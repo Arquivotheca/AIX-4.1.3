@@ -1,0 +1,1181 @@
+#  @(#)06  1.12.1.5  src/bos/objclass/POWER/sm_cmdbsys.add, cmdbsys, bos41J, 9521B_all 5/26/95 14:34:14
+#
+#  COMPONENT_NAME: cmdbsys
+#
+#  FUNCTIONS: none
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#########################################################################
+#
+#  System Backup Menus  (mksysb)
+#
+#########################################################################
+
+sm_menu_opt:
+	id_seq_num = "050"
+	id = "storage"
+	next_id = "backsys"
+	text = "System Backup Manager"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 1
+	next_type = "m"
+	alias = ""
+	help_msg_id = "0514001"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "backsys"
+	next_id = "mksysb"
+	text = "Back Up the System"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 2
+	next_type = "d"
+	alias = ""
+	help_msg_id = "0514002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "020"
+	id = "backsys"
+	next_id = "lsmksysb"
+	text = "List Files in a System Image"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 3
+	next_type = "d"
+	alias = ""
+	help_msg_id = "0514003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "030"
+	id = "backsys"
+	next_id = "restmksysb"
+	text = "Restore Files in a System Image"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 4
+	next_type = "d"
+	alias = ""
+	help_msg_id = "0514004"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###################################################################
+#                                                                 #
+#  System Backup Dialog Screens
+#                                                                 #
+###################################################################
+
+sm_cmd_hdr:
+	id = "mksysb"
+	option_id = "mksysbOpts"
+	has_name_select = "n"
+	name = "Back Up the System"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 2
+	cmd_to_exec = "\
+backup_sys ()
+{
+MSGCAT=mksysb.cat        # message catalog name
+MSGSET=1                 # message set for mksysb error messages
+CMDNAME=mksysb           # name of command used in messages
+
+##    Full-Path to commands used
+awk=/usr/bin/awk
+df=/usr/bin/df
+dspmsg=/usr/bin/dspmsg
+grep=/usr/bin/grep
+tail=/usr/bin/tail
+bootinfo=/usr/sbin/bootinfo
+bosboot=/usr/sbin/bosboot
+chfs=/usr/sbin/chfs
+
+BOOTABLE=0
+EXPAND=0
+
+while getopts 'Bb:ef:mx' OPTION; do
+  case $OPTION in
+    B) BOOTABLE=1 ;;
+    b) BFLAG='-b'$OPTARG ;;
+    e) EFLAG='-e' ;;
+    f) DEVICE=$OPTARG ;;
+    m) MFLAG='-m' ;;
+    x) EXPAND=1 ;;
+  esac
+done
+
+# If user asked for bootable media
+#
+if (( BOOTABLE ))
+then
+  # Check if device is a tape.
+  #
+  export ODMDIR=/etc/objrepos
+  DEVNAME=`basename $DEVICE`
+  DEV=`echo $DEVNAME | cut -f1 -d'.'`
+  # Check if there is a device with specified name.
+  dspmsg -s $MSGSET $MSGCAT 26 'Checking for a valid device.\n'
+  lsdev -C -S a| fgrep $DEV >/dev/null 2>&1
+  if [[ $? = 0 ]]
+  then
+    # Get the type of the device.
+    dspmsg -s $MSGSET $MSGCAT 27 'Getting the device type.\n'
+    DEVTYPE=`lsdev -C -S a -F 'name class' | fgrep $DEV | awk ' { print $2 } '`
+    # If device is tape
+    if [[ $DEVTYPE = tape ]]
+    then
+
+      # Get amount of free space in /tmp
+      #
+      dspmsg -s $MSGSET $MSGCAT 28 'Calculating space requirements.\n'
+      TMP_LV=`LC_MESSAGES=C ${df} /tmp | ${tail} +2l | grep /dev | ${awk} '{gsub (\"/dev/\", \"\", $1); print $1}' `
+      FREETMPBLKS=`LC_MESSAGES=C ${df} /dev/$TMP_LV | ${tail} +2l | ${awk} '{print $3}'`
+
+      RSTYPE=`${bootinfo} -T`
+      # Get space needed for bosboot, required at mksysb and bosinstall time
+      #
+      dspmsg -s 10 BosMenus.cat 45 'Creating boot image.\n'
+      BOOT_BLKS=`LC_MESSAGES=C ${bosboot} -qad /dev/ipldevice | ${tail} +3l | ${awk} '{print $2 * 2}'`
+      if [[ "$RSTYPE" != "rspc" ]]
+      then
+	TAPE_BLKS=`LC_MESSAGES=C ${bosboot} -qad /dev/rmt0 | ${tail} +3l | ${awk} '{print $2 * 2}'`
+      else
+	TAPE_BLKS=0
+      fi
+      if [[ $TAPE_BLKS > $BOOT_BLKS ]]
+      then
+        MUSTHAVE_TMP_BLKS=$TAPE_BLKS
+      else
+        MUSTHAVE_TMP_BLKS=$BOOT_BLKS
+      fi
+
+      # If there is not enough free space in /tmp and if the user has asked
+      # to have it expanded, then expand the /tmp file system.
+      #
+      if ((FREETMPBLKS < MUSTHAVE_TMP_BLKS))
+      then
+        ((EXPAND_BLKS = MUSTHAVE_TMP_BLKS - FREETMPBLKS))
+        ((EXPAND_KBYTES = EXPAND_BLKS / 2))
+        if (( EXPAND ))
+        then
+          dspmsg -s $MSGSET $MSGCAT 29 'Expanding /tmp.\n'
+          chfs -a size=+$EXPAND_BLKS /tmp
+          if [[ $? != 0 ]]
+          then
+            dspmsg -s $MSGSET $MSGCAT 23 \
+'0512-041 %s: The /tmp file system could not be expanded.\n' $CMDNAME
+            exit 1
+          fi
+        else
+          dspmsg -s $MSGSET $MSGCAT 24 \
+'0512-042 %s: The backup could not continue because the /tmp file
+\tsystem needs an additional %s Kbytes of free space to make
+\tthe boot image. To make a system backup image, do one of
+\tthe following:
+\t  (1) Change your answer on the dialog screen to allow the
+\t      /tmp file system to be expanded.
+\t  (2) Change your answer on the dialog screen to allow a
+\t      nonbootable backup media.\n' $CMDNAME $EXPAND_KBYTES
+          exit 1
+        fi  # END if expand
+      fi  # END if /tmp needs more free space
+
+    # This command is called for bootable tapes.
+    #
+    # dspmsg -s $MSGSET $MSGCAT 30 Backing up the system...
+    /usr/bin/mksysb -i $BFLAG $EFLAG $MFLAG $DEVICE
+    exit
+
+    fi
+  fi  # END if device is tape
+
+fi  # END if bootable
+
+# This command is called for non-tape devices and for non-bootable tapes.
+#
+dspmsg -s $MSGSET $MSGCAT 30 'Backing up the system...\n'
+/usr/bin/savevg -i $BFLAG $EFLAG $MFLAG -f $DEVICE rootvg
+}
+backup_sys "
+	ask = "n"
+	help_msg_id = "0514002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "lsmksysb"
+	option_id = "lsmksysbOpts"
+	has_name_select = "n"
+	name = "List Files in a System Image"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 3
+	cmd_to_exec  = "x() {
+TAPE=''
+BFLAG=''
+REWIND=0
+while getopts 'b:f:' OPTION; do
+    case $OPTION in
+	f) DEVICE=$OPTARG        ;;
+	b) BFLAG='-b '$OPTARG    ;;
+    esac
+done
+TAPE_DEV=`basename $DEVICE`
+if [ `lsdev -C -c tape -l $TAPE_DEV | wc -l` -eq 1 ]
+then
+    TAPE='-s 4'
+    DEVICE=$DEVICE.1
+    REWIND=1
+fi
+/usr/sbin/restore $TAPE -Tq $BFLAG -f $DEVICE
+RC=$?
+[ $REWIND -eq 1 ] && tctl -f $DEVICE rewind
+return $RC
+}
+x"
+	ask = "n"
+	help_msg_id = "0514003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_hdr:
+	id = "restmksysb"
+	option_id = "restmksysbOpts"
+	has_name_select = "n"
+	name = "Restore Files in a System Image"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 4
+	cmd_to_exec  = "x() {
+GET_FILES=''
+TAPE=''
+BFLAG=''
+REWIND=0
+while getopts 'b:f:' OPTION; do
+    case $OPTION in
+	f) DEVICE=$OPTARG       ;;
+	b) BFLAG='-b '$OPTARG    ;;
+    esac
+done
+shift
+[ "$BFLAG" = "" ] || shift
+GET_FILES=$*
+TAPE_DEV=`basename $DEVICE`
+if [ `lsdev -C -c tape -l $TAPE_DEV | wc -l` -eq 1 ]
+then
+    TAPE='-s 4'
+    DEVICE=$DEVICE.1
+    REWIND=1
+fi
+/usr/sbin/restore $TAPE -xdq  $BFLAG -f $DEVICE $GET_FILES
+RC=$?
+[ $REWIND -eq 1 ] && tctl -f $DEVICE rewind
+return $RC
+}
+x"
+	ask = "n"
+	help_msg_id = "0514004"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###################################################################
+#                                                                 #
+#  System Backup Options Screens  (mksysb)                        #
+#                                                                 #
+###################################################################
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "mksysbOpts"
+	disc_field_name = ""
+	name = "  WARNING:  Execution of the mksysb command will
+	    result in the loss of all material
+	    previously stored on the selected
+	    output medium. This command backs
+	    up only rootvg volume group.
+"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 19
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0514005"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "mksysbOpts"
+	disc_field_name = ""
+	name = "Make BOOTABLE backup?\n   (Applies only to tape)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "-B,"
+	help_msg_id = "0514026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "mksysbOpts"
+	disc_field_name = ""
+	name = "EXPAND /tmp if needed?\n   (Applies only to bootable tape)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 28
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "-x,"
+	help_msg_id = "0514027"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "mksysbOpts"
+	disc_field_name = ""
+	name = "Create MAP files?"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 10
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = "-m"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = ","
+	help_msg_id = "0514006"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "mksysbOpts"
+	name = "EXCLUDE files?"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 11
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = "-e"
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = ","
+	help_msg_id = "0514007"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "mksysbOpts"
+	disc_field_name = ""
+	name = "Number of BLOCKS to write in a single output"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 9
+	op_type = "n"
+	entry_type = "#"
+	entry_size = 0
+	required = "?"
+	prefix = "-b"
+	multi_select = ""
+	help_msg_id = "0514024"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "mksysbOpts"
+	id_seq_num    = "051"
+	name          = "   (Leave blank to use a system default)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 24
+	help_msg_id   = "0514024"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id_seq_num = "005"
+	id = "mksysbOpts"
+	name = "Backup DEVICE or FILE"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 12
+	op_type = "l"
+	entry_type = "f"
+	required = "+"
+	prefix = "-f"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "
+	/usr/sbin/lsdev -Cc tape -Sa -F'name:description' |
+/usr/bin/awk -F ':' '{ printf \"/dev/%-16s %-40s\\n\", $1, $2 }'"
+	multi_select = ""
+	disp_values = ""
+	help_msg_id = "0514008"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###################################################################
+#                                                                 #
+#  List Files in a System Image Options Screens                   #
+#                                                                 #
+###################################################################
+
+sm_cmd_opt:
+	id_seq_num = "005"
+	id = "lsmksysbOpts"
+	disc_field_name = ""
+	name = "Number of BLOCKS to read in a single input"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+	op_type = "n"
+	entry_type = "#"
+	entry_size = 0
+	required = "?"
+	prefix = "-b"
+	multi_select = ""
+	help_msg_id = "0514025"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "lsmksysbOpts"
+	id_seq_num    = "006"
+	name          = "   (Leave blank to use a system default)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 24
+	help_msg_id   = "0514025"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id            = "lsmksysbOpts"
+	id_seq_num    = "000"
+	name          = "DEVICE or FILE"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 13
+	op_type       = "l"
+	entry_type    = "f"
+	required      = "+"
+	prefix        = "-f"
+	cmd_to_list_mode = "1"
+	cmd_to_list   = "
+	/usr/sbin/lsdev -Cc tape -Sa -F'name:description'  |
+/usr/bin/awk -F ':' '{ printf \"/dev/%-16s %-40s\\n\", $1, $2 }'"
+	disp_values   = "/dev/rmt0"
+	help_msg_id   = "0514009"
+	help_msg_loc  = ""
+
+
+###################################################################
+#                                                                 #
+#  Restore files from a System Image Options Screens
+#                                                                 #
+###################################################################
+
+sm_cmd_opt:
+	id            = "restmksysbOpts"
+	id_seq_num    = "010"
+	name          = "FILES to restore"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 14
+	entry_type    = "r"
+	prefix        = "--"
+	help_msg_id   = "0514010"
+	help_msg_loc  = ""
+
+
+sm_cmd_opt:
+	id            = "restmksysbOpts"
+	id_seq_num    = "011"
+	name          = "   (Leave blank to restore entire archive)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 15
+	help_msg_id   = "0514010"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id_seq_num = "015"
+	id = "restmksysbOpts"
+	disc_field_name = ""
+	name = "Number of BLOCKS to read in a single input"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+	op_type = "n"
+	entry_type = "#"
+	entry_size = 0
+	required = "?"
+	prefix = "-b"
+	multi_select = ""
+	help_msg_id = "0514025"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "restmksysbOpts"
+	id_seq_num    = "016"
+	name          = "   (Leave blank to use a system default)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 24
+	help_msg_id   = "0514025"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id            = "restmksysbOpts"
+	id_seq_num    = "005"
+	name          = "Restore DEVICE or FILE"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 20
+	op_type       = "l"
+	entry_type    = "f"
+	required      = "+"
+	prefix        = "-f"
+	cmd_to_list_mode  = "1"
+	cmd_to_list   = "
+	/usr/sbin/lsdev -Cc tape -Sa -F'name:description'  |
+/usr/bin/awk -F ':' '{ printf \"/dev/%-16s %-40s\\n\", $1, $2 }'"
+	disp_values   = "/dev/rmt0"
+	help_msg_id   = "0514011"
+	help_msg_loc  = ""
+
+
+#########################################################################
+#########################################################################
+#
+#  Volume Group Backup Menus  (savevg & restvg)
+#
+#########################################################################
+
+
+sm_menu_opt:
+	id_seq_num = "100"
+	id = "vg"
+	next_id = "savevg"
+	text = "Back Up a Volume Group"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 25
+	next_type = "d"
+	alias = ""
+	help_msg_id = "0514014"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_menu_opt:
+	id_seq_num = "105"
+	id = "vg"
+	next_id = "restvg"
+	text = "Remake a Volume Group"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 26
+	next_type = "d"
+	alias = ""
+	help_msg_id = "0514015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "110"
+	id = "vg"
+	next_id = "lsbackvg"
+	text = "List Files in a Volume Group Backup"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 5
+	next_type = "d"
+	alias = ""
+	help_msg_id = "0514012"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "115"
+	id = "vg"
+	next_id = "restsavevg"
+	text = "Restore Files in a Volume Group Backup"
+	text_msg_file = "sm_cmdbsys.cat"
+	text_msg_set = 1
+	text_msg_id = 6
+	next_type = "d"
+	alias = ""
+	help_msg_id = "0514013"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###################################################################
+#                                                                 #
+#  Volume Group Backup Dialog Screens
+#                                                                 #
+###################################################################
+
+sm_cmd_hdr:
+	id = "lsbackvg"
+	option_id = "lsbackvgOpts"
+	has_name_select = "n"
+	name = "List Files in a Volume Group Backup"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 5
+	cmd_to_exec = "/usr/sbin/restore -Tq "
+	ask = "n"
+	help_msg_id = "0514012"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_hdr:
+	id = "restsavevg"
+	option_id = "restsavevgOpts"
+	has_name_select = "n"
+	name = "Restore Files in a Volume Group Backup"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 6
+	cmd_to_exec = "/usr/sbin/restore -xqd "
+	ask = "n"
+	help_msg_id = "0514013"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "savevg"
+	option_id = "savevgOpts"
+	has_name_select = "n"
+	name = "Back Up a Volume Group"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 25
+	cmd_to_exec = "savevg -i"
+	ask = "n"
+	help_msg_id = "0514014"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_hdr:
+	id = "restvg"
+	option_id = "restvgOpts"
+	has_name_select = "n"
+	name = "Remake a Volume Group"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 26
+	cmd_to_exec = "restvg"
+	ask = "n"
+	help_msg_id = "0514015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+###################################################################
+#                                                                 #
+#  Volume Group Backup Options Screens    (savevg)                #
+#                                                                 #
+###################################################################
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "savevgOpts"
+	disc_field_name = ""
+	name = "  WARNING:  Execution of the savevg command will
+	    result in the loss of all material
+	    previously stored on the selected
+	    output medium.
+"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 21
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0514016"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "005"
+	id = "savevgOpts"
+	name = "VOLUME GROUP to back up"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 16
+	op_type = "l"
+	entry_type = "t"
+	required = "+"
+	prefix = "--"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "lsvg -o"
+	multi_select = ""
+	disp_values = ""
+	help_msg_id = "0514017"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "savevgOpts"
+	name = "Create MAP files?"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 10
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = "-m"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = ","
+	help_msg_id = "0514006"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "015"
+	id = "savevgOpts"
+	name = "EXCLUDE files?"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 11
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = "-e"
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = ","
+	help_msg_id = "0514018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "savevgOpts"
+	disc_field_name = ""
+	name = "Number of BLOCKS to write in a single output"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 9
+	op_type = "n"
+	entry_type = "#"
+	entry_size = 0
+	required = "?"
+	prefix = "-b"
+	multi_select = ""
+	help_msg_id = "0514024"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "savevgOpts"
+	id_seq_num    = "021"
+	name          = "   (Leave blank to use a system default)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 24
+	help_msg_id   = "0514024"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id_seq_num = "002"
+	id = "savevgOpts"
+	name = "Backup DEVICE or FILE"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 12
+	op_type = "l"
+	entry_type = "f"
+	required = "+"
+	prefix = "-f"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "
+	/usr/sbin/lsdev -Cc tape -Sa -F'name:description' |
+/usr/bin/awk -F ':' '{ printf \"/dev/%-16s %-40s\\n\", $1, $2 }'"
+	multi_select = ""
+	disp_values = ""
+	help_msg_id = "0514008"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###################################################################
+#                                                                 #
+#  List Files in a Volume Group Image Options Screens
+#                                                                 #
+###################################################################
+
+sm_cmd_opt:
+	id_seq_num = "005"
+	id = "lsbackvgOpts"
+	disc_field_name = ""
+	name = "Number of BLOCKS to read in a single input"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+	op_type = "n"
+	entry_type = "#"
+	entry_size = 0
+	required = "?"
+	prefix = "-b"
+	multi_select = ""
+	help_msg_id = "0514025"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "lsbackvgOpts"
+	id_seq_num    = "006"
+	name          = "   (Leave blank to use a system default)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 24
+	help_msg_id   = "0514025"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id            = "lsbackvgOpts"
+	id_seq_num    = "000"
+	name          = "DEVICE or FILE"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 13
+	op_type       = "l"
+	entry_type    = "f"
+	required      = "+"
+	prefix        = "-f"
+	cmd_to_list_mode  = "1"
+	cmd_to_list   = "
+	/usr/sbin/lsdev -Cc tape -Sa -F'name:description'  |
+/usr/bin/awk -F ':' '{ printf \"/dev/%-16s %-40s\\n\", $1, $2 }'"
+	disp_values   = "/dev/rmt0"
+	help_msg_id   = "0514009"
+	help_msg_loc  = ""
+
+
+###################################################################
+#                                                                 #
+#  Restore files from a System Image Options Screens
+#                                                                 #
+###################################################################
+
+sm_cmd_opt:
+	id            = "restsavevgOpts"
+	id_seq_num    = "010"
+	name          = "FILES to restore"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 14
+	entry_type    = "r"
+	prefix        = "--"
+	help_msg_id   = "0514019"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id            = "restsavevgOpts"
+	id_seq_num    = "011"
+	name          = "   (Leave blank to restore entire archive)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 15
+	help_msg_id   = "0514020"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id_seq_num = "015"
+	id = "restsavevgOpts"
+	disc_field_name = ""
+	name = "Number of BLOCKS to read in a single input"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+	op_type = "n"
+	entry_type = "#"
+	entry_size = 0
+	required = "?"
+	prefix = "-b"
+	multi_select = ""
+	help_msg_id = "0514025"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "restsavevgOpts"
+	id_seq_num    = "016"
+	name          = "   (Leave blank to use a system default)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 24
+	help_msg_id   = "0514025"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id            = "restsavevgOpts"
+	id_seq_num    = "005"
+	name          = "Restore DEVICE or FILE"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 20
+	op_type       = "l"
+	entry_type    = "f"
+	required      = "+"
+	prefix        = "-f"
+	cmd_to_list_mode  = "1"
+	cmd_to_list   = "
+	/usr/sbin/lsdev -Cc tape -Sa -F'name:description'  |
+/usr/bin/awk -F ':' '{ printf \"/dev/%-16s %-40s\\n\", $1, $2 }'"
+	disp_values   = "/dev/rmt0"
+	help_msg_id   = "0514011"
+	help_msg_loc  = ""
+
+
+###################################################################
+#                                                                 #
+#  Restore a Volume Group Image options screens
+#                                                                 #
+###################################################################
+
+
+sm_cmd_opt:
+	id_seq_num = "005"
+	id = "restvgOpts"
+	name = "SHRINK the filesystems?"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 17
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = "-s"
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = ","
+	help_msg_id = "0514021"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "restvgOpts"
+	id_seq_num    = "010"
+	name          = "PHYSICAL VOLUME names"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 18
+	op_type       = "l"
+	entry_type    = "t"
+	required      = "?"
+	prefix        = "--"
+	multi_select  = "y"
+	cmd_to_list_mode = "1"
+	cmd_to_list   = "lspv | grep None | cut -f1 -d' '"
+	disp_values   = ""
+	help_msg_id   = "0514022"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id            = "restvgOpts"
+	id_seq_num    = "011"
+	name          = "   (Leave blank to use the PHYSICAL VOLUMES listed
+    in the vgname.data file in the backup image)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 22
+	help_msg_id   = "0514023"
+	help_msg_loc  = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "015"
+	id = "restvgOpts"
+	disc_field_name = ""
+	name = "Number of BLOCKS to read in a single input"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+	op_type = "n"
+	entry_type = "#"
+	entry_size = 0
+	required = "?"
+	prefix = "-b"
+	multi_select = ""
+	help_msg_id = "0514025"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id            = "restvgOpts"
+	id_seq_num    = "016"
+	name          = "   (Leave blank to use a system default)"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 24
+	help_msg_id   = "0514025"
+	help_msg_loc  = ""
+
+sm_cmd_opt:
+	id            = "restvgOpts"
+	id_seq_num    = "000"
+	name          = "Restore DEVICE or FILE"
+	name_msg_file = "sm_cmdbsys.cat"
+	name_msg_set  = 1
+	name_msg_id   = 20
+	op_type       = "l"
+	entry_type    = "f"
+	required      = "+"
+	prefix        = "-f"
+	cmd_to_list_mode  = "1"
+	cmd_to_list   = "
+	/usr/sbin/lsdev -Cc tape -Sa -F'name:description'  |
+/usr/bin/awk -F ':' '{ printf \"/dev/%-16s %-40s\\n\", $1, $2 }'"
+	disp_values   = "/dev/rmt0"
+	help_msg_id   = "0514011"
+	help_msg_loc  = ""
+

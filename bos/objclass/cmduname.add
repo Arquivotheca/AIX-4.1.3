@@ -1,0 +1,261 @@
+# @(#)90 1.1 src/bos/objclass/cmduname.add, cmdstat, bos411, 9428A410j 5/27/94 14:30:36
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDSTAT                                                     #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27, 83                                                             #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994               #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+################################################################################
+
+# NOTES
+#
+# 1. help Id's
+#
+#       Help text Id's already used for helps are in the range:
+#               055116 to 055123
+#
+# 2. the command to list the processors has to be verified when available
+#
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  FAST PATH ONLY -> smit uname                                  #
+#                        Show System Level                                     #
+#                                                                              #
+# FAST KEY:  uname                                                             #
+#									       #
+# UNIX COMMAND(S):  uname                                                      #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   7 dialogue objects      		                               #
+#                                                                              #
+# HEADER:  Show System Level                                                   #
+#                                                                              #
+# OBJECTS:  1.  Display ALL the options?	                     	       #
+#		  - OR any combination of the following -		       #
+#           2.  Display the LAN NETWORK number?                        	       #
+#           3.  Display the type of HARDWARE running the system?       	       #
+#           4.  Display the name of the NODE?                          	       #
+#           5.  Display the RELEASE number of the operating system?    	       #
+#           6.  Display the SYSTEM name?                               	       #
+#           7.  Display the operating system VERSION?                  	       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "uname"
+	option_id               = "unameOpts"
+	has_name_select         = "n"
+	name                    = "Show System Level"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 17
+	name_msg_id             = 90
+	cmd_to_exec             = "uname"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "055116"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "unameOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "Display ALL the options?\n\n  - OR any combination of the following -\n"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 95
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-x"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055117"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "unameOpts"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "Display the LAN NETWORK number?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 100
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-l"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055118"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "unameOpts"
+	id_seq_num          = "010"
+	disc_field_name     = ""
+	name                = "Display the type of HARDWARE running the system?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 105
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-m"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055119"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "unameOpts"
+	id_seq_num          = "015"
+	disc_field_name     = ""
+	name                = "Display the name of the NODE?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 110
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-n"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055120"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "unameOpts"
+	id_seq_num          = "020"
+	disc_field_name     = ""
+	name                = "Display the RELEASE number of the operating\n  system?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 115
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-r"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055121"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "unameOpts"
+	id_seq_num          = "025"
+	disc_field_name     = ""
+	name                = "Display the SYSTEM name?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 120
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = "-s,"
+	help_msg_id         = "055122"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "unameOpts"
+	id_seq_num          = "030"
+	disc_field_name     = ""
+	name                = "Display the operating system VERSION?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 125
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-v"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055123"
+	help_msg_loc        = ""

@@ -1,0 +1,27 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+What will the word "floating" become after
+the command
+  s/a./or/
+is executed?  Type "answer WORD" where WORD is the
+new version.
+#copyin
+#user
+#uncopyin
+#match flooring
+#log
+#next
+32.2d 5
+32.1b 10

@@ -1,0 +1,52 @@
+#!/bin/ksh
+# @(#)30	1.1  src/bldscripts/NormalizeXreqShip, ade_build, bos41J, 9509A_all 2/17/95 13:33:47
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+trap : 1
+export PAGERID=packager
+export PAGERSEVERITY=3
+alias  dataman=`whence dataman`
+alias  DBenv="`whence bldenv` `whence DBenv` "
+
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED ; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset DBGLEVEL=1
+eval ${DEBUGX}
+
+typeset -r cmd=$(basename $0)
+typeset -r tmpfile=/tmp/$cmd.tmp.$$
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+# This should fail if pre_ptf_pkg has not been set up.  pre_ptf_pkg
+# should be set up by running prepkg and saving the ptf_pkg files.
+DBenv qryBCShips $BLDCYCLE >$tmpfile
+sed <$tmpfile "s![^ ]*ship/power/!/!g;
+     s![^ ]*selfix/UPDATE/!/!g;
+     s!//!/!g;
+     s!^\./!/!;
+     s!.*liblpp.a!liblpp.a!" |
+sort -u |
+dataman -s leveldata[$BLDCYCLE][xreqshipped]
+rm -f $tmpfile
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE
+

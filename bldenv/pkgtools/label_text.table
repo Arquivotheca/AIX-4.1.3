@@ -1,0 +1,42 @@
+###################################################################
+# SCCSID: @(#)40	1.2  src/bldenv/pkgtools/label_text.table, pkgtools, bos41B, 412_41B_sync  12/7/94  08:20:18
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+###################################################################
+# label_text.table 
+###################################################################
+#*******                                                  *********
+#***                     W A R N I N G                         ****
+#*******                                                  *********
+#*                                                               **
+#* Due to restrictions/limitations with Boulder's distribution   **
+#* mechanisms, PTF label information is limited to a MAXIMUM     **
+#* of 29 characters!  Any description that is longer than 29     **
+#* will cause the PTF to be rejected by Boulder's systems.       **
+#* Refer to defect 122627 for more information.                  **
+#*                                                               **
+#*******                                                  *********
+###################################################################
+#   0        1         2        2
+#   12345678901234567890123456789
+#***-----------------------------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+I - Software Installation Package
+S - Selective Fix Package
+M - Selective Enhancement Package
+P - Preventive Maintenance Pkg
+G - Initial Update Package
+X - For use on AIX V4.1 only

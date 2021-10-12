@@ -1,0 +1,72 @@
+* "@(#)73	1.4  src/bos/usr/ccs/lib/libbsd/libbsd.exp, libbsd, bos411, 9428A410j 4/23/93 13:38:07"
+*
+* COMPONENT_NAME: LIBBSD
+*
+* FUNCTION: symbol export list
+*
+* ORIGINS: 27 10
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1985, 1989, 1991
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+fcntl
+flock
+ftime
+gcd
+invert
+ioctl
+madd
+m_add
+msub
+m_sub
+mdiv
+m_dsb
+m_trq
+m_div
+mktemp
+m_in
+m_out
+s_div
+mout
+min
+omout
+omin
+fmout
+fmin
+sdiv
+msqrt
+mult
+m_mult
+tradd
+nice
+nlist
+pow
+rpow
+re_comp
+re_exec
+getpgrp
+setpgrp
+signal
+_signal
+sigvec
+sleep
+timezone
+move
+xalloc
+fatal
+xfree
+mcan
+itom
+mcmp
+xtom
+mtox
+mfree 
+valloc
+vfork
+vtimes

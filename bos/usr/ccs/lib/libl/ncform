@@ -1,0 +1,518 @@
+/* @(#)44 1.9.2.3 src/bos/usr/ccs/lib/libl/ncform, libl, bos411, 9428A410j 6/2/93 13:41:00";*/
+/*
+ * COMPONENT_NAME: (LIBL) Lex Libraries
+ *
+ * FUNCTIONS: yylook, yyhlook, yyback, yyinput, yyoutput, yyunput,
+ *            yymbinput, yymboutput, yymbunput, yymbreturn
+ *            yywinput, yywoutput, yywunput, yywreturn
+ *
+ * ORIGINS: 3
+ *
+*/
+
+int yylineno =1;
+
+# define YYU(x)         x
+# define NLSTATE        yyprevious=YYNEWLINE
+
+# define YYCCLDOT       0x0001
+
+wchar_t         yywtext[YYLMAX];
+wchar_t         yywbuf[YYLMAX];
+
+unsigned char   yytbuf[YYLMAX];
+unsigned char   *yytbp;
+int             yytbi;
+wchar_t         yytwc;
+
+struct yysvf    *yylstate [YYLMAX], **yylsp, **yyolsp;
+unsigned char   yysbuf[YYLMAX];
+unsigned char   *yysptr = yysbuf;
+int             *yyfnd;
+extern struct yysvf *yyestate;
+int             yyprevious = YYNEWLINE;
+
+# ifdef LEXDEBUG
+int             debug;
+#ifdef __cplusplus
+#ifdef _CPP_IOSTREAMS
+void            allprint(wchar_t);
+void            sprint  (wchar_t *);
+#else
+extern "C" void allprint(wchar_t);
+extern "C" void sprint  (wchar_t *);
+#endif
+#endif
+# endif
+
+yylook()
+{
+register struct yysvf *yystate, **yytlsp;
+register struct yywork *yyt;
+struct yysvf    *yyz;
+int             yywch, yyfirst, yyw;
+struct yywork   *yyr;
+wchar_t         *yywlastch;
+/*
+ * start off machines
+ */
+# ifdef LEXDEBUG
+    debug = 1;
+# endif
+
+    yyfirst=1;
+    if (!yymorfg)
+        yywlastch = yywtext;
+    else
+    {
+        yymorfg=0;
+        yywlastch = &(yywtext[yywleng]);
+    }
+
+    for(;;)
+    {
+        yytlsp = yylstate;
+        yyestate = yystate = yybgin;
+        if (yyprevious==YYNEWLINE)
+            yystate++;
+        for (;;)
+        {
+# ifdef LEXDEBUG
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+            if(debug) (*yyout) << "state " << yystate-yysvec-1 << endl;
+#else
+            if(debug) fprintf(yyout,"state %d\n",yystate-yysvec-1);
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+# endif
+            yyt = yystate->yystoff;
+            if(yyt == yycrank && !yyfirst)      /* may not be any transitions */
+            {
+                yyz = yystate->yyother;
+                if(yyz == 0)
+                    break;
+                if(yyz->yystoff == yycrank)
+                    break;
+            }
+            yywch = winput();
+            *yywlastch++ = yywch;
+
+            yyfirst=0;
+        tryagain:
+# ifdef LEXDEBUG
+            if(debug)
+            {
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+                (*yyout) << "char ";
+                allprint (yywch);
+                (*yyout) << endl;
+#else
+                fprintf(yyout,"char ");
+                allprint(yywch);
+                putchar('\n');
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+            }
+# endif
+            yyr = yyt;
+            if ( (int)yyt > (int)yycrank)
+            {
+                if (yywch < NCH)                /* 8-bit */
+                {
+                    yyt = yyr + yywch;
+                    if (yyt <= yytop && yyt->verify+yysvec == yystate)
+                    {
+                        if(yyt->advance+yysvec == YYLERR) /* error transitions */
+                        {
+                            wunput(*--yywlastch);
+                            break;
+                        }
+                        *yytlsp++ = yystate = yyt->advance+yysvec;
+                        goto contin;
+                    }
+                }
+# if YYHSIZE
+                else                            /* wide */
+                {
+                    if (yyw = yyhlook(yywch,yystate-yysvec))
+                    {
+                        if (yywcrank[yyw].wadvance+yysvec==YYLERR)
+                        {
+                            wunput(*--yywlastch);
+                            break;
+                        }
+                        *yytlsp++ = yystate = yywcrank[yyw].wadvance+yysvec;
+                        goto contin;
+                    }
+                }
+# endif /*YYHSIZE*/
+            }
+# ifdef YYOPTIM
+            else if ((int)yyt < (int)yycrank)   /* r < yycrank */
+            {
+                yyt = yyr = yycrank+(yycrank-yyt);
+# ifdef LEXDEBUG
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+                if(debug) (*yyout) << "compressed state" << endl;
+#else
+                if(debug) fprintf(yyout,"compressed state\n");
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+# endif
+                if (yywch < NCH)                /* 8-bit */
+                {
+                    yyt = yyt + yywch;
+                    if(yyt <= yytop && yyt->verify+yysvec == yystate)
+                    {
+                        if(yyt->advance+yysvec == YYLERR) /* error transitions */
+                        {
+                            wunput(*--yywlastch);
+                            break;
+                        }
+                        *yytlsp++ = yystate = yyt->advance+yysvec;
+                        goto contin;
+                    }
+                    yyt = yyr + YYU(yymatch[yywch]);
+# ifdef LEXDEBUG
+                    if(debug)
+                    {
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+                        (*yyout) << "try fall back character ";
+                        allprint(YYU(yymatch[yywch]));
+                        (*yyout) << endl;
+#else
+                        fprintf(yyout,"try fall back character ");
+                        allprint(YYU(yymatch[yywch]));
+                        putchar('\n');
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+                    }
+# endif
+                    if(yyt <= yytop && yyt->verify+yysvec == yystate)
+                    {
+                        if(yyt->advance+yysvec == YYLERR) /* error transition */
+                        {
+                            wunput(*--yywlastch);
+                            break;
+                        }
+                        *yytlsp++ = yystate = yyt->advance+yysvec;
+                        goto contin;
+                    }
+                }
+# if YYHSIZE
+                else                            /* wide */
+                {
+                    if (yyw = yyhlook(yywch,yystate-yysvec))
+                    {
+                        if (yywcrank[yyw].wadvance+yysvec==YYLERR)
+                        {
+                            wunput(*--yywlastch);
+                            break;
+                        }
+                        *yytlsp++ = yystate = yywcrank[yyw].wadvance+yysvec;
+                        goto contin;
+                    }
+                    if (yyw = yymlook(yywch))   /* find the target char */
+                    {
+                        if (yyw = yyhlook(yyw,yystate-yysvec))
+                        {
+                            if (yywcrank[yyw].wadvance+yysvec == YYLERR)
+                            {
+                                wunput(*--yywlastch);
+                                break;
+                            }
+                            *yytlsp++ = yystate = yywcrank[yyw].wadvance+yysvec;
+                            goto contin;
+                        }
+                    }
+                }
+# endif /*YYHSIZE*/
+# if YYXSIZE
+# ifdef MFDEBUG
+                if (debug)
+                {
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+                    (*yyout) << "try extended ccl on char ";
+                    allprint(YYU(yywch));
+                    (*yyout) << '\n';
+#else
+                    fprintf (yyout, "try extended ccl on char ");
+                    allprint(YYU(yywch));
+                    putchar('\n');
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+                }
+# endif
+                yyw = yyxlook(yywch,yystate-yysvec);
+                if (yyw != -1)
+                {
+                    if (yyxccl[yyw].advance+yysvec == YYLERR)
+                    {
+                        wunput(*--yywlastch);
+                        break;
+                    }
+                    *yytlsp++ = yystate = yyxccl[yyw].advance+yysvec;
+                    goto contin;
+                }
+# endif /*YYXSIZE*/
+            } /* r < yycrank */
+            if ((yystate = yystate->yyother) && (yyt= yystate->yystoff) != yycrank)
+            {
+# ifdef LEXDEBUG
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+                if(debug) (*yyout) << "fall back to state "
+                                   << yystate-yysvec-1 << endl;
+#else
+                if(debug) fprintf(yyout,"fall back to state %d\n",yystate-yysvec-1);
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+# endif
+                goto tryagain;
+            }
+# endif /*YYOPTIM*/
+            else
+            {
+                wunput(*--yywlastch);
+                break;
+            }
+        contin:
+# ifdef LEXDEBUG
+            if(debug)
+            {
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+                (*yyout) << "state " << yystate-yysvec-1 << " char ";
+                allprint(yywch);
+                (*yyout) << endl;
+#else
+                fprintf(yyout,"state %d char ",yystate-yysvec-1);
+                allprint(yywch);
+                putchar('\n');
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+            }
+# endif
+            ; /* contin: */
+        } /* for(;;) */
+# ifdef LEXDEBUG
+        if(debug)
+        {
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+            (*yyout) << "stopped at " << (int) (*(yytlsp-1)-yysvec-1) << " with ";
+            allprint(yywch);
+            (*yyout) << endl;
+#else
+            fprintf(yyout,"stopped at %d with ",*(yytlsp-1)-yysvec-1);
+            allprint(yywch);
+            putchar('\n');
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+        }
+# endif
+        while (yytlsp-- > yylstate)
+        {
+            *yywlastch-- = 0;
+            if (*yytlsp != 0 && (yyfnd= (*yytlsp)->yystops) && *yyfnd > 0)
+            {
+                yyolsp = yytlsp;
+                if(yyextra[*yyfnd])             /* must backup */
+                {
+                    while(yyback((*yytlsp)->yystops,-*yyfnd) != 1 && yytlsp > yylstate)
+                    {
+                        yytlsp--;
+                        wunput(*yywlastch--);
+                    }
+                }
+                yyprevious = YYU(*yywlastch);
+                yylsp = yytlsp;
+                yywleng = yywlastch-yywtext+1;
+                yywtext[yywleng] = 0;
+# ifdef LEXDEBUG
+                if(debug)
+                {
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+                    (*yyout) << "\nmatch ";
+                    sprint(yywtext);
+                    (*yyout) << " action " << *yyfnd << endl;
+#else
+                    fprintf(yyout,"\nmatch ");
+                    sprint(yywtext);
+                    fprintf(yyout," action %d\n",*yyfnd);
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+                }
+# endif
+
+                wreturn(*yyfnd++);
+            }
+            wunput(*yywlastch);
+        }
+        if (yywtext[0] == 0  /* && feof(yyin) */)
+        {
+            yysptr=yysbuf;
+            wreturn(0);
+        }
+        yyprevious = yywtext[0] = winput();
+        if (yyprevious>0)
+            woutput(yyprevious);
+        yywlastch=yywtext;
+# ifdef LEXDEBUG
+#if defined(__cplusplus) && defined(_CPP_IOSTREAMS)
+        if(debug) cout << endl;
+#else
+        if(debug) putchar('\n');
+#endif /* #if defined(__cplusplus) && defined(_CPP_IOSTREAMS) */
+# endif
+    } /* for (;;) */
+    wreturn(0);
+}
+int yyback(int *yyp, int yym)
+{
+    if (yyp==0) return(0);
+    while (*yyp)
+    {
+        if (*yyp++ == yym)
+            return(1);
+    }
+    return(0);
+}
+# if YYHSIZE
+/*
+ * wide chars are hashed in yywcrank, return the index of the found element, or
+ * zero
+ */
+int yyhlook(int yyc, int yyv)
+{
+int             yyn;
+
+    yyn = (yyc % (YYHSIZE - 1)) + 1;
+    for (;;)
+    {
+        if ((yywcrank[yyn].wch==yyc)&&(yywcrank[yyn].wverify==yyv))
+            return(yyn);
+        yyn = yywcrank[yyn].wnext;
+        if (yyn==0)
+            return(0);
+    }
+}
+# endif /*YYHSIZE*/
+# if YYHSIZE
+/*
+ * wide CCL chars are hashed in yywmatch, return the character to map to or
+ * zero if there are none;  each char occurs only once in the match table.
+ */
+int
+yymlook(int yyc)
+{
+# if YYMSIZE
+int             yyn;
+
+    yyn = (yyc % (YYMSIZE - 1)) + 1;
+
+    while (yyn!=0)
+    {
+        if (yywmatch[yyn].wch == yyc)
+            return(yywmatch[yyn].wmatch);
+        yyn = yywmatch[yyn].wnext;
+    }
+# endif /*YYMSIZE*/
+
+    return(0);
+}
+# endif /*YYHSIZE*/
+# if YYXSIZE
+/*
+ * general CCLs are described in yyxccl; return the index of the first
+ * acceptable CCL that matches verification, -1 if none found.
+ */
+int
+yyxlook (int yyc, int yyv)
+{
+register int yyi;
+
+    if (!yyc)                                     /* c==0 => EOF */
+        return (-1);
+
+    for (yyi = 0; (yyi < YYXSIZE) && (yyxccl[yyi].verify < yyv); yyi++)
+        ; /*Empty*/
+
+    for ( ; (yyi < YYXSIZE) && (yyxccl[yyi].verify == yyv); yyi++)
+    {
+        switch (yyxccl[yyi].type)
+        {
+        case YYCCLDOT:  return((yyc=='\n')?-1:yyi);
+        }
+    }
+    return (-1);
+}
+#endif
+/*
+ * The following are the multi-byte renditions of input, unput, and
+ * output.  They are referenced through the winput, wunput, and woutput macros
+ * resepectively.
+ *
+ * A (-1) is returned if the character input is invalid.
+ */
+#ifdef __cplusplus
+#include <mbstr.h>
+#endif /*  __cplusplus */
+int yywinput()
+{
+    yytbi=0;
+    do
+    {
+        yytbuf[yytbi++]=input();
+        yytbuf[yytbi]=0;
+    } while(mbsinvalid((const char *) yytbuf)&&(yytbi<yymbcurmax));
+
+    if (mbtowc(&yytwc,(const char *)yytbuf,yymbcurmax)<0)
+        return (-1);
+
+    return ((int)yytwc);
+}
+
+void yywoutput(int yyc)
+{
+    for (yytbi=wctomb((char *) yytbuf,(wchar_t)yyc),yytbp=yytbuf;yytbi>0;yytbi--)
+        output(*yytbp++);
+}
+void yywunput(int yyc)
+{
+    for(yytbi=wctomb((char *)yytbuf,(wchar_t)yyc)-1;yytbi>=0;yytbi--)
+        unput(yytbuf[yytbi]);
+}
+/*
+ * Convert yywtext to yytext prior to returning from yylook.  It is referenced
+ * through the wreturn macro.
+ */
+int yywreturn(int yyr)
+{
+    yyleng=wcstombs((char *)yytext,yywtext,YYLMAX);
+    if(yyleng<0)
+    {
+        yyleng=0;
+        yytext[0]=0;
+    }
+    return(yyr);
+}
+/*
+ * the following are only used in the lex library
+ */
+int yyinput()
+{
+    return(input());
+}
+void yyoutput(int yyc)
+{
+    output(yyc);
+}
+void yyunput(int yyc)
+{
+    unput(yyc);
+}
+int yymbinput()
+{
+    return(winput());
+}
+void yymboutput(int yyc)
+{
+    woutput(yyc);
+}
+void yymbunput(int yyc)
+{
+    wunput(yyc);
+}
+int yymbreturn(int yyx)
+{
+    wreturn (yyx);
+}

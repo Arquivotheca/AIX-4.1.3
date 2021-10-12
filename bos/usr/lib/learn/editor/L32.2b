@@ -1,0 +1,27 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Or, to take another example, the command
+  s/h./ar/
+would turn the word "that" into "tart": the '.' matches
+the 'a'.  What would that command change the
+word "what" into?  Reply "answer WORD" where WORD
+is what the substitute command would produce.
+#copyin
+#user
+#uncopyin
+#match wart
+#log
+#next
+32.2c 5

@@ -1,0 +1,125 @@
+#
+# COMPONENT_NAME: (UCODMPQ) Multiprotocol Quad Port Adapter Software
+# 
+# DESCRIPTION: 
+# 	adjbase		: Shell script used to adjust the base address of 
+#				the MPQP adapter
+# ORIGINS: 27
+# 
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# All Rights Reserved
+# 
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                    
+#!/bin/sh
+#-----------------------------------------------------------------------------
+#  ADJBASE
+#
+#  This shell script adjusts the base address of the MPQP adapter
+#  software so that all data structures are aligned on the correct
+#  boundaries.  This is for use on an RT installed with PCSIM; the
+#  following procedure is used:
+#
+#	1) Edit PCMDISK and SRC (below) to reflect the minidisk and
+#	   directory under pcsim that contains the build source.
+#	2) Build the MPQP adapter software under pcsim (first pass).
+#	3) Exit pcsim and run this shell script; the map file will be
+#	   read from DOS, then the qpdatdef.s file will be edited to 
+#	   reflect the new base value.  If this script indicates that
+#	   the base needs no adjustment, skip the rebuild (step 4).
+#	4) Build the MPQP adapter software again (second pass).
+# 
+#  This leaves an mpqpasw image with all data structures in the proper
+#  place.  This shell script should only be run once between builds or
+#  the base will be erroneous.
+#
+#					20 MAY 90  MGM
+
+PCMDISK=hd7				# PCSIM's minidisk on your RT
+SRC=/src				# Build directory under pcsim
+
+echo
+echo "---------------------------------------------------"
+echo "       MPQP Adapter Software Base Adjustment"
+echo
+#
+#  Get a copy of the map file and look at TX_FREE:
+#
+cd /tmp
+echo " Reading map file . . ."
+if test -f mpqpasw.map
+then
+	rm mpqpasw.map
+fi
+dosread -a -D/dev/$PCMDISK $SRC/mpqpasw.map mpqpasw.map > /dev/null
+if test ! -f mpqpasw.map
+then
+    echo " ERROR: Couldn't read mpqpasw.map from pcsim!"
+    echo "---------------------------------------------------"
+    exit 1
+fi
+TXFREE=`fgrep TX_FREE mpqpasw.map | tail -1 | cut -c7-10`
+rm mpqpasw.map
+#
+#  Calculate the offset; TX_FREE should be at address 0xC000:
+#
+echo "obase=16" > bccmd
+echo "ibase=16" >> bccmd
+echo "$TXFREE - C000" >>bccmd
+OFFSET=`cat bccmd | bc`
+if [ "$OFFSET" = "0" ]
+then
+    echo " The base value needs no adjustment!"
+    echo "---------------------------------------------------"
+    exit
+fi
+#  Get qpdatdef.s and read the old base value from it:
+#
+if test -f qpdatdef.s
+then
+	rm qpdatdef.s
+fi
+dosread -a -D/dev/$PCMDISK $SRC/qpdatdef.s qpdatdef.s
+if test ! -f qpdatdef.s
+then
+    echo " ERROR: Couldn't read qpdatdef.s from pcsim!"
+    echo "---------------------------------------------------"
+    exit 1
+fi
+QPDAT=`fgrep __HLT__ qpdatdef.s | cut -c12-15`
+echo " The old base was $QPDAT"
+#
+#  Calculate the new base from the offset:
+#
+echo " Calculating new base . . ."
+echo "obase=16" > bccmd
+echo "ibase=16" >> bccmd
+echo "$QPDAT - $OFFSET" >>bccmd
+NEWVAL=`cat bccmd | bc`
+echo " The new base is  $NEWVAL"
+#
+#  Edit qpdatdef.s with the new base value:
+#
+echo " Editing qpdatdef.s . . ."
+cp qpdatdef.s temp
+sed s%__HLT__\	db\	$QPDAT%__HLT__\	db\	$NEWVAL% "qpdatdef.s" > temp
+rm qpdatdef.s
+mv temp qpdatdef.s
+#
+#  Put qpdatdef.s back into pcsim source directory:
+#
+doswrite -a -D/dev/$PCMDISK qpdatdef.s $SRC/qpdatdef.s >/dev/null; error=$?
+if [ "$error" != "0" ]
+then
+    echo " ERROR: Couldn't write qpdatdef.s back to pcsim!"
+    echo "---------------------------------------------------"
+    exit $error
+fi
+echo
+echo " MPQP adapter software base has been adjusted."
+echo "---------------------------------------------------"
+rm bccmd

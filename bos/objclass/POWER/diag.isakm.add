@@ -1,0 +1,184 @@
+# @(#)59	1.3  src/bos/objclass/POWER/diag.isakm.add, cmddiag, bos41J, 9520A_all 5/16/95 14:48:35
+#
+#   COMPONENT_NAME: CMDDIAG
+#
+#   FUNCTIONS: ISA Keyboard/Mouse Adapter and Device Diagnostics
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#
+# DClass   - name uniquely identifying a device class
+# DSClass  - name uniquely identifying a device subclass
+# DType    - name uniquely identifying a device type
+# Ports    - number of ports on the card if a multi-port card
+# Pset     - set id of message set in catalog file dcda.msg (vendor.msg)
+#	     (see Menu bit 16 below if not using dcda.msg file)
+# PreTest  - set if device is to be tested before system comes up.
+#          - value equals 1 if not a display device
+#          - value equals 2 if a display device
+# AttDType - names a device that has a device driver that supports DType.
+# Conc     - 0 not supported in concurrent mode
+#          - 1 supports Diagnostic Tests in concurrent mode
+#          - 2 supports ELA
+# SupTests - Bit positions 64 32 16 8 4 2 1
+#                           |  |  | | | | |__Shared Tests
+#                           |  |  | | | |____Subtests Tests
+#                           |  |  | | |______Full Tests
+#                           |  |  | |________Missing Options 1
+#                           |  |  |__________Missing Options 2
+#                           |  |_____________Graphics related Device (used for X)
+#                           |                     device will not be in test list if
+#                           |                     running under X-windows
+#                           |________________Device uses DIAGEX kernel extension
+#
+# Menu     - Bit positions 16 8 4 2 1
+#                           | | | | |_____Diagnostic Test List Menu
+#                           | | | |_______Not allowed to be deleted from DTL Menu
+#                           | | |_________Diagnostic Selection Menu
+#                           | |___________Conditional Diagnostic Selection Menu
+#			    |_____________Devices SRN numbers are located in the
+#					  Diagnostic Application catalog file.
+#					  Pset indicates the set number	
+# DNext    - 2 Test Sibling next
+#          - 1 Test Parent next
+# DaName   - name of Diagnostic Application associated with device
+#            When DaName is prefixed with a "*", the diagnostic controller will
+#            get the value of the attribute name that follows the "*", then
+#            uses the attribute value obtained to get the real DaName from the
+#            PDiagAtt object class. This method is used to allow support of
+#            devices having the same DType, but requiring different DA.
+# Diskette - 0 => Not on any diskette
+#            X => Diskette number
+#            S => Supplemental Diskette 
+# EnclDaName - name of Diagnostic Application associated with enclosure for
+#              device
+# SysxFlg  - Bit positions  8 4 2 1
+#                           | | | |__System Exerciser NOT supported
+#                           | | |____DA must run separately from similar DAs
+#                           | |______DA requires media
+#                           |________DA is considered a long test
+#
+#
+# Stanzas for the ISA keyboard & mouse adapter predefines
+#
+
+PDiagDev:
+        DClass  = "adapter"
+        DSClass  = "isa_sio"
+        DType = "isa_keyboard"
+        Ports    = 0
+        PSet     = 16
+        PreTest  = 0
+        AttDType = ""
+        AttSClass = ""
+        Conc     = 0
+        SupTests = 100
+        Menu     = 5
+        DNext    = 1
+        DaName   = "disakma"
+        Diskette = "7B"
+        EnclDaName   = ""
+        SysxFlg  = 0x0002
+
+PDiagDev:
+        DClass  = "adapter"
+        DSClass  = "isa_sio"
+        DType = "isa_mouse"
+        Ports    = 0
+        PSet     = 17
+        PreTest  = 0
+        AttDType = ""
+        AttSClass = ""
+        Conc     = 0
+        SupTests = 100
+        Menu     = 5
+        DNext    = 1
+        DaName   = "disakma"
+        Diskette = "7B"
+        EnclDaName   = ""
+        SysxFlg  = 0x0002
+
+PDiagDev:
+        DClass  = "keyboard"
+        DSClass  = "std_k"
+        DType = "ps2"
+        Ports    = 0
+        PSet     = 19
+        PreTest  = 1
+        AttDType = ""
+        AttSClass = ""
+        Conc     = 1
+        SupTests = 100
+        Menu     = 5
+        DNext    = 2
+        DaName   = "*parent_type"
+        Diskette = "7B"
+        EnclDaName   = ""
+        SysxFlg  = 0x0002
+
+# Keyboard/mouse devices which have different Diagnostic
+# Applications to call depending on Parent Type. There should
+# be a separate PDiagAtt attribute for those devices with
+# multiple Diagnostic Application to call. 
+
+PDiagAtt:
+        DClass = "keyboard"
+        DSClass = "std_k"
+        DType = "kb101"
+	attribute = "disakbd"
+        value = "adapter/isa_sio/isa_keyboard"
+        rep = "s"
+        DApp = "disakbd"
+
+PDiagAtt:
+        DClass = "keyboard"
+        DSClass = "std_k"
+        DType = "kb102"
+	attribute = "disakbd"
+        value = "adapter/isa_sio/isa_keyboard"
+        rep = "s"
+        DApp = "disakbd"
+
+PDiagAtt:
+        DClass = "keyboard"
+        DSClass = "std_k"
+        DType = "kb106"
+	attribute = "disakbd"
+        value = "adapter/isa_sio/isa_keyboard"
+        rep = "s"
+        DApp = "disakbd"
+
+PDiagAtt:
+        DClass = "keyboard"
+        DSClass = "std_k"
+        DType = "ps2"
+        attribute = "disakbd"
+        value = "adapter/isa_sio/isa_keyboard"
+        rep = "s"
+        DApp = "disakbd"
+
+PDiagAtt:
+        DClass = "mouse"
+        DSClass = "std_m"
+        DType = "mse_3b"
+	attribute = "disamouse"
+        value = "adapter/isa_sio/isa_mouse"
+        rep = "s"
+        DApp = "disamouse"
+
+PDiagAtt:
+        DClass = "mouse"
+        DSClass = "std_m"
+        DType = "mse_2b"
+	attribute = "disamouse"
+        value = "adapter/isa_sio/isa_mouse"
+        rep = "s"
+        DApp = "disamouse"

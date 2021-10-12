@@ -1,0 +1,63 @@
+# @(#)84	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.ibmaadu/kbrd.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:48:18
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#  KHB.map
+#   -------
+#
+#  This is the maping of keyboard while in Hebrew_Alpha mode.
+#  Only keys affected must be present in the file.
+#  The first value is the ASCII decimal code of the the "ENGLISH"
+#  mode, the second is the value of the INTERNAL (addu vt220 8 bit
+#  emulation on the PC) in decimal of the corresponding hebrew characters.
+#
+#
+# key          converted
+#                 to
+#
+ 39               44      #   '     -> ,
+ 44              220      #   ,     -> taf
+ 46              242      #   .     -> zadi sofit
+ 47               46      #   /     -> .
+ 59              244      #   ;     -> peh sofit
+ 96               59      #   `     -> ;
+ 97              214      #   a     -> shin
+ 98              201      #   b     -> nun
+ 99              252      #   c     -> beth
+100              233      #   d     -> gimel
+101              249      #   e     -> kuf
+102              239      #   f     -> khaf
+103              198      #   g     -> ain
+104              235      #   h     -> joth
+105              197      #   i     -> nun sofit
+106              231      #   j     -> chetj
+107              238      #   k     -> lamed
+108              232      #   l     -> khaf sofith
+109              251      #   m     -> tzadik
+110              196      #   n     -> mem
+111              236      #   o     -> mem sofit
+112              246      #   p     -> peh
+113               47      #   q     -> /
+114              253      #   r     -> resh
+115              226      #   s     -> daleth
+116              199      #   t     -> alef
+117              224      #   u     -> vav
+118              228      #   v     -> he
+119               39      #   w     -> '
+120              230      #   x     -> samach
+121              234      #   y     -> teth
+122              229      #   z     -> zain
+
+

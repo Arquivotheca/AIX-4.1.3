@@ -1,0 +1,7 @@
+bbldd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(bzero.o)
+bbldd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(moveeq.o)
+bblddpin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(bzero.o)
+bblddpin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(moveeq.o)
+bblddpin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(strcpy.o)
+bblddpin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(strlen.o)
+bblddpin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(strncpy.o)

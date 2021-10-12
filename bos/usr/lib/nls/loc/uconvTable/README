@@ -1,0 +1,244 @@
+# @(#)35        1.1  src/bos/usr/lib/nls/loc/uconvTable/README, cmdiconv, bos411, 9428A410j 11/5/93 05:08:13
+#
+#   COMPONENT_NAME: CMDICONV
+#
+#   FUNCTIONS: README for uconvdef utility
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+PURPOSE
+
+This utility allows users to modify and create UCS-2 conversions.
+
+SYNOPSIS
+
+uconvdef [-f SrcFile] [-v] UconvTable
+
+FLAGS AND OPERANDS
+
+-f SrcFile        Specifies the conversion table source file.  If this
+		  flag is not given, standard input is read.
+
+-v                Verbose flag, which causes the program to output the
+                  file statements processed.
+
+UconvTable        Path name of compiled table produced by uconvdef. In
+                  general, this should be the name of the code set for
+                  which conversions into and out of UCS-2 are defined.
+
+DESCRIPTION
+
+The uconvdef utility reads SrcFile  and generates a compiled version  of the
+file in UconvTable.  The SrcFile defines mapping between UCS-2 and multibyte
+code set (1 or more bytes per character). The UconvTable file is in a format
+which can be loaded by the UCSTBL conversion method located in the '/usr/lib
+/nls/loc/uconv' directory.  This method uses the table to support UCS-2 con-
+versions in both directions.   The conversion table can be accessed from the
+iconv utility and iconv programming interfaces,   if the following steps are
+taken:
+
+  1. Name the compiled table using the name of the non-UCS-2 code set.
+     (e.g. IBM-850).
+
+  2. Place the table in a directory called uconvTable.  The default system
+     directory is '/usr/lib/nls/loc/uconvTable'.   If another directory is
+     used, the LOCPATH environment variable will need to be set to include
+     parent directory (e.g. /usr/lib/nls/loc).
+
+  3. Create the following links in a directory called iconv:
+
+     <CODESET>_UCS-2 -> /usr/lib/nls/loc/uconv/UCSTBL
+     (e.g. IBM-850_UCS-2 -> /usr/lib/nls/loc/uconv/UCSTBL)
+     UCS-2_<CODESET> -> /usr/lib/nls/loc/uconv/UCSTBL
+     (e.g. UCS-2_IBM-850 -> /usr/lib/nls/loc/uconv/UCSTBL)
+
+     The default directory for these links is '/usr/lib/nls/loc/iconv'. If
+     another directory is used, the LOCPATH environment variable will need
+     to be set to include parent directory (e.g. /usr/lib/nls/loc).
+
+EXIT STATUS
+
+0               Successful completion.
+> 0             An error occurred.
+
+SOURCE FILE FORMAT
+
+Conversion mapping values are defined using UCS-2 symbolic character names
+followed by character encoding (code point) values for non-UCS-2 code set.
+
+For example,
+
+  <U0020>         \x20
+
+represents the mapping  between the <U0020> UCS-2 symbolic character name for
+the space character and the \x20 hexadecimal codepoint for the space character
+in ASCII.
+
+In addition to the code set mappings, the following directives are interpreted
+by the uconvdef utility to produce a compiled table. The following declarations
+can precede the character definitions.  Each declaration consists of the symbol
+shown in the following list,  starting in column 1,  including the surrounding
+brackets, followed by white space, followed by the value to be assigned to the
+symbol:
+
+<code_set_name>  The name of the coded character set for which the character
+                 set description file is defined, enclosed in quotation marks.
+
+<mb_cur_max>     The maximum number of bytes in a multibyte character. This
+		 defaults to 1.
+
+<mb_cur_min>     An unsigned positive integer value that defines the minimum
+		 number of bytes in a character for the encoded character set.
+		 The value is less than or equal to <mb_cur_max>. If not
+		 specified, the minimum number will be equal to <mb_cur_max>.
+
+<escape_char>    The escape character used to indicate that the characters
+		 following is interpreted in a special way, as defined later
+		 in this section.  This defaults to backslash (\),  which is
+		 the character glyph used in all the following text examples.
+
+<comment_char>   The character, that when placed in column 1 of a charmap line,
+		 is used to indicate that the line is ignored. The default
+		 character will be the number-sign (#).
+
+<char_name_mask> A quoted string consisting of format specifiers for the UCS-2
+		 symbolic names. In this version of the uconvdef utility, this
+		 must be "AXXXX",  indicating an alphabetic character followed
+		 by 4 hexadecimal digits.  Also, the alphabetic character must
+		 be a 'U', and the hexadecimal digits must represent the UCS-2
+                 code point for the character.   An example of a symbolic name
+		 based on this mask is <U0020> (UCS-2 space character).
+
+<uconv_class>    Specifies the type of the code set. It must be one of the
+                 following:
+
+                     SBCS             single byte encoding
+                     DBCS             stateless double and/or single byte
+			              encoding
+                     EBCDIC_STATEFUL  stateful double and/or sigle byte
+                                      EBCDIC encoding
+                     MBCS             stateless multibyte encoding
+
+                 This type is used to direct the uconvdef utility on what type
+                 of table to build. It is also stored in the table to indicate
+                 the type of processing algorithm in the UCS conversion methods.
+
+<locale>         Specifies the default locale name, to be used if locale
+                 information is needed.
+
+<subchar>        This is used to specify the encoding of the default substitute
+                 character in the multibyte code set.
+
+The character set mapping definitions are preceded by a line containing CHARMAP
+declaration and terminated by a line containing END CHARMAP declaration. Between
+the two, the mapping pairs are listed, one on each line.  Empty lines and lines
+containing <comment_char> in the first column are ignored.   Symbolic character
+names follow the pattern specified in the <char_name_mask>. This does not apply
+to the following reserved symbolic character names:
+
+<unassigned>     A reserved symbolic character name indicating that a codepoint
+		 (or a range of code points)  with which it is associated is
+		 unassigned. This symbolic name can be specified more than once
+                 in the coded character set description file.
+
+
+Each noncomment line of the character set mapping definition must be in one of
+the following forms:
+
+1. "%s %s %s\n", <symbolic-name>, <encoding>, <comments>
+
+Example:
+
+  <U3004>		\x81\x57
+
+In this form the line in the character set mapping definition defines a single
+symbolic character name and a corresponding encoding. A character following an
+escape character is interpreted as itself;   for example,  the sequence <\\\>>
+represents the symbolic name \> enclosed between angle brackets.
+
+2. "%s...%s %s %s\n", <symbolic-name>, <symbolic-name>, <encoding>, <comments>
+
+Example:
+
+  <U3003>...<U3007>	\x81\x56
+
+In this format, the line in the character set mapping definition defines a
+range of one or more symbolic names.
+
+In this form the line in the character set mapping definition defines a range
+of symbolic character names and a corresponding encoding. The range is
+indicated by two symbolic character names separated by ellipsis. The integer
+formed by the digits in the second symbolic name is equal to or greater than
+the integer formed by the digits in the first name. This is interpreted as a
+series of symbolic names formed from the common part and each of the integers
+between the first and the second integer, inclusive. As an example,
+<U3003>...<U3006> is interpreted as the symbolic names <U3003>,<U3004>,<U3005>,
+and <U3006>, in that order.
+
+3. "<unassigned> %s...%s %s\n", <encoding>, <encoding>, <comments>
+
+Example:
+
+  <unassigned>		\x9b...\x9c
+
+In this form the line in the character set mapping definition defines a single
+symbolic character name and a range of one or more encoding parts associated
+with that symbolic character name. This form can only be used with the reserved
+symbolic character name <unassigned>.
+
+
+The encoding part is expressed as one (for single-byte character values) or
+more concatenated decimal, octal, or hexadecimal constants in the following
+formats:
+
+"%cd%d", <escape_char>, <decimal byte value>
+
+"%cx%x", <escape_char>, <hexadecimal byte value>
+
+"%c%o", <escape_char>, <octal byte value>
+
+Decimal constants are represented by two or more decimal digits, preceded by
+the escape character and the lowercase letter d; for example, \d97 or \d143.
+Hexadecimal constants are represented by two or more hexadecimal digits,
+preceded by an escape character and the lowercase letter x; for example, \x61
+or \x8f. Octal constants are represented by two or more octal digits preceded
+by an escape character.
+
+Each constant represents a single-byte value When constants are concatenated
+for multibyte character values, they are of the same type, with the last
+specifies the least significant octet and preceding constants specifies
+successively more significant octets.
+
+In lines defining ranges of symbolic names, the encoded value is the value for
+the first symbolic name in the range (the symbolic name preceding the ellipsis)
+Subsequent symbolic names defined by the range have encoding values in
+increasing order For example, the line:
+
+<U3003>...<U3007>          \x81\x56
+
+is interpreted as:
+
+<U3003>                    \x81\x56
+<U3004>                    \x81\x57
+<U3005>                    \x81\x58
+<U3006>                    \x81\x59
+<U3007>                    \x81\x5a
+
+A range of encoding parts is indicated by an ellipsis separating two encoding
+parts which are the boundaries of the range For example, the line:
+
+<unassigned>               \x9b...\x9c
+
+is interpreted as:
+
+<unassigned>               \x9b
+<unassigned>               \x9c
+

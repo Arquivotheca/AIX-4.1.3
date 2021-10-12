@@ -1,0 +1,31 @@
+#
+# dependents of ubblue.o:
+ubblue.o: ${MAKETOP}bos/usr/include/stdio.h
+ubblue.o: ${MAKETOP}bos/usr/include/standards.h
+ubblue.o: ${MAKETOP}bos/usr/include/va_list.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/types.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/m_types.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/limits.h
+ubblue.o: ${MAKETOP}bos/usr/include/float.h
+ubblue.o: ${MAKETOP}bos/usr/include/signal.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/signal.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/context.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/m_param.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/mstsave.h
+ubblue.o: ${MAKETOP}bos/usr/include/fcntl.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/flock.h
+ubblue.o: ${MAKETOP}bos/usr/include/unistd.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/access.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/lockf.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/stat.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/mode.h
+ubblue.o: ${MAKETOP}bos/usr/include/diag/diago.h
+ubblue.o: ${MAKETOP}bos/usr/include/asl.h
+ubblue.o: ${MAKETOP}bos/usr/include/stdarg.h
+ubblue.o: ${MAKETOP}bos/diag/tu/bblue/bblue_tu_type.h
+ubblue.o: ${MAKETOP}../export/power/usr/include/sys/mdio.h
+ubblue.o: ubblue_msg.h
+ubblue.o: ${MAKETOP}bos/usr/include/limits.h
+ubblue.o: ${MAKETOP}bos/usr/include/nl_types.h
+ubblue.o: ${MAKETOP}bos/usr/include/mesg.h
+ubblue.o: ${MAKETOP}bos/diag/util/u5081/bblue/ubblue.h

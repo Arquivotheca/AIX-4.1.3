@@ -1,0 +1,235 @@
+/* @(#)91	1.1  src/bos/kernel/sys/POWER/scsi_scb.h, sysxscsi, bos411, 9428A410j 9/29/93 08:49:48 */
+
+#ifndef _H_SCSI_SCB
+#define _H_SCSI_SCB
+/*
+ * COMPONENT_NAME: (SYSXSCSI) IBM SCSI Device Driver
+ *
+ * FUNCTIONS:	NONE
+ *
+ * ORIGINS: 27
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1992
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+/*
+ *
+ * COMPONENT:   SYSXSCSI 
+ *                                                
+ * NAME:        scsi_scb.h
+ *                                               
+ * FUNCTION:    IBM SCSI Protocol/Adapter Driver Header File
+ *                                                                
+ *      	The SCSI subsystem is made up of SCSI head drivers, protocol
+ *		driver, and the adapter driver. This header is shared
+ *		between the protocol and adapter drivers.
+ *                                                               
+ */
+
+
+/*
+ *  this header file contains structures and defines common to both
+ *  the protocol and adapter drivers.
+ */
+
+/*****************************************************************************/
+/*  General Common Defines for SCSI Protocol and Adapter Drivers             */
+/*****************************************************************************/
+
+#define  MAX_ADAPTERS 0x10 
+
+struct rpl_element_def {
+    struct ctl_elem_hdr    header;
+    ushort  resvd0;
+    ushort  adap_status;
+    ulong   resid_count;
+    ulong   resid_addr;
+    ushort  resvd1;
+    uchar   cmd_status;
+    uchar   scsi_status;
+    uchar   cmd_error_code;
+    uchar   device_error_code;
+    ushort  resvd2;
+    ulong   resvd3;
+    ushort  resvd4;
+};
+
+/*
+ *        SUGGESTED SCSI COMMAND BLOCK FOR THE PROTOCOL HEAD
+ *
+ *                      1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3
+ *  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+ *
+ * +---------------------------------------------------------------+    *
+ * |  SBP: NEXT ADDR  FCP: NOT USED    SIP: NOT USED               | 0  *
+ * +---------------------------------------------------------------+    *
+ * |  SBP: NEXT ADDR  FCP:SCSI ADDR    SIP: NOT USED               | 1  *
+ * | --------------------------------------------------------------+    *
+ * |SBP:RSV SIP:SCSI ID FCP:SCSI AD|   SBP/FCP/SIP: SCSI LUN       | 2  *
+ * +---------------------------------------------------------------+    *
+ * |   MEDIA SPECIFIC FLAGS AND CODES, SEE BELOW                   | 3  *
+ * +---------------------------------------------------------------+    *
+ * |                    SCSI   CDB                                 | 4  *
+ * +---------------------------------------------------------------+    *
+ * |                    SCSI   CDB                                 | 5  *
+ * +---------------------------------------------------------------+    *
+ * |                    SCSI   CDB                                 | 6  *
+ * +---------------------------------------------------------------+    *
+ * |                    SCSI   CDB                                 | 7  *
+ * +---------------------------------------------------------------+    *
+ * |                SCSI  DATA  LENGTH                             | 8  *
+ * +---------------------------------------------------------------+    *
+ * |                            .                                  |
+ * +---------------------------------------------------------------+
+ * |                            .                                  |
+ * +---------------------------------------------------------------+
+ * |             SBP USES THIS AREA FOR DATA BUFFER ADDRESSES,     |
+ * +---------------------------------------------------------------+
+ * |                 STATUS ADDRESSES, AND SENSE ADDRESSES         |
+ * +---------------------------------------------------------------+
+ * |                  (FCP & SIP DO NOT USE THESE BYTES)           |
+ * +---------------------------------------------------------------+
+ * |                             .                                 |
+ * +---------------------------------------------------------------+
+ * |                             .                                 | 16
+ * +---------------------------------------------------------------+
+ *        SIP: SCSI INTERLOCKED PROTOCOL (PARALLEL SCSI)
+ *        FCP: SCSI OVER FIBRECHANNEL
+ *        SBP: SCSI BUS PACKETIZED (SCSI ON P1394)
+ *
+ *   NOTE:
+ *        Word 0 used only by SBP.
+ *        Word 1 used for SCSI device addressing by SIP & FCP.
+ *               Used for next command address in chain in SBP
+ *        Word 2 used for SCSI device addressing by all protocols
+ *        Word 3 used for flags for all protocols.
+ *        Words 4 - 8 used for SCSI CDB & transfer length by all protocols.
+ *
+ *        (Words 0 - 8 can be used as the SCSI CDB generated by the
+ *        protocol head. Each adapter driver or adapter must fill in the
+ *        missing fields which are unique to its protocol, or send the
+ *        appropriate signals on the media. For normal read/write commands,
+ *        the FCS adapter or adapter driver must mask out the qtag field,
+ *        while the SIP adapter driver will send the qtag to the device in a
+ *        qtag message. For exceptions such as ABORT, the SIP adapter will
+ *        send the appropriate abort message, while the FCS adapter will abort
+ *        the appropriate exchange.
+ * NOTES:
+ *     1. CODING FOR WORD 3 ABOVE DEPENDS ON THE PHYSICAL TRANSPORT:
+ *SIP:
+ *                      1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3
+ *  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+ * +---------------------------------------------------------------+
+ * |F F|   | SIZE  |        C| QMSG| AC|R I O|r S D|  QTAG         | 3
+ * +---------------------------------------------------------------+
+ *               FF: Format Identifier
+ *                   B'00' - SIP (Parallel SCSI)
+ *                   B'01' - SBP
+ *                   All other values reserved (FCP value TBD).
+ *
+ *		 SIZE: This 4-bit(4 - 7) indicates the number of bytes
+ *		       of the SCSI CDB which should be sent to the
+ *		       SCSI device.
+ *                  C: This bit indicates that the queue of commands for 
+ *                     the specified device should be cleared at the adapter
+ *                     without an abort message being sent to the device.
+ *                     This bit is only vaild if the AC bits have a value
+ *                     of 01 (simple abort).
+ *
+ *               QMSG: B'000' - SIMPLE QUEUE
+ *                     B'001' - HEAD OF QUEUE
+ *                     B'010' - ORDERED QUEUE
+ *                     B'100' - ACA QUEUE
+ *                     B'011' - NO QUEUE
+ *                     (SIP sends appropriate qtag message with QTAG tag
+ *                      SBP sends the command block and includes the QMSG bits
+ *                      FCP sends the command block and includes the QMSG bits
+ *                      The NO QUEUE TAG bit coding is used only by SIP)
+ *
+ *                 AC: B'10' - TAGGED ABORT (abort the tagged command only)
+ *                     B'01' - SIMPLE ABORT (abort all commands at LUN)
+ *                     B'00' - No abort operation
+ *                     B'11' - SCSI bus reset
+ *                     (SIP sends appropriate abort message
+ *                      SBP sends appropriate abort message
+ *                      FCP only implements the R bit defined below.
+ *                          Specific commands are aborted by aborting exchange.)
+ *
+ *NOTE: For all abort operations and Bus Device Reset (see below), the SCB
+ *      request element formed by the protocol head is chained to a Cancel
+ *      element with a cancellation list giving the complete list of commands
+ *      to be aborted.
+ *
+ *
+ *                  R: BUS DEVICE RESET
+ *                     (SIP sends Bus Device Reset message
+ *                      SBP semds Bis Device Reset message
+ *                      FCP sends the command block with the R bit set
+ *                  I: DATA PHASE DIRECTION INTO INITIATOR (read)
+ *                  O: DATA PHASE DIRECTION OUT OF INITIATOR (write)
+ *                     (SIP activates appropriate SCSI bus line
+ *                      SBP uses these bits in the command block
+ *                      FCP uses these bits in the command block)
+ *                  S: SIP: 0 - Use synchronous mode; 1 - Use Asynchronous Mode
+ *                     SBP: Refer to SBP document
+ *                     FCP: Refer to FCP document
+ *                  D: SIP: 0 - Allow disconnections;
+ *                          1 - Do not allow disconnections
+ *                      SBP: Refer to SBP document
+ *                      FCP: Refer to FCP document
+ *
+ *
+ *               QTAG: VALUE OF QTAG
+ *                     (SIP sends qtag as part of queue message
+ *                      SBP does not use qtags--P1394 CDBs provide function.
+ *                      FCS does not use qtags--exchange IDs provide function.)
+ *
+ */
+
+struct scsi_cdb {
+    ulong                  next_addr1;
+    ulong                  next_addr2;
+    ushort                 scsi_id;
+    ushort                 scsi_lun;
+    ulong                  media_flags;
+    struct sc_cmd          scsi_cmd_blk;
+    ulong                  scsi_extra;
+    ulong                  scsi_data_length;
+};
+
+struct ctl_element_def {
+    struct ctl_elem_hdr    header;
+    struct pd              type2_pd;
+    struct pd              type1_pd;
+    struct  scsi_cdb       scsi_cdb;      /* command descriptor block   */
+};
+
+/* 
+ * Controls for SCSI SCB driver 
+ */
+#define	NDD_ADD_DEV		(0x00010001)
+#define	NDD_DEL_DEV		(0x00010002)
+#define	NDD_TGT_ADD_DEV		(0x00010003)
+#define	NDD_TGT_DEL_DEV		(0x00010004)
+#define	NDD_TGT_SUS_DEV		(0x00010005)
+#define	NDD_TGT_RES_DEV		(0x00010006)
+#define	NDD_DEL_ALL_DEV		(0x00010007)
+#define	NDD_QUERY_DEV		(0x00010008)
+#define	NDD_RESET_ADP		(0x00010009)
+
+
+/* 
+ * Status codes for SCSI SCB driver 
+ */
+#define	NDD_SCSI_BUS_RESET	(0x00001001)
+#define	NDD_DEV_RESELECT	(0x00001002)
+#define	NDD_TERM_POWER_LOSS	(0x00001003)
+#define	NDD_DIFFERENTIAL_SENSE	(0x00001004)
+
+
+#endif /* _H_SCSI_SCB */

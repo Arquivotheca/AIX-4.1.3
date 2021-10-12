@@ -1,0 +1,584 @@
+#
+# @(#)17        1.28  src/bos/usr/lib/assist/add_files/sm_preserve.add, cmdassist, bos411, 9438B411a 9/21/94 11:04:21
+#
+#   COMPONENT_NAME:  cmdassist
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist"
+    next_id                   = "chtz"
+    text                      = "Set Date and Time"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 2
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "2850101"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist"
+    next_id                   = "assist_passwd"
+    text                      = "Set root Password"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 3
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850102"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id			      = "assist_passwd"
+    option_id		      = ""
+    has_name_select 	      = "n"
+    cmd_to_exec		      = "x() { \n\
+passwd root\n\
+if [ $? -ne 0 ]\n\
+then\n\
+        dspmsg -s 52 smit.cat 49 'Press Enter to continue.\n'\n\
+        read\n\
+fi\n\
+}\n\
+x"
+    ask			      = ""
+    exec_mode		      = "i"
+    ghost		      = "y"
+
+
+
+sm_menu_opt:
+    id_seq_num                = "040"
+    id                        = "assist"
+    next_id                   = "assist_net"
+    text                      = "Configure Network Communications"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 5
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850104"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "070"
+    id                        = "assist"
+    next_id                   = "assist_user"
+    text                      = "Create Users"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 18
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850107"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "080"
+    id                        = "assist"
+    next_id                   = "assist_printer_menu"
+    text                      = "Define Printers"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 21
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850108"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_net"
+    next_id                   = "assist_tcpip"
+    text                      = "TCP/IP Startup"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52 
+    text_msg_id               = 42 
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "2058114"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_net"
+    next_id                   = "mkhostent"
+    text                      = "Add a Hostname to Access Other Systems"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52 
+    text_msg_id               = 43 
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "0822042"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "030"
+    id			      = "assist_net"
+    next_id                   = "assist_nfs"
+    text                      = "Start NFS"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52 
+    text_msg_id               = 44 
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "2850116"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "040"
+    id                        = "assist_net"
+    next_id                   = "mknfsmnt"
+    text                      = "Mount a Remote File System"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 6
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "1800303"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_user"
+    next_id                   = "mkuser"
+    text                      = "Create a User"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 19
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "1800168"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_user"
+    next_id                   = "passwd"
+    text                      = "Set Password"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 20
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "3004400"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_printer_menu"
+    next_id                   = "printerinst"
+    text                      = "Install Printer Software"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52 
+    text_msg_id               = 40 
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "1800099"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_printer_menu"
+    next_id                   = "assist_printer"
+    text                      = "Add a Print Queue"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52 
+    text_msg_id               = 41 
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "1800226"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_name_hdr:
+    id                        = "assist_printer"
+    next_id                   = "assist_printer"
+    option_id                 = "assist_printer_dummy_opt"
+    has_name_select	      = ""
+    name                      = "Add a Print Queue"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 41
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify	      = "\
+x()
+{
+    # Check to see if the printer file is installed.
+    lslpp -l printers.rte 2>/dev/null 1>/dev/null
+    if [[ $? != 0 ]]
+    then
+	echo 2
+    else
+	echo 1
+    fi
+}
+x"
+    next_type 		      = "n"
+
+sm_name_hdr:
+    id                        = "assist_printer1"
+    next_id                   = "mkpq"
+    option_id                 = "assist_printer_dummy_opt"
+    has_name_select	      = ""
+    ghost		      = "y"
+    next_type 		      = "n"
+    type		      = "c"
+    cmd_to_classify           = "\
+gui_check()
+{
+   if [ $SMIT = \"m\" ]; then
+     echo gui
+   fi
+}
+gui_check"
+   
+sm_name_hdr:
+	id		= "mkpqgui"
+	next_id		= "invoke_gui"
+	next_type	= "d"
+	option_id	= "assist_printer_dummy_opt"
+	ghost		= "y"
+		
+sm_cmd_hdr:
+	id		= "invoke_gui"
+	cmd_to_exec	= "/usr/bin/X11/xprintm &"
+	exec_mode	= "E"
+	ghost		= "y"
+
+sm_cmd_opt:
+    id			      = "assist_printer_dummy_opt"
+    id_seq_num		      = 0
+
+sm_name_hdr:
+    id                        = "assist_printer2"
+    next_id                   = "assist_printer1"
+    option_id                 = "assist_print_opt"
+    has_name_select	      = ""
+    name                      = "Add a Print Queue"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 41
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = "\
+install_printers ()
+{
+  # Set variables for message numbers.  These must match the values
+  # in the include file cmdassist_msg.h which is generated from the
+  # cmdassist.msg file.
+  #
+  MF_CMDASSIST=cmdassist.cat  # Message file
+  ASSIST_ERR_SET=1            # Message set number
+  ASSIST_INSTL_PRINTER_E=20   # Install error, printer.rte package
+  ASSIST_INSTL_FAIL_I=9       # Install failure, possible causes
+
+  # Install the printer package.
+  /usr/lib/assist/install_pkg \"printers.rte\" 2>&1 >/dev/null
+  if [[ $? != 0 ]]
+  then
+    # Display specific error message for printers.rte.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_PRINTER_E \
+'0851-013 install_assist:  These commands\n\
+cannot be run until the printers.rte package\n\
+is installed.  An attempt to install this\n\
+package failed.\n\n'
+    # Display information about possible causes for install error.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_FAIL_I \
+'The installation failure may have been caused \n\
+by one of the following: \n\
+  - The input device/directory is not correct. \n\
+    The device may be changed through the Set \n\
+    Installation Device menu. \n\
+  - The input device does not contain a valid \n\
+    installation medium. \n\
+  - There is a valid installation medium, but \n\
+    it does not contain the necessary packages. \n\
+If you are able to correct this problem, you \n\
+may wish to try this function again.\n'
+    exit 1
+  else
+    exit 0
+  fi
+}
+install_printers "
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = ""
+    next_type 		      = "n"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "assist_print_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Add a Print Queue"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 41
+    op_type                   = "l"
+    cmd_to_list               = "x()\
+{
+if [ $SMIT = \"a\" ] \n\
+then \n\
+dspmsg -s 52 smit.cat 56 \
+'Press Enter to automatically install the printer software.\n\
+Press F3 to cancel.\n\
+'\n\
+else \n\
+dspmsg -s 52 smit.cat 57 'Click on this item to automatically install
+the printer software.\n' \n\
+fi\n\
+} \n\
+x"
+    entry_type                = "t"
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_name_hdr:
+    id                        = "assist_tcpip"
+    next_id                   = "mktcpip"
+    option_id                 = "cmd_tcpip"
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = "\
+install_tcp ()
+{
+  # Set variables for message numbers.  These must match the values
+  # in the include file cmdassist_msg.h which is generated from the
+  # cmdassist.msg file.
+  #
+  MF_CMDASSIST=cmdassist.cat  # Message file
+  ASSIST_ERR_SET=1            # Message set number
+  ASSIST_INSTL_TCP_E=7        # Install error, tcp package
+  ASSIST_INSTL_FAIL_I=9       # Install failure, possible causes
+
+  # Install the needed tcp packages.
+  /usr/lib/assist/install_pkg \"bos.net.tcp.smit bos.net.tcp.client\"
+  if [[ $? != 0 ]]
+  then
+    # Give specific error message about tcpip.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_TCP_E \
+'0851-003 install_assist:  TCP/IP cannot \n\
+be started until the bos.net.tcp.client \n\
+package is installed.  An attempt to install \n\
+this package failed.\n\n'
+    # Display information about possible causes for install error.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_FAIL_I \
+'The installation failure may have been caused \n\
+by one of the following: \n\
+  - The input device/directory is not correct. \n\
+    The device may be changed through the Set \n\
+    Installation Device menu. \n\
+  - The input device does not contain a valid \n\
+    installation medium. \n\
+  - There is a valid installation medium, but \n\
+    it does not contain the necessary packages. \n\
+If you are able to correct this problem, you \n\
+may wish to try this function again.\n'
+    exit 1
+  else
+    exit 0
+  fi
+}
+install_tcp "
+    cmd_to_classify_postfix   = ""
+    next_type                 = "n"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_tcpip"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = "n"
+    entry_type                = "n"
+    required                  = "n"
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_name_hdr:
+    id			      = "assist_nfs"
+    next_id		      = "assist_nfs"
+    option_id		      = "assist_nfs_dummy_opt"
+    type		      = "c"
+    ghost		      = "y"
+    cmd_to_classify	      = "\
+x()
+{
+    # Check to see if the nfs is installed
+    lslpp -l bos.net.nfs.client 2>/dev/null 1>/dev/null
+    if [[ $? != 0 ]]
+    then
+        echo 2
+    else
+        echo 1
+    fi
+}
+x"
+    next_type                 = "n"
+
+sm_cmd_opt:
+   id			     = "assist_nfs_dummy_opt"
+   id_seq_num		     = 0
+
+sm_name_hdr:
+    id			      = "assist_nfs1"
+    next_id		      = "mknfs"
+    option_id		      = "assist_nfs_dummy_opt"
+    ghost		      = "y"
+
+sm_name_hdr:
+    id                        = "assist_nfs2"
+    next_id                   = "mknfs"
+    option_id                 = "cmd_nfs"
+    has_name_select           = ""
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52 
+    name_msg_id               = 44 
+    name                      = "Start NFS"
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = "\
+install_nfs ()
+{
+  # Set variables for message numbers.  These must match the values
+  # in the include file cmdassist_msg.h which is generated from the
+  # cmdassist.msg file.
+  #
+  MF_CMDASSIST=cmdassist.cat  # Message file
+  ASSIST_ERR_SET=1            # Message set number
+  ASSIST_INSTL_NFS_E=8        # Install error, nfs package
+  ASSIST_INSTL_FAIL_I=9       # Install failure, possible causes
+
+  /usr/lib/assist/install_pkg \"bos.net.nfs.client\" 2>&1 >/dev/null
+  if [[ $? != 0 ]]
+  then
+    # Give specific error message about nfs.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_NFS_E \
+'0851-004 install_assist:  NFS cannot \n\
+be started until the bos.net.nfs.client \n\
+package is installed.  An attempt to install \n\
+this package failed.\n\n'
+    # Display information about possible causes for install error.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_FAIL_I \
+'The installation failure may have been caused \n\
+by one of the following: \n\
+  - The input device/directory is not correct. \n\
+    The device may be changed through the Set \n\
+    Installation Device menu. \n\
+  - The input device does not contain a valid \n\
+    installation medium. \n\
+  - There is a valid installation medium, but \n\
+    it does not contain the necessary packages. \n\
+If you are able to correct this problem, you \n\
+may wish to try this function again.\n'
+    exit 1
+  else
+    exit 0
+  fi
+}
+install_nfs "
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_nfs"
+    id_seq_num                = "0"
+    cmd_to_list = "x() { \n\
+if [ $SMIT = "a" ] \n\
+then \n\
+dspmsg -s 52 smit.cat 47 'Press Enter to automatically install NFS.\n\
+Press F3 to cancel.\n\
+'\n\
+else \n\
+dspmsg -s 52 smit.cat 55 'Click on this item to automatically install NFS.\n' \n\
+fi\n\
+} \n\
+x "
+        name = "Start NFS"
+        name_msg_file = "smit.cat"
+        name_msg_set = 52
+        name_msg_id = 44
+

@@ -1,0 +1,30 @@
+#!/unix
+* @(#)96
+*
+*
+* COMPONENT_NAME: (tu_wildw) MPS Diagnostic Kernel Extension
+*
+* FUNCTIONS: Diagnostic Kernel Extension Interface Export Symbols
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+start_up_adapter        syscall
+mps_open_adapter        syscall
+mps_setup               syscall
+recv_setup              syscall
+mps_recv_setup          syscall
+mps_tx_setup            syscall
+mps_recv_undo           syscall
+mps_tx_undo             syscall
+mps_clean_up            syscall
+mps_fastwrt             syscall
+mps_recv                syscall
+mps_tx_done             syscall
+mps_enable_channel      syscall

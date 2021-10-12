@@ -1,0 +1,148 @@
+# @(#)53	1.2  src/bos/objclass/sm_console.add, sysxcons, bos411, 9437C411a 9/15/94 13:15:19
+#
+#  COMPONENT_NAME: SYSXCONS
+#
+#  FUNCTIONS: none
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_cmd_hdr:
+    id                  = "chcons"
+    option_id           = "chcons_1"
+    has_name_select     = ""
+    name                = "Assign the Console"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 25
+    name_msg_id         = 14
+    cmd_to_exec         = "chcons "
+    ask                 = ""
+    exec_mode           = ""
+    ghost               = "n"
+    cmd_to_discover     = "print '#current\\n'`lscons -b`"
+    cmd_to_discover_postfix = ""
+    name_size           = 0
+    value_size          = 0
+    help_msg_id         = "038082"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "chcons_1"
+    id_seq_num          = "010"
+    disc_field_name     = "current"
+    name                = "\
+PATHNAME of console\n"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 25
+    name_msg_id         = 780
+    op_type             = "l"
+    entry_type          = "t"
+    entry_size          = 0
+    required            = ""
+    prefix              = "--"
+    cmd_to_list_mode    = "1"
+    cmd_to_list         = "lsdev -C | cut -c1-10 | egrep 'tty|lft' | \n\
+sed 's?tty?/dev/tty?g' | \n\
+sed 's?lft?/dev/lft?g' | \n\
+sed '1i\\\n\
+# These are some suggested choices.\\\n\
+# In general, any regular file name may be used.\\\n\
+# ' "
+    cmd_to_list_postfix = ""
+    multi_select        = ""
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "038083"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "chcons_1"
+    id_seq_num          = "020"
+    disc_field_name     = ""
+    name                = "Enable for LOGIN?\n"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 25
+    name_msg_id         = 781
+    op_type             = "r"
+    entry_type          = ""
+    entry_size          = 0
+    required            = "y"
+    prefix              = "-a "
+    cmd_to_list_mode    = ""
+    cmd_to_list         = ""
+    cmd_to_list_postfix = ""
+    multi_select        = ""
+    value_index         = 0
+    disp_values         = "yes,no"
+    values_msg_file     = "smit.cat"
+    values_msg_set      = 27
+    values_msg_id       = 12 
+    aix_values          = "login=enable,login=disable"
+    help_msg_id         = "038084"
+    help_msg_loc        = ""
+
+sm_cmd_hdr:
+    id                  = "swcons"
+    option_id           = "swcons_1"
+    has_name_select     = ""
+    name                = "Redirect Console Output"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 25
+    name_msg_id         = 432
+    cmd_to_exec         = ""
+    ask                 = ""
+    exec_mode           = ""
+    ghost               = "n"
+    cmd_to_discover     = "print '#current\\n'`lscons`"
+    cmd_to_discover_postfix = ""
+    name_size           = 0
+    value_size          = 0
+    help_msg_id         = "038085"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "swcons_1"
+    id_seq_num          = "010"
+    disc_field_name     = "current"
+    name                = "\
+PATHNAME of console output\n"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 25
+    name_msg_id         = 782
+    op_type             = "l"
+    entry_type          = "t"
+    entry_size          = 0
+    required            = ""
+    prefix              = "swcons "
+    cmd_to_list_mode    = "1"
+    cmd_to_list         = "lsdev -C | cut -c1-10 | egrep 'tty|lft' | \n\
+sed 's?tty?/dev/tty?g' | \n\
+sed 's?lft?/dev/lft?g' | \n\
+sed '1i\\\n\
+# These are some suggested choices.\\\n\
+# In general, any regular file name may be used.\\\n\
+# ' "
+    cmd_to_list_postfix = ""
+    multi_select        = ""
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "038086"
+    help_msg_loc        = ""
+

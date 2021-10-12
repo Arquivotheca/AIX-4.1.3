@@ -1,0 +1,35 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+There is another file named "table" in this directory.
+Find all numbers and surround them with "*" characters (that
+is, "345" becomes "*345*".  Then rewrite the file
+and type "ready".
+#create Ref
+  Income
+Wages    *73*
+Interest *20*
+Gambling  *5*
+Other     *2*
+#create table
+  Income
+Wages    73
+Interest 20
+Gambling  5
+Other     2
+#user
+#cmp table Ref
+#log
+#next
+37.2e 5

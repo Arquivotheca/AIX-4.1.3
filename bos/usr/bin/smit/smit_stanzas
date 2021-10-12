@@ -1,0 +1,105 @@
+# @(#)64        1.5  src/bos/usr/bin/smit/smit_stanzas, smitobj, bos411, 9428A410j 1/18/93 10:15:09
+
+
+#   COMPONENT_NAME: CMDSMIT
+#
+# FUNCTIONS: none
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+
+
+
+# Empty stanzas (odmadd format) for initializing SMIT objects.
+
+sm_menu_opt:
+    id                        = ""
+    id_seq_num                = ""
+    next_id                   = ""
+    text                      = ""
+    text_msg_file             = ""
+    text_msg_set              = 0
+    text_msg_id               = 0
+    next_type                 = ""
+    alias                     = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base	      = ""
+    help_msg_book	      = ""
+ 
+sm_name_hdr:
+    id                        = ""
+    next_id                   = ""
+    option_id                 = ""
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    type                      = ""
+    ghost                     = ""
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = ""
+    next_type                 = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base	      = ""
+    help_msg_book	      = ""
+ 
+sm_cmd_hdr:
+    id                        = ""
+    option_id                 = ""
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    cmd_to_exec               = ""
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = ""
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base	      = ""
+    help_msg_book	      = ""
+
+sm_cmd_opt:
+    id                        = ""
+    id_seq_num                = ""
+    disc_field_name           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base	      = ""
+    help_msg_book	      = ""

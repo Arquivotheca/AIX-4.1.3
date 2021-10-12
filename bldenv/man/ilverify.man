@@ -1,0 +1,238 @@
+#
+# @(#)97 1.1 src/bldenv/man/ilverify.man, pkgtools, bos412, GOLDA411a 5/20/94 14:58:19
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: ilverify command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  ilverify Command
+  
+  
+  Purpose
+  
+  The ilverify command validates inslist files.
+  
+
+  Syntax
+  
+  ilverify [ -p search_directory ] [ -e exception_file ] [ -i inslist(s) ]
+           [ -t tablename ] [ -d db_file ] [ -n db_file ]
+
+
+  Description
+  
+  The ilverify command validates inslist files.  ilverify will validate
+  individual inslist files, or it will search a specified directory such as
+  a build tree, a sandbox, or the current directory, and validate all
+  inslist (*.il) files found.  Any errors detected are displayed to stderr.
+
+  The command will search for and use prerequisite files (*.prereq.S)
+  as part of the verification process.  The information from multiple
+  inslists is combined into an ordered list based on the prereq
+  files before verification.  ilverify then ensures that the following 
+  criteria holds across inslists:
+
+	.  The correct number of fields is in each inslist entry.
+
+        .  The type field is valid in each inslist entry.
+
+	.  The uid and gid fields in the inslists entries are valid.
+           (When this command is run with the -t flag, the uid and gid 
+           fields are checked using the specified table.  The /etc/passwd 
+           and /etc/group files are used as default.)
+
+	.  A directory entry appears before any file or link entries
+           for that directory.
+
+	.  All parent directories are specified in the inslists.
+
+	.  File paths that exist in one inslist entry do not exist
+           in another inslist entry unless they are on the exception list.
+           (When this command is run with the -e flag, the exception list file
+           specified is used.  If the -e flag is not specified, the file
+           indicated by the environment variable EXCEPTION_LIST is used
+           if it exists.)
+
+	.  Duplicate directory entries are identical (i.e. have identical
+           attributes) in all inslists if they exist.
+
+	.  Duplicate directory paths that are not identical (i.e. do not 
+	   have identical attributes) do not exist unless they are on the
+           exception list.  (When this command is run with the -e flag,
+           the exception list file specified will be used.  If the -e
+           flag is not specified, the file indicated by the environment 
+           variable EXCEPTION_LIST is used if it exists.)
+
+	.  Hard links do not cross base file systems.
+
+  If neither the -i nor -p flags are specified, the inslists in the
+  current directory are validated, and a recursive directory search is 
+  not performed.
+
+  The ilverify command also generates a database file when invoked
+  with the -d option.  The database file contains a composite list
+  of the entries from all the inslists validated.
+
+  The output database file can be used as input with the -n option in
+  order to validate individual inslists against the database information.  
+  The database is assumed to be correct, so ilverify only runs its checks
+  against the individual inslist files specified.  If the -n flag is not
+  specified, the file indicated by the environment variable DB_FILE_IN is
+  used if it exists.
+
+  The -n and -d flags are mutually exclusive.
+
+  Note:  Inslist verification against the input database file does not
+         perform requisite directory checking.  This is because ilverify 
+         does not have access to all of the necessary prereq.S files
+         when an input database file is used.
+  
+
+  Flags
+
+  (No flags)          The inslist(s) in the current directory are validated
+                      if the -p or -i flags are not specified.  A recursive 
+                      directory search for inslists is not performed.
+
+  -p search_directory (optional) Specifies the path to the build tree 
+                      directory, the sandbox directory, or a search directory.
+                      A recursive directory search is performed for all
+                      inslists found.
+
+  -e exception_file   (optional) Specifies the full path name of the exception
+                      file.  This file contains the file path names that may
+                      exist in more than one inslist.  The environment variable
+                      EXCEPTION_LIST can also be used to specify this file.
+
+  -i inslist(s)       (optional) Specifies inslist(s) path(s).  Multiple
+                      entries are supported and must be separated by a
+                      colon (:).
+
+  -t tablename        (optional) Specifies the name of a file that contains a
+                      table which is used to validate the uid and gid fields
+                      contained in the inslist entries.  Any uids or gids
+                      that are not found in the table will be verified
+                      against /etc/passwd and /etc/group on the running
+                      system.
+
+  -d db_file_out      (optional) Specifies where to generate the composite    
+                      database file of inslists.
+
+  -n db_file_in       (optional) Specifies the name of an existing database
+                      file to be used when verifying the inslist(s).  The 
+                      environment variable DB_FILE_IN can also be used to
+                      specify this file.
+
+  Note:  A command line argument will always override a pre-specified
+         environment variable. 
+ 
+
+  Environment Variables
+
+  EXCEPTION_LIST     Full pathname of the exception file.
+
+  DB_FILE_IN         Full pathname of the existing database file.
+
+
+  Input Files
+
+  inslist(*.il) -       This file contains the inslist entries for
+                        the objects related to each installable lpp.  
+			The format of this file is:
+
+        <type> <uid> <gid> <mode>       <fileName> 
+
+        Example:
+
+        F 2 2 555       /usr/bin/awk 
+
+        The format of a link entry in the inslist is:
+
+        <type> <uid> <gid> <mode>       <linkName> <targetFile> 
+
+        Example:
+
+        H 2 2 777       /usr/bin/nawk /usr/bin/awk 
+
+        NOTE:  Hard links must immediately follow the inslist entry for
+        their target file.  This requirement does not apply to symbolic
+        link entries.
+
+
+  prereq (<option>.prereq.S) - This file contains the prerequisite options
+                        associated with each installable product that must 
+                        be installed prior to the installation of a specific 
+                        product.  The inslists being verified are ordered 
+                        based on the required prerequisites.
+
+			The format of this file is:
+
+			# Prologue
+			#
+			*prereq <option> <version.release.modification.fix>
+
+			Example:
+
+			*prereq bos.adt.cls 4.1.0.0
+
+  exception file -      This file contains the file or directory path names
+                        that may exist in more than one inslist.  The 
+                        environment variable associated with this file is
+                        EXCEPTION_LIST.  The format of this file is one
+			path name per line.
+
+  uid/gid table -       This file contains a table that can add to or
+			supersede usr and group id for the system
+			from /etc/passwd and /etc/group.  ilverify
+                        will validate uids/gids from the inslist first
+                        against this table (if specified) and then
+                        against /etc/passwd and /etc/group.
+
+			The format of this file is:
+
+                	<user name> <uid> <group name> <gid>
+
+        		Example:
+
+                	dbadmuser 200 dbadmgroup 300
+
+
+  Output Files
+  
+  composite data base - This file contains a composite list of all the inslists
+                        validated.  This database file can be used to validate
+                        individual inslists without having to perform a total
+                        verification of all inslists.  The environment variable
+                        associated with this file is DB_FILE_IN.
+
+
+  Examples
+
+   1.  Call ilverify to verify the inslists contained in the directory 
+       /project/aix4/build/latest/src/packages.  The files and directory paths
+       specified in /aix/4.1/sb/tmp/except.list may exist in more than one 
+       inslist and a composite data base file of all the inslist entries will
+       be generated into /aix/4.1/sb/tmp/db_file.  Requisite directory 
+       checking will be performed.
+
+       ilverify -p /project/aix4/build/latest/src/packages
+                -e /aix/4.1/sb/tmp/except.list -d /aix/4.1/sb/tmp/db_file
+
+   2.  Call ilverify to verify inslist1.il and inslist2.il.  The table 
+       user.table will be used to validate the uid and gid fields contained in
+       these inslists.  The composite data base file /aix/4.1/sb/tmp/db_file
+       will be used to check for duplicate path definitions.  Requisite 
+       directory checking will not be performed.
+
+       ilverify -i /aix/4.1/sb/tmp/inslist1.il:/aix/4.1/sb/tmp/inslist2.il
+                -t /aix/4.1/sb/tmp/user.table -n /aix/4.1/sb/tmp/db_file 

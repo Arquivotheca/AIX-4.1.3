@@ -1,0 +1,36 @@
+# @(#)36        1.4  src/bldenv/man/ptf_pkg.man, bldtools, bos412, GOLDA411a 1/4/94 14:31:30
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: ptf_pkg file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991,1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/UPDATE/<lpp-name>/ptf_pkg.$BLDCYCLE:
+	Intermediate selective-fix file which specifies contents of PTF's
+        to be created.  Created by the subptf command.
+
+	Format:
+		D|A A A...|F|O|I I I...|C C C...|P P P...
+		D|A A A...|F|O|I I I...|C C C...|P P P...
+                                  .
+                                  .
+	        where
+			D is a PTF identifier
+			A is an APAR number
+			F is a file name
+                        O is a LPP option.subsystem name
+			I is an if-requisites (PTF identifier)
+			C is an corequisites (PTF identifier)
+			P is an prerequisites (PTF identifier)
+
+ 		Each file in a PTF is listed on a separate line (in the
+                above format).

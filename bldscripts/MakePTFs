@@ -1,0 +1,56 @@
+#!/bin/ksh
+# @(#)31	1.1  src/bldscripts/MakePTFs, ade_build, bos41J, 9509A_all 2/21/95 07:54:06
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+trap : 1
+export PAGERID=packager
+export PAGERSEVERITY=3
+alias  dataman=`whence dataman`
+alias  execman="`whence bldenv` `whence execman` "
+
+typeset DBGLEVEL=1
+eval ${DEBUGX}
+
+cmd=${0##*/}
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+typeset -r realtop=$(dataman -q directory[fulltop])
+typeset -r ship_prefix=$(dataman -q directory[SHIP_PREFIX])
+typeset -r PROD_DIR=$(dataman -q directory[BFFPROD])
+export     TOP=${treetop}/selfix
+export     BLDTMP=`dataman -q directory[BLDTMP]`
+export     BUILD_TYPE=`dataman -q leveldata[${BLDCYCLE}][type]`
+export     SHIP_PATH
+if [[ "$treetop" = "$realtop" ]]
+then SHIP_PATH=${treetop}/${ship_prefix}
+else SHIP_PATH=${treetop}/${ship_prefix}:${realtop}/${ship_prefix}
+fi
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+execman bldenv ptfpkg -b -c -d ${PROD_DIR} >$ptfpkglog 2>&1
+
+# check to see if everything got done
+execman ksh -c "cat ${TOP}/UPDATE/*/ptf_pkg.${BLDCYCLE} | exit \$(wc -c)"
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

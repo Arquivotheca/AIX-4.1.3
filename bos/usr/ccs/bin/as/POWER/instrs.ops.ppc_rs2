@@ -1,0 +1,100 @@
+*/* @(#)63	1.2  src/bos/usr/ccs/bin/as/POWER/instrs.ops.ppc_rs2, cmdas, bos411, 9428A410j 3/10/94 10:32:38*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.ppc_rs2
+* *
+* *        V4.1  RIOS/2 and PowerPC architecutre common instructions  
+* *        that are not supported in RIOS/1 but supported in 601
+* *                                                                   
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1994
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+***********************************************************************
+*
+*** - *** Type indicator: For RIOS/2 and PowerPC common 
+*                         instructions, not supported in RIOS/1.
+*                         The bit map is 0x807C
+% 32892
+***********************************************************************
+*       XTB-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XTB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  ///  |   OP2 |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = BF | FRT
+*              OP2 = I | FRB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2             ----- RC=0
+*       mnemonic. OP1,OP2             ----- RC=1
+*
+***********************************************************************
+************************************************
+**** /*** Floating Convert To Integer Word ***/ ****
+************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*14    fcir     frt,frb    Floating Convert Double to Integer with round
+*14    fcir.    frt,frb    Floating Convert Double to Integer with round (Rc=1)
+*14    fctiw   frt,frb    Floating Convert to Integer Word
+*14    fctiw.  frt,frb    Floating Convert to Integer Word (Rc=1)
+       fctiw      rr       x5   63-014  fcir
+       fctiw.     rr       x5   63-014-1  fcir.
+*15    fcirz    frt,frb    Floating Convert Double to Integer with round to zero
+*15    fcirz.   frt,frb    Floating Convert Double to Integer with round to zero (Rc=1)
+*15    fctiwz  frt,frb    Floating Convert to Integer Word
+*                         with round to zero
+*15    fctiwz. frt,frb    Floating Convert to Integer Word
+*                         with round to zero (Rc=1)
+       fctiwz     rr       x5   63-015  fcirz
+       fctiwz.    rr       x5   63-015-1  fcirz.
+* 
+***********************************************************************

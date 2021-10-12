@@ -1,0 +1,29 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This one is tougher than the last one. There are
+several files in this directory whose names
+begin with "hard". Remove them, then type "ready".
+#create X1
+#create X2
+#
+ls >X2
+cp X1 "hard 1"
+cp X1 "hard er"
+#user
+ls >X1
+#cmp X1 X2
+#log
+#next
+13.1f

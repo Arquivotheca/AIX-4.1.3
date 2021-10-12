@@ -1,0 +1,246 @@
+ADDRESS MAP FOR ccmdd_pin
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+ I                        ER S1    pinned_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S2    clrjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S3    devswqry                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S4    fp_open                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S5    fp_close                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S6    fp_ioctl                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S7    getexcept                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S8    i_clear                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S9    i_reset                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S10   lockl                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S11   longjmpx                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S12   setjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S13   xmalloc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S14   xmfree                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S15   busgetc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S16   busputc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S17   busgets                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S18   busputs                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S19   busgetl                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S20   busputl                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S21   buscpy                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S22   io_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S23   io_det                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S24   iomem_att                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S25   iomem_det                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I  00003200           XO ER S26   __divss                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003200           XO ER S27   .__divss                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003280           XO ER S28   __divus                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003280           XO ER S29   .__divus                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003300           XO ER S30   __quoss                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003300           XO ER S31   .__quoss                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003380           XO ER S32   __quous                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003380           XO ER S33   .__quous                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+    00000000 000088  2 PR SD S34   <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_interrupt.c(ccm_interrupt.o)
+    00000000           PR LD S35   .ccm_interrupt
+    00000088 000040  2 PR SD S36   <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    00000088           PR LD S37   ._ptrgl
+    00000088           PR LD S38   .$PTRGL
+    000000C8 000024  2 GL SD S39   <.i_reset>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000000C8           GL LD S40   .i_reset
+    000000EC 0000B8  2 PR SD S41   <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_open.c(ccm_open.o)
+    000000EC           PR LD S42   .ccm_open
+    000001A4 000024  2 GL SD S43   <.devswqry>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000001A4           GL LD S44   .devswqry
+    000001C8 0000E8  2 PR SD S45   <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_close.c(ccm_close.o)
+    000001C8           PR LD S46   .ccm_close
+    000002B0 000024  2 GL SD S47   <.i_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000002B0           GL LD S48   .i_clear
+    000002D4 0001A0  2 PR SD S49   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_act.c(vtt_act.o)
+    000002D4           PR LD S50   .ccm_vtt_act
+    00000474 000E20  2 PR SD S51   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_subrs.c(vtt_subrs.o)
+    00000474           PR LD S52   .clear_frame_buffer
+    000004FC           PR LD S53   .clear_box
+    00000790           PR LD S54   .copy_ps
+    00000B18           PR LD S55   .ccm_move_cursor
+    00000D88           PR LD S56   .ccm_draw_string
+    00000E98           PR LD S57   .ccm_draw_char
+    00000F38           PR LD S58   .process_special_attrs
+    00001070           PR LD S59   .cdd_draw_glyph
+    000011C8           PR LD S60   .ps_to_screen_text
+    00001230           PR LD S61   .ps_to_screen_clear
+    00001294 000024  2 GL SD S62   <.xmalloc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001294           GL LD S63   .xmalloc
+    000012B8 000090  2 PR SD S64   .bzero                    bzero.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o])
+    00001348 000080  2 PR SD S65   .memset                   memset.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[memset.o])
+    000013C8 000024  2 GL SD S66   <.xmfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000013C8           GL LD S67   .xmfree
+    000013EC 000024  2 GL SD S68   <.io_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000013EC           GL LD S69   .io_att
+    00001410 000024  2 GL SD S70   <.io_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001410           GL LD S71   .io_det
+    00001434 0000C4  2 PR SD S72   .bcopy                    moveeq.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o])
+    00001434           PR LD S73   .ovbcopy
+    00001440           PR LD S74   ._moveeq
+    00001440           PR LD S75   .memcpy
+    00001440           PR LD S76   .memmove
+    000014F8 0001B8  2 PR SD S77   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_cfl.c(vtt_cfl.o)
+    000014F8           PR LD S78   .ccm_vtt_cfl
+    000016B0 0001D0  2 PR SD S79   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_clr.c(vtt_clr.o)
+    000016B0           PR LD S80   .ccm_vtt_clr
+    00001880 000308  2 PR SD S81   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_cpl.c(vtt_cpl.o)
+    00001880           PR LD S82   .update_screen
+    00001980           PR LD S83   .ccm_vtt_cpl
+    00001B88 000038  2 PR SD S84   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_dact.c(vtt_dact.o)
+    00001B88           PR LD S85   .ccm_vtt_dact
+    00001BC0 000258  2 PR SD S86   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_defc.c(vtt_defc.o)
+    00001BC0           PR LD S87   .ccm_vtt_defc
+    00001E18 000530  2 PR SD S88   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_init.c(vtt_init.o)
+    00001E18           PR LD S89   .load_font_table
+    00001FB8           PR LD S90   .ccm_vtt_init
+    00002348 0000F8  2 PR SD S91   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_movc.c(vtt_movc.o)
+    00002348           PR LD S92   .ccm_vtt_movc
+    00002440 0000F8  2 PR SD S93   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_rds.c(vtt_rds.o)
+    00002440           PR LD S94   .ccm_vtt_rds
+    00002538 000098  2 PR SD S95   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_term.c(vtt_term.o)
+    00002538           PR LD S96   .ccm_vtt_term
+    000025D0 000298  2 PR SD S97   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_text.c(vtt_text.o)
+    000025D0           PR LD S98   .ccm_vtt_text
+    00002868 000360  2 PR SD S99   <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_scr.c(vtt_scr.o)
+    00002868           PR LD S100  .ccm_vtt_scr
+    00002BC8 0000B0  2 PR SD S101  <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_setm.c(vtt_setm.o)
+    00002BC8           PR LD S102  .ccm_vtt_setm
+    00002C78 000030  2 PR SD S103  <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_stct.c(vtt_stct.o)
+    00002C78           PR LD S104  .ccm_vtt_stct
+    00002CA8 0016E8  2 PR SD S105  <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+    00002CA8           PR LD S106  .ccmdd_svcs_buscpy
+    00002FFC           PR LD S107  .ccmdd_svcs_busputc
+    000032BC           PR LD S108  .ccmdd_svcs_busputs
+    000034F4           PR LD S109  .ccmdd_svcs_busputl
+    00003894           PR LD S110  .ccmdd_svcs_busgetc
+    00003C5C           PR LD S111  .ccmdd_svcs_busgets
+    00003F28           PR LD S112  .ccmdd_svcs_busgetl
+    000042C8           PR LD S113  .ccmdd_svcs_lockl
+    0000431C           PR LD S114  <.dd_nvram_open>
+    00004390 000024  2 GL SD S115  <.buscpy>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004390           GL LD S116  .buscpy
+    000043B4 000024  2 GL SD S117  <.fp_ioctl>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000043B4           GL LD S118  .fp_ioctl
+    000043D8 000024  2 GL SD S119  <.fp_close>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000043D8           GL LD S120  .fp_close
+    000043FC 000024  2 GL SD S121  <.getexcept>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000043FC           GL LD S122  .getexcept
+    00004420 000024  2 GL SD S123  <.setjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004420           GL LD S124  .setjmpx
+    00004444 000024  2 GL SD S125  <.clrjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004444           GL LD S126  .clrjmpx
+    00004468 000024  2 GL SD S127  <.longjmpx>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004468           GL LD S128  .longjmpx
+    0000448C 000024  2 GL SD S129  <.iomem_att>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000448C           GL LD S130  .iomem_att
+    000044B0 000024  2 GL SD S131  <.iomem_det>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000044B0           GL LD S132  .iomem_det
+    000044D4 000024  2 GL SD S133  <.busputc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000044D4           GL LD S134  .busputc
+    000044F8 000024  2 GL SD S135  <.busputs>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000044F8           GL LD S136  .busputs
+    0000451C 000024  2 GL SD S137  <.busputl>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000451C           GL LD S138  .busputl
+    00004540 000024  2 GL SD S139  <.busgetc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004540           GL LD S140  .busgetc
+    00004564 000024  2 GL SD S141  <.busgets>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004564           GL LD S142  .busgets
+    00004588 000024  2 GL SD S143  <.busgetl>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004588           GL LD S144  .busgetl
+    000045AC 000024  2 GL SD S145  <.lockl>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000045AC           GL LD S146  .lockl
+    000045D0 000024  2 GL SD S147  <.fp_open>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000045D0           GL LD S148  .fp_open
+    000045F8 000020  3 RO SD S149  <>                        ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_defc.c(vtt_defc.o)
+    00000000 00006E  3 RW SD S150  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_interrupt.c(ccm_interrupt.o)
+    00000070 000068  3 RW SD S151  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_open.c(ccm_open.o)
+  E 000000D8 000004  2 RW SD S152  _CCMDD                    ../../../../../../src/bos/kernext/disp/ccm/config/ccm_open.c(ccm_open.o)
+    000000E0 00006A  3 RW SD S153  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_close.c(ccm_close.o)
+    00000150 000067  3 RW SD S154  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_subrs.c(vtt_subrs.o)
+    000001B8 000065  3 RW SD S155  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_act.c(vtt_act.o)
+    00000220 000065  3 RW SD S156  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_cfl.c(vtt_cfl.o)
+    00000288 000065  3 RW SD S157  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_clr.c(vtt_clr.o)
+    000002F0 000065  3 RW SD S158  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_cpl.c(vtt_cpl.o)
+    00000358 000066  3 RW SD S159  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_dact.c(vtt_dact.o)
+    000003C0 000066  3 RW SD S160  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_defc.c(vtt_defc.o)
+    00000428 000065  3 RW SD S161  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_init.c(vtt_init.o)
+    00000490 000066  3 RW SD S162  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_movc.c(vtt_movc.o)
+    000004F8 000065  3 RW SD S163  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_rds.c(vtt_rds.o)
+    00000560 000066  3 RW SD S164  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_term.c(vtt_term.o)
+    000005C8 000066  3 RW SD S165  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_text.c(vtt_text.o)
+    00000630 000065  3 RW SD S166  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_scr.c(vtt_scr.o)
+    00000698 000066  3 RW SD S167  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_setm.c(vtt_setm.o)
+    00000700 000066  3 RW SD S168  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_stct.c(vtt_stct.o)
+    00000768 000073  3 RW SD S169  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+* E 000007DC 00000C  2 DS SD S170  ccm_interrupt             ../../../../../../src/bos/kernext/disp/ccm/config/ccm_interrupt.c(ccm_interrupt.o)
+  E 000007E8 00000C  2 DS SD S171  ccm_open                  ../../../../../../src/bos/kernext/disp/ccm/config/ccm_open.c(ccm_open.o)
+  E 000007F4 00000C  2 DS SD S172  ccm_close                 ../../../../../../src/bos/kernext/disp/ccm/config/ccm_close.c(ccm_close.o)
+  E 00000800 00000C  2 DS SD S173  ccm_vtt_act               ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_act.c(vtt_act.o)
+  E 0000080C 00000C  2 DS SD S174  ccm_vtt_cfl               ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_cfl.c(vtt_cfl.o)
+  E 00000818 00000C  2 DS SD S175  ccm_vtt_clr               ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_clr.c(vtt_clr.o)
+  E 00000824 00000C  2 DS SD S176  ccm_vtt_cpl               ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_cpl.c(vtt_cpl.o)
+  E 00000830 00000C  2 DS SD S177  ccm_vtt_dact              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_dact.c(vtt_dact.o)
+  E 0000083C 00000C  2 DS SD S178  ccm_vtt_defc              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_defc.c(vtt_defc.o)
+  E 00000848 00000C  2 DS SD S179  ccm_vtt_init              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_init.c(vtt_init.o)
+  E 00000854 00000C  2 DS SD S180  ccm_vtt_movc              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_movc.c(vtt_movc.o)
+  E 00000860 00000C  2 DS SD S181  ccm_vtt_rds               ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_rds.c(vtt_rds.o)
+  E 0000086C 00000C  2 DS SD S182  ccm_vtt_term              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_term.c(vtt_term.o)
+  E 00000878 00000C  2 DS SD S183  ccm_vtt_text              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_text.c(vtt_text.o)
+  E 00000884 00000C  2 DS SD S184  ccm_vtt_scr               ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_scr.c(vtt_scr.o)
+  E 00000890 00000C  2 DS SD S185  ccm_vtt_setm              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_setm.c(vtt_setm.o)
+  E 0000089C 00000C  2 DS SD S186  ccm_vtt_stct              ../../../../../../src/bos/kernext/disp/ccm/ksr/vtt_stct.c(vtt_stct.o)
+  E 000008A8 00000C  2 DS SD S187  ccmdd_svcs_buscpy         ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+  E 000008B4 00000C  2 DS SD S188  ccmdd_svcs_busputc        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+  E 000008C0 00000C  2 DS SD S189  ccmdd_svcs_busputs        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+  E 000008CC 00000C  2 DS SD S190  ccmdd_svcs_busputl        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+  E 000008D8 00000C  2 DS SD S191  ccmdd_svcs_busgetc        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+  E 000008E4 00000C  2 DS SD S192  ccmdd_svcs_busgets        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+  E 000008F0 00000C  2 DS SD S193  ccmdd_svcs_busgetl        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+  E 000008FC 00000C  2 DS SD S194  ccmdd_svcs_lockl          ../../../../../../src/bos/kernext/disp/ccm/config/ccm_io_subrs.c(ccm_io_subrs.o)
+    00000908 000000  2 T0 SD S195  <TOC>
+    00000908 000004  2 TC SD S196  <i_reset>
+    0000090C 000004  2 TC SD S197  <_$STATIC>
+    00000910 000004  2 TC SD S198  <devswqry>
+    00000914 000004  2 TC SD S199  <_$STATIC>
+    00000918 000004  2 TC SD S200  <i_clear>
+    0000091C 000004  2 TC SD S201  <_$STATIC>
+    00000920 000004  2 TC SD S202  <_CCMDD>
+    00000924 000004  2 TC SD S203  <pinned_heap>
+    00000928 000004  2 TC SD S204  <xmalloc>
+    0000092C 000004  2 TC SD S205  <xmfree>
+    00000930 000004  2 TC SD S206  <io_att>
+    00000934 000004  2 TC SD S207  <io_det>
+    00000938 000004  2 TC SD S208  <_$STATIC>
+    0000093C 000004  2 TC SD S209  <_$STATIC>
+    00000940 000004  2 TC SD S210  <_$STATIC>
+    00000944 000004  2 TC SD S211  <_$STATIC>
+    00000948 000004  2 TC SD S212  <_$STATIC>
+    0000094C 000004  2 TC SD S213  <_$STATIC>
+    00000950 000004  2 TC SD S214  <>
+    00000954 000004  2 TC SD S215  <>
+    00000958 000004  2 TC SD S216  <_$STATIC>
+    0000095C 000004  2 TC SD S217  <_$STATIC>
+    00000960 000004  2 TC SD S218  <_$STATIC>
+    00000964 000004  2 TC SD S219  <_$STATIC>
+    00000968 000004  2 TC SD S220  <_$STATIC>
+    0000096C 000004  2 TC SD S221  <_$STATIC>
+    00000970 000004  2 TC SD S222  <_$STATIC>
+    00000974 000004  2 TC SD S223  <_$STATIC>
+    00000978 000004  2 TC SD S224  <_$STATIC>
+    0000097C 000004  2 TC SD S225  <buscpy>
+    00000980 000004  2 TC SD S226  <fp_ioctl>
+    00000984 000004  2 TC SD S227  <fp_close>
+    00000988 000004  2 TC SD S228  <getexcept>
+    0000098C 000004  2 TC SD S229  <setjmpx>
+    00000990 000004  2 TC SD S230  <clrjmpx>
+    00000994 000004  2 TC SD S231  <longjmpx>
+    00000998 000004  2 TC SD S232  <iomem_att>
+    0000099C 000004  2 TC SD S233  <iomem_det>
+    000009A0 000004  2 TC SD S234  <busputc>
+    000009A4 000004  2 TC SD S235  <busputs>
+    000009A8 000004  2 TC SD S236  <busputl>
+    000009AC 000004  2 TC SD S237  <busgetc>
+    000009B0 000004  2 TC SD S238  <busgets>
+    000009B4 000004  2 TC SD S239  <busgetl>
+    000009B8 000004  2 TC SD S240  <lockl>
+    000009BC 000004  2 TC SD S241  <_$STATIC>
+    000009C0 000004  2 TC SD S242  <fp_open>
+  E 000009C4 000004  2 RW CM S243  _CCMDD_INTR               ../../../../../../src/bos/kernext/disp/ccm/config/ccm_open.c(ccm_open.o)

@@ -1,0 +1,77 @@
+#!/etc/drivers/sdpin
+* @(#)06        1.7.2.1  src/bos/kernext/disk/sd/sdpin.exp, sysxdisk, bos411, 9428A410j 3/16/94 10:31:20
+*
+* COMPONENT_NAME: (SYSXDISK) Serial DASD Subsystem Device Driver
+*                            Bottom Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1990, 1991
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+sd_log_adap_err
+sd_log_ctrl_err
+sd_log_dasd_err
+sd_log_error
+sd_async_event
+sd_adap_cdt
+sd_ctrl_cdt
+sd_dasd_cdt
+sd_adap_table
+sd_ctrl_table
+sd_dasd_table
+sd_open_adaps
+sd_open_ctrls
+sd_open_dasd
+sd_inited_adaps
+sd_inited_ctrls
+sd_inited_dasd
+sd_global_lock
+sd_strategy
+sd_epow
+sd_intr
+sd_start_disable
+sd_hash
+sd_dump
+sd_write_POS
+sd_read_POS
+sd_reload_pos
+sd_sleep
+sd_restart_adap
+sd_set_adap_parms_disable
+sd_wait_reset_disable
+sd_ioctl_timer
+sd_cmd_timer
+sd_query_timer
+sd_delay_timer
+sd_cmd_alloc_disable
+sd_free_cmd_disable
+sd_start_unit_disable
+sd_read_cap_disable
+sd_release_disable
+sd_pio
+sd_reset_quiesce_disable
+sd_activity
+sd_fail_adap
+sd_fail_adap_disable
+sd_halt_adap_disable
+sd_q_cmd_disable
+sd_d_q_cmd_disable
+sd_adap_cdt_func
+sd_ctrl_cdt_func
+sd_dasd_cdt_func
+sd_walk_event
+activity_timer
+sd_epow_ptr
+sd_format_mode_data
+sd_verify_disable
+sd_concurrent
+sd_epow_lock

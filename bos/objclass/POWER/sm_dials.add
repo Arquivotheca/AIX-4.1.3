@@ -1,0 +1,1121 @@
+# @(#)37        1.7  src/bos/objclass/POWER/sm_dials.add, cfggraphics, bos41J, 9510A_all 2/28/95 14:06:50
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Dials/LPFKs Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined Dials/LPFKeys
+#       Add a Dials/LPFKeys
+#       Change/Show Characteristics of a Dials/LPFKeys
+#       Remove a Dials/LPFKeys
+#       Configure a Defined Dials/LPFKeys
+#
+#       Help text Id's for Dials/LPFKeys specific helps are in the range:
+#               04201300 to 04201399
+#       This does not include menu helps.
+#
+
+#
+# List All Defined Dials/LPFKeys
+# This uses a ghost dialogue to list all the defined Dials/LPFKeys
+# devices.  The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsdials"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 441
+    cmd_to_exec               = "
+lsdev -C -s sgio
+lsdev -C -s gio"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800193"
+    help_msg_loc              = ""
+
+#
+#
+# Add a Dials/LPFKeys
+# This allows a Dials/LPFKeys device to be added by defining and
+# configuring it.
+# There are two name selectors followed by the dialogue.  The first
+# name selector is used to put up a list of Predefined Dials/LPFKeys
+# devices for the user to select from.  The second name selector
+# puts up a list of defined adapters which can have the selected type
+# of Dials/LPFKeys device attached to it.
+
+# Select type of Dials/LPFKeys
+sm_name_hdr:
+    id                        = "makdials"
+    next_id                   = "makdials_parent"
+    option_id                 = "dials_predef_opt"
+    has_name_select           = "n"
+    name                      = "Add a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 434
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+class () # str1 str2\n\
+{\n\
+echo $1 | sed 's/^\\([^ ]*\\)[ ]*/\\1:/'\n\
+}\n\
+class "
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "type:desc"
+    next_type                 = "n"
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# Name selector command option for type of Dials/LPFKeys
+sm_cmd_opt:
+    id                        = "dials_predef_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Dials/LPFKeys Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 626
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "lsdev -P -s gio -F \"type description\""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201"
+    help_msg_loc              = ""
+
+# Select parent adapter
+# This name selector displays possible parent devices.
+sm_name_hdr:
+    id                        = "makdials_parent"
+    next_id                   = "makdials_"
+    option_id                 = "makdials_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 434
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "
+makdials_ext ()
+{
+case $1 in
+  tty*) echo \"hdr_sgio\";;
+     *) echo \"hdr\";;
+esac
+}
+makdials_ext "
+    cmd_to_classify_postfix   = "parent"
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "makdials_parent_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "
+ii=`lsdev -C -S available -c tty`
+if [ \"$ii\" = \"\" ]
+  then
+    echo \"  \"
+  else
+    echo \"$ii\"
+fi
+lsparent -C -k gio"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# The dialogue header follows.
+
+sm_cmd_hdr:
+    id                        = "makdials_hdr"
+    option_id                 = "dials_add"
+    has_name_select           = "y"
+    name                      = "Add a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 434
+    cmd_to_exec               = "mkdev -s gio "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -s gio "
+    cmd_to_discover_postfix   = "-t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "makdials_hdr_sgio"
+    option_id                 = "dials_add_sgio"
+    has_name_select           = "y"
+    name                      = "Add a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 434
+    cmd_to_exec               = "mkdev -s sgio "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -s sgio "
+    cmd_to_discover_postfix   = "-t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+
+#
+# Change/Show Characteristics of a Dials/LPFKeys
+# This allows a Dials/LPFKeys device's characteristics to be shown. 
+# First, there is a name selector used to put up a
+# list of the defined Dials/LPFKeys devices for the user to select from.
+# The dialogue then shows all of the characteristics.
+
+# Select Dials/LPFKeys by logical name
+sm_name_hdr:
+    id                        = "chdials"
+    next_id                   = "chgdials_hdr_"
+    option_id                 = "dials_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 435
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "
+xx () \n\
+{ \n\
+tmp=`lsattr -l $1 -a ttydevice -E -O |sed 's/^#ttydevice *//' |sed 's/ *$//'`
+tmp2=`lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\" | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\2:&/'`
+echo $tmp:$tmp2 | awk ' BEGIN { FS = \":\" }
+{
+  sgio_info = \"\"
+  for (i = 1; i <= NF; i++) {
+    if ( i > 1 ) {
+      if (i == NF)
+        sgio_info = sgio_info $i
+      else if ( i == 5 )
+        sgio_info = sgio_info $1\":\"
+      else
+        sgio_info = sgio_info $i\":\"
+    }
+  }
+  printf(\"%s\\n\", sgio_info)
+}'
+} \n\
+xx "
+# Obtain type, subclass, parent, port from logicname; concat _ separated type
+# and subclass to next_id. (SMIT will concat up to first : to next_id by dflt)
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:parent:port:loc:state:desc"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+
+# The dialogue header follows.
+
+sm_cmd_hdr:
+    id                        = "chgdials_hdr_gio"
+    option_id                 = "dials_chg"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 435
+    cmd_to_exec               = "chdev"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "chgdials_hdr_sgio"
+    option_id                 = "dials_chg_sgio"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 435
+    cmd_to_exec               = "chdev"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+
+#
+# Remove a Dials/LPFKeys
+# This allows a Dials/LPFKeys device to be removed, including its
+# definition in the database, from the system.  A name selector is used to
+# put up a list of the "defined" and "configured" Dials/LPFKeys devices
+# for the user to select from.  The dialogue then uses the rmdev command to
+# remove the selected device.
+
+# Select Dials/LPFKeys by logical name
+sm_name_hdr:
+    id                        = "rmdials"
+    next_id                   = "rmvdials_hdr"
+    option_id                 = "dials_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 436
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvdials_hdr"
+    option_id                 = "rmvdials_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 436
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvdials_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 625
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201300"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvdials_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "04201302"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined Dials/LPFKeys 
+# This allows a Dials/LPFKeys device that is defined but not configured to
+# be configured.  A name selector is used to put up a list of the "defined"
+# Dials/LPFKeys devices for the user to select from.  The dialogue then
+# uses the mkdev command to configure the selected device.
+
+# Select Dials/LPFKeys by logical name
+sm_name_hdr:
+    id                        = "cfgdials"
+    next_id                   = "cfgdials_hdr"
+    option_id                 = "dials_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 437
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800200"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgdials_hdr"
+    option_id                 = "cfgdials_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 437
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800200"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgdials_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 625
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201300"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing Dials/LPFKeys by logical
+# name.
+# Used by: change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "dials_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 625
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "
+lsdev -C -s sgio
+lsdev -C -s gio"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201300"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add.
+# Used by: add function.
+
+sm_cmd_opt:
+    id                        = "dials_add"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "Dials/LPFKeys type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 626
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201306"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "dials_add"
+    id_seq_num                = "002"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201303"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "dials_add"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201307"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "dials_add"
+    id_seq_num                = "005"
+    disc_field_name           = ""
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn -k gio"
+    cmd_to_list_postfix       = "-p parent"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201301"
+    help_msg_loc              = ""
+
+# Displays autoconfig attribute.
+sm_cmd_opt:
+    id                        = "dials_add"
+    id_seq_num                = "006"
+    disc_field_name           = "autoconfig"
+    name                      = "STATE to be configured at boot time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 26
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "available,defined"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27 
+    values_msg_id             = 21 
+    aix_values                = "available,defined"
+    help_msg_id               = "0420236"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "dials_add_sgio"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "Dials/LPFKeys type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 626
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201306"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "dials_add_sgio"
+    id_seq_num                = "002"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201303"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "dials_add_sgio"
+    id_seq_num                = "003"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-a ttydevice="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201307"
+    help_msg_loc              = ""
+
+# Displays autoconfig attribute.
+sm_cmd_opt:
+    id                        = "dials_add_sgio"
+    id_seq_num                = "004"
+    disc_field_name           = "autoconfig"
+    name                      = "STATE to be configured at boot time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 26
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "available,defined"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 21
+    aix_values                = "available,defined"
+    help_msg_id               = "0420236"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to change/show.
+# Used by: change/show function.
+
+# Displays the device's logical name.
+sm_cmd_opt:
+    id                        = "dials_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 625
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201300"
+    help_msg_loc              = ""
+
+# Displays Dials/LPFKeys device type.
+#sm_cmd_opt:
+#    id                        = "dials_chg"
+#    id_seq_num                = "002"
+#    disc_field_name           = "type"
+#    name                      = "Dials/LPFKeys type"
+#    name_msg_file             = "smit.cat"
+#    name_msg_set              = 27
+#    name_msg_id               = 626
+#    op_type                   = ""
+#    entry_type                = "n"
+#    entry_size                = 0
+#    required                  = "n"
+#    prefix                    = "-t "
+#    cmd_to_list_mode          = ""
+#    cmd_to_list               = ""
+#    cmd_to_list_postfix       = ""
+#    multi_select              = "n"
+#    value_index               = 0
+#    disp_values               = ""
+#    values_msg_file           = ""
+#    values_msg_set            = 0
+#    values_msg_id             = 0
+#    aix_values                = ""
+#    help_msg_id               = "0420101"
+#    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "dials_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201303"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "dials_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201304"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "dials_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201305"
+    help_msg_loc              = ""
+
+# Displays parent adapter.
+sm_cmd_opt:
+    id                        = "dials_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201307"
+    help_msg_loc              = ""
+
+# Displays port number Dials/LPFKeys device is connected to.
+sm_cmd_opt:
+    id                        = "dials_chg"
+    id_seq_num                = "007"
+    disc_field_name           = "port"
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn"
+    cmd_to_list_postfix       = "-p parent -l logicname"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201301"
+    help_msg_loc              = ""
+
+# Displays autoconfig attribute.
+sm_cmd_opt:
+    id                        = "dials_chg"
+    id_seq_num                = "008"
+    disc_field_name           = "autoconfig"
+    name                      = "STATE to be configured at boot time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 26
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "available,defined"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27 
+    values_msg_id             = 21 
+    aix_values                = "available,defined"
+    help_msg_id               = "0420236"
+    help_msg_loc              = ""
+
+# Displays the device's logical name.
+sm_cmd_opt:
+    id                        = "dials_chg_sgio"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Dials/LPFKeys"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 625
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201300"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "dials_chg_sgio"
+    id_seq_num                = "002"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201303"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "dials_chg_sgio"
+    id_seq_num                = "003"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201304"
+    help_msg_loc              = ""
+
+# Displays tty device instance serial Dials/LPFKeys device is connected to.
+sm_cmd_opt:
+    id                        = "dials_chg_sgio"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a ttydevice= "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201307"
+    help_msg_loc              = ""
+
+# Displays autoconfig attribute.
+sm_cmd_opt:
+    id                        = "dials_chg_sgio"
+    id_seq_num                = "005"
+    disc_field_name           = "autoconfig"
+    name                      = "STATE to be configured at boot time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 26
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "available,defined"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 21
+    aix_values                = "available,defined"
+    help_msg_id               = "0420236"
+    help_msg_loc              = ""

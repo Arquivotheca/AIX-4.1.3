@@ -1,0 +1,113 @@
+# @(#)28	1.2.1.2  src/bos/objclass/POWER/if_ca.add, cmdnet, bos411, 9428A410j 1/22/94 12:46:17
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the ethernet network interface.
+
+PdDv:
+	type		= "ca"
+	class		= "if"
+	subclass	= "CA"
+	prefix		= "ca"
+	base		= 0
+	chgstatus	= 1
+	led		= 0x581
+	setno		= 110
+	msgno		= 29
+	catalog		= "devices.cat"
+	DvDr		= "if_ca"
+	Define		= "/usr/lib/methods/defif"
+	Configure	= "/usr/lib/methods/cfgif"
+	Change		= "/usr/lib/methods/chgif"
+	Unconfigure	= "/usr/lib/methods/ucfgif"
+	Undefine	= "/usr/lib/methods/udefif"
+	uniquetype	= "if/CA/ca"
+
+PdCn:
+	uniquetype	= "if/CA/ca"
+	connkey		= "TCPIP"
+
+PdAt:
+	uniquetype	= "if/CA/ca"
+	attribute	= "mtu"
+	deflt		= "1500"
+	values		= "60-32768,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 2
+
+PdAt:
+	uniquetype	= "if/CA/ca"
+	attribute	= "netaddr"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4
+
+PdAt:
+	uniquetype	= "if/CA/ca"
+	attribute	= "dest"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 12
+
+PdAt:
+	uniquetype	= "if/CA/ca"
+	attribute	= "subchan"
+	deflt		= ""
+	values		= "0-254,2"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 29
+
+PdAt:
+	uniquetype	= "if/CA/ca"
+	attribute	= "state"
+	deflt		= "down"
+	values		= "up,down,detach"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 5
+
+PdAt:
+	uniquetype	= "if/CA/ca"
+	attribute	= "if_keyword"
+	deflt		= "cat"
+	values		= "cat"
+	type		= "R"
+	generic		= ""
+	rep		= "s"
+	nls_index	= 0
+
+PdAt:
+     uniquetype     = "if/CA/ca"
+     attribute = "netmask"
+     deflt          = ""
+     values         = ""
+     type      = "R"
+     generic        = "DU"
+     rep       = "s"
+     nls_index = 8
+

@@ -1,0 +1,47 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This is an easy unit.  If you just hit
+"newline" (or "carriage return", whatever it
+is labeled on your terminal), the
+editor will simply print the next line
+as you can see by trying this out.  Edit the
+file "pres"; print some line; then hit return
+or newline, and watch the editor print the
+next line.  Is there any difference between
+newline and ".+1p" as a command?  When you
+think you know, leave the editor and type "yes" or "no".
+#create pres
+George Washington
+John Adams
+Thomas Jefferson
+James Madison
+James Monroe
+John Quincy Adams
+Andrew Jackson
+Martin van Buren
+William Henry Harrison
+John Tyler
+James K. Polk
+Franklin Pierce
+Millard Fillmore
+James Buchanan
+Abraham Lincoln
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+56.1a 10

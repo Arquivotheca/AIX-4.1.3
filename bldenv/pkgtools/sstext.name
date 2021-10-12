@@ -1,0 +1,784 @@
+# @(#)52        1.1  src/bldenv/pkgtools/sstext.name, pkgtools, bos412, GOLDA411a 12/7/93 10:07:54
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: Subsystem description cross reference
+#
+#   ORIGINS: 27
+#
+#   sstext.name --- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#        1         2         3         4         5         6         7
+#234567890123456789012345678901234567890123456789012345678901234567890123456789
+#
+# BOS Base Operating System Data
+#
+bos.data.dir				DIRECTORIES
+bos.data.info				Info Explorer Databases
+bos.data.mail				Mail Data
+bos.data.terminfo			Terminal Capabilities Database
+#
+# BOS Base Operating System Runtime
+#
+bos.obj.arch				File Archival Utilities
+bos.obj.async-io			POSIX Asynchronous I/O Services
+bos.obj.awk				awk Language Interpreter
+bos.obj.bosboot				System IPL Utilities
+bos.obj.bosinst				System Installation Utilities
+bos.obj.bsh				Bourne Shell
+bos.obj.cmd-aout			XCOFF File Management Utilities
+bos.obj.cmd-cfg				Device Configuration Utilities
+bos.obj.cmd-cmp				File Comparison Utilities
+bos.obj.cmd-cntl			System, Process, Boot Utilities
+bos.obj.cmd-comm			User Messaging Utilities
+bos.obj.cmd-file			File Attribute Utilities
+bos.obj.cmd-fs				File System Management Utilities
+bos.obj.cmd-ipc				SYS-V IPC Utilities
+bos.obj.cmd-nls				ILS Locale Management Utilities
+bos.obj.odm				Object Data Manager
+bos.obj.cmd-sa				System Accounting
+bos.obj.cmd-scan			File Scanning/Searching Utilities
+bos.obj.comm-dd 			Communications Device Drivers
+bos.obj.compress			Data Compression Utilities
+bos.obj.cpp				C Language Preprocessor
+bos.obj.cron				cron Daemon Utilities
+bos.obj.date				Date & Time Related Utilities
+bos.obj.dd				Base Device Drivers
+bos.obj.dd-reject			Device Drivers Reject Utilities
+bos.obj.diag				Device Diagnostics
+bos.obj.dir				DIRECTORIES
+bos.obj.dwm				Diskless Workstation Manager
+bos.obj.edit				Character Stream Editing Utilities
+bos.obj.errlog				Trace Reporting and Error Logging
+bos.obj.graph				Textronics Graphics Terminal Utilities
+bos.obj.hft				HFT Utilities and Device Drivers
+bos.obj.host-dd				Host Communications Device Drivers
+bos.obj.iconv				Character Set Tables & Libraries
+bos.obj.im				Input Method Library & Keymaps
+bos.obj.info				Info Explorer Utilities
+bos.obj.install				Application Installation Utilities
+bos.obj.ezupdate			Maintenance Level Update Utilities
+bos.obj.ksh				Korn Shell
+bos.obj.lan				Lan Device Drivers
+bos.obj.learn				Learn Utility
+bos.obj.lib-bsd				BSD Services Library
+bos.obj.lib-c				C Library
+bos.obj.lib-cfg				Device Configuration Library
+bos.obj.lib-csys			C Library Services used by the Kernel
+bos.obj.lib-cur				Curses Standard and Extended Libraries
+bos.obj.lib-dbm				BSD Toy Data Base Management Library
+bos.obj.lib-im				Input Method Library
+bos.obj.lib-m				Math Library
+bos.obj.lib-msaa			Math Library(SYS-V/SAA Error Semantics)
+bos.obj.lib-oldx			X10 Library
+bos.obj.lib-pw				SYS V Programmer's Workbench Library
+bos.obj.lib-qb				Spooler Services Library
+bos.obj.lib-rpc				Remote Procedure Call Services Library
+bos.obj.lib-rts				Trace Reporting Library
+bos.obj.lib-s				Security Services Library
+bos.obj.lib-x11				X11-R4 Library
+bos.obj.lib-xm				Motif 1.1.4 Library
+bos.obj.lib-xt				X11-R4 Toolkit Library
+bos.obj.license				Software Licensing Utilities
+bos.obj.locale				International Language Locales
+bos.obj.logger				Error Logging Utilities
+bos.obj.lvm				Logical Volume Manager
+bos.obj.mail				Mail Facilities
+bos.obj.man				Man Page Facility
+bos.obj.mm 				MultiMedia Device Drivers
+bos.obj.net				Base Network Utilities
+bos.obj.nfs				Network File System
+bos.obj.odm-cfg				Device Configuration Database
+bos.obj.print				Printer Management Utilities
+bos.obj.quota				BSD Disk Quota Utilities
+bos.obj.security			Security Related Utilities and Files
+bos.obj.smit				System Management Interface Tool
+bos.obj.src				System Resource Controller
+bos.obj.stat				System Activity Reporting
+bos.obj.streams				Streams Devices, Interfaces & Utilities
+bos.obj.terminfo			Terminal Capability Utilities
+bos.obj.tty				tty Utilities and Device Drivers
+bos.obj.unix				Kernel
+bos.obj.vca				Video Capture Adapter
+bos.obj.vi				vi Text Editor
+bos.obj.x25				x25 Device Drivers
+#
+# BOS Application Development Toolkit
+#
+bosadt.bosadt.data.dir			DIRECTORIES
+bosadt.bosadt.data.help			Help Database
+bosadt.bosadt.obj.cmd-aout		XCOFF File Management Utilities
+bosadt.bosadt.obj.cmd-asm		Assembler Utilities
+bosadt.bosadt.obj.cmd-bs		The bs Program
+bosadt.bosadt.obj.cmd-c			C Language Source Utilities
+bosadt.bosadt.obj.cmd-for		FORTRAN Language Utilities
+bosadt.bosadt.obj.cmd-lint		lint Program
+bosadt.bosadt.obj.cmd-make		make Program
+bosadt.bosadt.obj.cmd-nls		Locale Management Utilities
+bosadt.bosadt.obj.cmd-str		BSD Message String Utilities
+bosadt.bosadt.obj.debug			Program Debug Utilities
+bosadt.bosadt.obj.dir			DIRECTORIES
+bosadt.bosadt.obj.dos-dev		DOS Device Merge Utility
+bosadt.bosadt.obj.lex			lex Program
+bosadt.bosadt.obj.sccs			Source Code Control (sccs) Utilities
+bosadt.bosadt.obj.snobol		snobol Program
+bosadt.bosadt.obj.yacc			yacc Program
+bosadt.lib.obj.bos-samples		Programming Examples
+bosadt.lib.obj.bsd-adm			BSD System Administration Help
+bosadt.lib.obj.dir			DIRECTORIES
+bosadt.lib.obj.hft-samples		HFT Programming Examples
+bosadt.lib.obj.include			Include Files
+bosadt.lib.obj.libblas			Linear Algebra Math Library
+bosadt.lib.obj.libbsd			BSD Toolkit Services Library
+bosadt.lib.obj.libld			Linker Library
+bosadt.lib.obj.libplot			Tektronix Terminal Plotting Library
+bosadt.lib.obj.librs2			New hardware fast library
+bosadt.lib.obj.lint			lint Program Rules Databases
+bosadt.lib.obj.smit-samples		SMIT Programming Examples
+bosadt.prof.obj.prof			Performance Profiling Utilities
+bosadt.xde.obj.xde			xde Program Debugger
+#
+# BOS Base Operating System Extensions #1
+#
+bosext1.csh.obj.csh			C Shell
+bosext1.ecs.obj.dir			DIRECTORIES
+bosext1.ecs.obj.ecs			Electronic Customer Support
+bosext1.extcmds.data.dict		Spelling Dictionary Data
+bosext1.extcmds.data.dir		DIRECTORIES
+bosext1.extcmds.data.man		man Database
+bosext1.extcmds.data.term		Terminal Tabs Database
+bosext1.extcmds.obj.cal			Calendar Utilities
+bosext1.extcmds.obj.calc		Math Calculator Utilities
+bosext1.extcmds.obj.dir			DIRECTORIES
+bosext1.extcmds.obj.games		Miscellaneous Amusements
+bosext1.extcmds.obj.iconv		Character Set Conversion Utilities
+bosext1.extcmds.obj.mail		Mail Convenience Utilities
+bosext1.extcmds.obj.man			getNAME Utility
+bosext1.extcmds.obj.misc		banner & yes Programs
+bosext1.extcmds.obj.perf		Performance Monitoring Utilities
+bosext1.mh.obj.dir			DIRECTORIES
+bosext1.mh.obj.mail			mh Mail Program
+bosext1.uucp.obj.dir			DIRECTORIES
+bosext1.uucp.obj.uucp			uucp Program and Utilities
+bosext1.vdidd.obj.dir			DIRECTORIES
+bosext1.vdidd.obj.vdi			Video Capture Adapter Utilities
+#
+# BOS Base Operating System Extensions #2
+#
+bosext2.acct.obj.acct			System Accounting Utilities
+bosext2.ate.obj.ate			Simple Terminal Emulator
+bosext2.dlc8023.obj.dlc8023		8023 Data Link Control
+bosext2.dlcether.obj.dlcether		Ethernet Data Link Control
+bosext2.dlcqllc.obj.dlcqllc		QLLC Data Link Control
+bosext2.dlcsdlc.obj.dlcsdlc		SDLC Data Link Control
+bosext2.dlctoken.obj.dlctoken		Token Ring Data Link Control
+bosext2.dlcfddi.obj.dlcfddi		FDDI Data Link Control
+bosext2.dosutil.obj.dosutil		DOS File & Disk Utilities
+bosext2.games.obj.games			Miscellaneous Amusements
+bosext2.x25app.obj.x25app		X25 Applications
+bosext2.lrn.data.learn			learn Utility Database
+#
+# BOS Network
+#
+bosnet.ncs.obj.dir			DIRECTORIES
+bosnet.ncs.obj.ncs			Network Computing Services 
+bosnet.nfs.obj.dir			DIRECTORIES
+bosnet.nfs.obj.client			NFS Client Utilities
+bosnet.nfs.obj.server			NFS Server Utilities
+bosnet.nfs.obj.smit			NFS SMIT Utilities
+bosnet.snmpd.obj.dir			DIRECTORIES
+bosnet.snmpd.obj.snmpd			SNMP Daemon
+bosnet.tcpip.obj.dir			DIRECTORIES
+bosnet.tcpip.obj.client			TCP/IP Client Utilities
+bosnet.tcpip.obj.server			TCP/IP Server Utilities
+bosnet.tcpip.obj.smit			TCP/IP SMIT Utilities
+#
+# X11-R5 Fonts
+#
+X11fntR5.coreX.fnt.coreX		X11-R5 Core X Fonts
+X11fntR5.ibm850.pc.fnt.ibm850		X11-R5 IBM PC-850 Fonts
+X11fntR5.iso88591.aix.fnt.iso88591	X11-R5 ISO-8859-1 Fonts
+X11fntR5.iso88592.fnt.iso88592		X11-R5 ISO-8859-2 Fonts
+X11fntR5.iso88593.fnt.iso88593		X11-R5 ISO-8859-3 Fonts
+X11fntR5.iso88594.fnt.iso88594		X11-R5 ISO-8859-4 Fonts
+X11fntR5.iso88595.fnt.iso88595		X11-R5 ISO-8859-5 Fonts
+X11fntR5.iso88597.aix.fnt.iso88597	X11-R5 ISO-8859-7 Fonts
+X11fntR5.iso88599.aix.fnt.iso88599	X11-R5 ISO-8859-9 Fonts
+X11fntR5.kanji.aix.fnt.kanji		X11-R5 PC-932 Fonts
+X11fntR5.oldX.fnt.oldX			X11-R5 Old X Windows Fonts
+#
+# X11-R5 Development
+#
+X11devR5.im.dir				DIRECTORIES
+X11devR5.im.examples			X11-R5 Input Method Examples
+X11devR5.obj.Mrm			Motif 1.2 Resource Manager
+X11devR5.obj.Xaw			Motif 1.2 Xaw Widgets
+X11devR5.obj.Xm				Motif 1.2 Xm Widgets
+X11devR5.obj.Xmu			Motif 1.2 Xmu Widgets
+X11devR5.obj.bitmaps			X11-R5 Development Bitmaps
+X11devR5.obj.cmds			X11-R5 Development Commands
+X11devR5.obj.dir			DIRECTORIES
+X11devR5.obj.dps			X11-R5 Display Postscript
+X11devR5.obj.extensions			X11-R5 Extensions
+X11devR5.obj.uil			X11-R5 UIL
+X11devR5.obj.x11-dmcp			X11-R5 DMCMP
+X11devR5.obj.x11-ext			X11-R5 Server Extensions
+X11devR5.obj.x11-fx			X11-R5 FX
+X11devR5.obj.x11-inc			X11-R5 Include Files
+X11devR5.src.bitmaps			X11-R5 Example Source Bitmaps
+X11devR5.src.defaults			X11-R5 Application Default Files
+X11devR5.src.dir			DIRECTORIES
+X11devR5.src.examples			X11-R5 Programming Examples
+X11devR5.src.gsl			X11-R5 GSL
+X11devR5.src.x11-au			X11-R5 Au Widgets
+#
+# X11-R5 Run-Time
+#
+X11rteR5.ext.obj.bitmaps		X11-R5 Runtime Extensions Bitmaps
+X11rteR5.ext.obj.dir			DIRECTORIES
+X11rteR5.ext.obj.dps-fonts		X11-R5 Additional Postscript Fonts
+X11rteR5.ext.obj.dps			X11-R5 Additional Postscript Utilities
+X11rteR5.ext.obj.ext			X11-R5 Extensions
+X11rteR5.ext.obj.fontutil		X11-R5 Font Utility
+X11rteR5.ext.obj.info			X11-R5 Info
+X11rteR5.ext.obj.msmit			X11-R5 Motif SMIT
+X11rteR5.ext.obj.xdt			X11-R5 X-Desktop
+X11rteR5.ext.obj.custom			X11-R5 X Customize Utilities
+X11rteR5.obj.bitmaps			X11-R5 Runtime Environment Bitmaps
+X11rteR5.obj.dir			DIRECTORIES
+X11rteR5.obj.examples			X11-R5 Runtime Environment Examples
+X11rteR5.obj.fonts			X11-R5 Runtime Environment Fonts
+X11rteR5.obj.locale			X11-R5 Runtime Environment Locales
+X11rteR5.obj.rte			X11-R5 Runtime Environment
+#
+# X11-R5 Motif Development
+#
+X11devR5.motif1.2.obj.dir		DIRECTORIES
+X11devR5.motif1.2.obj.include		Motif 1.2 Include Files
+X11devR5.motif1.2.obj.merge		Motif 1.1/1.2 Merge Utilities
+X11devR5.motif1.2.obj.mrm		Motif 1.2 Resource Manager 
+X11devR5.motif1.2.obj.uil		X11-R5 UIL
+X11devR5.motif1.2.src.dir		DIRECTORIES
+X11devR5.motif1.2.src.examples		Motif 1.2 Programming Examples
+#
+# X11-R5 Messages
+#
+X11mEn_USR5.msg.bitmaps			X11-R5 Bitmap Utility Msgs-U.S. English
+X11mEn_USR5.msg.dir			DIRECTORIES
+X11mEn_USR5.msg.examples		X11-R5 Msgs For Examples - U.S. English
+X11mEn_USR5.msg.fontutil		X11-R5 Font Utility Msgs - U.S. English
+X11mEn_USR5.msg.im			X11-R5 Input Method Msgs - U.S. English
+X11mEn_USR5.msg.info			X11-R5 Info Messages - U.S. English
+X11mEn_USR5.msg.mwm			X11-R5 Motif Win Mgr Msgs - U.S. English
+X11mEn_USR5.msg.rte			X11-R5 Motif Utility Msgs - U.S. English
+X11mEn_USR5.msg.uil			X11-R5 UIL Messages - U.S. English
+X11mEn_USR5.msg.xdt			X11-R5 XDT messages - U.S. English
+X11mEn_USR5.msg.xm			X11-R5 XM Messages - U.S. English
+#
+# X11-R5 Motif Run-Time
+#
+X11rteR5.motif1.2.obj.rte		Motif 1.2 Window Manager Program
+X11rteR5.motif1.2.obj.mwmrc		Motif 1.2 Translated mwmrc Files
+#
+# X11 3D 
+#
+X11_3d.gl.dev.obj.dir			DIRECTORIES
+X11_3d.gl.dev.src.dir			DIRECTORIES
+X11_3d.gl.dev.obj.dev			GL Development Utilities
+X11_3d.gl.dev.src.demos			GL Demos
+X11_3d.gl.dev.src.examples		GL Programming Examples
+X11_3d.gl.rte.obj.rte			GL Runtime Environment
+X11_3d.graPHIGS.dev.obj.dev		graPHIGS Development Utilities
+X11_3d.graPHIGS.dev.obj.dir		DIRECTORIES
+X11_3d.graPHIGS.dev.src.dir		DIRECTORIES
+X11_3d.graPHIGS.dev.src.examples	graPHIGS Programming Examples
+X11_3d.graPHIGS.gks.obj.gks		graPHIGS Graphics Kernel Services
+X11_3d.graPHIGS.kanji.fnt.kanji		graPHIGS Kanji Fonts
+X11_3d.graPHIGS.pex.obj.dir		DIRECTORIES
+X11_3d.graPHIGS.pex.obj.examples	graPHIGS PEX Programming Examples
+X11_3d.graPHIGS.pex.obj.include		graPHIGS PEX Include Files 
+X11_3d.graPHIGS.pex.obj.pex		graPHIGS PEX 
+X11_3d.graPHIGS.plot.obj.plot		graPHIGS Plot Utilities
+X11_3d.graPHIGS.rnuc.obj.rnuc		graPHIGS RNUC
+X11_3d.graPHIGS.rte.obj.dir		DIRECTORIES
+X11_3d.graPHIGS.rte.obj.rte		graPHIGS Runtime Environment
+X11_3d.obj.lib				X11-3D Libraries
+#
+# OpenGL
+#
+OpenGL.com.libs					OpenGL Common Files - Libraries
+OpenGL.dev.doc.docs				OpenGL Development Documentation
+OpenGL.dev.obj.inc				OpenGL Development Include Files
+OpenGL.dev.obj.libs				OpenGL Development Libraries
+OpenGL.dev.src.samples			OpenGL Development Sample Programs
+OpenGL.rte.PPC.libs				OpenGL RTE Libraries -- PowerPC
+OpenGL.rte.R1.libs				OpenGL RTE Libraries -- R1
+OpenGL.rte.R2.libs				OpenGL RTE Libraries -- R2
+OpenGL.rte.obj.rte				OpenGL RTE
+OpenGL.tools.tools				OpenGL Tools
+#
+# SOFT PEX
+#
+softPEX.obj.rte				Soft PEX Runtime Environment
+#
+# SOFT graPHIGS
+#
+softgP.obj.rte				Soft graPHIGS Runtime Environment
+#
+# graPHIGS fonts
+#
+gPfonts.hangul.fonts			graPHIGS Hangul fonts
+gPfonts.tchinese.fonts			graPHIGS Traditional Chinese fonts
+gPfonts.unicode.fonts			graPHIGS Unicode fonts
+#
+# X11-R4 Dev
+#
+X11dev.obj.Mrm				Motif 1.1.4 Resource Manager
+X11dev.obj.Xaw				X11-R4 Xaw Widgets
+X11dev.obj.Xm				X11-R4 Xm Widgets
+X11dev.obj.Xmu				X11-R4 Xmu Widgets
+X11dev.obj.bitmaps			X11-R4 Development Bitmaps
+X11dev.obj.cmds				X11-R4 Development Commands
+X11dev.obj.dir				DIRECTORIES
+X11dev.obj.dps				X11-R4 Display Postscript
+X11dev.obj.extensions			X11-R4 Extensions
+X11dev.obj.uil				X11-R4 UIL
+X11dev.obj.x11-dmcp			X11-R4 DMCP
+X11dev.obj.x11-ext			X11-R4 Extensions
+X11dev.obj.x11-fx			X11-R4 Fx
+X11dev.obj.x11-inc			X11-R4 Include Files
+X11dev.src.Xau				X11-R4 Xau Widgets
+X11dev.src.bitmaps			X11-R4 More Bitmaps
+X11dev.src.defaults			X11-R4 Application Defaults
+X11dev.src.dir				DIRECTORIES
+X11dev.src.examples			X11-R4 Programming Examples
+X11dev.src.gsl				X11-R4 GSL
+#
+# X11-R4 Fonts
+#
+X11fnt.coreX.fnt.coreX			Core X Fonts
+X11fnt.coreX.fnt.dir			DIRECTORIES
+X11fnt.ibm850.pc.fnt.ibm850		IBM PC-850 Fonts
+X11fnt.iso88591.aix.fnt.iso88591	ISO-8859-1 Fonts
+X11fnt.iso88592.fnt.iso88592		ISO-8859-2 Fonts
+X11fnt.iso88593.fnt.iso88593		ISO-8859-3 Fonts
+X11fnt.iso88594.fnt.iso88594		ISO-8859-4 Fonts
+X11fnt.iso88595.fnt.iso88595		ISO-8859-5 Fonts
+X11fnt.iso88597.aix.fnt.iso88597	ISO-8859-7 Fonts
+X11fnt.iso88599.aix.fnt.iso88599	ISO-8859-9 Fonts
+X11fnt.kanji.aix.fnt.kanji		PC-932 Fonts
+X11fnt.oldX.fnt.oldX			Old X Windows Fonts
+X11fnt.oldX.fnt.dir			DIRECTORIES
+#
+# X11-R4 RunTime
+#
+X11rte.ext.obj.bitmaps			X11-R4 RTE Bitmaps
+X11rte.ext.obj.dir			DIRECTORIES
+X11rte.ext.obj.dps-fonts		X11-R4 RTE PS Fonts
+X11rte.ext.obj.dps			X11-R4 RTE Display Postscript
+X11rte.ext.obj.ext			X11-R4 RTE Extension
+X11rte.ext.obj.fontutil			X11-R4 RTE Font Utility
+X11rte.ext.obj.info			X11-R4 RTE Info
+X11rte.ext.obj.msmit			X11-R4 RTE Motif SMIT
+X11rte.ext.obj.xdt			X11-R4 RTE X-DeskTop
+X11rte.ext.obj.custom			X11-R4 X Customize Utilities
+X11rte.obj.bitmaps			X11-R4 RTE Bitmaps
+X11rte.obj.dir				DIRECTORIES
+X11rte.obj.examples			X11-R4 RTE Programming Examples
+X11rte.obj.fonts			X11-R4 RTE Fonts
+X11rte.obj.locale			X11-R4 RTE Locates
+X11rte.obj.rte				X11-R4 RTE 
+#
+# HANFS
+#
+hanfs.obj.hanfs				High Availability Network File System
+#
+# HCON
+#
+hcon.obj.bin				Host Connect Utilities
+hcon.obj.dir				DIRECTORIES
+hcon.obj.include			Host Connect Include Files
+hcon.obj.lib				Host Connect Libraries
+#
+# Network Management
+#
+netmgr.am.obj.am			Alert Manager
+netmgr.am.obj.dir			DIRECTORIES
+netmgr.clm.obj.clm			CLM
+netmgr.hcf.obj.dir			DIRECTORIES
+netmgr.hcf.obj.hcf			HCF
+netmgr.nvdm.obj.nvdm			NVDM
+netmgr.nvdm.obj.dir			DIRECTORIES
+netmgr.xgmon.obj.xgmon			Gateway Monitor Utility
+netmgr.xgmon.obj.dir			DIRECTORIES
+netmgr.api.obj.api			Application Programming Interface
+netmgr.xgmon.obj.dir			DIRECTORIES
+#
+# ICRAFT
+#
+icraft.obj.dir				DIRECTORIES
+icraft.obj.icraft			Info Crafter
+icraft.obj.samples			Programming Examples
+#
+# PCSIM
+#
+pcsim.obj.dir				DIRECTORIES
+pcsim.obj.pcsim				PC-Simulator Utilities
+pcsim.obj.samples			PC-Simulator Samples
+pcsim.obj.tty				PC-Simulator Terminfo
+#	
+# X Station Manager
+#
+x_st_mgr.obj.x_st_mgr		 	Xstation Manager
+x_st_mgrR5.obj.x_st_mgr		 	Xstation Manager X11-R5
+x_st_mgrR5.obj.x_st_mgrR5		Xstation Manager X11-R5
+x_st_mgrmEn_US.msg.x_st_mgrmEn_US 	Xstation Messages - U.S. English
+x_st_mgrmDe_DE.msg.x_st_mgrmDe_DE 	Xstation Messages - German
+x_st_mgrmEs_ES.msg.x_st_mgrmEs_ES 	Xstation Messages - Spanish
+x_st_mgrmFr_FR.msg.x_st_mgrmFr_FR 	Xstation Messages - French
+x_st_mgrmIt_IT.msg.x_st_mgrmIt_IT 	Xstation Messages - Italian
+x_st_mgrmJa_JP.msg.x_st_mgrmJa_JP 	Xstation Messages - Japanese
+x_st_mgrmNl_BE.msg.x_st_mgrmNl_BE 	Xstation Messages - Dutch (Belgium)
+x_st_mgrmNo_NO.msg.x_st_mgrmNo_NO 	Xstation Messages - Norwegian
+x_st_mgrmSv_SE.msg.x_st_mgrmSv_SE 	Xstation Messages - Swedish
+x_st_mgrmko_KR.msg.x_st_mgrmko_KR 	Xstation Messages - Korean
+x_st_mgrmzh_TW.msg.x_st_mgrmxh_TW 	Xstation Messages - Chinese
+#
+# FDDI
+#
+fddi.obj.fddi				FDDI
+#
+# BLKMUX
+#
+blkmux.obj.blkmux			BLKMUX
+#
+# Text Formatting
+#
+txtfmt.bib.obj.bib			Text Formating Bibliography Utilities
+txtfmt.graf.obj.graf			Tektronics Terminal Drivers
+txtfmt.hplj.fnt.hplj			HP LaserJet Fonts
+txtfmt.ibm3812.fnt.ibm3812		IBM-3812 Fonts
+txtfmt.ibm3816.fnt.ibm3816		IBM-3816 Fonts
+txtfmt.spell.obj.spell			Spell Checker Utilities
+txtfmt.tfs.obj.tfs			Text Formatting Utilities
+txtfmt.ts.obj.ts			Postscript Formatter
+txtfmt.xpv.obj.xpv			X Preview Utility
+txtfmt.bib.data.bib			Text Formating Bibliography Utilities
+txtfmt.tfs.data.tfs			Text Formatting Macros
+txtfmt.spell.data.spell			Spell Checker Dictionaries
+	
+#
+# INed
+#
+INed.obj.INed				INed Text Editor
+#
+# DCEBASE
+#
+dcebase.En_US.msg.dcebase		DCE Base Messages (En_US)
+dcebase.admin.obj.admin			DCE Administration Tools
+dcebase.appdev.obj.appdev		DCE Application Development Support
+dcebase.base.obj.base			DCE Base Support Services
+dcebase.dfs.obj.dfs			DCE Base DFS Services
+dcecds.En_US.msg.cds			DCE Cell Directory Server Msgs (En_US)
+dcecds.obj.cds				DCE Cell Directory Server
+dcedfs.En_US.msg.dfs			DCE DFS Base Messages (En_US)
+dcedfs.base.obj.dfs			DCE DFS Basic Services
+dceedfs.En_US.msg.edfs			DCE Enhanced DFS Messages (En_US)
+dceedfs.obj.edfs			DCE Enhanced DFS Services
+dcepriv.obj.priv			DCE Privacy Level Protection Feature
+dcepthreads.En_US.msg.pthreads		DCE Threads Messages (En_US)
+dcepthreads.obj.pthreads		DCE Threads
+dcesec.En_US.msg.sec			DCE Security Server Messages (En_US)
+dcesec.obj.sec				DCE Security Server
+xdsxom.obj.xdsxom			X.500 API Library
+#
+# ENCINA
+#
+encExecmEn_US.msg.Exec			Encina Executive Messages (En_US)
+encExec.obj.Exec			Encina Executive
+encMon.obj.Mon				Encina Monitor
+encServmEn_US.msg.Serv			Encina Server Messages (En_US)
+encServ.obj.Serv			Encina Server
+encSfsmEn_US.msg.Sfs			Encina Struct File Server Msgs (En_US)
+encSfs.obj.Sfs				Encina Structured File Server
+ppcExecmEn_US.msg.Exec			Encina Peer-to-Peer Exec Msgs (En_US)
+ppcExec.obj.Exec			Encina Peer-to-Peer Executive
+ppcGatemEn_US.msg.Gate			Encina P-to-P SNA Services Msgs (En_US)
+ppcGate.obj.Gate			Encina P-to-P SNA Services
+#
+# X11 Messages
+#
+#	German 
+X11mDe_DE.msg.dir			DIRECTORIES
+X11mDe_DE.msg.bitmaps			Msgs for Bitmap Utilities - German
+X11mDe_DE.msg.custom			Msgs for X Customize Utils - German
+X11mDe_DE.msg.fontutil			Msgs for Font Utilities - German
+X11mDe_DE.msg.im			Msgs for Input Method Utilities - German
+X11mDe_DE.msg.info			Msgs for Infocrafter - German
+X11mDe_DE.msg.mwm			Msgs for Motif Window Manager - German
+X11mDe_DE.msg.rte			Msgs for Runtime Environment - German
+X11mDe_DE.msg.uil			Msgs for UIL - German
+X11mDe_DE.msg.xdtcat		Msgs for X Desktop - German
+X11mDe_DE.msg.xdt			Locale Files for X Desktop - German
+X11mDe_DE.msg.xm			Msgs for Xm Widget Examples - German
+#	U.S. English
+X11mEn_US.msg.bitmaps			Msgs for Bitmap Utilities - U.S. English
+X11mEn_US.msg.fontutil			Msgs for Font Utilities - U.S. English
+X11mEn_US.msg.im			Msgs for Input Methods - U.S. English
+X11mEn_US.msg.info			Msgs for Infocrafter - U.S. English
+X11mEn_US.msg.mwm			Msgs for Motif Window Mgr - U.S. English
+X11mEn_US.msg.rte			Msgs for Runtime Env. - U.S. English
+X11mEn_US.msg.uil			Msgs for UIL - U.S. English
+X11mEn_US.msg.xdt			Msgs for X Desktop - U.S. English
+X11mEn_US.msg.xm			Msgs for Xm Widget Exmpls - U.S. English
+#	Spanish
+X11mEs_ES.msg.dir			DIRECTORIES
+X11mEs_ES.msg.bitmaps			Msgs for Bitmap Utils - Spanish
+X11mEs_ES.msg.custom			Msgs for X Customize Utils - Spanish
+X11mEs_ES.msg.fontutil			Msgs for Font Utils - Spanish
+X11mEs_ES.msg.im			Msgs for Input Method Utils - Spanish
+X11mEs_ES.msg.info			Msgs for Infocrafter - Spanish
+X11mEs_ES.msg.mwm			Msgs for Motif Window Mgr - Spanish
+X11mEs_ES.msg.rte			Msgs for Runtime Environment - Spanish
+X11mEs_ES.msg.uil			Msgs for UIL - Spanish
+X11mEs_ES.msg.xdtcat		Msgs for X Desktop - Spanish
+X11mEs_ES.msg.xdt			Locale Files for X Desktop - Spanish
+X11mEs_ES.msg.xm			Msgs for Xm Widget Examples - Spanish
+#	French
+X11mFr_FR.msg.dir			DIRECTORIES
+X11mFr_FR.msg.bitmaps			Msgs for Bitmap Utils - French
+X11mFr_FR.msg.custom			Msgs for X Customize Utils - French
+X11mFr_FR.msg.fontutil			Msgs for Font Utils - French
+X11mFr_FR.msg.im			Msgs for Input Method Utils - French
+X11mFr_FR.msg.info			Msgs for Infocrafter - French
+X11mFr_FR.msg.mwm			Msgs for Motif Window Mgr - French
+X11mFr_FR.msg.rte			Msgs for Runtime Environment - French
+X11mFr_FR.msg.uil			Msgs for UIL - French
+X11mFr_FR.msg.xdtcat		Msgs for X Desktop - French
+X11mFr_FR.msg.xdt			Locale Files for X Desktop - French
+X11mFr_FR.msg.xm			Msgs for Xm Widget Examples - French
+# 	Italian
+X11mIt_IT.msg.dir			DIRECTORIES
+X11mIt_IT.msg.bitmaps			Msgs for Bitmap Utils - Italian
+X11mIt_IT.msg.custom			Msgs for X Customize Utils - Italian
+X11mIt_IT.msg.fontutil			Msgs for Font Utils - Italian
+X11mIt_IT.msg.im			Msgs for Input Method Utils - Italian
+X11mIt_IT.msg.info			Msgs for Infocrafter - Italian
+X11mIt_IT.msg.mwm			Msgs for Motif Window Mgr - Italian
+X11mIt_IT.msg.rte			Msgs for Runtime Environment - Italian
+X11mIt_IT.msg.uil			Msgs for UIL - Italian
+X11mIt_IT.msg.xdtcat		Msgs for X Desktop - Italian
+X11mIt_IT.msg.xdt			Locale Files for X Desktop - Italian
+X11mIt_IT.msg.xm			Msgs for Xm Widget Examples - Italian
+# 	Japanese
+X11mJa_JP.msg.dir			DIRECTORIES
+X11mJa_JP.msg.bitmaps			Msgs for Bitmap Utils - Japanese
+X11mJa_JP.msg.custom			Msgs for X Customize Utils - Japanese
+X11mJa_JP.msg.fontutil			Msgs for Font Utils - Japanese
+X11mJa_JP.msg.im			Msgs for Input Method Utils - Japanese
+X11mJa_JP.msg.info			Msgs for Infocrafter - Japanese
+X11mJa_JP.msg.mwm			Msgs for Motif Window Mgr - Japanese
+X11mJa_JP.msg.rte			Msgs for Runtime Environment - Japanese
+X11mJa_JP.msg.uil			Msgs for UIL - Japanese
+X11mJa_JP.msg.xdtcat		Msgs for X Desktop - Japanese
+X11mJa_JP.msg.xdt			Locale Files for X Desktop - Japanese
+X11mJa_JP.msg.xm			Msgs for Xm Widget Examples - Japanese
+#	Dutch (Belgium)	
+X11mNl_BE.msg.dir			DIRECTORIES
+X11mNl_BE.msg.bitmaps			Msgs for Bitmap Utils - Dutch(Belgium)
+X11mNl_BE.msg.custom			Msgs for X Customize Utils - Dutch(Belgium)
+X11mNl_BE.msg.fontutil			Msgs for Font Utils - Dutch(Belgium)
+X11mNl_BE.msg.im			Msgs for Input Method - Dutch(Belgium)
+X11mNl_BE.msg.info			Msgs for Infocrafter - Dutch(Belgium)
+X11mNl_BE.msg.mwm			Msgs for Motif Win. Mgr - Dutch(Belgium)
+X11mNl_BE.msg.rte			Msgs for Runtime Env. - Dutch(Belgium)
+X11mNl_BE.msg.uil			Msgs for UIL - Dutch (Belgium)
+X11mNl_BE.msg.xdtcat		Msgs for X Desktop - Dutch(Belgium)
+X11mNl_BE.msg.xdt			Locale Files for X Desktop - Dutch(Belgium)
+X11mNl_BE.msg.xm			Msgs for Xm Widget Exmpls-Dutch(Belgium)
+#	Norwegian
+X11mNo_NO.msg.dir			DIRECTORIES
+X11mNo_NO.msg.bitmaps			Msgs for Bitmap Utils - Norwegian
+X11mNo_NO.msg.custom			Msgs for X Customize Utils - Norwegian
+X11mNo_NO.msg.fontutil			Msgs for Font Utils - Norwegian
+X11mNo_NO.msg.im			Msgs for Input Method Utils - Norwegian
+X11mNo_NO.msg.info			Msgs for Infocrafter - Norwegian
+X11mNo_NO.msg.mwm			Msgs for Motif Window Mgr - Norwegian
+X11mNo_NO.msg.rte			Msgs for Runtime Environment - Norwegian
+X11mNo_NO.msg.uil			Msgs for UIL - Norwegian
+X11mNo_NO.msg.xdtcat		Msgs for X Desktop - Norwegian
+X11mNo_NO.msg.xdt			Locale Files for X Desktop - Norwegian
+X11mNo_NO.msg.xm			Msgs for Xm Widget Examples - Norwegian
+#	Swedish
+X11mSv_SE.msg.dir			DIRECTORIES
+X11mSv_SE.msg.bitmaps			Msgs for Bitmap Utils - Swedish
+X11mSv_SE.msg.custom			Msgs for X Customize Utils - Swedish
+X11mSv_SE.msg.fontutil			Msgs for Font Utils - Swedish
+X11mSv_SE.msg.im			Msgs for Input Method Utils - Swedish
+X11mSv_SE.msg.info			Msgs for Infocrafter - Swedish
+X11mSv_SE.msg.mwm			Msgs for Motif Window Mgr - Swedish
+X11mSv_SE.msg.rte			Msgs for Runtime Environment - Swedish
+X11mSv_SE.msg.uil			Msgs for UIL - Swedish
+X11mSv_SE.msg.xdtcat		Msgs for X Desktop - Swedish
+X11mSv_SE.msg.xdt			Locale Files for X Desktop - Swedish
+X11mSv_SE.msg.xm			Msgs for Xm Widget Examples
+#	Korean
+X11mko_KR.msg.dir			DIRECTORIES
+X11mko_KR.msg.bitmaps			Msgs For Bitmap Utils - Korean
+X11mko_KR.msg.custom			Msgs For X Customize Utils - Korean
+X11mko_KR.msg.fontutil			Msgs for Font Utils - Korean
+X11mko_KR.msg.im			Msgs for Input Method Util. - Korean
+X11mko_KR.msg.info			Msgs for Infocrafter - Korean
+X11mko_KR.msg.mwm			Msgs for Motif Window Mgr - Korean
+X11mko_KR.msg.rte			Msgs for Runtime Env. - Korean
+X11mko_KR.msg.uil			Msgs for UIL - Korean
+X11mko_KR.msg.xdtcat		Msgs for X Desktop - Korean
+X11mko_KR.msg.xdt			Locale Files for X Desktop - Korean
+X11mko_KR.msg.xm			Msgs for Xm Widget Examples - Korean
+#	Traditional Chinese
+X11mzh_TW.msg.dir			DIRECTORIES
+X11mzh_TW.msg.bitmaps			Msgs for Bitmap Utils - Chinese
+X11mzh_TW.msg.custom			Msgs for X Customize Utils - Chinese
+X11mzh_TW.msg.fontutil			Msgs for Font Utils - Chinese
+X11mzh_TW.msg.im			Msgs for Input Method Utils - Chinese
+X11mzh_TW.msg.info			Msgs for Infocrafter - Chinese
+X11mzh_TW.msg.mwm			Msgs for Motif Window Mgr - Chinese
+X11mzh_TW.msg.rte			Msgs for Runtime Env. - Chinese
+X11mzh_TW.msg.uil			Msgs for UIL - Chinese
+X11mzh_TW.msg.xdtcat		Msgs for X Desktop - Chinese
+X11mzh_TW.msg.xdt			Locale Files for X Desktop - Chinese
+X11mzh_TW.msg.xm			Msgs for Xm Widget Examples - Chinese
+#
+# Base System Msgs
+#
+bsmEn_US.msg.messages			Base System Messages - U.S. English
+bsmDe_DE.msg.messages                   Base System Messages - German
+bsmEs_ES.msg.messages                   Base System Messages - Spanish
+bsmFr_FR.msg.messages                   Base System Messages - French
+bsmIt_IT.msg.messages                   Base System Messages - Italian
+bsmJa_JP.msg.messages                   Base System Messages - Japanese
+bsmNl_BE.msg.messages                   Base System Messages - Dutch (Belgium)
+bsmNo_NO.msg.messages                   Base System Messages - Norwegian
+bsmSv_SE.msg.messages                   Base System Messages - Swedish
+bsmko_KR.msg.messages                   Base System Messages - Korean
+bsmzh_TW.msg.messages                   Base System Messages - Chinese
+#
+bsmEn_US.msg.sm_inst			SMIT Install Messages - U.S. English
+bsmDe_DE.msg.sm_inst                    SMIT Install Messages - German
+bsmEs_ES.msg.sm_inst                    SMIT Install Messages - Spanish
+bsmFr_FR.msg.sm_inst                    SMIT Install Messages - French
+bsmIt_IT.msg.sm_inst                    SMIT Install Messages - Italian
+bsmJa_JP.msg.sm_inst                    SMIT Install Messages - Japanese
+bsmNl_BE.msg.sm_inst                    SMIT Install Messages - Dutch (Belgium)
+bsmNo_NO.msg.sm_inst                    SMIT Install Messages - Norwegian
+bsmSv_SE.msg.sm_inst                    SMIT Install Messages - Swedish
+bsmko_KR.msg.sm_inst                    SMIT Install Messages - Korean
+bsmzh_TW.msg.sm_inst                    SMIT Install Messages - Chinese
+#
+# Locale Subsystems
+#
+bsl.da_DK.aix.loc.locale		AIX Locale - Danish
+bsl.da_DK.pc.loc.locale			PC Locale - Danish
+bsl.de_CH.aix.loc.locale		AIX Locale - German (Switzerland)
+bsl.de_CH.pc.loc.locale			PC Locale - German (Switzerland)
+bsl.de_DE.aix.loc.locale		AIX Locale - German
+bsl.de_DE.pc.loc.locale			PC Locale - German
+bsl.el_GR.aix.loc.locale		AIX Locale - Greek
+bsl.en_GB.aix.loc.locale		AIX Locale - English (Great Britain)
+bsl.en_GB.pc.loc.locale			PC Locale - English (Great Britain)
+bsl.en_US.aix.loc.locale		AIX Locale - English (United States)
+bsl.en_US.pc.loc.locale			PC Locale - English (United States)
+bsl.es_ES.aix.loc.locale		AIX Locale - Spanish
+bsl.es_ES.pc.loc.locale			PC Locale - Spanish
+bsl.fi_FI.aix.loc.locale		AIX Locale - Finnish
+bsl.fi_FI.pc.loc.locale			PC Locale - Finnish
+bsl.fr_BE.aix.loc.locale		AIX Locale - French (Belgium)
+bsl.fr_BE.pc.loc.locale			PC Locale - French (Belgium)
+bsl.fr_CA.aix.loc.locale		AIX Locale - French (Canada)
+bsl.fr_CA.pc.loc.locale			PC Locale - French (Canada)
+bsl.fr_CH.aix.loc.locale		AIX Locale - French (Switzerland)
+bsl.fr_CH.pc.loc.locale			PC Locale - French (Switzerland)
+bsl.fr_FR.aix.loc.locale		AIX Locale - French
+bsl.fr_FR.pc.loc.locale			PC Locale - French
+bsl.is_IS.aix.loc.locale		AIX Locale - Icelandic
+bsl.is_IS.pc.loc.locale			PC Locale - Icelandic
+bsl.it_IT.aix.loc.locale		AIX Locale - Italian
+bsl.it_IT.pc.loc.locale			PC Locale - Italian
+bsl.ja_JP.aix.loc.locale		AIX Locale - Japanese
+bsl.ja_JP.com.loc.locale		Japanese Character Support
+bsl.ja_JP.pc.loc.locale			PC Locale - Japanese
+bsl.ko_KR.aix.loc.locale		AIX Locale - Korean
+bsl.nl_BE.aix.loc.locale		AIX Locale - Dutch (Belgium)
+bsl.nl_BE.pc.loc.locale			PC Locale - Dutch (Belgium)
+bsl.nl_NL.aix.loc.locale		AIX Locale - Dutch
+bsl.nl_NL.pc.loc.locale			PC Locale - Dutch
+bsl.no_NO.aix.loc.locale		AIX Locale - Norwegian
+bsl.no_NO.pc.loc.locale			PC Locale - Norwegian
+bsl.pt_PT.aix.loc.locale		AIX Locale - Portuguese
+bsl.pt_PT.pc.loc.locale			PC Locale - Portuguese
+bsl.sv_SE.aix.loc.locale		AIX Locale - Swedish
+bsl.sv_SE.pc.loc.locale			PC Locale - Swedish
+bsl.tr_TR.aix.loc.locale		AIX Locale - Turkish
+bsl.zh_TW.aix.loc.locale		AIX Locale - Traditional Chinese
+
+#
+# French man pages
+#
+bsmFr_FR.msg.man                        Base System Man pages - French
+
+#
+# Netware
+#
+netware.fs.obj.fs                       Netware File System
+netware.server.obj.server               Netware Server Code for AIX/6000
+
+#
+# Performance Toolbox and Performance Aide
+#
+perfagent.perf                         Performance Agent
+perfmgr.perf                           Performance Manager
+
+#
+# HCON messages
+#
+hconmEn_US.msg.hcon			HCON Messages - U.S. English
+hconmDe_DE.msg.hcon			HCON Messages - German
+hconmEs_ES.msg.hcon			HCON Messages - Spanish
+hconmFr_FR.msg.hcon			HCON Messages - French
+hconmIt_IT.msg.hcon			HCON Messages - Italian
+hconmJa_JP.msg.hcon			HCON Messages - Japanese
+hconmNl_BE.msg.hcon			HCON Messages - Dutch (Belgium)
+hconmSv_SE.msg.hcon			HCON Messages - Swedish
+hconmko_KR.msg.hcon			HCON Messages - Korean
+hconmzh_TW.msg.hcon			HCON Messages - Chinese
+#
+# UMS6000 Objects subsystems
+#
+UMS6000.objects.obj.applets		Multimedia applications
+UMS6000.objects.obj.dev			Development library and include files
+UMS6000.objects.obj.dir			DIRECTORIES
+UMS6000.objects.obj.examples		Ultimedia Services example code
+UMS6000.objects.obj.rte_exec		Ultimedia Services runtime executables
+UMS6000.objects.obj.rte_lib		Ultimedia Services runtime libraries
+UMS6000.objects.obj.samples		Multimedia samples - audio & video
+UMS6000.objects.obj.som			SOM libraries and include files
+#
+# UMS6000 Messages subsystems
+#
+UMS6000_msg_De_DE.msg.catalog		Message catalogs
+UMS6000_msg_En_US.msg.catalog		Message catalogs
+UMS6000_msg_Es_ES.msg.catalog		Message catalogs
+UMS6000_msg_Fr_FR.msg.catalog		Message catalogs
+UMS6000_msg_It_IT.msg.catalog		Message catalogs
+UMS6000_msg_Ja_JP.msg.catalog		Message catalogs
+UMS6000_msg_No_NO.msg.catalog		Message catalogs
+UMS6000_msg_Sv_SE.msg.catalog		Message catalogs
+UMS6000_msg_ko_KR.msg.catalog		Message catalogs
+UMS6000_msg_zh_TW.msg.catalog		Message catalogs

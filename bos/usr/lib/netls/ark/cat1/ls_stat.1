@@ -1,0 +1,264 @@
+
+
+
+ls_stat(1M)           Maintenance Commands            ls_stat(1M)
+
+
+
+NNNNAAAAMMMMEEEE
+     ls_stat - Display the status of the license server system
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     llllssss____ssssttttaaaatttt llllssss____ssssttttaaaatttt -- [ ssssttttaaaannnnddddaaaarrrrdddd XXXX aaaarrrrgggguuuummmmeeeennnnttttssss ]
+
+     ls_stat {----tttt | ----iiii | ----aaaa | ----u u_s_e_r__n_a_m_e }  [[----nnnn  _s_e_r_v_e_r  ][  ----vvvv
+     _v_e_n_d_o_r  ][ ----pppp _p_r_o_d_u_c_t ] [ ----rrrr _v_e_r_s_i_o_n | ----zzzz ]] | [ ----hhhh | ----uuuussssaaaaggggeeee
+     | ----vvvveeeerrrrssssiiiioooonnnn ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The llllssss____ssssttttaaaatttt command displays, in the  transcript  pad  below
+     the  llllssss____ssssttttaaaatttt  window,  status  information on licenses. Note
+     that end users as well as  system  administrators  may  find
+     llllssss____ssssttttaaaatttt  useful for finding out the status of licenses in an
+     NetLS system.
+
+     llllssss____ssssttttaaaatttt features both a command-line and graphic  interface.
+     If  all  options are omitted, or the X argument delimiter --------
+     is found on the command line,
+      llllssss____ssssttttaaaatttt invokes a graphic interface.  Both  interfaces  are
+     described here.
+
+     In graphic interface mode, you can get help by  placing  the
+     cursor on any button and pressing SHIFT/HELP.
+
+
+GGGGRRRRAAAAPPPPHHHHIIIICCCC IIIINNNNTTTTEEEERRRRFFFFAAAACCCCEEEE MMMMEEEENNNNUUUUSSSS AAAANNNNDDDD BBBBUUUUTTTTTTTTOOOONNNNSSSS
+     EEEExxxxiiiitttt BBBBuuuuttttttttoooonnnn
+          Select this button to exit from llllssss____ssssttttaaaatttt.
+
+     LLLLiiiicccceeeennnnsssseeee IIIInnnnffffoooorrrrmmmmaaaattttiiiioooonnnn MMMMeeeennnnuuuu
+          This menu contains three buttons: UUUUsssseeeerrrrssss, IIIInnnnssssttttaaaalllllllleeeedddd, and
+          UUUUssssaaaaggggeeee (see below). After you have selected a server and
+          product from the Server and Product lists, select these
+          buttons  to  display information about users, installed
+          licenses, and usage of the selected server and product.
+
+     UUUUsssseeeerrrrssss BBBBuuuuttttttttoooonnnn
+          Displays information, listed  by  vendor,  product  and
+          server,  about  current  users  of  licensed  products,
+          including user ID, node name, group, number of licenses
+          held, and start time.
+
+     IIIInnnnssssttttaaaalllllllleeeedddd BBBBuuuuttttttttoooonnnn
+          Displays information, listed  by  vendor,  product  and
+          server,  about  product  licenses installed at selected
+          servers, including number  of  active  licenses,  their
+          start and end dates, their type, the number of licenses
+          currently in use, and the length of the queue of  users
+          waiting for licenses.
+
+
+
+
+NetLS Version 2           Last change:                          1
+
+
+
+
+
+
+ls_stat(1M)           Maintenance Commands            ls_stat(1M)
+
+
+
+     UUUUssssaaaaggggeeee BBBBuuuuttttttttoooonnnn
+          Displays information, listed  by  vendor,  product  and
+          server,   about the usage of products, including number
+          of licenses in  use,  total  number  of  licenses,  and
+          number of licenses available.
+
+     SSSSeeeerrrrvvvveeeerrrr LLLLiiiisssstttt BBBBooooxxxx
+          This list box, directly to the  right  of  the  License
+          Information  menu, displays the server list. At the top
+          of this box is the All  Servers  (Update)  button  (see
+          below). At the left of the box is a scroll bar that you
+          can use to scroll the list.
+
+     All Servers (Update) Button
+          Select this button to poll the network and  update  the
+          server  list. When you select this button, a check mark
+          appears in the box at its left. A check  mark  in  this
+          box indicates that:
+
+               All existing servers are displayed in  the  Server
+               List Box.
+
+               The vendors and products  listed  in  the  Product
+               List  box are the vendors and products existing at
+               the server currently selected in the  Server  List
+               box..
+
+          After updating the server  list,  select  a  server  to
+          display  (in  the  Product  List  box)  the products it
+          administers. Next select a product (or  All)  from  the
+          list  of  products;  then  select  UUUUsssseeeerrrrssss, IIIInnnnssssttttaaaalllllllleeeedddd, or
+          UUUUssssaaaaggggeeee....
+
+     PPPPrrrroooodddduuuucccctttt LLLLiiiisssstttt BBBBooooxxxx
+          This list box, directly to the right of the Server List
+          box,  displays  the server list. At the top of this box
+          is the All Products (Update) button (see below). At the
+          left  of  the  box  is a scroll bar that you can use to
+          scroll the list.
+
+     AAAAllllllll PPPPrrrroooodddduuuuccccttttssss ((((UUUUppppddddaaaatttteeee)))) BBBBuuuuttttttttoooonnnn
+          Select this button to poll the network and  update  the
+          product list. When you select this button, a check mark
+          appears in the box at its left. A check  mark  in  this
+          box indicates that:
+
+               All existing vendors and products are displayed in
+               the Product List Box.
+
+               The servers listed in the Server List box are  the
+               servers   that   hold  licenses  for  the  product
+               currently selected in the Product List box.
+
+
+
+NetLS Version 2           Last change:                          2
+
+
+
+
+
+
+ls_stat(1M)           Maintenance Commands            ls_stat(1M)
+
+
+
+          After updating the product list, select  a  product  to
+          display  (in  the  Server List box) the servers holding
+          licenses for the product. Select a server (or All) from
+          the  list  of servers; then select UUUUsssseeeerrrrssss, IIIInnnnssssttttaaaalllllllleeeedddd, or
+          UUUUssssaaaaggggeeee....
+
+     SSSSttttaaaattttuuuussss MMMMeeeessssssssaaaaggggeeee FFFFiiiieeeelllldddd
+          This field, across the bottom of the window,  describes
+          the  information currently displayed in the Server List
+          box and the Product List box.
+
+
+CCCCOOOOMMMMMMMMAAAANNNNDDDD----LLLLIIIINNNNEEEE IIIINNNNTTTTEEEERRRRFFFFAAAACCCCEEEE OOOOPPPPTTTTIIIIOOOONNNNSSSS AAAANNNNDDDD AAAARRRRGGGGUUUUMMMMEEEENNNNTTTTSSSS
+     ----tttt   Displays a table of total  license  usage  compared  to
+          installed  licenses;  all  servers and all products are
+          listed by default.
+
+     ----iiii   Displays installed licenses; all servers and  all  pro-
+          ducts are listed by default.
+
+     ----aaaa   Displays  information  about  all  license  users;  all
+          servers and all products are listed by default.
+
+     ----uuuu  uuuusssseeeerrrr____nnnnaaaammmmeeee
+          Displays licenses being used by the specified user.
+
+     NNNNooootttteeee:::: One of the options listed above must  be  included  in
+     all llllssss____ssssttttaaaatttt command lines.
+
+     ----nnnn sssseeeerrrrvvvveeeerrrr
+          Displays licenses located at the specified server.
+
+     ----vvvv  vvvveeeennnnddddoooorrrr
+          Displays licenses of the specified vendor; if the  ven-
+          dor  string  contains  spaces,  it must be delimited by
+          single or double quotes.
+
+     ----pppp  pppprrrroooodddduuuucccctttt
+          Displays licenses for the  specified  product;  if  the
+          product string contains spaces, it must be delimited by
+          single or double quotes.
+
+     ----rrrr  vvvveeeerrrrssssiiiioooonnnn
+          Displays licenses for the specified revision of a  pro-
+          duct  specified  by  ----pppp; if the version string contains
+          spaces, it  must  be  delimited  by  single  or  double
+          quotes.
+
+     ----zzzz   Debugging flag. (Prints RPC debugging information).
+
+     ----hhhh   Displays command usage information. (Same as ----uuuussssaaaaggggeeee).
+
+
+
+
+NetLS Version 2           Last change:                          3
+
+
+
+
+
+
+ls_stat(1M)           Maintenance Commands            ls_stat(1M)
+
+
+
+     ----uuuussssaaaaggggeeee
+          Displays command usage information. (Same as ----hhhh).
+
+     ----vvvveeeerrrrssssiiiioooonnnn
+          Displays command version information.
+
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     Display all licenses  installed  for  all  products  on  all
+     servers:
+
+     llllssss____ssssttttaaaatttt ----iiii
+
+     Display licenses in use from the server park:
+
+     llllssss____ssssttttaaaatttt ----aaaa ----nnnn ppppaaaarrrrkkkk
+
+     DDDDiiiissssppppllllaaaayyyy lllliiiicccceeeennnnsssseeeessss iiiinnnnssssttttaaaalllllllleeeedddd aaaannnndddd ccccuuuurrrrrrrreeeennnnttttllllyyyy iiiinnnn uuuusssseeee ffffoooorrrr tttthhhheeee pppprrrroooo----
+     dddduuuucccctttt KKKKwwwwiiiikkkkDDDDrrrraaaawwww,,,, rrrreeeevvvviiiissssiiiioooonnnn VVVV2222....1111::::
+
+     llllssss____ssssttttaaaatttt ----aaaa ----iiii ----pppp KKKKwwwwiiiikkkk----DDDDrrrraaaawwww ----rrrr VVVV2222....1111
+
+     DDDDiiiissssppppllllaaaayyyy lllliiiicccceeeennnnsssseeeessss iiiinnnnssssttttaaaalllllllleeeedddd oooonnnn ppppaaaarrrrkkkk ffffoooorrrr tttthhhheeee vvvveeeennnnddddoooorrrr AAAAppppoooolllllllloooo....
+
+     llllssss____ssssttttaaaatttt ----iiii ----vvvv AAAAppppoooolllllllloooo ----nnnn ppppaaaarrrrkkkk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NetLS Version 2           Last change:                          4
+
+
+

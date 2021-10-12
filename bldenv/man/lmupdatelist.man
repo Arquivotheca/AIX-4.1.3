@@ -1,0 +1,24 @@
+# @(#)33	1.2  src/bldenv/man/lmupdatelist.man, bldtools, bos412, GOLDA411a 6/1/92 16:17:27
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: lmupdatelist file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    $TOP/PTF/$BLDCYCLE/<release-name>/lmupdatelist:
+        List of ship file names which have been built this build cycle and
+        are binary different from prebuild version.  Created indirectly by 
+        v3bld with make rules (Make.footer).
+
+	Format:
+        	<ship filename>
+        	<ship filename>
+                        .
+                        .

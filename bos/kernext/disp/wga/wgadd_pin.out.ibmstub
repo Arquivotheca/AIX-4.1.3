@@ -1,0 +1,101 @@
+(ld): halt 4
+(ld): setopt strip 
+(ld): setopt member 
+(ld): savename wgadd_pin
+(ld): filelist 31 8
+(ld): i copyps.o
+(ld): i draw.o
+(ld): i font.o
+(ld): i load_pal.o
+(ld): i makegp.o
+(ld): i moveit.o
+(ld): i reset.o
+(ld): i vtt_act.o
+(ld): i vtt_cfl.o
+(ld): i vtt_clr.o
+(ld): i vtt_cpl.o
+(ld): i vtt_dact.o
+(ld): i vtt_defc.o
+(ld): i vtt_init.o
+(ld): i vtt_movc.o
+(ld): i vtt_rds.o
+(ld): i vtt_scr.o
+(ld): i vtt_stct.o
+(ld): i vtt_term.o
+(ld): i vtt_text.o
+(ld): i vtt_setm.o
+(ld): i ksr_diag.o
+(ld): i intr_diag.o
+(ld): i wga_err.o
+(ld): i open.o
+(ld): i close.o
+(ld): i interrupt.o
+(ld): i vtt_dpm.o
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a
+FILELIST: Number of previously inserted files processed: 31
+(ld): imports ../../../../../../src/bos/kernext/disp/wga/wgadd.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernext/disp/wga/wgadd.exp: 2
+(ld): imports ../../../../../../src/bos/kernel/exp/sysoverlay.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/sysoverlay.exp: 7
+(ld): imports ../../../../../../src/bos/kernel/exp/kernex.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/kernex.exp: 514
+(ld): imports ../../../../../../src/bos/kernel/exp/syscalls.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/syscalls.exp: 247
+(ld): imports ../../../../../../src/bos/kernel/exp/dead.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/dead.exp: 5
+(ld): imports ../../../../../../src/bos/kernel/exp/streams.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/streams.exp: 6
+(ld): exports ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp 
+EXPORTS: Symbols exported: 20
+(ld): entry wga_intr
+ENTRY: Entry point set to wga_intr
+(ld): resolve
+RESOLVE: 164 of 1360 symbols were kept.
+(ld): addgl /aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o
+ADDGL: Glink code added for 19 symbols.
+(ld): er full
+ER: There are no unresolved symbols.
+(ld): mismatch
+MISMATCH: No type mismatches exist.
+(ld): comprld
+COMPRLD: Kept 321 of 321 relocation entries.
+(ld): origin 0x0 0x0
+(ld): save 1L .
+SAVE: Section sizes = 18640+3420+280 (0x48D0+0xD5C+0x118 hex)
+SAVE: Size of TOC: 212 (0xD4 hex)
+SAVE: These object files and archive members were
+	used to create the output file:
+ copyps.o
+ draw.o
+ font.o
+ load_pal.o
+ makegp.o
+ moveit.o
+ reset.o
+ vtt_act.o
+ vtt_cfl.o
+ vtt_clr.o
+ vtt_cpl.o
+ vtt_dact.o
+ vtt_defc.o
+ vtt_init.o
+ vtt_movc.o
+ vtt_rds.o
+ vtt_scr.o
+ vtt_stct.o
+ vtt_term.o
+ vtt_text.o
+ vtt_setm.o
+ wga_err.o
+ open.o
+ close.o
+ interrupt.o
+ vtt_dpm.o
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strlen.o]
+(ld): gen map wgadd_pin.map
+(ld): rc
+RC: Highest return code was 0.

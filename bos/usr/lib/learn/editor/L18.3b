@@ -1,0 +1,31 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Remembering that 'i' inserts one line before
+the 'a' command, so that after 
+  3a
+the first input line is number 4 while after
+  3i
+the first input line is number 3, what command
+using 'i' is the same as the command
+  5a
+to the editor?  Type "answer XX" where XX is that
+command.
+#copyin
+#user
+#uncopyin
+#match 6i
+#log
+#next
+18.2c 5

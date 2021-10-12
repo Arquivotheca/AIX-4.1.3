@@ -1,0 +1,23 @@
+# @(#) 43 1.1 src/bos/usr/lpp/bosinst/preserve.list/preserve.list, bosinst, bos411, 9428A410j 6/30/93 17:56:40
+#
+#   COMPONENT_NAME: BOSINST
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#
+# This file contains a list of system files which will be copied during a
+# preservation BOS install.  Any configuration files which the user wishes to
+# save during a preservation BOS install should be added to the following list.
+# The file name must contain the full directory path.
+
+/etc/filesystems

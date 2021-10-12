@@ -1,0 +1,34 @@
+# @(#)66	1.2  src/bos/usr/lpp/cnls/bin/abcnewphrase/Makefile, ils-zh_CN, bos41J, 9515B_all 4/11/95 23:01:15
+#
+#   COMPONENT_NAME: ils-zh_CN
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+IM		= ${MAKETOP}bos/usr/lib/nls/loc/CN.im
+PROGRAMS	= abcnewphrase
+
+abcnewphrase_OFILES = abcnewphrase.o
+
+INCFLAGS	= -I${IM}
+
+LIBS		= -lXm -lPW -lIM -lXt -lX11 -lm -lc
+
+ILIST		= ${PROGRAMS} Abcnewphrase
+IDIR		= /usr/lpp/cnls/bin/
+Abcnewphrase_IDIR	= /usr/lpp/X11/lib/X11/zh_CN/app-defaults/
+
+.include <${RULES_MK}>
+abcnewphrase.c: AbcNewPH.c
+	${RM} -f ${.TARGET}
+	${CP} -p ${.ALLSRC} ${.TARGET}

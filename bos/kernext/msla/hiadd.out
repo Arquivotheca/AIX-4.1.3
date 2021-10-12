@@ -1,0 +1,83 @@
+(ld): halt 4
+(ld): setopt strip 
+(ld): setopt member 
+(ld): savename hiadd
+(ld): filelist 15 6
+(ld): i mslaclose.o
+(ld): i mslaintr.o
+(ld): i msladd.o
+(ld): i mslaio.o
+(ld): i mslamisc.o
+(ld): i mslaofflv.o
+(ld): i mslampx.o
+(ld): i mslaopen.o
+(ld): i mslaread.o
+(ld): i mslawrite.o
+(ld): i mslaselect.o
+(ld): i mslaioctl.o
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a
+FILELIST: Number of previously inserted files processed: 15
+(ld): imports ../../../../../src/bos/kernel/exp/sysoverlay.exp 
+IMPORTS: Symbols imported from import file ../../../../../src/bos/kernel/exp/sysoverlay.exp: 7
+(ld): imports ../../../../../src/bos/kernel/exp/kernex.exp 
+IMPORTS: Symbols imported from import file ../../../../../src/bos/kernel/exp/kernex.exp: 514
+(ld): imports ../../../../../src/bos/kernel/exp/syscalls.exp 
+IMPORTS: Symbols imported from import file ../../../../../src/bos/kernel/exp/syscalls.exp: 247
+(ld): imports ../../../../../src/bos/kernel/exp/dead.exp 
+IMPORTS: Symbols imported from import file ../../../../../src/bos/kernel/exp/dead.exp: 5
+(ld): imports ../../../../../src/bos/kernel/exp/streams.exp 
+IMPORTS: Symbols imported from import file ../../../../../src/bos/kernel/exp/streams.exp: 6
+(ld): entry mslaconfig
+ENTRY: Entry point set to mslaconfig
+(ld): resolve
+ld: 0711-228 WARNING: Duplicate symbols were found while resolving symbols.
+	The following duplicates were found:
+ Symbol                    Source-File(Object) OR Import-File{Shared-object}
+ ------------------------- -------------------------------------------------
+ .disable_lock             ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ disable_lock              ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ .unlock_enable            ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ unlock_enable             ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+RESOLVE: 259 of 1523 symbols were kept.
+RESOLVE: The return code is 4.
+(ld): addgl /aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o
+ADDGL: Glink code added for 44 symbols.
+(ld): er full
+ER: There are no unresolved symbols.
+(ld): mismatch
+MISMATCH: No type mismatches exist.
+(ld): comprld
+COMPRLD: Kept 1054 of 1054 relocation entries.
+(ld): origin 0x0 0x0
+(ld): save 1L .
+SAVE: Section sizes = 58644+2960+130408 (0xE514+0xB90+0x1FD68 hex)
+SAVE: Size of TOC: 372 (0x174 hex)
+SAVE: These object files and archive members were
+	used to create the output file:
+ mslaclose.o
+ mslaintr.o
+ msladd.o
+ mslaio.o
+ mslamisc.o
+ mslaofflv.o
+ mslampx.o
+ mslaopen.o
+ mslaread.o
+ mslawrite.o
+ mslaselect.o
+ mslaioctl.o
+ /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a[timeout.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a[pioutil.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strncpy.o]
+(ld): gen map hiadd.map
+(ld): rc
+RC: Highest return code was 4.

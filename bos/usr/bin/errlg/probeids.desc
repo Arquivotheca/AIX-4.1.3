@@ -1,0 +1,30 @@
+# @(#)22	1.2  src/bos/usr/bin/errlg/probeids.desc, cmderrlg, bos411, 9428A410j 3/31/94 09:17:23
+# COMPONENT_NAME: CMDERRLG
+#
+# FUNCTIONS:  List of probe labels used to build probeids.h
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+# This file contains probe labels (minus the PCSS_) used to build probeids.h
+# The label is the first item on the line and should be in upper case
+# for use in a #define.  The probe ids themselves are generated.
+# The algorithm is, if the id already exists for this label, use it,
+# otherwise create a new one.
+# Following the label is the comment to appear in probeids.h for
+# this probe.
+
+# File format:
+#LABEL		Comment
+
+SYSDUMP		System dump probe
+COREDUMP	Core dump probe id
+DIAGRPT		Diagnostic report probe id

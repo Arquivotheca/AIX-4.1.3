@@ -1,0 +1,38 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Same thing again, but this time print the
+fifth line in the file.  Then type 'w', 'q',
+and "ready".
+#create Ref
+:james monroe
+#create file
+george washington
+john adams
+thomas jefferson
+james madison
+james monroe
+john quincy adams
+#print file
+#copyout
+#pipe
+ex +'set prompt noopt' file
+#user
+#unpipe
+#uncopyout
+grep monroe .ocopy >X2
+#cmp Ref X2
+#log
+#next
+7.1a 10

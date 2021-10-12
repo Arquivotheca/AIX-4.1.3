@@ -1,0 +1,84 @@
+* @(#)23        1.1  src/bos/objclass/POWER/adapter.sio.ppa_iod.add, cfgmethods, bos411, 9428A410j 6/28/94 07:19:51
+*  COMPONENT_NAME: (CFGMETHODS)
+* 
+*  FUNCTIONS: Parallel port adapter predefined data
+* 
+*  ORIGINS: 27, 83
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*  LEVEL 1, 5 Years Bull Confidential Information
+*
+
+*
+* SIO printer adapter for IOD Card
+*
+
+PdDv:   
+	type = ppa_iod
+        class = adapter 
+	subclass = sio
+        prefix = ppa 
+        devid = ""
+        base = 0 
+        has_vpd = 0 
+	detectable = 1
+        chgstatus = 0 
+        bus_ext = 0 
+        led = 0x827 
+	fru = 2
+        setno = 41 
+        msgno = 1 
+        catalog = "devices.cat" 
+	DvDr = ppdd
+        Define = /usr/lib/methods/define 
+	Configure = /usr/lib/methods/cfgppa
+        Change = ""
+        Unconfigure = /usr/lib/methods/ucfgdevice
+        Undefine = /usr/lib/methods/undefine
+        Start = ""
+        Stop = ""
+	uniquetype = "adapter/sio/ppa_iod"
+
+PdCn:
+	uniquetype = "adapter/sio/ppa_iod"
+        connkey = parallel 
+        connwhere = p
+
+PdAt:
+	uniquetype = "adapter/sio/ppa_iod"
+        attribute = "bus_io_addr" 
+        deflt = 0x078 
+        values = 0x078 
+        width = 0x03 
+        type = O 
+        generic = D
+        rep = n
+        nls_index = 2
+
+PdAt:
+	uniquetype = "adapter/sio/ppa_iod"
+        attribute = "bus_intr_lvl" 
+        deflt = 13 
+        values = 13 
+        width = ""
+        type = I 
+        generic = D 
+        rep = n
+        nls_index = 3
+
+PdAt:
+	uniquetype = "adapter/sio/ppa_iod"
+        attribute = "intr_priority" 
+        deflt = 4 
+        values = 4 
+        width = ""
+        type = P
+        generic = D 
+        rep = n
+        nls_index = 4 

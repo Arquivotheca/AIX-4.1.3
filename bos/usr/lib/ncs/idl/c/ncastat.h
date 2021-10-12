@@ -1,0 +1,23 @@
+#ifndef nca_status__v0_included
+#define nca_status__v0_included
+#include "idl_base.h"
+#define NCASTAT_IDL_SUPPORTS_V1 ndr__true
+#define nca_status__comm_failure 469827585
+#define nca_status__op_rng_error 469827586
+#define nca_status__unk_if 469827587
+#define nca_status__wrong_boot_time 469827590
+#define nca_status__you_crashed 469827593
+#define nca_status__proto_error 469827595
+#define nca_status__out_args_too_big 469827603
+#define nca_status__server_too_busy 469827604
+#define nca_status__string_too_long 469827605
+#define nca_status__unsupported_type 469827607
+#define nca_status__zero_divide 469762049
+#define nca_status__address_error 469762050
+#define nca_status__fp_div_zero 469762051
+#define nca_status__fp_underflow 469762052
+#define nca_status__fp_overflow 469762053
+#define nca_status__invalid_tag 469762054
+#define nca_status__invalid_bound 469762055
+#define nca_status__rpc_version_mism 469762056
+#endif

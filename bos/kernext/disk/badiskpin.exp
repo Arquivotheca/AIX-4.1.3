@@ -1,0 +1,37 @@
+#!/etc/drivers/badiskpin
+* @(#)01	1.4  src/bos/kernext/disk/badiskpin.exp, sysxdisk, bos411, 9428A410j 6/15/90 18:19:53
+*
+* COMPONENT_NAME: (SYSXDISK) Bus Attached Disk Device Driver
+*                            Bottom Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1990
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*                                                                   
+badebug
+ba_count
+ba_lock
+ba_list
+ba_cdt
+ba_strategy
+ba_epow
+ba_intr
+ba_dump
+ba_dump_func
+ba_issue_cmd
+ba_piofunc
+ba_piorecov
+ba_piowxfer
+ba_waitirpt
+ba_cmdxfer
+ba_idle
+ba_watch

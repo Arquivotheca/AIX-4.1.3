@@ -1,0 +1,28 @@
+class raid_disp_hdr {
+	char id[65];                                 /* offset: 0xc ( 12) */
+	char option_id[65];                         /* offset: 0x50 ( 80) */
+	vchar name[1025];                            /* offset: 0x58 ( 88) */
+	vchar name_msg_file[1025];                   /* offset: 0x5c ( 92) */
+	long name_msg_set;                           /* offset: 0x60 ( 96) */
+	long name_msg_id;                            /* offset: 0x64 ( 100) */
+	vchar cmd_to_exec[1025];                     /* offset: 0x68 ( 104) */
+	vchar cmd_to_exec_postfix[1025];                     /* offset: 0x68 ( 104) */
+	char exec_mode[2];                           /* offset: 0x6e ( 110) */
+	char multi_select[2];                           /* offset: 0x6e ( 110) */
+	vchar cmd_to_discover[1025];                 /* offset: 0x74 ( 116) */
+	vchar cmd_to_discover_postfix[1025];         /* offset: 0x78 ( 120) */
+	char help_mst_avail[2];                           /* offset: 0x6e ( 110) */
+	char help_msg_id[17];                        /* offset: 0x84 ( 132) */
+	vchar help_msg_loc[1025];                    /* offset: 0x98 ( 152) */
+	vchar help_msg_base[64];                     /* offset: 0x9c ( 156) */
+	vchar help_msg_book[64];                     /* offset: 0xa0 ( 160) */
+	char PdDvLn[48];
+	};
+/*
+	descriptors:    19
+	structure size:     0xa4 (164) bytes
+	data offset:    0x528
+	population:     998 objects (628 active, 370 deleted)
+*/
+
+

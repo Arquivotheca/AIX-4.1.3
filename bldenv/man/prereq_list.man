@@ -1,0 +1,127 @@
+######################################################################
+#  @(#)77        1.3  src/bldenv/man/prereq_list.man, pkgtools, bos412, GOLDA411a 8/17/93 09:51:57
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# prereq_list.man 
+#
+# Change log:
+#    10/22/91-wt-added header
+######################################################################
+  prereq_list Command
+
+
+  Key Concepts
+
+
+
+  Purpose
+
+    To verify that all PTF's requisites are included in the promotion list
+    (or exist in an upstream server) before attempting a promotion.
+
+
+  Syntax
+
+    prereq_list  -s ship_directory  -p prod_directory [-b build_directory]
+                 [-c] [-v] [-x] [-h] [-?] PTF_filename(s)
+
+
+  Description
+
+    Lists all missing prereqs, coreqs, supersedes, and ifreqs for each PTF
+    specified.  The list of missing requisites will be printed to the standard
+    output.  Using the '-c' option suppresses the list of missing
+    requisites, and returns an error code if there are missing requisites.
+
+    The -x option causes prereq_list to ignore missing supersede ptfs.
+    In this case missing supersedes do not generate an error condition.
+
+
+  Flags
+
+    -s ship_directory    Path to the 'ship' server.
+
+    -p prod_directory    Path to the 'production' server.
+
+    -b build_directory   Path to the 'build' server.
+
+    -c                   Check mode suppresses the list of missing
+                         requisites and returns an error code if
+                         requisite PTFs were found that are not in
+                         the original list.
+
+    -v                   Verbose messages are given during execution.
+
+    -x                   Do not produce an error condition for  missing
+                         supersedes.
+
+    -h | -?              Print help message and exit.
+
+    PTF_filename(s)      List of PTFs to be checked.
+                         For example:
+                                U0000257.ptf  U0000032.ptf U000001.ptf
+                                           < or >
+                                U0000257 U0000032 U000001
+
+
+  Exit codes
+
+    With -c option:
+      If there are missing requisites:  Error:  non-zero return code.
+      No missing requisites:  Successful:  return code of zero.
+
+      NOTE:  If the -x option was specified missing supersedes do
+      not generate an error condition.
+
+    Without -c option:
+      If there is a program error:  non-zero return code.
+      No program error:  return code of zero.
+
+
+  File
+
+    None
+
+
+  Examples
+
+    1. 'prereq_list  -s /afs/ship -p /afs/prod -b ./build ix0002.ptf ix3002.ptf'
+
+       This command verifies that PTFs ix0002 & ix3002 are ready to promote
+       from the prod server to the ship server.  If requisites are missing,
+       the missing requisite list will be printed, but no error code will be
+       returned.
+
+    2. 'prereq_list  -s /afs/ship -p ./prod -c ix0002.ptf ix3002.ptf'
+
+       This command verifies that PTFs ix0002 & ix3002 are ready to promote
+       from the prod server to the ship server.  If requisites are missing,
+       the missing requisite list will be suppressed, and an error code
+       returned.
+
+
+  Implementation Specifics
+
+    Using PTFs specified on the command line allows execution of this command
+    from Motif or EMACS.
+
+
+  Related Information
+
+    promote_prod
+    promote_ship

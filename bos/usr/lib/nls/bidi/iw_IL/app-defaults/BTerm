@@ -1,0 +1,38 @@
+# @(#)39	1.1  src/bos/usr/lib/nls/bidi/app-defaults/iw_IL/Bterm, bos, bos410 8/27/93 09:45:21
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+#  BTERM resource defaults
+#
+bterm.fScrRev: on
+bterm.fLTR: on
+bterm.fRTL: on
+bterm.fAutoPush: on
+bterm.fPush: on
+bterm.fEndPush: on
+bterm.fASD: off
+bterm.fShapeIS: off
+bterm.fShapeIN: off
+bterm.fShapeM: off
+bterm.fShapeF: off
+bterm.textType: visual
+bterm.orientation: RTL
+bterm.symmetric: off
+bterm.autopush: off
+bterm.numShape: passthru
+bterm.charShape: passthru
+bterm.maps: Iw.IBM-856
+

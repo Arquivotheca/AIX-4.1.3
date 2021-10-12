@@ -1,0 +1,38 @@
+*
+* @(#)40	1.1  src/bos/usr/lib/nls/loc/locale/ko_KR/methods.exp, libmeth, bos411, 9428A410j 5/25/92 16:00:46
+* COMPONENT_NAME:	LIBMETH
+*
+* FUNCTIONS:		export file for ko_KR.o
+*
+* ORIGINS:		27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1992
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+__mblen_euckr
+__mblen_euctw
+__mbstopcs_euckr
+__mbstopcs_euctw
+__mbstowcs_euckr
+__mbstowcs_euctw
+__mbtopc_euckr
+__mbtopc_euctw
+__mbtowc_euckr
+__mbtowc_euctw
+__pcstombs_euckr
+__pcstombs_euctw
+__pctomb_euckr
+__pctomb_euctw
+__wcstombs_euckr
+__wcstombs_euctw
+__wcswidth_euckr
+__wcswidth_euctw
+__wctomb_euckr
+__wctomb_euctw
+__wcwidth_euckr
+__wcwidth_euctw

@@ -1,0 +1,92 @@
+* @(#)36 1.6 src/bldenv/compilers/xlC/xlC.cfg.tmplt, xlC, bos412, GOLDA411a 8/30/94 13:04:27
+*
+* COMPONENT_NAME: (CC) AIX XL C++ Compiler/6000
+*
+* FUNCTIONS: C++ Configuration file
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* standard c compiler aliased as xlc_r
+xlc_r:  use        = DEFLT
+        crt        = __XLC_PATH__/usr/lib/crt0_r.o
+        mcrt       = __XLC_PATH__/usr/lib/mcrt0_r.o
+        gcrt       = __XLC_PATH__/usr/lib/gcrt0_r.o
+        libraries  = -lc_r,-lpthreads,-lc
+        proflibs   = -L/lib/profiled,-L/usr/lib/profiled
+        options    = -D_ANSI_C_SOURCE,-qansialias,-D_THREAD_SAFE
+
+* standard c compiler aliased as cc_r
+cc_r:   use        = DEFLT
+        crt        = __XLC_PATH__/usr/lib/crt0_r.o
+        mcrt       = __XLC_PATH__/usr/lib/mcrt0_r.o
+        gcrt       = __XLC_PATH__/usr/lib/gcrt0_r.o
+        libraries  = -lc_r,-lpthreads,-lc
+        proflibs   = -L/lib/profiled,-L/usr/lib/profiled
+        options    = -qlanglvl=extended,-qnoro,-qnoroconst,-D_LONG_LONG,-D_THREAD_SAFE
+
+* standard c compiler
+xlc:    use        = DEFLT
+        crt        = __XLC_PATH__/usr/lib/crt0.o
+        mcrt       = __XLC_PATH__/usr/lib/mcrt0.o
+        gcrt       = __XLC_PATH__/usr/lib/gcrt0.o
+        libraries  = -lc
+        proflibs   = -L/lib/profiled,-L/usr/lib/profiled
+        options    = -D_ANSI_C_SOURCE,-qansialias
+
+* standard c compiler aliased as cc
+cc:     use        = DEFLT
+        crt        = __XLC_PATH__/usr/lib/crt0.o
+        mcrt       = __XLC_PATH__/usr/lib/mcrt0.o
+        gcrt       = __XLC_PATH__/usr/lib/gcrt0.o
+        libraries  = -lc
+        proflibs   = -L/lib/profiled,-L/usr/lib/profiled
+        options    = -qlanglvl=extended,-qnoro,-qnoroconst,-D_LONG_LONG
+ 
+* standard c compiler aliased as c89
+c89:    use        = DEFLT
+        crt        = __XLC_PATH__/usr/lib/crt0.o
+        mcrt       = __XLC_PATH__/usr/lib/mcrt0.o
+        gcrt       = __XLC_PATH__/usr/lib/gcrt0.o
+        libraries  = -lc
+        proflibs   = -L/lib/profiled,-L/usr/lib/profiled
+        options    = -D_ANSI_C_SOURCE,-qansialias
+
+* standard xlC compiler
+xlC:    use        = DEFLT
+        crt        = __XLC_PATH__/usr/lpp/xlC/lib/crt0.o
+        mcrt       = __XLC_PATH__/usr/lpp/xlC/lib/mcrt0.o
+        gcrt       = __XLC_PATH__/usr/lpp/xlC/lib/gcrt0.o
+        libraries2 = -lC,-lm,-lc
+        proflibs   = -L__BASE__/src/xlC/usr/lpp/xlC/lib/profiled,-L/lib/profiled,-L/usr/lib/profiled
+        cc         = __XLC_PATH__/usr/bin/cc
+        xlC        = __XLC_PATH__/usr/bin/xlC
+
+* xlC C++ compiler aliased as xlC_r (DCE)
+xlC_r:  use        = DEFLT
+        crt        = __XLC_PATH__/usr/lpp/xlC/lib/crt0_r.o
+        mcrt       = __XLC_PATH__/usr/lpp/xlC/lib/mcrt0_r.o
+        gcrt       = __XLC_PATH__/usr/lpp/xlC/lib/gcrt0_r.o
+	options    = -D_THREAD_SAFE
+        libraries2 = -L__BASE__/src/xlC/usr/lpp/xlC/lib,-lC,-lc_r,-lpthreads,-lm,-lc
+        proflibs   = -L__BASE__/src/xlC/usr/lpp/xlC/lib/profiled,-L/lib/profiled,-L/usr/lib/profiled
+ 
+* common definitions
+DEFLT:  cppcomp   = __XLC_PATH__/usr/lpp/xlC/exe/xlCentry
+        ccomp     = __XLC_PATH__/usr/lpp/xlC/exe/xlcentry
+        code      = __XLC_PATH__/usr/lpp/xlC/exe/xlCcode
+        cppfilt   = __XLC_PATH__/usr/lpp/xlC/bin/c++filt
+        inline    = __XLC_PATH__/usr/lpp/xlC/exe/xlCinline
+	cpp       = __XLC_PATH__/usr/lib/cpp
+        munch     = __XLC_PATH__/usr/lpp/xlC/exe/munch
+        ld        = __XLC_PATH__/usr/bin/ld
+        as        = __XLC_PATH__/usr/bin/as
+	xlC       = __XLC_PATH__/usr/lpp/xlC/bin/xlC
+        options   = -bpT:0x10000000,-D_IBMR2,-D_AIX,-D_AIX32,-Z__BASE__/export/__TARGET_MACHINE__,-bhalt:4,-qnostdinc,-qidirf,-bbinder:__XLC_PATH__/usr/lib/bind,-bglink:__XLC_PATH__/usr/lib/glink.o,-blibpath:/usr/lib:/lib:/usr/lpp/xlC/lib,-qarch=com,-qdebug=useabs,-qxflag=strpfile,-qmaxmem=-1
+        ldopt     = "b:o:e:u:R:H:Y:Z:L:T:A:V:k:j:"

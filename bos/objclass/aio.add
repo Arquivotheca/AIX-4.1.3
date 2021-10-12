@@ -1,0 +1,97 @@
+* @(#)43	1.6  src/bos/objclass/aio.add, sysxaio, bos411, 9428A410j 6/6/94 13:54:47
+* 
+*  COMPONENT_NAME: (SYSXAIO) Asynchronous I/O
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1991, 1994
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = aio 
+	class = aio
+	subclass = node
+	prefix = aio
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	led = 0x594
+	setno = 100
+	msgno = 1
+	fru = 0
+	catalog = devices.cat
+	DvDr = aio.ext
+	Define = /usr/lib/methods/defaio
+	Configure = /usr/lib/methods/cfgaio
+	Change = /usr/lib/methods/chgaio
+	Unconfigure = /usr/lib/methods/ucfgaio
+	Undefine = /usr/lib/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = aio/node/aio 
+
+PdAt:
+	uniquetype = aio/node/aio
+	attribute = minservers
+	deflt = 1
+	values = "1-1000,1"
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 2
+
+PdAt:
+	uniquetype = aio/node/aio
+	attribute = maxservers
+	deflt = 10
+	values = "1-1000,1"
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 3
+
+
+* This number should be at least AIO_MAX (from inc/sys/limits.h)
+PdAt:
+	uniquetype = aio/node/aio
+	attribute = maxreqs
+	deflt = 4096
+	values = "4096-1000000,1"
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 4
+
+PdAt:
+	uniquetype = aio/node/aio
+	attribute = kprocprio
+	deflt = 39
+	values = "17-127,1"
+	width = ""
+	type = R
+	generic = UD
+	rep = n
+	nls_index = 5
+
+PdAt:
+	uniquetype = aio/node/aio
+	attribute = autoconfig
+	deflt = defined 
+	values = available,defined
+	width = ""
+	type = R
+	generic = UD
+	rep = sl
+	nls_index = 6
+

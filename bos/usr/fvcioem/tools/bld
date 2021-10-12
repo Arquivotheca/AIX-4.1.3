@@ -1,0 +1,7 @@
+#!/bin/ksh
+base=${0%/*}
+rm -f ciedata.c.old
+cp ciedata.c ciedata.c.old
+chmod -w ciedata.c.old
+awk -f $base/timestamp.awk ciedata.c.old > ciedata.c
+/afs/austin/aix/410/project/ode/bin/build $*

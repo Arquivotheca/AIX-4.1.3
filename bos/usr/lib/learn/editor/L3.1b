@@ -1,0 +1,49 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+A particularly important editor command
+is 'w' (write).  This writes whatever
+you are working on, including everything you
+have typed in or changed, into a file,
+so that you can work on it again later.
+If you try to quit from the editor without
+writing out your changes, the editor will complain.
+Generally it's wisest to leave the editor by typing
+
+w
+q
+
+rather than just 'q'.  I'll put you in the editor;
+type those two commands to leave.  Then type
+"ready".
+#create bpres
+Washington Adams Jefferson
+#create pres
+Washington Adams Jefferson
+#pipe
+ex +'set prompt noopt' pres
+#user
+#unpipe
+#cmp pres bpres
+#succeed
+Note that the editor typed
+	"pres" 1 line, 27 characters
+This is the number of characters and lines it wrote into the file.
+This is reassuring - it tells you the write was successful.
+It also lets you compare these numbers with those it typed
+just before it gave you a ':'.
+#log
+#next
+4.1a 10
+4.2a 5

@@ -1,0 +1,46 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Just before the last line of file 'airlines'
+in this directory insert the line
+
+twa
+
+and then rewrite the file with wq and
+type "ready".
+#create Ref
+american
+braniff
+continental
+delta
+eastern
+national
+pan am
+twa
+united
+#create airlines
+american
+braniff
+continental
+delta
+eastern
+national
+pan am
+united
+#user
+#cmp airlines Ref
+#log
+#next
+19.1a 10
+19.2a 5

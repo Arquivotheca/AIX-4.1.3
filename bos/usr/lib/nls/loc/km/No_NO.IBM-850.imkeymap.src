@@ -1,0 +1,2506 @@
+# @(#)27	1.6  src/bos/usr/lib/nls/loc/km/No_NO.IBM-850.imkeymap.src, cfgnlskm, bos411, 9428A410j 12/14/93 00:00:09
+#
+# COMPONENT_NAME: (CFGNLSKM) National Language Support 
+#
+# FUNCTIONS: NORWEGIAN KEYBOARD TABLE ( ID 155, CODE SET 850 )
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1986, 1990
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# The unique key states are Base, Shift, CapsLock, Shift-CapsLock, Control, 
+# Alt, and AltGraphic.	
+# All other key states are mapped to one of these unique key states.
+#
+# KEY STATES
+#	    Base
+#	    Shift
+#	    CapsLock
+#	    Shift+CapsLock
+#	    Control
+#	    Alt
+#	    Alt+Graphic
+#
+#
+
+XK_space							\
+			' '					\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			U
+XK_exclam							\
+			'!'					\
+			XK_exclam				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_quotedbl							\
+			'"'					\
+			XK_quotedbl				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_numbersign							\
+			'#'					\
+			XK_numbersign				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dollar							\
+			'$'					\
+			XK_dollar				\
+			U					\
+			U					\
+			'\x1d'					\
+			U					\
+			U
+XK_percent							\
+			'%'					\
+			XK_percent				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ampersand							\
+			'&'					\
+			XK_ampersand				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_apostrophe							\
+			'\''					\
+			XK_asterisk				\
+			XK_apostrophe				\
+			XK_asterisk				\
+			U					\
+			U					\
+			U
+XK_parenleft							\
+			'('					\
+			XK_parenleft				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_parenright							\
+			')'					\
+			XK_parenright				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_asterisk							\
+			'*'					\
+			XK_asterisk				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_plus								\
+			'+'					\
+			XK_question				\
+			XK_plus					\
+			XK_question				\
+			U					\
+			U					\
+			U
+XK_comma							\
+			','					\
+			XK_semicolon				\
+			XK_comma				\
+			XK_semicolon				\
+			U					\
+			U					\
+			U
+XK_minus							\
+			'-'					\
+			XK_underscore				\
+			XK_minus				\
+			XK_underscore				\
+			'\x1f'					\
+			U					\
+			U
+XK_period							\
+			'.'					\
+			XK_colon				\
+			XK_period				\
+			XK_colon				\
+			U					\
+			U					\
+			U
+XK_slash							\
+			'/'					\
+			XK_slash				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_0								\
+			'0'					\
+			XK_equal				\
+			XK_0					\
+			XK_equal				\
+			U					\
+			U					\
+			XK_braceright
+XK_1								\
+			'1'					\
+			XK_exclam				\
+			XK_1					\
+			XK_exclam				\
+			U					\
+			U					\
+			U
+XK_2								\
+			'2'					\
+			XK_quotedbl				\
+			XK_2					\
+			XK_quotedbl				\
+			'\x00'					\
+			U					\
+			XK_at
+XK_3								\
+			'3'					\
+			XK_numbersign				\
+			XK_3					\
+			XK_numbersign				\
+			U					\
+			U					\
+			XK_sterling
+XK_4								\
+			'4'					\
+			XK_currency				\
+			XK_4					\
+			XK_currency				\
+			U					\
+			U					\
+			XK_dollar
+XK_5								\
+			'5'					\
+			XK_percent				\
+			XK_5					\
+			XK_percent				\
+			U					\
+			U					\
+			U
+XK_6								\
+			'6'					\
+			XK_ampersand				\
+			XK_6					\
+			XK_ampersand				\
+			'\x1e'					\
+			U					\
+			U
+XK_7								\
+			'7'					\
+			XK_slash				\
+			XK_7					\
+			XK_slash				\
+			U					\
+			U					\
+			XK_braceleft
+XK_8								\
+			'8'					\
+			XK_parenleft				\
+			XK_8					\
+			XK_parenleft				\
+			XK_Escape				\
+			U					\
+			XK_bracketleft
+XK_9								\
+			'9'					\
+			XK_parenright				\
+			XK_9					\
+			XK_parenright				\
+			'\x1d'					\
+			U					\
+			XK_bracketright
+XK_colon							\
+			':'					\
+			XK_colon				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_semicolon							\
+			';'					\
+			XK_semicolon				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_less								\
+			'<'					\
+			XK_greater				\
+			XK_less					\
+			XK_greater				\
+			U					\
+			U					\
+			U
+XK_equal							\
+			'='					\
+			XK_equal				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_greater							\
+			'>'					\
+			XK_greater				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_question							\
+			'?'					\
+			XK_question				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_at								\
+			'@'					\
+			XK_at					\
+			U					\
+			U					\
+			'\x00'					\
+			U					\
+			U
+XK_A								\
+			'A'					\
+			XK_A					\
+			U					\
+			U					\
+			'\x01'					\
+			U					\
+			U
+XK_B								\
+			'B'					\
+			XK_B					\
+			U					\
+			U					\
+			'\x02'					\
+			U					\
+			U
+XK_C								\
+			'C'					\
+			XK_C					\
+			U					\
+			U					\
+			'\x03'					\
+			U					\
+			U
+XK_D								\
+			'D'					\
+			XK_D					\
+			U					\
+			U					\
+			'\x04'					\
+			U					\
+			U
+XK_E								\
+			'E'					\
+			XK_E					\
+			U					\
+			U					\
+			'\x05'					\
+			U					\
+			U
+XK_F								\
+			'F'					\
+			XK_F					\
+			U					\
+			U					\
+			'\x06'					\
+			U					\
+			U
+XK_G								\
+			'G'					\
+			XK_G					\
+			U					\
+			U					\
+			'\x07'					\
+			U					\
+			U
+XK_H								\
+			'H'					\
+			XK_H					\
+			U					\
+			U					\
+			XK_BackSpace				\
+			U					\
+			U
+XK_I								\
+			'I'					\
+			XK_I					\
+			U					\
+			U					\
+			XK_Tab					\
+			U					\
+			U
+XK_J								\
+			'J'					\
+			XK_J					\
+			U					\
+			U					\
+			XK_Linefeed				\
+			U					\
+			U
+XK_K								\
+			'K'					\
+			XK_K					\
+			U					\
+			U					\
+			'\x0b'					\
+			U					\
+			U
+XK_L								\
+			'L'					\
+			XK_L					\
+			U					\
+			U					\
+			'\x0c'					\
+			U					\
+			U
+XK_M								\
+			'M'					\
+			XK_M					\
+			U					\
+			U					\
+			XK_Return				\
+			U					\
+			U
+XK_N								\
+			'N'					\
+			XK_N					\
+			U					\
+			U					\
+			'\x0e'					\
+			U					\
+			U
+XK_O								\
+			'O'					\
+			XK_O					\
+			U					\
+			U					\
+			'\x0f'					\
+			U					\
+			U
+XK_P								\
+			'P'					\
+			XK_P					\
+			U					\
+			U					\
+			'\x10'					\
+			U					\
+			U
+XK_Q								\
+			'Q'					\
+			XK_Q					\
+			U					\
+			U					\
+			'\x11'					\
+			U					\
+			U
+XK_R								\
+			'R'					\
+			XK_R					\
+			U					\
+			U					\
+			'\x12'					\
+			U					\
+			U
+XK_S								\
+			'S'					\
+			XK_S					\
+			U					\
+			U					\
+			'\x13'					\
+			U					\
+			U
+XK_T								\
+			'T'					\
+			XK_T					\
+			U					\
+			U					\
+			'\x14'					\
+			U					\
+			U
+XK_U								\
+			'U'					\
+			XK_U					\
+			U					\
+			U					\
+			'\x15'					\
+			U					\
+			U
+XK_V								\
+			'V'					\
+			XK_V					\
+			U					\
+			U					\
+			'\x16'					\
+			U					\
+			U
+XK_W								\
+			'W'					\
+			XK_W					\
+			U					\
+			U					\
+			'\x17'					\
+			U					\
+			U
+XK_X								\
+			'X'					\
+			XK_X					\
+			U					\
+			U					\
+			'\x18'					\
+			U					\
+			U
+XK_Y								\
+			'Y'					\
+			XK_Y					\
+			U					\
+			U					\
+			'\x19'					\
+			U					\
+			U
+XK_Z								\
+			'Z'					\
+			XK_Z					\
+			U					\
+			U					\
+			'\x1a'					\
+			U					\
+			U
+XK_bracketleft							\
+			'['					\
+			XK_bracketleft				\
+			U					\
+			U					\
+			XK_Escape				\
+			U					\
+			U
+XK_backslash							\
+			'\\'					\
+			XK_dead_grave				\
+			XK_backslash				\
+			XK_dead_grave				\
+			'\x1c'					\
+			U					\
+			XK_dead_acute
+XK_bracketright							\
+			']'					\
+			XK_bracketright				\
+			U					\
+			U					\
+			'\x1d'					\
+			U					\
+			U
+XK_asciicircum							\
+			'^'					\
+			XK_asciicircum				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_underscore							\
+			'_'					\
+			XK_underscore				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_grave							\
+			'`'					\
+			XK_grave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_a								\
+			'a'					\
+			XK_A					\
+			XK_A					\
+			XK_a					\
+			'\x01'					\
+			U					\
+			U
+XK_b								\
+			'b'					\
+			XK_B					\
+			XK_B					\
+			XK_b					\
+			'\x02'					\
+			U					\
+			U
+XK_c								\
+			'c'					\
+			XK_C					\
+			XK_C					\
+			XK_c					\
+			'\x03'					\
+			U					\
+			U
+XK_d								\
+			'd'					\
+			XK_D					\
+			XK_D					\
+			XK_d					\
+			'\x04'					\
+			U					\
+			U
+XK_e								\
+			'e'					\
+			XK_E					\
+			XK_E					\
+			XK_e					\
+			'\x05'					\
+			U					\
+			U
+XK_f								\
+			'f'					\
+			XK_F					\
+			XK_F					\
+			XK_f					\
+			'\x06'					\
+			U					\
+			U
+XK_g								\
+			'g'					\
+			XK_G					\
+			XK_G					\
+			XK_g					\
+			'\x07'					\
+			U					\
+			U
+XK_h								\
+			'h'					\
+			XK_H					\
+			XK_H					\
+			XK_h					\
+			XK_BackSpace				\
+			U					\
+			U
+XK_i								\
+			'i'					\
+			XK_I					\
+			XK_I					\
+			XK_i					\
+			XK_Tab					\
+			U					\
+			U
+XK_j								\
+			'j'					\
+			XK_J					\
+			XK_J					\
+			XK_j					\
+			XK_Linefeed				\
+			U					\
+			U
+XK_k								\
+			'k'					\
+			XK_K					\
+			XK_K					\
+			XK_k					\
+			'\x0b'					\
+			U					\
+			U
+XK_l								\
+			'l'					\
+			XK_L					\
+			XK_L					\
+			XK_l					\
+			'\x0c'					\
+			U					\
+			U
+XK_m								\
+			'm'					\
+			XK_M					\
+			XK_M					\
+			XK_m					\
+			XK_Return				\
+			U					\
+			U
+XK_n								\
+			'n'					\
+			XK_N					\
+			XK_N					\
+			XK_n					\
+			'\x0e'					\
+			U					\
+			U
+XK_o								\
+			'o'					\
+			XK_O					\
+			XK_O					\
+			XK_o					\
+			'\x0f'					\
+			U					\
+			U
+XK_p								\
+			'p'					\
+			XK_P					\
+			XK_P					\
+			XK_p					\
+			'\x10'					\
+			U					\
+			U
+XK_q								\
+			'q'					\
+			XK_Q					\
+			XK_Q					\
+			XK_q					\
+			'\x11'					\
+			U					\
+			U
+XK_r								\
+			'r'					\
+			XK_R					\
+			XK_R					\
+			XK_r					\
+			'\x12'					\
+			U					\
+			U
+XK_s								\
+			's'					\
+			XK_S					\
+			XK_S					\
+			XK_s					\
+			'\x13'					\
+			U					\
+			U
+XK_t								\
+			't'					\
+			XK_T					\
+			XK_T					\
+			XK_t					\
+			'\x14'					\
+			U					\
+			U
+XK_u								\
+			'u'					\
+			XK_U					\
+			XK_U					\
+			XK_u					\
+			'\x15'					\
+			U					\
+			U
+XK_v								\
+			'v'					\
+			XK_V					\
+			XK_V					\
+			XK_v					\
+			'\x16'					\
+			U					\
+			U
+XK_w								\
+			'w'					\
+			XK_W					\
+			XK_W					\
+			XK_w					\
+			'\x17'					\
+			U					\
+			U
+XK_x								\
+			'x'					\
+			XK_X					\
+			XK_X					\
+			XK_x					\
+			'\x18'					\
+			U					\
+			U
+XK_y								\
+			'y'					\
+			XK_Y					\
+			XK_Y					\
+			XK_y					\
+			'\x19'					\
+			U					\
+			U
+XK_z								\
+			'z'					\
+			XK_Z					\
+			XK_Z					\
+			XK_z					\
+			'\x1a'					\
+			U					\
+			U
+XK_braceleft							\
+			'{'					\
+			XK_braceleft				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_bar								\
+			'|'					\
+			XK_section				\
+			XK_bar					\
+			XK_section				\
+			U					\
+			U					\
+			U
+XK_braceright							\
+			'}'					\
+			XK_braceright				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_asciitilde							\
+			'~'					\
+			XK_asciitilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_nobreakspace							\
+			' '					\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			U					\
+			U					\
+			U
+XK_exclamdown							\
+			'\xad'					\
+			XK_exclamdown				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_cent								\
+			'\xbd'					\
+			XK_cent					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_sterling							\
+			'\x9c'					\
+			XK_sterling				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_currency							\
+			'\xcf'					\
+			XK_currency				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_yen								\
+			'\xbe'					\
+			XK_yen					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_brokenbar							\
+			'\xdd'					\
+			XK_brokenbar				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_section							\
+			'\xf5'					\
+			XK_section				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_diaeresis							\
+			'\xf9'					\
+			XK_asciicircum				\
+			U					\
+			U					\
+			U					\
+			U					\
+			XK_asciitilde
+XK_copyright							\
+			'\xb8'					\
+			XK_copyright				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ordfeminine							\
+			'\xa6'					\
+			XK_ordfeminine				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_guillemotleft						\
+			'\xae'					\
+			XK_guillemotleft			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_notsign							\
+			'\xaa'					\
+			XK_notsign				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_hyphen							\
+			'\xf0'					\
+			XK_hyphen				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_registered							\
+			'\xa9'					\
+			XK_registered				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_macron							\
+			'\xee'					\
+			XK_macron				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_degree							\
+			'\xf8'					\
+			XK_degree				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_plusminus							\
+			'\xf1'					\
+			XK_plusminus				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_twosuperior							\
+			'\xfd'					\
+			XK_twosuperior				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_threesuperior						\
+			'\xfc'					\
+			XK_threesuperior			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_acute							\
+			'\xef'					\
+			XK_acute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_mu								\
+			'\xe6'					\
+			XK_mu					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_paragraph							\
+			'\xf4'					\
+			XK_paragraph				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_periodcentered						\
+			'\xfa'					\
+			XK_periodcentered			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_cedilla							\
+			'\xf7'					\
+			XK_cedilla				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_onesuperior							\
+			'\xfb'					\
+			XK_onesuperior				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_masculine							\
+			'\xa7'					\
+			XK_masculine				\
+			U					\
+			U					\
+			'\x1c'					\
+			U					\
+			U
+XK_guillemotright						\
+			'\xaf'					\
+			XK_guillemotright			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_onequarter							\
+			'\xac'					\
+			XK_onequarter				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_onehalf							\
+			'\xab'					\
+			XK_onehalf				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_threequarters						\
+			'\xf3'					\
+			XK_threequarters			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_questiondown							\
+			'\xa8'					\
+			XK_questiondown				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Agrave							\
+			'\xb7'					\
+			XK_Agrave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Aacute							\
+			'\xb5'					\
+			XK_Aacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Acircumflex							\
+			'\xb6'					\
+			XK_Acircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Atilde							\
+			'\xc7'					\
+			XK_Atilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Adiaeresis							\
+			'\x8e'					\
+			XK_Adiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Aring							\
+			'\x8f'					\
+			XK_Aring				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_AE								\
+			'\x92'					\
+			XK_AE					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ccedilla							\
+			'\x80'					\
+			XK_Ccedilla				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Egrave							\
+			'\xd4'					\
+			XK_Egrave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Eacute							\
+			'\x90'					\
+			XK_Eacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ecircumflex							\
+			'\xd2'					\
+			XK_Ecircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ediaeresis							\
+			'\xd3'					\
+			XK_Ediaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Igrave							\
+			'\xde'					\
+			XK_Igrave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Iacute							\
+			'\xd6'					\
+			XK_Iacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Icircumflex							\
+			'\xd7'					\
+			XK_Icircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Idiaeresis							\
+			'\xd8'					\
+			XK_Idiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ETH								\
+			'\xd1'					\
+			XK_ETH					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ntilde							\
+			'\xa5'					\
+			XK_Ntilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ograve							\
+			'\xe3'					\
+			XK_Ograve				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Oacute							\
+			'\xe0'					\
+			XK_Oacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ocircumflex							\
+			'\xe2'					\
+			XK_Ocircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Otilde							\
+			'\xe5'					\
+			XK_Otilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Odiaeresis							\
+			'\x99'					\
+			XK_Odiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_multiply							\
+			'\x9e'					\
+			XK_multiply				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ooblique							\
+			'\x9d'					\
+			XK_Ooblique				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ugrave							\
+			'\xeb'					\
+			XK_Ugrave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Uacute							\
+			'\xe9'					\
+			XK_Uacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Ucircumflex							\
+			'\xea'					\
+			XK_Ucircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Udiaeresis							\
+			'\x9a'					\
+			XK_Udiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Yacute							\
+			'\xed'					\
+			XK_Yacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_THORN							\
+			'\xe8'					\
+			XK_THORN				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ssharp							\
+			'\xe1'					\
+			XK_ssharp				\
+			U					\
+			U					\
+			'\x1c'					\
+			U					\
+			U
+XK_agrave							\
+			'\x85'					\
+			XK_agrave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_aacute							\
+			'\xa0'					\
+			XK_aacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_acircumflex							\
+			'\x83'					\
+			XK_acircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_atilde							\
+			'\xc6'					\
+			XK_atilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_adiaeresis							\
+			'\x84'					\
+			XK_adiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_aring							\
+			'\x86'					\
+			XK_Aring				\
+			XK_Aring				\
+			XK_aring				\
+			U					\
+			U					\
+			U
+XK_ae								\
+			'\x91'					\
+			XK_AE					\
+			XK_AE					\
+			XK_ae					\
+			U					\
+			U					\
+			U
+XK_ccedilla							\
+			'\x87'					\
+			XK_ccedilla				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_egrave							\
+			'\x8a'					\
+			XK_egrave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_eacute							\
+			'\x82'					\
+			XK_eacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ecircumflex							\
+			'\x88'					\
+			XK_ecircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ediaeresis							\
+			'\x89'					\
+			XK_ediaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_igrave							\
+			'\x8d'					\
+			XK_igrave				\
+			U					\
+			U					\
+			'\x1e'					\
+			U					\
+			U
+XK_iacute							\
+			'\xa1'					\
+			XK_iacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_icircumflex							\
+			'\x8c'					\
+			XK_icircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_idiaeresis							\
+			'\x8b'					\
+			XK_idiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_eth								\
+			'\xd0'					\
+			XK_eth					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ntilde							\
+			'\xa4'					\
+			XK_ntilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ograve							\
+			'\x95'					\
+			XK_ograve				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_oacute							\
+			'\xa2'					\
+			XK_oacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ocircumflex							\
+			'\x93'					\
+			XK_ocircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_otilde							\
+			'\xe4'					\
+			XK_otilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_odiaeresis							\
+			'\x94'					\
+			XK_odiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_division							\
+			'\xf6'					\
+			XK_division				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_oslash							\
+			'\x9b'					\
+			XK_Ooblique				\
+			XK_Ooblique				\
+			XK_oslash				\
+			U					\
+			U					\
+			U
+XK_ugrave							\
+			'\x97'					\
+			XK_ugrave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_uacute							\
+			'\xa3'					\
+			XK_uacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ucircumflex							\
+			'\x96'					\
+			XK_ucircumflex				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_udiaeresis							\
+			'\x81'					\
+			XK_udiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_yacute							\
+			'\xec'					\
+			XK_yacute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_thorn							\
+			'\xe7'					\
+			XK_thorn				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_ydiaeresis							\
+			'\x98'					\
+			XK_ydiaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_BackSpace							\
+			'\x08'					\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_Break				\
+			U					\
+			U
+XK_Tab								\
+			'\x09'					\
+			U					\
+			XK_Tab					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Linefeed							\
+			'\x0a'					\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			U
+XK_Clear							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Return							\
+			'\x0d'					\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			U					\
+			U
+XK_Pause							\
+			U					\
+			U					\
+			U					\
+			U					\
+			XK_Break				\
+			XK_Break				\
+			U
+XK_Escape							\
+			'\x1b'					\
+			U					\
+			XK_Escape				\
+			U					\
+			U					\
+			U					\
+			U
+XK_Multi_key							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Kanji							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Home								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Left								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Up								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Right							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Down								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Prior							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Next								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_End								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Begin							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Select							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Print							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Execute							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Insert							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Undo								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Redo								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Menu								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Find								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Cancel							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Help								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Break							\
+			'\x7f'					\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			U
+XK_Mode_switch							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Num_Lock							\
+			U					\
+			U					\
+			U					\
+			U					\
+			'\x13'					\
+			U					\
+			U
+XK_KP_Space							\
+			' '					\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			U
+XK_KP_Tab							\
+			'\x08'					\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			U
+XK_KP_Enter							\
+			'\x0d'					\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			U					\
+			U
+XK_KP_F1							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_F2							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_F3							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_F4							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_Multiply							\
+			'*'					\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			U					\
+			U					\
+			U
+XK_KP_Add							\
+			'+'					\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			U					\
+			U					\
+			U
+XK_KP_Separator							\
+			','					\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			U					\
+			U					\
+			U
+XK_KP_Subtract							\
+			'-'					\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			U					\
+			U					\
+			U
+XK_KP_Decimal							\
+			'\xc4'					\
+			XK_comma				\
+			XK_KP_Decimal				\
+			XK_comma				\
+			U					\
+			U					\
+			U
+XK_KP_Divide							\
+			'/'					\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			U					\
+			U					\
+			U
+XK_KP_0								\
+			'\xb3'					\
+			XK_0					\
+			XK_KP_0					\
+			XK_0					\
+			U					\
+			U					\
+			U
+XK_KP_1								\
+			'\xc0'					\
+			XK_1					\
+			XK_KP_1					\
+			XK_1					\
+			U					\
+			U					\
+			U
+XK_KP_2								\
+			'\xc1'					\
+			XK_2					\
+			XK_KP_2					\
+			XK_2					\
+			U					\
+			U					\
+			U
+XK_KP_3								\
+			'\xd9'					\
+			XK_3					\
+			XK_KP_3					\
+			XK_3					\
+			U					\
+			U					\
+			U
+XK_KP_4								\
+			'\xc3'					\
+			XK_4					\
+			XK_KP_4					\
+			XK_4					\
+			U					\
+			U					\
+			U
+XK_KP_5								\
+			'\xc5'					\
+			XK_5					\
+			XK_KP_5					\
+			XK_5					\
+			U					\
+			U					\
+			U
+XK_KP_6								\
+			'\xb4'					\
+			XK_6					\
+			XK_KP_6					\
+			XK_6					\
+			U					\
+			U					\
+			U
+XK_KP_7								\
+			'\xda'					\
+			XK_7					\
+			XK_KP_7					\
+			XK_7					\
+			U					\
+			U					\
+			U
+XK_KP_8								\
+			'\xc2'					\
+			XK_8					\
+			XK_KP_8					\
+			XK_8					\
+			U					\
+			U					\
+			U
+XK_KP_9								\
+			'\xbf'					\
+			XK_9					\
+			XK_KP_9					\
+			XK_9					\
+			U					\
+			U					\
+			U
+XK_F1								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F2								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F3								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F4								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F5								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F6								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F7								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F8								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F9								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F10								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F11								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F12								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F13								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F14								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F15								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F16								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F17								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F18								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F19								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F20								\
+			U					\
+			U					\
+			U					\
+			U					\
+			XK_Break				\
+			XK_Break				\
+			U
+XK_F21								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F22								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F23								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F24								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F25								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F26								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F27								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F28								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F29								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F30								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F31								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F32								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F33								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F34								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F35								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Shift_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Shift_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Control_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Control_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Caps_Lock							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Shift_Lock							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Meta_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Meta_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Alt_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Alt_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Super_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Super_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Hyper_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Hyper_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Delete							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_acute							\
+			'\xef'					\
+			XK_dead_acute				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_grave							\
+			'`'					\
+			XK_dead_grave				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_circumflex						\
+			'^'					\
+			XK_dead_circumflex			\
+			U					\
+			U					\
+			XK_Escape				\
+			U					\
+			U
+XK_dead_diaeresis						\
+			'\xf9'					\
+			XK_dead_circumflex			\
+			XK_dead_diaeresis			\
+			XK_dead_circumflex			\
+			U					\
+			U					\
+			XK_dead_tilde
+XK_dead_tilde							\
+			'~'					\
+			XK_dead_tilde				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_caron							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_breve							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_doubleacute						\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_degree							\
+			'\xf8'					\
+			XK_dead_degree				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_abovedot						\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_macron							\
+			'\xaf'					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_dead_cedilla							\
+			'\xf7'					\
+			XK_dead_cedilla				\
+			U					\
+			U					\
+			'\x1d'					\
+			U					\
+			U
+XK_dead_ogonek							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+
+#
+#	definition of state mapping
+#
+%M 0	0
+%M 1	1
+%M 2	2
+%M 3	3
+%M 4	4 5 6 7 12 13 14 15 20 21 22 23 28 29 30 31
+%M 5	8 9 10 11 24 25 26 27
+%M 6	16 17 18 19

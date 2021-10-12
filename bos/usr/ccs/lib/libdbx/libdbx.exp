@@ -1,0 +1,105 @@
+*
+* @(#)65        1.21  src/bos/usr/ccs/lib/libdbx/libdbx.exp, libdbx, bos411, 9428A410j 6/27/94 11:26:32
+*   COMPONENT_NAME: LIBDBX
+*
+*   FUNCTIONS: Makefile
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1990,1994
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+dpi_command
+dpi_main
+envptr
+eofinput
+in
+interactive
+process
+prompt
+pterm
+resetinput
+restoretty
+ttyinfo
+ttyinfo_in
+rootdbx_ttyname
+dpi_get_token_type
+dpi_current_location
+dpi_get_traceback
+dpi_report_newProcessId
+dpi_current_file
+dpi_get_eventHistory
+dpi_get_traceHistory
+dpi_isredirected
+dpi_process_init
+dpi_find_externals
+dpi_variable_value
+dpi_expand_variable
+dpi_current_array_element_name
+dpi_array_subscripts_values
+dpi_release_array
+dpi_array_element_subscripts
+dpi_change_array_subscripts
+dpi_max_array_element_name
+dpi_set_variable_format
+dpi_variable_offset
+dpi_free_variable
+dpi_variable_list
+adc_variable_list
+dpi_variable_address
+dpi_help
+dpi_is_runfirst
+dpi_set_jump_env
+dpi_set_var_path
+dpi_fix_var_path
+dpi_setcase
+dpi_get_file_length
+dpi_get_registers
+dpi_get_memory
+dpi_get_address_of_line
+dpi_calc_effective_addr
+dpi_get_mapinfo
+dpi_var_element
+dpi_get_object_name
+dpi_lookup
+adc_var_lang_init
+dpi_find_symbol_for_variable
+dpi_which
+dpi_variable_block
+adc_function_list
+dpi_expand_variable_inline
+dpi_unexpand_variable_inline
+dpi_decl_lines
+dpi_if_cobol
+find_dimension_of_cobol_arrays
+dpi_get_files
+adc_namecmp
+dpi_dealias
+dpi_aliasing_off
+dpi_var_scope
+dpi_get_var_offset
+dpi_get_lang
+dpi_get_configuration
+dpi_get_func_size
+dpi_convert_case
+dpi_use_coredump
+dpi_why_stopped
+dpi_qtoa
+varIsSet
+dpi_hidden
+dpi_find_function
+dpi_find_inlined_variables
+dpi_variable_name
+dpi_set_update_proc
+dpi_get_symname
+dpi_resolve_file
+dpi_set_resolve_callback
+dpi_src_lang
+dpi_invalid_regs
+dpi_check_heap_and_stacks
+dpi_get_more_configuration

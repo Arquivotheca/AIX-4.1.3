@@ -1,0 +1,3134 @@
+# @(#)08	1.1  src/bos/usr/lib/nls/loc/km/Iw_IL.IBM-856.imkeymap.src, cfgnlskm, bos411, 9428A410j 8/30/93 12:28:45
+#
+# COMPONENT_NAME: (CFGNLSKM) Hebrew Language Support 
+#
+# FUNCTIONS: HEBREW KEYBOARD TABLE ( ID 115, CODE SET 856 )
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993      
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# The unique key states are Base, Shift, CapsLock, Shift-CapsLock, Control, 
+# Alt, and AltGraphic.	
+# All other key states are mapped to one of these unique key states.
+#
+# KEY STATES
+#	    Base
+#	    Shift
+#	    CapsLock
+#	    Shift+CapsLock
+#	    Hebrew Base
+#	    Hebrew Shift
+#	    Hebrew CapsLock
+#	    Hebrew Shift+CapsLock
+#	    Control
+#	    Alt
+#	    Alt+Graphic
+#
+#
+
+XK_space							\
+			' '					\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_space				\
+			XK_nobreakspace
+XK_exclam							\
+			'!'					\
+			U					\
+			XK_exclam				\
+			U					\
+			XK_exclam				\
+			U					\
+			XK_exclam				\
+			U					\
+			U					\
+			U					\
+			XK_onesuperior
+XK_quotedbl							\
+			'"'					\
+			U					\
+			XK_quotedbl				\
+			U					\
+			XK_quotedbl				\
+			U					\
+			XK_quotedbl				\
+			U					\
+			U					\
+			U					\
+			U
+XK_numbersign							\
+			'#'					\
+			U					\
+			XK_numbersign				\
+			U					\
+			XK_numbersign				\
+			U					\
+			XK_numbersign				\
+			U					\
+			U					\
+			U					\
+			XK_threesuperior
+XK_dollar							\
+			'$'					\
+			U					\
+			XK_dollar				\
+			U					\
+			XK_dollar				\
+			U					\
+			XK_dollar				\
+			U					\
+			'\x1d'					\
+			U					\
+			XK_onequarter
+XK_percent							\
+			'%'					\
+			U					\
+			XK_percent				\
+			U					\
+			XK_percent				\
+			U					\
+			XK_percent				\
+			U					\
+			U					\
+			U					\
+			XK_onehalf
+XK_ampersand							\
+			'&'					\
+			U					\
+			XK_ampersand				\
+			U					\
+			XK_ampersand				\
+			U					\
+			XK_ampersand				\
+			U					\
+			U					\
+			U					\
+			U
+XK_apostrophe							\
+			'\''					\
+			XK_quotedbl				\
+			XK_apostrophe				\
+			XK_quotedbl				\
+			XK_apostrophe				\
+			XK_quotedbl				\
+			XK_apostrophe				\
+			XK_quotedbl				\
+			U					\
+			U					\
+			U
+XK_parenleft							\
+			'('					\
+			U					\
+			XK_parenleft				\
+			U					\
+			XK_parenleft				\
+			U					\
+			XK_parenleft				\
+			U					\
+			U					\
+			U					\
+			XK_cent
+XK_parenright							\
+			')'					\
+			U					\
+			XK_parenright				\
+			U					\
+			XK_parenright				\
+			U					\
+			XK_parenright				\
+			U					\
+			U					\
+			U					\
+			XK_degree
+XK_asterisk							\
+			'*'					\
+			U					\
+			XK_asterisk				\
+			U					\
+			XK_asterisk				\
+			U					\
+			XK_asterisk				\
+			U					\
+			U					\
+			U					\
+			XK_multiply
+XK_plus								\
+			'+'					\
+			U					\
+			XK_plus					\
+			U					\
+			XK_plus					\
+			U					\
+			XK_plus					\
+			U					\
+			U					\
+			U					\
+			XK_plusminus
+XK_comma							\
+			','					\
+			XK_semicolon				\
+			XK_comma				\
+			XK_semicolon				\
+			XK_comma				\
+			XK_semicolon				\
+			XK_comma				\
+			XK_semicolon				\
+			U					\
+			U					\
+			U
+XK_minus							\
+			'-'					\
+			XK_underscore				\
+			XK_minus				\
+			XK_underscore				\
+			XK_minus				\
+			XK_underscore				\
+			XK_minus				\
+			XK_underscore				\
+			'\x1f'					\
+			U					\
+			U
+XK_period							\
+			'.'					\
+			XK_colon				\
+			XK_period				\
+			XK_colon				\
+			XK_period				\
+			XK_colon				\
+			XK_period				\
+			XK_colon				\
+			U					\
+			U					\
+			XK_periodcentered
+XK_slash							\
+			'/'					\
+			XK_question				\
+			XK_slash				\
+			XK_question				\
+			XK_slash				\
+			XK_question				\
+			XK_slash				\
+			XK_question				\
+			U					\
+			U					\
+			XK_division
+XK_0								\
+			'0'					\
+			XK_parenright				\
+			XK_0					\
+			XK_parenright				\
+			XK_0					\
+			XK_parenright				\
+			XK_0					\
+			XK_parenright				\
+			U					\
+			U					\
+			XK_degree
+XK_1								\
+			'1'					\
+			XK_exclam				\
+			XK_1					\
+			XK_exclam				\
+			XK_1					\
+			XK_exclam				\
+			XK_1					\
+			XK_exclam				\
+			U					\
+			U					\
+			XK_onesuperior
+XK_2								\
+			'2'					\
+			XK_at					\
+			XK_2					\
+			XK_at					\
+			XK_2					\
+			XK_at					\
+			XK_2					\
+			XK_at					\
+			'\x00'					\
+			U					\
+			XK_twosuperior
+XK_3								\
+			'3'					\
+			XK_numbersign				\
+			XK_3					\
+			XK_numbersign				\
+			XK_3					\
+			XK_numbersign				\
+			XK_3					\
+			XK_numbersign				\
+			U					\
+			U					\
+			XK_threesuperior
+XK_4								\
+			'4'					\
+			XK_dollar				\
+			XK_4					\
+			XK_dollar				\
+			XK_4					\
+			XK_dollar				\
+			XK_4					\
+			XK_dollar				\
+			U					\
+			U					\
+			XK_onequarter
+XK_5								\
+			'5'					\
+			XK_percent				\
+			XK_5					\
+			XK_percent				\
+			XK_5					\
+			XK_percent				\
+			XK_5					\
+			XK_percent				\
+			U					\
+			U					\
+			XK_onehalf
+XK_6								\
+			'6'					\
+			XK_asciicircum				\
+			XK_6					\
+			XK_asciicircum				\
+			XK_6					\
+			XK_asciicircum				\
+			XK_6					\
+			XK_asciicircum				\
+			'\x1e'					\
+			U					\
+			XK_threequarters
+XK_7								\
+			'7'					\
+			XK_ampersand				\
+			XK_7					\
+			XK_ampersand				\
+			XK_7					\
+			XK_ampersand				\
+			XK_7					\
+			XK_ampersand				\
+			U					\
+			U					\
+			U
+XK_8								\
+			'8'					\
+			XK_asterisk				\
+			XK_8					\
+			XK_asterisk				\
+			XK_8					\
+			XK_asterisk				\
+			XK_8					\
+			XK_asterisk				\
+			U					\
+			U					\
+			XK_multiply
+XK_9								\
+			'9'					\
+			XK_parenleft				\
+			XK_9					\
+			XK_parenleft				\
+			XK_9					\
+			XK_parenleft				\
+			XK_9					\
+			XK_parenleft				\
+			U					\
+			U					\
+			XK_cent
+XK_colon							\
+			':'					\
+			U					\
+			XK_colon				\
+			U					\
+			XK_colon				\
+			U					\
+			XK_colon				\
+			U					\
+			U					\
+			U					\
+			XK_periodcentered
+XK_semicolon							\
+			';'					\
+			U					\
+			XK_semicolon				\
+			U					\
+			XK_semicolon				\
+			U					\
+			XK_semicolon				\
+			U					\
+			U					\
+			U					\
+			U
+XK_less								\
+			'<'					\
+			U					\
+			XK_less					\
+			U					\
+			XK_less					\
+			U					\
+			XK_less					\
+			U					\
+			'\x1c'					\
+			U					\
+			XK_asciitilde
+XK_equal							\
+			'='					\
+			XK_plus					\
+			XK_equal				\
+			XK_plus					\
+			XK_equal				\
+			XK_plus					\
+			XK_equal				\
+			XK_plus					\
+			U					\
+			U					\
+			XK_plusminus
+XK_greater							\
+			'>'					\
+			U					\
+			XK_greater				\
+			U					\
+			XK_greater				\
+			U					\
+			XK_greater				\
+			U					\
+			U					\
+			U					\
+			XK_brokenbar
+XK_question							\
+			'?'					\
+			U					\
+			XK_question				\
+			U					\
+			XK_question				\
+			U					\
+			XK_question				\
+			U					\
+			U					\
+			U					\
+			XK_division
+XK_at								\
+			'@'					\
+			U					\
+			XK_at					\
+			U					\
+			XK_at					\
+			U					\
+			XK_at					\
+			U					\
+			'\x00'					\
+			U					\
+			XK_twosuperior
+XK_A								\
+			'A'					\
+			U					\
+			U					\
+			XK_A					\
+			XK_A					\
+			U					\
+			U					\
+			XK_A					\
+			'\x01'					\
+			U					\
+			U
+XK_B								\
+			'B'					\
+			U					\
+			U					\
+			XK_B					\
+			XK_B					\
+			U					\
+			U					\
+			XK_B					\
+			'\x02'					\
+			U					\
+			U
+XK_C								\
+			'C'					\
+			U					\
+			U					\
+			XK_C					\
+			XK_C					\
+			U					\
+			U					\
+			XK_C					\
+			'\x03'					\
+			U					\
+			XK_copyright
+XK_D								\
+			'D'					\
+			U					\
+			U					\
+			XK_D					\
+			XK_D					\
+			U					\
+			U					\
+			XK_D					\
+			'\x04'					\
+			U					\
+			XK_diaeresis
+XK_E								\
+			'E'					\
+			U					\
+			U					\
+			XK_E					\
+			XK_E					\
+			U					\
+			U					\
+			XK_E					\
+			'\x05'					\
+			U					\
+			U
+XK_F								\
+			'F'					\
+			U					\
+			U					\
+			XK_F					\
+			XK_F					\
+			U					\
+			U					\
+			XK_F					\
+			'\x06'					\
+			U					\
+			XK_cedilla
+XK_G								\
+			'G'					\
+			U					\
+			U					\
+			XK_G					\
+			XK_G					\
+			U					\
+			U					\
+			XK_G					\
+			'\x07'					\
+			U					\
+			U
+XK_H								\
+			'H'					\
+			U					\
+			U					\
+			XK_H					\
+			XK_H					\
+			U					\
+			U					\
+			XK_H					\
+			XK_BackSpace				\
+			U					\
+			U
+XK_I								\
+			'I'					\
+			U					\
+			U					\
+			XK_I					\
+			XK_I					\
+			U					\
+			U					\
+			XK_I					\
+			XK_Tab					\
+			U					\
+			U
+XK_J								\
+			'J'					\
+			U					\
+			U					\
+			XK_J					\
+			XK_J					\
+			U					\
+			U					\
+			XK_J					\
+			XK_Linefeed				\
+			U					\
+			U
+XK_K								\
+			'K'					\
+			U					\
+			U					\
+			XK_K					\
+			XK_K					\
+			U					\
+			U					\
+			XK_K					\
+			'\x0b'					\
+			U					\
+			U
+XK_L								\
+			'L'					\
+			U					\
+			U					\
+			XK_L					\
+			XK_L					\
+			U					\
+			U					\
+			XK_L					\
+			'\x0c'					\
+			U					\
+			XK_sterling
+XK_M								\
+			'M'					\
+			U					\
+			U					\
+			XK_M					\
+			XK_M					\
+			U					\
+			U					\
+			XK_M					\
+			XK_Return				\
+			U					\
+			XK_mu
+XK_N								\
+			'N'					\
+			U					\
+			U					\
+			XK_N					\
+			XK_N					\
+			U					\
+			U					\
+			XK_N					\
+			'\x0e'					\
+			U					\
+			U
+XK_O								\
+			'O'					\
+			U					\
+			U					\
+			XK_O					\
+			XK_O					\
+			U					\
+			U					\
+			XK_O					\
+			'\x0f'					\
+			U					\
+			XK_currency
+XK_P								\
+			'P'					\
+			U					\
+			U					\
+			XK_P					\
+			XK_P					\
+			U					\
+			U					\
+			XK_P					\
+			'\x10'					\
+			U					\
+			XK_paragraph
+XK_Q								\
+			'Q'					\
+			U					\
+			U					\
+			XK_Q					\
+			XK_Q					\
+			U					\
+			XK_Q					\
+			U					\
+			'\x11'					\
+			U					\
+			XK_macron
+XK_R								\
+			'R'					\
+			U					\
+			U					\
+			XK_R					\
+			XK_R					\
+			U					\
+			U					\
+			XK_R					\
+			'\x12'					\
+			U					\
+			XK_registered
+XK_S								\
+			'S'					\
+			U					\
+			U					\
+			XK_S					\
+			XK_S					\
+			U					\
+			U					\
+			XK_S					\
+			'\x13'					\
+			U					\
+			XK_section
+XK_T								\
+			'T'					\
+			U					\
+			U					\
+			XK_T					\
+			XK_T					\
+			U					\
+			U					\
+			XK_T					\
+			'\x14'					\
+			U					\
+			U
+XK_U								\
+			'U'					\
+			U					\
+			U					\
+			XK_U					\
+			XK_U					\
+			U					\
+			U					\
+			XK_U					\
+			'\x15'					\
+			U					\
+			U
+XK_V								\
+			'V'					\
+			U					\
+			U					\
+			XK_V					\
+			XK_V					\
+			U					\
+			U					\
+			XK_V					\
+			'\x16'					\
+			U					\
+			U
+XK_W								\
+			'W'					\
+			U					\
+			U					\
+			XK_W					\
+			XK_W					\
+			U					\
+			U					\
+			XK_W					\
+			'\x17'					\
+			U					\
+			U
+XK_X								\
+			'X'					\
+			U					\
+			U					\
+			XK_X					\
+			XK_X					\
+			U					\
+			U					\
+			XK_X					\
+			'\x18'					\
+			U					\
+			U
+XK_Y								\
+			'Y'					\
+			U					\
+			U					\
+			XK_Y					\
+			XK_Y					\
+			U					\
+			U					\
+			XK_Y					\
+			'\x19'					\
+			U					\
+			XK_yen
+XK_Z								\
+			'Z'					\
+			U					\
+			U					\
+			XK_Z					\
+			XK_Z					\
+			U					\
+			U					\
+			XK_Z					\
+			'\x1a'					\
+			U					\
+			U
+XK_bracketleft							\
+			'['					\
+			XK_braceleft				\
+			XK_bracketleft				\
+			XK_braceleft				\
+			XK_bracketleft				\
+			XK_braceleft				\
+			XK_bracketleft				\
+			XK_braceleft				\
+			XK_Escape				\
+			U					\
+			XK_guillemotleft
+XK_backslash							\
+			'\\'					\
+			XK_bar					\
+			XK_backslash				\
+			XK_bar					\
+			XK_backslash				\
+			XK_bar					\
+			XK_backslash				\
+			XK_bar					\
+			'\x1c'					\
+			U					\
+			U
+XK_bracketright							\
+			']'					\
+			XK_braceright				\
+			XK_bracketright				\
+			XK_braceright				\
+			XK_bracketright				\
+			XK_braceright				\
+			XK_bracketright				\
+			XK_braceright				\
+			'\x1d'					\
+			U					\
+			XK_guillemotright
+XK_asciicircum							\
+			'^'					\
+			U					\
+			XK_asciicircum				\
+			U					\
+			XK_asciicircum				\
+			U					\
+			XK_asciicircum				\
+			U					\
+			'\x1e'					\
+			U					\
+			XK_threequarters
+XK_underscore							\
+			'_'					\
+			U					\
+			XK_underscore				\
+			U					\
+			XK_underscore				\
+			U					\
+			XK_underscore				\
+			U					\
+			U					\
+			U					\
+			U
+XK_grave							\
+			'`'					\
+			XK_notsign				\
+			XK_grave				\
+			XK_notsign				\
+			XK_hebrew_finalpe			\
+			XK_notsign				\
+			XK_hebrew_finalpe			\
+			XK_notsign				\
+			U					\
+			U					\
+			XK_grave
+XK_a								\
+			'a'					\
+			XK_A					\
+			XK_A					\
+			XK_a					\
+			XK_hebrew_shin				\
+			XK_A					\
+			XK_A					\
+			XK_hebrew_shin				\
+			'\x01'					\
+			U					\
+			U
+XK_b								\
+			'b'					\
+			XK_B					\
+			XK_B					\
+			XK_b					\
+			XK_hebrew_nun				\
+			XK_B					\
+			XK_B					\
+			XK_hebrew_nun				\
+			'\x02'					\
+			U					\
+			U
+XK_c								\
+			'c'					\
+			XK_C					\
+			XK_C					\
+			XK_c					\
+			XK_hebrew_bet				\
+			XK_C					\
+			XK_C					\
+			XK_hebrew_bet				\
+			'\x03'					\
+			U					\
+			XK_copyright
+XK_d								\
+			'd'					\
+			XK_D					\
+			XK_D					\
+			XK_d					\
+			XK_hebrew_gimmel			\
+			XK_D					\
+			XK_D					\
+			XK_hebrew_gimmel			\
+			'\x04'					\
+			U					\
+			XK_diaeresis
+XK_e								\
+			'e'					\
+			XK_E					\
+			XK_E					\
+			XK_e					\
+			XK_hebrew_kuf				\
+			XK_E					\
+			XK_E					\
+			XK_hebrew_kuf				\
+			'\x05'					\
+			U					\
+			U
+XK_f								\
+			'f'					\
+			XK_F					\
+			XK_F					\
+			XK_f					\
+			XK_hebrew_kaph				\
+			XK_F					\
+			XK_F					\
+			XK_hebrew_kaph				\
+			'\x06'					\
+			U					\
+			XK_cedilla
+XK_g								\
+			'g'					\
+			XK_G					\
+			XK_G					\
+			XK_g					\
+			XK_hebrew_ayin				\
+			XK_G					\
+			XK_G					\
+			XK_hebrew_ayin				\
+			'\x07'					\
+			U					\
+			U
+XK_h								\
+			'h'					\
+			XK_H					\
+			XK_H					\
+			XK_h					\
+			XK_hebrew_yod				\
+			XK_H					\
+			XK_H					\
+			XK_hebrew_yod				\
+			XK_BackSpace				\
+			U					\
+			U
+XK_i								\
+			'i'					\
+			XK_I					\
+			XK_I					\
+			XK_i					\
+			XK_hebrew_finalnun			\
+			XK_I					\
+			XK_I					\
+			XK_hebrew_finalnun			\
+			XK_Tab					\
+			U					\
+			U
+XK_j								\
+			'j'					\
+			XK_J					\
+			XK_J					\
+			XK_j					\
+			XK_hebrew_chet				\
+			XK_J					\
+			XK_J					\
+			XK_hebrew_chet				\
+			XK_Linefeed				\
+			U					\
+			U
+XK_k								\
+			'k'					\
+			XK_K					\
+			XK_K					\
+			XK_k					\
+			XK_hebrew_lamed				\
+			XK_K					\
+			XK_K					\
+			XK_hebrew_lamed				\
+			'\x0b'					\
+			U					\
+			U
+XK_l								\
+			'l'					\
+			XK_L					\
+			XK_L					\
+			XK_l					\
+			XK_hebrew_finalkaph			\
+			XK_L					\
+			XK_L					\
+			XK_hebrew_finalkaph			\
+			'\x0c'					\
+			U					\
+			XK_sterling
+XK_m								\
+			'm'					\
+			XK_M					\
+			XK_M					\
+			XK_m					\
+			XK_hebrew_zadi				\
+			XK_M					\
+			XK_M					\
+			XK_hebrew_zadi				\
+			XK_Return				\
+			U					\
+			XK_mu
+XK_n								\
+			'n'					\
+			XK_N					\
+			XK_N					\
+			XK_n					\
+			XK_hebrew_mem				\
+			XK_N					\
+			XK_N					\
+			XK_hebrew_mem				\
+			'\x0e'					\
+			U					\
+			U
+XK_o								\
+			'o'					\
+			XK_O					\
+			XK_O					\
+			XK_o					\
+			XK_hebrew_finalmem			\
+			XK_O					\
+			XK_O					\
+			XK_hebrew_finalmem			\
+			'\x0f'					\
+			U					\
+			XK_currency
+XK_p								\
+			'p'					\
+			XK_P					\
+			XK_P					\
+			XK_p					\
+			XK_hebrew_pe				\
+			XK_P					\
+			XK_P					\
+			XK_hebrew_pe				\
+			'\x10'					\
+			U					\
+			XK_paragraph
+XK_q								\
+			'q'					\
+			XK_Q					\
+			XK_Q					\
+			XK_q					\
+			XK_hebrew_doublelowline			\
+			XK_Q					\
+			XK_Q					\
+			XK_hebrew_doublelowline			\
+			'\x11'					\
+			U					\
+			XK_macron
+XK_r								\
+			'r'					\
+			XK_R					\
+			XK_R					\
+			XK_r					\
+			XK_hebrew_resh				\
+			XK_R					\
+			XK_R					\
+			XK_hebrew_resh				\
+			'\x12'					\
+			U					\
+			XK_registered
+XK_s								\
+			's'					\
+			XK_S					\
+			XK_S					\
+			XK_s					\
+			XK_hebrew_dalet				\
+			XK_S					\
+			XK_S					\
+			XK_hebrew_dalet				\
+			'\x13'					\
+			U					\
+			XK_section
+XK_t								\
+			't'					\
+			XK_T					\
+			XK_T					\
+			XK_t					\
+			XK_hebrew_aleph				\
+			XK_T					\
+			XK_T					\
+			XK_hebrew_aleph				\
+			'\x14'					\
+			U					\
+			U
+XK_u								\
+			'u'					\
+			XK_U					\
+			XK_U					\
+			XK_u					\
+			XK_hebrew_waw				\
+			XK_U					\
+			XK_U					\
+			XK_hebrew_waw				\
+			'\x15'					\
+			U					\
+			U
+XK_v								\
+			'v'					\
+			XK_V					\
+			XK_V					\
+			XK_v					\
+			XK_hebrew_he				\
+			XK_V					\
+			XK_V					\
+			XK_hebrew_he				\
+			'\x16'					\
+			U					\
+			U
+XK_w								\
+			'w'					\
+			XK_W					\
+			XK_W					\
+			XK_w					\
+			XK_acute				\
+			XK_W					\
+			XK_W					\
+			XK_acute				\
+			'\x17'					\
+			U					\
+			U
+XK_x								\
+			'x'					\
+			XK_X					\
+			XK_X					\
+			XK_x					\
+			XK_hebrew_samech			\
+			XK_X					\
+			XK_X					\
+			XK_hebrew_samech			\
+			'\x18'					\
+			U					\
+			U
+XK_y								\
+			'y'					\
+			XK_Y					\
+			XK_Y					\
+			XK_y					\
+			XK_hebrew_tet				\
+			XK_Y					\
+			XK_Y					\
+			XK_hebrew_tet				\
+			'\x19'					\
+			U					\
+			XK_yen
+XK_z								\
+			'z'					\
+			XK_Z					\
+			XK_Z					\
+			XK_z					\
+			XK_hebrew_zain				\
+			XK_Z					\
+			XK_Z					\
+			XK_hebrew_zain				\
+			'\x1a'					\
+			U					\
+			U
+XK_braceleft							\
+			'{'					\
+			U					\
+			XK_braceleft				\
+			U					\
+			XK_braceleft				\
+			U					\
+			XK_braceleft				\
+			U					\
+			U					\
+			U					\
+			XK_guillemotleft
+XK_bar								\
+			'|'					\
+			U					\
+			XK_bar					\
+			U					\
+			XK_bar					\
+			U					\
+			XK_bar					\
+			U					\
+			'\x1c'					\
+			U					\
+			U
+XK_braceright							\
+			'}'					\
+			U					\
+			XK_braceright				\
+			U					\
+			XK_braceright				\
+			U					\
+			XK_braceright				\
+			U					\
+			U					\
+			U					\
+			XK_guillemotright
+XK_asciitilde							\
+			'~'					\
+			XK_less					\
+			XK_asciitilde				\
+			XK_less					\
+			XK_hebrew_taf				\
+			XK_less					\
+			XK_hebrew_taf				\
+			XK_less					\
+			U					\
+			U					\
+			XK_asciitilde
+XK_nobreakspace							\
+			'\xff'					\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			XK_nobreakspace				\
+			U					\
+			U					\
+			U
+XK_cent								\
+			'\xbd'					\
+			U					\
+			U					\
+			U					\
+			XK_cent					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_sterling							\
+			'\x9c'					\
+			U					\
+			U					\
+			U					\
+			XK_sterling				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_currency							\
+			'\xcf'					\
+			U					\
+			U					\
+			U					\
+			XK_currency				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_yen								\
+			'\xbe'					\
+			U					\
+			U					\
+			U					\
+			XK_yen					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_brokenbar							\
+			'\xdd'					\
+			XK_greater				\
+			XK_brokenbar				\
+			XK_greater				\
+			XK_hebrew_finalzadi			\
+			XK_greater				\
+			XK_hebrew_finalzadi			\
+			XK_greater				\
+			U					\
+			U					\
+			XK_brokenbar
+XK_section							\
+			'\xf5'					\
+			U					\
+			U					\
+			U					\
+			XK_section				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_diaeresis							\
+			'\xf9'					\
+			U					\
+			U					\
+			U					\
+			XK_diaeresis				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_copyright							\
+			'\xb8'					\
+			U					\
+			U					\
+			U					\
+			XK_copyright				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_multiply							\
+			'\x9e'					\
+			U					\
+			U					\
+			U					\
+			XK_multiply				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_guillemotleft						\
+			'\xae'					\
+			U					\
+			U					\
+			U					\
+			XK_guillemotleft			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_notsign							\
+			'\xaa'					\
+			U					\
+			XK_notsign				\
+			U					\
+			XK_notsign				\
+			U					\
+			XK_notsign				\
+			U					\
+			U					\
+			U					\
+			XK_grave
+XK_hyphen							\
+			'\xf0'					\
+			U					\
+			U					\
+			U					\
+			XK_hyphen				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_registered							\
+			'\xa9'					\
+			U					\
+			U					\
+			U					\
+			XK_registered				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_macron							\
+			'\xee'					\
+			U					\
+			U					\
+			U					\
+			XK_macron				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_degree							\
+			'\xf8'					\
+			U					\
+			U					\
+			U					\
+			XK_degree				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_plusminus							\
+			'\xf1'					\
+			U					\
+			U					\
+			U					\
+			XK_plusminus				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_twosuperior							\
+			'\xfd'					\
+			U					\
+			U					\
+			U					\
+			XK_twosuperior				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_threesuperior						\
+			'\xfc'					\
+			U					\
+			U					\
+			U					\
+			XK_threesuperior			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_acute							\
+			'\xef'					\
+			XK_W					\
+			XK_W					\
+			XK_acute				\
+			XK_w					\
+			XK_W					\
+			XK_W					\
+			XK_w					\
+			'\x17'					\
+			U					\
+			U
+XK_mu								\
+			'\xe6'					\
+			U					\
+			U					\
+			U					\
+			XK_mu					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_paragraph							\
+			'\xf4'					\
+			U					\
+			U					\
+			U					\
+			XK_paragraph				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_periodcentered						\
+			'\xfa'					\
+			U					\
+			U					\
+			U					\
+			XK_periodcentered			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_cedilla							\
+			'\xf7'					\
+			U					\
+			U					\
+			U					\
+			XK_cedilla				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_onesuperior							\
+			'\xfb'					\
+			U					\
+			U					\
+			U					\
+			XK_onesuperior				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_division							\
+			'\xf6'					\
+			U					\
+			U					\
+			U					\
+			XK_division				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_guillemotright						\
+			'\xaf'					\
+			U					\
+			U					\
+			U					\
+			XK_guillemotright			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_onequarter							\
+			'\xac'					\
+			U					\
+			U					\
+			U					\
+			XK_onequarter				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_onehalf							\
+			'\xab'					\
+			U					\
+			U					\
+			U					\
+			XK_onehalf				\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_threequarters						\
+			'\xf3'					\
+			U					\
+			U					\
+			U					\
+			XK_threequarters			\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_hebrew_doublelowline						\
+			'\xf2'					\
+			XK_Q					\
+			XK_Q					\
+			XK_hebrew_doublelowline			\
+			XK_q					\
+			XK_Q					\
+			XK_Q					\
+			XK_q					\
+			'\x11'					\
+			U					\
+			U
+XK_hebrew_aleph							\
+			'\x80'					\
+			XK_T					\
+			XK_T					\
+			XK_hebrew_aleph				\
+			XK_t					\
+			XK_T					\
+			XK_T					\
+			XK_t					\
+			'\x14'					\
+			U					\
+			U
+XK_hebrew_bet							\
+			'\x81'					\
+			XK_C					\
+			XK_C					\
+			XK_hebrew_bet				\
+			XK_c					\
+			XK_C					\
+			XK_C					\
+			XK_c					\
+			'\x03'					\
+			U					\
+			XK_copyright
+XK_hebrew_gimmel						\
+			'\x82'					\
+			XK_D					\
+			XK_D					\
+			XK_hebrew_gimmel			\
+			XK_d					\
+			XK_D					\
+			XK_D					\
+			XK_d					\
+			'\x04'					\
+			U					\
+			XK_diaeresis
+XK_hebrew_dalet							\
+			'\x83'					\
+			XK_S					\
+			XK_S					\
+			XK_hebrew_dalet				\
+			XK_s					\
+			XK_S					\
+			XK_S					\
+			XK_s					\
+			'\x13'					\
+			U					\
+			XK_section
+XK_hebrew_he							\
+			'\x84'					\
+			XK_V					\
+			XK_V					\
+			XK_hebrew_he				\
+			XK_v					\
+			XK_V					\
+			XK_V					\
+			XK_v					\
+			'\x16'					\
+			U					\
+			U
+XK_hebrew_waw							\
+			'\x85'					\
+			XK_U					\
+			XK_U					\
+			XK_hebrew_waw				\
+			XK_u					\
+			XK_U					\
+			XK_U					\
+			XK_u					\
+			'\x15'					\
+			U					\
+			U
+XK_hebrew_zain							\
+			'\x86'					\
+			XK_Z					\
+			XK_Z					\
+			XK_hebrew_zain				\
+			XK_z					\
+			XK_Z					\
+			XK_Z					\
+			XK_z					\
+			'\x1a'					\
+			U					\
+			U
+XK_hebrew_chet							\
+			'\x87'					\
+			XK_J					\
+			XK_J					\
+			XK_hebrew_chet				\
+			XK_j					\
+			XK_J					\
+			XK_J					\
+			XK_j					\
+			XK_Linefeed				\
+			U					\
+			U
+XK_hebrew_tet							\
+			'\x88'					\
+			XK_Y					\
+			XK_Y					\
+			XK_hebrew_tet				\
+			XK_y					\
+			XK_Y					\
+			XK_Y					\
+			XK_y					\
+			'\x19'					\
+			U					\
+			XK_yen
+XK_hebrew_yod							\
+			'\x89'					\
+			XK_H					\
+			XK_H					\
+			XK_hebrew_yod				\
+			XK_h					\
+			XK_H					\
+			XK_H					\
+			XK_h					\
+			XK_BackSpace				\
+			U					\
+			U
+XK_hebrew_finalkaph						\
+			'\x8a'					\
+			XK_L					\
+			XK_L					\
+			XK_hebrew_finalkaph			\
+			XK_l					\
+			XK_L					\
+			XK_L					\
+			XK_l					\
+			'\x0c'					\
+			U					\
+			XK_sterling
+XK_hebrew_kaph							\
+			'\x8b'					\
+			XK_F					\
+			XK_F					\
+			XK_hebrew_kaph				\
+			XK_f					\
+			XK_F					\
+			XK_F					\
+			XK_f					\
+			'\x06'					\
+			U					\
+			XK_cedilla
+XK_hebrew_lamed							\
+			'\x8c'					\
+			XK_K					\
+			XK_K					\
+			XK_hebrew_lamed				\
+			XK_k					\
+			XK_K					\
+			XK_K					\
+			XK_k					\
+			'\x0b'					\
+			U					\
+			U
+XK_hebrew_finalmem						\
+			'\x8d'					\
+			XK_O					\
+			XK_O					\
+			XK_hebrew_finalmem			\
+			XK_o					\
+			XK_O					\
+			XK_O					\
+			XK_o					\
+			'\x0f'					\
+			U					\
+			XK_currency
+XK_hebrew_mem							\
+			'\x8e'					\
+			XK_N					\
+			XK_N					\
+			XK_hebrew_mem				\
+			XK_n					\
+			XK_N					\
+			XK_N					\
+			XK_n					\
+			'\x0e'					\
+			U					\
+			U
+XK_hebrew_finalnun						\
+			'\x8f'					\
+			XK_I					\
+			XK_I					\
+			XK_hebrew_finalnun			\
+			XK_i					\
+			XK_I					\
+			XK_I					\
+			XK_i					\
+			XK_Tab					\
+			U					\
+			U
+XK_hebrew_nun							\
+			'\x90'					\
+			XK_B					\
+			XK_B					\
+			XK_hebrew_nun				\
+			XK_b					\
+			XK_B					\
+			XK_B					\
+			XK_b					\
+			'\x02'					\
+			U					\
+			U
+XK_hebrew_samech						\
+			'\x91'					\
+			XK_X					\
+			XK_X					\
+			XK_hebrew_samech			\
+			XK_x					\
+			XK_X					\
+			XK_X					\
+			XK_x					\
+			'\x18'					\
+			U					\
+			U
+XK_hebrew_ayin							\
+			'\x92'					\
+			XK_G					\
+			XK_G					\
+			XK_hebrew_ayin				\
+			XK_g					\
+			XK_G					\
+			XK_G					\
+			XK_g					\
+			'\x07'					\
+			U					\
+			U
+XK_hebrew_finalpe						\
+			'\x93'					\
+			XK_notsign				\
+			XK_hebrew_finalpe			\
+			XK_notsign				\
+			XK_grave				\
+			XK_notsign				\
+			XK_grave				\
+			XK_notsign				\
+			U					\
+			U					\
+			XK_grave
+XK_hebrew_pe							\
+			'\x94'					\
+			XK_P					\
+			XK_P					\
+			XK_hebrew_pe				\
+			XK_p					\
+			XK_P					\
+			XK_P					\
+			XK_p					\
+			'\x10'					\
+			U					\
+			XK_paragraph
+XK_hebrew_finalzadi						\
+			'\x95'					\
+			XK_greater				\
+			XK_hebrew_finalzadi			\
+			XK_greater				\
+			XK_brokenbar				\
+			XK_greater				\
+			XK_brokenbar				\
+			XK_greater				\
+			U					\
+			U					\
+			XK_brokenbar
+XK_hebrew_zadi							\
+			'\x96'					\
+			XK_M					\
+			XK_M					\
+			XK_hebrew_zadi				\
+			XK_m					\
+			XK_M					\
+			XK_M					\
+			XK_m					\
+			XK_Return				\
+			U					\
+			XK_mu
+XK_hebrew_kuf							\
+			'\x97'					\
+			XK_E					\
+			XK_E					\
+			XK_hebrew_kuf				\
+			XK_e					\
+			XK_E					\
+			XK_E					\
+			XK_e					\
+			'\x05'					\
+			U					\
+			U
+XK_hebrew_resh							\
+			'\x98'					\
+			XK_R					\
+			XK_R					\
+			XK_hebrew_resh				\
+			XK_r					\
+			XK_R					\
+			XK_R					\
+			XK_r					\
+			'\x12'					\
+			U					\
+			XK_registered
+XK_hebrew_shin							\
+			'\x99'					\
+			XK_A					\
+			XK_A					\
+			XK_hebrew_shin				\
+			XK_a					\
+			XK_A					\
+			XK_A					\
+			XK_a					\
+			'\x01'					\
+			U					\
+			U
+XK_hebrew_taf							\
+			'\x9a'					\
+			XK_less					\
+			XK_hebrew_taf				\
+			XK_less					\
+			XK_asciitilde				\
+			XK_less					\
+			XK_asciitilde				\
+			XK_less					\
+			U					\
+			U					\
+			XK_asciitilde
+XK_BackSpace							\
+			'\x08'					\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_BackSpace				\
+			XK_Break				\
+			U					\
+			U
+XK_Tab								\
+			'\x09'					\
+			U					\
+			XK_Tab					\
+			U					\
+			XK_Tab					\
+			U					\
+			XK_Tab					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Linefeed							\
+			'\x0a'					\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			XK_Linefeed				\
+			U
+XK_Clear							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Return							\
+			'\x0d'					\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			XK_Return				\
+			U					\
+			U
+XK_Pause							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			XK_Break				\
+			XK_Break				\
+			U
+XK_Escape							\
+			'\x1b'					\
+			U					\
+			XK_Escape				\
+			U					\
+			XK_Escape				\
+			U					\
+			XK_Escape				\
+			U					\
+			U					\
+			U					\
+			U
+XK_Multi_key							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Kanji							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Home								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Left								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Up								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Right							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Down								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Prior							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Next								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_End								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Begin							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Select							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Print							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Execute							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Insert							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Undo								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Redo								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Menu								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Find								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Cancel							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Help								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Break							\
+			'\x7f'					\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			XK_Break				\
+			U
+XK_Mode_switch							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Num_Lock							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			'\x13'					\
+			U					\
+			U
+XK_KP_Space							\
+			' '					\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			XK_KP_Space				\
+			U
+XK_KP_Tab							\
+			'\x09'					\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			XK_KP_Tab				\
+			U
+XK_KP_Enter							\
+			'\x0d'					\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			XK_KP_Enter				\
+			U					\
+			U
+XK_KP_F1							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_F2							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_F3							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_F4							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_KP_Multiply							\
+			'*'					\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			XK_KP_Multiply				\
+			U					\
+			U					\
+			U
+XK_KP_Add							\
+			'+'					\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			XK_KP_Add				\
+			U					\
+			U					\
+			U
+XK_KP_Separator							\
+			','					\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			XK_KP_Separator				\
+			U					\
+			U					\
+			U
+XK_KP_Subtract							\
+			'-'					\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			XK_KP_Subtract				\
+			U					\
+			U					\
+			U
+XK_KP_Decimal							\
+			'\xc4'					\
+			XK_period				\
+			XK_KP_Decimal				\
+			XK_period				\
+			XK_KP_Decimal				\
+			XK_period				\
+			XK_KP_Decimal				\
+			XK_period				\
+			U					\
+			U					\
+			U
+XK_KP_Divide							\
+			'/'					\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			XK_KP_Divide				\
+			U					\
+			U					\
+			U
+XK_KP_0								\
+			'\xb3'					\
+			XK_0					\
+			XK_KP_0					\
+			XK_0					\
+			XK_KP_0					\
+			XK_0					\
+			XK_KP_0					\
+			XK_0					\
+			U					\
+			U					\
+			U
+XK_KP_1								\
+			'\xc0'					\
+			XK_1					\
+			XK_KP_1					\
+			XK_1					\
+			XK_KP_1					\
+			XK_1					\
+			XK_KP_1					\
+			XK_1					\
+			U					\
+			U					\
+			U
+XK_KP_2								\
+			'\xc1'					\
+			XK_2					\
+			XK_KP_2					\
+			XK_2					\
+			XK_KP_2					\
+			XK_2					\
+			XK_KP_2					\
+			XK_2					\
+			U					\
+			U					\
+			U
+XK_KP_3								\
+			'\xd9'					\
+			XK_3					\
+			XK_KP_3					\
+			XK_3					\
+			XK_KP_3					\
+			XK_3					\
+			XK_KP_3					\
+			XK_3					\
+			U					\
+			U					\
+			U
+XK_KP_4								\
+			'\xc3'					\
+			XK_4					\
+			XK_KP_4					\
+			XK_4					\
+			XK_KP_4					\
+			XK_4					\
+			XK_KP_4					\
+			XK_4					\
+			U					\
+			U					\
+			U
+XK_KP_5								\
+			'\xc5'					\
+			XK_5					\
+			XK_KP_5					\
+			XK_5					\
+			XK_KP_5					\
+			XK_5					\
+			XK_KP_5					\
+			XK_5					\
+			U					\
+			U					\
+			U
+XK_KP_6								\
+			'\xb4'					\
+			XK_6					\
+			XK_KP_6					\
+			XK_6					\
+			XK_KP_6					\
+			XK_6					\
+			XK_KP_6					\
+			XK_6					\
+			U					\
+			U					\
+			U
+XK_KP_7								\
+			'\xda'					\
+			XK_7					\
+			XK_KP_7					\
+			XK_7					\
+			XK_KP_7					\
+			XK_7					\
+			XK_KP_7					\
+			XK_7					\
+			U					\
+			U					\
+			U
+XK_KP_8								\
+			'\xc2'					\
+			XK_8					\
+			XK_KP_8					\
+			XK_8					\
+			XK_KP_8					\
+			XK_8					\
+			XK_KP_8					\
+			XK_8					\
+			U					\
+			U					\
+			U
+XK_KP_9								\
+			'\xbf'					\
+			XK_9					\
+			XK_KP_9					\
+			XK_9					\
+			XK_KP_9					\
+			XK_9					\
+			XK_KP_9					\
+			XK_9					\
+			U					\
+			U					\
+			U
+XK_F1								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F2								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F3								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F4								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F5								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F6								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F7								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F8								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F9								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F10								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F11								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F12								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F13								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F14								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F15								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F16								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F17								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F18								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F19								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F20								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			XK_Break				\
+			XK_Break				\
+			U
+XK_F21								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F22								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F23								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F24								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F25								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F26								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F27								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F28								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F29								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F30								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F31								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F32								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F33								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F34								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_F35								\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Shift_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Shift_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Control_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Control_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Caps_Lock							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Shift_Lock							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Meta_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Meta_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Alt_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Alt_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Super_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Super_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Hyper_L							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Hyper_R							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+XK_Delete							\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U					\
+			U
+
+#
+#	definition of state mapping
+#
+%M 0	0
+%M 1	1
+%M 2	2
+%M 3	3
+%M 4	32
+%M 5	33
+%M 6	34
+%M 7	35
+%M 8	4 5 6 7 12 13 14 15 20 21 22 23 28 29 30 31 36 37 38 39 44 45 46 47 52 53 54 55 60 61 62 63
+%M 9	8 9 10 11 24 25 26 27 40 41 42 43 56 57 58 59
+%M 10	16 17 18 19 48 49 50 51

@@ -1,0 +1,187 @@
+*/* @(#)61	1.2  src/bos/usr/ccs/bin/as/POWER/instrs.ops.ppc.no601, cmdas, bos411, 9428A410j 3/10/94 10:30:38*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.ppc.no601
+* *
+* *      V4.1 instructions that are supported in common PowerPC 
+* *      architecture  and is not supported in 601 processor
+* *                                                                   
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1994
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+*
+***********************************************************************
+*
+*** - *** Type indicator: Bat map for PowerPC common instructions
+*                          but not supported in 601 is  0x8068
+% 32872
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*       X-Form  (output format) instructions
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*
+***********************************************************************
+*       X1-Form instructions
+***********************************************************************
+*
+*       Instruction Format: X1-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  | / / / | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | FRT | BF | RS
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1                 ----- RC=0
+*       mnemonic. OP1                 ----- RC=1
+*
+***********************************************************************
+*
+****************************************************
+**** /*** Special Purpose Register Control ***/ ****
+****************************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*
+*173   mftb     rt,tbr             Move from Time base
+*173   mftb     rt                 Move from Time base
+       mftb       y?rr5       xn   31-371
+** extended mnemonic for mftb  **
+*133   mftbu    rt            Move From Time Base Upper
+       mftbu    r             x4   31-371-0-0-0-13-0-08
+***********************************************************************
+** extended mnemonics for mtspr ****
+*Opcde 1F
+*       mnem  |input     |out |op code value
+*193    mttbl    rs             Move to Time Base [lower]
+        mttbl    r         x4    31-467-0-0-0-28-0-08
+* The following mnemonic is changed to mttbl, to keep the
+* source compatibility, mttb is still kept in instruction table
+        mttb    r         x4    31-467-0-0-0-28-0-08
+*1B3    mttbu   rs             Move to Time Base Upper
+        mttbu   r         x4    31-467-0-0-0-29-0-08
+*
+***********************************************************************
+*       XTA-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XTA-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | BF | BFT | FRT
+*              OP2 = RA | BFA | FRA | SR | SPR
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2             ----- RC=0
+*       mnemonic. OP1,OP2             ----- RC=1
+*
+***********************************************************************
+***************************************************
+** / ** Extended mnemonics for SPR control  ** / **
+***************************************************
+*Opcde 1F
+*       mnem  |input     |out |op code value
+*
+*153    mfibatu  rt,n           Move from IBAT Registers, Upper
+*                                ( IBAT0U - IBAT3U)
+        mfibatu  r4        xp   31-339-0-0-0-16-0-16
+*
+*153    mfibatl  rt,n           Move from IBAT Registers, Lower
+*                                ( IBAT0L - IBAT3L)
+        mfibatl  r4        xp   31-339-0-0-0-17-0-16
+*
+*153    mfdbatu  rt,n           Move from DBAT Registers, Upper 
+*                                ( DBAT0U - DBAT3U)
+        mfdbatu  r4        xp   31-339-0-0-0-24-0-16
+*
+*153    mfdbatl  rt,n           Move from DBAT Registers, Lower 
+*                                ( DBAT0L - DBAT3L)
+        mfdbatl  r4        xp   31-339-0-0-0-25-0-16
+*
+***********************************************************************
+*       XAT-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XAT-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  RS   |  SPR  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  SPR,RS              ----- RC=0
+*       mnemonic. SPR,RS              ----- RC=1
+*
+*       NOTE: *** Bits 11-15 (SPR) is the first assembler operand
+*
+***********************************************************************
+***************************************************
+** / ** Extended mnemonics for SPR control  ** / **
+***************************************************
+*1D3    mtibatu  n,rs           Move to IBAT Registers, Upper
+*                                ( IBAT0U - IBAT3U)
+        mtibatu  4r        xv   31-467-0-0-0-16-0-16
+*1D3    mtibatl  n,rs           Move to IBAT Registers, Lower
+*                                ( IBAT0L - IBAT3L)
+        mtibatl  4r        xv   31-467-0-0-0-17-0-16
+*
+*1D3    mtdbatu  n,rs           Move to DBAT Registers, Upper 
+*                                ( DBAT0U - DBAT3U)
+        mtdbatu  4r        xv   31-467-0-0-0-24-0-16
+*1D3    mtdbatl  n,rs           Move to DBAT Registers, Lower 
+*                                ( DBAT0L - DBAT3L)
+        mtdbatl  4r        xv   31-467-0-0-0-25-0-16
+***********************************************************************
+*****   END   ****   END   ********************************************
+***********************************************************************

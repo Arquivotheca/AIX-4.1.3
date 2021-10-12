@@ -1,0 +1,263 @@
+#@(#)27	1.11  src/bos/objclass/cmdmsg.add, cmdmle, bos411, 9428A410j 5/2/94 17:28:26
+#*****************************************************************************\
+#
+# COMPONENT_NAME: (CMDMLE)
+#
+# FUNCTIONS: none
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#*****************************************************************************/
+##############################################################################
+#									     #
+# Smit dialog for converting system messages from one codeset to another.    #
+#									     #
+##############################################################################
+sm_cmd_hdr:
+        id                       ="catalog_convert"
+        option_id                ="catalog_opt"
+        has_name_select          ="n"
+        name                     ="Convert System Messages"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =44
+        name_msg_id              =10
+        cmd_to_exec              ="\
+           convert_msg_cat()
+           {
+              while getopts a:b:c:d: Option \"$@\"
+              do
+                 case $Option in
+                    a) source_msg_cat=$OPTARG;;
+                    b) source_locale=$OPTARG;;
+                    c) target_msg_cat=$OPTARG;;
+                    d) target_locale=$OPTARG;;
+                 esac
+              done
+
+              echo $source_locale | grep -q '\\['
+              if [[ $? -eq 0 ]]
+              then
+                 source_locale=`echo $source_locale | cut -f2 -d'[' | cut -c1-5`
+              fi 
+              echo $target_locale | grep -q '\\['
+              if [[ $? -eq 0 ]]
+              then
+                 target_locale=`echo $target_locale | cut -f2 -d'[' | cut -c1-5`
+              fi 
+              if [[ -z $target_locale ]]
+              then
+                 first_char=`echo $source_locale | cut -c1-1`
+                 rest_of_chars=`echo $source_locale | cut -c2-128`
+                 if [ `expr \"$first_char\" : \"\[\[:lower:\]\]\"` -ne 0 ]
+                 then
+                    new_first_char=`echo $first_char | tr \"\[:lower:\]\"  \"\[:upper:\]\"`
+                 else
+                    new_first_char=`echo $first_char | tr \"\[:upper:\]\"  \"\[:lower:\]\"`
+                 fi
+                 target_locale=${new_first_char}${rest_of_chars}
+              fi
+                    
+              if [[ `dirname $source_msg_cat` = '.' ]]
+              then
+                 source_msg_cat=/usr/lib/nls/msg/$source_locale/$source_msg_cat
+              fi
+
+              if [[ -z $target_msg_cat ]]
+              then
+                 target_msg_cat=`echo $source_msg_cat | sed \"s/$source_locale/$target_locale/g\"`
+              fi
+              if [[ `dirname $target_msg_cat` = '.' ]]
+              then
+                 target_msg_cat=/usr/lib/nls/msg/$target_locale/$target_msg_cat
+              fi
+              locale -a | grep -xq $source_locale
+              if [[ $? -ne 0 ]]
+              then
+                 dspmsg -s 44 smit.cat 250 \
+                 'Error : The source locale %s is not installed.\n' $source_locale
+                 dspmsg -s 44 smit.cat 240 \
+                 'The message catalog %s was not converted.\n' $source_msg_cat
+                 exit 1
+              fi
+              locale -a | grep -xq $target_locale
+              if [[ $? -ne 0 ]]
+              then
+                 dspmsg -s 44 smit.cat 260 \
+                 'Error : The target locale %s is not installed.\n' $target_locale
+                 dspmsg -s 44 smit.cat 240 \
+                 'The message catalog %s was not converted.\n' $source_msg_cat
+                 exit 1
+              fi
+              ##
+              ## Figure out the source and target codesets by generating
+              ## a dummy message catalog in each locale and reading the 
+              ## header of thre resulting msg catalog
+              ##
+              echo '$set 1\n1 \"\"' | LC_CTYPE=$source_locale gencat /tmp/.source.cat
+              echo >> /tmp/.source.cat
+              source_codeset=`cut -b9-28 /tmp/.source.cat`
+              rm -f /tmp/.source.cat
+              echo '$set 1\n1 \"\"' | LC_CTYPE=$target_locale gencat /tmp/.target.cat
+              echo >> /tmp/.target.cat
+              target_codeset=`cut -b9-28 /tmp/.target.cat`
+              rm -f /tmp/.target.cat
+        
+              LC_CTYPE=$source_locale dspcat -g $source_msg_cat > /tmp/.working_source.$$
+              if [[ $? -ne 0 ]]
+              then
+                 dspmsg -s 44 smit.cat 240 \
+                 'The message catalog %s was not converted.\n' $source_msg_cat
+                 rm -f /tmp/.working_source.$$
+                 exit 1
+              fi
+
+              if [[ $source_codeset != $target_codeset ]]
+              then
+                 iconv -f $source_codeset -t $target_codeset /tmp/.working_source.$$ > /tmp/.converted_source.$$
+                 if [[ $? -ne 0 ]]
+                 then
+                    dspmsg -s 44 smit.cat 270 \
+                    'Error : The codeset conversion from %1$s to %2$s failed.\n' \
+                       $source_codeset $target_codeset
+                    dspmsg -s 44 smit.cat 240 \
+                    'The message catalog %s was not converted.\n' $source_msg_cat
+                    rm -f /tmp/.working_source.$$ /tmp/.converted_source.$$
+                    exit 1
+                 fi
+              else
+                 mv -f /tmp/.working_source.$$ /tmp/.converted_source.$$
+              fi
+
+              rm -f $target_msg_cat
+              LC_CTYPE=$target_locale gencat $target_msg_cat /tmp/.converted_source.$$
+              if [[ $? -ne 0 ]]
+              then
+                 dspmsg -s 44 smit.cat 240 \
+                 'The message catalog %s was not converted.\n' $source_msg_cat
+                 rm -f /tmp/.converted_source.$$
+                 exit 1
+              fi 
+              echo $target_msg_cat
+              exit 0
+           }
+           convert_msg_cat"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    =""
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="1800577"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="catalog_opt"
+        id_seq_num               ="01"
+        disc_field_name          =""
+        name                     ="SOURCE message catalog"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =44
+        name_msg_id              =1
+        op_type                  =""
+        entry_type               ="f"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="-a "
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      ="" 
+        multi_select             =""
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="1312001"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="catalog_opt"
+        id_seq_num               ="02"
+        disc_field_name          =""
+        name                     ="LOCALE of source message catalog"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =44
+        name_msg_id              =2
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="-b "
+        cmd_to_list_mode         =""
+        cmd_to_list              ="/usr/lib/nls/lsmle -c"
+        cmd_to_list_postfix      =""
+        multi_select             =""
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="1312003"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="catalog_opt"
+        id_seq_num               ="03"
+        disc_field_name          =""
+        name                     ="TARGET message catalog"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =44
+        name_msg_id              =3
+        op_type                  =""
+        entry_type               ="f"
+        entry_size               =0
+        required                 ="y"
+        prefix                   ="-c "
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             =""
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="1312002"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="catalog_opt"
+        id_seq_num               ="04"
+        disc_field_name          =""
+        name                     ="LOCALE of target message catalog"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =44
+        name_msg_id              =4
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="y"
+        prefix                   ="-d "
+        cmd_to_list_mode         =""
+        cmd_to_list              ="/usr/lib/nls/lsmle -c"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="1312004"
+        help_msg_loc             =""

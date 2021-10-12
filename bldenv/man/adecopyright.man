@@ -1,0 +1,139 @@
+#
+# @(#)95 1.1 src/bldenv/man/adecopyright.man, pkgtools, bos412, GOLDA411a 5/20/94 14:57:16
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: adecopyright command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  adecopyright Command
+  
+  
+  Purpose
+  
+  The adecopyright command generates a comprehensive copyright file
+  for a bff (backup format file) image from a set of user-provided
+  copyright keywords.
+  
+
+  Syntax
+   
+  adecopyright -f copyright_master_keyword_file -l lpp_name
+		 -t compids.table [ -c ] File...
+ 
+  Description
+  
+  The adecopyright command accepts a list of one or more input copyright 
+  keyword files and displays to stdout a comprehensive expanded copyright 
+  file.  adecopyright uses a copyright master keyword file to do the 
+  keyword expansion and the compids.table file to determine the productid 
+  for the copyright file.
+
+  
+  Flags
+
+	-f file 	Specifies the full path location of the
+			copyright master keyword file.
+    
+        -l lpp_name     Specifies the lpp_name (BFF).
+
+        -t file         Specifies the full (or relative) path location of 
+                        the compids.table file.
+ 
+	-c		Indicates that adecopyright should create a dummy
+			productid file if an entry does not exist for the
+			option in the compids.table file.  This flag is only
+			intended for use during development and should not be
+			used when generating product level packages.  A valid
+			product id file is required for product level packages.
+			
+ 	File	 	Specifies the full path of the option key file(s)
+                        for substitution.
+
+
+  Input Files
+
+  copyright.map - The copyright master keyword file.  This file is required and
+                 includes a master list of valid keywords with substitution
+                 text. In the 4.1 build environment, copyright.map is exported 
+                 to the $ODE_TOOLS/usr/lib directory.  The format of this
+                 file is:
+
+                    <prologue - contains standard prologue and comments.>
+                    HEADER
+                    <header - contains header entry lines.>
+                    KEYS
+                    keys - contains valid keys with substitution data.
+                    FOOTER
+                    footer - contains footer entry lines.
+
+		Example of a line from the KEYS section:
+
+      %%_IBMa " (C) Copyright International Business Machines Corp. 1985,1994."
+
+
+  compids.table - The compids.table file is required.  This file includes
+                 vendor_id(s) and option information.  In the 4.1 build
+                 environment, this file is exported to the 
+                 ODE_TOOLS/usr/lib directory.  The format of the 
+		 compids.table file is:
+
+                    prologue - contains standard prologue and comments.
+                    ** lines - contains information concerning maintenance of
+                               this file.
+                    %%_ lines - contains vendor identification and numeric_id.
+                    component/option lines - contains the information required
+                                for packaging and distribution of each option.
+                                The required format of the option lines is:
+
+                package name:component id:feature code:component release level:
+                system release level:change team id(s):CMVC release:vendor_id:
+                iFOR/LS_product_id:iFOR/LS_product_version: 
+                               
+		Example:
+
+             bos.adt:575603001:5005:410:410:TX2527:XXX:IBM:1234567:12345678901: 
+
+  option.cr -    The option key file(s) are required.  This file contains
+                 the copyright keys which are substituted with copyright 
+                 statements from the master file and placed in the output
+                 copyright file.
+
+		Sample format of this file follows:
+
+		%%_IBMa 
+		%%_ATTa 
+		%%_KSCd 
+
+
+  Output Files
+  
+  copyright -    The copyright file is written to stdout and contains a
+                 comprehensive text expansion of copyright data for all
+                 of the option key files.  This file is archived
+                 into the liblpp.a file for the bff by the Makefiles in
+                 the ade build environment.
+
+
+  Examples
+
+  1.  The following command example generates a comprehensive expanded 
+      copyright file (copyright) from the option key files (*.cr) and 
+      displays it to stdout.
+
+      adecopyright \
+	-f /project/aix4/build/latest/ode_tools/power/usr/lib/copyright.map \
+        -l bos.adt \
+        -t /project/aix4/build/latest/ode_tools/power/usr/lib/compids.table \
+        /project/aix4/build/latest/src/packages/bos/adt/cls/bos.adt.cls.cr \
+        /project/aix4/build/latest/src/packages/bos/adt/data/bos.adt.data.cr
+

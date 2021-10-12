@@ -1,0 +1,116 @@
+# @(#)79	1.7  src/bldenv/man/CheckSymptom.man, bldprocess, bos412, GOLDA411a 1/10/94 17:55:10
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: CheckSymptom man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  CheckSymptom Command
+
+
+  Purpose
+
+  The CheckSymptom command gets the most recent symptom and memo strings
+  from CMVC and appends (creates) to the files 'symptoms' and 'memos' in 
+  a directory pointed by 'bldglobalpath'.
+
+
+  Syntax
+
+  CheckSymptom [-a] [-r <ReleaseName>] [-l <logfile>] [<defectsfile>]
+
+
+  Descripiton
+
+  The CheckSymptom command reads a list of defects from the defect's
+  file passed on the command line or gets a list of defects from CMVC
+  given the release name and a levelname set in an exported variable
+  "LEVELVERSION" (If LEVELVERSION is set and the release name is not
+  passed on the command line, it is prompted to the user). For each of
+  these defect/features the CheckSymptom command gets the most recent
+  Symptom string and user memo string from notes attached to that
+  defect/feature and appends (creates) to the files 'symptoms' and 'memos'
+  in the directory pointed to by 'bldglobalpath'. If it cannot find a
+  symptom string for a defect/feature, it issues a warning message as
+  every defect/feature has to have a symptom string attached to it in
+  CMVC.
+
+  The CheckSymptom command uses the status commands to indicate its
+  success or failure in the STATUS_FILE. The status will be a success if
+  and only if the command was able to get the symptom strings for all the
+  defect/features.  For more information on the status file see the note
+  at the end of this section.
+
+  The CheckSymptom command logs its execution process using the log
+  commands 'log' and 'logset'. The logfile to be used can be passed on
+  the command line and if it is not passed, it defaults to the file
+  'CheckSymptom.all' in the directory pointed to by 'bldlogpath'.
+
+  The CheckSymptom command is used to create or append to the files
+  'symptoms' and 'memos'. For modification of these files, please refer
+  to the man pages of 'ChangeSymptoms' and 'ChangeMemos'.
+#include "SymSyntax.man"
+#include "MemSyntax.man"
+
+  NOTE : Among the fields that are used to set status in the STATUS_FILE,
+  there are two fields that differ depending upon the command line
+  parameters. If the defects file is passed on the command line, then the
+  "_LEVEL" and "_RELEASE" fields will have the defects filename and
+  "defects" respectively. On the other hand when the LEVELVERSION is set,
+  they will have the levelname and the release name respectively. (For
+  more information on these fields, please read the man pages of the
+  status commands).
+
+
+  Flags
+
+  -a			Indicates that CheckSymptom is being called
+			as part of an area build as opposed to a
+			production build.  If defects are found that
+			do not contain symptoms then dummy symptoms
+			will be created for the defect.
+
+  -r <Releasename>	The CMVC release name for querying defects
+			when levelname is set and exported in the
+			variable LEVELVERSION.
+
+  -l <logfile>		The file to be used for logging.
+
+  <defectsfile>		The file containing a list of defects, one on
+			each line.
+
+
+  Examples
+
+  1. To pass a file containing defects and also pass the log file
+
+     CheckSymptom -l "LOG" defects
+
+  2. To use a levelname
+
+     export LEVELVERSION=9216320; CheckSymptom -r bos320
+
+
+  Output Files
+#include "symptoms.man"
+#include "memos.man"
+
+
+  Related Information
+
+  $BLDENV/usr/bin/bldhistorypath	The "bldhistorypath" command.
+  $BLDENV/usr/bin/bldglobalpath         The "bldglobalpath" command.
+  $BLDENV/usr/bin/bldlogpath            The "bldlogpath" command.
+  $BLDENV/usr/bin/bldsetstatus          The "bldsetstatus" command.
+  $BLDENV/usr/bin/log                   The "log" command.
+  $BLDENV/usr/bin/logset                The "logset" command.
+  $BLDENV/usr/bin/ChangeMemos           The "ChangeMemos" command.
+  $BLDENV/usr/bin/ChangeSymptoms        The "ChangeSymptoms" command

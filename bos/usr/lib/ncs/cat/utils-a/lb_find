@@ -1,0 +1,66 @@
+
+
+
+LB_FIND(1)                User Commands                LB_FIND(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     llllbbbb____ffffiiiinnnndddd - get a list of glb server daemons and their  attri-
+     butes
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     llllbbbb____ffffiiiinnnndddd [ ----qqqq ] [ ----vvvv ] [ ----ddddllll ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     llllbbbb____ffffiiiinnnndddd sends out inquiries to the NCS Location Broker  dae-
+     mons and gathers the responses.  The results are analyzed to
+     determine whether the Global Location Broker is replicatable
+     or  not,  and  which  cell  each  daemon  serves.  After ten
+     seconds, the results are summarized, showing the GLB  broker
+     type,  the  server  host's  network  address, a cell name of
+     either _d_e_f_a_u_l_t or _a_l_t_e_r_n_a_t_e__N, and the cell's UUID.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----qqqq         Query for a GLB server, using  the  standard  RPC
+               mechanism.    At  most  one  GLB  server  will  be
+               printed, and only servers in the current machine's
+               cell will be searched.  The program will exit with
+               a status of zero if a GLB server was found, other-
+               wise the status will be non-zero.
+
+     ----vvvv         Print out the NCS version string.
+
+     ----ddddllll        Turn on RPC debugging  while  searching  for  GLB
+               servers.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     A network contains one ggggllllbbbbdddd in each of two  NCS  cells,  and
+     one nnnnrrrrggggllllbbbbdddd in a third cell.
+     _$$$$ ////eeeettttcccc////nnnnccccssss////llllbbbb____ffffiiiinnnndddd
+
+     sent to broadcast address 192.92.110.255
+     waiting for replies
+     received response from glb daemon at ip:stimpy(192.92.110.43) port 1072.
+     received response from glb daemon at ip:oscar(192.92.110.16) port 1168.
+     received response from glb daemon at ip:vmess(192.92.110.21) port 1114.
+     .....
+     replicatable   ip:stimpy   default    333b91c50000.0d.00.00.87.84.00.00.00
+     replicatable   ip:oscar   alternate_1 54bdad9a4000.0d.00.01.83.0f.00.00.00
+     non-replicatable ip:vmess alternate_2 5c0e4acb8fa7.02.c0.5c.6e.15.00.00.00
+     _$$$$
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     llbd(NCS), glbd(NCS), nrglbd(NCS), lb_admin(NCS)
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          1
+
+
+

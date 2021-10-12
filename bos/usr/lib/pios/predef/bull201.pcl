@@ -1,0 +1,55 @@
+# @(#)52        1.7  src/bos/usr/lib/pios/predef/bull201.pcl, cmdpios, bos411, 9428A410j 4/27/94 19:31:19
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1992, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# BULL SOURCE FILE
+#
+:056:__FLG::
+:003:_Y:Dn:
+:060:__SYS::
+:641:s0:S[115]I[1810521]En%IWP:4
+:765:s1:S[105]I[1810521]En%IWP:4
+:766:s2:S[110]I[1810521]En%IWP:4
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLOQXZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLOQXZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJOQZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:500:__HTP::
+:321:sh::%Ide/bull.header %IwW | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -J! %IsH -u%IuH
+:324:st::%Ide/bull.trailer | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -t-14 %IsT -u%IuT
+:058:__MIS::
+:330:mA::PCL Emulation
+:331:mL::[devices.cat,71,93;Bull Compuprint PageMaster 201]
+:295:mN::201
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]
+#
+# Page Width (pels) For Portrait Orientation
+:461:wJ::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{2400}%e%gq%{2}%=%t%{2400}%e%gq%{3}%=%t%{1999}%e%gq%{4}%=%t%{2400}%e%{2025}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+#
+# Page Length (pels) For Portrait Orientation
+:462:wK::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{3000}%e%gq%{2}%=%t%{3900}%e%gq%{3}%=%t%{2735}%e%gq%{4}%=%t%{3207}%e%{2850}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+#
+# Page Width (pels) For Landscape Orientation
+:463:wM::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{3112}%e%gq%{2}%=%t%{4012}%e%gq%{3}%=%t%{2915}%e%gq%{4}%=%t%{3320}%e%{3030}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+#
+# Page Length (pels) For Landscape Orientation
+:464:wR::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{2250}%e%gq%{2}%=%t%{2250}%e%gq%{3}%=%t%{1849}%e%gq%{4}%=%t%{2250}%e%{1875}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+#
+:475:__HIR::
+:686:zL::2
+:688:zM::Bull
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

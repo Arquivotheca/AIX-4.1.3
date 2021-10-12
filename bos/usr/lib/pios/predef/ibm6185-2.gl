@@ -1,0 +1,25 @@
+# @(#)64        1.5  src/bos/usr/lib/pios/predef/ibm6185-2.gl, cmdpios, bos411, 9428A410j 3/10/94 16:58:28
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:058:__MIS::
+:330:mA::IBM-GL
+:331:mL::[devices.cat,72,61;IBM 6185-2 Color Plotter]
+:295:mN::6185
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.gl
+:477:zS::!
+:685:zV::+

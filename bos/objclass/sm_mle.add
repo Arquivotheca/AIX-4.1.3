@@ -1,0 +1,2107 @@
+# @(#)02        1.44  src/bos/objclass/sm_mle.add, cmdmle, bos41J, 9508A 2/17/95 10:10:24
+#
+# COMPONENT_NAME: cmdmle 
+#
+# FUNCTIONS: none
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993,1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+
+sm_menu_opt:
+    id                        = "startup_env"
+    id_seq_num                = "051"
+    next_id                   = "mlang"
+    text                      = "Manage Language Environment"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 25
+    text_msg_id               = 529
+    next_type                 = "m"
+    alias                     = "y"
+    help_msg_id               = "1800574"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "system"
+    id_seq_num                = "052"
+    next_id                   = "mlang"
+    text                      = "Manage Language Environment"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 25
+    text_msg_id               = 529
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "1800574"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "mlang"
+    id_seq_num                = "010"
+    next_id                   = "chlang"
+    text                      = "Change/Show Primary Language Environment"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 1
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850300"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "chlang"
+    id_seq_num                = "020"
+    next_id                   = "mle_cc_set_hdr"
+    text                      = "Select Set of Cultural Convention, Language, and Keyboard"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 2
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "2850306"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "chlang"
+    id_seq_num                = "010"
+    next_id                   = "mle_cc_cust_hdr"
+    text                      = "Change/Show Cultural Convention, Language, or Keyboard"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 4
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850307"
+    help_msg_loc              = ""
+
+sm_name_hdr:
+    id                        = "mle_cc_set_hdr"
+    next_id                   = "mle_hdr_select_lang"
+    option_id                 = "mle_cmd_select_lang"
+    name                      = "Select Set of Cultural Convention, Language, and Keyboard"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 2 
+    type                      = "j"
+    ghost                     = "n"
+    cmd_to_classify           = "\
+        x() {
+            ## NOTE: the value of the _rawname could have some single
+            ## quotes in it, making the single parameter look like
+            ## several to ksh ...
+            echo $* | 
+            awk 'BEGIN {
+                     FS = \" - \"\
+                 } {
+                 printf (\"%s:%s [%s]:%s [%s]:%s [%s]\",$1,$2,$5,$3,$6,$4,$7) 
+                 }' 
+        }
+        x"
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "sel_cs:sel_cc:sel_lang:sel_keyb"
+    next_type                 = "d"
+    help_msg_id               = "2850306"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "mle_cmd_select_lang"
+    id_seq_num                = "0"
+    disc_field_name           = "mle_select_set"
+    name                      = "Select SET\n     (cultural convention, language and keyboard)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 5
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 80
+    required                  = "+"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "\
+        ## List Codeset, CC, Language, Keyboard
+        ## NOTE: any colons in the output text 
+        ## must be removed for smit to work right.
+        ## Also take out single quotes.
+        /usr/lib/nls/lsmle -a | sed -e \"s/:/./g\" -e \"s/'//g\" | sort -t'-' -k3,3 -k1r"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850308"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "mle_hdr_select_lang"
+    option_id                 = "mle_cc_set_dlg"
+    has_name_select           = "y"
+    name                      = "Select Set of Cultural Convention, Language, and Keyboard"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 2 
+    cmd_to_exec               = "\
+set_primary_lang() {
+    if [[ `whoami` != root ]]
+    then
+       dspmsg -s 53 smit.cat 75 '\
+Error:  You must be logged in as root to run this command.\n' >&2
+       exit 1
+    fi
+    ## Set the cc, lang and keyboard.  Install LPPs if necessary.
+    ## arguments are <c> <l> <d> <k> <X> in any order
+    ## cultural convention, language, device, keyboard, and Xtend fs
+    while getopts c:l:d:k:X Option \"$@\"
+    do
+     case $Option in
+        c) locale=$OPTARG;;
+        l) language=$OPTARG;;
+        d) device=$OPTARG;;
+        k) keyboard=$OPTARG;;
+	X) extend_fs="-X";;
+     esac
+    done
+
+    ## get variable values
+    keyboard=`echo \"$keyboard\" | cut -f2 -d'[' | cut -f1 -d']'`
+    locale=`echo \"$locale\" | cut -f2 -d'[' | cut -f1 -d']'`
+    language=`echo \"$language\" | cut -f2 -d'[' | cut -f1 -d']'`
+
+    if [[ -n $locale ]]
+    then
+        ## get the list of packages.  This is a union of all
+        ## packages necessary for the language, locale and keyboard.
+	packages=$(/usr/lib/nls/lsmle -P -l $language;
+		   /usr/lib/nls/lsmle -P -c $locale;
+		   /usr/lib/nls/lsmle -P -k $keyboard)
+        packages=$(echo $packages | 
+            awk 'BEGIN { FS = \"\\n\" } { 
+                     n = split ($1, array, \" \")
+                     for (i=1; i<=n; ++i) {
+                         print array[i]
+                     }
+                 }' | sort -u)
+
+        if [[ -n $device ]]
+        then
+           if [[ `/usr/lib/assist/check_cd $device` = '1' ]]
+           then
+              install_device=`/usr/lib/assist/mount_cd $device`
+              CD_MOUNTED=true
+           else
+              install_device=$device
+           fi
+        fi
+
+	## call installp if necessary
+	install_list=
+        if [[ -n $packages ]]
+        then
+ 	   for i in $packages
+	   do
+	    #If the package is not installed, lslpp will have
+	    #no output.  The error message doesn't count.
+	    check=`lslpp -lqc $i 2>/dev/null`
+	    if [[ -z $check ]]
+            then
+              short_package=`echo $i | sed 's/\\.\\*$//'`
+	      install_list=\"$install_list $short_package\"
+	    fi 
+          done
+	  if [[ -n $install_list ]]
+          then
+	    if [[ -z $device ]]
+            then
+  	        dspmsg -s 53 smit.cat 70 '\
+Error:  The selected settings for cultural convention, language,\n\
+        and keyboard require the installation of additional filesets\n\
+        that are not currently installed.  Select an installation device\n\
+        that contains the following filesets:\n\n' >&2
+                for i in $install_list
+                do
+                   echo \"\t${i}\" >&2
+                done
+	        exit 1
+	    fi
+	    installp -qQacNg $extend_fs -d $install_device $install_list
+	  fi
+ 	fi   
+
+        ## unmount the CD if necessary
+        if [[ -n $CD_MOUNTED ]]
+        then
+            /usr/lib/assist/unmount_cd $device
+        fi
+
+        lft_defined=`lsdev -C -l lft0`
+
+        ## check to see if new font is same codeset as old one -
+        ## if not, call chfont
+        if [[ -n $lft_defined &&
+              `/usr/lib/nls/lsmle -C -c $locale` != `lsfont -l | read a b c d ; echo $d` ]]
+        then
+           $(/usr/lib/nls/lsmle -X -f $(/usr/lib/nls/lsmle -C -c $locale))
+        fi
+
+        lcmess=`ODMDIR=/usr/lib/objrepos odmget -q locale=$language MESSAGES | grep variables | cut -f2 -d'\"' | cut -f2 -d'='`
+
+        ## change language and keyboard
+        if [[ -z $lcmess || $lcmess = $locale ]]
+        then
+           chlang -M $locale
+        else
+           chlang -m $lcmess $locale
+        fi
+
+        if [[ -n $lft_defined ]]
+        then
+           $(/usr/lib/nls/lsmle -X -k $keyboard)
+        fi
+    else
+        dspmsg -s 53 smit.cat 53 'Error:  Empty locale string.\n' >&2
+        exit 1
+    fi
+}
+set_primary_lang"
+    ask                       = "n"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "\
+       echo '#device'
+       grep \"^INSTALL_DEVICE=\" /var/adm/sw/__assistinfo 2>/dev/null | cut -f2 -d'='"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850306"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_cc_set_dlg"
+    id_seq_num                = "10"
+    disc_field_name           = "sel_cs"
+    name                      = "Selected set\'s CODESET"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850309"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_cc_set_dlg"
+    id_seq_num                = "15"
+    disc_field_name           = "sel_cc"
+    name                      = "Selected set\'s CULTURAL convention"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-c "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850310"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_cc_set_dlg"
+    id_seq_num                = "20"
+    disc_field_name           = "sel_lang"
+    name                      = "Selected set\'s LANGUAGE translation"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850311"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_cc_set_dlg"
+    id_seq_num                = "27"
+    disc_field_name           = "sel_keyb"
+    name                      = "Selected set\'s KEYBOARD"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 10
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-k "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850312"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+
+sm_cmd_opt:
+    id                        = "mle_cc_set_dlg"
+    id_seq_num                = "35"
+    disc_field_name           = "device"
+    name                      = "INPUT device/directory for software"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 11
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "?"
+    prefix                    = "-d "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "\
+        DEFAULT_DEVICE=`grep INSTALL_DEVICE /var/adm/sw/__assistinfo 2>/dev/null | cut -f2 -d'='`
+        if [[ -n $DEFAULT_DEVICE ]]
+        then
+           /usr/lib/instl/sm_inst list_devices | grep -q $DEFAULT_DEVICE
+           if [[ $? -ne 0 ]]
+           then
+              echo $DEFAULT_DEVICE
+           fi
+        fi
+        /usr/lib/instl/sm_inst list_devices"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    disp_values               = ""
+    aix_values                = ""
+    help_msg_id               = "2850313"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+	id_seq_num = "40"
+	id = "mle_cc_set_dlg"
+	disc_field_name = ""
+	name = "EXTEND file systems if space needed?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 53
+	name_msg_id = 12
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+        values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "-X,"
+	help_msg_id = "0503005"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+    id                        = "mle_cc_cust_hdr"
+    option_id                 = "mle_cc_cust_dlg"
+    has_name_select           = "n"
+    name                      = "Change/Show Cultural Convention, Language, or Keyboard"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 4 
+    cmd_to_exec               = "\
+change_primary_lang() {
+    if [[ `whoami` != root ]]
+    then
+       dspmsg -s 53 smit.cat 75 '\
+Error:  You must be logged in as root to run this command.\n' >&2
+       exit 1
+    fi
+    ## Set the cc, lang and keyboard.  Install lpps if necessary.
+    ## arguments are <c> <l> <d> <k> <X> in any order
+    ## cultural convention, language, device, keyboard, and Xtend fs
+    while getopts c:l:d:k:X Option \"$@\"
+    do
+     case $Option in
+        c) locale=$OPTARG;;
+        l) language=$OPTARG;;
+        d) device=$OPTARG;;
+        k) keyboard=$OPTARG;;
+	X) extend_fs="-X";;
+     esac
+    done
+
+    ## get variable values
+    keyboard=`echo \"$keyboard\" | cut -f2 -d'[' | cut -f1 -d']'`
+    locale=`echo \"$locale\" | cut -f2 -d'[' | cut -f1 -d']'`
+    language=`echo \"$language\" | cut -f2 -d'[' | cut -f1 -d']'`
+
+    if [[ -n $device ]]
+    then
+       if [[ `/usr/lib/assist/check_cd $device` = '1' ]]
+       then
+          install_device=`/usr/lib/assist/mount_cd $device`
+          CD_MOUNTED=true
+       else
+          install_device=$device
+       fi
+    fi
+
+    ## get a list of unique packages
+    packages=$(
+        if [[ -n $language ]]
+        then
+	    /usr/lib/nls/lsmle -P -l $language
+        fi ;
+        if [[ -n $locale ]]
+        then
+	       /usr/lib/nls/lsmle -P -c $locale
+        fi ;
+        if [[ -n $keyboard ]]
+        then
+	       /usr/lib/nls/lsmle -P -k $keyboard
+        fi)
+    packages=$(echo $packages | 
+        awk 'BEGIN { FS = \"\\n\" } { 
+                 n = split ($1, array, \" \")
+                 for (i=1; i<=n; ++i) {
+                     print array[i]
+                 }
+             }' | sort -u)
+
+    ## check codeset consistency
+    ## If codeset of locale and keyboard match or keyboard is undefined
+    ## then we are OK.
+    if [[ `/usr/lib/nls/lsmle -C -c $locale` = `/usr/lib/nls/lsmle -C -k $keyboard` ||
+          -z `/usr/lib/nls/lsmle -C -k $keyboard` ]]
+    then
+	if [[ `/usr/lib/nls/lsmle -C -l $language` = `/usr/lib/nls/lsmle -C -c $locale` ||
+             $language = 'En_US' || $language = 'en_US' || $language = 'C' ]]
+        then
+            ## codeset is consistent
+
+	    ## call installp if necessary
+	    install_list=
+	    if [[ -n $packages ]]
+            then
+	      for i in $packages
+	      do
+		#If the package is not installed, lslpp will have
+		#no output.  The error message doesn't count.
+		check=`lslpp -lqc $i 2>/dev/null`
+		if [[ -z $check ]]
+                then
+                  short_package=`echo $i | sed 's/\\.\\*$//'`
+		  install_list=\"$install_list $short_package\"
+		fi 
+	      done
+	      if [[ -n $install_list ]]
+              then
+                 if [[ -z $device ]]
+                 then
+                     dspmsg -s 53 smit.cat 70 '\
+Error:  The selected settings for cultural convention, language,\n\
+        and keyboard require the installation of additional filesets\n\
+        that are not currently installed.  Select an installation device\n\
+        that contains the following filesets:\n\n' >&2
+                     for i in $install_list
+                     do
+                        echo \"\t${i}\" >&2
+                     done
+                     exit 1
+                 fi
+                 installp -qQacNg $extend_fs -d $install_device $install_list
+	      fi
+	    fi   
+
+            lft_defined=`lsdev -C -l lft0`
+
+            if [[ -n $locale ]]
+            then
+                ## check to see if new font is same codeset as old one -
+                ## if not, call chfont
+		if [[ -n $lft_defined && 
+                   `/usr/lib/nls/lsmle -C -c $locale` != `lsfont -l | read a b c d ; echo $d` ]]
+                then
+		   $(/usr/lib/nls/lsmle -X -f $(/usr/lib/nls/lsmle -C -c $locale))
+                fi
+
+                lcmess=`ODMDIR=/usr/lib/objrepos odmget -q locale=$language MESSAGES | grep variables | cut -f2 -d'\"' | cut -f2 -d'='`
+
+                ## change language and keyboard
+                if [[ -z $lcmess || $lcmess = $locale ]]
+                then
+                   chlang -M $locale
+                else
+                   chlang -m $lcmess $locale
+                fi
+
+		if [[ -n $lft_defined ]]
+                then
+                   $(/usr/lib/nls/lsmle -X -k $keyboard)
+                fi
+            fi
+        else
+            dspmsg -s 53 smit.cat 54 'Error:  Language codeset does not match keyboard and cultural\n\tconvention.\n' >&2
+            exit 1
+        fi
+    else
+        dspmsg -s 53 smit.cat 55 'Error:  Keyboard and cultural convention codesets do not match.\n' >&2
+        exit 1
+    fi
+
+    ## unmount the CD if necessary
+    if [[ -n $CD_MOUNTED ]]
+    then
+        /usr/lib/assist/unmount_cd $device
+    fi
+    exit 0
+}
+change_primary_lang"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = ""
+    cmd_to_discover           = "\
+        ## Figure out the current cc from the LANG environment variable,
+        ## the current lang from /etc/environment, and the current keyboard
+        ## from lskbd.
+        echo '#custom_lang:custom_keyb:custom_cc:device'
+        CURLANG=`grep \"^LC_ALL=\" /etc/environment | cut -f2 -d'=' | cut -f1 -d' '`
+        if [[ -z $CURLANG ]]
+        then
+           CURLANG=`grep \"^LC_MESSAGES=\" /etc/environment | cut -f2 -d'=' | cut -f1 -d' '`
+           if [[ -z $CURLANG || $CURLANG = C@lft ]]
+           then
+              CURLANG=`grep \"^LANG=\" /etc/environment | cut -f2 -d'=' | cut -f1 -d' '`
+           fi
+        fi
+
+        ##
+        ## If the LANG setting is not a supported translation, then
+        ## look in the NLSPATH for the primary translation.
+        ##
+        if [[ `/usr/lib/nls/lsmle -l $CURLANG | cut -c1-1` = '?' ]]
+        then
+           LANG_SETTING=$CURLANG
+           CURLANG=`grep '^NLSPATH=' /etc/environment | cut -f2 -d':' | cut -f6 -d'/'`
+        fi
+        
+        if [[ `/usr/lib/nls/lsmle -c $CURLANG | cut -c1-1` = '?' ]]
+        then
+           CURLANG=$LANG_SETTING
+        fi
+
+        custom_lang=`/usr/lib/nls/lsmle -c $CURLANG`
+
+        if [[ -n `lsdev -C -l lft0` ]]
+        then
+           current_keyboard=`LC_ALL=C lskbd | tail -1 | cut -f1 -d'.' | cut -f6 -d'/'`
+        else
+           current_keyboard=`dspmsg -s 53 smit.cat 60 'undefined'`
+        fi
+
+        custom_keyb=`/usr/lib/nls/lsmle -D -k $current_keyboard | sed -e 's/:/./g' -e \"s/'//g\"`
+           
+        CURCC=`grep \"^LC_ALL=\" /etc/environment | cut -f2 -d'=' | cut -f1 -d' '`
+        if [[ -z $CURCC ]]
+        then
+           CURCC=`grep \"^LANG=\" /etc/environment | cut -f2 -d'=' | cut -f1 -d' '`
+        fi
+	custom_cc=`/usr/lib/nls/lsmle -c $CURCC`
+
+        DEFAULT_DEVICE=`grep \"^INSTALL_DEVICE=\" /var/adm/sw/__assistinfo 2>/dev/null | cut -f2 -d'='`
+        echo \"${custom_lang}:${custom_keyb}:${custom_cc}:${DEFAULT_DEVICE}\""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850307"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+
+sm_cmd_opt:
+    id                        = "mle_cc_cust_dlg"
+    id_seq_num                = "010"
+    disc_field_name           = "custom_cc"
+    name                      = "Primary CULTURAL convention"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 13
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-c "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "/usr/lib/nls/lsmle -c | sort -k1.12,1 -k1r -t'['"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850314"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+sm_cmd_opt:
+    id                        = "mle_cc_cust_dlg"
+    id_seq_num                = "020"
+    disc_field_name           = "custom_lang"
+    name                      = "Primary LANGUAGE translation"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 14
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "/usr/lib/nls/lsmle -l | sort -k1.12,1 -k1r -t'['"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850315"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+sm_cmd_opt:
+    id                        = "mle_cc_cust_dlg"
+    id_seq_num                = "030"
+    disc_field_name           = "custom_keyb"
+    name                      = "Primary KEYBOARD"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 15
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-k "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "/usr/lib/nls/lsmle -D -k | sed -e \"s/:/./g\" -e \"s/'//g\" | sort -A -k2fd,2 -t'[' -k1r"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850316"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+sm_cmd_opt:
+    id                        = "mle_cc_cust_dlg"
+    id_seq_num                = "040"
+    disc_field_name           = "device"
+    name                      = "INPUT device/directory for software"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 11
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "?"
+    prefix                    = "-d "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "\
+        DEFAULT_DEVICE=`grep INSTALL_DEVICE /var/adm/sw/__assistinfo 2>/dev/null | cut -f2 -d'='`
+        if [[ -n $DEFAULT_DEVICE ]]
+        then
+           /usr/lib/instl/sm_inst list_devices | grep -q $DEFAULT_DEVICE
+           if [[ $? -ne 0 ]]
+           then
+              echo $DEFAULT_DEVICE
+           fi
+        fi
+        /usr/lib/instl/sm_inst list_devices"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850313"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "50"
+	id = "mle_cc_cust_dlg"
+	disc_field_name = ""
+	name = "EXTEND file systems if space needed?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 53
+	name_msg_id = 12
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "-X,"
+	help_msg_id = "0503005"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+    id                        = "mlang"
+    id_seq_num                = "020"
+    next_id                   = "mle_add_lang"
+    text                      = "Add Additional Language Environments"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 17
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850301"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "mle_add_lang"
+    option_id                 = "mle_cmd_add_lang"
+    has_name_select           = "n"
+    name                      = "Add Additional Language Environments"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 17
+    cmd_to_exec               = "\
+add_lang_environment () {
+if [[ `whoami` != root ]]
+then
+   dspmsg -s 53 smit.cat 75 '\
+Error:  You must be logged in as root to run this command.\n' >&2
+   exit 1
+fi
+while getopts c:l:d:X Option \"$@\"
+do
+   case $Option in
+      c) locale=$OPTARG;;
+      l) language=$OPTARG;;
+      d) device=$OPTARG;;
+      X) extend_fs="-X";;
+   esac
+done
+
+rm -f /tmp/.patternlist.$$
+
+## Grab just the values inside the brackets
+locale=`echo \"$locale\" | sed 's/][^\\[]*\\[/ /g' | cut -f2 -d'[' | cut -f1 -d']'`
+
+for i in $locale
+do
+   echo '.loc.*'${i} >> /tmp/.patternlist.$$
+done
+
+## Grab just the values inside the brackets
+language=`echo \"$language\" | sed 's/][^\\[]*\\[/ /g' | cut -f2 -d'[' | cut -f1 -d']'`
+
+for i in $language
+do
+   echo '.msg.'${i} >> /tmp/.patternlist.$$
+done
+
+if [[ -s /tmp/.patternlist.$$ ]]
+then
+   if [[ `/usr/lib/assist/check_cd $device` = '1' ]]
+   then
+      install_device=`/usr/lib/assist/mount_cd $device`
+      CD_MOUNTED=true
+   else
+      install_device=$device
+   fi
+
+   lslpp -Lqc | grep -f /tmp/.patternlist.$$ | cut -f2,3 -d':' > /tmp/.installed_options.$$
+   if [[ ! -s /tmp/.installed_options.$$ ]]
+   then
+      echo '^$' >> /tmp/.installed_options.$$
+   fi
+   installp -qd $install_device -L | grep -f /tmp/.patternlist.$$ | grep -vf /tmp/.installed_options.$$ | cut -f2,3 -d':' | tr ':' ' ' >> /tmp/install_list.$$
+   if [[ -s /tmp/install_list.$$ ]]
+   then
+      installp -qQacNg $extend_fs -d $install_device -f /tmp/install_list.$$
+      RC=$?
+   fi
+
+   if [[ -n $CD_MOUNTED ]]
+   then
+      /usr/lib/assist/unmount_cd $device
+   fi
+fi
+rm -f /tmp/.patternlist.$$ /tmp/.installed_options.$$ /tmp/.install_list.$$
+exit $RC
+
+}
+add_lang_environment"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = ""
+    cmd_to_discover           = "\
+       echo '#device'
+       grep \"^INSTALL_DEVICE=\" /var/adm/sw/__assistinfo 2>/dev/null | cut -f2 -d'='`"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850301"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_cmd_add_lang"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "CULTURAL convention to install"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 19
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-c "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+lslpp -lqc 'bos.loc.*.??_??' 2>/dev/null | grep -v '^#' | cut -f2 -d':' | cut -f4 -d'.' | sort -u > /tmp/.lpplist.$$
+if [[ -s /tmp/.lpplist.$$ ]]
+then
+   /usr/lib/nls/lsmle -c | cut -f2 -d'[' | cut -f1 -d']' | grep -v '^C$' | grep -vf /tmp/.lpplist.$$ | while read language
+   do
+      /usr/lib/nls/lsmle -c $language
+   done | sort -k1.12,1 -k1r -t'['
+else
+   /usr/lib/nls/lsmle -c | grep -v '\\[C]' | sort -k1.12,1 -k1r -t'['
+fi
+rm -f /tmp/.lpplist.$$"
+    cmd_to_list_postfix       = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850317"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_cmd_add_lang"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "LANGUAGE translation to install"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 20
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+lslpp -lqc 'bos.msg.??_??.*' 2>/dev/null | grep -v '^#' | cut -f2 -d':' | cut -f3 -d'.' | sort -u > /tmp/.lpplist.$$
+if [[ -s /tmp/.lpplist.$$ ]]
+then
+   /usr/lib/nls/lsmle -l | cut -f2 -d'[' | cut -f1 -d']' | grep -v '^C$' | grep -vf /tmp/.lpplist.$$ | while read language
+   do
+      /usr/lib/nls/lsmle -l $language
+   done | sort -k1.12,1 -k1r -t'['
+else
+   /usr/lib/nls/lsmle -l | grep -v '\\[C]' | sort -k1.12,1 -k1r -t'['
+fi
+rm -f /tmp/.lpplist.$$"
+    cmd_to_list_postfix       = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850318"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_cmd_add_lang"
+    id_seq_num                = "030"
+    disc_field_name           = "device"
+    name                      = "INPUT device/directory for software"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 11
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-d "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "\
+        DEFAULT_DEVICE=`grep INSTALL_DEVICE /var/adm/sw/__assistinfo 2>/dev/null | cut -f2 -d'='`
+        if [[ -n $DEFAULT_DEVICE ]]
+        then
+           /usr/lib/instl/sm_inst list_devices | grep -q $DEFAULT_DEVICE
+           if [[ $? -ne 0 ]]
+           then
+              echo $DEFAULT_DEVICE
+           fi
+        fi
+        /usr/lib/instl/sm_inst list_devices"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850313"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+sm_cmd_opt:
+	id_seq_num = "40"
+	id = "mle_cmd_add_lang"
+	disc_field_name = ""
+	name = "EXTEND file systems if space needed?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 53
+	name_msg_id = 12
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+        values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "-X,"
+	help_msg_id = "0503005"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+    id                        = "mlang"
+    id_seq_num                = "030"
+    next_id                   = "mle_rm_lang_hdr"
+    text                      = "Remove Language Environments"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 22
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850302"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "mle_rm_lang_hdr"
+    option_id                 = "mle_cmd_rm_lang"
+    has_name_select           = "n"
+    name                      = "Remove Language Environments"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 22
+    cmd_to_exec               = "\
+remove_lang() {
+if [[ `whoami` != root ]]
+then
+   dspmsg -s 53 smit.cat 75 '\
+Error:  You must be logged in as root to run this command.\n' >&2
+   exit 1
+fi
+while getopts c:l: Option \"$@\"
+do
+   case $Option in
+      c) locale=$OPTARG;;
+      l) language=$OPTARG;;
+   esac
+done
+
+## Grab just the values inside the brackets
+locale=`echo \"$locale\" | sed 's/][^\\[]*\\[/ /g' | cut -f2 -d'[' | cut -f1 -d']'`
+
+for i in $locale
+do
+   echo '*.loc.*'${i}'*' >> /tmp/.patternlist.$$
+done
+
+## Grab just the values inside the brackets
+language=`echo \"$language\" | sed 's/][^\\[]*\\[/ /g' | cut -f2 -d'[' | cut -f1 -d']'`
+
+for i in $language
+do
+   echo '*.msg.'${i}'*' >> /tmp/.patternlist.$$
+done
+
+installp -ugf /tmp/.patternlist.$$
+RC=$?
+
+rm -f /tmp/.patternlist.$$
+exit $RC
+}
+remove_lang"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = ""
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850302"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+sm_cmd_opt:
+    id                        = "mle_cmd_rm_lang"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "LANGUAGE translation to remove"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 45 
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+lslpp -lqc '*.msg.*' 2>/dev/null | grep -v '^#' | cut -f2 -d':' | sed 's/.*\.msg\.//' | cut -f1 -d'.' | sort -u > /tmp/.langlist.$$
+if [[ ! -s /tmp/.langlist.$$ ]]
+then
+   echo '^$' >> /tmp/.langlist.$$
+fi
+/usr/lib/nls/lsmle -c | grep -f /tmp/.langlist.$$ | sort -k1.12,1 -k1r -t'['
+rm -f /tmp/.langlist.$$"
+    cmd_to_list_postfix       = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850319"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+sm_cmd_opt:
+    id                        = "mle_cmd_rm_lang"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "CULTURAL convention to remove"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 46 
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-c "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+lslpp -lqc 'bos.loc.*.??_??' 2>/dev/null | grep -v '^#' | cut -f2 -d':' | cut -f4 -d'.' | sort -u > /tmp/.langlist.$$
+if [[ ! -s /tmp/.langlist.$$ ]]
+then
+   echo '^$' >> /tmp/.langlist.$$
+fi
+/usr/lib/nls/lsmle -c | grep -f /tmp/.langlist.$$ | sort -k1.12,1 -k1r -t'['
+rm -f /tmp/.langlist.$$"
+    cmd_to_list_postfix       = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850320"
+    help_msg_loc              = ""
+    help_msg_base          = ""
+    help_msg_book          = ""
+
+sm_menu_opt:
+    id                        = "mlang"
+    id_seq_num                = "040"
+    next_id                   = "mle_hier_cmd_hdr"
+    text                      = "Change/Show Language Hierarchy"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 26
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850303"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "mle_hier_cmd_hdr"
+    option_id                 = "mle_hier"
+    has_name_select           = ""
+    name                      = "Change/Show Language Hierarchy"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 26
+    cmd_to_exec               = "\
+        set_hierarchy()
+        {
+        if [[ `whoami` != root ]]
+        then
+           dspmsg -s 53 smit.cat 75 '\
+Error:  You must be logged in as root to run this command.\n' >&2
+           exit 1
+        fi
+           while getopts a:b:c: Option \"$@\"
+           do
+              case $Option in
+                 a) first_lang=$OPTARG;;
+                 b) second_lang=$OPTARG;;
+                 c) third_lang=$OPTARG;;
+              esac
+           done
+
+           echo \"$first_lang\" | grep -q '\\['
+           if [[ $? -eq 0 ]]
+           then
+              first_lang=`echo $first_lang | cut -f2 -d'[' | cut -f1 -d']'`
+           fi
+
+           echo \"$second_lang\" | grep -q '\\['
+           if [[ $? -eq 0 ]]
+           then
+              second_lang=`echo $second_lang | cut -f2 -d'[' | cut -f1 -d']'`
+           fi
+
+           echo \"$third_lang\" | grep -q '\\['
+           if [[ $? -eq 0 ]]
+           then
+              third_lang=`echo $third_lang | cut -f2 -d'[' | cut -f1 -d']'`
+           fi
+
+           hierarchy=$first_lang
+           if [[ -n $second_lang ]]
+           then
+              hierarchy=$hierarchy:$second_lang
+           fi
+           if [[ -n $third_lang ]]
+           then
+              hierarchy=$hierarchy:$third_lang
+           fi
+
+	   chlang -m $hierarchy
+ 	}
+	set_hierarchy"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = ""
+    cmd_to_discover           = "\
+        echo '#language1:language2:language3'
+        langlist=`grep NLSPATH /etc/environment | sed 's/^NLSPATH=//' | sed 's/:/ /g`
+        for current_entry in $langlist
+        do
+           echo $current_entry | grep -q '/usr/lib/nls/msg/'
+           if [[ $? -eq 0 ]]
+           then
+              msgvalue=`echo $current_entry | sed 's-/usr/lib/nls/msg/--' | sed 's-/%N.*$--'`
+              if [[ -n $msgvalue && $msgvalue != '%L' ]]
+              then
+                 typeset -i valuefound=0
+                 for i in $msglist
+                 do
+                    if [[ $i = $msgvalue ]]
+                    then
+                       (( valuefound = 1 ))
+                    fi
+                 done
+                 if [[ $valuefound = 0 ]]
+                 then
+                    msglist=\"$msglist $msgvalue\"
+                 fi
+              fi
+           fi
+        done
+        echo $msglist | read val1 val2 val3 junk
+
+        /usr/lib/nls/lsmle -l $val1 >/dev/null 2>&1
+        if [[ $? -eq 0 && -n $val1 ]]
+        then
+           val1=`/usr/lib/nls/lsmle -l $val1`
+        fi 
+        /usr/lib/nls/lsmle -l $val2 >/dev/null 2>&1
+        if [[ $? -eq 0 && -n $val2 ]]
+        then
+           val2=`/usr/lib/nls/lsmle -l $val2`
+        fi 
+        /usr/lib/nls/lsmle -l $val3 >/dev/null 2>&1
+        if [[ $? -eq 0 && -n $val3 ]]
+        then
+           val3=`/usr/lib/nls/lsmle -l $val3`
+        fi 
+        echo ${val1}:${val2}:${val3}"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850303"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_hier"
+    id_seq_num                = "010"
+    disc_field_name           = "language1"
+    name                      = "1ST language translation choice" 
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 28
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-a "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "/usr/lib/nls/lsmle -l | sort -k1.12,1 -k1r -t'['"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850323"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_hier"
+    id_seq_num                = "020"
+    disc_field_name           = "language2"
+    name                      = "2ND language translation choice"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 29
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "?"
+    prefix                    = "-b "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "/usr/lib/nls/lsmle -l | sort -k1.12,1 -k1r -t'['"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850323"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_hier"
+    id_seq_num                = "030"
+    disc_field_name           = "language3"
+    name                      = "3RD language translation choice"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 30
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "?"
+    prefix                    = "-c "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "/usr/lib/nls/lsmle -l | sort -k1.12,1 -k1r -t'['"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850323"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id                        = "mlang"
+    id_seq_num                = "050"
+    next_id                   = "mle_chapp_menu"
+    text                      = "Change/Show Applications for a Language"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 31
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850304"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id                        = "mle_chapp_menu"
+    id_seq_num                = "010"
+    next_id                   = "mle_list_app_hdr"
+    text                      = "List Applications Installed for a Language"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 32
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850324"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "mle_list_app_hdr"
+    option_id                 = "mle_list_apps"
+    has_name_select           = ""
+    name                      = "List Applications Installed for a Language"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 32
+    cmd_to_exec               = "\
+list_app()
+{
+   language=`echo \"$1\" | cut -f2 -d'[' | cut -f1 -d']'`
+   lslpp -Lqc \"*.msg.$language*\" | sort -k2 -t':' | while read line 
+   do
+      package_name=`echo $line | cut -f2 -d':'`
+      package_level=`echo $line | cut -f3 -d':'`
+      package_desc=`echo $line | cut -f8 -d':'`
+      printf '%s  %s\n\t%-60s\n\n' $package_name $package_level \"$package_desc\"
+   done
+}
+list_app"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850324"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_list_apps"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "Installed LANGUAGE translation" 
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 47 
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "\
+lslpp -lqc '*.msg.*' 2>/dev/null | grep -v '^#' | cut -f2 -d':' | sed 's/.*\.msg\.//' | cut -f1 -d'.' | sort -u > /tmp/.langlist.$$
+if [[ ! -s /tmp/.langlist.$$ ]]
+then
+   echo '^$' >> /tmp/.langlist.$$
+fi
+/usr/lib/nls/lsmle -c | grep -f /tmp/.langlist.$$ | sort -k1.12,1 -k1r -t'['
+rm -f /tmp/.langlist.$$"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850327"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id                        = "mle_chapp_menu"
+    id_seq_num                = "020"
+    next_id                   = "mle_inst_lang_hdr"
+    text                      = "Add Language for Application Already Installed"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 35
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "2850325"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_name_hdr:
+    id                        = "mle_inst_lang_hdr"
+    next_id                   = "mle_inst_lang"
+    option_id                 = "mle_inst_lang_select"
+    name                      = "Add Language for Application Already Installed"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 35
+    type                      = "j"
+    ghost                     = "n"
+    cmd_to_classify           = "\
+classify_cmd()
+{
+echo \"$1\" | cut -f2 -d'[' | cut -f1 -d']'
+}
+classify_cmd"
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = "add_lang_language"
+    next_type                 = "n"
+    help_msg_id               = "2850325"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "mle_inst_lang_select"
+    id_seq_num                = "0"
+    disc_field_name           = "add_lang_language"
+    name                      = "LANGUAGE translation to install"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 20 
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-l "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "/usr/lib/nls/lsmle -l | grep -v '\\[C]' | sort -k1.12,1 -k1r -t'['"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850328"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_name_hdr:
+    id                        = "mle_inst_lang"
+    next_id                   = "dialog_add_lang"
+    option_id                 = "add_input_select"
+    has_name_select           = "y"
+    name                      = "Add Language for Application Already Installed"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 35
+    type                      = "j"
+    ghost                     = "n"
+    cmd_to_classify           = "echo $1"
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = "add_lang_input"
+    next_type                 = "d"
+    help_msg_id               = "2850328"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "add_input_select"
+    id_seq_num                = "0"
+    disc_field_name           = "add_lang_input"
+    name                      = "INPUT device/directory for software"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 11 
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-d "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "\
+        DEFAULT_DEVICE=`grep INSTALL_DEVICE /var/adm/sw/__assistinfo 2>/dev/null | cut -f2 -d'='`
+        if [[ -n $DEFAULT_DEVICE ]]
+        then
+           /usr/lib/instl/sm_inst list_devices | grep -q $DEFAULT_DEVICE
+           if [[ $? -ne 0 ]]
+           then
+              echo $DEFAULT_DEVICE
+           fi
+        fi
+        /usr/lib/instl/sm_inst list_devices"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850313"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+
+sm_cmd_hdr:
+    id                        = "dialog_add_lang"
+    option_id                 = "mle_add_app_lang"
+    has_name_select           = ""
+    name                      = "Add Language for Application Already Installed"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 35 
+    cmd_to_exec               = "\
+       add_lang()
+       {
+       if [[ `whoami` != root ]]
+       then
+          dspmsg -s 53 smit.cat 75 '\
+Error:  You must be logged in as root to run this command.\n' >&2
+          exit 1
+       fi
+       while getopts d:l:S:X Option \"$@\"
+       do
+          case $Option in
+             d) device=$OPTARG;;
+             l) language=$OPTARG;;
+             S) software=$OPTARG;;
+             X) extend_fs="-X";;
+          esac
+       done
+
+       if [[ `/usr/lib/assist/check_cd $device` = '1' ]]
+       then
+          install_device=`/usr/lib/assist/mount_cd $device`
+          CD_MOUNTED=true
+       else
+          install_device=$device
+       fi
+
+       ALL_VALUE=`dspmsg -s 53 smit.cat 65 'ALL'`
+       if [[ $software = $ALL_VALUE ]]
+       then
+          lslpp -Lqc \"*.msg.$language*\" 2>/dev/null | cut -f2,3 -d':' > /tmp/msg_installed.$$
+          if [[ ! -s /tmp/msg_installed.$$ ]]
+          then
+             echo '^$' >> /tmp/msg_installed.$$ ]]
+          fi
+          installp -qd $install_device -L | grep .msg.$language | grep -vf /tmp/msg_installed.$$ | cut -f2,3 -d':' | tr ':' ' ' > /tmp/msg_list.$$
+	  if [[ -s /tmp/msg_list.$$ ]]
+          then
+             installp -qQacNg $extend_fs -d $install_device -f /tmp/msg_list.$$
+             RC=$?
+          fi
+          rm -f /tmp/msg_list.$$ /tmp/msg_installed.$$
+       else
+          installp -qQacNg $extend_fs -d $install_device $software
+          RC=$?
+       fi
+       if [[ -n $CD_MOUNTED ]]
+       then
+          /usr/lib/assist/unmount_cd $device
+       fi
+       exit $RC  
+       }
+       add_lang"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "\
+echo '#all_value'
+dspmsg -s 53 smit.cat 65 'ALL'
+echo"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850325"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_add_app_lang"
+    id_seq_num                = "0"
+    disc_field_name           = "add_lang_language"
+    name                      = "LANGUAGE translation to install"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 20 
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850328"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_add_app_lang"
+    id_seq_num                = "020"
+    disc_field_name           = "add_lang_input"
+    name                      = "INPUT device/directory for software"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 11 
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-d "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "/usr/lib/instl/sm_inst list_devices"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850313"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_add_app_lang"
+    id_seq_num                = "030"
+    disc_field_name           = "all_value"
+    name                      = "Installed APPLICATION"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 43
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-S "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "\
+list_messages () 
+{
+language=$1
+device=$2
+if [[ `/usr/lib/assist/check_cd $device` = '1' ]]
+then
+   install_device=`/usr/lib/assist/mount_cd $device`
+   CD_MOUNTED=true
+else
+   install_device=$device
+fi
+lslpp -Lqc \"*.msg.$language*\" 2>/dev/null | cut -f2,3 -d':' > /tmp/msg_installed.$$
+if [[ ! -s /tmp/msg_installed.$$ ]]
+then
+   echo '^$' >> /tmp/msg_installed.$$
+fi
+installp -qd $install_device -L | grep .msg.$language | grep -vf /tmp/msg_installed.$$ | while read line
+do
+   package_name=`echo $line | cut -f2 -d':'`
+   package_level=`echo $line | cut -f3 -d':'`
+   package_desc=`echo $line | cut -f12 -d':'`
+   printf '%s  %s\n#\t%-60s\n#\n' $package_name $package_level \"$package_desc\"
+done
+rm -f /tmp/msg_installed.$$
+}
+list_messages"
+    cmd_to_list_postfix       = "add_lang_language add_lang_input"
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850329"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+	id_seq_num = "40"
+	id = "mle_add_app_lang"
+	disc_field_name = ""
+	name = "EXTEND file systems if space needed?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 53
+	name_msg_id = 12
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+        values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "-X,"
+	help_msg_id = "0503005"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+    id                        = "mle_chapp_menu"
+    id_seq_num                = "030"
+    next_id                   = "mle_rmlang_hdr"
+    text                      = "Remove Language for Applications"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 44
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "2850326"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_name_hdr:
+    id                        = "mle_rmlang_hdr"
+    next_id                   = "mle_cmd_rmlang"
+    option_id                 = "mle_opt_rmlang"
+    name                      = "Remove Language for Applications"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 44
+    type                      = "j"
+    ghost                     = "n"
+    cmd_to_classify           = "\
+classify_cmd()
+{
+   echo \"$1\" | cut -f2 -d'[' | cut -f1 -d']'
+}
+classify_cmd"
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = "_rmlang_language"
+    next_type                 = "d"
+    help_msg_id               = "2850326"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "mle_opt_rmlang"
+    id_seq_num                = "0"
+    disc_field_name           = "_rmlang_language"
+    name                      = "LANGUAGE translation to remove"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 45
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "\
+lslpp -lqc '*.msg.*' 2>/dev/null | grep -v '^#' | cut -f2 -d':' | sed 's/.*\.msg\.//' | cut -f1 -d'.' | sort -u > /tmp/.langlist.$$
+if [[ ! -s /tmp/.langlist.$$ ]]
+then
+   echo '^$' >> /tmp/.langlist.$$ ]]
+fi
+/usr/lib/nls/lsmle -c | grep -f /tmp/.langlist.$$ | sort -k1.12,1 -k1r -t'['
+rm -f /tmp/.langlist.$$"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850330"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "mle_cmd_rmlang"
+    option_id                 = "mle_rmlang_dlg"
+    has_name_select           = ""
+    name                      = "Remove Language for Applications"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 44
+    cmd_to_exec               = "\
+remove_lang()
+{
+   if [[ `whoami` != root ]]
+   then
+      dspmsg -s 53 smit.cat 75 '\
+Error:  You must be logged in as root to run this command.\n' >&2
+      exit 1
+   fi
+   while getopts l:a: Option \"$@\"
+   do
+      case $Option in
+         l) language=$OPTARG;;
+         a) lpps=$OPTARG;;
+      esac
+   done
+
+   ALLVALUE=`dspmsg -s 53 smit.cat 65 'ALL'`
+   if [[ $lpps = $ALLVALUE ]]
+   then
+      installp -ug *.msg.$language*
+   else
+      installp -ug $lpps
+   fi 
+}
+remove_lang"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "\
+echo '#all_value'
+dspmsg -s 53 smit.cat 65 'ALL'
+echo"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850326"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_rmlang_dlg"
+    id_seq_num                = "010"
+    disc_field_name           = "_rmlang_language"
+    name                      = "LANGUAGE translation to remove"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 45
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850330"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "mle_rmlang_dlg"
+    id_seq_num                = "020"
+    disc_field_name           = "all_value"
+    name                      = "Selected APPLICATION"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 53
+    name_msg_id               = 48
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-a "
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+list_lang()
+{
+   language=$1
+   lslpp -Lqc \"*.msg.$language*\" | sort -k2 -t':' | while read line
+   do
+      package_name=`echo $line | cut -f2 -d':'`
+      package_level=`echo $line | cut -f3 -d':'`
+      package_desc=`echo $line | cut -f8 -d':'`
+      printf '%s  %s     \n#\t%-60s\n#\n' $package_name $package_level \"$package_desc\"
+   done
+}
+list_lang"
+    cmd_to_list_postfix       = "_rmlang_language"
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850331"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id                        = "mlang"
+    id_seq_num                = "060"
+    next_id                   = "nu_iconv"
+    text                      = "Convert System Messages and Flat Files"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 50
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "1800576"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "nu_iconv"
+    id_seq_num                = "010"
+    next_id                   = "catalog_convert"
+    text                      = "Convert System Messages"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 51
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "1800577"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id                        = "nu_iconv"
+    id_seq_num                = "020"
+    next_id                   = "fficonv"
+    text                      = "Convert Flat Files"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 53
+    text_msg_id               = 52
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "1800575"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+
+

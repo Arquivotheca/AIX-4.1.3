@@ -1,0 +1,462 @@
+
+
+
+ls_admin(1M)          Maintenance Commands           ls_admin(1M)
+
+
+
+NNNNAAAAMMMMEEEE
+     ls_admin - Display and edit the license server database
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     llllssss____aaaaddddmmmmiiiinnnn ls_admin -- [ ssssttttaaaannnnddddaaaarrrrdddd XXXX aaaarrrrgggguuuummmmeeeennnnttttssss ]
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]]  [[[[----rrrr]]]]
+      [[[[----llll |||| ----zzzz |||| ----hhhh |||| ----uuuussssaaaaggggeeee |||| ----vvvveeeerrrrssssiiiioooonnnn ]]]] {{{{----aaaa |||| ----ssss |||| ----dddd  ||||  ----ffff  }}}}
+     {{{{----vvvv |||| ----pppp}}}}  aaaarrrrgggguuuummmmeeeennnntttt1111 aaaarrrrgggguuuummmmeeeennnntttt2222............
+
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The llllssss____aaaaddddmmmmiiiinnnn command allows you to edit and examine  license
+     databases.    llllssss____aaaaddddmmmmiiiinnnn  features  both  a  command-line  and
+     graphic interface.  If all options are  omitted,  or  the  x
+     argument delimiter -------- is found on the command line, ls_admin
+     invokes a graphic interface.  Both interfaces are  described
+     here.
+
+
+GGGGRRRRAAAAPPPPHHHHIIIICCCC IIIINNNNTTTTEEEERRRRFFFFAAAACCCCEEEE MMMMEEEENNNNUUUUSSSS AAAANNNNDDDD BBBBUUUUTTTTTTTTOOOONNNNSSSS
+     EEEExxxxiiiitttt Exits from llllssss____aaaaddddmmmmiiiinnnn.
+
+     "Operate On" Menu
+
+     This menu lists the license server objects you  can  operate
+     on: SSSSeeeerrrrvvvveeeerrrr, VVVVeeeennnnddddoooorrrr, PPPPrrrroooodddduuuucccctttt, and  LLLLiiiicccceeeennnnsssseeee.
+
+     SSSSeeeerrrrvvvveeeerrrr
+          Select SSSSeeeerrrrvvvveeeerrrr to display a list of servers.  After  you
+          select  a  server,  you  can select VVVVeeeennnnddddoooorrrr to display a
+          list of vendors for that server, or you can  select  an
+          operation  to  perform  on the selected server from the
+          OOOOppppeeeerrrraaaattttiiiioooonnnnssss:::: menu.
+
+     VVVVeeeennnnddddoooorrrr
+          Select VVVVeeeennnnddddoooorrrr to display a  list  of  vendors  for  the
+          server selected in the SSSSeeeerrrrvvvveeeerrrrssss list. After you select a
+          vendor, you can select PPPPrrrroooodddduuuucccctttt to  display  a  list  of
+          products  for  that vendor, or you can select an opera-
+          tion to perform on the selected vendor from the  OOOOppppeeeerrrraaaa----
+          ttttiiiioooonnnnssss:::: menu.
+
+     PPPPrrrroooodddduuuucccctttt
+          Select PPPPrrrroooodddduuuucccctttt to display a list of  products  for  the
+          selected server and vendor. After you select a product,
+          you can select LLLLiiiicccceeeennnnsssseeee to display a  list  of  licenses
+          for  that  product,  or  you can select an operation to
+          perform on the selected product  from  the  OOOOppppeeeerrrraaaattttiiiioooonnnnssss::::
+          menu.
+
+     LLLLiiiicccceeeennnnsssseeee
+
+
+
+NetLS Version 2           Last change:                          1
+
+
+
+
+
+
+ls_admin(1M)          Maintenance Commands           ls_admin(1M)
+
+
+
+          Select LLLLiiiicccceeeennnnsssseeee to display a list of license records for
+          the  selected  server, vendor, and product. Each record
+          shows the number, type,  and  terms  of  the  licenses.
+          Select  a  license  record and select an operation from
+          the OOOOppppeeeerrrraaaattttiiiioooonnnnssss::::  menu.
+
+     "Operations:" Menu
+
+     This menu lists the license database operations you can per-
+     form. The contents of this menu vary depending on the object
+     (Server,  Vendor,  Product,  or  License)  selected  in  the
+     OOOOppppeeeerrrraaaatttteeee OOOOnnnn menu.
+
+     OOOOppppeeeerrrraaaattttiiiioooonnnnssss OOOOnnnn SSSSeeeerrrrvvvveeeerrrrssss
+
+     CCCChhhheeeecccckkkk uuuusssseeeerrrr ffffiiiilllleeee
+          Verifies that the format of the file CCCCOOOONNNNFFFF____DDDDIIIIRRRR////uuuusssseeeerrrr____ffffiiiilllleeee
+          is valid.
+
+     Update server list
+          Updates server and/or license database information. The
+          information  displayed  is  current,  so it's generally
+          unnecessary to use UUUUppppddddaaaatttteeee sssseeeerrrrvvvveeeerrrr lllliiiisssstttt unless a communi-
+          cations  failure  has been repaired or a new server has
+          been started since you  invoked  llllssss____aaaaddddmmmmiiiinnnn,  or  another
+          user  is  currently  editing  a  license  database with
+          llllssss____aaaaddddmmmmiiiinnnn.
+
+     AAAAdddddddd vvvveeeennnnddddoooorrrr
+          Adds a vendor to the selected license  database.  Enter
+          the  vendor  name, vendor ID and vendor password on the
+          pop-up; then select AAAAdddddddd VVVVeeeennnnddddoooorrrr.
+
+     DDDDeeeessssccccrrrriiiibbbbeeee
+          Provides  detailed  information  about   the   selected
+          server,  including  socket information, target type and
+          target ID.
+
+     OOOOppppeeeerrrraaaattttiiiioooonnnnssss OOOOnnnn VVVVeeeennnnddddoooorrrrssss
+
+     AAAAdddddddd pppprrrroooodddduuuucccctttt
+          Adds a product to the selected vendor at  the  selected
+          server.  Enter the product name, version, product pass-
+          word, and license annotation (if there is one)  on  the
+          pop-up; then select AAAAdddddddd vvvveeeennnnddddoooorrrr. If you add a product to
+          more than one server, be sure to use exactly  the  same
+          product name at all servers. Note that AAAAdddddddd pppprrrroooodddduuuucccctttt per-
+          forms two functions: it establishes a new product,  and
+          it  adds licenses for the product. To add more licenses
+          for an existing product, select the  product  and  then
+          use AAAAdddddddd lllliiiicccceeeennnnsssseeeessss.
+
+
+
+
+NetLS Version 2           Last change:                          2
+
+
+
+
+
+
+ls_admin(1M)          Maintenance Commands           ls_admin(1M)
+
+
+
+     RRRReeeennnnaaaammmmeeee
+          Renames the selected vendor. Enter the new vendor  name
+          on  the  pop-up.  If you rename a vendor at one server,
+          you should also rename it (using the same name) at  all
+          servers where that vendor is listed.
+
+     DDDDeeeelllleeeetttteeee
+          Deletes the selected vendor  at  the  selected  server.
+          select  the  DDDDeeeelllleeeetttteeee????  pop-up  to confirm the operation.
+          Move the cursor off the pop-up to cancel the operation.
+          You  can't delete a vendor that has active licenses for
+          its products.
+
+     CCCCooooppppyyyy vvvveeeennnnddddoooorrrr
+          Copies the selected vendor to another server's  license
+          database.  Select the server to which you want the ven-
+          dor copied from the pop-up that appears.
+
+     DDDDeeeessssccccrrrriiiibbbbeeee
+          Provides detailed information about the selected server
+          and vendor, including the vendor ID.
+
+     OOOOppppeeeerrrraaaattttiiiioooonnnnssss OOOOnnnn PPPPrrrroooodddduuuuccccttttssss
+
+     AAAAdddddddd lllliiiicccceeeennnnsssseeeessss
+          Adds  licenses  to  the  selected  product.  Enter  the
+          license password on the pop-jup. (Use AAAAdddddddd lllliiiicccceeeennnnsssseeeessss only
+          to add more licenses for an existing  product.  If  you
+          are both establishing a new product and adding licenses
+          for the  product,  use  AAAAdddddddd  pppprrrroooodddduuuucccctttt  rather  than  AAAAdddddddd
+          lllliiiicccceeeennnnsssseeeessss.)
+
+     RRRReeeennnnaaaammmmeeee
+          Renames the selected product.  Enter  the  new  product
+          name  on  the  pop-up.  If  you rename a product at one
+          server, you should also rename it (using the same name)
+          at all servers where that product is listed.
+
+     Describe
+          Provides  detailed  information  about  the  about  the
+          selected  server, vendor, and product. Product informa-
+          tion displayed includes the ID, annotation string,  and
+          the number, type, and date of existing licenses for the
+          product.
+
+     OOOOppppeeeerrrraaaattttiiiioooonnnnssss OOOOnnnn LLLLiiiicccceeeennnnsssseeeessss
+
+     DDDDeeeelllleeeetttteeee
+          Deletes the selected license record. This  enables  you
+          to  get  rid  of  expired  licenses.Select  the DDDDeeeelllleeeetttteeee????
+          pop-up to confirm the operation, or move the cursor off
+          the pop-up to cancel.
+
+
+
+NetLS Version 2           Last change:                          3
+
+
+
+
+
+
+ls_admin(1M)          Maintenance Commands           ls_admin(1M)
+
+
+
+     DDDDeeeessssccccrrrriiiibbbbeeee
+          Provides  detailed  information  about   the   selected
+          server,  vendor,  product,  and license record. License
+          information displayed includes the number, type,  date,
+          and timestamp.
+
+
+CCCCOOOOMMMMMMMMAAAANNNNDDDD----LLLLIIIINNNNEEEE OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     Default options are indicated by (D).
+
+     CCCChhhheeeecccckkkk uuuusssseeeerrrr ffffiiiilllleeee
+          Verifies that the format of the file CCCCOOOONNNNFFFF____DDDDIIIIRRRR////uuuusssseeeerrrr____ffffiiiilllleeee
+          is valid.
+
+     ----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee
+          Indicates the server at which the license  database  to
+          be  edited or displayed resides. (Optional; the default
+          value is the name of the license server node  at  which
+          the command is executed.)
+
+     ----rrrr   Specifies a version of a product to be operated upon.
+
+     ----llll   Specifies the license annotation.
+
+     ----zzzz   Debugging flag. (Prints RPC debugging information).
+
+     ----hhhh   Displays command usage information. (Same as ----uuuussssaaaaggggeeee).
+
+     ----uuuussssaaaaggggeeee
+          Displays command usage information. (Same as ----hhhh).
+
+     ----vvvveeeerrrrssssiiiioooonnnn
+          Displays command version information.
+
+     ----aaaa ((((DDDD))))
+          Adds a new vendor, a new  product  (and  licenses),  or
+          more  licenses  for  an existing product to the license
+          database.
+
+          If adding a vendor, specify (as  arguments  to  the  ----vvvv
+          option)  the  vendor  name, vendor ID, and vendor pass-
+          word.
+
+          If adding a new product and licenses, specify (as argu-
+          ments  to the ----pppp option) the vendor name, product name,
+          product password, version text, and license  annotation
+          (if  there  is  one)  as  arguments. (Do not use the ----rrrr
+          option in this case).
+
+          You must have previously added the vendor in  order  to
+          add its product, and you may not establish a vendor and
+          product licenses simultaneously  in  a  single  command
+
+
+
+NetLS Version 2           Last change:                          4
+
+
+
+
+
+
+ls_admin(1M)          Maintenance Commands           ls_admin(1M)
+
+
+
+          line. If adding new licenses for an established version
+          of a product, you may not specify a license  annotation
+          unless the established version had an annotation.
+
+          The same annotation must be used in all licenses for  a
+          given  product  (identified  by the product ID and ver-
+          sion).
+
+          The options ----aaaa,,,, ----dddd,,,, and ----ssss are mutually exclusive.
+
+     ----ssss   Shows information about the specified  license  server,
+          vendor  or product. To show information about a license
+          server, use the ----nnnn option with the  node  name  as  the
+          argument.  To  show information about a vendor, use the
+          ----vvvv option with the name of the vendor as the  argument.
+          To  show  information  about  all  vendors at a license
+          server, use the ----vvvv option without an argument. To  show
+          information  about a product version, use the ----rrrr option
+          with the version text as the argument followed  by  the
+          ----pppp  option  with  the  vendor  name and product name as
+          arguments. To show information about all versions of  a
+          product use the ----rrrr option without an argument, followed
+          by the ----pppp option with the vendor name and product  name
+          as arguments. To show information about all versions of
+          all products of a vendor, use the ----pppp option, giving the
+          vendor name as the only argument.
+
+          The options ----aaaa,,,, ----dddd,,,, and ----ssss are mutually exclusive.
+
+     ----dddd   Deletes a vendor or product from the license  database.
+          To  delete  a vendor, use the ----vvvv option with the vendor
+          name as the argument.  You  may  not  delete  a  vendor
+          unless  you have previously deleted all versions of all
+          products of the vendor at the current server,  nor  may
+          you  delete more than one vendor at a time. To delete a
+          product, use the ----pppp option with  the  vendor  name  and
+          product  name  as  arguments,  followed  by the license
+          timestamp. You may not delete useonce licenses nor com-
+          pound  passwords  that  have  not  expired, nor may you
+          delete more than one version of a product  at  a  time.
+          Use  the  ----ssss and ----pppp options to get the timestamp of the
+          specified product licenses. The options ----aaaa,,,, ----dddd,,,, and  ----ssss
+          are mutually exclusive.
+
+     ----ffff   Copies a vendor (specified with the ----vvvv option) from the
+          server  specified in the ----ffff option to the server speci-
+          fied in the ----nnnn option, or to the default server  if  no
+          ----nnnn server is specified.
+
+     ----vvvv   Specifies the vendor to be operated upon.  ----vvvv  and  its
+          arguments must appear last on the command line.
+
+
+
+
+NetLS Version 2           Last change:                          5
+
+
+
+
+
+
+ls_admin(1M)          Maintenance Commands           ls_admin(1M)
+
+
+
+     ----pppp   Specifies the product to be operated upon. ----pppp  and  its
+          arguments must appear last on the command line.
+
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEE FFFFOOOORRRRMMMMAAAATTTTSSSS
+     NNNNooootttteeee:::: In the following examples, argument items  represented
+     by terms such as vendor_name and product_name must appear in
+     the command line separated by spaces. If  a  given  argument
+     item  contains  spaces, it must be enclosed in double quotes
+     ("). For example, a vendor_name  like  Acme  Firmware,  Inc.
+     must  appear  in  the  actual command line as Acme Firmware,
+     Inc." Also, vendor and product names must be case-correct.
+
+     1. To add a vendor:
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----aaaa ----vvvv  vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee
+     vvvveeeennnnddddoooorrrr____iiiidddd  vvvveeeennnnddddoooorrrr____ppppaaaasssssssswwwwoooorrrrdddd
+
+     2222.... TTTToooo aaaadddddddd aaaa pppprrrroooodddduuuucccctttt oooorrrr aaaaddddddddiiiittttiiiioooonnnnaaaallll lllliiiicccceeeennnnsssseeeessss::::
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----aaaa  [[[[----llll aaaannnnnnnnoooottttaaaattttiiiioooonnnn]]]]
+     ----pppp vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee  pppprrrroooodddduuuucccctttt____nnnnaaaammmmeeee  pppprrrroooodddduuuucccctttt____ppppaaaasssssssswwwwoooorrrrdddd  pppprrrroooodddduuuucccctttt____vvvveeeerrrrssssiiiioooonnnn
+
+     NNNNooootttteeee:::: The ----llll aaaannnnnnnnoooottttaaaattttiiiioooonnnn parameter must be included for those
+     products having annotations.
+
+     3. To show servers:
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----ssss
+
+     4444.... TTTToooo sssshhhhoooowwww vvvveeeennnnddddoooorrrrssss::::
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----ssss ----vvvv [[[[vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee]]]]
+
+     NNNNooootttteeee::::If vendor-name is not specified, this command shows all
+     vendors  at  the  specified server, or at the default server
+     (the one on the node the command is run from) if  no  server
+     is specified.
+
+     5. To show all products for a single vendor at the specified
+     server:
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----ssss ----pppp vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee
+
+     6666.... TTTToooo sssshhhhoooowwww aaaallllllll lllliiiicccceeeennnnsssseeeessss ffffoooorrrr aaaallllllll vvvveeeerrrrssssiiiioooonnnnssss ooooffff aaaa ssssppppeeeecccciiiiffffiiiieeeedddd pppprrrroooo----
+     dddduuuucccctttt ooooffff aaaa ssssppppeeeecccciiiiffffiiiieeeedddd vvvveeeennnnddddoooorrrr::::
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----ssss ----pppp vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee pppprrrroooodddduuuucccctttt____nnnnaaaammmmeeee
+
+     7777.... TTTToooo sssshhhhoooowwww aaaa ssssppppeeeecccciiiiffffiiiieeeedddd vvvveeeerrrrssssiiiioooonnnn ooooffff aaaa ssssppppeeeecccciiiiffffiiiieeeedddd pppprrrroooodddduuuucccctttt  ooooffff  aaaa
+     ssssppppeeeecccciiiiffffiiiieeeedddd vvvveeeennnnddddoooorrrr::::
+
+
+
+
+NetLS Version 2           Last change:                          6
+
+
+
+
+
+
+ls_admin(1M)          Maintenance Commands           ls_admin(1M)
+
+
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]]  ----rrrr vvvveeeerrrrssssiiiioooonnnn
+      ----ssss ----pppp vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee pppprrrroooodddduuuucccctttt____nnnnaaaammmmeeee
+
+     8888.... TTTToooo ccccooooppppyyyy aaaa vvvveeeennnnddddoooorrrr ffffrrrroooommmm aaaannnnooootttthhhheeeerrrr sssseeeerrrrvvvveeeerrrr::::
+
+     llllssss____aaaaddddmmmmiiiinnnn ----ffff nnnnooooddddeeee____nnnnaaaammmmeeee ----vvvv vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee
+
+     9999.... TTTToooo ddddeeeelllleeeetttteeee aaaa vvvveeeennnnddddoooorrrr::::
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----dddd ----vvvv vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee
+
+     NNNNooootttteeee:::: You cannot delete a vendor  who  has  products  listed
+     (that is, you must delete all the products first).
+
+     10. To delete a product:
+
+     llllssss____aaaaddddmmmmiiiinnnn [[[[----nnnn nnnnooooddddeeee____nnnnaaaammmmeeee]]]] ----dddd ----pppp vvvveeeennnnddddoooorrrr____nnnnaaaammmmeeee pppprrrroooodddduuuucccctttt____nnnnaaaammmmeeee ttttiiiimmmmeeeessssttttaaaammmmpppp
+
+     NNNNooootttteeee:::: Products must be deleted one at a time  and  are  dis-
+     tinguished by their timestamps.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NetLS Version 2           Last change:                          7
+
+
+

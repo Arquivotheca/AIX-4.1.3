@@ -1,0 +1,88 @@
+*@(#)53  1.1  src/bos/objclass/POWER/memory.sys.memory.add, cfgmethods, bos411, 9428A410j 12/2/93 13:54:09
+* 
+*  COMPONENT_NAME: (CFGMETHODS) memory.sys.memory.add
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+* memory card
+PdDv:
+	type = memory
+	class = memory
+	subclass = sys
+	prefix = mem
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x812
+	setno = 1
+	msgno = 0
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = memory/sys/memory
+
+PdAt:
+	uniquetype = "memory/sys/memory"
+	attribute = "size"
+	deflt = "0"
+	values = "0-512,1"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nr"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "memory/sys/memory"
+	attribute = "type"
+	deflt = "0x0"
+	values = "0x0-0xffffffff,0x1"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nr"
+	nls_index = 12
+
+PdAt:
+	uniquetype = "memory/sys/memory"
+	attribute = "cardec"
+	deflt = "0x0"
+	values = "0x0-0xffffffff,0x1"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nr"
+	nls_index = 13
+
+PdAt:
+	uniquetype = "memory/sys/memory"
+	attribute = "desc"
+	deflt = "6"
+	values = "6,30,31,32,33,34,35,36"
+	width = ""
+	type = "T"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+

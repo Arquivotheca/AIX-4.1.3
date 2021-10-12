@@ -1,0 +1,110 @@
+#
+# @(#)37        1.1  src/bldenv/man/cptools.dat.man, bldtools, bos412, GOLDA411a 5/11/93 16:16:33
+#
+#  COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#  FUNCTIONS: cptools.dat man page.
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  $BLDENV/usr/bin/cptools.dat
+
+    Format of this file is:
+
+      <type>:<text>
+
+    Lines beginning with # are ignored.  The cptools command finds all
+    lines in a <type> class.  The <text> portion of each line in the
+    <type> class is evaluated with 'eval'.  For each evaluated line cptools
+    takes the action described for <type>.
+
+    Since the <text> is evaluated with 'eval' all characters special to the
+    shell must be escaped with a '\'.
+
+    Below are the values of <type>.  Values to the right of the first ':'
+    are the <text> values.
+
+    builder:<user>@<host>
+
+      List of  users that should receive notification each time cptools
+      is run.  The user's login name is specified by <user> and the
+      user's system name is <host>.
+
+      Examples:
+        builder:build@tycobb.austin.ibm.com
+        builder:area_build@remote.austin.ibm.com
+        builder:build@build
+
+    directory:[[<user>@]<host>]:<directory> [[<user>@]<host>]:<directory>
+
+      List of directories to copy.  Contents of the directory specified
+      on the left are copied to the directory specified on the right.
+      The user's login name the copy should be performed as is specified
+      by <user>, the system the directory is located on is specified 
+      by <host> and the directory is specified by <directory>.
+
+      Examples:
+        directory:${HOSTSFILE_PROD}/bin ${HOSTSFILE_AFSBASE}/build/bin
+        directory:${HOSTSFILE_PROD}/etc ${HOSTSFILE_AFSBASE}/build/etc
+        directory:${HOSTSFILE_PROD}/lib ${HOSTSFILE_AFSBASE}/build/lib
+        directory:${HOSTSFILE_PROD}/usr ${HOSTSFILE_AFSBASE}/build/usr
+        directory:${HOSTSFILE_PROD}/bin tycobb:${BLDENV}/bin
+        directory:${HOSTSFILE_PROD}/etc tycobb:${BLDENV}/etc
+        directory:${HOSTSFILE_PROD}/lib tycobb:${BLDENV}/lib
+        directory:${HOSTSFILE_PROD}/usr tycobb:${BLDENV}/usr
+      The first four entries copy bin, etc, lib and usr from the directory
+      specified by ${HOSTSFILE_PROD} to the directory specified by
+      ${HOSTSFILE_AFSBASE}.  The next four entries copy bin , etc, lib and
+      usr from the directory specified by ${HOSTSFILE_PROD} to the
+      directory specified by ${BLDENV} on the machine tycobb.
+
+    file:[[<user>@]<host>]:<file> [[<user>@]<host>]:<file>
+
+      List of files to copy.  The file specified on the left is copied
+      to the file specified on the right.  The user's login name the copy
+      should be performed as is specified by <user>, the system the file
+      is located on is specified by <host> and the file is specified by
+      <file>.
+
+      Examples:
+        file:${HOSTSFILE_PROD}/usr/bin/README_afs ${HOSTSFILE_AFSBASE}/README
+        file:${HOSTSFILE_PROD}/usr/bin/README_afs tycobb:${BLDENV}/README
+      The first entry copies the file ${HOSTSFILE_PROD}/usr/bin/README_afs
+      to ${HOSTSFILE_AFSBASE}/README.  The second entry copies the file
+      ${HOSTSFILE_PROD}/usr/bin/README_afs to ${BLDENV}/README on the
+      machine tycobb.
+
+    message:<text>
+
+      When cptools has finished this message will be sent to builders
+      listed in the builder <type>.
+
+      Examples:
+        message:attention build coordinator:
+        message:
+        message:Please be informed that the 3.2 build environment in
+        message:${HOSTSFILE_AFSBASE}/build
+        message:has been updated.
+        message:
+        message:PIB
+        message:\(Production Integration Build Team\)
+      Blank lines are created by having just the message <type>.  The
+      environment variable ${HOSTSFILE_AFSBASE} will be evaluated before
+      the message is sent.  Note the '\' before '(' and ')'; this
+      prevents the call to eval from evaluating the message as a subshell.
+      The '\' will not appear in the final message.
+
+    subject:<text>
+
+      When cptools has finished this will be the subject of the mail message
+      sent to builders listed in the builder <type>.
+
+      Examples:
+        subject:3.2 Build Environment copied to AFS.

@@ -1,0 +1,263 @@
+# @(#)77        1.2  src/bos/objclass/POWER/tape.scsi.9trk.add, cfgmethods, bos41J, 9513A_all 3/24/95 16:21:44
+*
+*  COMPONENT_NAME: (CFGMETHODS) SCSI TAPE PREDEFINED DATA STANZAS
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 27
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = 9trk
+	class = tape
+	subclass = scsi
+	prefix = rmt
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x970
+	setno = 54
+	msgno = 3
+	fru = 1
+	catalog = devices.cat
+	DvDr = tape
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsctape
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = tape/scsi/9trk
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = mode
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 5
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = block_size
+	deflt = 1024
+	values = "0-262144,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 6
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = extfm
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = ret
+	deflt = no
+	values = no
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = model_map
+	deflt = "10109348 MODEL 001  ,0808IBM     "
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = maxlun
+	deflt = 0
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = dev_type
+	deflt = 2
+	values = 2
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = min_read_error
+	deflt = 20
+	values = 20
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = min_write_error
+	deflt = 9
+	values = 9
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = read_ratio
+	deflt = 0x3b9aca00
+	values = 0x3b9aca00
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = write_ratio
+	deflt = 0x05F5E100
+	values = 0x05F5E100
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = mode_data
+	deflt = 0x000010080000000000000400
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = res_support
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = var_block_size
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = density_set_1
+	deflt = 3
+	values = "0,2,3"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 12
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = density_set_2
+	deflt = 2
+	values = "0,2,3"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 13
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = vpd_map
+	deflt = "MF0808C,TM1010C,SN2707C,Z00008X,Z12004C"
+	values = ""
+	width = ""
+	type = V
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = pm_dev_itime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/9trk
+	attribute = pm_dev_stime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+        uniquetype = tape/scsi/9trk
+        attribute = pm_device_id
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x0018
+4000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b0
+00,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0

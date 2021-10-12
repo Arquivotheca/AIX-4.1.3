@@ -1,0 +1,46 @@
+#!/bin/bsh
+# @(#)30	1.6  src/bos/usr/bin/uucp/uudemon.admin, cmduucp, bos411, 9428A410j 9/30/93 15:53:16
+# 
+# COMPONENT_NAME: CMDUUCP uudemon.admin
+# 
+# FUNCTIONS: then, tmp/u 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#	uucp:uudemon.admin	1.2
+#
+#	This shell sends uucp status information to an administrator.
+#	It should started by 'cron' from a line in
+#	  /var/spool/cron/crontabs/uucp.
+#	e.g.
+#
+# 48 8,12,16 * * * /bin/su uucp -c "/usr/sbin/uucp/uudemon.admin" > /dev/null
+#
+set +e
+
+export PATH
+PATH=/bin:/usr/bin
+MAILTO=uucp
+LOGDIR=/var/spool/uucp/.Log
+ULOG=$LOGDIR/uucico
+TMP=/tmp/uu$$
+
+(uustat -p; uustat -q) > $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: uu-status"; cat $TMP) | rmail $MAILTO
+fi
+grep passwd $ULOG/* > $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: passwd check"; cat $TMP) | rmail $MAILTO
+fi
+rm $TMP

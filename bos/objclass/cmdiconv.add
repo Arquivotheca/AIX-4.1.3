@@ -1,0 +1,253 @@
+# @(#)84        1.5  src/bos/objclass/cmdiconv.add, cmdiconv, bos411, 9428A410j 5/5/94 15:23:46
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDICONV                                                     #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27                                                                 #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1991                     #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+################################################################################
+
+################################################################################
+#									       #
+#	COMMANDS:  iconv						       #
+#									       #
+################################################################################
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Manage Language Environment                               #
+#                        Convert Files                                         #
+#                            Convert Flat File                                 #
+#                                                                              #
+# FAST KEY:  fficonv                                                           #
+#									       #
+# UNIX COMMAND(S):  iconv                                                      #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   2 dialogue objects 			                               #
+#                                                                              #
+# HEADER:  Convert Flat File  	                                               #
+#                                                                              #
+# OBJECTS:  1.  Current File Name                                              #
+#           2.  Current Code Set               	                               #
+#           3.  New File Name               	                               #
+#           4.  New Code Set               	                               #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "fficonv"
+	option_id               = "iconvOpts"
+	has_name_select         = "n"
+	name                    = "Convert Flat File"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 43
+	name_msg_id             = 10
+	cmd_to_exec             = "x(){
+if [ ! -r $5 ]
+then
+	dspmsg iconv.cat -s 2 1 'Cannot read %s.\n' $5 >&2
+	exit 1
+fi
+if [ -d $5 ]
+then
+	if [ -f $6 ]
+	then
+		dspmsg iconv.cat -s 2 2 '%s must be a directory.\n' $6 >&2
+		exit 1
+	fi
+	if [ ! -d $6 ]
+	then
+		mkdir $6
+		if [ $? -ne 0 ]
+		then
+		    dspmsg iconv.cat -s 2 3 'Cannot make directory %s.\n' $6 >&2
+			exit 1
+		fi
+	fi
+	if [ ! -w $6 ]
+	then
+		dspmsg iconv.cat -s 2 4 'Cannot write to %s.\n' $6 >&2
+		exit 1
+	fi
+	wd=`pwd`
+	cd $5
+	ret=1
+	for i in *
+	do
+		if [ -d $i ]
+		then
+dspmsg iconv.cat -s 2 5 'The directory %1$s/%2$s was not converted.\n' $5 $i >&2
+		else
+			iconv $1 $2 $3 $4 $i > /tmp/smit.iconv$$
+			if [ $? -eq 0 ]
+			then
+				cd $wd
+				cp /tmp/smit.iconv$$ $6/$i
+				cd $5
+				ret=0
+			else
+dspmsg iconv.cat -s 2 6 'The file %1$s/%2$s was not converted.\n' $5 $i >&2
+			fi
+			rm -f /tmp/smit.iconv$$
+		fi
+	done
+	exit $ret
+else
+	iconv $1 $2 $3 $4 $5 > /tmp/smit.iconv$$
+	ret=$?
+	if [ $ret -eq 0 ]
+	then
+		if [ ! -d $6 ]
+		then
+			cp /tmp/smit.iconv$$ $6
+			if [ $? -ne 0 ]
+			then
+				ret=1
+			fi
+		else
+			cp /tmp/smit.iconv$$ $6/`basename $5`
+			if [ $? -ne 0 ]
+			then
+				ret=1
+			fi
+		fi
+        else
+           dspmsg -s 44 smit.cat 270 \\
+             'Error : The codeset conversion from %1$s to %2$s failed.\n' $2 $4 >&2
+        fi
+	rm -f /tmp/smit.iconv$$
+	exit $ret
+fi
+}
+x"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "1800575"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "iconvOpts"
+	id_seq_num          = "010"
+	disc_field_name     = ""
+	name                = "CURRENT FILE / DIRECTORY name"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 43
+	name_msg_id         = 20
+	op_type             = ""
+	entry_type          = "t"
+	entry_size          = 256
+	required            = "+"
+	prefix              = "--"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "07911"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "iconvOpts"
+	id_seq_num          = "020"
+	disc_field_name     = ""
+	name                = "CURRENT CODE set"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 43
+	name_msg_id         = 30
+	op_type             = "l"
+	entry_type          = "t"
+	entry_size          = 256
+	required            = "+"
+	prefix              = "-f "
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "echo ISO8859-1; echo IBM-850; echo IBM-eucJP; echo IBM-932"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "07912"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "iconvOpts"
+	id_seq_num          = "030"
+	disc_field_name     = ""
+	name                = "NEW FILE / DIRECTORY name"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 43
+	name_msg_id         = 40
+	op_type             = ""
+	entry_type          = "t"
+	entry_size          = 256
+	required            = "+"
+	prefix              = "--"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "07913"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "iconvOpts"
+	id_seq_num          = "040"
+	disc_field_name     = ""
+	name                = "NEW CODE set"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 43
+	name_msg_id         = 50
+	op_type             = "l"
+	entry_type          = "t"
+	entry_size          = 256
+	required            = "+"
+	prefix              = "-t "
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "echo ISO8859-1; echo IBM-850; echo IBM-eucJP; echo IBM-932"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "07914"
+	help_msg_loc        = ""
+

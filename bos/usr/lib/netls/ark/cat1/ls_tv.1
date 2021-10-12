@@ -1,0 +1,132 @@
+
+
+
+ls_tv(1M)             Maintenance Commands              ls_tv(1M)
+
+
+
+NNNNAAAAMMMMEEEE
+     llllssss____ttttvvvv - Verify that Network License Servers are working
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     llllssss____ttttvvvv
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The llllssss____ttttvvvv tool requests a concurrent-access license  from  a
+     license server and prints a list of active license servers.
+
+     If you can run llllssss____ttttvvvv successfully but  are  still  having  a
+     problem  with  a  licensed  product, the problem is probably
+     with the licenses, or possibly with the product  itself:  in
+     this  case, talk to the vendor of the licensed software pro-
+     duct.
+
+     If you can't run llllssss____ttttvvvv successfully and receive one  of  the
+     error  messages  listed  below,  use  the explanation of the
+     error to fix the problem. Then try running llllssss____ttttvvvv again.
+
+     If you can't run llllssss____ttttvvvv successfully  and  receive  an  error
+     that's  not  listed  below, it means there is a problem with
+     the software on which LSSERVER is layered (for example,  TCP
+     or NCS), or a hardware problem.
+
+EEEERRRRRRRROOOORRRR MMMMEEEESSSSSSSSAAAAGGGGEEEESSSS
+     netls_no_svrs_found
+          Either no license servers are running, or  someone  has
+          deleted the vendor Apollo from license servers.
+
+     netls_license_not_found
+          Someone has deleted the licenses for llllssss____ttttvvvv; this prohi-
+          bits anyone from using the test and verification tool.
+
+     netls_not_authorized
+          Someone has edited the user file to restrict the use of
+          llllssss____ttttvvvv.
+
+     netls_bad_timestamp
+          Node clocks have not been  synchronized  to  within  12
+          hours.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     1.  Run the LSSERVER test and verification tool:
+
+     ls_tv
+
+     LS_TV Version 2.0 -- NetLS Test and Verification Tool
+     (c) Copyright 1991, Hewlett-Packard Company, All Rights Reserved
+     (c) Copyright 1991, Gradient Technologies Inc., All Rights Reserved
+     Completed license transaction on node  1f9a4 running NetLS  2.0
+     Active NetLS Servers:
+
+
+
+NetLS Version 2           Last change:                          1
+
+
+
+
+
+
+ls_tv(1M)             Maintenance Commands              ls_tv(1M)
+
+
+
+         venus (HP-UX) running NetLS 2.0
+         mars (DomainOS SR 10.3) running NetLS 2.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NetLS Version 2           Last change:                          2
+
+
+

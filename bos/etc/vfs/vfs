@@ -1,0 +1,28 @@
+# @(#)vfs  @(#)77	1.20  src/bos/etc/vfs/vfs, cmdfs, bos411, 9428A410j 6/7/91 07:47:30
+#
+# COMPONENT_NAME: CFGETC
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 27 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# this file describes the known virtual file system implementations.
+# format: (the name and vfs_number should match what is in <sys/vmount.h>)
+#
+# The standard helper directory is /etc/helpers
+#
+# name	vfs_number mount_helper filsys_helper
+#
+# Uncomment the following line to specify the local or remote default vfs.
+%defaultvfs	jfs	nfs
+#
+cdrfs	5	none			none
+jfs     3       none    		/sbin/helpers/v3fshelper
+nfs	2	/sbin/helpers/nfsmnthelp	none			remote

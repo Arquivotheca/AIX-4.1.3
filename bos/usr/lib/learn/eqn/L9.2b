@@ -1,0 +1,33 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Which equation prints a longer bar?
+
+   xyz sub i bar
+
+or
+
+   x yz sub i bar
+
+Type "answer N", where N is 1 if it's
+the first one, 2 if it's the second, and
+0 if they are the same length.
+#copyin
+#user
+#uncopyin
+#match 0
+#log
+#next
+10.1a 10
+9.3b 5

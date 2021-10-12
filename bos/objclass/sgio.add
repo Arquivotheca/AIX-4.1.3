@@ -1,0 +1,117 @@
+# @(#)66   1.1  src/bos/objclass/sgio.add, inputdd, bos41J, 9510A_all 2/28/95 17:34:57
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#  Predefined stanza file for Serial GIO devices
+#
+
+PdDv:
+	type = "dials"
+	class = "dial"
+	subclass = "sgio"
+	prefix = "dials"
+	devid = ""
+	base = "0"
+	has_vpd = "0"
+	detectable = "0"
+	chgstatus = "1"
+	bus_ext = "0"
+	inventory_only = "0"
+	fru = "1"
+	led = "0x929"
+	setno = "24"
+	msgno = "6"
+	catalog = "devices.cat"
+	DvDr = "sgiodd"
+	Define = "/usr/lib/methods/define -n"
+	Configure = "/usr/lib/methods/cfgsgio"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = "dial/sgio/dials"
+
+PdDv:
+	type = "lpfkeys"
+	class = "lpfk"
+	subclass = "sgio"
+	prefix = "lpfk"
+	devid = ""
+	base = "0"
+	has_vpd = "0"
+	detectable = "0"
+	chgstatus = "1"
+	bus_ext = "0"
+	inventory_only = "0"
+	fru = "1"
+	led = "0x930"
+	setno = "24"
+	msgno = "5"
+	catalog = "devices.cat"
+	DvDr = "sgiodd"
+	Define = "/usr/lib/methods/define -n"
+	Configure = "/usr/lib/methods/cfgsgio"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = "lpfk/sgio/lpfkeys"
+
+PdAt:
+	uniquetype = "lpfk/sgio/lpfkeys"
+	attribute = "autoconfig"
+	values = "available,defined"
+	deflt = "available"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "ls"
+	nls_index = "7"
+	
+PdAt:
+	uniquetype = "lpfk/sgio/lpfkeys"
+	attribute = "ttydevice"
+	values = ""
+	deflt = ""
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = ""
+	
+PdAt:
+	uniquetype = "dial/sgio/dials"
+	attribute = "autoconfig"
+	deflt = "available"
+	values = "available,defined"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "ls"
+	nls_index = "7"
+
+PdAt:
+	uniquetype = "dial/sgio/dials"
+	attribute = "ttydevice"
+	values = ""
+	deflt = ""
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = ""
+	

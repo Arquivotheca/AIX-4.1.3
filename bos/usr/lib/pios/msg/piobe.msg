@@ -1,0 +1,2319 @@
+$ @(#)65	1.34.1.1  src/bos/usr/lib/pios/msg/piobe.msg, cmdpios, bos411, 9431A411a 8/1/94 18:24:38
+$
+$   COMPONENT_NAME: (CMDPIOS) PRINTER BACKEND
+$
+$   FUNCTIONS: none
+$
+$   ORIGINS: 27
+$
+$   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+$   combined with the aggregated modules for this product)
+$                    SOURCE MATERIALS
+$
+$   (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+$   All Rights Reserved
+$   US Government Users Restricted Rights - Use, duplication or
+$   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+$
+$
+$set 1
+$ **************************************************************************
+$       Messages for run time commands (piobe, pioformat, etc.)
+$ **************************************************************************
+$
+$       Messages Used From Command Line (do not change set # or msg #)
+$
+MSG01 \
+0782-001 Input data type %s is not valid\n\
+\tRefer to the -d flag option for the qprt command.\n
+$
+$       Messages NOT Used From Command Line
+$
+MSG_MALLOC \
+0782-002 There is not enough memory available now.\n\
+\tTry again later or\n\
+\tuse local problem reporting procedures.\n
+$
+MSG_ATTRNAME \
+0782-003 Cannot find attribute name %6$.2s in the data base.\n\
+\t   The program name is %2$s\n\
+\t   The subroutine name is %3$s\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_LOADFAIL \
+0782-004 Cannot load print formatter.\n\
+\t   The program name is %2$s\n\
+\t   The print formatter name is %6$s\n\
+\t   The errno (error number) from the load system call is %8$d\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_DATATYPE \
+0782-005 Member name datatype in attrparms structures passed to the \n\
+\t piogetvals subroutine must have a value of VAR_INT or VAR_STR.\n\
+\t   The name of the program is %2$s\n\
+\t   The name of the subroutine is %3$s\n\
+\t   The attribute name is %6$.2s\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BADFLAG \
+0782-006 -%6$.1s flag not supported for the print file type, printer language,\n\
+\t and printer type selected for the print job.  Check the flags.\n
+$
+MSG_NOARG1 \
+0782-007 Flag -%6$.1s has no parameter value.\n\
+\tUsage: pioformat -@ DataBaseFileName [-! FormatterName] [-#+] [-$+]\n\
+\tDrives a printer formatter.\n
+$
+MSG_NOARG2 \
+0782-008 Flag -%6$.1s has no parameter value.\n\
+\tCheck the flag parameter value.\n
+$
+MSG_DBASEFLAG \
+0782-009 -@ flag not specified.\n\
+\tUsage: pioformat -@ DataBaseFileName [-! FormatterName] [-#+] [-$+]\n\
+\tDrives a printer formatter.\n
+$
+MSG_DBASENAME \
+0782-010 Cannot find digested data base file for printer.\n\
+\t   The command name is %2$s\n\
+\t   The file name is %6$s\n\
+\t Check the value specified for the -@ flag.\n
+$
+MSG_BADARG \
+0782-011 The parameter value specified with the -%6$.1s flag is not valid.\n\
+\tUsage: pioformat -@ DataBaseFileName [-! FormatterName] [-#+] [-$+]\n\
+\tDrives a printer formatter.\n
+$
+MSG_FMTRNAME \
+0782-012 Name of print formatter not specified with either\n\
+\tmf attribute name in data base or with -! flag on command line.\n\
+\tUsage: pioformat -@ DataBaseFileName [-! FormatterName] [-#+] [-$+]\n\
+\tDrives a printer formatter.\n
+$
+MSG_TOPMARG \
+0782-013 Value for top margin is not valid. The top margin\n\
+\tmust be less than the page length and must not be negative.\n\
+\tCheck the value specified for the top margin.\n
+$
+MSG_BOTMARG \
+0782-014 Value for bottom margin is not valid. The bottom margin\n\
+\tmust be less than the page length and must not be negative.\n\
+\tCheck the value specified for the bottom margin.\n
+$
+MSG_TOPBOT \
+0782-015 Top and bottom margins must not overlap and\n\
+\tmust not fill the entire page length.\n\
+\tCheck the values specified for the top and bottom margins.\n
+$
+MSG_PAGELEN \
+0782-016 Value for page length is not valid. The page length must be a\n\
+\tpositive integer or must be zero if pagination is not wanted.\n\
+\tCheck the value specified for the page length.\n
+$
+MSG_SECUR \
+0782-017 Top or bottom margin is too large for security \n\
+\tlabels to fit on page.\n\
+\tCheck the values specified for the top and bottom margins.\n
+$
+MSG_DBOPENFAIL \
+0782-018 Cannot open digested data base file for printer.\n\
+\t   The command name is %2$s\n\
+\t   The file name is %6$s\n\
+\t   The errno (error number) from the open system call is %8$d\n\
+\t Check the print queue and queue device names that were specified, or\n\
+\t use local problem reporting procedures.\n
+$
+MSG_NOTDBFILE \
+0782-019 File is not a digested data base file for printer.\n\
+\t   The command name is %2$s\n\
+\t   The file name is %6$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_FMTLEVEL \
+0782-020 Digested data base file for printer has incompatible format level.\n\
+\t   The command name is %2$s\n\
+\t   The file name is %6$s\n\
+\t   The file format level is %7$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_DBREADFAIL \
+0782-021 Cannot read digested data base file for printer.\n\
+\t   The command name is %2$s\n\
+\t   The file name is %6$s\n\
+\t   The errno (error number) from the read system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_ESC_ND \
+0782-022 The character following a %%n operator (where n is 1 - 9) in a\n\
+\t data base attribute value string must be the character d.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The incorrect character is %7$.1s\n\
+\t   The character offset into the the attribute value string is %8$d\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BADQUOTE \
+0782-023 Parameter values specified with flags cannot contain unprotected\n\
+\tsingle or double quote characters. An unprotected quote character\n\
+\tis a quote character not immediately preceded by an odd number\n\
+\t(1,3,5, ...) of backslash characters.\n\
+\t   The flag name is %6$.1s\n\
+\t   The parameter value is %7$s\n\
+\tCheck the paramter value.\n\
+\tNote: The shell that processed your command may have removed backslash\n\
+\t      characters from the parameter value that you typed.\n
+$
+MSG_PIOBECMD \
+0782-024 The piobe command must be invoked only by the spooler's\n\
+\tqdaemon.  It is dependent on services provided by the qdaemon and\n\
+\tcannot run without them.  To cause the qdaemon to invoke piobe, refer\n\
+\tto the qprt, lp, lpr, and enq commands.\n
+$
+MSG_DIRFAIL \
+0782-025 Cannot open directory for digested data base file.\n\
+\t   The command name is %2$s\n\
+\t   The directory name is %6$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_DBASENAME2 \
+0782-026 A virtual printer has not been configured for\n\
+\tprint queue and queue device %6$s:%7$s\n\
+\tRefer to the mkvirprt command, or\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_PREVIEW \
+0782-027 Preview option value not recognized. The value must be 0 or 1.\n\
+\tCheck the parameter value specified with the -a flag.\n
+$
+MSG_DIAGLEVEL \
+0782-028 Diagnostic level not recognized. The value must be 0, 1, or 2.\n\
+\tCheck the parameter value specified with the -A flag.\n
+$
+MSG_FOPEN \
+0782-029 Cannot open a temporary file.\n\
+\t   The file name is %6$s\n\
+\t   The errno (error number) from the open system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_TEMPNAM \
+0782-030 Cannot get temporary file name from tempnam subroutine.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_DATASTREAM \
+0782-031 Value for input datastream type not recognized.\n\
+\tCheck the parameter value specified with the -d flag.\n
+$
+MSG_FILTER \
+0782-032 Unrecognized filter identifier.\n\
+\tCheck the parameter value specified with the -f flag.\n
+$
+MSG_ATTRFAIL \
+0782-033 Cannot find attribute name %6$.2s in the data base.\n\
+\t   The program name is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_PREVIEWHDR \
+0782-034 Below is the preview information requested with the -a1 flag.\n\
+\t No files will be printed.\n\n
+$
+MSG_FLAGVALSHDR \
+FLAG VALUES:\n
+$
+MSG_DOCPIPE2 \
+PIPELINE OF FILTERS:\n
+$
+MSG_ZERODIVIDE \
+0782-035 Cannot divide by zero with %%/ operator in data base attribute\n\
+\t value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The character offset into the the attribute value string is %8$d\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BADFLAG2 \
+0782-036 -%c is not a recognized flag for the pioout command.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_BADSTRING \
+0782-037 String specified with -%c flag for pioout command is not valid.\n\
+\tThe string must be of the form \\xxx\\xxx ..., where x is an octal digit.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_FOPEN2 \
+0782-038 Cannot open file specified with -%1$c flag for pioout command.\n\
+\t   The file name is %2$s\n\
+\t   The errno (error number) from the open system call is %3$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_LOAD2 \
+0782-039 Cannot load printer read routine specified\n\
+\t with -%1$c flag for pioout command.\n\
+\t   The printer read routine is %2$s\n\
+\t   The errno (error number) from the load system call is %3$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_FOPEN3 \
+0782-040 Cannot open print file.\n\
+\t   The file name is %6$s\n\
+\t   The errno (error number) from the open system call is %8$d\n\
+\t Check the file name specified with your print request.\n
+$
+MSG_STAT \
+0782-041 Cannot access print file.\n\
+\t   The file name is %6$s\n\
+\t   The errno (error number) from the stat system call is %8$d\n\
+\t Check the file name specified with your print request.\n
+$
+MSG_STAT2 \
+0782-042 Cannot access file %6$s\n\
+\t   The errno (error number) from the stat system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_MAXFILES \
+0782-043 Cannot specify more than %8$d print files\n\
+\tCheck the number of files specified with your print request\n
+$
+MSG_DIAGHDR \
+0782-045 DIAGNOSTIC INFORMATION:\n\n
+$
+MSG_STDERR \n\
+==>    ABOVE IS STANDARD ERROR OUTPUT     <==\n\
+==> GENERATED BY THE PIPELINE SHOWN BELOW <==\n\n
+$
+MSG_SPOOLHDR \
+=====> MESSAGE FROM PRINT JOB %1$s <=====\n
+$
+MSG_PIOBURST \
+0782-046 The pioburst command must be run under the spooler's qdaemon.\n\
+\tIt is dependent on services provided by the qdaemon and cannot run\n\
+\twithout them.  It is normally run in a pipeline invoked by the Print\n\
+\tJob Manager, piobe.\n
+$
+MSG_BURSTARG \
+0782-047 Either the -h flag or the -t flag (but not both) must be\n\
+\tspecified with the pioburst command.\n\
+\tUsage: pioburst [-H Hostname] TextFile\n\
+\tGenerates a burst (header or trailer) page for printer output.\n
+$
+MSG_BURSTARG2 \
+0782-048 Flag -%c has no parameter value.\n\
+\tUsage: pioburst [-H Hostname] TextFile\n\
+\tGenerates a burst (header or trailer) page for printer output.\n
+$
+MSG_BURSTBAD \
+0782-049 -%c is not a recognized flag for the pioburst command.\n\
+\tUsage: pioburst [-H Hostname] TextFile\n\
+\tGenerates a burst (header or trailer) page for printer output.\n
+$
+MSG_BURSTOPEN \
+0782-050 Cannot access text file specified with pioburst command.\n\
+\t   The file name is %1$s\n\
+\t   The errno (error number) from the open system call is %2$d\n\
+\t Check the file name specified with the -h or -t flag.\n
+$
+MSG_HDRPIPE \
+PIPELINE FOR HEADER PAGE:\n
+$
+MSG_TRLPIPE \
+PIPELINE FOR TRAILER PAGE:\n
+$
+MSG_DOCPIPE \
+PIPELINE FOR PRINT FILE %s:\n
+$
+MSG_PROHIBFLAG \
+0782-051 Cannot specify -%6$.1s flag.\n\
+\tUsage of the flag has been prohibited by the system administrator.\n\
+\tFor information about the flag, refer to the qprt command.\n
+$
+MSG_IOCTL \
+0782-052 Cannot access printer.\n\
+\t   The device name is %1$s\n\
+\t   The errno (error number) from the ioctl system call is %2$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_READ \
+0782-053 Error detected during read from printer.\n\
+\t   The device name is %1$s\n\
+\t   The errno (error number) from the read system call is %2$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_WRITE \
+0782-054 Error detected during output to printer.\n\
+\t   The device name is %1$s\n\
+\t   The errno (error number) from the write system call is %2$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_ERROR \
+0782-055 Error detected during output to printer %1$s\n\
+\t LPQUERY status: %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_PAPER \
+0782-056 Printer %1$s needs paper.\n\
+\tCheck the printer.\n
+$
+MSG_INTREQ \
+0782-057 Printer %1$s needs attention.\n\
+\tCheck the printer.\n
+$
+MSG_TRLCLEANUP \
+PIPELINE FOR TRAILER PAGE WHEN PRINT JOB TERMINATES EARLY:\n
+$
+MSG_ALIGN \
+PIPELINE FOR SENDING FORM FEED TO ALIGN PAPER AFTER PRINTER WAS IDLE:\n
+$
+MSG_FEED \
+PIPELINE FOR FEEDING PAPER OUT WHEN PRINTER GOES IDLE:\n
+$
+MSG_BINDFAIL \
+0782-058 Cannot bind print formatter.\n\
+\t   The program name is %2$s\n\
+\t   The print formatter name is %6$s\n\
+\t   The errno (error number) from the loadbind system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BADATTR \
+0782-059 Attribute name passed to subroutine %3$s\n\
+\t by program %2$s is not valid.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_CLOSEBRACK \
+0782-060 Cannot find matching closing bracket for %%%7$.1s operator\n\
+\t in data base attribute value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The opening bracket is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_NOFLAGLETTER \
+0782-061 No flag letter follows opening bracket for %%%7$.1s operator\n\
+\t in data base attribute value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The opening bracket is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_NOATTRNAME \
+0782-062 No attribute name follows opening bracket for %%%7$.1s operator\n\
+\t in data base attribute value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The opening bracket is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BADATTR2 \
+0782-063 Attribute name specified for %%%7$.1s operator\n\
+\t in data base attribute value string is not valid.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The attribute name specified for the %%%7$.1s operator\n\
+\t   is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_NOTSTRING \
+0782-064 An attribute name specified for a %%%7$.1s operator in\n\
+\t a data base attribute value string must represent either a\n\
+\t string constant or a string variable, not an integer variable.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The attribute name specified for the %%%7$.1s operator\n\
+\t   is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_CLOSEQUOTE \
+0782-065 Closing quote is missing from character constant in data base\n\
+\t attribute value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The closing quote is expected at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_CLOSEBRACE \
+0782-066 Cannot find closing brace for %%{ operator in data base attribute\n\
+\t value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The opening brace is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BADSEQ \
+0782-067 The %%%7$.1s operator is not valid in a data base attribute\n\
+\t value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_NOENDING1 \
+0782-068 Cannot find ending %%; for %%%7$.1s operator in data base\n\
+\t attribute value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The %%%7$.1s operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_NOENDING2 \
+0782-069 Cannot find either %%e or %%; to end %%t statement in data base\n\
+\t attribute value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The %%t operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_WHILENEST \
+0782-070 %%w loops nested more than 9 levels in data base attribute\n\
+\t value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The %%w operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_WHILEVAR \
+0782-071 The one-character variable name that follows a %%w operator in\n\
+\t a data base attribute value string must be in the range a - z.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The variable name is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_DUP_ATTR \
+0782-072 Multiple attributes named %6$.2s in file %7$s\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_BADFLAG3 \
+0782-073 -%6$.1s flag not expected.\n\
+\tUsage: piodigest  [-d QueueDevice]  [-n DeviceName]\n\
+\t       [-p OutputDirectory]  [-q PrintQueue]  [-s DataStreamType]\n\
+\t       [-t PrinterType]  ColonFile\n\
+\tDigests attribute values for a virtual printer definition.\n
+$
+MSG_OPERAND \
+0782-074 One file name operand must be specified.\n\
+\tUsage: piodigest  [-d QueueDevice]  [-n DeviceName]\n\
+\t       [-p OutputDirectory]  [-q PrintQueue]  [-s DataStreamType]\n\
+\t       [-t PrinterType]  ColonFile\n\
+\tDigests attribute values for a virtual printer definition.\n
+$
+MSG_FOPEN4 \
+0782-075 Cannot open input colon file.\n\
+\t    The file name is %6$s\n\
+\t    The errno (error number) from the open system call is %8$d\n\
+\t Check the file name specified with the piodigest command.\n
+$
+MSG_TMPFILE \
+0782-076 Cannot create a temporary file.\n\
+\t   The errno (error number) from the tmpfile subroutine is %8$d.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_EOF \
+0782-077 Unexpected end-of-file on line %8$d\n\
+\tof input colon file %6$s\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_EOL \
+0782-078 Unexpected end-of-line on line %8$d\n\
+\tof input colon file %6$s\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_ATTRNAME2 \
+0782-079 Attribute name %7$s is not valid. The attribute name is on\n\
+\tline %8$d of input colon file %6$s\n\
+\tThe attribute name is between the second and third colons on the line.\n\
+\tAttribute names must contain only the characters A-Z, a-z, 0-9, or _.\n\
+\tNames of comment attributes begin with two underscore characters and \n\
+\tmay be up to five characters long.  All other attribute names must be\n\
+\ttwo characters long.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_FOPEN5 \
+0782-080 Cannot open output file for digested data base attributes.\n\
+\t    The file name is %6$s\n\
+\t    The errno (error number) from the open system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_LOCKF \
+0782-081 Warning: File lock failed.\n\
+\t    The file name is %6$s\n\
+\t    The errno (error number) from the lockf system call is %8$d\n\
+\t Try again later, or use local problem reporting procedures.\n
+$
+MSG_WRITE2 \
+0782-082 Error detected during output to file.\n\
+\t    The file name is %6$s\n\
+\t    The errno (error number) from the write system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_OCT_OVER \
+0782-083 Octal/Hexadecimal value greater than \\377 at offset %8$d\n\
+\tin string value for attribute %7$s in\n\
+\tinput colon file %6$s\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_OCT_UNDER \
+0782-084 Octal/Hexadecimal digit does not follow \\ at offset %8$d\n\
+\tin string value for attribute %7$s in\n\
+\tinput colon file %6$s\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_NO_DBFILE \
+0782-085 No virtual printer defined for print queue and queue device.\n\
+\t   The print queue and queue device names are %6$s\n\
+\t Check the print queue and queue device names, or\n\
+\t Use local problem reporting procedures (refer to mkvirprt command).\n
+$
+MSG_READ3 \
+0782-086 Error reading print file.\n\
+\t   The file name is %6$s\n\
+\t   The errno (error number) from the read system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_OPENDIR \
+0782-087 Cannot open directory for digested data base attribute files.\n\
+\t    The directory name is %6$s\n\
+\t    The errno (error number) from the opendir system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_UNLINK \
+0782-088 Cannot unlink old digested data base attribute file.\n\
+\t    The file name is %6$s\n\
+\t    The errno (error number) from the unlink system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_MAILED_DIAG \
+0782-089 Output to standard error detected while processing your print job.\n\
+\t Diagnostic information about the problem has been mailed to you.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BIND2 \
+0782-090 Cannot bind printer read routine specified\n\
+\t with -%1$c flag for pioout command.\n\
+\t   The printer read routine is %2$s\n\
+\t   The errno (error number) from the loadbind system call is %3$d\n\
+\t Use local problem reporting procedures.\n
+$
+$       Text Other Than Message Text
+$
+$ Make the text below have constant message numbers that don't change
+$ every time a new message is added above.
+100 Dummy Message.
+$
+MSG_TOPLAB \
+This is a top-of-page security label to be used for testing\n\
+print formatters.  Security labels are not currently supported.
+$
+MSG_BOTLAB \
+This is a bottom-of-page security label to be used for testing\n\
+print formatters.  Security labels are not currently supported.
+$
+MSG_NONESTR \
+(no title)
+$
+MSG_4224COLORS \
+:black:blue:red:magenta:green:cyan:yellow:brown:
+$
+MSG_HEADER_TITLES \
+TITLE:TIME PRINTED:TIME QUEUED:PRINTED AT:SUBMITTED BY:\
+DELIVER TO:FLAG VALUES:END OF OUTPUT FOR:
+$
+$  These are eight fields each terminated by a colon.  Exceeding 20
+$  characters for a field name is discouraged, but permissible.
+$
+MSG_READHDR \
+Message received from printer %s:\n
+$
+MSG_PRINTER_HDR \
+PRINTER:\n
+$
+MSG_FORKFAIL \
+0782-091 fork() failed while trying to start a pipeline of filters.\n\
+\t   The command name is piobe.\n\
+\t   The errno (error number) from the fork system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_EXECFAIL \
+0782-092 execl() failed trying to start /usr/bin/sh.\n\
+\t   The command name is piobe.\n\
+\t   The errno (error number) from the execl system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_OPEN_FONTS2 \
+0782-106 Cannot open file specified by %%D operator in a data base\n\
+\t attribute value string.\n\
+\t   The file name is %7$.2s\n\
+\t   The attribute name is %6$.2s\n\
+\t   The errno (error number) from the open system call is %8$d\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+$       Messages issued by a formatter
+$
+120 Dummy Message.
+MSG_BADFORMFLAG \
+0782-500 The parameter value specified with the -%.1s flag is not valid.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG1 \
+0782-501 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be + or !.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG2 \
+0782-502 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be 1 or greater.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG3 \
+0782-503 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be 0 or greater.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG4 \
+0782-504 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be 10 or 12.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG5 \
+0782-505 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be 0, 1, 2, or 3.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG6 \
+0782-506 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be 6 or 8.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG7 \
+0782-507 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be 0, 1, or 2.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG8 \
+0782-508 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be less than the page width.\n\
+\tCheck the parameter value.\n
+$
+MSG_BADFORMFLAG9 \
+0782-509 The parameter value specified with the -%.1s flag is not valid.\n\
+\tThe parameter value must be 1, 2, or 3.\n\
+\tCheck the parameter value.\n
+$
+MSG_NOPITCH \
+0782-510 Cannot specify a pitch value directly.\n\
+\tThe pitch value is implied by the font identifier.\n\
+\tSpecify an appropriate font identifier with the -I flag.\n\
+\tNote: To determine the correct font identifier, consult the manual\n\
+\t      that came with your printer.\n
+$
+MSG_BAD4224COLOR \
+0782-511 The parameter value specified with the -%.1s flag is not valid.\n\
+\t The parameter value must be one of the following:\n\
+\t    black   (or 0)\n\
+\t    blue    (or 1)\n\
+\t    red     (or 2)\n\
+\t    magenta (or 3)\n\
+\t    green   (or 4)\n\
+\t    cyan    (or 5)\n\
+\t    yellow  (or 6)\n\
+\t    brown   (or 10)\n\
+\t Check the parameter value.\n
+$
+MSG_OPEN_FLAGS \
+0782-512 Cannot determine whether or not flags file exists.  A flags file\n\
+\t contains information about which printer fonts are currently loaded.\n\
+\t    The file name is %1$s\n\
+\t    The errno (error number) from the open system call is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_FMTRS_MALLOC \
+0782-002 There is not enough memory available now.\n\
+\tTry again later or\n\
+\tuse local problem reporting procedures.\n
+$
+MSG_CODEPOINT1 \
+0782-513 Value in stage 1 translate table is not valid.\n\
+\t    The translate table is %1$s\n\
+\t    The code point in the translate table is %2$s\n\
+\t    The value at the code point in the translate table is %3$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_FMT_TYPE \
+0782-514 Format type in stage 1 translate table is not valid.\n\
+\t    The translate table is %1$s\n\
+\t    The format type in the translate table is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_MANY_CHARS \
+0782-515 Character stack size exceeded by print formatter.  A maximum of\n\
+\t280 characters can be on the character stack at once.  Characters are\n\
+\tpushed on the stack by a print formatter using the piopushin()\n\
+\tsubroutine.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_OPEN_TRANS1 \
+0782-516 Cannot open file containing stage 1 translate table.\n\
+\t    The file name is %1$s\n\
+\t    The errno (error number) from the open system call is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BAD_STAGE1 \
+0782-517 Stage 1 translate file is not valid.\n\
+\t    The file name is %1$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_OLD_STAGE1 \
+0782-518 File format level for stage 1 translate table is incompatible.\n\
+\t    The file name is %1$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_READ_TRANS1 \
+0782-519 Cannot read file containing stage 1 translate table.\n\
+\t    The file name is %1$s\n\
+\t    The errno (error number) from the read system call is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_OPEN_TRANS2 \
+0782-520 Cannot open file containing stage 2 translate table.\n\
+\t    The file name is %1$s\n\
+\t    The errno (error number) from the open system call is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BAD_STAGE2 \
+0782-521 Stage 2 translate file is not valid.\n\
+\t    The file name is %1$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_OLD_STAGE2 \
+0782-522 File format level for stage 2 translate table is incompatible.\n\
+\t    The file name is %1$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_READ_TRANS2 \
+0782-523 Cannot read file containing stage 2 translate table.\n\
+\t    The file name is %1$s\n\
+\t    The errno (error number) from the read system call is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_NEED_TRANS2 \
+0782-524 At least one stage 2 translate table must be specified in\n\
+\tthe data base. Refer to the lsvirprt command to check the value of\n\
+\tthe t0 attribute, which should specify a stage 2 translate table.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_OPEN_FONTS \
+0782-525 Cannot open file containing fonts to be downloaded.\n\
+\t    The file name is %1$s\n\
+\t    The errno (error number) from the open system call is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_SUBST_CHAR \
+0782-526 Cannot print substitute character.\n\
+\tRefer to the lsvirprt command to check the value of the mS attribute\n\
+\tin the data base. The mS attribute specifies the character to be\n\
+\tsubstituted for a character which cannot be printed.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_CODEPOINT2 \
+0782-527 Value in stage 2 translate table is not valid.\n\
+\t    The translate table is %1$s\n\
+\t    The code point in the translate table is %2$s\n\
+\t    The value at the code point in the translate table is %3$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_LNOUT_PSTHRU \
+0782-528 This is the PASSTHRU formatter.  You should not be in LINEOUT.\n
+$
+MSG_BAD_FONT_SET \
+0782-529 The combination of the typestyle and pitch result in an illegal\n\
+\t typeface.  Check the values associated with the -s and -p flags.\n
+$ No longer used; Replaced by MSG_BAD_FONT_SET2
+MSG_PIOMSGCMD \
+0782-093 The piomsg command must be invoked only by the spooler's\n\
+\tqdaemon.  It is dependent on services provided by the qdaemon and\n\
+\tcannot run without them.\n
+$
+MSG_MAILONLY \
+(mail only)
+$      Note: "mail only" means that messages must mailed instead of displayed.
+$
+MSG_MSG_TO \
+Message to:
+$
+MSG_CLOSEQUOTE2 \
+0782-104 Cannot find closing double quote for %%%7$.1s operator\n\
+\t in data base attribute value string.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The opening quote is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BADEQUAL \
+0782-105 %%%7$.1s operator in data base attribute value string\n\
+\t cannot compare integer value with string value.\n\
+\t   The attribute name is %6$.2s\n\
+\t   The operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_BAD_FONT_SET2 \
+0782-529 No font is available for %1$s %2$s pitch.\n\
+\t Check the values for the -s and -p flags.\n
+$ %1$s is typestyle (courier, prestige, etc.) and %2$s is pitch value (10, 12)
+$ Replacement for MSG_BAD_FONT_SET
+$
+TP_UNKNOWN_TERM \
+0782-530 Cannot determine terminal type. \n\
+\t    Use local problem reporting procedures.\n
+$
+TP_TERMINFO1 \
+0782-531 Error occurred while reading terminfo database for %s.
+$
+TP_TERMINFO2 \
+0782-532 Cannot find terminfo attribute %1$s for %2$s.
+$
+TP_UNKNOWN_ASYNC \
+0782-533 Unsupported asynchronous adapter.
+$
+TP_FOPEN1 \
+0782-534 Cannot open terminal attached printer device. \n\
+\t    The file name is %6$s\n\
+\t    The errno (error number) from the open system call is %8$d\n\
+\t    Use local problem reporting procedures.\n
+TP_BADHD \
+0782-535 TTY hardware line discipline does not match database value.\n\
+\t Device "%1$s" has been relocated since print queue configuration.\n\
+\t    The hardware discipline value is "%2$s".\n\
+\t    The database attribute name is "y0".\n\
+\t To display database value, refer to the lsvirprt command.\n\
+\t To reconfigure print queue, refer to the rmvirprt and mkvirprt commands.\n
+$
+MSG_ATTR_ESETNOMATCH \
+0782-107 Error detected in value string for attribute %6$.2s\n\
+ '%7$s'\n\
+====> ERROR <=====   No Matching ']' For '%%I['.\n\n
+$
+MSG_ATTR_INCATTRLEN \
+0782-108 Error detected in value string for attribute %6$.2s\n\
+ '%7$s'\n\
+====> ERROR <=====   Attribute Not 2 Characters Long.\n\n
+$
+MSG_ATTR_ATTRNOTFOUND \
+0782-109 Error detected in value string for attribute %6$.2s\n\
+ '%7$s'\n\
+====> ERROR <=====   Attribute Referenced But Not Defined.\n\n
+$
+MSG_ATTR_SYNTERR \
+0782-110 Error detected in value string for attribute %6$.2s\n\
+%7$s\n
+$
+MSG_READ_TMPFILE \
+0782-111 Error detected while reading %6$s bytes from tmpfile.\n\
+\t   The program name is %2$s\n\
+\t   The errno (error number) from the read system call is %8$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_ERR_URGEFIX \
+0782-112 %8$d Errors detected while validating printer attributes.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_DDISIZ_EXCEED \
+0782-113 Size of digested data base file exceeded %6$s bytes.\n\
+\t   The program name is %2$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_NEED_INVOKE_TRINIT \
+0782-536 Stage 2 translate tables must be loaded by invoking\n\
+\t"piotrinit" before translating intermediate code page data into\n\
+\tprinter code page data.  Refer to this formatter source to see if\n\
+\t"piotrinit" is invoked in "setup" function.\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_STACK_OVERFLOW \
+0782-114 Stack overflow has occurred due to %%%7$.1s operator\n\
+\t in data base attribute value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The operator specified is %%%7$.1s and\n\
+\t   is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_STACK_UNDERFLOW \
+0782-115 Stack underflow has occurred due to %%%7$.1s operator\n\
+\t in data base attribute value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The operator specified is %%%7$.1s and\n\
+\t   is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_MISS_PTRNDELIMIT \
+0782-116 Delimiters are missing for the %%%7$.1s operator in \n\
+\t a data base attribute value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_REGCMPERR \
+0782-117 Error in performing regcmp for the %%%7$.1s operator in \n\
+\t a data base attribute value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_MISS_PTRNEXTRACT \
+0782-118 String extraction character @ is missing for the %%%7$.1s operator\n\
+\t in a data base attribute value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The operator is at character offset %8$d into the string.\n\
+\t   (Note: Sequences such as \\145 and %%%% count as one character.)\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_POPEN_ERR \
+0782-119 Pipe could not be opened for a shell command specified\n\
+\t in a data base attribute value string.\n\
+\t   The name of the attribute value string is %6$.2s\n\
+\t   The shell command string is %7$s\n\
+\t   The errno (error number) from the open system call is %8$d\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t To display the string, refer to the lsvirprt command.\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_ATTRLMT_ESETNOMATCH \
+0782-120 Error detected in limits string for attribute %6$.2s\n\
+ '%7$s'\n\
+====> ERROR <=====   No Matching ']' For '%%I['.\n\n
+$
+MSG_ATTRLMT_INCATTRLEN \
+0782-121 Error detected in limits string for attribute %6$.2s\n\
+ '%7$s'\n\
+====> ERROR <=====   Attribute Not 2 Characters Long.\n\n
+$
+MSG_ATTRLMT_ATTRNOTFOUND \
+0782-122 Error detected in limits string for attribute %6$.2s\n\
+ '%7$s'\n\
+====> ERROR <=====   Attribute Referenced But Not Defined.\n\n
+$
+MSG_ATTRLMT_SYNTERR \
+0782-123 Error detected in limits string for attribute %6$.2s\n\
+%7$s\n
+$
+MSG_LMT_OCT_OVER \
+0782-124 Octal/Hexadecimal value greater than \\377 at offset %8$d\n\
+\tin limit string for attribute %7$s in\n\
+\tinput colon file %6$s\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_LMT_OCT_UNDER \
+0782-125 Octal/Hexadecimal digit does not follow \\ at offset %8$d\n\
+\tin limit string for attribute %7$s in\n\
+\tinput colon file %6$s\n\
+\tUse local problem reporting procedures.\n
+$
+MSG_PIOMSG_MARG \
+0782-126 Flag -%c has no parameter value.\n\
+\tUsage: piomsg [-u UsrList] [-c MsgCatalog [-s MsgSet] -n MsgNo]\n\
+\t              [-a MsgArg ...] [MsgText]\n\
+\tSends a printer backend message to a user.\n
+$
+MSG_PIOMSG_ILOPT \
+0782-127 -%c is not a recognized flag for the piomsg command.\n\
+\tUsage: piomsg [-u UsrList] [-c MsgCatalog [-s MsgSet] -n MsgNo]\n\
+\t              [-a MsgArg ...] [MsgText]\n\
+\tSends a printer backend message to a user.\n
+$
+MSG_PIOMSG_IPUSG \
+0782-128 Both the flags -c and -n should be specified when either\n\
+\tof the flags -c, -s or -n is specified with the piomsg command.\n\
+\tUsage: piomsg [-u UsrList] [-c MsgCatalog [-s MsgSet] -n MsgNo]\n\
+\t              [-a MsgArg ...] [MsgText]\n\
+\tSends a printer backend message to a user.\n
+$
+MSG_DUMMY \
+%6$s
+$
+MSG_ATTR_LIMITVALID \
+0782-129 Limit validation failed for attribute %6$.2s.\n
+$
+MSG_RBLD_ERRODMINIT \
+0782-130 ODM initialization failed (odmerrno is %8$d).\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_ERRODMSP \
+0782-131 Setting ODM path to %6$s failed (odmerrno is %8$d).\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_ERRODMLOCK \
+0782-132 Locking the ODM path %6$s failed (odmerrno is %8$d).\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_ERRODMOPEN \
+0782-133 Opening the ODM class \"%6$s\" failed (odmerrno is %8$d).\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_ERRNOIP \
+0782-134 No input pipeline attributes were found in \n\
+\t   the colon file \"%6$s\".\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_ERRGRFS \
+0782-135 Error in determining referenced attributes for the attribute\n\
+\t   \"%7$.2s\" in the colon file \"%6$s\".\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_ERRPARSE \
+0782-136 Error in parsing the ODM info in the limits field \n\
+\t   of the attribute \"%7$.2s\" in the colon file \"%6$s\".\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_ERRODMADD \
+0782-137 Error in adding an object to the ODM class \"%6$s\"\n\
+\t   (odmerrno is %8$d).\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_INVLIMOP \
+0782-138 Invalid op \"%6$.1s\" specified in the limits field of\n\
+\t   attribute \"%7$s\".\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_INVLIMSYNTAX \
+0782-139 Invalid op syntax - \"%6$s\" specified in the limits field of\n\
+\t   attribute \"%7$s\".\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_SIGRECVD \
+0782-140 Signal %8$d received while building ODM information. Aborting ...\n\
+\t   The print queue and queue device names are %4$s:%5$s\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_RBLD_CONTMSG \
+\t Continuing anyway ...\n
+$
+$
+$set 2
+$ **************************************************************************
+$       Messages for mkvirprt, lsvirprt, chvirprt, rmvirprt, piopredef
+$ **************************************************************************
+YES_LETTER \
+y
+$
+$     This must be a single letter and be different from NO_LETTER
+$
+NO_LETTER \
+n
+$
+$     This must be a single letter and be different from YES_LETTER
+$
+CUS_XST_QQD \
+0782-300 Queue %1$s and queue device %2$s are already configured.\n
+$
+CUS_XST \
+0782-301 A virtual printer is already configured for\n\
+\t print queue %1$s and queue device %2$s.\n\
+\t Either:\n\
+\t   (1) Specify a different print queue name or queue device name, or\n\
+\t   (2) Use the rmvirprt command to remove the existing virtual printer.\n
+$
+CUS_NOPEN \
+0782-302 Cannot open file for customized attributes.\n\
+\t   The file name is %1$s\n\
+\t   The errno (error number) from the open system call is %2$d\n\
+\t Check the error number.\n
+$
+CUS_NOXST \
+0782-303 Cannot find customized attributes for\n\
+\t print queue %1$s and queue device %2$s\n\
+\t Check the -q and -d flags.\n
+$
+PRE_XST \
+0782-304 Predefined attributes for printer type %1$s\n\
+\t with data stream type %2$s already exist.\n
+$
+PRE_NOPEN \
+0782-305 Cannot open file for predefined attributes for\n\
+\t printer type %1$s with data stream %2$s\n\
+\t   The file name is %3$s\n\
+\t   The errno (error number) from the open system call is %4$d\n\
+\t Check the error number.\n
+$
+PRE_NOXST \
+0782-306 Cannot find predefined attributes for\n\
+\t printer type %1$s with data stream %2$s\n\
+\t Check the -s and -t flags.\n
+$
+USAGE_MK \
+0782-310 Usage:\n\
+\tmkvirprt -A AttachmentType\n\
+\tmkvirprt [ -A AttachmentType ] -d QueueDevice -n Device\n\
+\t -q PrintQueue -s DataStream -t PrinterType [ -T ]\n\
+\tUse 'smit mkvirprt' to use it interactively.\n
+$
+USAGE_RM \
+0782-311 Usage: rmvirprt -q PrintQueue -d QueueDevice\n\
+\tUse 'smit rmvirprt' to use it interactively.\n
+$
+USAGE_CH \
+0782-312 Usage: chvirprt -q PrintQueue -d QueueDevice\n\
+\t [ -a AttributeName=Value [AttributeName=Value...]\n\
+\tUse 'smit chvirprt' to use it interactively.\n
+$
+USAGE_LS \
+0782-313 Usage: lsvirprt  [ -q PrintQueue  -d QueueDevice\n\
+\t { [ -f Format ] [ -n ] [ -a AttributeName | -s SectionName ]... | -i\
+ | -D } ]\n
+$
+USAGE_PP \
+0782-314 Usage: piopredef  -d QueueDevice  -q PrintQueue  -s DataStream\n\
+\t -t PrinterType\n
+$
+DEV_USED \
+There is already a print queue for this device.\n\
+Do you want to add another print queue for the device?
+$
+QUEUE \
+0782-318 %1$s is not a valid queue name.\n
+$
+QUEDEV \
+0782-319 Queue name %1$s and queue device name %2$s do not refer to\n\
+\t a valid queue device.\n
+$
+QUEUE_XST \
+0782-320 This is an existing queue.  Do you want to add to it?
+$
+QUEUE_NAMES \
+0782-321 The mkque command used to generate the print queue has failed.\n\
+\t Use local problem reporting procedures, or press Enter to continue.\n
+$
+CANT_CHNG \
+0782-322 Must have System Administrator permissions to change attribute values\n
+$
+WRONG_DEV \
+0782-323 Queue device %1$s already assigned to device %2$s\n
+$
+BAD_BACKEND \
+0782-324 The 'backend =' specification in the existing queue device\n\
+\t is not /usr/lib/lpd/piobe.  The virtual printer was not created.\n
+$
+TTY \
+0782-325 This program was not run from a tty; interactive mode\n\
+\t is not possible.\n
+$
+PTYPE \
+0782-326 Not a valid printer type.\n
+$
+DSTYPE \
+0782-327 Not a valid data stream type for this printer.\n
+$
+DSTYPE2 \
+0782-328 Printer type %1$s supports more than one data stream type.\n\
+\t The desired data stream must be specified.\n
+$
+INV_DNAME \
+0782-329 Not a valid device file name. Press Enter to continue.
+$
+BAD_XNAME \
+0782-331 Not a valid XServer name.  Press Enter to continue.
+$
+BAD_NAME \
+0782-332 Invalid name.  Name may contain only the characters\n\
+\t [a-z], [A-Z], [0-9], @, -, or _.  Press Enter.
+$
+NO_VIRPTS \
+0782-333 No virtual printers defined for this system.\n
+$
+NAME_TOO_LONG \
+0782-334 Invalid name.  Must be less than 21 characters long.  Press Enter.
+$
+MKVIR_SUMMARY \
+%1$s configured for print queue %2$s\n
+$
+MKVIR_SUMMARY_DS \
+%1$s (%2$s) configured for print queue %3$s\n
+$
+MULTI_DS_GREET \
+NOTE:\tThe %1$s printer supports multiple print data streams.\n\
+\tEach of the data streams will now be configured individually.\n
+$
+MULTI_DS_HEAD \
+--------------------  %1$s  --------------------\n
+$
+VIRPRT_HDG \
+ No. Queue             Device   Description
+$
+PREDEF_HDG \
+     No.    Description
+$
+DEVICE_HDG \
+      Name         Description
+$ 6 spaces, then 15 character Name field, then Description field
+$
+LS_HEADER \n\
+Name    Description                                          Value
+$
+ENTER_DN \
+Enter printer device name:
+$
+ENTER_PQ \
+Enter print queue name:
+$
+ENTER_PQ_SKIP \
+Enter print queue name (or, ! to bypass configuration):
+$
+GET_PR_NUM \
+Enter number from list above (press Enter to terminate):
+$
+GET_DEVICE \
+Enter device name (or, ! to exit):
+$
+PICK_PQ \
+Enter print queue name from list above:
+$
+ENTER_VP \
+Enter print queue device name:
+$
+PICK_VP \
+Enter print queue device name from list above:
+$
+ENTER_DEFQ \
+Should this queue be the default queue?
+$
+CONFIRM \
+Press Enter to continue.
+$
+LS_ATTRS \
+To list attributes, enter the names separated by spaces, or\n\
+to list all attributes, enter * (scroll using subcommands for pg command), or\n\
+press Enter to terminate:
+$ No longer used; Replaced by LS_ATTRS2
+$
+LS_CH_ATTRS \
+To list attributes, enter the names separated by spaces, or\n\
+to list all attributes, enter * (scroll using subcommands for pg command), or\n\
+to change an attribute value, enter AttributeName=NewValue, or\n\
+press Enter to terminate:
+$ No longer used; Replaced by LS_CH_ATTRS2
+$
+ATTR_NOXST \
+The %1$s attribute does not exist.\n
+$
+ENTER_ATTVAL \
+Enter AttributeName=NewValue, or\n\
+press Enter to leave values unchanged:
+$
+ENTER_HS \
+Header pages wanted?  (n=none; a=each file; g=each job):
+$
+$  The key letters n, a, and g  must not change
+$
+ENTER_TS \
+Trailer pages wanted? (n=none; a=each file; g=each job):
+$
+$  The key letters n, a, and g  must not change
+MSG_OPENDIR2 \
+0782-335 Cannot open directory %1$s\n\
+\t The errno (error number) from the opendir system call is %2$d\n\
+\t Use local problem reporting procedures.\n
+$
+MSG_OPENFILE \
+0782-336 Cannot open file %1$s\n\
+\t The errno (error number) from the open system call is %2$d\n\
+\t Check the error number.\n
+$
+MSG_PIFSHORT \
+0782-337 Line %1$d in file %2$s does not contain %3$d fields\n\
+\t separated by colons.\n
+$
+MSG_FILELOCK \
+0782-338 The virtual printer attributes for %1$s\n\
+\t are currently being modified by someone else.\n\
+\t Try again later.\n
+$
+MSG_ATTRED \
+\nA syntax error was detected in the attribute value string. Do you want\n\
+to edit the attribute value again to view the error message and correct\n\
+the error? (if not, the update will be discarded)
+$
+$
+$ Make the text below have constant message numbers that don't change
+$ every time a new message is added above.
+$
+100 Dummy Message.
+$
+MSG_HOSTATTACH \
+Printer or Plotter Attached to Host
+102 \
+Printer or Plotter Attached to Xstation
+103 \
+Xstation Name
+104 \
+No Xstation with that name is configured. Enter another name.
+105 \
+Serial Interface
+106 \
+Parallel Interface
+107 \
+Xstation 120
+108 \
+Xstation 130
+109 \
+Serial Port
+110 \
+Baud Rate
+111 \
+Parity
+112 \
+none
+113 \
+odd
+114 \
+even
+115 \
+stuck odd
+116 \
+stuck even
+117 \
+Bits Per Character
+118 \
+Number of Stop Bits
+$
+LS_ATTRS2 \
+To LIST attributes, enter AttributeName1 ... (* for all attributes)\n\
+To terminate, press Enter:
+$ Replacement for LS_ATTRS
+$
+LS_CH_ATTRS2 \
+To LIST attributes, enter AttributeName1 ... (* for all attributes)\n\
+To CHANGE an attribute value, enter AttributeName=NewValue\n\
+To FORMAT and EDIT an attribute value, enter AttributeName~v\n\
+To EDIT the attribute file, enter ~v\n\
+To terminate, press Enter:
+$ Replacement for LS_CH_ATTRS
+$
+TOO_MANY \
+0782-339 Number of defined Virtual Printers exceeds system limit of %1$d.\n
+$
+MSG_ATTR_NONMODFBLE \
+0782-340 The %1$s attribute can not be modified.\n
+$
+MSG_POPENERR \
+0782-342 Error '%1$s' in popen while executing the command '%2$s'.\n
+$
+MSG_RM_ERRODMINIT \
+0782-343 ODM initialization failed (odmerrno is %d).\n\
+Use local problem reporting procedures.\n
+$
+MSG_RM_ERRODMSP \
+0782-344 Setting ODM path to %1$s failed (odmerrno is %2$d).\n\
+Use local problem reporting procedures.\n
+$
+MSG_RM_ERRODMLOCK \
+0782-345 Locking the ODM path %1$s failed (odmerrno is %2$d).\n\
+Use local problem reporting procedures.\n
+$
+MSG_RM_ERRODMOPEN \
+0782-346 Opening the ODM class \"%s\" failed (odmerrno is %d).\n\
+Use local problem reporting procedures.\n
+$
+VPEXISTS \
+0782-652 A virtual printer already exists for the queue name %1$s and\n\
+\t the queue device name %2$s!\n
+$
+$set 3
+$ **************************************************************************
+$       Usage Message for qprt
+$ **************************************************************************
+$
+$
+$       Messages Used From Command Line (do not change set # or msg #)
+$
+MSG_QPRT_USAGE \
+Usage: qprt [ flags ] [ File ... ] [ - ]\n\
+Queues a file for printing.\n
+$
+$set 4
+$ **************************************************************************
+$       Messages with hardcoded message numbers - DO NOT CHANGE MESSAGE #'s
+$ **************************************************************************
+$
+$       Messages Used by the QMS printer initialization script
+$                  (do not change set # or msg #)
+$
+1 \
+0782-094 Data stream type specified with -s flag for pioqms100 command\n\
+\tmust be s (for PostScript) or g (for Graphics Language).\n
+$
+2 \
+0782-095 Printer interface type specified with -i flag for pioqms100\n\
+\tcommand must be 0 or 1 for parallel, 2 or 3 for serial.\n
+$
+3 
+$
+4 \
+0782-097 Flags specified with pioqms100 command are not valid.\n\
+\tUsage:  pioqms100  -s DataStreamType  -i Mode  -f FlagsFileName\n\
+\t        pioqms100  -Q  (to install HPGL emulator files from diskette)\n
+$
+5 \
+0782-098 Missing HPGL emulator files. To install the files, enter:\n\
+\t    su root\n\
+\t    /usr/lib/lpd/pio/etc/pioqms100  -Q\n\
+\t Use local problem reporting procedures.\n
+$
+6 \
+0782-099 pioqms100: HPGL emulator download failed.\n
+$
+7 \
+0782-100 pioqms100: HPGL emulator activation (Part A) failed.\n
+$
+8 \
+0782-101 pioqms100: HPGL emulator activation (Part B) failed.\n
+$
+9 \
+0782-102 HPGL termination failed.\n
+$
+10 \
+0782-103 Must have root permissions to perform installation.\n
+$
+11 \
+0782-550 Usage: piofontin -t PrinterType -c CodePage [ -d DisketteDevice ]\n\
+\t  PrinterType: ibm2380|ibm2381|ibm2390|ibm2391|ibm4201-3|ibm4202-3|\n\
+\t               ibm4207-2|ibm4208-2\n\
+\t  CodePage: 851|853\n\
+\tCopies printer fonts from diskette to font directory.\n
+$
+12 \
+Printer or Plotter Attached to ASCII Terminal
+$
+13 \
+Terminal Devices
+$
+14 \
+0782-551 Usage:\tpiochpq -q Queue -d QueueDevice [-a AttributeName=Value | -Flag 'Value']...\n
+$
+15 \
+0782-552 piochpq: Missing argument.\n
+$
+16 \
+0782-553 piochpq: Illegal flag.\n
+$
+17 \
+Printer Attached to Local Host
+$
+18 \
+Printer Attached to Remote Host
+$
+19 \
+Printer Attached to Xstation
+$
+20 \
+Printer Attached to ASCII Terminal
+$
+21 \
+File (in /dev directory)
+$
+22 \
+Network Printer (HP JetDirect)
+$
+23 \
+0782-554 Usage: %1$s PseudoDevice [ BackendFlags ] PrintFile ...\n
+$
+24 \
+0782-555 %1$s: Error in extracting communication info from the pseudo-device \n\
+file %2$s\n
+$
+25 \
+0782-556 %1$s: Error in extracting xstation name from the pseudo-device \n\
+file %2$s\n
+$
+26 \
+0782-557 %1$s: Error in extracting interface type from the pseudo-device \n\
+file %2$s\n
+$
+27 \
+0782-558 %1$s: Error in extracting port from the pseudo-device file %2$s\n
+$
+28 \
+0782-559 Must be super-user\n
+$
+29 \
+0782-560 Usage: %1$s -i source_file [ -o target_file ]\n\
+\t-i\t-\tsource colon file\n\
+\t-o\t-\ttarget colon file (if omitted, same as source file)\n
+$
+30 \
+0782-561 %1$s: %2$s requires a value\n
+$
+31 \
+0782-562 %1$s: unknown option %2$s\n
+$
+32 \
+0782-563 Source file must be supplied\n
+$
+33 \
+0782-564 A signal was caught during conversion\n
+$
+34 \
+0782-565 %1$s does not exist or not readable\n
+$
+35 \
+0782-566 Directory "%1$s" must be writable to create target file\n
+$
+36 \
+0782-567 Formatter name could not be extracted from the source file\n
+$
+37 \
+0782-568 The source file "%1$s" is already in new format\n
+$
+38 \
+0782-569 Parent colon file name could not be extracted from the source file\n
+$
+39 \
+0782-570 Error %1$d in opening "%2$s" for reading\n
+$
+40 \
+0782-571 Error %1$d in opening "%2$s" for writing\n
+$
+41 \
+0782-572 Error(s) in creating "%1$s"\n
+$
+42 \
+0782-573 Error in expanding additions using "%1$s"\n
+$
+43 \
+%1$s
+$
+44 \
+0782-574 Errors found in conversion of the source file "%1$s"\n
+$
+45 \
+0782-575 Error in restoring to default state using "%1$s"\n
+$
+46 \
+0782-576 Error %1$d in creating the target file "%2$s"\n
+$
+47 \
+0782-577 Usage: %1$s { -c | -h }\n
+$
+48 \
+0782-578 Usage: %1$s -f {+|!} -S Server -P Queue -N Filter\n\
+\t[ -o BackendFlag ... ] PrintFile ...\n
+$
+49 \
+0782-650 Error in creating ODM in the path %1$s\n
+$
+50 \
+0782-651 Error in adding ODM objects in the path %1$s\n
+$
+$
+$
+$set 5
+$ **************************************************************************
+$       Colon file operator descriptions used by pioattred
+$ **************************************************************************
+$
+$
+$  NOTES:
+$  (1) "push" means to insert an additional value onto a stack of values.
+$  (2) "pop" means to remove a value from a stack of values.
+$
+OP_SYNTAX \
+\n====> ERROR <=====   Operator Not Properly Formed.
+$
+OP_USAGE \
+Usage:\tcolon -how -now -brown -cow
+$
+OP_PERC \
+% -> OUTPUT
+$  %%
+$
+OP_d \
+POP -> ASCII String -> OUTPUT
+$  %d
+$
+OP_num_d \
+POP -> ASCII String (%c digits) -> OUTPUT
+$  %*d
+$
+OP_c \
+POP -> Low-Order Byte -> OUTPUT
+$  %c
+$
+OP_h \
+POP -> Low-Order Two Bytes -> OUTPUT
+$  %h
+$
+OP_a \
+POP -> Low-Order Two Bytes -> Reverse Order -> OUTPUT
+$  %a
+$
+OP_I \
+INCLUDE: (%s)
+$  %I**
+$
+OP_I_brak \
+INCLUDE Each of the Following Attributes:
+$  %I[**,** ... **]
+$
+OP_G \
+PUSH: (%s)
+$  %G**
+$
+OP_char \
+PUSH: (Character Constant '%c' -> Integer)
+$  %'*'
+$
+OP_INTEGER_CONST \
+PUSH: (Integer Constant %d)
+$  %{*...*}
+$
+OP_STRING_CONST \
+PUSH: (String Constant %s)
+$  %"*...*"
+$
+OP_S \
+PUSH: (Attribute %s String)
+$  %S**
+$
+OP_L \
+PUSH: (Length of Attribute:  %s)
+$  %L**
+$
+OP_P \
+POP -> Internal Variable %c
+$  %P*
+$
+OP_Z \
+Initialize Internal Variable %c to Zero
+$  %Z*
+$
+OP_g \
+PUSH: (Internal Variable %c)
+$  %g*
+$
+OP_add \
+PUSH: (pop2 + pop1)
+$  %+
+$
+OP_sub \
+PUSH: (pop2 - pop1)
+$  %-
+$
+OP_mul \
+PUSH: (pop2 * pop1)
+$  %*
+$
+OP_div \
+PUSH: (pop2 / pop1)
+$  %/
+$
+OP_mod \
+PUSH: (Modulus of (pop2 / pop1))
+$  %m
+$
+OP_eq \
+PUSH: (pop2 = pop1 ?)
+$  %=
+$
+OP_gt \
+PUSH: (pop2 > pop1 ?)
+$  %>
+$
+OP_lt \
+PUSH: (pop2 < pop1 ?)
+$  %<
+$
+OP_not \
+PUSH: (! pop) -- Unary Negation
+$  %!
+$
+OP_and \
+PUSH: (pop2 & pop1) -- Bitwise AND
+$  %&
+$
+OP_or \
+PUSH: (pop2 | pop1) -- Bitwise OR
+$  %|
+$
+OP_xor \
+PUSH: (pop2 ^ pop1) -- Bitwise Exclusive OR
+$  %^
+$
+OP_comp \
+PUSH: (pop2 ~ pop1) -- One's Complement
+$  %~
+$
+OP_if \
+<IF>
+$  %?
+$
+OP_then \
+<THEN>
+$  %t
+$
+OP_else \
+<ELSE>
+$  %e
+$
+OP_endif \
+<END>
+$  %;
+$
+OP_x \
+Pass Through Number of Bytes Specified by Formatter to piocmdout()
+$  %x  Note: piocmdout should not be translated
+$
+OP_w \
+<WHILE> Loop (Counter is in Internal Variable %c)
+$  %w*
+$
+OP_o \
+Begin Using Default (Instead of Command Line) Values
+$  %o
+$
+OP_r \
+Return to Using Values Used Before %o
+$  %r
+$
+OP_i \
+Force Attribute i%c as Main Pipeline
+$  %i*
+$
+OP_i_null \
+Force Null String as Main Pipeline
+$  %i!
+$
+OP_p \
+Put Prefix Pipeline (fx Attribute) Here
+$  %p
+$
+OP_z \
+Put Suffix Pipeline (mo Attribute) Here
+$  %z
+$
+OP_C \
+PUSH: (1 If -%c Flag on Command Line; Otherwise 0)
+$  %C*
+$
+OP_F \
+If "-%s Argument" on Command Line, "-# Argument" -> OUTPUT
+$  %F#*
+$
+OP_f \
+For Each Flag x on Command Line: "-xArgument" -> OUTPUT
+$  %f[*...*]
+$
+OP_v \
+For Each Flag x Passed to pioout: "-xArgument" -> OUTPUT
+$  %v[*...*]
+$
+OP_ERRORS \
+\n%d SYNTAX ERRORS Found.\n
+$
+OP_BAD_IF_WHILE \
+\n====> ERROR <=====  IF (%%?) or WHILE (%%w) Operator\n\
+\tNot Matched by END (%%;) Operator\n
+$
+OP_ATTR_NOT_FOUND \
+\n====> ERROR <=====  Attribute Not Defined
+$
+OP_NOT_WRITTEN \
+File was not updated to reflect this change.\n
+$
+OP_D \
+Download the File Specified by Attribute %s
+$
+OP_BACKQUOTE \
+Insert Standard Output Produced when Attribute %s is Passed to Shell
+$
+OP_U \
+Indicate to piobe: Pass the Following Attributes to subsequent printer commands
+$  %U[*...*]
+$
+OP_REGEXP \
+Extract Pattern From Attribute Value Matching the Reg Exp %s
+$  %#xx"...@..."
+$
+OP_BACKQUOTE1 \
+Insert Standard Output Produced when the Following String is Passed to Shell %s
+$  %`"..."
+$
+$
+$set 6
+$ **************************************************************************
+$       Messages used by piocnvt
+$ **************************************************************************
+$
+CNVT_NOFILE \
+File %s does not exist.\n
+$
+CNVT_BADOPT \
+Command line option %s is not valid.\n
+$
+CNVT_BADARG \
+Argument %1$s to command line option %2$s is not valid.\n
+$
+CNVT_DUPATTR \
+More than one instance of attribute %2$s in file %1$s.
+$
+CNVT_BADATTR \
+File %1$s contains the line\n'%2$s'\n\
+which is neither an attribute nor a heading\n
+$
+CNVT_CNVT_USAGE \
+Usage:\tpiocnvt -i InputFileName [ -s +|! ] [ -o OutputFileName ]\n
+$
+CNVT_ASMBL_USAGE \
+(dummy)
+$ Do not translate the above message CNVT_ASMBL_USAGE.
+$
+CNVT_ATTR_USAGE \
+Usage:\tpioattred -q QueueName -d QueueDeviceName\n\
+\t[ -o [0-4] ] -a AttributeName\n
+$
+CNVT_NOT_ROOT \
+Permission Denied - Must Have root Permissions\n
+$
+CNVT_NO_ATTRS \
+No Attributes Defined\n
+$
+CNVT_NO_TRACE \
+Cannot find file containing previously edited attribute.\n
+$
+CNVT_OPENFILE \
+0782-336 Cannot open file %1$s\n\
+\t The errno (error number) from the open system call is %2$s\n\
+\t Check the error number.\n
+$
+CNVT_EDIT \
+---------------------------------------------------------------------------\n\
+Edit the attribute value below.  Observe the following rules:\n\
+(1) Lines that begin with % specify an operator.\n\
+(2) Lines that begin with ' specify text.\n\
+(3) Lines that begin with neither % nor ' are ignored.\n\
+---------------------------------------------------------------------------\n
+$
+CNVT_ATTR_NONEDITABLE \
+0782-341 The %1$s attribute can not be edited.\n
+$
+$
+$set 7
+$ **************************************************************************
+$       Messages used for limits validation
+$ **************************************************************************
+$
+MSG_LIM_BADATTR	\
+0782-579 The attribute name %.2s is not valid\n
+MSG_LIM_ILLOP	\
+0782-580 The limits field of %1$.2s attribute contains the illegal op %2$c\n
+MSG_LIM_NOBEGIN	\
+0782-581 The limits field of %1$.2s attribute does not contain a '[' after \n\
+the op %2$c\n
+MSG_LIM_NOEND	\
+0782-582 The limits field of %1$.2s attribute does not contain a matching \n\
+']' after the op %2$c\n
+MSG_LIM_ILLENTRY_RANGE \
+0782-583 The limits field of %1$.2s attribute does not specify a valid entry \n\
+type for range op %2$c\n
+MSG_LIM_INVENTRY	\
+0782-584 The limits field of %1$.2s attribute specifies an invalid entry \n\
+type for op %2$c\n
+MSG_VAL_NOTALNMENTRY	\
+0782-585 The value of %.2s attribute is not of alphanumeric entry type\n
+MSG_VAL_NOTNMRCENTRY	\
+0782-586 The value of %.2s attribute is not of numeric entry type\n
+MSG_VAL_NOTHEXENTRY	\
+0782-587 The value of %.2s attribute is not of hexadecimal entry type\n
+MSG_VAL_NOTFILEENTRY	\
+0782-588 The value of %.2s attribute is not of filename entry type\n
+MSG_LIM_LISTGENERR	\
+0782-589 Error in generating a list from the limits field of %1$.2s attribute \n\
+for list op %2$c\n
+MSG_LIM_LISTREADERR	\
+0782-590 Error in reading the list from the limits field of %1$.2s attribute \n\
+for list op %2$c\n
+MSG_VAL_INVVAL_LIST	\
+0782-591 The value of %.2s attribute is not in the list generated from \n\
+the limits field\n
+MSG_LIM_RANGEFMTERR	\
+0782-592 The limits field of %1$.2s attribute specifies an invalid range \n\
+format for range op %2$c\n
+MSG_VAL_NOTINT	\
+0782-593 The value of %.2s attribute is not an integer\n
+MSG_VAL_OUTOFBNDS	\
+0782-594 The value of %.2s attribute falls out of bounds specified in \n\
+the range format\n 
+MSG_LIM_VALIDNOTINT	\
+0782-595 The limits field of %1$.2s attribute does not specify an integer \n\
+for validate op %2$c\n
+MSG_LIM_INVRINGFMT	\
+0782-596 The limits field of %1$.2s attribute specifies an invalid ring format \n\
+for ring op %2$c\n
+MSG_VAL_NOTINRING	\
+0782-597 The value of %.2s attribute is not in the ring list specified \n\
+in the limits field\n
+MSG_VAL_VALIDFAILURE	\
+0782-598 The value %1$d specified in the validate op %2$c in the \n\
+limits field for %3$.2s attribute indicates failure\n
+$
+$
+$set 8
+$ **************************************************************************
+$       Messages used for new commands 
+$ **************************************************************************
+$
+MSG_LPT_GENMFR	\
+Other (Select this if your printer type is not listed above)
+$             Keep this message in the same position. Do not add
+$             any new messages before this.
+$
+MSG_LVP_USAGE	\
+0782-599 Usage:\t%s { -q | -v | -Q | -p | -A } [ -n SmitSelectorName ]\n\
+\t\t-P Queue[:QueueDevice] -n SmitSelectorName\n\
+\t\t-P Queue -d\n\
+\t\t-N AttachmentType -n SmitSelectorName\n
+$
+MSG_LVP_MISSARG	\
+0782-600 %1$s: Missing argument for the flag -%2$c\n
+$
+MSG_LVP_ILLOPT	\
+0782-601 %1$s: Illegal flag -%2$c\n
+$
+MSG_LVP_ILLUSE	\
+0782-602 %s: Illegal usage\n
+$
+MSG_LVP_MALLOCERR	\
+0782-603 %1$s: Error '%2$s' in malloc()\n
+$
+MSG_LVP_ATHDR	\
+# ATTACHMENT TYPE      DESCRIPTION\n
+$
+MSG_LVP_QHDR	\
+# PRINT QUEUE                DESCRIPTION\n
+$
+MSG_LVP_qHDR	\
+# PRINT QUEUE[:PRINTER]      DESCRIPTION\n
+$
+MSG_LVP_vHDR	\
+# PRINT QUEUE          PRINTER              DESCRIPTION\n
+$
+MSG_LVP_dHDR	\
+# PRINTER              DESCRIPTION\n
+$
+MSG_LVP_DOPENERR	\
+0782-604 %1$s: Error '%2$s' in opening the directory %3$s\n
+$
+MSG_LVP_DRDERR	\
+0782-605 %1$s: Error '%2$s' in reading the directory %3$s\n
+$
+MSG_LVP_FOPENERR	\
+0782-606 %1$s: Error '%2$s' in opening the file %3$s\n
+$
+MSG_LVP_FRDERR	\
+0782-607 %1$s: Error '%2$s' in reading the file %3$s\n
+$
+MSG_LVP_POPENERR	\
+0782-608 %1$s: Error '%2$s' in opening a pipe to command %3$s\n
+$
+MSG_LVP_PRDERR	\
+0782-609 %1$s: Error '%2$s' in reading a pipe to command %3$s\n
+$
+MSG_LVP_DNMNOTFND	\
+0782-610 %1$s: Device name (mn) not found in %2$s\n
+$
+MSG_LVP_PTYPENOTFND	\
+0782-611 %1$s: Printer type (mt) not found in %2$s\n
+$
+MSG_LVP_NOVPSFND	\
+0782-612 %1$s: No virtual printers found for the queue %2$s\n
+$
+MSG_LVP_GENATDESC	\
+User Defined Backend
+$ Note: There is a duplicate entry for this message in piosmit.cat.  Any
+$ changes to this message should also be reflected in piosmit.cat.
+$
+MSG_EA_USAGE	\
+0782-613 Usage:\t%s -q PrintQueue -d QueueDevice [ -u ] AttributeName...\n
+$
+MSG_EA_NOVP	\
+0782-614 %1$s: No virtual printer exists for the specified queue %2$s and \n\
+queue device %3$s\n
+$
+MSG_EA_NOATTR	\
+0782-615 %1$s: The attribute %2$2.2s does not exist in the virtual \n\
+printer definition\n
+$
+MSG_MPD_USAGE	\
+0782-616 Usage:\t%s -p PseudoDevice -t AttachmentType\n\
+\t\t{ -A | -C | -R | -D } [ -a Clause... ]\n
+$
+MSG_MPD_UNLINKERR	\
+0782-617 %1$s: Error '%2$s' in removing the file %3$s\n
+$
+MSG_MPD_FLDNOTFND	\
+0782-618 %1$s: The specified field '%2$s' is not found in the pseudo-device \n\
+file %3$s\n
+$
+MSG_MPD_FWRERR	\
+0782-619 %1$s: Error '%2$s' in writing to the file %3$s\n
+$
+MSG_MPD_PDEXISTS	\
+0782-620 %1$s: The device '%2$s' already exists; can not create\n
+$
+$ **************************************************************************
+$       Messages used by piomkapqd
+$ **************************************************************************
+APQD_USAGE \
+0782-621 Usage: piomkapqd -A local -p Printer -d DeviceName -h header [-e]\n\
+\tpiomkapqd -A local -p Printer -v Device -s Subclass -r Adapter -h header [-e]\n\
+\tpiomkapqd -A xstation -p Printer -x XstationName -t XstationType -P Port -h header [-e]\n\
+\tpiomkapqd -A ascii -p Printer -T ttyName -h header [-e]\n\
+\tpiomkapqd -A file -p Printer -f FileName -h header [-e]\n\
+\tpiomkapqd -A Attachment -p Printer [ -d Devicename ] -c CmdExec -i DiscCmd\n\
+\t\t -o ObjectId  -h header [-e]\n
+$
+MSG_APQD_PREDEF \
+0782-622 Predefined virtual printer does not exist for the \n\
+printer type specified with the '-d' command line option. \n\
+Use local problem reporting procedures.\n
+$
+MSG_APQD_ERRODMINIT \
+0782-623 ODM initialization failed (odmerrno is %d).\n\
+Use local problem reporting procedures.\n
+$
+MSG_APQD_ERRODMSP \
+0782-624 Setting ODM path to %1$s failed (odmerrno is %2$d).\n\
+Use local problem reporting procedures.\n
+$
+MSG_APQD_ERRODMLOCK \
+0782-625 Locking the ODM path %1$s failed (odmerrno is %2$d).\n\
+Use local problem reporting procedures.\n
+$
+MSG_APQD_ERRODMOPEN \
+0782-626 Opening the ODM class \"%1$s\" failed (odmerrno is %2$d).\n\
+Use local problem reporting procedures.\n
+$
+MSG_APQD_ERRODMADD \
+0782-627 Error in adding an object to the ODM class \"%1$s\"\n\
+\t (odmerrno is %2$d).\n\
+\t Use local problem reporting procedures.\n
+$
+APQD_SINGLE_QNAME \
+Name of new PRINT QUEUE to add
+$
+APQD_HEADER \
+Add a Print Queue 
+$
+EXISTING_NAME \
+EXISTING print queues for this printer
+$
+DEF_DS_STRING \
+(user defined)
+$
+MKPQ_BAD_QNAME \
+0782-332 Invalid print queue name '%s'.\n\
+\tName must not exceed 20 characters and may only\n\
+\tcontain the characters [a-z], [A-Z], [0-9], @, -, or _.\n
+$
+MKPQ_NO_CREATE \
+0782-628 Unable to create print queue.\n
+$
+MKPQ_DEVICE_DONE \
+Added printer '%s'.\n
+$
+MKPQ_QUEUE_DONE \
+Added print queue '%s'.\n
+$
+MKPQ_QDEV_DONE \
+Added printer '%1$s' to print queue '%2$s'.\n
+$
+MKPQ_QD_EXISTS \
+0782-629 Queue device '%1$s' already exists on print queue '%2$s'.\n\
+Unable to add queue device.\n
+$
+MKPQ_Q_NOT_EXIST \
+0782-630 Queue '%s' does not exist. \n
+$
+MKPQ_Q_MISSING \
+0782-631 At least one print queue name must be specified.\n
+$
+MKPQ_DUP_Q \
+0782-632 Print queue '%s' specified more than once. \n\
+\tDuplicate names not allowed.\n  
+$
+MKPQ_DUP_PRT \
+0782-633 Print queue '%1$s' already contains printer '%2$s'.\n
+$
+MKPQ_USAGE \
+0782-634 Usage:\n\
+piomkpq -A local -p PrinterType -d DeviceName { -D DataStream -q QueueName }...\n\
+piomkpq -A local -p PrinterType -d DeviceName -Q QueueName -D DataStream\n\
+piomkpq -A local -p PrinterType { -D DataStream -q QueueName }...\n\
+\t-s SubClass -r ParentAdapter -w PortNo -v DeviceType\n\
+\t[ -a {interface|ptop|autoconfig|speed|parity|bpc|stops|xon|dtr|tbc}=DescVal]...\n\
+piomkpq -A local -p PrinterType -Q QueueName -D DataStream -v DeviceType\n\
+\t-s SubClass -r ParentAdapter -w PortNo\n\
+\t[ -a {interface|ptop|autoconfig|speed|parity|bpc|stops|xon|dtr|tbc}=DescVal]...\n\
+piomkpq -A xstation -p PrinterType -d PseudoDeviceName\n\
+\t{ -D DataStream -q QueueName }...\n\
+piomkpq -A xstation -p PrinterType -d PseudoDeviceName\n\
+\t-Q QueueName -D DataStream\n\
+piomkpq -A xstation -p PrinterType { -D DataStream -q QueueName }...\n\
+\t-x XstationName -t XstationType -P XstationPort\n\
+\t[ -a {speed|parity|bpc|stops}=DescVal ]...\n\
+piomkpq -A xstation -p PrinterType -Q QueueName -D DataStream\n\
+\t-x XstationName -t XstationType -P XstationPort\n\
+\t[ -a {speed|parity|bpc|stops}=DescVal ]...\n\
+piomkpq -A ascii -p PrinterType -d TtyName { -D DataStream -q QueueName }...\n\
+piomkpq -A ascii -p PrinterType -d TtyName -Q QueueName -D DataStream\n\
+piomkpq -A file -p PrinterType -d FileName { -D DataStream -q QueueName }...\n\
+piomkpq -A file -p PrinterType -d FileName -Q QueueName -D DataStream\n\
+piomkpq -A OtherAttachmentType -p PrinterType -d DeviceName\n\
+\t{ -D DataStream -q QueueName }... -b 'QueueAttribute=Value'...\n\
+\t-c 'QueueDeviceAttribute=Value'...\n
+$ Note: do not translate local or xstation or ascii or file
+$
+MSG_LPT_USAGE	\
+0782-635 Usage:\t%s -t [ -A AttachmentType ] Maker\n\
+\t\t-T -A AttachmentType\n\
+\t\t-m\n
+$
+MSG_LPT_GENPTR	\
+Generic Printer
+$
+MSG_CDQ_SYS_ERR	\
+0782-636 piochdfq: System error - %s.\n
+$
+MSG_CDQ_OPEN_ERROR	\
+0782-637 piochdfq: Could not open /etc/qconfig\n
+$
+MSG_CDQ_USAGE	\
+0782-638 Usage: piochdfq -q default_queue\n
+$
+MSG_CDQ_INVQ	\
+0782-639 piochdfq: Print queue '%s' does not exist.\n
+$
+MSG_CDQ_DIGFAIL	\
+0782-640 piochdfq: Could not make queue '%s' the default.\n
+$
+APQD_HEADER_PRINTER \
+Add an Additional Printer to an Existing Print Queue 
+$
+MSG_CDQ_LOCK_ERR	\
+0782-641 piochdfq: Could not lock /etc/qconfig.\n
+$
+MSG_MPD_FCHERR	\
+0782-642 %1$s: Error '%2$s' in changing access rights of the file %3$s\n
+$
+MKPQ_DEVICE_UNDONE \
+Removed printer '%s'.\n
+$
+MKPQ_QUEUE_UNDONE \
+Removed print queue '%s'.\n
+$
+MKPQ_QDEV_UNDONE \
+Removed printer '%1$s' from print queue '%2$s'.\n
+$
+$set 9
+$ **************************************************************************
+$       Messages used by piohpnpf
+$ **************************************************************************
+$
+CANTACCESS \
+0782-643 %1$s: cannot access file %2$s \n
+$
+TOOMANYFILES \
+0782-644 %1$s: only %2$d files allowed\n
+$
+USAGE \
+0782-645 usage: %s -x periph [ -nN ] [file...]\n
+$
+CNTRLPORT \
+Connecting to control port on %s ...
+$
+FAILED \
+failed\n
+$
+CONNECTED \
+connected\n
+$
+CONNECTING \
+Connecting to %s ...
+$
+CONNPORT \
+Connecting to data port on %s ...
+$
+SENDFILIN \
+Sending file (stdin)\n
+$
+SENDFILE \
+Sending file %s\n
+$
+CLOSE \
+0782-646 %s: connection closed by peripheral\n
+$
+ACCDENIED \
+0782-647 access to %s denied by access list\n
+$
+RESET \
+0782-648 %s: connection reset by peer\n
+$
+UNKNOWN_HOST \
+0782-649 %1$s: unknown host %2$s\n

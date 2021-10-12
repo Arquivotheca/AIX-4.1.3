@@ -1,0 +1,889 @@
+ePtr.$t$I$ADDRTABLE *$The Address Table
+ePtr.$n$I$int *$Entry Index
+eIndex.$t$I$ADDRTABLE *$The Address Table
+eIndex.$p$I$ADDRENTRY *$Entry Pointer
+new_ADDRTABLE.$tSize$$ushort$
+new_ADDRTABLE.$aBytes$$ushort$
+free_ADDRTABLE.$t$$ADDRTABLE *$
+find.$t$RI0$ADDRTABLE *$The Address Table
+find.$addr$RCI$char *$Address to be found
+alloc.$t$RI0$ADDRTABLE *$The Address Table
+dealloc.$t$RI0$ADDRTABLE *$The Address Table
+enableGroup.$nddp$RI$ndd_t *$NDD
+enableGroup.$t$RI0$ADDRTABLE *$The Address Table
+enableGroup.$chnRef$RI0$int *$Channel's Address Ref Table
+enableGroup.$addr$RCI$char *$Group Addr to be enabled
+disableGroup.$nddp$RI$ndd_t *$NDD
+disableGroup.$t$RI0$ADDRTABLE *$The Address Table
+disableGroup.$chnRef$RI0$int *$Channel's Address Ref Table
+disableGroup.$addr$RCI$char *$Group Addr to be enabled
+disableAllGroups.$nddp$RI$ndd_t *$NDD
+disableAllGroups.$t$RI0$ADDRTABLE *$The Address Table
+disableAllGroups.$chnRef$RI0$int *$Channel's Address Ref Table
+new_ADDRTABLE.$tSize$$ushort$
+new_ADDRTABLE.$aBytes$$ushort$
+free_ADDRTABLE.$t$$ADDRTABLE *$
+enableGroup.$nddp$RI$ndd_t *$NDD
+enableGroup.$t$RI0$ADDRTABLE *$The Address Table
+enableGroup.$chnRef$RI0$int *$Channel's Address Ref Table
+enableGroup.$addr$RCI$char *$Group Addr to be enabled
+disableGroup.$nddp$RI$ndd_t *$NDD
+disableGroup.$t$RI0$ADDRTABLE *$The Address Table
+disableGroup.$chnRef$RI0$int *$Channel's Address Ref Table
+disableGroup.$addr$RCI$char *$Group Addr to be enabled
+disableAllGroups.$nddp$RI$ndd_t *$NDD
+disableAllGroups.$t$RI0$ADDRTABLE *$The Address Table
+disableAllGroups.$chnRef$RI0$int *$Channel's Address Ref Table
+new_CHN.$devType$RI$CIE_DEV_TYPE$Device Type Code
+new_CHN.$recQueueSize$RI$int$Receive Queue Size
+new_CHN.$staQueueSize$RI$int$Status Queue Size
+free_CHN.$chn$RI0$CHN *$Channel to be freed
+openChannel.$dev$RI0$DEV *$The Device
+openChannel.$chn$RI0$CHN *$The Channel
+openChannel.$devflag$RI$ulong$Device Flags
+closeChannel.$dev$RI0$DEV *$The Device
+closeChannel.$chn$RI0$CHN *$The Channel
+getChannelStatus.$dev$RI0$DEV *$Device
+getChannelStatus.$chn$RI0$CHN *$Channel
+getChannelStatus.$arg$RI0$cio_stat_blk_t *$Status Block Return Area
+getChannelStatus.$devflag$RI$ulong$Device Flags from Open
+readData.$dev$RI0$DEV *$The Device
+readData.$chn$RI0$CHN *$The Channel
+readData.$pm$R0$mbuf_t **$Output mbuf pointer
+readStatus.$devType$RI$CIE_DEV_TYPE$Device Type Code
+readStatus.$chn$RI0$CHN *$The Channel
+readStatus.$stat$R0$cio_stat_blk_t *$Output status buffer
+queueStatus.$chn$RI0$CHN *$The channel
+queueStatus.$s$RCI$STATBLK *$The status block
+writeData.$dev$RI0$DEV *$The device
+writeData.$chn$RI0$CHN *$The channel
+writeData.$m$RI$mbuf_t *$The mbuf
+entMulticastAddr.$dev$RI$DEV *$Device
+entMulticastAddr.$chn$RI$CHN *$Channel
+entMulticastAddr.$argp$RI0$void *$Parameter block
+entMulticastAddr.$devflag$RI$ulong$Device Flags from open
+tokFuncAddr.$dev$RI$DEV *$Device
+tokFuncAddr.$chn$RI$CHN *$Channel
+tokFuncAddr.$argp$RI0$void *$Parameter Block
+tokFuncAddr.$devflag$RI$ulong$Device Flags from open
+tokGroupAddr.$dev$RI$DEV *$Device
+tokGroupAddr.$chn$RI$CHN *$Channel
+tokGroupAddr.$argp$RI0$void *$Parameter Block
+tokGroupAddr.$devflag$RI$ulong$Device Flags from open
+tokSetGroupAddr.$dev$RI0$DEV *$Device
+tokSetGroupAddr.$chn$RI0$CHN *$Channel
+tokSetGroupAddr.$nddp$RI0$ndd_t *$NDD
+tokSetGroupAddr.$groupAddr$RI$unsigned int$Group Address (lsw)
+tokClearGroupAddr.$dev$RI0$DEV *$Device
+tokClearGroupAddr.$chn$RI0$CHN *$Channel
+tokClearGroupAddr.$nddp$RI0$ndd_t *$NDD
+tokClearGroupAddr.$groupAddr$RI$unsigned int$Group Address (lsw)
+fddiGroupAddr.$dev$RI$DEV *$Device
+fddiGroupAddr.$chn$RI$CHN *$Channel
+fddiGroupAddr.$argp$RI0$void *$Parameter Block
+fddiGroupAddr.$devflag$RI$ulong$Device Flags from open
+fddiClearAllGroups.$dev$RI0$DEV *$Device
+fddiClearAllGroups.$chn$RI0$CHN *$Channel
+fddiQueryGroupAddr.$dev$RI$DEV *$Device
+fddiQueryGroupAddr.$chn$RI$CHN *$Channel
+fddiQueryGroupAddr.$argp$RI0$void *$Parameter Block
+fddiQueryGroupAddr.$devflag$RI$ulong$Device Flags from open
+entPromiscuousOn.$dev$RI$DEV *$Device
+entPromiscuousOn.$chn$RI$CHN *$Channel
+entPromiscuousOn.$argp$RI0$void *$Parameter Block
+entPromiscuousOn.$devflag$RI$ulong$Device Flags from open
+entPromiscuousOff.$dev$RI$DEV *$Device
+entPromiscuousOff.$chn$RI$CHN *$Channel
+entPromiscuousOff.$argp$RI0$void *$Parameter Block
+entPromiscuousOff.$devflag$RI$ulong$Device Flags from open
+startSession.$dev$RI0$DEV *$Device Block
+startSession.$chn$RI0$CHN *$Channel Block
+startSession.$uarg$RI0$cio_sess_blk_t *$IOCTL Command Parameters
+startSession.$devflag$RI$ulong$Device Flags from Open
+haltSession.$dev$RI0$DEV *$Device Block
+haltSession.$chn$RI0$CHN *$Channel Block
+haltSession.$uarg$RI0$cio_sess_blk_t *$IOCTL Command Parameters
+haltSession.$devflag$RI$ulong$Device Flags from Open
+haltAllSessions.$dev$I0$DEV *$Device
+haltAllSessions.$chn$I0$CHN *$Channel
+lockChannel.$p$$$
+lockChannel.$chn$$$
+unlockChannel.$p$$$
+unlockChannel.$chn$$$
+new_CHN.$devType$RI$CIE_DEV_TYPE$Device Type Code
+new_CHN.$recQueueSize$RI$int$Receive Queue Size
+new_CHN.$staQueueSize$RI$int$Status Queue Size
+free_CHN.$chn$RI0$CHN *$Channel to be freed
+openChannel.$dev$RI0$DEV *$The Device
+openChannel.$chn$RI0$CHN *$The Channel
+openChannel.$devflag$RI$ulong$Device Flags
+closeChannel.$dev$RI0$DEV *$The Device
+closeChannel.$chn$RI0$CHN *$The Channel
+getChannelStatus.$dev$RI0$DEV *$Device
+getChannelStatus.$chn$RI0$CHN *$Channel
+getChannelStatus.$arg$RI0$cio_stat_blk_t *$Status Block Return Area
+getChannelStatus.$devflag$RI$ulong$Device Flags from Open
+readData.$dev$RI0$DEV *$The Device
+readData.$chn$RI0$CHN *$The Channel
+readData.$pm$R0$mbuf_t **$Output mbuf pointer
+readStatus.$devType$RI$CIE_DEV_TYPE$Device Type Code
+readStatus.$chn$RI0$CHN *$The Channel
+readStatus.$stat$R0$cio_stat_blk_t *$Output status buffer
+queueStatus.$chn$RI0$CHN *$The channel
+queueStatus.$s$RCI$STATBLK *$The status block
+writeData.$dev$RI0$DEV *$The device
+writeData.$chn$RI0$CHN *$The channel
+writeData.$m$RI$mbuf_t *$The mbuf
+entMulticastAddr.$dev$RI$DEV *$Device
+entMulticastAddr.$chn$RI$CHN *$Channel
+entMulticastAddr.$argp$RI0$void *$Parameter block
+entMulticastAddr.$devflag$RI$ulong$Device Flags from open
+tokFuncAddr.$dev$RI$DEV *$Device
+tokFuncAddr.$chn$RI$CHN *$Channel
+tokFuncAddr.$argp$RI0$void *$Parameter Block
+tokFuncAddr.$devflag$RI$ulong$Device Flags from open
+tokGroupAddr.$dev$RI$DEV *$Device
+tokGroupAddr.$chn$RI$CHN *$Channel
+tokGroupAddr.$argp$RI0$void *$Parameter Block
+tokGroupAddr.$devflag$RI$ulong$Device Flags from open
+tokSetGroupAddr.$dev$RI0$DEV *$Device
+tokSetGroupAddr.$chn$RI0$CHN *$Channel
+tokSetGroupAddr.$nddp$RI0$ndd_t *$NDD
+tokSetGroupAddr.$groupAddr$RI$unsigned int$Group Address (lsw)
+tokClearGroupAddr.$dev$RI0$DEV *$Device
+tokClearGroupAddr.$chn$RI0$CHN *$Channel
+tokClearGroupAddr.$nddp$RI0$ndd_t *$NDD
+tokClearGroupAddr.$groupAddr$RI$unsigned int$Group Address (lsw)
+fddiGroupAddr.$dev$RI$DEV *$Device
+fddiGroupAddr.$chn$RI$CHN *$Channel
+fddiGroupAddr.$argp$RI0$void *$Parameter Block
+fddiGroupAddr.$devflag$RI$ulong$Device Flags from open
+fddiClearAllGroups.$dev$RI0$DEV *$Device
+fddiClearAllGroups.$chn$RI0$CHN *$Channel
+fddiQueryGroupAddr.$dev$RI$DEV *$Device
+fddiQueryGroupAddr.$chn$RI$CHN *$Channel
+fddiQueryGroupAddr.$argp$RI0$void *$Parameter Block
+fddiQueryGroupAddr.$devflag$RI$ulong$Device Flags from open
+entPromiscuousOn.$dev$RI$DEV *$Device
+entPromiscuousOn.$chn$RI$CHN *$Channel
+entPromiscuousOn.$argp$RI0$void *$Parameter Block
+entPromiscuousOn.$devflag$RI$ulong$Device Flags from open
+entPromiscuousOff.$dev$RI$DEV *$Device
+entPromiscuousOff.$chn$RI$CHN *$Channel
+entPromiscuousOff.$argp$RI0$void *$Parameter Block
+entPromiscuousOff.$devflag$RI$ulong$Device Flags from open
+startSession.$dev$RI0$DEV *$Device Block
+startSession.$chn$RI0$CHN *$Channel Block
+startSession.$uarg$RI0$cio_sess_blk_t *$IOCTL Command Parameters
+startSession.$devflag$RI$ulong$Device Flags from Open
+haltSession.$dev$RI0$DEV *$Device Block
+haltSession.$chn$RI0$CHN *$Channel Block
+haltSession.$uarg$RI0$cio_sess_blk_t *$IOCTL Command Parameters
+haltSession.$devflag$RI$ulong$Device Flags from Open
+haltAllSessions.$dev$I0$DEV *$Device
+haltAllSessions.$chn$I0$CHN *$Channel
+new_CHN_LIST.$void$$$
+free_CHN_LIST.$chl$RI0$CHN_LIST *$The Channel List to be freed
+expand_CHN_LIST.$chl$RI0$CHN_LIST *$The Chn List to be expanded
+expand_CHN_LIST.$incr$RI$int$Size Increment
+new_CHN_LIST.$void$$$
+free_CHN_LIST.$chl$RI0$CHN_LIST *$The Channel List to be freed
+expand_CHN_LIST.$chl$RI0$CHN_LIST *$The Chn List to be expanded
+expand_CHN_LIST.$incr$RI$int$Size Increment
+cieconfig.$devno$I$dev_t$Device Number
+cieconfig.$cmd$I$int$Command Code
+cieconfig.$uiop$I$uio_t *$Ptr to uio containing dds
+ciempx.$devno$I$dev_t$Device Major/Minor Number
+ciempx.$chanp$I0$chan_t *$Ptr to Channel Number
+ciempx.$channame$CI$char *$Channel Name
+cieopen.$devno$I$dev_t$Device major/minor number
+cieopen.$devflag$I$ulong$Device Flags
+cieopen.$chan$I$chan_t$Channel Number
+cieopen.$ext$I0$void *$Open Extension
+cieclose.$devno$I$dev_t$Device major/minor number
+cieclose.$chan$I$chan_t$Channel Number
+cieclose.$ext$I0$void *$Open Extension
+cieread.$devno$I$dev_t$Device Major/Minor Number
+cieread.$uiop$I0$uio_t *$Data to be written
+cieread.$chan$I$chan_t$Channel number
+cieread.$ext$I0$cio_read_ext_t *$Read Extension
+ciewrite.$devno$I$dev_t$Device Major/Minor Number
+ciewrite.$uiop$I0$uio_t *$Data to be written
+ciewrite.$chan$I$chan_t$Channel number
+ciewrite.$ext$I0$cio_write_ext_t *$Write Extension
+cieselect.$devno$I$dev_t$Device Major/Minor Number
+cieselect.$events$I$ushort$Event mask to be tested
+cieselect.$revents$0$ushort *$Events that actually occurred
+cieselect.$chan$I$chan_t$Channel number
+cieioctl.$devno$I$dev_t$Device Number
+cieioctl.$cmd$I$int$IOCTL Command Code
+cieioctl.$arg$I0$void *$IOCTL Paramater Block
+cieioctl.$devflag$I$ulong$Device Flags from OPEN
+cieioctl.$chan$I$int$Channel Number
+cieioctl.$ext$I0$void *$IOCTL Extension Block
+arraysize.$x$I$<arrayname>$The name of the array
+min.$x$I$int$First operand
+min.$x$I$int$Second operand
+max.$x$I$int$First operand
+max.$x$I$int$Second operand
+cierecv.$ndd$I$ndd_t *$NDD Pointer
+cierecv.$m$I$mbuf_t *$Mbuf chain containing data
+cierecv.$macp$I$caddr_t$Ptr to start of packet in m
+cierecv.$chn$I$CHN *$isr_data (channel address)
+ciestat.$ndd$I$struct ndd *$NDD Pointer
+ciestat.$stat$CI$ndd_statblk_t *$Status Block
+ciestat.$chn$I$CHN *$isr_data (channel address)
+dbginit.$void$$$
+dbgterm.$void$$$
+dbgwrt.$fname$RCI$char *$Output File Name
+dbgwrt.$data$RCI$char *$Data to be written
+dbgwrt.$bytes$RI$int$Number of bytes
+getEnv.$v$C$char *$
+dbgout.$fmt$CI$char *$Format String
+dbgout.$...$I$$Arguments to be formatted
+sortIOCTLdefTable.$table$RI0$IODT_ENTRY *$Ptr to array of entries
+sortIOCTLdefTable.$size$RI$int$Number of entries
+uioToMbuf.$mp$R0$mbuf_t **$Return area for chain head ptr
+uioToMbuf.$uiop$RI0$uio_t *$uio pointer
+mbufToUio.$devType$I$CIE_DEV_TYPE$Device Type Code
+mbufToUio.$uiop$RI0$uio_t *$uio pointer
+mbufToUio.$chain$RI0$mbuf_t **$Ptr to head of mbuf chain
+searchIODTable.$cmd$RI$int$Command Code
+searchIODTable.$iodTable$RCI$IODT_ENTRY *$IOCTL Dispatch Table
+searchIODTable.$iodtSize$RI$$Number of entries in table
+hexInt.$in$I$unsigned int$Data to be formatted
+hexInt.$out$0$char *$Output Buffer
+hexInt.$width$I$int$Output width
+hexStr.$out$0$char *$Output Buffer
+hexStr.$olen$I$int$Output width
+hexStr.$in$CI$char *$Input buffer
+hexStr.$ilen$I$int$Input length
+memDump.$out$I0$char *$Output Buffer
+memDump.$indent$I$int$Output Line Indent
+memDump.$width$I$int$Output Line Width (src bytes)
+memDump.$opt$I$DUMPOPT$Dump Options
+memDump.$data$I$void *$Source Data
+memDump.$len$I$int$Length of Source
+TOK_FRAME_HAS_ROUTING_INFO.$f$$$
+TOK_ROUTING_INFO_LENGTH.$f$$$
+dbginit.$void$$$
+dbgterm.$void$$$
+dbgwrt.$fname$RCI$char *$Output File Name
+dbgwrt.$data$RCI$char *$Data to be written
+dbgwrt.$bytes$RI$int$Number of bytes
+getEnv.$v$C$char *$
+dbgout.$fmt$CI$char *$Format String
+dbgout.$...$I$$Arguments to be formatted
+sortIOCTLdefTable.$table$RI0$IODT_ENTRY *$Ptr to array of entries
+sortIOCTLdefTable.$size$RI$int$Number of entries
+uioToMbuf.$mp$R0$mbuf_t **$Return area for chain head ptr
+uioToMbuf.$uiop$RI0$uio_t *$uio pointer
+mbufToUio.$devType$I$CIE_DEV_TYPE$Device Type Code
+mbufToUio.$uiop$RI0$uio_t *$uio pointer
+mbufToUio.$chain$RI0$mbuf_t **$Ptr to head of mbuf chain
+searchIODTable.$cmd$RI$int$Command Code
+searchIODTable.$iodTable$RCI$IODT_ENTRY *$IOCTL Dispatch Table
+searchIODTable.$iodtSize$RI$$Number of entries in table
+hexStr.$out$0$char *$Output Buffer
+hexStr.$olen$I$int$Output width
+hexStr.$in$CI$char *$Input buffer
+hexStr.$ilen$I$int$Input length
+memDump.$out$I0$char *$Output Buffer
+memDump.$indent$I$int$Output Line Indent
+memDump.$width$I$int$Output Line Width (src bytes)
+memDump.$opt$I$DUMPOPT$Dump Options
+memDump.$data$I$void *$Source Data
+memDump.$len$I$int$Length of Source
+devInitENT.$dev$RI0$DEV *$Device
+devInitFDDI.$dev$RI0$DEV *$Device
+new_DEV.$devno$RI$dev_t$Device Number
+new_DEV.$dds$RCI$DDS *$DDS Temporary in kernel mem
+free_DEV.$dev$RI0$DEV *$DEV to be freed
+attachChannelToDevice.$dev$RI0$DEV *$Device
+attachChannelToDevice.$chn$RI0$CHN *$Channel to be attached
+detachChannelFromDevice.$dev$RI0$DEV *$Device
+detachChannelFromDevice.$chn$R$CHN *$I0-Channel to be detached 
+createChannel.$dev$RI0$DEV *$The Device
+createChannel.$chanp$0$chan_t *$Output channel pointer
+destroyChannel.$dev$RI0$DEV *$The device
+destroyChannel.$chanp$RI$chan_t *$The channel number
+describeDevice.$dev$RI$DEV *$Device
+describeDevice.$chn$RI$CHN *$Channel
+describeDevice.$info$R0$void *$User's devinfo buffer
+describeDevice.$devflag$RI$ulong$Device Flags from open
+queryStatistics.$dev$RI$DEV *$Device
+queryStatistics.$chn$RI$CHN *$Channel
+queryStatistics.$argp$R0$void *$Paramter Block
+queryStatistics.$devflag$RI$ulong$Device Flags from open
+tokQueryVPD.$dev$RI$DEV *$Device
+tokQueryVPD.$chn$RI$CHN *$Channel
+tokQueryVPD.$vpd$R0$void *$User's VPD Buffer
+tokQueryVPD.$devflag$RI$ulong$Device Flags from open
+tokQueryTokenRingInfo.$dev$RI$DEV *$Device
+tokQueryTokenRingInfo.$chn$RI$CHN *$Channel
+tokQueryTokenRingInfo.$argp$RI0$void *$User's tok_q_ring_info_t buf
+tokQueryTokenRingInfo.$devflag$RI$ulong$Device Flags from open
+entQueryVPD.$dev$RI$DEV *$Device
+entQueryVPD.$chn$RI$CHN *$Channel
+entQueryVPD.$vpd$R0$void *$User's VPD Buffer
+entQueryVPD.$devflag$RI$ulong$Device Flags from open
+new_DEV.$devno$RI$dev_t$Device Number
+new_DEV.$dds$RCI$DDS *$DDS Temporary in kernel mem
+free_DEV.$dev$RI0$DEV *$DEV to be freed
+attachChannelToDevice.$dev$RI0$DEV *$Device
+attachChannelToDevice.$chn$RI0$CHN *$Channel to be attached
+detachChannelFromDevice.$dev$RI0$DEV *$Device
+detachChannelFromDevice.$chn$R$CHN *$I0-Channel to be detached 
+createChannel.$dev$RI0$DEV *$The Device
+createChannel.$chanp$0$chan_t *$Output channel pointer
+destroyChannel.$dev$RI0$DEV *$The device
+destroyChannel.$chanp$RI$chan_t *$The channel number
+describeDevice.$dev$RI$DEV *$Device
+describeDevice.$chn$RI$CHN *$Channel
+describeDevice.$info$R0$void *$User's devinfo buffer
+describeDevice.$devflag$RI$ulong$Device Flags from open
+queryStatistics.$dev$RI$DEV *$Device
+queryStatistics.$chn$RI$CHN *$Channel
+queryStatistics.$argp$R0$void *$Paramter Block
+queryStatistics.$devflag$RI$ulong$Device Flags from open
+tokQueryVPD.$dev$RI$DEV *$Device
+tokQueryVPD.$chn$RI$CHN *$Channel
+tokQueryVPD.$vpd$R0$void *$User's VPD Buffer
+tokQueryVPD.$devflag$RI$ulong$Device Flags from open
+tokQueryTokenRingInfo.$dev$RI$DEV *$Device
+tokQueryTokenRingInfo.$chn$RI$CHN *$Channel
+tokQueryTokenRingInfo.$argp$RI0$void *$User's tok_q_ring_info_t buf
+tokQueryTokenRingInfo.$devflag$RI$ulong$Device Flags from open
+entQueryVPD.$dev$RI$DEV *$Device
+entQueryVPD.$chn$RI$CHN *$Channel
+entQueryVPD.$vpd$R0$void *$User's VPD Buffer
+entQueryVPD.$devflag$RI$ulong$Device Flags from open
+init_DEVMGR.$void$$$
+uninit_DEVMGR.$void$$$
+createDevice.$devno$I$dev_t$Device identifier
+createDevice.$uiop$I$uio_t *$Device Dependent Structure
+destroyDevice.$devno$I$dev_t$Device identifier
+ACQUIRE_DEVICE.$devno$$$
+ACQUIRE_DEVICE.$dev$$$
+acquireDevice.$devno$RI$dev_t$Device Number
+acquireDevice.$pdev$R0$DEV **$Return area for dev
+releaseDevice.$dev$RI0$DEV *$The device
+acquireChannel.$devno$RI$dev_t$Device Number
+acquireChannel.$chan$RI$chan_t$Channel Number
+acquireChannel.$pdev$R0$DEV **$Ptr to dev return
+acquireChannel.$pchn$R0$CHN **$Ptr to chn return
+releaseChannel.$dev$RI0$DEV *$The Device
+releaseChannel.$chn$RI0$CHN *$The channel
+init_DEVMGR.$void$$$
+uninit_DEVMGR.$void$$$
+createDevice.$devno$I$dev_t$Device identifier
+createDevice.$uiop$I$uio_t *$Device Dependent Structure
+destroyDevice.$devno$I$dev_t$Device identifier
+acquireDevice.$devno$RI$dev_t$Device Number
+acquireDevice.$pdev$R0$DEV **$Return area for dev
+releaseDevice.$dev$RI0$DEV *$The device
+acquireChannel.$devno$RI$dev_t$Device Number
+acquireChannel.$chan$RI$chan_t$Channel Number
+acquireChannel.$pdev$R0$DEV **$Ptr to dev return
+acquireChannel.$pchn$R0$CHN **$Ptr to chn return
+releaseChannel.$dev$RI0$DEV *$The Device
+releaseChannel.$chn$RI0$CHN *$The channel
+setHWM.$stat$$$
+setHWM.$var$$$
+new_DEVTABLE.$void$$$
+free_DEVTABLE.$dt$I0$DEVTABLE *$Device Table
+mkDevHandle.$dt$RI$DEVTABLE *$Device Table
+mkDevHandle.$devno$RI$dev_t$Device Number
+mkDevHandle.$dhp$R0$DEVHANDLE *$Ptr to output handle
+new_DEVTABLE.$void$$$
+free_DEVTABLE.$dt$I0$DEVTABLE *$Device Table
+mkDevHandle.$dt$RI$DEVTABLE *$Device Table
+mkDevHandle.$devno$RI$dev_t$Device Number
+mkDevHandle.$dhp$R0$DEVHANDLE *$Ptr to output handle
+dhValid.$dt$CI$DEVTABLE *$Device Table
+dhValid.$dh$CI$DEVHANDLE &$Device Handle
+getDEV.$dt$CI$DEVTABLE *$Device Table
+getDEV.$dh$CI$DEVHANDLE &$Device Handle
+setDEV.$dt$CI$DEVTABLE *$Device Table
+setDEV.$dh$CI$DEVHANDLE &$Device Handle
+setDEV.$p$CI$DEV *$Ptr to DEV Object
+clrDEV.$dt$CI$DEVTABLE *$Device Table
+clrDEV.$dh$CI$DEVHANDLE &$Device Handle
+incrDevCount.$dt$CI$DEVTABLE *$Device Table
+incrDevCount.$dh$CI$DEVHANDLE &$Device Handle
+decrDevCount.$dt$CI$DEVTABLE *$Device Table
+decrDevCount.$dh$CI$DEVHANDLE &$Device Handle
+rotate.$x$I0$unsigned int$Number to be rotated
+rotate.$n$I0$size_t$Number of bits to rotate
+hash.$x$$$
+hash.$lim$$$
+dmallocInit.$htabSize$$unsigned long$
+dmallocInit.$memSize$$unsigned long$
+dmallocTerm.$void$$$
+dmallocReport.$void$$$
+d_save.$p$$void *$
+d_save.$size$$unsigned long$
+d_save.$type$$MEM_TYPE$
+d_save.$file$R$char *$
+d_save.$func$R$char *$
+d_save.$line$R$int$
+d_attach.$p$$void *$
+d_attach.$size$$unsigned long$
+d_attach.$file$R$char *$
+d_attach.$func$R$char *$
+d_attach.$line$R$int$
+d_release.$p$$void *$
+d_release.$type$$MEM_TYPE$
+dmalloc.$size$R$int$
+dmalloc.$align$R$int$
+dmalloc.$heap$R$void *$
+dmalloc.$file$R$char *$
+dmalloc.$func$R$char *$
+dmalloc.$line$R$int$
+dmfree.$p$R$void *$
+dmfree.$heap$R$void *$
+d_get.$wait$I$int$Wait Flag
+d_get.$type$I$int$Block Type
+d_get.$file$R$char *$
+d_get.$func$R$char *$
+d_get.$line$R$int$
+d_gethdr.$wait$I$int$Wait Flag
+d_gethdr.$type$I$int$Block Type
+d_gethdr.$file$R$char *$
+d_gethdr.$func$R$char *$
+d_gethdr.$line$R$int$
+d_getclr.$wait$I$int$Wait Flag
+d_getclr.$type$I$int$Block Type
+d_getclr.$file$R$char *$
+d_getclr.$func$R$char *$
+d_getclr.$line$R$int$
+d_clgetm.$m$I0$struct mbuf *$mbuf to attach to
+d_clgetm.$wait$I$int$Wait Flag
+d_clgetm.$size$I$int$Cluster Size
+d_clgetm.$file$R$char *$
+d_clgetm.$func$R$char *$
+d_clgetm.$line$R$int$
+d_free.$m$$struct mbuf *$
+d_free.$file$R$char *$
+d_free.$func$R$char *$
+d_free.$line$R$int$
+d_freem.$m$$struct mbuf *$
+d_freem.$file$R$char *$
+d_freem.$func$R$char *$
+d_freem.$line$R$int$
+dmallocInit.$htabSize$$unsigned long$
+dmallocInit.$memSize$$unsigned long$
+dmallocTerm.$void$$$
+dmallocReport.$void$$$
+d_save.$p$$void *$
+d_save.$size$$unsigned long$
+d_save.$type$$MEM_TYPE$
+d_save.$file$R$char *$
+d_save.$func$R$char *$
+d_save.$line$R$int$
+d_release.$p$$void *$
+d_release.$type$$MEM_TYPE$
+dmalloc.$size$R$int$
+dmalloc.$align$R$int$
+dmalloc.$heap$R$void *$
+dmalloc.$file$R$char *$
+dmalloc.$func$R$char *$
+dmalloc.$line$R$int$
+dmfree.$p$R$void *$
+dmfree.$heap$R$void *$
+d_get.$wait$I$int$Wait Flag
+d_get.$type$I$int$Block Type
+d_get.$file$R$char *$
+d_get.$func$R$char *$
+d_get.$line$R$int$
+d_gethdr.$wait$I$int$Wait Flag
+d_gethdr.$type$I$int$Block Type
+d_gethdr.$file$R$char *$
+d_gethdr.$func$R$char *$
+d_gethdr.$line$R$int$
+d_getclr.$wait$I$int$Wait Flag
+d_getclr.$type$I$int$Block Type
+d_getclr.$file$R$char *$
+d_getclr.$func$R$char *$
+d_getclr.$line$R$int$
+d_clgetm.$m$I0$struct mbuf *$mbuf to attach to
+d_clgetm.$wait$I$int$Wait Flag
+d_clgetm.$size$I$int$Cluster Size
+d_clgetm.$file$R$char *$
+d_clgetm.$func$R$char *$
+d_clgetm.$line$R$int$
+d_free.$m$$struct mbuf *$
+d_free.$file$R$char *$
+d_free.$func$R$char *$
+d_free.$line$R$int$
+d_freem.$m$$struct mbuf *$
+d_freem.$file$R$char *$
+d_freem.$func$R$char *$
+d_freem.$line$R$int$
+xmalloc.$bytes$I$int$Number of bytes
+xmalloc.$align$I$int$Alignment
+xmalloc.$heap$I$void *$Ptr to heap
+xmfree.$ptr$I$void *$Ptr to area to be freed
+xmfree.$heap$I$void *$Ptr to heap
+m_get.$wait$I$int$Wait Flag
+m_get.$type$I$int$mbuf Type
+m_gethdr.$wait$I$int$Wait Flag
+m_gethdr.$type$I$int$mbuf Type
+m_getclr.$wait$I$int$Wait Flag
+m_getclr.$type$I$int$mbuf Type
+m_clgetm.$m$I0$struct mbuf *$mbuf to attach to
+m_clgetm.$wait$I$int$Wait Flag
+m_clgetm.$size$I$int$Cluster size
+m_free.$p$I0$void *$Mbuf to be freed
+m_freem.$p$I0$void *$Mbuf chain to be freed
+mk_DSAP_filter.$f$0$ns_8022_t *$Ptr to return area
+mk_DSAP_filter.$netid$I$netid_t$Net ID
+mk_ethertype_filter.$f$0$ns_8022_t *$Ptr to return area
+mk_ethertype_filter.$netid$I$netid_t$Net ID
+mk_FDDI_SMT_filter.$f$0$fddi_dmx_filter_t *$Ptr to return area
+mk_FDDI_SMT_filter.$ftype$I$ushort$Filter Type Code
+mk_TOK_MAC_filter.$f$0$ns_8022_t *$Ptr to return area
+mk_DSAP_filter.$f$0$ns_8022_t *$Ptr to return area
+mk_DSAP_filter.$netid$I$netid_t$Net ID
+mk_ethertype_filter.$f$0$ns_8022_t *$Ptr to return area
+mk_ethertype_filter.$netid$I$netid_t$Net ID
+mk_FDDI_SMT_filter.$f$0$fddi_dmx_filter_t *$Ptr to return area
+mk_FDDI_SMT_filter.$ftype$I$ushort$Filter Type Code
+mk_TOK_MAC_filter.$f$0$ns_8022_t *$Ptr to return area
+min.$x$$$
+min.$y$$$
+max.$x$$$
+max.$y$$$
+tokFGtoCDLI.$cioLen$I$ushort$CIO-format length
+tokFGtoCDLI.$cioAddr$I$char *$CIO-format address
+tokFGtoCDLI.$cdliLen$I$ushort$CDLI-format length
+tokFGtoCDLI.$cdliAddr$0$char *$CDLI-format address
+findAddrMap.$map$CI$ADDR_MAP *$The address mapping table
+findAddrMap.$devType$I$CIE_DEV_TYPE$Device Type Code
+findAddrMap.$cioLen$I$ushort$COMIO-format addr length
+findAddrMap.$cdliLen$I$ushort$CDLI=format addr length
+mapNetAddress.$devType$I$CIE_DEV_TYPE$Device Type Code
+mapNetAddress.$direction$I$MAP_ADDR_DIR$Mapping Direction
+mapNetAddress.$cioLen$I$ushort$Length of COMIO-format address
+mapNetAddress.$cioAddr$I$char *$Ptr to COMIO-format address
+mapNetAddress.$cdliLen$I$ushort$Length of CDLI-format address
+mapNetAddress.$cdliAddr$0$char *$Ptr to CDLI-format address
+mapNetAddress.$devType$I$CIE_DEV_TYPE$Device Type Code
+mapNetAddress.$direction$I$MAP_ADDR_DIR$Mapping Direction
+mapNetAddress.$cioLen$I$ushort$Length of COMIO-format address
+mapNetAddress.$cioAddr$I$char *$Ptr to COMIO-format address
+mapNetAddress.$cdliLen$I$ushort$Length of CDLI-format address
+mapNetAddress.$cdliAddr$0$char *$Ptr to CDLI-format address
+mbqInit.$q$I0$MBQUEUE *$The mbuf Queue
+mbqInit.$limit$I$int$Queue Size Limit
+mbqQueue.$q$I0$MBQUEUE *$The queue
+mbqQueue.$m$I0$mbuf_t *$The mbuf to be queued
+mbqDeQueue.$q$I0$MBQUEUE *$The queue
+mbqEmpty.$q$$$
+mbqSize.$q$$$
+mbqHWM.$q$$$
+first_mib_addr.$a$$ndd_mib_addr_t *$Ptr to ndd_mib_addr structure 
+next_mib_addr.$e$$ndd_mib_addr_elem_t *$Ptr to current ndd_mib_addr_elem_t 
+mib_addr_count.$t$$ndd_mib_addr_t$Ptr to ndd_mib_addr_t structure 
+dbg_ns_alloc.$nddname$$char *$
+dbg_ns_alloc.$nddpp$$ndd_t **$
+dbg_ns_free.$nddp$$ndd_t *$
+dbg_ns_add_filter.$nddp$$ndd_t *$
+dbg_ns_add_filter.$filter$$caddr_t$
+dbg_ns_add_filter.$len$$int$
+dbg_ns_add_filter.$user$$struct ns_user *$
+dbg_ns_del_filter.$nddp$$ndd_t *$
+dbg_ns_del_filter.$filter$$caddr_t$
+dbg_ns_del_filter.$len$$int$
+dbg_ns_add_status.$nddp$$ndd_t *$
+dbg_ns_add_status.$statfilter$$caddr_t$
+dbg_ns_add_status.$len$$int$
+dbg_ns_add_status.$statuser$$struct ns_statuser *$
+dbg_ns_del_status.$nddp$$ndd_t *$
+dbg_ns_del_status.$statfilter$$caddr_t$
+dbg_ns_del_status.$len$$int$
+dbg_ndd_output.$nddp$$ndd_t *$
+dbg_ndd_output.$m$$struct mbuf *$
+dbg_ndd_ctl.$nddp$$ndd_t *$
+dbg_ndd_ctl.$cmd$$int$
+dbg_ndd_ctl.$arg$$caddr_t$
+dbg_ndd_ctl.$len$$int$
+NDD_OUTPUT.$n$$$
+NDD_OUTPUT.$m$$$
+NDD_CTL.$n$$$
+NDD_CTL.$c$$$
+NDD_CTL.$a$$$
+NDD_CTL.$l$$$
+dbg_ns_alloc.$nddname$$char *$
+dbg_ns_alloc.$nddpp$$ndd_t **$
+dbg_ns_free.$nddp$$ndd_t *$
+dbg_ns_add_filter.$nddp$$ndd_t *$
+dbg_ns_add_filter.$filter$$caddr_t$
+dbg_ns_add_filter.$len$$int$
+dbg_ns_add_filter.$user$$struct ns_user *$
+dbg_ns_del_filter.$nddp$$ndd_t *$
+dbg_ns_del_filter.$filter$$caddr_t$
+dbg_ns_del_filter.$len$$int$
+dbg_ns_add_status.$nddp$$ndd_t *$
+dbg_ns_add_status.$statfilter$$caddr_t$
+dbg_ns_add_status.$len$$int$
+dbg_ns_add_status.$statuser$$struct ns_statuser *$
+dbg_ns_del_status.$nddp$$ndd_t *$
+dbg_ns_del_status.$statfilter$$caddr_t$
+dbg_ns_del_status.$len$$int$
+dbg_ndd_output.$nddp$$ndd_t *$
+dbg_ndd_output.$m$$struct mbuf *$
+dbg_ndd_ctl.$nddp$$ndd_t *$
+dbg_ndd_ctl.$cmd$$int$
+dbg_ndd_ctl.$arg$$caddr_t$
+dbg_ndd_ctl.$len$$int$
+enable_FDDI_SMT.$nddp$RI0$ndd_t *$NDD
+enable_FDDI_SMT.$ses$RI0$SES *$Session
+enable_FDDI_SMT.$user$RI0$ns_user_t *$ns_user structure
+enable_FDDI_SMT.$fdef$RCI$FDDI_SMT_DEF *$SMT Filter Definition
+disable_FDDI_SMT.$nddp$RI0$ndd_t *$NDD
+disable_FDDI_SMT.$ses$RI0$SES *$Session
+disable_FDDI_SMT.$fdef$RCI$FDDI_SMT_DEF *$SMT Filter Definition
+enable_TOK_MAC.$nddp$RI0$ndd_t *$NDD
+enable_TOK_MAC.$ses$RI0$SES *$Session
+enable_TOK_MAC.$user$RI0$ns_user_t *$ns_user structure
+disable_TOK_MAC.$nddp$RI0$ndd_t *$NDD
+disable_TOK_MAC.$ses$RI0$SES *$Session
+enable_ethertype.$nddp$RI0$ndd_t *$NDD
+enable_ethertype.$ses$RI0$SES *$Session
+enable_ethertype.$user$RI0$ns_user_t *$ns_user structure
+disable_ethertype.$nddp$RI0$ndd_t *$NDD
+disable_ethertype.$ses$RI0$SES *$Session
+enable_DSAP.$nddp$RI0$ndd_t *$NDD
+enable_DSAP.$ses$RI0$SES *$Session
+enable_DSAP.$user$RI0$ns_user_t *$ns_user structure
+disable_DSAP.$nddp$RI0$ndd_t *$NDD
+disable_DSAP.$ses$RI0$SES *$Session
+enableStatus.$nddp$RI0$ndd_t *$The NDD
+enableStatus.$psid$R0$uint *$Ptr to sid
+enableStatus.$user$RCI$ns_statuser_t *$User Structure
+disableStatus.$nddp$RI0$ndd_t *$The NDD
+disableStatus.$psid$R0$unsigned int*$Ptr to sid
+enableSessionFilters.$dev$RI0$DEV *$Device
+enableSessionFilters.$chn$RI0$CHN *$Channel
+enableSessionFilters.$ses$RI0$SES *$Session Block
+enableSessionFilters.$user$RI0$ns_user_t *$User Definition
+disableSessionFilters.$dev$RI0$DEV *$Device
+disableSessionFilters.$chn$RI0$CHN *$Channel
+disableSessionFilters.$ses$RI0$SES *$Session Block
+enableStatus.$nddp$RI0$ndd_t *$The NDD
+enableStatus.$psid$R0$uint *$Ptr to sid
+enableStatus.$user$RCI$ns_statuser_t *$User Structure
+disableStatus.$nddp$RI0$ndd_t *$The NDD
+disableStatus.$psid$R0$unsigned int*$Ptr to sid
+enableSessionFilters.$dev$RI0$DEV *$Device
+enableSessionFilters.$chn$RI0$CHN *$Channel
+enableSessionFilters.$ses$RI0$SES *$Session Block
+enableSessionFilters.$user$RI0$ns_user_t *$User Definition
+disableSessionFilters.$dev$RI0$DEV *$Device
+disableSessionFilters.$chn$RI0$CHN *$Channel
+disableSessionFilters.$ses$RI0$SES *$Session Block
+new_QUEUE.$size$RI$int$Number of nodes to prealloc
+new_QUEUE.$allocType$RI$int$Allocation Flags
+free_QUEUE.$q$RI0$QHANDLE$Queue to be freed
+xNew.$q$RI0$QHANDLE$The queue
+xNew.$data$RCI$void *$Data pointer to be stored
+xQueue.$q$R$QHANDLE$
+xQueue.$d$RC$void *$
+xPush.$q$R$QHANDLE$
+xPush.$d$RC$void *$
+xInsert.$q$R$QHANDLE$
+xInsert.$p$R$CURSOR$
+xInsert.$d$RC$void *$
+xRemove.$q$RI0$QHANDLE$The queue
+xRemove.$c$RI0$CURSOR$Node to be removed
+new_QUEUE.$size$RI$int$Number of nodes to prealloc
+new_QUEUE.$allocType$RI$int$Allocation Flags
+free_QUEUE.$q$RI0$QHANDLE$Queue to be freed
+qInsert.$q$I0$QHANDLE$Queue
+qInsert.$p$I0$CURSOR &$Predecessor
+qInsert.$d$CI$<obj-type *>$Ptr to node data
+qQueue.$q$I0$QHANDLE$Queue
+qQueue.$d$CI$<obj-type *>$Ptr to node data
+qPush.$q$I0$QHANDLE$Queue
+qPush.$d$CI$<obj-type *>$Ptr to node data
+qRemove.$q$I0$QHANDLE$Queue
+qRemove.$c$I0$CURSOR &$Cursor for node to remove
+qRemove.$<obj-type>$$<literal-type-name>$Datatype for cast
+qDelete.$q$$$
+qDelete.$c$$$
+qPop.$q$I0$QHANDLE$Queue
+qPop.$<obj-type>$$<literal-type-name>$Datatype for cast
+qDrop.$q$I0$QHANDLE$Queue
+qDrop.$<obj-type>$$<literal-type-name>$Datatype for cast
+qCurr.$c$I0$CURSOR &$Cursor for node
+qCurr.$<obj-type>$$<literal-type-name>$Datatype for cast
+qFirst.$q$I0$QHANDLE$Queue
+qFirst.$c$I0$CURSOR &$Cursor to use
+qFirst.$<obj-type>$$<literal-type-name>$Datatype for cast
+qLast.$q$I0$QHANDLE$Queue
+qLast.$c$I0$CURSOR &$Cursor to use
+qLast.$<obj-type>$$<literal-type-name>$Datatype for cast
+qNext.$q$I0$QHANDLE$Queue
+qNext.$c$I0$CURSOR &$Cursor to use
+qNext.$<obj-type>$$<literal-type-name>$Datatype for cast
+qPrev.$q$I0$QHANDLE$Queue
+qPrev.$c$I0$CURSOR &$Cursor to use
+qPrev.$<obj-type>$$<literal-type-name>$Datatype for cast
+qEmpty.$q$I0$QHANDLE$Queue
+qSize.$q$CI$QHANDLE$Queue
+xNew.$q$RI0$QHANDLE$The queue
+xNew.$data$RCI$void *$Data pointer to be stored
+xQueue.$q$R$QHANDLE$
+xQueue.$d$RC$void *$
+xPush.$q$R$QHANDLE$
+xPush.$d$RC$void *$
+xInsert.$q$R$QHANDLE$
+xInsert.$p$R$CURSOR$
+xInsert.$d$RC$void *$
+xRemove.$q$RI0$QHANDLE$The queue
+xRemove.$c$RI0$CURSOR$Node to be removed
+initSesBlock.$ses$R0$SES *$Ptr to output Session Block
+initSesBlock.$devType$RI$CIE_DEV_TYPE$Device Type Code
+initSesBlock.$netidLength$RI$ushort$Length of net id (1 or 2)
+initSesBlock.$netid$RI$netid_t$Network ID
+new_SES.$devType$RI$CIE_DEV_TYPE$Device Type Code
+new_SES.$netidLength$RI$ushort$Length of net id (1 or 2)
+new_SES.$netid$RI$netid_t$Network ID
+destroy_SES.$ses$RI0$SES *$The session block
+tokSetFuncAddr.$ses$RI0$SES *$Session
+tokSetFuncAddr.$nddp$RCI$ndd_t *$NDD
+tokSetFuncAddr.$addrBits$RI$unsigned int$Functional Address Bits
+tokClearFuncAddr.$ses$RI0$SES *$Session
+tokClearFuncAddr.$nddp$RCI$ndd_t *$NDD
+tokClearFuncAddr.$addrBits$RI$unsigned int$Functional Address Bits
+initSesBlock.$ses$R0$SES *$Ptr to output Session Block
+initSesBlock.$devType$RI$CIE_DEV_TYPE$Device Type Code
+initSesBlock.$netidLength$RI$ushort$Length of net id (1 or 2)
+initSesBlock.$netid$RI$netid_t$Network ID
+new_SES.$devType$RI$CIE_DEV_TYPE$Device Type Code
+new_SES.$netidLength$RI$ushort$Length of net id (1 or 2)
+new_SES.$netid$RI$netid_t$Network ID
+destroy_SES.$ses$RI0$SES *$The session block
+tokSetFuncAddr.$ses$RI0$SES *$Session
+tokSetFuncAddr.$nddp$RCI$ndd_t *$NDD
+tokSetFuncAddr.$addrBits$RI$unsigned int$Functional Address Bits
+tokClearFuncAddr.$ses$RI0$SES *$Session
+tokClearFuncAddr.$nddp$RCI$ndd_t *$NDD
+tokClearFuncAddr.$addrBits$RI$unsigned int$Functional Address Bits
+mapTokMonStats.$t3$R0$tok_query_stats_t *$COMIO TR Statistics
+mapTokMonStats.$ds$RCI$DEVSTATS *$CIOEM Device Statistics
+mapTokMonStats.$t4$RCI$mon_all_stats_t *$CDLI TR Statistics
+mapTokMonStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapTokMonStats.$dmxTok$RCI$tok_dmx_stats_t *$CDLI TR Demux Stats
+mapFddiStats.$f3$R0$fddi_query_stats_t *$COMIO FDDI Statistics
+mapFddiStats.$ds$RCI$DEVSTATS *$CIOEM Device Statistics
+mapFddiStats.$f4$RCI$fddi_ndd_stats_t *$CDLI FDDI Statistics
+mapFddiStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapFddiStats.$dmxFddi$RCI$fddi_dmx_stats_t *$CDLI FDDI Demux Stats
+mapEnt3ComStats.$e3$R0$ent_query_stats_t *$COMIO 3Com Ent Statistics
+mapEnt3ComStats.$ds$RCI$DEVSTATS *$CIOEM Device Statistics
+mapEnt3ComStats.$e4$RCI$en3com_all_stats_t *$CDLI 3Com Statistics
+mapEnt3ComStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapEnt3ComStats.$dmxEnt$RCI$eth_dmx_stats_t *$CDLI 3Com Demux Stats
+mapEntIentStats.$e3$R0$ent_query_stats_t *$COMIO Ient Statistics
+mapEntIentStats.$ds$RCI$DEVSTATS *$Emulator Device Statistics
+mapEntIentStats.$e4$RCI$ient_all_stats_t *$CDLI Ient Statistics
+mapEntIentStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapEntIentStats.$dmxEnt$RCI$eth_dmx_stats_t *$CDLI Ient Demux Stats
+mapTokMonStats.$t3$R0$tok_query_stats_t *$COMIO TR Statistics
+mapTokMonStats.$ds$RCI$DEVSTATS *$CIOEM Device Statistics
+mapTokMonStats.$t4$RCI$mon_all_stats_t *$CDLI TR Statistics
+mapTokMonStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapTokMonStats.$dmxTok$RCI$tok_dmx_stats_t *$CDLI TR Demux Stats
+mapFddiStats.$f3$R0$fddi_query_stats_t *$COMIO FDDI Statistics
+mapFddiStats.$ds$RCI$DEVSTATS *$CIOEM Device Statistics
+mapFddiStats.$f4$RCI$fddi_ndd_stats_t *$CDLI FDDI Statistics
+mapFddiStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapFddiStats.$dmxFddi$RCI$fddi_dmx_stats_t *$CDLI FDDI Demux Stats
+mapEnt3ComStats.$e3$R0$ent_query_stats_t *$COMIO 3Com Ent Statistics
+mapEnt3ComStats.$ds$RCI$DEVSTATS *$CIOEM Device Statistics
+mapEnt3ComStats.$e4$RCI$en3com_all_stats_t *$CDLI 3Com Statistics
+mapEnt3ComStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapEnt3ComStats.$dmxEnt$RCI$eth_dmx_stats_t *$CDLI 3Com Demux Stats
+mapEntIentStats.$e3$R0$ent_query_stats_t *$COMIO Ient Statistics
+mapEntIentStats.$ds$RCI$DEVSTATS *$Emulator Device Statistics
+mapEntIentStats.$e4$RCI$ient_all_stats_t *$CDLI Ient Statistics
+mapEntIentStats.$dmx$RCI$nd_dmxstats_t *$CDLI Generic Demux Stats
+mapEntIentStats.$dmxEnt$RCI$eth_dmx_stats_t *$CDLI Ient Demux Stats
+mapFDDIHardFail.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapFDDIHardFail.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+mapFDDILimboEnter.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapFDDILimboEnter.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+mapFDDINDDStatus.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapFDDINDDStatus.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+mapTokHardFail.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapTokHardFail.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+mapTokLimboEnter.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapTokLimboEnter.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+mapTokNDDStatus.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapTokNDDStatus.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+mapAsyncStatus.$devType$I$CIE_DEV_TYPE$Device Type Code
+mapAsyncStatus.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapAsyncStatus.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+new_STATBLK.$format$I$STATBLK_FORMAT$Status Block Format Code
+new_STATBLK.$waitFlag$I$int$Wait flag (borrowed from mbuf)
+free_STATBLK.$s$I0$STATBLK *$Ptr to statblk to be freed
+mkStartDoneStatus.$dev$RI$DEV *$Device
+mkStartDoneStatus.$netid$RI$netid_t$Net ID
+mkHaltDoneStatus.$dev$RI$DEV *$Device
+mkHaltDoneStatus.$netid$RI$netid_t$Net ID
+mkNullBlkStatus.$void$$$
+mkLostStatusStatus.$void$$$
+mkTXDoneStatus.$status$RI$int$Status Code
+mkTXDoneStatus.$write_id$RI$int$Write Correlator from Extension
+mkCDLIStatus.$ns$RCI$ndd_statblk_t *$NDD Status Block
+mapAsyncStatus.$devType$I$CIE_DEV_TYPE$Device Type Code
+mapAsyncStatus.$cioStat$0$cio_stat_blk_t *$COMIO Status Block
+mapAsyncStatus.$cdliStat$CI$ndd_statblk_t *$CDLI Status Block
+new_STATBLK.$format$I$STATBLK_FORMAT$Status Block Format Code
+new_STATBLK.$waitFlag$I$int$Wait flag (borrowed from mbuf)
+free_STATBLK.$s$I0$STATBLK *$Ptr to statblk to be freed
+mkStartDoneStatus.$dev$RI$DEV *$Device
+mkStartDoneStatus.$netid$RI$netid_t$Net ID
+mkHaltDoneStatus.$dev$RI$DEV *$Device
+mkHaltDoneStatus.$netid$RI$netid_t$Net ID
+mkNullBlkStatus.$void$$$
+mkLostStatusStatus.$void$$$
+mkTXDoneStatus.$status$RI$int$Status Code
+mkTXDoneStatus.$write_id$RI$int$Write Correlator from Extension
+mkCDLIStatus.$ns$RCI$ndd_statblk_t *$NDD Status Block
+new_TRACE_TABLE.$tSize$RI$int$Size of trace table
+free_TRACE_TABLE.$tt$RI0$TRACE_TABLE *$Trace Table
+NETADDR1.$x$$$
+NETADDR2.$x$$$
+XMFAIL.$bytes$$$
+TRC_XMIT.$tag$$$
+TRC_XMIT.$a$$$
+TRC_XMIT.$b$$$
+TRC_XMIT.$c$$$
+TRC_RECV.$tag$$$
+TRC_RECV.$a$$$
+TRC_RECV.$b$$$
+TRC_RECV.$c$$$
+TRC_OTHER.$tag$$$
+TRC_OTHER.$a$$$
+TRC_OTHER.$b$$$
+TRC_OTHER.$c$$$
+TRC_DEBUG.$tag$$$
+TRC_DEBUG.$a$$$
+TRC_DEBUG.$b$$$
+TRC_DEBUG.$c$$$
+FUNC_NAME.$x$$$
+new_TRACE_TABLE.$tSize$RI$int$Size of trace table
+free_TRACE_TABLE.$tt$RI0$TRACE_TABLE *$Trace Table
+cieTrace.$tt$RI0$TRACE_TABLE *$Trace Table
+cieTrace.$traceID$RI$ulong$Trace ID
+cieTrace.$arg1$RI$ulong$First Trace Data Word
+cieTrace.$arg2$RI$ulong$Second Trace Data Word
+cieTrace.$arg3$RI$ulong$Third Trace Data Word
+cieTrace.$tt$RI0$TRACE_TABLE *$Trace Table
+cieTrace.$traceID$RI$ulong$Trace ID
+cieTrace.$arg1$RI$ulong$First Trace Data Word
+cieTrace.$arg2$RI$ulong$Second Trace Data Word
+cieTrace.$arg3$RI$ulong$Third Trace Data Word

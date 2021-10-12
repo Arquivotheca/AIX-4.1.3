@@ -1,0 +1,54 @@
+#!/bin/ksh
+# @(#)34	1.1  src/bldscripts/ResolveLmupdateXreqDiffs, ade_build, bos41J, 9509A_all 2/17/95 13:35:10
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+
+alias  dataman=`whence dataman`
+cmd=${0##*/}
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+export     TOP=$treetop/selfix
+typeset    RC=0
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+
+if dataman -q leveldata[$BLDCYCLE][notbuiltshipfiles] | grep -qs "."
+then
+    echo "Xreq said to ship files that didn't show up in the lmupdatelist."
+    echo "Delete these files from their transactions:"
+    dataman -q leveldata[$BLDCYCLE][notbuiltshipfiles]
+    RC=1
+fi
+if dataman -q leveldata[$BLDCYCLE][unexpectedshipfiles] | grep -qs "."
+then
+    echo "lmupdatelist says to ship files that didn't show up xreq."
+    echo "These need to be added to the appropriate transaction to"
+    echo "keep the database in sync with the ptf_pkg files."
+    dataman -q leveldata[$BLDCYCLE][unexpectedshipfiles]
+    RC=1
+fi
+[ $RC = 0 ]
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

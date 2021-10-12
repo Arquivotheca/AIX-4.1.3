@@ -1,0 +1,21 @@
+#!/bin/sh
+#ident "@(#)rc.ncs:3.2  File Date:93/03/25 Last Delta:93/03/22 14:57:32"
+
+############################################################################
+#
+#	rc.ncs	--	NCS startup file
+#
+############################################################################
+
+#######
+#	Start the NCS daemons 
+#######
+#Uncomment the following line to start the Local Location Broker
+startsrc -s llbd
+
+# Allow time for the llbd to start listening
+# before the glbd tries to register.
+sleep 5
+
+#Uncomment the following line to start the Global Location Broker
+#startsrc -s glbd

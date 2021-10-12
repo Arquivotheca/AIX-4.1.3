@@ -1,0 +1,125 @@
+* @(#)64        1.3.1.7  src/bos/kernext/exp/pse_int.exp, sysxpse, bos411, 9436A411a 8/26/94 07:54:44
+#!/unix
+*COMPONENT_NAME: SYSXPSE - Streams Framework
+*
+* ORIGINS: 27 83
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1994
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*LEVEL 1, 5 Years Bull Confidential Information
+
+* important data structures: debugging only
+sth_open_streams
+streams_runq
+fmodsw
+dmodsw
+runq_run
+mh_freelater
+
+* support for strinfo
+strinfo syscall
+
+* use esballoc instead
+allocbi
+
+* for compat module
+dcookie_to_dindex
+dindex_to_str
+
+* for sc module
+dname_to_dcookie
+dname_to_str
+fname_to_str
+nd_getset
+nd_load
+
+* mi support routines
+* internal use only
+mi_addr_scanf
+mi_allocq
+mi_close_detached
+mi_copy_done
+mi_copy_state
+mi_copyb
+mi_copyin
+mi_copyout
+mi_copyout_alloc
+mi_detach
+mi_gq_head
+mi_gq_in
+mi_gq_init
+mi_gq_out
+mi_ibc_qenable
+mi_ibc_timer
+mi_ibc_timer_add
+mi_ibc_timer_del
+mi_iprintf
+mi_itimer
+mi_itimer_fire
+mi_itimer_init
+mi_itimer_rsrv
+mi_mpprintf
+mi_mpprintf_nr
+mi_mpprintf_putc
+mi_nd_comm
+mi_nd_get
+mi_nd_set
+mi_offset_param
+mi_offset_param_mblk
+mi_offset_paramc
+mi_panic
+* mi_q_shuffle
+*mi_read_log
+mi_reallocb
+*mi_set_log
+mi_set_sth_wroff
+mi_sprintf
+mi_sprintf_noop
+mi_sprintf_putc
+mi_strcmp
+mi_strlog
+mi_strtol
+mi_timer
+mi_timer_alloc
+mi_timer_fire
+mi_timer_free
+mi_timer_valid
+mi_tpi_ack_alloc
+mi_tpi_addr_and_opt
+mi_tpi_conn_con
+mi_tpi_conn_ind
+mi_tpi_conn_req
+mi_tpi_data_ind
+mi_tpi_data_req
+mi_tpi_discon_ind
+mi_tpi_discon_req
+mi_tpi_err_ack_alloc
+mi_tpi_exdata_ind
+mi_tpi_exdata_req
+mi_tpi_info_req
+mi_tpi_ioctl_info_req
+mi_tpi_ok_ack_alloc
+mi_tpi_ordrel_ind
+mi_tpi_ordrel_req
+mi_tpi_trailer_alloc
+mi_tpi_uderror_ind
+mi_tpi_unitdata_ind
+mi_tpi_unitdata_req
+mi_zalloc
+
+dmodsw_next
+fmodsw_next
+
+he_alloc
+he_free
+
+* for xtiso driver
+drv_priv

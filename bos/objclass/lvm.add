@@ -1,0 +1,41 @@
+# @(#)44        1.10  src/bos/objclass/lvm.add, cfgmethods, bos411, 9428A410j 3/31/94 14:28:37
+
+*
+*
+* COMPONENT_NAME: (CFGMETH)   SYSXLVM define / config methods
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1989
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type=lvdd
+	class=lvm
+	subclass=lvm
+	prefix=""
+	devid=""
+	base=1
+	has_vpd=0
+	chgstatus=1
+	bus_ext=0
+	fru=0
+	led=0x591
+	setno=1
+	msgno=52
+	catalog=devices.cat
+	DvDr=hd_pin
+	Define=/usr/lib/methods/deflvm
+	Configure=/usr/lib/methods/cfglvdd
+	Change=""
+	Unconfigure=""
+	Undefine=""
+	Start=""
+	Stop=""
+	uniquetype=lvm/lvm/lvdd
+

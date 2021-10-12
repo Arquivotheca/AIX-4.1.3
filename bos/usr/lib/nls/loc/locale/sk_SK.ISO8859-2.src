@@ -1,0 +1,1150 @@
+# @(#)12	1.6  src/bos/usr/lib/nls/loc/locale/sk_SK.ISO8859-2.src, cfgnls, bos411, 9428A410j 4/8/94 10:01:31
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# Locale Source for sk_SK ( ISO8859-2 ) locale                       #
+######################################################################
+
+
+#############
+LC_CTYPE
+#############
+
+upper   <A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+        <A-ogonek>;\
+	<A-circumflex>;\
+        <A-diaresis>;\
+        <A-acute>;\
+        <A-breve>;\
+	<C-cedilla>;\
+        <C-acute>;\
+        <C-caron>;\
+        <D-stroke>;\
+        <D-caron>;\
+        <E-ogonek>;\
+	<E-acute>;\
+        <E-caron>;\
+	<E-diaresis>;\
+	<I-circumflex>;\
+        <I-acute>;\
+        <L-acute>;\
+        <L-caron>;\
+        <L-stroke>;\
+        <N-acute>;\
+        <N-caron>;\
+        <O-acute>;\
+        <O-circumflex>;\
+        <O-doubleacute>;\
+        <O-diaresis>;\
+        <R-caron>;\
+        <R-acute>;\
+        <S-caron>;\
+        <S-acute>;\
+        <S-cedilla>;\
+        <T-caron>;\
+        <T-cedilla>;\
+        <U-ring>;\
+        <U-acute>;\
+        <U-doubleacute>;\
+        <U-diaresis>;\
+        <Y-acute>;\
+        <Z-acute>;\
+        <Z-caron>;\
+        <Z-abovedot>
+
+lower   <a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+        <a-ogonek>;\
+        <a-circumflex>;\
+        <a-diaresis>;\
+        <a-acute>;\
+        <a-breve>;\
+        <c-cedilla>;\
+        <c-acute>;\
+        <c-caron>;\
+        <d-stroke>;\
+        <d-caron>;\
+        <e-ogonek>;\
+        <e-acute>;\
+        <e-caron>;\
+        <e-diaresis>;\
+        <i-circumflex>;\
+        <i-acute>;\
+        <l-acute>;\
+        <l-caron>;\
+        <l-stroke>;\
+        <n-acute>;\
+        <n-caron>;\
+        <o-acute>;\
+        <o-circumflex>;\
+        <o-doubleacute>;\
+        <o-diaresis>;\
+        <r-caron>;\
+        <r-acute>;\
+        <s-caron>;\
+        <s-acute>;\
+        <s-cedilla>;\
+        <t-caron>;\
+        <t-cedilla>;\
+        <u-ring>;\
+        <u-acute>;\
+        <u-doubleacute>;\
+        <u-diaresis>;\
+        <y-acute>;\
+        <z-acute>;\
+        <z-caron>;\
+        <z-abovedot>
+
+space  	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+       	<form-feed>;\
+	<carriage-return>;\
+	<space>
+
+cntrl   <NUL>;\
+	<SOH>;\
+	<STX>;\
+	<ETX>;\
+	<EOT>;\
+	<ENQ>;\
+	<ACK>;\
+	<BEL>;\
+	<alert>;\
+	<backspace>;\
+	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+	<form-feed>;\
+	<carriage-return>;\
+	<SO>;\
+	<SI>;\
+	<DLE>;\
+	<DC1>;\
+	<DC2>;\
+	<DC3>;\
+	<DC4>;\
+	<NAK>;\
+	<SYN>;\
+	<ETB>;\
+	<CAN>;\
+	<EM>;\
+	<SUB>;\
+	<ESC>;\
+	<IS4>;\
+	<IS3>;\
+	<IS2>;\
+	<IS1>;\
+	<DEL>;\
+	<PAD>;\
+	<HOP>;\
+	<BPH>;\
+	<NBH>;\
+	<IND>;\
+	<NEL>;\
+	<SSA>;\
+	<ESA>;\
+	<HTS>;\
+	<HTJ>;\
+	<VTS>;\
+	<PLD>;\
+	<PLU>;\
+	<RI>;\
+	<SS2>;\
+	<SS3>;\
+	<DCS>;\
+	<PU1>;\
+	<PU2>;\
+	<STS>;\
+	<CCH>;\
+	<MW>;\
+	<SPS>;\
+	<EPA>;\
+	<SOS>;\
+	<SGCI>;\
+	<SCI>;\
+	<CSI>;\
+	<ST>;\
+	<OSC>;\
+	<PM>;\
+	<APC>
+
+graph   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<A-ogonek>;\
+	<breve>;\
+	<L-stroke>;\
+	<currency>;\
+	<L-caron>;\
+	<S-acute>;\
+	<section>;\
+	<diaresis>;\
+	<S-caron>;\
+	<S-cedilla>;\
+	<T-caron>;\
+	<Z-acute>;\
+	<dash>;\
+	<Z-caron>;\
+	<Z-abovedot>;\
+	<degree>;\
+	<a-ogonek>;\
+	<ogonek>;\
+	<l-stroke>;\
+	<acute>;\
+	<l-caron>;\
+	<s-acute>;\
+	<caron>;\
+	<cedilla>;\
+	<s-caron>;\
+	<s-cedilla>;\
+	<t-caron>;\
+	<z-acute>;\
+	<doubleacute>;\
+	<z-caron>;\
+	<z-abovedot>;\
+	<R-acute>;\
+	<A-acute>;\
+	<A-circumflex>;\
+	<A-breve>;\
+	<A-diaresis>;\
+	<L-acute>;\
+	<C-acute>;\
+	<C-cedilla>;\
+	<C-caron>;\
+	<E-acute>;\
+	<E-ogonek>;\
+	<E-diaresis>;\
+	<E-caron>;\
+	<I-acute>;\
+	<I-circumflex>;\
+	<D-caron>;\
+	<D-stroke>;\
+	<N-acute>;\
+	<N-caron>;\
+	<O-acute>;\
+	<O-circumflex>;\
+	<O-doubleacute>;\
+	<O-diaresis>;\
+	<multiply>;\
+	<R-caron>;\
+	<U-ring>;\
+	<U-acute>;\
+	<U-doubleacute>;\
+	<U-diaresis>;\
+	<Y-acute>;\
+	<T-cedilla>;\
+	<s-sharp>;\
+	<r-acute>;\
+	<a-acute>;\
+	<a-circumflex>;\
+	<a-breve>;\
+	<a-diaresis>;\
+	<l-acute>;\
+	<c-acute>;\
+	<c-cedilla>;\
+	<c-caron>;\
+	<e-acute>;\
+	<e-ogonek>;\
+	<e-diaresis>;\
+	<e-caron>;\
+	<i-acute>;\
+	<i-circumflex>;\
+	<d-caron>;\
+	<d-stroke>;\
+	<n-acute>;\
+	<n-caron>;\
+	<o-acute>;\
+	<o-circumflex>;\
+	<o-doubleacute>;\
+	<o-diaresis>;\
+	<divide>;\
+	<division>;\
+	<r-caron>;\
+	<u-ring>;\
+	<u-acute>;\
+	<u-doubleacute>;\
+	<u-diaresis>;\
+	<y-acute>;\
+	<t-cedilla>;\
+	<abovedot>
+
+print   <space>;\
+	<exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<nobreakspace>;\
+	<A-ogonek>;\
+	<breve>;\
+	<L-stroke>;\
+	<currency>;\
+	<L-caron>;\
+	<S-acute>;\
+	<section>;\
+	<diaresis>;\
+	<S-caron>;\
+	<S-cedilla>;\
+	<T-caron>;\
+	<Z-acute>;\
+	<dash>;\
+	<Z-caron>;\
+	<Z-abovedot>;\
+	<degree>;\
+	<a-ogonek>;\
+	<ogonek>;\
+	<l-stroke>;\
+	<acute>;\
+	<l-caron>;\
+	<s-acute>;\
+	<caron>;\
+	<cedilla>;\
+	<s-caron>;\
+	<s-cedilla>;\
+	<t-caron>;\
+	<z-acute>;\
+	<doubleacute>;\
+	<z-caron>;\
+	<z-abovedot>;\
+	<R-acute>;\
+	<A-acute>;\
+	<A-circumflex>;\
+	<A-breve>;\
+	<A-diaresis>;\
+	<L-acute>;\
+	<C-acute>;\
+	<C-cedilla>;\
+	<C-caron>;\
+	<E-acute>;\
+	<E-ogonek>;\
+	<E-diaresis>;\
+	<E-caron>;\
+	<I-acute>;\
+	<I-circumflex>;\
+	<D-caron>;\
+	<D-stroke>;\
+	<N-acute>;\
+	<N-caron>;\
+	<O-acute>;\
+	<O-circumflex>;\
+	<O-doubleacute>;\
+	<O-diaresis>;\
+	<multiply>;\
+	<R-caron>;\
+	<U-ring>;\
+	<U-acute>;\
+	<U-doubleacute>;\
+	<U-diaresis>;\
+	<Y-acute>;\
+	<T-cedilla>;\
+	<s-sharp>;\
+	<r-acute>;\
+	<a-acute>;\
+	<a-circumflex>;\
+	<a-breve>;\
+	<a-diaresis>;\
+	<l-acute>;\
+	<c-acute>;\
+	<c-cedilla>;\
+	<c-caron>;\
+	<e-acute>;\
+	<e-ogonek>;\
+	<e-diaresis>;\
+	<e-caron>;\
+	<i-acute>;\
+	<i-circumflex>;\
+	<d-caron>;\
+	<d-stroke>;\
+	<n-acute>;\
+	<n-caron>;\
+	<o-acute>;\
+	<o-circumflex>;\
+	<o-doubleacute>;\
+	<o-diaresis>;\
+	<divide>;\
+	<division>;\
+	<r-caron>;\
+	<u-ring>;\
+	<u-acute>;\
+	<u-doubleacute>;\
+	<u-diaresis>;\
+	<y-acute>;\
+	<t-cedilla>;\
+	<abovedot>
+
+punct   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>
+
+digit   <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>
+
+xdigit  <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>
+
+blank  	<space>;\
+	<tab>
+
+toupper (<a>,<A>);(<b>,<B>);(<c>,<C>);(<d>,<D>);(<e>,<E>);\
+        (<f>,<F>);(<g>,<G>);(<h>,<H>);(<i>,<I>);(<j>,<J>);\
+        (<k>,<K>);(<l>,<L>);(<m>,<M>);(<n>,<N>);(<o>,<O>);\
+        (<p>,<P>);(<q>,<Q>);(<r>,<R>);(<s>,<S>);(<t>,<T>);\
+        (<u>,<U>);(<v>,<V>);(<w>,<W>);(<x>,<X>);(<y>,<Y>);\
+        (<z>,<Z>);\
+        (<a-ogonek>,<A-ogonek>);\
+        (<l-stroke>,<L-stroke>);\
+        (<l-caron>,<L-caron>);\
+        (<s-acute>,<S-acute>);\
+        (<s-caron>,<S-caron>);\
+        (<s-cedilla>,<S-cedilla>);\
+        (<t-caron>,<T-caron>);\
+        (<z-acute>,<Z-acute>);\
+        (<z-caron>,<Z-caron>);\
+        (<z-abovedot>,<Z-abovedot>);\
+        (<r-acute>,<R-acute>);\
+        (<a-acute>,<A-acute>);\
+        (<a-circumflex>,<A-circumflex>);\
+        (<a-breve>,<A-breve>);\
+        (<a-diaresis>,<A-diaresis>);\
+        (<l-acute>,<L-acute>);\
+        (<c-acute>,<C-acute>);\
+        (<c-cedilla>,<C-cedilla>);\
+        (<c-caron>,<C-caron>);\
+        (<e-acute>,<E-acute>);\
+        (<e-ogonek>,<E-ogonek>);\
+        (<e-diaresis>,<E-diaresis>);\
+        (<e-caron>,<E-caron>);\
+        (<i-acute>,<I-acute>);\
+        (<i-circumflex>,<I-circumflex>);\
+        (<d-caron>,<D-caron>);\
+        (<i-circumflex>,<I-circumflex>);\
+        (<d-stroke>,<D-stroke>);\
+        (<n-acute>,<N-acute>);\
+        (<n-caron>,<N-caron>);\
+        (<o-acute>,<O-acute>);\
+        (<o-circumflex>,<O-circumflex>);\
+        (<o-doubleacute>,<O-doubleacute>);\
+        (<o-diaresis>,<O-diaresis>);\
+        (<r-caron>,<R-caron>);\
+        (<u-ring>,<U-ring>);\
+        (<u-acute>,<U-acute>);\
+        (<u-doubleacute>,<U-doubleacute>);\
+        (<u-diaresis>,<U-diaresis>);\
+        (<y-acute>,<Y-acute>);\
+        (<t-cedilla>,<T-cedilla>)
+
+END LC_CTYPE
+
+#############
+LC_COLLATE
+#############
+
+collating-symbol <eszet>
+
+collating-element       <CH> from "<C><H>"
+collating-element       <ch> from "<c><h>"
+collating-element       <Ch> from "<C><h>"
+
+order_start			forward;forward;forward
+<NUL>
+<SOH>
+<STX>
+<ETX>
+<EOT>
+<ENQ>
+<ACK>
+<alert>
+<backspace>
+<tab>
+<newline>
+<vertical-tab>
+<form-feed>
+<carriage-return>
+<SO>
+<SI>
+<DLE>
+<DC1>
+<DC2>
+<DC3>
+<DC4>
+<NAK>
+<SYN>
+<ETB>
+<CAN>
+<EM>
+<SUB>
+<ESC>
+<IS4>
+<IS3>
+<IS2>
+<IS1>
+<DEL>
+<PAD>
+<HOP>
+<BPH>		
+<NBH>	
+<IND>
+<NEL>		
+<SSA>	
+<ESA>
+<HTS>		
+<HTJ>	
+<VTS>
+<PLD>		
+<PLU>	
+<RI>
+<SS2>			
+<SS3>		
+<DCS>	
+<PU1>
+<PU2>			
+<STS>		
+<CCH>	
+<MW>
+<SPS>		
+<EPA>	
+<SOS>
+<SGCI>
+<SCI>			
+<CSI>		
+<ST>	
+<OSC>
+<PM>
+<APC>			
+<space>			<space>;<space>;<space>
+<exclamation-mark>	<exclamation-mark>;<exclamation-mark>;<exclamation-mark>
+<quotation-mark>	<quotation-mark>;<quotation-mark>;<quotation-mark>
+<number-sign>		<number-sign>;<number-sign>;<number-sign>
+<dollar-sign>		<dollar-sign>;<dollar-sign>;<dollar-sign>
+<percent-sign>		<percent-sign>;<percent-sign>;<percent-sign>
+<ampersand>		<ampersand>;<ampersand>;<ampersand>
+<apostrophe>            <apostrophe>;<apostrophe>;<apostrophe>
+<left-parenthesis>      <left-parenthesis>;<left-parenthesis>;<left-parenthesis>
+<right-parenthesis>     <right-parenthesis>;<right-parenthesis>;<right-parenthesis>
+<asterisk>		<asterisk>;<asterisk>;<asterisk>
+<plus-sign>		<plus-sign>;<plus-sign>;<plus-sign>
+<comma>			<comma>;<comma>;<comma>
+<hyphen>		<hyphen>;<hyphen>;<hyphen>
+<period>		<period>;<period>;<period>
+<slash>			<slash>;<slash>;<slash>
+<colon>			<colon>;<colon>;<colon>
+<semicolon>		<semicolon>;<semicolon>;<semicolon>
+<less-than-sign>	<less-than-sign>;<less-than-sign>;<less-than-sign>
+<equals-sign>		<equals-sign>;<equals-sign>;<equals-sign>
+<greater-than-sign>	<greater-than-sign>;<greater-than-sign>;<greater-than-sign>
+<question-mark>		<question-mark>;<question-mark>;<question-mark>
+<commercial-at>		<commercial-at>;<commercial-at>;<commercial-at>
+<left-square-bracket>	<left-square-bracket>;<left-square-bracket>;<left-square-bracket>
+<backslash>		<backslash>;<backslash>;<backslash>
+<right-square-bracket>	<right-square-bracket>;<right-square-bracket>;<right-square-bracket>
+<circumflex-accent>	<circumflex-accent>;<circumflex-accent>;<circumflex-accent>
+<underscore>		<underscore>;<underscore>;<underscore>
+<grave-accent>		<grave-accent>;<grave-accent>;<grave-accent>
+<left-brace>		<left-brace>;<left-brace>;<left-brace>
+<vertical-line>		<vertical-line>;<vertical-line>;<vertical-line>
+<right-brace>		<right-brace>;<right-brace>;<right-brace>
+<tilde>			<tilde>;<tilde>;<tilde>
+<breve>			<breve>;<breve>;<breve>
+<currency>		<currency>;<currency>;<currency>
+<section>		<section>;<section>;<section>
+<diaresis>		<diaresis>;<diaresis>;<diaresis>
+<dash>			<dash>;<dash>;<dash>
+<degree>		<degree>;<degree>;<degree>
+<ogonek>		<ogonek>;<ogonek>;<ogonek>
+<acute>			<acute>;<acute>;<acute>
+<caron>			<caron>;<caron>;<caron>
+<cedilla>		<cedilla>;<cedilla>;<cedilla>
+<doubleacute>		<doubleacute>;<doubleacute>;<doubleacute>
+<multiply>		<multiply>;<multiply>;<multiply>
+<division>		<division>;<division>;<division>
+<abovedot>		<abovedot>;<abovedot>;<abovedot>
+<nobreakspace>		<nobreakspace>;<nobreakspace>;<nobreakspace>
+<zero>			<zero>;<zero>;<zero>
+<one>			<one>;<one>;<one>
+<two>			<two>;<two>;<two>
+<three>			<three>;<three>;<three>
+<four>			<four>;<four>;<four>
+<five>			<five>;<five>;<five>
+<six>			<six>;<six>;<six>
+<seven>			<seven>;<seven>;<seven>
+<eight>			<eight>;<eight>;<eight>
+<nine>			<nine>;<nine>;<nine>
+<a>			<a>;<a>;<a>
+<a-acute>		<a>;<a-acute>;<a-acute>
+<a-breve>		<a>;<a-breve>;<a-breve>
+<a-circumflex>		<a>;<a-circumflex>;<a-circumflex>
+<a-diaresis>		<a>;<a-diaresis>;<a-diaresis>
+<a-ogonek>		<a>;<a-ogonek>;<a-ogonek>
+<b>			<b>;<b>;<b>
+<c>			<c>;<c>;<c>
+<c-caron>		<c>;<c-caron>;<c-caron>	
+<c-acute>		<c>;<c-acute>;<c-acute>
+<c-cedilla>		<c>;<c-cedilla>;<c-cedilla>
+<d>			<d>;<d>;<d>
+<d-caron>		<d>;<d-caron>;<d-caron>
+<d-stroke>		<d>;<d-stroke>;<d-stroke>
+<e>			<e>;<e>;<e>
+<e-acute>		<e>;<e-acute>;<e-acute>
+<e-caron>		<e>;<e-caron>;<e-caron>
+<e-diaresis>		<e>;<e-diaresis>;<e-diaresis>
+<e-ogonek>		<e>;<e-ogonek>;<e-ogonek>
+<f>			<f>;<f>;<f>
+<g>			<g>;<g>;<g>
+<h>			<h>;<h>;<h>
+<ch>			<ch>;<ch>;<ch>
+<i>			<i>;<i>;<i>
+<i-acute>		<i>;<i-acute>;<i-acute>	
+<i-circumflex>		<i>;<i-circumflex>;<i-circumflex>
+<j>			<j>;<j>;<j>
+<k>			<k>;<k>;<k>
+<l>			<l>;<l>;<l>
+<l-acute>		<l>;<l-acute>;<l-acute>
+<l-caron>		<l>;<l-caron>;<l-caron>
+<l-stroke>		<l>;<l-stroke>;<l-stroke>
+<m>			<m>;<m>;<m>
+<n>			<n>;<n>;<n>
+<n-acute>		<n>;<n-acute>;<n-acute>
+<n-caron>		<n>;<n-caron>;<n-caron>
+<o>			<o>;<o>;<o>
+<o-acute>		<o>;<o-acute>;<o-acute>
+<o-circumflex>		<o>;<o-circumflex>;<o-circumflex>
+<o-diaresis>		<o>;<o-diaresis>;<o-diaresis>
+<o-doubleacute>		<o>;<o-doubleacute>;<o-doubleacute>
+<p>			<p>;<p>;<p>
+<q>			<q>;<q>;<q>
+<r>			<r>;<r>;<r>
+<r-acute>		<r>;<r-acute>;<r-acute>
+<r-caron>		<r>;<r-caron>;<r-caron>
+<s>			<s>;<s>;<s>
+<s-acute>		<s>;<s-acute>;<s-acute>
+<s-caron>		<s>;<s-caron>;<s-caron>
+<s-cedilla>		<s>;<s-cedilla>;<s-cedilla>
+<eszet>
+<t>			<t>;<t>;<t>		
+<t-caron>		<t>;<t-caron>;<t-caron>
+<t-cedilla>		<t>;<t-cedilla>;<t-cedilla>
+<u>			<u>;<u>;<u>
+<u-acute>		<u>;<u-acute>;<u-acute>
+<u-ring>		<u>;<u-ring>;<u-ring>
+<u-diaresis>		<u>;<u-diaresis>;<u-diaresis>
+<u-doubleacute>		<u>;<u-doubleacute>;<u-doubleacute>
+<v>			<v>;<v>;<v>
+<w>			<w>;<w>;<w>
+<x>			<x>;<x>;<x>
+<y>			<y>;<y>;<y>
+<y-acute>		<y>;<y-acute>;<y-acute>
+<z>			<z>;<z>;<z>
+<z-acute>		<z>;<z-acute>;<z-acute>	
+<z-caron>		<z>;<z-caron>;<z-caron>
+<z-abovedot>		<z>;<z-abovedot>;<z-abovedot>
+<A>			<a>;<a>;<A>
+<A-acute>		<a>;<a-acute>;<A-acute>
+<A-breve>		<a>;<a-breve>;<A-breve>
+<A-circumflex>		<a>;<a-circumflex>;<A-circumflex>
+<A-diaresis>		<a>;<a-diaresis>;<A-diaresis>
+<A-ogonek>		<a>;<a-ogonek>;<A-ogonek>
+<B>			<b>;<b>;<B>
+<C>			<c>;<c>;<C>
+<C-caron>		<c>;<c-caron>;<C-caron>
+<C-acute>		<c>;<c-acute>;<C-acute>
+<C-cedilla>		<c>;<c-cedilla>;<C-cedilla>
+<D>			<d>;<d>;<D>
+<D-caron>		<d>;<d-caron>;<D-caron>
+<D-stroke>		<d>;<d-stroke>;<D-stroke>
+<E>			<e>;<e>;<E>
+<E-acute>		<e>;<e-acute>;<E-acute>
+<E-caron>		<e>;<e-caron>;<E-caron>
+<E-diaresis>		<e>;<e-diaresis>;<E-diaresis>
+<E-ogonek>		<e>;<e-ogonek>;<E-ogonek>
+<F>			<f>;<f>;<F>
+<G>			<g>;<g>;<G>
+<H>			<h>;<h>;<H>
+<Ch>			<ch>;<ch>;<Ch>
+<CH>			<ch>;<ch>;<CH>
+<I>			<i>;<i>;<I>
+<I-acute>		<i>;<i-acute>;<I-acute>
+<I-circumflex>		<i>;<i-circumflex>;<I-circumflex>
+<J>			<j>;<j>;<J>
+<K>			<k>;<k>;<K>
+<L>			<l>;<l>;<L>
+<L-acute>		<l>;<l-acute>;<L-acute>
+<L-caron>		<l>;<l-caron>;<L-caron>
+<L-stroke>		<l>;<l-stroke>;<L-stroke>
+<M>			<m>;<m>;<M>
+<N>			<n>;<n>;<N>
+<N-acute>		<n>;<n-acute>;<N-acute>
+<N-caron>		<n>;<n-caron>;<N-caron>
+<O>			<o>;<o>;<O>
+<O-acute>		<o>;<o-acute>;<O-acute>
+<O-circumflex>		<o>;<o-circumflex>;<O-circumflex>
+<O-diaresis>		<o>;<o-diaresis>;<O-diaresis>
+<O-doubleacute>		<o>;<o-doubleacute>;<O-doubleacute>
+<P>			<p>;<p>;<P>
+<Q>			<q>;<q>;<Q>
+<R>			<r>;<r>;<R>
+<R-acute>		<r>;<r-acute>;<R-acute>
+<R-caron>		<r>;<r-caron>;<R-caron>
+<S>			<s>;<s>;<S>
+<S-acute>		<s>;<s-acute>;<S-acute>
+<S-caron>		<s>;<s-caron>;<S-caron>
+<S-cedilla>		<s>;<s-cedilla>;<S-cedilla>
+<T>			<t>;<t>;<T>
+<T-caron>		<t>;<t-caron>;<T-caron>
+<T-cedilla>		<t>;<t-cedilla>;<T-cedilla>
+<U>			<u>;<u>;<U>
+<U-acute>		<u>;<u-acute>;<U-acute>
+<U-ring>		<u>;<u-ring>;<U-ring>
+<U-diaresis>		<u>;<u-diaresis>;<U-diaresis>
+<U-doubleacute>		<u>;<u-doubleacute>;<U-doubleacute>
+<V>			<v>;<v>;<V>
+<W>			<w>;<w>;<W>
+<X>			<x>;<x>;<X>
+<Y>			<y>;<y>;<Y>
+<Y-acute>		<y>;<y-acute>;<Y-acute>
+<Z>			<z>;<z>;<Z>
+<Z-acute>		<z>;<z-acute>;<Z-acute>
+<Z-caron>		<z>;<z-caron>;<Z-caron>
+<Z-abovedot>		<z>;<z-abovedot>;<Z-abovedot>
+
+####################################
+# Characters with no opposite case #
+####################################
+
+<s-sharp>		<s>;<eszet>;<eszet>
+
+###################################
+# Ignore all undefined characters #
+###################################
+
+UNDEFINED		IGNORE;IGNORE;IGNORE
+
+order_end
+
+END LC_COLLATE
+
+#############
+LC_MONETARY
+#############
+
+int_curr_symbol   "<C><S><K><space>"
+currency_symbol   "<K><c-caron><s>"
+mon_decimal_point <comma>
+mon_thousands_sep "<space>"
+mon_grouping      3
+positive_sign     ""
+negative_sign     "<hyphen>"
+int_frac_digits   2
+frac_digits       2
+p_cs_precedes     0
+p_sep_by_space    1
+n_cs_precedes     0
+n_sep_by_space    1
+p_sign_posn       1
+n_sign_posn       1
+
+END LC_MONETARY
+
+
+#############
+LC_NUMERIC
+#############
+
+decimal_point     <comma>
+thousands_sep     "<space>"
+grouping          3
+
+END LC_NUMERIC
+
+
+#############
+LC_TIME
+#############
+abday   "<N><e>";\
+        "<P><o>";\
+        "<U><t>";\
+        "<S><t>";\
+        "<S-caron><t>";\
+        "<P><a>";\
+        "<S><o>"
+
+day     "<n><e><d><e><l-caron><e>";\
+        "<p><o><n><d><e><l><o><k>";\
+        "<u><t><o><r><o><k>";\
+        "<s><t><r><e><d><a>";\
+        "<s-caron><t><v><r><t><o><k>";\
+        "<p><i><a><t><o><k>";\
+        "<s><o><b><o><t><a>"
+
+abmon   "<j><a><n>";\
+        "<f><e><b>";\
+        "<m><a><r>";\
+        "<a><p><r>";\
+        "<m><a-acute><j>";\
+        "<j><u-acute><n>";\
+        "<j><u-acute><l>";\
+        "<a><u><g>";\
+        "<s><e><p>";\
+        "<o><k><t>";\
+        "<n><o><v>";\
+        "<d><e><c>"
+
+mon     "<j><a><n><u><a-acute><r>";\
+        "<f><e><b><r><u><a-acute><r>";\
+        "<m><a><r><e><c>";\
+        "<a><p><r><i-acute><l>";\
+        "<m><a-acute><j>";\
+        "<j><u-acute><n>";\
+        "<j><u-acute><l>";\
+        "<a><u><g><u><s><t>";\
+        "<s><e><p><t><e><m><b><e><r>";\
+        "<o><k><t><o-acute><b><e><r>";\
+        "<n><o><v><e><m><b><e><r>";\
+        "<d><e><c><e><m><b><e><r>"
+
+d_t_fmt "%a %e %b %Y %H:%M:%S"
+
+d_fmt   "%Y-%m-%d"
+
+t_fmt   "%H:%M:%S"
+
+am_pm   "";""
+
+t_fmt_ampm	"%H:%M:%S"
+
+nlldate	"%e %b %Y"
+
+END LC_TIME
+
+
+#############
+LC_MESSAGES
+#############
+
+yesexpr "^([aA]|[aA][nN][oO])"
+noexpr  "^([nN]|[nN][iI][eE])"
+yesstr  "Ano:a:A"
+nostr   "Nie:n:N"
+
+END LC_MESSAGES

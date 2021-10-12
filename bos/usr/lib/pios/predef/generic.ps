@@ -1,0 +1,98 @@
+# @(#)43        1.20  src/bos/usr/lib/pios/predef/generic.ps, cmdpios, bos41J, 9510A_all 3/7/95 15:36:25
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:625:CB:S[B]DyEn:
+:626:CC:S[C]DyEn:
+:627:CD:S[D]DyEn:
+:628:CE:S[E]DyEn:
+:629:CF:S[F]DyEn:
+:630:CG:S[G]DyEn:
+:718:_1:S[D060]I[1810541]%IWY:!
+:719:_2:S[D065]I[1810542]%IWY:!
+:720:_3:S[D070]I[1810543]%IWY:!
+:721:_4:Dn%IWY:!
+:722:_5:S[D080]I[1810545]%IWY:!
+:621:_H:S[F350]I[1810503]Dy:
+:829:_L:S[D020]I[1810504]%IWY:+
+:683:_Q:S[E020]I[1810505]En%IWP:%IwQ
+:795:_X:S[D030]I[1810507]Dn%`"[[ -d /usr/lib/nls/loc/iconvTable ]] && print -n 'L[print \\"%IWX\\"|/usr/bin/tr -s , \\"\\012\\"]'":
+:614:_Z:S[D035]I[1810534]Dn%IWY:!
+:658:_d:S[C925]I[1810509]EnL[%IW2]F1:s
+:828:_h:S[D040]I[1810512]:
+:830:_l:S[D045]I[1810573]E#G[0..]:%IWL
+:726:_p:S[B035]I[1810546]E#G[1..]:%?%G_2%t%{1}%e%{0}%;%?%G_z%t%{1}%e%{0}%;%?%+%{2}%=%t7%e10%;
+:827:_s:S[B040]I[1810547]%`"[[ -r /usr/lib/ps/fontmap ]] && print -n 'EnR[=%IWs]'":Courier
+:638:_u:S[E015]I[1810516]DnEnR[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]:1
+:618:_z:S[E005]I[1810520]EnR[pioattr1.cat,1,620;portrait,landscape=!,+]:!
+:060:__SYS::
+:641:s0:S[115]I[1810521]DnEn%IWP:1
+:757:s1:S[105]I[1810521]DnEn%IWP:1
+:758:s2:S[110]I[1810521]DnEn%IWP:1
+:644:s3:S[120]I[1810522]DnEn%IWE:3
+:645:s4:S[125]I[1810522]DnEn%IWE:3
+:747:sD:S[103]I[1810566]%IWY:!
+:708:sH:S[150]I[1810525]:
+:709:sT:S[155]I[1810525]:
+:653:sw:S[185]I[1810539]E#G[0..]:77
+:655:uH:S[140]I[1810527]DnEnR[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]:1
+:656:uT:S[145]I[1810527]DnEnR[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]:1
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsH
+:324:st::%Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsT
+:057:__IDS::
+:274:ia::{ test "$PIOTITLE" !=  %I@1 && BFLAG=" -b $PIOTITLE "; if [[ ! -x /usr/bin/enscript ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 801 "Error\072 The /usr/bin/enscript command was not found."; exit 1; fi; /usr/bin/enscript -M%IWQ %?%CX%t%f[X]%e -X%I_X%; -p- -q%?%G_2%t -2%;%?%G_z%t -r%;%?%G_3%t -G%;%?%G_1%t%e -B%;%?%G_L%t%e -c%;%?%Ch%t%fbh%e%?%L_h%t -b'%I_h'%e $BFLAG %;%; -L%G_l%d -f%?%Cs%t%f!s%e%I_s%;%G_p%d %?%G_1%t-F%Iw7%G_p%d%;%?%G_4%t -g%;%?%G_5%t -o%;%?%L_f%t%e %I@1%; 2>/dev/null;} | %Iis
+:465:in::{ if [[ ! -x /usr/bin/psc ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 820 -a /usr/bin/psc "Error\072 The %%s command was not found.\\n"; exit 1; fi; /usr/bin/psc; } | %Iis 
+:277:ip::%Iis
+:273:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJZ]
+:059:__PFL::
+:693:Is:S[160s]I[1810529]Dn:
+:055:__FIL::
+:662:ff::{ [[ -x /usr/ucb/fpr ]] || { %Ide/piomsg -c pioattr1.cat -s 1 -n 815 'Error\072 The /usr/ucb/fpr command was not found.\\n';exit 1;};/usr/ucb/fpr;}%ia
+:663:fg::{ [[ -x /usr/bin/psplot ]] || { %Ide/piomsg -c pioattr1.cat -s 1 -n 814 'Error\072 The /usr/bin/psplot command was not found.\\n';exit 1;};/usr/bin/psplot;}%is
+:665:fn::{ if [[ ! -x /usr/bin/psc ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 820 -a /usr/bin/psc "Error\072 The %%s command was not found.\\n"; exit 1; fi; /usr/bin/psc; }%is
+:666:fp::/usr/bin/pr -l%G_l%d %F[h] %I@1%ia
+:058:__MIS::
+:330:mA::PostScript
+:331:mL::[pioattr1.cat,1,736;PostScript Printer]
+:301:mc::\4
+:303:mf::%Idf/piofpt
+:308:mp::%?%GsD%t%%!,\x04%%!,,,x T ,,,~~~%;
+:319:mz::1
+:062:__WKV::
+:763:WE::R[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]
+:842:WL::%?%G_z%t%?%G_Q%{1}%=%t%{47}%e%G_Q%{2}%=%t%{47}%e%G_Q%{3}%=%t%{38}%e%G_Q%{4}%=%t%{45}%e%G_Q%{5}%=%t%{39}%e%{29}%;%e%?%G_Q%{1}%=%t%{66}%e%G_Q%{2}%=%t%{85}%e%G_Q%{3}%=%t%{60}%e%G_Q%{4}%=%t%{70}%e%G_Q%{5}%=%t%{62}%e%{48}%;%;%?%G_1%t%{2}%-%;%d
+:762:WP::R[letter,legal,B5,A4,A5,exec=1,2,3,4,6,5]
+:762:WQ::%?%G_Q%{1}%=%tLetter%e%G_Q%{2}%=%tLegal%e%G_Q%{3}%=%tB5%e%G_Q%{4}%=%tA4%e%G_Q%{5}%=%tExecutive%eA5%;
+:795:WX::%`"{ /usr/bin/ls -1 /usr/lib/nls/loc/iconvTable|/usr/bin/sed -n '/_src/d;/^ISO8859-1_/s///p'|/usr/bin/awk '{printf(\\"%%s,\\",$1);}END{if(NR)printf(\\"ISO8859-1\\")}';} 2>/dev/null"
+:701:Ws::%`"/usr/bin/awk '{if (notfirst)printf(\\",%%s\\",$1);else{printf(\\"%%s\\",$1);notfirst++;}}' /usr/lib/ps/fontmap 2>/dev/null"
+:472:w7::%?%S_s%"Courier"%=%tCourier-Bold%e%S_s%"Times-Roman"%=%tTimes-Bold%e%S_s%"Helvetica"%=%tHelvetica-Bold%e%S_s%"Times-Italic"%=%tTimes-BoldItalic%e%S_s%"Helvetica-Oblique"%=%tHelvetica-BoldOblique%e%S_s%"Garamond-Light"%=%tGaramond-Bold%e%S_s%"Garamond-LightItalic"%=%tGaramond-BoldItalic%e%Iw8%;
+:472:w8::%?%S_s%"Courier-Oblique"%=%tCourier-BoldOblique%e%S_s%"Palatino-Roman"%=%tPalatino-Bold%e%S_s%"Palatino-Italic"%=%tPalatino-BoldItalic%e%S_s%"Optima"%=%tOptima-Bold%e%S_s%"Optima-Oblique"%=%tOptima-BoldOblique%e%Iw9%;
+:472:w9::%?%S_s%"NewCenturySchlbk-Italic"%=%tNewCenturySchlbk-BoldItalic%e%S_s%"Helvetica-Narrow"%=%tHelvetica-Narrow-Bold%e%S_s%"Helvetica-Narrow-Oblique"%=%tHelvetica-Narrow-BoldOblique%e%I_s%;
+:458:wQ::%?%G_u%{0}%=%t%Gs0%e%G_u%{1}%=%t%Gs1%e%G_u%{2}%=%t%Gs2%e%G_u%{3}%=%t%Gs3%e%Gs4%;%d
+:051:__CAG::
+:144:ci::
+:152:cr::\4
+:052:__CTL::
+:113:af::showpage
+:054:__ESC::
+:609:pU::\33%%-12345X
+:610:pL::@PJL ENTER LANGUAGE = POSTSCRIPT\012
+:475:__HIR::
+:686:zL::2
+:688:zM::generic
+:476:zP::master
+:477:zS::!
+:685:zV::+

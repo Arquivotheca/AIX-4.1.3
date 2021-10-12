@@ -1,0 +1,278 @@
+* @(#)59        1.5  src/bos/objclass/POWER/mps_tok.add, sysxmps, bos412, 9445C412a 11/7/94 13:48:36
+*********************************************************************
+*
+* COMPONENT_NAME : SYSXMPS
+*
+* FUNCTIONS: mps_tok.add: Predefined Data for Token Ring Adapter
+*
+* ORIGINS : 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+
+PdDv:
+        type = "mps"
+        class = "adapter"
+        subclass = "mca"
+        prefix = "tok"
+        devid = "0xa28f"
+        base = 1
+        has_vpd = 1
+        detectable = 1
+        chgstatus = 0
+        bus_ext = 0
+        fru = 1
+        led = 0x085A
+        setno = 28
+        msgno = 20
+        catalog = "devices_tok.cat"
+        DvDr = "mpsdd"
+        Define = "/usr/lib/methods/define"
+        Configure = "/usr/lib/methods/cfgmps"
+        Change = "/usr/lib/methods/chgtok"
+        Unconfigure = "/usr/lib/methods/ucfgcommo"
+        Undefine = "/usr/lib/methods/undefine"
+        Start = ""
+        Stop = ""
+        uniquetype = "adapter/mca/mps"
+
+PdCn:
+        uniquetype = "adapter/mca/mps"
+        connkey = "tok"
+        connwhere = ""
+
+* "bus_intr_lvl" - Hardware attribute
+* Value set by system and not modifiable by user.
+* The interrupt level for this device is shareable with other devices.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "bus_intr_lvl"
+        deflt = "10"
+        values = "11,9,3,10"
+        width = ""
+	type = "I"
+        generic = "D"
+        rep = "nl"
+        nls_index = "4"
+
+* "intr_priority" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "intr_priority"
+        deflt = "3"
+        values = "3"
+        width = ""
+        type = "P"
+        generic = "D"
+        rep = "nl"
+        nls_index = "5"
+
+* "xmt_que_size" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "xmt_que_size"
+        deflt = "60"
+        values = "32-160,1"
+        width = ""
+        type = "R"
+        generic = "DU"
+        rep = "nr"
+        nls_index = "7"
+
+* "bus_mem_addr" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "bus_mem_addr"
+        deflt = "0x000c0000"
+        values = "0x000c0000-0x000dc000,0x4000"
+        width = "0x4000"
+        type = "M"
+        generic = "D"
+        rep = "nr"
+        nls_index = "21"
+
+* "dma_bus_mem" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "dma_bus_mem"
+        deflt = "0x100000"
+        values = "0x100000-0xffffffff,0x1000"
+	width = "0x1A6000"
+        type = "M"
+        generic = "D"
+        rep = "nr"
+        nls_index = "2"
+
+* "dma_lvl" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "dma_lvl"
+        deflt = "4"
+        values = "0-14,1"
+        width = ""
+        type = "A"
+        generic = "D"
+        rep = "nr"
+        nls_index = "6"
+
+* "bus_io_addr" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "bus_io_addr"
+        deflt = "0x1c00"
+        values = "0x0000-0xfc00,0x0400"
+        width = "0x0100"
+        type = "O"
+        generic = "D"
+        rep = "nr"
+        nls_index = "3"
+
+* "attn_mac" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "attn_mac"
+        deflt = "no"
+        values = "yes,no"
+        width = ""
+        type = "R"
+        generic = "DU"
+        rep = "sl"
+        nls_index = "10"
+
+* "beacon_mac" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "beacon_mac"
+        deflt = "no"
+        values = "yes,no"
+        width = ""
+        type = "R"
+        generic = "DU"
+        rep = "sl"
+        nls_index = "15"
+
+* "priority_tx" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "priority_tx"
+        deflt = "no"
+        values = "yes,no"
+        width = ""
+        type = "R"
+        generic = "DU"
+        rep = "sl"
+        nls_index = "23"
+
+* "use_alt_addr" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "use_alt_addr"
+        deflt = "no"
+        values = "yes,no"
+        width = ""
+        type = "R"
+        generic = "DU"
+        rep = "sl"
+        nls_index = "13"
+
+* "alt_addr" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "alt_addr"
+        deflt = "0x"
+        values = ""
+        width = ""
+        type = "R"
+        generic = "DU"
+        rep = "s"
+        nls_index = "14"
+
+* "ring_speed" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "ring_speed"
+	deflt = "autosense"
+	values = "4,16,autosense"
+        width = ""
+        type = "R"
+        generic = "DU"
+        rep = "sl"
+	nls_index = "12"
+
+* "cfg_ring_speed" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Not displayable with "lsattr" command.
+* No help text.
+* Value also stored and updated in NVRAM
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "cfg_ring_speed"
+        deflt = "4"
+        values = "4,16"
+        width = ""
+        type = "R"
+        generic = "U"
+        rep = "sl"
+        nls_index = "24"
+
+* "addl_dvdr" - Configurable attribute
+* Value modifiable through command line only.
+* Not displayable with "lsattr" command.
+* No help text.
+* This attribute is the name of the method to be executed to configure or
+* unconfigure an additional driver in the kernel for this device.
+PdAt:
+        uniquetype = "adapter/mca/mps"
+        attribute = "addl_dvdr"
+        deflt = "/usr/lib/methods/cfgdmxtok"
+        values = ""
+        width = ""
+        type = "R"
+        generic = "U"
+        rep = "s"
+        nls_index = "0"
+
+

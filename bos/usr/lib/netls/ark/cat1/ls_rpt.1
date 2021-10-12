@@ -1,0 +1,198 @@
+
+
+
+ls_rpt(1M)            Maintenance Commands             ls_rpt(1M)
+
+
+
+NNNNAAAAMMMMEEEE
+     ls_rpt - Report on license server events
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     llllssss____rrrrpppptttt [[ ----nnnn _n_o_d_e__n_a_m_e ][ ----cccc ][ ----zzzz ]
+     [ _e_v_e_n_t__t_y_p_e__l_i_s_t ][ _i_n_f_o_r_m_a_t_i_o_n__f_i_l_t_e_r__l_i_s_t ] |
+     [ ----hhhh | ----uuuussssaaaaggggeeee | ----vvvveeeerrrrssssiiiioooonnnn ]]
+
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The llllssss____rrrrpppptttt  command  generates  reports  on  license  server
+     events. There is no graphic interface for this command.
+
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS AAAANNNNDDDD AAAARRRRGGGGUUUUMMMMEEEENNNNTTTTSSSS
+     Default options are indicated by (D).
+
+     ----nnnn   Specifies the server node about which the report is  to
+          be  generated.  If  you  do  not specify a node, llllssss____rrrrpppptttt
+          reports on the current server node.
+
+     ----cccc   Lists data in 80-column format.
+
+     ----zzzz   Debugging flag. (Prints RPC debugging information).
+
+     ----hhhh   Displays command usage information. (Same as ----uuuussssaaaaggggeeee).
+
+     ----uuuussssaaaaggggeeee
+          Displays command usage information. (Same as ----hhhh).
+
+     ----vvvveeeerrrrssssiiiioooonnnn
+          Displays command version information.
+
+     event_type_list
+
+     You may specify  any  combination  of  the  following  event
+     types. Specify ----aaaa to specify all event types.
+
+     ----aaaa   Lists all log messages.
+
+     ----llll  (D)
+          Lists license-related events (product received license,
+          product   released  license  to  server,  user  entered
+          license queue, user exited queue).
+
+     ----eeee   Lists error events.
+
+     ----ssss   Lists server start/stop events.
+
+     ----mmmm   Lists messages that were logged by software product  or
+          license server.
+
+
+
+
+NetLS Version 2           Last change:                          1
+
+
+
+
+
+
+ls_rpt(1M)            Maintenance Commands             ls_rpt(1M)
+
+
+
+     ----ffff   Lists fatal error events.
+
+     ----dddd   Lists license database modification messages.
+
+     information_filter_list
+
+     You may choose any combination of the following  information
+     filters.  If  no  filters  are  specified the default is all
+     dates, all vendors, all products, all users.
+
+     ----bbbb_y_y/_m_m/_d_d or ----bbbb_N
+          Lists events that occurred beginning at  the  specified
+          date.   The  date is either absolute, _y_y/_m_m/_d_d, or _N 24
+          hour periods relative to now in the past.
+
+     ----tttt_y_y/_m_m/_d_d or ----tttt_N
+          Lists events that occurred up to  the  specified  date.
+          The  date  is  either  absolute, _y_y/_m_m/_d_d, or _N 24 hour
+          periods relative to now in the past.
+
+     ----vvvv _v_e_n_d_o_r__n_a_m_e
+          Lists events related to the specified vendor(s).
+
+     ----pppp _p_r_o_d_u_c_t__n_a_m_e
+          Lists events related to the specified product(s).
+
+     ----uuuu _u_s_e_r__n_a_m_e
+          List events related to the specified user(s).
+
+     ----rrrr _1 Lists for the specified product the number of  requests
+          for  licenses,  the number of licenses granted, and the
+          percent of rejected requests.
+
+     ----rrrr _2 Lists the same information as ----rrrr 1111, but  also  includes
+          user names and number of licenses installed.
+
+     ----xxxx_y_y/_m_m/_d_d or ----xxxx_N
+          Deletes log file entries  written  on  and  before  the
+          specified date.  The date is either absolute, _y_y/_m_m/_d_d,
+          or _N 24 hour periods relative to now in the past.
+
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     List license events on the local server node:
+
+     llllssss____rrrrpppptttt
+
+     List errors and fatal errors occurring between August 31 and
+     September 30 1990 on the server node _p_l_u_t_o:
+
+     llllssss____rrrrpppptttt ----nnnn _p_l_u_t_o ----eeee ----ffff ----bbbb _8_7/_0_8/_3_1 ----tttt _8_7/_0_9/_3_0
+
+
+
+
+NetLS Version 2           Last change:                          2
+
+
+
+
+
+
+ls_rpt(1M)            Maintenance Commands             ls_rpt(1M)
+
+
+
+     List all messages logged at _m_a_r_s by the vendor _x_y_z:
+
+     llllssss____rrrrpppptttt ----nnnn _m_a_r_s ----mmmm ----vvvv _x_y_z
+
+     Delete all messages logged at _n_e_p_t_u_n_e that are  15  days  or
+     more  old. Note that here that it actually means 15 days ago
+     at the current time as well.
+
+     llllssss____rrrrpppptttt ----nnnn _n_e_p_t_u_n_e ----xxxx_1_5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NetLS Version 2           Last change:                          3
+
+
+

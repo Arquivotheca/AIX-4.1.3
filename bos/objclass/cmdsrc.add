@@ -1,0 +1,664 @@
+# @(#)50	1.2  src/bos/objclass/cmdsrc.add, cmdsrc, bos41J, 9513A_all 2/8/95 10:26:29
+#
+#   COMPONENT_NAME: (cmdsrc) System Resource Controller
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+sm_name_hdr:
+	id = "qserver"
+	next_id = "qserver.cmd"
+	option_id = "select.subsvr.name.opt"
+	has_name_select = "n"
+	name = "Query a Subserver"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 3
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "sub_type"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "05130003"
+	help_msg_loc = ""
+
+sm_name_hdr:
+	id = "startserver"
+	next_id = "startserver.cmd"
+	option_id = "select.subsvr.name.opt"
+	has_name_select = "n"
+	name = "Start a Subserver"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 9
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "sub_type"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "05130009"
+	help_msg_loc = ""
+
+sm_name_hdr:
+	id = "stopserver"
+	next_id = "stopserver.cmd"
+	option_id = "select.subsvr.name.opt"
+	has_name_select = "n"
+	name = "Stop a Subserver"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 16
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "sub_type"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "05130016"
+	help_msg_loc = ""
+
+sm_name_hdr:
+	id = "startserver.trace"
+	next_id = "startserver.trace.cmd"
+	option_id = "select.subsvr.name.opt"
+	has_name_select = "n"
+	name = "Start Trace"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 8
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "sub_type"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "05130008"
+	help_msg_loc = ""
+
+sm_name_hdr:
+	id = "stopserver.trace"
+	next_id = "stopserver.trace.cmd"
+	option_id = "select.subsvr.name.opt"
+	has_name_select = "n"
+	name = "Stop Trace"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 15
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "sub_type"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "05130015"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "lsssys"
+	option_id = ""
+	has_name_select = ""
+	name = "List All Subsystems"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 1
+	cmd_to_exec = "lssrc -a"
+	ask = ""
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130001"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "qssys"
+	option_id = "subsys.pid.opt"
+	has_name_select = ""
+	name = "Query a Subsystem"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 4
+	cmd_to_exec = "lssrc -l"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130004"
+	help_msg_loc = ""
+
+sm_name_hdr:
+	id = "startssys"
+	next_id = "startssys1"
+	option_id = "subsys.name.opt"
+	name = "Start a Subsystem"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 10
+	type = ""
+	ghost = ""
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "_rawname"
+	cooked_field_name = "_cookedname"
+	next_type = "d"
+	help_msg_id = "05130010"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "startssys1"
+	option_id = "subsys.name.opt"
+	has_name_select = "y"
+	name = "Start a Subsystem"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 10
+	cmd_to_exec = "startsrc"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "getparam() { if [ "$1" = "sendmail" ]; then\n subsysparam='-bd -q30m'\nfi\n\
+echo '#subsysname:subsysparam'; echo $1:$subsysparam; }; getparam"
+	cmd_to_discover_postfix = "_rawname"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130010"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "subsys.name.opt"
+	disc_field_name = "subsysname"
+	name = "Subsystem name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 20
+	op_type = "l"
+	entry_type = ""
+	entry_size = 29
+	required = "+"
+	prefix = "-s"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "v()\n\
+{\n\
+lssrc -S | cut -f1 -d: | sed -e \"/^#/d\"\n\
+}\n\
+v\n\
+"
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "05130020"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "01"
+	id = "subsys.name.opt"
+	disc_field_name = "subsysparam"
+	name = "Subsystem parameters"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 20
+	op_type = "n"
+	entry_type = "t"
+	entry_size = 0
+	required = "?"
+	prefix = "-a"
+	cmd_to_list_mode = "1"
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "stopassys"
+	option_id = "subsys.pid.opt,stopssys.opt"
+	has_name_select = ""
+	name = "Stop a Subsystem"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 17
+	cmd_to_exec = "stopsrc"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130017"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "stopallssys"
+	option_id = "stopssys.opt"
+	has_name_select = ""
+	name = "Stop All Subsystems"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 12
+	cmd_to_exec = "stopsrc -a"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130012"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "refresh"
+	option_id = "subsys.pid.opt"
+	has_name_select = ""
+	name = "Refresh a Subsystem"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 5
+	cmd_to_exec = "refresh"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130005"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "tracessyson"
+	option_id = "subsys.pid.opt,start.trace.opt"
+	has_name_select = ""
+	name = "Start Trace"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 8
+	cmd_to_exec = "traceson"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130008"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "tracessysoff"
+	option_id = "subsys.pid.opt"
+	has_name_select = ""
+	name = "Stop Trace"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 15
+	cmd_to_exec = "tracesoff"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130015"
+	help_msg_loc = ""
+
+
+sm_cmd_hdr:
+	id = "qserver.cmd"
+	option_id = "subsvr.name.opt,pid.subsys.opt,query.type.opt"
+	has_name_select = "y"
+	name = "Query a Subserver"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 3
+	cmd_to_exec = "lssrc"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130003"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "startserver.cmd"
+	option_id = "subsvr.name.opt,pid.subsys.opt"
+	has_name_select = "y"
+	name = "Start a Subserver"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 9
+	cmd_to_exec = "startsrc"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130009"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "stopserver.cmd"
+	option_id = "subsvr.name.opt,pid.subsys.opt,stopserver.opt"
+	has_name_select = "y"
+	name = "Stop a Subserver"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 16
+	cmd_to_exec = "stopsrc"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130016"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "startserver.trace.cmd"
+	option_id = "subsvr.name.opt,pid.subsys.opt,start.trace.opt"
+	has_name_select = "y"
+	name = "Start Trace"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 8
+	cmd_to_exec = "traceson"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130008"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "stopserver.trace.cmd"
+	option_id = "subsvr.name.opt,pid.subsys.opt"
+	has_name_select = "y"
+	name = "Stop Trace"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 15
+	cmd_to_exec = "tracesoff"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "05130015"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "subsys.pid.opt"
+	disc_field_name = "_rawname"
+	name = "Subsystem PROCESS ID"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 21
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = "-p"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "v()\n\
+{\n\
+lssrc -a | awk \"/`dspmsg src.cat -s 1 1 active`$/{if (NF == 4) print \\$3  \\\"	\\\" \\$1;else print \\$2 \\\"	\\\" \\$1}\"\n\
+}\n\
+v\n\
+"
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "05130021"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "1"
+	id = "stopssys.opt"
+	disc_field_name = ""
+	name = "Stop TYPE"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 14
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "normal,forced,cancel"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ",-f,-c"
+	help_msg_id = "05130014"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "1"
+	id = "stopserver.opt"
+	disc_field_name = ""
+	name = "Stop TYPE"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 14
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "normal,forced"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ",-f"
+	help_msg_id = "05130014"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "1"
+	id = "start.trace.opt"
+	disc_field_name = ""
+	name = "Trace TYPE"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 25
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "short,long"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ",-l"
+	help_msg_id = "05130025"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "select.subsvr.name.opt"
+	disc_field_name = "sub_type"
+	name = "SUBSERVER name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 7
+	op_type = "l"
+	entry_type = ""
+	entry_size = 29
+	required = "+"
+	prefix = "-t"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "v()\n\
+{\n\
+lssrc -T | cut -f1 -d: | sed -e \"/^#/d\"\n\
+}\n\
+v"
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "05130007"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "subsvr.name.opt"
+	disc_field_name = "sub_type"
+	name = "Subserver name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 18
+	op_type = ""
+	entry_type = ""
+	entry_size = 29
+	required = "y"
+	prefix = "-t"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "v()\n\
+{\n\
+lssrc -T | cut -f1 -d: | sed -e \"/^#/d\"\n\
+}\n\
+v"
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "05130018"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "1"
+	id = "query.type.opt"
+	disc_field_name = ""
+	name = "Query TYPE"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 2
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "short,long"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ",-l"
+	help_msg_id = "05130002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "pid.subsys.opt"
+	disc_field_name = "subsyspid"
+	name = "Subsystem PROCESS ID"
+	name_msg_file = "smit.cat"
+	name_msg_set = 40
+	name_msg_id = 21
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = "-p"
+	cmd_to_list_mode = "1"
+	cmd_to_list = "v()\n\
+{\n\
+SUBSYS=`lssrc -T -t $1 | sed -e \"/^#/d\" | cut -f2 -d:`\n\
+lssrc -s $SUBSYS | awk \"/`dspmsg src.cat -s 1 1 active`$/{if (NF == 4) print \\$3  \\\"	\\\" \\$1;else print \\$2 \\\"	\\\" \\$1}\"\n\
+}\n\
+v"
+	cmd_to_list_postfix = "sub_type"
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "05130021"
+	help_msg_loc = ""
+

@@ -1,0 +1,44 @@
+main$argc$$int$
+main$argv[]$$char *$
+vpdItemLength$p$CI$char *$Ptr to start of item
+memDump$out$I0$char *$Output Buffer
+memDump$indent$I$int$Output Line Indent
+memDump$width$I$int$Output Line Width (src bytes)
+memDump$opt$I$DUMPOPT$Dump Options
+memDump$data$I$void *$Source Data
+memDump$len$I$int$Length of Source
+cvtBool$sRep$RCI$char *$String rep of boolean (yes/no)
+getValAtt$alist$CI$attr_list_t *$Attribute List Structure
+getValAtt$aname$CI$char *$Attribute Name
+getValAtt$dest$0$void *$Ptr to destination
+getValAtt$type$I$char$Destination Type Code
+getHex$outbuf$$char *$
+getHex$outlen$$int$
+getHex$inbuf$$char *$
+getHardwareAddress$hdwAddr[6]$0$char$Return Buffer
+getHardwareAddress$addrlen$I$int$Address Length
+getHardwareAddress$vpd$CI$VPDBUF *$VPD Buffer
+getCurAddress$alist$CI$attr_list_t *$Attribute List Structure
+getCurAddress$curAddr$0$char *$Alternate Address
+getCurAddress$hdwAddr$CI$char *$Hardwired Address
+getCurAddress$addrLen$I$int$Address Length
+cieDDInfo$cdliDDInstance$CI$char *$CDLI DD Instance Name
+cieDDInfo$cieDDInstance$0$char *$COMIO DD Instance Name
+cieDDInfo$devType$0$CIE_DEV_TYPE *$COMIO Device Type Code
+buildDDS$dds$I0$DDS *$Device Dependent Structure
+buildDDS$logicalName$CI$char *$Logical Device Name
+buildDDS$cieDevType$I$CIE_DEV_TYPE$COMIO Device Type Code
+buildDDS$odm$CI$ODMDATA *$Dev Config ODM Data
+getdevno$logicalName$CI$char *$Device Logical Name
+getdevno$DDInstance$CI$char *$Dev Dr Instance Name
+getdevno$generate$I$int$Generate Flag
+getdevno$pdevno$0$dev_t *$Ptr to devno return area
+lookupDevice$logicalName$CI$char *$Logical Device Name to lookup
+lookupDevice$cdliDDInstance$0$char *$CDLI Dev Driver Instance Name
+lookupDevice$uniqueType$0$char *$CDLI Unique Type Code
+getVPD$ldev$CI$char *$Logical Device Name
+getVPD$vpd$0$VPDBUF *$VPD Buffer
+getODMData$logicalName$CI$char *$Device Logical Name
+getODMData$odm$0$ODMDATA *$ODM Data for the Device
+min$x$$$
+min$y$$$

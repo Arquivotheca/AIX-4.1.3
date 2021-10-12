@@ -1,0 +1,25 @@
+# @(#)85        1.2  src/bos/usr/lib/pios/ascii.attach, cmdpios, bos411, 9428A410j 7/28/93 17:02:40
+#
+#   COMPONENT_NAME: CMDPIOS
+#
+#   FUNCTIONS:#
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+	# ASCII attachment
+	description 	= 	piobe.cat,4,20;Printer Attached to ASCII Terminal
+	add_queue 	= 	ps_makprt_prt
+	add_printer 	= 	ps_makprt_prt
+	seq_num		=	4
+	submit_job	=	ps_qprt_fileName
+	change_queue	=	ps_chpq_attachName
+	change_filters	=	ps_pqfilters_ghostName
+	remove_queue	=	ps_rmpq_ghostName_other

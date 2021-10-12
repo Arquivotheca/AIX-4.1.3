@@ -1,0 +1,165 @@
+######################################################################
+#  @(#)79        1.5  src/bldenv/man/promote_ship.man, pkgtools, bos412, GOLDA411a 8/17/93 09:52:08
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: PTF_filename
+#		server
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# promote_ship.man
+#
+# Change log:
+#    07/15/92-sw-add -d option
+#    06/04/92-sw-add -p and -s options
+#    10/22/91-wt-added header
+######################################################################
+  promote_ship Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+    Moves PTFs from the production server to the ship server
+    and releases the CCSS format PTFs to the field.
+
+
+  Syntax
+
+    promote_ship   [-p prod_directory] [-s ship_directory] [-n]
+                   [-x] [-R] [-E] [-h] [-d] [-?] PTF_filename(s)
+
+
+  Description
+
+    The promote_ship command moves PTFs from the production server
+    to ship server and transmits each PTF from the ship server to
+    ausmvs6 for distribution. It also updates the PTFs information
+    on RETAIN and CMVC.
+
+    If you do not specified -d option, then the promote_ship command
+    will generate the RETAIN.dbg file on your home directory for 
+    debugging RETAIN purpose.
+
+
+  Flags
+
+    -p prod_directory    Directory of production server. 
+                         The default is $PROD_DIRNAME which is in    
+                         32_pkg_environment file.
+
+    -s ship_directory    Directory of ship server.
+                         The default is $SHIP_DIRNAME which is in
+                         32_pkg_environment file.
+
+    -n                   No execute.  Verifies that the group of PTFs
+                         specified can be promoted together.
+
+    -x                   Do not generate an error condition for missing
+                         supersede requisites on the ship server.  If
+                         this option is used a ptf is allowed to promote
+                         when ptfs that it supersedes are missing from the
+                         ship server.
+
+    -R                   Resends PTF files to ausmvs6 for distribution.
+                         All PTFs must already be located on the ship
+                         server.
+
+    -E                   Resends PTF files to RETAIN and updates 
+                         PTFs information on CMVC.
+
+    -d                   Exclude debug mode for RETAIN information
+
+    -h | -?              Lists help message. 
+
+    PTF_filename(s)      The list of PTFs to be checked.
+                         For example:
+                                U0000257.ptf  U0000032.ptf U000001.ptf
+                                           < or >
+                                U0000257 U0000032 U000001
+
+
+  Messages 
+
+    Informative
+
+    "promote_ship: FINISHED. ALL files successfully promoted"
+    The promote_ship command successfully promotes the PTFs from production
+    server to ship server, transmits them to ausmvs6 and updates information
+    on RETAIN and CMVC.
+
+    Fatal Errors
+
+    "promote_ship: promote failed"
+    The promote_ship command fails.
+
+    "promote_ship: ...... "
+    The error message that is caused by running the promote_ship command.
+
+    "prereq_list: ...... "
+    The error message that is caused by running the prereq_list program.
+
+    "xmit_ptf: ...... "
+    The error message that is caused by running the xmit_ptf program.
+
+    "ccss_unpack: ...... "
+    The error message that is caused by running the ccss_unpack program.
+
+    "update_RETAIN: ...... "
+    The error message that is caused by running the update_RETAIN program. 
+
+    "gen_ptf_index: ...... "
+    The error message that is caused by running the gen_ptf_index program.
+
+
+  Examples
+
+    1. Promote PTF files: U000001.ptf and U000002.ptf from the production
+       server (prod_server) to the ship server (ship_server):
+
+       promote_ship -p prod_server -s ship_server U000001.ptf U000002.ptf
+
+    2. Resend PTF file U000001.ptf to the ausmvs6 from the ship server
+       (ship_server):
+
+       promote_ship -R -s ship_server U000001.ptf
+
+    3. Resend PTF file U000002.ptf to RETAIN from the ship server
+       (ship_server):
+
+       promote_ship -E -s ship_server U000002.ptf
+
+
+  Input File
+
+    none
+
+
+  Prerequisite Information
+  
+    The promote_ship command calls 32_pkg_environment, xmit_ptf, ccss_unpack,
+    gen_ptf_index prereq_list, update_RETAIN and SendPtf programs. Make sure
+    you add those programs' pathname to your PATH environment variable.
+
+
+  Related Information
+
+    prereq_list
+    xmit_ptfs
+    update_RETAIN
+    SendPtf
+    gen_ptf_index
+    ccss_unpack

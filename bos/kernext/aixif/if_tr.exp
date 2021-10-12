@@ -1,0 +1,23 @@
+*
+* @(#)17	1.4  src/bos/kernext/aixif/if_tr.exp, sysxaixif, bos411, 9428A410j 4/26/94 10:43:08
+*   COMPONENT_NAME: SYSXAIXIF
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+* symbols exported from if_tr loadable code.
+*
+config_ie5
+ie5_output
+ie5_ioctl
+ie5_arpresolve
+ie5_arpinput

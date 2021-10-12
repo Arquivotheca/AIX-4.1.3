@@ -1,0 +1,467 @@
+*/* @(#)64	1.1  src/bos/usr/ccs/bin/as/POWER/instrs.ops.rs1, cmdas, bos411, 9428A410j 5/10/93 14:55:05*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.rs1
+* *                                                                   *
+* *       V4.1 RIOS/1 implementation unique instructions.  They are 
+* *       supported in RIOS/2 and 601.
+* *
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1992
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+***********************************************************************
+*
+*** - *** Type indicator: Bit map for POWER unique instrsuctions 
+*                         and supported in 601 is 0x8016
+% 32790
+***********************************************************************
+***********************************************************************
+*  D-Form instructions                                                *
+***********************************************************************
+*
+*   Instruction Format: D-FORM    (Displacement ..signed..)
+*
+*       ------------------------------------------------
+*      |OPCODE|   OP1   |   RA   |          D           |
+*       ------------------------------------------------
+*       0    5 6      10 11    15 16                  31
+*
+*                 OP1 = RT | RS | FRT | FRS
+*
+*   Assembler Format:
+*
+*       mnemonic  OP1,D(RA|0)
+*
+***********************************************************************
+***************************************************
+**** /*** Instruction Address Computation ***/ ****
+***************************************************
+*0E    ca     rt,d(ra)       Compute Address
+       ca         rs       ds   14
+***********************************************************************
+*       UI-Form instructions
+***********************************************************************
+*
+*       Instruction Format: UI-FORM  (Unsigned Immediate)
+*
+*       ------------------------------------------------
+*      |OPCODE|  OP1    |   RA   |         UI           |
+*       ------------------------------------------------
+*       0    5 6      10 11    15 16                  31
+*
+*                 UI = UL
+*                 OP1 = RT | BF
+*
+*   Asm Formats:
+*
+*       mnemonic  RT,RA,UI
+*
+***********************************************************************
+***************************************************
+**** /*** Instruction Address Computation ***/ ****
+***************************************************
+*       mnem  |input     |out |op code value
+*
+***********************************************************************
+*       SI-Form instructions
+***********************************************************************
+*
+*       Instruction Format: SI-FORM  (Signed Immediate)
+*
+*       ------------------------------------------------
+*      |OPCODE|   OP1   |   RA   |         SI           |
+*       ------------------------------------------------
+*       0    5 6      10 11    15 16                  31
+*
+*                 OP1 = RT | TO | BF
+*                 SI  = D
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,RA,SI
+*
+***********************************************************************
+*09    dozi   rt,ra,si       Difference or Zero Immediate
+       dozi       rri      di   09
+***********************************************************************
+*       SC-Form instructions
+***********************************************************************
+*
+*       Instruction Format: SC-FORM  (System Call)
+*
+*       ------------------------------------------------------
+*      |OPCODE| / / / / | / / / /|         BD           |AR|LK|
+*       ------------------------------------------------------
+*       0    5 6      10 11    15 16                  29 30 31
+*
+*                                 ----------------------
+*       .........................|  FL1  |  LEV   | FL2 |.....
+*                                 ----------------------
+*                                 16   19 20    26 27 29
+*
+*   Asm Formats:
+*
+*       mnemonic  BD
+*       mnemonic  LEV,FL1,FL2
+*
+***********************************************************************
+*********************************************
+**** /*** Supervisor Linkage & Trap ***/ ****
+*********************************************
+*11    svcla  bd             Supervisor Call and Link         (AR=1 LK=1)
+       svcla      v        dc   17-000-1-0-0-0-1
+*
+***********************************************************************
+*       X-Form instructions
+***********************************************************************
+*
+*       Instruction Format: X-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | RS | FRT | FRS | BF
+*              OP2 = RA | FRA
+*              OP3 = RB | FRB | NB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2,OP3         ----- RC=0
+*       mnemonic. OP1,OP2,OP3         ----- RC=1
+*
+***********************************************************************
+*
+*115   lscbx  rt,ra,rb       Load Multiple and Compare
+       lscbx      rrr      x7   31-277
+       lscbx.     rrr      x7   31-277-1
+***********************************************************************
+*       XO-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XO-FORM
+*
+*       ----------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |OV|      EO       |Rc|
+*       ----------------------------------------------------
+*       0    5 6    10 11   15 16   20 21 22           30 31
+*
+*              OP1 = RT
+*              OP2 = RA
+*              OP3 = RB
+*              OV  = OV Bit
+*
+*
+*   Asm Formats:
+*
+*       mnemonic   OP1,OP2,OP3        ---- OV=0 Rc=0
+*       mnemonic.  OP1,OP2,OP3        ---- OV=0 Rc=1
+*       mnemonicO  OP1,OP2,OP3        ---- OV=1 Rc=0
+*       mnemonicO. OP1,OP2,OP3        ---- OV=1 Rc=1
+*
+***********************************************************************
+*108   doz    rt,ra,rb       Difference or Zero
+*108   doz.   rt,ra,rb       Difference or Zero (Rc=1)
+*108   dozo   rt,ra,rb       Difference or Zero and set Overflow
+*108   dozo.  rt,ra,rb       Difference or Zero and set Overflow (Rc=1)
+       doz        rrr      x7   31-264
+       doz.       rrr      x7   31-264-1
+       dozo       rrr      x7   31-264-0-1
+       dozo.      rrr      x7   31-264-1-1
+*14B   div    rt,ra,rb       Divide
+*14B   div.   rt,ra,rb       Divide (Rc=1)
+*14B   divo   rt,ra,rb       Divide and set Overflow
+*14B   divo.  rt,ra,rb       Divide and set Overflow (Rc=1)
+       div        rrr      x7   31-331
+       div.       rrr      x7   31-331-1
+       divo       rrr      x7   31-331-0-1
+       divo.      rrr      x7   31-331-1-1
+*16B   divs   rt,ra,rb       Divide Short
+*16B   divs.  rt,ra,rb       Divide Short (Rc=1)
+*16B   divso  rt,ra,rb       Divide Short and set Overflow
+*16B   divso. rt,ra,rb       Divide Short and set Overflow (Rc=1)
+       divs       rrr      x7   31-363
+       divs.      rrr      x7   31-363-1
+       divso      rrr      x7   31-363-0-1
+       divso.     rrr      x7   31-363-1-1
+*10B   mul    rt,ra,rb       Multiply
+*10B   mul.   rt,ra,rb       Multiply (Rc=1)
+*10B   mulo   rt,ra,rb       Multiply and set Overflow
+*10B   mulo.  rt,ra,rb       Multiply and set Overflow (Rc=1)
+       mul        rrr      x7   31-107
+       mul.       rrr      x7   31-107-1
+       mulo       rrr      x7   31-107-0-1
+       mulo.      rrr      x7   31-107-1-1
+***********************************************************************
+*       XO2-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XO2-FORM
+*
+*       ----------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |OV|      EO       |Rc|
+*       ----------------------------------------------------
+*       0    5 6    10 11   15 16   20 21 22           30 31
+*
+*              OP1 = RT
+*              OP2 = RA
+*              OV  = OV Bit
+*
+*
+*   Asm Formats:
+*
+*       mnemonic   OP1,OP2            ---- OV=0 Rc=0
+*       mnemonic.  OP1,OP2            ---- OV=0 Rc=1
+*       mnemonicO  OP1,OP2            ---- OV=1 Rc=0
+*       mnemonicO. OP1,OP2            ---- OV=1 Rc=1
+*
+***********************************************************************
+*168   abs    rt,ra          Absolute
+*168   abs.   rt,ra          Absolute (Rc=1)
+*168   abso   rt,ra          Absolute and set Overflow
+*168   abso.  rt,ra          Absolute and set Overflow (Rc=1)
+       abs        rr       x6   31-360
+       abs.       rr       x6   31-360-1
+       abso       rr       x6   31-360-0-1
+       abso.      rr       x6   31-360-1-1
+*1E8   nabs   rt,ra          Negative Absolute
+*1E8   nabs.  rt,ra          Negative Absolute (Rc=1)
+*1E8   nabso  rt,ra          Negative Absolute and set Overflow
+*1E8   nabso. rt,ra          Negative Absolute and set Overflow (Rc=1)
+       nabs       rr       x6   31-488
+       nabs.      rr       x6   31-488-1
+       nabso      rr       x6   31-488-0-1
+       nabso.     rr       x6   31-488-1-1
+*
+***********************************************************************
+*       XR-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XR-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RS
+*              OP2 = RA
+*              OP3 = RB | SH
+*
+*   Asm Formats:
+*
+*       mnemonic  OP2,OP1,OP3         ----- RC=0
+*       mnemonic. OP2,OP1,OP3         ----- RC=1
+*
+*       Note: *** OP2 is the first assembler operand.
+*
+***********************************************************************
+*01D   maskg  ra,rs,rb       Mask Generate
+       maskg      rrr      xf   31-029
+       maskg.     rrr      xf   31-029-1
+*21D   maskir ra,rs,rb       Mask insert register
+       maskir     rrr      xf   31-541
+       maskir.    rrr      xf   31-541-1
+*
+*0B8   sliq   ra,rs,sh       Shift Left Immediate with MQ
+*0B8   sliq.  ra,rs,sh       Shift Left Immediate with MQ (Rc=1)
+       sliq       rrt      xf   31-184
+       sliq.      rrt      xf   31-184-1
+*098   slq    ra,rs,rb       Shift Left with MQ
+*098   slq.   ra,rs,rb       Shift Left with MQ (Rc=1)
+       slq        rrr      xf   31-152
+       slq.       rrr      xf   31-152-1
+*0F8   slliq  ra,rs,sh       Shift Left Long Immediate with MQ
+*0F8   slliq. ra,rs,sh       Shift Left Long Immediate with MQ (Rc=1)
+       slliq      rrt      xf   31-248
+       slliq.     rrt      xf   31-248-1
+*0D8   sllq   rs,ra,rb       Shift Left Long with MQ
+*0D8   sllq.  ra,rs,rb       Shift Left Long with MQ (Rc=1)
+       sllq       rrr      xf   31-216
+       sllq.      rrr      xf   31-216-1
+*2B8   sriq   ra,rs,sh       Shift Right Immediate with MQ
+*2B8   sriq.  ra,rs,sh       Shift Right Immediate with MQ (Rc=1)
+       sriq       rrt      xf   31-696
+       sriq.      rrt      xf   31-696-1
+*298   srq    ra,rs,rb       Shift Right with MQ
+*298   srq.   ra,rs,rb       Shift Right with MQ (Rc=1)
+       srq        rrr      xf   31-664
+       srq.       rrr      xf   31-664-1
+*2F8   srliq  ra,rs,sh       Shift Right Long Immediate with MQ
+*2F8   srliq. ra,rs,sh       Shift Right Long Immediate with MQ (Rc=1)
+       srliq      rrt      xf   31-760
+       srliq.     rrt      xf   31-760-1
+*2D8   srlq   ra,rs,rb       Shift Right Long with MQ
+*2D8   srlq.  ra,rs,rb       Shift Right Long with MQ (Rc=1)
+       srlq       rrr      xf   31-728
+       srlq.      rrr      xf   31-728-1
+*398   sraq   ra,rs,rb       Shift Right Algebraic with MQ
+*398   sraq.  ra,rs,rb       Shift Right Algebraic with MQ (Rc=1)
+       sraq       rrr      xf   31-920
+       sraq.      rrr      xf   31-920-1
+*3B8   sraiq  ra,rs,sh       Shift Right Algebraic Immediate w MQ
+*3B8   sraiq. ra,rs,sh       Shift Right Algebraic Immediate w MQ (Rc=1)
+       sraiq      rrt      xf   31-952
+       sraiq.     rrt      xf   31-952-1
+*099   sle    ra,rs,rb       Shift Left Extended
+*099   sle.   ra,rs,rb       Shift Left Extended (Rc=1)
+       sle        rrr      xf   31-153
+       sle.       rrr      xf   31-153-1
+*0D9   sleq   ra,rs,rb       Shift Left Extended with MQ
+*0D9   sleq.  ra,rs,rb       Shift Left Extended with MQ (Rc=1)
+       sleq       rrr      xf   31-217
+       sleq.      rrr      xf   31-217-1
+*299   sre    ra,rs,rb       Shift Right Extended
+*299   sre.   ra,rs,rb       Shift Right Extended (Rc=1)
+       sre        rrr      xf   31-665
+       sre.       rrr      xf   31-665-1
+*2D9   sreq   ra,rs,rb       Shift Right Extended with MQ
+*2D9   sreq.  ra,rs,rb       Shift Right Extended with MQ (Rc=1)
+       sreq       rrr      xf   31-729
+       sreq.      rrr      xf   31-729-1
+*399   srea   ra,rs,rb       Shift Right Extended
+*399   srea.  ra,rs,rb       Shift Right Extended (Rc=1)
+       srea       rrr      xf   31-921
+       srea.      rrr      xf   31-921-1
+*
+************************************
+**** /*** Rotate and Shift ***/ ****
+************************************
+*       mnem  |input     |out |op code value
+*219   rrib   ra,rs,rb       Rotate Right and Insert Bit
+*219   rrib.  ra,rs,rb       Rotate Right and Insert Bit (Rc=1)
+       rrib       rrr      xf   31-537
+       rrib.      rrr      xf   31-537-1
+***********************************************************************
+*       X1-Form instructions
+***********************************************************************
+*
+*       Instruction Format: X1-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  | / / / | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | FRT | BF
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1                 ----- RC=0
+*       mnemonic. OP1                 ----- RC=1
+*
+***********************************************************************
+**********************************************
+**** /*** Machine State Modification ***/ ****
+**********************************************
+*212   clcs   rt,ra          Cache line compute size
+       clcs       rr       x6   31-531
+***********************************************************************
+*       M-Form instructions
+***********************************************************************
+*
+*       Instruction Format: M-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  RS   |  RA   |  OP3  |  MBGN  | MEND  |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21    25 26   30 31
+*
+*              OP3 = RB | SH
+*
+*   Asm Formats:
+*
+*       mnemonic  RA,RS,OP3,MASK      ----- RC=0
+*       mnemonic. RA,RS,OP3,MASK      ----- RC=1
+*       mnemonic  RA,RS,OP3,MBGN,MEND ----- RC=0
+*       mnemonic. RA,RS,OP3,MBGN,MEND ----- RC=1
+*
+*       NOTE: *** Bits 11-15 (RA) is the first assembler operand
+*
+***********************************************************************
+************************************
+**** /*** Rotate and Shift ***/ ****
+************************************
+*16    rlmi   ra,rs,rb,mb,me    Rotate Left then Mask Insert
+*16    rlmi.  ra,rs,rb,mb,me    Rotate Left then Mask Insert (Rc=1)
+*16    rlmi   ra,rs,rb,mask     Rotate Left then Mask Insert
+*16    rlmi.  ra,rs,rb,mask     Rotate Left then Mask Insert (Rc=1)
+       rlmi       rrry?ztt m    22-000
+       rlmi.      rrry?ztt m    22-000-1
+***********************************************************************
+*       I-Form instructions
+***********************************************************************
+*
+*       Instruction Format: I-FORM
+*
+*       --------------------------------------------------
+*      |OPCODE|              LI                     |AR|LK|
+*       --------------------------------------------------
+*       0    5 6                                  29 30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  LI
+*
+***********************************************************************
+***********************************************************************
+**             Some special extended mnemonics                      ***
+**             No particular instruction format order               ***
+***********************************************************************
+*1D3   mtmq   rs             Move to MQ register (mtspr)
+       mtmq       r        x4   31-467-0-0-0-00
+*153   mfmq   rt             Move from MQ register (mfspr)
+       mfmq       r        x4   31-339-0-0-0-00
+*1D3   mtrtcu rs             Move to real time clock upper (mtspr)
+       mtrtcu     r        x4   31-467-0-0-0-20
+*1D3   mtrtcl rs             Move to real time clock lower (mtspr)
+       mtrtcl     r        x4   31-467-0-0-0-21
+*153   mfrtcu  rt            Move from real time clock upper (mfspr)
+*      mfrtcu     r        x4   31-339-0-0-0-20
+       mfrtcu     r        x4   31-339-0-0-0-04
+*153   mfrtcl  rt            Move from real time clock lower (mfspr)
+*      mfrtcl     r        x4   31-339-0-0-0-21
+       mfrtcl     r        x4   31-339-0-0-0-05

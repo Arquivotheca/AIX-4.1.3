@@ -1,0 +1,308 @@
+# @(#)51	1.2  src/bos/usr/lib/nls/loc/uconvTable/IBM-869.ucmap, cmdiconv, bos411, 9428A410j 11/2/93 08:28:09
+#
+#   COMPONENT_NAME:	CMDICONV
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   ISO 10646-1: UCS-2
+#
+#   Table Format:
+#	Columns separated by spaces:
+#	Col1: (pos.  1- 7) ISO 10646 code as <Uxxxx>
+#	Col2: (pos. 16-30) IBM-869 code as \xhh
+#	Col3: (pos. 32-39) IBM GCGID
+#	Col4: (pos. 42-49) Mapping indicator to specify:
+#		1. Arabic Shared hapes:
+#			NOMINAL, ISOLATED, INITIAL, MEDIAL, FINAL
+#		2. Synonym GCGID used when direct mapping for
+#		   the main GCGID is not available.
+#	Col5: (pos. 56-> ) ISO 10646 character name
+#
+#   Sorting:	The entries are in IBM CCSID 00869 code point order
+#
+#   Statistics:	IBM CCSID  00869:  256 (of 256) code points mapped to
+#		ISO 10646, UCS-2:  256 code points
+#
+<code_set_name>         "IBM-869"
+<char_name_mask>        "AXXXX"
+<mb_cur_max>            1
+<mb_cur_min>            1
+<uconv_class>		"SBCS"
+#
+#
+#
+CHARMAP
+#
+#ISO 10646     Codepoint        GCGID    SYN/SHAPE     ISO 10646 Name
+#---------     ---------        -------- ---------     ------------------------
+<U0000>        \x00            #                       ===
+<U0001>        \x01            #                       ===
+<U0002>        \x02            #                       ===
+<U0003>        \x03            #                       ===
+<U0004>        \x04            #                       ===
+<U0005>        \x05            #                       ===
+<U0006>        \x06            #                       ===
+<U0007>        \x07            #                       ===
+<U0008>        \x08            #                       ===
+<U0009>        \x09            #                       ===
+<U000A>        \x0A            #                       ===
+<U000B>        \x0B            #                       ===
+<U000C>        \x0C            #                       ===
+<U000D>        \x0D            #                       ===
+<U000E>        \x0E            #                       ===
+<U000F>        \x0F            #                       ===
+<U0010>        \x10            #                       ===
+<U0011>        \x11            #                       ===
+<U0012>        \x12            #                       ===
+<U0013>        \x13            #                       ===
+<U0014>        \x14            #                       ===
+<U0015>        \x15            #                       ===
+<U0016>        \x16            #                       ===
+<U0017>        \x17            #                       ===
+<U0018>        \x18            #                       ===
+<U0019>        \x19            #                       ===
+<U001C>        \x1A            #                       ===
+<U001B>        \x1B            #                       ===
+<U007F>        \x1C            #                       ===
+<U001D>        \x1D            #                       ===
+<U001E>        \x1E            #                       ===
+<U001F>        \x1F            #                       ===
+<U0020>        \x20            # SP010000              SPACE
+<U0021>        \x21            # SP020000              EXCLAMATION MARK
+<U0022>        \x22            # SP040000              QUOTATION MARK
+<U0023>        \x23            # SM010000              NUMBER SIGN
+<U0024>        \x24            # SC030000              DOLLAR SIGN
+<U0025>        \x25            # SM020000              PERCENT SIGN
+<U0026>        \x26            # SM030000              AMPERSAND
+<U0027>        \x27            # SP050000              APOSTROPHE
+<U0028>        \x28            # SP060000              LEFT PARENTHESIS
+<U0029>        \x29            # SP070000              RIGHT PARENTHESIS
+<U002A>        \x2A            # SM040000              ASTERISK
+<U002B>        \x2B            # SA010000              PLUS SIGN
+<U002C>        \x2C            # SP080000              COMMA
+<U002D>        \x2D            # SP100000              HYPHEN-MINUS
+<U002E>        \x2E            # SP110000              FULL STOP
+<U002F>        \x2F            # SP120000              SOLIDUS
+<U0030>        \x30            # ND100000              DIGIT ZERO
+<U0031>        \x31            # ND010000              DIGIT ONE
+<U0032>        \x32            # ND020000              DIGIT TWO
+<U0033>        \x33            # ND030000              DIGIT THREE
+<U0034>        \x34            # ND040000              DIGIT FOUR
+<U0035>        \x35            # ND050000              DIGIT FIVE
+<U0036>        \x36            # ND060000              DIGIT SIX
+<U0037>        \x37            # ND070000              DIGIT SEVEN
+<U0038>        \x38            # ND080000              DIGIT EIGHT
+<U0039>        \x39            # ND090000              DIGIT NINE
+<U003A>        \x3A            # SP130000              COLON
+<U003B>        \x3B            # SP140000              SEMICOLON
+<U003C>        \x3C            # SA030000              LESS-THAN SIGN
+<U003D>        \x3D            # SA040000              EQUALS SIGN
+<U003E>        \x3E            # SA050000              GREATER-THAN SIGN
+<U003F>        \x3F            # SP150000              QUESTION MARK
+<U0040>        \x40            # SM050000              COMMERCIAL AT
+<U0041>        \x41            # LA020000              LATIN CAPITAL LETTER A
+<U0042>        \x42            # LB020000              LATIN CAPITAL LETTER B
+<U0043>        \x43            # LC020000              LATIN CAPITAL LETTER C
+<U0044>        \x44            # LD020000              LATIN CAPITAL LETTER D
+<U0045>        \x45            # LE020000              LATIN CAPITAL LETTER E
+<U0046>        \x46            # LF020000              LATIN CAPITAL LETTER F
+<U0047>        \x47            # LG020000              LATIN CAPITAL LETTER G
+<U0048>        \x48            # LH020000              LATIN CAPITAL LETTER H
+<U0049>        \x49            # LI020000              LATIN CAPITAL LETTER I
+<U004A>        \x4A            # LJ020000              LATIN CAPITAL LETTER J
+<U004B>        \x4B            # LK020000              LATIN CAPITAL LETTER K
+<U004C>        \x4C            # LL020000              LATIN CAPITAL LETTER L
+<U004D>        \x4D            # LM020000              LATIN CAPITAL LETTER M
+<U004E>        \x4E            # LN020000              LATIN CAPITAL LETTER N
+<U004F>        \x4F            # LO020000              LATIN CAPITAL LETTER O
+<U0050>        \x50            # LP020000              LATIN CAPITAL LETTER P
+<U0051>        \x51            # LQ020000              LATIN CAPITAL LETTER Q
+<U0052>        \x52            # LR020000              LATIN CAPITAL LETTER R
+<U0053>        \x53            # LS020000              LATIN CAPITAL LETTER S
+<U0054>        \x54            # LT020000              LATIN CAPITAL LETTER T
+<U0055>        \x55            # LU020000              LATIN CAPITAL LETTER U
+<U0056>        \x56            # LV020000              LATIN CAPITAL LETTER V
+<U0057>        \x57            # LW020000              LATIN CAPITAL LETTER W
+<U0058>        \x58            # LX020000              LATIN CAPITAL LETTER X
+<U0059>        \x59            # LY020000              LATIN CAPITAL LETTER Y
+<U005A>        \x5A            # LZ020000              LATIN CAPITAL LETTER Z
+<U005B>        \x5B            # SM060000              LEFT SQUARE BRACKET
+<U005C>        \x5C            # SM070000              REVERSE SOLIDUS
+<U005D>        \x5D            # SM080000              RIGHT SQUARE BRACKET
+<U005E>        \x5E            # SD150000              CIRCUMFLEX ACCENT
+<U005F>        \x5F            # SP090000              LOW LINE
+<U0060>        \x60            # SD130000              GRAVE ACCENT
+<U0061>        \x61            # LA010000              LATIN SMALL LETTER A
+<U0062>        \x62            # LB010000              LATIN SMALL LETTER B
+<U0063>        \x63            # LC010000              LATIN SMALL LETTER C
+<U0064>        \x64            # LD010000              LATIN SMALL LETTER D
+<U0065>        \x65            # LE010000              LATIN SMALL LETTER E
+<U0066>        \x66            # LF010000              LATIN SMALL LETTER F
+<U0067>        \x67            # LG010000              LATIN SMALL LETTER G
+<U0068>        \x68            # LH010000              LATIN SMALL LETTER H
+<U0069>        \x69            # LI010000              LATIN SMALL LETTER I
+<U006A>        \x6A            # LJ010000              LATIN SMALL LETTER J
+<U006B>        \x6B            # LK010000              LATIN SMALL LETTER K
+<U006C>        \x6C            # LL010000              LATIN SMALL LETTER L
+<U006D>        \x6D            # LM010000              LATIN SMALL LETTER M
+<U006E>        \x6E            # LN010000              LATIN SMALL LETTER N
+<U006F>        \x6F            # LO010000              LATIN SMALL LETTER O
+<U0070>        \x70            # LP010000              LATIN SMALL LETTER P
+<U0071>        \x71            # LQ010000              LATIN SMALL LETTER Q
+<U0072>        \x72            # LR010000              LATIN SMALL LETTER R
+<U0073>        \x73            # LS010000              LATIN SMALL LETTER S
+<U0074>        \x74            # LT010000              LATIN SMALL LETTER T
+<U0075>        \x75            # LU010000              LATIN SMALL LETTER U
+<U0076>        \x76            # LV010000              LATIN SMALL LETTER V
+<U0077>        \x77            # LW010000              LATIN SMALL LETTER W
+<U0078>        \x78            # LX010000              LATIN SMALL LETTER X
+<U0079>        \x79            # LY010000              LATIN SMALL LETTER Y
+<U007A>        \x7A            # LZ010000              LATIN SMALL LETTER Z
+<U007B>        \x7B            # SM110000              LEFT CURLY BRACKET
+<U007C>        \x7C            # SM130000              VERTICAL LINE
+<U007D>        \x7D            # SM140000              RIGHT CURLY BRACKET
+<U007E>        \x7E            # SD190000              TILDE
+<U001A>        \x7F            #                       ===
+<unassigned>   \x80            #                       *** UNASSIGNED ***
+<unassigned>   \x81            #                       *** UNASSIGNED ***
+<unassigned>   \x82            #                       *** UNASSIGNED ***
+<unassigned>   \x83            #                       *** UNASSIGNED ***
+<unassigned>   \x84            #                       *** UNASSIGNED ***
+<unassigned>   \x85            #                       *** UNASSIGNED ***
+<U0386>        \x86            # GA120000              GREEK CAPITAL LETTER ALPHA WITH TONOS
+<unassigned>   \x87            #                       *** UNASSIGNED ***
+<U00B7>        \x88            # SD630000              MIDDLE DOT
+<U00AC>        \x89            # SM660000              NOT SIGN
+<U00A6>        \x8A            # SM650000              BROKEN BAR
+<U2018>        \x8B            # SP190000              LEFT SINGLE QUOTATION MARK
+<U2019>        \x8C            # SP200000              RIGHT SINGLE QUOTATION MARK
+<U0388>        \x8D            # GE120000              GREEK CAPITAL LETTER EPSILON WITH TONOS
+<U2015>        \x8E            # SM120000              HORIZONTAL BAR
+<U0389>        \x8F            # GE720000              GREEK CAPITAL LETTER ETA WITH TONOS
+<U038A>        \x90            # GI120000              GREEK CAPITAL LETTER IOTA WITH TONOS
+<U03AA>        \x91            # GI180000              GREEK CAPITAL LETTER IOTA WITH DIALYTIKA
+<U038C>        \x92            # GO120000              GREEK CAPITAL LETTER OMICRON WITH TONOS
+<unassigned>   \x93            #                       *** UNASSIGNED ***
+<unassigned>   \x94            #                       *** UNASSIGNED ***
+<U038E>        \x95            # GU120000              GREEK CAPITAL LETTER UPSILON WITH TONOS
+<U03AB>        \x96            # GU180000              GREEK CAPITAL LETTER UPSILON WITH DIALYTIKA
+<U00A9>        \x97            # SM520000              COPYRIGHT SIGN
+<U038F>        \x98            # GO720000              GREEK CAPITAL LETTER OMEGA WITH TONOS
+<U00B2>        \x99            # ND021000              SUPERSCRIPT TWO
+<U00B3>        \x9A            # ND031000              SUPERSCRIPT THREE
+<U03AC>        \x9B            # GA110000              GREEK SMALL LETTER ALPHA WITH TONOS
+<U00A3>        \x9C            # SC020000              POUND SIGN
+<U03AD>        \x9D            # GE110000              GREEK SMALL LETTER EPSILON WITH TONOS
+<U03AE>        \x9E            # GE710000              GREEK SMALL LETTER ETA WITH TONOS
+<U03AF>        \x9F            # GI110000              GREEK SMALL LETTER IOTA WITH TONOS
+<U03CA>        \xA0            # GI170000              GREEK SMALL LETTER IOTA WITH DIALYTIKA
+<U0390>        \xA1            # GI730000              GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS
+<U03CC>        \xA2            # GO110000              GREEK SMALL LETTER OMICRON WITH TONOS
+<U03CD>        \xA3            # GU110000              GREEK SMALL LETTER UPSILON WITH TONOS
+<U0391>        \xA4            # GA020000              GREEK CAPITAL LETTER ALPHA
+<U0392>        \xA5            # GB020000              GREEK CAPITAL LETTER BETA
+<U0393>        \xA6            # GG020000              GREEK CAPITAL LETTER GAMMA
+<U0394>        \xA7            # GD020000              GREEK CAPITAL LETTER DELTA
+<U0395>        \xA8            # GE020000              GREEK CAPITAL LETTER EPSILON
+<U0396>        \xA9            # GZ020000              GREEK CAPITAL LETTER ZETA
+<U0397>        \xAA            # GE320000              GREEK CAPITAL LETTER ETA
+<U00BD>        \xAB            # NF010000              VULGAR FRACTION ONE HALF
+<U0398>        \xAC            # GT620000              GREEK CAPITAL LETTER THETA
+<U0399>        \xAD            # GI020000              GREEK CAPITAL LETTER IOTA
+<U00AB>        \xAE            # SP170000              LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+<U00BB>        \xAF            # SP180000              RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+<U2591>        \xB0            # SF140000              LIGHT SHADE
+<U2592>        \xB1            # SF150000              MEDIUM SHADE
+<U2593>        \xB2            # SF160000              DARK SHADE
+<U2502>        \xB3            # SF110000              BOX DRAWINGS LIGHT VERTICAL
+<U2524>        \xB4            # SF090000              BOX DRAWINGS LIGHT VERTICAL AND LEFT
+<U039A>        \xB5            # GK020000              GREEK CAPITAL LETTER KAPPA
+<U039B>        \xB6            # GL020000              GREEK CAPITAL LETTER LAMDA
+<U039C>        \xB7            # GM020000              GREEK CAPITAL LETTER MU
+<U039D>        \xB8            # GN020000              GREEK CAPITAL LETTER NU
+<U2563>        \xB9            # SF230000              BOX DRAWINGS DOUBLE VERTICAL AND LEFT
+<U2551>        \xBA            # SF240000              BOX DRAWINGS DOUBLE VERTICAL
+<U2557>        \xBB            # SF250000              BOX DRAWINGS DOUBLE DOWN AND LEFT
+<U255D>        \xBC            # SF260000              BOX DRAWINGS DOUBLE UP AND LEFT
+<U039E>        \xBD            # GX020000              GREEK CAPITAL LETTER XI
+<U039F>        \xBE            # GO020000              GREEK CAPITAL LETTER OMICRON
+<U2510>        \xBF            # SF030000              BOX DRAWINGS LIGHT DOWN AND LEFT
+<U2514>        \xC0            # SF020000              BOX DRAWINGS LIGHT UP AND RIGHT
+<U2534>        \xC1            # SF070000              BOX DRAWINGS LIGHT UP AND HORIZONTAL
+<U252C>        \xC2            # SF060000              BOX DRAWINGS LIGHT DOWN AND HORIZONTAL
+<U251C>        \xC3            # SF080000              BOX DRAWINGS LIGHT VERTICAL AND RIGHT
+<U2500>        \xC4            # SF100000              BOX DRAWINGS LIGHT HORIZONTAL
+<U253C>        \xC5            # SF050000              BOX DRAWINGS LIGHT VERTICAL AND HORIZONTAL
+<U03A0>        \xC6            # GP020000              GREEK CAPITAL LETTER PI
+<U03A1>        \xC7            # GR020000              GREEK CAPITAL LETTER RHO
+<U255A>        \xC8            # SF380000              BOX DRAWINGS DOUBLE UP AND RIGHT
+<U2554>        \xC9            # SF390000              BOX DRAWINGS DOUBLE DOWN AND RIGHT
+<U2569>        \xCA            # SF400000              BOX DRAWINGS DOUBLE UP AND HORIZONTAL
+<U2566>        \xCB            # SF410000              BOX DRAWINGS DOUBLE DOWN AND HORIZONTAL
+<U2560>        \xCC            # SF420000              BOX DRAWINGS DOUBLE VERTICAL AND RIGHT
+<U2550>        \xCD            # SF430000              BOX DRAWINGS DOUBLE HORIZONTAL
+<U256C>        \xCE            # SF440000              BOX DRAWINGS DOUBLE VERTICAL AND HORIZONTAL
+<U03A3>        \xCF            # GS020000              GREEK CAPITAL LETTER SIGMA
+<U03A4>        \xD0            # GT020000              GREEK CAPITAL LETTER TAU
+<U03A5>        \xD1            # GU020000              GREEK CAPITAL LETTER UPSILON
+<U03A6>        \xD2            # GF020000              GREEK CAPITAL LETTER PHI
+<U03A7>        \xD3            # GH020000              GREEK CAPITAL LETTER CHI
+<U03A8>        \xD4            # GP620000              GREEK CAPITAL LETTER PSI
+<U03A9>        \xD5            # GO320000              GREEK CAPITAL LETTER OMEGA
+<U03B1>        \xD6            # GA010000              GREEK SMALL LETTER ALPHA
+<U03B2>        \xD7            # GB010000              GREEK SMALL LETTER BETA
+<U03B3>        \xD8            # GG010000              GREEK SMALL LETTER GAMMA
+<U2518>        \xD9            # SF040000              BOX DRAWINGS LIGHT UP AND LEFT
+<U250C>        \xDA            # SF010000              BOX DRAWINGS LIGHT DOWN AND RIGHT
+<U2588>        \xDB            # SF610000              FULL BLOCK
+<U2584>        \xDC            # SF570000              LOWER HALF BLOCK
+<U03B4>        \xDD            # GD010000              GREEK SMALL LETTER DELTA
+<U03B5>        \xDE            # GE010000              GREEK SMALL LETTER EPSILON
+<U2580>        \xDF            # SF600000              UPPER HALF BLOCK
+<U03B6>        \xE0            # GZ010000              GREEK SMALL LETTER ZETA
+<U03B7>        \xE1            # GE310000              GREEK SMALL LETTER ETA
+<U03B8>        \xE2            # GT610000              GREEK SMALL LETTER THETA
+<U03B9>        \xE3            # GI010000              GREEK SMALL LETTER IOTA
+<U03BA>        \xE4            # GK010000              GREEK SMALL LETTER KAPPA
+<U03BB>        \xE5            # GL010000              GREEK SMALL LETTER LAMDA
+<U03BC>        \xE6            # GM010000              GREEK SMALL LETTER MU
+<U03BD>        \xE7            # GN010000              GREEK SMALL LETTER NU
+<U03BE>        \xE8            # GX010000              GREEK SMALL LETTER XI
+<U03BF>        \xE9            # GO010000              GREEK SMALL LETTER OMICRON
+<U03C0>        \xEA            # GP010000              GREEK SMALL LETTER PI
+<U03C1>        \xEB            # GR010000              GREEK SMALL LETTER RHO
+<U03C3>        \xEC            # GS010000              GREEK SMALL LETTER SIGMA
+<U03C2>        \xED            # GS610000              GREEK SMALL LETTER FINAL SIGMA
+<U03C4>        \xEE            # GT010000              GREEK SMALL LETTER TAU
+<U00B4>        \xEF            # SD110000              ACUTE ACCENT
+<U00AD>        \xF0            # SP320000              SOFT HYPHEN
+<U00B1>        \xF1            # SA020000              PLUS-MINUS SIGN
+<U03C5>        \xF2            # GU010000              GREEK SMALL LETTER UPSILON
+<U03C6>        \xF3            # GF010000              GREEK SMALL LETTER PHI
+<U03C7>        \xF4            # GH010000              GREEK SMALL LETTER CHI
+<U00A7>        \xF5            # SM240000              SECTION SIGN
+<U03C8>        \xF6            # GP610000              GREEK SMALL LETTER PSI
+<U0385>        \xF7            # SD730000              GREEK DIALYTIKA TONOS
+<U00B0>        \xF8            # SM190000              DEGREE SIGN
+<U00A8>        \xF9            # SD170000              DIAERESIS
+<U03C9>        \xFA            # GO310000              GREEK SMALL LETTER OMEGA
+<U03CB>        \xFB            # GU170000              GREEK SMALL LETTER UPSILON WITH DIALYTIKA
+<U03B0>        \xFC            # GU730000              GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS
+<U03CE>        \xFD            # GO710000              GREEK SMALL LETTER OMEGA WITH TONOS
+<U25A0>        \xFE            # SM470000              BLACK SQUARE
+<U00A0>        \xFF            # SP300000              NO-BREAK SPACE
+#--------------------------------------------------------------------------
+#           IBM CCSID  00869:  247 (of 247) code points mapped to
+#           ISO 10646, UCS-2:  247 code points
+#
+END CHARMAP

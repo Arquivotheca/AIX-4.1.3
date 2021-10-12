@@ -1,0 +1,52 @@
+! @(#)67	1.2  src/bos/usr/lpp/cnls/bin/cndictutil/CNdictutil, ils-zh_CN, bos41J, 9513A_all 3/21/95 21:24:50
+!
+! COMPONENT_NAME: ils-zh_CN
+!
+! FUNCTIONS: n/a
+!
+! ORIGINS: 27
+!
+! (C) COPYRIGHT International Business Machines Corp. 1994
+! All Rights Reserved
+! Licensed Materials - Property of IBM
+!
+! US Government Users Restricted Rights - Use, duplication or
+! disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+!
+!
+*fontList:			-ibm_aix-song-medium-r-normal--27-170-100-100-m-*-*-*:
+CNdictutil*fontList:		-ibm_aix-song-medium-r-normal--27-170-100-100-m-*-*-*:
+*allowShellResize:		true
+*borderWidth:			0
+*highlightThickness:		2
+*traversalOn:			true
+*keyboardFocusPolicy:		pointer
+CNdictutil*text.rows:		17
+CNdictutil*text.columns:	20
+CNdictutil*text.width:		450
+CNdictutil*text.height:		495
+CNdictutil*main.width:		470
+CNdictutil*main.height:		615
+CNdictutil*Label.foreground:	red
+CNdictutil*Label.background:	white
+
+!
+!
+CNdictutil*cancelLabelString: 	取消
+CNdictutil*okLabelString:    	确认
+*okLabelString:   		确认
+*cancelLabelString:  		取消
+CNdictutil*filterLabelString:   过滤
+*filterLabelString:   		过滤
+CNdictutil*applyLabelString: 	过滤
+*applyLabelString:    		过滤
+CNdictutil*fileListLabelString: 文件表
+*fileListLabelString:   	文件表
+CNdictutil*dirListLabelString:  目录表
+*dirListLabelString:     	目录表
+CNdictutil*selectionLabelString:选择
+*selectionLabelString: 		选择
+CNdictutil*helpLabelString: 	求助
+*helpLabelString: 		求助
+~
+

@@ -1,0 +1,109 @@
+# @(#)17	1.1  src/bldenv/man/bldgenfs.man, bldtools, bos412, GOLDA411a 5/20/93 07:48:32
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldgenfs man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: bldgenfs.man
+#
+# PURPOSE: man page for bldgenfs command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+bldgenfs Command
+                                                                                
+                                                                                
+  Key Concepts                                                                  
+                                                                                
+                                                                                
+  Purpose                                                                       
+                                                                                
+     Executes the genfsimage command in the local directory using               
+     default values.                                                            
+                                                                                
+                                                                                
+  Syntax                                                                        
+                                                                                
+     bldgenfs [-l stack_list] [-p prod_directory] [-s ship_directory]           
+                [-t] [-B] [-h|-?]                                               
+                                                                                
+                                                                                
+  Description                                                                   
+                                                                                
+     The bldgenfs command expects to find a stack_list file of the default      
+     name "basename \`pwd`\".ptfs, and executes the command genfsimage          
+     using a set of default values.  The current working directory is           
+     expected to contain any PTF files not on the prod or ship servers.         
+                                                                                
+     The default stack_list can be overwritten with the -l option.  The         
+     default prod_directory is $AFSPROD but can be overwritten with the         
+     -p flag.  The default ship_directory is $AFSSHIP but can be overwritten    
+     with the -s flag.  The -t flag is optional and passed to                   
+     genfsimage command if specified.  The -B flag specifies that the PTF       
+     files are BULL files and adjusts the PROD and SHIP servers.                
+                                                                                
+     The genfsimage command is issued with the default values or the            
+     specified options and the output is saved to the file genfsimage.out       
+     as well as using tee to present the output to the terminal.                
+                                                                                
+     The genfsimage flags -B and -x are always used and are not able to         
+     be overwritten.  The command issued would be of the syntax:                
+     genfsimage -l stack_list -B -b. -d. -x \                                   
+	-p $AFSPROD -s $AFSSHIP 2>&1| tee genfsimage.out                               
+                                                                                
+  Flags                                                                         
+                                                                                
+     -l stack_list        Stack list that contains PTF filenames without paths. 
+                                                                                
+     -p prod_directory    Production server directory.                          
+                                                                                
+     -s ship_directory    Ship server directory.                                
+                                                                                
+     -t                   Ignore duplicate PTF's between current directory and  
+                          prod or ship servers.                                 
+                                                                                
+     -B                   The PTF filenames are BULL files.                     
+                                                                                
+     -h | -?              Provides usage message.                               
+                                                                                
+                                                                                
+  Environment Variables                                                         
+                                                                                
+     $AFSPROD        Set by 32_pkg_environment program	                         
+                                                                                
+     $AFSSHIP        Set by 32_pkg_environment program                          
+                                                                                
+                                                                                
+  Messages                                                                      
+                                                                                
+     Informative                                                                
+                                                                                
+     All other messages are those from the genfsimage command.                  
+                                                                                
+  Examples                                                                      
+                                                                                
+     1. Create a file system in ./target from AIX ship_server                   
+        with requisites and check ./target file system size.  Create            
+	a list of the files in target.ptfs:                                            
+                                                                                
+        bldgenfs                                                                
+                                                                                
+     2. Create a file system in ./target from BULL ship_server                  
+        with requisites and check ./target file system size.  Create            
+	a list of the files in target.ptfs:                                            
+                                                                                
+        bldgenfs -B                                                             
+                                                                                
+  Related Information                                                           
+                                                                                
+     genfsimage                                                                 
+                                                                                

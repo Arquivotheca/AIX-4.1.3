@@ -1,0 +1,190 @@
+# @(#)98 1.2 src/bos/objclass/POWER/cieent.add, sysxcie, bos411, 9428A410j 4/20/94 10:29:38
+#
+#  COMPONENT_NAME: (SYSXCIE) COMIO Emulator
+#
+#  FUNCTIONS: ent.add - Ethernet Adapter Device Attributes
+#
+#  ORIGINS: 27
+#
+#    (C) COPYRIGHT International Business Machines Corp. 1989
+#    All Rights Reserved
+#    Licensed Materials - Property of IBM
+#    US Government Users Restricted Rights - Use, duplication or
+#    disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+PdAt:
+        uniquetype = "adapter/mca/ethernet"
+        attribute = rec_que_size
+        deflt = 30
+        values = "20-150,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/mca/ethernet"
+        attribute = sta_que_size
+        deflt = 5
+        values = "3-20,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 12
+
+PdAt:
+        uniquetype = "adapter/mca/ethernet"
+        attribute = type_field_off
+        deflt = 12
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 9
+
+PdAt:
+        uniquetype = "adapter/mca/ethernet"
+        attribute = net_id_offset
+        deflt = 14
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 14
+
+PdAt:
+        uniquetype = "adapter/sio/ient_1"
+        attribute = rec_que_size
+        deflt = 30
+        values = "20-150,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/sio/ient_1"
+        attribute = sta_que_size
+        deflt = 5
+        values = "3-20,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 12
+
+PdAt:
+        uniquetype = "adapter/sio/ient_1"
+        attribute = type_field_off
+        deflt = 12
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 9
+
+PdAt:
+        uniquetype = "adapter/sio/ient_1"
+        attribute = net_id_offset
+        deflt = 14
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 14
+
+PdAt:
+        uniquetype = "adapter/sio/ient_2"
+        attribute = rec_que_size
+        deflt = 30
+        values = "20-150,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/sio/ient_2"
+        attribute = sta_que_size
+        deflt = 5
+        values = "3-20,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 12
+
+PdAt:
+        uniquetype = "adapter/sio/ient_2"
+        attribute = type_field_off
+        deflt = 12
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 9
+
+PdAt:
+        uniquetype = "adapter/sio/ient_2"
+        attribute = net_id_offset
+        deflt = 14
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 14
+
+PdAt:
+        uniquetype = "adapter/sio/ient_6"
+        attribute = rec_que_size
+        deflt = 30
+        values = "20-150,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/sio/ient_6"
+        attribute = sta_que_size
+        deflt = 5
+        values = "3-20,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 12
+
+PdAt:
+        uniquetype = "adapter/sio/ient_6"
+        attribute = type_field_off
+        deflt = 12
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 9
+
+PdAt:
+        uniquetype = "adapter/sio/ient_6"
+        attribute = net_id_offset
+        deflt = 14
+        values = "1-1526,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 14

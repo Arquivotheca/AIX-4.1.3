@@ -1,0 +1,123 @@
+ADDRESS MAP FOR wgadd
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+ I                        ER S1    pinned_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S2    clrjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S3    devswadd                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S4    devswdel                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S5    devswqry                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S6    longjmpx                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S7    nodev                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S8    setjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S9    uiomove                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S10   xmalloc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S11   xmfree                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S12   io_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S13   io_det                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S14   wga_err                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S15   wga_open                  ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S16   wga_close                 ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S17   wga_intr                  ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S18   vttact                    ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S19   vttcfl                    ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S20   vttclr                    ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S21   vttcpl                    ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S22   vttdact                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S23   vttdefc                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S24   vttterm                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S25   vttinit                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S26   vttmovc                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S27   vttrds                    ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S28   vttsetm                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S29   vttstct                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S30   vtttext                   ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S31   vttscr                    ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S32   wga_make_gp               ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+ I                        ER S33   vttpwrphase               ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp{/usr/lib/drivers/wgadd_pin}
+    00000000 000220  2 PR SD S34   <>                        ../../../../../../src/bos/kernext/disp/wga/config/config.c(config.o)
+    00000000           PR LD S35   .wga_config
+    00000220 000024  2 GL SD S36   <.devswqry>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000220           GL LD S37   .devswqry
+    00000244 000024  2 GL SD S38   <.setjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000244           GL LD S39   .setjmpx
+    00000268 000024  2 GL SD S40   <.io_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000268           GL LD S41   .io_det
+    0000028C 000024  2 GL SD S42   <.longjmpx>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000028C           GL LD S43   .longjmpx
+    000002B0 000024  2 GL SD S44   <.io_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000002B0           GL LD S45   .io_att
+    000002D4 000530  2 PR SD S46   <>                        ../../../../../../src/bos/kernext/disp/wga/config/define.c(define.o)
+    000002D4           PR LD S47   .wga_undefine
+    000004A0           PR LD S48   .wga_define
+    00000804 000024  2 GL SD S49   <.wga_err>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000804           GL LD S50   .wga_err
+    00000828 000024  2 GL SD S51   <.xmfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000828           GL LD S52   .xmfree
+    0000084C 000024  2 GL SD S53   <.devswdel>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000084C           GL LD S54   .devswdel
+    00000870 0000C4  2 PR SD S55   .bcopy                    moveeq.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o])
+    00000870           PR LD S56   .ovbcopy
+    0000087C           PR LD S57   ._moveeq
+    0000087C           PR LD S58   .memcpy
+    0000087C           PR LD S59   .memmove
+    00000934 000024  2 GL SD S60   <.xmalloc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000934           GL LD S61   .xmalloc
+    00000958 000090  2 PR SD S62   .bzero                    bzero.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o])
+    000009E8 0000C0  2 PR SD S63   <>                        ../../../../../../src/bos/kernext/disp/wga/config/ioctl.c(ioctl.o)
+    000009E8           PR LD S64   .wga_ioctl
+    00000AA8 000024  2 GL SD S65   <.devswadd>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000AA8           GL LD S66   .devswadd
+    00000ACC 000024  2 GL SD S67   <.uiomove>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000ACC           GL LD S68   .uiomove
+    00000AF0 000024  2 GL SD S69   <.clrjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000AF0           GL LD S70   .clrjmpx
+    00000000 0000D0  3 RW SD S71   <_$STATIC>                ../../../../../../src/bos/kernext/disp/wga/config/define.c(define.o)
+    000000D0 000075  3 RW SD S72   <_$STATIC>                ../../../../../../src/bos/kernext/disp/wga/config/ioctl.c(ioctl.o)
+    00000148 000498  3 RW SD S73   s_crt_control             ../../../../../../src/bos/kernext/disp/wga/config/config.c(config.o)
+    000005E0 00007E  3 RW SD S74   <_$STATIC>                ../../../../../../src/bos/kernext/disp/wga/config/config.c(config.o)
+* E 00000660 00000C  2 DS SD S75   wga_config                ../../../../../../src/bos/kernext/disp/wga/config/config.c(config.o)
+    0000066C 00000C  2 DS SD S76   wga_ioctl                 ../../../../../../src/bos/kernext/disp/wga/config/ioctl.c(ioctl.o)
+    00000678 000000  2 T0 SD S77   <TOC>
+    00000678 000004  2 TC SD S78   <pinned_heap>
+    0000067C 000004  2 TC SD S79   <devswqry>
+    00000680 000004  2 TC SD S80   <setjmpx>
+    00000684 000004  2 TC SD S81   <bus_base_addr>
+    00000688 000004  2 TC SD S82   <io_det>
+    0000068C 000004  2 TC SD S83   <longjmpx>
+    00000690 000004  2 TC SD S84   <io_att>
+    00000694 000004  2 TC SD S85   <_$STATIC>
+    00000698 000004  2 TC SD S86   <wga_err>
+    0000069C 000004  2 TC SD S87   <xmfree>
+    000006A0 000004  2 TC SD S88   <devswdel>
+    000006A4 000004  2 TC SD S89   <xmalloc>
+    000006A8 000004  2 TC SD S90   <wga_intr>
+    000006AC 000004  2 TC SD S91   <vttmovc>
+    000006B0 000004  2 TC SD S92   <nodev>
+    000006B4 000004  2 TC SD S93   <vttact>
+    000006B8 000004  2 TC SD S94   <vttcfl>
+    000006BC 000004  2 TC SD S95   <vttclr>
+    000006C0 000004  2 TC SD S96   <vttcpl>
+    000006C4 000004  2 TC SD S97   <vttdact>
+    000006C8 000004  2 TC SD S98   <vttdefc>
+    000006CC 000004  2 TC SD S99   <vttterm>
+    000006D0 000004  2 TC SD S100  <vttinit>
+    000006D4 000004  2 TC SD S101  <vttrds>
+    000006D8 000004  2 TC SD S102  <vtttext>
+    000006DC 000004  2 TC SD S103  <vttscr>
+    000006E0 000004  2 TC SD S104  <vttstct>
+    000006E4 000004  2 TC SD S105  <vttpwrphase>
+    000006E8 000004  2 TC SD S106  <vttsetm>
+    000006EC 000004  2 TC SD S107  <wga_make_gp>
+    000006F0 000004  2 TC SD S108  <wga_open>
+    000006F4 000004  2 TC SD S109  <wga_close>
+    000006F8 000004  2 TC SD S110  <wga_ioctl>
+    000006FC 000004  2 TC SD S111  <_$STATIC>
+    00000700 000004  2 TC SD S112  <wga_config>
+    00000704 000004  2 TC SD S113  <devswadd>
+    00000708 000004  2 TC SD S114  <P_CRT_CONTROL>
+    0000070C 000004  2 TC SD S115  <s_crt_control>
+    00000710 000004  2 TC SD S116  <_$STATIC>
+    00000714 000004  2 TC SD S117  <uiomove>
+    00000718 000004  2 TC SD S118  <clrjmpx>
+    0000071C 000004  2 RW CM S119  bus_base_addr             ../../../../../../src/bos/kernext/disp/wga/config/config.c(config.o)
+  E 00000720 000004  2 RW CM S120  P_CRT_CONTROL             ../../../../../../src/bos/kernext/disp/wga/config/config.c(config.o)

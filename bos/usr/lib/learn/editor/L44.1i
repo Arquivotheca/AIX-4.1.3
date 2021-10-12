@@ -1,0 +1,32 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+One last one with "\".  Add the following to
+the end of the first line in file "temp",
+separated by a single blank.
+
+/* &"\n" isn't &'\n' */
+
+You can do it by re-typing the line, but it's
+a nice exercise to use "s".
+Type "ready" after you have re-written the file.
+#create Ref
+p = &"\n"; /* &"\n" isn't &'\n' */
+#create temp
+p = &"\n";
+#user
+#cmp temp Ref
+#log
+#next
+45.1a 10

@@ -1,0 +1,196 @@
+# @(#)17 1.1 src/bldenv/man/odmupdate.man, pkgtools, bos412, GOLDA411a 6/10/94 10:24:02
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: odmupdate command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1994
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  odmupdate Command
+  
+  
+  Purpose
+
+  The odmupdate command creates executable scripts and stanza files
+  that are used to modify the odm database.
+
+  Syntax
+
+  odmupdate  obj_class_db   option   previousfile   basename  
+             output_files_directory   previous_stanza_file  
+             current_stanza_file
+	
+  
+
+  Description
+
+  The odmupdate command is invoked by the mkodmupdt command in the 4.1
+  build environment when both the previous and current stanza files are
+  specified.
+
+  odmupdate is provided with an object class database file (obj_class_db)
+  as input.  The object class database file is used to validate keys and
+  fields for each object class stanza given in the input file(s)
+  (previous_stanza_file and current_stanza_file).  These files must be 
+  preprocessed, where the comments and blank lines are stripped out and a 
+  blank line is inserted after every stanza (including the last stanza).
+  The processStanza command can be invoked to preprocess the input stanza 
+  file(s).  For each stanza in the input file(s), odmupdate queries the 
+  object class database file to make sure the stanza is defined correctly 
+  and generates a fatal error if there is a problem with a stanza.  If 
+  all the stanzas are correctly defined, odmupdate generates the appropriate
+  .odmadd, .unodmadd, and .odmdel scripts.  The previous stanza file,
+  previousfile, is updated with new, modified, and deleted stanzas.
+
+  The names of the output files are generated based on the option parameter
+  and the basename paremeter.  For example, if the option name is
+  'bos.diag.rte' and the stanza file name is 'DSMOpt.add' then the output
+  files will be:
+  	bos.diag.rte.DSMOpt.odmadd 
+	bos.diag.rte.DSMOpt.unodmadd 
+	bos.diag.rte.DSMOpt.odmdel
+
+
+  Input Patameters
+
+  obj_class_db             Specifies the file containing the valid keys
+                               and fields for all known object classes.
+
+  option                   Specifies the lpp option name.
+
+  previousfile             Specifies the full path name of the previous
+                               version of the object class definition
+                               file
+
+  basename                 Specifies the name of the current .add
+                               file with .add stripped off
+
+  output_files_dir         Specifies the directory where the output
+                               files are to be placed. 
+                              
+  previous_stanza_file     Specifies the previous preprocessed version of 
+                               the object class definition file.  
+
+  current_stanza_file      Specifies the current preprocessed version of 
+                               the object class definition file.
+
+  
+
+ Fatal Errors
+    Fatal errors contain the word "FATAL" followed by a message printed
+    to stderr.  Fatal errors are given for the following conditions:
+       - wrong number of input parameters
+       - an input file does not exist or cannot be opened
+       - invalid object class definition
+       - a stanza with the same key values was duplicated
+
+    odmupdate exits with a non-zero return code if an error is detected.
+
+  Errors
+    Errors contain the word "ERROR" followed by a message printed to
+    stderr.  odmupdate will continue normally after an error is issued.
+    Error message are given for the following conditions in the object
+    class database file:
+       - unrecognized object class format
+       - duplicate object class 
+       - object class key field not listed in list of fields 
+  
+    Invalid lines in the object class database will be ignored. 
+
+
+
+  Input Files
+
+  previous_stanza_file and current_stanza_file
+
+    	These files contains one or more object class definitions in stanza
+    	format.  The format of a stanza is:
+
+		object_class_name:
+			<key> = <value>
+			...
+			<attribute> = <value>
+			...
+
+        where all comments and embedded blank lines are stripped out
+        and a blank line is inserted after each stanza.
+
+  object class database file
+
+    	This is the internal database file odmupdate uses to verify the object
+    	classes from the stanza files and generate the appropriate odm commands
+    	for the output odm scripts.  This database file contains one entry for 
+    	each object class, where the entries are described as follows:
+
+       	<object class>:<List of keys>:<list of fields including keys>
+
+    	The list of keys is separated by '%'.  The list of fields is 
+	comma-separated.
+
+        Object classes that should not be updated are indicated buy placing
+        a 99 after the object class name.
+
+    	For example:
+
+       	GAI:Adapter_Id%Module_Key%Module_Path:Adapter_Id,Module_Key,Module_Path
+       	CuAt:99
+                               
+
+
+  Output Files
+ 
+  <option>*.odmadd file:
+      This file contains a complete stanza for each new and modified 
+      stanzas.
+
+      This file is used as input to the odmadd command which adds 
+      information to the odm database.
+
+  <option>*.odmdel file:
+      This file is an executable script that contains odmget and 
+      odmdelete commands for each new and modified stanza in the current
+      stanza file. It also contains one odmget and odmdelete command
+      for each stanza that is to be deleted from the previous stanza file.
+
+      This script is executed to delete previous odm information before
+      the odmadd is executed.
+
+  <option>*.unodmadd file:
+      This file is an executable script that contains odmdelete commands 
+      for every new and modified stanza in the current .add file. 
+
+      The unodmadd script is executed to reject an update to the odm
+      database.
+
+  *.add file:
+      This file is the same file as specified with the -p flag.  
+      For stanzas that are new, modified, or deleted, only the object
+      class name and keys are added to this file.  If a stanza is 
+      unchanged, the entire stanza is added.
+
+   
+  Related Information
+ 
+  4.1 BLDENV mkodmupdt command
+  4.1 BLDENV processStanza command
+  
+
+Examples
+
+     odmupdate  objclassdb bos.diag.rte history/DSMenu.add DSMenu
+		/a/b/c prevstanza.processed curstanza.processed
+
+     output files:
+  	/a/b/c/bos.diag.rte.DSMenu.odmadd 
+	/a/b/c/bos.diag.rte.DSMenu.unodmadd 
+	/a/b/c/bos.diag.rte.DSMenu.odmdel
+                   and
+        history/DSMenu will be updated

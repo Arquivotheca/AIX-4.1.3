@@ -1,0 +1,21 @@
+* @(#)68        1.1  src/bos/objclass/POWER/ops_rules.add, sysxsol, bos411, 9428A410j 10/11/93 10:25:29
+* COMPONENT_NAME: SYSXSOL
+*
+* FUNCTIONS: N/A
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+********** Config_Rules **************************************************
+
+Config_Rules:
+	phase = 2
+	seq = 29
+	rule = /usr/lib/methods/defops

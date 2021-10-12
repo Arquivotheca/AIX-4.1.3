@@ -1,0 +1,46 @@
+# @(#)16	1.2  src/bos/usr/lpp/jls/defaults/jimrc, libKJI, bos41J, 9522A_all 5/29/95 20:19:12
+# 
+#  COMPONENT_NAME: (libKJI) Japanese Input Method (JIM)
+# 
+#  FUNCTIONS: jimrc
+# 
+#  ORIGINS: 27
+# 
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1995
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+# 
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#  Profile for Japanese Input Method.
+#  Copy this file to the home directory with name ".jimrc" and
+#  uncomment the following lines to change the defaults if necessary.
+#
+#initchar	: alphanum
+#initchar	: katakana
+#initchar	: hiragana
+#initsize	: single
+#initsize	: double
+#initrkc	: on
+#initrkc	: off
+#conversion	: look-ahead
+#conversion	: mphrase
+#conversion	: sphrase
+#conversion	: word
+#kjbeep		: on
+#kjbeep		: off
+#learning	: on
+#learning	: off
+#alphanum	: on
+#alphanum	: off
+#kuten		: JIS83
+#kuten		: JIS78
+#udload		: on
+#udload		: off
+#numberinput	: JISkuten
+#numberinput	: IBMkanji
+#modereset	: on
+#modereset	: off
+#singlequote	: 8166
+#doublequote	: 8168

@@ -1,0 +1,124 @@
+# @(#)22	1.2  src/bos/objclass/POWER/if_fi.add, sockobj, bos411, 9428A410j 9/26/91 10:58:03
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Resfiicted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1991
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Resfiicted Rights - Use, duplication or
+# disclosure resfiicted by GSA ADP Schedule Confiact with IBM Corp.
+#                                                                   
+#	configuration data for the FDDI network interface.
+
+PdDv:
+	type		= "fi"
+	class		= "if"
+	subclass	= "FI"
+	prefix		= "fi"
+	base		= 0
+	chgstatus	= 1
+	DvDr		= "if_fd"
+	led		= 0x581
+	setno		= 110
+	msgno		= 28
+	catalog		= "devices.cat"
+	Define		= "/usr/lib/methods/defif"
+	Configure	= "/usr/lib/methods/cfgif"
+	Change		= "/usr/lib/methods/chgif"
+	Unconfigure	= "/usr/lib/methods/ucfgif"
+	Undefine	= "/usr/lib/methods/udefif"
+	uniquetype	= "if/FI/fi"
+
+PdCn:
+	uniquetype	= "if/FI/fi"
+	connkey		= "TCPIP"
+
+#
+#   this stanza will be dynamically replaced in the smit panel for mtu changes
+#
+PdAt:
+        uniquetype      = "if/FI/fi"
+        attribute       = "mtu"
+        deflt           = "4352"
+        values          = "1-4352,1"
+        type            = "R"
+        generic         = "DU"
+        rep             = "nr"
+        nls_index       = 2
+
+PdAt:
+	uniquetype	= "if/FI/fi"
+	attribute	= "netaddr"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4
+
+PdAt:
+	uniquetype	= "if/FI/fi"
+	attribute	= "state"
+	deflt		= "down"
+	values		= "up,down,detach"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 5
+
+PdAt:
+	uniquetype	= "if/FI/fi"
+	attribute	= "arp"
+	deflt		= "on"
+	values		= "on,off"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 7
+
+PdAt:
+	uniquetype	= "if/FI/fi"
+	attribute	= "allcast"
+	deflt		= "on"
+	values		= "on,off"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 16
+
+PdAt:
+	uniquetype	= "if/FI/fi"
+	attribute	= "netmask"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 8
+
+PdAt:
+	uniquetype	= "if/FI/fi"
+	attribute	= "if_keyword"
+	deflt		= "fddi"
+	values		= "fddi"
+	type		= "R"
+	generic		= ""
+	rep		= "s"
+	nls_index	= 0
+
+PdAt:
+	uniquetype	= "if/FI/fi"
+	attribute	= "broadcast"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 11

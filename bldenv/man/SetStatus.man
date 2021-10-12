@@ -1,0 +1,127 @@
+# @(#)34	1.4  src/bldenv/man/SetStatus.man, bldprocess, bos412, GOLDA411a 3/28/94 15:56:11
+#
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: SetStatus man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+SetStatus
+
+
+PURPOSE
+
+	The SetStatus command stores multiple records of information in a file.
+The format of each record is organized into ten fields, and these fields can be
+used to save any information thereby providing greater flexibility.
+
+
+SYNOPSIS
+
+	 SetStatus [-a <avalue>] [-b <bvalue>] [-c <cvalue>] [-d <dvalue>]
+                   [-e <evalue>] [-f <fvalue>] [-g <gvalue>] [-h <hvalue>]
+                   [-i <ivalue>] [-j <jvalue>] filename
+
+
+DESCRIPTION
+
+	The SetStatus command is a primitive database operation that can be 
+used to store any useful information in a file of records. Each of these 
+records consists of 10 fields. These fields are separated by bars ('|') and 
+have no limitation on the size. Each record is separated by a new line. The 
+SetStatus command poses no restrictions on the kind of information that it is 
+storing as it considers each of the field values to be plain strings. It is up 
+to higher level calling functions to decide on the kind of status to store. The
+fields that are not used are set to null. If the filename is not specified then
+it checks for the value of the environment variable "STATUS_FILE" and if not 
+set, then it uses the default file "$BLDTMP/status.db". The command uses the 
+'bldlock' function to lock the database file when it is writing to the file.
+
+Here's an example of how it stores the information in the file
+
+
+cumptf|9138|||Cherilyn (albert)|Sep 25 11:37|X11fnt|||failure
+cumptf|9138|||Cherilyn (albert)|Sep 25 11:37|X11mIt_IT|||failure
+cumptf|9138|||Cherilyn (albert)|Sep 25 11:37|X11dev|||failure
+subptf|9139|bos320||Cherilyn (albert)|Sep 25 13:59|||getlists|success
+subptf|9139|des320||Cherilyn (albert)|Sep 25 14:00|||getlists|success
+prebuild|9139|bos320|9139320g|rgjack|Sep 26 13:02|||cmvcmerge|success
+prebuild|9139|bos320|9139320g|rgjack|Sep 26 14:21|||cmvccommit|success
+prebuild|9139|bos320|9139320f|rgjack|Sep 26 14:23|||cmvccommit|success
+			.
+			.
+			.
+			.
+
+	SetStatus returns (0) on success and (1) on errors. All errors go to 
+STDERR.
+
+
+FLAGS
+
+
+	-a <avalue>      The first field with the string <avalue>
+
+        -b <bvalue>      The second field with the string <bvalue>  
+
+        -c <cvalue>      The third field with the string <cvalue>  
+
+        -d <dvalue>      The fourth field with the string <dvalue>  
+
+        -e <evalue>      The fifth field with the string <evalue>  
+
+        -f <fvalue>      The sixth field with the string <fvalue>  
+
+        -g <gvalue>      The seventh field with the string <gvalue>  
+
+        -h <hvalue>      The eight field with the string <hvalue>
+	
+	-i <ivalue>      The ninth field with the string <ivalue>  
+
+        -j <jvalue>      The tenth field with the string <jvalue>  
+
+	filename	 The database file where status information has to be 
+			 stored
+
+
+ENVIRONMENT VARIABLES
+
+	STATUS_FILE	The database file where status information has to be
+			stored
+
+	BLDTMP		The temporary directory where the database file is
+			stored by default under the name "status.db"
+
+
+EXAMPLES
+
+	1. To set status for the CMVC merge task of the prebuild command to 
+	   success for the bos320 release
+
+	   SetStatus -a prebuild -b 9152 -c bos320 -i "CMVC merge" -j success
+
+	2. To set status with date specifying a status file on the command line
+
+	   SetStatus -a subptf -d "$(date)" -j success $(pwd)/STATUS_FILE
+
+
+RELATED INFORMATION
+
+	The following commands
+		CheckStatus
+		QueryStatus
+		DeleteStatus
+		bldsetstatus
+		bldlock
+
+	The following file
+		$BLDTMP/status.db

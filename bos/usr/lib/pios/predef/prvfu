@@ -1,0 +1,124 @@
+# @(#)78 1.1 src/bos/usr/lib/pios/predef/prvfu, cmdpios, bos411, 9428A410j 4/28/94 08:10:57
+#
+# COMPONENT_NAME: Printer Backend for PR-88 VFU Handling
+#
+# FUNCTIONS:
+#
+# ORIGINS: 83
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+:056:__FLG::
+:536:_0::ibm.850
+:017:_E::!
+:020:_F::
+:022:_H::
+:025:_I::
+:029:_K::
+:030:_L::+
+:033:_O::
+:038:_Q::
+:040:_S::
+:042:_U::
+:043:_V::
+:044:_W::
+:046:_X::IBM-850
+:047:_Y::
+:064:_b::0
+:066:_d::p
+:069:_e::
+:071:_g::1
+:072:_h::
+:073:_i::0
+:078:_k::
+:079:_l::66
+:083:_p::10
+:085:_q::
+:090:_s::
+:091:_t::0
+:093:_u::
+:099:_v::6
+:100:_w::80
+:101:_x::2
+:103:_y::
+:107:_z::
+:060:__SYS::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofasci -J!
+:324:st::%Ide/pioburst %F[H] %Idb/T.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofasci %?%o%G_l%r%{14}%>%t-t%o%G_l%r%{14}%-%d%;
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofasci -l%IwL -w%IwW %f[0bgijtxJLXZ]
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofasci -#+ -x0 -l%IwL -w%IwW %f[jxJL]
+:059:__PFL::
+:001:Ia::
+:055:__FIL::
+:264:fc::
+:265:fd::
+:266:ff::
+:267:fg::
+:268:fl::
+:269:fn::
+:270:fp::/bin/pr -l%IwL -w%IwW %F[h] %I@1
+:271:ft::
+:272:fv::
+:058:__MIS::
+:290:mH::120
+:331:mL::ASCII printer
+:298:mS::_
+:299:mV::120
+:303:mf::%Idf/piofasci
+:061:__TRN::
+:326:t0::%Id2/%I_0
+:327:t1::
+:328:t2::
+:328:t3::
+:328:t4::
+:328:t5::
+:328:t6::
+:328:t7::
+:328:t8::
+:328:t9::
+:062:__WKV::
+:337:w1::0
+:337:w2::0
+:339:wD::
+:340:wF::0
+:343:wH::%GmH%G_p%/%d
+:347:wL::%?%Cl%t%f!l%e%o%GwV%G_l%*%r%GwV%/%d%;
+:358:wV::%GmV%G_v%/%d
+:359:wW::%?%Cw%t%f!w%e%o%Gww%r%GwH%/%d%;
+:365:wf::af
+:367:wh::%{9}%Px%{35}%Py%?%gy%t%wy%gx%c%gx%{8}%+%Px%;%;\0
+:368:wi::cl
+:369:wl::%{1}%G_E%+%d
+:373:wp::!
+:382:wv::\0
+:383:ww::%GwH%G_w%*%d
+:384:wy::cx
+:051:__CAG::
+:488:c1::
+:489:c2::
+:490:c3::
+:491:c4::
+:492:c5::
+:493:c6::
+:494:c7::
+:142:cd::
+:143:ch::
+:144:ci::
+:146:cl::%Iac%Ial
+:152:cr::
+:155:cs::
+:052:__CTL::
+:110:ab::\10
+:111:ac::\15
+:113:af::\14
+:116:ai::\17
+:117:al::\12
+:118:an::\0
+:120:ao::\16
+:121:ar::\7
+:054:__ESC::
+:225:eb::
+:475:__HIR::
+:476:zP::mastervfu
+:477:zS::!

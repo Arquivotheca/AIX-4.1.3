@@ -1,0 +1,31 @@
+* "@(#)82       1.4  src/bos/objclass/cfgrule.lvm.add, cfgmethods, bos411, 9438C411a 9/19/94 17:35:46";
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: cfgrule.lvm.add - Add file for lvm
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+Config_Rules:
+	phase = 1
+	seq = 2
+	rule = "/usr/lib/methods/deflvm"
+
+Config_Rules:
+        phase = 2
+        seq = 12
+        rule = "/usr/lib/methods/deflvm"
+
+Config_Rules:
+        phase = 3
+        seq = 12
+        rule = "/usr/lib/methods/deflvm"
+

@@ -1,0 +1,32 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This is trickier.  File "name" contains
+ A T and T Co.
+Change it to read
+ A T & T Co.
+Then rewrite it and type "ready".
+#create Ref
+ A T & T Co.
+#create name
+ A T and T Co.
+#user
+#cmp name Ref
+#succeed
+I hope you used
+ s/and/\&/p
+and did not retype the line.
+#log
+#next
+44.1a 5

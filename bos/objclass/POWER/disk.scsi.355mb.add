@@ -1,0 +1,220 @@
+# @(#)50        1.3  src/bos/objclass/POWER/disk.scsi.355mb.add, cfgmethods, bos41J, 9513A_all 3/24/95 22:30:31
+* 
+*  COMPONENT_NAME: (CFGMETHODS) SCSI DISK PREDEFINED DATA STANZAS
+* 
+*  FUNCTIONS:
+*  
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1995
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+PdDv:
+	type = 355mb
+	class = disk
+	subclass = scsi
+	prefix = hdisk
+	devid = ""
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x952
+	setno = 2
+	msgno = 5
+	fru = 1
+	catalog = scdisk.cat
+	DvDr = scdisk
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgscdisk
+	Change = /etc/methods/chgdisk
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = disk/scsi/355mb
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = model_map
+	deflt = "1010XT-8380S        /8380S           ,0808IBM     "
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = maxlun
+	deflt = 0
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = pv
+	deflt = "no"
+	values = "no,yes,clear"
+	width = ""
+	type = R
+	generic = "U"
+	rep = "sl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = pvid
+	deflt = "none"
+	values = ""
+	width = ""
+	type = R
+	generic = "D"
+	rep = s
+	nls_index = 2
+
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = mode_data
+	deflt = 0x000000080000000000000200010124020a94940000000000000000080a0100ffff0000ffffffff380121
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = alt_mode_data2
+	deflt = 0x000000080000000000000200010124020a94940000000000000000080a0000ffff0000ffffffff380111
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = alt_mode_data
+	deflt = 0x000000080000000000000200010124020a94940000000000000000
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = mode_default
+	deflt = 0x00000000010700ffff000000ff380300ffff
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = recovery_limit
+	deflt = 4
+	values = 4
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = reset_delay
+	deflt = 2
+	values = 2
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = media_rate
+	deflt = 1600
+	values = 1600
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = max_data_rate
+	deflt = 4000
+	values = 4000
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/355mb
+	attribute = vpd_map
+	deflt = "MF0808C,TM1010C,RL2004X,SN2408C,Z00008X,Z12c0cC,Z26204C"
+	values = ""
+	width = ""
+	type = V
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/355mb
+        attribute = pm_dev_itime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/355mb
+        attribute = pm_dev_stime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/355mb
+        attribute = pm_devid
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x00184000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b000,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+

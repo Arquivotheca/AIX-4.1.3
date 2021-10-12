@@ -1,0 +1,380 @@
+# @(#)49	1.1  src/bos/objclass/POWER/std_keyboard.add, inputdd, bos41J, 9509A_all 2/14/95 12:56:10
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Stanzas for standard keyboard predefined values
+#
+
+# 101 key keyboard predefined values
+PdDv:
+ type = "kb101"
+ class = "keyboard"
+ subclass = "std_k"
+ prefix = "kbd"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x921
+ setno = 126
+ msgno = 13
+ catalog = "devices.cat"
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgkbd_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "keyboard/std_k/kb101"
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb101"
+ attribute = "typamatic_delay"
+ deflt = "500"
+ values = "250,500,750,1000"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 3
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb101"
+ attribute = "typamatic_rate"
+ deflt = "20"
+ values = "2-30,1"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nr"
+ nls_index = 4
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb101"
+ attribute = "volume"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 11
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb101"
+ attribute = "click"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 12
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb101"
+ attribute = "sys_kbd"
+ deflt = "1"
+ values = "1"
+ width = ""
+ type = "R"
+ generic = ""
+ rep = "n"
+ nls_index = 0
+
+# 102 key keyboard predefined values
+PdDv:
+ type = "kb102"
+ class = "keyboard"
+ subclass = "std_k"
+ prefix = "kbd"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x922
+ setno = 126
+ msgno = 14
+ catalog = "devices.cat"
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgkbd_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "keyboard/std_k/kb102"
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb102"
+ attribute = "typamatic_delay"
+ deflt = "500"
+ values = "250,500,750,1000"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 3
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb102"
+ attribute = "typamatic_rate"
+ deflt = "20"
+ values = "2-30,1"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nr"
+ nls_index = 4
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb102"
+ attribute = "volume"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 11
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb102"
+ attribute = "click"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 12
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb102"
+ attribute = "sys_kbd"
+ deflt = "1"
+ values = "1"
+ width = ""
+ type = "R"
+ generic = ""
+ rep = "n"
+ nls_index = 0
+
+# 106 key keyboard predefined values
+PdDv:
+ type = "kb106"
+ class = "keyboard"
+ subclass = "std_k"
+ prefix = "kbd"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x923
+ setno = 126
+ msgno = 15
+ catalog = "devices.cat"
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgkbd_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "keyboard/std_k/kb106"
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb106"
+ attribute = "typamatic_delay"
+ deflt = "500"
+ values = "250,500,750,1000"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 3
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb106"
+ attribute = "typamatic_rate"
+ deflt = "10"
+ values = "2-30,1"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nr"
+ nls_index = 4
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb106"
+ attribute = "volume"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 11
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb106"
+ attribute = "click"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 12
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb106"
+ attribute = "sys_kbd"
+ deflt = "1"
+ values = "1"
+ width = ""
+ type = "R"
+ generic = ""
+ rep = "n"
+ nls_index = 0
+
+PdAt:
+ uniquetype = "keyboard/std_k/kb106"
+ attribute = "special_map"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 23
+
+# PS/2 keyboard predefined values
+PdDv:
+ type = "ps2"
+ class = "keyboard"
+ subclass = "std_k"
+ prefix = "kbd"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x736
+ setno = 126
+ msgno = 24
+ catalog = "devices.cat"
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgkbd_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "keyboard/std_k/ps2"
+
+PdAt:
+ uniquetype = "keyboard/std_k/ps2"
+ attribute = "typamatic_delay"
+ deflt = "500"
+ values = "250,500,750,1000"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 3
+
+PdAt:
+ uniquetype = "keyboard/std_k/ps2"
+ attribute = "typamatic_rate"
+ deflt = "20"
+ values = "2-30,1"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nr"
+ nls_index = 4
+
+PdAt:
+ uniquetype = "keyboard/std_k/ps2"
+ attribute = "volume"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 11
+
+PdAt:
+ uniquetype = "keyboard/std_k/ps2"
+ attribute = "click"
+ deflt = "2"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 12
+
+PdAt:
+ uniquetype = "keyboard/std_k/ps2"
+ attribute = "sys_kbd"
+ deflt = "1"
+ values = "1"
+ width = ""
+ type = "R"
+ generic = ""
+ rep = "n"
+ nls_index = 0
+
+PdAt:
+ uniquetype = "keyboard/std_k/ps2"
+ attribute = "special_map"
+ deflt = "0"
+ values = "0,1,2,3"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 23
+
+PdAt:
+ uniquetype = "keyboard/std_k/ps2"
+ attribute = "special_type"
+ deflt = "0"
+ values = "0,1"
+ width = ""
+ type = "R"
+ generic = "DU"
+ rep = "nl"
+ nls_index = 23

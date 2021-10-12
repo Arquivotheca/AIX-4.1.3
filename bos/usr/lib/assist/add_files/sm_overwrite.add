@@ -1,0 +1,61 @@
+#
+# @(#)15        1.3  src/bos/usr/lib/assist/add_files/sm_overwrite.add, cmdassist, bos411, 9428A410j 3/29/94 15:29:45
+#
+#   COMPONENT_NAME:  cmdassist
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_menu_opt:
+    id_seq_num                = "090"
+    id                        = "assist"
+    next_id                   = "assist_importvg"
+    text                      = "Import Existing Volume Groups"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 22
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850109"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_importvg"
+    next_id                   = "importvg"
+    text                      = "Import a Volume Group"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 38
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "0516080"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_importvg"
+    next_id                   = "mountfs"
+    text                      = "Mount a File System"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 39
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "050607"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""

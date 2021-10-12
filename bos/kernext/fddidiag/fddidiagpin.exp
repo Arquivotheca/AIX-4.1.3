@@ -1,0 +1,66 @@
+#!fddidiagpin
+*
+*   COMPONENT_NAME: DIAGDDFDDI
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1990,1994
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+fdditrace
+cache_inval
+fddi_ctl
+fddi_chk_frame
+fddi_chk_kernel_mbufs
+fddi_act
+fddi_chk_events
+fddi_chk_state
+fddi_clean_swque
+fddi_close_wait
+fddi_cmd_to
+fddi_dnld_to
+fddi_do_dma
+fddi_fastwrite
+fddi_get_stat
+fddi_start_netid
+fddi_halt_netid
+fddi_get_query
+fddi_limbo_to
+fddi_oflv
+fddi_pio_retry
+fddi_remove_netids
+fddi_free_addr
+fddi_report_status
+fddi_send_cmd
+fddi_shutdown_adap
+fddi_slih
+fddi_trace
+fddi_tx
+fddi_tx_to
+fddi_get_registers
+fddi_chg_state
+fddi_issue_cmd
+fddi_rcv_deque
+fddi_sq_addr_cmplt
+fddi_hcr_cmd_cmplt
+fddi_download
+fddi_cdt_func
+l_fddi_cdt
+p_fddi_cdt
+fddi_enter_limbo
+fddi_cycle_limbo
+fddi_run_stest
+fddi_get_stest
+fddi_bugout
+fddi_logerr
+fddi_enter_diag_cmplt
+fddi_uls_handler
+fddi_query_stats_cmplt

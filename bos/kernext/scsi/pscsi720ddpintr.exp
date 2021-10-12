@@ -1,0 +1,56 @@
+#!/etc/drivers/pscsi720ddpin
+* @(#)53	1.2  src/bos/kernext/scsi/pscsi720ddpintr.exp, sysxscsi, bos411, 9432A411a 7/30/94 16:38:57
+*
+* COMPONENT_NAME: (SYSXSCSI) IBM SCSI Adapter Driver Bottom Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+adp_str_inited
+epow_struct
+p720_cdt
+adp_str
+INSTRUCTIONS
+A_abort_select_failed_Used
+A_abort_io_complete_Used
+A_uninitialized_reselect_Used
+E_scsi_0_lun_Used
+E_scsi_1_lun_Used
+E_scsi_2_lun_Used
+E_scsi_3_lun_Used
+E_scsi_4_lun_Used
+E_scsi_5_lun_Used
+E_scsi_6_lun_Used
+E_scsi_7_lun_Used
+p720_chip_register_init
+p720_config_adapter
+p720_logerr
+p720_write_reg
+p720_write_reg_disable
+p720_read_POS
+p720_write_POS
+p720_strategy
+p720_iodone
+p720_dump
+p720_cdt_func
+p720_delay
+p720_intr
+p720_epow
+p720_watchdog
+p720_fail_cmd
+p720_free_resources
+p720_enq_abort_bdr
+p720_reset_iowait_jump
+p720_enq_active
+p720_issue_bdr_script
+p720_trace_1
+p720_trace_2
+p720_trace_3

@@ -1,0 +1,134 @@
+* @(#)87  1.2  src/bos/objclass/POWER/apm.add, cfgmethods, bos411, 9428A410j 5/20/94 16:27:22
+* COMPONENT_NAME: apm.stanza
+*
+* FUNCTIONS: N/A
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+********** PdDv ***************************************************************
+
+PdDv:
+        uniquetype= "adapter/mca/portmaster"
+        class= adapter
+        subclass= mca
+        type= portmaster
+        DvDr= ""
+        Define= "/etc/methods/define"
+        Configure= "/etc/methods/cfgapm"
+        Change= ""
+        prefix= apm
+        devid= 0x708f
+        led= 0x855
+        base= 0
+        has_vpd= 0
+        detectable = 1
+        chgstatus= 0
+        bus_ext= 0
+        Start= ""
+        Stop= ""
+        fru= 1
+        setno= 29
+        msgno= 0
+        catalog= "devices.cat"
+        Unconfigure= "/etc/methods/ucfgdevice"
+        Undefine= "/etc/methods/undefine"
+
+********** PdCn ***************************************************************
+
+PdCn:
+        connwhere= "0"
+        uniquetype= "adapter/mca/portmaster"
+        connkey= portmaster
+
+PdCn:
+        connwhere = "0"
+        uniquetype = "adapter/mca/portmaster"
+        connkey = "artic"
+
+
+********** PdAt ***************************************************************
+PdAt:
+        uniquetype= "adapter/mca/portmaster"
+        attribute= bus_intr_lvl
+        values= 3,4,7,9,10,11,12
+        type= I
+        generic= D
+        nls_index= 5
+        width= ""
+        deflt= 3
+        rep= nl
+
+PdAt:
+        uniquetype= "adapter/mca/portmaster"
+        attribute= bus_io_addr
+        values= "0x2a0-0x1ea0,0x400"
+        type= O
+        deflt= "0x2a0"
+        width= 0x08
+        generic= D
+        nls_index= 4
+        rep= nr
+
+PdAt:
+        uniquetype= "adapter/mca/portmaster"
+        attribute= dma_lvl
+        values= "0-14,1"
+        type= A
+        deflt= 0
+        generic= D
+        nls_index= 7
+        width= ""
+        rep= nr
+
+PdAt:
+        uniquetype= "adapter/mca/portmaster"
+        attribute= bus_mem_addr
+        values= "0x10000-0xff0000,0x10000"
+        type= M
+        deflt= 0x10000
+        width= 0x10000
+        generic= D
+        nls_index= 2
+        rep= nr
+
+PdAt:
+        uniquetype= "adapter/mca/portmaster"
+        attribute= dma_bus_mem
+        values= "0x100000-0xfffc0000,0x1000"
+        type= M
+        deflt= 0x100000
+        width= 0x40000
+        generic= D
+        nls_index= 3
+        rep= nr
+
+PdAt:
+        uniquetype= "adapter/mca/portmaster"
+        attribute= intr_priority
+        values= 2
+        type= P
+        deflt= 2
+        generic= D
+        nls_index= 6
+        width= ""
+        rep= n
+
+PdAt:
+        uniquetype= "adapter/mca/portmaster"
+        attribute= _subtype
+        values= "1,10,11,12,13,14"
+        type= T
+        deflt= 10
+        generic= ""
+        nls_index= 0
+        width= ""
+        rep= nl
+
+

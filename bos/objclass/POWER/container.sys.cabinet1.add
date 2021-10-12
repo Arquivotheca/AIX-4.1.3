@@ -1,0 +1,61 @@
+*@(#)14  1.1  src/bos/objclass/POWER/container.sys.cabinet1.add, cfgmethods, bos411, 9428A410j 3/7/94 07:41:55
+*
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 83
+*
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+* cabinet device
+PdDv:
+	type = cabinet1
+	class = container
+	subclass = sys
+	prefix = cabinet
+	devid = ""
+	base = 1
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 1
+	bus_ext = 0
+	fru = 1
+	led = 0x811
+	setno = 1
+	msgno = 1
+	catalog = devices_p.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = container/sys/cabinet1
+
+PdCn:
+	uniquetype = container/sys/cabinet1
+	connkey = cabinet
+	connwhere = 0
+
+PdCn:
+	uniquetype = container/sys/cabinet1
+	connkey = cabinet
+	connwhere = 1
+
+PdCn:
+	uniquetype = container/sys/cabinet1
+	connkey = cabinet
+	connwhere = 2
+
+PdCn:
+	uniquetype = container/sys/cabinet1
+	connkey = cabinet
+	connwhere = 3
+
+PdCn:
+	uniquetype = container/sys/cabinet1
+	connkey = planar
+	connwhere = p

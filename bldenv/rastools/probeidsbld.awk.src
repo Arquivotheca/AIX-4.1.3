@@ -1,0 +1,96 @@
+# @(#)14	1.2  src/bldenv/rastools/probeidsbld.awk.src, cmderrlg, bos412, GOLDA411a 10/20/93 14:38:04
+#
+# COMPONENT_NAME: (CMDERRLG) Error logging
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1990,1991
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# To generate the probeids.h file we:
+# - Read in the current probeids.h file and get the current probe id
+#   assignments so we can assign the same ids to existing probes
+#   as they had before.
+# - Read in the probeids.desc file noting which entries had been
+#   created and which are new.
+# - Generate new probe ids for the new entries.
+
+BEGIN {
+	descid = 0
+	hname = "probeids.h"
+	Lhname = length(hname)
+}
+
+# Get the name of the probeids.h file.
+NR == 1 {
+	Lf = length(FILENAME)
+	if ((Lf >= Lhname) && (substr(FILENAME,Lf-Lhname+1)==hname)) {
+		# This is it, it ends with hname (probeids.h).
+		hfile = FILENAME
+	}
+}
+
+# Save the label and ids from the probeids.h file first.
+FILENAME == hfile && NF > 2 && $1 ~ /^#define$/ {
+	ids[$2] = $3
+	# figure out what number to start with for new ids.
+	# idnum will be the highest existing id.
+	n = substr($3,5,length($3)-5)
+	if (n>idnum) idnum = n
+}
+
+# For the probeids.desc file, mark existing labels as in-use
+# The format of the probeids.desc file is a label optionally followed
+# by a comment.
+FILENAME != hfile && NF > 0 && $0 !~ /^#/ {
+	# Save the label (so we can use the order in .desc)
+	label = "PCSS_"$1
+	desc_label[descid] = label
+	if (NF>1) {
+		# There are comments.
+		i = index(substr($0,length($1)+1),$2)
+		if (i>0) {
+			# i is the start of the comment relative to the label.
+			desc_comment[descid] = substr($0,i+length($1))
+		}
+	}
+	descid += 1
+
+	# Any label in .desc is marked "inuse"
+	inuse[label] = 1
+
+	# See if label is new
+	if (!ids[label]) {
+		# Generate a new label
+		idnum += 1
+		ids[label] = sprintf("\"SPI%d\"",idnum)
+	}
+}
+
+# Now, actually re-generate the probeids.h file.
+END {
+	# For each descriptor saved from probeids.desc
+	for (i=0; i<descid; i+=1) {
+		label=desc_label[i]
+		printf("#define %s %s\t/* %s */\n",label,ids[label],desc_comment[i])
+	}
+
+	# Now put unused labels back
+	# There are entries from the old probeids.h file that aren't
+	# in probeids.desc any more.  We keep them so we don't
+	# re-use probe ids that are still in previous versions.
+	for (label in ids) {
+		if (!inuse[label]) {
+			printf("#define %s %s\t/* UNUSED */\n",label,ids[label])
+		}
+	}
+}

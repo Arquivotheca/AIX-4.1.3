@@ -1,0 +1,64 @@
+# @(#)55	1.2  src/bldenv/man/AddAbstractAsSymptom.man, bldtools, bos412, GOLDA411a 6/28/94 11:47:01
+# COMPONENT_NAME: (bldtools) BAI Build Tools
+#
+# FUNCTIONS: ChangeSymptoms man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+AddAbstractAsSymptom
+
+
+PURPOSE
+
+        Add a START_SYMPTOM/STOP_SYMPTOM note, with the defect abstract
+        as the body, to each defect in the input.
+
+
+SYNTAX
+
+	AddAbstractAsSymptom [file]
+
+
+DESCRIPTION
+
+	The AddAbstractAsSymptom command reads the input file (standard input
+        by default) to get a list of defects which need to have a dummy symptom
+        string consisting of the defect abstract added to the defect.  If
+        an input defect already has a START_SYMPTOM/STOP_SYMPTOM note in it
+        no note will be added.
+
+	The AddAbstractAsSymptom command logs its execution status (along
+        with any errors encountered) to both the terminal and the log file.
+        The log file will be  the directory pointed to by 'bldlogpath' with
+        the name "AddAbstractAsSymptom.all".
+
+
+FLAGS
+
+	file		Input file containing defects, each on a
+			separate line.
+
+
+EXAMPLES
+
+	1. To pass a file containing defects
+
+		AddAbstractAsSymptom defectsfile
+
+	2. To pass defects from STDIN
+
+		echo "12345" | AddAbstractAsSymptom
+
+
+RELATED INFORMATION
+		
+		bldlogpath
+		ChangeSymptom

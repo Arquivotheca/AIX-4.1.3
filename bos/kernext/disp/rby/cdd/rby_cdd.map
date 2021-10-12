@@ -1,0 +1,20 @@
+ADDRESS MAP FOR rby_cdd
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+    00000000 0024A8  2 PR SD S1    <>                        ../../../../../../../src/bos/kernext/disp/rby/cdd/cdd_entry.c(cdd_entry.o)
+    00000000           PR LD S2    <.check_cdd_structures>
+    00000188           PR LD S3    <.cdd_qvpd>
+    000009FC           PR LD S4    <.cdd_set_POS>
+    00001064           PR LD S5    <.cdd_load_ucode>
+    000017B8           PR LD S6    <.cdd_disable>
+    00001A7C           PR LD S7    <.cdd_enable>
+    00001D40           PR LD S8    <.cdd_init>
+    00001F4C           PR LD S9    <.cdd_blit>
+    00002374           PR LD S10   .cdd_entry
+    000024A8 000040  2 PR SD S11   <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    000024A8           PR LD S12   ._ptrgl
+    000024A8           PR LD S13   .$PTRGL
+    00000000 000061  3 RW SD S14   <_$STATIC>                ../../../../../../../src/bos/kernext/disp/rby/cdd/cdd_entry.c(cdd_entry.o)
+* E 00000064 00000C  2 DS SD S15   cdd_entry                 ../../../../../../../src/bos/kernext/disp/rby/cdd/cdd_entry.c(cdd_entry.o)
+    00000070 000000  2 T0 SD S16   <TOC>
+    00000070 000004  2 TC SD S17   <_$STATIC>

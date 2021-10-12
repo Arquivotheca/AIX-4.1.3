@@ -1,0 +1,41 @@
+//******************************************************************
+//* SCCSID:  @(#)01        1.4  src/bldenv/pkgtools/rename/xmit_ptf/jcl_cleanup, pkgtools, bos412, GOLDA411a 6/24/93 08:42:00
+//*
+//* COMPONENT_NAME: PKGTOOLS
+//*
+//* FUNCTIONS: none
+//*
+//* ORIGINS: 27
+//*
+//* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+//* combined with the aggregated modules for this product)
+//*                  SOURCE MATERIALS
+//*
+//* (C) COPYRIGHT International Business Machines Corp. 1991,1993
+//* All Rights Reserved
+//* US Government Users Restricted Rights - Use, duplication or
+//* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+//*
+//******************************************************************
+//* STEP TO CLEANUP LEFTOVER DATA ON HOST
+//******************************************************************
+//* CHANGE LOG:
+//*   10/16/91-wt-changes for userid awdtrn2
+//*   02/03/92-wt-ADDED SAMPLE DISTRIBUTION NOTIFICATION
+//*
+//******************************************************************
+//CLEANUP  EXEC PGM=IEFBR14
+//SYSPRINT DD SYSOUT=T
+//CCSSIN   DD DISP=(OLD,DELETE,DELETE),
+//            DSN=@@mvs_userid@@.@@ptf_number@@.PTF.UNFORMAT
+//CCSSOUT  DD DISP=(OLD,DELETE,DELETE),
+//            DSN=@@mvs_userid@@.@@ptf_number@@.PTF
+//******************************************************************
+//* IN THE FUTURE MAYBE WE CAN MAIL NOTIFICATION OF FAILURE TO:
+//*   - THE USER THAT RAN PROMOTE_SHIP
+//*        @@aix_userid@@ AT @@aix_hostname@@
+//*   - OR THE SPECIFIED DISTRIBUTION USERID'S
+//*        @@dist_notify@@
+//*   REF. SMTPNOTE COMMAND IN MVS TCPIP
+//******************************************************************
+/*

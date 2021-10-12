@@ -1,0 +1,366 @@
+# @(#)68	1.3  src/bos/usr/lib/nls/loc/uconvTable/IBM-sbdTW.ucmap, cmdiconv, bos411, 9428A410j 3/22/94 09:24:52
+#
+#   COMPONENT_NAME:	CMDICONV
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   ISO 10646-1: UCS-2
+#
+#   Table Format:
+#	Columns separated by spaces:
+#	Col1: (pos.  1- 7) ISO 10646 code as <Uxxxx>
+#	Col2: (pos. 16-30) IBM-sbdTW code as \xhh
+#	Col3: (pos. 32-39) IBM GCGID
+#	Col4: (pos. 42-49) Mapping indicator to specify:
+#		1. Arabic Shared hapes:
+#			NOMINAL, ISOLATED, INITIAL, MEDIAL, FINAL
+#		2. Synonym GCGID used when direct mapping for
+#		   the main GCGID is not available.
+#	Col5: (pos. 56-> ) ISO 10646 character name
+#
+<code_set_name>         "IBM-sbdTW"
+<char_name_mask>        "AXXXX"
+<mb_cur_max>            2
+<mb_cur_min>            2
+<uconv_class>		"DBCS"
+<subchar>		\x21\x21
+#
+#
+#
+CHARMAP
+#
+#ISO 10646     Codepoint        GCGID    SYN/SHAPE     ISO 10646 Name
+#---------     ---------        -------- ---------     ------------------------
+<U309B>        \x21\x21        #                       KATAKANA-HIRAGANA VOICED SOUND MARK
+<U309C>        \x21\x22        #                       KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+<U00A8>        \x21\x23        #                       DIAERESIS
+<UFF3E>        \x21\x24        #                       FULLWIDTH CIRCUMFLEX ACCENT
+<U30FD>        \x21\x25        #                       KATAKANA ITERATION MARK
+<U30FE>        \x21\x26        #                       KATAKANA VOICED ITERATION MARK
+<U309D>        \x21\x27        #                       HIRAGANA ITERATION MARK
+<U309E>        \x21\x28        #                       HIRAGANA VOICED ITERATION MARK
+<U3003>        \x21\x29        #                       DITTO MARK
+<UF8D2>        \x21\x2A        #                       
+<U3005>        \x21\x2B        #                       IDEOGRAPHIC ITERATION MARK
+<U3006>        \x21\x2C        #                       IDEOGRAPHIC CLOSING MARK
+<U3007>        \x21\x2D        #                       IDEOGRAPHIC NUMBER ZERO
+<U30FC>        \x21\x2E        #                       KATAKANA-HIRAGANA PROLONGED SOUND MARK
+<U2010>        \x21\x2F        #                       HYPHEN
+<UFF3B>        \x21\x30        #                       FULLWIDTH LEFT SQUARE BRACKET
+<UFF3D>        \x21\x31        #                       FULLWIDTH RIGHT SQUARE BRACKET
+<U2032>        \x21\x32        #                       PRIME
+<U2033>        \x21\x33        #                       DOUBLE PRIME
+<U2217>        \x21\x34        #                       ASTERISK OPERATOR
+<U3013>        \x21\x35        #                       GETA MARK
+<U2208>        \x21\x36        #                       ELEMENT OF
+<U220B>        \x21\x37        #                       CONTAINS AS MEMBER
+<U2286>        \x21\x38        #                       SUBSET OF OR EQUAL TO
+<U2287>        \x21\x39        #                       SUPERSET OF OR EQUAL TO
+<U2282>        \x21\x3A        #                       SUBSET OF
+<U2283>        \x21\x3B        #                       SUPERSET OF
+<U2227>        \x21\x3C        #                       LOGICAL AND
+<U2228>        \x21\x3D        #                       LOGICAL OR
+<U21D2>        \x21\x3E        #                       RIGHTWARDS DOUBLE ARROW
+<U21D4>        \x21\x3F        #                       LEFT RIGHT DOUBLE ARROW
+<U2200>        \x21\x40        #                       FOR ALL
+<U2203>        \x21\x41        #                       THERE EXISTS
+<U2312>        \x21\x42        #                       ARC
+<U2202>        \x21\x43        #                       PARTIAL DIFFERENTIAL
+<U2207>        \x21\x44        #                       NABLA
+<U226A>        \x21\x45        #                       MUCH LESS-THAN
+<U226B>        \x21\x46        #                       MUCH GREATER-THAN
+<U223D>        \x21\x47        #                       REVERSED TILDE
+<U221D>        \x21\x48        #                       PROPORTIONAL TO
+<U222C>        \x21\x49        #                       DOUBLE INTEGRAL
+<U212B>        \x21\x4A        #                       ANGSTROM SIGN
+<U2030>        \x21\x4B        #                       PER MILLE SIGN
+<U266F>        \x21\x4C        #                       MUSIC SHARP SIGN
+<U266D>        \x21\x4D        #                       MUSIC FLAT SIGN
+<U266A>        \x21\x4E        #                       EIGHTH NOTE
+<U2020>        \x21\x4F        #                       DAGGER
+<U2021>        \x21\x50        #                       DOUBLE DAGGER
+<U00B6>        \x21\x51        #                       PILCROW SIGN
+<U25EF>        \x21\x52        #                       LARGE CIRCLE
+<U3041>        \x21\x53        #                       HIRAGANA LETTER SMALL A
+<U3042>        \x21\x54        #                       HIRAGANA LETTER A
+<U3043>        \x21\x55        #                       HIRAGANA LETTER SMALL I
+<U3044>        \x21\x56        #                       HIRAGANA LETTER I
+<U3045>        \x21\x57        #                       HIRAGANA LETTER SMALL U
+<U3046>        \x21\x58        #                       HIRAGANA LETTER U
+<U3047>        \x21\x59        #                       HIRAGANA LETTER SMALL E
+<U3048>        \x21\x5A        #                       HIRAGANA LETTER E
+<U3049>        \x21\x5B        #                       HIRAGANA LETTER SMALL O
+<U304A>        \x21\x5C        #                       HIRAGANA LETTER O
+<U304B>        \x21\x5D        #                       HIRAGANA LETTER KA
+<U304C>        \x21\x5E        #                       HIRAGANA LETTER GA
+<U304D>        \x21\x5F        #                       HIRAGANA LETTER KI
+<U304E>        \x21\x60        #                       HIRAGANA LETTER GI
+<U304F>        \x21\x61        #                       HIRAGANA LETTER KU
+<U3050>        \x21\x62        #                       HIRAGANA LETTER GU
+<U3051>        \x21\x63        #                       HIRAGANA LETTER KE
+<U3052>        \x21\x64        #                       HIRAGANA LETTER GE
+<U3053>        \x21\x65        #                       HIRAGANA LETTER KO
+<U3054>        \x21\x66        #                       HIRAGANA LETTER GO
+<U3055>        \x21\x67        #                       HIRAGANA LETTER SA
+<U3056>        \x21\x68        #                       HIRAGANA LETTER ZA
+<U3057>        \x21\x69        #                       HIRAGANA LETTER SI
+<U3058>        \x21\x6A        #                       HIRAGANA LETTER ZI
+<U3059>        \x21\x6B        #                       HIRAGANA LETTER SU
+<U305A>        \x21\x6C        #                       HIRAGANA LETTER ZU
+<U305B>        \x21\x6D        #                       HIRAGANA LETTER SE
+<U305C>        \x21\x6E        #                       HIRAGANA LETTER ZE
+<U305D>        \x21\x6F        #                       HIRAGANA LETTER SO
+<U305E>        \x21\x70        #                       HIRAGANA LETTER ZO
+<U305F>        \x21\x71        #                       HIRAGANA LETTER TA
+<U3060>        \x21\x72        #                       HIRAGANA LETTER DA
+<U3061>        \x21\x73        #                       HIRAGANA LETTER TI
+<U3062>        \x21\x74        #                       HIRAGANA LETTER DI
+<U3063>        \x21\x75        #                       HIRAGANA LETTER SMALL TU
+<U3064>        \x21\x76        #                       HIRAGANA LETTER TU
+<U3065>        \x21\x77        #                       HIRAGANA LETTER DU
+<U3066>        \x21\x78        #                       HIRAGANA LETTER TE
+<U3067>        \x21\x79        #                       HIRAGANA LETTER DE
+<U3068>        \x21\x7A        #                       HIRAGANA LETTER TO
+<U3069>        \x21\x7B        #                       HIRAGANA LETTER DO
+<U306A>        \x21\x7C        #                       HIRAGANA LETTER NA
+<U306B>        \x21\x7D        #                       HIRAGANA LETTER NI
+<U306C>        \x21\x7E        #                       HIRAGANA LETTER NU
+<U306D>        \x22\x21        #                       HIRAGANA LETTER NE
+<U306E>        \x22\x22        #                       HIRAGANA LETTER NO
+<U306F>        \x22\x23        #                       HIRAGANA LETTER HA
+<U3070>        \x22\x24        #                       HIRAGANA LETTER BA
+<U3071>        \x22\x25        #                       HIRAGANA LETTER PA
+<U3072>        \x22\x26        #                       HIRAGANA LETTER HI
+<U3073>        \x22\x27        #                       HIRAGANA LETTER BI
+<U3074>        \x22\x28        #                       HIRAGANA LETTER PI
+<U3075>        \x22\x29        #                       HIRAGANA LETTER HU
+<U3076>        \x22\x2A        #                       HIRAGANA LETTER BU
+<U3077>        \x22\x2B        #                       HIRAGANA LETTER PU
+<U3078>        \x22\x2C        #                       HIRAGANA LETTER HE
+<U3079>        \x22\x2D        #                       HIRAGANA LETTER BE
+<U307A>        \x22\x2E        #                       HIRAGANA LETTER PE
+<U307B>        \x22\x2F        #                       HIRAGANA LETTER HO
+<U307C>        \x22\x30        #                       HIRAGANA LETTER BO
+<U307D>        \x22\x31        #                       HIRAGANA LETTER PO
+<U307E>        \x22\x32        #                       HIRAGANA LETTER MA
+<U307F>        \x22\x33        #                       HIRAGANA LETTER MI
+<U3080>        \x22\x34        #                       HIRAGANA LETTER MU
+<U3081>        \x22\x35        #                       HIRAGANA LETTER ME
+<U3082>        \x22\x36        #                       HIRAGANA LETTER MO
+<U3083>        \x22\x37        #                       HIRAGANA LETTER SMALL YA
+<U3084>        \x22\x38        #                       HIRAGANA LETTER YA
+<U3085>        \x22\x39        #                       HIRAGANA LETTER SMALL YU
+<U3086>        \x22\x3A        #                       HIRAGANA LETTER YU
+<U3087>        \x22\x3B        #                       HIRAGANA LETTER SMALL YO
+<U3088>        \x22\x3C        #                       HIRAGANA LETTER YO
+<U3089>        \x22\x3D        #                       HIRAGANA LETTER RA
+<U308A>        \x22\x3E        #                       HIRAGANA LETTER RI
+<U308B>        \x22\x3F        #                       HIRAGANA LETTER RU
+<U308C>        \x22\x40        #                       HIRAGANA LETTER RE
+<U308D>        \x22\x41        #                       HIRAGANA LETTER RO
+<U308E>        \x22\x42        #                       HIRAGANA LETTER SMALL WA
+<U308F>        \x22\x43        #                       HIRAGANA LETTER WA
+<U3090>        \x22\x44        #                       HIRAGANA LETTER WI
+<U3091>        \x22\x45        #                       HIRAGANA LETTER WE
+<U3092>        \x22\x46        #                       HIRAGANA LETTER WO
+<U3093>        \x22\x47        #                       HIRAGANA LETTER N
+<U30A1>        \x22\x48        #                       KATAKANA LETTER SMALL A
+<U30A2>        \x22\x49        #                       KATAKANA LETTER A
+<U30A3>        \x22\x4A        #                       KATAKANA LETTER SMALL I
+<U30A4>        \x22\x4B        #                       KATAKANA LETTER I
+<U30A5>        \x22\x4C        #                       KATAKANA LETTER SMALL U
+<U30A6>        \x22\x4D        #                       KATAKANA LETTER U
+<U30A7>        \x22\x4E        #                       KATAKANA LETTER SMALL E
+<U30A8>        \x22\x4F        #                       KATAKANA LETTER E
+<U30A9>        \x22\x50        #                       KATAKANA LETTER SMALL O
+<U30AA>        \x22\x51        #                       KATAKANA LETTER O
+<U30AB>        \x22\x52        #                       KATAKANA LETTER KA
+<U30AC>        \x22\x53        #                       KATAKANA LETTER GA
+<U30AD>        \x22\x54        #                       KATAKANA LETTER KI
+<U30AE>        \x22\x55        #                       KATAKANA LETTER GI
+<U30AF>        \x22\x56        #                       KATAKANA LETTER KU
+<U30B0>        \x22\x57        #                       KATAKANA LETTER GU
+<U30B1>        \x22\x58        #                       KATAKANA LETTER KE
+<U30B2>        \x22\x59        #                       KATAKANA LETTER GE
+<U30B3>        \x22\x5A        #                       KATAKANA LETTER KO
+<U30B4>        \x22\x5B        #                       KATAKANA LETTER GO
+<U30B5>        \x22\x5C        #                       KATAKANA LETTER SA
+<U30B6>        \x22\x5D        #                       KATAKANA LETTER ZA
+<U30B7>        \x22\x5E        #                       KATAKANA LETTER SI
+<U30B8>        \x22\x5F        #                       KATAKANA LETTER ZI
+<U30B9>        \x22\x60        #                       KATAKANA LETTER SU
+<U30BA>        \x22\x61        #                       KATAKANA LETTER ZU
+<U30BB>        \x22\x62        #                       KATAKANA LETTER SE
+<U30BC>        \x22\x63        #                       KATAKANA LETTER ZE
+<U30BD>        \x22\x64        #                       KATAKANA LETTER SO
+<U30BE>        \x22\x65        #                       KATAKANA LETTER ZO
+<U30BF>        \x22\x66        #                       KATAKANA LETTER TA
+<U30C0>        \x22\x67        #                       KATAKANA LETTER DA
+<U30C1>        \x22\x68        #                       KATAKANA LETTER TI
+<U30C2>        \x22\x69        #                       KATAKANA LETTER DI
+<U30C3>        \x22\x6A        #                       KATAKANA LETTER SMALL TU
+<U30C4>        \x22\x6B        #                       KATAKANA LETTER TU
+<U30C5>        \x22\x6C        #                       KATAKANA LETTER DU
+<U30C6>        \x22\x6D        #                       KATAKANA LETTER TE
+<U30C7>        \x22\x6E        #                       KATAKANA LETTER DE
+<U30C8>        \x22\x6F        #                       KATAKANA LETTER TO
+<U30C9>        \x22\x70        #                       KATAKANA LETTER DO
+<U30CA>        \x22\x71        #                       KATAKANA LETTER NA
+<U30CB>        \x22\x72        #                       KATAKANA LETTER NI
+<U30CC>        \x22\x73        #                       KATAKANA LETTER NU
+<U30CD>        \x22\x74        #                       KATAKANA LETTER NE
+<U30CE>        \x22\x75        #                       KATAKANA LETTER NO
+<U30CF>        \x22\x76        #                       KATAKANA LETTER HA
+<U30D0>        \x22\x77        #                       KATAKANA LETTER BA
+<U30D1>        \x22\x78        #                       KATAKANA LETTER PA
+<U30D2>        \x22\x79        #                       KATAKANA LETTER HI
+<U30D3>        \x22\x7A        #                       KATAKANA LETTER BI
+<U30D4>        \x22\x7B        #                       KATAKANA LETTER PI
+<U30D5>        \x22\x7C        #                       KATAKANA LETTER HU
+<U30D6>        \x22\x7D        #                       KATAKANA LETTER BU
+<U30D7>        \x22\x7E        #                       KATAKANA LETTER PU
+<U30D8>        \x23\x21        #                       KATAKANA LETTER HE
+<U30D9>        \x23\x22        #                       KATAKANA LETTER BE
+<U30DA>        \x23\x23        #                       KATAKANA LETTER PE
+<U30DB>        \x23\x24        #                       KATAKANA LETTER HO
+<U30DC>        \x23\x25        #                       KATAKANA LETTER BO
+<U30DD>        \x23\x26        #                       KATAKANA LETTER PO
+<U30DE>        \x23\x27        #                       KATAKANA LETTER MA
+<U30DF>        \x23\x28        #                       KATAKANA LETTER MI
+<U30E0>        \x23\x29        #                       KATAKANA LETTER MU
+<U30E1>        \x23\x2A        #                       KATAKANA LETTER ME
+<U30E2>        \x23\x2B        #                       KATAKANA LETTER MO
+<U30E3>        \x23\x2C        #                       KATAKANA LETTER SMALL YA
+<U30E4>        \x23\x2D        #                       KATAKANA LETTER YA
+<U30E5>        \x23\x2E        #                       KATAKANA LETTER SMALL YU
+<U30E6>        \x23\x2F        #                       KATAKANA LETTER YU
+<U30E7>        \x23\x30        #                       KATAKANA LETTER SMALL YO
+<U30E8>        \x23\x31        #                       KATAKANA LETTER YO
+<U30E9>        \x23\x32        #                       KATAKANA LETTER RA
+<U30EA>        \x23\x33        #                       KATAKANA LETTER RI
+<U30EB>        \x23\x34        #                       KATAKANA LETTER RU
+<U30EC>        \x23\x35        #                       KATAKANA LETTER RE
+<U30ED>        \x23\x36        #                       KATAKANA LETTER RO
+<U30EE>        \x23\x37        #                       KATAKANA LETTER SMALL WA
+<U30EF>        \x23\x38        #                       KATAKANA LETTER WA
+<U30F0>        \x23\x39        #                       KATAKANA LETTER WI
+<U30F1>        \x23\x3A        #                       KATAKANA LETTER WE
+<U30F2>        \x23\x3B        #                       KATAKANA LETTER WO
+<U30F3>        \x23\x3C        #                       KATAKANA LETTER N
+<U30F4>        \x23\x3D        #                       KATAKANA LETTER VU
+<U30F5>        \x23\x3E        #                       KATAKANA LETTER SMALL KA
+<U30F6>        \x23\x3F        #                       KATAKANA LETTER SMALL KE
+<U0410>        \x23\x40        #                       CYRILLIC CAPITAL LETTER A
+<U0411>        \x23\x41        #                       CYRILLIC CAPITAL LETTER BE
+<U0412>        \x23\x42        #                       CYRILLIC CAPITAL LETTER VE
+<U0413>        \x23\x43        #                       CYRILLIC CAPITAL LETTER GHE
+<U0414>        \x23\x44        #                       CYRILLIC CAPITAL LETTER DE
+<U0415>        \x23\x45        #                       CYRILLIC CAPITAL LETTER IE
+<U0401>        \x23\x46        #                       CYRILLIC CAPITAL LETTER IO
+<U0416>        \x23\x47        #                       CYRILLIC CAPITAL LETTER ZHE
+<U0417>        \x23\x48        #                       CYRILLIC CAPITAL LETTER ZE
+<U0418>        \x23\x49        #                       CYRILLIC CAPITAL LETTER I
+<U0419>        \x23\x4A        #                       CYRILLIC CAPITAL LETTER SHORT I
+<U041A>        \x23\x4B        #                       CYRILLIC CAPITAL LETTER KA
+<U041B>        \x23\x4C        #                       CYRILLIC CAPITAL LETTER EL
+<U041C>        \x23\x4D        #                       CYRILLIC CAPITAL LETTER EM
+<U041D>        \x23\x4E        #                       CYRILLIC CAPITAL LETTER EN
+<U041E>        \x23\x4F        #                       CYRILLIC CAPITAL LETTER O
+<U041F>        \x23\x50        #                       CYRILLIC CAPITAL LETTER PE
+<U0420>        \x23\x51        #                       CYRILLIC CAPITAL LETTER ER
+<U0421>        \x23\x52        #                       CYRILLIC CAPITAL LETTER ES
+<U0422>        \x23\x53        #                       CYRILLIC CAPITAL LETTER TE
+<U0423>        \x23\x54        #                       CYRILLIC CAPITAL LETTER U
+<U0424>        \x23\x55        #                       CYRILLIC CAPITAL LETTER EF
+<U0425>        \x23\x56        #                       CYRILLIC CAPITAL LETTER HA
+<U0426>        \x23\x57        #                       CYRILLIC CAPITAL LETTER TSE
+<U0427>        \x23\x58        #                       CYRILLIC CAPITAL LETTER CHE
+<U0428>        \x23\x59        #                       CYRILLIC CAPITAL LETTER SHA
+<U0429>        \x23\x5A        #                       CYRILLIC CAPITAL LETTER SHCHA
+<U042A>        \x23\x5B        #                       CYRILLIC CAPITAL LETTER HARD SIGN
+<U042B>        \x23\x5C        #                       CYRILLIC CAPITAL LETTER YERU
+<U042C>        \x23\x5D        #                       CYRILLIC CAPITAL LETTER SOFT SIGN
+<U042D>        \x23\x5E        #                       CYRILLIC CAPITAL LETTER E
+<U042E>        \x23\x5F        #                       CYRILLIC CAPITAL LETTER YU
+<U042F>        \x23\x60        #                       CYRILLIC CAPITAL LETTER YA
+<U0430>        \x23\x61        #                       CYRILLIC SMALL LETTER A
+<U0431>        \x23\x62        #                       CYRILLIC SMALL LETTER BE
+<U0432>        \x23\x63        #                       CYRILLIC SMALL LETTER VE
+<U0433>        \x23\x64        #                       CYRILLIC SMALL LETTER GHE
+<U0434>        \x23\x65        #                       CYRILLIC SMALL LETTER DE
+<U0435>        \x23\x66        #                       CYRILLIC SMALL LETTER IE
+<U0451>        \x23\x67        #                       CYRILLIC SMALL LETTER IO
+<U0436>        \x23\x68        #                       CYRILLIC SMALL LETTER ZHE
+<U0437>        \x23\x69        #                       CYRILLIC SMALL LETTER ZE
+<U0438>        \x23\x6A        #                       CYRILLIC SMALL LETTER I
+<U0439>        \x23\x6B        #                       CYRILLIC SMALL LETTER SHORT I
+<U043A>        \x23\x6C        #                       CYRILLIC SMALL LETTER KA
+<U043B>        \x23\x6D        #                       CYRILLIC SMALL LETTER EL
+<U043C>        \x23\x6E        #                       CYRILLIC SMALL LETTER EM
+<U043D>        \x23\x6F        #                       CYRILLIC SMALL LETTER EN
+<U043E>        \x23\x70        #                       CYRILLIC SMALL LETTER O
+<U043F>        \x23\x71        #                       CYRILLIC SMALL LETTER PE
+<U0440>        \x23\x72        #                       CYRILLIC SMALL LETTER ER
+<U0441>        \x23\x73        #                       CYRILLIC SMALL LETTER ES
+<U0442>        \x23\x74        #                       CYRILLIC SMALL LETTER TE
+<U0443>        \x23\x75        #                       CYRILLIC SMALL LETTER U
+<U0444>        \x23\x76        #                       CYRILLIC SMALL LETTER EF
+<U0445>        \x23\x77        #                       CYRILLIC SMALL LETTER HA
+<U0446>        \x23\x78        #                       CYRILLIC SMALL LETTER TSE
+<U0447>        \x23\x79        #                       CYRILLIC SMALL LETTER CHE
+<U0448>        \x23\x7A        #                       CYRILLIC SMALL LETTER SHA
+<U0449>        \x23\x7B        #                       CYRILLIC SMALL LETTER SHCHA
+<U044A>        \x23\x7C        #                       CYRILLIC SMALL LETTER HARD SIGN
+<U044B>        \x23\x7D        #                       CYRILLIC SMALL LETTER YERU
+<U044C>        \x23\x7E        #                       CYRILLIC SMALL LETTER SOFT SIGN
+<U044D>        \x24\x21        #                       CYRILLIC SMALL LETTER E
+<U044E>        \x24\x22        #                       CYRILLIC SMALL LETTER YU
+<U044F>        \x24\x23        #                       CYRILLIC SMALL LETTER YA
+<U2501>        \x24\x24        #                       BOX DRAWINGS HEAVY HORIZONTAL
+<U2503>        \x24\x25        #                       BOX DRAWINGS HEAVY VERTICAL
+<U250F>        \x24\x26        #                       BOX DRAWINGS HEAVY DOWN AND RIGHT
+<U2513>        \x24\x27        #                       BOX DRAWINGS HEAVY DOWN AND LEFT
+<U251B>        \x24\x28        #                       BOX DRAWINGS HEAVY UP AND LEFT
+<U2517>        \x24\x29        #                       BOX DRAWINGS HEAVY UP AND RIGHT
+<U2523>        \x24\x2A        #                       BOX DRAWINGS HEAVY VERTICAL AND RIGHT
+<U2533>        \x24\x2B        #                       BOX DRAWINGS HEAVY DOWN AND HORIZONTAL
+<U252B>        \x24\x2C        #                       BOX DRAWINGS HEAVY VERTICAL AND LEFT
+<U253B>        \x24\x2D        #                       BOX DRAWINGS HEAVY UP AND HORIZONTAL
+<U254B>        \x24\x2E        #                       BOX DRAWINGS HEAVY VERTICAL AND HORIZONTAL
+<U2520>        \x24\x2F        #                       BOX DRAWINGS VERTICAL HEAVY AND RIGHT LIGHT
+<U252F>        \x24\x30        #                       BOX DRAWINGS DOWN LIGHT AND HORIZONTAL HEAVY
+<U2528>        \x24\x31        #                       BOX DRAWINGS VERTICAL HEAVY AND LEFT LIGHT
+<U2537>        \x24\x32        #                       BOX DRAWINGS UP LIGHT AND HORIZONTAL HEAVY
+<U253F>        \x24\x33        #                       BOX DRAWINGS VERTICAL LIGHT AND HORIZONTAL HEAVY
+<U251D>        \x24\x34        #                       BOX DRAWINGS VERTICAL LIGHT AND RIGHT HEAVY
+<U2530>        \x24\x35        #                       BOX DRAWINGS DOWN HEAVY AND HORIZONTAL LIGHT
+<U2525>        \x24\x36        #                       BOX DRAWINGS VERTICAL LIGHT AND LEFT HEAVY
+<U2538>        \x24\x37        #                       BOX DRAWINGS UP HEAVY AND HORIZONTAL LIGHT
+<U2542>        \x24\x38        #                       BOX DRAWINGS VERTICAL HEAVY AND HORIZONTAL LIGHT
+<UFE33>        \x24\x39        #                       PRESENTATION FORM FOR VERTICAL LOW LINE
+<U2574>        \x24\x3A        #                       BOX DRAWINGS LIGHT LEFT
+<UFE34>        \x24\x3B        #                       PRESENTATION FORM FOR VERTICAL WAVY LOW LINE
+<UFE4F>        \x24\x3C        #                       WAVY LOW LINE
+<U21E7>        \x24\x3D        #                       UPWARDS WHITE ARROW
+<U21B8>        \x24\x3E        #                       NORTH WEST ARROW TO LONG BAR
+<U21B9>        \x24\x3F        #                       LEFTWARDS ARROW TO BAR OVER RIGHTWARDS ARROW TO BAR
+<UFFE2>        \x24\x40        #                       FULLWIDTH NOT SIGN
+<UFFE4>        \x24\x41        #                       FULLWIDTH BROKEN BAR
+<UFF07>        \x24\x42        #                       FULLWIDTH APOSTROPHE
+<UFF02>        \x24\x43        #                       FULLWIDTH QUOTATION MARK
+<U3231>        \x24\x44        #                       PARENTHESIZED IDEOGRAPH STOCK
+<U2116>        \x24\x45        #                       NUMERO SIGN
+<U2121>        \x24\x46        #                       TELEPHONE SIGN
+<U6491>        \x24\x47        #                       CJK UNIFIED IDEOGRAPH-6491
+#
+END CHARMAP

@@ -1,0 +1,63 @@
+/* @(#)37	1.2  src/bos/objclass/srcobj.cre, cmdsrc, bos411, 9428A410j 6/16/90 02:56:13 */
+/*
+ * COMPONENT_NAME: (cmdsrc) System Resource Controller
+ *
+ * FUNCTIONS:
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */                                                                   
+#define SRCNAMESZ 30
+#define SRCPATHSZ 200
+/* subsystem structure definition */
+class SRCsubsys {
+	char  subsysname [SRCNAMESZ];	/* subsystem name */
+	char  synonym [SRCNAMESZ];	/* subsystem synonym */
+	char  cmdargs [SRCPATHSZ];	/* subsystem command arguments */
+	char  path [SRCPATHSZ];		/* path to executable */
+	long uid;			/* UID for subsystem */
+	long auditid;			/* Audit id for subsystem */
+	char  standin [SRCPATHSZ];	/* standard input file */
+	char  standout [SRCPATHSZ];	/* standard output file */
+	char  standerr [SRCPATHSZ];	/* standard error file */
+	short action;			/* respawn action */
+	short multi;			/* multi instance support  */
+	short contact;			/* contact type of of
+					**  1. signals
+					**  2. message queues
+					**  3. sockets
+					**/
+	long svrkey;			/* IPC queue key TEMPORARY     */
+	long  svrmtype;			/* IPC mtype for subsystem IPC    */
+	short priority;			/* nice value 1-40 */
+	short signorm;			/* stop normal */
+	short sigforce;			/* stop force */
+	short display;			/* display inactive on all or
+					** group status 
+					**/
+	short waittime;			/* stop cancel time to wait before
+					** sending a sigkill to the subsystem
+					**/
+	char grpname[SRCNAMESZ];	/* subsystem group name */
+};
+
+/* subsystem subserver structure definition */
+struct SRCsubsvr {
+	char  sub_type [SRCNAMESZ];/* subsvr type */
+	char  subsysname [SRCNAMESZ];/* subsystem name */
+	short sub_code;            /* subserver code id */
+};
+
+/* subsystem subserver structure definition */
+struct SRCnotify {
+	char  notifyname [SRCNAMESZ];/* subsystem name */
+	method notifymethod;
+};

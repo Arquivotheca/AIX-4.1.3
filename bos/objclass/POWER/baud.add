@@ -1,0 +1,137 @@
+# @(#)61        1.3  com/sysx/audio/baud/baud.add, baud, ums121 8/23/94 16:21:58
+
+** Predefined Device object
+
+PdDv:
+	type = "baud"
+	class = "adapter"
+	subclass = "mca"
+	prefix = "baud"
+	devid = "0xe5df"
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x715
+	setno = 1
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = "bauddd"
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfgbaud"
+	Change = "/etc/methods/chggen"
+	Unconfigure = "/etc/methods/ucfgdevice"
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = "adapter/mca/baud"
+
+
+** Predefined Attributes objects
+** The bus IO address can be anywhere in the first 64K of memory.
+** It must be on a 256 byte boundary.
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "bus_io_addr"
+	deflt = "0x0100"
+	values = "0x0100-0xff00,256"
+	width = "0x100"
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 2
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "bus_intr_level"
+	deflt = 10
+	values = 9,10,11,12
+	width = ""
+	type = I
+	generic = D
+	rep = nl
+	nls_index = 3
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "intr_priority"
+	deflt = 2
+	values = 2
+	width = ""
+	type = P
+	generic = D
+	rep = n
+	nls_index = 4
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "cap_dma_level"
+	deflt = "10"
+	values = "0-14,1"
+	width = ""
+	type = A
+	generic = D
+	rep = nr
+	nls_index = 5
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "play_dma_level"
+	deflt = "9"
+	values = "0-14,1"
+	width = ""
+	type = A
+	generic = D
+	rep = nr
+	nls_index = 6
+
+** It's type = A that says this is a dma level attribute, supposedly documented in the class book.
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "dma_bus_mem"
+	deflt = 0xE00000
+	values = "0xE00000-0xFFFFFFFF,0x200000"
+	width = 0x200000
+	type = M
+	generic = D
+	rep = nr
+	nls_index = 7
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "play_time"
+	deflt = 3
+	values = "1-10,1"
+	width = ""
+	type = R
+	generic = DU
+	rep = nr
+	nls_index = 8
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "cap_time"
+	deflt = 1
+	values = "1-10,1"
+	width = ""
+	type = R
+	generic = DU
+	rep = nr
+	nls_index = 9
+
+PdAt:
+	uniquetype = adapter/mca/baud
+	attribute = "request_buf"
+	deflt = 50
+	values = "10-100,1"
+	width = ""
+	type = R
+	generic = DU
+	rep = nr
+	nls_index = 10
+
+

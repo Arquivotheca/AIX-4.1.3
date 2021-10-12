@@ -1,0 +1,650 @@
+# @(#)83	1.4  src/bos/usr/bin/uucp/uucpadm/uucpadm.hf, cmduucp, bos411, 9428A410j 8/3/93 16:15:55
+# 
+# COMPONENT_NAME: CMDUUCP uucpadm.hf
+# 
+# FUNCTIONS: file, function, help, unit 
+#
+# ORIGINS: 10  27 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#  Copyright (c) IBM Corporation, 1988.  All Rights Reserved.
+#
+master|
+This program allows you to enter basic uucp configuration information
+for the Sysfiles, Devices, Systems, Permissions, Poll, Dialcodes 
+and Dialers files.  You may reuse this program again and again to make
+adjustments to the same files.
+
+When uucpadm is started, it reads all of the target files
+from disk into memory.  All changes are made to the memory image.
+Actual updating of the files occurs only when the user enters
+a CNTR U or CNTR X at the appropriate menu.
+
+If uucpadm detects an inconsistency within the uucp files a
+warning message is displayed on the menu. A '?' entered for
+any menu component causes help information for that component
+to be displayed. A '~' entered for any menu component invokes
+the editor on the appropriate uucp file.
+
+If you are configuring uucp for the first time the Devices, Systems
+and Permissions files MUST be updated with your local network
+information. Select the ADD/CHANGE option for the Devices, then
+the Systems and finally the Permissions file from the master menu.
+Request help (by entering a '?') at the first entry of each of  
+these menus. These help screens will provide examples for completing
+entries in each of the files.  You do not need to configure the
+Sysfiles file unless you desire to use configuration files other
+than the defaults.
+
+On each menu an 'enter' will move you down the selections. If your
+entry for the first item on the menu matches an existing record
+then uucpadm will retrieve that record for update. uucpadm will
+also tell you how many records with that first entry exist. Secondary
+records should only exist for the Devices file. Secondary records
+are edited by paging through the menu. After the final menu entry, 
+uucpadm will prompt with "to next entry?". An affirmative response
+retrieves the next record for update. A negative response continues the
+editing of the current record. An affirmative response at the final 
+record allows you to ADD another secondary record.
+type|
+The Devices file contains profiles of all the physical devices which
+uucp may use to establish a connection with a remote host.
+
+Type: Indicates the type of the communications device. Several
+keywords are recognized. These are:
+
+	* "Direct" - indicates that this device is a direct link
+	  to another computer. Enter 'Direct' for type.
+
+	* "ACU" - indicates that this device is an automatic call
+	  unit (such as an autodial modem). Enter 'ACU' for type.
+
+	* Built-in or standard function - indicates that the device
+	  is a built-in function (such as "TCP") or a standard function
+	  whose name appears as a first field entry in the Dialers
+	  file (such as "develcon"). Enter 'TCP' for type.
+
+	* System-Name - indicates that this device is a direct link to
+	  a particular computer. In this case, System-Name should be 
+	  replaced with the machine's uucp node name. This name must 
+	  appear as a third field entry in the Systems file. If you 
+	  do not enter Direct, ACU or TCP then uucpadm assumes you have
+	  entered a System-Name or standard function. uucpadm then
+	  checks the Systems and Dialers file for consistency.
+	  Enter System-Name for type.
+
+*EXAMPLES*
+
+To configure a hayes 1200 baud modem connected to /dev/tty1:
+	Type = ACU
+	line1 = tty1
+	line2 = -
+	class = 1200
+	dialers = hayes
+
+To configure a direct 9600 connection to machine "lance" on /dev/tty2:
+	Type = lance
+	line1 = tty2
+	line2 = -
+	class = 1200
+	dialers = direct
+
+To configure uucp for a TCP connection:
+	Type = TCP
+	line1 = -
+	line2 = -
+	class = -
+	dialers = TCP
+
+*WARNINGS*
+	   
+"Type entry not found in Systems or Dialers" - your entry for type
+was not a recognized function (ACU,Direct or TCP). A check of
+/etc/uucp/Systems & /etc/uucp/Dialers did not locate a
+cross entry for type. You should add a cross entry to one of these files
+
+"make certain uucpd is enabled" - You entered TCP for type which requires the
+daemon process, /etc/uucp/uucpd, to be enabled. You accomplish this by
+uncommenting the appropriate lines in /etc/rc.tcpip and reinitializing the
+system.
+
+"/dev/line1(line2) not found" - your entry for line1 or line2
+implied that the device was attached to /dev/line1(line2). A check
+of /dev did not locate the device. Run "devices" to add the device.
+
+"Bad format to class entry" - your class entry contained more than one
+character. Restrict class names to one character. 
+
+"Dialer entry not found in Dialers" - your dialers entry did not have
+a cross entry in /etc/uucp/Dialers. You should add the cross entry.
+
+"entry not correct when type is TCP" - see examples for correct TCP
+values.
+nameS|
+The Systems file delineates each machine in your UUCP network. UUCP 
+communications to/from a remote host will not be permitted unless
+a Systems file entry exists for that host. (This is true except when
+remote.unkown is configured to permit access by unknown hosts).
+
+Name: This field should be set equal to the uucp node name of the
+remote host. In general, this name can be obtained by entering the
+command "uname -n". The node name can be set through the "uname  
+-Smyhost.node.name" command. Uncommenting this command line in 
+"/etc/rc.include" configures the uucp node name at boot time.
+
+*EXAMPLES*
+
+To enter the system lance.ibm.com which is connected with
+an ACU device in class 2400 (see Devices). Calls are permitted at
+any time. The uucp login on lance.ibm.com is nuucp & the nuucp
+password is "saysme":
+	Name = lance.ibm.com
+	Time = Any
+	Type = ACU
+	Class = 2400
+	Phone = 997-7942
+	Login = nuucp 
+	Password = saysme
+
+To enter the system backwoods which is connected with a TCP device. 
+Calls are permitted only on weekdays between 9am-5pm. The uucp login on
+backwoods is nuucp & the nuucp password is "barBque":
+	Name = backwoods
+	Time = Wk0900-1700
+	Type = TCP,t
+	Class = -
+	Phone = -
+	Login = nuucp
+	Password = barBque
+
+*WARNINGS*
+
+"Multiple entries exist with this system name" - uucpadm found multiple
+records in /etc/uucp/Systems with this system name. Delete the 
+multiple entries with uucpadm or with the editor.
+
+"Invalid Time entry. Valid portion displayed." - Your time entry is
+ invalid. uucpadm will display accepted section of entry. Read help.
+
+"Type entry not found in Devices" - You specified a communications
+link which is not in /etc/uucp/Devices. A Devices entry MUST be constructed.
+
+"Type & Class entries not found in Devices" - You specified a
+communications link which is not in /etc/uucp/Devices. A Devices entry MUST be
+constructed which matches BOTH your Type and Class entries.
+
+"Type is not ACU" - You entered a phone # for a non-ACU device.
+
+"Dialcode entry not found in Dialcodes." You entered a dialcode 
+abbreviation not found in /etc/uucp/Dialcodes. Construct the
+Dialcodes entry.
+systemP|
+The Poll file specifies machines in your uucp network to be polled.
+Each entry contains the name of the machine to be polled plus the
+hours the machine should be called.
+
+System: This field should be set equal to the short node name of the
+remote host to be polled. This name can be obtained by entering the
+command "uname -n". The node name can be set through the "uname  
+-Smyhost.node.name" command. Uncommenting this command line in 
+"/etc/rc.include" configures the uucp node name at boot time.
+
+*EXAMPLES*
+
+To enter the system lance.ibm.com which is to be polled at
+12pm 9am 1pm & 6pm.
+
+	System = lance.ibm.com
+	Hours = 0 9 13 18
+
+*WARNINGS*
+
+"Multiple entries exist with this system name" - uucpadm found multiple
+records in /etc/uucp/Poll with this system name. Delete the 
+multiple entries with uucpadm or with the editor.
+
+"System entry not found in Systems" - You specified a machine name
+which is not in /etc/uucp/Systems. A Systems entry MUST be
+constructed.
+
+"Ined will destroy Poll file. Use another editor" - You selected the
+ined editor which removes tab characters. Tabs are the delimit   
+character in /etc/uucp/Poll. Select another editor.
+abr|
+The Dialcodes file specifies dialcode abbreviations to be used
+in the phone # entry of the Systems file (see Systems). Each
+entry has the form of: abbreviation dialcode.
+
+Abr: This field should be set equal to the dialcodes abbreviation.
+
+*EXAMPLES*
+
+To enter LA as the abbreviation for the Los Angeles area code, enter
+"LA" at the Abr prompt and the desired dialcode at the Dialcode: prompt
+as follows:
+
+	Abr: LA
+	Dialcode: 1-213-
+
+*WARNINGS*
+
+"Multiple entries exist with this dialcode" - uucpadm found multiple
+records in /etc/uucp/Dialcodes with this dialcode. Delete the 
+multiple entries with uucpadm or with the editor.
+
+lmP|
+The Permissions file specifies options for machine access, file access
+and command execution which take effect when a remote host logs into
+your machine or when you log into a remote host. 
+
+L/M: This entry must be either LOGNAME=(login) or MACHINE=(short node
+name). If LOGNAME is entered then permissions are being defined
+which will take effect when a remote host enters this login id. ALL
+REMOTE LOGIN IDS MUST HAVE A (ONE) PERMISSIONS FILE ENTRY. If MACHINE is
+entered then permissions are being defined which will take effect when
+you login to the remote host. When LOGNAME= is entered uucpadm issues
+a warning if the login id does not exist. When MACHINE= is entered uucpadm
+issues a warning if no Systems file entry exists for the node name.
+
+*EXAMPLES*
+
+The login id to be entered is uucpz. Remote hosts using this id may
+REQUEST to receive files on login and your host may SEND queued work
+when requested. The id may read all files with "other" permissions
+and may write all files, except those in /etc, with "other" permissions.
+If the remote machine is "lance" or "backwoods" it must utilize this
+id : 
+	L/M: LOGNAME=uucpz
+	Request: yes
+	Sendfiles: yes
+	Read: /
+	Write: NOWRITE=/etc
+	Callback:
+	Commands:
+	Validate: lance:backwoods
+
+The machine id to be entered is lance. When calling this host 
+REQUESTs can be made for file transfers. Enable reading and
+writing of all files, except those in /etc. Permit the execution
+of any command:
+	L/M: MACHINE=lance
+	Request: yes
+	Sendfiles: 
+	Read: NOREAD=/etc
+	Write: NOWRITE=/etc
+	Callback:
+	Commands: ALL
+	Validate: 
+
+*WARNINGS*
+
+"L/M must start with LOGNAME= or MACHINE=" - These strings are required.
+
+"Multiple entries exist with for LOGNAME or MACHINE " - uucpadm found
+multiple records in /etc/uucp/Permissions for this LOGNAME or 
+MACHINE. Delete the multiple entries with uucpadm or with the editor.
+
+"MACHINE entry not found in Systems" -  A check of /etc/uucp/Systems
+did not locate your entry for MACHINE. You should add a cross entry to
+this file.
+
+"LOGNAME entry not found" - Your LOGNAME user id was not found in /etc/passwd.
+You should execute "adduser" to create the remote login id.
+
+"Sendfiles ignored with MACHINE entries" - You entered a sendfiles entry
+with MACHINE=. In this case, the sendfiles option has no impact on UUCP.
+
+"Callback not valid with MACHINE entry" - You entered a callback entry
+ with MACHINE=. uucpadm issues a warning and ignores the entry.
+
+"Commands not valid with LOGNAME entry" - You entered a commands entry
+ with MACHINE=. uucpadm issues a warning and ignores the entry.
+
+"Validate not valid with MACHINE entry" - You entered a validate entry
+ with MACHINE=. uucpadm issues a warning and ignores the entry.
+line1|
+Line1: Specifies the device name associated with this entry. For
+an auto-dial modem attached to "/dev/tty1" you would enter "ACU"
+for Type and "tty1" for Line1. For a direct connection through
+"/dev/tty3" enter "tty3" for Line1. If this field is not relevant
+(i.e. when Type is "TCP") use a "-" as a placeholder. When Type
+is not equal to "TCP", uucpadm checks /dev for the existence of
+Line1. If Line1 is not found a warning message is issued.
+ 
+line2|
+Line2: Specifies the device name associated with a dialer. 
+This field would be used when connecting a modem which does not
+contain a dialer. In this example, Type would be "ACU", Line1
+would be the modem line and Line2 would be the dialer line.
+For a dialer attached to "/dev/tty3" you would enter "tty3"
+for Line2. If this field is not relevant (i.e. usually) use a
+"-" as a placeholder. When Type is not equal to "TCP", uucpadm
+checks /dev for the existence of Line2. If Line2 is not found a
+warning message is issued.
+classd|
+Class: When "ACU" or "Direct" is Type, then Class is the speed
+of the device. For a 1200 baud modem you would enter "ACU" for
+type and "1200" for Class. This field may contain a letter and
+speed (C1200) to distinquish between classes of devices. A match
+is performed between this field and the fourth (Class) field of
+the Systems file to determine which class of device to use when
+connecting to a particular system. The keyword "Any" is also
+an acceptable Class. Use this when the device can be used at any speed.
+If "Any" is entered then the speed requested in the Systems file
+will be employed. If the both Devices & System file entries are
+"Any" the speed is defaulted to 1200. 
+dialersd|
+Dialers: This is actually a dialer-token pair field where the token
+is optional. If the token is missing, it is obtained from the Systems
+file. If the device is a direct connection to another machine
+then enter "direct". In all cases, dialers should match to a
+record in the Dialers file. If the device is an automatic dialing
+modem then dialers will normally be the name of modem (i.e. penril,
+hayes. . .). uucpadm checks the Dialers file for the existence of
+dialers. If dialers is not found a warning message is issued.
+timeS|
+Time: This field defines the day-of-week & time-of-day that a remote
+host may be called. Day-of-week must be a list drawn from the following
+options: Su Mo Tu We Th Fr Sa Wk Any Never (Wk = any weekday, Any = 
+any day, Never = never). Time-of-day must specify a numeric range such
+as: 0100-2200. This would permit calls from 1am to 10pm. A subfield
+specifying retry time after a call failure is also permitted. This
+subfield is entered after a ";". For example, Wk;5 would allow calls
+on any weekday and set a wait period of 5 minutes after failed attempts.
+uucpadm checks the validity of this entry according to these rules. If
+an error is found, uucpadm displays a message & the valid portion of the
+entry.
+typeS|
+Type: Indicates the type of the communications link to the remote host.
+This entry must match a type entry in the Devices file (see Devices).
+uucpadm checks the Devices file for the existence of the device type. A
+warning message is issued if the device is not found.
+classS|
+Class: Indicates the class of the communications link to the remote host.
+This entry must match a class entry in the Devices file (see Devices).
+uucpadm checks the Devices file for the existence of the device type &
+class. A warning message is issued if the device & class is not found.
+phoneS|
+Phone: Provides the phone number of remote hosts linked through ACU
+devices. Any alphabetic abbreviations MUST match an entry in the
+Dialcodes file (see Dialcodes). An "=" indicates that a secondary
+dial tone must be received before dialing the remaining digits. A "-"
+dictates a 4 second pause before dialing the next digit. If type is
+not equal to ACU and phone is not equal to "-" a warning message is
+issued.
+loginS|
+login: Delineates the login information for the remote host. You
+should enter the uucp login name. If the uucp login is "nuucp" 
+enter: "nuucp". UUCP treats this field as an expect-send sequence.
+uucpadm will prefix the entered name with an appropriate expect
+string. This prefix may be altered by adding the record and then
+retreiving the record in change mode. The expect prefix is
+normally: "in:--in:" which tells UUCP to expect (log)in: from the
+remote host. If UUCP receives this string then it will send the login
+name (nuucp). The "--in:" tells UUCP to send nothing followed by a new
+line and expect a second (log)in: when the first (log)in: is not received.
+passwdS|
+Password: Delineates the login password for the remote host. You
+should enter the uucp login password. UUCP treats this field as an
+expect-send sequence. uucpadm will prefix the entered name with an
+appropriate expect string. This prefix may be altered by adding the
+record and then retreiving the record in change mode. The expect prefix is
+normally: "word:" which tells UUCP to expect (pass)word: from the
+remote host. If UUCP receives this string then it will send the password.
+request|
+Request: This option specifies whether or not a remote host
+can request file transfers when the remote initiated the UUCP
+connection. Valid values are "yes" or "no". Request may be entered
+with either LOGNAME or MACHINE.
+sendfiles|
+Sendfiles: When a remote host logs into your machine it may attempt
+to receive work queued for it. The sendfiles option specifies whether
+this request will be allowed. Valid values are "yes" or "no". Sendfiles
+is ignored with a MACHINE entry and uucpadm issues a warning in this
+case.
+read|
+Read: This option specifies read access to the file system. Read may
+be entered with either LOGNAME or MACHINE. The entry "/" specifies
+access to the entire file system with "other" permissions. Multiple
+entries should be separated with a ":". To allow read access to /usr/bin
+& /bin you would enter "/usr/bin:/bin". To permit read access to all
+files EXCEPT those in /etc enter "NOREAD=/etc". uucpadm
+prepends "READ=" to your entry unless "NOREAD=" is the first seven 
+characters of your entry.
+write|
+Write: This option specifies write access to the file system. Write may
+be entered with either LOGNAME or MACHINE. The entry "/" specifies
+access to the entire file system with "other" permissions. Multiple
+entries should be separated with a ":". To allow write access to /u/pat
+& /usr/tmp you would enter "/u/pat:/usr/tmp". To permit write access to
+all files EXCEPT those in /etc & /bin enter "NOWRITE=/etc:/bin". 
+uucpadm prepends "WRITE=" to your entry unless "NOWRITE=" is
+the first eight characters of your entry.
+callback|
+Callback: This option specifies that no transactions will occur until
+the calling host is called backed. Valid entries are yes and no.
+The Callback option should be entered only for LOGNAME records.
+uucpadm issues an error when it is entered with MACHINE entries. 
+IF TWO HOSTS HAVE CALLBACK SET FOR EACH OTHER NO CONVERSATIONS WILL
+EVER COMPLETE.
+commands|
+Commands: When uux is invoked it generates remote execution requests
+which are then transfered to the target host for execution. The Commands
+option is used with MACHINE entries to specify the set of permitted
+commands. uucpadm issues a warning message and ignores Commands
+for LOGNAME entries. Multiple entries should be separated with a ":".
+To allow the commands rmail & diff you would enter "rmail:diff". The
+key word ALL specifies that all commands accessible to a local user
+with "other" permissions are permitted. Use this option with care.
+(see also Validate). 
+validate|
+Validate: This option should be utilized only for LOGNAME entries.
+Validate specifies remote hosts which MUST enter the LOGNAME id
+to login. The purpose is to require remotes which have extensive
+command access (i.e. COMMANDS=ALL in their MACHINE entry) to use
+restricted logins. Multiple hosts should be separated with a ":".
+To force validation on lance & backwoods you would enter "lance:backwoods".
+uucpadm issues an error message and ignores the input when Validate
+is entered with MACHINE entries.
+hours|
+Hours: The hours (0-24) for polling.
+dialcode|
+Dialcodes: The dialing sequence substituted for the abbreviation (abr)
+when the abr string is encountered in the Systems phone # field.
+service|
+Sysfiles provides a means of specifying different Systems, Devices and
+Dialers files for uucico and cu in the file /etc/uucp/Sysfiles.  See the
+comments in the Sysfiles file for example entries.  You may enter a
+tilde (~) at the Sysfiles Maintenance screen to invoke the default
+editor on this file.
+
+
+Service: This option designates which Basic Networking service you wish
+to modify.  This field can be set to "cu" or "uucico".  Any other entry
+will cause a warning message to be displayed and uucpadm will continue 
+awaiting valid input.
+systems|
+Systems: This option reflects which file(s) will be used as Systems file(s)
+for the service you specified (cu or uucico).  This entry consists of
+filenames separated by colons.  The following sample entry
+specifies two Systems files;  one named "Systems.cico, and the second
+corresponding to the normal default, "Systems."
+
+Systems.cico:Systems
+
+The file listed first will be referenced before following files.
+
+You may include a full path name for each file you specify.  Filenames
+which are not preceeded by a path name will default to the /etc/uucp
+directory.
+devices|
+Devices: This option reflects which file(s) will be used as Devices file(s)
+for the service you specified (cu or uucico).  This entry consists of
+filenames separated by colons.  The following sample entry
+specifies two Devices files;  one named "Devices.cico, and the second
+corresponding to the normal default, "Devices."
+
+Devices.cico:Devices
+
+The file listed first will be referenced before following files.
+
+You may include a full path name for each file you specify.  Filenames
+which are not preceeded by a path name will default to the /etc/uucp
+directory.
+dialers|
+Dialers: This option reflects which file(s) will be used as Dialers file(s)
+for the service you specified (cu or uucico).  This entry consists of
+filenames separated by colons.  The following sample entry
+specifies two Dialers files;  one named "Dialers.cico, and the second
+corresponding to the normal default, "Dialers."
+
+Dialers.cico:Dialers
+
+The file listed first will be referenced before following files.
+
+You may include a full path name for each file you specify.  Filenames
+which are not preceeded by a path name will default to the /etc/uucp
+directory.
+devices_spec|
+Devices files contain profiles of all the physical devices which
+The Basic Networking Utilities may use to establish a connection with a 
+remote host.
+
+This screen exists for the purpose of allowing the user to specify which
+Devices file he/she would like to modify.  Type in  a filename and press
+the enter key.  The Uucp Device Maintenance screen then will be displayed 
+to allow the user to manipulate the file he/she specifies here.  If a 
+Devices filename is not preceeded by an explicit path, the location of
+the file will default to the /etc/uucp directory.
+
+The filenames listed are the filenames listed in /etc/uucp/Sysfiles
+as devices configuration files.  The user may enter one of these filenames
+at the prompt or enter the name of a non-existent file.  If the user 
+specifies the name of a non-existent file, a file will be created with the 
+desired name if permissions permit. (i.e. if a pathname is supplied to 
+a writable directory).  If the user specifies an unwritable file/directory 
+to configure for Devices Maintenance, an error message will be displayed 
+and uucpadm will terminate.  
+systems_spec|
+Systems files contain information used by the Basic Networking Utilities to
+interact with remote systems.  Among other things, a Systems file reflects
+a remote system's name as well as which device to use to contact the remote 
+system.
+
+This screen exists for the purpose of allowing the user to specify which
+Systems file he/she would like to modify.  Type in  a filename and press
+the enter key.  The Uucp Systems Maintenance screen then will be displayed 
+to allow the user to manipulate the file he/she specifies here.  If a 
+Systems filename is not preceeded by an explicit path, the location of
+the file will default to the /etc/uucp directory.
+
+The filenames listed are the filenames listed in /etc/uucp/Sysfiles
+as systems configuration files.  The user may enter one of these filenames
+at the prompt or enter the name of a non-existent file.  If the user 
+specifies the name of a non-existent file, a file will be created with 
+the desired name if permissions permit. (i.e. if a pathname is supplied to 
+a writable directory).  If the user specifies an unwritable file/directory 
+to configure for Systems Maintenance, an error message will be displayed 
+and uucpadm will terminate.
+dialers_spec|
+A Dialers file is used to translate generic uucp dialing character sequences
+into character sequences specific to a particular dialer (modem) type.
+
+This screen exists for the purpose of allowing the user to specify which
+Dialers file he/she would like to modify.  Type in  a filename and press
+the enter key.  The Uucp Dialers Maintenance screen then will be displayed 
+to allow the user to manipulate the file he/she specifies here.  If a 
+Dialers filename is not preceeded by an explicit path, the location of
+the file will default to the /etc/uucp directory.
+
+The filenames listed are the filenames listed in /etc/uucp/Sysfiles
+as dialers configuration files.  The user may enter one of these filenames
+at the prompt or enter the name of a non-existent file.  If the user 
+specifies the name of a non-existent file, a file will be created with the 
+desired name if permissions permit. (i.e. if a pathname is supplied to 
+a writable directory).  If the user specifies an unwritable file/directory 
+to configure for Devices Maintenance, an error message will be displayed 
+and uucpadm will terminate.
+dodialers|
+Each line in a Dialers file consists of three parts:
+
+ 1. The name of the dialer (modem type).
+	
+ 2. The Substitute sequence is used to translate any '=' and - characters 
+    contained in the phone number string from the Systems file.  The
+    equals sign ('=') is used in a phone number to indicate a wait 
+    for a secondary dial tone.  The dash ('-') is used to indicate a 
+    pause (4 seconds, normally).  This field specifies how these 
+    characters are translated into characters which a specific 
+    dialer (modem) can recognize.  Enter a question mark with your
+    cursor positioned on the Substitute sequence line for further help.
+
+ 3. The Expect-send sequence reflects a sequence of character exchanges
+    between the software executing the dialing script and the dialer itself.
+    The following example sequence reflects that the string  "AT" should
+    be sent to the modem, to which the modem responds with an "OK".  The
+    ATDT5551212 string will then be sent to the modem.  The  modem should
+    then respond with "CONNECT".
+
+    AT OK ATDT5551212 CONNECT
+substitute|
+    The Substitute sequence is used to translate any '=' and - characters 
+    contained in the phone number string from the Systems file.  The
+    equals sign ('=') is used in a phone number to indicate a wait 
+    for a secondary dial tone.  The dash ('-') is used to indicate a 
+    pause (4 seconds, normally).  This field specifies how these 
+    characters are translated into characters which a specific 
+    dialer (modem) can recognize.  This field consists of an even number
+    of characters (up to 4).  The first character is translated into 
+    the second character and the third character, if any, is translated 
+    into the fourth when the dialing is carried out.  The following example 
+    sequence will cause the equals sign ('=') to be converted to a plus 
+    sign ('+'), and the dash ('-') to be converted to a comma (',').
+
+     =+-,
+expect|
+    The Expect-send sequence reflects a sequence of character exchanges
+    between the software executing the dialing script and the dialer itself.
+    The following example sequence reflects that the string  "AT" should
+    be sent to the modem, to which the modem responds with an "OK".  The
+    ATDT5551212 string will then be sent to the modem.  The  modem should
+    then respond with "CONNECT".  
+
+    AT OK ATDT5551212 CONNECT
+
+    A null string can be represented by a pair of double quotes.  The
+    following example sequence reflects that a null string should be
+    be sent to the modem, to which the modem should not respond with
+    any reply.  Subsequently, the the string  "AT" should be sent to 
+    the modem, to which the modem responds with an "OK".  The
+    ATDT\T string will then be sent to the modem.  The  modem should
+    then respond with "CONNECT".  The meaning of \T is described
+    below.
+
+    "" AT OK ATDT\T CONNECT
+
+
+
+
+    A number of escape characters can be specified in the Expect-send
+    string.  Their meanings are as follows:
+
+      \p - pause (approximately 1/4-1/2 second delay)
+      \d - delay (2 seconds)
+      \D - phone number/token
+      \T - phone number with Dialcodes and character translation
+      \N - null byte
+      \K - insert a BREAK
+      \E - turn on echo checking (for slow devices)
+      \e - turn off echo checking
+      \r - carriage return
+      \c - no new-line
+      \n - send new-line
+      \s - send space
+      \nnn - send octal number

@@ -1,0 +1,44 @@
+# @(#)14        1.1  src/bldenv/inutoc/Makefile.org, cmdinstl, bos412, GOLDA411a 5/18/94 16:31:45
+#
+#   COMPONENT_NAME: CMDINSTL
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#   Use this makefile if you need to rebuild the inutoc binary ...
+#   but it may need some changes to compile (heads up)
+
+VPATH		= ${MAKETOP}bos/usr/sbin/install/inutoc:${MAKETOP}bos/usr/sbin/install/inulib:${MAKETOP}bos/usr/sbin/install/messages:${MAKETOP}bos/usr/include:${MAKETOP}bos/usr/include/IN
+
+PROGRAMS	= inutoc
+MSGHDRS		= cmdinstl_e_msg.h
+LOCAL_HFILES	= includes/inu_toc.h includes/IN/AFdefs.h
+HFILES		= ${MSGHDRS} commonmsg.h ${LOCAL_HFILES}
+OFILES		= getbasename.o inurddk.o inutoc.o inu_dev_ctl.o \
+		  inu_do_exec.o inu_get_lppname.o inu_level_compare.o \
+		  inu_level_convert.o inu_mk_dir.o inu_obj_mgmt.o \
+		  inu_restore.o inu_toc.o inu_rm.o is_file.o inu_msg.o \
+                  inu_tape_lock.o inu_signal.o
+
+ILIST		= ${PROGRAMS}
+IDIR		= /usr/sbin/
+
+INCFLAGS	= -Iincludes -I${MAKETOP}bos/usr/sbin/install/inutoc -I${MAKETOP}bos/usr/sbin/install/include -I${MAKETOP}bos/usr/sbin/install/messages
+
+${LOCAL_HFILES} : $${.TARGET:T}
+	${RM} ${_RMFLAGS_} ${.TARGET} ${.TARGET:T}
+	[ -d ${.TARGET:H} ] || ${MKDIR} -p ${.TARGET:H}
+	${CP} ${${.TARGET:T}:P} ${.TARGET}
+
+.include <${RULES_MK}>

@@ -1,0 +1,214 @@
+# @(#)71	1.1  src/bos/usr/bin/uucp/Dialers.samples, cmduucp, bos411, 9428A410j 2/11/94 14:20:32
+#
+#   COMPONENT_NAME: cmduucp
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Dialers.samples 
+# The examples in this file are supplied without any warranty or support
+# whatsoever.  These are samples only.  Most of these will work as is
+# for the models mentioned, but may not meet your specific needs.
+# Some modifications may be and probably will be required at your site.
+# Consult your modem manual for a more detailed explanation of the
+# settings.
+#
+# To use the settings to program the modem, you need an entry in the Systems
+# file such as:
+# hayes Nvr HayesPRGM Any
+#
+# and the Devices file:
+# HayesPRGM tty0 - 2400 HayesProgrm2400 
+# 
+# Then use cu to program the modem:
+# cu -d hayes
+
+#######################################################
+# Motorola UDS Modem                                  #
+# Use udsmodemPROGRAM to program the modem.           #
+# Port needs to have rts/cts set.                     #
+# Use uds or hayes dialer.                            #
+#######################################################
+udsmodemPROGRAM	=,-,	"" \dAT&FQ2\r\c OK ATE0Y0&C1&D2&S1%B5%E0*LC\r\c OK AT&K3&W\r\c OK
+
+uds	=,-,	"" \dAT\r\c OK\r ATDT\T\d\r\c CONNECT
+
+#######################################################
+# IBM 7855 Model 10                                   #
+# Use IBMProgrm to program the modem.                 #
+# This sets rts/cts flow control, turns               #
+# off xon/xoff, and sets the DTE speed at 19,200 bps. #
+# The modem will connect at the appropriate speed and #
+# flow control with the RS/6000.                      #
+# Port needs to have rts/cts set.                     #
+#######################################################
+IBMProgrm	=,-,	"" \dATQ0\r\c OK AT&F\r\c OK ATM1\r\c OK AT&D3\r\c OK AT&C1\R2\Q2\M14\r\c OK AT&B8N1L0E0\A0\r\c OK ATS0=1\r\c OK ATQ1&W0&Y0\r\c ""
+
+#######################################################
+# The following are used for Dialing out on a 7855    #
+# regular ACU device.  We have to turn on result      #
+# codes (Q0) because they are turned off when we      #
+# programmed it. (Keeps all upper case login from     #
+# happening on dial in attempts.)                     #
+# We have to have an extra "\" before "\N" because    #
+# the BNU programs strips it if it's before an "N".   #
+#######################################################
+ibm	=,-,	"" \dATQ0\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 ECL (No Compression)
+ibmecl	=,-,	"" \dAT\\N3%C0Q0\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 ECLC (Compression)
+ibmeclc	=,-,	"" \dAT\\N3%C1Q0\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 ECLC Compression with 256 byte block size
+ibmeclc256	=,-,	"" \dAT\\N3%C1Q0\A3\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 1200bps
+ibm_ne12	=,-,	"" \dATQ0\\N0&A2%C0\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 2400bps
+ibm_ne24	=,-,	"" \dATQ0\\N0&A3%C0\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 9600bps
+ibm_ne96	=,-,	"" \dATQ0\\N0&A6%C0\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 19200bps
+ibm_ne192	=,-,	"" \dATQ0\\N0%C0\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 12000bps
+ibm_ne120	=,-,	"" \dATQ0\\N3%C0&AL8\r\c OK ATDT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 1200bps (Dial Quietly)
+ibmq12	=,-,	"" \dATQ0\r\c OK AT&A2M0DT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 2400bps (Dial Quietly)
+ibmq24	=,-,	"" \dATQ0\r\c OK AT&A3M0DT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 9600bps (Dial Quietly)
+ibmq96	=,-,	"" \dATQ0\r\c OK AT&A6M0DT\T\d\r\c CONNECT
+
+# IBM 7855 No Compression 19200bps (Dial Quietly)
+ibmq192	=,-,	"" \dATQ0\r\c OK ATM0DT\T\d\r\c CONNECT
+
+
+#######################################################
+# Intel 9600EX Modem                                  #
+# Use IntelProgram to program the modem.              #
+# This sets rts/cts flow control, and turns           #
+# off xon/xoff.                                       #
+# Port needs to have rts/cts set. (Use hayes dialer)  #
+#######################################################
+IntelProgram	=,-,	"" \d\dAT\r\c OK AT&F\r\c OK AT&S1M1\r\c OK AT&D3\r\c OK AT&C1\r\c OK ATL0E0Y0&Y0\X1\r\c OK ATS0=1\r\c OK AT&W\r\c OK
+
+
+#######################################################
+# Practical Peripherals 1440FXMT Modem                #
+# Use PracPerProgram144 to program the modem.         #
+# This sets rts/cts flow control, and turns           #
+# off xon/xoff.  (Use hayes dialer)                   #
+# DTE speed will be locked at connect speed when      #
+# the modem is programmed. (Suggestion: 38400 baud)   #
+#######################################################
+PracPerProgram144	=,-,	"" \d\dAT\r\c OK AT&F\r\c OK ATM1\r\c OK AT&D3\r\c OK AT&C1&K3\r\c OK ATQ2E1&Q9\r\c OK ATS0=1S9=20\r\c OK AT&W\r\c OK
+
+#######################################################
+# Practical Peripherals 9600 bps Modem                #
+# Use PracPerProgram9600 to program the modem.        #
+# This sets rts/cts flow control, and turns           #
+# off xon/xoff.  (Use hayes dialer)                   #
+#######################################################
+PracPerProgram9600	=,-,	"" \d\dAT\r\c OK AT&F\r\c OK ATM1\r\c OK AT&D3\r\c OK AT&C1&K3\r\c OK ATL0E0\r\c OK ATS0=1S9=20\r\c OK AT&W\r\c OK
+
+
+#######################################################
+# Practical Peripherals 2400 bps Modem                #
+# Use PracPerProgram to program the modem             #
+#######################################################
+PracPerProgram2400	=,-,	"" \d\dAT\r\c OK AT&F\r\c OK ATM1\r\c OK AT&D3\r\c OK AT&C1\r\c OK ATL0E0\r\c OK ATS0=1S9=20\r\c OK AT&W\r\c OK
+
+hayes	=,-,	"" ATDT\T\d\r\c CONNECT
+
+
+#######################################################
+# Hayes 2400 bps Modem                                #
+# Use HayesProgrm2400 to program the modem.           #
+# (Use hayes dialer to dial)                          #
+#######################################################
+HayesProgrm2400	=,-,	"" \d\dAT\r\c OK AT&F\r\c OK ATM1\r\c OK AT&D3\r\c OK AT&C1\r\c OK ATL0E0\r\c OK ATS0=1\r\c OK AT&W\r\c OK
+
+#######################################################
+# Telebit t2000 Trailblazer Plus                      #
+# Use TelebitProgrm to program the modem              #
+# This sets rts/cts flow control, and turns           #
+# off xon/xoff and sets the Default DTE speed at      #
+# 19,200 bps.                                         #
+# Port needs to have rts/cts set.                     #
+# This sets modem to send PEP tones last as they can  #
+# can confuse some other modems.                      #
+#######################################################
+TelebitProgram	=,-,	"" \dAT&F\r\c OK ats2=255s7=60s11=50s41=2s45=255s51=254s52=2s54=3s58=2s64=1s66=1\r\c OK ATs69=1s92=1s96=0s105=0s110=1s111=30s130=3s131=1F1M0Q6TV1W0X3Y0\r\c OK ATE0&W\r\c OK
+#
+# Telebit T2000 dialers Entries:
+#
+# Forces a PEP connection:
+tbfast	=,-,	"" \dATs50=255s7=60\r\c OK\r ATDT\T\r\c CONNECT-\d\c-CONNECT
+
+#
+#   2400bps connection:
+#
+tb2400	=,-,	"" \dATs50=3\r\c OK\r ATDT\T\r\c CONNECT
+#  2400 MNP:
+tb24mnp =,-,	"" \dAT\r\c OK ATS0=0S95=2S50=3S41=0\r\c OK ATDT\T\r\c CONNECT
+
+#
+#   1200bps connection:
+#
+tb1200	=,-,	"" \dATs50=2\r\c OK\r ATDT\T\r\c CONNECT
+#  1200 MNP:
+tb12mnp =,-,	"" \dAT\r\c OK ATS0=0S95=2S50=2S41=0\r\c OK ATDT\T\r\c CONNECT
+
+
+#######################################################
+# Telebit WorldBlazer                                 #
+# WORLDBLAZERProgram sets the DTE speed at 38400, but #
+# you could set it higher if the DTE connection can   #
+# handle it.  We answer with PEP tones last so as not #
+# to confuse other modems.  This turns off xon/xoff   #
+# and turns on RTS/CTS flow control.  The port should #
+# be locked to 38400 with these settings, and needs   #
+# to have RTS/CTS turned on.                          #
+#######################################################
+WORLDBLAZERProgram	=,-,	"" \dAT\r\c AT AT&F3M0\r\c AT ATs51=253s92=1\r\c AT AT&W\r\c AT
+
+#######################################################
+# ACU Dialers for various BAUD rates for the          #
+# WorldBlazer - each sets the modem to attempt to     #
+# connect at a specific speed and lower.  The         #
+# WBlazer will accept whatever the remote modem can   #
+# do.  You will want to use PEP for other Telebits,   #
+# so use WBlazer38400 or WBlazer19200 for those       #
+#######################################################
+WBlazer	=,-,	"" \dAT\r\c OK ATDT\T\d\r\c CONNECT
+WBlazer38400	=,-,	"" \dATs50=255\r\c OK ATDT\T\d\r\c CONNECT
+WBlazer19200	=,-,	"" \dATs50=255\r\c OK ATDT\T\d\r\c CONNECT
+
+# WBlazer14400 attempts to negotiate a V.42bis connection.
+WBlazer14400	=,-,	"" \dATs50=7\r\c OK ATDT\T\d\r\c CONNECT
+
+# For a V.32 connection:
+WBlazer9600	=,-,	"" \dATs50=6\r\c OK ATDT\T\d\r\c CONNECT
+
+# For a V.22 connection:
+WBlazer2400	=,-,	"" \dATs50=3\r\c OK ATDT\T\d\r\c CONNECT
+
+# For a 1200 bps connection:
+WBlazer1200	=,-,	"" \dATs50=2\r\c OK ATDT\T\d\r\c CONNECT

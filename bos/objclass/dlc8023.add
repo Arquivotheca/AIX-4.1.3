@@ -1,0 +1,59 @@
+# @(#)75        1.4  src/bos/objclass/dlc8023.add, dlccfg, bos411, 9428A410j 3/31/94 19:24:31
+# COMPONENT_NAME: (DLCCFG) Add file to create objects during install
+#
+# FUNCTIONS: none
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+#
+# (C) COPYRIGHT International Business Machines Corp. 1987, 1994
+# All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+PdDv:
+	type = "IEEE_ethernet"
+	class = "dlc"
+	subclass = "dlc"
+	prefix = "dlc8023"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 0
+	led = 0x0584
+	catalog = "devices.cat"
+	setno = 129
+	msgno = 5
+	DvDr = "E3L.ext"
+	Define = "/usr/lib/methods/defdlc"
+	Configure = "/usr/lib/methods/cfgdlc"
+	Change = "/usr/lib/methods/chgdlc"
+	Unconfigure = "/usr/lib/methods/ucfgdlc"
+	Undefine = "/usr/lib/methods/udefdlc"
+	Start = ""
+	Stop = ""
+	uniquetype = "dlc/dlc/IEEE_ethernet"
+
+PdAt:
+	uniquetype = "dlc/dlc/IEEE_ethernet"
+	attribute = "queue_depth"
+	deflt = "32"
+	values = "1-1000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 6
+
+PdCn:
+	uniquetype = "dlc/dlc/IEEE_ethernet"
+	connkey = "dlc_ethernet"
+	connwhere = ""
+

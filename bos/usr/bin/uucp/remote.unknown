@@ -1,0 +1,19 @@
+#!/usr/bin/bsh
+# @(#)13	1.4  src/bos/usr/bin/uucp/remote.unknown, cmduucp, bos411, 9428A410j 3/11/94 17:25:28
+# 
+# COMPONENT_NAME: UUCP remote.unknown
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+FOREIGN=/usr/spool/uucp/.Admin/Foreign
+echo "`date`: call from system $1" >> $FOREIGN

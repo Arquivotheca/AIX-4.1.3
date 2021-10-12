@@ -1,0 +1,1153 @@
+# @(#)02	1.5  src/bos/usr/lib/nls/loc/locale/bg_BG.ISO8859-5.src, cfgnls, bos411, 9428A410j 4/1/94 15:02:26
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# Locale Source for bg_BG ( ISO8859-5 ) locale                       #
+######################################################################
+
+
+#############
+LC_CTYPE
+#############
+
+upper   <A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+        <cyr-IO>;\
+        <serbian-DJE>;\
+        <macedonia-GJE>;\
+        <ukrainian-IE>;\
+        <macedonia-DZE>;\
+        <ukrainian-I>;\
+        <ukrainian-YI>;\
+        <cyr-JE>;\
+        <cyr-LJE>;\
+        <cyr-NJE>;\
+        <serbian-TSHE>;\
+        <macedonia-KJE>;\
+        <byelorussian-SHORTU>;\
+        <cyr-DZHE>;\
+        <cyr-A>;\
+        <cyr-BE>;\
+        <cyr-VE>;\
+        <cyr-GHE>;\
+        <cyr-DE>;\
+        <cyr-IE>;\
+        <cyr-ZHE>;\
+        <cyr-ZE>;\
+        <cyr-I>;\
+        <cyr-SHORTI>;\
+        <cyr-KA>;\
+        <cyr-EL>;\
+        <cyr-EM>;\
+        <cyr-EN>;\
+        <cyr-O>;\
+        <cyr-PE>;\
+        <cyr-ER>;\
+        <cyr-ES>;\
+        <cyr-TE>;\
+        <cyr-U>;\
+        <cyr-EF>;\
+        <cyr-HA>;\
+        <cyr-TSE>;\
+        <cyr-CHE>;\
+        <cyr-SHA>;\
+        <cyr-SHCHA>;\
+        <HARDSIGN>;\
+        <cyr-YERU>;\
+        <SOFTSIGN>;\
+        <cyr-E>;\
+        <cyr-YU>;\
+        <cyr-YA>
+
+lower   <a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+        <cyr-io>;\
+        <serbian-dje>;\
+        <macedonia-gje>;\
+        <ukrainian-ie>;\
+        <macedonia-dze>;\
+        <ukrainian-i>;\
+        <ukrainian-yi>;\
+        <cyr-je>;\
+        <cyr-lje>;\
+        <cyr-nje>;\
+        <serbian-tshe>;\
+        <macedonia-kje>;\
+        <byelorussian-shortu>;\
+        <cyr-dzhe>;\
+        <cyr-a>;\
+        <cyr-be>;\
+        <cyr-ve>;\
+        <cyr-ghe>;\
+        <cyr-de>;\
+        <cyr-ie>;\
+        <cyr-zhe>;\
+        <cyr-ze>;\
+        <cyr-i>;\
+        <cyr-shorti>;\
+        <cyr-ka>;\
+        <cyr-el>;\
+        <cyr-em>;\
+        <cyr-en>;\
+        <cyr-o>;\
+        <cyr-pe>;\
+        <cyr-er>;\
+        <cyr-es>;\
+        <cyr-te>;\
+        <cyr-u>;\
+        <cyr-ef>;\
+        <cyr-ha>;\
+        <cyr-tse>;\
+        <cyr-che>;\
+        <cyr-sha>;\
+        <cyr-shcha>;\
+        <hardsign>;\
+        <cyr-yeru>;\
+        <softsign>;\
+        <cyr-e>;\
+        <cyr-yu>;\
+        <cyr-ya>
+
+space  	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+       	<form-feed>;\
+	<carriage-return>;\
+	<space>
+
+cntrl   <NUL>;\
+	<SOH>;\
+	<STX>;\
+	<ETX>;\
+	<EOT>;\
+	<ENQ>;\
+	<ACK>;\
+	<BEL>;\
+	<alert>;\
+	<backspace>;\
+	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+	<form-feed>;\
+	<carriage-return>;\
+	<SO>;\
+	<SI>;\
+	<DLE>;\
+	<DC1>;\
+	<DC2>;\
+	<DC3>;\
+	<DC4>;\
+	<NAK>;\
+	<SYN>;\
+	<ETB>;\
+	<CAN>;\
+	<EM>;\
+	<SUB>;\
+	<ESC>;\
+	<IS4>;\
+	<IS3>;\
+	<IS2>;\
+	<IS1>;\
+	<DEL>;\
+	<PAD>;\
+	<HOP>;\
+	<BPH>;\
+	<NBH>;\
+	<IND>;\
+	<NEL>;\
+	<SSA>;\
+	<ESA>;\
+	<HTS>;\
+	<HTJ>;\
+	<VTS>;\
+	<PLD>;\
+	<PLU>;\
+	<RI>;\
+	<SS2>;\
+	<SS3>;\
+	<DCS>;\
+	<PU1>;\
+	<PU2>;\
+	<STS>;\
+	<CCH>;\
+	<MW>;\
+	<SPS>;\
+	<EPA>;\
+	<SOS>;\
+	<SGCI>;\
+	<SCI>;\
+	<CSI>;\
+	<ST>;\
+	<OSC>;\
+	<PM>;\
+	<APC>
+
+graph   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<cyr-IO>;\
+	<serbian-DJE>;\
+	<macedonia-GJE>;\
+	<ukrainian-IE>;\
+	<macedonia-DZE>;\
+	<ukrainian-I>;\
+	<ukrainian-YI>;\
+	<cyr-JE>;\
+	<cyr-LJE>;\
+	<cyr-NJE>;\
+	<serbian-TSHE>;\
+	<macedonia-KJE>;\
+	<dash>;\
+	<byelorussian-SHORTU>;\
+	<cyr-DZHE>;\
+	<cyr-A>;\
+	<cyr-BE>;\
+	<cyr-VE>;\
+	<cyr-GHE>;\
+	<cyr-DE>;\
+	<cyr-IE>;\
+	<cyr-ZHE>;\
+	<cyr-ZE>;\
+	<cyr-I>;\
+	<cyr-SHORTI>;\
+	<cyr-KA>;\
+	<cyr-EL>;\
+	<cyr-EM>;\
+	<cyr-EN>;\
+	<cyr-O>;\
+	<cyr-PE>;\
+	<cyr-ER>;\
+	<cyr-ES>;\
+	<cyr-TE>;\
+	<cyr-U>;\
+	<cyr-EF>;\
+	<cyr-HA>;\
+	<cyr-TSE>;\
+	<cyr-CHE>;\
+	<cyr-SHA>;\
+	<cyr-SHCHA>;\
+	<HARDSIGN>;\
+	<cyr-YERU>;\
+	<SOFTSIGN>;\
+	<cyr-E>;\
+	<cyr-YU>;\
+	<cyr-YA>;\
+	<cyr-a>;\
+	<cyr-be>;\
+	<cyr-ve>;\
+	<cyr-ghe>;\
+	<cyr-de>;\
+	<cyr-ie>;\
+	<cyr-zhe>;\
+	<cyr-ze>;\
+	<cyr-i>;\
+	<cyr-shorti>;\
+	<cyr-ka>;\
+	<cyr-el>;\
+	<cyr-em>;\
+	<cyr-en>;\
+	<cyr-o>;\
+	<cyr-pe>;\
+	<cyr-er>;\
+	<cyr-es>;\
+	<cyr-te>;\
+	<cyr-u>;\
+	<cyr-ef>;\
+	<cyr-ha>;\
+	<cyr-tse>;\
+	<cyr-che>;\
+	<cyr-sha>;\
+	<cyr-shcha>;\
+	<hardsign>;\
+	<cyr-yeru>;\
+	<softsign>;\
+	<cyr-e>;\
+	<cyr-yu>;\
+	<cyr-ya>;\
+	<numero-sign>;\
+	<cyr-io>;\
+	<serbian-dje>;\
+	<macedonia-gje>;\
+	<ukrainian-ie>;\
+	<macedonia-dze>;\
+	<ukrainian-i>;\
+	<ukrainian-yi>;\
+	<cyr-je>;\
+	<cyr-lje>;\
+	<cyr-nje>;\
+	<serbian-tshe>;\
+	<macedonia-kje>;\
+	<section>;\
+	<byelorussian-shortu>;\
+	<cyr-dzhe>
+
+print   <space>;\
+	<exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<nobreakspace>;\
+	<cyr-IO>;\
+	<serbian-DJE>;\
+	<macedonia-GJE>;\
+	<ukrainian-IE>;\
+	<macedonia-DZE>;\
+	<ukrainian-I>;\
+	<ukrainian-YI>;\
+	<cyr-JE>;\
+	<cyr-LJE>;\
+	<cyr-NJE>;\
+	<serbian-TSHE>;\
+	<macedonia-KJE>;\
+	<dash>;\
+	<byelorussian-SHORTU>;\
+	<cyr-DZHE>;\
+	<cyr-A>;\
+	<cyr-BE>;\
+	<cyr-VE>;\
+	<cyr-GHE>;\
+	<cyr-DE>;\
+	<cyr-IE>;\
+	<cyr-ZHE>;\
+	<cyr-ZE>;\
+	<cyr-I>;\
+	<cyr-SHORTI>;\
+	<cyr-KA>;\
+	<cyr-EL>;\
+	<cyr-EM>;\
+	<cyr-EN>;\
+	<cyr-O>;\
+	<cyr-PE>;\
+	<cyr-ER>;\
+	<cyr-ES>;\
+	<cyr-TE>;\
+	<cyr-U>;\
+	<cyr-EF>;\
+	<cyr-HA>;\
+	<cyr-TSE>;\
+	<cyr-CHE>;\
+	<cyr-SHA>;\
+	<cyr-SHCHA>;\
+	<HARDSIGN>;\
+	<cyr-YERU>;\
+	<SOFTSIGN>;\
+	<cyr-E>;\
+	<cyr-YU>;\
+	<cyr-YA>;\
+	<cyr-a>;\
+	<cyr-be>;\
+	<cyr-ve>;\
+	<cyr-ghe>;\
+	<cyr-de>;\
+	<cyr-ie>;\
+	<cyr-zhe>;\
+	<cyr-ze>;\
+	<cyr-i>;\
+	<cyr-shorti>;\
+	<cyr-ka>;\
+	<cyr-el>;\
+	<cyr-em>;\
+	<cyr-en>;\
+	<cyr-o>;\
+	<cyr-pe>;\
+	<cyr-er>;\
+	<cyr-es>;\
+	<cyr-te>;\
+	<cyr-u>;\
+	<cyr-ef>;\
+	<cyr-ha>;\
+	<cyr-tse>;\
+	<cyr-che>;\
+	<cyr-sha>;\
+	<cyr-shcha>;\
+	<hardsign>;\
+	<cyr-yeru>;\
+	<softsign>;\
+	<cyr-e>;\
+	<cyr-yu>;\
+	<cyr-ya>;\
+	<numero-sign>;\
+	<cyr-io>;\
+	<serbian-dje>;\
+	<macedonia-gje>;\
+	<ukrainian-ie>;\
+	<macedonia-dze>;\
+	<ukrainian-i>;\
+	<ukrainian-yi>;\
+	<cyr-je>;\
+	<cyr-lje>;\
+	<cyr-nje>;\
+	<serbian-tshe>;\
+	<macedonia-kje>;\
+	<section>;\
+	<byelorussian-shortu>;\
+	<cyr-dzhe>
+
+punct   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>
+
+digit   <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>
+
+xdigit  <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>
+
+blank  	<space>;\
+	<tab>
+
+toupper (<a>,<A>);(<b>,<B>);(<c>,<C>);(<d>,<D>);(<e>,<E>);\
+        (<f>,<F>);(<g>,<G>);(<h>,<H>);(<i>,<I>);(<j>,<J>);\
+        (<k>,<K>);(<l>,<L>);(<m>,<M>);(<n>,<N>);(<o>,<O>);\
+        (<p>,<P>);(<q>,<Q>);(<r>,<R>);(<s>,<S>);(<t>,<T>);\
+        (<u>,<U>);(<v>,<V>);(<w>,<W>);(<x>,<X>);(<y>,<Y>);\
+        (<z>,<Z>);\
+        (<cyr-io>,<cyr-IO>);\
+	(<serbian-dje>,<serbian-DJE>);\
+	(<macedonia-gje>,<macedonia-GJE>);\
+	(<ukrainian-ie>,<ukrainian-IE>);\
+	(<macedonia-dze>,<macedonia-DZE>);\
+	(<ukrainian-i>,<ukrainian-I>);\
+	(<ukrainian-yi>,<ukrainian-YI>);\
+	(<cyr-je>,<cyr-JE>);\
+	(<cyr-lje>,<cyr-LJE>);\
+	(<cyr-nje>,<cyr-NJE>);\
+	(<serbian-tshe>,<serbian-TSHE>);\
+	(<macedonia-kje>,<macedonia-KJE>);\
+	(<byelorussian-shortu>,<byelorussian-SHORTU>);\
+	(<cyr-dzhe>,<cyr-DZHE>);\
+        (<cyr-a>,<cyr-A>);\
+        (<cyr-be>,<cyr-BE>);\
+        (<cyr-ve>,<cyr-VE>);\
+        (<cyr-ghe>,<cyr-GHE>);\
+        (<cyr-de>,<cyr-DE>);\
+        (<cyr-ie>,<cyr-IE>);\
+        (<cyr-zhe>,<cyr-ZHE>);\
+        (<cyr-ze>,<cyr-ZE>);\
+        (<cyr-i>,<cyr-I>);\
+        (<cyr-shorti>,<cyr-SHORTI>);\
+        (<cyr-ka>,<cyr-KA>);\
+        (<cyr-el>,<cyr-EL>);\
+        (<cyr-em>,<cyr-EM>);\
+        (<cyr-en>,<cyr-EN>);\
+        (<cyr-o>,<cyr-O>);\
+        (<cyr-pe>,<cyr-PE>);\
+        (<cyr-er>,<cyr-ER>);\
+        (<cyr-es>,<cyr-ES>);\
+        (<cyr-te>,<cyr-TE>);\
+        (<cyr-u>,<cyr-U>);\
+        (<cyr-ef>,<cyr-EF>);\
+        (<cyr-ha>,<cyr-HA>);\
+        (<cyr-tse>,<cyr-TSE>);\
+        (<cyr-che>,<cyr-CHE>);\
+        (<cyr-sha>,<cyr-SHA>);\
+        (<cyr-shcha>,<cyr-SHCHA>);\
+        (<hardsign>,<HARDSIGN>);\
+        (<cyr-yeru>,<cyr-YERU>);\
+        (<softsign>,<SOFTSIGN>);\
+        (<cyr-e>,<cyr-E>);\
+        (<cyr-yu>,<cyr-YU>);\
+        (<cyr-ya>,<cyr-YA>)
+
+END LC_CTYPE
+
+
+#############
+LC_COLLATE
+#############
+
+
+order_start		forward;forward;forward
+<NUL>
+<SOH>
+<STX>
+<ETX>
+<EOT>
+<ENQ>
+<ACK>
+<alert>
+<backspace>
+<tab>
+<newline>
+<vertical-tab>
+<form-feed>
+<carriage-return>
+<SO>
+<SI>
+<DLE>
+<DC1>
+<DC2>
+<DC3>
+<DC4>
+<NAK>
+<SYN>
+<ETB>
+<CAN>
+<EM>
+<SUB>
+<ESC>
+<IS4>
+<IS3>
+<IS2>
+<IS1>
+<DEL>
+<PAD>
+<HOP>
+<BPH>		
+<NBH>	
+<IND>
+<NEL>		
+<SSA>	
+<ESA>
+<HTS>		
+<HTJ>	
+<VTS>
+<PLD>		
+<PLU>	
+<RI>
+<SS2>			
+<SS3>		
+<DCS>	
+<PU1>
+<PU2>			
+<STS>		
+<CCH>	
+<MW>
+<SPS>		
+<EPA>	
+<SOS>
+<SGCI>
+<SCI>			
+<CSI>		
+<ST>	
+<OSC>
+<PM>
+<APC>			
+<space>			<space>;<space>;<space>
+<exclamation-mark>	<exclamation-mark>;<exclamation-mark>;<exclamation-mark>
+<quotation-mark>	<quotation-mark>;<quotation-mark>;<quotation-mark>
+<number-sign>		<number-sign>;<number-sign>;<number-sign>
+<dollar-sign>		<dollar-sign>;<dollar-sign>;<dollar-sign>
+<percent-sign>		<percent-sign>;<percent-sign>;<percent-sign>
+<ampersand>		<ampersand>;<ampersand>;<ampersand>
+<apostrophe>            <apostrophe>;<apostrophe>;<apostrophe>
+<left-parenthesis>      <left-parenthesis>;<left-parenthesis>;<left-parenthesis>
+<right-parenthesis>     <right-parenthesis>;<right-parenthesis>;<right-parenthesis>
+<asterisk>		<asterisk>;<asterisk>;<asterisk>
+<plus-sign>		<plus-sign>;<plus-sign>;<plus-sign>
+<comma>			<comma>;<comma>;<comma>
+<hyphen>		<hyphen>;<hyphen>;<hyphen>
+<period>		<period>;<period>;<period>
+<slash>			<slash>;<slash>;<slash>
+<colon>			<colon>;<colon>;<colon>
+<semicolon>		<semicolon>;<semicolon>;<semicolon>
+<less-than-sign>	<less-than-sign>;<less-than-sign>;<less-than-sign>
+<equals-sign>		<equals-sign>;<equals-sign>;<equals-sign>
+<greater-than-sign>	<greater-than-sign>;<greater-than-sign>;<greater-than-sign>
+<question-mark>		<question-mark>;<question-mark>;<question-mark>
+<commercial-at>		<commercial-at>;<commercial-at>;<commercial-at>
+<left-square-bracket>	<left-square-bracket>;<left-square-bracket>;<left-square-bracket>
+<backslash>		<backslash>;<backslash>;<backslash>
+<right-square-bracket>	<right-square-bracket>;<right-square-bracket>;<right-square-bracket>
+<circumflex-accent>	<circumflex-accent>;<circumflex-accent>;<circumflex-accent>
+<underscore>		<underscore>;<underscore>;<underscore>
+<grave-accent>		<grave-accent>;<grave-accent>;<grave-accent>
+<left-brace>		<left-brace>;<left-brace>;<left-brace>
+<vertical-line>		<vertical-line>;<vertical-line>;<vertical-line>
+<right-brace>		<right-brace>;<right-brace>;<right-brace>
+<tilde>			<tilde>;<tilde>;<tilde>
+<dash>			<dash>;<dash>;<dash>
+<numero-sign>		<numero-sign>;<numero-sign>;<numero-sign>
+<section>               <section>;<section>;<section>
+<nobreakspace>		<nobreakspace>;<nobreakspace>;<nobreakspace>
+<zero>			<zero>;<zero>;<zero>
+<one>			<one>;<one>;<one>
+<two>			<two>;<two>;<two>
+<three>			<three>;<three>;<three>
+<four>			<four>;<four>;<four>
+<five>			<five>;<five>;<five>
+<six>			<six>;<six>;<six>
+<seven>			<seven>;<seven>;<seven>
+<eight>			<eight>;<eight>;<eight>
+<nine>			<nine>;<nine>;<nine>
+<a>			<a>;<a>;<a>
+<b>			<b>;<b>;<b>
+<c>			<c>;<c>;<c>
+<d>			<d>;<d>;<d>
+<e>			<e>;<e>;<e>
+<f>			<f>;<f>;<f>
+<g>			<g>;<g>;<g>
+<h>			<h>;<h>;<h>
+<i>			<i>;<i>;<i>
+<j>			<j>;<j>;<j>
+<k>			<k>;<k>;<k>
+<l>			<l>;<l>;<l>
+<m>			<m>;<m>;<m>
+<n>			<n>;<n>;<n>
+<o>			<o>;<o>;<o>
+<p>			<p>;<p>;<p>
+<q>			<q>;<q>;<q>
+<r>			<r>;<r>;<r>
+<s>			<s>;<s>;<s>
+<t>			<t>;<t>;<t>
+<u>			<u>;<u>;<u>
+<v>			<v>;<v>;<v>
+<w>			<w>;<w>;<w>
+<x>			<x>;<x>;<x>
+<y>			<y>;<y>;<y>
+<z>			<z>;<z>;<z>
+<A>			<a>;<a>;<A>
+<B>			<b>;<b>;<B>
+<C>			<c>;<c>;<C>
+<D>			<d>;<d>;<D>
+<E>			<e>;<e>;<E>
+<F>			<f>;<f>;<F>
+<G>			<g>;<g>;<G>
+<H>			<h>;<h>;<H>
+<I>			<i>;<i>;<I>
+<J>			<j>;<j>;<J>
+<K>			<k>;<k>;<K>
+<L>			<l>;<l>;<L>
+<M>			<m>;<m>;<M>
+<N>			<n>;<n>;<N>
+<O>			<o>;<o>;<O>
+<P>			<p>;<p>;<P>
+<Q>			<q>;<q>;<Q>
+<R>			<r>;<r>;<R>
+<S>			<s>;<s>;<S>
+<T>			<t>;<t>;<T>
+<U>			<u>;<u>;<U>
+<V>			<v>;<v>;<V>
+<W>			<w>;<w>;<W>
+<X>			<x>;<x>;<X>
+<Y>			<y>;<y>;<Y>
+<Z>			<z>;<z>;<Z>
+<cyr-a>			<cyr-a>;<cyr-a>;<cyr-a>
+<cyr-be>		<cyr-be>;<cyr-be>;<cyr-be>
+<cyr-ve>		<cyr-ve>;<cyr-ve>;<cyr-ve>
+<cyr-ghe>		<cyr-ghe>;<cyr-ghe>;<cyr-ghe>
+<cyr-de>		<cyr-de>;<cyr-de>;<cyr-de>
+<macedonia-gje>		<macedonia-gje>;<macedonia-gje>;<macedonia-gje>
+<serbian-dje>		<serbian-dje>;<serbian-dje>;<serbian-dje>
+<cyr-ie>		<cyr-ie>;<cyr-ie>;<cyr-ie>
+<ukrainian-ie>		<ukrainian-ie>;<ukrainian-ie>;<ukrainian-ie>
+<cyr-io>		<cyr-io>;<cyr-io>;<cyr-io>
+<cyr-zhe>		<cyr-zhe>;<cyr-zhe>;<cyr-zhe>
+<cyr-ze>		<cyr-ze>;<cyr-ze>;<cyr-ze>
+<macedonia-dze>		<macedonia-dze>;<macedonia-dze>;<macedonia-dze>
+<cyr-i>			<cyr-i>;<cyr-i>;<cyr-i>
+<ukrainian-i>		<ukrainian-i>;<ukrainian-i>;<ukrainian-i>
+<ukrainian-yi>		<ukrainian-yi>;<ukrainian-yi>;<ukrainian-yi>
+<cyr-shorti>		<cyr-shorti>;<cyr-shorti>;<cyr-shorti>
+<cyr-je>		<cyr-je>;<cyr-je>;<cyr-je>
+<cyr-ka>		<cyr-ka>;<cyr-ka>;<cyr-ka>
+<cyr-el>		<cyr-el>;<cyr-el>;<cyr-el>
+<cyr-lje>		<cyr-lje>;<cyr-lje>;<cyr-lje>
+<cyr-em>		<cyr-em>;<cyr-em>;<cyr-em>
+<cyr-en>		<cyr-en>;<cyr-en>;<cyr-en>
+<cyr-nje>		<cyr-nje>;<cyr-nje>;<cyr-nje>
+<cyr-o>			<cyr-o>;<cyr-o>;<cyr-o>
+<cyr-pe>		<cyr-pe>;<cyr-pe>;<cyr-pe>
+<cyr-er>		<cyr-er>;<cyr-er>;<cyr-er>
+<cyr-es>		<cyr-es>;<cyr-es>;<cyr-es>
+<cyr-te>		<cyr-te>;<cyr-te>;<cyr-te>
+<macedonia-kje>		<macedonia-kje>;<macedonia-kje>;<macedonia-kje>
+<serbian-tshe>		<serbian-tshe>;<serbian-tshe>;<serbian-tshe>
+<cyr-u>			<cyr-u>;<cyr-u>;<cyr-u>
+<byelorussian-shortu>	<byelorussian-shortu>;<byelorussian-shortu>;<byelorussian-shortu>
+<cyr-ef>		<cyr-ef>;<cyr-ef>;<cyr-ef>
+<cyr-ha>		<cyr-ha>;<cyr-ha>;<cyr-ha>
+<cyr-tse>		<cyr-tse>;<cyr-tse>;<cyr-tse>
+<cyr-che>		<cyr-che>;<cyr-che>;<cyr-che>
+<cyr-dzhe>		<cyr-dzhe>;<cyr-dzhe>;<cyr-dzhe>
+<cyr-sha>		<cyr-sha>;<cyr-sha>;<cyr-sha>
+<cyr-shcha>		<cyr-shcha>;<cyr-shcha>;<cyr-shcha>
+<hardsign>		<hardsign>;<hardsign>;<hardsign>
+<cyr-yeru>		<cyr-yeru>;<cyr-yeru>;<cyr-yeru>
+<softsign>		<softsign>;<softsign>;<softsign>
+<cyr-e>			<cyr-e>;<cyr-e>;<cyr-e>
+<cyr-yu>		<cyr-yu>;<cyr-yu>;<cyr-yu>	
+<cyr-ya>		<cyr-ya>;<cyr-ya>;<cyr-ya>
+<cyr-A>			<cyr-a>;<cyr-a>;<cyr-A>
+<cyr-BE>		<cyr-be>;<cyr-be>;<cyr-BE>
+<cyr-VE>		<cyr-ve>;<cyr-ve>;<cyr-VE>
+<cyr-GHE>		<cyr-ghe>;<cyr-ghe>;<cyr-GHE>
+<cyr-DE>		<cyr-de>;<cyr-de>;<cyr-DE>
+<macedonia-GJE>		<macedonia-gje>;<macedonia-gje>;<macedonia-GJE>
+<serbian-DJE>		<serbian-dje>;<serbian-dje>;<serbian-DJE>
+<cyr-IE>		<cyr-ie>;<cyr-ie>;<cyr-IE>
+<ukrainian-IE>		<ukrainian-ie>;<ukrainian-ie>;<ukrainian-IE>
+<cyr-IO>		<cyr-io>;<cyr-io>;<cyr-IO>
+<cyr-ZHE>		<cyr-zhe>;<cyr-zhe>;<cyr-ZHE>
+<cyr-ZE>		<cyr-ze>;<cyr-ze>;<cyr-ZE>
+<macedonia-DZE>		<macedonia-dze>;<macedonia-dze>;<macedonia-DZE>
+<cyr-I>			<cyr-i>;<cyr-i>;<cyr-I>
+<ukrainian-I>		<ukrainian-i>;<ukrainian-i>;<ukrainian-I>
+<ukrainian-YI>		<ukrainian-yi>;<ukrainian-yi>;<ukrainian-YI>
+<cyr-SHORTI>		<cyr-shorti>;<cyr-shorti>;<cyr-SHORTI>
+<cyr-JE>		<cyr-je>;<cyr-je>;<cyr-JE>
+<cyr-KA>		<cyr-ka>;<cyr-ka>;<cyr-KA>
+<cyr-EL>		<cyr-el>;<cyr-el>;<cyr-EL>
+<cyr-LJE>		<cyr-lje>;<cyr-lje>;<cyr-LJE>
+<cyr-EM>		<cyr-em>;<cyr-em>;<cyr-EM>
+<cyr-EN>		<cyr-en>;<cyr-en>;<cyr-EN>
+<cyr-NJE>		<cyr-nje>;<cyr-nje>;<cyr-NJE>
+<cyr-O>			<cyr-o>;<cyr-o>;<cyr-O>
+<cyr-PE>		<cyr-pe>;<cyr-pe>;<cyr-PE>
+<cyr-ER>		<cyr-er>;<cyr-er>;<cyr-ER>
+<cyr-ES>		<cyr-es>;<cyr-es>;<cyr-ES>
+<cyr-TE>		<cyr-te>;<cyr-te>;<cyr-TE>
+<macedonia-KJE>		<macedonia-kje>;<macedonia-kje>;<macedonia-KJE>
+<serbian-TSHE>		<serbian-tshe>;<serbian-tshe>;<serbian-TSHE>
+<cyr-U>			<cyr-u>;<cyr-u>;<cyr-U>
+<byelorussian-SHORTU>	<byelorussian-shortu>;<byelorussian-shortu>;<byelorussian-SHORTU>
+<cyr-EF>		<cyr-ef>;<cyr-ef>;<cyr-EF>
+<cyr-HA>		<cyr-ha>;<cyr-ha>;<cyr-HA>
+<cyr-TSE>		<cyr-tse>;<cyr-tse>;<cyr-TSE>
+<cyr-CHE>		<cyr-che>;<cyr-che>;<cyr-CHE>
+<cyr-DZHE>		<cyr-dzhe>;<cyr-dzhe>;<cyr-DZHE>
+<cyr-SHA>		<cyr-sha>;<cyr-sha>;<cyr-SHA>
+<cyr-SHCHA>		<cyr-shcha>;<cyr-shcha>;<cyr-SHCHA>
+<HARDSIGN>		<hardsign>;<hardsign>;<HARDSIGN>
+<cyr-YERU>		<cyr-yeru>;<cyr-yeru>;<cyr-YERU>
+<SOFTSIGN>		<softsign>;<softsign>;<SOFTSIGN>
+<cyr-E>			<cyr-e>;<cyr-e>;<cyr-E>
+<cyr-YU>		<cyr-yu>;<cyr-yu>;<cyr-YU>
+<cyr-YA>		<cyr-ya>;<cyr-ya>;<cyr-YA>
+
+###################################
+# Ignore all undefined characters #
+###################################
+
+UNDEFINED		IGNORE;IGNORE;IGNORE
+
+order_end
+
+END LC_COLLATE
+
+
+#############
+LC_MONETARY
+#############
+
+int_curr_symbol   "<B><G><L><space>"
+currency_symbol   "<cyr-el><cyr-ve><period>"
+mon_decimal_point <comma>
+mon_thousands_sep "<space>"
+mon_grouping      3
+positive_sign     ""
+negative_sign     "<hyphen>"
+int_frac_digits   2
+frac_digits       2
+p_cs_precedes     0
+p_sep_by_space    1
+n_cs_precedes     0
+n_sep_by_space    1
+p_sign_posn       1
+n_sign_posn       1
+
+END LC_MONETARY
+
+
+#############
+LC_NUMERIC
+#############
+
+decimal_point     <comma>
+thousands_sep     "<space>"
+grouping          3
+
+END LC_NUMERIC
+
+
+#############
+LC_TIME
+#############
+abday   "<cyr-EN><cyr-de>";\
+        "<cyr-PE><cyr-en>";\
+        "<cyr-VE><cyr-te>";\
+        "<cyr-ES><cyr-er>";\
+        "<cyr-CHE><cyr-te>";\
+        "<cyr-PE><cyr-te>";\
+        "<cyr-ES><cyr-be>"
+
+day     "<cyr-EN><cyr-ie><cyr-de><cyr-ie><cyr-el><cyr-ya>";\
+        "<cyr-PE><cyr-o><cyr-en><cyr-ie><cyr-de><cyr-ie><cyr-el><cyr-en><cyr-i><cyr-ka>";\
+        "<cyr-VE><cyr-te><cyr-o><cyr-er><cyr-en><cyr-i><cyr-ka>";\
+        "<cyr-ES><cyr-er><cyr-ya><cyr-de><cyr-a>";\
+        "<cyr-CHE><cyr-ie><cyr-te><cyr-ve><hardsign><cyr-er><cyr-te><hardsign><cyr-ka>";\
+        "<cyr-PE><cyr-ie><cyr-te><hardsign><cyr-ka>";\
+        "<cyr-ES><hardsign><cyr-be><cyr-o><cyr-te><cyr-a>"
+
+abmon   "<I>";\
+        "<I><I>";\
+        "<I><I><I>";\
+        "<I><V>";\
+        "<V>";\
+        "<V><I>";\
+        "<V><I><I>";\
+        "<V><I><I><I>";\
+        "<I><X>";\
+        "<X>";\
+        "<X><I>";\
+        "<X><I><I>"
+
+mon     "<cyr-ya><cyr-en><cyr-u><cyr-a><cyr-er><cyr-i>";\
+        "<cyr-ef><cyr-ie><cyr-ve><cyr-er><cyr-u><cyr-a><cyr-er><cyr-i>";\
+        "<cyr-em><cyr-a><cyr-er><cyr-te>";\
+        "<cyr-a><cyr-pe><cyr-er><cyr-i><cyr-el>";\
+        "<cyr-em><cyr-a><cyr-shorti>";\
+        "<cyr-yu><cyr-en><cyr-i>";\
+        "<cyr-yu><cyr-el><cyr-i>";\
+        "<cyr-a><cyr-ve><cyr-ghe><cyr-u><cyr-es><cyr-te>";\
+        "<cyr-es><cyr-ie><cyr-pe><cyr-te><cyr-ie><cyr-em><cyr-ve><cyr-er><cyr-i>";\
+        "<cyr-o><cyr-ka><cyr-te><cyr-o><cyr-em><cyr-ve><cyr-er><cyr-i>";\
+        "<cyr-en><cyr-o><cyr-ie><cyr-em><cyr-ve><cyr-er><cyr-i>";\
+        "<cyr-de><cyr-ie><cyr-ka><cyr-ie><cyr-em><cyr-ve><cyr-er><cyr-i>"
+
+d_t_fmt "%A %e %B %Y %H:%M:%S"
+
+d_fmt   "%d.%m.%y"
+
+t_fmt   "%H:%M:%S"
+
+am_pm   "";""
+
+t_fmt_ampm	"%H:%M:%S"
+
+nlldate	"%e %b %Y"
+
+END LC_TIME
+
+
+#############
+LC_MESSAGES
+#############
+
+yesexpr "^([dD]|[dD][aA])"
+noexpr  "^([nN]|[nN][eE])"
+yesstr  "da:d:D"
+nostr   "ne:n:N"
+
+END LC_MESSAGES

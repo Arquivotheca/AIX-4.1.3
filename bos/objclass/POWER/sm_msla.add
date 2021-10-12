@@ -1,0 +1,907 @@
+# @(#)36        1.18  src/bos/objclass/POWER/sm_msla.add, cfggraphics, bos41B, 9504A 12/13/94 14:20:19
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: 5085/86/88 Attachment Adapter Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All 5085/86/88 Attachment Adapters
+#       Add a 5085/86/88 Attachment Adapter
+#       Change/Show Characteristics of a 5085/86/88 Attachment Adapter
+#       Remove a 5085/86/88 Attachment Adapter
+#       Configure a Defined 5085/86/88 Attachment Adapter
+#
+#       Help text Id's for msla adapter specific helps are in the range:
+#               04201200 to 04201299
+#       This does not include menu helps.
+#
+
+#
+# List All 5085/86/88 Attachment Adapters
+# This uses a ghost dialogue to list all the defined 5085/86/88 adapters.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsdmsla"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All 5085/85/88 Attachment Adapters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1200
+    cmd_to_exec               = "lsdev -C -c msla"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800193"
+    help_msg_loc              = ""
+
+#
+# Add a 5085/86/88 Attachment Adapter
+# This allows a 5085/86/88 adapter to be added as either a GSW or HIA
+# adapter.  There are two name selectors followed by the dialogue.  The
+# first name selector is used to put up a list of defined 5085/86/88
+# adapters for the user to select from.  The second name selector asks
+# the user whether this card is to be added as a GSW or HIA card.  The
+# dialogue then puts up a list of the user configurable attributes.
+
+# Select adapter card
+sm_name_hdr:
+    id                        = "makmsla"
+    next_id                   = "makmsla_mode"
+    option_id                 = "msla_mk_parent"
+    has_name_select           = "n"
+    name                      = "Add a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1201
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "n"
+    help_msg_id               = "1800490"
+    help_msg_loc              = ""
+
+# Name selector command option for adapter card.
+sm_cmd_opt:
+    id                        = "msla_mk_parent"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1206
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C -k msla"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+# Select mode
+sm_name_hdr:
+    id                        = "makmsla_mode"
+    next_id                   = "makmsla_hdr_"
+    option_id                 = "msla_mk_mode"
+    has_name_select           = "y"
+    name                      = "Add a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1201
+    type                      = "c"
+    ghost                     = "n"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "mode"
+    cooked_field_name         = "mode"
+    next_type                 = "d"
+    help_msg_id               = "1800490"
+    help_msg_loc              = ""
+
+# Name selector command option for adapter card.
+sm_cmd_opt:
+    id                        = "msla_mk_mode"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "5085/86/88 Mode"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1207
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "gsw,hia"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "gsw,hia"
+    help_msg_id               = "04204"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There is one for each of the two modes:
+# gsw and hia.  Their Id's are built as follows:
+#       "makmsla_hdr_gsw"   for gsw, and
+#       "makmsla_hdr_hia"   for hia
+
+# The hia dialogue header.
+sm_cmd_hdr:
+    id                        = "makmsla_hdr_hia"
+    option_id                 = "msla_add,hia_common"
+    has_name_select           = "y"
+    name                      = "Add a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1201
+    cmd_to_exec               = "mkdev -c msla -s msla -w 0"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c msla -s msla -t hia -D -O"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800490"
+    help_msg_loc              = ""
+
+# The gsw dialogue header.
+sm_cmd_hdr:
+    id                        = "makmsla_hdr_gsw"
+    option_id                 = "msla_add,gsw_common"
+    has_name_select           = "y"
+    name                      = "Add a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1201
+    cmd_to_exec               = "mkdev -c msla -s msla -w 0"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c msla -s msla -t gsw -D -O"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800490"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a 5085/86/88 Attachment Adapter
+# This allows a 5085/86/88 adapter's characteristics to be shown and,
+# if desired, changed.  First, there is a name selector used to put up a
+# list of the defined 5085/86/88 adapters for the user to select from.  The
+# dialogue then shows all of the characteristics.
+
+# Select 5085/86/88 adapter by logical name
+sm_name_hdr:
+    id                        = "chgmsla"
+    next_id                   = "chgmsla_hdr_"
+    option_id                 = "msla_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1202
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "lsdev -C -F \"type:location:status\" -l "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "type:loc:state"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There is one for each of the two modes:
+# gsw and hia.  Their Id's are built as follows:
+#       "chgmsla_hdr_gsw"   for gsw, and
+#       "chgmsla_hdr_hia"   for hia
+
+# The hia dialogue header.
+sm_cmd_hdr:
+    id                        = "chgmsla_hdr_hia"
+    option_id                 = "hia_chg,hia_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1202
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# The gsw dialogue header.
+sm_cmd_hdr:
+    id                        = "chgmsla_hdr_gsw"
+    option_id                 = "gsw_chg,gsw_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1202
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+#
+# Remove a 5085/86/88 Attachment Adapter
+# This allows a 5085/86/88 adapter to be removed, including its definition
+# in the database, from the system.  A name selector is used to put up a
+# list of the "defined" and "configured" 5085/86/88 adapters for the user
+# to select from.  The dialogue then uses the rmdev command to remove the
+# selected device.
+
+# Select 5085/86/88 adapter by logical name
+sm_name_hdr:
+    id                        = "rmvmsla"
+    next_id                   = "rmvmsla_hdr"
+    option_id                 = "msla_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1204
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvmsla_hdr"
+    option_id                 = "rmvmsla_opt"
+    has_name_select           = "y"
+    name                      = "Remove a 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1204
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvmsla_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1206
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201200"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvmsla_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1203
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 1209
+    aix_values                = ",-d "
+    help_msg_id               = "04201215"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined 5085/86/88 Attachment Adapter
+# This allows a 5085/86/88 adapter that is defined but not configured to
+# be configured.  A name selector is used to put up a list of the "defined"
+# 5085/86/88 adapters for the user to select from.  The dialogue then uses
+# the mkdev command to configure the selected device.
+
+# Select 5085/86/88 adapter by logical name
+sm_name_hdr:
+    id                        = "cfgmsla"
+    next_id                   = "cfgmsla_hdr"
+    option_id                 = "msla_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1205
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800494"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgmsla_hdr"
+    option_id                 = "cfgmsla_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined 5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1205
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800494"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgmsla_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1206
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201200"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing 5085/86/88 Attachment adapters
+# by logical name.
+# Used by: change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "msla_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1206
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c msla"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add for hia or gsw mode.
+# Used by: add function.
+
+# Displays card name.
+sm_cmd_opt:
+    id                        = "msla_add"
+    id_seq_num                = "001"
+    disc_field_name           = "parent"
+    name                      = "5085/86/88 Attachment Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1206
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201200"
+    help_msg_loc              = ""
+
+# Displays mode, i.e. psla or hia.
+sm_cmd_opt:
+    id                        = "msla_add"
+    id_seq_num                = "002"
+    disc_field_name           = "mode"
+    name                      = "5085/86/88 mode"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1208
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201201"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change for hia mode.
+# Used by: show/change function.
+
+# Displays hia name.
+sm_cmd_opt:
+    id                        = "hia_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "System/370 Host Interface Adapter (5088)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 1
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201202"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "hia_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1210
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201203"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "hia_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1211
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201204"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Specific to show/change for gsw mode.
+# Used by: show/change function.
+
+# Displays gsw name.
+sm_cmd_opt:
+    id                        = "gsw_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "5085/86 Attachment Adapter"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 130
+    name_msg_id               = 1
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201202"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "gsw_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1210
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201203"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "gsw_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1211
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201204"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Common to add and show/change for hia.
+# Used by: add and show/change functions.
+
+# Displays number of sessions.
+sm_cmd_opt:
+    id                        = "hia_common"
+    id_seq_num                = "010"
+    disc_field_name           = "num_sessions"
+    name                      = "Number of SESSIONS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 2
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a num_sessions="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c msla -s msla -t hia -a num_sessions -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201210"
+    help_msg_loc              = ""
+
+# Displays buffer size.
+sm_cmd_opt:
+    id                        = "hia_common"
+    id_seq_num                = "020"
+    disc_field_name           = "buffer_size"
+    name                      = "BUFFER size"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a buffer_size="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c msla -s msla -t hia -a buffer_size -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201211"
+    help_msg_loc              = ""
+
+# Displays lower bond session address.
+sm_cmd_opt:
+    id                        = "hia_common"
+    id_seq_num                = "030"
+    disc_field_name           = "lower_bond"
+    name                      = "LOWER BOND session address"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 4
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a lower_bond="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c msla -s msla -t hia -a lower_bond -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201212"
+    help_msg_loc              = ""
+
+# Displays link speed.
+sm_cmd_opt:
+    id                        = "hia_common"
+    id_seq_num                = "050"
+    disc_field_name           = "link_speed"
+    name                      = "LINK speed"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 6
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a link_speed="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "1,2"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "1,2"
+    help_msg_id               = "04201214"
+    help_msg_loc              = ""
+
+
+sm_cmd_opt:
+    id                        = "hia_common"
+    id_seq_num                = "060"
+    disc_field_name           = "num_5080_sess"
+    name                      = "Number of 5080 SESSIONS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 7
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a num_5080_sess="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c msla -s msla -t hia -a num_5080_sess -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201210"
+    help_msg_loc              = ""
+
+# Displays lower bond session address.
+sm_cmd_opt:
+    id                        = "hia_common"
+    id_seq_num                = "070"
+    disc_field_name           = "lower_5080_bond"
+    name                      = "5080 LOWER BOUND session address"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 8
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a lower_5080_bond="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c msla -s msla -t hia -a lower_5080_bond -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201212"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "hia_common"
+    id_seq_num                = "080"
+    disc_field_name           = "addr_5080_chan"
+    name                      = "5080 channel address"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 42
+    name_msg_id               = 10
+    op_type                   = "l"
+    entry_type                = "x"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a addr_5080_chan="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c msla -s msla -t hia -a addr_5080_chan -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201212"
+    help_msg_loc              = ""
+
+###################################
+# gsw has no modifiable attributes.
+#

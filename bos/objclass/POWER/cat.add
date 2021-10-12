@@ -1,0 +1,306 @@
+* static char sccsid[] = "@(#)66	1.21  src/bos/objclass/POWER/cat.add, sysxcat, bos411, 9433A411a 8/11/94 12:48:51";
+*********************************************************************
+*
+* COMPONENT_NAME : (SYSXCAT) - Predefined data for 370 Parallel Channel Adapter 
+*
+* FUNCTIONS:
+*
+* ORIGINS : 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1991
+* Unpublished Work
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* RESTRICTED RIGHTS LEGEND
+* US Government Users Restricted Rights -  Use, Duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+ 
+** Predefined Device object
+ 
+*PdDv:
+* PdDv.class = device class (e.g. adapter)
+* PdDv.subclass = connection type (e.g. mca meaning MicroChannelArch.)
+* PdDv.type = (e.g. pca (Parallel Channel Adapter)
+* PdDv.prefix = customized device names prefix (e.g. /dev/cat0)
+* PdDv.devid = the card id obtained from pos(0) and pos(1)
+* PdDv.base = whether device is a base device
+* PdDv.has_vpd =  device has/hasn't got Vital Product Data
+* PdDv.detectable = whether the device can be detected automatically
+* PdDv.chgstatus = set to NEW when defining a device of this type
+* PdDv.bus_ext = whether this device is a bus extension
+* PdDv.fru = whether this device IS a FRU (field replacable unit)
+* PdDv.led = the LED value to be displayed when being configured at boot time
+* PdDv.catalog = the NLS message catalog containing adapter text descriptions
+* PdDv.setno = the NLS message set number containing text descriptions
+* PdDv.msgno = the NLS message number of the text description of the adapter
+* PdDv.DvDr = device driver (e.g. "catdd") to be loaded when the adapter is configured
+* PdDv.Define = the pathname of the define method
+* PdDv.Configure = the pathame of the configure method
+* PdDv.Change = the pathname of the change method
+* PdDv.Unconfigure = the pathname of the unconfigure method
+* PdDv.Undefine = the pathname of the undefine method
+* PdDv.Start = the pathname of the start method
+* PdDv.Stop = the pathname of the stop method
+* PdDv.uniquetype = adapter's class, subclass, and type
+PdDv:
+	class = adapter
+	subclass = mca
+	type = pca
+	prefix = cat
+	devid = 0x92fe
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x862
+	catalog = "devices.cat"
+	setno = 79
+	msgno = 1
+	DvDr = "catdd"
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgcat
+	Change = /etc/methods/chgcat
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/mca/pca
+ 
+** Predefined Connection
+ 
+*PdCn:
+* PdCn.uniquetype = adapter's class, subclass, and type
+* PdCn.connkey = connection type of devices that can be attached
+* PdCn.connwhere = where a device can be attached
+PdCn:
+      uniquetype = adapter/mca/pca
+      connkey = cat
+      connwhere = ""
+ 
+ 
+** Predefined Attributes
+ 
+*PdAt:
+* PdAt.uniquetype = adapter's class, subclass, and type
+* PdAt.attribute =  attribute name
+* PdAt.deflt = default value for attribute
+* PdAt.values =  possible values the attribute can be set to
+* PdAt.width = range of addresses to be assigned
+* PdAt.type =  type or attribute (e.g. bus I/O address)
+* PdAt.generic = displayable and user changeable characteristics
+* PdAt.rep =  type of representation (e.g. numeric range)
+* PdAt.nls_index = the NLS catalog message number
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "dma_bus_mem"
+	deflt = "0x00F40000"
+	values = "0x00F40000,0x00F80000,0x00Fc0000,0x1000000,0x1100000,0x1200000,0x1300000,0x1400000,0x1500000,0x1600000,0x1700000,0xFFC00000,0xFFD00000,0xFFE00000"
+	width = "0x40000"
+	type = "M"
+	generic = "D"
+	rep = "nl"
+	nls_index = 2
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "bus_intr_lvl"
+	deflt = "4"
+	values = "4,5,6,7,9,10,11,14"
+	width = ""
+	type = "I"
+	generic = "D"
+	rep = "nl"
+	nls_index = 3
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "intr_priority"
+	deflt = "3"
+	values = "3"
+	width = ""
+	type = "P"
+	generic = ""
+	rep = "nl"
+	nls_index = 4
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "dma_lvl"
+	deflt = "1"
+	values = "1-14,1"
+	width = ""
+	type = "A"
+	generic = "D"
+	rep = "nr"
+	nls_index = 5
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "xmitsz"
+	deflt = "4096"
+	values = "1024-65536,1024"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 6
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "xmitno"
+	deflt = "26"
+	values = "0-208,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 7
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "recvsz"
+	deflt = "4096"
+	values = "1024-65536,1024"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 8
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "recvno"
+	deflt = "26"
+	values = "0-208,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 9
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "rdto"
+	deflt = "0"
+	values = "0-128,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 10
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "speed"
+	deflt = "2"
+	values = "0,2,4"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nl"
+	nls_index = 11
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "first_sc"
+	deflt = "0x0"
+	values = "0x0-0xFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 12
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "num_sc"
+	deflt = "4"
+	values = "0-256,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 13
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "clawset"
+	deflt = "none"
+	values = "none,(0x0-0xFE,0x2)"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 14
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "switch"
+	deflt = "online"
+	values = "offline,online"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nl"
+	nls_index = 15
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "indicator"
+	deflt = "offline"
+	values = "offline,online"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nl"
+	nls_index = 16
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "check_ind"
+	deflt = "0"
+	values = "0,1"
+	width = ""
+	type = "R"
+	generic = "U"
+	rep = "nl"
+	nls_index = 17
+ 
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "ucode_type"
+	deflt = "1"
+* 1 : DNLD NORMAL uCode, 2 : DNLD DIAG uCode, 3 : NO DNLD
+	values = "1,2,3"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nl"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "host_name"
+	deflt = "HOST"
+	values = ""
+	width = "8"
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "adapter/mca/pca"
+	attribute = "adapter_name"
+	deflt = "PSCA"
+	values = ""
+	width = "8"
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 20

@@ -1,0 +1,59 @@
+#!/bin/ksh
+#
+# @(#)36        1.1  src/bldscripts/unsetBuildStatus, ade_build, bos412, GOLDA411a 5/5/94 16:08:21
+#
+#   COMPONENT_NAME: bldprocess
+#
+#   ORIGINS: 27,71
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#------------------------------------------------------------------------------
+#
+# Description:
+#
+#    Refreshes the database for a build cycle so that
+#    all stages of a build can be re-run.
+#
+# Inputs: build cycle
+#
+# Outputs: status of each stage for given build cycle 
+#          to standard out
+#          
+#
+#------------------------------------------------------------------------------
+
+#
+# Establish Database Connectivity
+#
+. `/usr/bin/dirname $0`/bldDBfunctions
+SAVEPATH=$PATH
+. `/usr/bin/dirname $0`/common.sh
+PATH=$SAVEPATH
+initDB
+
+USAGE="USAGE: "$(basename $0)" <build_cycle> "
+
+BUILD=$1
+
+if [[ -z $BUILD ]]
+then
+	print $USAGE
+	exit 1
+fi 
+
+showBuildStage -k ${BUILD}/* -f "STAGE" | 
+	tail +2 |
+	while read STAGE
+	do
+		echo "$STAGE"
+		maintainBuildStage -k ${BUILD}/"$STAGE" -v COMPLETE="N"
+	done
+

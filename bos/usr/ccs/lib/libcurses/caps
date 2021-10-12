@@ -1,0 +1,563 @@
+# @(#)25    1.9  src/bos/usr/ccs/lib/libcurses/caps, libcurses, bos411, 9428A410j 4/22/94 09:32:42
+#
+#   COMPONENT_NAME: LIBCURSES
+#
+#   FUNCTIONS: caps
+#
+#   ORIGINS: 27, 4
+#
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#	Copyright (c) 1984 AT&T
+#	  All Rights Reserved
+#
+#	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+#	The copyright notice above does not evidence any
+#	actual or intended publication of such source code.
+#
+#ident	"@(#)curses:screen/caps	1.24"
+#
+# Be sure to add new capabilties at the END of the appropriate section!
+#
+# These caps are ordered to preserve AIX 3.2 binary compatibility.
+# Some of the AT&T common capabilities had to be moved in order to
+# do this.
+
+--- begin bool
+auto_left_margin,	"bw"	"bw"	cub1 wraps from column 0 to last column
+auto_right_margin,	"am"	"am"	Terminal has automatic margins
+no_esc_ctlc,		"xsb"	"xb"	Beehive (f1=escape, f2=ctrl C)
+ceol_standout_glitch,	"xhp"	"xs"	Standout not erased by overwriting (hp)
+eat_newline_glitch,	"xenl"	"xn"	newline ignored after 80 cols (Concept)
+erase_overstrike,	"eo"	"eo"	Can erase overstrikes with a blank
+generic_type,		"gn"	"gn"	Generic line type (e.g. dialup, switch).
+hard_copy,		"hc"	"hc"	Hardcopy terminal
+has_meta_key,		"km"	"km"	Has a meta key (shift, sets parity bit)
+has_status_line,	"hs"	"hs"	Has extra "status line"
+insert_null_glitch,	"in"	"in"	Insert mode distinguishes nulls
+memory_above,		"da"	"da"	Display may be retained above the screen
+memory_below,		"db"	"db"	Display may be retained below the screen
+move_insert_mode,	"mir"	"mi"	Safe to move while in insert mode
+move_standout_mode,	"msgr"	"ms"	Safe to move in standout modes
+over_strike,		"os"	"os"	Terminal overstrikes
+status_line_esc_ok,	"eslok"	"es"	Escape can be used on the status line
+dest_tabs_magic_smso,	"xt"	"xt"	Tabs destructive, magic so char (t1061)
+tilde_glitch,		"hz"	"hz"	Hazeltine; can't print ~'s
+transparent_underline,	"ul"	"ul"	underline character overstrikes
+xon_xoff,		"xon"	"xo"	Terminal uses xon/xoff handshaking
+needs_xon_xoff,		"nxon"	"nx"	Padding won't work, xon/xoff required
+prtr_silent,		"mc5i"	"5i"	Printer won't echo on screen.
+hard_cursor,		"chts"	"HC"	Cursor is hard to see.
+non_rev_rmcup,		"nrrmc"	"NR"	Smcup does not reverse rmcup.
+no_pad_char,		"npc"	"NP"	Pad character doesn't exist.
+non_dest_scroll_region,	"ndscr"	"ND"	Scrolling region is non-destructive.
+can_change,		"ccc"	"cc"	Can re-define existing color
+back_color_erase,	"bce"	"ut"	Erases screen with current background
+hue_lightness_saturation,	"hls"	"hl"	HLS color notation is used (Tek)
+#
+# printer specific
+#
+col_addr_glitch,	"xhpa"	"YA"	Only positive motion for hpa/mhpa caps
+cr_cancels_micro_mode,	"crxm"	"YB"	Using cr turns off micro mode
+has_print_wheel,	"daisy"	"YC"	Printer needs operator to change character set
+row_addr_glitch,	"xvpa"	"YD"	Only positive motion for vpa/mvpa caps
+semi_auto_right_margin,	"sam"	"YE"	Printing in last column causes cr
+cpi_changes_res,	"cpix"	"YF"	Changing char. pitch changes resolution
+lpi_changes_res,	"lpix"	"YG"	Changing line pitch changes resolution
+# Add new Booleans before this line.
+--- end bool
+
+--- begin num
+columns,		"cols"	"co"	Number of columns in a line
+init_tabs,		"it"	"it"	Tabs initially every # spaces.
+lines,			"lines"	"li"	Number of lines on screen or page
+lines_of_memory,	"lm"	"lm"	Lines of memory if > lines.  0 => varies
+magic_cookie_glitch,	"xmc"	"sg"	Number blank chars left by smso or rmso
+padding_baud_rate,	"pb"	"pb"	Lowest baud rate where padding needed
+virtual_terminal,	"vt"	"vt"	Virtual terminal number (CB/Unix)
+width_status_line,	"wsl"	"ws"	# columns in status line
+num_labels,		"nlab"	"Nl"	# of labels on screen (start at 1)
+label_height,		"lh"	"lh"	# rows in each label
+label_width,		"lw"	"lw"	# cols in each label
+max_attributes,		"ma"	"ma"	max combined video attributes terminal can display
+#
+#
+#
+maximum_windows,	"wnum"	"MW"	Maximum number of defineable windows
+max_colors,		"colors"	"Co"	max # of color on the screen
+max_pairs,		"pairs"	"pa"	max # of color pairs on the screen
+no_color_video,		"ncv"	"NC"	Video attributes that cannot be used with colors
+#
+# printer specific
+#
+buffer_capacity,	"bufsz"	"Ya"	Number of bytes buffered before printing
+dot_vert_spacing,	"spinv"	"Yb"	Spacing of pins vertically in pins per inch
+dot_horz_spacing,	"spinh"	"Yc"	Spacing of dots horizontally in dots per inch
+max_micro_address,	"maddr"	"Yd"	Maximum value in micro_..._address
+max_micro_jump,		"mjump"	"Ye"	Maximum value in parm_..._micro
+micro_char_size,	"mcs"	"Yf"	Character step size when in micro mode
+micro_line_size,	"mls"	"Yg"	Line step size when in micro mode
+number_of_pins,		"npins"	"Yh"	Number of pins in print-head
+output_res_char,	"orc"	"Yi"	Horizontal resolution in units per character
+output_res_line,	"orl"	"Yj"	Vertical resolution in units per line
+output_res_horz_inch,	"orhi"	"Yk"	Horizontal resolution in units per inch
+output_res_vert_inch,	"orvi"	"Yl"	Vertical resolution in units per inch
+print_rate,		"cps"	"Ym"	Print rate in characters per second
+wide_char_size,		"widcs"	"Yn"	Character step size when in double wide mode
+# Add new numbers before this line.
+--- end num
+
+--- begin str
+back_tab,		"cbt"	"bt"	Back tab
+bell,			"bel"	"bl"	Audible signal (bell)
+carriage_return,	"cr"	"cr"	Carriage return (*)
+change_scroll_region,	"csr"	"cs"	change to lines #1 thru #2 (vt100) (G)
+clear_all_tabs,		"tbc"	"ct"	Clear all tab stops.
+clear_screen,		"clear"	"cl"	Clear screen (*)
+clr_eol,		"el"	"ce"	Clear to end of line
+clr_eos,		"ed"	"cd"	Clear to end of display (*)
+column_address,		"hpa"	"ch"	Set cursor column (G)
+command_character,	"cmdch"	"CC"	Term. settable cmd char in prototype
+cursor_address,		"cup"	"cm"	Cursor motion to row #1 col #2 (G)
+cursor_down,		"cud1"	"do"	Down one line
+cursor_home,		"home"	"ho"	Home cursor (if no cup)
+cursor_invisible,	"civis"	"vi"	Make cursor invisible
+cursor_left,		"cub1"	"le"	Move cursor left one space.
+cursor_mem_address,	"mrcup"	"CM"	Memory relative cursor addressing.
+cursor_normal,		"cnorm"	"ve"	Make cursor appear normal (undo vs/vi)
+cursor_right,		"cuf1"	"nd"	Non-destructive space (cursor right)
+cursor_to_ll,		"ll"	"ll"	Last line, first column (if no cup)
+cursor_up,		"cuu1"	"up"	Upline (cursor up)
+cursor_visible,		"cvvis"	"vs"	Make cursor very visible
+delete_character,	"dch1"	"dc"	Delete character (*)
+delete_line,		"dl1"	"dl"	Delete line (*)
+dis_status_line,	"dsl"	"ds"	Disable status line
+down_half_line,		"hd"	"hd"	Half-line down (forward 1/2 linefeed)
+enter_alt_charset_mode,	"smacs"	"as"	Start alternate character set
+enter_blink_mode,	"blink"	"mb"	Turn on blinking
+enter_bold_mode,	"bold"	"md"	Turn on bold (extra bright) mode
+enter_ca_mode,		"smcup"	"ti"	String to begin programs that use cup
+enter_delete_mode,	"smdc"	"dm"	Delete mode (enter)
+enter_dim_mode,		"dim"	"mh"	Turn on half-bright mode
+enter_insert_mode,	"smir"	"im"	Insert mode (enter);
+enter_secure_mode,	"invis"	"mk"	Turn on blank mode (chars invisible)
+enter_protected_mode,	"prot"	"mp"	Turn on protected mode
+enter_reverse_mode,	"rev"	"mr"	Turn on reverse video mode
+enter_standout_mode,	"smso"	"so"	Begin stand out mode
+enter_underline_mode,	"smul"	"us"	Start underscore mode
+erase_chars,		"ech"	"ec"	Erase #1 characters (G)
+exit_alt_charset_mode,	"rmacs"	"ae"	End alternate character set
+exit_attribute_mode,	"sgr0"	"me"	Turn off all attributes
+exit_ca_mode,		"rmcup"	"te"	String to end programs that use cup
+exit_delete_mode,	"rmdc"	"ed"	End delete mode
+exit_insert_mode,	"rmir"	"ei"	End insert mode;
+exit_standout_mode,	"rmso"	"se"	End stand out mode
+exit_underline_mode,	"rmul"	"ue"	End underscore mode
+flash_screen,		"flash"	"vb"	Visible bell (may not move cursor)
+form_feed,		"ff"	"ff"	Hardcopy terminal page eject (*)
+from_status_line,	"fsl"	"fs"	Return from status line
+init_1string,		"is1"	"i1"	Terminal initialization string
+init_2string,		"is2"	"is"	Terminal initialization string
+init_3string,		"is3"	"i3"	Terminal initialization string
+init_file,		"if"	"if"	Name of file containing is
+insert_character,	"ich1"	"ic"	Insert character
+insert_line,		"il1"	"al"	Add new blank line (*)
+insert_padding,		"ip"	"ip"	Insert pad after character inserted (*)
+key_backspace,		"kbs"	"kb"	KEY_BACKSPACE, 03507, Sent by backspace key
+key_catab,		"ktbc"	"ka"	KEY_CATAB, 03626, Sent by clear-all-tabs key.
+key_clear,		"kclr"	"kC"	KEY_CLEAR, 03615, Sent by clear screen or erase key.
+key_ctab,		"kctab"	"kt"	KEY_CTAB, 03625, Sent by clear-tab key
+key_dc,			"kdch1"	"kD"	KEY_DC, 03612, Sent by delete character key.
+key_dl,			"kdl1"	"kL"	KEY_DL, 03610, Sent by delete line key.
+key_down,		"kcud1"	"kd"	KEY_DOWN, 03502, Sent by terminal down arrow key
+key_eic,		"krmir"	"kM"	KEY_EIC, 03614, Sent by rmir or smir in insert mode.
+key_eol,		"kel"	"kE"	KEY_EOL, 03617, Sent by clear-to-end-of-line key.
+key_eos,		"ked"	"kS"	KEY_EOS, 03616, Sent by clear-to-end-of-screen key.
+key_f0,			"kf0"	"k0"	KEY_F(0), 03510, function key f0.
+key_f1,			"kf1"	"k1"	KEY_F(1), 03511, function key f1.
+key_f10,		"kf10"	"k;"	KEY_F(10), 03522, function key f10.
+key_f2,			"kf2"	"k2"	KEY_F(2), 03512, function key f2.
+key_f3,			"kf3"	"k3"	KEY_F(3), 03513, function key f3.
+key_f4,			"kf4"	"k4"	KEY_F(4), 03514, function key f4.
+key_f5,			"kf5"	"k5"	KEY_F(5), 03515, function key f5.
+key_f6,			"kf6"	"k6"	KEY_F(6), 03516, function key f6.
+key_f7,			"kf7"	"k7"	KEY_F(7), 03517, function key f7.
+key_f8,			"kf8"	"k8"	KEY_F(8), 03520, function key f8.
+key_f9,			"kf9"	"k9"	KEY_F(9), 03521, function key f9.
+key_home,		"khome"	"kh"	KEY_HOME, 03506, Sent by home key.
+key_ic,			"kich1"	"kI"	KEY_IC, 03613, Sent by ins char/enter ins mode key.
+key_il,			"kil1"	"kA"	KEY_IL, 03611, Sent by insert line.
+key_left,		"kcub1"	"kl"	KEY_LEFT, 03504, Sent by terminal left arrow key
+key_ll,			"kll"	"kH"	KEY_LL, 03633, Sent by home-down key
+key_npage,		"knp"	"kN"	KEY_NPAGE, 03622, Sent by next-page key
+key_ppage,		"kpp"	"kP"	KEY_PPAGE, 03623, Sent by previous-page key
+key_right,		"kcuf1"	"kr"	KEY_RIGHT, 03505, Sent by terminal right arrow key
+key_sf,			"kind"	"kF"	KEY_SF, 03620, Sent by scroll-forward/down key
+key_sr,			"kri"	"kR"	KEY_SR, 03621, Sent by scroll-backward/up key
+key_stab,		"khts"	"kT"	KEY_STAB, 03624, Sent by set-tab key
+key_up,			"kcuu1"	"ku"	KEY_UP, 03503, Sent by terminal up arrow key
+keypad_local,		"rmkx"	"ke"	Out of "keypad transmit" mode
+keypad_xmit,		"smkx"	"ks"	Put terminal in "keypad transmit" mode
+lab_f0,			"lf0"	"l0"	Labels on function key f0 if not f0
+lab_f1,			"lf1"	"l1"	Labels on function key f1 if not f1
+lab_f10,		"lf10"	"la"	Labels on function key f10 if not f10
+lab_f2,			"lf2"	"l2"	Labels on function key f2 if not f2
+lab_f3,			"lf3"	"l3"	Labels on function key f3 if not f3
+lab_f4,			"lf4"	"l4"	Labels on function key f4 if not f4
+lab_f5,			"lf5"	"l5"	Labels on function key f5 if not f5
+lab_f6,			"lf6"	"l6"	Labels on function key f6 if not f6
+lab_f7,			"lf7"	"l7"	Labels on function key f7 if not f7
+lab_f8,			"lf8"	"l8"	Labels on function key f8 if not f8
+lab_f9,			"lf9"	"l9"	Labels on function key f9 if not f9
+meta_off,		"rmm"	"mo"	Turn off "meta mode"
+meta_on,		"smm"	"mm"	Turn on "meta mode" (8th bit)
+newline,		"nel"	"nw"	Newline (behaves like cr followed by lf)
+pad_char,		"pad"	"pc"	Pad character (rather than null)
+parm_dch,		"dch"	"DC"	Delete #1 chars (G*)
+parm_delete_line,	"dl"	"DL"	Delete #1 lines (G*)
+parm_down_cursor,	"cud"	"DO"	Move cursor down #1 lines. (G*)
+parm_ich,		"ich"	"IC"	Insert #1 blank chars (G*)
+parm_index,		"indn"	"SF"	Scroll forward #1 lines. (G)
+parm_insert_line,	"il"	"AL"	Add #1 new blank lines (G*)
+parm_left_cursor,	"cub"	"LE"	Move cursor left #1 spaces (G)
+parm_right_cursor,	"cuf"	"RI"	Move cursor right #1 spaces. (G*)
+parm_rindex,		"rin"	"SR"	Scroll backward #1 lines. (G)
+parm_up_cursor,		"cuu"	"UP"	Move cursor up #1 lines. (G*)
+pkey_key,		"pfkey"	"pk"	Prog funct key #1 to type string #2
+pkey_local,		"pfloc"	"pl"	Prog funct key #1 to execute string #2
+pkey_xmit,		"pfx"	"px"	Prog funct key #1 to xmit string #2
+print_screen,		"mc0"	"ps"	Print contents of the screen
+prtr_off,		"mc4"	"pf"	Turn off the printer
+prtr_on,		"mc5"	"po"	Turn on the printer
+repeat_char,		"rep"	"rp"	Repeat char #1 #2 times.  (G*)
+reset_1string,		"rs1"	"r1"	Reset terminal completely to sane modes.
+reset_2string,		"rs2"	"r2"	Reset terminal completely to sane modes.
+reset_3string,		"rs3"	"r3"	Reset terminal completely to sane modes.
+reset_file,		"rf"	"rf"	Name of file containing reset string.
+restore_cursor,		"rc"	"rc"	Restore cursor to position of last sc.
+row_address,		"vpa"	"cv"	Like hpa but sets row. (G)
+save_cursor,		"sc"	"sc"	Save cursor position.
+scroll_forward,		"ind"	"sf"	Scroll text up
+scroll_reverse,		"ri"	"sr"	Scroll text down
+set_attributes,		"sgr"	"sa"	Define the video attributes (G9)
+set_tab,		"hts"	"st"	Set a tab in all rows, current column.
+set_window,		"wind"	"wi"	Current window is lines #1-#2 cols #3-#4
+tab,			"ht"	"ta"	Tab to next 8 space hardware tab stop.
+to_status_line,		"tsl"	"ts"	Go to status line, col #1
+underline_char,		"uc"	"uc"	Underscore one char and move past it
+up_half_line,		"hu"	"hu"	Half-line up (reverse 1/2 linefeed)
+init_prog,		"iprog"	"iP"	Path name of program for init.
+key_a1,			"ka1"	"K1"	KEY_A1, 03634, Upper left of keypad
+key_a3,			"ka3"	"K3"	KEY_A3, 03635, Upper right of keypad
+key_b2,			"kb2"	"K2"	KEY_B2, 03636, Center of keypad
+key_c1,			"kc1"	"K4"	KEY_C1, 03637, Lower left of keypad
+key_c3,			"kc3"	"K5"	KEY_C3, 03640, Lower right of keypad
+prtr_non,		"mc5p"	"pO"	Turn on the printer for #1 bytes.
+#------------------------------  AIX add on caps  -----------------------------
+box_chars_1,		"box1"	"bx"	Box characters primary set
+box_chars_2,		"box2"	"by"	Box characters alternate set
+box_attr_1,		"batt1"	"Bx"	Attributes for box_chars_1
+box_attr_2,		"batt2"	"By"	Attributes for box_chars_2
+color_bg_0,		"colb0"	"d0"	Background color 0 black
+color_bg_1,		"colb1"	"d1"	Background color 1 red
+color_bg_2,		"colb2"	"d2"	Background color 2 green
+color_bg_3,		"colb3"	"d3"	Background color 3 brown
+color_bg_4,		"colb4"	"d4"	Background color 4 blue
+color_bg_5,		"colb5"	"d5"	Background color 5 magenta
+color_bg_6,		"colb6"	"d6"	Background color 6 cyan
+color_bg_7,		"colb7"	"d7"	Background color 7 white
+color_fg_0,		"colf0"	"c0"	Foreground color 0 white
+color_fg_1,		"colf1"	"c1"	Foreground color 1 red
+color_fg_2,		"colf2"	"c2"	Foreground color 2 green
+color_fg_3,		"colf3"	"c3"	Foreground color 3 brown
+color_fg_4,		"colf4"	"c4"	Foreground color 4 blue
+color_fg_5,		"colf5"	"c5"	Foreground color 5 magenta
+color_fg_6,		"colf6"	"c6"	Foreground color 6 cyan
+color_fg_7,		"colf7"	"c7"	Foreground color 7 black
+font_0,			"font0"	"f0"	Select font 0
+font_1,			"font1"	"f1"	Select font 1
+font_2,			"font2"	"f2"	Select font 2
+font_3,			"font3"	"f3"	Select font 3
+font_4,			"font4"	"f4"	Select font 4
+font_5,			"font5"	"f5"	Select font 5
+font_6,			"font6"	"f6"	Select font 6
+font_7,			"font7"	"f7"	Select font 7
+key_back_tab,		"kbtab"	"kO"	AIX back tab key
+key_do,			"kdo"	"ki"	Do request key
+key_command,		"kcmd"	"@4"	KEY_COMMAND, 03645, cmd (command) key
+key_command_pane,	"kcpn"	"kW"	Command pane key
+key_end,		"kend"	"@7"	KEY_END, 03650, end key
+key_help,		"khlp"	"%1"	KEY_HELP, 03653, help key
+key_newline,		"knl"	"kn"	Newline key
+key_next_pane,		"knpn"	"kv"	Next pane key
+key_prev_cmd,		"kpcmd"	"kp"	Previous command key
+key_prev_pane,		"kppn"	"kV"	Previous pane key
+key_quit,		"kquit"	"kQ"	Quit key
+key_select_aix,		"ksel"	"kU"	AIX select key 
+key_scroll_left,	"kscl"	"kz"	Scroll left
+key_scroll_right,	"kscr"	"kZ"	Scroll right
+key_tab,		"ktab"	"ko"	Tab key
+key_smap_in1,		"kmpf1"	"Kv"	input for special mapped key 1
+key_smap_out1,		"kmpt1"	"KV"	output for mapped key 1
+key_smap_in2,		"kmpf2"	"Kw"	input for special mapped key 2
+key_smap_out2,		"kmpt2"	"KW"	output for mapped key 2
+key_smap_in3,		"kmpf3"	"Kx"	input for special mapped key 3
+key_smap_out3,		"kmpt3"	"KX"	output for mapped key 3
+key_smap_in4,		"kmpf4"	"Ky"	input for special mapped key 4
+key_smap_out4,		"kmpt4"	"KY"	output for mapped key 4
+key_smap_in5,		"kmpf5"	"Kz"	input for special mapped key 5
+key_smap_out5,		"kmpt5"	"KZ"	output for mapped key 5
+appl_defined_str,	"apstr"	"za"	Application defined terminal string
+key_smap_in6,		"kmpf6"	"Kr"	input for special mapped key 6
+key_smap_out6,		"kmpt6"	"KR"	output for mapped key 6
+key_smap_in7,		"kmpf7"	"Ks"	input for special mapped key 7
+key_smap_out7,		"kmpt7"	"KS"	output for mapped key 7
+key_smap_in8,		"kmpf8"	"Kt"	input for special mapped key 8
+key_smap_out8,		"kmpt8"	"KT"	output for mapped key 8
+key_smap_in9,		"kmpf9"	"Ku"	input for special mapped key 9
+key_smap_out9,		"kmpt9"	"KU"	output for mapped key 9
+key_sf1,		"ksf1"	"S1"	Special function key 1
+key_sf2,		"ksf2"	"S2"	Special function key 2
+key_sf3,		"ksf3"	"S3"	Special function key 3
+key_sf4,		"ksf4"	"S4"	Special function key 4
+key_sf5,		"ksf5"	"S5"	Special function key 5
+key_sf6,		"ksf6"	"S6"	Special function key 6
+key_sf7,		"ksf7"	"S7"	Special function key 7
+key_sf8,		"ksf8"	"S8"	Special function key 8
+key_sf9,		"ksf9"	"S9"	Special function key 9
+key_sf10,		"ksf10"	"S0"	Special function key 10
+key_f11,		"kf11"	"F1"	KEY_F(11), 03523, Sent by function key f11.
+key_f12,		"kf12"	"F2"	KEY_F(12), 03524, Sent by function key f12.
+key_f13,		"kf13"	"F3"	KEY_F(13), 03525, Sent by function key f13.
+key_f14,		"kf14"	"F4"	KEY_F(14), 03526, Sent by function key f14.
+key_f15,		"kf15"	"F5"	KEY_F(15), 03527, Sent by function key f15.
+key_f16,		"kf16"	"F6"	KEY_F(16), 03530, Sent by function key f16.
+key_f17,		"kf17"	"F7"	KEY_F(17), 03531, Sent by function key f17.
+key_f18,		"kf18"	"F8"	KEY_F(18), 03532, Sent by function key f18.
+key_f19,		"kf19"	"F9"	KEY_F(19), 03533, Sent by function key f19.
+key_f20,		"kf20"	"FA"	KEY_F(20), 03534, Sent by function key f20.
+key_f21,		"kf21"	"FB"	KEY_F(21), 03535, Sent by function key f21.
+key_f22,		"kf22"	"FC"	KEY_F(22), 03536, Sent by function key f22.
+key_f23,		"kf23"	"FD"	KEY_F(23), 03537, Sent by function key f23.
+key_f24,		"kf24"	"FE"	KEY_F(24), 03540, Sent by function key f24.
+key_f25,		"kf25"	"FF"	KEY_F(25), 03541, Sent by function key f25.
+key_f26,		"kf26"	"FG"	KEY_F(26), 03542, Sent by function key f26.
+key_f27,		"kf27"	"FH"	KEY_F(27), 03543, Sent by function key f27.
+key_f28,		"kf28"	"FI"	KEY_F(28), 03544, Sent by function key f28.
+key_f29,		"kf29"	"FJ"	KEY_F(29), 03545, Sent by function key f29.
+key_f30,		"kf30"	"FK"	KEY_F(30), 03546, Sent by function key f30.
+key_f31,		"kf31"	"FL"	KEY_F(31), 03547, Sent by function key f31.
+key_f32,		"kf32"	"FM"	KEY_F(32), 03550, Sent by function key f32.
+key_f33,		"kf33"	"FN"	KEY_F(33), 03551, Sent by function key f33.
+key_f34,		"kf34"	"FO"	KEY_F(34), 03552, Sent by function key f34.
+key_f35,		"kf35"	"FP"	KEY_F(35), 03553, Sent by function key f35.
+key_f36,		"kf36"	"FQ"	KEY_F(36), 03554, Sent by function key f36.
+key_f37,		"kf37"	"FR"	KEY_F(37), 03555, Sent by function key f37.
+key_f38,		"kf38"	"FS"	KEY_F(38), 03556, Sent by function key f38.
+key_f39,		"kf39"	"FT"	KEY_F(39), 03557, Sent by function key f39.
+key_f40,		"kf40"	"FU"	KEY_F(40), 03560, Sent by function key f40.
+key_f41,		"kf41"	"FV"	KEY_F(41), 03561, Sent by function key f41.
+key_f42,		"kf42"	"FW"	KEY_F(42), 03562, Sent by function key f42.
+key_f43,		"kf43"	"FX"	KEY_F(43), 03563, Sent by function key f43.
+key_f44,		"kf44"	"FY"	KEY_F(44), 03564, Sent by function key f44.
+key_f45,		"kf45"	"FZ"	KEY_F(45), 03565, Sent by function key f45.
+key_f46,		"kf46"	"Fa"	KEY_F(46), 03566, Sent by function key f46.
+key_f47,		"kf47"	"Fb"	KEY_F(47), 03567, Sent by function key f47.
+key_f48,		"kf48"	"Fc"	KEY_F(48), 03570, Sent by function key f48.
+key_f49,		"kf49"	"Fd"	KEY_F(49), 03571, Sent by function key f49.
+key_f50,		"kf50"	"Fe"	KEY_F(50), 03572, Sent by function key f50.
+key_f51,		"kf51"	"Ff"	KEY_F(51), 03573, Sent by function key f51.
+key_f52,		"kf52"	"Fg"	KEY_F(52), 03574, Sent by function key f52.
+key_f53,		"kf53"	"Fh"	KEY_F(53), 03575, Sent by function key f53.
+key_f54,		"kf54"	"Fi"	KEY_F(54), 03576, Sent by function key f54.
+key_f55,		"kf55"	"Fj"	KEY_F(55), 03577, Sent by function key f55.
+key_f56,		"kf56"	"Fk"	KEY_F(56), 03600, Sent by function key f56.
+key_f57,		"kf57"	"Fl"	KEY_F(57), 03601, Sent by function key f57.
+key_f58,		"kf58"	"Fm"	KEY_F(58), 03602, Sent by function key f58.
+key_f59,		"kf59"	"Fn"	KEY_F(59), 03603, Sent by function key f59.
+key_f60,		"kf60"	"Fo"	KEY_F(60), 03604, Sent by function key f60.
+key_f61,		"kf61"	"Fp"	KEY_F(61), 03605, Sent by function key f61.
+key_f62,		"kf62"	"Fq"	KEY_F(62), 03606, Sent by function key f62.
+key_f63,		"kf63"	"Fr"	KEY_F(63), 03607, Sent by function key f63.
+key_action,		"kact"	"kJ"	KEY_ACTION, 03731, Sent by the action key.
+enter_topline_mode,	"topl"	"tp"	Start topline mode.
+enter_bottom_mode,	"btml"	"bm"	Start bottom mode.
+enter_rvert_mode,	"rvert"	"rv"	Start right vertical line mode.
+enter_lvert_mode,	"lvert"	"lv"	Start left vertical line mode.
+#------------------------------	ATT add on caps  -----------------------------
+char_padding,		"rmp"	"rP"	Like ip but when in replace mode
+acs_chars,		"acsc"	"ac"	Graphic charset pairs aAbBcC - def=vt100
+plab_norm,		"pln"	"pn"	Prog label #1 to show string #2
+key_btab,		"kcbt"	"kB"	KEY_BTAB, 03641, Back tab key
+enter_xon_mode,		"smxon"	"SX"	Turn on xon/xoff handshaking
+exit_xon_mode,		"rmxon"	"RX"	Turn off xon/xoff handshaking
+enter_am_mode,		"smam"	"SA"	Turn on automatic margins
+exit_am_mode,		"rmam"	"RA"	Turn off automatic margins
+xon_character,		"xonc"	"XN"	X-on character
+xoff_character,		"xoffc"	"XF"	X-off character
+ena_acs,		"enacs"	"eA"	Enable alternate char set
+label_on,		"smln"	"LO"	Turn on soft labels
+label_off,		"rmln"	"LF"	Turn off soft labels
+key_beg,		"kbeg"	"@1"	KEY_BEG, 03642, beg(inning) key
+key_cancel,		"kcan"	"@2"	KEY_CANCEL, 03643, cancel key
+key_close,		"kclo"	"@3"	KEY_CLOSE, 03644, close key
+# ----------------  ATT key_command use to be here. -----------------
+key_copy,		"kcpy"	"@5"	KEY_COPY, 03646, copy key
+key_create,		"kcrt"	"@6"	KEY_CREATE, 03647, create key
+# ----------------  ATT key_end use to be here. ---------------------
+key_enter,		"kent"	"@8"	KEY_ENTER, 03627, Enter/send (unreliable)
+key_exit,		"kext"	"@9"	KEY_EXIT, 03651, exit key
+key_find,		"kfnd"	"@0"	KEY_FIND, 03652, find key
+# ----------------  ATT key_help use to be here. ---------------------
+key_mark,		"kmrk"	"%2"	KEY_MARK, 03654, mark key
+key_message,		"kmsg"	"%3"	KEY_MESSAGE, 03655, message key
+key_move,		"kmov"	"%4"	KEY_MOVE, 03656, move key
+key_next,		"knxt"	"%5"	KEY_NEXT, 03657, next object key
+key_open,		"kopn"	"%6"	KEY_OPEN, 03660, open key
+key_options,		"kopt"	"%7"	KEY_OPTIONS, 03661, options key
+key_previous,		"kprv"	"%8"	KEY_PREVIOUS, 03662, previous object key
+key_print,		"kprt"	"%9"	KEY_PRINT, 03632, print or copy
+key_redo,		"krdo"	"%0"	KEY_REDO, 03663, redo key
+key_reference,		"kref"	"&1"	KEY_REFERENCE, 03664, ref(erence) key
+key_refresh,		"krfr"	"&2"	KEY_REFRESH, 03665, refresh key
+key_replace,		"krpl"	"&3"	KEY_REPLACE, 03666, replace key
+key_restart,		"krst"	"&4"	KEY_RESTART, 03667, restart key
+key_resume,		"kres"	"&5"	KEY_RESUME, 03670, resume key
+key_save,		"ksav"	"&6"	KEY_SAVE, 03671, save key
+key_suspend,		"kspd"	"&7"	KEY_SUSPEND, 03727, suspend key
+key_undo,		"kund"	"&8"	KEY_UNDO, 03730, undo key
+key_sbeg,		"kBEG"	"&9"	KEY_SBEG, 03672, shifted beginning key
+key_scancel,		"kCAN"	"&0"	KEY_SCANCEL, 03673, shifted cancel key
+key_scommand,		"kCMD"	"*1"	KEY_SCOMMAND, 03674, shifted command key
+key_scopy,		"kCPY"	"*2"	KEY_SCOPY, 03675, shifted copy key
+key_screate,		"kCRT"	"*3"	KEY_SCREATE, 03676, shifted create key
+key_sdc,		"kDC"	"*4"	KEY_SDC, 03677, shifted delete char key
+key_sdl,		"kDL"	"*5"	KEY_SDL, 03700, shifted delete line key
+key_select,		"kslt"	"*6"	KEY_SELECT, 03701, select key
+key_send,		"kEND"	"*7"	KEY_SEND, 03702, shifted end key
+key_seol,		"kEOL"	"*8"	KEY_SEOL, 03703, shifted clear line key
+key_sexit,		"kEXT"	"*9"	KEY_SEXIT, 03704, shifted exit key
+key_sfind,		"kFND"	"*0"	KEY_SFIND, 03705, shifted find key
+key_shelp,		"kHLP"	"#1"	KEY_SHELP, 03706, shifted help key
+key_shome,		"kHOM"	"#2"	KEY_SHOME, 03707, shifted home key
+key_sic,		"kIC"	"#3"	KEY_SIC, 03710, shifted input key
+key_sleft,		"kLFT"	"#4"	KEY_SLEFT, 03711, shifted left arrow key
+key_smessage,		"kMSG"	"%a"	KEY_SMESSAGE, 03712, shifted message key
+key_smove,		"kMOV"	"%b"	KEY_SMOVE, 03713, shifted move key
+key_snext,		"kNXT"	"%c"	KEY_SNEXT, 03714, shifted next key
+key_soptions,		"kOPT"	"%d"	KEY_SOPTIONS, 03715, shifted options key
+key_sprevious,		"kPRV"	"%e"	KEY_SPREVIOUS, 03716, shifted prev key
+key_sprint,		"kPRT"	"%f"	KEY_SPRINT, 03717, shifted print key
+key_sredo,		"kRDO"	"%g"	KEY_SREDO, 03720, shifted redo key
+key_sreplace,		"kRPL"	"%h"	KEY_SREPLACE, 03721, shifted replace key
+key_sright,		"kRIT"	"%i"	KEY_SRIGHT, 03722, shifted right arrow
+key_srsume,		"kRES"	"%j"	KEY_SRSUME, 03723, shifted resume key
+key_ssave,		"kSAV"	"!1"	KEY_SSAVE, 03724, shifted save key
+key_ssuspend,		"kSPD"	"!2"	KEY_SSUSPEND, 03725, shifted suspend key
+key_sundo,		"kUND"	"!3"	KEY_SUNDO, 03726, shifted undo key
+req_for_input,		"rfi"	"RF"	send next input char (for ptys)
+# ------------ ATT key_f11 through key_f63 has moved ---------------------
+clr_bol,		"el1"	"cb"	Clear to beginning of line, inclusive
+clear_margins,		"mgc"	"MC"	Clear left and right soft margins
+set_left_margin,	"smgl"	"ML"	Set soft left margin
+set_right_margin,	"smgr"	"MR"	Set soft right margin
+label_format,		"fln"	"Lf"	Label format
+#
+#
+#
+set_clock,		"sclk"	"SC"	Set time-of-day clock
+display_clock,		"dclk"	"DK"	Display time-of-day clock
+remove_clock,		"rmclk"	"RC"	Remove time-of-day clock
+create_window,		"cwin"	"CW"	Define win #1 to go from #2,#3 to #4,#5
+goto_window,		"wingo"	"WG"	Got to window #1
+hangup,			"hup"	"HU"	Hang-up phone
+dial_phone,		"dial"	"DI"	Dial phone number #1
+quick_dial,		"qdial"	"QD"	Dial phone number #1, without progress detection
+tone,			"tone"	"TO"	Select touch tone dialing
+pulse,			"pulse"	"PU"	Select pulse dialing
+flash_hook,		"hook"	"fh"	Flash the switch hook
+fixed_pause,		"pause"	"PA"	Pause for 2-3 seconds
+wait_tone,		"wait"	"WA"	Wait for dial tone
+user0,			"u0"	"u0"	User string 0
+user1,			"u1"	"u1"	User string 1
+user2,			"u2"	"u2"	User string 2
+user3,			"u3"	"u3"	User string 3
+user4,			"u4"	"u4"	User string 4
+user5,			"u5"	"u5"	User string 5
+user6,			"u6"	"u6"	User string 6
+user7,			"u7"	"u7"	User string 7
+user8,			"u8"	"u8"	User string 8
+user9,			"u9"	"u9"	User string 9
+orig_pair,		"op"	"op"	Original color-pair
+orig_colors,		"oc"	"oc"	Original colors
+initialize_color,	"initc"	"Ic"	Initialize the definition of color
+initialize_pair,	"initp"	"Ip"	Initialize color pair
+set_color_pair,		"scp"	"sp"	Set color pair	
+set_foreground,		"setf"	"Sf"	Set foregrounf color
+set_background,		"setb"	"Sb"	Set background color
+#
+# printer specific
+#
+change_char_pitch,	"cpi"	"ZA"	Change no. characters per inch
+change_line_pitch,	"lpi"	"ZB"	Change no. lines per inch
+change_res_horz,	"chr"	"ZC"	Change horizontal resolution
+change_res_vert,	"cvr"	"ZD"	Change vertical resolution
+define_char,		"defc"	"ZE"	Define a character in a character set
+enter_doublewide_mode,	"swidm"	"ZF"	Enable double wide printing
+enter_draft_quality,	"sdrfq"	"ZG"	Set draft quality print
+enter_italics_mode,	"sitm"	"ZH"	Enable italics
+enter_leftward_mode,	"slm"	"ZI"	Enable leftward carriage motion
+enter_micro_mode,	"smicm"	"ZJ"	Enable micro motion capabilities
+enter_near_letter_quality,	"snlq"	"ZK"	Set near-letter quality print
+enter_normal_quality,	"snrmq"	"ZL"	Set normal quality print
+enter_shadow_mode,	"sshm"	"ZM"	Enable shadow printing
+enter_subscript_mode,	"ssubm"	"ZN"	Enable subscript printing
+enter_superscript_mode,	"ssupm"	"ZO"	Enable superscript printing
+enter_upward_mode,	"sum"	"ZP"	Enable upward carriage motion
+exit_doublewide_mode,	"rwidm"	"ZQ"	Disable double wide printing
+exit_italics_mode,	"ritm"	"ZR"	Disable italics
+exit_leftward_mode,	"rlm"	"ZS"	Enable rightward (normal) carriage motion
+exit_micro_mode,	"rmicm"	"ZT"	Disable micro motion capabilities
+exit_shadow_mode,	"rshm"	"ZU"	Disable shadow printing
+exit_subscript_mode,	"rsubm"	"ZV"	Disable subscript printing
+exit_superscript_mode,	"rsupm"	"ZW"	Disable superscript printing
+exit_upward_mode,	"rum"	"ZX"	Enable downward (normal) carriage motion
+micro_column_address,	"mhpa"	"ZY"	Like column_address for micro adjustment
+micro_down,		"mcud1"	"ZZ"	Like cursor_down for micro adjustment
+micro_left,		"mcub1"	"Za"	Like cursor_left for micro adjustment
+micro_right,		"mcuf1"	"Zb"	Like cursor_right for micro adjustment
+micro_row_address,	"mvpa"	"Zc"	Like row_address for micro adjustment
+micro_up,		"mcuu1"	"Zd"	Like cursor_up for micro adjustment
+order_of_pins,		"porder"	"Ze"	Matches software bits to print-head pins
+parm_down_micro,	"mcud"	"Zf"	Like parm_down_cursor for micro adjust.
+parm_left_micro,	"mcub"	"Zg"	Like parm_left_cursor for micro adjust.
+parm_right_micro,	"mcuf"	"Zh"	Like parm_right_cursor for micro adjust.
+parm_up_micro,		"mcuu"	"Zi"	Like parm_up_cursor for micro adjust.
+select_char_set,	"scs"	"Zj"	Select character set
+set_bottom_margin,	"smgb"	"Zk"	Set soft bottom margin at current line
+set_bottom_margin_parm,	"smgbp"	"Zl"	Set soft bottom margin
+set_left_margin_parm,	"smglp"	"Zm"	Set soft left margin
+set_right_margin_parm,	"smgrp"	"Zn"	Set soft right margin
+set_top_margin,		"smgt"	"Zo"	Set soft top margin at current line
+set_top_margin_parm,	"smgtp"	"Zp"	Set soft top margin
+start_bit_image,	"sbim"	"Zq"	Start printing bit image graphics
+start_char_set_def,	"scsd"	"Zr"	Start definition of a character set
+stop_bit_image,		"rbim"	"Zs"	End printing bit image graphics
+stop_char_set_def,	"rcsd"	"Zt"	End definition of a character set
+subscript_characters,	"subcs"	"Zu"	List of ``subscript-able'' characters
+superscript_characters,	"supcs"	"Zv"	List of ``superscript-able'' characters
+these_cause_cr,		"docr"	"Zw"	Printing any of these chars causes cr
+zero_motion,		"zerom"	"Zx"	No motion for the subsequent character
+char_set_names,		"csnm"	"Zy"	List of character set names
+# Add new strings before this line.
+--- end str

@@ -1,0 +1,26 @@
+* @(#)28	1.2  src/bos/kernext/intf/netintf.exp, sysxintf, bos411, 9428A410j 6/16/90 04:31:22
+*
+*
+* COMPONENT_NAME: (SYSXINTF) raw interface services. 
+* 
+* FUNCTIONS: 
+*
+* ORIGINS: 27 
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1989 
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* 
+
+* 
+*
+* symbols exported from netintf loadable code.
+*
+netintf_kmid
+netintf_count
+intfintrq

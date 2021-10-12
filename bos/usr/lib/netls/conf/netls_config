@@ -1,0 +1,605 @@
+#! /bin/ksh
+#ident "@(#)netls_config:1.1  File Date:93/03/25 Last Delta:93/03/22 14:53:08"
+#
+#This section is the master for the NetLS / NCS product. It is used as the final
+# phase of the NetLS / NCS install. This section facilitates the proper setup
+# of NCS to insure that the NetLS product will run when installed. It checks 
+# for the global broker and if one currently is not available it will ask if
+# you want this machine to be setup as the global broker, otherwise it will
+# query the user on global brokers currently in use.
+#
+#Assumptions: this script assumes that the llbd,glbd and the nrglbd are not
+#              running at time of invocation.
+first="unknown"
+noglbd="unknown"
+init="false"
+init2="false"
+
+tidy_exit()
+{
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG1 -m "An error occured while $2."
+
+	# the error did not come out of a shell script so
+	# print the message. Shell scripts are supposed to
+	# report the error themselves
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG2 -m "error message was:"
+	cat $errmsg
+
+	rm -f $errmsg
+	rm -rf $1
+
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG3 -m "NCS setup  cancelled"
+
+}
+
+intr_exit()
+{
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG4 -m "INTERRUPT, installation cancelled"
+	rm -f $errmsg
+	rm -rf $1
+	if [ $init = "true" ]
+	then
+		rmitab "rcncs"
+	fi
+	if [ $init2 = "true" ]
+	then
+		rmitab "netlsd"
+	fi
+
+	exit 1
+}
+
+# set up of variables because this is an Internationalized script
+MSGCAT=netls.cat			# message catalog number
+MSGSET=1				# message set number
+MSG1=1					# 1st message
+MSG2=2					# etc
+MSG3=3
+MSG4=4
+MSG5=5
+MSG6=6
+MSG7=7
+MSG8=8
+MSG9=9
+MSG10=10
+MSG11=11
+MSG12=12
+MSG13=13
+MSG14=14
+MSG15=15
+MSG16=16
+MSG17=17
+MSG18=18
+MSG19=19
+MSG20=20
+MSG21=21
+MSG22=22
+MSG23=23
+MSG24=24
+MSG25=25
+MSG26=26
+MSG27=27
+MSG28=28
+MSG29=29
+MSG30=30
+MSG31=31
+MSG32=32
+MSG33=33
+MSG34=34
+MSG35=35
+MSG36=36
+MSG37=37
+MSG38=38
+MSG39=39
+MSG40=40
+MSG41=41
+MSG42=42
+MSG43=43
+MSG44=44
+MSG45=45
+MSG46=46
+MSG47=47
+MSG48=48
+MSG49=49
+MSG50=50
+MSG51=51
+MSG52=52
+MSG53=53
+MSG54=54
+MSG55=55
+MSG56=56
+MSG57=57
+MSG58=58
+MSG59=59
+MSG60=60
+MSG61=61
+MSG62=62
+MSG63=63
+
+PATH=$PATH:/usr/lib/netls/ark/ils
+export PATH
+exists=0
+ncsetup=1
+i18necho -s $MSGSET -f $MSGCAT -n $MSG5 -m "
+A number of daemons can be automatically started by this
+installation when the machine reboots by updating the files in
+/etc/rc[012].d.  Please indicate if you want this to occur.
+
+"
+i18necho -s $MSGSET -f $MSGCAT -n $MSG6 -m "Do you want the 'llbd' started automatically when the machine boots?"
+
+i18ninq
+if [ "$?" -eq 1  ]
+       then
+           mkitab rcncs:2:wait:"sh /etc/rc.ncs > /dev/console 2>&1 # Start NCS"
+	   init="true"
+       fi
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG7 -m "Do you want 'netlsd' started automatically when the machine boots?"
+
+# the only logging event that the server is started with is error. If you want to log more events, remove the
+# letter symbolizing the event from the '-no' parameter list.  For more information, look at the description of
+# netlsd in the "NetLS Network License System" documentation
+
+i18ninq
+if [ "$?" -eq 1 ]
+    then
+       mkitab netlsd:2:wait:"sh /etc/rc.netls >/dev/console 2>&1 # start netls"
+       init2="true"
+    fi
+
+
+if [ $ncsetup -ne 0 ]
+then
+vers=NCS_1.5.1
+trap 'intr_exit $pd' 2 3
+errmsg=/usr/tmp/err.$$
+tmpdir=/usr/tmp
+lb_txt=/usr/tmp/lb_find.txt
+
+if [ `uname` = ULTRIX -o `uname` = VMS ]
+	then 
+	glb='non'
+	else
+	glb='ok'
+fi
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG8 -m "
+
+NCS must be properly installed and setup for NetLS to function properly.
+
+"
+if [ -f /etc/ncs/glb.e ] && [ -f /etc/ncs/glb.p ]
+then
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG9 -m "There exists a inititialized database already for the glbd"
+	echo ""
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG10 -m "Do you wish to use that database when starting the 'glbd' daemon?"
+	i18ninq
+	if [ "$?" -eq 1 ]
+	then
+		exists=1
+	else
+		exists=0
+		rm -f /etc/ncs/glb.e
+		rm -f /etc/ncs/glb.p
+		rm -f /etc/ncs/glb_log
+		rm -f /etc/ncs/glb_site.txt
+		rm -f /etc/ncs/glb_obj.txt
+	fi
+fi
+
+if [ $exists -eq 0 ]
+then
+i18necho -s $MSGSET -f $MSGCAT -n $MSG11 -m "
+
+Checking cell name configurations. Please wait....... 
+
+"
+/usr/lib/ncs/bin/lb_find > $lb_txt
+
+grep default $lb_txt 
+if [ $? -eq 1 ]
+then
+	def="no"
+else
+	def="yes"
+fi
+grep alternate $lb_txt 
+if [ $? -eq 1 ]
+then
+	alt="no"
+else
+	alt="yes"
+fi
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG12 -m "
+ 
+A NCS location broker configuration ordinarily contains one or more
+Global Location Broker daemons belonging to one GLB cell, known as the
+default cell.  Most configurations use the default cell. 
+
+For some sites, it is desirable to assign some machines to an alternate
+cell, where the GLB object has a different identification."
+
+if [ $def = "no" -a $alt = "no" ]
+then
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG13 -m "
+No existing GLB cells were found:  this machine may be assigned to
+either the default cell, or a new alternate cell can be created."
+else
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG14 -m "
+There are already existing GLB cells on this network:  you may choose
+to join one of them, or you may create a new one for this machine. 
+
+You must choose which cell you wish this system to belong to."
+fi
+ 
+choices=`i18necho -s $MSGSET -f $MSGCAT -n $MSG15 -m "[1,2,3]"`
+number=`i18necho -s $MSGSET -f $MSGCAT -n $MSG16 -m "three"`
+choice4=""
+if [ $alt = "yes" ]
+then
+	choices=`i18necho -s $MSGSET -f $MSGCAT -n $MSG17 -m "[1,2,3,4]"`
+	number=`i18necho -s $MSGSET -f $MSGCAT -n $MSG18 -m "four"`
+	choice4=`i18necho -s $MSGSET -f $MSGCAT -n $MSG19 -m \
+"\\\\\t4\) Choose an existing alternate cell for the system Cell Name.
+\\\\\n"`
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG20 -m "
+Press enter for a list of available cells.
+"
+	read a
+
+
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG21 -m "The following GLB servers were found in alternate cells:"
+	echo ""
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG22 -m " Svr_Name    Type of Server  Cell_Name             Uuid "
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG23 -m " --------    --------------  --------      --------------------------"
+	grep "^replicatable" $lb_txt | awk '{printf("%-10s    %-12s    %-10s   %-17s\n",$2,$1,$3,$4)}'
+	grep "non-replicatable" $lb_txt | awk '{printf("%-10s    %-12s    %-10s   %-17s\n",$2,$1,$3,$4)}'
+	echo ""
+fi
+
+command=`i18necho -s $MSGSET -f $MSGCAT -n $MSG24 -m "
+	You have $number options:"`
+eval echo $command
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG45 -m "	1) Continue with installation without choosing a Cell_Name.
+	2) Use the default for the system Cell Name.
+	3) Create a new alternate cell for the system Cell Name."
+eval echo $choice4
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG25 -m \
+"    WARNING:
+	If you continue[1] the install without choosing a Cell Name 
+	then NetLS will not function. If you do not understand these options 
+	input [1] to continue and consult your system administrator or the
+	documentation Managing NCS Software"
+
+ans=0
+while true
+do
+	case $ans in
+	1|2|3)
+		break;
+		;;
+	4)
+		if [ $alt = "yes" ]
+		then
+			break
+		fi
+		;;
+	esac
+	echo ""
+
+	command=`i18necho -s $MSGSET -f $MSGCAT -n $MSG26 -m "Please indicate your choice $choices: "`
+	eval echo $command
+	read ans
+done
+
+case $ans in
+
+1)
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG27 -m "
+
+Consult documentation Managing NCS Software for further information.
+ 
+You have chosen to cancel this setup script, you must run the
+
+         /usr/lib/netls/conf/netls_config 
+
+shell script at some point.  This script will generate a shell script which
+will contain the commands needed to initialize NCS and to
+start up the NCS and NetLS daemons the first time.  After that, the
+daemons will start automatically whenever the system is booted.
+"
+
+                exit 1
+
+	;;
+
+2)
+	echo ""
+	# set up this machine in the default cell.
+	rm -f /etc/ncs/glb_obj.txt
+	if [ $def = "yes" ]
+	then
+		i18necho -s $MSGSET -f $MSGCAT -n $MSG28 -m "Will add this system to the default GLB cell"
+		hostn=`grep default $lb_txt | head -1 | awk '{ print $2 }'` 
+		first="no"
+		#check to see if Cell_Name is a non-replicatable
+		norep=`grep default $lb_txt | head -1 | cut -c-3`
+		if [ $norep = non ]
+		then
+			noglbd="yes"
+		else
+			i18necho -s $MSGSET -f $MSGCAT -n $MSG62 -m \
+			"There is already a glbd server in this cell."
+			i18necho -s $MSGSET -f $MSGCAT -n $MSG63 -m \
+			"Do you want a new glbd server to run on this machine?"
+			i18ninq
+			if [ "$?" -eq 1 ]
+			then
+				noglbd="no"
+			else
+				noglbd="yes"
+			fi
+		fi
+	else
+		i18necho -s $MSGSET -f $MSGCAT -n $MSG29 -m "Will create default GLB cell for this system."
+		# set it up as replicatable (glbd)
+		noglbd="no"
+		first="yes"
+	fi
+	;;
+
+3)
+	echo ""
+	# set up this machine in a new alternate cell.
+	rm -f /etc/ncs/glb_obj.txt
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG30 -m "Will create new alternate GLB cell for this system."
+	/usr/lib/ncs/bin/uuid_gen > /etc/ncs/glb_obj.txt
+	noglbd="no"
+	first="yes"
+	;;
+
+4)
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG31 -m "Please enter Alternate Cell number[1,2,?]: "
+	read ans2
+	while [ "$ans2" -lt 1 ]
+	do
+		i18necho -s $MSGSET -f $MSGCAT -n $MSG31 -m "Please enter Alternate Cell number[1,2,?]:"
+		read ans2
+	done	
+	search=`i18necho -s $MSGSET -f $MSGCAT -n $MSG32 -m "alternate_$ans2"`
+	search=`eval echo $search`
+	grep $search $lb_txt > /dev/null
+	while [ $? -eq 1 ]
+	do
+		echo ""
+		i18necho -s $MSGSET -f $MSGCAT -n $MSG33 -m "\"$ans2\" is not a valid Alternate Cell number"
+		i18necho -s $MSGSET -f $MSGCAT -n $MSG34 -m "Please enter Alternate Cell number. "
+		read ans2
+		search=`i18necho -s $MSGSET -f $MSGCAT -n $MSG32 -m "alternate_$ans2"`
+		grep $search $lb_txt > /dev/null
+	done
+	echo ""
+	command=`i18necho -s $MSGSET -f $MSGCAT -n $MSG35 -m "Will add system to be a member of the $search Cell."`
+	eval echo $command
+	grep $search $lb_txt | head -1 | awk '{print $4}' >/etc/ncs/glb_obj.txt
+	hostn=`grep $search $lb_txt | head -1 | awk '{ print $2 }'` 
+	first="no"
+	#check to see if Cell_Name is a non-replicatable
+	norep=`grep $search $lb_txt | head -1 | cut -c-3`
+	if [ $norep =  non ]
+	then
+		noglbd="yes"
+	else
+		i18necho -s $MSGSET -f $MSGCAT -n $MSG62 -m \
+		"There is already a glbd server in this cell."
+		i18necho -s $MSGSET -f $MSGCAT -n $MSG63 -m \
+		"Do you want a new glbd server to run on this machine?"
+		i18ninq
+		if [ "$?" -eq 1 ]
+		then
+			noglbd="no"
+		else
+			noglbd="yes"
+		fi
+	fi
+	;;
+esac
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG36 -m "Continuing setup..."
+echo ""
+
+
+fi
+#endif exists = 0 do not use existing  glb.e and glb.p
+fi
+# endif for ncssetup=1
+#
+#   Starting all daemons for non-svr4 systems only
+#
+#
+
+#
+# not_running <proc_name> returns 0 if process <proc_name> is not running.
+#
+not_running()
+{
+	pid=`/usr/bin/ps -e | /usr/bin/grep $1 | /usr/bin/awk '{ print $1 }'`
+	if [ "${pid}" = "" ]
+	then
+		return 0	# success
+	else
+		return 1	# failure
+	fi
+}
+
+LLBD=/usr/lib/ncs/bin/llbd
+GLBD=/usr/lib/ncs/bin/glbd
+LBFIND=/usr/lib/ncs/bin/lb_find
+NETLSD=/usr/lib/netls/bin/netlsd
+SCRIPT=/usr/lib/netls/conf/netls_first_time
+
+if [ $ncsetup -eq 1 ]
+then
+    rm -f $SCRIPT
+    echo "#! /bin/sh" > $SCRIPT
+    chmod u+x $SCRIPT
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG37 -m "
+After this installation has been done, you must run the 
+"
+
+echo $SCRIPT
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG40 -m "
+shell script.  It contains the commands needed to initialize NCS and to 
+start up the NCS and NetLS daemons the first time.  After that, the  
+daemons will start automatically whenever the system is booted.
+"
+
+    if not_running llbd
+    then
+	rm -f /tmp/llbdbase.dat
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG38 -m "The llbd daemon will be started."
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG39 -m "echo Starting the llbd daemon" >> $SCRIPT
+	echo "startsrc -s llbd" >> $SCRIPT
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG41 -m "sleep 5	# give the llbd time to start" >> $SCRIPT
+    fi
+
+    if [ $exists -eq 1 ]
+    then
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG42 -m "Using existing GLB database"
+	if not_running glbd
+	then
+	    i18necho -s $MSGSET -f $MSGCAT -n $MSG43 -m "The glbd daemon will be started"
+	    i18necho -s $MSGSET -f $MSGCAT -n $MSG44 -m "echo Starting the glbd daemon" >> $SCRIPT
+	    echo "startsrc -s glbd" >> $SCRIPT 
+	fi
+        if [ -f /etc/rc.ncs ]
+        then
+        ed -s /etc/rc.ncs <<! > /dev/null
+/#startsrc -s glbd
+c
+startsrc -s glbd
+.
+w
+q
+!
+        fi
+
+    fi
+
+    if [ $exists -ne 1 ] && [ $noglbd = "no" ]
+    then
+	# start the glbd
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG43 -m "The glbd daemon will be started"
+	if [ $first = "yes" ] 
+	then
+	    # replicatable - first time setting up the default
+	    i18necho -s $MSGSET -f $MSGCAT -n $MSG46 -m "echo Starting the first glbd daemon in this cell" >> $SCRIPT
+	    echo \
+	"startsrc -s glbd -a \"-create -first -family ip\"" >> $SCRIPT
+	fi
+        if [ -f /etc/rc.ncs ]
+        then
+        ed -s /etc/rc.ncs <<! > /dev/null
+/#startsrc -s glbd
+c
+startsrc -s glbd
+.
+w
+q
+!
+        fi
+
+	if [ $first = "no" ] 
+	then
+	    # replicatable - initialize the database when starting the glbd
+	    command=`i18necho -s $MSGSET -f $MSGCAT -n $MSG48 -m "echo Starting the glbd from replica on $hostn"`
+	    eval echo $command >> $SCRIPT
+	    echo  \
+	"startsrc -s glbd -a \"-create -from $hostn\"" >> $SCRIPT
+        if [ -f /etc/rc.ncs ]
+        then
+        ed -s /etc/rc.ncs <<! > /dev/null
+/#startsrc -s glbd
+c
+startsrc -s glbd
+.
+w
+q
+!
+        fi
+	fi
+    fi
+
+# the only logging event that the server is started with is error. If you want to log more events, remove the
+# letter symbolizing the event from the '-no' parameter list.  For more information, look at the description of
+# netlsd in the "NetLS Network License System" documentation
+
+    if not_running netlsd
+    then
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG50 -m "The netlsd daemon will be started"
+	echo "if $LBFIND -q" >> $SCRIPT
+	echo "then" >> $SCRIPT
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG53 -m "  echo Starting the netlsd daemon" >> $SCRIPT
+	echo "  startsrc -s netlsd -a '-no lcwvptms'" >> $SCRIPT
+	echo "else" >> $SCRIPT
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG56 -m "  echo The GLB server is not responding;" >> $SCRIPT
+	i18necho -s $MSGSET -f $MSGCAT -n $MSG57 -m "  echo NetLS server cannot be started." >> $SCRIPT
+	echo "fi" >> $SCRIPT
+    fi
+
+    #
+    # Now that the setup has been successful, lets make sure that the current
+    # targetid (the planar id) is stored in /usr/lib/netls/conf/list_targetids
+    #
+
+    target_file=/usr/lib/netls/conf/list_targetids
+    target_output=/tmp/temptarg1
+    planar=/tmp/temptarg2
+
+    # put targetid output into $target_output
+    /usr/lib/netls/bin/ls_targetid > $target_output
+
+    # find the planar id and store that in the file $planar
+    exec < $target_output
+    read line
+    read line
+    read line
+    echo "$line" > $planar
+
+
+    if [ -f $target_file ]
+    then
+	grep $line $target_file >> /dev/null
+	if [ $? != 0 ]
+	then
+		date | cat >> $target_file
+		cat $planar >> $target_file
+	fi
+    else
+	date | cat > $target_file
+	cat $planar >> $target_file
+    fi
+
+    rm $target_output
+    rm $planar
+
+    echo ""
+    i18necho -s $MSGSET -f $MSGCAT -n $MSG59 -m "The NCS setup completed successfully"
+    echo ""
+fi
+exit 0
+
+
+
+
+
+
+
+
+

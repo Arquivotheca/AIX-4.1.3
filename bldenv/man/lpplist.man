@@ -1,0 +1,25 @@
+# @(#)59        1.1  src/bldenv/man/lpplist.man, pkgtools, bos412, GOLDA411a 12/1/93 17:31:27
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: lpplist file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/UPDATE/lpplist.$BLDCYCLE:
+        List of LPP's that need to be processed for PTF's.  Created by
+        subptf and used by ptfpkg.
+
+	Format:
+                <lpp>
+                <lpp>
+                  .
+                  .

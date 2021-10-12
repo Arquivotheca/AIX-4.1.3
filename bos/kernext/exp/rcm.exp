@@ -1,0 +1,25 @@
+#!/unix
+* @(#)66	1.2  src/bos/kernext/exp/rcm.exp, rcm, bos411, 9428A410j 7/5/94 11:29:39
+*
+*   COMPONENT_NAME: RCM
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+*
+*************************************************************************
+*
+* rcm.exp:  Labels that are exported to HFT extensions.
+*
+*************************************************************************
+*
+
+aixgsc syscall

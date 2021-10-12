@@ -1,0 +1,116 @@
+# @(#)40 1.4  src/bldenv/man/bldlogset.man, bldprocess, bos412, GOLDA411a 10/30/92 14:13:58
+#
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldlogset man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  
+  bldlogset Command
+  
+  
+  Purpose
+  
+  Creates,appends or resets a database file that contains default values 
+  which are used by the 'bldlog' command.
+
+  
+  Syntax
+  
+  bldlogset [-L <level> | +-l] [-C <context>] [-1 <subcontext1>]
+            [-2 <subcontext2>] [-c <command>] [-F <log_file>]
+            [-r] <log_message>
+  
+  
+  Description
+  
+  The bldlogset command can be used to create a database file called,
+  '.LOG.$(hostname).$(terminalName).$(terminalNumber).db' in the $BLDTMP 
+  directory (example: /tmp/.LOG.stanmusial.pts.1.db). This database (db)
+  file holds the default values for the various options that can be used
+  in the 'bldlog' command.  The filename used can be overridden with the
+  BLDLOG_DATABASE environment variable.
+  
+  The bldlogset command can  be called with a list of options on the 
+  command line. If some of these options are not specified, it creates
+  default values for these options, If a db file is already present, these
+  values are appended to the db file. This also takes a reset option 
+  wherein it deletes the last updated information in the db file.
+   
+  The bldlogset command should be called from a particular language 
+  interface (See bldloginit or bldperlog.pl) but can be used directly.
+
+  
+  Flags
+  
+  +-l              Append a new entry to the db file by incrementing 
+                   or decrementing from the previous level. Here
+                   level indicates the level of any routine
+                   relative to others, default being 1. 
+  
+  -L level         Append a new entry to the db file by a new
+                   absolute value of level.
+  
+  -C context       Append a new entry to the db file by a new      
+                   default value of context.    
+  
+  -1 subcontext1   Append a new entry to the db file by a new      
+                   default value of subcontext1.    
+  
+  -2 subcontext1   Append a new entry to the db file by a new      
+                   default value of subcontext2.    
+  
+  -c command       Append a new entry to the db file by a new      
+                   default value of command.    
+  
+  -F log_file      Append a new entry to the db file by a new      
+                   default value of log file to log_file.
+  
+  -r               Removes the last updated default values
+                   from the db file.
+  
+  <log_message>    Append a new default value of log message
+                   to the db file.
+   
+  
+  Environment Variables
+
+  BLDLOG_DATABASE
+               Override the standard name for the database file the
+               logging functions use.  Used primarily for functions
+               executed remotely that do logging.  Since the remote
+               process has no tty assigned, the logging functions will
+               not be able to create a unique file by using the tty
+               name.  The file specified should be unique (contain a
+               process id).  When the function doing the logging is
+               finished, it should call 'logset -r' to remove the
+               database file.
+
+  
+  Examples
+  
+  1. To create default values for context and subcontext1.
+  
+     bldlogset -C build -1 bos
+  
+  2. To reset  the db file.
+  
+     bldlogset -r
+
+
+  Related Information
+  
+  $BLDENV/usr/bin/bldlog                  The "bldlog" command.
+  $BLDENV/usr/bin/bldloginit              The "bldloginit" command.
+  $BLDENV/usr/bin/bldperllog              The "bldperllog" command.
+  $BLDENV/usr/bin/showlog                 The "showlog" command.
+  

@@ -1,0 +1,391 @@
+ADDRESS MAP FOR bblddpin
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+ I                        ER S1    pinned_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S2    as_getsrval               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S3    clrjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S4    e_sleep                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S5    e_wakeup                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S6    errsave                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S7    fp_open                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S8    fp_close                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S9    fp_ioctl                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S10   getadsp                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S11   longjmpx                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S12   pinu                      ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S13   setjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S14   sprintf                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S15   unpinu                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S16   w_start                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S17   w_stop                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S18   xmalloc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S19   xmattach                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S20   xmdetach                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S21   xmemout                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S22   xmfree                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S23   dmp_add                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S24   dmp_del                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S25   io_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S26   io_det                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S27   iomem_att                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S28   iomem_det                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S29   pci_cfgrw                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S30   xmemdma                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S31   pm_planar_control         ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S32   getpid                    ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S33   thread_self               ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S34   Trconflag                 ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S35   trchook                   ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S36   _system_configuration     ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I  00009000           XO ER S37   i_disable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009000           XO ER S38   .i_disable                ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009300           XO ER S39   i_enable                  ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009300           XO ER S40   .i_enable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00003200           XO ER S41   __divss                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003200           XO ER S42   .__divss                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003280           XO ER S43   __divus                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003280           XO ER S44   .__divus                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003300           XO ER S45   __quoss                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003300           XO ER S46   .__quoss                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003380           XO ER S47   __quous                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003380           XO ER S48   .__quous                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+    00000000 0008D0  2 PR SD S49   <>                        ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+    00000000           PR LD S50   .bbl_correct_dmp_table_pd_ptr
+    000000B0           PR LD S51   .bbl_correct_dmp_table_vt_ld_ptr
+    00000164           PR LD S52   .bbl_term_dmp_table
+    00000574           PR LD S53   .bbl_init_dmp_table
+    00000794           PR LD S54   .bblcdtf7
+    000007BC           PR LD S55   .bblcdtf6
+    000007E4           PR LD S56   .bblcdtf5
+    0000080C           PR LD S57   .bblcdtf4
+    00000834           PR LD S58   .bblcdtf3
+    0000085C           PR LD S59   .bblcdtf2
+    00000884           PR LD S60   .bblcdtf1
+    000008AC           PR LD S61   .bblcdtf0
+    000008D0 000024  2 GL SD S62   <.dmp_del>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000008D0           GL LD S63   .dmp_del
+    000008F4 0000C4  2 PR SD S64   .bcopy                    moveeq.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o])
+    000008F4           PR LD S65   .ovbcopy
+    00000900           PR LD S66   ._moveeq
+    00000900           PR LD S67   .memcpy
+    00000900           PR LD S68   .memmove
+    000009B8 000024  2 GL SD S69   <.dmp_add>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000009B8           GL LD S70   .dmp_add
+    000009DC 000168  2 PR SD S71   .strcpy                   strcpy.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strcpy.o])
+    00000B44 000140  2 PR SD S72   <>                        ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_err.c(bbl_err.o)
+    00000B44           PR LD S73   .bbl_err
+    00000C84 0001C0  2 PR SD S74   .strncpy                  strncpy.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strncpy.o])
+    00000E44 000024  2 GL SD S75   <.sprintf>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000E44           GL LD S76   .sprintf
+    00000E68 000118  2 PR SD S77   .strlen                   strlen.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strlen.o])
+    00000F80 000024  2 GL SD S78   <.errsave>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000F80           GL LD S79   .errsave
+    00000FA4 000280  2 PR SD S80   <>                        ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_memtrc.c(bbl_memtrc.o)
+    00000FA4           PR LD S81   .bbl_memtrace_term
+    00001018           PR LD S82   .bbl_memtrace
+    00001080           PR LD S83   .bbl_memtrace_init
+    00001224 000024  2 GL SD S84   <.xmfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001224           GL LD S85   .xmfree
+    00001248 000024  2 GL SD S86   <.xmalloc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001248           GL LD S87   .xmalloc
+    0000126C 000024  2 GL SD S88   <.trchook>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000126C           GL LD S89   .trchook
+    00001290 000090  2 PR SD S90   .bzero                    bzero.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o])
+    00001320 001308  2 PR SD S91   <>                        ../../../../../../src/bos/kernext/disp/bbl/intr/bbl_intr.c(bbl_intr.o)
+    00001320           PR LD S92   .bbl_intr
+    0000177C           PR LD S93   .bbl_diag_intr
+    00001850           PR LD S94   .bbl_not_busy_intr
+    000018D8           PR LD S95   .bbl_fetch_last_addr_intr
+    00001C60           PR LD S96   .bbl_vertical_retrace_intr
+    00002628 000024  2 GL SD S97   <.iomem_att>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00002628           GL LD S98   .iomem_att
+    0000264C 000024  2 GL SD S99   <.setjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000264C           GL LD S100  .setjmpx
+    00002670 000024  2 GL SD S101  <.io_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00002670           GL LD S102  .io_det
+    00002694 000024  2 GL SD S103  <.longjmpx>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00002694           GL LD S104  .longjmpx
+    000026B8 000024  2 GL SD S105  <.io_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000026B8           GL LD S106  .io_att
+    000026DC 000024  2 GL SD S107  <.iomem_det>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000026DC           GL LD S108  .iomem_det
+    00002700 000024  2 GL SD S109  <.clrjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00002700           GL LD S110  .clrjmpx
+    00002724 000024  2 GL SD S111  <.xmemout>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00002724           GL LD S112  .xmemout
+    00002748 000024  2 GL SD S113  <.e_wakeup>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00002748           GL LD S114  .e_wakeup
+    0000276C 000024  2 GL SD S115  <.w_stop>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000276C           GL LD S116  .w_stop
+    00002790 000024  2 GL SD S117  <.w_start>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00002790           GL LD S118  .w_start
+    000027B4 000968  2 PR SD S119  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttpwrphase.c(bbl_vttpwrphase.o)
+    000027B4           PR LD S120  .vttpwrphase
+    00002AD4           PR LD S121  .vttpwrphase_noop
+    00002B80           PR LD S122  .bbl_dpms_set_new_phase
+    0000311C 0001B8  2 PR SD S123  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttcfl.c(bbl_vttcfl.o)
+    0000311C           PR LD S124  .vttcfl
+    000032D4 001168  2 PR SD S125  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttsubrs.c(bbl_vttsubrs.o)
+    000032D4           PR LD S126  .clear_rectangle
+    00003528           PR LD S127  .copy_ps
+    00003BF4           PR LD S128  .draw_string
+    00003CCC           PR LD S129  .draw_char
+    00003D74           PR LD S130  .process_special_attrs
+    00003E9C           PR LD S131  .draw_glyph
+    00004370           PR LD S132  .ps_to_screen_text
+    000043D8           PR LD S133  .ps_to_screen_clear
+    0000443C 0005C0  2 PR SD S134  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttmovc.c(bbl_vttmovc.o)
+    0000443C           PR LD S135  .vttmovc
+    000049FC 000320  2 PR SD S136  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttclr.c(bbl_vttclr.o)
+    000049FC           PR LD S137  .vttclr
+    00004D1C 000868  2 PR SD S138  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttcpl.c(bbl_vttcpl.o)
+    00004D1C           PR LD S139  .update_screen
+    00005384           PR LD S140  .vttcpl
+    00005584 000300  2 PR SD S141  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttdefc.c(bbl_vttdefc.o)
+    00005584           PR LD S142  .vttdefc
+    00005884 000140  2 PR SD S143  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttrds.c(bbl_vttrds.o)
+    00005884           PR LD S144  .vttrds
+    000059C4 0004B0  2 PR SD S145  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttscr.c(bbl_vttscr.o)
+    000059C4           PR LD S146  .vttscr
+    00005E74 000108  2 PR SD S147  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttsetm.c(bbl_vttsetm.o)
+    00005E74           PR LD S148  .vttsetm
+    00005F7C 000228  2 PR SD S149  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttact.c(bbl_vttact.o)
+    00005F7C           PR LD S150  .vttact
+    000061A4 000100  2 PR SD S151  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttstct.c(bbl_vttstct.o)
+    000061A4           PR LD S152  .vttstct
+    000062A4 000420  2 PR SD S153  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/load_color_table.c(load_color_table.o)
+    000062A4           PR LD S154  .load_color_table
+    000066C4 000408  2 PR SD S155  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vtttext.c(bbl_vtttext.o)
+    000066C4           PR LD S156  .vtttext
+    00006ACC 000990  2 PR SD S157  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_hw_init.c(bbl_hw_init.o)
+    00006ACC           PR LD S158  .bbl_hw_init
+    0000745C 000024  2 GL SD S159  <.fp_open>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000745C           GL LD S160  .fp_open
+    00007480 000024  2 GL SD S161  <.fp_ioctl>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00007480           GL LD S162  .fp_ioctl
+    000074A4 000024  2 GL SD S163  <.fp_close>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000074A4           GL LD S164  .fp_close
+    000074C8 000718  2 PR SD S165  <>                        ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_60x.c(bbl_cfg_60x.o)
+    000074C8           PR LD S166  .bbl_60x_config_device
+    0000796C           PR LD S167  .wr_60x_std_cfg_reg_w
+    00007A6C           PR LD S168  .rd_60x_std_cfg_reg_w
+    00007B6C           PR LD S169  .bbl_dd_nvram_open
+    00007BE0 0005E8  2 PR SD S170  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/setup_CRTC.c(setup_CRTC.o)
+    00007BE0           PR LD S171  .setup_CRTC
+    000081C8 0000A0  2 PR SD S172  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttdact.c(bbl_vttdact.o)
+    000081C8           PR LD S173  .vttdact
+    00008268 000628  2 PR SD S174  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttinit.c(bbl_vttinit.o)
+    00008268           PR LD S175  .load_font_table
+    0000848C           PR LD S176  .vttinit
+    00008890 000090  2 PR SD S177  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttterm.c(bbl_vttterm.o)
+    00008890           PR LD S178  .vttterm
+    00008920 0018F8  2 PR SD S179  <>                        ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_blt.c(bbl_blt.o)
+    00008920           PR LD S180  .bbl_blt_term
+    000089A4           PR LD S181  .bbl_blt_init
+    00008AE0           PR LD S182  .bbl_blt_indirect
+    0000A218 000024  2 GL SD S183  <.e_sleep>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A218           GL LD S184  .e_sleep
+    0000A23C 000024  2 GL SD S185  <.xmattach>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A23C           GL LD S186  .xmattach
+    0000A260 000024  2 GL SD S187  <.pinu>                   glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A260           GL LD S188  .pinu
+    0000A284 000024  2 GL SD S189  <.xmdetach>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A284           GL LD S190  .xmdetach
+    0000A2A8 000024  2 GL SD S191  <.xmemdma>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A2A8           GL LD S192  .xmemdma
+    0000A2CC 000024  2 GL SD S193  <.unpinu>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A2CC           GL LD S194  .unpinu
+    0000A2F0 000460  2 PR SD S195  <>                        ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_wat.c(bbl_wat.o)
+    0000A2F0           PR LD S196  .bbl_remove_update_wat_requests
+    0000A4A0           PR LD S197  .bbl_update_wat
+    0000A750 0006F0  2 PR SD S198  <>                        ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_mbx.c(bbl_mbx.o)
+    0000A750           PR LD S199  .bbl_remove_swap_requests
+    0000A830           PR LD S200  .bbl_swapbuffers
+    0000AE40 000024  2 GL SD S201  <.getpid>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE40           GL LD S202  .getpid
+    0000AE64 000024  2 GL SD S203  <.thread_self>            glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE64           GL LD S204  .thread_self
+    0000AE88 000024  2 GL SD S205  <.getadsp>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE88           GL LD S206  .getadsp
+    0000AEAC 000024  2 GL SD S207  <.as_getsrval>            glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AEAC           GL LD S208  .as_getsrval
+    0000AED0 000330  2 PR SD S209  <>                        ../../../../../../src/bos/kernext/disp/bbl/intr/bbl_watch.c(bbl_watch.o)
+    0000AED0           PR LD S210  .bbl_pm_watchdog
+    0000AFCC           PR LD S211  .bbl_vr_watchdog
+    0000B200 000D70  2 PR SD S212  <>                        ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_pm.c(bbl_pm.o)
+    0000B200           PR LD S213  .bbl_pm_handler
+    0000B694           PR LD S214  .bbl_pm_save_data_and_shutdown
+    0000BC54           PR LD S215  .bbl_pm_init_and_restore_data
+    0000BF70 000024  2 GL SD S216  <.pm_planar_control>      glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000BF70           GL LD S217  .pm_planar_control
+    0000BF94 000638  2 PR SD S218  <>                        ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_pci.c(bbl_cfg_pci.o)
+    0000BF94           PR LD S219  .bbl_pci_config_device
+    0000C4F0           PR LD S220  .rw_pci_std_cfg_regs
+    0000C5CC 000024  2 GL SD S221  <.pci_cfgrw>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000C5CC           GL LD S222  .pci_cfgrw
+    0000C5F0 000080  3 RO SD S223  <>                        ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+    0000C670 000020  3 RO SD S224  <>                        ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttdefc.c(bbl_vttdefc.o)
+    00000000 00007E  3 RW SD S225  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+    00000080 00009A  3 RW SD S226  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_err.c(bbl_err.o)
+    00000120 000092  3 RW SD S227  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_memtrc.c(bbl_memtrc.o)
+    000001B8 000101  3 RW SD S228  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/intr/bbl_intr.c(bbl_intr.o)
+    000002C0 000086  3 RW SD S229  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttpwrphase.c(bbl_vttpwrphase.o)
+    00000348 0000E1  3 RW SD S230  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttsubrs.c(bbl_vttsubrs.o)
+    00000430 00009B  3 RW SD S231  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttmovc.c(bbl_vttmovc.o)
+    000004D0 000061  3 RW SD S232  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttcfl.c(bbl_vttcfl.o)
+    00000538 00007E  3 RW SD S233  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttclr.c(bbl_vttclr.o)
+    000005B8 00007F  3 RW SD S234  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttcpl.c(bbl_vttcpl.o)
+    00000638 00007E  3 RW SD S235  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttdefc.c(bbl_vttdefc.o)
+    000006B8 000061  3 RW SD S236  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttrds.c(bbl_vttrds.o)
+    00000720 00007E  3 RW SD S237  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttscr.c(bbl_vttscr.o)
+    000007A0 00007E  3 RW SD S238  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttact.c(bbl_vttact.o)
+    00000820 0000E0  3 RW SD S239  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/load_color_table.c(load_color_table.o)
+    00000900 000062  3 RW SD S240  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttstct.c(bbl_vttstct.o)
+    00000968 00007E  3 RW SD S241  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttsetm.c(bbl_vttsetm.o)
+    000009E8 00007F  3 RW SD S242  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vtttext.c(bbl_vtttext.o)
+    00000A68 000104  3 RW SD S243  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_hw_init.c(bbl_hw_init.o)
+    00000B70 000189  3 RW SD S244  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_60x.c(bbl_cfg_60x.o)
+    00000D00 0000BA  3 RW SD S245  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/setup_CRTC.c(setup_CRTC.o)
+    00000DC0 000062  3 RW SD S246  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttdact.c(bbl_vttdact.o)
+    00000E28 000094  3 RW SD S247  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttinit.c(bbl_vttinit.o)
+    00000EC0 000063  3 RW SD S248  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttterm.c(bbl_vttterm.o)
+    00000F28 00017F  3 RW SD S249  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_blt.c(bbl_blt.o)
+    000010A8 0000A8  3 RW SD S250  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_wat.c(bbl_wat.o)
+    00001150 00007B  3 RW SD S251  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_mbx.c(bbl_mbx.o)
+    000011D0 00007D  3 RW SD S252  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/intr/bbl_watch.c(bbl_watch.o)
+    00001250 000085  3 RW SD S253  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_pm.c(bbl_pm.o)
+    000012D8 0000DD  3 RW SD S254  <_$STATIC>                ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_pci.c(bbl_cfg_pci.o)
+  E 000013B8 00000C  2 DS SD S255  bbl_correct_dmp_table_pd_ptr ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 000013C4 00000C  2 DS SD S256  bblcdtf0                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 000013D0 00000C  2 DS SD S257  bblcdtf1                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 000013DC 00000C  2 DS SD S258  bblcdtf2                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 000013E8 00000C  2 DS SD S259  bblcdtf3                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 000013F4 00000C  2 DS SD S260  bblcdtf4                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 00001400 00000C  2 DS SD S261  bblcdtf5                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 0000140C 00000C  2 DS SD S262  bblcdtf6                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 00001418 00000C  2 DS SD S263  bblcdtf7                  ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 00001424 00000C  2 DS SD S264  bbl_correct_dmp_table_vt_ld_ptr ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 00001430 00000C  2 DS SD S265  bbl_term_dmp_table        ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 0000143C 00000C  2 DS SD S266  bbl_init_dmp_table        ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+  E 00001448 00000C  2 DS SD S267  bbl_err                   ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_err.c(bbl_err.o)
+  E 00001454 00000C  2 DS SD S268  bbl_memtrace_term         ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_memtrc.c(bbl_memtrc.o)
+  E 00001460 00000C  2 DS SD S269  bbl_memtrace              ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_memtrc.c(bbl_memtrc.o)
+  E 0000146C 00000C  2 DS SD S270  bbl_memtrace_init         ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_memtrc.c(bbl_memtrc.o)
+  E 00001478 00000C  2 DS SD S271  bbl_intr                  ../../../../../../src/bos/kernext/disp/bbl/intr/bbl_intr.c(bbl_intr.o)
+  E 00001484 00000C  2 DS SD S272  vttcfl                    ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttcfl.c(bbl_vttcfl.o)
+  E 00001490 00000C  2 DS SD S273  vttmovc                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttmovc.c(bbl_vttmovc.o)
+  E 0000149C 00000C  2 DS SD S274  vttclr                    ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttclr.c(bbl_vttclr.o)
+  E 000014A8 00000C  2 DS SD S275  vttcpl                    ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttcpl.c(bbl_vttcpl.o)
+  E 000014B4 00000C  2 DS SD S276  vttdefc                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttdefc.c(bbl_vttdefc.o)
+  E 000014C0 00000C  2 DS SD S277  vttrds                    ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttrds.c(bbl_vttrds.o)
+  E 000014CC 00000C  2 DS SD S278  vttscr                    ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttscr.c(bbl_vttscr.o)
+  E 000014D8 00000C  2 DS SD S279  vttsetm                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttsetm.c(bbl_vttsetm.o)
+  E 000014E4 00000C  2 DS SD S280  vttact                    ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttact.c(bbl_vttact.o)
+  E 000014F0 00000C  2 DS SD S281  vttstct                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttstct.c(bbl_vttstct.o)
+  E 000014FC 00000C  2 DS SD S282  vtttext                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vtttext.c(bbl_vtttext.o)
+  E 00001508 00000C  2 DS SD S283  bbl_60x_config_device     ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_60x.c(bbl_cfg_60x.o)
+  E 00001514 00000C  2 DS SD S284  vttdact                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttdact.c(bbl_vttdact.o)
+  E 00001520 00000C  2 DS SD S285  vttinit                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttinit.c(bbl_vttinit.o)
+  E 0000152C 00000C  2 DS SD S286  vttterm                   ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttterm.c(bbl_vttterm.o)
+  E 00001538 00000C  2 DS SD S287  bbl_blt_term              ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_blt.c(bbl_blt.o)
+  E 00001544 00000C  2 DS SD S288  bbl_blt_init              ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_blt.c(bbl_blt.o)
+  E 00001550 00000C  2 DS SD S289  bbl_blt_indirect          ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_blt.c(bbl_blt.o)
+  E 0000155C 00000C  2 DS SD S290  bbl_remove_update_wat_requests ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_wat.c(bbl_wat.o)
+  E 00001568 00000C  2 DS SD S291  bbl_update_wat            ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_wat.c(bbl_wat.o)
+  E 00001574 00000C  2 DS SD S292  bbl_remove_swap_requests  ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_mbx.c(bbl_mbx.o)
+  E 00001580 00000C  2 DS SD S293  bbl_swapbuffers           ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_mbx.c(bbl_mbx.o)
+  E 0000158C 00000C  2 DS SD S294  vttpwrphase               ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttpwrphase.c(bbl_vttpwrphase.o)
+    00001598 00000C  2 DS SD S295  vttpwrphase_noop          ../../../../../../src/bos/kernext/disp/bbl/ksr/bbl_vttpwrphase.c(bbl_vttpwrphase.o)
+  E 000015A4 00000C  2 DS SD S296  wr_60x_std_cfg_reg_w      ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_60x.c(bbl_cfg_60x.o)
+  E 000015B0 00000C  2 DS SD S297  rd_60x_std_cfg_reg_w      ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_60x.c(bbl_cfg_60x.o)
+  E 000015BC 00000C  2 DS SD S298  bbl_dd_nvram_open         ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_60x.c(bbl_cfg_60x.o)
+  E 000015C8 00000C  2 DS SD S299  bbl_pm_watchdog           ../../../../../../src/bos/kernext/disp/bbl/intr/bbl_watch.c(bbl_watch.o)
+  E 000015D4 00000C  2 DS SD S300  bbl_vr_watchdog           ../../../../../../src/bos/kernext/disp/bbl/intr/bbl_watch.c(bbl_watch.o)
+  E 000015E0 00000C  2 DS SD S301  bbl_pm_handler            ../../../../../../src/bos/kernext/disp/bbl/rcm/bbl_pm.c(bbl_pm.o)
+  E 000015EC 00000C  2 DS SD S302  bbl_pci_config_device     ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_pci.c(bbl_cfg_pci.o)
+  E 000015F8 00000C  2 DS SD S303  rw_pci_std_cfg_regs       ../../../../../../src/bos/kernext/disp/bbl/config/bbl_cfg_pci.c(bbl_cfg_pci.o)
+    00001604 000000  2 T0 SD S304  <TOC>
+    00001604 000004  2 TC SD S305  <_$STATIC>
+    00001608 000004  2 TC SD S306  <_$STATIC_BSS>
+    0000160C 000004  2 TC SD S307  <>
+    00001610 000004  2 TC SD S308  <>
+    00001614 000004  2 TC SD S309  <bblcdtf0>
+    00001618 000004  2 TC SD S310  <dmp_del>
+    0000161C 000004  2 TC SD S311  <bblcdtf1>
+    00001620 000004  2 TC SD S312  <bblcdtf2>
+    00001624 000004  2 TC SD S313  <bblcdtf3>
+    00001628 000004  2 TC SD S314  <bblcdtf4>
+    0000162C 000004  2 TC SD S315  <bblcdtf5>
+    00001630 000004  2 TC SD S316  <bblcdtf6>
+    00001634 000004  2 TC SD S317  <bblcdtf7>
+    00001638 000004  2 TC SD S318  <dmp_add>
+    0000163C 000004  2 TC SD S319  <_system_configuration>
+    00001640 000004  2 TC SD S320  <ER>
+    00001644 000004  2 TC SD S321  <_$STATIC>
+    00001648 000004  2 TC SD S322  <sprintf>
+    0000164C 000004  2 TC SD S323  <errsave>
+    00001650 000004  2 TC SD S324  <pinned_heap>
+    00001654 000004  2 TC SD S325  <xmfree>
+    00001658 000004  2 TC SD S326  <_$STATIC>
+    0000165C 000004  2 TC SD S327  <xmalloc>
+    00001660 000004  2 TC SD S328  <Trconflag>
+    00001664 000004  2 TC SD S329  <trchook>
+    00001668 000004  2 TC SD S330  <_$STATIC>
+    0000166C 000004  2 TC SD S331  <iomem_att>
+    00001670 000004  2 TC SD S332  <setjmpx>
+    00001674 000004  2 TC SD S333  <io_det>
+    00001678 000004  2 TC SD S334  <longjmpx>
+    0000167C 000004  2 TC SD S335  <io_att>
+    00001680 000004  2 TC SD S336  <iomem_det>
+    00001684 000004  2 TC SD S337  <clrjmpx>
+    00001688 000004  2 TC SD S338  <xmemout>
+    0000168C 000004  2 TC SD S339  <e_wakeup>
+    00001690 000004  2 TC SD S340  <w_stop>
+    00001694 000004  2 TC SD S341  <w_start>
+    00001698 000004  2 TC SD S342  <_$STATIC>
+    0000169C 000004  2 TC SD S343  <_$STATIC>
+    000016A0 000004  2 TC SD S344  <_$STATIC>
+    000016A4 000004  2 TC SD S345  <_$STATIC>
+    000016A8 000004  2 TC SD S346  <_$STATIC>
+    000016AC 000004  2 TC SD S347  <_$STATIC>
+    000016B0 000004  2 TC SD S348  <_$STATIC>
+    000016B4 000004  2 TC SD S349  <>
+    000016B8 000004  2 TC SD S350  <>
+    000016BC 000004  2 TC SD S351  <_$STATIC>
+    000016C0 000004  2 TC SD S352  <_$STATIC>
+    000016C4 000004  2 TC SD S353  <_$STATIC>
+    000016C8 000004  2 TC SD S354  <_$STATIC>
+    000016CC 000004  2 TC SD S355  <_$STATIC>
+    000016D0 000004  2 TC SD S356  <_$STATIC>
+    000016D4 000004  2 TC SD S357  <_$STATIC>
+    000016D8 000004  2 TC SD S358  <_$STATIC>
+    000016DC 000004  2 TC SD S359  <fp_open>
+    000016E0 000004  2 TC SD S360  <fp_ioctl>
+    000016E4 000004  2 TC SD S361  <fp_close>
+    000016E8 000004  2 TC SD S362  <_$STATIC>
+    000016EC 000004  2 TC SD S363  <_$STATIC>
+    000016F0 000004  2 TC SD S364  <_$STATIC>
+    000016F4 000004  2 TC SD S365  <_$STATIC>
+    000016F8 000004  2 TC SD S366  <_$STATIC>
+    000016FC 000004  2 TC SD S367  <_$STATIC>
+    00001700 000004  2 TC SD S368  <e_sleep>
+    00001704 000004  2 TC SD S369  <xmattach>
+    00001708 000004  2 TC SD S370  <pinu>
+    0000170C 000004  2 TC SD S371  <xmdetach>
+    00001710 000004  2 TC SD S372  <xmemdma>
+    00001714 000004  2 TC SD S373  <unpinu>
+    00001718 000004  2 TC SD S374  <_$STATIC>
+    0000171C 000004  2 TC SD S375  <getpid>
+    00001720 000004  2 TC SD S376  <thread_self>
+    00001724 000004  2 TC SD S377  <getadsp>
+    00001728 000004  2 TC SD S378  <as_getsrval>
+    0000172C 000004  2 TC SD S379  <_$STATIC>
+    00001730 000004  2 TC SD S380  <_$STATIC>
+    00001734 000004  2 TC SD S381  <vttpwrphase>
+    00001738 000004  2 TC SD S382  <vttpwrphase_noop>
+    0000173C 000004  2 TC SD S383  <_$STATIC>
+    00001740 000004  2 TC SD S384  <pm_planar_control>
+    00001744 000004  2 TC SD S385  <_$STATIC>
+    00001748 000004  2 TC SD S386  <pci_cfgrw>
+    00001750 0003E0  3 RW CM S387  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_dmp.c(bbl_dmp.o)
+    00001B30 0000FC  3 RW CM S388  ER                        ../../../../../../src/bos/kernext/disp/bbl/ras/bbl_err.c(bbl_err.o)

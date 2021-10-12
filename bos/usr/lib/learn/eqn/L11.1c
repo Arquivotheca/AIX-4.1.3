@@ -1,0 +1,44 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#once #create message
+.ND
+.tr %$
+.EQ
+delim $$
+.EN
+.LP
+Modify "Example" so it prints the following output, then
+type "ready".
+.pl 1
+#once #create Ref
+.EQ
+delim $$
+.EN
+.LP
+The cost of processing is proportional to
+${ "{" characters "}" } over "$"$.
+.pl 1
+#once #create Example
+.LP
+The cost of processing is proportional to
+.pl 1
+#
+#once neqn Ref | nroff >X1 &
+#once neqn message Ref | nroff -T$term %s/tinyms -
+#user
+neqn Example | nroff >X2
+#cmp X1 X2
+#log
+#next
+11.1d 10

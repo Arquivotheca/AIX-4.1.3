@@ -1,0 +1,47 @@
+* @(#)29        1.4  src/bos/usr/ccs/lib/libqb/libqb.exp, libqb, bos411, 9428A410j 2/3/94 17:02:48
+*COMPONENT_NAME: (CMDQUE) spooling commands
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1985, 1994
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+put_header
+put_trailer
+asterisks
+blankline
+log_init
+log_status
+log_progress
+log_percent
+log_pages
+log_charge
+get_job_number
+get_backend
+get_copies
+get_align
+get_was_idle
+get_feed
+get_from
+get_header
+get_qdate
+get_title
+get_to
+get_trailer
+get_mail_only
+get_queue_name
+get_device_name
+sysnot
+csysnot
+telluser
+get_cmd_line
+piogetstatus
+pioputstatus

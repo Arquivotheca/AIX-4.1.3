@@ -1,0 +1,53 @@
+(ld): halt 4
+(ld): setopt strip 
+(ld): setopt member 
+(ld): savename wgadd
+(ld): filelist 7 8
+(ld): i config.o
+(ld): i define.o
+(ld): i ioctl.o
+(ld): i config_diag.o
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a
+FILELIST: Number of previously inserted files processed: 7
+(ld): imports ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernext/disp/wga/wgadd_pin.exp: 20
+(ld): imports ../../../../../../src/bos/kernel/exp/sysoverlay.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/sysoverlay.exp: 7
+(ld): imports ../../../../../../src/bos/kernel/exp/kernex.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/kernex.exp: 514
+(ld): imports ../../../../../../src/bos/kernel/exp/syscalls.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/syscalls.exp: 247
+(ld): imports ../../../../../../src/bos/kernel/exp/dead.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/dead.exp: 5
+(ld): imports ../../../../../../src/bos/kernel/exp/streams.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/streams.exp: 6
+(ld): exports ../../../../../../src/bos/kernext/disp/wga/wgadd.exp 
+EXPORTS: Symbols exported: 2
+(ld): entry wga_config
+ENTRY: Entry point set to wga_config
+(ld): resolve
+RESOLVE: 89 of 1059 symbols were kept.
+(ld): addgl /aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o
+ADDGL: Glink code added for 12 symbols.
+(ld): er full
+ER: There are no unresolved symbols.
+(ld): mismatch
+MISMATCH: No type mismatches exist.
+(ld): comprld
+COMPRLD: Kept 125 of 125 relocation entries.
+(ld): origin 0x0 0x0
+(ld): save 1L .
+SAVE: Section sizes = 2836+1820+8 (0xB14+0x71C+0x8 hex)
+SAVE: Size of TOC: 164 (0xA4 hex)
+SAVE: These object files and archive members were
+	used to create the output file:
+ config.o
+ define.o
+ ioctl.o
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o]
+(ld): gen map wgadd.map
+(ld): rc
+RC: Highest return code was 0.

@@ -1,0 +1,33 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Will the name
+  xyz
+be selected by the pattern
+  x?
+in an "ls" command?
+Type "yes" or "no".  If you
+have trouble, there is such a file
+in the current directory,
+so you can find out by trial and error.
+(For example, you might do an ordinary "ls"
+and then try "ls x?" and compare the results.)
+#create xyz
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+5.1c 0

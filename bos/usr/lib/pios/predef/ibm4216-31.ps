@@ -1,0 +1,41 @@
+# @(#)92        1.18  src/bos/usr/lib/pios/predef/ibm4216-31.ps, cmdpios, bos411, 9428A410j 5/25/94 19:47:21
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:638:_u:S[E015]I[1810516]EnR[pioattr1.cat,1,768;lower tray,upper tray or no sheet feeder,envelope tray=1,2,3]:2
+:060:__SYS::
+:757:s1:S[105]I[1810521]En%IWP:1
+:758:s2:S[110]I[1810521]En%IWP:1
+:655:uH:S[140]I[1810527]EnR[pioattr1.cat,1,768;lower tray,upper tray or no sheet feeder,envelope tray=1,2,3]:2
+:656:uT:S[145]I[1810527]EnR[pioattr1.cat,1,768;lower tray,upper tray or no sheet feeder,envelope tray=1,2,3]:2
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j] %IsH -u%GuH%d
+:324:st::%Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j] %IsT -u%GuT%d
+:057:__IDS::
+:273:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[juJZ]
+:058:__MIS::
+:330:mA::PostScript
+:331:mL::[devices.cat,71,4;IBM 4216 Personal Page Printer, Model 031]
+:295:mN::4216
+:301:mc::\0
+:319:mz::14688
+:051:__CAG::
+:144:ci::statusdict begin %G_u%d setpapertray end
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.ps
+:477:zS::!
+:685:zV::+

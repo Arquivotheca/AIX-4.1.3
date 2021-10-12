@@ -1,0 +1,40 @@
+#
+# @(#)36        1.1  src/bldenv/man/bldCMVCfamily.dat.man, bldtools, bos412, GOLDA411a 9/29/93 17:15:51
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS:  bldCMVCfamily.dat man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  $BLDENV/usr/bin/bldCMVCfamily.dat
+
+    Accessing bldCMVCfamily.dat should only be done through functions
+    in bldCMVCfamily.
+ 
+    This file contains a list of all CMVC families currently being used.
+    The ordering of the families should be from most used (top of file)
+    to least used (bottom of file).
+
+    Refer to 'IBM AIX Configuration Management Version Control/6000
+    Commands Reference' for more information about CMVC families.
+
+    Format of this file is:
+ 
+      familyname@hostname@portnumber
+
+    Each field is described below:
+
+      familyname (required) - The family name.
+
+      hostname (required) - The name of the server host for the family.
+
+      portnumber (required) - The TCP/IP port number assigned to the 
+                              family.

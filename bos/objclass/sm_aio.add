@@ -1,0 +1,263 @@
+# @(#)44	1.2.1.1  src/bos/objclass/sm_aio.add, cmdfs, bos411, 9428A410j 6/6/94 13:47:46
+#
+# COMPONENT_NAME: (cmdfs) File System Commands
+#
+# FUNCTIONS: sm_aio.add
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+## [End of PROLOG]
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Change/Show Characteristics of Asynchronous I/O	       #
+#                                                                              #
+# FAST KEY:         aio                                                     #
+# UNIX COMMAND(S):  aio                                                     #
+#                                                                              #
+#
+# Change/Show Characteristics of the AIO
+# This allows the AIO device's characteristics to be shown and, if desired,
+# changed.  There is no name selector.
+# DESIGN: 								 
+#	   3 dialogue header
+#	   1 name select						       #
+#  	   5 dialogue objects						       #
+#                                                                              #
+# HEADER:  
+#       Change/Show Characteristics of the AIO
+#       Remove the AIO; Keep Definition
+#       Configure the Defined AIO 
+#									       #
+# NAME SELECT:  AIO Name						       #
+#                                                                              #
+# OBJECTS:  
+#	    1. minimum number of servers				       #
+#	    2. maximum number of servers				       #
+#	    3. load automatically at system restart?			       #
+#	    4. server priority						       #
+#	    5. maximum number of requests				       #
+#                                                                              #
+#       Help text Id's for AIO specific helps are in the range:
+#       04201800 to 04201824
+#       This does not include menu helps.
+#
+################################################################################
+ 
+sm_cmd_hdr:
+	id                      = "chgaio"
+	option_id               = "chgaioCmdOpt"
+	has_name_select         = "n"
+	name                    = "Change/Show Characteristics of Asynchronous I/O"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 25
+	name_msg_id             = 461
+	cmd_to_exec             = "x() {
+chdev -l aio0 -P $*
+if [ $? = 0 ]
+then
+dspmsg smit.cat -s 25 763 'Changes will become effective at next system restart'
+fi
+}
+x"
+	ask                     = ""
+	exec_mode               = "P"
+	ghost                   = "n"
+	cmd_to_discover         = "lsattr -l aio0 -E -O  "
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "04201800"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "chgaioCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= "minservers"
+	name			= "MINIMUM number of servers"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 100
+	name_msg_id		= 2
+	op_type			= ""
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a minservers="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "04201801"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chgaioCmdOpt"
+	id_seq_num		= "010"
+	disc_field_name		= "maxservers"
+	name			= "MAXIMUM number of servers"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 100
+	name_msg_id		= 3
+	op_type			= ""
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a maxservers="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "04201802"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chgaioCmdOpt"
+	id_seq_num		= "015"
+	disc_field_name		= "maxreqs"
+	name			= "maximum number of REQUESTS"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 100
+	name_msg_id		= 4
+	op_type			= ""
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a maxreqs="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "04201803"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chgaioCmdOpt"
+	id_seq_num		= "020"
+	disc_field_name		= "kprocprio"
+	name			= "server PRIORITY"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 100
+	name_msg_id		= 5
+	op_type			= ""
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a kprocprio="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "04201804"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chgaioCmdOpt"
+	id_seq_num		= "025"
+	disc_field_name		= "autoconfig"
+	name			= "STATE to be configured at system restart"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 100
+	name_msg_id		= 6
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a autoconfig="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= "available,defined"
+	help_msg_id		= "04201805"
+	help_msg_loc		= ""
+
+#
+# Remove the AIO; Keep Definition
+# This allows the AIO device to be removed without deleting its
+# definition from the database.  No name selector is used.  A ghost
+# dialogue is used.
+
+# Command header.
+sm_cmd_hdr:
+    id                        = "rmvaio"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "Remove Asynchronous I/O; Keep Definition"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 462
+    cmd_to_exec               = "rmdev -l aio0"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "04201806"
+    help_msg_loc              = ""
+
+#
+# Configure the Defined AIO
+# This allows the AIO device when defined but not configured to be
+# configured.  No  name selector is used.  A ghost dialogue is used.
+
+# Command header.
+sm_cmd_hdr:
+    id                        = "cfgaio"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "Configure Defined Asynchronous I/O"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 463
+    cmd_to_exec               = "mkdev -l aio0"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "04201807"
+    help_msg_loc              = ""
+

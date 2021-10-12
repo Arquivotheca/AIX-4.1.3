@@ -1,0 +1,164 @@
+#
+# @(#)15        1.7  src/bos/usr/lib/assist/add_files/sm_instdev.add, cmdassist, bos411, 9438C411a 9/22/94 09:53:18
+#
+#   COMPONENT_NAME:  cmdassist
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+sm_menu_opt:
+    id                        = "assist"
+    id_seq_num                = "030"
+    next_id                   = "assist_dev"
+    text                      = "Set Installation Device"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 4
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850103"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "assist_dev"
+    option_id                 = "cmd_select_dev"
+    has_name_select           = "n"
+    name                      = "Set Installation Device"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 33
+    cmd_to_exec               = "\
+replace()
+{
+  # Set flag for install device line found to false.
+  install_dev=0
+
+  # Read from the /var/adm/sw/__assistinfo file a line at a time.
+  while read line
+  do
+    # If a line is found that starts with "INSTALL_DEVICE"
+    if [[ $line = INSTALL_DEVICE* ]]
+    then
+      # Write the new install device information to a temp file.
+      echo INSTALL_DEVICE=$1 >> /tmp/_assist$$
+      # Set flag for install device line found to true.
+      install_dev=1
+    else
+      # Otherwise, write the line read to the temp file.
+      echo $line >> /tmp/_assist$$
+    fi
+  done < /var/adm/sw/__assistinfo
+
+  # If a line for install device was not found in /var/adm/sw/__assistinfo
+  if [ $install_dev = 0 ]
+  then
+    # Write the new install device information to the temp file.
+    echo INSTALL_DEVICE=$1 >> /tmp/_assist$$
+  fi
+
+  # Replace the old /var/adm/sw/__assistinfo with the temp file.
+  mv /tmp/_assist$$ /var/adm/sw/__assistinfo
+}
+replace "
+    ask                       = "n"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "\
+default()
+{
+value=`sed -n 's?.*INSTALL_DEVICE=[ ]*\\(.*\\)?\\1?p'</var/adm/sw/__assistinfo`
+echo \"#default_dev\"
+echo $value
+}
+default "
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850103"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_select_dev"
+    id_seq_num                = "010"
+    disc_field_name           = "default_dev"
+    name                      = "INPUT device/directory for software"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 32
+    op_type                   = "l"
+    entry_type                = "t"
+    required                  = "+"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "/usr/lib/instl/sm_inst list_devices"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850113"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+*
+
+# This will display the language message in ascii format
+sm_name_hdr:
+	id			= "lang_msg"
+	option_id		= "lang_msg.ghost_opt"
+	ghost			= "y"
+	next_type		= "d"
+	next_id			= "lang_msg_ascii.cmd"
+
+sm_cmd_hdr:
+	id			= "lang_msg_ascii.cmd"
+	exec_mode		= "E"
+	ghost			= "y"
+	cmd_to_exec		= "t()
+{
+loop=1
+while [ $loop = 1 ]
+do
+  dspmsg -s 1 cmdassist.cat 25 '
+ The message files for the Graphical Installation Assistant are not \n\
+ present on this system for your language.  Would you like to use \n\
+ the Ascii Installation Assistant in your language, or the Graphical \n\
+ Installation Assistant in English only? \n\n\
+ 1  Ascii Installation Assistant in your language \n\
+ 2  Graphical Installation Assistant in English \n\n\
+>>> Choice []: '
+
+  read answer
+  if [ $answer\"x\" = 1\"x\" ]; then
+	return 1
+  elif [ $answer\"x\" = 2\"x\" ]; then
+	return 2
+  fi
+done
+}
+t"
+
+sm_cmd_opt:
+        id                      = "lang_msg.ghost_opt"
+        id_seq_num              = 0
+        disc_field_name         = "my_rawname"
+        required                = "y"
+

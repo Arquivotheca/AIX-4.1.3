@@ -1,0 +1,23 @@
+# @(#)74	1.4  src/bos/usr/bin/uucp/Permissions, cmduucp, bos411, 9428A410j 6/15/90 23:57:31
+# 
+# COMPONENT_NAME: UUCP Permissions
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# Example MACHINE and LOGNAME entries. Execute /usr/lib/uucp/uucpadm
+# for on-line help configuring uucp.
+#
+# Warning:  use COMMANDS=ALL only with extreme caution!
+#
+# MACHINE=merlin REQUEST=yes READ=/ WRITE=/  COMMANDS=rmail:uucp
+# LOGNAME=nuucp REQUEST=yes SENDFILES=yes READ=/ WRITE=/   

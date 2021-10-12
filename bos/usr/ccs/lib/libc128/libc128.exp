@@ -1,0 +1,31 @@
+#!libc128.a(shr.o)
+* @(#)84	1.2  src/bos/usr/ccs/lib/libc128/libc128.exp, libc128, bos411, 9428A410j 10/3/93 12:58:23
+*
+*   COMPONENT_NAME: LIBC128
+*
+*   FUNCTIONS:
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+scanf
+fscanf
+sscanf
+wsscanf
+fprintf
+printf
+sprintf
+vfprintf
+vprintf
+vsprintf
+vwsprintf
+wsprintf
+_doprnt

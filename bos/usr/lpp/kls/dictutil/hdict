@@ -1,0 +1,23 @@
+# @(#)81	1.1  src/bos/usr/lpp/kls/dictutil/hdict, cmdkr, bos411, 9428A410j 5/25/92 14:39:30
+#
+# COMPONENT_NAME:       (CMDKR) User Dictionary Utility
+#
+# FUNCTIONS:		Top level Shell
+#
+# ORIGINS:		27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp.  1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+if [ $# = 0 ]
+then
+   exec  /usr/lpp/kls/bin/hdict.kor
+else
+   exec  /usr/lpp/kls/bin/hdict.kor "$@"
+fi

@@ -1,0 +1,92 @@
+# @(#)95	1.3  src/bos/objclass/POWER/if_so.add, sockobj, bos411, 9428A410j 7/15/91 10:38:07
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the Serial Optical Interface.
+
+PdDv:
+	type		= "so"
+	class		= "if"
+	subclass	= "SO"
+	prefix		= "so"
+	base		= 0
+	chgstatus	= 1
+	DvDr		= "if_op"
+	led		= 0x581
+	setno		= 110
+	msgno		= 27
+	catalog		= "devices.cat"
+	Define		= "/usr/lib/methods/defif"
+	Configure	= "/usr/lib/methods/cfgif"
+	Change		= "/usr/lib/methods/chgif"
+	Unconfigure	= "/usr/lib/methods/ucfgif"
+	Undefine	= "/usr/lib/methods/udefif"
+	uniquetype	= "if/SO/so"
+
+PdCn:
+	uniquetype	= "if/SO/so"
+	connkey		= "TCPIP"
+
+PdAt:
+	uniquetype	= "if/SO/so"
+	attribute	= "mtu"
+	deflt		= "61428"
+	values		= "1-61428,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 2
+
+PdAt:
+	uniquetype	= "if/SO/so"
+	attribute	= "netaddr"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4
+
+PdAt:
+	uniquetype	= "if/SO/so"
+	attribute	= "state"
+	deflt		= "down"
+	values		= "up,down,detach"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 5
+
+PdAt:
+	uniquetype	= "if/SO/so"
+	attribute	= "netmask"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 8
+
+PdAt:
+	uniquetype	= "if/SO/so"
+	attribute	= "if_keyword"
+	deflt		= "ops"
+	values		= "ops"
+	type		= "R"
+	generic		= ""
+	rep		= "s"
+	nls_index	= 0

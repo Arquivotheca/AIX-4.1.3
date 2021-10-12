@@ -1,0 +1,102 @@
+# @(#)16 1.1 src/bldenv/man/processStanza.man, pkgtools, bos412, GOLDA411a 6/10/94 10:23:37
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: processStanza command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1994
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  processStanza Command
+  
+  
+  Purpose
+
+  The processStanza command creates processesed stanza files
+  that are used by odmupdate command to generate the odm files for 
+  updating the odm database.
+
+  Syntax
+
+  processStanza  -p <previous_stanza_file>  -c <current_stanza_file>
+  
+
+  Description
+
+  processStanza creates two output files prevstanza.processed and 
+  curstanza.processed in the current directory. It removes all the 
+  comments and embedded blank and addes one blank line after every 
+  stanza(including the last stanza).
+
+
+  Flags
+
+*  -p previous_stanza_file     Specifies the previous version of the object
+                               class definition file.
+
+*  -c current_stanza_file      Specifies the current version of the object
+                               class definition file.
+  
+   * Options indicated with an asterisk are required.
+
+
+ Fatal Errors
+    Fatal errors contain the word "FATAL" followed by a message printed
+    to stderr.  Fatal errors are given for the following conditions:
+       - one of the command line parameters is not specified
+       - an input file cannot be opened for read access
+       - an output file cannot be opened for write access
+
+    processStanza exits with a non-zero return code if an error is detected.
+
+
+  Input Files
+
+  object description (.add) file(s)
+
+    	This file contains one or more object class definitions in stanza
+    	format.  The format of a stanza is:
+
+		object_class_name:
+			<key> = <value>
+			...
+			<attribute> = <value>
+			...
+
+
+  Output Files
+ 
+  prevstanza.processed
+         This file contains a complete stanza for each stanza in the 
+         previous stanza (.add) file specified with the -p flag.
+
+  curstanza.processed
+         This file contains a complete stanza for each stanza in the 
+         current stanza (.add) file specified with the -c flag.
+
+      These files are used as input to the odmupdate command which creates 
+      odm files for updating the odm database.
+
+  Related Information
+ 
+  4.1 BLDENV odmupdate command
+  4.1 BLDENV mkodmupdt command
+  
+
+Examples
+
+  1. Call processStanza where the input files are in the
+     current directory
+
+     processStanza -c current.add -p previous.add
+ 
+     output files:
+        prevstanza.processed
+        curstanza.processed

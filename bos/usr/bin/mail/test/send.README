@@ -1,0 +1,86 @@
+# @(#)03	1.1  src/bos/usr/bin/mail/test/send.README, cmdmailx_tc, bos411, 9428A410j 5/8/91 16:45:50
+#
+# COMPONENT_NAME: TCPTEST send.README
+# 
+# ORIGINS: 27 28
+# 
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+# 
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# 
+# 
+  		     SendMail Automated FVT Test Script
+
+
+
+    FILES NEEDED -----------------------------------------------------
+
+
+     RUNTEST files	
+
+      (/tcpip/sccs/com/tcptest/tools/runtest/runtest)	
+      runtest (script) : Master test script.
+
+      (/tcpip/sccs/com/tcptest/tools/runtest/util.sh)
+      util (script) : Various utilities used by runtest. 
+
+      (/tcpip/sccs/com/tcptest/tools/runtest/testenv.sh)
+      testenv : A file containing environment variables.
+
+      (/tcpip/sccs/com/tcptest/tools/runtest/testlist.c)
+      testlist.c : Utility to determine which test cases to run.
+
+    SendMail  FVT Test files
+
+        (/bos/sccs/com/cmd/send/test/send.sh 
+	send.sh (script)  : Shell Function Test Cases for Sendmail 
+
+       (/bos/sccs/com/cmd/send/test/send.README
+       send.README (text) : This file              
+
+   BASIC STEPS USED TO RUN TEST ------------------------------------
+
+
+        1. Set up machines with the appropriate configurations.
+           Refer to the SendMail LPP/FVT Test Plan.
+
+        2. Copy the above files onto the LOCAL HOST in an appropriate
+           subdirectory (e.g., /tmp or create your own; rwx by ALL).
+
+        3. "cd" to the subdirectory in step 2.
+
+        4. Edit testenv file as appropriate. 
+	   ($USER and $USER2 and their addresses should be set)
+
+        5. Make testlist from testlist.c
+
+        6. Run runtest ( as user ) to start test scripts.
+
+            o--Run runtest ( as root ) to start test scripts for SendMail.
+               Syntax:  runtest send[:num[-num|,num]...]
+               Example: runtest send                 # for ALL test cases
+                        runtest send:1-5,20,30-32    # specific tests
+
+        7. Review output in ./log subdirectory.
+
+
+    ASSUMPTIONS ------------------------------------------------------
+
+
+        - The /etc/hosts file exists w/appropriate hosts
+        - Interfaces are configured and are up.
+
+
+SENDMAIL testcases:
+-------------------
+In order to run the sendmail scripts the following conditions should
+be met:
+		- These must be run by a Super User: root
+		- /etc/sendmail.pid must indicate the pid of the current
+		  sendmail daemon process.
+		- All lockfiles, semaphores and permissions should be clear on
+		  the queueing directories and on $HOME directories.
+

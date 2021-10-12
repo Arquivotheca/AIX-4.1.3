@@ -1,0 +1,59 @@
+# @(#)16        1.2  src/bldenv/man/subptf.man, bldtools, bos412, GOLDA411a 5/13/93 09:37:05
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: subptf man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  subptf Command
+
+
+  Purpose
+
+  The subptf Command groups ship files with associated APAR numbers to form
+  intermediate packages for creating Programming Temporary Fixes (PTFs).
+
+  Syntax
+
+  subptf [<idtype>]
+
+
+  Description
+
+  The subptf Command replaces the bldptf Command for the cumulative version
+  of the selective fix process.
+  
+  The salient difference between bldptf and subptf is in the manner in which
+  the shipped files are grouped into Program Temporary Fixes (PTFs).
+  bldptf groups files into the same package if they share a common defect
+  and belong to the same LPP, while subptf will group all files of the same
+  subsystem into the same package.  Defects which change only "configuration"
+  files of an LPP are packaged separately.
+  
+  Additionally, subptf does not utilize the BLDPTFSPLIT environment parameter.
+  It is presumed that the "special files" to which this parameter applies
+  are defined in separate subsystems.
+  
+  A liblpp.a file is shipped when an inslist file or configuration file
+  is changed.  It is expected that each subsystem will have an associated
+  inslist file with a filename "<subsystem_name>.il".  When an inslist is
+  changed, subptf will put a file with the inslist's basename into a PTF
+  for the appropriate subsystem based upon the inslist filename.  The
+  liblpp.a file itself will be put into the subsystems, if any, defined in
+  the SSXREF file.  Data in the SSXREF file is derived from  a list of
+  subsystems given in a CMVC defect note bracketed by a START_SS/END_SS pair.
+  The liblpp.a file will be packaged in each specified subsystem associated
+  with the defects that changed it.  If multiple subsystems are specified
+  for a liblpp.a defect, the corresponding PTFs will be ifreq'd.
+  
+  See the bldptf Command for other general information.
+  The bldptf routines bldptfpkg, bldfilelpp, bldgroup and bldptfformat are
+  replaced by the corresponding subptfpkg, subfilelpp, subgroup and 
+  subptfformat routines for subptf.

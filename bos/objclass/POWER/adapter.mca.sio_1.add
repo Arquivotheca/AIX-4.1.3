@@ -1,0 +1,110 @@
+* @(#)96 1.1 src/bos/objclass/POWER/adapter.mca.sio_1.add, cfgmethods, bos411, 9428A410j 12/7/93 15:45:12
+*
+* COMPONENT_NAME: (CFGMETHODS) sio_1.add
+*
+* FUNCTIONS: Standard I/O planar predefined data
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+*
+* SIO adapter card for new hardware in release 2
+*
+PdDv:
+	type = sio_1
+	class = adapter
+	subclass = mca
+	prefix = sio
+	devid =	0xe6de
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 1
+	fru = 2
+	led = 0x812
+	setno = 21
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = ""
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsio
+	Change = ""
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/mca/sio_1
+
+*
+* Define the children that are present for Rlse 2 SIO
+*
+PdAt:
+	uniquetype = adapter/mca/sio_1
+	attribute  = children
+	deflt	   = ""
+	width	   = ""
+	type	   = R
+	generic	   = ""
+	rep	   = sl
+	nls_index  = 0
+	values     = "\
+adapter/sio/fda fda 0D \
+adapter/sio/keyboard ka 0K \
+adapter/sio/mouse ma 0M \
+adapter/sio/ppa ppa 0P \
+adapter/sio/s1a_1 s1a S1 \
+adapter/sio/s2a_1 s2a S2" 
+
+*
+* Identify the connection location the above children
+*	   can connect to.
+*
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = fda
+	
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = ppa
+	
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = ma
+	
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = s1a
+	
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = s2a
+	
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = ka
+
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = 14
+	
+PdCn:
+	uniquetype = adapter/mca/sio_1
+	connkey = sio
+	connwhere = 15

@@ -1,0 +1,98 @@
+# @(#)59        1.2  src/bldenv/man/blddeps.man, bldtools, bos412, GOLDA411a 5/25/93 11:03:47
+#
+#   COMPONENT_NAME: BLDTOOLS
+#
+#   FUNCTIONS: blddeps man page
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  blddeps Command
+  
+  
+  Purpose
+  
+  The blddeps command is used to check the build environment for files
+  that have been updated since the last build of a release.
+
+
+  Syntax
+ 
+  blddeps [ release ... ] 
+
+
+  Description
+ 
+  The blddeps command determines when the last build of a release 
+  occurred by searching for 'lmmakelist.all' files in the directories
+  $TOP/PTF/$BLDCYCLE/<release>.  The date of the most recent
+  'lmmakelist.all' is taken as the last time <release> was built.
+
+  The blddeps command then checks the date from the most recent build
+  of release against the modification times of all files listed in
+  $BLDENV/usr/bin/blddeps<release>.dat.  Any files that have modification
+  times since the last build of release are displayed to the screen.
+
+  The $BLDENV/usr/bin/blddeps<release>.dat file must exist for blddeps
+  to check dependencies.
+
+
+  Flags
+
+  release      Release to check dependencies of.  Value of release is 
+               determined in the following order: 1) release values
+               entered on command line, 2) value of CMVC_RELEASE or
+               3) prompt for value of release.
+
+
+  Environment Variables
+
+  BLDENV       Full pathname to the top of the build environment.  Typical
+               value is /bldenv/3.2/prod.
+
+  BLDTMP       Temporary directory. The default is /tmp.
+
+  CMVC_RELEASE CMVC release name.
+
+  TOP          Full pathname of the top of the tree from which the build
+               is initiated.
+
+
+  Examples
+
+   1.  Call blddeps using value in $CMVC_RELEASE.  If $CMVC_RELEASE is not
+       set prompting will occur. 
+
+       blddeps
+
+   2.  Call blddeps for dce10 and oltp330.
+
+       blddeps dce10 oltp330
+
+
+  Input Files
+
+    $BLDENV/usr/bin/blddeps<release>.dat
+        Contains a list of all files required by <release> to build that
+        are updated by another release. Each <filename> is evaluated with
+        'eval' so all characters special to the shell must be escaped with
+        a '\'.  The <filename> can contain environment variables prefixed
+        with a '$' or the ${} form.
+
+        Format:
+           <filename>
+           <filename>
+           .
+           .
+
+  
+  Related Information
+
+  $BLDENV/usr/bin/blddepsdce10.dat        Release dce10 dependencies.
+  $BLDENV/usr/bin/blddepsoltp330.dat      Release oltp330 dependencies.

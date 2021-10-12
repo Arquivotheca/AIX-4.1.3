@@ -1,0 +1,652 @@
+# @(#)38        1.16.1.3  src/bos/objclass/cmdoper.add, cmdoper, bos411, 9437A411a 9/13/94 11:16:09
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDOPER                                                     #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27                                                                 #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1989,1994                #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+################################################################################
+
+################################################################################
+#									       #
+#	COMMANDS: at, chitab, lsitab, mkitab, rmitab, shutdown, telinit        #
+#									       #
+################################################################################
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Performance & Policy                                   #
+#                    Schedule Jobs                                             #
+#		         Schedule a Job					       #
+#                                                                              #
+# FAST KEY:  sjat        	                                               #
+#									       #
+# UNIX COMMAND(S):  at, echo                                                   #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   7 dialogue objects         			                       #
+#                                                                              #
+# HEADER:  Schedule a Job                                                      #
+#									       #
+# OBJECTS:  1.  +-------------------------------------------+		       #
+#		| Specify the date & time for the job to    |		       #
+#		| be executed.  Upon committing to the 'at' |		       #
+#		| command, you will be prompted for the set |		       #
+#		| of commands to be executed as part of the |		       #
+#		| job.  The format is one command per line. |		       #
+#		+-------------------------------------------+		       #
+#	    2.  *YEAR							       #
+#	    3.  *MONTH							       #
+#	    4.  *DAY (1-31)						       #
+#	    5.  *HOUR (0-23)						       #
+#	    6.  *MINUTES (0-59)						       #
+#	    7.  *SHELL to use for job execution				       #
+#                                                                              #
+################################################################################
+
+sm_menu_opt:
+        id                  = "at"
+        id_seq_num          = "020"
+        next_id             = "sjat"
+        text                = "Schedule a Job"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 54
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800480"
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+	id                      = "sjat"
+	option_id               = "atOpts"
+	has_name_select         = ""
+	name                    = "Schedule a Job"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 22
+	name_msg_id             = 15
+	cmd_to_exec             = \
+"at_proc () 		#  Shell Hour:Minute Month Day, Year Job
+# dialogue param order	#    6     4    5      2    3     1   7
+{
+at $6 $4:$5 $2 $3, $1 $7
+}
+at_proc "
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover		= \
+"echo '#cur_month:cur_day:cur_hour:cur_min:cur_sec:cur_year'\n\
+date +%h:%d:%H:%M:%S:%y"
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "048101"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "atOpts"
+	id_seq_num          = "050"
+	disc_field_name     = ""
+	name		    = "COMMAND or SHELL SCRIPT (full pathname)"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 95
+	op_type             = ""
+	entry_type          = "f"
+	entry_size          = 0
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048101"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "atOpts"
+	id_seq_num          = "012"
+	disc_field_name     = "cur_year"
+	name                = "YEAR" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 100
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048110"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "atOpts"
+	id_seq_num          = "015"
+	disc_field_name     = "cur_month"
+	name                = "MONTH" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 105
+	op_type             = "l"
+	entry_type          = "t"
+	entry_size          = 0
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = \
+"/usr/bin/locale abmon | /usr/bin/tr -d '\"' | /usr/bin/tr ';' '\n'"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048111"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "atOpts"
+	id_seq_num          = "020"
+	disc_field_name     = "cur_day"
+	name                = "DAY (1-31)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 115
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048112"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "atOpts"
+	id_seq_num          = "030"
+	disc_field_name     = ""
+	name                = "HOUR (0-23)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 120
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048113"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "atOpts"
+	id_seq_num          = "035"
+	disc_field_name     = ""
+	name                = "MINUTES (0-59)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 125
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048114"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "atOpts"
+	id_seq_num          = "040"
+	disc_field_name     = ""
+	name                = "SHELL to use for job execution" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 130
+	op_type             = "r"
+	entry_type          = ""
+	entry_size          = 0
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = "Korn (ksh),Bourne (bsh),C (csh)"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 22
+	values_msg_id       = 135
+	aix_values          = "-k,-s,-c"
+	help_msg_id         = "048115"
+	help_msg_loc        = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Performance & Policy                                   #
+#                    Schedule Jobs                                             #
+#		         List All Scheduled Jobs			       #
+#                                                                              #
+# FAST KEY:  lsat        	                                               #
+#									       #
+# UNIX COMMAND(S):  at, echo                                                   #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#                                                                              #
+# HEADER:  List All Scheduled Jobs                                             #
+#									       #
+################################################################################
+
+sm_menu_opt:
+        id                  = "at"
+        id_seq_num          = "010"
+        next_id             = "lsat"
+        text                = "List All Jobs Scheduled"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 555
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800479"
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+	id                      = "lsat"
+	option_id               = ""
+	has_name_select         = ""
+	name                    = "List All Scheduled Jobs"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 22
+	name_msg_id             = 140
+	cmd_to_exec             = "at -l"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = "y"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "048118"
+	help_msg_loc            = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Performance & Policy                                   #
+#                    Schedule Jobs                                             #
+#		         Remove a Job from the Schedule			       #
+#                                                                              #
+# FAST KEY:  rmat        	                                               #
+#									       #
+# UNIX COMMAND(S):  at, echo                                                   #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   1 dialogue option						       #
+#                                                                              #
+# HEADER:  List All Scheduled Jobs                                             #
+#									       #
+# OPTIONS: 1. JOB NUMBER to remove					       #
+#									       #
+################################################################################
+
+sm_menu_opt:
+        id                  = "at"
+        id_seq_num          = "030"
+        next_id             = "rmat"
+        text                = "Remove a Job from the Schedule"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 55
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800481"
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+	id                      = "rmat"
+	option_id               = "rmatOpts"
+	has_name_select         = ""
+	name                    = "Remove a Job from the Schedule"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 22
+	name_msg_id             = 145
+	cmd_to_exec             = "at -r"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "048116"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "rmatOpts"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "JOB NUMBER to remove" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 150
+	op_type             = "l"
+	entry_type          = ""
+	entry_size          = 0
+	required            = "+"
+	prefix              = " "
+	cmd_to_list_mode    = "1"
+	cmd_to_list         = "at -l"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048117"
+	help_msg_loc        = ""
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Stop the System                                           #
+#                                                                              #
+# FAST KEY:  shutdown                                                          #
+#									       #
+# UNIX COMMAND(S):  shutdown                                                   #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   4 dialogue objects         			                       #
+#                                                                              #
+# HEADER:  Stop the System    	                                               #
+#                                                                              #
+# OBJECTS:  1.  TIME the systems goes down (in minutes from now)               #
+#           2.  MESSAGE to all users on the system                             #
+#	    3.  Shutdown INTERACTIVELY?					       #
+#	    4.  RESTART after shutdown?					       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "shutdown"
+	option_id               = "shutdownOpts"
+	has_name_select         = "n"
+	name                    = "Stop the System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 22
+	name_msg_id             = 50
+	cmd_to_exec             = "shutdown"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "048103"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "shutdownOpts"
+	id_seq_num          = "050"
+	disc_field_name     = ""
+	name                = "TIME the system goes down (in minutes from now)"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 55
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 0
+	required            = "+"
+	prefix              = "+"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048104"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "shutdownOpts"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "MESSAGE to all users on the system"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 60
+	op_type             = ""
+	entry_type          = "t"
+	entry_size          = 0
+	required            = "+"
+	prefix              = "--"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "048105"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "shutdownOpts"
+	id_seq_num          = "010"
+	disc_field_name     = ""
+	name                = "Shutdown INTERACTIVELY?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 85
+	op_type             = "r"
+	entry_type          = ""
+	entry_size          = 0
+	required            = ""
+	prefix              = "-i"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 22
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "048106"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "shutdownOpts"
+	id_seq_num          = "020"
+	disc_field_name     = ""
+	name                = "RESTART the system after shutdown?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 90
+	op_type             = "r"
+	entry_type          = ""
+	entry_size          = 0
+	required            = ""
+	prefix              = "-r"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 22
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "048107"
+	help_msg_loc        = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Performance & Policy                                   #
+#                    Set System Run Level                                      #
+#                                                                              #
+# FAST KEY:  telinit                                                           #
+#									       #
+# UNIX COMMAND(S):  telinit                                                    #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#  	   1 dialogue objects                               		       #
+#                                                                              #
+# HEADER:  Set System Run Level                                                #
+#                                                                              #
+# OBJECTS:  1. *System RUN LEVEL (M = Maintenance mode)			       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "telinit"
+	option_id               = "telinitOpts"
+	has_name_select         = "n"
+	name                    = "Set System Run Level"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 22
+	name_msg_id             = 65
+	cmd_to_exec             = "telinit"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "048108"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "telinitOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "System RUN LEVEL (M = Maintenance mode)"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 22
+	name_msg_id         = 70
+	op_type             = "r"
+	entry_type          = "t"
+	entry_size          = 1
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = "0,1,2,3,4,5,6,7,8,9,M"
+	values_msg_file     = ""
+	values_msg_set      = 22
+	values_msg_id       = 75
+	aix_values          = ""
+	help_msg_id         = "048109"
+	help_msg_loc        = ""
+
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Menu Definition                                #
+#                                                                              #
+# MENU PATH(S):  Performance & Resource Scheduling                             #
+#                    Schedule Jobs                                             #
+#                                                                              #
+# FAST KEY:  performance       	                                               #
+#									       #
+# DESIGN:  1 menu headers						       #
+#                                                                              #
+#									       #
+################################################################################
+sm_menu_opt:
+        id                      =  "performance"
+        id_seq_num              =  "040"
+        next_id                 =  "at"
+        text                    =  "Schedule Jobs"
+        text_msg_file           =  "smit.cat"
+        text_msg_set            =  25
+        text_msg_id             =  42
+        next_type               =  "m"
+        alias                   =  ""
+        help_msg_id             =  "180048"
+        help_msg_loc            = ""
+

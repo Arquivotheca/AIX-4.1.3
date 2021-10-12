@@ -1,0 +1,37 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Edit file "junk" and print the first line
+that contains either "color" or "Color".
+Then leave the editor and type "ready".
+#create junk
+this file contains
+a few random lines
+much noise
+bright Colors
+other stuff
+colored paper
+and color by Technicolor
+#create x2
+:bright Colors
+#copyout
+#user
+#uncopyout
+grep olor .ocopy >x1
+tail -1 x1 >x3
+#cmp x3 x2
+#log
+#next
+50.2d 5
+50.1c 10

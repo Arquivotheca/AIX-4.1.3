@@ -1,0 +1,47 @@
+*@(#)17  1.1  src/bos/objclass/POWER/ioplanar.sys.iodplanar1.add, cfgmethods, bos411, 9428A410j 3/7/94 07:42:16
+*
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 83
+*
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+* IOD planar device for MP models with PowerPC chip
+PdDv:
+        type = iodplanar1
+        class = ioplanar
+        subclass = sys
+        prefix = ioplanar
+        devid = ""
+        base = 1
+        has_vpd = 1
+        detectable = 1
+        chgstatus = 1
+        bus_ext = 0
+        led = 0x813
+        setno = 1
+        msgno = 5
+        fru = 1 
+        catalog = devices.cat
+        DvDr = ""
+        Define = "/etc/methods/define"
+        Configure = ""
+        Change = ""
+        Unconfigure = ""
+        Undefine = "/etc/methods/undefine"
+        Start = ""
+        Stop = ""
+        uniquetype = ioplanar/sys/iodplanar1
+
+PdCn:
+    uniquetype = ioplanar/sys/iodplanar1
+    connkey = sys
+    connwhere = 0
+
+PdCn:
+    uniquetype = ioplanar/sys/iodplanar1
+    connkey = sys
+    connwhere = 1
+

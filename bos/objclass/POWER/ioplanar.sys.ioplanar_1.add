@@ -1,0 +1,53 @@
+*@(#)51  1.1  src/bos/objclass/POWER/ioplanar.sys.ioplanar_1.add, cfgmethods, bos411, 9428A410j 12/2/93 13:53:43
+* 
+*  COMPONENT_NAME: (CFGMETHODS) ioplanar.sys.ioplanar_1.add
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+* I/O planar device for new (non RSC) 3.2 models
+PdDv:
+	type = ioplanar_1
+	class = ioplanar
+	subclass = sys
+	prefix = ioplanar
+	devid = ""
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 1
+	bus_ext = 0
+	led = 0x813
+	setno = 1
+	msgno = 5
+	fru = 2
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = ioplanar/sys/ioplanar_1
+
+
+PdCn:
+	uniquetype = ioplanar/sys/ioplanar_1
+	connkey = sys
+	connwhere = 0
+
+PdCn:
+	uniquetype = ioplanar/sys/ioplanar_1
+	connkey = sys
+	connwhere = 1

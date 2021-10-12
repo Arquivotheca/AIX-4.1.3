@@ -1,0 +1,126 @@
+# @(#)18	1.2  src/bldenv/man/promote_bad.man, bldtools, bos412, GOLDA411a 4/1/94 10:14:11
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: promote_bad man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: promote_bad.man
+#
+# PURPOSE: man page for promote_bad command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+promote_bad Command
+                                                                                
+                                                                                
+  Key Concepts
+     
+    
+  Purpose
+        
+    Moves CCSS format PTFs from the production server to
+    the bad directory for AIX ptf's, update side files, and informs
+    ctcb@ctgate anc bteam@ctgate, by using the promote_prod command.
+  
+ 
+  Syntax
+   
+    promote_bad  [ -f fixing_defect ] [ -d bad_defect ] [ -t move_to_directory ]
+                 [ -p from_directory ] [ -e ] [ -s ] [ -m ] [ -i ] [ -h ] [ -? ]
+
+
+  Description
+            
+    Moves the AIX PTF from the production server to another specified
+    directory, by calling promote_prod.  The tool will perform the following
+    functions:
+
+    o Ensures that the PTF is in the "from" directory.
+    o Asks for the "fixing" defect number.
+    o Finds all the PTFs that supersede the "bad" PTF in the "from" dir.
+    o Ensures that an index file exists in the "to" directory.
+    o Uses promote_prod to move the PTFs from "from" to "to".
+    o Gets fixing defect abstract.
+    o Sends a note informing of the move to: ctcb@ctgate and bteam@ctgate
+    o Appends to move information to /afs/austin/aix/ptf.images/320/prod/bad/
+      ptfs.bad
+    o Appends PTF/bad_defect/fixing_defect information to 
+      /afs/austin/aix/ptf.images/320/prod/ptfs.bad.fixed
+    o Gives the user the opportunity to edit ptfs.bad.
+
+  
+  Flags   
+         
+    -f    Fixing Defect Number. (default: prompt_user) 
+    -d    Bad Defect Number. (default: prompt_user/get from ptfs.bad.fixed
+    	  file)
+    -t    Move the ptf to this directory. (default:
+          /afs/austin/aix/ptf.images/320/prod/bad)
+    -p    Move the ptf from this directory. (default:
+          /afs/austin/aix/ptf.images/320/prod)
+    -e    Do not prompt user for editor.
+    -s    Do not check for superseding PTFs.  It will only move the ptf
+          specified with this command.
+    -m    Do not move PTFs, just update the ptfs.bad* files under
+          /afs/austin/aix/ptf.images/320/prod/bad directory.
+    -i    Ignore the fact that the PTF is not in the "from" directory
+          (implies -m is in use as well)
+    -h    Generate this message.
+    -?    Generate this message.
+
+  Exit 
+
+    It will echo the message if the ptf is moved or not.
+
+  File
+            
+    None
+
+
+  Examples
+
+    1. Move ptf U403000 from /afs/austin/aix/ptf.images/320/prod to
+    /afs/austin/aix/ptf.images/320/prod/bad directory. 
+
+    promote_bad  U403000
+
+    If the ptf U403000.ptf is in the /afs/austin/aix/ptf.images/320/prod
+    directory, it will be moved to the /afs/austin/aix/ptf.images/320/prod/bad
+    directory.  Also, since the defect numbers were not specified, it will
+    asked for fixing and bad defect numbers.
+   
+    2. Move ptf U429704 in bad directory and update the sidefiles with the
+    fixing defect number 140149, get the bad defect number from the file, and
+    do not prompt user for editor.
+
+    promote_bad -f 140149 -e -d 000000 U429704
+
+    Ptf U429704 will be moved to /afs/austin/aix/ptf.images/320/prod/bad
+    directory and the sidefiles will be updated.
+
+    3. Do not move the U429704 in bad directory, but update the sidefiles with
+    the fixing defect number 140149, get the bad defect number from the file,
+    do not prompt user for editor and do not check superseding information.
+
+    promote_bad -ms -f 140149 -e -d 000000 U429704
+   
+    The sidefiles in /afs/austin/aix/ptf.images/320/prod/bad will be updated.
+
+  Implementation Specifics
+  
+    None
+ 
+
+  Related Information
+
+    promote_prod
+

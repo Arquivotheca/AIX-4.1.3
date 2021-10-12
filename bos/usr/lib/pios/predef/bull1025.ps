@@ -1,0 +1,79 @@
+# @(#)44 1.2 src/bos/usr/lib/pios/predef/bull1025.ps, cmdpios, bos411, 9430C411a 7/11/94 09:48:29
+#
+# COMPONENT_NAME: Printer Backend for Bull PageMaster 1025
+#                         in Postscript lev.2
+#
+# FUNCTIONS:
+#
+# ORIGINS: 83
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+:056:__FLG::
+:466:_1::!
+:467:_2::!
+:469:_3::!
+:470:_4::!
+:471:_5::!
+:022:_H::
+:027:_J::+
+:030:_L::+
+:948:_O::0
+:046:_X::IBM-850
+:511:_Y::0
+:050:_Z::!
+:066:_d::s
+:072:_h::
+:076:_j::+
+:079:_l::66
+:083:_p::%?%G_2%t%{1}%e%{0}%;%?%G_z%t%{1}%e%{0}%;%+%{2}%=%t7%e10%;
+:090:_s::Courier
+:093:_u::1
+:100:_w::80
+:949:_x::0
+:950:_z::0
+:060:__SYS::
+:321:sh::%Ide/pioburst %F[H] %Idb/bullH.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJOYux]
+:324:st::%Ide/pioburst %F[H] %Idb/bullT.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJOYux]
+:447:s1::4
+:057:__IDS::
+:913:ia::/usr/bin/enscript %?%CX%t%f[X]%e -X%I_X%; -p- -q%?%G_2%t -2%;%?%G_z%t -r%;%?%G_3%t -G%;%?%G_1%t%e -B%;%?%G_L%t%e -c%;%?%Ch%t%fbh%e%?%L_h%t -b'%I_h'%;%; -L%G_l%d -f%?%Cs%t%f!s%e%I_s%;%G_p%d %?%G_1%t-F%Iw7%G_p%d%;%?%G_4%t -g%;%?%G_5%t -o%;%?%L_f%t%e %I@1%; | %Iis
+:919:in::/usr/bin/psc | %Iis
+:916:ip::%Iis
+:912:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJOYuwxZ]
+:059:__PFL::
+:001:Is::
+:055:__FIL::
+:269:fn::/usr/bin/psc%is
+:270:fp::/bin/pr -l%G_l%d -w%G_w%d%F[h] %I@1%ia
+:058:__MIS::
+:330:mA::PostScript
+:332:mD::pioattr1.cat
+:331:mL::Bull Compuprint PageMaster 1025
+:295:mN::1025
+:301:mc::\3
+:303:mf::%Idf/piofpt
+:308:mp::%%!
+:319:mz::1
+:062:__WKV::
+:472:w7::%?%S_s%"Courier"%=%tCourier-Bold%e%S_s%"Times-Roman"%=%tTimes-Bold%e%S_s%"Helvetica"%=%tHelvetica-Bold%e%S_s%"Times-Italic"%=%tTimes-BoldItalic%e%S_s%"Helvetica-Oblique"%=%tHelvetica-BoldOblique%e%Iw8%;
+:472:w8::%?%S_s%"Courier-Oblique"%=%tCourier-BoldOblique%e%S_s%"Palatino-Roman"%=%tPalatino-Bold%e%S_s%"Palatino-Italic"%=%tPalatino-BoldItalic%e%S_s%"Optima"%=%tOptima-Bold%e%S_s%"Optima-Oblique"%=%tOptima-BoldOblique%e%Iw9%;
+:472:w9::%?%S_s%"NewCenturySchlbk-Italic"%=%tNewCenturySchlbk-BoldItalic%e%S_s%"Helvetica-Narrow"%=%tHelvetica-Narrow-Bold%e%S_s%"Helvetica-Narrow-Oblique"%=%tHelvetica-Narrow-BoldOblique%e%I_s%;
+:370:wl::1
+:381:wu::3
+:051:__CAG::
+:113:af::showpage
+:117:al::\12
+:144:ci::\4%?%G_j%t%I[eP,eM,eC,eT,eY]%;
+:152:cr::%?%G_J%t%Iez%;\4
+:054:__ESC::
+:512:eY::<</Duplex %?%G_Y%{0}%=%tfalse %etrue %;/Tumble %?%G_Y%{2}%=%ttrue%efalse%;>> setpagedevice %Ial
+:540:eT::<</InputAttributes <</Priority [%?%G_u%{1}%=%t0 1%e1 0%;]>> >> setpagedevice %Ial
+:951:eR::<</InputAttributes <</Priority [0 1]>> >> setpagedevice %Ial
+:952:eC::<</NumCopies %G_x%{1}%+%d /Collate false>> setpagedevice %Ial
+:953:eM::%?%G_O%{1}%=%t<</ManualFeed true>> setpagedevice %Ial%;
+:954:ez::<< >> setpagedevice %Ial
+:955:eP::<</Policies <</PolicyNotFound 1>> >> setpagedevice %Ial
+:920:__HIR::
+:476:zP::master
+:477:zS::!

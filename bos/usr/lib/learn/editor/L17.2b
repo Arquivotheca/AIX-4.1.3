@@ -1,0 +1,25 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+What do you type to go from
+the editor command level to where
+you type input text?  (The append command).
+Type "answer X" where X is what you type.
+#copyin
+#user
+#uncopyin
+#match a
+#log
+#next
+17.2c 5

@@ -1,0 +1,487 @@
+# @(#)80        1.4  src/bldenv/man/OVERVIEW.man, bldtools, bos412, GOLDA411a 3/28/94 15:56:07
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: Overview man page for Selective Fix Builds
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+                               BUILDER'S OVERVIEW
+
+
+TABLE OF CONTENTS
+
+	SECTION 0: PURPOSE OF THIS OVERVIEW	
+	SECTION 1: DOCUMENTATION SOURCES
+        SECTION 2: REQUIRED ENVIRONMENT FOR BUILDS
+	SECTION 3: PRIMARY BUILD COMMANDS
+	SECTION 4: POINTS-OF-CONTACT	
+        SECTION 5: WHERE THINGS ARE AT
+	SECTION 6: GENERAL NOTES AND INFORMATION
+	SECTION 7: CALLING HIERARCHY OF PRIMARY COMMANDS
+        SECTION 8: GLOSSARY 
+
+
+SECTION 0: PURPOSE OF THIS OVERVIEW
+
+    This document gives an overview of the build process for both development
+    and production (BAI) builders.  It will attempt to get you started in 
+    the correct direction through the maze of information that is available.
+    Also provided here are miscellaneous data which will not neatly fit
+    in any of the other documentation sources.  If you would like to 
+    suggest additions to this document or find any errors, please contact 
+    Margie Blevins at MBLEVINS@AUSVMQ.
+
+
+SECTION 1: DOCUMENTATION SOURCES
+
+    The following sources are available for documentation.
+
+	-> bldman (command)
+	
+	   For a complete list of manual pages, execute "bldman" on any 
+           machine containing the current build environment.  IT IS 
+           IMPORTANT TO READ THE BLDMAN MANUAL PAGES FOR EACH OF THE
+           PRIMARY COMMANDS BEFORE USING THEM.  Entering "bldman <command>"
+	   will bring up that command's man page.  (bldman's path is 
+           $BLDENV/usr/bin/bldman).
+
+	-> Selective Fix / Enhancement How To Guide (document)
+
+	   Latest version kept on 
+           /afs/austin/aix/ptf.images/320/prod/selfix.doc.  This document
+           is in Interleaf format.
+
+	-> How to Make a 3.2 Build Machine
+
+	   Latest version (in ASCII) kept in
+	   /afs/austin/aix/ptf.images/320/prod/info/bldmachinesetup.
+
+	-> Build Notes (e-mail)
+
+	   Any significant changes or late breaking news is reported in the 
+           BAI build notes through e-mail.  If you are not on the build note 
+           mail list and would like to be, send a note to MBLEVINS@AUSVMQ.
+           (These notes are also published on Usenet under ibm.awd.build.)
+
+
+SECTION 2: REQUIRED ENVIRONMENT FOR BUILDS
+
+    Before builds are done, the host machine must be configured as a build
+    machine.  See "How to Make a 3.2 Build Machine" (referenced in Section 1) 
+    for the general configuration instructions.  Also, confirm the following
+    criteria are meet.
+
+        1) The build machine must be an RISC System 6000 running 3.1.5. 
+
+	2) The Korn Shell (/bin/ksh) must be installed.
+
+	3) AFS must be installed if cloning against AFS or if $BLDENV
+           is accessed on AFS.
+
+        4) The perl interpreper must be copied or linked to /usr/bin.
+           (i.e. "cp /afs/austin/local/bin/perl /usr/bin/perl")
+
+        5) The build environment must be stored under /bldenv/<NODE>/prod
+           where <NODE> is the current version number (e.g. "3.2").  Also,
+           the BLDENV environment variable must be set to the build 
+           environment location and exported 
+           (e.g. "export BLDENV=/bldenv/3.2/prod").
+
+        6) PATH must include the build environment usr/bin directory (i.e. 
+	   "export PATH=$PATH:$BLDENV/usr/bin")
+
+        7) CMVC must be accessible.
+
+        8) Adequate ram, disk space and paging space must be available.  
+           See the Environment and Resource Requirements Section under
+           "bldman bldptf".
+
+    See also Section 6: General Notes and Information.
+
+
+SECTION 3: PRIMARY BUILD COMMANDS
+
+    Currently there are somewhere over one-hundred selective fix commands in 
+    the build environment.  Most of the commands are low-level and not directly
+    used or needed by area or production builders.  The primary commands
+    which the average builder will want to be aware of are listed below.  Each
+    of these commands will have a manual page (see bldman) giving additional
+    information.  Also, the calling hierarchy in Section 5 starts with the 
+    primary commands and shows their interaction (calling sequence) with 
+    many of the other selective fix build environment commands.
+
+    Note the list below outlines the command order for update builds, a
+    non-update build would use only bldstatus, prebuild/ptfsetup, and v3bld.
+    
+	-> ptfsetup (development only)
+
+	   Purpose: Create files required by subptf and cumptf based on area
+		    build information.
+
+		    This command does the equivalent work for area builds that
+                    is done by prebuild and bldretain for production builds 
+                    (except the area builders must manually perform their
+                    CMVC extracts).
+ 
+                    For area builds, defects are used in place of APARs when 
+                    APARs are not available, and dummy PTFIDs are automatically
+                    generated.
+
+	-> bldstatus (usually production only, can be used by development if
+                      extra control and safeguards are needed)
+
+           Purpose: The bldstatus command controls the build process by 
+                    opening build cycles and moderating transitions through
+                    the various build cycle phases.   
+
+                    This command provides additional build control for BAI when
+                    multiple builders are working at the same time; since
+                    area builds are usually done on an individual basis, this
+                    added security is not needed.
+
+	-> prebuild (production only)
+
+	   Purpose: The prebuild command extracts source, resulting from 
+                    defects and features, for BAI production builds. The 
+                    primary tasks of the prebuild command include interfacing 
+                    with CMVC, verifying required states, extracting, merging,
+                    and storing source, logging information about processing 
+                    and posting status about the tasks.
+
+		    Area builders use ptfsetup in place of prebuild.
+
+	-> bldretain (production only)
+
+	   Purpose: The bldretain command creates APARs and PTFIDs by 
+                    interfacing with the RETAIN system.  
+
+		    PTFs sent to the customer must contain real APAR numbers 
+                    plus PTFIDs which have been registered with RETAIN. 
+		    (Area builders use ptfsetup in place of bldretain.)
+
+	-> v3bld (required)
+
+	   Purpose: Builds AIX Version 3 source code.
+
+		    PTF update builds (selective fixes) must be done with this 
+                    command to insure the correct data is gathered for later 
+		    steps.
+
+	-> subptf (required)
+
+	   Purpose: The subptf command groups updated files with associated 
+		    APAR (or defect) numbers to form intermediate packages for 
+                    creating PTFs.  It also determines prereqs, coreqs, and
+                    ifreqs between current PTFs and previous PTFs.
+
+		    This command defines the PTF organization for cumptf (see 
+                    $TOP/UPDATE/<LPP>/ptf_pkg).
+
+	-> makeptf (production only)
+
+	   Purpose: The makeptf command traverses production LPP package 
+                    directories and calls genptf for every LPP that generated
+	   	    a ptf_pkg file.
+
+		    This command uses a text file containing hard coded BAI
+                    production tree paths;  area builders bypass this command 
+		    by directly executing genptf from the LPP packaging
+		    directory.  
+
+	-> genptf (required)
+
+	   Purpose: Creates PTF images for an LPP.
+
+                    Area builders directly execute this command from the LPP
+                    package directory; production indirectly executes this
+                    command by calling makeptf.  The -m option should be
+                    used to create a CCSS image (called mif in genptf manual
+                    page); genfsimage expects a CCSS image.
+
+
+	-> genfsimage (required)
+
+	   Purpose: Creates a file system, of the specified PTFs, suitable
+     		    for network installs (/usr/sys/inst.images).
+
+                    Among other things, this command converts genptf's CCSS 
+                    image to a bff image, which is required by the installp
+                    Command.
+
+	            See the gentape and gendiskette manual pages for 
+                    information on other media formats.
+
+	-> promote_prod
+
+	   Purpose: copies a PTF to the production server.
+
+                    The production PTF server will contain the PTF images in 
+                    CCSS format.  Developers can retrieve the images from there
+  		    and reformat them into bff images before installing.
+
+
+SECTION 4: POINTS-OF-CONTACT	
+
+    When you have a build problem, the people in the following list
+    should be able to help you or find someone who can.
+
+	-> Terry Walters 	(83196)	BAI Manager
+	-> Margie Blevins 	(83176) BAI Selective Fix Coordinator & Team 
+					Lead
+	-> Cherilyn Hack 	(83179) CMVC Administrator and BAI Selective
+					Fix Team Member 
+	-> Dave Schneider 	(82695) BAI PTF Builder, BAI Selective Fix Team 
+				    	Member, and BAI expert on build machine 
+				    	configurations
+	-> Marion Roby		(81954) BAI tools area builder, CMVC 
+					Administrator Backup, and BAI Selective 
+					Fix Team Member
+	-> Shashi Ramamurthy	(83187) BAI Selective Fix Team Member
+        -> Bill Chesky 		(84174) BAI Selective Fix Team Member
+        -> Dave Koenig 		(84173) BAI Selective Fix Team Member
+        -> Richard Jackson 	(83183) BAI PTF Builder
+        -> Dale Mulye		(83195) BAI PTF Builder
+	-> Dave Kinnison 	(83222) owns generation and promotion tools 
+                                   	(e.g. genptf, genfsimage)
+        -> Tom Krueger 		(83185) BAI Coordinator for distribution 
+					packaging
+	-> David Kleikamp 	(83184) BAI makefile expert, Screen Team Member
+        -> BAI Lab 		(88816) BAI lab
+
+
+SECTION 5: WHERE THINGS ARE AT
+
+    Following are the locations of the most referenced objects.  See the
+    manual pages of the individual commands for additional details.
+
+	1) Source files are stored in /afs/austin/aix/320/<PROD>/prod/src
+	2) In distribution, PTF images are stored in 
+	   /afs/austin/aix/ptf.images/320/ship
+	3) Published production PTF images (under test by ART lab) are 
+	   stored in /afs/austin/aix/ptf.images/320/prod
+	4) Development produced 3.2.1 PTF images are stored in
+	   /afs/austin/aix/ptf.images/320/test
+	5) v3bld listings are stored in
+           $TOP/LISTINGS/$BLDCYCLE/<bldmachine>.$BLDNAME.<x> where <bldmachine>
+           is the name of the machine the build was performed on and <x> is the
+           number of the run.  All make output is contained in these listings.
+   	6) v3bld logs are stored in $TOP/LOG/$BLDCYCLE/v3bld.  The execution
+           parameters and times are contained in this log.
+	7) prebuild logs are stored in $TOP/LOG/$BLDCYCLE/prebuild.<x> where 
+           <x> is the number of run (e.g. prebuild.3).
+	8) subptf logs are stored in $TOP/LOG/$BLDCYCLE/subptf.<x> where <x>
+           is the number of run (e.g. subptf.3).
+        9) cumptf listings are stored in $TOP/LOG/$BLDCYCLE/cumptf.<LPP> where
+           <LPP> is the LPP name.
+
+
+SECTION 6: GENERAL NOTES AND INFORMATION
+
+	A) There was a note circulating called TEMPORARY SETUP REQUIREMENTS 
+           FOR SELFIX COMMANDS.  As of 9204 the setup requirements specified 
+           in this note are no longer necessary with the exception of the
+           following item.  
+
+		-> export STATUS_FILE=$TOP/HISTORY/STATUS_FILE
+
+           Make sure you have the latest version of the tools!
+
+	B) Many of the build commands (see manual pages) use the bldlog command
+           to log information.  To view a log file generated with the bldlog 
+	   command, enter "showlog <logfile>".  See "bldman showlog" for more 
+	   information.  The locations of the log files are listed in
+	   Section 5.
+
+	C) The primary build tools store their execution status in the 
+           status file (e.g. $TOP/HISTORY/STATUS_FILE).  These status values
+           can be examined with the command showstatus (see bldman).  Some
+           tools/commands first examine the status file to see if the needed
+           function has already been successfully completed before doing it
+           again; if the function has been successfully completed, it is
+           bypassed.  In a few instances, this optimization can cause a 
+           problem if data must be reprocessed but the function which 
+           processes it shows itself as having already completed.  The only 
+           step to take at this point is to delete the function's corresponding 
+           status line with the showstatus command.  Note, this is only needed
+           in a few rare instances, we handle this problem automatically
+           whenever possible.  To clarify, two examples where this problem 
+	   might arise are 1) accidentally removing a data file and then
+           trying to recreate it, 2) getting a fix for a tools bug and 
+           attempting to reprocess the data.
+
+	D) It is recommended the user set up id 300 as the one that will 
+           be performing the build since this is the owner id that CMVC uses 
+           when doing the build extracts.  The genroot command in 
+           $BLDENV/usr/bin should be owned by root and have a unique group that
+           contains the user that will be performing the builds.  It should 
+           also have 550 permissions and the setuid bit set.  This is because 
+           the genroot command provides root privileges to other commands that 
+           a non-root user would otherwise be unable to run.
+
+        E) The build tools use various environment variables.  These
+           variables should not be used by other commands in order to insure 
+	   there is no conflict.  See the individual manual pages (bldman) 
+	   for specific variable names (e.g. BLDCYCLE, PROD, TOP, LEVEL).
+
+        F) If distributed builds are done using NFS mounts (as in BAI)
+           then a common lock file should be used for all the build
+           machines.  This can be done by exporting the LOCKFILE variable
+           with a path located on a common mount point, for example
+           "export LOCKFILE=$TOP/HISTORY/lockfile" with all build 
+           machines mounting $TOP/HISTORY. 
+
+        G) To save time, some of the bldgetalllists' subcommands have been 
+           optimized.  Because of the approach used, traps are turned off
+           in certain critical sections.  If you need to kill subptf (or
+           possibly v3bld) while it is in bldgetalllists, do it with <ctrl>-c
+           only, not with "kill -9"; this will prevent the low-level commands
+           from being killed in a critical section.  If the first <ctrl>-c
+           does not work, you may have to wait a minute and try again. 
+
+
+SECTION 7: CALLING HIERARCHY OF MAJOR COMMANDS
+
+	ptfsetup
+		CheckSymptom
+		bldabstracts
+
+	bldstatus
+		bldcycleRemove
+		postbuild
+		postpackage
+			CancelPtf
+			bldcommitall
+			bldCleanup
+
+	prebuild
+		treecopy
+		bldabstracts
+		CheckSymptom
+		bldreqlist
+			bldverifyreqs
+	
+	bldretain
+		CheckAparStatus
+
+	v3bld
+		ptfmake
+		bldgetalllists (see hierarchy below)
+
+	subptf
+		bldmid
+		bldorderstatus
+		bldgetalllists
+			bldgetlists
+				bldmakelist
+				bldenvlist
+				bldupdatelist
+				bldchangelist
+				blddefectlist
+		bldlinkdata
+		bldxreflist
+		bldptfdepend
+			bldhistory
+			bldtd
+			bldfilterdeps
+			bldcurdef
+			bldprevdef
+			bldinfo
+		subptfpkg
+			bldinfo
+			subfilelpp
+			bldhistory
+			subgroup
+			bldaddptfids
+			bldsaveptfinfo
+			bldcut
+			bldifreqs
+			bldcoreqs
+			bldprereqs
+			subptfformat
+			subptfopts
+		bldlppreqslist
+		bldmissdefects
+
+
+	makeptf
+		genptf
+
+	genptf
+
+	genfsimage
+
+	promote
+		promote_prod
+			xmit_ptf
+
+
+SECTION 8: Glossary
+
+	APAR
+		Authorized Program Analysis Report.  Basically this is an
+                official customer problem report.
+
+	BAI
+		Build Architecture and Integration group.  This group performs
+                production builds from the CMVC products.
+
+        Build Environment
+		Directory Containing the build tools and system include files
+                and libraries for use during the build process.
+
+	Co-Req(uisite) Dependency
+		Specifies two PTFs must be installed together.
+
+	If-Req(uisite) Dependency
+		Conditional co-req; specifies a PTF must be installed if the
+                LPP-option it belongs to is installed; otherwise the ifreq
+		PTF is not required.
+
+        Inslist
+		An ASCII file in stanza format that defines the location and
+                attributes of all files related to installation and update
+		for an LPP by option.
+
+	LPP
+		Licensed Program Product
+
+	Pre-Req(uisite) Dependency
+		Specifies one PTF must be installed before another.
+
+	PTF
+		Program Temporary Fix; a PTF corrects a software problem
+                reported in an APAR.
+
+	RETAIN
+		Remote Technical Assistance Information Network.  The system
+                used by IBM employees to help solve customer problems with
+                hardware and software products.
+
+	Ship Tree
+		Directory in the built source tree ($TOP/ship) that mirrors
+                the structure of the AIX installed file system.
+
+	Supercede
+		A new PTF replaces an old PTF; this can occur only when the
+		old PTF contains a subset of the files in the new PTF.
+
+	TOP
+		Environment variable that specifies the pathname of the root
+                of the source tree of a product.  During a build TOP is set
+                to the primary search tree in .tpath.
+
+	.tpath 
+		A file pointed to by the FTPATH environment variable that 
+		contains a list of search paths for a build.
+
+	update
+		See PTF.
+

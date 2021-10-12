@@ -1,0 +1,55 @@
+# @(#)18        1.8  src/bos/usr/lib/pios/predef/generic.gl, cmdpios, bos411, 9428A410j 5/25/94 19:46:50
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:626:CC:DyS[C]En:
+:627:CD:DyS[D]En:
+:629:CF:DyS[F]En:
+:630:CG:DyS[G]En:
+:621:_H:S[F350]I[1810503]Dy:
+:791:_J:S[C950]I[1810533]%IWY:!
+:614:_Z:S[D035]I[1810534]Dn%IWY:!
+:658:_d:S[C925]I[1810509]EnL[%IW2]F1:g
+:616:_j:S[C940]I[1810536]%IWY:!
+:638:_u:S[E015]I[1810516]DnEnR[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]:1
+:060:__SYS::
+:708:sH:S[150]I[1810525]:
+:709:sT:S[155]I[1810525]:
+:653:sw:S[185]I[1810539]E#G[0..]:77
+:655:uH:S[140]I[1810527]DnEnR[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]:1
+:656:uT:S[145]I[1810527]DnEnR[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]:1
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.gl | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %IsH
+:324:st::%Ide/pioburst %F[H] %Idb/T.gl | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %IsT
+:057:__IDS::
+:276:ig::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJZ]
+:277:ip::%Iig
+:059:__PFL::
+:624:Ig:S[160g]I[1810530]Dn:
+:058:__MIS::
+:330:mA::GL Emulation
+:331:mL::[pioattr1.cat,1,735;Plotter]
+:303:mf::%Idf/piofpt
+:051:__CAG::
+:144:ci::
+:152:cr::in;
+:052:__CTL::
+:113:af::af;
+:475:__HIR::
+:686:zL::2
+:688:zM::generic
+:476:zP::master
+:477:zS::!
+:685:zV::+

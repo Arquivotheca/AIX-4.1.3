@@ -1,0 +1,98 @@
+* @(#)56        1.17  src/bos/kernext/exp/pse.exp, sysxpse, bos412, 9447A 11/11/94 14:26:46
+#!/unix
+
+*COMPONENT_NAME: SYSXPSE - Streams Framework
+*
+*ORIGINS: 83 
+*
+*LEVEL 1, 5 Years Bull Confidential Information
+
+
+* svr4 streams system calls
+getmsg syscall
+putmsg syscall
+getpmsg syscall
+putpmsg syscall
+
+* aix dynamic configuration entry points
+str_config
+str_install
+
+* svrx compatibility
+pse_timeout
+pse_untimeout
+pse_timeout_cf
+pse_sleep
+pse_sleepl
+pse_sleepx
+pse_sleep_thread
+pse_block_thread
+
+* streams utilities
+adjmsg
+allocb
+backq
+bcanput
+bufcall
+canput
+copyb
+copymsg
+datamsg
+dupb
+dupmsg
+enableok
+esballoc
+flushband
+flushq
+freeb
+freemsg
+getadmin
+getmid
+getq
+insq
+linkb
+msgdsize
+noenable
+OTHERQ
+pullupmsg
+putbq
+putctl
+putctl1
+putctl2
+putnext
+putq
+qenable
+qreply
+qsize
+RD
+rmvb
+rmvq
+strlog
+strqget
+strqset
+testb
+unbufcall
+unlinkb
+weldq
+unweldq
+weldq_cnx
+unweldq_cnx
+puthere
+pse_bufcall
+pse_deny_job_ctl_write
+pse_deny_job_ctl_read
+pse_deny_job_ctl_ioctl
+WR
+wantio
+wantmsg
+
+mi_open_comm
+mi_close_comm
+mi_bufcall
+mi_next_ptr
+throttle
+
+* for compatibility with AIX 3.2.5 users
+mps_sleep
+mps_wakeup
+splstr

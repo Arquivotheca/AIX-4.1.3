@@ -1,0 +1,5 @@
+rbydd: ${MAKETOP}../../export/power/kernel/lib/libsysp.a(ioccdelay.o)
+rbydd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(ptrgl.o)
+rbydd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(bzero.o)
+rbydd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(moveeq.o)
+rbydd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(strlen.o)

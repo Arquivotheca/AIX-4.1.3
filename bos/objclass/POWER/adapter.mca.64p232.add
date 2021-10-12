@@ -1,0 +1,512 @@
+* @(#)02 1.3 src/bos/objclass/POWER/adapter.mca.64p232.add, cfgtty, bos41J, 9520A_all 4/27/95 11:52:55
+*
+* COMPONENT_NAME: (CFGMETHODS) adapter.mca.64p232.add
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+*
+* adapter/mca/64p232 object
+*
+PdDv:
+	type = 64p232
+	class = adapter
+	subclass = mca
+	prefix = sa
+	devid = 0xfd61
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x834
+	setno = 37
+	msgno = 1
+	fru = 1
+	catalog = devices.cat
+	DvDr = "liondd"
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgasync
+	Change = ""
+	Unconfigure = /etc/methods/ucfgasync
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/mca/64p232
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 0
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 1
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 2
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 3
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 4
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 5
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 6
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 7
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 8
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 9
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 10
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 11
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 12
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 13
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 14
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 15
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 16
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 17
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 18
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 19
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 20
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 21
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 22
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 23
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 24
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 25
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 26
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 27
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 28
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 29
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 30
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 31
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 32
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 33
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 34
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 35
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 36
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 37
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 38
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 39
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 40
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 41
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 42
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 43
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 44
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 45
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 46
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 47
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 48
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 49
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 50
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 51
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 52
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 53
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 54
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 55
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 56
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 57
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 58
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 59
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 60
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 61
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 62
+
+PdCn:
+	uniquetype = adapter/mca/64p232
+	connkey = rs232
+	connwhere = 63
+
+PdAt:
+	uniquetype = adapter/mca/64p232
+	attribute = bus_mem_addr
+	deflt = 0xDC0000
+	values = "0x40000-0xF80000,0x40000"
+	width = 0x40000
+	type = M
+	generic = D
+	rep = nr
+	nls_index = 2
+
+PdAt:
+	uniquetype = adapter/mca/64p232
+	attribute = bus_intr_lvl
+	deflt = 15
+	values = "3,4,5,7,10,11,12,15"
+	width = ""
+	type = I
+	generic = D
+	rep = nl
+	nls_index = 3
+
+PdAt:
+	uniquetype = adapter/mca/64p232
+	attribute = intr_64p_key
+	deflt = ""
+	values = bus_intr_lvl
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = adapter/mca/64p232
+	attribute = intr_priority
+	deflt = 1
+	values = 1
+	width = ""
+	type = P
+	generic = D
+	rep = n
+	nls_index = 4
+
+PdAt:
+	uniquetype = "adapter/mca/64p232"
+	attribute = id_seg_reg
+	deflt = 0x800C0080
+	values = 0x800C0080
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/mca/64p232"
+	attribute = nseg_reg
+	deflt = 0x80080020
+	values = 0x80080020
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/mca/64p232"
+	attribute = "load_module"
+        deflt = "/usr/lib/methods/lionload"
+        values = "/usr/lib/methods/lionload"
+        width = ""
+        type = "E"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/mca/64p232"
+	attribute = tbc64
+	deflt = 64
+	values = "2-64,2"
+	width = ""
+	type = E
+	generic = DU
+	rep = nr
+	nls_index = 5
+
+PdAt:
+	uniquetype = "adapter/mca/64p232"
+	attribute = rtrig
+	deflt = 3
+	values = "0-3,1"
+	width = ""
+	type = E
+	generic = DU
+	rep = nr
+	nls_index = 6
+
+PdAt:
+        uniquetype = "adapter/mca/64p232"
+        attribute = speed
+        deflt = 9600
+        values = "0,50,75,110,134,150,200,300,600,1200,1800,2400,4800,9600,19200,38400"
+        width = ""
+        type = E
+        generic = DU
+        rep = slm
+        nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/mca/64p232"
+	attribute = "xprint_priority"
+	deflt = "30"
+	values = "0-64,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 8
+
+PdAt:
+	uniquetype = "adapter/mca/64p232"
+	attribute = "xprint_on_str"
+	deflt = "\\033[5i"
+	values = ""
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "s"
+	nls_index = 9
+
+PdAt:
+	uniquetype = "adapter/mca/64p232"
+	attribute = "xprint_off_str"
+	deflt = "\\033[4i"
+	values = ""
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "s"
+	nls_index = 10
+
+
+

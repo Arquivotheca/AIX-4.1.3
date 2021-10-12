@@ -1,0 +1,119 @@
+.# #ident "@(#)lspass.hlp:3.1  File Date:93/03/25 Last Delta:91/09/06 13:54:20"
+
+
+
+.#  This is the ls_pass Help File
+
+.I             ls_pass help index
+.#
+    s_on_ops            On Operations menu 
+    s_on_v_add          On Adding a Vendor
+    s_on_p_add          On Adding a Product
+    s_on_filename       On File Output
+.#
+.#
+.# Screens
+.#
+.S   s_v_add            Help On Adding a Vendor
+.#
+To add a new vendor, enter the name of the new vendor.
+Then click on the 'Create Vendor Id' button, which 
+creates a new vendor UUID and vendor password.
+Then make up and enter a vendor key, which is a number
+between 256 and 65534.
+
+To add a previously determined vendor (i.e. - reenter
+a vendor or add a supplier vendor) enter the name of 
+this vendor and its UUID.  Then enter the vendor key,
+which is either a number, or in the case of a
+supplier vendor, is the word "sup[plier]".
+
+At this point the 'Done' button will become active.  
+Either click on this button with the mouse or press 
+<return> to enter the new vendor.
+.#
+.#
+.S   s_p_add            Help On Adding a Product
+.#
+To add a product, enter the name of the product
+and the product id, which is a non-negative integer.
+The 'Product Version' button will then become active.
+Enter the version, which is any alphanumeric sequence.
+
+At this point the 'Done' button will become active.  
+Either click on this button with the mouse or press 
+<return> to enter the new product.
+.#
+.#
+.S   s_filename         Help On File Output
+.#
+To direct output to a file as well as to the transcript 
+pad, enter the path of the file which will contain the 
+output.  If a pathname is not entered, then there is no 
+output to a file.
+
+Either click on the 'Done' button with the mouse or press 
+<return> to enter the output pathname.
+.#
+.#
+.#
+.#
+.#
+.#
+.S   s_on_v_add         Help On Adding a Vendor
+.#
+To add a new vendor, first select 'Vendor' in the top left
+menu and then select 'Add Vendor...' in the operations
+menu at the left.  In the popup that appears, enter the 
+vendor information.
+
+To add a new vendor, enter the name of the new vendor.
+Then click on the 'Create Vendor Id' button to create
+a new vendor UUID and vendor password.  Then make up 
+and enter a vendor key, which is a number between 256 
+and 65534.
+
+To add a previously determined vendor (i.e. - reenter
+a vendor or add a supplier vendor) enter the name of 
+this vendor and its UUID.  Then enter the vendor key,
+which is either a number, or in the case of a
+supplier vendor, is the word "sup[plier]".
+
+At this point the 'Done' button will become active.  
+Either click on this button with the mouse or press 
+<return> to enter the new vendor.
+.#
+.#
+.#
+.S   s_on_p_add         Help On Adding a Product
+.#
+To add a new product, first select 'Product' in the top 
+left menu and then select 'Add Product...' in the 
+operations menu at the left.  In the popup that appears, 
+enter the name of the product and the product id, which 
+is a non-negative integer.  The 'Product Version' button 
+will then become active.  Enter the version, which is any 
+alphanumeric sequence.
+.#
+.#
+.S   s_on_filename      Help On File Output
+.#
+To direct output to a file as well as to the transcript 
+pad, first select 'Password' in the top left menu and then
+select 'Filename...' in the bottom row of buttons.  Enter
+the path of the file which will contain the output.  If a
+pathname is not entered, then there is no output to a file.
+.#
+.#
+.S   s_on_ops           Help On Operations menu 
+There are four steps in creating a password, and four 
+coresponding entries in the operations menu in the upper 
+left corner: 
+
+1) select a VENDOR
+2) select a PRODUCT
+3) select a CUSTOMER (optional)
+4) create a PASSWORD
+.#
+.#
+

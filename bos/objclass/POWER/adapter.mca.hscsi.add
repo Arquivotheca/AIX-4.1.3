@@ -1,0 +1,457 @@
+* @(#)04        1.4  src/bos/objclass/POWER/adapter.mca.hscsi.add, cfgmethods, bos411, 9431A411a 7/28/94 06:46:55
+*********************************************************************
+* 		PREDEFINED DATA
+*		FOR SCSI ADAPTER
+*
+* COMPONENT_NAME :hscsi.add
+*
+* ORIGINS : 27, 83 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+* Unpublished Work
+* All Rights Reserved
+* Licensed Materials , Property of IBM
+*
+* RESTRICTED RIGHTS LEGEND
+* US Government Users Restricted Rights ,  Use, Duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* LEVEL 1,  5 Years Bull Confidential Information
+*
+***********************************************************************
+PdDv:
+	 type = hscsi
+	 class = adapter
+	 subclass = mca
+       	 prefix = scsi
+	 devid = 0x778d
+	 base = 1
+	 has_vpd = 1
+	 detectable = 1
+	 chgstatus = 0
+	 bus_ext = 0
+	 fru = 1
+	 led = 0x869
+	 setno = 22
+         msgno = 1
+	 catalog = "devices.cat"
+	 DvDr =  hscsidd
+	 Define = "/etc/methods/define"
+	 Configure = "/etc/methods/cfghscsi"
+	 Change = "/etc/methods/chghscsi"
+	 Unconfigure = "/etc/methods/ucfgdevice"
+	 Undefine = "/etc/methods/undefine"
+	 Start = ""
+	 Stop = ""
+         uniquetype = "adapter/mca/hscsi"
+
+
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "0,7"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "1,7"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "2,7"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "3,7"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "4,7"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "5,7"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "6,7"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,0"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,1"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,2"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,3"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,4"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,5"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,6"
+PdCn:
+        uniquetype = "adapter/mca/hscsi"
+        connkey = scsi
+        connwhere = "7,7"
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+	attribute = "bus_mem_addr"
+        deflt = 0xe0000 
+        values = "0x30000-0xfffff000,0x1000"
+        width = 0x1000
+        type = M
+        generic = D 
+	rep = nr
+	nls_index = 2
+               
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "dma_bus_mem"
+        deflt = 0x100000
+        values = "0x100000-0xfffff000,0x1000"
+	width = ""
+        type = M
+        generic = D 
+	rep = nr
+	nls_index = 3
+               
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "dbmw"
+        deflt = 0x202000
+        values = "0x202000-0x902000,0x1000"
+	width = "dma_bus_mem"
+        type = W
+        generic = DU
+	rep = nr
+	nls_index = 12
+
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "bus_intr_lvl"
+        deflt = 14
+        values = "3,4,5,7,10,11,12,14"
+	width = ""
+        type = I       
+        generic = D 
+	rep = nl
+	nls_index = 4
+                
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "intr_priority"
+        deflt = 3
+        values = 3
+	width = ""
+        type = P       
+        generic = D 
+	rep = nl
+	nls_index = 5
+
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "dma_lvl"
+        deflt = 3 
+        values = "0-14,1"
+	width = ""
+        type = A
+        generic = D 
+	rep = nr
+	nls_index = 6
+                
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "id"
+        deflt = 7 
+        values = "0-7,1"
+        width = ""      
+	type = R
+        generic = UD 
+	rep = nr
+	nls_index = 7
+                
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "ucode"
+        deflt = ""
+        values = ""
+	width = ""
+	type = R
+        generic = D 
+	rep = sl
+	nls_index = 9
+                
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "bb"
+        deflt = "no"
+        values = "yes,no"
+	width = ""
+	type = R
+        generic = UD
+	rep = sl
+	nls_index = 10
+               
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "tm"
+        deflt = "no"
+        values = "yes,no"
+	width = ""
+	type = R
+        generic = UD
+	rep = sl
+	nls_index = 14
+               
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "tme"
+        deflt = "no"
+        values = "yes,no"
+	width = ""
+	type = R
+        generic = D
+	rep = sl
+	nls_index = 15
+               
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "tmp"
+        deflt = 50
+        values = "0-75,1"
+	width = 1
+	type = R
+        generic = UD
+	rep = nr
+	nls_index = 13
+
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "max_data_rate"
+        deflt = 3800
+        values = ""
+	width = ""
+	type = R
+        generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/mca/hscsi"
+        attribute = "bus_loc"
+        deflt = ""
+        values = ""
+        width = ""
+        type = "R"
+        generic = ""
+        rep = "s"
+        nls_index = 0

@@ -1,0 +1,40 @@
+//******************************************************************
+//* SCCSID:  @(#)00        1.3  src/bldenv/pkgtools/rename/xmit_ptf/jcl_ccssmvs, pkgtools, bos412, GOLDA411a 6/24/93 08:41:55
+//*
+//*  COMPONENT_NAME: PKGTOOLS
+//*
+//*  FUNCTIONS: none
+//*
+//*  ORIGINS: 27
+//*
+//*  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+//*  combined with the aggregated modules for this product)
+//*                   SOURCE MATERIALS
+//*
+//*  (C) COPYRIGHT International Business Machines Corp. 1991,1993
+//*  All Rights Reserved
+//*  US Government Users Restricted Rights - Use, duplication or
+//*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+//*
+//@@mvs_userid@@Z  JOB (IDAEAA,S30,,,,N),'LOIS DAY 838-2522',
+//             NOTIFY=@@mvs_userid@@,
+//             USER=@@mvs_userid@@,
+//             PASSWORD=@@mvs_password@@,
+//             REGION=4096K,
+//             MSGCLASS=T
+//*MAIN SYSTEM=ANY,CLASS=OS
+//**** FORMAT PR,DDNAME=,DEST=AUSMVS3
+//*
+//* CHANGE LOG:
+//*   10/16/91-wt-changes for userid awdtrn2
+//*
+//******************************************************************
+//* STEP TO REFORMAT DATA INTO CCSS VARIABLE LENGTH RECORDS
+//******************************************************************
+//CRUN     EXEC PGM=CCSSMVS
+//STEPLIB  DD DSN=@@mvs_userid@@.IU.LOADLIB.V32,DISP=SHR
+//SYSPRINT DD SYSOUT=T
+//CCSSIN   DD DISP=SHR,DSN=@@mvs_userid@@.@@ptf_number@@.PTF.UNFORMAT
+//CCSSOUT  DD DISP=(NEW,CATLG),DSN=@@mvs_userid@@.@@ptf_number@@.PTF,
+//            SPACE=(8260,(7000,1000),RLSE),UNIT=SYSDA
+//*

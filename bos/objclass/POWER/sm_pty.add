@@ -1,0 +1,189 @@
+# @(#)38 1.12 src/bos/objclass/POWER/sm_pty.add, cfgtty, bos411, 9438A411a 9/19/94 08:51:57
+#
+#  COMPONENT_NAME: (CFGMETH) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: PTY Interfaces
+#
+#  ORIGINS: 27, 83
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       Change/Show Characteristics of the PTY
+#       Remove the PTY; Keep Definition
+#       Configure the Defined TTY
+#
+#       Help text Id's for PTY specific helps are in the range:
+#               0420300 to 0420399
+#       This does not include menu helps.
+#
+
+#
+# Change/Show Characteristics of the PTY
+# This allows the PTY device's characteristics to be shown and, if desired,
+# changed.  There is no name selector.
+
+# Command header
+sm_cmd_hdr:
+    id                        = "chgpty"
+    option_id                 = "pty_attr"
+    has_name_select           = "n"
+    name                      = "Change / Show Characteristics of the PTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 90
+    cmd_to_exec               = "chdev -l pty0"
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -l pty0 -E -O"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Displays autoconfig attribute.
+sm_cmd_opt:
+    id                        = "pty_attr"
+    id_seq_num                = "010"
+    disc_field_name           = "autoconfig"
+    name                      = "STATE to be configured at boot time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 50
+    name_msg_id               = 4
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "available,defined"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27 
+    values_msg_id             = 21 
+    aix_values                = "available,defined"
+    help_msg_id               = "0420301"
+    help_msg_loc              = ""
+
+# display ATTnum attribute
+sm_cmd_opt:
+    id                        = "pty_attr"
+    id_seq_num                = "015"
+    disc_field_name           = "ATTnum"
+    name                      = "Maximum number of Pseudo-Terminals"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 50
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a ATTnum="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -l pty0 -a ATTnum -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420302"
+    help_msg_loc              = ""
+
+# display BSDnum attribute
+sm_cmd_opt:
+    id                        = "pty_attr"
+    id_seq_num                = "020"
+    disc_field_name           = "BSDnum"
+    name                      = "Maximum number of BSD Pseudo-Terminals"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 50
+    name_msg_id               = 3
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a BSDnum="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -l pty0 -a BSDnum -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420300"
+    help_msg_loc              = ""
+
+#
+# Remove the PTY; Keep Definition
+# This allows the PTY device to be removed without deleting its
+# definition from the database.  No name selector is used.  A ghost
+# dialogue is used.
+
+# Command header.
+sm_cmd_hdr:
+    id                        = "rmvpty"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "Remove the PTY; Keep Definition"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 91
+    cmd_to_exec               = "rmdev -l pty0"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180096"
+    help_msg_loc              = ""
+
+#
+# Configure the Defined PTY
+# This allows the PTY device when defined but not configured to be
+# configured.  No  name selector is used.  A ghost dialogue is used.
+
+# Command header.
+sm_cmd_hdr:
+    id                        = "cfgpty"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "Configure the Defined PTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 92
+    cmd_to_exec               = "mkdev -l pty0"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180095"
+    help_msg_loc              = ""

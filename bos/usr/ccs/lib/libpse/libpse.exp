@@ -1,0 +1,20 @@
+* @(#)44	1.1  src/bos/usr/ccs/lib/libpse/libpse.exp, cmdpse, bos411, 9434B411a 8/19/94 16:56:55
+*
+*   COMPONENT_NAME: cmdpse
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+strconfig
+strconferr
+mkdevice
+rmdevice
+mkdevname

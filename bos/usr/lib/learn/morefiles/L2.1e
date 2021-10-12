@@ -1,0 +1,38 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+If you make a mistake and type something like
+
+   xxxxx >precious
+
+where "xxxxx" is ___not the name of a legal UNIX
+command, what happens to the file "precious"?
+
+In this directory, there are several precious files.
+Experiment to see what happens.  When you have decided,
+type "answer harmless" if nothing happens to the files,
+or "answer disaster" if the file is clobbered.
+#create precious
+I am precious.
+#create precious1
+So am I.
+#create precious2
+Me too.
+#copyin
+#user
+#uncopyin
+#match disaster
+#log
+#next
+2.1f 10

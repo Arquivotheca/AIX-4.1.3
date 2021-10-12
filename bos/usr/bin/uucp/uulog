@@ -1,0 +1,121 @@
+#!/bin/bsh 
+# COMPONENT_NAME: UUCP uulog
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# "@(#)35       1.6  src/bos/usr/bin/uucp/uulog, cmduucp, bos41J, 9512A_all 3/9/95 16:59:50"
+#From: ulysses!smb (Steven Bellovin)
+#
+# usage:
+# 	uulog
+# or	uulog foo
+# or	uulog -sfoo
+# or	uulog -s foo
+# or	uulog -ffoo
+# or	uulog -f foo
+#
+#	-x means check the execute file
+#	-nnn where 'nnn' is a number will do tail -nnn
+#
+LOGDIR=/usr/spool/uucp/.Log
+sys=""
+type=uucico
+n=""
+
+cd $LOGDIR
+
+while [ $# -gt 0 ]
+do
+	case $1 in
+	-x)	type=uuxqt
+		shift
+		;;
+
+	-[0-9]*)n=`echo $1|cut -c2-`
+		shift
+		;;
+
+	-f)	fflag=1
+		shift
+		;;
+
+	-f*)	x=`echo $1|cut -c3-`
+		shift
+		set - $x $*
+		fflag=1
+		;;
+
+	-s)	shift
+		sflag=1
+		;;
+
+	-s*)	x=`echo $1|cut -c3-`
+		shift
+		set - $x $*
+		sflag=1
+		;;
+
+	-*)	if [ -x /usr/bin/dspmsg ];
+		        then dspmsg -s 1 uucp.cat 3 "Invalid flag %s.\n" $1 1>&2
+        		else echo "Invalid flag $1." 1>&2
+     		fi
+		exit 1
+		;;
+
+	*)	sys="$sys $1"
+		shift
+		;;
+
+	esac
+done
+
+set - $sys
+
+# The -s and -f options require an argument.  If no argument is supplied,
+# X/Open requires that uulog exits with a non-zero exit code.
+if [ x$sflag != x -a "$sys" = "" ] ; then
+	if [ -x /usr/bin/dspmsg ];
+	        then dspmsg -s 1 uucp.cat 5 "The -s option requires an argument.\n" 1>&2
+        	else echo "The -s option requires an argument." 1>&2
+     	fi
+	exit 1
+fi
+if [ x$fflag != x -a "$sys" = "" ] ; then
+	if [ -x /usr/bin/dspmsg ];
+	        then dspmsg -s 1 uucp.cat 6 "The -f option requires an argument.\n" 1>&2
+        	else echo "The -f option requires an argument." 1>&2
+     	fi
+	exit 1
+fi
+	
+if [ x$fflag = x ]; then
+	if [ $# = 0 ]; then
+		set - `ls $type`
+	fi
+	for i
+	do
+		if [ x$n = x ]; then
+			cat $type/$i
+		else
+			tail -$n $type/$i
+		fi
+	done
+else
+	if [ $# != 1 ]; then
+     		if [ -x /usr/bin/dspmsg ];
+		    then dspmsg -s 1 uucp.cat 4 "Exactly one system with -f.\n" 1>&2
+        		else echo "Exactly one system with -f." 1>&2
+     		fi
+		exit 2
+	fi
+	exec tail -${n}f $type/$1
+fi

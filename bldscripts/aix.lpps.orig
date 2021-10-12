@@ -1,0 +1,108 @@
+# @(#)77        1.25  src/bldscripts/aix.lpps, ade_build, bos412, 9443A412a 10/25/94 16:43:37
+#
+#   COMPONENT_NAME: ADE_BUILD
+#
+#   ORIGINS: 27,71
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991, 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+#
+# PLEASE NOTE:
+#
+# If any updates are made to this file corresponding update(s)
+# should be made to src/bldscripts/Stage and if necessary to
+# src/bldscripts/StageReq. In time this file and Stage will
+# be merged so that modifications to both files will not be
+# necessary.
+#
+
+#
+# This file contains the ordered list of lpps to build/install.  Each entry
+# is described by the following fields:
+#
+#     <lpp name>|<lpp release>|<lpp script>|<label string>|<make pass>|<list of lpps>|
+#
+# <lpp name>     - The symbolic name for the LPP(s) to build/install.
+# <lpp release>  - Release of lpp.
+# <lpp script>   - Script to execute to build/install LPP(s).
+# <label string> - The string indicating what is being done.
+# <make pass>    - The pass used to build/install LPP.
+# <list of lpps> - The space separated list of LPP directories.  Each LPP
+#                  directory is followed by "" or _mp.
+#
+# <lpp name> and <lpp script> are required.  All other fields are optional.
+#
+
+#
+# List of LPPs to build:
+#
+# setup|bos410|setup.sh| # do not build setup for 411
+kernel|bos410|aixlpp.sh|KERNEL and KERNEL EXTENSIONS build|build|bos/kernel "" bos/kernext "" bos/kernel _mp|
+cmds|bos410|aixlpp.sh|COMMANDS build|build|bos ""|
+rspc|rspc410|aixlpp.sh|RS PC build|build|rspc ""|
+rspc_g|rspc_g411|aixlpp.sh|rspc_g build|build|woodfield ""|
+xlC|xlC410|aixlpp.sh|XLC (C++) build|build|xlC ""|
+nfs|nfs410|aixlpp.sh|NFS build|build|nfs ""|
+tcpip|tcpip410|aixlpp.sh|TCP/IP build|build|tcpip ""|
+gos|gos410|aixlpp.sh|GOS build|build|gos ""|
+dtuimx|dtuimx410|aixlpp.sh|DTUIMX build|build|dtuimx ""|
+tw|tw410|aixlpp.sh|TW build|build|tw ""|
+cmdtext|cmdtext410|aixlpp.sh|CMDTEXT build|build|cmdtext ""|
+des|des410|aixlpp.sh|DES build|build|des ""|
+xlf|xlf410|aixlpp.sh|XLF build|build|xlf ""|
+INed|tenplus410|aixlpp.sh|INED build|build|tenplus ""|
+msg|msg410|aixlpp.sh|TRANSLATED MESSAGES build|build|msg ""|
+icraft|icraft410|aixlpp.sh|ICRAFT build|build|icraft ""|
+dossvr|dossvr410|aixlpp.sh|DOS SERVER build|build|pci ""|
+dsmit|dsmit410|aixlpp.sh|DSMIT build|build|dsmit ""|
+hcon|hcon410|aixlpp.sh|HCON build|build|hcon ""|
+info|info410|aixlpp.sh|INFO build|build|info ""|
+infoxl|info410|aixlpp.sh|INFOXL build|build|infoxl ""|
+perf|perf410|aixlpp.sh|PERF build|build|perf ""|
+afs|afs410|aixlpp.sh|AFS build|build|afs ""|
+x_st_mgr|xmgr410|aixlpp.sh|X Station Mgr|build|x_st_mgr ""|
+neptune|nep410|aixlpp.sh|NEPTUNE build|build|neptune ""|
+netware|netware411|aixlpp.sh|NETWARE build|build|netware ""|
+
+#
+# List of LPPs to install:
+#
+install|bos410|aixlpp.sh|INSTALL|install|bos "" bos/kernel "" bos/kernext "" bos/kernel _mp|
+rspcinstall|rspc410|aixlpp.sh|RS PC install|install|rspc ""|
+rspc_ginstall|rspc_g411|aixlpp.sh|rspc_g install|install|woodfield ""|
+xlCinstall|xlC410|aixlpp.sh|XLC (C++) install|install|xlC ""|
+nfsinstall|nfs410|aixlpp.sh|NFS install|install|nfs ""|
+gosinstall|gos410|aixlpp.sh|GOS install|install|gos ""|
+dtuimxinstall|dtuimx411|aixlpp.sh|DTUIMX install|install|dtuimx ""|
+tcpipinstall|tcpip410|aixlpp.sh|TCP/IP install|install|tcpip ""|
+twinstall|tw410|aixlpp.sh|TW install|install|tw ""|
+cmdtextinstall|cmdtext410|aixlpp.sh|CMDTEXT install|install|cmdtext ""|
+desinstall|des410|aixlpp.sh|DES install|install|des ""|
+xlfinstall|xlf410|aixlpp.sh|XLF install|install|xlf ""|
+INedinstall|tenplus410|aixlpp.sh|INED install|install|tenplus ""|
+msginstall|msg410|aixlpp.sh|TRANSLATED MESSAGES install|install|msg ""|
+icraftinstall|icraft410|aixlpp.sh|ICRAFT install|install|icraft ""|
+dossvrinstall|dossvr410|aixlpp.sh|DOS SERVER install|install|pci ""|
+dsmitinstall|dsmit410|aixlpp.sh|DSMIT install|install|dsmit ""|
+hconinstall|hcon410|aixlpp.sh|HCON install|install|hcon ""|
+infoinstall|info410|aixlpp.sh|INFO install|install|info ""|
+infoxlinstall|info410|aixlpp.sh|INFOXL install|install|infoxl ""|
+perfinstall|perf410|aixlpp.sh|PERF install|install|perf ""|
+afsinstall|afs410|aixlpp.sh|AFS install|install|afs ""|
+x_st_mgrinstall|xmgr410|aixlpp.sh|X Station Mgr|install|x_st_mgr ""|
+neptuneinstall|nep410|aixlpp.sh|NEPTUNE install|install|neptune ""|
+netwareinstall|netware411|aixlpp.sh|NETWARE install|install|netware ""|
+
+#
+# List of images to build/install:
+#
+images|pkg410|aixlpp.sh|IMAGES|build|packages ""|
+#installimages|pkg410|aixlpp.sh|INSTALL images|install|packages ""|

@@ -1,0 +1,418 @@
+#----------------------------------------------------------------
+# SCCSID="@(#)03  1.11  src/bldenv/pkgtools/rename/package.table, pkgtools, bos412, GOLDA411a 6/24/93 08:40:04"
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1990,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#----------------------------------------------------------------
+# change log:
+# 08/20/91 -wht-added media label fields (8&9) for 3.2 selective fix
+#                 to current 3.2 table from T. Krueger.
+#----------------------------------------------------------------
+#
+# RULES:
+# 1) all packages in an lpp have the same program #, i.e. productid -
+#    last two digits.
+# 2) an lpp can consist of one or more of the following packages:
+#   a) executable
+#   b) primary language mri
+#   c) secondary language mri
+#   d) primary language softcopy
+#   e) secondary language softcopy
+#   f) update
+# 3) all primary language package feature codes start with 29.
+# 4) all second language package feature codes start with 59.
+#
+#
+#  The rule for naming is as follows:
+#    1. For the individual tape update piece, add a u to the name.
+#    2. If the name is not unique at this point (e.g. bosu), then add
+#       another u to the name (e.g. bosuu).
+#    3. If the name is now too long (>14 chars), subtract a letter.
+#
+#----------------------------------------------------------------
+# suffix and feature code for all primary languages
+#   secondary language feature codes are 5xxx instead of 2xxx.
+#
+#        Nl_BE      xxxx-xxxxx    2963
+#        En_US      xxxx-xxxxx    2924
+#        Fr_FR      xxxx-xxxxx    2928
+#        De_DE      xxxx-xxxxx    2929
+#        It_IT      xxxx-xxxxx    2932
+#        Ja_JP      xxxx-xxxxx    2962
+#        No_NO      xxxx-xxxxx    2933
+#        Es_ES      xxxx-xxxxx    2931
+#        Sv_SE      xxxx-xxxxx    2937
+#----------------------------------------------------------------
+#   AIX Version 3.2 for RISC System/6000
+#
+#----------------------------------------------------------------
+# comments begin with '#' in column 1
+#----------------------------------------------------------------
+# package_name:product_id:feature_code:preload_sequence#:tape_sequence#:mvs_name:mfg_pn_ec:labeltxt_line1:labeltxt_line2:
+#----------------------------------------------------------------
+reserved:5756-03001:5005:1000::reserved::Selective Fix:For use on AIX V3.2 only:
+bosboot:5756-03001:5005:2000::bosboot::Selective Fix:For use on AIX V3.2 only:
+bosinst:5756-03001:5005:3000::bosinst::Selective Fix:For use on AIX V3.2 only:
+bos:5756-03001:5005:4000::bos:02G7468 C26084K:Selective Fix:For use on AIX V3.2 only:
+bsl:5756-03001:5005:5000::bsl::Selective Fix:For use on AIX V3.2 only:
+bsmEn_US:5756-03001:2924:6000::bsmenus:00G1350 C26084K:Selective Fix:For use on AIX V3.2 only:
+bsmNl_BE:5756-03001:2963:7000::bsmnlbe:99A2002 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmFr_FR:5756-03001:2928:8000::bsmfrfr:99A0005 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmDe_DE:5756-03001:2923:9000::bsmdede:99A1002 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmIt_IT:5756-03001:2932:10000::bsmitit:99A0007 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmJa_JP:5757-03001:2962:11000::bsmjajp:99A1001 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmNo_NO:5756-03001:2933:12000::bsmnono:99A0009 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmEs_ES:5756-03001:2931:13000::bsmeses:99A1011 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmSv_SE:5756-03001:2937:14000::bsmsvse:99A1212 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+bsmko_KR:5756-03001:2986:3255::bsmkokr:99X3003 KORTAIW:Selective Fix: For use on AIX V3.2 only:
+bsmzh_TW:5756-03001:2987:3260::bsmzhtw:99X3004 KORTAIW:Selective Fix: For use on AIX V3.2 only:
+bos.data:5756-03001:5005:15000::bos.data:02G7468 C26084K:Selective Fix:For use on AIX V3.2 only:
+INed:5756-03001:5005:16000::ined:71F1313 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosadt:5756-03001:5005:17000::bosadt:71F1312 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosadt.data:5756-03001:5005:18000::bosadt.data:71F1312 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosext1:5756-03001:5005:19000::bosext1:71F1310 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosext1.data:5756-03001:5005:20000::bosext1.data:71F1310 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosext2:5756-03001:5005:21000::bosext2:71F1311 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosext2.data:5756-03001:5005:22000::bosext2.data:71F1311 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosnet:5756-03001:5005:23000::bosnet:71F1303 C26084C:Selective Fix:For use on AIX V3.2 only:
+hanfs:5756-03001:5005:24000::hanfs::Selective Fix:For use on AIX V3.2 only:
+des:5756-03011:5151:25000::des:71F1307 C26084C:Selective Fix:For use on AIX V3.2 only:
+infoxl:5756-03001:5005:26000::infoxl::Selective Fix:For use on AIX V3.2 only:
+pci:5756-03001:5005:27000::pci:71F1314 C26084C:Selective Fix:For use on AIX V3.2 only:
+txtfmt.data:5756-03001:5005:28000::txtfmt.data:02G7470 C26084K:Selective Fix:For use on AIX V3.2 only:
+txtfmt:5756-03001:5005:29000::txtfmt:02G7470 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlccmp:5756-03001:5005:30000::xlccmp:71F1316 C26084C:Selective Fix:For use on AIX V3.2 only:
+bssiEn_US:5756-03001:2924:31000::bssienus:02G7473 C26084K:Selective Fix:For use on AIX V3.2 only:
+bseiEn_US:5756-03001:2924:32000::bseienus:02G7471 C26084K:Selective Fix:For use on AIX V3.2 only:
+bspiEn_US:5756-03001:2924:33000::bspienus:02G7472 C26084K:Selective Fix:For use on AIX V3.2 only:
+bosu:5756-03001:5005:34000::bosu:02G7474 C26084K:Selective Fix:For use on AIX V3.2 only:
+bosuu:5756-03001:5006:35000::bosuu::Selective Fix:For use on AIX V3.2 only:
+boslu:5756-03001:5006:36000::boslu:02G7469 C26084K:Selective Fix:For use on AIX V3.2 only:
+bslu:5756-03001:5005:37000::bslu::Selective Fix:For use on AIX V3.2 only:
+bsmEn_USu:5756-03001:2924:38000::bsmenusu::Selective Fix:For use on AIX V3.2 only:
+bsmNl_BEu:5756-03001:2963:39000::bsmnlbeu::Selective Fix:For use on AIX V3.2 only:
+bsmFr_FRu:5756-03001:2928:40000::bsmfrfru::Selective Fix:For use on AIX V3.2 only:
+bsmDe_DEu:5756-03001:2923:41000::bsmdedeu::Selective Fix:For use on AIX V3.2 only:
+bsmIt_ITu:5756-03001:2932:42000::bsmititu::Selective Fix:For use on AIX V3.2 only:
+bsmJa_JPu:5757-03001:2962:43000::bsmjajpu::Selective Fix:For use on AIX V3.2 only:
+bsmNo_NOu:5756-03001:2933:44000::bsmnonou::Selective Fix:For use on AIX V3.2 only:
+bsmEs_ESu:5756-03001:2931:45000::bsmesesu::Selective Fix:For use on AIX V3.2 only:
+bsmSv_SEu:5756-03001:2937:46000::bsmsvseu::Selective Fix:For use on AIX V3.2 only:
+bos.datau:5756-03001:5005:47000::bos.datau:02G7468 C26084K:Selective Fix:For use on AIX V3.2 only:
+INedu:5756-03001:5005:48000::inedu::Selective Fix:For use on AIX V3.2 only:
+bosadtu:5756-03001:5005:49000::bosadtu::Selective Fix:For use on AIX V3.2 only:
+bosadt.datau:5756-03001:5005:50000::bosadt.datau:71F1312 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosext1u:5756-03001:5005:51000::bosext1u::Selective Fix:For use on AIX V3.2 only:
+bosext1.datau:5756-03001:5005:52000::bosext1.datau:71F1310 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosext2u:5756-03001:5005:53000::bosext2u::Selective Fix:For use on AIX V3.2 only:
+bosext2.datau:5756-03001:5005:54000::bosext2.datau:71F1311 C26084C:Selective Fix:For use on AIX V3.2 only:
+bosnetu:5756-03001:5005:55000::bosnetu::Selective Fix:For use on AIX V3.2 only:
+hanfsu:5756-03001:5005:56000::hanfsu::Selective Fix:For use on AIX V3.2 only:
+desu:5756-03011:5151:57000::desu:81F8906 C26084F:Selective Fix:For use on AIX V3.2 only:
+infoxlu:5756-03001:5005:58000::infoxlu::Selective Fix:For use on AIX V3.2 only:
+pciu:5756-03001:5005:59000::pciu::Selective Fix:For use on AIX V3.2 only:
+txtfmt.datau:5756-03001:5005:60000::txtfmt.datau:02G7470 C26084K:Selective Fix:For use on AIX V3.2 only:
+txtfmtu:5756-03001:5005:61000::txtfmtu::Selective Fix:For use on AIX V3.2 only:
+xlccmpu:5756-03001:5005:62000::xlccmpu::Selective Fix:For use on AIX V3.2 only:
+X11rte:5601-25701:5005:63000::x11rte:02G7478 C26084K:Selective Fix:For use on AIX V3.2 only:
+X11rteR5:5601-25701:5005:63000::x11rte:02G7478 C26084K:Selective Fix:For use on AIX V3.2 only:
+X11rtel:5601-25701:5006:64000::x11rtel:02G7475 C26084K:Selective Fix:For use on AIX V3.2 only:
+X11dev:5601-25701:5005:65000::x11dev:71F0194 C26084C:Selective Fix:For use on AIX V3.2 only:
+X11devR5:5601-25701:5005:65000::x11dev:71F0194 C26084C:Selective Fix:For use on AIX V3.2 only:
+X11mEn_US:5601-25701:2924:66000::x11menus:71F0189 C26084C:Selective Fix:For use on AIX V3.2 only:
+X11mEn_USR5:5601-25701:2924:66000::x11menus:71F0189 C26084C:Selective Fix:For use on AIX V3.2 only:
+X11mNl_BE:5601-25701:2963:67000::x11mnlbe::Selective Fix:For use on AIX V3.2 only:
+X11mFr_FR:5601-25701:2928:68000::x11mfrfr:99A0063 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+X11mDe_DE:5601-25701:2929:69000::x11mdede::Selective Fix:For use on AIX V3.2 only:
+X11mIt_IT:5601-25701:2932:70000::x11mitit:99A0065 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+X11mJa_JP:5601-25701:2962:71000::x11mjajp::Selective Fix:For use on AIX V3.2 only:
+X11mNo_NO:5601-25701:2933:72000::x11mnono:99A0067 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+X11mEs_ES:5601-25701:2931:73000::x11meses::Selective Fix:For use on AIX V3.2 only:
+X11mSv_SE:5601-25701:2937:74000::x11msvse::Selective Fix:For use on AIX V3.2 only:
+X11deviEn_US:5601-25701:2924:75000::x11devi.enus:02G7480 C26084K:Selective Fix:For use on AIX V3.2 only:
+X11u:5601-25701:5005:76000::x11u:02G7479 C26084K:Selective Fix:For use on AIX V3.2 only:
+X11lu:5601-25701:5006:77000::x11lu:02G7476 C26084K:Selective Fix:For use on AIX V3.2 only:
+X11rteu:5601-25701:0000:78000::x11rteu::Selective Fix:For use on AIX V3.2 only:
+X11devu:5601-25701:0000:79000::x11devu::Selective Fix:For use on AIX V3.2 only:
+X11mEn_USu:5601-25701:2924:80000::x11menus.u::Selective Fix:For use on AIX V3.2 only:
+X11mNl_BEu:5601-25701:2963:81000::x11mnlbe.u::Selective Fix:For use on AIX V3.2 only:
+X11mFr_FRu:5601-25701:2928:82000::x11mfrfr.u::Selective Fix:For use on AIX V3.2 only:
+X11mDe_DEu:5601-25701:2929:83000::x11mdede.u::Selective Fix:For use on AIX V3.2 only:
+X11mIt_ITu:5601-25701:2932:84000::x11mi.titu::Selective Fix:For use on AIX V3.2 only:
+X11mJa_JPu:5601-25701:2962:85000::x11mjajp.u::Selective Fix:For use on AIX V3.2 only:
+X11mNo_NOu:5601-25701:2933:86000::x11mnono.u::Selective Fix:For use on AIX V3.2 only:
+X11mEs_ESu:5601-25701:2931:87000::x11meses.u::Selective Fix:For use on AIX V3.2 only:
+X11mSv_SEu:5601-25701:2937:88000::x11msvse.u::Selective Fix:For use on AIX V3.2 only:
+X11fnt:5601-25701:2937:89000::x11fnt::Selective Fix:For use on AIX V3.2 only:
+X11fntR5:5601-25701:2937:89000::x11fnt::Selective Fix:For use on AIX V3.2 only:
+X11fntu:5601-25701:2937:90000::x11fntu::Selective Fix:For use on AIX V3.2 only:
+X11_3d:5601-25701:5005:91000::x113d::Selective Fix:For use on AIX V3.2 only:
+X11_3diEn_US:5601-25701:2924:92000::x113di.enus:02G7480 C26084K:Selective Fix:For use on AIX V3.2 only:
+X11_3du:5601-25701:5005:93000::x113du::Selective Fix:For use on AIX V3.2 only:
+aic:5756-02700:1234:94000::aic::Selective Fix:For use on AIX V3.2 only:
+aicu:5756-02700:1234:95000::aicu::Selective Fix:For use on AIX V3.2 only:
+aicmEn_US:5756-02700:1234:96000::aicmenus::Selective Fix:For use on AIX V3.2 only:
+aicmNl_BE:5756-02700:1234:97000::aicmnlbe::Selective Fix:For use on AIX V3.2 only:
+aicmFr_FR:5756-02700:1234:98000::aicmfrfr::Selective Fix:For use on AIX V3.2 only:
+aicmEs_ES:5756-02700:1234:99000::aicmeses::Selective Fix:For use on AIX V3.2 only:
+aicmEn_USu:5756-02700:1234:100000::aicmenus.u::Selective Fix:For use on AIX V3.2 only:
+aicmNl_BEu:5756-02700:1234:101000::aicmnlbe.u::Selective Fix:For use on AIX V3.2 only:
+aicmFr_FRu:5756-02700:1234:102000::aicmfrfr.u::Selective Fix:For use on AIX V3.2 only:
+aicmEs_ESu:5756-02700:1234:103000::aicmeses.u::Selective Fix:For use on AIX V3.2 only:
+cobolcmp:5601-25801:5005:104000::cobolcmp::Selective Fix:For use on AIX V3.2 only:
+cobolrte:5601-25901:5005:105000::cobolrte::Selective Fix:For use on AIX V3.2 only:
+cobolrtemEn_US:5601-25901:2924:106000::cobolrte.menus:71F1329 C26084C:Selective Fix:For use on AIX V3.2 only:
+cobolrtemFr_FR:5601-25901:2928:107000::cobolrte.mfrfr:99A0084 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+cobolrtemFr_CF:5601-25901:2928:108000::cobolrte.mfrcf:99A0084 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+cobolrtemJp_JP:5601-25901:2928:109000::cobolrte.mjpjp:99A0084 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+cobolrtemSp_SP:5601-25901:2931:110000::cobolrte.mspsp::Selective Fix:For use on AIX V3.2 only:
+cobolcmpu:5601-25801:5005:111000::cobolcmp.u::Selective Fix:For use on AIX V3.2 only:
+cobolcmpuu:5601-25801:0000:112000::cobolcmp.uu::Selective Fix:For use on AIX V3.2 only:
+cobolrteu:5601-25901:5005:113000::cobolrte.u::Selective Fix:For use on AIX V3.2 only:
+cobolrteuu:5601-25901:0000:114000::cobolrte.uu::Selective Fix:For use on AIX V3.2 only:
+cobolrtemEn_USu:5601-25901:2924:115000::cobolrte.menusu::Selective Fix:For use on AIX V3.2 only:
+cobolrtemFr_FRu:5601-25901:2928:116000::cobolrte.mfrfru::Selective Fix:For use on AIX V3.2 only:
+cobolrtemFr_CFu:5601-25901:2928:117000::cobolrte.mfrcfu::Selective Fix:For use on AIX V3.2 only:
+cobolrtemJp_JPu:5601-25901:2962:118000::cobolrte.mjpjpu::Selective Fix:For use on AIX V3.2 only:
+cobolrtemSp_SPu:5601-25901:2931:119000::cobolrte.mspspu::Selective Fix:For use on AIX V3.2 only:
+em78:5601-25601:5005:120000::em78:71F1329 C26084C:Selective Fix:For use on AIX V3.2 only:
+em78mEn_US:5601-25601:2924:121000::em78menu.s:71F1330 C26084C:Selective Fix:For use on AIX V3.2 only:
+em78mNl_BE:5601-25601:2963:122000::em78mnlb.e::Selective Fix:For use on AIX V3.2 only:
+em78mFr_FR:5601-25601:2928:123000::em78mfrf.r:99A0095 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+em78mDe_DE:5601-25601:2932:124000::em78mded.e::Selective Fix:For use on AIX V3.2 only:
+em78mIt_IT:5601-25601:2932:125000::em78mi.tit:99A0096 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+em78mEs_ES:5601-25601:2931:126000::em78mese.s::Selective Fix:For use on AIX V3.2 only:
+em78mSv_SE:5601-25601:2937:127000::em78msvs.e::Selective Fix:For use on AIX V3.2 only:
+em78u:5601-25601:5005:128000::em78u:02G7481 C26084K:Selective Fix:For use on AIX V3.2 only:
+em78uu:5601-25601:0000:129000::em78uu::Selective Fix:For use on AIX V3.2 only:
+em78mEn_USu:5601-25601:2924:130000::em78menu.su::Selective Fix:For use on AIX V3.2 only:
+em78mNl_BEu:5601-25601:2963:131000::em78mnlb.eu::Selective Fix:For use on AIX V3.2 only:
+em78mFr_FRu:5601-25601:2928:132000::em78mfrf.ru::Selective Fix:For use on AIX V3.2 only:
+em78mDe_DEu:5601-25601:2932:133000::em78mded.eu::Selective Fix:For use on AIX V3.2 only:
+em78mIt_ITu:5601-25601:2932:134000::em78mi.titu::Selective Fix:For use on AIX V3.2 only:
+em78mEs_ESu:5601-25601:2931:135000::em78mese.su::Selective Fix:For use on AIX V3.2 only:
+em78mSv_SEu:5601-25601:2937:136000::em78msvs.eu::Selective Fix:For use on AIX V3.2 only:
+hcon:5601-26001:5005:137000::hcon:02G7482 C26084K:Selective Fix:For use on AIX V3.2 only:
+hconmEn_US:5601-26001:2924:138000::hconmenu.s:02G7483 C26084K:Selective Fix:For use on AIX V3.2 only:
+hconmNl_BE:5601-26001:2963:139000::hconmnlb.e::Selective Fix:For use on AIX V3.2 only:
+hconmFr_FR:5601-26001:2928:140000::hconmfrf.r:99A0105 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+hconmDe_DE:5601-26001:2929:141000::hconmded.e::Selective Fix:For use on AIX V3.2 only:
+hconmIt_IT:5601-26001:2932:142000::hconmi.tit:99A0107 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+hconmJa_JP:5601-26001:2962:143000::hconmjaj.p::Selective Fix:For use on AIX V3.2 only:
+hconmEs_ES:5601-26001:2931:144000::hconmese.s::Selective Fix:For use on AIX V3.2 only:
+hconmSv_SE:5601-26001:2937:145000::hconmsvs.e::Selective Fix:For use on AIX V3.2 only:
+hconu:5601-26001:5005:146000::hconu:02G7484 C26084K:Selective Fix:For use on AIX V3.2 only:
+hconuu:5601-26001:0000:147000::hconuu::Selective Fix:For use on AIX V3.2 only:
+hconmEn_USu:5601-26001:2924:148000::hconmenu.su::Selective Fix:For use on AIX V3.2 only:
+hconmNl_BEu:5601-26001:2963:149000::hconmnlb.eu::Selective Fix:For use on AIX V3.2 only:
+hconmFr_FRu:5601-26001:2928:150000::hconmfrf.ru::Selective Fix:For use on AIX V3.2 only:
+hconmDe_DEu:5601-26001:2929:151000::hconmded.eu::Selective Fix:For use on AIX V3.2 only:
+hconmIt_ITu:5601-26001:2932:152000::hconmi.titu::Selective Fix:For use on AIX V3.2 only:
+hconmJa_JPu:5601-26001:2962:153000::hconmjaj.pu::Selective Fix:For use on AIX V3.2 only:
+hconmEs_ESu:5601-26001:2931:154000::hconmese.su::Selective Fix:For use on AIX V3.2 only:
+hconmSv_SEu:5601-26001:2937:155000::hconmsvs.eu::Selective Fix:For use on AIX V3.2 only:
+icraft:5696-10800:1234:156000::icraft::Selective Fix:For use on AIX V3.2 only:
+icraftmEn_US:5696-10800:1234:157000::icraftme.nus::Selective Fix:For use on AIX V3.2 only:
+icraftu:5696-10800:1234:158000::icraftu::Selective Fix:For use on AIX V3.2 only:
+icraftuu:5696-10800:1234:159000::icraftuu::Selective Fix:For use on AIX V3.2 only:
+icraftmEn_USu:5696-10800:1234:160000::icraftme.nusu::Selective Fix:For use on AIX V3.2 only:
+netware:5696-23600:1234:161000::netware::Selective Fix:For use on AIX V3.2 only:
+netwareu:5696-23600:1234:162000::netwareu::Selective Fix:For use on AIX V3.2 only:
+pcsim:5601-26301:5005:163000::pcsim:71F1323 C26084C:Selective Fix:For use on AIX V3.2 only:
+pcsimmEn_US:5601-26301:2924:164000::pcsi.mmenus:71F1324 C26084C:Selective Fix:For use on AIX V3.2 only:
+pcsimmNl_BE:5601-26301:2963:165000::pcsi.mmnlbe::Selective Fix:For use on AIX V3.2 only:
+pcsimmFr_FR:5601-26301:2928:166000::pcsi.mmfrfr:99A0117 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+pcsimmDe_DE:5601-26301:2928:167000::pcsi.mmdede::Selective Fix:For use on AIX V3.2 only:
+pcsimmIt_IT:5601-26301:2932:168000::pcsi.mmitit:99A0118 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+pcsimmNo_NO:5601-26301:2933:169000::pcsi.mmnono:99A0120 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+pcsimmEs_ES:5601-26301:2931:170000::pcsi.mmeses::Selective Fix:For use on AIX V3.2 only:
+pcsimu:5601-26301:5005:171000::pcsimu:02G7486 C26084K:Selective Fix:For use on AIX V3.2 only:
+pcsimuu:5601-26301:0000:172000::pcsimuu::Selective Fix:For use on AIX V3.2 only:
+pcsimmEn_USu:5601-26301:2924:173000::pcsi.mmenusu::Selective Fix:For use on AIX V3.2 only:
+pcsimmNl_BEu:5601-26301:2963:174000::pcsi.mmnlbeu::Selective Fix:For use on AIX V3.2 only:
+pcsimmFr_FRu:5601-26301:2928:175000::pcsi.mmfrfru::Selective Fix:For use on AIX V3.2 only:
+pcsimmDe_DEu:5601-26301:2928:176000::pcsi.mmdedeu::Selective Fix:For use on AIX V3.2 only:
+pcsimmIt_ITu:5601-26301:2932:177000::pcsi.mmititu::Selective Fix:For use on AIX V3.2 only:
+pcsimmNo_NOu:5601-26301:2933:178000::pcsi.mmnonou::Selective Fix:For use on AIX V3.2 only:
+pcsimmEs_ESu:5601-26301:2931:179000::pcsi.mmesesu::Selective Fix:For use on AIX V3.2 only:
+sna:5601-28701:5005:180000::sna:71F1320 C26084C:Selective Fix:For use on AIX V3.2 only:
+snamEn_US:5601-28701:2924:181000::snamenus:71F1321 C26084C:Selective Fix:For use on AIX V3.2 only:
+snamNl_BE:5601-28701:2924:182000::snamnlbe::Selective Fix:For use on AIX V3.2 only:
+snamFr_FR:5601-28701:2924:183000::snamfrfr::Selective Fix:For use on AIX V3.2 only:
+snamJa_JP:5601-28701:2962:184000::snamjajp::Selective Fix:For use on AIX V3.2 only:
+snamEs_ES:5601-28701:2931:185000::snameses::Selective Fix:For use on AIX V3.2 only:
+snamSv_SE:5601-28701:2931:186000::snamsvse::Selective Fix:For use on AIX V3.2 only:
+snau:5601-28701:5005:187000::snau:02G7487 C26084K:Selective Fix:For use on AIX V3.2 only:
+snauu:5601-28701:0000:188000::snauu::Selective Fix:For use on AIX V3.2 only:
+snamEn_USu:5601-28701:2924:189000::snamenus.u::Selective Fix:For use on AIX V3.2 only:
+snamNl_BEu:5601-28701:2962:190000::snamnlbe.u::Selective Fix:For use on AIX V3.2 only:
+snamFr_FRu:5601-28701:2962:191000::snamfrfr.u::Selective Fix:For use on AIX V3.2 only:
+snamJa_JPu:5601-28701:2962:192000::snamjajp.u::Selective Fix:For use on AIX V3.2 only:
+snamEs_ESu:5601-28701:2931:193000::snameses.u::Selective Fix:For use on AIX V3.2 only:
+snamSv_SEu:5601-28701:2931:194000::snamsvse.u::Selective Fix:For use on AIX V3.2 only:
+netmgr:5601-25301:5005:195000::netmgr:71F0173 C26084C:Selective Fix:For use on AIX V3.2 only:
+netmgrmEn_US:5601-25301:2924:196000::netmgrme.nus::Selective Fix:For use on AIX V3.2 only:
+netmgru:5601-25301:5005:197000::netmgru:02G7485 C26084K:Selective Fix:For use on AIX V3.2 only:
+netmgruu:5601-25301:0000:198000::netmgruu::Selective Fix:For use on AIX V3.2 only:
+netmgrmEn_USu:5601-25301:2924:199000::netmgrme.nusu::Selective Fix:For use on AIX V3.2 only:
+vdi:5601-38601:5005:200000::vdi::Selective Fix:For use on AIX V3.2 only:
+vdimEn_US:5601-38601:2924:201000::vdimenus::Selective Fix:For use on AIX V3.2 only:
+vdimNl_BE:5601-38601:2963:202000::vdimnlbe::Selective Fix:For use on AIX V3.2 only:
+vdimFr_FR:5601-38601:2928:203000::vdimfrfr:99A0127 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+vdimEs_ES:5601-38601:2931:204000::vdimeses::Selective Fix:For use on AIX V3.2 only:
+vdiu:5601-38601:5005:205000::vdiu::Selective Fix:For use on AIX V3.2 only:
+vdiuu:5601-38601:0000:206000::vdiuu::Selective Fix:For use on AIX V3.2 only:
+vdimEn_USu:5601-38601:2924:207000::vdi.menusu::Selective Fix:For use on AIX V3.2 only:
+vdimNl_BEu:5601-38601:2963:208000::vdi.mnlbeu::Selective Fix:For use on AIX V3.2 only:
+vdimFr_FRu:5601-38601:2928:209000::vdi.mfrfru::Selective Fix:For use on AIX V3.2 only:
+vdimEs_ESu:5601-38601:2931:210000::vdi.mesesu::Selective Fix:For use on AIX V3.2 only:
+vdigft:5601-38601:2931:211000::vdigft::Selective Fix:For use on AIX V3.2 only:
+vdigftmEn_US:5601-38601:2931:212000::vdi.gftmenus::Selective Fix:For use on AIX V3.2 only:
+vdigftmNl_BE:5601-38601:2931:213000::vdi.gftmnlbe::Selective Fix:For use on AIX V3.2 only:
+vdigftmFr_FR:5601-38601:2931:214000::vdi.gftmfrfr::Selective Fix:For use on AIX V3.2 only:
+vdigftmEs_ES:5601-38601:2931:215000::vdi.gftmeses::Selective Fix:For use on AIX V3.2 only:
+vdigftmEn_USu:5601-38601:2931:216000::vdigftme.nusu::Selective Fix:For use on AIX V3.2 only:
+vdigftmNl_BEu:5601-38601:2931:217000::vdigftmn.lbeu::Selective Fix:For use on AIX V3.2 only:
+vdigftmFr_FRu:5601-38601:2931:218000::vdigftmf.rfru::Selective Fix:For use on AIX V3.2 only:
+vdigftmEs_ESu:5601-38601:2931:219000::vdigftme.sesu::Selective Fix:For use on AIX V3.2 only:
+vdiplot:5601-38601:2931:220000::vdiplot::Selective Fix:For use on AIX V3.2 only:
+vdiplotmEn_US:5601-38601:2931:221000::vdiplotm.enus::Selective Fix:For use on AIX V3.2 only:
+vdiplotu:5601-38601:2931:222000::vdiplotu::Selective Fix:For use on AIX V3.2 only:
+vdiplotmEn_USu:5601-38601:2931:223000::vdiplotm.enusu::Selective Fix:For use on AIX V3.2 only:
+x_st_mgr:5601-45701:5005:224000::xstmgr:00G1348 C26084K:Selective Fix:For use on AIX V3.2 only:
+x_st_mgrR5:5601-45701:5005:224000::xstmgr:00G1348 C26084K:Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmEn_US:5601-45701:2924:225000::xstmgrme.nus:00G1349 C26084K:Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmNl_BE:5601-45701:2963:226000::xstmgrmn.lbe::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmFr_FR:5601-45701:2928:227000::xstmgrmf.rfr:99A0180 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmDe_DE:5601-45701:2929:228000::xstmgrmd.ede::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmIt_IT:5601-45701:2932:229000::xstmgrmi.tit:99A0182 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmNo_NO:5601-45701:2933:230000::xstmgrmn.ono:99A0183 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmEs_ES:5601-45701:2931:231000::xstmgrme.ses::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmSv_SE:5601-45701:2937:232000::xstmgrms.vse::Selective Fix:For use on AIX V3.2 only:
+x_st_mgru:5601-45701:5005:233000::xstmgru:00G1350 C26084K:Selective Fix:For use on AIX V3.2 only:
+x_st_mgruu:5601-45701:0000:234000::xstmgruu::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmEn_USu:5601-45701:2924:235000::xstmgrme.nusu::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmNl_BEu:5601-45701:2963:236000::xstmgrmn.lbeu::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmFr_FRu:5601-45701:2928:237000::xstmgrmf.rfru::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmDe_DEu:5601-45701:2929:238000::xstmgrmd.edeu::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmIt_ITu:5601-45701:2932:239000::xstmgrmi.titu::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmNo_NOu:5601-45701:2933:240000::xstmgrmn.onou::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmEs_ESu:5601-45701:2931:241000::xstmgrme.sesu::Selective Fix:For use on AIX V3.2 only:
+x_st_mgrmSv_SEu:5601-45701:2937:242000::xstmgrms.vseu::Selective Fix:For use on AIX V3.2 only:
+xlfrte:5601-24801:5005:243000::xlfrte:71F0181 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlfcmp:5601-24801:5005:244000::xlfcmp:71F0180 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlfrtemEn_US:5601-24801:2924:245000::xlfrteme.nus:71F0184 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_FR:5601-24801:2928:246000::xlfrtemf.rfr:99A0136 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_CF:5601-24801:2928:247000::xlfrtemf.rcf:99A0136 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlfrtemJp_JP:5601-24801:2962:248000::xlfrtemj.pjp::Selective Fix:For use on AIX V3.2 only:
+xlfrtemSp_SP:5601-24801:2931:249000::xlfrtems.psp::Selective Fix:For use on AIX V3.2 only:
+xlfcmpmEn_US:5601-24801:2924:250000::xlfcmpme.nus:71F0183 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlfcmpmJp_JP:5601-24801:2962:251000::xlfcmpmj.pjp::Selective Fix:For use on AIX V3.2 only:
+xlfrteu:5601-24801:5005:252000::xlfrteu:02G7490 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmpu:5601-24801:5005:253000::xlfcmpu:02G7489 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfrteuu:5601-24801:0000:254000::xlfrteuu::Selective Fix:For use on AIX V3.2 only:
+xlfcmpuu:5601-24801:0000:255000::xlfcmpuu::Selective Fix:For use on AIX V3.2 only:
+xlfrtemEn_USu:5601-24801:2924:256000::xlfrteme.nusu::Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_FRu:5601-24801:2928:257000::xlfrtemf.rfru::Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_CFu:5601-24801:2928:258000::xlfrtemf.rcfu:99A0136 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlfrtemJp_JPu:5601-24801:2962:259000::xlfrtemj.pjpu::Selective Fix:For use on AIX V3.2 only:
+xlfrtemSp_SPu:5601-24801:2931:260000::xlfrtems.pspu::Selective Fix:For use on AIX V3.2 only:
+xlfcmpmEn_USu:5601-24801:2924:261000::xlfcmpme.nusu::Selective Fix:For use on AIX V3.2 only:
+xlfcmpmJp_JPu:5601-24801:2962:262000::xlfcmpmj.pjpu::Selective Fix:For use on AIX V3.2 only:
+xlfrte2:5765-01901:5005:263000::xlfrte2:00G1355 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmp2:5765-01801:5005:264000::xlfcmp2:00G1354 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmpmEn_US2:5765-01801:2924:265000::xlfcmpme.nus2:00G1356 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmpmJp_JP2:5765-01801:2962:266000::xlfcmpmj.pjp2::Selective Fix:For use on AIX V3.2 only:
+xlfrtemEn_US2:5765-01901:2924:267000::xlfrteme.nus2:00G1357 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_FR2:5765-01901:2928:268000::xlfrtemf.rfr2:99A0201 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_CF2:5765-01901:2981:269000::xlfrtemf.rcf2::Selective Fix:For use on AIX V3.2 only:
+xlfrtemJp_JP2:5765-01901:2962:270000::xlfrtemj.pjp2::Selective Fix:For use on AIX V3.2 only:
+xlfrtemSp_SP2:5765-01901:2931:271000::xlfrtems.psp2:99A0201 ICRBLNV:Selective Fix:For use on AIX V3.2 only:
+xlfcmpiEn_US2:5757-01800:2924:272000::xlfcmpi.enus2:00G1358 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfrte2u:5765-01901:5005:273000::xlfrte2u:00G1359 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmp2u:5765-01801:5005:274000::xlfcmp2u:02G7147 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmp2uu:5765-01801:5005:275000::xlfcmp2u.u:00G1354 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmpmEn_US2u:5765-01801:2924:276000::xlfcmpme.nus2u:00G1356 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfcmpmJp_JP2u:5765-01801:2962:277000::xlfcmpmj.pjp2u::Selective Fix:For use on AIX V3.2 only:
+xlfrte2uu:5765-01901:5005:278000::xlfrte2u.u:00G1355 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfrtemEn_US2u:5765-01901:2924:279000::xlfrteme.nus2u:00G1357 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_FR2u:5765-01901:2928:280000::xlfrtemf.rfr2u:99A0201 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlfrtemFr_CF2u:5765-01901:2981:281000::xlfrtemf.rcf2u::Selective Fix:For use on AIX V3.2 only:
+xlfrtemJp_JP2u:5765-01901:2962:282000::xlfrtemj.pjp2u::Selective Fix:For use on AIX V3.2 only:
+xlfrtemSp_SP2u:5765-01901:2931:283000::xlfrtems.psp2u::Selective Fix:For use on AIX V3.2 only:
+xlprte:5601-25401:5005:284000::xlprte:71F1333 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlpcmp:5601-25401:5005:285000::xlpcmp:71F1332 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlprtemEn_US:5601-25401:2924:286000::xlprteme.nus:71F0177 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlprtemFr_FR:5601-25401:2928:287000::xlprtemf.rfr:99A0178 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlprtemFr_CF:5601-25401:2928:288000::xlprtemf.rcf:99A0178 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlprtemJp_JP:5601-25401:2962:289000::xlprtemj.pjp::Selective Fix:For use on AIX V3.2 only:
+xlprtemSp_SP:5601-25401:2931:290000::xlprtems.psp::Selective Fix:For use on AIX V3.2 only:
+xlpcmpmEn_US:5601-25401:2924:291000::xlpcmpme.nus:71F0176 C26084C:Selective Fix:For use on AIX V3.2 only:
+xlpcmpiEn_US:5601-25401:2924:292000::xlpcmpi.enus:02G7491 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlpcmpmJp_JP:5601-25401:5962:293000::xlpcmpmj.pjp::Selective Fix:For use on AIX V3.2 only:
+xlprteu:5601-25401:5005:294000::xlprteu:02G7528 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlprteuu:5601-25401:0000:295000::xlprteuu::Selective Fix:For use on AIX V3.2 only:
+xlpcmpu:5601-25401:5005:296000::xlpcmpu:02G7492 C26084K:Selective Fix:For use on AIX V3.2 only:
+xlpcmpuu:5601-25401:0000:297000::xlpcmpuu::Selective Fix:For use on AIX V3.2 only:
+xlprtemEn_USu:5601-25401:2924:298000::xlprteme.nusu::Selective Fix:For use on AIX V3.2 only:
+xlprtemFr_FRu:5601-25401:2928:299000::xlprtemf.rfru::Selective Fix:For use on AIX V3.2 only:
+xlprtemFr_CFu:5601-25401:2928:300000::xlprtemf.rcfu:99A0178 ICRBNLV:Selective Fix:For use on AIX V3.2 only:
+xlprtemJp_JPu:5601-25401:2962:301000::xlprtemj.pjpu::Selective Fix:For use on AIX V3.2 only:
+xlprtemSp_SPu:5601-25401:2931:302000::xlprtems.pspu::Selective Fix:For use on AIX V3.2 only:
+xlpcmpmEn_USu:5601-25401:2924:303000::xlpcmpme.nusu::Selective Fix:For use on AIX V3.2 only:
+xlpcmpmJp_JPu:5601-25401:2962:304000::xlpcmpmj.pjpu::Selective Fix:For use on AIX V3.2 only:
+cadam:5756-09401:5086:305000::cadam::Selective Fix:For use on AIX V3.2 only:
+cadamt:5756-09401:5086:306000::cadamt::Selective Fix:For use on AIX V3.2 only:
+pciue:5756-09501:5095:307000::pciue::Selective Fix:For use on AIX V3.2 only:
+pcmch:5756-09301:5061:308000::pcmch::Selective Fix:For use on AIX V3.2 only:
+pcmfg:5756-09201:5061:309000::pcmfg::Selective Fix:For use on AIX V3.2 only:
+pcsurf:5756-09101:5061:310000::pcsurf::Selective Fix:For use on AIX V3.2 only:
+pcisd:5756-09601:5061:311000::pcisd::Selective Fix:For use on AIX V3.2 only:
+cbds:5756-07701:0000:312000::cbds::Selective Fix:For use on AIX V3.2 only:
+cbdsdb:5756-07701:0000:313000::cbdsdb::Selective Fix:For use on AIX V3.2 only:
+cbdslog:5756-07801:0000:314000::cbdslog::Selective Fix:For use on AIX V3.2 only:
+cbdsphys:5756-07901:0000:315000::cbdsphys::Selective Fix:For use on AIX V3.2 only:
+catiabas:5612-10101:0000:316000::catiabas::Selective Fix:For use on AIX V3.2 only:
+catiainf:5612-10301:0000:317000::catiainf::Selective Fix:For use on AIX V3.2 only:
+catiadra:5612-10401:0000:318000::catiadra::Selective Fix:For use on AIX V3.2 only:
+catia3dd:5612-10501:0000:319000::catia3dd::Selective Fix:For use on AIX V3.2 only:
+catiancl:5612-10801:0000:320000::catiancl::Selective Fix:For use on AIX V3.2 only:
+catiasol:5612-10701:0000:321000::catiasol::Selective Fix:For use on AIX V3.2 only:
+catiancm:5612-10901:0000:322000::catiancm::Selective Fix:For use on AIX V3.2 only:
+catiakin:5612-11101:0000:323000::catiakin::Selective Fix:For use on AIX V3.2 only:
+catiarob:5612-11201:0000:324000::catiarob::Selective Fix:For use on AIX V3.2 only:
+catiasld:5612-11601:0000:325000::catiasld::Selective Fix:For use on AIX V3.2 only:
+catiafem:5612-11801:0000:326000::catiafem::Selective Fix:For use on AIX V3.2 only:
+adarte:5706-29401:0000:327000::adarte::Selective Fix:For use on AIX V3.2 only:
+adacmp:5706-29101:0000:328000::adacmp::Selective Fix:For use on AIX V3.2 only:
+adarteu:5706-29401:0000:329000::adarteu::Selective Fix:For use on AIX V3.2 only:
+adacmpu:5706-29101:0000:330000::adacmpu::Selective Fix:For use on AIX V3.2 only:
+adaiEn_US:5706-29101:0000:331000::adaienus::Selective Fix:For use on AIX V3.2 only:
+osimf:5756-08501:0000:332000::osimf::Selective Fix:For use on AIX V3.2 only:
+osimfu:5756-08501:0000:333000::osimfu::Selective Fix:For use on AIX V3.2 only:
+essl14:5621-06001:0000:334000::essl14::Selective Fix:For use on AIX V3.2 only:
+fddi:5756-03001:5005:::fddi::Selective Fix:For use on AIX V3.2 only:
+blkmux:5756-03001:5055:::blkmux::Selective Fix:For use on AIX V3.2 only:
+dcebase:5765-00117:4161:::dcebase::Selective Fix:For use on AIX V3.2 only:
+dcepriv:5765-00117:5053:::dcepriv::Selective Fix:For use on AIX V3.2 only:
+dcesec:5765-00118:0000:::dcesec::Selective Fix:For use on AIX V3.2 only:
+dcecds:5765-00119:0000:::dcecds::Selective Fix:For use on AIX V3.2 only:
+encExec:5765-00117:4160:::encExec::Selective Fix:For use on AIX V3.2 only:
+encServ:5696-00240:0000:::encServ::Selective Fix:For use on AIX V3.2 only:
+encMon:5696-00239:0000:::encMon::Selective Fix:For use on AIX V3.2 only:
+encSfs:5696-00237:0000:::encSfs::Selective Fix:For use on AIX V3.2 only:
+ppcExec:5696-00238:0000:::ppcExec:Selective Fix:For use on AIX V3.2 only:
+ppcGate:5696-00347:0000:::ppcGate::Selective Fix:For use on AIX V3.2 only:

@@ -1,0 +1,1028 @@
+# @(#)96  1.11  src/bos/objclass/POWER/rcs_sm_cmd_hdr.add, rcs, bos41B, 9506B 1/27/95 13:04:23
+# 
+#   COMPONENT_NAME: RCS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_cmd_hdr:
+	id = "RCS_chgslipc"
+	option_id = "RCS_chgslipcon"
+	has_name_select = ""
+	name = "Change / Show a SLIP Connection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 11
+	cmd_to_exec = "/usr/bin/chslip "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "/usr/bin/lsslip -c -n "
+	cmd_to_discover_postfix = "_rawname"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000033"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_chlnk_prof_sna_HCON"
+	option_id = "RCS__chlnk_prof_sna_HCON"
+	has_name_select = ""
+	name = "Change / Show an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 13
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 5"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 5 -n"
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_chlnk_prof_slip_HCON"
+	option_id = "RCS__chlnk_prof_slip_HCON"
+	has_name_select = ""
+	name = "Change / Show an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 13
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 4"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 4 -n"
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_chlnk_prof_slip_telnet"
+	option_id = "RCS__chlnk_prof_slip_telnet"
+	has_name_select = ""
+	name = "Change / Show an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 13
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 4"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 4 -n"
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_chlnk_prof_tcp_telnet"
+	option_id = "RCS__chlnk_prof_tcp_telnet"
+	has_name_select = ""
+	name = "Change / Show an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 13
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 3"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 3 -n"
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_chlnk_prof_tcp_HCON"
+	option_id = "RCS__chlnk_prof_tcp_HCON"
+	has_name_select = ""
+	name = "Change / Show an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 13
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 3"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 3 -n"
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_makeconnection"
+	option_id = "RCS__makeconnection"
+	has_name_select = ""
+	name = "Connect a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 15
+	cmd_to_exec = "/usr/bin/slipcomm -p$$ -c "
+	ask = ""
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000040"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_disconnslip"
+	option_id = "RCS__disconnslip"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "/usr/bin/slipcomm -p$$ -d "
+	ask = ""
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_lsslip"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "/usr/bin/lsslip -a | cut -d ':' -f1,2 | sed 's/:/ /g' | sort"
+	ask = ""
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ibmprof_logon_slip_HCON"
+	option_id = "RCS__ibmprof_logon_slip_HCON"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "e() \n\
+{ \n\
+e789 $@ \n\
+dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+read x \n\
+} \n\
+e "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "x() \n\
+{ \n\
+echo \"#Sessions\"\n\
+echo `lsusrprof -l -n $1 -t4 | cut -d ':' -f6 | sed 's/ //g'` \n\
+} \n\
+x "
+	cmd_to_discover_postfix = "ibmprof_user_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ibmprof_logon_slip_telnet"
+	option_id = "RCS__ibmprof_logon_slip_telnet"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "tn_ibmlink() \n\
+{ \n\
+/usr/bin/ckwinsiz \n\
+if [ $? -ne 0 ] \n\
+then \n\
+	dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+	read x \n\
+exit 1 \n\
+fi \n\
+telnet $@ \n\
+} \n\
+tn_ibmlink "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "x() \n\
+{ \n\
+echo \"#hostname:\" \n\
+echo `lsusrprof -l -n $1 -t4 | cut -d ':' -f5` \n\
+} \n\
+x "
+	cmd_to_discover_postfix = "ibmprof_user_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ibmprof_logon_tcp_telnet"
+	option_id = "RCS__ibmprof_logon_tcp_telnet"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "tn_ibmlink() \n\
+{ \n\
+/usr/bin/ckwinsiz \n\
+if [ $? -ne 0 ] \n\
+then \n\
+	dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+	read x \n\
+exit 1 \n\
+fi \n\
+telnet $@ \n\
+} \n\
+tn_ibmlink "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "x() \n\
+{ \n\
+echo \"#hostname:\" \n\
+echo `lsusrprof -l -n $1 -t3 | cut -d ':' -f5` \n\
+} \n\
+x "
+	cmd_to_discover_postfix = "ibmprof_user_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ibmprof_logon_tcp_HCON"
+	option_id = "RCS__ibmprof_logon_tcp_HCON"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "login_HCON() \n\
+{ \n\
+e789 $@ \n\
+dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+read x \n\
+} \n\
+login_HCON "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "x() \n\
+{ \n\
+echo \"#Sessions\"\n\
+echo `lsusrprof -l -n $1 -t3 | cut -d ':' -f6 | sed 's/ //g'` \n\
+} \n\
+x "
+	cmd_to_discover_postfix = "ibmprof_user_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ibmprof_logon_sna"
+	option_id = "RCS__ibmprof_logon_sna"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "login_sna() \n\
+{ \n\
+e789 $@ \n\
+dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+read x \n\
+} \n\
+login_sna "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "x() \n\
+{ \n\
+echo \"#Sessions\"\n\
+echo `lsusrprof -l -n $1 -t5 | cut -d ':' -f6 | sed 's/ //g'` \n\
+} \n\
+x "
+	cmd_to_discover_postfix = "ibmprof_user_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ibmprof_logon_snaHCON"
+	option_id = "RCS__ibmprof_logon_sna"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "login_sna_hcon() \n\
+{ \n\
+e789 $@ \n\
+dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+read x \n\
+} \n\
+login_sna_hcon "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "x() \n\
+{ \n\
+echo \"#Sessions\"\n\
+echo `lsusrprof -l -n $1 -t5 | cut -d ':' -f6 | sed 's/ //g'` \n\
+} \n\
+x "
+	cmd_to_discover_postfix = "ibmprof_user_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_sup6login_TCP/IP"
+	option_id = "RCS__sup6login_TCP/IP"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "login_tcpip() \n\
+{ \n\
+/usr/bin/slogin $@ \n\
+dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+read x  \n\
+} \n\
+login_tcpip "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "get_interface() \n\
+{ \n\
+INTERFACE=`lsusrprof -s -n $1 -t1 | cut -d ':' -f6` \n\
+if [ $INTERFACE = ascii ]  \n\
+then \n\
+	lsusrprof -s -n $1 -t1 -c \n\
+	exit 0 \n\
+fi \n\
+if [ \"$DISPLAY\" = \"$NULLVALUE\" ] \n\
+then \n\
+	dspmsg rcs.cat 85 'The DISPLAY environment variable is not set.\n\Please set it and try again.\n' \n\
+	exit 1 \n\
+fi \n\
+DISP=`echo $DISPLAY | cut -d':' -f1` \n\
+if [ \"$DISP\" = \"unix\" ] \n\
+then \n\
+	DISP_EXT=`echo $DISPLAY | cut -d ':' -f2` \n\
+	DISP=`host \\`hostname\\` | cut -d' ' -f1` \n\
+	FINALDISP=`echo $DISP#!:$DISP_EXT` \n\
+fi \n\
+if [ \"$DISP\" = \"$NULLVALUE\" ] \n\
+then \n\
+	DISP_EXT=`echo $DISPLAY | cut -d ':' -f2` \n\
+	SYSNAME=`host \\`hostname\\` | cut -d ' ' -f1` \n\
+	FINALDISP=`echo $SYSNAME#!:$DISP_EXT` \n\
+else \n\
+	DISP_EXT=`echo $DISPLAY | cut -d ':' -f2` \n\
+	DISP=`host $DISP | cut -d' ' -f1` \n\
+	FINALDISP=`echo $DISP#!:$DISP_EXT` \n\
+fi \n\
+USERINFO=`lsusrprof -s -n $1 -t1 | cut -d ':' -f4,5,8,9` \n\
+echo \\#Userid:Server:Custid:Password:Interface \n\
+echo $USERINFO:$FINALDISP \n\
+} \n\
+get_interface "
+	cmd_to_discover_postfix = "support_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_sup6login_SLIP"
+	option_id = "RCS__sup6login_SLIP"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "login_slip() \n\
+{ \n\
+/usr/bin/slogin $@ \n\
+dspmsg rcs.cat 41 'Press Enter to Continue.\n' \n\
+read x  \n\
+} \n\
+login_slip "
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = "get_interface() \n\
+{ \n\
+INTERFACE=`lsusrprof -s -n $1 -t2 | cut -d ':' -f6` \n\
+if [ $INTERFACE = ascii ]  \n\
+then \n\
+	lsusrprof -s -n $1 -t2 -c \n\
+	exit 0 \n\
+fi \n\
+if [ \"$DISPLAY\" = \"$NULLVALUE\" ] \n\
+then \n\
+	dspmsg rcs.cat 85 'The DISPLAY environment variable is not set.\n\Please set it and try again.\n' \n\
+	exit 1 \n\
+fi \n\
+DISP=`echo $DISPLAY | cut -d':' -f1` \n\
+if [ \"$DISP\" = \"unix\" ] \n\
+then \n\
+	DISP_EXT=`echo $DISPLAY | cut -d ':' -f2` \n\
+	DISP=`host \\`hostname\\` | cut -d' ' -f1` \n\
+	FINALDISP=`echo $DISP#!:$DISP_EXT` \n\
+fi \n\
+if [ \"$DISP\" = \"$NULLVALUE\" ] \n\
+then \n\
+	DISP_EXT=`echo $DISPLAY | cut -d ':' -f2` \n\
+	SYSNAME=`host \\`hostname\\` | cut -d ' ' -f1` \n\
+	FINALDISP=`echo $SYSNAME#!:$DISP_EXT` \n\
+else \n\
+	DISP_EXT=`echo $DISPLAY | cut -d ':' -f2` \n\
+	DISP=`host $DISP | cut -d' ' -f1` \n\
+	FINALDISP=`echo $DISP#!:$DISP_EXT` \n\
+fi \n\
+USERINFO=`lsusrprof -s -n $1 -t2 | cut -d ':' -f4,5,8,9` \n\
+echo \\#Userid:Server:Custid:Password:Interface \n\
+echo $USERINFO:$FINALDISP \n\
+} \n\
+get_interface "
+	cmd_to_discover_postfix = "support_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_mkslipc"
+	option_id = "RCS_mkslipcon"
+	has_name_select = ""
+	name = "Add a SLIP Connection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 2
+	cmd_to_exec = "/usr/bin/mkslip "
+	ask = ""
+	exec_mode = ""
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000032"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_mkusrprof_ibm_tcp_telnet"
+	option_id = "RCS__mkusrprof_ibm_tcp_telnet"
+	has_name_select = ""
+	name = "Add an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 5
+	cmd_to_exec = "/usr/bin/mkusrprof -m l -r 3 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_mkusrprof_ibm_tcp_HCON"
+	option_id = "RCS__mkusrprof_ibm_tcp_HCON"
+	has_name_select = ""
+	name = "Add an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 5
+	cmd_to_exec = "/usr/bin/mkusrprof -m l -r 3 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_mkprof_HCON"
+	option_id = "RCS_mkprof_hc"
+	has_name_select = ""
+	name = "Add an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 5
+	cmd_to_exec = "/usr/bin/mkusrprof -m l -r 5 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_mkusrprof_ibm_slip_telnet"
+	option_id = "RCS__mkusrprof_ibm_slip_telnet"
+	has_name_select = ""
+	name = "Add an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 5
+	cmd_to_exec = "/usr/bin/mkusrprof -m l -r 4 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_mkusrprof_ibm_slip_HCON"
+	option_id = "RCS__mkusrprof_ibm_slip_HCON"
+	has_name_select = ""
+	name = "Add an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 5
+	cmd_to_exec = "/usr/bin/mkusrprof -m l -r 4 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_reconfig_slip"
+	option_id = "RCS__reconfig_slip"
+	has_name_select = ""
+	name = "Reconfigure SLIP Addresses"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 42
+	cmd_to_exec = "/usr/bin/slipcomm -p$$ -r "
+	ask = ""
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "lsslip -c -n "
+	cmd_to_discover_postfix = "slip_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_removeslip"
+	option_id = "RCS_rm_this_slip"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "/usr/bin/rmslip -n "
+	ask = "y"
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_rmusrprof_3"
+	option_id = "RCS_rmusrprof3"
+	has_name_select = ""
+	name = "Remove an IBMLINK User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 50
+	cmd_to_exec = "/usr/bin/rmusrprof -m l "
+	ask = "y"
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_rmusrprof_4"
+	option_id = "RCS_rmusrprof4"
+	has_name_select = ""
+	name = "Remove an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 50
+	cmd_to_exec = "/usr/bin/rmusrprof -m l "
+	ask = "y"
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_rmusrprof_5"
+	option_id = "RCS_rmusrprof5"
+	has_name_select = ""
+	name = "Remove an IBMLINK User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 50
+	cmd_to_exec = "/usr/bin/rmusrprof -m l "
+	ask = "y"
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_startslip"
+	option_id = ""
+	has_name_select = ""
+	name = "Start the SLIP Connection Subsystem"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 59
+	cmd_to_exec = "startslip() \n\
+{ \n\
+USER=`id -u` \n\
+if [ $USER -ne 0 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+else \n\
+	/usr/bin/slipserver \n\
+fi \n\
+} \n\
+startslip"
+	ask = ""
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000036"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ok_to_stopslip_ask_NO"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Stops the SLIP Connection Subsystem"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	cmd_to_exec = ""
+	ask = ""
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ok_to_stopslip_ask_YES"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Stops the SLIP Connection Subsystem"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	cmd_to_exec = "killslip() \n\
+{ \n\
+USER=`id -u` \n\
+if [ $USER -ne 0 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+SLIP_PID=`ps -efa |grep /usr/bin/slipserver|grep -v grep|awk '{ print $2 }'` \n\
+if [ \"$SLIP_PID\" = \"$X\" ] \n\
+then \n\
+	dspmsg rcs.cat 26 'The SLIP Connection Subsystem is not running.\n' \n\
+	exit 1 \n\
+else \n\
+	kill -15 $SLIP_PID \n\
+	if [ $? -eq 0 ] \n\
+	then \n\
+		exit 0 \n\
+	else \n\
+		exit 1 \n\
+	fi \n\
+fi \n\
+} \n\
+killslip "
+	ask = ""
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000053"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_ok_to_stopslip"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Stops the SLIP Connection Subsystem"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	cmd_to_exec = "killslip() \n\
+{ \n\
+USER=`id -u` \n\
+if [ $USER -ne 0 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+SLIP_PID=`ps -efa |grep /usr/bin/slipserver|grep -v grep|awk '{ print $2 }'` \n\
+if [ \"$SLIP_PID\" = \"$X\" ] \n\
+then \n\
+	dspmsg rcs.cat 26 'The SLIP Connection Subsystem is not running.\n' \n\
+	exit 1 \n\
+else \n\
+	kill -15 $SLIP_PID \n\
+	if [ $? -eq 0 ] \n\
+	then \n\
+		exit 0 \n\
+	else \n\
+		exit 1 \n\
+	fi \n\
+fi \n\
+} \n\
+killslip "
+	ask = ""
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000053"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS__sub_sys_disconn_slip"
+	option_id = "RCS_sub_sys_disconn"
+	has_name_select = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	cmd_to_exec = "/usr/bin/slipcomm -p$$ -k "
+	ask = ""
+	exec_mode = "P"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_linkucfg_tcp_telnet"
+	option_id = "RCS__linkucfg_tcp_telnet"
+	has_name_select = ""
+	name = "IBMLink Configuration Options"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 31
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 3"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 3 -n "
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_linkucfg_slip_telnet"
+	option_id = "RCS__linkucfg_slip_tel"
+	has_name_select = ""
+	name = "IBMLink Configuration Options"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 31
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 4"
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 4 -n "
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_linkucfg_tcp_HCON"
+	option_id = "RCS__linkucfg_tcp_HCON"
+	has_name_select = ""
+	name = "IBMLink Configuration Options"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 31
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 3 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 3 -n "
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_linkucfg_slip_HCON"
+	option_id = "RCS__linkucfg_slip_HCON"
+	has_name_select = ""
+	name = "IBMLink Configuration Options"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 31
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 4 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 4 -n "
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "RCS_linkucfg_sna"
+	option_id = "RCS__linkucfg_sna"
+	has_name_select = ""
+	name = "IBMLink Configuration Options"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 31
+	cmd_to_exec = "/usr/bin/chusrprof -m l -r 5 "
+	ask = ""
+	exec_mode = "P"
+	ghost = ""
+	cmd_to_discover = "lsusrprof -l -c -t 5 -n "
+	cmd_to_discover_postfix = "rcss_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""

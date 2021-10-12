@@ -1,0 +1,214 @@
+* @(#)21        1.12  src/bos/objclass/POWER/msla.add, cfgmethods, bos411, 9428A410j 5/2/94 09:13:15
+*
+*   COMPONENT_NAME: SYSXMSLA
+*
+*   FUNCTIONS:
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = msla 
+	class = adapter 
+	subclass = mca 
+	prefix = msla
+	devid = 0x8787 
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x858
+	setno = 30
+	msgno = 1
+	catalog = devices.cat 
+	DvDr = ""
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgmsla
+	Change = "" 
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = "" 
+	Stop = ""
+	uniquetype = adapter/mca/msla 
+
+PdCn:
+	uniquetype = adapter/mca/msla
+	connkey = msla
+	connwhere = "0"
+
+PdAt:
+	uniquetype = adapter/mca/msla
+	attribute = bus_mem_addr
+	deflt = 0xea0000
+	values = 0x020000-0xff0000,0x10000
+	width = 0x10000
+	type = M
+	generic = D 
+	rep = nr 
+	nls_index = 2 
+ 
+PdAt:
+	uniquetype = adapter/mca/msla
+	attribute = bus_io_addr
+	deflt = 0x0e000
+ 	values = 0x00100-0xfe00,0x100
+	width = 0x100 
+	type = O 
+	generic = D  
+	rep = nl 
+	nls_index = 3 
+ 
+PdAt:
+	uniquetype = adapter/mca/msla
+	attribute = bus_intr_lvl
+	deflt = 10 
+	values ="3,4,5,6,7,9,10,11,12,14,15"
+	width = "" 
+	type = I 
+	generic = D 
+	rep = nl 
+	nls_index = 4 
+ 
+PdAt:
+	uniquetype = adapter/mca/msla
+	attribute = intr_priority 
+	deflt = 2 
+	values = 2
+	width = "" 
+	type = P  
+	generic = D  
+	rep = nl 
+	nls_index = 5 
+
+PdAt:
+	uniquetype = adapter/mca/msla
+	attribute = dma_lvl  
+	deflt = 0x5
+	values = "0x0-0xE,0x1"
+	width = "" 
+	type = A 
+	generic = D 
+	rep = nr 
+	nls_index = 6
+
+PdAt:
+	uniquetype= "adapter/mca/msla"
+	attribute= dma_bus_mem
+	deflt= 0x140000
+	values= "0x100000-0xe3b000,0x1000"
+	width= 0x191000
+	type= M 
+	generic= D
+	rep= nr
+	nls_index= 7
+
+PdDv:
+	type = cca
+	class = adapter
+	subclass = mca
+	prefix = cca
+	devid = 0xbdef
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x858
+	setno = 30
+	msgno = 7
+	catalog = devices.cat
+	DvDr = ""
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgmsla
+	Change = ""
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/mca/cca
+
+PdCn:
+	uniquetype = adapter/mca/cca
+	connkey = msla
+	connwhere = "0"
+
+PdAt:
+	uniquetype = adapter/mca/cca
+	attribute = bus_mem_addr
+	deflt = 0xea0000
+	values = 0x020000-0xff0000,0x10000
+	width = 0x10000
+	type = M
+	generic = D
+	rep = nr
+	nls_index = 2
+
+PdAt:
+	uniquetype = adapter/mca/cca
+	attribute = bus_io_addr
+	deflt = 0x0e000
+	values = 0x00100-0xfe00,0x100
+	width = 0x100
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 3
+
+PdAt:
+	uniquetype = adapter/mca/cca
+	attribute = bus_intr_lvl
+	deflt = 10
+	values ="3,4,5,6,7,9,10,11,12,14,15"
+	width = ""
+	type = I
+	generic = D
+	rep = nl
+	nls_index = 4
+
+PdAt:
+	uniquetype = adapter/mca/cca
+	attribute = intr_priority
+	deflt = 2
+	values = 2
+	width = ""
+	type = P
+	generic = D
+	rep = nl
+	nls_index = 5
+
+PdAt:
+	uniquetype = adapter/mca/cca
+	attribute = dma_lvl
+	deflt = 0x5
+	values = "0x0-0xE,0x1"
+	width = ""
+	type = A
+	generic = D
+	rep = nr
+	nls_index = 6
+
+PdAt:
+	uniquetype= "adapter/mca/cca"
+	attribute= dma_bus_mem
+	deflt= 0x140000
+	values= "0x100000-0xe3b000,0x1000"
+	width= 0x191000
+	type= M
+	generic= D
+	rep= nr
+	nls_index= 7
+
+
+

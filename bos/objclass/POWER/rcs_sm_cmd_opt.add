@@ -1,0 +1,4354 @@
+# @(#)95  1.14  src/bos/objclass/POWER/rcs_sm_cmd_opt.add, rcs, bos41J, 9508A 2/10/95 15:30:29
+# 
+#   COMPONENT_NAME: RCS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS__chgslip"
+	disc_field_name = ""
+	name = "Available SLIP Connections"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 7
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 20
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "lsslip -a|cut -d ':' -f 1,2|sed 's/:/ /g'|sort"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_chgslipcon"
+	disc_field_name = "ConnName"
+	name = "Connection Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 18
+	op_type = ""
+	entry_type = "n"
+	entry_size = 20
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000001"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS_chgslipcon"
+	disc_field_name = "ConnDesc"
+	name = "Connection Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 17
+	op_type = ""
+	entry_type = "t"
+	entry_size = 40
+	required = "y"
+	prefix = "-c "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "025"
+	id = "RCS_chgslipcon"
+	disc_field_name = "RemoteHost"
+	name = "Remote Host Names\n(or dotted decimal addresses)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 45
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-r "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000023"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS_chgslipcon"
+	disc_field_name = "LocalHost"
+	name = "Internet Address of LOCAL Host"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 36
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-l "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS_chgslipcon"
+	disc_field_name = "DialedHost"
+	name = "Internet Address of DIALED Host"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 35
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000004"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS_chgslipcon"
+	disc_field_name = "NetMask"
+	name = "Network Mask\n(hexadecimal or dotted decimal)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 40
+	op_type = ""
+	entry_type = "t"
+	entry_size = 15
+	required = "y"
+	prefix = "-m "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0822120"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "060"
+	id = "RCS_chgslipcon"
+	disc_field_name = "TTY_Port"
+	name = "TTY Port Used for SLIP Connection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 65
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 7
+	required = "+"
+	prefix = "-p "
+	cmd_to_list_mode = ""
+	cmd_to_list = "lsdev -C|grep tty|awk '{print $1}'"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000007"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "070"
+	id = "RCS_chgslipcon"
+	disc_field_name = "BaudRate"
+	name = "Baud Rate"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 8
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 9
+	required = "+"
+	prefix = "-b "
+	cmd_to_list_mode = ""
+	cmd_to_list = "show_baud() \n\
+{ \n\
+lsattr -a speed -R -l `lsdev -C -t tty -S Available -F \"name\"|head -1` >/dev/null 2>&1 \n\
+if [ $? -ne 0 ]; then \n\
+	dspmsg rcs.cat 88 'The TTY port must be configured\nbefore selecting the baud rate.\n' \n\
+	exit 1 \n\
+else \n\
+	lsattr -a speed -R -l `lsdev -C -t tty -S Available -F \"name\"|head -1`;dspmsg rcs.cat 82 '57600\n' \n\
+fi \n\
+} \n\
+show_baud"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000008"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "080"
+	id = "RCS_chgslipcon"
+	disc_field_name = "DialString"
+	name = "Dial String"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+	op_type = ""
+	entry_type = "t"
+	entry_size = 1024
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000009"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "090"
+	id = "RCS_chgslipcon"
+	disc_field_name = "Timeout"
+	name = "Connection Timeout (in seconds)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 84
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 4
+	required = "+"
+	prefix = "-t "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "list_seconds() \n\
+{ \n\
+	echo 30 \n\
+	echo 60 \n\
+	echo 90 \n\
+	echo 120 \n\
+	echo 180 \n\
+	echo 600 \n\
+} \n\
+list_seconds "
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000027"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_chusr_name_sel"
+	disc_field_name = ""
+	name = "Select a User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 57
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 9
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "list_users() \n\
+{ \n\
+lsusrprof -a 2>&1 > /dev/null \n\
+if [ $? -ne 0 ] ; then \n\
+	exit 0 \n\
+else \n\
+	lsusrprof -a | cut -d':' -f1 | sort | uniq \n\
+fi \n\
+} \n\
+list_users"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000021"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_rcs_serv_sel"
+	disc_field_name = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lsusrprof -l -n $1 > /dev/null 2>&1 \n\
+RC2=$? \n\
+if [ $RC2 -eq 2 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+LINK=0 \n\
+for I in `lsusrprof -l -n $1 | cut -d':' -f7` \n\
+do \n\
+	case $I in \n\
+		3) LINK=1;; \n\
+		4) LINK=1;; \n\
+		5) LINK=1;; \n\
+	esac \n\
+done \n\
+if [ $LINK -eq 1 ] \n\
+then \n\
+	dspmsg rcs.cat 33 'IBMLink\n' \n\
+fi \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_conn_sel_lnk"
+	disc_field_name = ""
+	name = "Select a Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 54
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x()\n\
+{\n\
+for I in `lsusrprof -l -n $1 | cut -d':' -f7 | sort` \n\
+do \n\
+	case $I in \n\
+		3) echo TCP/IP ;; \n\
+		4) echo SLIP   ;; \n\
+		5) echo SNA    ;; \n\
+	esac \n\
+done \n\
+}\n\
+x"
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000042"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_emul_link_slip"
+	disc_field_name = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo telnet;echo HCON"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_sel_emul_tcp"
+	disc_field_name = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo telnet;echo HCON"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_sel_emul_slip"
+	disc_field_name = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+echo `lsusrprof -l -n $1 -t 4 | cut -d ':' -f4` \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__chlnk_prof_sna_HCON"
+	disc_field_name = "UserName"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__chlnk_prof_sna_HCON"
+	disc_field_name = "conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 8
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "035"
+	id = "RCS__chlnk_prof_sna_HCON"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__chlnk_prof_sna_HCON"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 6
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__chlnk_prof_sna_HCON"
+	disc_field_name = "Sessions"
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__chlnk_prof_slip_HCON"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__chlnk_prof_slip_HCON"
+	disc_field_name = "conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 8
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__chlnk_prof_slip_HCON"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 6
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__chlnk_prof_slip_HCON"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__chlnk_prof_slip_HCON"
+	disc_field_name = "Sessions"
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__chlnk_prof_slip_telnet"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__chlnk_prof_slip_telnet"
+	disc_field_name = "conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 8
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "035"
+	id = "RCS__chlnk_prof_slip_telnet"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__chlnk_prof_slip_telnet"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 6
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "telnet"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__chlnk_prof_slip_telnet"
+	disc_field_name = "Server"
+	name = "IBMLink Host Name\n(or dotted decimal address)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 32
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000019"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__chlnk_prof_tcp_telnet"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__chlnk_prof_tcp_telnet"
+	disc_field_name = "conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 8
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "035"
+	id = "RCS__chlnk_prof_tcp_telnet"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__chlnk_prof_tcp_telnet"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 6
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "telnet"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "045"
+	id = "RCS__chlnk_prof_tcp_telnet"
+	disc_field_name = "Server"
+	name = "IBMLink Host Name\n(or dotted decimal address)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 32
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000019"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__chlnk_prof_tcp_HCON"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__chlnk_prof_tcp_HCON"
+	disc_field_name = "conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 8
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__chlnk_prof_tcp_HCON"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 6
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__chlnk_prof_tcp_HCON"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__chlnk_prof_tcp_HCON"
+	disc_field_name = "Sessions"
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS__showslips"
+	disc_field_name = ""
+	name = "Connect a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 15
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lsslip -a > /dev/null 2>&1 \n\
+if [ $? -ne 0 ] \n\
+then \n\
+	dspmsg rcs.cat 66 'There are no slips defined.' \n\
+	exit 1 \n\
+else \n\
+	lsslip -a | cut -d ':' -f1,2 | sed 's/:/ /g' | sort \n\
+fi \n\
+} \n\
+x "
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000045"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__makeconnection"
+	disc_field_name = "connselected"
+	name = "Connection Selected"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 19
+	op_type = ""
+	entry_type = ""
+	entry_size = 8
+	required = "+"
+	prefix = "-n"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_what_slip_to_rm"
+	disc_field_name = ""
+	name = "Disconnect a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 34
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "/usr/bin/slipcomm -p$$ -q "
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__disconnslip"
+	disc_field_name = "connection_name"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "+"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_getibmserv"
+	disc_field_name = ""
+	name = "Select User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 53
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+TELNET=0 \n\
+SLIP=0 \n\
+SNA=0 \n\
+for I in `lsusrprof -l -n $1 | cut -d':' -f7 | sort` \n\
+do \n\
+	case $I in \n\
+		3) echo `lsusrprof -l -n $1 -t 3|cut -d ':' -f2,3|sed 's/:/ /g'`;TELNET=1;;\n\
+		4) echo `lsusrprof -l -n $1 -t 4|cut -d ':' -f2,3|sed 's/:/ /g'`;SLIP=1;;\n\
+		5) echo `lsusrprof -l -n $1 -t 5|cut -d ':' -f2,3|sed 's/:/ /g'`;SNA=1;;\n\
+	esac \n\
+done\n\
+if [ $TELNET -eq 0 ] && [ SLIP -eq 0 ] && [ SNA -eq 0 ] \n\
+then \n\
+	dspmsg rcs.cat 71 'You do not have any profiles of this type.\n' \n\
+	dspmsg rcs.cat 21 'Contact your system administrator.\n' \n\
+exit 1 \n\
+fi \n\
+} \n\
+x "
+	cmd_to_list_postfix = "ibmprof_user_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__ibmprof_logon_slip_HCON"
+	disc_field_name = "Sessions"
+	name = "Sessions"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = " "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__ibmprof_logon_slip_telnet"
+	disc_field_name = "hostname"
+	name = "Hostname"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = " "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__ibmprof_logon_tcp_telnet"
+	disc_field_name = "hostname"
+	name = "Hostname"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = " "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__ibmprof_logon_tcp_HCON"
+	disc_field_name = "Sessions"
+	name = "Sessions"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = " "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__ibmprof_logon_sna"
+	disc_field_name = "Sessions"
+	name = "Sessions"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_mkslipcon"
+	disc_field_name = "ConnName"
+	name = "Connection Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 18
+	op_type = ""
+	entry_type = "t"
+	entry_size = 20
+	required = "+"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000001"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "20"
+	id = "RCS_mkslipcon"
+	disc_field_name = "ConnDesc"
+	name = "Connection Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 17
+	op_type = ""
+	entry_type = "t"
+	entry_size = 40
+	required = "y"
+	prefix = "-c "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "25"
+	id = "RCS_mkslipcon"
+	disc_field_name = "RemoteHost"
+	name = "Remote Host Names\n(or dotted decimal addresses)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 45
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-r "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000023"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "30"
+	id = "RCS_mkslipcon"
+	disc_field_name = "LocalHost"
+	name = "Internet Address of LOCAL Host"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 36
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-l "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "40"
+	id = "RCS_mkslipcon"
+	disc_field_name = "DialedHost"
+	name = "Internet Address of DIALED Host"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 35
+	op_type = ""
+	entry_type = "t"
+	entry_size = 256
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000004"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "50"
+	id = "RCS_mkslipcon"
+	disc_field_name = ""
+	name = "Network Mask\n(hexadecimal or dotted decimal)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 40
+	op_type = ""
+	entry_type = "t"
+	entry_size = 15
+	required = "y"
+	prefix = "-m "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0822120"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "60"
+	id = "RCS_mkslipcon"
+	disc_field_name = ""
+	name = "TTY Port Used for SLIP Connection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 65
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 7
+	required = "+"
+	prefix = "-p "
+	cmd_to_list_mode = ""
+	cmd_to_list = "lsdev -C|grep tty|awk '{print $1}'"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000007"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "70"
+	id = "RCS_mkslipcon"
+	disc_field_name = "BaudRate"
+	name = "Baud Rate"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 8
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 9
+	required = "+"
+	prefix = "-b "
+	cmd_to_list_mode = ""
+	cmd_to_list = "show_baud() \n\
+{ \n\
+lsattr -a speed -R -l `lsdev -C -t tty -S Available -F \"name\"|head -1` >/dev/null 2>&1 \n\
+if [ $? -ne 0 ]; then \n\
+	dspmsg rcs.cat 88 'The TTY port must be configured\nbefore selecting the baud rate.\n' \n\
+	exit 1 \n\
+else \n\
+	lsattr -a speed -R -l `lsdev -C -t tty -S Available -F \"name\"|head -1`;dspmsg rcs.cat 82 '57600\n' \n\
+fi \n\
+} \n\
+show_baud"
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000008"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "80"
+	id = "RCS_mkslipcon"
+	disc_field_name = "DialString"
+	name = "Dial String"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+	op_type = ""
+	entry_type = "t"
+	entry_size = 1024
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000009"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "90"
+	id = "RCS_mkslipcon"
+	disc_field_name = "Timeout"
+	name = "Connection Timeout (in seconds)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 84
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 4
+	required = "+"
+	prefix = "-t "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "list_seconds() \n\
+{ \n\
+	echo 30 \n\
+	echo 60 \n\
+	echo 90 \n\
+	echo 120 \n\
+	echo 180 \n\
+	echo 600 \n\
+} \n\
+list_seconds "
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000027"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_link_conn_type"
+	disc_field_name = ""
+	name = "Select a Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 54
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "x() \n\
+{ \n\
+LTCP=1 \n\
+LSLP=1 \n\
+LSNA=1 \n\
+for I in `lsusrprof -l -n $1 | cut -d ':' -f7` \n\
+do \n\
+        case $I in \n\
+                3) LTCP=0;; \n\
+                4) LSLP=0;; \n\
+                5) LSNA=0;; \n\
+        esac \n\
+done \n\
+        if [ $LTCP -eq 1 ]  \n\
+        then \n\
+                echo TCP/IP \n\
+        fi \n\
+        if [ $LSLP -eq 1 ] \n\
+        then \n\
+                echo SLIP \n\
+        fi \n\
+        if [ $LSNA -eq 1 ] \n\
+        then \n\
+                echo SNA \n\
+        fi \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000042"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_link_emul_ibm_SLIP"
+	disc_field_name = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "echo telnet;echo HCON"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_link_emul_TCP/IP"
+	disc_field_name = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "echo telnet;echo HCON"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__mkusrprof_ibm_tcp_telnet"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__mkusrprof_ibm_tcp_telnet"
+	disc_field_name = "link_conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "035"
+	id = "RCS__mkusrprof_ibm_tcp_telnet"
+	disc_field_name = ""
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__mkusrprof_ibm_tcp_telnet"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "telnet"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__mkusrprof_ibm_tcp_telnet"
+	disc_field_name = ""
+	name = "IBMLink Host Name\n(or dotted decimal address)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 32
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000019"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__mkusrprof_ibm_tcp_HCON"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__mkusrprof_ibm_tcp_HCON"
+	disc_field_name = "link_conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__mkusrprof_ibm_tcp_HCON"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__mkusrprof_ibm_tcp_HCON"
+	disc_field_name = ""
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__mkusrprof_ibm_tcp_HCON"
+	disc_field_name = ""
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_mkprof_hc"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS_mkprof_hc"
+	disc_field_name = "link_conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS_mkprof_hc"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS_mkprof_hc"
+	disc_field_name = ""
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS_mkprof_hc"
+	disc_field_name = ""
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__mkusrprof_ibm_slip_telnet"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__mkusrprof_ibm_slip_telnet"
+	disc_field_name = "link_conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__mkusrprof_ibm_slip_telnet"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "telnet"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__mkusrprof_ibm_slip_telnet"
+	disc_field_name = ""
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__mkusrprof_ibm_slip_telnet"
+	disc_field_name = ""
+	name = "IBMLink Host Name\n(or dotted decimal address)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 32
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000019"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__mkusrprof_ibm_slip_HCON"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 9
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__mkusrprof_ibm_slip_HCON"
+	disc_field_name = "link_conn_type"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__mkusrprof_ibm_slip_HCON"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__mkusrprof_ibm_slip_HCON"
+	disc_field_name = ""
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 64
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__mkusrprof_ibm_slip_HCON"
+	disc_field_name = ""
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_rcs_select_name"
+	disc_field_name = ""
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 9
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "lsuser ALL | cut -d ' ' -f1 | sort"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000015"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_rcs_service"
+	disc_field_name = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "x() \n\
+{ \n\
+LTCP=1 \n\
+LSLP=1 \n\
+LSNA=1 \n\
+USER=`id -u` \n\
+if [ $USER -ne 0 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+lsuser $1 > /dev/null 2>&1 \n\
+if [ $? -ne 0 ] \n\
+then \n\
+	lsuser $1 \n\
+	exit 1 \n\
+fi \n\
+for I in `lsusrprof -l -n $1 | cut -d':' -f7` \n\
+do \n\
+        case $I in \n\
+                3) LTCP=0;; \n\
+                4) LSLP=0;; \n\
+                5) LSNA=0;; \n\
+        esac \n\
+done \n\
+        if [ $LTCP -eq 1 ] || [ $LSLP -eq 1 ] || [ $LSNA -eq 1 ] \n\
+        then \n\
+                dspmsg rcs.cat 33 'IBMLink\n' \n\
+        fi \n\
+	if [ $LTCP -eq 0 ] && [ $LSLP -eq 0 ] && [ $LSNA -eq 0 ] \n\
+	then \n\
+		dspmsg rcs.cat 72  'All profile types have been defined for this user.\nUse Change / Show to modify existing profiles.\n' \n\
+		exit 1 \n\
+	fi \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS__usrfuncquery"
+	disc_field_name = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "x() \n\
+{ \n\
+lsusrprof -l -n $1 > /dev/null 2>&1 \n\
+RC2=$? \n\
+if [ $RC2 -eq 2 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+LINK=0 \n\
+for I in `lsusrprof -l -n $1 | cut -d':' -f7` \n\
+do \n\
+	case $I in \n\
+		3) LINK=1;; \n\
+		4) LINK=1;; \n\
+		5) LINK=1;; \n\
+	esac \n\
+done \n\
+	if [ $LINK -eq 1 ] \n\
+	then \n\
+		dspmsg rcs.cat 33 'IBMLink\n' \n\
+	fi \n\
+	if [ $LINK -eq 0 ] \n\
+	then \n\
+		dspmsg rcs.cat 81 'You do not have any profiles defined.\n' \n\
+		dspmsg rcs.cat 21 'Contact your system administrator.\n' \n\
+		exit 1 \n\
+	fi \n\
+} \n\
+x"
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS__get_slip"
+	disc_field_name = ""
+	name = "Reconfigure a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 43
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/bin/slipcomm -p$$ -q"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__reconfig_slip"
+	disc_field_name = "slip_name"
+	name = "Connection Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 18
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000001"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__reconfig_slip"
+	disc_field_name = "ConnDesc"
+	name = "Connection Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 17
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__reconfig_slip"
+	disc_field_name = "LocalHost"
+	name = "Internet Address of LOCAL host"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 36
+	op_type = ""
+	entry_type = "t"
+	entry_size = 15
+	required = "+"
+	prefix = "-L "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__reconfig_slip"
+	disc_field_name = "DialedHost"
+	name = "Internet Address of DIALED host"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 35
+	op_type = ""
+	entry_type = "t"
+	entry_size = 15
+	required = "+"
+	prefix = "-D "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000004"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_whichslip"
+	disc_field_name = ""
+	name = "Available SLIP Connections"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 7
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "lsslip -a|cut -d ':' -f 1,2|sed 's/:/ /g' | sort"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_rm_this_slip"
+	disc_field_name = "slip2remove"
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_rm_name_sel"
+	disc_field_name = ""
+	name = "Select a User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 57
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 9
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "list_users() \n\
+{ \n\
+lsusrprof -a 2>&1 > /dev/null \n\
+if [ $? -ne 0 ] ; then \n\
+	exit 0 \n\
+else \n\
+	lsusrprof -a | cut -d':' -f1 | sort | uniq \n\
+fi \n\
+} \n\
+list_users"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000022"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_rm_serv_sel"
+	disc_field_name = ""
+	name = "Remove a User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 49
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "x() \n\
+{ \n\
+lsusrprof -l -n $1 > /dev/null 2>&1 \n\
+RC2=$? \n\
+if [ $RC2 -eq 2 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+for K in `lsusrprof -l -n $1 | cut -d':' -f7 | sort` \n\
+do \n\
+        case $K in \n\
+                3) dspmsg rcs.cat 75 'IBMLink (TCP/IP Connection)\n'	;; \n\
+                4) dspmsg rcs.cat 76 'IBMLink (SLIP Connection)\n'	;; \n\
+                5) dspmsg rcs.cat 77 'IBMLink (SNA Connection)\n'	;; \n\
+        esac \n\
+done \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rmprof_nam"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000040"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_rmusrprof1"
+	disc_field_name = "rmprof_nam"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000022"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS_rmusrprof1"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "TCP/IP"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_rmusrprof2"
+	disc_field_name = "rmprof_nam"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000022"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS_rmusrprof2"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "SLIP"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_rmusrprof3"
+	disc_field_name = "rmprof_nam"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000022"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS_rmusrprof3"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "TCP/IP"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_rmusrprof4"
+	disc_field_name = "rmprof_nam"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000022"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS_rmusrprof4"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "SLIP"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_rmusrprof5"
+	disc_field_name = "rmprof_nam"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000022"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS_rmusrprof5"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "SNA"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_echo_active_slips"
+	disc_field_name = ""
+	name = "There are active SLIP Connections.\nDo you wish to continue?"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 78
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "dspmsg rcs.cat 80 'NO\n';dspmsg rcs.cat 79 'YES\n'"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_select_slip"
+	disc_field_name = ""
+	name = "Active SLIP Connections"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 1
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "get_slips() \n\
+{ \n\
+USER=`id -u` \n\
+if [ $USER -ne 0 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+/usr/bin/slipcomm -p$$ -a > /dev/null 2>&1 \n\
+RC=`echo $?` \n\
+if [ RC -eq 0 ] \n\
+then \n\
+	/usr/bin/slipcomm -p$$ -a \n\
+	exit 0 \n\
+fi \n\
+if [ RC -eq 255 ] \n\
+then \n\
+	dspmsg rcs.cat 26 'The SLIP Connection Subsystem is not running.\n' \n\
+	exit 1 \n\
+else \n\
+	/usr/bin/slipcomm -p$$ -a \n\
+	exit 1 \n\
+fi \n\
+} \n\
+get_slips"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS_sub_sys_disconn"
+	disc_field_name = "slip_to_remove"
+	name = "Remove a SLIP Connection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 25
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS__linkcontype"
+	disc_field_name = ""
+	name = "Select a Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 54
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+for I in `lsusrprof -l -n $1 | cut -d ':' -f7 | sort` \n\
+do \n\
+	case $I in \n\
+		3) echo TCP/IP	;; \n\
+		4) echo SLIP	;; \n\
+		5) echo SNA	;; \n\
+	esac \n\
+done \n\
+} \n\
+x"
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000042"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_link_emul_sel"
+	disc_field_name = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo telnet;echo HCON"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS__link_emul_SNA"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__linkucfg_tcp_telnet"
+	disc_field_name = "UserName"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000043"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__linkucfg_tcp_telnet"
+	disc_field_name = "linkconn"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__linkucfg_tcp_telnet"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "telnet"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__linkucfg_tcp_telnet"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 65
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "045"
+	id = "RCS__linkucfg_tcp_telnet"
+	disc_field_name = "Server"
+	name = "IBMLink Host Name\n(or dotted decimal address)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 32
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000019"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__linkucfg_slip_tel"
+	disc_field_name = "UserName"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000043"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__linkucfg_slip_tel"
+	disc_field_name = "linkconn"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__linkucfg_slip_tel"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "telnet"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__linkucfg_slip_tel"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 65
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "045"
+	id = "RCS__linkucfg_slip_tel"
+	disc_field_name = "Server"
+	name = "IBMLink Host Name\n(or dotted decimal address)"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 32
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000019"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__linkucfg_tcp_HCON"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000043"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__linkucfg_tcp_HCON"
+	disc_field_name = "linkconn"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__linkucfg_tcp_HCON"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo HCON"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__linkucfg_tcp_HCON"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 65
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__linkucfg_tcp_HCON"
+	disc_field_name = "Sessions"
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__linkucfg_slip_HCON"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000043"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__linkucfg_slip_HCON"
+	disc_field_name = "linkconn"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__linkucfg_slip_HCON"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__linkucfg_slip_HCON"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 65
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__linkucfg_slip_HCON"
+	disc_field_name = "Sessions"
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "RCS__linkucfg_sna"
+	disc_field_name = "rcss_name"
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000043"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "RCS__linkucfg_sna"
+	disc_field_name = "linkconn"
+	name = "Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 20
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000060"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "RCS__linkucfg_sna"
+	disc_field_name = "ConnDesc"
+	name = "Description"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+	op_type = ""
+	entry_type = "t"
+	entry_size = 65
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000026"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "RCS__linkucfg_sna"
+	disc_field_name = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-e "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "HCON"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "RCS__linkucfg_sna"
+	disc_field_name = "Sessions"
+	name = "HCON Sessions to Start"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 40
+	required = "+"
+	prefix = "-h "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "x() \n\
+{ \n\
+lshconp -N $1 -F l \n\
+} \n\
+x "
+	cmd_to_list_postfix = "rcss_name"
+	multi_select = "y"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "6000020"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "RCS_ghost_cmd_opt"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+

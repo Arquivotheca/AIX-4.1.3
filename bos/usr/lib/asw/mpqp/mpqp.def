@@ -1,0 +1,294 @@
+/*
+static char sccsid[] = "@(#)74  1.9  src/bos/usr/lib/asw/mpqp/mpqp.def, ucodmpqp, bos411, 9428A410j 8/23/93 13:21:23";
+*/
+
+/*
+ * COMPONENT_NAME: (UCODMPQ) Multiprotocol Quad Port Adapter Software
+ *
+ * FUNCTIONS:  
+ *	mpqp.h		: Defines for protocol independent fields such
+ *			  as scheduler levels, etc.
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */                                                                   
+
+#define	uchar	unsigned char
+#define	ushort	unsigned short
+#define	ulong	unsigned long
+
+#define	NULL_FN	(int (*)())0
+#define NULL	0
+#define FALSE	0
+#define TRUE	1
+#define	YES	0
+#define	NO	-1
+
+#define	boolean	char
+#define	B_TRUE	(char)-1
+#define	B_FALSE	(char)0
+
+/*
+   How many ports per adapter?
+*/
+#define	NUM_PORT	4
+
+/*
+   The num_lev define specifies the length of the scheduler array, i.e.
+   the number of LEVELS that exist.
+*/
+#define	NUM_LEV		7
+#define NUM_LEVEL	8			/* actual number of levels */
+
+/*
+   The type definition for a scheduler level (sch_lev) defines the maximum
+   number of tasks which can ever exist on a level.  Setting this requires
+   knowledge of the compiler types and hardware word sizes.  For 80186,
+   "unsigned short" is used for 16 task levels, "unsigned long" for 32.
+*/
+#define	sch_lev		unsigned short
+
+/*
+   The base_mask define tells how many tasks exist within each level.
+   Add one bit for each new task up to the sixteen maximum possible
+   in a structure of unsigned shorts.  0x000F = 4, 0x003F = 6, ...
+*/
+#define	BASE_MASK	(sch_lev)0x000F
+
+/*
+   The number of buffers, both transmit and receive.
+*/
+#define	NBUF		0x30		/* 48 buffers each */
+#define	NO_BUFNO	0xF0		/* Not a Buffer Number indicator */
+#define RX_BUF_LEN	0x1000		/* rx buffer size */
+#define TX_BUF_LEN	0x1000		/* transmit buffer size */
+#define TX_EXT_LEN	0x4000		/* transmit extension size */
+
+/*
+   The 80186 internal interrupt controller address for resetting interrupts.
+*/
+#define	LOC_EOI		0xFF22		/* I/O Address */
+
+/*
+   The value to write to LOC_EOI to issue a non-specific End-Of-Interrupt
+*/
+#define	NSPEC_EOI	0x8000
+
+/*
+   When the driver signal that the tx free list has gone non-empty, the
+   adapter places a threshold value into a counter and, after freeing
+   that number of buffers, the return signal (tx buffers available) will
+   be issued.
+*/
+#define	TXFL_THR	4
+
+/*
+   The Adapter Command Register may contain several values listed below.
+*/
+#define	ACQINT		0x0000		/* ACQ went Non-Empty */
+#define	TXFLMT		0x0001		/* Tx Free List Empty */
+
+/*
+   The adapter log_error routine receives defined error codes, as listed
+   below.
+*/
+#define	RX_FREE_EMPTY	0x0210		/* The rx_free list went empty and */
+					/* some port tried to enable rx'ing */
+#define	AD_RQE_FULL	0x0330		/* The ASW wrote an RQE to the ARQ */
+					/* but it was *full*!  Data loss. */
+#define	Q_OVERFLOW	0x0341		/* A list which can't overflow did */
+
+#define	PCQ_NO_WORK	0x0400		/* The scheduler invoked a port */
+					/* work function but the PCQ was */
+					/* empty.  Non-critical. */
+
+#define	PCQ_BAD_CMD	0x0410		/* During port command processing */
+					/* a meaningless or otherwise un- */
+					/* implemented command type field */
+					/* was detected in a port command */
+					/* **** THE DRIVER IS BROKEN **** */
+#define	DIAG_OK		0
+#define	DIAG_FAIL	-1
+
+/*
+   The possible types for an eblock to be (i.e. each estat structure e_type
+   field contains one of these types).
+*/
+#define	NO_SI	0		/* No status interrupt */
+#define	RT_SI	1		/* SCC Rx/Tx status interrupt */
+#define	EC_SI	2		/* SCC External, C/T status interrupt */
+#define	CI_SI	4		/* CIO status interrupt */
+
+/* The PCQ_LOCK value, when extracted from a Port Command Queue, indicates
+   the queue is Locked awaiting DMA completion. */
+
+#define	PCQ_LOCK    (unsigned char)0xF0
+
+/*
+   Within transmit command blocks, flags exist which control disposition of
+   the commands.  They are listed below.
+*/
+
+#define	TX_DMA_ACK	(unsigned char)0x01	/* Low Level DMA Ack */
+#define	TX_NO_FREE	(unsigned char)0x02	/* Do Not free command block */
+#define	TX_FINAL_BLK	(unsigned char)0x04	/* Final transmit block */
+#define	TX_TRANSPARENT	(unsigned char)0x40	/* BiSync only */
+#define	TX_CMPL_ACK	(unsigned char)0x80	/* Frame Sent Ack Control */
+
+/*
+   The define NUM_LEV, number of scheduler work levels, should agree with the
+   number of level mnemonics given below.  The levels are prioritized by their
+   numerical values, lower being a higher priority request.
+*/
+
+#define RECV_DMA_WORK	0x0000		/* Bus Master Recv DMA work level */
+#define	RX_WORK		0x0001		/* Receive Data Available from ISR */
+#define XMIT_DMA_WORK	0x0002		/* Bus Master Xmit DMA work level */
+#define	TX_WORK		0x0003		/* Tx Data acquired, pre-process */
+#define	ERR_STS		0x0004		/* Error/Status Available from ISR */
+#define	PRQ_WORK	0x0005		/* Port Response Queue work needed */
+#define	PCQ_WORK	0x0006		/* Port Command Queue processing */
+#define	SLEEPWAKE	0x0007		/* All sleeping processes use this */
+
+/* Maximum number of bus master DMA retries: */
+
+#define MAX_BM_DMA	100		
+
+/* State machine timer service macro definitions */
+
+#define	START_TIMER( p, v )	set_timer( p->port_no, v )
+#define	STOP_TIMER( p )		set_timer( p->port_no, 0 )   
+
+/*
+   A macro which writes virtually the only pertinent CIO register.  Note
+   that the data register is the only one used with any regularity for
+   typical operations.
+*/
+
+#define	set_cio( p )	( out08 ( p->cio_data, p->cio_reg.data ) )
+
+/*
+   The defines below are used for the Error/Status handling offlevel and
+   ISRs.  The ETYP fields must agree with their assembly language generating
+   counterparts' EQU statements.
+   On 052389, eblock type fields were made into bitmaps and the associated
+   generation and checking logic was converted, as required.
+*/
+
+#define	ETYP_RXTX_STAT	(unsigned short)0x01	/* Rx, Rx/Tx Status */
+#define	ETYP_ECT_STAT	(unsigned short)0x02	/* External, Counter/Timer */
+#define	ETYP_CIO_STAT	(unsigned short)0x04	/* CIO (line changes) */
+#define	ETYP_X21_STAT	(unsigned short)0x08	/* X.21 PAL interrupts */
+
+#define	ETYP_RX_RDY	(unsigned short)0x20	/* Rx Data Avail. Interr */
+
+#define	ETYP_FAILSAFE	(unsigned short)0x4000	/* Failsafe timer pop */
+#define	ETYP_TIMER_POP	(unsigned short)0x8000	/* Timer Service Signal */
+
+#define	ETYP_EMPTY	(unsigned short)0x00	/* e_block has no data */
+
+/* Offlevel interrupt mask values */
+
+#define	MASK_CTS	0x80
+#define	MASK_DSR	0x40
+#define	MASK_RI		0x20
+#define	MASK_CD		0x10
+#define	MASK_TXRX	0x08
+#define	MASK_X21	0x04
+#define	MASK_TXRDY	0x02
+#define	MASK_RXRDY	0x01
+
+/* The transmit frame types, found in both _txftype and _txcmd on occasion */
+
+#define	FT_X		0x01		/* X21 frame */
+#define	FT_B_ASCII	0x02		/* BiSync frame: ASCII data */
+#define	FT_B_EXT	0x04		/* BiSync frame: External Clocking */
+#define	FT_B_ITB	0x08		/* BiSync frame: ends with ITB */
+#define	FT_B		0x10		/* BiSync frame */
+#define	FT_A		0x20		/* Async frame: i.e. no SOM cmd */
+#define	FT_S		0x40		/* SDLC frame: i.e. must xmt pads */
+#define	FT_FINAL	0x80		/* Final frame: SDLC & BSC - used */
+					/* to know when to sync stream and */
+					/* set rx timer			*/
+/* Miscellaneous Defines */
+
+# define POLL_BIT 	0x10		/* SDLC POLL bit		*/
+# define QLGT		48		/* Queue length			*/
+# define RECV_DMA	0x80		/* Flag for receive DMA's 	*/
+
+/*----------------------------------------------------------------------*/
+/* General-Purpose Macros: 						*/
+
+# define LO_BYTE( halfword )	((halfword) & 0xFF)	/* Low 8 bits */
+# define HI_BYTE( halfword )	((halfword) >> 8)	/* High 8 bits */
+# define ODD( val )		((val) & 1)		/* TRUE if odd # */
+# define EVEN( val )		(!((val) & 1))		/* TRUE if even # */
+
+# define LOOP			loop = TRUE; while (loop)
+# define EXIT_LOOP		loop = FALSE; continue
+
+# define MAX(a, b) (((b) < (a)) ? (a) : (b))
+# define MIN(a, b) (((a) < (b)) ? (a) : (b))
+
+/*----------------------------------------------------------------------*/
+/* Scheduling Macros: 							*/
+
+# define SCHED_RX_WORK(     p_pcb )	work_q[ RX_WORK   ] |= (p_pcb)->mask_on
+# define SCHED_TX_WORK(     p_pcb )	work_q[ TX_WORK   ] |= (p_pcb)->mask_on
+# define SCHED_ERRS_WORK(   p_pcb )	work_q[ ERR_STS   ] |= (p_pcb)->mask_on
+# define SCHED_PRQ_WORK(    p_pcb )	work_q[ PRQ_WORK  ] |= (p_pcb)->mask_on
+# define SCHED_PCQ_WORK(    p_pcb )	work_q[ PCQ_WORK  ] |= (p_pcb)->mask_on
+# define SCHED_SLEEPWAKE(   p_pcb )	work_q[ SLEEPWAKE ] |= (p_pcb)->mask_on
+
+# define UNSCHED_RX_WORK(   p_pcb )	work_q[ RX_WORK   ] &= (p_pcb)->mask_off
+# define UNSCHED_TX_WORK(   p_pcb )	work_q[ TX_WORK   ] &= (p_pcb)->mask_off
+# define UNSCHED_ERRS_WORK( p_pcb )	work_q[ ERR_STS   ] &= (p_pcb)->mask_off
+# define UNSCHED_PRQ_WORK(  p_pcb )	work_q[ PRQ_WORK  ] &= (p_pcb)->mask_off
+# define UNSCHED_PCQ_WORK(  p_pcb )	work_q[ PCQ_WORK  ] &= (p_pcb)->mask_off
+# define UNSCHED_SLEEPWAKE( p_pcb )	work_q[ SLEEPWAKE ] &= (p_pcb)->mask_off
+
+/* NEXT_PORT returns a new port mask that indicates the next port: 	*/
+/*	0001	->	0010		*/
+/*	0010	->	0100		*/
+/*	0100	->	1000		*/
+/*	1000	->	0001		*/
+
+# define NEXT_PORT( mask ) (((mask) < 8) ? ((mask) << 1) : 1)
+
+
+/*----------------------------------------------------------------------*/
+/* Queue Macros: 							*/
+
+# define NEXT_IN( p_q )							\
+	(((p_q)->in  == ((p_q)->end)) ? 0 : ((p_q)->in  + 1))
+
+# define NEXT_OUT( p_q )						\
+	(((p_q)->out == ((p_q)->end)) ? 0 : ((p_q)->out + 1))
+
+# define Q_EMPTY( p_q )							\
+	((p_q)->out == (p_q)->in)
+
+# define Q_FULL( p_q )							\
+	((p_q)->out == NEXT_IN( p_q ))
+
+# define PREV_OUT( p_q )                                                \
+        (((p_q)->out  == 0) ? ((p_q)->end) : ((p_q)->out - 1))
+
+/*----------------------------------------------------------------------*/
+/* Trace Macros: 							*/
+
+# define FOOTPRINT( x, y, z )	char_trace( x, y, z )
+
+/*----------------------------------------------------------------------*/
+/* Defines for autodial							*/
+
+# define OFF_BIT		1	/* signal low when this bit is on */
+# define SELECT_SIG_LEN		256	/* maximum length of dial command */

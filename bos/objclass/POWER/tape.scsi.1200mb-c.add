@@ -1,0 +1,275 @@
+# @(#)71        1.6  src/bos/objclass/POWER/tape.scsi.1200mb-c.add, cfgmethods, bos41J, 9513A_all 3/24/95 16:19:15
+*
+*  COMPONENT_NAME: (CFGMETHODS) SCSI TAPE PREDEFINED DATA STANZAS
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 27
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+PdDv:
+	type = 1200mb-c
+	class = tape
+	subclass = scsi
+	prefix = rmt
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x995
+	setno = 54
+	msgno = 17
+	fru = 1
+	catalog = devices.cat
+	DvDr = tape
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsctape
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = tape/scsi/1200mb-c
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = mode
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 5
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = block_size
+	deflt = 512
+	values = "1024,512,0"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 6
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = extfm
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = ret
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 7
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = dev_type
+	deflt = 7
+	values = 7
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = model_name
+	deflt = " IBM 4100       "
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = maxlun
+	deflt = 0
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = min_read_error
+	deflt = 10
+	values = 10
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = min_write_error
+	deflt = 8
+	values = 8
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = read_ratio
+	deflt = 1250
+	values = 1250
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = write_ratio
+	deflt = 334
+	values = 334
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = mode_data
+	deflt = 0x000010081500000000000200200a00000000011080000000
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = res_support
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = var_block_size
+	deflt = 512
+	values = 512
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = density_set_1
+	deflt = 21
+	values = "0,15,16,17,21"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 12
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = density_set_2
+	deflt = 17
+	values = "0,15,16,17,21"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 13
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = compress
+	deflt = no
+	values = no
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = vpd_map
+	deflt = "MF0808C,TM1010C,PN2607C,EC2d06X,Z00008X,Z12004C,Z22402C,SN040a50C,LI080403C"
+	values = ""
+	width = ""
+	type = V
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = pm_dev_itime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/1200mb-c
+	attribute = pm_dev_stime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+        uniquetype = tape/scsi/1200mb-c
+        attribute = pm_device_id
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x0018
+4000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b0
+00,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0

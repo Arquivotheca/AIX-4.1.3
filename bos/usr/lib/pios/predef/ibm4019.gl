@@ -1,0 +1,72 @@
+# @(#)85        1.11.1.5  src/bos/usr/lib/pios/predef/ibm4019.gl, cmdpios, bos411, 9428A410j 5/25/94 19:47:04
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1989
+# All Rights Reserved
+#
+:056:__FLG::
+:628:CE:DyS[E]En:
+:791:_J:S[C950]I[1810533]%IWY:+
+:697:_O:S[E035]DnR[1,3]:3
+:683:_Q:S[E020]I[1810505]En%IW6:%IwQ
+:616:_j:S[C940]I[1810536]%IWY:+
+:678:_l:Dn:64
+:638:_u:S[E015]I[1810516]En%IW9:1
+:618:_z:S[E005]I[1810520]EnR[pioattr1.cat,1,620;portrait,landscape=!,+]:+
+:060:__SYS::
+:724:mZ:S[101]I[1810548]%IWY:!
+:641:s0:S[115]I[1810521]EnR[letter,legal,B5,A4,exec=1,2,3,4,5]:1
+:642:s1:S[105]I[1810521]EnR[letter,legal,B5,A4,exec=1,2,3,4,5]:1
+:643:s2:S[110]I[1810521]EnR[letter,legal,B5,A4,exec=1,2,3,4,5]:1
+:644:s3:S[120]I[1810522]EnR[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]:3
+:645:s4:S[125]I[1810522]EnR[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]:3
+:747:sD:S[103]I[1810566]%IWY:+
+:655:uH:S[140]I[1810527]En%IW9:1
+:656:uT:S[145]I[1810527]En%IW9:1
+:841:mY:S[177]I[1810544]EnR[PPDS,PCL,GL,PostScript=1,2,3,8]:3
+:500:__HTP::
+:321:sh::{ ddi=$(/usr/bin/find %Idd/%Imt.asc.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 819 -a ASCII "Error\72 Cannot print separator page because no %%s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@$ddi -!%Idf/piof5202 -L! -z! %IsH -u%IuH ; }
+:324:st::{ ddi=$(/usr/bin/find %Idd/%Imt.asc.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 819 -a ASCII "Error\72 Cannot print separator page because no %%s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioburst %F[H] %Idb/T.ascii | %Ide/pioformat -@$ddi -!%Idf/piof5202 -L! -z! %?%o%G_l%r%{14}%>%t-t%o%G_l%r%{14}%-%d%; %IsT -u%IuT ; }
+:057:__IDS::
+:276:ig::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[juzJOQZ]
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[juJZ] ; }
+:058:__MIS::
+:452:m0::%?%GWu%{0}%=%t%G_Q%e%Gs0%;%c
+:452:m1::%?%GWu%{1}%=%t%G_Q%e%Gs1%;%c
+:452:m2::%?%GWu%{2}%=%t%G_Q%e%Gs2%;%c
+:452:m3::%?%GWu%{3}%=%t%G_Q%e%Gs3%;%c
+:452:m4::%?%GWu%{4}%=%t%G_Q%e%Gs4%;%c
+:330:mA::GL Emulation
+:331:mL::[devices.cat,71,6;IBM 4019 LaserPrinter]
+:308:mp::%?%GsD%t%?%GmZ%t%%!,\x04%%!%;%;
+:062:__WKV::
+:689:W6::%Zq%?%GWu%{3}%=%t%{1}%Pq%e%?%GWu%{4}%=%t%{1}%Pq%;%;%?%gq%tR[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]%eR[letter,legal,B5,A4,exec=1,2,3,4,5]%;
+:760:W9::R[pioattr1.cat,1,739;manual paper feed,tray 1 (upper),tray 2 (lower),envelope feeder,manual envelope feed=0,1,2,3,4]
+:730:Wu::%?%CO%t%?%G_O%{1}%=%t%?%Cu%t%?%G_u%{2}%>%t%{4}%e%{0}%;%e%{0}%;%e%?%G_O%{2}%=%t%{5}%e%G_u%;%;%e%G_u%;%d
+:458:wQ::%?%GWu%{0}%=%t%Gs0%e%GWu%{1}%=%t%Gs1%e%GWu%{2}%=%t%Gs2%e%GWu%{3}%=%t%Gs3%e%Gs4%;%d
+:051:__CAG::
+:144:ci::%Iez
+:152:cr::in;%Iex
+:052:__CTL::
+:113:af::pg;
+:054:__ESC::
+:514:ex::\33[K\3\0\4\61%GmY%c
+:263:ez::\33[K\12\0\1\61\3\0%G_z%!%GWu%{8}%*%+%{128}%+%c%Im0%Im1%Im2%Im3%Im4
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.gl
+:477:zS::!
+:685:zV::+

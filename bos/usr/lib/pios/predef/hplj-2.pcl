@@ -1,0 +1,37 @@
+# @(#)02        1.12.1.4  src/bos/usr/lib/pios/predef/hplj-2.pcl, cmdpios, bos411, 9428A410j 9/10/93 17:33:25
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:003:_Y:Dn:
+:060:__SYS::
+:776:s1:S[105]I[1810521]En%IWP:1
+:643:s2:Dn:
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLOQXZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLOQXZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJOQZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:058:__MIS::
+:330:mA::PCL
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,7;Hewlett-Packard LaserJet II]
+:295:mN::hplj-2
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,771;manual paper,paper tray,envelope feeder,manual envelope=0,1,3,4]
+:475:__HIR::
+:686:zL::2
+:688:zM::Hewlett-Packard
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

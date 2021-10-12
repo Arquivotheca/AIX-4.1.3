@@ -1,0 +1,149 @@
+/* @(#)35   1.12 src/bos/objclass/cfgodm.cre, cfgoclc, bos411, 9428A410j 7/12/93 13:38:41 */
+
+/*
+ *   COMPONENT_NAME: CFGOCLC
+ *
+ *   FUNCTIONS: none
+ *
+ *   ORIGINS: 27
+ *
+ *
+ *   (C) COPYRIGHT International Business Machines Corp. 1993
+ *   All Rights Reserved
+ *   Licensed Materials - Property of IBM
+ *   US Government Users Restricted Rights - Use, duplication or
+ *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+
+/* Common to Predefined/Customized Object Classes */
+
+#define		TYPESIZE	16		
+#define		CLASSIZE	16	
+#define		PREFIXSIZE	16
+#define		DEVIDSIZE	16
+#define		CATSIZE		16
+#define		DDNAMESIZE	16
+#define		UNIQUESIZE	48
+#define		NAMESIZE	16
+#define		VPDSIZE		512
+#define		KEYSIZE		16
+#define		LOCSIZE		16
+#define		METHODSIZE	256
+
+/* Predefined/Customized Attribute Object Class */
+
+#define		ATTRNAMESIZE	16
+#define		DEFAULTSIZE	256
+#define		ATTRVALSIZE	256
+#define		WIDTHSIZE	16
+#define		FLAGSIZE	8
+
+/* Predefined Device Driver Object Class */
+
+#define		PATHSIZE	256
+
+/* Configuration Rules Object Class */
+
+#define		RULESIZE	256
+
+/* Customized Device Driver Object Class */
+
+#define		RESOURCESIZE	12
+
+/* WARNING - if you change the value of VALUESIZE, you must also change the */
+/*    the value in the file com/lib/cfg/concurn.c : genmajor uses this value */
+/*    when validating names */
+#define		VALUESIZE	20
+
+class PdDv {
+	char type[TYPESIZE];		key
+	char class[CLASSIZE];
+	char subclass[CLASSIZE];
+	char prefix[PREFIXSIZE];
+	char devid[DEVIDSIZE];
+	short base;
+	short has_vpd;
+	short detectable;
+	short chgstatus;
+	short bus_ext;
+	short fru;
+	short led;
+	short setno;
+	short msgno;
+	char catalog[CATSIZE];
+	char DvDr[DDNAMESIZE];
+	nchar Define[METHODSIZE];
+	nchar Configure[METHODSIZE];
+	nchar Change[METHODSIZE];
+	nchar Unconfigure[METHODSIZE];
+	nchar Undefine[METHODSIZE];
+	nchar Start[METHODSIZE];
+	nchar Stop[METHODSIZE];
+	short inventory_only;
+	char uniquetype[UNIQUESIZE];		key
+	};
+
+class PdCn {
+	char uniquetype[UNIQUESIZE];		key
+	char connkey[KEYSIZE];
+	char connwhere[LOCSIZE];
+	};
+
+class PdAt {
+	char uniquetype[UNIQUESIZE];			key
+	char attribute[ATTRNAMESIZE];
+	nchar deflt[DEFAULTSIZE];
+	nchar values[ATTRVALSIZE];
+	char width[WIDTHSIZE];
+	char type[FLAGSIZE];
+	char generic[FLAGSIZE];
+	char rep[FLAGSIZE];
+	short nls_index;
+	};
+
+class Config_Rules {
+	short phase;
+	short seq;
+	long boot_mask;
+	char rule[RULESIZE];
+	};
+
+class CuDv {
+	char name[NAMESIZE];    		key
+	short status;
+	short chgstatus;
+	char ddins[TYPESIZE];
+	char location[LOCSIZE];
+	char parent[NAMESIZE];
+	char connwhere[LOCSIZE];
+	link  PdDv PdDv uniquetype PdDvLn;
+	};
+
+class CuDep {
+	char name[NAMESIZE];
+	char dependency[NAMESIZE];
+	};
+
+class CuAt {
+	char name[NAMESIZE];
+	char attribute[ATTRNAMESIZE];
+	nchar value[ATTRVALSIZE];
+	char type[FLAGSIZE];
+	char generic[FLAGSIZE];	
+	char rep[FLAGSIZE];
+	short nls_index;
+	};
+
+class CuDvDr {
+	char resource[RESOURCESIZE];
+	char value1[VALUESIZE];
+	char value2[VALUESIZE];
+	char value3[VALUESIZE];
+	};
+
+class CuVPD {
+	char name[NAMESIZE];
+	short vpd_type;
+	longchar vpd[VPDSIZE];
+	};

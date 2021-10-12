@@ -1,0 +1,25 @@
+# @(#)07        1.12  src/bos/usr/lib/pios/predef/ti2115.gl, cmdpios, bos411, 9428A410j 3/10/94 16:58:55
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:058:__MIS::
+:330:mA::GL Emulation
+:331:mL::[devices.cat,71,8;Texas Instruments OmniLaser 2115 Page Printer]
+:295:mN::ti2115
+:475:__HIR::
+:686:zL::2
+:688:zM::Texas Instruments
+:476:zP::generic.gl
+:477:zS::!
+:685:zV::+

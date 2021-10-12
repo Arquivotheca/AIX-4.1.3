@@ -1,0 +1,75 @@
+#
+#   COMPONENT_NAME: pkgtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Remember bos.rte is always first and in general it will be in
+# a BFF image called "bos"
+bos.rte
+# Next comes all the options listed in the BOS.autoi and GOS.autoi files
+# along with the bos.loc.*, devices, printers, and other options that 
+# BOS install adds to the list for installp.
+bos.ifor_ls.client.rte
+bos.ifor_ls.client.utils
+bos.info.en_US.smit_help
+bos.info.rte
+bos.loc.*
+bos.msg.*.net.tcp.client
+bos.msg.*.net.tcp.smit
+bos.msg.*.rte
+bos.msg.*.sysmgt.smit
+bos.msg.*.terminfo.rte
+bos.net.tcp.client
+bos.net.tcp.smit
+bos.rte.mp
+bos.rte.up
+bos.sysmgt.smit
+bos.terminfo.dec.data
+bos.terminfo.ibm.data
+bos.terminfo.pc.data
+bos.terminfo.rte
+bos.terminfo.televideo.data
+bos.terminfo.wyse.data
+bos.term_compat.dec.data
+bos.term_compat.ibm.data
+bos.term_compat.rte
+bos.term_compat.sun.data
+bos.term_compat.televideo.data
+bos.term_compat.wyse.data
+devices.*
+devices.msg.*
+printers.*
+X11.apps.msmit
+X11.apps.rte
+X11.base.common
+X11.base.lib
+X11.base.rte
+X11.compat.apps.aixterm
+X11.Dt.helprun
+X11.Dt.lib
+X11.Dt.ToolTalk
+X11.fnt.defaultFonts
+X11.info.rte
+X11.loc.*.base
+X11.loc.*.vsm
+X11.motif.lib
+X11.motif.mwm
+X11.msg.*.apps.msmit
+X11.msg.*.apps.rte
+X11.msg.*.base.rte
+X11.msg.*.compat.aixterm
+X11.msg.*.motif
+X11.vsm.*
+X11.vsm.rte
+xlC.rte

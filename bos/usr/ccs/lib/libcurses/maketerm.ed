@@ -1,0 +1,747 @@
+a
+# @(#)41    1.3  src/bos/usr/ccs/lib/libcurses/maketerm.ed, libcurses, bos411, 9428A410j 2/9/94 07:20:37
+#
+#   COMPONENT_NAME: LIBCURSES
+#
+#   FUNCTIONS: maketerm.ed
+#
+#   ORIGINS: 27, 4
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#
+#	Copyright (c) 1984 AT&T
+#	  All Rights Reserved
+#
+#	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+#	The copyright notice above does not evidence any
+#	actual or intended publication of such source code.
+#
+.
+1,$d
+!#ident	"@(#)curses:screen/maketerm.ed	1.34"
+H
+!${ODE_TOOLS}/usr/bin/rm -f bool num str boolnames numnames strnames boolvals numvals strvals tnames.c tinames.c tifnames.c term4.h ./tmp/term.h.new ./tmp/tmp.awk ./tmp/term.h
+E caps
+g/^#/d
+/--- begin bool/+1,/--- end bool/-1 w bool
+/--- begin num/+1,/--- end num/-1 w num
+/--- begin str/+1,/--- end str/-1 w str
+E bool
+1,$s/"	.*/", /
+1,$s/.*	"/"/
+1,$-10g/^/.,+9j
++,$j
+1i
+char	*boolnames[] =
+	{
+.
+$a
+0
+	};
+
+.
+w tinames.c
+e bool
+1,$s/^[^"]*"[^"]*".//
+1,$s/"	.*/", /
+1,$-10g/^/.,+9j
++,$j
+1i
+char	*boolcodes[] =
+	{
+.
+$a
+0
+	};
+
+.
+w tnames.c
+e bool
+1,$s/^\([a-z][0-9a-z_]*\),.*/"\1", /
+1,$-4g/^/.,+3j
++,$j
+1i
+char	*boolfnames[] =
+	{
+.
+$a
+0
+	};
+
+.
+w tifnames.c
+e bool
+1,$s;"[^"]*"[ 	]*".."	;/* ;
+1,$s;$; */;
+1,$s;^;	;
+1i
+    char
+.
+$a
+	Sentinel;		/* End of bools. DO NOT MOVE! */
+.
+w boolvals
+e num
+1,$s/"	.*/", /
+1,$s/.*	"/"/
+1,$-10g/^/.,+9j
++,$j
+1i
+char	*numnames[] =
+	{
+.
+$a
+0
+	};
+
+.
+0r tinames.c
+w tinames.c
+e num
+1,$s/^[^"]*"[^"]*".//
+1,$s/"	.*/", /
+1,$-10g/^/.,+9j
++,$j
+1i
+char	*numcodes[] =
+	{
+.
+$a
+0
+	};
+
+.
+0r tnames.c
+w tnames.c
+e num
+1,$s/^\([a-z][0-9a-z_]*\),.*/"\1", /
+1,$-4g/^/.,+3j
++,$j
+1i
+char	*numfnames[] =
+	{
+.
+$a
+0
+	};
+
+.
+0r tifnames.c
+w tifnames.c
+e num
+1,$s;"[^"]*"[ 	]*".."	;/* ;
+1,$s;$; */;
+1,$s;^;	;
+1i
+    short
+.
+$a
+	Sentinel;		/* End of nums. DO NOT MOVE! */
+.
+w numvals
+e str
+1,$s/"	.*/", /
+1,$s/.*	"/"/
+1,$-10g/^/.,+9j
++,$j
+1i
+char	*strnames[] =
+	{
+.
+$a
+0
+	};
+
+.
+0r tinames.c
+w tinames.c
+e str
+1,$s/^[^"]*"[^"]*".//
+1,$s/"	.*/", /
+1,$-10g/^/.,+9j
++,$j
+1i
+char	*strcodes[] =
+	{
+.
+$a
+0
+	};
+
+.
+0r tnames.c
+w tnames.c
+e str
+1,$s/^\([a-z][0-9a-z_]*\),.*/"\1", /
+1,$-4g/^/.,+3j
++,$j
+1i
+char	*strfnames[] =
+	{
+.
+$a
+0
+	};
+
+.
+0r tifnames.c
+w tifnames.c
+e str
+1,$s;"[^"]*"[ 	]*".."	;/* ;
+1,$s;$; */;
+1,$s;^;	strs.;
+$a
+	Sentinel;		/* End of strings. DO NOT MOVE! */
+.
+w strvals
+1,$d
+r tnames.c
+1i
+/* #ident	"@(#)curses:screen/maketerm.ed	1.34" */
+/* tnames.c: Made automatically from caps and maketerm.ed - don't edit me! */
+.
+1,$s/ $//
+0r copyright.h
+/screen\/copyright\.h/d
+w tnames.c
+1,$d
+r tinames.c
+1i
+/* #ident	"@(#)curses:screen/maketerm.ed	1.34" */
+/* tinames.c: Made automatically from caps and maketerm.ed - don't edit me! */
+.
+1,$s/ $//
+0r copyright.h
+/screen\/copyright\.h/d
+w tinames.c
+1,$d
+r tifnames.c
+1i
+/* #ident	"@(#)curses:screen/maketerm.ed	1.34" */
+/* tifnames.c: Made automatically from caps and maketerm.ed - don't edit me! */
+.
+1,$s/ $//
+0r copyright.h
+/screen\/copyright\.h/d
+w tifnames.c
+e bool
+1,$d
+a
+
+typedef char *charptr;
+struct strs {
+    charptr
+.
+r strvals
+1,.s/strs\.//
+$a
+};
+
+struct _bool_struct {
+.
+r boolvals
+a
+};
+
+struct _num_struct {
+.
+r numvals
+a
+};
+.
+w ./tmp/term.h.new
+e ./tmp/term.h.new
+g/^	./s/^	/	_/
+w ./tmp/term.h.new
+e boolvals
+.kb
+.r numvals
+.kn
+.r strvals
+.ks
+1,'sv/^	/d
+1,'ss/^	//
+1,'ss/	[^	].*/	/
+1,'ss/,/ /
+1,'bs/.*/#define &	CURB _&/
+'b+1,'ns/.*/#define &	CURN _&/
+'n+1,'ss/.*/#define &	CURS _&/
+1,'ss/strs\.//
+1,'sw ./tmp/space
+1,$d
+E ./tmp/space
+ks
+1,'ss/strs.\(.\)/strs._\1/
+1,'sg/;/d
+w ./tmp/term.h.new1
+e ./tmp/term.h.new1
+$r ./tmp/term.h.new
+w ./tmp/term.h.new
+e ./tmp/term.h.new
+1,$s/[ 	]*$//
+1,$s/CURS _strs/CURS strs/
+1;/CURS strs/+100;.,+99s/CURS strs/CURS strs2/
+1,.w ./tmp/part1
+.+1,$w ./tmp/part2
+1,$d
+E ./tmp/part1
+kz
+r ./tmp/part2
+'z+1,'z+100s/CURS strs/CURS strs3/
+.+1,$s/CURS strs/CURS strs4/
+/^struct strs/+101s/,/;/
+a
+};
+
+struct strs2 {
+    charptr
+.
++100s/,/;/
+a
+};
+
+struct strs3 {
+    charptr
+.
++100s/,/;/
+a
+};
+
+struct strs4 {
+    charptr
+.
+1,$s/_Sentinel/Sentinel/
+w ./tmp/term.h.new
+e ./tmp/term.h.new
+g/[ 	.]_cursor_/s/_cursor_/_crsr_/
+g/[ 	.]_delete_/s/_delete_/_dlt_/
+g/[ 	.]_enter_/s/_enter_/_entr_/
+g/[ 	.]_insert_/s/_insert_/_ins_/
+g/[ 	.]_key_/s/_key_/_ky_/
+g/[ 	.]_keypad_/s/_keypad_/_kpad_/
+g/[ 	.]_label_/s/_label_/_labl_/
+g/[ 	.]_memory_/s/_memory_/_mem_/
+g/[ 	.]_parm_/s/_parm_/_prm_/
+g/[ 	.]_scroll_/s/_scroll_/_scrll_/
+g/^	_......[,;]			\//s/,	/,/
+g/^	_..............[,;]		\//s/,	/,/
+g/^	_......................[,;]	\//s/,	/,/
+w ./tmp/term.h.new
+e ./tmp/term.h.new
+!# the following lines GO away when Vr2 compat code goes away
+1;/^#define auto_left_margin/,/^#define xon_xoff/s/CURB.*/CUR _b/
+1;/^#define auto_left_margin/,/^#define xon_xoff/w ./tmp/tmp.term.h
+1;/^#define auto_left_margin/,/^#define xon_xoff/d
+!${ODE_TOOLS}/usr/bin/echo '{printf "\%s\%d\\n", $0,++i}' > ./tmp/tmp.awk
+.-1r !${ODE_TOOLS}/usr/bin/awk -f ./tmp/tmp.awk < ./tmp/tmp.term.h
+1;/^#define columns/,/^#define width_status_line/s/CURN.*/CUR _c/
+1;/^#define columns/,/^#define width_status_line/w ./tmp/tmp.term.h
+1;/^#define columns/,/^#define width_status_line/d
+!${ODE_TOOLS}/usr/bin/echo '{printf "\%s\%d\\n", $0,++i}' > ./tmp/tmp.awk
+.-1r !${ODE_TOOLS}/usr/bin/awk -f ./tmp/tmp.awk < ./tmp/tmp.term.h
+1;/^#define back_tab/,/^#define lab_f8/s/CURS.*/CUR _Vr2_Astrs._s/
+1;/^#define back_tab/,/^#define lab_f8/w ./tmp/tmp.term.h
+1;/^#define back_tab/,/^#define lab_f8/d
+!${ODE_TOOLS}/usr/bin/echo '{printf "\%s\%d\\n", $0,++i}' > ./tmp/tmp.awk
+.-1r !${ODE_TOOLS}/usr/bin/awk -f ./tmp/tmp.awk < ./tmp/tmp.term.h
+1;/^#define lab_f9/,/^#define prtr_non/s/CURS.*/CUR _Vr2_Bstrs._s/
+1;/^#define lab_f9/,/^#define prtr_non/w ./tmp/tmp.term.h
+1;/^#define lab_f9/,/^#define prtr_non/d
+!${ODE_TOOLS}/usr/bin/echo 'BEGIN{i=100}\n{printf "\%s\%d\\n", $0,++i}' > ./tmp/tmp.awk
+.-1r !${ODE_TOOLS}/usr/bin/awk -f ./tmp/tmp.awk < ./tmp/tmp.term.h
+1i
+
+/* For AIX, #define the _b*, _c*, and _s* to their respective AIX
+ * names so that source code compatibility is maintained for both
+ * AT&T and AIX.
+ */
+
+#define Auto_left_margin     _b1   /* cub1 wraps from column 0 to last column*/
+#define Auto_right_margin    _b2   /* Terminal has automatic margins*/
+#define Beehive_glitch       _b3   /* Beehive (f1=escape, f2=ctrl C)*/
+#define Ceol_standout_glitch _b4   /* Standout not erased by overwriting (hp)*/
+#define Eat_newline_glitch   _b5   /* newline ignored after 80 cols (Concept)*/
+#define Erase_overstrike     _b6   /* Can erase overstrikes with a blank*/
+#define Generic_type         _b7   /* Generic line type (e.g. dialup, switch).*/
+#define Hard_copy            _b8   /* Hardcopy terminal*/
+#define Has_meta_key         _b9   /* Has a meta key (shift, sets parity bit)*/
+#define Has_status_line      _b10  /* Has extra "status line"*/
+#define Insert_null_glitch   _b11  /* Insert mode distinguishes nulls*/
+#define Memory_above         _b12  /* Display may be retained above the screen*/
+#define Memory_below         _b13  /* Display may be retained below the screen*/
+#define Move_insert_mode     _b14  /* Safe to move while in insert mode*/
+#define Move_standout_mode   _b15  /* Safe to move in standout modes*/
+#define Over_strike          _b16  /* Terminal overstrikes*/
+#define Status_line_esc_ok   _b17  /* Escape can be used on the status line*/
+#define Teleray_glitch       _b18  /* Tabs destructive, magic so char (t1061)*/
+#define Tilde_glitch         _b19  /* Hazeltine; can't print ~'s*/
+#define Transparent_underline _b20  /* underline character overstrikes*/
+#define Xon_xoff             _b21  /* Terminal uses xon/xoff handshaking*/
+
+#define Columns              _c1   /* Number of columns in a line*/
+#define Init_tabs            _c2   /* Tabs initially every # spaces.*/
+#define Lines                _c3   /* Number of lines on screen or page*/
+#define Lines_of_memory      _c4   /* Lines of memory if > lines.  0 => varies*/
+#define Magic_cookie_glitch  _c5   /* Number blank chars left by smso or rmso*/
+#define Padding_baud_rate    _c6   /* Lowest baud rate where padding needed*/
+#define Virtual_terminal     _c7   /* Virtual terminal number (CB/Unix)*/
+#define Width_status_line    _c8   /* # columns in status line*/
+
+#define Back_tab             _s1	/* Back tab (P)*/
+#define Bell                 _s2	/* Audible signal (bell) (P)*/
+#define Carriage_return      _s3   	/* Carriage return (P*)*/
+#define Change_scroll_region _s4    /* change to lines #1 thru #2 (vt100) (PG)*/
+#define Clear_all_tabs       _s5   	/* Clear all tab stops. (P)*/
+#define Clear_screen         _s6   	/* Clear screen (P*)*/
+#define Clr_eol              _s7	/* Clear to end of line (P)*/
+#define Clr_eos              _s8	/* Clear to end of display (P*)*/
+#define Column_address       _s9   	/* Set cursor column (PG)*/
+#define Command_character    _s10  	/* Term. settable cmd char in prototype*/
+#define Cursor_address       _s11  	/* Cursor motion to row #1 col #2 (PG)*/
+#define Cursor_down          _s12  	/* Down one line*/
+#define Cursor_home          _s13  	/* Home cursor (if no cup)*/
+#define Cursor_invisible     _s14  	/* Make cursor invisible*/
+#define Cursor_left          _s15  	/* Move cursor left one space.*/
+#define Cursor_mem_address   _s16       /* Memory relative cursor addressing.*/
+#define Cursor_normal        _s17  	/* Make cursor appear normal (undo vs/vi)*/
+#define Cursor_right         _s18  	/* Non-destructive space (cursor right)*/
+#define Cursor_to_ll         _s19  	/* Last line, first column (if no cup)*/
+#define Cursor_up            _s20  		/* Upline (cursor up)*/
+#define Cursor_visible       _s21  	/* Make cursor very visible*/
+#define Delete_character     _s22  	/* Delete character (P*)*/
+#define Delete_line          _s23  	/* Delete line (P*)*/
+#define Dis_status_line      _s24  	/* Disable status line*/
+#define Down_half_line       _s25  	/* Half-line down (forward 1/2 linefeed)*/
+#define Enter_alt_charset_mode _s26   /* Start alternate character set (P)*/
+#define Enter_blink_mode     _s27  	/* Turn on blinking*/
+#define Enter_bold_mode      _s28  	/* Turn on bold (extra bright) mode*/
+#define Enter_ca_mode        _s29  	/* String to begin programs that use cup*/
+#define Enter_delete_mode    _s30  	/* Delete mode (enter)*/
+#define Enter_dim_mode       _s31  	/* Turn on half-bright mode*/
+#define Enter_insert_mode    _s32  	/* Insert mode (enter)*/
+#define Enter_secure_mode    _s33  	/* Turn on blank mode (chars invisible)*/
+#define Enter_protected_mode _s34   /* Turn on protected mode*/
+#define Enter_reverse_mode   _s35   /* Turn on reverse video mode*/
+#define Enter_standout_mode  _s36   /* Begin stand out mode*/
+#define Enter_underline_mode _s37   /* Start underscore mode*/
+#define Erase_chars          _s38   /* Erase #1 characters (PG)*/
+#define Exit_alt_charset_mode _s39  /* End alternate character set (P)*/
+#define Exit_attribute_mode  _s40   /* Turn off all attributes*/
+#define Exit_ca_mode         _s41  	/* String to end programs that use cup*/
+#define Exit_delete_mode     _s42  	/* End delete mode*/
+#define Exit_insert_mode     _s43  	/* End insert mode*/
+#define Exit_standout_mode   _s44   /* End stand out mode*/
+#define Exit_underline_mode  _s45   /* End underscore mode*/
+#define Flash_screen         _s46  	/* Visible bell (may not move cursor)*/
+#define Form_feed            _s47	/* Hardcopy terminal page eject (P*)*/
+#define From_status_line     _s48  	/* Return from status line*/
+#define Init_1string         _s49  	/* Terminal initialization string*/
+#define Init_2string         _s50  	/* Terminal initialization string*/
+#define Init_3string         _s51  	/* Terminal initialization string*/
+#define Init_file            _s52	/* Name of file containing is*/
+#define Insert_character     _s53  	/* Insert character (P)*/
+#define Insert_line          _s54  	/* Add new blank line (P*)*/
+#define Insert_padding       _s55  	/* Insert pad after character inserted (P*)*/
+#define Key_backspace        _s56  	/* Sent by backspace key*/
+#define Key_catab            _s57	/* Sent by clear-all-tabs key.*/
+#define Key_clear            _s58	/* Sent by clear screen or erase key.*/
+#define Key_ctab             _s59	/* Sent by clear-tab key*/
+#define Key_dc               _s60	/* Sent by delete character key.*/
+#define Key_dl               _s61	/* Sent by delete line key.*/
+#define Key_down             _s62	/* Sent by terminal down arrow key*/
+#define Key_eic              _s63	/* Sent by rmir or smir in insert mode.*/
+#define Key_eol              _s64	/* Sent by clear-to-end-of-line key.*/
+#define Key_eos              _s65	/* Sent by clear-to-end-of-screen key.*/
+#define Key_f0               _s66	/* Sent by function key f0.*/
+#define Key_f1               _s67	/* Sent by function key f1.*/
+#define Key_f10              _s68	/* Sent by function key f10.*/
+#define Key_f2               _s69	/* Sent by function key f2.*/
+#define Key_f3               _s70	/* Sent by function key f3.*/
+#define Key_f4               _s71	/* Sent by function key f4.*/
+#define Key_f5               _s72	/* Sent by function key f5.*/
+#define Key_f6               _s73	/* Sent by function key f6.*/
+#define Key_f7               _s74	/* Sent by function key f7.*/
+#define Key_f8               _s75	/* Sent by function key f8.*/
+#define Key_f9               _s76	/* Sent by function key f9.*/
+#define Key_home             _s77	/* Sent by home key.*/
+#define Key_ic               _s78	/* Sent by ins char/enter ins mode key.*/
+#define Key_il               _s79	/* Sent by insert line.*/
+#define Key_left             _s80	/* Sent by terminal left arrow key*/
+#define Key_ll               _s81	/* Sent by home-down key*/
+#define Key_npage            _s82	/* Sent by next-page key*/
+#define Key_ppage            _s83	/* Sent by previous-page key*/
+#define Key_right            _s84	/* Sent by terminal right arrow key*/
+#define Key_sf               _s85	/* Sent by scroll-forward/down key*/
+#define Key_sr               _s86	/* Sent by scroll-backward/up key*/
+#define Key_stab             _s87	/* Sent by set-tab key*/
+#define Key_up               _s88	/* Sent by terminal up arrow key*/
+#define Keypad_local         _s89	/* Out of "keypad transmit" mode*/
+#define Keypad_xmit          _s90  	/* Put terminal in "keypad transmit" mode*/
+#define Lab_f0               _s91	/* Labels on function key f0 if not f0*/
+#define Lab_f1               _s92	/* Labels on function key f1 if not f1*/
+#define Lab_f10              _s93	/* Labels on function key f10 if not f10*/
+#define Lab_f2               _s94	/* Labels on function key f2 if not f2*/
+#define Lab_f3               _s95	/* Labels on function key f3 if not f3*/
+#define Lab_f4               _s96	/* Labels on function key f4 if not f4*/
+#define Lab_f5               _s97	/* Labels on function key f5 if not f5*/
+#define Lab_f6               _s98	/* Labels on function key f6 if not f6*/
+#define Lab_f7               _s99	/* Labels on function key f7 if not f7*/
+#define Lab_f8               _s100	/* Labels on function key f8 if not f8*/
+#define Lab_f9               _s101	/* Labels on function key f9 if not f9*/
+#define Meta_off             _s102	/* Turn off "meta mode"*/
+#define Meta_on              _s103	/* Turn on "meta mode" (8th bit)*/
+#define Newline              _s104	/* Newline (behaves like cr followed by lf)*/
+#define Pad_char             _s105	/* Pad character (rather than null)*/
+#define Parm_dch             _s106	/* Delete #1 chars (PG*)*/
+#define Parm_delete_line     _s107 	/* Delete #1 lines (PG*)*/
+#define Parm_down_cursor     _s108 	/* Move cursor down #1 lines. (PG*)*/
+#define Parm_ich             _s109	/* Insert #1 blank chars (PG*)*/
+#define Parm_index           _s110 	/* Scroll forward #1 lines. (PG)*/
+#define Parm_insert_line     _s111 	/* Add #1 new blank lines (PG*)*/
+#define Parm_left_cursor     _s112 	/* Move cursor left #1 spaces (PG)*/
+#define Parm_right_cursor    _s113 	/* Move cursor right #1 spaces. (PG*)*/
+#define Parm_rindex          _s114 	/* Scroll backward #1 lines. (PG)*/
+#define Parm_up_cursor       _s115 	/* Move cursor up #1 lines. (PG*)*/
+#define Pkey_key             _s116	/* Prog funct key #1 to type string #2*/
+#define Pkey_local           _s117 	/* Prog funct key #1 to execute string #2*/
+#define Pkey_xmit            _s118	/* Prog funct key #1 to xmit string #2*/
+#define Print_screen         _s119 	/* Print contents of the screen*/
+#define Prtr_off             _s120	/* Turn off the printer*/
+#define Prtr_on              _s121	/* Turn on the printer*/
+#define Repeat_char          _s122 	/* Repeat char #1 #2 times.  (PG*)*/
+#define Reset_1string        _s123 	/* Reset terminal completely to sane modes.*/
+#define Reset_2string        _s124 	/* Reset terminal completely to sane modes.*/
+#define Reset_3string        _s125 	/* Reset terminal completely to sane modes.*/
+#define Reset_file           _s126 	/* Name of file containing reset string.*/
+#define Restore_cursor       _s127 	/* Restore cursor to position of last sc.*/
+#define Row_address          _s128 	/* Like hpa but sets row. (PG)*/
+#define Save_cursor          _s129 	/* Save cursor position. (P)*/
+#define Scroll_forward       _s130 	/* Scroll text up (P)*/
+#define Scroll_reverse       _s131 	/* Scroll text down (P)*/
+#define Set_attributes       _s132 	/* Define the video attributes (PG9)*/
+#define Set_tab              _s133	/* Set a tab in all rows, current column.*/
+#define Set_window           _s134 	/* Current window is lines #1-#2 cols #3-#4*/
+#define Tab                  _s135	/* Tab to next 8 space hardware tab stop.*/
+#define To_status_line       _s136 	/* Go to status line*/
+#define Underline_char       _s137 	/* Underscore one char and move past it*/
+#define Up_half_line         _s138 	/* Half-line up (reverse 1/2 linefeed)*/
+#define Init_prog            _s139 		/* Path name of program for init.*/
+#define Key_a1               _s140 		/* Upper left of keypad*/
+#define Key_a3               _s141 		/* Upper right of keypad*/
+#define Key_b2               _s142 		/* Center of keypad*/
+#define Key_c1               _s143 		/* Lower left of keypad*/
+#define Key_c3               _s144 		/* Lower right of keypad*/
+#define Prtr_non             _s145 		/* Turn on the printer for #1 bytes.*/
+
+.
+!${ODE_TOOLS}/usr/bin/rm -f ./tmp/tmp.term.h ./tmp/tmp.awk
+w ./tmp/term.h.new
+e ./tmp/term.h.new
+!# Vr2 compat code ends here
+!##############################################################################
+1i
+/* #ident	"@(#)curses:screen/maketerm.ed	1.34" */
+/*
+ * term.h - this file is automatically made from caps and maketerm.ed.
+ * Don't make changes directly to term.h.
+ *
+ * Guard against multiple includes.
+ */
+
+#ifndef _H_TERM
+#define _H_TERM
+
+.
+$a
+
+struct _str_struct {
+	struct strs strs;
+	struct strs2 strs2;
+	struct strs3 strs3;
+	struct strs4 strs4;
+};
+
+#define NUM_ATTRIBUTES	9
+#define	UNACCESSIBLE		1
+#define	NO_TERMINAL		2
+#define CORRUPTED		3
+#define	ENTRY_TOO_LONG		4
+#define	TERMINFO_TOO_LONG	5
+#define	TERM_BAD_MALLOC		6
+#define NOT_READABLE		7
+#define _VR2_COMPAT_CODE
+#ifdef _VR2_COMPAT_CODE
+struct _Vr2_Astrs {
+	charptr
+	   _s1,  _s2,  _s3,  _s4,  _s5,  _s6,  _s7,  _s8,  _s9,  _s10,
+	   _s11, _s12, _s13, _s14, _s15, _s16, _s17, _s18, _s19, _s20,
+	   _s21, _s22, _s23, _s24, _s25, _s26, _s27, _s28, _s29, _s30,
+	   _s31, _s32, _s33, _s34, _s35, _s36, _s37, _s38, _s39, _s40,
+	   _s41, _s42, _s43, _s44, _s45, _s46, _s47, _s48, _s49, _s50,
+	   _s51, _s52, _s53, _s54, _s55, _s56, _s57, _s58, _s59, _s60,
+	   _s61, _s62, _s63, _s64, _s65, _s66, _s67, _s68, _s69, _s70,
+	   _s71, _s72, _s73, _s74, _s75, _s76, _s77, _s78, _s79, _s80,
+	   _s81, _s82, _s83, _s84, _s85, _s86, _s87, _s88, _s89, _s90,
+	   _s91, _s92, _s93, _s94, _s95, _s96, _s97, _s98, _s99, _s100;
+};
+
+struct _Vr2_Bstrs {
+	charptr
+	   _s101, _s102, _s103, _s104, _s105, _s106, _s107, _s108, _s109, _s110,
+	   _s111, _s112, _s113, _s114, _s115, _s116, _s117, _s118, _s119, _s120,
+	   _s121, _s122, _s123, _s124, _s125, _s126, _s127, _s128, _s129, _s130,
+	   _s131, _s132, _s133, _s134, _s135, _s136, _s137, _s138, _s139, _s140,
+	   _s141, _s142, _s143, _s144, _s145;
+};
+#endif /* _VR2_COMPAT_CODE */
+
+typedef struct {
+	char *_sends;	/* Characters sent when key is pressed */
+	short _keyval;	/* "char" we pass back to program */
+} _KEY_MAP;
+
+/*
+ * This definition for the term struct allows the boolean, number
+ * and string information to grow in the future and still allow .o
+ * compatibility.
+ */
+
+struct term {
+#ifdef _VR2_COMPAT_CODE
+	char
+	   _b1,  _b2,  _b3,  _b4,  _b5,  _b6,  _b7,  _b8,  _b9,  _b10,
+	   _b11, _b12, _b13, _b14, _b15, _b16, _b17, _b18, _b19, _b20, _b21;
+	short
+	   _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8;
+	struct _Vr2_Astrs _Vr2_Astrs;
+	struct _Vr2_Bstrs _Vr2_Bstrs;
+#endif /* _VR2_COMPAT_CODE */
+	short Filedes;		/* file descriptor being written to */
+	SGTTY Ottyb,		/* original state of the terminal */
+	      Nttyb;		/* current state of the terminal */
+#ifdef DIOCSETT
+	struct termcb new, old;	/* CB/UNIX virtual terminals */
+#endif
+#ifdef LTILDE
+	int newlmode, oldlmode;	/* BSD tty driver */
+#endif
+	/* end of Vr2 structure */
+	struct _bool_struct *_bools;
+	struct _num_struct *_nums;
+	struct _str_struct *_strs;
+	char *_strtab;
+#ifdef FIONREAD
+	long timeout;		/* for BSD halfdelay mode */
+#endif
+	/* end of Vr3 structure */
+	chtype sgr_mode;		/* current phys. graphic rendition */
+	chtype sgr_faked;		/* attributes faked by vidputs */
+	int    _delay;			/* timeout for inputs */
+	int    _inputfd;		/* input file descriptor */
+	int    _check_fd;		/* typeahead file descriptor */
+	_KEY_MAP	**_keys,	/* key map */
+			*internal_keys;	/* pointer to free key structures */
+	short		_ksz,		/* size of keymap */
+			_lastkey_ordered,/* where the last ordered key is */
+			_lastmacro_ordered,/* where the last ordered macro is */
+			_first_macro;
+	bool				/* map of which chars start fn keys */
+			funckeystarter[0400];	
+	bool		_fl_rawmode,	/* in cbreak(=1) or raw(=2) mode */
+			fl_typeahdok,	/* ok to use typeahead */
+			_cursorstate,	/* cursor: 0=invis, 1=norm, 2=vvis */
+			_iwait;		/* true if input-pending */
+	short		_regs[26];	/* tparm static registers */
+#define INP_QSIZE	32
+	short				/* a place to put stuff ungetch'ed */
+			_input_queue[INP_QSIZE],
+			_ungotten;	/* # chars ungotten by ungetch() */
+	char		_chars_on_queue; /* # chars on queue */
+#ifdef _VR3_COMPAT_CODE
+	_ochtype	*_acsmap;
+	chtype		*_acs32map;	/* map of alternate char set chars */
+#else /* _VR3_COMPAT_CODE */
+	chtype		*_acsmap;	/* map of alternate char set chars */
+#endif /* _VR3_COMPAT_CODE */
+	char		*turn_on_seq[NUM_ATTRIBUTES];
+	chtype		bit_vector;
+	char		*cursor_seq[3];
+	char		_termname[15];
+	char		*turn_off_seq[3];
+	chtype		check_turn_off;
+	chtype		non_faked_mode;
+};
+
+typedef struct term TERMINAL;
+
+/* allow old names for these capabilities */
+#define beehive_glitch	no_esc_ctlc
+#define teleray_glitch	dest_tabs_magic_smso
+
+extern TERMINAL			*cur_term;
+extern struct _bool_struct	*cur_bools;
+extern struct _num_struct	*cur_nums;
+extern struct _str_struct	*cur_strs;
+
+#ifdef SINGLE
+extern TERMINAL			_first_term;
+extern struct _bool_struct	_frst_bools;
+extern struct _num_struct	_frst_nums;
+extern struct _str_struct	_frst_strs;
+
+# define CUR			_first_term.
+# define CURB			_frst_bools.
+# define CURN			_frst_nums.
+# define CURS			_frst_strs.
+# define PROGTTY		_first_term.Nttyb
+# define SHELLTTY		_first_term.Ottyb
+#else
+# define CUR			cur_term->
+# define CURB			cur_bools->
+# define CURN			cur_nums->
+# define CURS			cur_strs->
+# define PROGTTY		(cur_term->Nttyb)
+# define SHELLTTY		(cur_term->Ottyb)
+#endif
+ 
+extern	chtype		termattrs();
+extern	TERMINAL	*setcurterm(/* TERMINAL *newterminal */);
+
+#ifdef	_VR3_COMPAT_CODE
+extern	TERMINAL	*set_curterm(/* TERMINAL *newterminal */);
+#endif	/* _VR3_COMPAT_CODE */
+
+#ifndef NOMACROS
+#define del_curterm	delterm
+#define set_curterm	setcurterm
+#endif /* NOMACROS */
+
+extern	short	term_errno;
+
+extern	char	*tparm(), *tgoto(), *tgetstr(), *tigetstr(),
+		term_parm_err[], *term_err_strings[], *Def_term, *termname();
+extern	char	*boolnames[], *boolcodes[], *boolfnames[],
+		*numnames[], *numcodes[], *numfnames[],
+		*strnames[], *strcodes[], *strfnames[];
+extern	int	tputs(), putp(), vidputs(), vidattr();
+
+extern	int	resetterm(), fixterm(), saveterm(), restartterm(), del_curterm(),
+		delterm();
+
+extern	void	termerr(), tinputfd();
+#endif /* _H_TERM */
+.
+0r copyright.h
+/screen\/copyright\.h/d
+w term4.h
+!${ODE_TOOLS}/usr/bin/rm -f boolnames boolvals bool numnames numvals num strnames strvals str ./tmp/term.h.new ./tmp/tmp.awk ./tmp/tmp.term.h
+q

@@ -1,0 +1,109 @@
+#!/bin/bsh
+# @(#)07	1.28  src/bos/etc/brc/brc, cfgetc, bos411, 9428A410j 4/15/91 12:27:03
+#
+# COMPONENT_NAME: (CFGETC) Base Operating System Configuration
+#
+# FUNCTIONS: brc
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+#
+#  Program: brc
+#
+################################################################
+
+PATH=/bin:/usr/bin:/etc
+ODMDIR=/etc/objrepos
+export PATH ODMDIR
+
+if [ -r /etc/filesystems ]; then
+	fsck -fp /usr
+	fsck -fp /tmp
+#	echo "Mounting /usr"
+#	mount /usr
+	echo "Mounting /tmp"
+	mount /tmp
+else
+	fsck -fp /dev/hd2
+	fsck -fp /dev/hd3
+#	echo "Mounting /usr"
+#	mount /dev/hd2 /usr
+	echo "Mounting /tmp"
+	mount /dev/hd3 /tmp
+fi
+
+#
+# sync the volume group
+#
+/etc/syncvg -v rootvg & 
+
+# ***** critical section - nothing should be added between this ******
+# ***** point and the end of the critical section marked below  ******
+#
+#	run the new configuration manager for phase 2
+#
+echo "Running Config. Manager Phase 2"
+cfgmgr -s -d >/tmp/phase2.out
+
+echo "Setting Up System Console "
+/etc/methods/cfgcon
+
+#
+# save our base customized here
+# (this must be done AFTER system console setup) 
+
+echo "Saving Base Customize Data to boot disk"
+savebase 
+
+# remove unavailable ttys from inittab
+# also remove ttyx if it is serving as the console
+/etc/methods/cleantty
+sync
+sync
+
+#********* end of critical section ***************
+
+echo "Starting the sync daemon"
+nohup /etc/syncd 60 > /dev/null 2>&1 &
+
+if [ -x /usr/lib/errdemon ]; then 
+    echo "Starting the error daemon"
+    /usr/lib/errdemon
+fi
+
+/etc/methods/showled 0xFFF
+
+# if shutdown did not end gracefully
+rm -f /etc/nologin
+
+# if locks were remaining
+rm -f /etc/locks/*
+
+# execute system configuration check
+/etc/methods/cfgchk
+
+# setup Service IPL and display message for missing devices
+IPLPATH=`odmget -q"attribute=keylock and value=normal" CuAt`
+if [ "X$IPLPATH" = X ]
+then
+	/etc/lpp/diagnostics/bin/diagpt </dev/console >/dev/console 2>&1
+	/etc/lpp/diagnostics/bin/diagipl </dev/console >/dev/console 2>&1
+else
+	DEVICES=`odmget -qchgstatus=3 CuDv`
+	if [ "X$DEVICES" != X ]
+	then
+		echo "A device that was previously detected could not be found."
+		echo "To cleanup the system configuration, run diag -a." 
+	fi
+fi
+
+echo "System initialization completed."
+
+exit 0

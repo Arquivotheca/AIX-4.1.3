@@ -1,0 +1,44 @@
+#!/etc/drivers/solddpin
+* @(#)69	1.5  src/bos/kernext/sol/solddpin.exp, sysxsol, bos411, 9428A410j 6/17/91 15:12:53
+*
+* COMPONENT_NAME: (SYSXSOL) Serial Optical Link DD Bottom Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+sol_ddi
+cck_proc
+sol_select
+sol_xmit_wait
+sol_cio_get_stat
+sol_report_status
+sol_fastwrt
+sol_com_write
+sol_check_mbufs
+sol_get_rcv
+sol_buildchain
+sol_rcv_notify
+sol_trace
+sol_cdt_func
+startup_chip
+stop_sla
+imcs_init
+imcs_terminate
+imcs_diag_start
+imcs_diag_stop
+imcs_start
+imcs_stop
+imcs_declare
+imcs_undeclare
+imcs_ctl
+imcs_sendmsg
+imcslra
+sol_loopback

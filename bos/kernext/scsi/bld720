@@ -1,0 +1,292 @@
+#! /bin/sh
+# @(#)73	1.2  src/bos/kernext/scsi/bld720, sysxscsi, bos411, 9432A411a 8/1/94 12:03:14
+#
+#   COMPONENT_NAME: SYSXSCSI (CONVERT720 SCRIPT)
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# this is a shell archive, meaning:
+# 1. Remove everything above the #! /bin/sh line
+# 2. Save the resulting text in a file.
+# 3. Execute the file with /bin/sh to create the files:
+#   bldscr (directory)
+# This archive created: Tue May 18 15:31:15 PDT 1993
+#
+#
+export PATH; PATH=/bin:$PATH
+#
+if [ -f bldscr ]
+then
+echo shar: can not write a directory over file bldscr
+else
+if [ ! -d bldscr ]
+then
+echo shar: creating directory bldscr
+mkdir bldscr
+fi
+echo shar: entering directory bldscr
+cd bldscr
+if [ -f convert720 ]
+then
+echo shar: will not over-write existing file convert720
+else
+echo shar: extracting 'convert720',     1313 characters
+cat > convert720 <<'Funky_Stuff'
+#
+#   COMPONENT_NAME: SYSXSCSI (CONVERT720 SCRIPT)
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#this script will create the imbed files for pscsi720dd from the
+#file output by the NCR 53C720 compiler (out2.h).  The reverse.c
+#program is unconditionally compiled.  Its main job is to byte-swap and do
+#any other needed processing for the SCRIPTS array.
+#The main processing is performed by the sed commands in the sedscr file.  These
+#create 3 files:  header.imbed, bottom.imbed, and top.imbed.  Note that the
+#output file from the reverse step (psc_script.in) will be read in by one of
+#the sed commands and thus ends up being imbedded in one of the three output
+#files.
+print "Converting NCR compiler output into pscsi720dd ss header files....\n"
+cc reverse.c -o reverse
+reverse out2.h > psc_script.in
+sed -f sedscr.720 out2.h > pscsi720tss.h
+prologs -C sysxscsi -O 27 -D 1994 -P 1 -T header -k pscsi720tss.h
+prologs -C sysxscsi -O 27 -D 1994 -P 1 -T header -k pscsi720bss.h
+prologs -C sysxscsi -O 27 -D 1994 -P 1 -T header -k pscsi720hss.h
+tput bel
+Funky_Stuff
+len=`wc -c < convert720`
+if [ $len !=     1313 ] ; then
+echo error: convert720 was $len bytes long, should have been     1313
+fi
+fi # end of overwriting check
+if [ -f reverse.c ]
+then
+echo shar: will not over-write existing file reverse.c
+else
+echo shar: extracting 'reverse.c',     1245 characters
+cat > reverse.c <<'Funky_Stuff'
+/*
+ *   COMPONENT_NAME: SYSXSCSI (REVERSE.C BUILD UTILITY PROGRAM)
+ *
+ *   FUNCTIONS: main
+ *
+ *   ORIGINS: 27
+ *
+ *
+ *   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+ *   All Rights Reserved
+ *   Licensed Materials - Property of IBM
+ *   US Government Users Restricted Rights - Use, duplication or
+ *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+#include <stdio.h>
+#include "out2.h"
+
+main()
+{
+/* this macro returns the byte-swapped version of a 32-bit quantity     */
+#define WORDREVERSE(a)                                                    \
+    (((ulong)(a) & 0xff000000)>>24 | ((ulong)(a) & 0x00ff0000)>>8 |        \
+    ((ulong)(a) & 0x0000ff00)<<8  | ((ulong)(a) & 0x000000ff)<<24)
+
+        ulong   *script_ptr;
+        int     i;
+
+        script_ptr = (ulong)SCRIPT;
+
+        printf("\nULONG\tPSC_SCRIPT[] = {\n");
+        for (i = 0; i < (INSTRUCTIONS * 2); i++)
+        {
+           if ((i % 2) == 0)
+              printf("\t0x%.8X,",WORDREVERSE(script_ptr[i]));
+           else if (i != (INSTRUCTIONS * 2 - 1))
+              printf("\t0x%.8X,\n",WORDREVERSE(script_ptr[i]));
+           else
+              printf("\t0x%.8X\n",WORDREVERSE(script_ptr[i]));
+        }
+        printf("};\n");
+}
+Funky_Stuff
+len=`wc -c < reverse.c`
+if [ $len !=     1245 ] ; then
+echo error: reverse.c was $len bytes long, should have been     1245
+fi
+fi # end of overwriting check
+if [ -f sedscr.720 ]
+then
+echo shar: will not over-write existing file sedscr.720
+else
+echo shar: extracting 'sedscr.720',     2899 characters
+cat > sedscr.720 <<'Funky_Stuff'
+#
+#   COMPONENT_NAME: SYSXSCSI (BUILD UTILITY SED SCRIPT FOR 720)
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#This utility script is used by the convert720 script.  Its purpose
+#is to take the output file created by the NCR SCRIPTs compiler
+#and produce three imbed files.  The imbed files are then included
+#into the NCR 720 device driver top half, bottom half, and main header
+#files.
+#The sed utility is used to parse the input file and appropriately
+#direct the C constructs it finds into the bottom half, header, or
+#bottom half.
+#
+#handle last comma in array initializers, skipping SCRIPT array
+/^ULONG	SCRIPT/,/^};$/{
+       b main
+       }
+/,$/{
+       :next
+       N
+       s/,\n};/ \
+};/
+       t cont
+       b next
+       :cont
+       }
+:main
+#bottom-half data structures
+/^ULONG A_io_wait_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG A_abort_msg_error_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG A_abort_select_failed_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG A_abort_io_complete_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG A_unknown_reselect_id_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG A_uninitialized_reselect_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_cmd_bytes_out_count_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_data_byte_count_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_ext_msg_size_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_tag_patch_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_abdr_tag_patch_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_scntl1_patch_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_scntl3_patch_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG R_sxfer_patch_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG E_data_addr_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG E_scsi_._lun_U/,/^$/{
+       w pscsi720bss.h
+       d
+       }
+/^ULONG	INSTRUCTIONS/{
+       w pscsi720bss.h
+       d
+       }
+#
+#header file typedefs and defines
+/^typedef /,/^$/{
+       w pscsi720hss.h
+       d
+       }
+/^#define A_/{
+       w pscsi720hss.h
+       d
+       }
+/^#define R_/{
+       w pscsi720hss.h
+       d
+       }
+/^#define Ent_/{
+       w pscsi720hss.h
+       d
+       }
+/^#define E_/{
+       w pscsi720hss.h
+       d
+       }
+#delete unwanted defines and arrays from input stream
+/^#define ..._Count/{
+       d
+       }
+/^char \*[a-zA-Z]*_Names/,/^$/{
+       d
+       }
+/^ULONG Rel_Patches/,/^$/{
+       d
+       }
+#process SCRIPT array
+/^ULONG	SCRIPT/,/^};$/{
+       d
+       }
+$r psc_script.in
+Funky_Stuff
+len=`wc -c < sedscr.720`
+if [ $len !=     2899 ] ; then
+echo error: sedscr.720 was $len bytes long, should have been     2899
+fi
+fi # end of overwriting check
+cd ..
+echo shar: done with directory bldscr
+fi

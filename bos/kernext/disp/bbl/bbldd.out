@@ -1,0 +1,72 @@
+(ld): halt 4
+(ld): setopt strip 
+(ld): setopt member 
+(ld): savename bbldd
+(ld): filelist 16 8
+(ld): i bbl_close.o
+(ld): i bbl_config.o
+(ld): i bbl_init.o
+(ld): i bbl_mon.o
+(ld): i bbl_open.o
+(ld): i bbl_rom_obj.o
+(ld): i bbl_ROM.o
+(ld): i bbl_ddf.o
+(ld): i bbl_dev_char.o
+(ld): i bbl_diag_dma.o
+(ld): i bbl_diag_req.o
+(ld): i bbl_gp.o
+(ld): i bbl_test_diag.o
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a
+FILELIST: Number of previously inserted files processed: 16
+(ld): imports ../../../../../../src/bos/kernext/disp/bbl/bblddpin.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernext/disp/bbl/bblddpin.exp: 48
+(ld): imports ../../../../../../src/bos/kernel/exp/sysoverlay.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/sysoverlay.exp: 7
+(ld): imports ../../../../../../src/bos/kernel/exp/kernex.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/kernex.exp: 514
+(ld): imports ../../../../../../src/bos/kernel/exp/syscalls.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/syscalls.exp: 247
+(ld): imports ../../../../../../src/bos/kernel/exp/dead.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/dead.exp: 5
+(ld): imports ../../../../../../src/bos/kernel/exp/streams.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/streams.exp: 6
+(ld): exports ../../../../../../src/bos/kernext/disp/bbl/bbldd.exp 
+EXPORTS: Symbols exported: 1
+(ld): entry bbl_config
+ENTRY: Entry point set to bbl_config
+(ld): resolve
+RESOLVE: 216 of 1229 symbols were kept.
+(ld): addgl /aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o
+ADDGL: Glink code added for 51 symbols.
+(ld): er full
+ER: There are no unresolved symbols.
+(ld): mismatch
+MISMATCH: No type mismatches exist.
+(ld): comprld
+COMPRLD: Kept 703 of 703 relocation entries.
+(ld): origin 0x0 0x0
+(ld): save 1L .
+SAVE: Section sizes = 24760+5024+400 (0x60B8+0x13A0+0x190 hex)
+SAVE: Size of TOC: 384 (0x180 hex)
+SAVE: These object files and archive members were
+	used to create the output file:
+ bbl_close.o
+ bbl_config.o
+ bbl_init.o
+ bbl_mon.o
+ bbl_open.o
+ bbl_rom_obj.o
+ bbl_ROM.o
+ bbl_ddf.o
+ bbl_dev_char.o
+ bbl_diag_dma.o
+ bbl_diag_req.o
+ bbl_gp.o
+ bbl_test_diag.o
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o]
+(ld): gen map bbldd.map
+(ld): rc
+RC: Highest return code was 0.

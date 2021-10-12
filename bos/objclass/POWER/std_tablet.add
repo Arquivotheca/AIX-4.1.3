@@ -1,0 +1,73 @@
+# @(#)48	1.1  src/bos/objclass/POWER/std_tablet.add, inputdd, bos41J, 9509A_all 2/14/95 12:56:06
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Stanzas for standard tablet predefined values
+#
+
+# 6093 model 11 predefined values
+PdDv:
+ type = "6093_m11"
+ class = "tablet"
+ subclass = "std_t"
+ prefix = "tablet"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x926
+ setno = 126
+ msgno = 17
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgtablet_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "tablet/std_t/6093_m11"
+ catalog = "devices.cat"
+
+# 6093 model 12 predefined values
+PdDv:
+ type = "6093_m12"
+ class = "tablet"
+ subclass = "std_t"
+ prefix = "tablet"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x927
+ setno = 126
+ msgno = 18
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgtablet_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "tablet/std_t/6093_m12"
+ catalog = "devices.cat"

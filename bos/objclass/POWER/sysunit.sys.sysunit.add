@@ -1,0 +1,289 @@
+*@(#)57  1.1  src/bos/objclass/POWER/sysunit.sys.sysunit.add, cfgmethods, bos411, 9428A410j 12/2/93 13:55:31
+* 
+*  COMPONENT_NAME: (CMDDIAG) DIAGNOSTIC DEVICES STANZA FILE
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = sysunit
+	class = sysunit
+	subclass = sys
+	prefix = sysunit
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	led = 0x811
+	setno = 1
+	msgno = 2
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = sysunit/sys/sysunit
+
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 01
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 02
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 03
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 04
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 05
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 06
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 07
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 08
+
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 11
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 12
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 13
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 14
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 15
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 16
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 17
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = media
+	connwhere = 18
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 01
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 02
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 03
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 04
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 05
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 06
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 07
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 08
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 11
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 12
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 13
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 14
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 15
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 16
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 17
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = dasd
+	connwhere = 18
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 01
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 02
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 03
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 04
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 05
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 06
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 07
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 08
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 11
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 12
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 13
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 14
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 15
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 16
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 17
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = async
+	connwhere = 18
+
+PdCn:
+	uniquetype = sysunit/sys/sysunit
+	connkey = cpu
+	connwhere = 00
+

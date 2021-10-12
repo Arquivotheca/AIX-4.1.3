@@ -1,0 +1,25 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Can you expect the normal command interpreter (called
+the 'shell') to recognize 
+ q
+Type yes or no.
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+5.1a 10

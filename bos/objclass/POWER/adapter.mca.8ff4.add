@@ -1,0 +1,387 @@
+* @(#)03        1.5  src/bos/objclass/POWER/adapter.mca.8ff4.add, cfgmethods, bos411, 9428A410j 5/20/94 13:32:35
+*********************************************************************
+* 		PREDEFINED DATA
+*		FOR SCSI ADAPTER
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+PdDv:
+	 type = pscsi
+	 class = adapter
+	 subclass = sio
+       	 prefix = scsi
+	 devid = 0xf48f
+	 base = 1
+	 has_vpd = 1
+	 detectable = 1
+	 chgstatus = 0
+	 bus_ext = 0
+	 fru = 2
+	 led = 0x868
+	 setno = 22
+         msgno = 20
+	 catalog = "devices.cat"
+	 DvDr =  pscsidd
+	 Define = "/usr/lib/methods/define"
+	 Configure = "/usr/lib/methods/cfgpscsi"
+	 Change = "/usr/lib/methods/chghscsi"
+	 Unconfigure = "/usr/lib/methods/ucfgdevice"
+	 Undefine = "/usr/lib/methods/undefine"
+	 Start = ""
+	 Stop = ""
+	 uniquetype = "adapter/sio/pscsi"
+
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "0,7"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "1,7"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "2,7"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "3,7"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "4,7"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "5,7"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "6,7"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,0"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,1"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,2"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,3"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,4"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,5"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,6"
+PdCn:
+        uniquetype = "adapter/sio/pscsi"
+        connkey = scsi
+        connwhere = "7,7"
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+	attribute = "bus_io_addr"
+	deflt = 0x80
+	values = 0x80
+	width = 0x40
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 11
+               
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+        attribute = "dma_bus_mem"
+        deflt = 0x100000
+        values = "0x100000-0xfffff000,0x1000"
+	width = ""
+        type = M
+        generic = D 
+	rep = nr
+	nls_index = 3
+               
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+        attribute = "dbmw"
+        deflt = 0x202000
+        values = "0x202000-0x902000,0x1000"
+	width = "dma_bus_mem"
+        type = W
+        generic = DU
+	rep = nr
+	nls_index = 12
+
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+        attribute = "bus_intr_lvl"
+	deflt = 4
+	values = "4,5"
+	width = ""
+        type = I       
+        generic = D 
+	rep = nl
+	nls_index = 4
+                
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+        attribute = "intr_priority"
+        deflt = 3
+        values = 3
+	width = ""
+        type = P       
+        generic = D 
+	rep = nl
+	nls_index = 5
+
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+        attribute = "dma_lvl"
+        deflt = 3 
+        values = "0-14,1"
+	width = ""
+        type = A
+        generic = D 
+	rep = nr
+	nls_index = 6
+                
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+        attribute = "id"
+        deflt = 7 
+        values = "0-7,1"
+        width = ""      
+	type = R
+        generic = UD 
+	rep = nr
+	nls_index = 7
+                
+PdAt:
+	uniquetype = "adapter/sio/pscsi"
+        attribute = "bb"
+        deflt = "no"
+        values = "yes,no"
+	width = ""
+	type = R
+        generic = UD
+	rep = sl
+	nls_index = 10

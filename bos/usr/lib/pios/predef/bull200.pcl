@@ -1,0 +1,27 @@
+# @(#)49 1.2 src/bos/usr/lib/pios/predef/bull200.pcl, cmdpios, bos411, 9428A410j 6/23/94 10:32:47
+#
+# COMPONENT_NAME: Printer Backend for Bull Compuprint PageMaster PM200
+#
+# FUNCTIONS:
+#
+# ORIGINS: 83
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+:060:__SYS::
+:447:s1::4
+:321:sh::%Ide/bull.header %IwW | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -J!
+:324:st::%Ide/bull.trailer | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -t%o%G_l%r%{14}%-%d
+:058:__MIS::
+:331:mL::Bull Compuprint PageMaster 200
+:295:mN::200
+:330:mA::HP DeskJet+ emulation
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijptuvxzELOQXZ]
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijptuvxzELOQXZ]
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpuvxzEQZ]
+:054:__ESC::
+:482:es::\33&l%?%G_O%{1}%=%t2%e%?%G_u%{2}%=%t4%e1%;%;H\33&l%G_Q%Pq%?%G_u%{3}%<%t%?%gq%{1}%=%t2%e%gq%{2}%=%t3%e%gq%{4}%=%t26%e%gq%{5}%=%t1%e2%;%e%?%gq%{1}%=%t80%e%gq%{3}%=%t81%e%gq%{4}%=%t90%e%gq%{5}%=%t91%e80%;%;A
+:475:__HIR::
+:476:zP::generic.pcl
+:477:zS::!

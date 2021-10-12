@@ -1,0 +1,41 @@
+* @(#)10        1.2  src/bldenv/compilers/fortran/bldenv.xlf.cfg.tmplt, ade_build, bos412, GOLDA411a 6/12/94 13:04:09
+*
+*   COMPONENT_NAME: BOSBUILD
+*
+*   FUNCTIONS:
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+* standard xlf compiler
+xlf:    use        = DEFLT
+        crt        = __BUILD__/usr/lib/crt0.o
+        mcrt       = __BUILD__/usr/lib/mcrt0.o
+        gcrt       = __BUILD__/usr/lib/gcrt0.o
+        libraries  = -lxlf,-lm,-lc
+        proflibs   = -L/lib/profiled,-L/usr/lib/profiled
+
+* alias for standard xlf compiler
+f77:    use        = DEFLT
+        crt        = __BUILD__/usr/lib/crt0.o
+        mcrt       = __BUILD__/usr/lib/mcrt0.o
+        gcrt       = __BUILD__/usr/lib/gcrt0.o
+        libraries  = -lxlf,-lm,-lc
+        proflibs   = -L/lib/profiled,-L/usr/lib/profiled
+
+* common definitions
+DEFLT:  xlf       = __BUILD__/usr/lpp/xlf/bin/xlfentry
+        fpp       = __BUILD__/usr/lpp/xlf/bin/fpp
+        fppk      = __BUILD__/usr/lpp/xlf/bin/fppk
+        as        = __BUILD__/usr/bin/as
+        ld        = __BUILD__/usr/bin/ld
+        options   = -bh:4,-T512,-H512,-bbinder:__BUILD__/usr/lib/bind,-bglink:__BUILD__/usr/lib/glink.o,-blibpath:/usr/lib:/lib,-qnozerosize,-qsave,-qalias=intptr,-qposition=appendold,-qxlf77=intarg:intxor:persistent:noleadzero:gedit77:noblankpad:oldboz,__OTHER_DEFAULT_OPTIONS__

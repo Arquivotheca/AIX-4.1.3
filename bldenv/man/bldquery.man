@@ -1,0 +1,343 @@
+# @(#)59	1.8  src/bldenv/man/bldquery.man, bldtools, bos412, GOLDA411a 8/16/93 14:30:32
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: bldquery.man
+#
+# PURPOSE: man page for bldquery command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+#include "bldenv_defines.h"
+
+bldquery Command
+
+Purpose
+
+Queries the build target-dependency databases and prints out various types of
+target-dependency information.
+
+Syntax 
+
+	bldquery [-D <search_dir>] [-n] [-l <LPP_filter>] 
+		 [-r <release_filter>] [-i <file_name>] [-f <string>] 
+		 [-F <string>] [-v <mode>] [-t <db_path>] [-q <query_value>] 
+		 [<file_name> | <release_name> | <LPP_name> ] 
+	where:
+	    <query_value> is one of the following:
+		 "t", "tts", "ts", "tb", "d", "dt", "db", 
+		 "r", "rdt", "rs", "l", "ldt", "ls" or "b"
+	    and the last argument on the command line is:
+		 * not required when <query_name> is "r", "l" or "b" (or 
+		   not supplied)
+		 * <file_name> when <query_name> is "t", "tts", "ts", "tb", 
+		   "d", "dt" or "db"
+		 * <release_name> when <query_name> is "rdt" or "rs"
+		 * <LPP_name> when <query_name> or "ldt" or "ls"
+
+Description
+
+The bldquery command generates various reports on a given build's make file
+dependencies based on information from various database files created during
+the build process.  The bldquery command is generally used to determine such 
+things as the number of files, CMVC releases, or LPPs that will be rebuilt 
+as a result of changing a given source file.
+
+Each week all CMVC releases that have had changes made to them are rebuilt
+with the resulting data used to update the bldquery database files on which 
+the bldquery command performs queries.  It should be noted that even though 
+a file may be rebuilt it is possible there may be no binary differences to 
+the object files, thus resulting in the files not being shipped.  For this 
+reason bldquery can only estimate what the eventual ship files will be from 
+an specific source change.
+
+The bldquery database files are created from the raw data that is generated
+as a result of each week's build.  If a release was not built during a 
+particular week the data from the last week that it was built is used to 
+create the bldquery database files for that release.  Each release was 
+"seeded" with a complete set of target-dependency information when the 
+current release went GOLDEN. 
+
+Using the bldquery command, the user is able to make various types of queries 
+as described in the following paragraphs.  Note that in the following 
+discussion the notation "A <-- B" signifies that file A is a target of file B - 
+i.e. if B is newer than A then A must be rebuilt.  The file A is referred to 
+as the target file in the relationship and B is referred to as the dependent 
+file.  Several target files may also share the same dependent file and vice 
+versa.  In these cases, a horizontal tree structure is shown as in the 
+following examples:
+
+	TREE 1			TREE 2
+	------			------
+	A <-+ F <-+ H		    +- B <-+- E
+	    |     |		    |      |
+	B <-+     |		A <-+- C   +- F
+	    |     |		    |
+	C <-+     |		    +- D <-+- G
+		  |			   |
+	D <-+ G <-+			   +- H
+	    |				   |
+	E <-+				   +- I
+
+In the first example, the files A, B, and C are targets of the file F which 
+is in turn a target of the file H.  The files D and E are targets of the 
+file G which is in turn also a target of the file H.  In the second example, 
+the file A is a target of the files B, C, and D.  B is then a target of the 
+files E and F.  D is a target of the files G, H, and I.
+
+The bldquery command accepts and displays all file names relative to the
+top of the source tree, i.e. the $TOP environment variable.  For example, if
+the user wished to perform some sort of query involving the file:
+
+	$TOP/inc/stdio.h
+
+he/she would enter the pathname:
+
+	./inc/stdio.h
+
+Note that the initial "./" at the beginning of the pathname is required.
+
+Flags
+
+	-D -- sets the search directory; this directory path is prepended to 
+	      any file name the user enters (e.g. if the search directory is
+	      "./inc" then entering "stdio.h" would result in the string
+	      "./inc/stdio.h" being used as the file name)
+	-n -- set new-only mode
+              when searching, display only those files belonging to target-
+	      dependency relationships in which the dependent is newer than
+	      the target; i.e. the files which were rebuilt
+	-l -- set LPP filter
+              when relevant, display only the specified LPP's data.  See query
+	      descriptions below to find out which queries this option affects.
+	-r -- set release filter
+              when relevant, display only the specified CMVC release's data.
+	      See query descriptions below to find out which queries this 
+	      option affects.
+	-i -- file input
+              read input file name(s) from the <file_name>
+	-f -- filter all file names from the output which do not match the 
+	      regular expression <string>
+	-F -- filter all file names from the output which do match the regular 
+	      expression <string>
+	-v -- sets the verbose mode to 0, 1 or 2.  When set to 0, only a 
+	      summary of the output is given which contains the number of 
+	      different file types and different LPPs or CMVC releases that 
+	      were found by the query.  If 1 is selected then all the files, 
+	      LPPs or CMVC releases are listed that were found by the query.  
+	      If 2 is selected then both the listing and the summary are given.
+	-t -- sets the database path name; by default this is set to 
+	      /afs/austin/aix/BLDENV_DEFINE_AFSSUBDIR/HISTORY/bldquery.  This is the AFS directory 
+	      where the bldquery database files for the latest build can be 
+	      found.  The -t option overrides this and sets it to the value 
+	      given in <db_path>.
+	-q -- query, where <query_value> is one of:
+
+	      "t" -  list all target files dependent (directly or indirectly)
+	       on a given file; for example, given the following dependency 
+	       tree:
+
+		     A <-+ C <-+ D
+			 | 
+		     B <-+
+
+	      The files A, B and C would be in the list of target files for the 
+	      file D; output filtered by release filter (-r option) and LPP 
+	      filter (-l option).
+
+	      "tts" -  list all target terminal files dependent on a given 
+              file; that is, list all target files that are at the terminal 
+	      end of a dependency chain; for example, given the following 
+	      dependency tree:
+
+		     A <-+ F <-+ H <-- I
+		         |     |
+		     B <-+     |
+		         |     |
+		     C <-+     |
+		               |
+		     D <-+ G <-+
+		         |
+		     E <-+
+
+	      the files A, B, C, D and E are in the list of target terminal 
+	      files for the file I; output filtered by release filter (-r 
+	      option) and LPP filter (-l option).
+
+	      "ts" - list all ship files along with the corresponding LPP(s) to 
+	      which the ship files belong; that is, given a file name list all 
+	      ship files in the dependency chain under the given file and the 
+	      name of the LPP(s) to which they belong; output filtered by 
+	      release filter (-r option) and LPP filter (-l option).
+
+	      "tb" - list all target build environment files; that is, given a 
+	      file name, list all build environment files in the dependency 
+	      chain under the given file; output filtered by release filter (-r
+	      option) and LPP filter (-l option).
+
+	      "d" - list all dependent files given a target file; for example, 
+	      given the following dependency tree:
+
+		         +-- B
+		         |
+		     A <-+
+		         |
+		         +-- C <-- D
+
+	      the dependent files for target A are B,C, and D; output filtered 
+	      by release filter (-r option) only.
+
+	      "dt" - list all dependent terminal (source) files (by CMVC 
+	      release); for example, given a target file, list all of the 
+	      dependent files that occur at the end of its dependency chain.  
+	      Since these files are at the end of the chain, they are not 
+	      targets of any other files, thus they are source files.  For 
+	      example, given the same tree as in the previous example, the 
+	      dependent terminal files are B and D.  These source files would 
+	      then be listed along with the CMVC release to which they belong;
+	      output filtered by release filter (-r option) only.
+
+	      "db" - list all dependent build environment files; for example, 
+	      given a target file, list all of the build environment files
+	      in the dependency chain under the given file; output filtered by 
+	      release filter (-r option) only.
+
+	      "l" - list all LPPs built in the current release.
+
+	      "r" - list all CMVC releases built in current release.
+
+	      "rdt" - list all of the dependent terminal (source) files that 
+	      were used to create a CMVC release; that is list all dependent 
+	      files that are at the end of the dependency chain for a given 
+	      CMVC release; for example, given the following dependency tree:
+
+		         +-- B
+		         |
+	 	     A <-+
+		         |
+		         +-- C <-- D
+
+	      if A belongs to the specified CMVC release then the two files 
+	      B and D would be in that release's dependent terminal file list.
+	      output filtered by release filter (-r option) only. 
+
+	      "rs" - list all ship files and corresponding LPP(s) built as 
+	      part of a given CMVC release; that is, given a release, list all 
+	      files that are shipped as part of that release along with the 
+	      corresponding LPP to which they belong; output filtered by 
+	      release filter (-r option) and LPP filter (-l option). 
+
+	      "ls" - list ship files that get shipped with a given LPP; output
+	      filtered by release filter (-r option) and LPP filter (-l 
+	      option).
+
+	      "ldt" - list all dependent terminal (source) files used to build
+	      the ship files that get shipped with a given LPP; output filtered
+	      by release filter (-r option) only.
+
+	      "b" - list all build environment files across all CMVC releases; 
+	      output filtered by release filter (-r option).
+
+The bldquery command can also be executed in menu mode.  This is done by
+executing bldquery with no query option (-q).  In menu mode the following
+menu is displayed to the user.  The current value of each option is displayed
+in parenthesis at the end of the line.
+
+	 1) Query
+	 2) Set search directory ()
+	 3) Set LPP ()
+	 4) Set release ()
+	 5) Set exclusion filter ()
+	 6) Set inclusion filter ()
+	 7) Toggle verbose mode (FILE LISTING ONLY)
+	 8) Set output file ()
+	 9) Set input file ()
+	10) Display input file
+	11) Toggle new-mode (OFF)
+	12) quit
+
+The user is then prompted to enter the number of the option of his choice.  
+The following list describes the meaning of each of the options.  Most, but 
+not all, of the options are analogous to one of the options described in the 
+Flags section.
+
+	Query - analogous to the -q option; the user is prompted for the 
+	    query codes 
+
+	Set search directory - analogous to the -D option
+
+	Set LPP - analogous to the -l option
+
+	Set release - analogous to the -r option
+
+	Set exclusion filter - analogous to the -F option
+
+	Set inclusion filter - analogous to the -f option
+
+	Toggle verbose mode - analogous to the -v option
+
+	Set output file - redirects all output to the given file
+
+	Set input file - analogous to the -i option
+
+	Display input file - displays the contents of the selected input file
+
+	Toggle new-mode - analogous to the -n option
+
+	quit - exit from bldquery
+
+Examples
+
+	1) bldquery -fmddioctl.c -qrdt bos320 
+	   bldquery -qts ./sysx/ktsm/mddioctl.c
+
+	   This sequence of two successive bldquery invocations is useful if 
+	   the full pathname of a source file is not known.  In the first
+	   invocation the user knows only the basename of the file, 
+	   "mddioctl.c", and the release to which it belongs, "bos320".  The 
+	   output of the invocation will contain the full pathnames of all 
+	   source files belonging to the release "bos320" that contain the 
+	   string "mddioctl.c".  Using the mouse, the user can then highlight 
+	   the desired full pathname from the list displayed and then paste
+	   it at the end of the second invocation shown above.  This invocation 
+	   then displays all target ship files dependent on the given source 
+	   file.
+
+	2) bldquery -fcronadm -qrs bos320
+	   bldquery -qdt ./ship/bin/cronadm
+
+	   This sequence of two bldquery invocations is essentially the 
+	   inverse of the sequence described in the previous example.  The
+	   user knows the name of a command, "cronadm", and the release to
+	   which it belongs, bos320.  The first invocation displays the full 
+	   pathnames of any ship files containing the string "cronadm".
+	   The user then uses the mouse to highlight the desired ship
+	   file then pastes it at the end of the second invocation shown
+	   above.  This invocation then displays all source files that make
+	   up the given ship file.
+
+	3) bldquery -n -c
+
+	   Brings up bldquery in menu mode with new mode and cross-release 
+	   mode turned on.
+
+Related Information
+
+see man pages on the commands:
+
+	bldquerydb
+	bldquerymerge
+
+bldquery database directory on AFS:
+
+	/afs/austin/aix/BLDENV_DEFINE_AFSSUBDIR/HISTORY/bldquery

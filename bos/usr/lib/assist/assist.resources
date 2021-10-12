@@ -1,0 +1,40 @@
+! @(#)25        1.3  src/bos/usr/lib/assist/assist.resources, cmdassist, bos411, 9436B411a 9/3/94 15:22:24
+!
+!   COMPONENT_NAME: cmdassist
+!
+!   FUNCTIONS: none
+!
+!   ORIGINS: 27
+!
+!
+!   (C) COPYRIGHT International Business Machines Corp. 1994
+!   All Rights Reserved
+!   Licensed Materials - Property of IBM
+!   US Government Users Restricted Rights - Use, duplication or
+!   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+!
+
+*XmCascadeButton*shadowThickness:	1
+*XmCascadeButtonGadget*shadowThickness:	1
+*XmDrawnButton*shadowThickness:	1
+*XmList*shadowThickness:	1
+*XmPanedWindow*sashShadowThickness:	1
+*XmPushButton*shadowThickness:	1
+*XmPushButtonGadget*shadowThickness:	1
+*XmScale*shadowThickness:	1
+*XmScrollBar*shadowThickness:	1
+*XmSelectionBox*shadowThickness:	1
+*XmText*shadowThickness:	1
+*XmTextField*shadowThickness:	1
+*enableBtn1Transfer:	False
+*enableButtonTab:	True
+*enableDefaultButton:	True
+*enableEtchedInMenu:	True
+*enableMenuInCascade:	True
+*enableToggleColor:	True
+*enableToggleVisual:	True
+*highlightThickness:	1
+*enableDragIcon:	True
+IADthelpview*fontList:	-dt-interface system-medium-r-normal-l*-*-*-*-*-*-*-*:
+IADthelpview*rows:	40
+IADthelpview*columns:	80

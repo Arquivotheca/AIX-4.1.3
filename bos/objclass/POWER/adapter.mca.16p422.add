@@ -1,0 +1,283 @@
+* @(#)01 1.3 src/bos/objclass/POWER/adapter.mca.16p422.add, cfgtty, bos41J, 9520A_all 4/27/95 11:52:53
+*
+* COMPONENT_NAME: (CFGMETHODS) adapter.mca.16p422.add
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+*
+* adapter/mca/16p422 object
+*
+PdDv:
+	type = 16p422
+	class = adapter
+	subclass = mca
+	prefix = sa
+	devid = 0xd3ed
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x848
+	setno = 32
+	msgno = 5
+	fru = 1
+	catalog = devices.cat
+	DvDr = "rsdd"
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgasync
+	Change = ""
+	Unconfigure = /etc/methods/ucfgasync
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/mca/16p422
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 0
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 1
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 2
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 3
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 4
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 5
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 6
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 7
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 8
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 9
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 10
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 11
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 12
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 13
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 14
+
+PdCn:
+	uniquetype = adapter/mca/16p422
+	connkey = rs422
+	connwhere = 15
+
+PdAt:
+	uniquetype = adapter/mca/16p422
+	attribute = bus_io_addr
+	deflt = 0x8120
+	values = "0x8120-0xF120,0x1000"
+	width = 0x0C3F
+	type = O
+	generic = D
+	rep = nr
+	nls_index = 6
+
+PdAt:
+	uniquetype = adapter/mca/16p422
+	attribute = arb_reg
+	deflt = 0x130
+	values = 0x130
+	width = 0x06
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 7
+
+PdAt:
+	uniquetype = adapter/mca/16p422
+	attribute = arb_async_key
+	deflt = ""
+	values = arb_reg
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = adapter/mca/16p422
+	attribute = bus_intr_lvl
+	deflt = 5
+	values = "3,5,9,10,11,12,14,15"
+	width = ""
+	type = I
+	generic = D
+	rep = nl
+	nls_index = 8
+
+PdAt:
+	uniquetype = adapter/mca/16p422
+	attribute = intr_async_key
+	deflt = ""
+	values = bus_intr_lvl
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = adapter/mca/16p422
+	attribute = intr_priority
+	deflt = 1
+	values = 1
+	width = ""
+	type = P
+	generic = D
+	rep = n
+	nls_index = 9
+
+PdAt:
+	uniquetype = adapter/mca/16p422
+	attribute = frequency
+	deflt = 12288000
+	values = 12288000
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/mca/16p422"
+	attribute = id_seg_reg
+	deflt = 0x800C0080
+	values = 0x800C0080
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/mca/16p422"
+	attribute = nseg_reg
+	deflt = 0x80080060
+	values = 0x80080060
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/mca/16p422"
+	attribute = eu_arb_reg
+	deflt = 0x134
+	values = 0x134
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/mca/16p422"
+        attribute = "load_module"
+        deflt = "/usr/lib/methods/rsddload"
+        values = "/usr/lib/methods/rsddload"
+        width = ""
+        type = "E"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/mca/16p422"
+        attribute = rtrig
+        deflt = 3
+        values = "0-3,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/mca/16p422"
+        attribute = tbc16
+        deflt = 16
+        values = "1-16,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 10
+
+PdAt:
+        uniquetype = "adapter/mca/16p422"
+        attribute = speed
+        deflt = 9600
+        values = "0,50,75,110,134,150,200,300,600,1200,1800,2400,4800,9600,19200,38400"
+        width = ""
+        type = E
+        generic = DU
+        rep = slm
+        nls_index = 12
+
+
+

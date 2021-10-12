@@ -1,0 +1,143 @@
+# @(#)88	1.2  src/bos/objclass/POWER/sm_apm.add, cfgcommo, bos41B, 9504A 12/13/94 14:19:59
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Portmaster Adapter/A Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_menu_opt:
+        id                  = "commodev"
+        id_seq_num          = "030"
+        next_id             = "portmaster"
+        text                = "Portmaster Adapter/A"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 559
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "120001"
+        help_msg_loc        = ""
+sm_menu_opt:
+        id                  = "portmaster"
+        id_seq_num          = "010"
+        next_id             = "multia"
+        text                = "Adapter"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 231
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "00001"
+        help_msg_loc        = ""
+sm_menu_opt:
+        id                  = "portmaster"
+        id_seq_num          = "020"
+        next_id             = "multiserv"
+        text                = "Services"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 232
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "00001"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "portmaster"
+        id_seq_num          = "030"
+        next_id             = "multiapps"
+        text                = "User Applications"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 233
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "1800234"
+        help_msg_loc        = ""
+sm_menu_opt:
+        id                  = "multia"
+        id_seq_num          = "010"
+        next_id             = "portmaster_ls"
+        text                = "List All Portmaster Adapter/A Adapters"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 551
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800193"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "multia"
+        id_seq_num          = "020"
+        next_id             = "portmaster_dd"
+        text                = "Manage Device Drivers for Portmaster Adapter/A"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 552
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "120002"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "multia"
+        id_seq_num          = "030"
+        next_id             = "errpt"
+        text                = "Generate an Error Report"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 88
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800203"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "multia"
+        id_seq_num          = "040"
+        next_id             = "stmat"
+        text                = "Trace a Portmaster Adapter/A"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 558
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "1800193"
+        help_msg_loc        = ""
+
+#
+# List All Defined Portmaster Adapters
+# This uses a ghost dialogue to list all the defined Portmaster Adapters.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "portmaster_ls"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Portmaster Adapter/A"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 551
+    cmd_to_exec               = "lsdev -C -c adapter -s mca -t portmaster"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800193"
+    help_msg_loc              = ""
+

@@ -1,0 +1,7 @@
+#!/bin/ksh
+# This procedure will cleanly bring down the ifor/ls server and the 2 location
+# brokers
+stopsrc -s netlsd
+sleep 5
+stopsrc -s glbd
+stopsrc -s llbd

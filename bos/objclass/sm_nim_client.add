@@ -1,0 +1,1706 @@
+* @(#)32        1.17.1.16  src/bos/objclass/sm_nim_client.add, cmdnim, bos41J, 9524G_all  6/15/95  11:28:13
+*
+*   COMPONENT_NAME: CMDNIM
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+#******************************************************************************
+#************************       sm_menu_opt       *****************************
+#******************************************************************************
+
+sm_menu_opt:
+		id_seq_num = "050"
+		id = "install"
+		next_id = "nim"
+		text = "Network Install Management"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 1
+		next_type = "m"
+		alias = ""
+		help_msg_id = "0042331"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim                        --------------------------
+
+sm_menu_opt:
+		id_seq_num = "010"
+		id = "nim"
+		next_id = "niminit"
+		text = "Configure Network Installation Management Client Fileset"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 117
+		next_type = "d"
+		alias = ""
+		help_msg_id = "0042338"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_menu_opt:
+		id_seq_num = "020"
+		id = "nim"
+		next_id = "nim_perms"
+		text = "Manage Network Install Permissions"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 103
+		next_type = "d"
+		alias = ""
+		help_msg_id = "0042351"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_menu_opt:
+		id_seq_num = "030"
+		id = "nim"
+		next_id = "nim_mac_res"
+		text = "Manage Network Install Resource Allocation"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 19
+		next_type = "m"
+		alias = ""
+		help_msg_id = "0042352"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_menu_opt:
+		id_seq_num = "040"
+		id = "nim"
+		next_id = "nim_install"
+		text = "Perform a Network Install"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 78
+		next_type = "n"
+		alias = ""
+		help_msg_id = "0042336"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_mac_res                --------------------------
+
+sm_menu_opt:
+		id_seq_num = "010"
+		id = "nim_mac_res"
+		next_id = "nim_lsalloc"
+		text = "List Allocated Network Install Resources"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 25
+		next_type = "d"
+		alias = ""
+		help_msg_id = "0042353"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_menu_opt:
+		id_seq_num = "020"
+		id = "nim_mac_res"
+		next_id = "nim_alloc"
+		text = "Allocate Network Install Resources"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 26
+		next_type = "n"
+		alias = ""
+		help_msg_id = "0042354"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_menu_opt:
+		id_seq_num = "030"
+		id = "nim_mac_res"
+		next_id = "nim_dealloc"
+		text = "Deallocate Network Install Resources"
+		text_msg_file = "cmdnim.cat"
+		text_msg_set = 10
+		text_msg_id = 27
+		next_type = "n"
+		alias = ""
+		help_msg_id = "0042335"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#******************************************************************************
+#************************ sm_cmd_hdr & sm_cmd_opt *****************************
+#******************************************************************************
+
+#------------------------ niminit               ----------------------------
+
+sm_cmd_hdr:
+		id = "niminit"
+		option_id = "niminit_opt"
+		has_name_select = "n"
+		name = "Configure Network Installation Management Client Fileset"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 117
+		cmd_to_exec = "doit()
+{
+	LINE= 
+	while getopts n:P:i:m:p:r:T:e:c: c
+	do
+		case $c in
+			n) LINE=\"$LINE -aname=$OPTARG\";;
+			P) LINE=\"$LINE -aplatform=$OPTARG\";;
+			i) LINE=\"$LINE -apif_name=$OPTARG\";;
+			m) LINE=\"$LINE -amaster=$OPTARG\";;
+			p) LINE=\"$LINE -amaster_port=$OPTARG\";;
+			r) LINE=\"$LINE -aring_speed1=$OPTARG\";;
+			T) LINE=\"$LINE -acable_type1=$OPTARG\";;
+			e) LINE=\"$LINE -aiplrom_emu=$OPTARG\";;
+			c) COMMENTS=\"$OPTARG\";;
+		esac
+	done
+	niminit $LINE ${COMMENTS:+-a comments=\"${COMMENTS}\"}
+	exit $?
+}
+doit"
+		ask = ""
+		exec_mode = ""
+		ghost = "n"
+		cmd_to_discover = "echo \"#master_port:platform\n1058:rs6k\""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042338"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "010"
+		id = "niminit_opt"
+		disc_field_name = ""
+		name = "Machine Object Name"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 56
+		op_type = "n"
+		entry_type = "t"
+		entry_size = 30
+		required = "+"
+		prefix = "-n "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042339"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "020"
+		id = "niminit_opt"
+		disc_field_name = ""
+		name = "Primary Network Install Interface"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 35
+		op_type = "l"
+		entry_type = "t"
+		entry_size = 30
+		required = "+"
+		prefix = "-i "
+		cmd_to_list_mode = "1"
+		cmd_to_list = "lsdev -Ccif -S available | awk '$1!~/^lo[0-9]/{print}'"
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042340"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "030"
+		id = "niminit_opt"
+		disc_field_name = ""
+		name = "Host Name of Network Install Master"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 104
+		op_type = "n"
+		entry_type = "t"
+		entry_size = 256
+		required = "+"
+		prefix = "-m "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042349"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "040"
+		id = "niminit_opt"
+		disc_field_name = "master_port"
+		name = "Port Number for Network Install Communications"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 36
+		op_type = "n"
+		entry_type = "#"
+		entry_size = 30
+		required = "+"
+		prefix = "-p "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042304"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "050"
+		id = "niminit_opt"
+		disc_field_name = ""
+		name = "Ring Speed"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 34
+		op_type = "n"
+		entry_type = "#"
+		entry_size = 2
+		required = "?"
+		prefix = "-r "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042302"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "055"
+		id = "niminit_opt"
+		disc_field_name = "cable_type"
+		name = "Cable Type"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 116
+		op_type = "l"
+		entry_type = "n"
+		entry_size = 30
+		required = "n"
+		prefix = "-T "
+		cmd_to_list_mode = ""
+		cmd_to_list = "echo \"bnc\ndix\nN/A\""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = ""
+		values_msg_set = 0
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042356"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "057"
+		id = "niminit_opt"
+		disc_field_name = "platform"
+		name = "Hardware Platform Type"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 125
+		op_type = "l"
+		entry_type = "n"
+		entry_size = 30
+		required = "y"
+		prefix = "-P "
+		cmd_to_list_mode = ""
+		cmd_to_list = "echo \"rs6k\nrs6ksmp\nrspc\""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042383"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "060"
+		id = "niminit_opt"
+		disc_field_name = ""
+		name = "IPL ROM Emulation Device"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 105
+		op_type = "n"
+		entry_type = "f"
+		entry_size = 0
+		required = "?"
+		prefix = "-e "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042350"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "070"
+		id = "niminit_opt"
+		disc_field_name = ""
+		name = "Comments"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 42
+		op_type = "n"
+		entry_type = "r"
+		entry_size = 1024
+		required = "?"
+		prefix = "-c "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042306"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_perms             ----------------------------
+
+sm_cmd_hdr:
+		id = "nim_perms"
+		option_id = "nim_perms_opt"
+		has_name_select = "n"
+		name = "Manage Network Install Permissions"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 103
+		cmd_to_exec = "nimclient $1"
+		ask = "y"
+		exec_mode = ""
+		ghost = "n"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042351"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "010"
+		id = "nim_perms_opt"
+		disc_field_name = "push"
+		name = "Network Install Master Push Permissions"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 106
+		op_type = "r"
+		entry_type = "n"
+		entry_size = 30
+		required = "+"
+		prefix = ""
+		cmd_to_list_mode = ""
+		cmd_to_list = "echo \"enable\ndisable\""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = "enable,disable"
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 107
+		aix_values = "-p,-P"
+		help_msg_id = "0042351"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_lsalloc             ------------------------------
+
+sm_cmd_hdr:
+		id = "nim_lsalloc"
+		option_id = "nim_lsalloc_opt"
+		has_name_select = "n"
+		name = "List Allocated Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 25
+		cmd_to_exec = "list_res()
+{
+	. /etc/niminfo
+	nimclient -l -c resources ${NIM_NAME}
+	exit $?
+}
+list_res"
+		ask = "n"
+		exec_mode = ""
+		ghost = "y"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042353"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_alloc_hdr         --------------------------------
+
+sm_cmd_hdr:
+		id = "nim_alloc_hdr"
+		option_id = "nim_alloc_opt"
+		has_name_select = "y"
+		name = "Allocate Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 26
+		cmd_to_exec = "alloc_res()
+{
+
+	. /etc/niminfo
+	[[ $# -le 0 ]] && exit 0
+ 	nimclient -l -L ${NIM_NAME} >/tmp/$$ 
+	if [[ -s /tmp/$$ ]] 
+	then 
+		set -- $* 
+		while [[ $# -gt 0 ]]
+		do 
+			attr=`awk -v r=$1 \'$1==r {print \"-a \" $2 \"=\" $1}\' /tmp/$$`
+			[[ -n \"$attr\" ]] && LINE=\"$LINE $attr\" 
+			shift 
+		done 
+	fi 
+	rm /tmp/$$ 2>/dev/null 
+	[[ -n \"$LINE\" ]] && nimclient -o allocate $LINE 
+	exit $?
+}
+alloc_res"
+		ask = "n"
+		exec_mode = ""
+		ghost = "y"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042354"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "010"
+		id = "nim_alloc_opt"
+		disc_field_name = "res"
+		name = "Available Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 100
+		op_type = "l"
+		entry_type = "n"
+		entry_size = 30
+		required = "+"
+		prefix = ""
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042153"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_dealloc_hdr         ------------------------------
+
+sm_cmd_hdr:
+		id = "nim_dealloc_hdr"
+		option_id = "nim_dealloc_opt"
+		has_name_select = "y"
+		name = "Deallocate Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 27
+		cmd_to_exec = "dealloc_res() 
+{
+	. /etc/niminfo
+	[[ $# -le 0 ]] && exit 0 
+	LINE= 
+	nimclient -l -c resources ${NIM_NAME} >/tmp/$$ 
+	if [[ -s /tmp/$$ ]] 
+	then 
+		set $* 
+		while [[ $# -gt 0 ]] 
+		do 
+			attr=`awk -v r=$1 \'$1==r {print \"-a \" $2 \"=\" $1}\' /tmp/$$`
+			[ -n \"$attr\" ] && LINE=\"$LINE $attr\" 
+			shift 
+		done 
+	fi 
+	rm /tmp/$$ 2>/dev/null 
+	[[ -n \"$LINE\" ]] && nimclient -o deallocate $LINE 
+	exit $?
+}
+dealloc_res"
+		ask = "n"
+		exec_mode = ""
+		ghost = "y"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042335"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "010"
+		id = "nim_dealloc_opt"
+		disc_field_name = "res"
+		name = "Allocated Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 68
+		op_type = ""
+		entry_type = "n"
+		entry_size = 30
+		required = "y"
+		prefix = ""
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042172"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_op_installp_flag   ------------------------------
+
+sm_cmd_opt:
+                id_seq_num = "046"
+                id = "nim_installp_flags"
+                disc_field_name = ""
+                name = ""
+                name_msg_file = ""
+                name_msg_set = 0
+                name_msg_id = 0
+                op_type = ""
+                entry_type = ""
+                entry_size = 0
+                required = ""
+                prefix = ""
+                cmd_to_list_mode = ""
+                cmd_to_list = ""
+                cmd_to_list_postfix = ""
+                multi_select = ""
+                value_index = 0
+                disp_values = ""
+                values_msg_file = ""
+                values_msg_set = 0
+                values_msg_id = 0
+                aix_values = ""
+                help_msg_id = "0"
+                help_msg_loc = ""
+                help_msg_base = ""
+                help_msg_book = ""
+
+sm_cmd_opt:
+                id_seq_num = "048"
+                id = "nim_installp_flags"
+                disc_field_name = ""
+                name = "installp Flags"
+                name_msg_file = "cmdnim.cat"
+                name_msg_set = 10
+                name_msg_id = 76
+                op_type = ""
+                entry_type = ""
+                entry_size = 0
+                required = ""
+                prefix = ""
+                cmd_to_list_mode = ""
+                cmd_to_list = ""
+                cmd_to_list_postfix = ""
+                multi_select = ""
+                value_index = 0
+                disp_values = ""
+                values_msg_file = "cmdnim.cat"
+                values_msg_set = 10
+                values_msg_id = 0
+                aix_values = ""
+                help_msg_id = ""
+                help_msg_loc = ""
+                help_msg_base = ""
+                help_msg_book = ""
+
+sm_cmd_opt:
+        	id_seq_num = "049"
+        	id = "nim_installp_flags"
+        	disc_field_name = ""
+        	name = "PREVIEW only? (install operation will NOT occur)"
+        	name_msg_file = "smit.cat"
+        	name_msg_set = 1
+        	name_msg_id = 648
+        	op_type = "r"
+        	entry_type = "n"
+        	entry_size = 0
+        	required = "y"
+        	prefix = "-f "
+        	cmd_to_list_mode = ""
+        	cmd_to_list = ""
+        	cmd_to_list_postfix = ""
+        	multi_select = "n"
+        	value_index = 0
+        	disp_values = "no,yes"
+        	values_msg_file = "smit.cat"
+        	values_msg_set = 1
+        	values_msg_id = 29
+        	aix_values = ",p"
+        	help_msg_id = "0504004"
+        	help_msg_loc = ""
+        	help_msg_base = ""
+        	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "nim_cust_spec_flags"
+	disc_field_name = ""
+	name = "COMMIT software updates?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 6
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-f "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "no,yes"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 29
+	aix_values = ",c"
+	help_msg_id = "0503003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "055"
+	id = "nim_cust_spec_flags"
+	disc_field_name = ""
+	name = "SAVE replaced files?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 621
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-f "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = ",N"
+	help_msg_id = "0503030"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "nim_up_all_spec_flags"
+	disc_field_name = ""
+	name = "COMMIT software updates?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 6
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-f "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "c,"
+	help_msg_id = "0503003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "055"
+	id = "nim_up_all_spec_flags"
+	disc_field_name = ""
+	name = "SAVE replaced files?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 621
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-f "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "no,yes"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 29
+	aix_values = "N,"
+	help_msg_id = "0503030"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "060"
+	id = "nim_installp_flags"
+	disc_field_name = ""
+	name = "OVERWRITE same or newer versions?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 625
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-f "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "no,yes"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 29
+	aix_values = ",F"
+	help_msg_id = "1800616"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "062"
+	id = "nim_installp_flags"
+	disc_field_name = ""
+	name = "VERIFY install and check file sizes?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 622
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-f "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "no,yes"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 29
+	aix_values = ",v"
+	help_msg_id = "0503004"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "059"
+	id = "nim_installp_flags"
+	disc_field_name = ""
+	name = "AUTOMATICALLY install requisite software?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 3
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-f "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 1
+	values_msg_id = 51
+	aix_values = "g,"
+	help_msg_id = "0504014"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "065"
+	id = "nim_installp_flags"
+	disc_field_name = ""
+	name = "EXTEND file system if space needed?"
+ 	name_msg_file = "smit.cat"
+   	name_msg_set = 1
+   	name_msg_id = 623
+   	op_type = "r"
+   	entry_type = "n"
+   	entry_size = 0
+   	required = "y"
+   	prefix = "-f "
+   	cmd_to_list_mode = ""
+   	cmd_to_list = ""
+   	cmd_to_list_postfix = ""
+   	multi_select = "n"
+   	value_index = 0
+   	disp_values = "yes,no"
+   	values_msg_file = "smit.cat"
+   	values_msg_set = 1
+   	values_msg_id = 51
+   	aix_values = "X,"
+   	help_msg_id = "0503005"
+   	help_msg_loc = ""
+   	help_msg_base = ""
+   	help_msg_book = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "065"
+	id = "nim_auto_expand"
+	disc_field_name = "auto_expand"
+	name = "EXPAND file systems if space needed?"
+	name_msg_file = "cmdnim.cat"
+	name_msg_set = 10
+	name_msg_id = 124
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "no,yes"
+	values_msg_file = "cmdnim.cat"
+	values_msg_set = 10
+	values_msg_id = 50
+	aix_values = "-a,-x"
+	help_msg_id = "0042381"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#------------------------ nim_cust                ------------------------------
+#-- NOTE: The option_id max of 5 has been reached on this cmd_hdr.  Need to
+#   re-group if more are to be added.
+sm_cmd_hdr:
+		id = "nim_cust"
+		option_id = "nim_installp_flags,nim_install_com,nim_install_options,nim_fixes,nim_cust_spec_flags"
+		has_name_select = "n"
+		name = "Perform a Network Install"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 78
+		cmd_to_exec = "inst_op()
+{
+	while getopts f:o:k:p: c
+	do
+		case $c in
+			f) FLAGS=$FLAGS$OPTARG;;
+			o) OPTIONS=$OPTARG;;
+			k) FIXES=$OPTARG;;
+		esac
+	done
+        [[ -n ${FLAGS} ]] &&  FLAGS=a${FLAGS}
+        [[ ${FLAGS} = *N* ]] && [[ ${FLAGS} != *c* ]] && FLAGS=c${FLAGS}
+	nimclient -o cust ${FLAGS:+-a installp_flags=-\"$FLAGS\"} \
+		${OPTIONS:+-a filesets=\"$OPTIONS\"} \
+		${FIXES:+-a fixes=\"$FIXES\"} 
+	exit $?
+}
+inst_op"
+		ask = "y"
+		exec_mode = ""
+		ghost = "n"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042336"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_update_all          ------------------------------
+
+sm_cmd_hdr:
+		id = "nim_update_all"
+		option_id = "nim_update_all_flags,nim_update_all_com,nim_installp_flags,nim_up_all_spec_flags"
+		has_name_select = "n"
+		name = "Perform a Network Install"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 78
+		cmd_to_exec = "inst_op()
+{
+	while getopts f: c
+	do
+		case $c in
+			f) FLAGS=$FLAGS$OPTARG;;
+		esac
+	done
+        [[ -n ${FLAGS} ]] &&  FLAGS=a${FLAGS}
+        [[ ${FLAGS} = *N* ]] && [[ ${FLAGS} != *c* ]] && FLAGS=c${FLAGS}
+	nimclient -o cust ${FLAGS:+-a installp_flags=-\"$FLAGS\"} \
+		-afixes=update_all
+	exit $?
+}
+inst_op"
+		ask = "y"
+		exec_mode = ""
+		ghost = "n"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042336"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_cust_bundle         ------------------------------
+
+sm_cmd_hdr:
+		id = "nim_cust_bundle"
+		option_id = "nim_install_com,nim_installp_flags,nim_cust_spec_flags"
+		has_name_select = "n"
+		name = "Perform a Network Install"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 78
+		cmd_to_exec = "inst_op()
+{
+	while getopts f: c
+	do
+		case $c in
+			f) FLAGS=$FLAGS$OPTARG;;
+		esac
+	done
+        [[ -n ${FLAGS} ]] &&  FLAGS=a${FLAGS}
+        [[ ${FLAGS} = *N* ]] && [[ ${FLAGS} != *c* ]] && FLAGS=c${FLAGS}
+	nimclient -o cust ${FLAGS:+-a installp_flags=\"$FLAGS\"}
+	exit $?
+}
+inst_op"
+		ask = "y"
+		exec_mode = ""
+		ghost = "n"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042336"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_bos_inst            ------------------------------
+
+sm_cmd_hdr:
+		id = "nim_bos_inst"
+		option_id = "nim_bos_inst_opt,nim_install_flags,nim_install_com,nim_install_options,nim_mac_stay_client"
+		has_name_select = "n"
+		name = "Perform a Network Install"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 78
+		cmd_to_exec = "inst_op()
+{
+	while getopts f:o:s:n c
+	do
+		case $c in
+			f) FLAGS=$OPTARG;;
+			o) OPTIONS=$OPTARG;;
+			s) SOURCE=$OPTARG;;
+			n) NO_NIM_CLIENT=\"-a no_nim_client=yes\";;
+		esac
+	done
+	nimclient -o bos_inst \
+		${FLAGS:+-a installp_flags=\"$FLAGS\"} \
+		${OPTIONS:+-a filesets=\"$OPTIONS\"} \
+		${SOURCE:+-a source=$SOURCE} ${NO_NIM_CLIENT}
+	exit $?
+}
+inst_op"
+		ask = "y"
+		exec_mode = ""
+		ghost = "n"
+		cmd_to_discover = "echo \"#source:installp_flags\nrte:-aXg\""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042336"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_bos_inst_bundle     ------------------------------
+
+sm_cmd_hdr:
+	id = "nim_bos_inst_bundle"
+	option_id = "nim_bos_inst_opt,nim_install_flags,nim_install_com,nim_mac_stay_client"
+	has_name_select = "n"
+	name = "Perform a Network Install"
+	name_msg_file = "cmdnim.cat"
+	name_msg_set = 10
+	name_msg_id = 78
+	cmd_to_exec = "inst_op()
+{
+	NO_NIM_CLIENT=
+	FLAGS=
+	while getopts f:s:n c
+	do
+		case $c in
+			f) FLAGS=$OPTARG;;
+			s) SOURCE=$OPTARG;;
+			n) NO_NIM_CLIENT=\"-a no_nim_client=yes\";;
+		esac
+	done
+	nimclient -o bos_inst \
+		${FLAGS:+-a installp_flags=\"$FLAGS\"} \
+		${SOURCE:+-a source=$SOURCE} \
+		$NO_NIM_CLIENT
+	exit $?
+}
+inst_op"
+	ask = "y"
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "echo \"#source:installp_flags\nrte:-aXg\""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "0042336"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#------------------------ nim_mac_stay_client       ---------------------------
+
+sm_cmd_opt:
+	id_seq_num = "025"
+	id = "nim_mac_stay_client"
+	disc_field_name = ""
+	name = "Remain NIM client after install?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 10
+	name_msg_id = 126
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 10
+	values_msg_id = 0
+	aix_values = ",-n"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+#------------------------ nim_bos_inst_opt        ------------------------------
+
+sm_cmd_opt:
+		id_seq_num = "020"
+		id = "nim_bos_inst_opt"
+		disc_field_name = "source"
+		name = "Source for BOS Runtime Files"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 115
+		op_type = "l"
+		entry_type = "n"
+		entry_size = 0
+		required = "?"
+		prefix = "-s "
+		cmd_to_list_mode = ""
+		cmd_to_list = "echo \"rte\nspot\nmksysb\""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042367"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_install_com         ------------------------------
+
+sm_cmd_opt:
+		id_seq_num = "010"
+		id = "nim_install_com"
+		disc_field_name = "op"
+		name = "Network Install Operation to Perform"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 102
+		op_type = ""
+		entry_type = "n"
+		entry_size = 0
+		required = ""
+		prefix = ""
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042337"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_update_all_com     ------------------------------
+
+sm_cmd_opt:
+		id_seq_num = "010"
+		id = "nim_update_all_com"
+		disc_field_name = ""
+		name = "Network Install Operation to Perform"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 102
+		op_type = ""
+		entry_type = "n"
+		entry_size = 0
+		required = ""
+		prefix = ""
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = "cust"
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042337"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+                id_seq_num = "045"
+                id = "nim_update_all_com"
+                disc_field_name = ""
+                name = "Fixes (Keywords)"
+                name_msg_file = "cmdnim.cat"
+                name_msg_set = 10
+                name_msg_id = 0
+                op_type = ""
+                entry_type = "n"
+                entry_size = 0
+                required = ""
+                prefix = ""
+                cmd_to_list_mode = ""
+                cmd_to_list = ""
+                cmd_to_list_postfix = ""
+                multi_select = ""
+                value_index = 0
+                disp_values = "update_all"
+                values_msg_file = "cmdnim.cat"
+                values_msg_set = 0
+                values_msg_id = 0
+                aix_values = ""
+                help_msg_id = "0042384"
+                help_msg_loc = ""
+                help_msg_base = ""
+                help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "030"
+		id = "nim_install_flags"
+		disc_field_name = "installp_flags"
+		name = "installp Flags"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 76
+		op_type = ""
+		entry_type = "t"
+		entry_size = 30
+		required = "?"
+		prefix = "-f "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042374"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+
+#------------------------ nim_install_options     ------------------------------
+
+sm_cmd_opt:
+		id_seq_num = "040"
+		id = "nim_install_options"
+		name = "Fileset Names"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 77
+		op_type = ""
+		entry_type = "t"
+		entry_size = 2048
+		required = "?"
+		prefix = "-o "
+		cmd_to_list_mode = ""
+		cmd_to_list = ""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042228"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_diag                ------------------------------
+
+sm_cmd_hdr:
+		id = "nim_diag"
+		option_id = ""
+		has_name_select = "n"
+		name = "Enable Diagnostic Boot"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 73
+		cmd_to_exec = "nimclient -o diag"
+		ask = "y"
+		exec_mode = ""
+		ghost = "y"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042363"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_diag_bundle         ------------------------------
+
+sm_cmd_hdr:
+		id = "nim_diag_bundle"
+		option_id = ""
+		has_name_select = "n"
+		name = "Enable Diagnostic Boot"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 73
+		cmd_to_exec = "nimclient -o diag"
+		ask = "y"
+		exec_mode = ""
+		ghost = "y"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042363"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_reset                -----------------------------
+
+sm_cmd_hdr:
+		id = "nim_reset"
+		option_id = ""
+		has_name_select = "n"
+		name = "Reset the NIM State of a Machine"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 74
+		cmd_to_exec = "nimclient -Fo reset"
+		ask = "y"
+		exec_mode = ""
+		ghost = "y"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042364"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------ nim_reset_bundle         -----------------------------
+
+sm_cmd_hdr:
+		id = "nim_reset_bundle"
+		option_id = ""
+		has_name_select = "n"
+		name = "Reset the NIM State of a Machine"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 74
+		cmd_to_exec = "nimclient -Fo reset"
+		ask = "y"
+		exec_mode = ""
+		ghost = "y"
+		cmd_to_discover = ""
+		cmd_to_discover_postfix = ""
+		name_size = 0
+		value_size = 0
+		help_msg_id = "0042364"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#******************************************************************************
+#************************      sm_name_hdr        *****************************
+#******************************************************************************
+
+#------------------------- nim_alloc              ----------------------------
+
+sm_name_hdr:
+		id = "nim_alloc"
+		next_id = "nim_alloc_hdr"
+		option_id = "nim_alloc_select"
+		has_name_select = "n"
+		name = "Allocate Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 26
+		type = ""
+		ghost = "y"
+		cmd_to_classify = ""
+		cmd_to_classify_postfix = ""
+		raw_field_name = "res"
+		cooked_field_name = ""
+		next_type = "d"
+		help_msg_id = "0042354"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "0"
+		id = "nim_alloc_select"
+		disc_field_name = ""
+		name = "Available Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 100
+		op_type = "l"
+		entry_type = "n"
+		entry_size = 30
+		required = "+"
+		prefix = ""
+		cmd_to_list_mode = "1"
+		cmd_to_list = "list_res()
+{
+	. /etc/niminfo
+ 	nimclient -l -L ${NIM_NAME}
+	exit $?
+}
+list_res"
+		cmd_to_list_postfix = ""
+		multi_select = "y"
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042153"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------- nim_dealloc            ----------------------------
+
+sm_name_hdr:
+		id = "nim_dealloc"
+		next_id = "nim_dealloc_hdr"
+		option_id = "nim_dealloc_res_select_opt"
+		has_name_select = "n"
+		name = "Allocated Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 68
+		type = ""
+		ghost = "y"
+		cmd_to_classify = ""
+		cmd_to_classify_postfix = ""
+		raw_field_name = "res"
+		cooked_field_name = ""
+		next_type = "d"
+		help_msg_id = "0042172"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "0"
+		id = "nim_dealloc_res_select_opt"
+		disc_field_name = ""
+		name = "Allocated Network Install Resources"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 68
+		op_type = "l"
+		entry_type = "n"
+		entry_size = 30
+		required = "+"
+		prefix = ""
+		cmd_to_list_mode = "1"
+		cmd_to_list = "list_res()
+{
+	. /etc/niminfo
+	nimclient -l -c resources ${NIM_NAME}
+	exit $?
+}
+list_res"
+		cmd_to_list_postfix = ""
+		multi_select = "y"
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042172"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+#------------------------- nim_install                            --------------
+
+sm_name_hdr:
+		id = "nim_install"
+		next_id = "nim_"
+		option_id = "nim_install_opt"
+		has_name_select = "n"
+		name = "Perform a Network Install"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 78
+		type = "c"
+		ghost = "y"
+		cmd_to_classify = "multiplex()
+{
+	. /etc/niminfo
+	OP=$1
+        BUN=
+	[[ \"$OP\" != "update_all" ]] && BUN=$( nimclient -l -c resources ${NIM_NAME} | awk \' (($2==\"installp_bundle\") || ($2==\"fix_bundle\")){print}\')
+	[[ -n \"$BUN\" ]] && echo \"$OP\"_bundle || echo $OP
+}
+multiplex"
+		cmd_to_classify_postfix = "op"
+		raw_field_name = "op"
+		cooked_field_name = ""
+		next_type = "d"
+		help_msg_id = "0042336"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+		id_seq_num = "0"
+		id = "nim_install_opt"
+		disc_field_name = ""
+		name = "Network Install Operation to Perform"
+		name_msg_file = "cmdnim.cat"
+		name_msg_set = 10
+		name_msg_id = 102
+		op_type = "l"
+		entry_type = "n"
+		entry_size = 30
+		required = "y"
+		prefix = ""
+		cmd_to_list_mode = ""
+		cmd_to_list = "echo \"cust\nupdate_all\nbos_inst\ndiag\nreset\""
+		cmd_to_list_postfix = ""
+		multi_select = ""
+		value_index = 0
+		disp_values = ""
+		values_msg_file = "cmdnim.cat"
+		values_msg_set = 10
+		values_msg_id = 0
+		aix_values = ""
+		help_msg_id = "0042337"
+		help_msg_loc = ""
+		help_msg_base = ""
+		help_msg_book = ""
+
+sm_cmd_opt:
+                id_seq_num = "045"
+                id = "nim_fixes"
+                disc_field_name = "fixes"
+                name = "Fixes (Keywords)"
+                name_msg_file = "cmdnim.cat"
+                name_msg_set = 10
+                name_msg_id = 0
+                op_type = ""
+                entry_type = "r"
+                entry_size = 2048
+                required = "?"
+                prefix = "-k "
+                cmd_to_list_mode = ""
+                cmd_to_list = ""
+                cmd_to_list_postfix = ""
+                multi_select = ""
+                value_index = 0
+                disp_values = ""
+                values_msg_file = "cmdnim.cat"
+                values_msg_set = 0
+                values_msg_id = 0
+                aix_values = ""
+                help_msg_id = "0042384"
+                help_msg_loc = ""
+                help_msg_base = ""
+                help_msg_book = ""
+
+

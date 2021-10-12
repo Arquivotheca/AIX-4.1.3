@@ -1,0 +1,52 @@
+# @(#)22        1.5  src/bldenv/man/ptfrequisites.man, bldtools, bos412, GOLDA411a 3/28/94 15:56:36
+#
+#   COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#   FUNCTIONS: Man page for ptfrequisites
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1992,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/PTF/ptfrequisites
+        User defined requisites.  May be hand modified or automatically
+	updated from CMVC data.  The subptf command reads this file
+	when calculating requisite data.
+
+        Format:
+	  T|FP|FO|FD|TP|TO|TD
+	  T|FP|FO|FD|TP|TO|TD
+             .
+             .
+
+        Where:
+          T is one of "coreq", "prereq", or "ifreq"
+	  FP is the from-release ("from" as in "source")
+	  FO is the from-option - this is OPTIONAL
+	  FD is the from-defect in the form <defect>:<CMVC_Family>
+	  TP is the to-release ("to" as in "destination")
+	  TO is the to-option - this is OPTIONAL
+	  TD is the to-defect in the form <defect>:<CMVC_Family>
+          <CMVC_Family> is <familyname>@<hostname>@<portnumber>
+
+          The old file format where FD and TD are <defect> can still be
+          read by the tools.  The tools will assume the defects came from
+          the $DEFAULT_CMVCFAMILY family.
+
+	Examples:
+	  prereq|tcpip320|tcpip.obj|49868:aix@ausaix02@2035\
+                |bos320|bos.obj|45264:aix@ausaix02@2035
+	  ifreq|tcpip320||48822:aix@ausaix02@2035\
+               |nfs321||45119:aix@ausaix02@a035
+	  coreq|bos321|bos.obj|49869:aix@ausaix02@2035\
+               |bos321||45277:aix@ausaix02@2035
+
+	Note: 
+	  The from-option and to-option fields are for informational
+	  purposes only; subptf does not actually use there fields

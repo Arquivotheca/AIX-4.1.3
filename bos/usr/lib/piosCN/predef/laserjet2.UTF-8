@@ -1,0 +1,195 @@
+# @(#)09        1.4  src/bos/usr/lib/piosCN/predef/laserjet2.UTF-8, ils-zh_CN, bos41J, 9519A_all 5/5/95 10:53:33
+#
+# COMPONEMT_NAME: ils-zh_CN
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTAIL -- (IBM Confidential Restricted when 
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989,1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or 
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+9:067:__FLG::
+9:077:_a::0
+9:079:_b::0
+9:080:_c::
+9:081:_d::k
+9:082:_e::!
+9:084:_f::
+9:086:_g::1
+9:087:_h::
+9:089:_i::0
+9:091:_j::+
+9:093:_k::
+9:094:_l::56
+9:095:_m::
+9:096:_n::
+9:097:_o::
+9:098:_p::10
+9:099:_q::
+9:102:_r::
+9:104:_s::m12
+9:105:_t::0
+9:107:_u::
+9:109:_v::6
+9:111:_w::80
+9:112:_x::2
+9:116:_y::!
+9:117:_z::
+9:013:_A::1
+9:015:_B::
+9:017:_C::
+9:018:_D::
+9:020:_E::!
+9:023:_F::/usr/lib/X11/fonts/26x54romucs.pcf.Z,/usr/lib/X11/fonts/52x54gbucs.pcf.Z,/usr/lib/X11/fonts/52x54t1ucs.pcf.Z,/usr/lib/X11/fonts/52x54t2ucs.pcf.Z,/usr/lib/X11/fonts/52x54restucs.pcf.Z,/usr/lib/X11/fonts/52x54sbdcn.pcf.Z,/usr/lib/X11/fonts/48udccn.pcf.Z,/usr/lib/X11/fonts/52x54sbdtw.pcf.Z,/usr/lib/X11/fonts/48udctw.pcf.Z
+9:024:_G::
+9:026:_H::
+9:028:_I::
+9:029:_J::+
+9:032:_K::!
+9:034:_L::+
+9:036:_M::
+9:037:_N::
+9:038:_O::
+9:041:_P::
+9:043:_Q::
+9:044:_R::
+9:047:_S::!
+9:048:_T::
+9:051:_U::!
+9:053:_V::!
+9:055:_W::!
+9:457:_X::UTF-8
+9:058:_Y::
+9:060:_Z::+
+9:003:_0::
+9:004:_1::
+9:005:_2::
+9:006:_3::
+9:007:_4::
+9:008:_5::
+9:009:_6::
+9:010:_7::
+9:011:_8::
+9:012:_9::
+9:073:__SYS::
+9:359:s0::
+9:363:sp::
+9:361:si::
+9:360:sh::%Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/pioflaserjetxUTF-8 -sgothic
+9:364:st::%Ide/pioburst %F[H] %Idb/T.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/pioflaserjetxUTF-8 -sgothic -t%o%G_l%r%{14}%-%d
+9:365:sw::78
+9:068:__IDS::
+9:314:ik::%Ide/pioformat -@%Idd/%Imm -!%Idf/pioflaserjetxUTF-8 -l%IwL -w%IwW %f[begijpstvxyEFJKLSUVWXZ]
+9:315:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/pioflaserjetxUTF-8 -#+ -j! -J+ -x0 -l%IwL -w%IwW %f[ejpsvyEKSUVWXZ]
+9:071:__PFL::
+9:002:Ia::
+9:065:__FIL::
+9:295:fc::
+9:297:fd::
+9:299:ff::
+9:301:fg::
+9:303:fl::
+9:305:fn::
+9:307:fp::
+9:309:ft::
+9:311:fv::
+9:063:__DIR::
+9:160:df::/usr/lpd/pio/fmtrs
+9:158:dd::/usr/lpd/pio/ddi
+9:152:d1::
+9:154:d2::
+9:157:db::/usr/lpd/pio/burst
+9:159:de::/usr/lpd/pio/etc
+9:161:dn::
+9:162:dz::/tmp
+9:070:__MIS::
+9:347:mt::
+9:334:md::
+9:340:mn::
+9:344:mq::
+9:355:mv::
+9:339:mm::
+9:316:m1::
+9:317:m2::
+9:319:mF::
+9:335:mf::%Idf/pioflaserjetxUTF-8
+9:345:mr::
+9:342:mo::%Ide/pioout %v[ABCDFINOPRS]
+9:358:mz::14688
+9:332:mc::\0
+9:352:mu::1
+9:338:mi::p
+9:343:mp::%!
+9:331:mb::
+9:425:mA::LASERJET2 UTF8 Data Stream
+9:426:mD::pioattr9.cat
+9:427:mL::LASERJET2 Printer
+9:322:mH::1440
+9:328:mV::1440
+9:326:mS::
+9:356:mx::28
+9:357:my::64
+9:325:mP::50
+9:075:__WKV::
+9:413:wp::!
+9:408:wl::%{1}%G_E%+%d
+9:386:wH::%GmH%{10}%*%?%G_K%t%{180}%/%e%G_p%{2}%*%/%;%?%G_W%t%{2}%*%;%d
+9:387:wI::8
+9:389:wJ::0
+9:382:wB::0
+9:381:wA::0
+9:393:wV::%GmV%{10}%*%G_v%/%d
+9:383:wD::0
+9:421:ww::%GwH%G_w%*%d
+9:391:wM::0
+9:394:wW::%?%Cw%t%f!w%e%o%Gww%r%GwH%/%d%;
+9:390:wL::%?%Cl%t%f!l%e%o%GwV%G_l%*%r%GwV%/%d%;
+9:384:wF::0
+9:395:wX::0
+9:397:wb::!
+9:402:we::!
+9:406:wh::\11\21\31\41\51\61\71\101\111\121\131\141\151\161\171\201\211\221\231\241\251\261\271\301\311\321\331\341\0
+9:418:wu::0
+9:420:wv::\0
+9:407:wi::cl
+9:400:wd::
+9:422:wx::
+9:423:wy::
+9:417:wt::
+9:424:wz::
+9:403:wf::af
+9:398:wc::0
+9:404:wg::1
+9:410:wm::0
+9:061:__CAG::
+9:141:ci::
+9:148:cr::%Iac
+9:145:cm::
+9:143:cl::%Iac%Ial
+9:139:ch::
+9:149:cs::
+9:062:__CTL::
+9:129:an::\000
+9:131:ar::\007
+9:120:ab::\010
+9:126:ah::
+9:128:al::\012
+9:134:av::
+9:125:af::\014\015
+9:121:ac::\015
+9:124:ae::\021
+9:123:ad::\023
+9:132:at::\030
+9:064:__ESC::
+9:243:eb::
+9:244:ec::\033E
+9:245:ed::\033*t300R
+9:246:ee::\033*r0A
+9:247:ef::\033*rB
+9:248:eg::\033&l1O

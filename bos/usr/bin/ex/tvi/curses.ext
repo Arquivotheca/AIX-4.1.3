@@ -1,0 +1,43 @@
+/* @(#)62  1.5  src/bos/usr/bin/ex/tvi/curses.ext, cmdedit, bos411, 9428A410j 6/5/91 23:53:49 */
+/*
+ * COMPONENT_NAME: (CMDEDIT) curses.ext
+ *
+ * FUNCTION: none
+ *
+ * ORIGINS: 3, 10, 26, 27
+ *
+ * This module contains IBM CONFIDENTIAL code. -- (IBM
+ * Confidential Restricted when combined with the aggregated
+ * modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ *
+ * 
+ * 
+ */
+/* derived from version below */
+/* curses.ext	7.1 - 87/06/16 - 01:49:14 */
+/*
+ *
+ * External variables for the library
+ *
+ */
+
+/* LINTLIBRARY */
+
+# define CURSES	/* We are internal to curses */
+
+# ifdef NONSTANDARD
+#  include "RecStruct.h"
+#  include "VTio.h"
+# endif ITC
+
+# undef USG		/* compiler complains that curses.h "redefines" USG */
+# include "curses.h" 
+# include "term.h"
+/* # include "curshdr.h" */
+# include "unctrl.h"

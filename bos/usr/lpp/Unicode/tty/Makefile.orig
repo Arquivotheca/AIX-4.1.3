@@ -1,0 +1,41 @@
+# @(#)47        1.1  src/bos/usr/lpp/Unicode/tty/Makefile, cfgnls, bos411, 9428A410j 4/18/94 13:36:39
+#
+# COMPONENT_NAME: CFGNLS
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 83
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1988, 1993
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+
+.include <${MAKETOP}bos/kernext/Kernext.mk>
+
+VPATH              +=:${TARGET_MACHINE}
+
+KERNEL_EXT         = uc_utf lc_utf
+
+IDIR    	   = /usr/lpp/Unicode/tty/
+ILIST    	   = ${KERNEL_EXT} UTF-8
+
+IMPORTS            = -bI:pse.exp sockets.exp -bI:pse_int.exp
+LIBS               = ${KERNEXT_LIBS}
+
+uc_utf_OFILES     = uc_utf.o stream_uc_utf.o stream_com_utf.o
+uc_utf_ENTRYPOINT = uc_sjis_config
+
+lc_utf_OFILES     = lc_utf.o stream_lc_utf.o stream_com_utf.o
+lc_utf_ENTRYPOINT = lc_sjis_config
+
+.include <${MAKETOP}bos/kernext/tty/${TARGET_MACHINE}/machdep.mk>
+
+.include <${RULES_MK}>

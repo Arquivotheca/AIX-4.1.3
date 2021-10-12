@@ -1,0 +1,193 @@
+# @(#) 62  1.22  src/bos/objclass/POWER/if_tr.add, sockobj, bos411, 9428A410j 1/27/94 15:25:40
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1991
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the token ring network interface.
+
+PdDv:
+	type		= "tr"
+	class		= "if"
+	subclass	= "TR"
+	prefix		= "tr"
+	base		= 0
+	chgstatus	= 1
+	DvDr		= "if_tr"
+	led		= 0x581
+	setno		= 110
+	msgno		= 21
+	catalog		= "devices.cat"
+	Define		= "/usr/lib/methods/defif"
+	Configure	= "/usr/lib/methods/cfgif"
+	Change		= "/usr/lib/methods/chgif"
+	Unconfigure	= "/usr/lib/methods/ucfgif"
+	Undefine	= "/usr/lib/methods/udefif"
+	uniquetype	= "if/TR/tr"
+
+PdCn:
+	uniquetype	= "if/TR/tr"
+	connkey		= "TCPIP"
+
+#
+#   this stanza will be dynamically replaced in the smit panel for mtu changes
+#
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "mtu"
+	deflt		= "1492"
+	values		= "60-8500,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 2
+
+#
+#   this stanza is used for 4 mbit ring speed
+#
+PdAt:
+	uniquetype = "if/TR/tr"
+	attribute = "mtu_4"
+	deflt = "1492"
+	values = "60-4096,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 2
+
+#
+#   this stanza is used for 16 mbit ring speed
+#
+PdAt:
+	uniquetype = "if/TR/tr"
+	attribute = "mtu_16"
+	deflt = "1492"
+	values = "60-17792,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 2
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "remmtu"
+	deflt		= "576"
+	values		= "60-8500,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 3
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "netaddr"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "state"
+	deflt		= "down"
+	values		= "up,down,detach"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 5
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "arp"
+	deflt		= "on"
+	values		= "on,off"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 7
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "allcast"
+	deflt		= "on"
+	values		= "on,off"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 16
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "hwloop"
+	deflt		= "off"
+	values		= "on,off"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 17
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "netmask"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 8
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "if_keyword"
+	deflt		= "tok"
+	values		= "tok"
+	type		= "R"
+	generic		= ""
+	rep		= "s"
+	nls_index	= 0
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "security"
+	deflt		= "none"
+	values		= "top_secret,secret,confidential,unclassified,none"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 9
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "authority"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 10
+
+PdAt:
+	uniquetype	= "if/TR/tr"
+	attribute	= "broadcast"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 11

@@ -1,0 +1,293 @@
+#!/unix
+* @(#)88        1.124.1.24  src/bos/kernel/exp/syscalls.exp, sysexp, bos412, 9448A 11/29/94 22:24:06
+*
+* COMPONENT_NAME: (SYSEXP) Exported System calls
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+* Data items on the stack at fixed addresses.
+*
+
+_environ
+_errno
+_errnop
+environ
+errno
+errnop
+
+* Data items needed in extensions - DO NOT add syscall option !
+*
+*
+*
+*	syscall.exps -- system call entry points
+*
+access                  syscall
+accessx                 syscall
+acct                    syscall
+adjtime			syscall
+audit                   syscall
+auditbin                syscall
+auditevents             syscall
+auditlog                syscall
+auditobj                syscall
+auditproc               syscall
+bindprocessor           syscall
+brk                     syscall
+* brkpoint need not be a syscall - in fact its better this way!
+brkpoint
+chdir                   syscall
+chacl                   syscall
+chmod                   syscall
+chown                   syscall
+chownx                  syscall
+chpriv                  syscall
+chroot                  syscall
+close                   syscall
+cmp_swap                syscall
+creat                   syscall
+disclaim                syscall
+execve                  syscall
+_exit                   syscall
+faccessx                syscall
+fchacl                  syscall
+fchdir			syscall
+fchmod                  syscall
+fchown                  syscall
+fchownx                 syscall
+fchpriv                 syscall
+fclear                  syscall
+fork                    syscall
+fp_cpusync              syscall
+_fp_trapstate_ker	syscall
+frevoke			syscall
+fscntl                  syscall
+fstatacl                syscall
+fstatfs                 syscall
+fstatpriv               syscall
+fstatx                  syscall
+fsync                   syscall
+ftruncate               syscall
+getargs                 syscall
+getdirent               syscall
+getevars                syscall
+getgidx                 syscall
+getgroups               syscall
+getpgrp                 syscall
+kgetpgrp                syscall
+kgetsid                 syscall
+getpid                  syscall
+getppid                 syscall
+getpriority             syscall
+getpri                  syscall
+getpriv                 syscall
+getprocs		syscall
+getthrds		syscall
+getrlimit               syscall
+getrusage               syscall
+getuidx                 syscall
+kfcntl                  syscall
+kfork                   syscall
+kill                    syscall
+kioctl			syscall
+knlist                  syscall
+kreadv			syscall
+kwaitpid		syscall
+kwritev			syscall
+lchown			syscall
+link                    syscall
+_load			syscall
+loadbind		syscall
+loadquery		syscall
+lockf                   syscall
+lseek                   syscall
+_lseek                  syscall
+madvise			syscall
+mincore			syscall
+mkdir                   syscall
+mknod                   syscall
+mmap			syscall
+mntctl                  syscall
+mprotect		syscall
+msem_remove		syscall
+msleep			syscall
+msync			syscall
+munmap			syscall
+mycpu                   syscall
+mwakeup			syscall
+open                    syscall
+openx                   syscall
+pause                   syscall
+pipe                    syscall
+plock                   syscall
+poll                    syscall
+privcheck               syscall
+probe                   syscall
+profil                  syscall
+psdanger		syscall
+ptrace                  syscall
+readlink                syscall
+reboot                  syscall
+rename                  syscall
+revoke			syscall
+rmdir                   syscall
+absinterval             syscall
+getinterval             syscall
+gettimer                syscall
+gettimerid              syscall
+incinterval             syscall
+quotactl                syscall
+reltimerid              syscall
+resabs                  syscall
+resinc                  syscall
+restimer                syscall
+settimer                syscall
+nsleep                  syscall
+sbrk                    syscall
+select                  syscall
+seteuid                 syscall
+setgid                  syscall
+setgidx                 syscall
+setgroups               syscall
+setpgid                 syscall
+setpgrp                 syscall
+setpri                  syscall
+setpriority             syscall
+setpriv                 syscall
+setreuid                syscall
+setrlimit               syscall
+setsid                  syscall
+setuid                  syscall
+setuidx                 syscall
+shmctl                  syscall
+shmget                  syscall
+shmat                   syscall
+shmdt                   syscall
+msgctl                  syscall
+msgget                  syscall
+msgsnd                  syscall
+msgrcv                  syscall
+msgxrcv                 syscall
+semctl                  syscall
+semget                  syscall
+semop                   syscall
+sigaction               syscall
+sigcleanup              syscall
+siglocalmask		syscall
+sigprocmask             syscall
+sigreturn               syscall
+sigstack                syscall
+sigsuspend              syscall
+sigpending              syscall
+statacl                 syscall
+statfs                  syscall
+statpriv                syscall
+statx                   syscall
+swapoff			syscall
+swapon			syscall
+swapqry			syscall
+symlink                 syscall
+sync                    syscall
+sysconfig               syscall
+times			syscall
+truncate                syscall
+ulimit                  syscall
+umask                   syscall
+umount                  syscall
+uname                   syscall
+unameu                  syscall
+unamex                  syscall
+unlink                  syscall
+unload			syscall
+usrinfo                 syscall
+upfget                  syscall
+upfput                  syscall
+ustat                   syscall
+utimes                  syscall
+uvmount                 syscall
+vmount                  syscall
+yield			syscall
+*
+* Threads system calls that can be used by kernel extensions
+*
+thread_create           syscall
+thread_terminate        syscall
+thread_setsched         syscall
+thread_self             syscall
+*
+* Trace system calls/symbols
+*
+Trconflag
+trchook			syscall
+trchk                   syscall
+trchkt                  syscall
+trchkl                  syscall
+trchklt                 syscall
+trchkg                  syscall
+trchkgt                 syscall
+trcgen                  syscall
+trcgent                 syscall
+*
+* socket system calls
+*
+socket                  syscall
+bind                    syscall
+listen                  syscall
+naccept                 syscall
+connect                 syscall
+socketpair              syscall
+sendto                  syscall
+send                    syscall
+nsendmsg                syscall
+nrecvfrom               syscall
+recv                    syscall
+nrecvmsg                syscall
+shutdown                syscall
+setsockopt              syscall
+getsockopt              syscall
+ngetsockname            syscall
+ngetpeername            syscall
+setdomainname           syscall
+getdomainname           syscall
+sethostname             syscall
+gethostname             syscall
+sethostid               syscall
+gethostid               syscall
+getkerninfo		syscall
+* the following are for 4.3 compatibility
+accept                 syscall
+sendmsg                syscall
+recvmsg                syscall
+recvfrom               syscall
+getsockname            syscall
+getpeername            syscall
+
+* compare and swap.. a fast svc do not use syscall
+cs
+_system_configuration
+utrchook
+_fp_fpscrx
+_clear_lock
+_check_lock
+_set_primxid
+
+* Integer millicode at fixed addresses.
+* These cannot be from /unix by name.
+* DO NOT ADD ADDITIONAL SYSCALLS BELOW HERE!
+#!
+__mulh		0x3100
+__mull		0x3180
+__divss		0x3200
+__divus		0x3280
+__quoss		0x3300
+__quous		0x3380

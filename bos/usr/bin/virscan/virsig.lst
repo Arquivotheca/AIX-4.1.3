@@ -1,0 +1,1512 @@
+* @(#)35	1.2  src/bos/usr/bin/virscan/virsig.lst, cmdsvir, bos411, 9428A410j 4/3/91 19:12:25 
+*
+* COMPONENT_NAME: CMDSVIR
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+* This file contains signatures of viruses.
+* Copyright (c) IBM Corporation 1990, 1991
+*
+* Lines beginning with a * are comment lines. These lines are ignored by the
+* virus scanning program, except when the entire file is read for self-test.
+*
+* CRCVMARK1F9BB72C
+* The virus scanning program uses information on the previous line
+* to detect modifications to this file.
+*
+F6872A0101740F8DB74D01BC
+%s a virus similar to the 1701 or the 1704 virus.
+(COM files only)
+*
+FA8BECE800005B81EB31012EF6872A0101740F8DB74D01BC820631343124464C75F8
+%s the 1701 virus.
+(COM files only)
+*
+FA8BECE800005B81EB31012EF6872A0101740F8DB74D01BC850631343124464C75F8
+%s the 1704 or the 1704-B virus.
+(COM files only)
+*
+FA8BCDE800005B81EB31012EF6872A0101740F8DB74D01BC850631343124464C75F8
+%s the 1704-Y virus.
+(COM files only)
+*
+2EA31700BB17000E1FB4DECD21B42ACD2181FA0104742281F9BC077506E8C504
+%s the April 1st EXE virus.
+(EXE files only)
+*
+89263401B419CD2104412EA265032EA2B103BF6703578BF2807C013A750D8A042EA265032EA2B103
+%s the April 1st COM virus.
+(COM files only)
+*
+8ED0BC000750B8C50050CBFC062E8C0631002E8C0639002E8C063D002E8C0641008CC0
+%s the 1813 virus.
+(COM and EXE files)
+*
+8ED0BC000750B8C50050CB06FC2E8C0631002E8C0639002E8C063D002E8C0641008CC0
+%s the 1813-Swiss virus.
+(COM and EXE files)
+*
+F9C30774303C05750D80FA0D74082EFE060E00EB2090B80835
+%s the 1813-not-13 virus.
+(COM and EXE files)
+*
+FC8BF281C60A00BF0001B90300F3A48BF2B430CD213C007503E9C701
+%s the Vienna-648 virus.
+(COM files only)
+*
+36010183EE038BC63D00007503E90201
+%s the DataCrime-1280 virus.
+(COM files only)
+*
+36010183EE038BC63D00007503E9FE00
+%s the DataCrime-1168 virus.
+(COM files only)
+*
+505380FC4B740880FC4E7403E977018BDA807F013A75058A07EB07
+%s the Lehigh I virus.
+(COMMAND.COM only)
+*
+F6872A0101740F8DB74D01BC850631343124464C77F8
+%s the 1704-C virus or the 1704-Format virus.
+(COM files only)
+*
+B8000026A2490226A24B0226A28B0250B419CD2126A24902B4470401
+%s the Burger-405 virus.
+(COM files only)
+*
+7106E82806B419CD2189B451018184510184088C8C5301
+%s the Traceback-3066 virus.
+(COM and EXE files)
+*
+8ED0BC200950B8230250CBFC062E8C062C002E8C0634002E8C0638002E8C063C008CC0
+%s the 2086 virus.
+(COM and EXE files)
+*
+5E81EE030183FE00742A2E8A9403018DBC2901
+%s the DataCrime II virus.
+(COM and EXE files)
+*
+8CDB4B8EDBB04DA20000A103002D8000A3030003D8438EC333F633FF0E1FB9D007
+%s the Saratoga 1, Saratoga 2, or Iceland II virus.
+(EXE files only)
+*
+26C6067F03FFB452CD212E8C066D02268B47FE8EC026030603004040
+%s the Iceland II virus.
+(EXE files only)
+*
+1E8BECC746100001E80000582DD700B104D3E88CCB03C32D100050
+%s the Friday the 13th COM virus.
+(COM files only)
+*
+D1E98AE18AC13306140031044646E2F25E5958C3
+%s the SYSLOCK virus.
+(COM and EXE files)
+*
+2906E8E005B419CD218884E300E8CE048A95E2000E1F7509
+%s the Traceback-2930 virus.
+(COM and EXE files)
+*
+5A45CD602EC606250601902E803E2606008D3E0806
+%s the 1536 virus.
+(COM files only)
+*
+9D73482E3B1E0807753A85DB7436E8AB029DE883007234
+%s the Dark Avenger virus.
+(COM and EXE files. Pause if found. Scan memory.)
+*
+2933C08EC02680261704BF26800E17042026F60617040C7411E4603C53
+%s the MIX1 virus.
+(EXE files only)
+*
+2733C08EC02680261704BF26800E17042026F60617040C740FE4603C53
+%s the MIX1-B virus.
+(EXE files only)
+*
+C606F900013CD375062EC606F90000BB40008EDB33DB8A4717240C3C0C7541
+%s the Alabama virus.
+(EXE files only. Scan memory. Pause if found)
+*
+DA012E890E0800B8014380E1FECD217303E9C801B8023D8E5E0E
+%s the VACSINA virus.
+(EXE files only)
+*
+F281C60A00BF0001B90300F3A48BF2B430CD213C007503E9C601
+%s the Vienna-Ghost virus.
+(COM files only)
+*
+FB750A86E09DCFE9CE06E9810381FF0AFB742E3D004B
+%s the DBF virus.
+(COM files only)
+*
+D681C2050033C9B44FCD2173EF8A4412A200018B4413A30101
+%s the Fumble-867 virus.
+(COM files only)
+*
+C80510008ED0BC5D0650B8C40050CBFC062E8C063100
+%s the Sunday virus.
+(COM and EXE files)
+*
+2FCD21895C00908C44029007BA5F009001F2B41A
+%s the Vienna-Lisbon virus.
+(COM files only)
+*
+4F0026A0FE032EA2510026C706FC03F3A526C606FE03CB58
+%s the sURIV 3.00 virus.
+(COM and EXE files)
+*
+EF408EC70E1FB90004FCBF0000F3A481EC0004
+%s the Perfume-765 virus.
+(COM files only)
+*
+9E0206B435B024CD21891EA2028C06A00207
+%s the Sylvia virus.
+(COM files only)
+*
+C21ECD707219A36F02B442B0028B1E6F02B90000
+%s the Do-Nothing virus.
+(COM files only)
+*
+9403018D8CC8068D9C2A012BCB2E8A0732C2D0CA
+%s the DataCrime II-B virus.
+(COM and EXE files)
+*
+8200C7069C007D098C0E9E00C7068400EE088C0E8600FB2E803E070100
+%s the OROPAX virus.
+(COM files only. Scan memory. Pause if found.)
+*
+D681C60000FCB90300BF0001F3A48BFAB430CD213C007503
+%s the W13-A or W13-B virus.
+(COM files only)
+*
+9F83C4049E7303E97A0233C933D2E811FFBA0A00B91400E8FEFE724F
+%s the Yankee Doodle-2885 virus.
+(COM and EXE files)
+*
+9F83C4049E7303E9F002B8004233C933D28B1E3C00E827FF
+%s the Yankee Doodle-2772 virus.
+(COM and EXE files)
+*
+875EECFCC383C30381FBCC0272E95BE8890AE421
+%s the 4096 virus.
+(COM and EXE files. Pause if found. Scan memory.)
+*
+7D02B440CD21E83E00A19B02A33602A19D02A334021E
+%s the 637 virus.
+(EXE files only)
+*
+* (Special signature -- built into VIRSCAN.)
+* %s the Washburn-1260 or Washburn-Casper virus.
+* (COM files only)
+*
+AD03F3A426C706000003015E1E068CC048
+%s the Devil's Dance-941 virus.
+(COM files only)
+*
+9B00FFFF7203A39B00A19B003DFFFF741FB000
+%s the 9800:0000 virus.
+(COM and EXE files)
+*
+B90800BEBC03BF00F8FCF3A4B9C4028B364801
+%s the Taiwan virus.
+(COM files only)
+*
+6803A32400A16A03051000A31C0090B80242B9FFFF
+%s the December 24th virus.
+(EXE files only)
+*
+4FBA5F02CD217202EBA0BA8000B41ACD21803E050105
+%s the Pixel-847 virus.
+(COM files only)
+*
+C5030133C033DBB909008D561289D6030043
+%s the VIRUS-90 virus.
+(COM files only)
+*
+*-----------------------------------------
+*
+* The 1392, or "KHETAPUNK", virus; displays odd message on line 26 of
+* CGA monitors, sometimes hangs the machine due to bugs.
+*
+* Properties: infects COM, infects EXE, uses MZ, resident
+*
+2F01C3E80700E83A00E86600C3BF0001A10301
+%s the 1392 virus.
+(COM and EXE files)
+*----------------------------------------
+* The V2000 (a Dark Avenger variant)
+*
+* Properties: Infects COM, infects EXE, uses MZ, resident
+*
+B413CD2F5A1F2E8994A7072E8C9CA9072E
+%s the V2000 virus.
+(EXE and COM files. Scan memory. Pause if found).
+*----------------------------------------
+*
+* The "Solano" virus.   Swaps digits in the display buffer periodically.
+*
+* Properties: Infects COM, uses MZ, resident
+*
+175858BF00012E893E2101582EA32301
+%s the Solano virus.
+(COM files only)
+*-----------------------------------------
+*
+* The Saturday 14th, or "Durban", virus; trashes disks
+* on Sat the 14th.
+*
+* Properties: Infects COM, infects EXE, uses MZ, resident
+*
+9D02A4E2FD06B82135CD211F891E5302
+%s the Saturday 14th ("Durban") virus.
+(COM and EXE files)
+*-----------------------------------------
+*
+* The June 16th, or "Pretoria", virus; renames files on June 16th.
+*
+* Properties: Infects COM
+*
+C933D2E85BFFE81200B440BA0001
+%s the June 16th ("Pretoria") virus.
+(COM files only)
+*-----------------------------------------
+*
+* The XA1 (XMas and April 1st) virus; displays tree on Dec 24,
+*   overwrites boot records with "April..." message on 4/1.
+*
+* Checked: Infects COM
+*
+*
+FA8BEC5832C08946028146002800
+%s the "XA1" virus.
+(COM files only)
+*-----------------------------------------
+*
+* The "ANARKIA", yet another 1813 variant.   Main functional
+*   difference is that the "black box" code is NOPped out.
+*
+*  Like the 1813, infects COM and EXE, and is resident.
+*
+*
+5C02B82125CD218E063100268E062C0033FFB9FF
+%s the 1813-ANARKIA virus.
+(COM and EXE files)
+*-----------------------------------------------------
+*
+* The "VP".   Infects *.COM files in the current directory or
+*  up the tree, sometimes displays a funny symbol.
+*
+* Checked: Infects COM
+*
+290332E43A062A037503E94902403D01007501
+%s the VP virus.
+(COM files only)
+*-----------------------------------------------------
+*
+* The PSQR-1720.   Infects any file executed.   If installed on
+*  any 13th, erases files executed, and trashes the bottom of
+*  drive 80 (C:).
+*  Does nothing in January or December.
+*
+* Checked: Infects COM, Infects EXE, Resident
+*
+A526C606FE03CB580510008EC00E1FB9B306D1E9
+%s the PSQR-1720 virus.
+COM and EXE files
+*-----------------------------------------------------
+*
+* The "ITAVIR".  A large and complex virus; uses a reserved
+* directory bit to mark infected files, sometimes causing
+* odd system behavior.
+*
+* Features: Infects EXE, uses MZ
+*
+9B00908A16D70B80FA02741B1E52B41CCD218A075A
+%s the ITAVIR virus.
+(EXE files, and perhaps COM files)
+*-----------------------------------------------------
+*
+* The Kennedy-333, or "Kennedy".   Infects *.COM files
+* in current directory.   On June 6, Nov 18, and
+* Nov 22, displays a message.
+*
+* Features: Infects COM
+*
+9452028BFAB90300CD21803DE97405E87E00F8
+%s the Kennedy-333 virus.
+(COM files only)
+*-----------------------------------------------------
+*
+* The Prudents-1210 virus.  A non-resident EXE infector.  If the year
+* is not 1989, the month is after April, and the day of the month
+* is 1, 2, or 3, it installs an INT13 handler that converts all
+* disk-writes into sector-verifies (making all disks unwriteable).
+*
+* Features: Infects EXE. Uses MZ.
+*
+2F040175D00E0E1F07BED3042BC92E8A0446410AC0
+%s the Prudents-1210 virus.
+(EXE files only)
+*-----------------------------------------------------
+*
+* The VIRDEM virus.  Sometimes prints messages including
+* the words "This is a demo program for computer viruses".
+*
+* Features: Infects COM.
+*
+B200B40ECD21B43B8D16DF03CD21EB4C90B43B8D16DF03
+%s the VIRDEM virus.
+(COM files only)
+*-----------------------------------------------------
+*
+* The Halloechen virus.
+*
+* Features: infects COM, infects EXE, uses MZ, resident.
+*
+4B00C7065B005555BA4900C706FB003000E8A1FEFF064A01
+%s the Halloechen virus.
+(COM and EXE files)
+*-----------------------------------------------------
+*
+* The Eight Tunes-1971, or "Eight Tunes" virus.  Apparently plays music
+* now and then!
+*
+* Features: infects COM, infects EXE, uses MZ, resident.
+*
+B7003B445B7219B8907EE8C800B80835CD21895C5D
+%s the Eight Tunes-1971 virus.
+(COM and EXE files)
+*-----------------------------------------------------
+*
+* The "Liberty" virus.     Normally infects EXE and COM files that
+*   are executed, but in some circumstances (particularly when a disk
+*   is very full) will also infect floppy disk boot sectors.  Also
+*   on rarish occasions, will install a variety of interrupt handlers
+*   which will cause some alteration of data sent to the screen,
+*   the printer, and the asynch ports via BIOS.   A "damaged"
+*   strain also exists in which this code is buggy, and will
+*   hang the machine.
+*
+* Features: Infects COM, infects EXE, infects floppy, uses MZ, resident.
+*
+* Signature for the "damaged" strain. This will also be found in the
+* undamaged strain.
+*
+93E8CD0072C2BB13012E813F4D5A7505E8B501EBB32EC606090200
+%s the Liberty virus.
+COM and EXE files.
+*
+* Signature for the "undamage" strain.
+*
+3F2833D2CD13C333C08ED8A14C002EA30A08A14E002EA30C08
+%s the Liberty virus.
+COM and EXE files and boot records.
+*------------------------------------------------------------------------
+*
+* The FISH 6 virus.   While it is active in memory, infected
+*   files don't appear infected.   It also spreads aggressively,
+*   sort of Dark-Avenger-like.  Much code taken from the 4096.
+*   If the year is after 1990, will sometimes hang the machine
+*   after printing a short message.
+*
+*  Features: Infects COM, Infects EXE, Uses MZ, Resident
+*
+8F06DB0E2E8326DB0EFE2E803EDA0E0075112EFF36DB0E
+%s the Fish 6 virus.
+COM and EXE files, scan memory, pause if found.
+*------------------------------------------------------------------------
+*
+* The V512 virus, from the Bulgarian collection.   Uses a
+*   number of undocumented DOS calls and control blocks, and
+*   therefore will tend to crash under various versions of DOS and odd setups.
+*   No intentional damage or symptoms evident.   If the virus is
+*   in memory, files will not appear infected, usually.  Infects
+*   *.CO* files that are executed or closed while the virus is active.
+*
+*   Features: Infects COM, Resident
+*
+C575F648D0EC2264047421B820008ED82BD2E865FF8BF2
+%s the V512 virus.
+COM files only, scan memory, pause if found.
+*-----------------------------------------------------
+*
+* The "Do-Nothing 2"; a trivial modification of the Do-Nothing.
+* This one doesn't do anything significant, either.  A silly virus,
+* that will crash any system with <640K, and doesn't work reliably
+* even then.
+*
+*  Features: infects COM, resident.
+*
+C21ECD707219A36F00B442B0028B1E6F00B90000
+%s the Do-Nothing 2 virus.
+(COM files only)
+*-----------------------------------------------------
+*
+* The Taiwan 2; probably an earlier version of the Taiwan,
+* functionally identical.  On the eighth of the month, will trash
+* various disks, and print "Greetings from National Central University!
+* Is today sunny?".
+*
+*  Features: infects COM.
+*
+B90800BEDF03BF00F8FCF3A4B9E7028B364001
+%s the Taiwan 2 virus.
+(COM files only)
+*-----------------------------------------------------
+*
+* The V1024 virus.  When the virus is in memory, files will appear
+* with the uninfected lengths in DIR output.   If a color display in
+* 25x80 text mode is active, the virus will on rather rare occasions
+* cause a pattern of bouncing multicolored diamonds to appear, making
+* the machine rather difficult to use...
+*
+*  Infects COM, infects EXE, uses MZ, resident
+*
+4A8EC233FFB943008B55022BD13BD0723CFA26294D03895502
+%s the V1024 virus.
+COM and EXE files.
+*-----------------------------------------------------
+*
+* The SHAKE virus.   When the virus is in memory, files will appear
+* with their uninfected lengths in DIR output.  Infects the first
+* uninfected *.COM file in the current directory whenever a "Get
+* Disk Free Space" call is made (for some reason).  After an infected
+* file is executed, there is a one-in-16 (or so) chance that any
+* program run afterwards will not in fact be run, but will instead
+* produce the message "Shake well before use!".  (This message will,
+* however, only occur once per boot.)
+*
+*       Features: Infects COM, Resident
+*
+DC01075B58CF80FC4B75225052B42CCD2180E20F08D2
+%s the Shake virus.
+COM files only
+*-----------------------------------------------------
+*
+* The Yankee-1961 virus.   Not terribly interesting; non-resident
+* EXE infector, plays a tune whenever an infected file is run.
+*
+* Features: infects EXE, uses MZ.
+*
+*
+2F078CD80E1FBE370881EE030103F38904BE390881EE030103F3
+%s the Yankee-1961 virus.
+(EXE files only)
+*-----------------------------------------------------
+*
+* The FLASH virus.  Causes a CGA screen to flash a few times
+* about every seven minutes.
+*
+* Features: infects COM, infects EXE, resident
+*
+*
+4ACD218CDA03D3428EC2B455CD2156BF000183EE080E1FB9D002
+%s the FLASH virus.
+(COM and EXE files)
+*-----------------------------------------------------
+*
+* The 1701-Jojo virus.   A non-garbled variant of the 1701; instead of
+* the 1701's screen effects, the 1701-Jojo will display diamond-shaped
+* patterns of multicolored blocks on a color display if an
+* infected program is run when the virus is already in memory,
+* and the time is 7pm or after.
+*
+* Features: infects COM, uses MZ, resident
+*
+*
+6DB42CCD2180FD13720AB8CD20A3000153E9C702
+%s the 1701-Jojo virus.
+COM files only.
+*----------------------------------------------------------------------*
+*
+* The SLOW virus.  Infects EXE and COM files as they are executed.
+* Much of the code is copied from the 1813.  Only "damage" is to
+* set an occasional file's timestamp to zero when it is closed,
+* on some Fridays after 12/31/1990.
+*
+* Features: Infects COM, infects EXE, uses MZ, resident.
+*
+DE909081C61B00B990062E8034
+%s the SLOW virus.
+COM and EXE files.
+*-----------------------------------------------------
+*
+* The SVIR virus.  When an infected file is executed, it will look
+* for another *.EXE file to infect.   A rather buggy and awkward virus...
+*
+* Features: Infects EXE
+*
+E788261900A11D00A32100A11B00A32300C7061B000000
+%s the SVIR virus.
+EXE files only.
+*-----------------------------------------------------
+*
+* The STAF virus.  Another awkward, buggy "demo" virus; infected files
+* announce themselves loudly.   Running an infected file will infect
+* zero or more *.COM files in the current directory.
+*
+* Features: Infects COM
+*
+CFBACB01E80AFFBA8F02E820FFE801FFB80057CD215152B000
+%s the STAF virus.
+COM files only.
+*-----------------------------------------------------
+*
+* The 1624 virus.   Similar to the 1961, but does not play a tune;
+* will sometimes hang the machine (on purpose).
+*
+* Features: infects EXE, uses MZ.
+*
+*
+DE058CD80E1FBEE60681EE030103F38904BEE80681EE030103F3
+%s the 1624 (Yankee) virus.
+EXE files only
+*-----------------------------------------------------
+*
+* The Sunday 2 virus.   A simple variation on the Sunday virus;
+* puts the word "PLAY" in the corner of the monochrome display space.
+*
+* Features: infects COM, infects EXE, resident
+*
+*
+C80510008ED0BCBE0650B8C40050CBFC062E8C063100
+%s the Sunday 2 virus.
+(COM and EXE files)
+*-----------------------------------------------------
+*
+* This signature can be used to detect the Flip-2153 virus in system memory,
+* will *not* detect the virus in files, and *can* be used with any version
+* of VIRSCAN that scans system memory. It has been commented out since the
+* other two signatures for the Flip viruses are sufficient with this
+* version of virscan.
+*
+* 505152B402CD1A80FD1075
+* System memory may be infected with the Flip-2153 virus.
+* Scan memory.
+*-----------------------------------------------------
+*
+* This signature will detect the both Flip-2153 virus and the
+* Flip-2343 viruses in both files and in system memory, but will only
+* work with a version of VIRSCAN that accepts single byte "wild-cards"
+* in signature strings.
+*
+0EBB????1FB9????B2??81C1????EB
+%s the Flip-2153 or the Flip-2343 virus.
+COM and EXE files.
+*-----------------------------------------------------
+*
+* The ANTHRAX virus.   A multi-modal virus, infecting COM files,
+* EXE files, and boot sectors.
+*
+A58ED8BA270451535052CB8EC1B104BEB00583C60EAD3C80
+%s the ANTHRAX virus.
+EXE and COM files and boot records.
+*-----------------------------------------------------
+*
+F4A113042D0700A31304B106D3E08EC0BE007C
+%s the Brain, Brain-Shoe\nor Brain-Ashar virus.
+(Boot records. Scan memory.)
+*
+1E5080FC02721780FC0473120AD2750E33C08ED8A03F04A8017503E80700
+%s the Stoned virus.
+(Boot records)
+*
+BB40008EDBA11300F7E32DE0078EC00E1F81FF56347504FF0EF87D
+%s the Yale virus.
+(Boot records)
+*
+8ED8A113042D0200A31304B106D3E02DC0078EC0BE007C8BFEB90001
+%s the Bouncing Ball\nor Typo Boot virus.
+(Boot records)
+*
+FA8CC88ED88ED0BC00F0FBB8787C50C3
+%s the Den Zuk virus.
+(Boot records)
+*
+31C0CD13B80202B90627BA0001BB00208EC3BB0001CD139A00010020
+%s the Falling Letters Boot virus.
+(Boot records)
+*
+8CC88ED88ED0BC00F0FBA0067CA2097C8B0E077C890E0A7CE85900
+%s the Brain-Ashar virus.
+(Boot records)
+*
+B106D3E08EC0BE007C33FFB90410FCF3A406B8000450CBB90400
+%s the Ohio virus.
+(Boot records)
+*
+7D0E582D20008EC0E83C008B1EF77D43B8C0FF8EC0E82F0033C0
+%s the Typo Boot virus.
+(Boot records)
+*
+7D807426BEBE81B90400807C0401740C807C04047406
+%s the Bouncing Ball/286 virus.
+(Boot records)
+*
+D2F7361A0088163F01A34101C3A141018B0E1A00F7E102063F0180D400
+%s the Disk Killer virus.
+(Boot records)
+*
+DB8ED8C7078118813F8118740D2D00103D00B875ECB800A8
+%s the EDV virus.
+(Boot records. Scan memory.)
+*-------------------------------------------------------------------------
+*
+* The "LBC" virus; infects floppy disk boot records, does nothing else.
+*
+* Checked: Infects floppy boot, Resident
+*
+A406B8330150CBBB4C008B0F8B5702
+%s by the LBC virus.
+(Boot records)
+*
+*-----------------------------------------------------
+*
+* The "Ohio0" virus; related to the Ohio and Den Zuk viruses.
+*
+* Features: Infects Floppy, Resident
+*
+B106D3E08EC0BE007C33FFB90410FCF3A406B8000450CBF8B902
+%s the Ohio0 virus.
+(Boot records)
+*-----------------------------------------------------
+*
+* The "PrtSc" virus.  A simple infector of floppy disk
+* boot sectors and hard disk master boot sectors.  Once
+* it's installed, it causes a PrintScreen every <many>
+* disk reads.
+*
+* Features: Infects Floppy, Infects HDS Master Boot, Resident
+*
+DBB801038A365F01B90100CD6DE824005A595F5E5B
+%s the PrtSc virus.
+(Boot records)
+*-----------------------------------------------------
+*
+* The FORM virus, from Switzerland.  Seems to do no intentional
+*    damage, contains silly message.
+*
+* Features: infects floppy disk boot sectors, and hard disk partition
+*   boot sectors (DOS boot sector), resident.
+*
+B9FF00FCF3A506B89A0050BBFE01B80102
+%s the FORM virus.
+(Boot records)
+*-----------------------------------------------------
+*
+* The JOSHI virus.
+*
+* Infects diskette boot, infects HD master boot, resident
+* Scan memory for this one; it hides.
+*
+B106D3E08EC0B800022D2100BF0000BE007C03F003F8B979012BC8
+%s the Joshi virus.
+Boot records. Scan memory.
+*-----------------------------------------------------
+*
+* The Stoned 2 virus.   A simple variation on the Stoned virus.
+*
+* Features: infects diskette boot, infects partition boot, resident
+*
+*
+1E80FC02721780FC0473120AD2750E33C08ED8A03F04A8017503E80700
+%s the Stoned 2 virus.
+(Boot records)
+*--------------------------------------------------------------------------
+* The MICROBE virus.   A diskette-infector that, after a certain number of
+* write-enabled boots, will display some "credits" before booting.  It
+* also removes the Brain virus if found (before infecting the disk
+* itself), marks the last four sectors on the diskette as bad (so
+* may trash some data on very full disks), and is "stealthed", so
+* cannot be seen via INT 13 if it's active in memory.
+*
+* Features: Infects floppy disk boot record, resident
+*
+*
+D7010000C706D9010800C606DB0102B9040051B402B001
+%s the MICROBE virus.
+Boot records.  Scan memory.
+*--------------------------------------------------------------------------
+* The Stoned-ZAPPED virus.   A rather nasty variant of the Stoned that,
+* rather than printing a message once in 16 boots on a hard disk,
+* attempts to trash the disk and print "I ZAPPED YOU!".
+*
+* Features: Infects floppy boot, infects HD master boot, resident
+*
+*
+1E5080FC02721780FC04731222D2750E33C08ED8A03F04A8017503E80700
+%s the Stoned-ZAPPED virus.
+(Boot records)
+*--------------------------------------------------------------------------
+*
+* This signature will detect both the Flip-2153 and Flip-2343 viruses
+* in master boot records.
+*
+FBB80300E81F0006B8420050B8C007
+%s the Flip-2153 or Flip-2343 virus.
+(Boot records)
+*--------------------------------------------------------------------------
+*
+* The 1253 virus.   Infects COM files (actually any file executed
+* with a third-to-last letter of "C"), floppy boot records, and
+* hard disk master boot records.   Will write garbage to the
+* bottom of some disk on November 23, 1990 or after.
+*
+* Features: infects COM, infects floppy, infects master, resident.
+*
+*
+CA03562D751726813ECC03314C750E36C7068001000036
+%s the 1253 virus.
+COM files and boot records.
+*--------------------------------------------------------------------------
+*
+* Burger-537 Virus, infects COM and EXE files. will write random garbage
+* to the disk if there is nothing left to be infected. No other effects
+* observed.
+*
+9B2E8B1EA202434B7409B44FCD21728C4B75F7B42FCD21
+%s the Burger-537 virus.
+COM files only.
+*
+* Burger-541 virus, same characteristics as Burger-537
+*
+A2FB02B447B60004018AD08D36FD02CD21B40EB200CD21
+%s the Burger-541 virus.
+COM files only.
+*
+*-----------
+* Not yet analyzed.
+28B80802BB00015326813F5224740BCD135B721806B8020150
+%s the Filler virus.
+Boot records.
+*
+* 26813F5224740BCD13
+* %s the FILLER virus.
+* (Boot records)
+*-----------
+*
+* Armagedon Virus. A .COM file infector that tries to dial out to a
+* service phone number in Greece during the night. Also known as
+* Armagedon the GREEK.
+*
+4A012EA13E018ED8BE37048A04040B880433D22E8B0E3A01
+%s the "Armagedon" virus.
+COM files only.
+*-----------------------------------------------------
+*
+* Two of the "Plastique" viruses.   Multi-modal, much code taken from
+* the 1813 virus.
+*
+A11304B106D3E08ED8833E400EFE751AB8540F1E501E
+%s the Plastique 5.21 virus
+EXE files and COM files and boot records
+*
+A11304B106D3E08ED8833E400EFE751AB8520F1E501E
+%s the Plastique-Invader virus
+EXE files and COM files and boot records
+*-----------------------------------------------------
+*
+* The "Leprosy" virus.   A simple file-overwriting virus that
+* will overlay files in the current directory, and on the path
+* to the root, that are named *.COM or *.EXE, with itself.
+* Infected programs will no longer work, but will often print
+* the message "Program too big to fit in memory", and sometimes
+* a message beginning "NEWS FLASH!!  Your system has been infected
+* with the incurable decay of LEPROSY 1.00...".  A silly virus.
+*
+* Features: Infects COM
+*
+510046FE06F002EB08BA8B03B43BCD21463B36ED027CE1803EF00200740AB8BA0250
+%s the Leprosy virus
+COM files only
+*-----------------------------------------------------
+*
+* The "Fellowship" virus.   With some code taken from the 1813,
+* this virus goes resident when the first infected file is executed,
+* and infects any file executed thereafter whose extension begins
+* with "E".  When an infected file is run in September, it prints
+* a message beginning "This message is dedicated to all fellow
+* PC users on Earth...".
+*
+* Features: Infects COM, Infects EXE, Resident
+*
+FB039C0650EA0000000033C08ED88F0600008F060200FB
+%s the Fellowship virus.
+EXE files and the occasional COM file.
+*-----------------------------------------------------
+*
+* The "Ambulance" or "Red X" virus.   A simple non-resident COM infector;
+* when an infected file is run, it looks along the PATH for other
+* COM files to infect.  Once in awhile, it will produce a screen
+* effect: a character-graphics ambulance will drive across the
+* bottom of the screen, and a siren will sound.
+*
+* Features: Infects COM
+*
+BDF0FFBA0000B91000E83F0042E2FAE81600E87B00
+%s the Ambulance virus.
+COM files only.
+*-----------------------------------------------------
+*
+* Another functionally-identical 1813 variant.
+*
+BC00078ED050B8C50050CBFC062E8C0631002E8C0639002E8C063D002E8C0641008CC0
+%s the 1813-Puerto virus.
+(COM and EXE files)
+*-----------------------------------------------------
+*
+* The TPxxVIR viruses; relatives of the VACSINA
+* and Yankee Doodles.   Not all analyzed in detail,
+* but all apparently very similar in form and function.
+*
+7A75772E833E1200069073922EA10C002EA3DD042E
+%s the TP06VIR virus.
+(COM files only)
+7A7403E98F002E803E16001073852E8A0E17002EA11000
+%s the TP16VIR virus.
+(COM files only)
+7A7406E98C00E9A201B417F6061B00027402FEC438262200
+%s the TP23VIR virus.
+EXE and COM files
+7A7406E98C00E99601B4??F606??00027402FEC43826
+%s the TP24VIR, TP25VIR, TP33VIR or TP34VIR virus.
+EXE and COM files
+7A755EB82900807E00007507F6065F000274014039060200
+%s the TP41VIR virus.
+EXE and COM files
+7A7558B82A00807E00007507F6065E000274014039060200
+%s the TP42VIR virus.
+EXE and COM files
+7A754AB82D00807E00007507F6065F000274014039060200
+%s the TP45VIR virus.
+EXE and COM files
+7A754AB82E00807E00007507F60660000274014039060200
+%s the TP46VIR virus.
+EXE and COM files
+*-----------------------------------------------------
+*
+* The "Black Monday" virus.   With much code taken from the Fellowship,
+* this virus goes resident when the first infected file is executed,
+* and infects any file executed thereafter.  Something like every 240
+* infections, the virus will attempt to format various parts of the
+* first hard disk.
+*
+* Features: Infects COM, Infects EXE, Resident
+*
+1F04B8AC009C0650EA0000000033C08ED88F0602008F060000FB
+%s the Black Monday virus.
+EXE and COM files
+*-----------------------------------------------------
+*
+* The Mirror virus.  Goes resident, and will occasionally infect
+* the first EXE file in the current directory.   Under some conditions,
+* installs a timer-tick handler that will reverse the order of the
+* characters on each line of the display screen every ten minutes or
+* so, if the screen is in text mode.  Since it trusts the extension to
+* determine file-type, it may sometimes infect a COM-format file
+* with the extension "EXE".
+*
+* Features: Infects COM, infects EXE, resident
+*
+99033C0A751DB81C35CD218CC08CDA3BC27410891E3C038C063E03
+%s the Mirror virus.
+EXE files, and the occasional COM file
+*-----------------------------------------------------
+* Mostly written in a high-level language.
+*
+FBA10C002EA30001A10E002EA302018C1E2200
+%s the 5120 virus.
+COM and EXE files.
+*-----------------------------------------------------
+*
+* Features: infects floppy boot, resident
+*
+DD2EFF2EC001530EE8B1FF0EBB4C00E8ADFF5BCD12
+%s the Aircop virus.
+Boot records
+*-----------------------------------------------------
+*
+FA8CC88ED88ED0BC00F0FBE82700FA31C08ED8A113042D0700
+%s the Mardi Bros virus.
+Boot records
+*
+* Many small take-offs on the Vienna-648 virus.
+*
+2FCD21891C8C440207BA5F009003D6B41ACD210656
+%s the VHP-627 virus.
+COM files only.
+2FCD21891C8C4402B82435CD21899C8F008C84910007B82425
+%s the VHP-623 virus.
+COM files only.
+5B83EB18FC8D37BF0001B90300F3A48BF3558BEC83EC7C
+%s the VHP-435 virus.
+COM files only.
+A5A58BF3B44E8D5690B103EB168A46EA241F3C1F740B836EEE0A
+%s the VHP-367 or VHP-353 virus.
+COM files only.
+5BBF00015750FC8D77FAA5A48BF38DAFD001B82435CD21
+%s the VHP-348 virus.
+COM files only.
+*
+*
+3FCD21055901902EA30F01813E5B014956741633C98BD1B80042
+%s the Pixel-345 virus.
+COM files only.
+3FCD21052B012EA30F01813E2D014956742533C98BD1B80042
+%s the Pixel-299 virus.
+COM files only.
+3FCD210515012EA30F01813E1701554D741633C98BD1B80042
+%s the Pixel-277 virus.
+COM files only.
+*
+4BCD217203E9??015E568BFE33C0501FC4064C002E
+%s the Murphy 1 or Murphy 2 virus.
+COM and EXE files.  Pause if found.  Scan memory.
+*-----------------------------------------------------
+* Some variants of the V512 virus.
+*
+CF8EC33B158E1D8B154A8EDA8BF18BD7B128F3A58EDB
+%s the V512-B, V512-C, or V512-D virus.
+COM files only, scan memory, pause if found.
+*
+BCF308B42CCD2189167200B42CCD218ACA80E10FD3067200
+%s the Victor virus.
+COM and EXE files, scan memory, pause if found.
+*-------
+* Displays a bouncing dot on July 13th.
+*
+A012003490BE1200B9B1042E300446E2FA
+%s the July 13th virus.
+EXE files only.
+*-------
+* A small relative of the Kennedy-333.
+EE0B018BACA00181C503018D94A20133C9B44ECD21727A
+%s the Kennedy-163 virus.
+COM files only.
+*-----------------------------------------------------
+*
+* In-memory signature for the WHALE
+*
+252E890E64255B2E8B0783C3025389C132ED2E302743E2FA
+The WHALE or Whale-B virus may be active in system memory.
+Scan memory, pause if found.
+*
+* The 30 possible whale "heads"
+*
+37261383C303E2F78BCB598BD959B460EB1D56E80200
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+37964083C303E2F78CC0588BD859B450EB1E56FDE80200
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+DB1F81C361DCE81E00BA02008137060403DAE2F881C38D00
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+DB1F81C361DCE81F00B8020081379A239001C3E2F781C38D00
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+DB5B81EB9F23E81E00B802008137380101C3E2F881C38D00
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+DC5901CB0EB9C4111FFEC943812FFE0043E2F85689DE81C68D00
+%s the WHALE virus.
+COM and EXE files.
+DDEB2AE80100C359BB61DC01CB0EB9C3101FFEC5290F
+%s the WHALE virus.
+COM and EXE files.
+DC5958935891B43FFEC4E8810158EBD28CCB8EDB5A52C3
+%s the WHALE virus.
+COM and EXE files.
+DFE82B0087D381C361DCB9C311E8E0FFF6063324FE74E1
+%s the WHALE virus.
+COM and EXE files.
+DCB9C1118B0743430107E2FA81C39200807F010174E106
+%s the WHALE virus.
+COM and EXE files.
+2907E2FA5B59EB2A5BFC53C30E1FE8F7FF81EBA323B9C111
+%s the WHALE virus.
+COM and EXE files.
+93B9C31183EB1E8A170057FF4BF54BE2F6803E3324017415
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+9383EB1DB9C3118A072847FF4B4BE2F7803E3324017416
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+CA8EDAE80300D7EBF65A81EA9D23F987DAB98A2CF881F10F0F
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+F9595B87CBE8B501EB078CC88ED8E80200EBF7582D9C23
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+49F61F83C30249C35DE8F4FF7430EBF9550EF81FE82300
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+4983C30249C35AE8F4FF742EEBF9520E1FE8230081EA
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+5BB44059E8BA01EB0C5B0E1F53C3E8290075FBEBEBE8F1FF
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+5B59B440E8BA01EB0C5B530E1FC3E82A0075FBEBEBE8F1FF
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+852381EBA923FE0F43E2FB558BEB81C58E0033C03E807E0001
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+5B5955FF3666255D3EFFD55DE80000B984235B81EBB623
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+E6FF75FB585BFB59FF3666258F069A25FF169A25E80000
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+91FF166625EBEE5BB985230E81EB9F231F8A47FFFEC8
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+49434975F7FF3666258F0699255B59EB03E82F00FF16
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+DCB986230E33C81F8037E801C32BC875F781C38F00FE0F
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+3786F283C301E2F55AFB5B59FF166625E803004033DE
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+67254EFF14E8020033DE81F676185B5E81EB9F23B98523
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+D7585B59FF166625E80300BB01565B81EB9F23B93489
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+371083C301E2F8585B5956BE6625F8FF14F85E43E82900
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+5B415956BE6625FF14F85E42505A90E80100F85B81EB9F23
+%s the WHALE or Whale-B virus.
+COM and EXE files.
+*-----------------------------------------------------
+* A simple nonresident EXE infector.  Prints a message after some date.
+3FB91C008B1E27008D160900CD217211813E1B004D5A7409A11700
+%s the 1381 virus.
+EXE files only.
+*-----------------------------------------------------
+* Reasonably simple music-playing non-resident COM infector
+DDBFA80390EB03??????8B87EE03EB02????81C34400EB04????????3101EB03
+%s the Suomi virus.
+COM files only.
+*--------------------------------
+*
+* The 1813-Discom virus.   Much code taken from the 1813, but the
+* EXE-file-reinfection bug seems to be fixed.   Under some
+* circumstances, this virus will send garbage data to the
+* async ports (hence the name); under other circumstances,
+* it will write garbage (actually parts of itself) over
+* part of the first hard disk (perhaps parts of the FAT).
+*
+* Features: infects COM, infects EXE, resident.
+*
+6B008CC88ED88EC0B43FCD21498BFABE0500F3A67507B43E
+%s the 1813-Discom virus.
+COM and EXE files.
+*-----------------------------------------------------
+*
+* The DataLock virus.  Goes resident, and will infect files executed.
+* If the date is August 1990 or after, attempts to open files named
+* *.?BF may fail with an "out of file handles" error.   The virus
+* contains two push-immediate calls, and may fail on some CPUs.
+*
+* Features: Infects COM, infects EXE, uses MZ, resident
+*
+680001C3B4BECD213D3412C31EA12C00508CD8488ED8812E
+%s the DataLock virus.
+COM and EXE files.
+*------------------
+*
+* The Eddie-651, or "Eddie 2", virus.  Goes resident, infects files
+* that are executed.   Intercepts DOS calls so that infected files
+* show up as their original lengths in DIR output.   No known damage.
+*
+* Features: infects COM, infects EXE, uses MZ, resident.
+*
+B104D3E8408CD103C18CD9498EC1BF0200BA2B008B0D
+%s the Eddie-651 virus.
+COM and EXE files.
+*------------------
+*
+* Not particularly analyzed yet.
+*
+95E800005E83C619FC8BFE33D2B9810151AD33D0E2FB
+%s the V800 virus.
+COM and EXE files.
+*------------------
+*
+* The BLOOD virus.   A simple non-resident COM infector.   Attempts to
+* infect all COM files in the current directory on drive C: when an
+* infected file is run.   One about one execution in four, will print
+* a message and bleep the speaker.
+*
+* Features: infects COM
+*
+B202B40ECD21B41ABA0C0003D5CD21BA040003D5B44E
+%s the Blood virus.
+COM files only.
+*----------------
+* Small bug-fix to the silly VIRDEM virus; basically identical (also
+* in the sample we have the messages are in German rather than English).
+A9008075093D0005907703E849015052B440B9000590
+%s the VIRDEM 2 virus.
+COM files only.
+*-----
+* Another small non-resident COM infector
+A700B0025A5283C230B43DCD21720750E99A00EB0490
+%s the 453 virus.
+COM files only
+*------
+* Another, probably earlier, member of the Plastique family.
+F900BA80047503BAA304C70614000100C70693000000C606920001
+%s the Plastique-2576 virus.
+COM and EXE files.
+*----------
+* Very similar to the Plastique 5.21, but doesn't infect boot records.
+A700B201E831007203E89D00C3B2802EC7060300D412E8
+%s the Plastique 4.51 virus.
+COM and EXE files.
+*----------
+* A Vienna-648 variant that trashes disks on or after August 15, 1990.
+B500B6008A168803CD13C35E5681C65C00ACB90080F2AE
+%s the Vienna-Viola virus.
+COM files only.
+*-------------------
+* Silly relative of the silly 405 virus.
+A24502B4470401508AD08D364602CD2158B40E2C018AD0CD21
+%s the Burger-560 virus.
+COM files only.
+*--------------
+* Prints some messages on Dec 25.
+D5CD21B44EB92000BA100103D7CD218A8E000480E107FEC1
+%s the Japanese Christmas virus.
+COM files only.
+*------------------
+* A self-garbling relative of the Leprosy virus.
+B440CD21E80100C3BB31018A273226060188274381FBCB03
+%s the Leprosy-B virus.
+COM files only.
+*-----------------
+* A simple non-resident *.COM infector.  Infected files print a
+* message in some language that I don't know when executed.
+*
+* Features: Infects COM
+*
+A4E943FFE91601E90C01B000B40ECD21BAC000B41ACD21
+%s the POLIMER virus.
+COM files only.
+*-----------
+* Another Vienna-648 variant.   Will sometimes install an INT20 (program
+* terminate) handler that messes with the timer, perhaps slowing down
+* the system (untested).   On the 13th of the month, instead of
+* infecting files, it will overlay them with one of three five-byte
+* pieces of code, which will either do nothing, hang the system, or
+* reboot the system.
+*
+* Features: Infects COM [sometimes installs a non-viral resident int hdlr]
+*
+A45E065653BB2C008B075B8EC0BF00005E5683C61AAC
+%s the Vienna-Monxla virus.
+COM files only.
+*-----------
+* A very small resident COM infector.  No side effects.
+*  Features: Infects COM, uses MZ, resident
+9C95008C84970089F283C21FB425CD21FEC60E07CD273D004B
+%s the Guppy virus.
+COM files only.
+*-----------
+* Infects *.COM files that are OPENed.
+* Features: Infects COM, resident
+A48C06F200B95501890EF000FF2EF0008CC18CD826A38C02
+%s the Turbo-448 virus.
+COM files only.
+*-----------
+*
+* A relative of the Turbo-448; installs an INT05 (print-screen)
+* handler that displays the message "Turbo Kukac 9.9" forever
+* rather than printing the screen.
+*
+* Features: Infects COM, resident
+C90290501E528CC88ED8BACE02B409E8D900EBF69080FC3D
+%s the Turbo-Kukac virus.
+COM files only.
+*-----------
+* New Plastique/ACAD family virus.
+F900BA5302C6067E00007508BA7602C6067E0001B80825CD21B80935
+%s the Plastique-2900 virus.
+COM and EXE files and perhaps even boot records.
+*-----------
+* New boot infector; plays "music" under some circumstances.
+AC03D0E2FB3B16407C740C33C08EC033FFB90080ABE2FDC3
+%s the MusicBug virus.
+Boot records.
+*-----------
+* A "Slow" variant
+F981FB03007519EB441E33C08ED88B368400A186008ED883C602
+%s the Slow-2131 ("Scott's Valley") virus.
+COM and EXE files.
+*-----------
+* Another 1813 variant, with the EXE-reinfection bug fixed.
+* Features: Infects COM, Infects EXE, Resident
+7A0089167C0005200783D20005050083D200723AF7367600
+%s the 1813-Westwood virus.
+COM and EXE files.
+*-----------
+* A non-resident COM infector that sometimes erases *.PAS.
+71FDE886FDB4492E8E062B01CD210E07BE7A03BF00FFB98000
+%s the Wisconsin virus.
+COM files.
+*-----------
+* Not yet very analyzed
+A4B8000150C32E8B1E030181C37C0553B104D3EB43B44ACD21
+%s the Carioca virus.
+COM files and perhaps EXE files.
+*-----------
+* A resident COM and EXE infector that disturbs the keyboard.
+A4F8C3061FC706BE020000B81C35CD21891EEA028C06EC
+%s the KeyPress virus.
+COM and EXE files.
+*-----------
+*
+* The long-thought-mythical Pentagon virus
+* Features: Infects floppy boot, resident
+FBBD447C817606CDAB907B57BD597CB96C0030760045E2FA
+%s the Pentagon virus.
+Boot records.
+*--------------
+* A variant on the Viola virus, running an infected file will
+* sometimes display garbage and/or obnoxious messages and overwrite
+* much of the bottom of drive C:.   Severe bugs also mean that
+* infected programs may not run correctly.
+*
+AA3C0075FA5EB80043BAB0119003D6E87DFE898C9911
+%s the Vienna-Viola B4 virus.
+COM files only.
+*------------
+* Apparently related to the Anthrax.  Looks multi-modal.
+7C8BF48ED8832E130411CD12B106D3E02D10008EC0BF0007
+%s the Crazy Eddie virus.
+COM and EXE files and boot records.
+*---------------
+* A simple *.COM infector.   Features: infects COM.
+7F55B8070ECD10B8000FCD105033C0CD10B91E00BA060AB30E
+%s the Happy Day virus.
+COM files only.
+*----------------
+* Another trivial 648 variant.  Features: infects COM.
+FC8BF281C60A00BF0001B90300F3A48BF2B430CD213C007503E9C501
+%s the Vienna-646 virus.
+(COM files only)
+*------------
+* 542 virus, same characteristics as 541 and 537.  Snore...
+A2FC02B447B60004018AD08D36FE02CD21B40EB200CD21
+%s the Burger-542 virus.
+COM files only.
+*----------------
+* A small resident EXE and COM infector.  In 1992 and after, the virus
+* does not execute the victim program (after the virus code executes,
+* it will just exit to DOS if the year is 1992 or above).
+*   Features: Infects COM, Infects EXE, uses MZ, Resident.
+A48ED889C1B8C700B384E8A101A30500890E0700FB5B8EDB
+%s the 555 virus.
+COM and EXE files.
+*---------------
+* A 648 variant that never overwrites files with reboot code,
+* and displays a message from "Father Christmas" if it's Dec 19th
+* or after in any year.
+*  Features: Infects COM
+5C02CD211FB42ACD2181FA130C730881FA01017202EB0E8BD6
+%s the Vienna-Choinka virus.
+COM files only.
+*------------------------
+* A small resident COM infector, it inserts itself into (it hopes)
+* unused space within the victim, so victim's length doesn't change.
+* It's also (unreliably) "stealthed", and if the virus is in memory
+* (most) reads of an infected file will not be able to see it.
+*  Features: Infects COM, Uses MZ, Resident, Scan Memory
+CF5689DE037702FF74488F07FF744E8F470283C6045051B99F01
+%s the Zero Hunt virus.
+COM files only, Scan Memory
+*-----------------
+* A silly non-resident virus that sometimes displays a message,
+* and sometimes erases infected files that are executed. Also may be
+* known as "SuperHacker".
+*
+*   Features: Infects COM
+A4B41ABA3E0501EA89969402CD21B419CD218886F804BBFFFF
+%s the Talentless Jerk virus.
+COM files only.
+*-------------------
+* The "SADAM" virus; a very poorly written resident *.COM infector.
+* Because of its bad handling of the INT21 routine, systems with the
+* virus active will be very unstable.   Infected systems will periodically
+* display the message "HEY SADAM  LEAVE QUEIT BEFORE I COME" [sic].
+*  Features: Infects COM, Resident
+6B7226EBEDA1E40225E0FF051F00A3E402B43DB0028CCA8EDA
+%s the SADAM virus.
+COM files only.
+*-----------------
+* The Bloody! virus infects diskette boot records and hard disk
+* master boot records.   When booting from an infected hard disk,
+* a message will occasionally be displayed.
+*  Features: Infects diskette, infects master boot, resident
+A5FF2E0F7C33C0CD130E1F33C08EC0B80102BB007C803E0A0000
+%s the Bloody! virus.
+Boot records.
+*---------------------
+* Another 1813 variant.   This one has the screen-effect, slowdown,
+* and file-erasing removed, but will redirect floppy-disks writes
+* to hard disk (and vice-versa) under some circumstances.
+*   Features: Infects EXE, Infects COM, Resident
+CF9C2E803E0C0001750880FC03750380F2809D2EFF2E1100
+%s the 1813-1605 virus.
+COM and EXE files.
+*----------------------
+* Another long-thought-mythical virus.   Not well analyzed yet.
+AE263A2575F9BA0042263B550175F0B6BA263A75FB75E883F900
+%s the Agiplan virus.
+COM and EXE files.
+*----------------------
+* Very similar in function to the Stoned; most code rephrased, and the
+* message is "The Swedish Disaster I".
+*   Features: Infects floppy, infects HD master boot, resident
+A4072BF68BFEB90002F3A4B8F3000650CB2BC0CD132BC08EC0
+%s the Swedish Disaster virus.
+Boot records.
+*----------------------
+* A couple of not-well-analyzed resident, at-least-somewhat-stealthed
+* viruses (Scan memory and pause if founds below are tentative.)
+688845FDC745FB80FCC745F9CDFC0E1F893EFC038C06FE03C606
+%s the MG1 or MG3 virus.
+COM files and perhaps EXE files.  Scan memory; pause if found.
+*----------------------
+* "Nomenklatura", so called because the string appears for no
+* apparent reason in the virus.
+*  Features: Infects COM, infects EXE, uses MZ, resident
+F57507B800428BD1CD21C3B8024233C933D2CD213D00047232
+%s the Nomenklatura virus.
+COM and EXE files.
+*----------------------
+* Another not-well-analyzed resident, perhaps-somewhat-stealthed
+* virus (Scan memory and pause if founds below are tentative.)
+* One time in 256, writes some garbage to drive C:.
+A48A4F13F6C101741381E1FE00BA7003B801430E1FCD217303
+%s the DIRVIR virus.
+COM files only.  Scan memory; pause if found.
+*----------------------
+* A family of very small, not utterly reliable, resident COM infectors.
+*  Features: Infects COM, uses MZ, resident
+A5A58EC1A674124E4FF3A58EC1939191268785E0FEABE3F7
+%s the Tiny-134, Tiny-138, or Tiny-143 virus.
+COM files only.
+*
+ADAF74144F4FABF3A4BFC800B836069191268745BCAB
+%s the Tiny-154, Tiny-156, or Tiny-158 virus.
+COM files only.
+*
+93B43FB90400BA00068BFA0E1FCD3257B04DF2AE5F742CB80242
+%s the Tiny-159, Tiny-160, or Tiny-167 virus.
+COM files only.
+*
+AE5F742EB8024233C933D2CD3250B606B1C6B440CD32B80042
+%s the Tiny-198 virus.
+COM files only.
+*---------------------
+* A variant of the silly WHALE virus.   Only difference seems to
+* be the replacement of six of the possible "heads" (and one
+* change to one, that doesn't effect us).
+E2FB5B59FF166625E800000E1F5B81EB9F23B98523FE0F43
+%s the Whale-B virus.
+COM and EXE files.
+*
+9C8007779D43F5E2F7905BF8599CFF1666259DE80000FB0E
+%s the Whale-B virus.
+COM and EXE files.
+*
+FB81EB9F23FCB98523528037415A4390E2F750FE8F8E00
+%s the Whale-B virus.
+COM and EXE files.
+*
+920E921F365B575081EBA023585FB9842350280F5158435991
+%s the Whale-B virus.
+COM and EXE files.
+*
+94E2F8365BB00059FBFF16662590E800009C9D0E50581F26
+%s the Whale-B virus.
+COM and EXE files.
+*
+9543E2F89D5B555D59FF166625FCE8000095930E93951FFC
+%s the Whale-B virus.
+COM and EXE files.
+*------------------------
+* Another 648 variant; only real differences are that it uses 1D rather
+* than 1F in the seconds field as an "infected" marker, and it overwrites
+* five bytes of one file in 8 with trash (rather than with reboot code,
+* as the 648 does).
+*   Features: Infects COM.
+844600241D3C1D74EE81BC4A0000FA77E683BC4A000A72DF8B
+%s the Vienna-535 virus.
+COM files only.
+*------------------
+* A non-resident COM infector that will hurt disks and print a message,
+* apparently on any 7th of the month, starting 7 June 1990.
+*  Features: Infects COM, uses MZ
+A4C6069D02B8B89BFF8EC0B93F0033D232E48BD9268A0701C2
+%s the Jeff virus.
+COM files only.
+*----------------------------
+* A resident EXE and COM infector that infects files executed, or
+* opened.   Seems to have no severe side-effects.
+*  Features: Infects EXE, infects COM, uses MZ, Resident, Scan, Pause
+*
+AAE9F7FE8BE8CF3D59EC74F83D004B741E80FC3D742180FC3E
+%s the Kamikaze virus.
+EXE and COM files.  Scan memory.  Pause if found.
+*----------------------
+* Another in this silly "Pixel" family.
+*  Features: Infects COM
+A433FF2EC7060E0100002E8C0610012EFF2E0E011E07BEE403
+%s the Pixel-740 virus.
+COM files only.
+*-----------------------
+* A resident COM and EXE infector, 1575 bytes long.  Infects files
+* as they are searched for (by DIR, for instance), rather than
+* as they are executed.   Seems to do a screen effect of some kind
+* under some circumstances.
+*  Features: Infects EXE, infects COM, Resident, Scan memory, Pause if found
+A4061FB800015033C0CBBE0600AD3D920174DD3D79017503
+%s the 1575 virus.
+EXE and COM files.  Scan Memory.  Pause if found.
+*-----------------------
+* A simple non-resident *.COM infector.   Displays a message if
+* an infected file is run in June or after of 1988 or after.
+*   Features: Infects COM
+A48BCE81E904005F5E5681C61C00B800003904770F
+%s the Crew-2480 virus.
+COM files only.
+*--------------------------
+* This one sometimes prints a message (which seems to be gibberish)
+* instead of running the host program.
+*   Features: Infects COM
+A4BA6402B41ACD21BA0601B90600B44ECD217260BA8202
+%s the Pixel-852 virus.
+COM files only.
+*-----------------
+* Another in the Dark Avenger / V2000 series.
+*
+*  Features: Infects COM, Infects EXE, uses MZ, Scan, Pause
+*
+AD3D8073740D75153DF6C27512AD3D8075750A46AD3DCD40
+%s the Dark Avenger-2100 virus.
+EXE and COM files.  Scan memory, pause if found.

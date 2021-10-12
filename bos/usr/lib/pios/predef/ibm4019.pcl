@@ -1,0 +1,67 @@
+# @(#)86        1.13.1.6  src/bos/usr/lib/pios/predef/ibm4019.pcl, cmdpios, bos411, 9428A410j 5/25/94 19:47:33
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1989
+# All Rights Reserved
+#
+:056:__FLG::
+:003:_Y:Dn:
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,785;no initialization,full initialization,send PCL language switch command only=0,1,2]:1
+:060:__SYS::
+:724:mZ:S[101]I[1810548]%IWY:!
+:642:s1:S[105]I[1810521]En%IWP:1
+:643:s2:S[110]I[1810521]En%IWP:1
+:747:sD:S[103]I[1810566]%IWY:+
+:841:mY:S[177]I[1810544]EnR[PPDS,PCL,GL,PostScript=1,2,3,8]:2
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLOQXZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLOQXZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJOQZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[juJZ] ; }
+:058:__MIS::
+#
+# set the paper sizes used in set initial conditions updated with
+# value of _Q specified on the command line
+:452:m0::%?%GWu%{0}%=%t%G_Q%e%Gs0%;%c
+:452:m1::%?%GWu%{1}%=%t%G_Q%e%Gs1%;%c
+:452:m2::%?%GWu%{2}%=%t%G_Q%e%Gs2%;%c
+:452:m3::%?%GWu%{3}%=%t%G_Q%e%Gs3%;%c
+:452:m4::%?%GWu%{4}%=%t%G_Q%e%Gs4%;%c
+:330:mA::PCL Emulation
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,6;IBM 4019 LaserPrinter]
+:295:mN::4019
+:308:mp::%?%GsD%t%?%GmZ%t%%!,\x04%%!%e,%;,,,x T %;
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,739;manual paper feed,tray 1 (upper),tray 2 (lower),envelope feeder,manual envelope feed=0,1,2,3,4]
+:762:WP::R[letter,legal,B5,A4,exec=1,2,3,4,5]
+:763:WE::R[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]
+:461:wJ::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2400}%e%gq%{2}%=%t%{2400}%e%gq%{3}%=%t%{1999}%e%gq%{4}%=%t%{2338}%e%gq%{5}%=%t%{2025}%e%{1598}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:462:wK::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3000}%e%gq%{2}%=%t%{3900}%e%gq%{3}%=%t%{2735}%e%gq%{4}%=%t%{3207}%e%gq%{5}%=%t%{2850}%e%{2180}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:463:wM::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3180}%e%gq%{2}%=%t%{4080}%e%gq%{3}%=%t%{2915}%e%gq%{4}%=%t%{3389}%e%gq%{5}%=%t%{3030}%e%{2360}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:464:wR::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2250}%e%gq%{2}%=%t%{2250}%e%gq%{3}%=%t%{1849}%e%gq%{4}%=%t%{2180}%e%gq%{5}%=%t%{1875}%e%{1448}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:454:wX::%Gwj%?%G_p%{17}%=%t%{1666}%e%G_p%{100}%*%;%*%{30000}%/%d
+:051:__CAG::
+:144:ci::%Iez%?%G_j%{1}%=%t%I[eP,c1,eT,eO,ct,eF,eC]%;
+:152:cr::%IeR%o%I[eF,eP,eO,ct,eD]%Iex
+:054:__ESC::
+:514:ex::\33[K\3\0\4\61%GmY%c
+:263:ez::\33[K\17\0\1\61\2\240\0\0\0\0\0%G_z%GWu%{8}%*%+%{128}%+%c%Im0%Im1%Im2%Im3%Im4
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

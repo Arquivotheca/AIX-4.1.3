@@ -1,0 +1,30 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+The editor and the 'shell' (the normal command
+interpreter) accept different commands.  The
+shell (which types '%' at you) understands
+"ls", "mv", "cp", "date" and so forth; the
+editor understands such commands as 'w' or 'q'.
+
+Who knows about "diff"?
+Type "answer shell" or "answer editor".
+#copyin
+#user
+#uncopyin
+#match shell
+#log
+#next
+4.2b 5
+4.1b 10

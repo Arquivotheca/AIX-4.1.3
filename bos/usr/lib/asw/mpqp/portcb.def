@@ -1,0 +1,190 @@
+/*
+static char sccsid[] = "@(#)79	1.7  src/bos/usr/lib/asw/mpqp/portcb.def, ucodmpqp, bos411, 9428A410j 5/26/92 11:19:25";
+*/
+
+/*
+ * COMPONENT_NAME: (UCODMPQ) Multiprotocol Quad Port Adapter Software
+ *
+ * FUNCTIONS:
+ *	Defines for port control block
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+/* Field Select Bits */
+#define PCB_FS_RT	(unsigned char)0x80	/* Receive timer bit mask */
+#define PCB_FS_MDM_INT	(unsigned char)0x40	/* Modem interrupt mask	  */
+#define PCB_FS_PL	(unsigned char)0x20
+#define PCB_FS_PA	(unsigned char)0x10	/* Poll Addr bit mask	  */
+#define PCB_FS_SA	(unsigned char)0x08	/* Select Addr bit mask	  */
+#define PCB_FS_AP	(unsigned char)0x04
+#define PCB_FS_DP	(unsigned char)0x02
+#define PCB_FS_BR	(unsigned char)0x01
+
+/* Physical link type  */
+#define	PCB_PL_V25	(unsigned char)0x01
+#define	PCB_PL_HAYES	(unsigned char)0x02
+#define	PCB_PL_X21	(unsigned char)0x04
+#define	PCB_PL_V35	(unsigned char)0x08
+#define	PCB_PL_422	(unsigned char)0x10
+#define	PCB_PL_232	(unsigned char)0x20
+
+/* Auto dial and data xfer protocol */
+#define	PCB_PRO_BSC	(unsigned char)0x01
+#define	PCB_PRO_SDLC_FD	(unsigned char)0x02
+#define	PCB_PRO_SDLC_HD	(unsigned char)0x04
+#define	PCB_PRO_SDLC	(unsigned char)0x06	/* AND mask, not equate */
+#define	PCB_PRO_ASYNC	(unsigned char)0x08
+#define	PCB_PRO_X21	(unsigned char)0x80	/* For call est phase   */
+
+/* Protocol flags  */
+#define	PCB_PF_ASCII	(unsigned char)0x01
+#define	PCB_PF_NRZI	(unsigned char)0x01
+#define	PCB_PF_ADCHK	(unsigned char)0x02
+#define	PCB_PF_XPAR	(unsigned char)0x04
+#define	PCB_PF_CC	(unsigned char)0x20	/* Continuous Carrier        */
+
+/* Auto-dial flags */
+#define PCB_AF_ASCII	(unsigned char)0x01	/* Bisync ascii mode         */
+#define PCB_AF_ODDPAR	(unsigned char)0x40	/* Select odd parity- ascii  */
+#define PCB_AF_PAREN	(unsigned char)0x80	/* Parity enable - ascii     */
+#define PCB_AF_NRZI	(unsigned char)0x01	/* SDLC NRZI mode            */
+#define PCB_AF_1STB	(unsigned char)0x04	/* Async 1 stop bit          */
+#define PCB_AF_15STB	(unsigned char)0x08	/* Async 1.5 stop bits       */
+#define PCB_AF_2STB	(unsigned char)0x0C	/* Async 2 stop bits         */
+#define PCB_AF_5BCS	(unsigned char)0x00	/* Async 5 bit char size     */
+#define PCB_AF_6BCS	(unsigned char)0x01	/* Async 6 bit char size     */
+#define PCB_AF_7BCS	(unsigned char)0x02	/* Async 7 bit char size     */
+#define PCB_AF_8BCS	(unsigned char)0x03	/* Async 8 bit char size     */
+#define PCB_AF_TX_CTS	(unsigned char)0x10	/* Wait on CTS for xmit      */
+#define PCB_AF_CC	(unsigned char)0x20	/* Control RTS on xmit       */
+#define PCB_AF_CHAR_MSK	(unsigned char)0x03	/* Char size mask            */
+#define PCB_AF_STOP_MSK	(unsigned char)0x0C	/* Stop bits mask            */
+
+/* Start port command parameters */           
+#define	PCB_SP_FDX	(unsigned char)0x01
+#define	PCB_SP_DRS	(unsigned char)0x02
+#define	PCB_SP_DIALBFR	(unsigned char)0x08
+#define	PCB_SP_CDSTL	(unsigned char)0x10
+#define	PCB_SP_AUTO	(unsigned char)0x20
+#define	PCB_SP_CALL	(unsigned char)0x40
+#define	PCB_SP_LEASED	(unsigned char)0x80
+
+/* Modem interrupt mask in SET_PARM command */
+#define PCB_MM_CT       (unsigned char)0x80        /* CTS interrupt enable */
+#define PCB_MM_DS       (unsigned char)0x40        /* DSR interrupt enable */
+#define PCB_MM_RI       (unsigned char)0x20        /* RI  interrupt enable */
+#define PCB_MM_CD       (unsigned char)0x10        /* CD  interrupt enable */
+#define PCB_MM_TI       (unsigned char)0x08        /* TI  interrupt enable */
+#define PCB_MM_X2       (unsigned char)0x04        /* X.21 PAL interrupt   */
+ 
+/* Port states     */
+#define DATA_TRANSFER		(unsigned char)0x01  /* Data transfer state  */ 
+#define WAIT_FOR_CONNECT	(unsigned char)0x02  /* Hayes modem transmit */ 
+#define STATE_EXIT		(unsigned char)0x04  /* Exit caused by error */ 
+#define V25BIS_CALL		(unsigned char)0x05  /* V25BIS call state    */ 
+#define V25_CALL_DIALING	(unsigned char)0x07  /* V25BIS dialing state */ 
+#define CALL_SET_UP		(unsigned char)0x08  /* Call set up state    */ 
+#define WAIT_FOR_RI		(unsigned char)0x0A  /* RI wait state        */ 
+#define DSR_TIMEOUT		(unsigned char)0x0C  /* Auto ans, DSR wait   */ 
+#define WAIT_FOR_DSR		(unsigned char)0x0D  /* Manual ans, DSR wait */ 
+#define PROTOCOL_SET_UP		(unsigned char)0x0E  /* Protocol set up state*/ 
+#define CALL_ESTAB		(unsigned char)0x0F  /* call set up */
+#define CALL_TERM		(unsigned char)0x10  /* call termination */
+
+ /* X21 states     */
+/* X21 Call Establishment States */
+#define WAIT_FOR_RDY	  		(unsigned char)0x81
+#define SIGNAL_UNR	  		(unsigned char)0x82
+#define SIGNAL_UNR_CTL			(unsigned char)0x83
+#define SIGNAL_RDY	  		(unsigned char)0x84
+#define SIGNAL_RDY_CTL			(unsigned char)0x85
+#define READY				(unsigned char)0x86 
+#define WAIT_FOR_SELECTION_CMPLT	(unsigned char)0x87 
+#define DTE_WAITING			(unsigned char)0x88 
+#define CALL_ACCEPTED			(unsigned char)0x89 
+#define WAIT_RETRY1_TIMER		(unsigned char)0x8A
+#define DATA_XFER			(unsigned char)0x9F
+/* X21 Call Clearing States */
+#define WAIT_CLR_DCE_RDY		(unsigned char)0xA1 
+#define WAIT_DCE_CLR_CONF		(unsigned char)0xA2 
+#define NORMAL_TERM			(unsigned char)0xAE
+#define FORCED_TERM			(unsigned char)0xAF
+
+/* Port status */
+#define READY_FOR_DIAL		(unsigned short)0x2210	/* Ready for Man Dial */
+
+/* Timer Types for RQE Status Ax */
+#define DSR_ON_TIMER		(unsigned short)0xA1
+#define DSR_OFF_TIMER		(unsigned short)0xA2	
+#define CTS_TIMER		(unsigned short)0xA3
+#define SW_TIMER		(unsigned short)0xA4
+#define SM_TIMER		(unsigned short)0xA5	/* Smart Modem Timer */
+#define V25_DIAL_CTS_TIMER	(unsigned short)0xA6
+#define RX_TIMER		(unsigned short)0xA7
+#define AR_RX_TIMER		(unsigned short)0xA8	/* Autoresp Timer    */
+#define SM_TX_TIMER		(unsigned short)0xA9	
+#define XMIT_DELAY_TIMER	(unsigned short)0xAA /* wait for data xfer   */
+#define SOM_TIMER		(unsigned short)0xAF	
+
+/* Timer Types for RQE Status Bx */
+#define TX_FS_TIMER		(unsigned char)0xB1
+
+/* Timer Types for RQE Status Cx */
+#define XT1_TIMER		(unsigned char)0xC1
+#define XT2_TIMER		(unsigned char)0xC2
+#define XT3_TIMER		(unsigned char)0xC3
+#define XT4_TIMER		(unsigned char)0xC4
+#define XT5_TIMER		(unsigned char)0xC5
+#define XT6_TIMER		(unsigned char)0xC6
+#define X_RETRY1_TIMER		(unsigned char)0xC7
+#define X_RETRY2_TIMER		(unsigned char)0xC8
+#define X_GR0_TIMER		(unsigned char)0xC9
+#define X_LSD_TIMER		(unsigned char)0xCA
+#define X_DCE_RDY_TIMER		(unsigned char)0xCB
+#define X_24B_TIMER		(unsigned char)0xCC
+#define X_CPS_TIMER		(unsigned char)0xCD
+
+#define X_RETRY_EXP		(unsigned char)0xCE
+#define X_DCE_CLEAR		(unsigned char)0xD2	/* same as X21_ZERO */
+							/* in unsol status */
+
+/* Timer values */
+#define SW_TIMEOUT		(unsigned int)10	/*    1 sec	*/
+#define SM_TIMEOUT		(unsigned int)600	/*    60 sec	*/
+#define SM_TX_TIMEOUT		(unsigned int)10	/*    1 sec	*/
+#define V25_CALL_CONNECT_TIME	(unsigned int)600	/*    60 sec	*/
+#define V25_DIAL_CTS_TIME	(unsigned int)5		/*    1/5 sec	*/
+#define XMIT_DELAY_TIME		(unsigned int)50	/*    5 sec 	*/
+#define DSR_ON_TIMEOUT		(unsigned int)100	/*    10 sec	*/
+
+#define XT1_TIMEOUT		(unsigned int)30
+#define XT2_TIMEOUT		(unsigned int)200
+#define XT3_TIMEOUT		(unsigned int)600
+#define XT4_TIMEOUT		(unsigned int)60
+#define XT5_TIMEOUT		(unsigned int)20
+#define XT6_TIMEOUT		(unsigned int)20
+#define X_RETRY2_TIMEOUT	(unsigned int)600
+#define X_GR0_TIMEOUT		(unsigned int)600
+#define X_CPS_TIMEOUT		(unsigned char)0x10
+#define X_LSD_TIMEOUT		(unsigned int)300
+#define X_DCE_RDY_TIMEOUT	(unsigned int)100
+
+/* Non-X21 conditions */
+#define RQE_NULL		(unsigned long) 0x0000
+#define CD_ON			(unsigned short)0x0010
+#define CD_OFF			(unsigned short)0x0011
+#define RI_ON			(unsigned short)0x0020
+#define RI_OFF			(unsigned short)0x0021
+#define DSR_ON			(unsigned short)0x0040
+#define DSR_OFF			(unsigned short)0x0041
+#define CTS_ON			(unsigned short)0x0080
+#define CTS_OFF			(unsigned short)0x0081
+#define TIMER_EXPIRED		(unsigned short)0x00A0

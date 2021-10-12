@@ -1,0 +1,30 @@
+#!/bin/sh
+#ident "@(#)netlsrc:3.1  File Date:92/07/27 Last Delta:91/09/06 14:00:20"
+#@(#)netlsrc:   $Revision: 1.1.1.1 $   $Date: 1994/08/16 21:43:25 $
+
+############################################################################
+#
+#	rc.netls	--	NetLS startup file
+#
+#	Note:   This system musts run a llbd in order run a netsld 
+#                
+#
+#	See Also:  /etc/rc.ncs, llbd(1M), glbd(1M).
+############################################################################
+
+#######
+#	Start the NetLS daemon
+#######
+# the only logging event that 'netlsd' is started with is error.  If you want
+# to log more events, remove the letter symbolizing the event from the 
+# -no parameter list.  For more information, look at the description of netlsd
+# in the "NetLS Network License System" manual.
+if /usr/lib/ncs/bin/lb_find -q
+then
+echo "Starting the netlsd daemon"
+startsrc -s netlsd -a '-no lcwvptms' 
+else
+echo "The GLB server is not responding;"
+echo "NetLS server cannot be started."
+fi
+

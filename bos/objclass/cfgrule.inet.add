@@ -1,0 +1,25 @@
+* "@(#)16       1.2  src/bos/objclass/cfgrule.inet.add, cfgcommo, bos411, 9438C411a 9/19/94 17:35:43";
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: cfgrule.inet.add - Add file for inet device
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+Config_Rules:
+	phase = 2
+	seq = 18
+	rule = "/usr/lib/methods/definet > /dev/null 2>&1;opt=`lsattr -E -l inet0 -a bootup_option -F value`\n\
+	if [ $opt = \"no\" ];then\n\
+		nf=/etc/rc.net\n\
+	else\n\
+		nf=/etc/rc.bsdnet\n\
+	fi;$nf -2;x=$?;test $x -ne 0&&echo $nf failed. Check for invalid commands;exit $x"

@@ -1,0 +1,76 @@
+# @(#)97 1.1 src/bos/objclass/POWER/sm_cietok.add, sysxcie, bos411, 9428A410j 4/1/94 16:16:48
+#
+#  COMPONENT_NAME: (SYSXCIE) COMIO Emulator Interface (SMIT)
+#
+#  FUNCTIONS:
+#
+#	Adds COMIO-specific information to the Token Ring
+#	Configuration SMIT Panel
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# Displays "Receive Queue Size" attribute on Token Ring Dialog
+
+sm_cmd_opt:
+	id			  = "tok_chg"
+	id_seq_num		  = "094"
+	disc_field_name 	  = "rec_que_size"
+	name			  = "RECEIVE queue Size"
+	name_msg_file		  = "ciedd.cat"
+	name_msg_set		  = 1
+	name_msg_id		  = 1
+	op_type 		  = "l"
+	entry_type		  = "#"
+	entry_size		  = 0
+	required		  = ""
+	prefix			  = "-a rec_que_size="
+	cmd_to_list_mode	  = "r"
+	cmd_to_list		  = "lsattr -c adapter -a rec_que_size -R"
+	cmd_to_list_postfix	  = "-s subclass -t type"
+	multi_select		  = ""
+	value_index		  = 0
+	disp_values		  = ""
+	values_msg_file 	  = ""
+	values_msg_set		  = 0
+	values_msg_id		  = 0
+	aix_values		  = ""
+	help_msg_id		  = "0420912"
+	help_msg_loc		  = ""
+
+# Displays "Status Queue Size" attribute on Token Ring Dialog
+
+sm_cmd_opt:
+	id			  = "tok_chg"
+	id_seq_num		  = "095"
+	disc_field_name 	  = "sta_que_size"
+	name			  = "STATUS queue Size"
+	name_msg_file		  = "ciedd.cat"
+	name_msg_set		  = 1
+	name_msg_id		  = 2
+	op_type 		  = "l"
+	entry_type		  = "#"
+	entry_size		  = 0
+	required		  = ""
+	prefix			  = "-a sta_que_size="
+	cmd_to_list_mode	  = "r"
+	cmd_to_list		  = "lsattr -c adapter -a sta_que_size -R"
+	cmd_to_list_postfix	  = "-s subclass -t type"
+	multi_select		  = ""
+	value_index		  = 0
+	disp_values		  = ""
+	values_msg_file 	  = ""
+	values_msg_set		  = 0
+	values_msg_id		  = 0
+	aix_values		  = ""
+	help_msg_id		  = "0420913"
+	help_msg_loc		  = ""

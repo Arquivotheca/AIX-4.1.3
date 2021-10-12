@@ -1,0 +1,40 @@
+#!/etc/drivers/scdiskpin
+* @(#)03      1.4.1.7  src/bos/kernext/disk/scdiskpin.exp, sysxdisk, bos41J, 9513A_all 3/24/95 15:39:21 
+*
+* COMPONENT_NAME: (SYSXDISK) SCSI Disk Device Driver Bottom Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1995
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+scdisk_info
+scdisk_list
+scdisk_open_list
+scdisk_strategy
+scdisk_iodone
+scdisk_dump
+scdisk_start_unit_disable
+scdisk_test_unit_ready_disable
+scdisk_release_disable
+scdisk_start_disable
+scdisk_watchdog
+scdisk_pm_watchdog
+scdisk_cdt_func
+scdisk_format_mode_data
+scdisk_q_cmd
+scdisk_d_q_cmd_disable
+scdisk_cmd_alloc_disable
+scdisk_free_cmd_disable
+scdisk_sleep
+scdisk_threshold
+scdisk_mode_data_offset
+scdisk_prevent_allow_disable
+scdisk_raw_iodone
+scdisk_pm_handler

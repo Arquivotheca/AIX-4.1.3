@@ -1,0 +1,105 @@
+/* @(#)43       1.8  src/bos/objclass/smit_class.cre, smitobj, bos411, 9428A410j 1/18/93 10:12:57 */
+/*
+ * COMPONENT_NAME: CMDSMIT (Input file to odmcreate)
+ *
+ * FUNCTIONS: none
+ *
+ * ORIGINS: 27
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+class sm_cmd_opt {
+	char id_seq_num[17];	key
+	char id[65];		key
+	vchar disc_field_name[65];
+	vchar name[1025];
+	vchar name_msg_file[1025];
+	long name_msg_set;
+	long name_msg_id;
+	char op_type[2];
+	char entry_type[2];
+	long entry_size;
+	char required[2];
+	vchar prefix[1025];
+	char cmd_to_list_mode[2];
+	vchar cmd_to_list[1025];
+	vchar cmd_to_list_postfix[1025];
+	char multi_select[2];
+	long value_index;
+	vchar disp_values[1025];
+	vchar values_msg_file[1025];
+	long values_msg_set;
+	long values_msg_id;
+	vchar aix_values[1025];
+	char help_msg_id[17];	key
+	vchar help_msg_loc[1025];
+	vchar help_msg_base[64];
+	vchar help_msg_book[64];
+	};
+
+class sm_cmd_hdr {
+	char id[65];		key
+	vchar option_id[65];
+	char has_name_select[2];
+	vchar name[1025];
+	vchar name_msg_file[1025];
+	long name_msg_set;
+	long name_msg_id;
+	vchar cmd_to_exec[1025];
+	char ask[2];
+	char exec_mode[2];
+	char ghost[2];
+	vchar cmd_to_discover[1025];
+	vchar cmd_to_discover_postfix[1025];
+	long name_size;
+	long value_size;
+	char help_msg_id[17];	key
+	vchar help_msg_loc[1025];
+	vchar help_msg_base[64];
+	vchar help_msg_book[64];
+	};
+
+class sm_menu_opt {
+	char id_seq_num[17];	key
+	char id[65];		key
+	char next_id[65];	key
+	vchar text[1025];
+	vchar text_msg_file[1025];
+	long text_msg_set;
+	long text_msg_id;
+	char next_type[2];
+	char alias[2];
+	char help_msg_id[17]; 	key
+	vchar help_msg_loc[1025];
+	vchar help_msg_base[64];
+	vchar help_msg_book[64];
+	};
+
+class sm_name_hdr {
+	char id[65];		key
+	vchar next_id[65];
+	vchar option_id[65];
+	char has_name_select[2];
+	vchar name[1025];
+	vchar name_msg_file[1025];
+	long name_msg_set;
+	long name_msg_id;
+	char type[2];
+	char ghost[2];
+	vchar cmd_to_classify[1025];
+	vchar cmd_to_classify_postfix[1025];
+	vchar raw_field_name[1025];
+	vchar cooked_field_name[1025];
+	char next_type[2];
+	char help_msg_id[17]; 	key
+	vchar help_msg_loc[1025];
+	vchar help_msg_base[64];
+	vchar help_msg_book[64];
+	};
+

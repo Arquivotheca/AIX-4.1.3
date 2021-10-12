@@ -1,0 +1,5 @@
+wgadd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(bzero.o)
+wgadd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(moveeq.o)
+wgadd_pin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(ptrgl.o)
+wgadd_pin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(bzero.o)
+wgadd_pin: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(strlen.o)

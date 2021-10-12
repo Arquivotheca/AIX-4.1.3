@@ -1,0 +1,121 @@
+/* @(#)26	1.4  src/bos/usr/lib/objrepos/swvpd/swvpd.cre, libswvpd, bos411, 9428A410j 3/31/94 12:42:38 */
+/*
+ * COMPONENT_NAME: (LIBSWVPD) Software Vital Product Data Management
+ *
+ * FUNCTIONS: swvpd.cre
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989, 1991
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+
+/*  input to odmcreate to create the structures needed for the */
+/*  Software Vital Product Data as defined for the AIX 3.2     */
+/*  distribution of the system.                                 */
+
+/*  LPP data base  */
+/*  carries one record for each unique LPP option that has      */
+/*  been processed by the installp command.                     */
+/*  contains the lppname/lpp_id relation other data bases use   */
+/*  either lpp_name or lpp_id                                   */
+
+class   lpp {
+        char    name    [145]   ;       /* name of LPP option   */
+        long    size            ;       /* size of LPP files in */
+                                        /* 512 byte units       */
+        short   state           ;       /* state of LPP - code  */
+        long    cp_flag         ;       /* short->long in 4.1   */
+        vchar   group   [22]    ;       /* group ?? unused??    */
+        char    magic_letter [2];       /* service code         */
+        short   ver             ;       /* version number       */
+        short   rel             ;       /* release number       */
+        short   mod             ;       /* modification number  */
+        short   fix             ;       /* fix number           */
+                                        /* ptf field deleted in 4.1 */
+        vchar   description [82];       /* description of pkg   */
+        short   lpp_id          ;       /* lpp code ident       */
+        } ;
+
+/*  Product data base  */
+/*  carries one record for each install or update package       */
+/*  that has been processed by the installp command.            */
+
+class   product {
+        char    lpp_name[145]   ;       /* lpp name string      */
+        char    comp_id [20]    ;       /* component ident      */
+        short   update          ;       /* 0 ==> no, 1 ==> yes  */
+        long    cp_flag         ;       /* short->long in 4.1   */
+        char    fesn    [10]    ;       /* service number       */
+        vchar   name    [42]    ;       /* product name         */
+        short   state           ;       /* status of package    */
+        short   ver             ;       /* version number       */
+        short   rel             ;       /* release number       */
+        short   mod             ;       /* modification number  */
+        short   fix             ;       /* fix number           */
+        char    ptf     [10]    ;       /* PTF ident string     */
+        short   media           ;       /* code for distr. media*/
+        char    sceded_by [10]  ;       /* superceded by PTF id */
+        vchar   fixinfo [1024]  ;       /* fix info             */
+        vchar   prereq  [1024]  ;       /* prerequisite tests   */
+        vchar   description [1024] ;    /* new field for description */
+        vchar   supersedes  [512] ;     /* new field for supersedes */
+        } ;
+
+
+/*  History Data Base */
+/*  Carries one record for each action attempted by the         */
+/*  installp command.                                           */
+
+class   history {
+        short   lpp_id          ;       /* reference to LPP_name*/
+        short   event           ;       /* action taken         */
+        short   ver             ;       /* version number       */
+        short   rel             ;       /* release number       */
+        short   mod             ;       /* modification number  */
+        short   fix             ;       /* fix number           */
+        char    ptf     [10]    ;       /* PTF ident string     */
+        char    corr_svn [40]   ;       /* corrective serv num  */
+        char    cp_mod  [10]    ;       /* mod lev for client   */
+        char    cp_fix  [10]    ;       /* fix lev for client   */
+        char    login_name [18] ;       /* id making change     */
+        short   state           ;       /* result of action     */
+        long    time            ;       /* time of action       */
+        vchar   comment [192]   ;       /* comment              */
+        } ;
+
+/*  Inventory Data Base */
+/*  Carries one record for each file that is installed as part  */
+/*  of an LPP.  Managed by the sysck command.                   */
+
+class   inventory {
+        short   lpp_id          ;       /* reference to lpp_name*/
+        short   private         ;       /* flag - 1 lpp owns it */
+        short   file_type       ;       /* type of file entry   */
+        short   format          ;       /* format of the file   */
+        char    loc0    [128]   ;       /* file name            */
+        vchar   loc1    [128]   ;       /* link, ...            */
+        vchar   loc2    [128]   ;       /* symlink, ...         */
+        long    size            ;       /* size of file in bytes*/
+        long    checksum        ;       /* checksum for file    */
+        };
+
+/*  Fix Data Base */
+/*  Carries one record for each fix that could potentially be
+     applied to the system.  Managed by the installp command */
+
+class	fix	{
+	char name[16];      /* Name of the fix (apar number or keyword) */
+  	char abstract[60];  /* Short description of the fix */
+  	char type[2];       /* 'F' for fix, 'M' for maintenance, 
+				'E' for enhancement, 'S' for subproduct */
+	vchar filesets[64]; /* Newline delimited lists of filesets with levels */
+	vchar symptom[64];  /* Optional variable length description */
+	};

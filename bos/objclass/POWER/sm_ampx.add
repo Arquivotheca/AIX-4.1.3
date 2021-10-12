@@ -1,0 +1,251 @@
+# @(#)70        1.1  src/bos/objclass/POWER/sm_ampx.add, cfgmethods, bos411, 9428A410j 2/26/94 10:16:18
+
+#
+#  COMPONENT_NAME: (CMDSMIT) System Management Interface Tool
+#
+#  FUNCTIONS: none
+#
+#  ORIGINS: 27
+#
+#  sm_ampx.add.N --- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+###############################################################################
+#                                                                             #
+#   N O T I C E   ----   ONLY the OWNER of CMDSMIT should modify this file!   #
+#                                                                             #
+###############################################################################
+
+###############################################################################
+#                                                                             #
+# Organization                                                                #
+#                                                                             #
+#       These conventions facilitate updating and checking by                 #
+#       automated tools.                                                      #
+#                                                                             #
+#               Items that go together on the screen are grouped              #
+#               together in the file, topologically sorted by depth           #
+#               from the __ROOT__ node.                                       #
+#               Floating menus (non-top_menu descendents of __ROOT__) follow  #
+#               the __ROOT__/top_menu hierarchy,                              #
+#               but preceed the orphan aliases.                               #
+#               All aliases should be placed at the end of this file.         #
+#                                                                             #
+#               NOTE: new fast_path system for menus requires that:a          #
+#                   1) next_ids be unique for stanzas with next_type = "m".   #
+#                   2) id_seq_nums be unique within a menu.                   #
+#                                                                             #
+###############################################################################
+
+sm_menu_opt:
+        id                  = "commodev"
+        id_seq_num          = "060"
+        next_id             = "articmpx"
+        text                = "X.25 CoProcessor/2 or Multiport/2 Adapter"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 250
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "1800148"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "articmpx"
+        id_seq_num          = "010"
+        next_id             = "articmpxa"
+        text                = "Adapter"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 231
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "00001"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "articmpx"
+        id_seq_num          = "020"
+        next_id             = "c2xserv"
+        text                = "Services"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 232
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "00001"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "articmpx"
+        id_seq_num          = "030"
+        next_id             = "c2xapps"
+        text                = "User Applications"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 233
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "00001"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "articmpxa"
+        id_seq_num          = "010"
+        next_id             = "lsarticmpx"
+        text                = "List All X.25 CoProcessor/2 or Multiport/2 Adapters"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 251
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800193"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id_seq_num          = "020"
+        id                  = "articmpxa"
+        next_id             = "articmpxdd"
+        text                = "Manage Device Drivers for X.25 CoProcessor/2 or Multiport/2 Adapters"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 252
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "120008"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "articmpxa"
+        id_seq_num          = "030"
+        next_id             = "errpt"
+        text                = "Generate an Error Report"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 88
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800203"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "articmpxa"
+        id_seq_num          = "040"
+        next_id             = "c2xst"
+        text                = "Trace an X.25 CoProcessor/2 or Multiport/2 Adapter"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 258
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "1800204"
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+        id                  = "lsarticmpx"
+        option_id           = ""
+        has_name_select     = "n"
+        name                = "List All X.25 CoProcessor/2 or Multiport/2 Adapters"
+        name_msg_file       = "smit.cat"
+        name_msg_set        = 27
+        name_msg_id         = 251
+        cmd_to_exec         = "lsdev -C -c adapter -s mca -t articmpx"
+        ask                 = "n"
+        exec_mode           = ""
+        ghost               = "y"
+        cmd_to_discover     = ""
+        cmd_to_discover_postfix = ""
+        name_size           = 0
+        value_size          = 0
+        help_msg_id         = "1800193"
+        help_msg_loc        = ""
+
+
+# ---- (X25) Services ----
+
+
+sm_menu_opt:
+        id                  = "c2xserv"
+        id_seq_num          = "020"
+        next_id             = "chifx25"
+        text                = "Change / Show Characteristics of a Network Interface"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 298
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800375"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "c2xst"
+        id_seq_num          = "010"
+        next_id             = "trcstart"
+        text                = "Start Trace"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 175
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800322"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "c2xst"
+        id_seq_num          = "020"
+        next_id             = "trcstop"
+        text                = "Stop Trace"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 176
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800323"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "c2xst"
+        id_seq_num          = "030"
+        next_id             = "trcrpt"
+        text                = "Generate a Trace Report"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 177
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800324"
+        help_msg_loc        = ""
+
+
+###############################################################################
+#                                                                             #
+#    _ _  R O O T  _ _   M E N U S                                            #
+#                                                                             #
+#    These include composite menus, which are not part of the top_menu        #
+#    hierarchy, but are included here for testing/reporting programs.         #
+#                                                                             #
+#    NOTE: These entries generally share text_msg_ids and help_msg_ids with   #
+#          other entries above.  Change with care!                            #
+#                                                                             #
+###############################################################################
+
+sm_menu_opt:
+        id                  = "lsadp"
+        id_seq_num          = "060"
+        next_id             = "lsarticmpx"
+        text                = "List All X.25 CoProcessor/2 or Multiport/2 Adapters"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 27
+        text_msg_id         = 251
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800193"
+        help_msg_loc        = ""
+

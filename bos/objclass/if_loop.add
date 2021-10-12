@@ -1,0 +1,92 @@
+# @(#) 74  1.9.1.1  src/bos/objclass/if_loop.add, sockobj, bos41J, 9510A_all 12/12/94 13:59:00
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the ethernet network interface.
+
+PdDv:
+	type		= "lo"
+	class		= "if"
+	subclass	= "LO"
+	prefix		= "lo"
+	base		= 0
+	chgstatus	= 0
+	DvDr		= ""
+	led		= 0x581
+	setno		= 110
+	msgno		= 30
+	catalog		= "devices.cat"
+	Define		= "/usr/lib/methods/defif"
+	Configure	= "/usr/lib/methods/cfgif"
+	Change		= "/usr/lib/methods/chgif"
+	Unconfigure	= "/usr/lib/methods/ucfgif"
+	Undefine	= "/usr/lib/methods/udefif"
+	uniquetype	= "if/LO/lo"
+
+PdCn:
+	uniquetype	= "if/LO/lo"
+	connkey		= "TCPIP"
+
+PdAt:
+	uniquetype	= "if/LO/lo"
+	attribute	= "netaddr"
+	deflt		= "127.0.0.1"
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4
+
+PdAt:
+	uniquetype	= "if/LO/lo"
+	attribute	= "state"
+	deflt		= "up"
+	values		= "up,down,detach"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 5
+
+PdAt:
+	uniquetype	= "if/LO/lo"
+	attribute	= "if_keyword"
+	deflt		= "none"
+	values		= "none"
+	type		= "R"
+	generic		= ""
+	rep		= "s"
+	nls_index	= 0
+
+PdAt:
+	uniquetype	= "if/LO/lo"
+	attribute	= "netmask"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 8
+PdAt:
+        uniquetype      = "if/LO/lo"
+        attribute       = "mtu"
+        deflt           = 16896
+        values          = "60-65536,1"
+        type            = "R"
+        generic         = "DU"
+        rep             = "nr"
+        nls_index       = 2
+

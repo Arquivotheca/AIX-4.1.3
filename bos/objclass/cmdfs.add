@@ -1,0 +1,2475 @@
+# @(#)35	1.24.1.18  src/bos/objclass/cmdfs.add, cmdfs, bos411, 9428A410j 4/25/94 14:58:33
+#
+#
+# COMPONENT_NAME:  CMDFS
+#
+# FUNCTIONS:  None.
+#
+# ORIGINS:  27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when 
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#                                                            
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                  
+
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Physical & Logical Storage                                    #
+#                    Manage File Systems                                       #
+#                        Verify a File System                                  #
+#                                                                              #
+# FAST KEY:  fsck    	                                                       #
+#									       #
+# UNIX COMMAND(S):  fsck                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   4 dialogue objects      		                               #
+#                                                                              #
+# HEADER:  Verify a File System                                                #
+#                                                                              #
+# OBJECTS:  1.	NAME of file system 					       #
+#		      - OR -						       #
+#	    2.  TYPE of file syste, 					       #
+#	    3.  FAST check?						       #
+#	    4.  SCRATCH file						       #
+#	 	  (must not be on the file system being checked)	       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "fsck"
+	option_id               = "fsckOpts"
+	has_name_select         = "n"
+	name                    = "Verify a File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 15
+	cmd_to_exec             = "fsck -p"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050601"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "fsckOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "NAME of file system\n      -OR-"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 20
+	op_type             = "l"
+	entry_type          = ""
+	entry_size          = 0
+	required            = ""
+	prefix              = "--"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "lsfs | awk 'NR > 1 && $6 != "ro" { print $3 }'"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050602"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "fsckOpts"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "TYPE of file system\n"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 25
+	op_type             = "l"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-V"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "lsvfs | awk '{ print $1 }'"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050603"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "fsckOpts"
+	id_seq_num          = "010"
+	disc_field_name     = ""
+	name                = "FAST check?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 30
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-f"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050604"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "fsckOpts"
+	id_seq_num          = "015"
+	disc_field_name     = ""
+	name                = "SCRATCH file\n  (must not be on the file system being checked)"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 35
+	op_type             = ""
+	entry_type          = "t"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-t"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050605"
+	help_msg_loc        = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Physical & Logical Storage                                    #
+#                    Manage File Systems                                       #
+#                        List All Mounted File Systems                         #
+#                                                                              #
+# FAST KEY:  mount, lsmount                                                    #
+# UNIX COMMAND(S):  mount                                                      #
+#                                                                              #
+# DESIGN:  1 dialogue header 						       #
+#                                                                              #
+# HEADER:  List All Mounted File Systems                                       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "lsmount"
+	option_id               = ""
+	has_name_select         = "n"
+	name                    = "List All Mounted File Systems"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 40
+	cmd_to_exec             = "mount"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = "y"
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050606"
+	help_msg_loc            = ""
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Physical & Logical Storage                                    #
+#                    Manage File Systems                                       #
+#                        Mount a File System                                   #
+#                                                                              #
+# FAST KEY:  mount, mountfs                                                    #
+#									       #
+# UNIX COMMAND(S):  mount, lsvfs, lsfs                                         #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   7 dialogue objects                               		       #
+#                                                                              #
+# HEADER:  Mount a File System                                                 #
+#                                                                              #
+# OBJECTS:  1.	FILE SYSTEM name					       #
+#	    2.  DIRECTORY over which to mount				       #
+#	    3.	TYPE of file system					       #
+#	    4.	FORCE the mount?					       #
+#	    5.  REMOTE NODE holding the file system to mount		       #
+#	    6.  Mount as a REMOVABLE system?				       #
+#	    7.  Mount as a READ-ONLY system?		        	       #
+#	    8.  Disallow DEVICE access via this mount?			       #
+#	    9.  Disallow execution of SUID and sgid programs		       #
+#		in this file system?"					       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "mountfs"
+	option_id               = "mountOpts"
+	has_name_select         = "n"
+	name                    = "Mount a File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 45
+	cmd_to_exec             = "mount"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050607"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "FILE SYSTEM name"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 50
+	op_type             = "l"
+	entry_type          = "t"
+	entry_size          = 0
+	required            = ""
+	prefix              = "--"
+	cmd_to_list_mode    = "1"
+	cmd_to_list         = "lsfs | while read dev node mnt vfs size opts jnk
+do
+        if mount | grep -q $dev
+        then 
+                echo $dev
+        else
+                echo $dev $mnt $vfs $size
+        fi
+done | awk 'NR > 1 { printf \"%-20s\t%-20s\t%-5s\t%-10s\\n\", $1, $2, $3, $4 }'"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050608"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "DIRECTORY over which to mount"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 55
+	op_type             = "l"
+	entry_type          = "t"
+	entry_size          = 0
+	required            = ""
+	prefix              = "--"
+	cmd_to_list_mode    = "1"
+	cmd_to_list         = "for mntpt in `lsfs | awk 'NR > 1 { print $3 }'` ; do mount | sed -e 1d -e 2d -e 's/^[^ 	]*//' | awk '{ print $2 }' | grep -s \^$mntpt\$ || lsfs $mntpt | awk 'NR > 1 { printf \"%-20s\t%-20s\t%-5s\t%-10s\\n\", $3, $1, $4, $5 }' ; done"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050609"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "010"
+	disc_field_name     = ""
+	name                = "TYPE of file system"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 100
+	op_type             = "l"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-v"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "lsvfs | awk '{ print $1 }'"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050610"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "015"
+	disc_field_name     = ""
+	name                = "FORCE the mount?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 60
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-f"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050611"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "025"
+	disc_field_name     = ""
+	name                = "REMOTE NODE containing the file system\n  to mount"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 70
+	op_type             = ""
+	entry_type          = "t"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-n"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050612"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "030"
+	disc_field_name     = ""
+	name                = "Mount as a REMOVABLE file system?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 75
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-p"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050613"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "035"
+	disc_field_name     = ""
+	name                = "Mount as a READ-ONLY system?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 80
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-r"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050614"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "040"
+	disc_field_name     = ""
+	name                = "Disallow DEVICE access via this mount?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 370
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-o nodev"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050672"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "mountOpts"
+	id_seq_num          = "045"
+	disc_field_name     = ""
+	name                = "Disallow execution of SUID and sgid programs\n  in this file system?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 380
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-o nosuid"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050673"
+	help_msg_loc        = ""
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Physical & Logical Storage                                    #
+#                    Manage File Systems                                       #
+#                        Mount a Group of File Systems                         #
+#                                                                              #
+# FAST KEY:  mount, mountg                                                     #
+#									       #
+# UNIX COMMAND(S):  mount                                                      #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   1 dialogue object     		                               #
+#                                                                              #
+# HEADER:  Mount a Group of File Systems                                       #
+#                                                                              #
+# OBJECTS:  1.  GROUP name						       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "mountg"
+	option_id               = "mountgOpts"
+	has_name_select         = "n"
+	name                    = "Mount a Group of File Systems"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 150
+	cmd_to_exec             = "mount"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050630"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "mountgOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "GROUP name"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 155
+	op_type             = "l"
+	entry_type          = ""
+	entry_size          = 0
+	required            = "+"
+	prefix              = "-t"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "lsfs -c | awk -F':' 'NR > 1 { print $5 }' | sort -u | grep -v '^$' || exit 0"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050631"
+	help_msg_loc        = ""
+
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Physical & Logical Storage                                    #
+#                    Manage File Systems                                       #
+#                        Unmount a Group of File Systems                       #
+#                                                                              #
+# FAST KEY:  umount, umountg                                                   #
+#									       #
+# UNIX COMMAND(S):  umount                                                     #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   1 dialogue object     		                               #
+#                                                                              #
+# HEADER:  Unmount a Group of File Systems                                     #
+#                                                                              #
+# OBJECTS:  1.  GROUP name						       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "umountg"
+	option_id               = "umountgOpts"
+	has_name_select         = "n"
+	name                    = "Unmount a Group of File Systems"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 160
+	cmd_to_exec             = "umount"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050632"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "umountgOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "GROUP name"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 165
+	op_type             = "l"
+	entry_type          = ""
+	entry_size          = 0
+	required            = "+"
+	prefix              = "-t"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "lsfs -c | awk -F':' 'NR > 1 { print $5 }' | sort -u | grep -v '^$' || exit 0"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050631"
+	help_msg_loc        = ""
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Physical & Logical Storage                                    #
+#                    Manage File Systems                                       #
+#                        Unmount a File System                                 #
+#                                                                              #
+# FAST KEY:  umount, umountfs                                                  #
+#									       #
+# UNIX COMMAND(S):  umount                                                     #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   4 dialogue objects    		                               #
+#                                                                              #
+# HEADER:  Unmount a File System                                               #
+#                                                                              #
+# OBJECTS:  1.	Unmount ALL mounted file systems?			       #
+#		        - OR -						       #
+#	    2.  Unmount all REMOTELY mounted file systems?		       #
+#		        - OR -						       #
+#	    3.	NAME of file system to unmount				       #
+#	    4.	REMOTE NODE containing the file system(s) to unmount	       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "umountfs"
+	option_id               = "umountfsOpts"
+	has_name_select         = "n"
+	name                    = "Unmount a File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 85
+	cmd_to_exec             = "umount"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050615"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "umountfsOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "Unmount ALL mounted file systems?\n  (except /, /tmp, /usr)\n            -OR-"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 105
+	op_type             = "r"
+	entry_type          = ""
+	entry_size          = 0
+	required            = ""
+	prefix              = "all"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050616"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "umountfsOpts"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "Unmount all REMOTELY mounted file systems?\n            -OR-"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 110
+	op_type             = "r"
+	entry_type          = ""
+	entry_size          = 0
+	required            = ""
+	prefix              = "allr"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 19
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "050617"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "umountfsOpts"
+	id_seq_num          = "010"
+	disc_field_name     = ""
+	name                = "NAME of file system to unmount"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 90
+	op_type             = "l"
+	entry_type          = "t"
+	entry_size          = 0
+	required            = ""
+	prefix              = "--"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = "mount | sed -e 1d -e 2d -e 's/^[^ 	]*//' | awk '{ print $2 }'"
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050618"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "umountfsOpts"
+	id_seq_num          = "015"
+	disc_field_name     = ""
+	name                = "REMOTE NODE containing the file system(s)\n  to unmount"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 19
+	name_msg_id         = 95
+	op_type             = ""
+	entry_type          = "t"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-n "
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050619"
+	help_msg_loc        = ""
+ 
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		     File System					       #
+#		         List All File Systems				       #
+#                                                                              #
+# FAST KEY:         lsfs                                                       #
+# UNIX COMMAND(S):  lsfs                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#                                                                              #
+# HEADER:  List All File Systems					       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "lsfs"
+	option_id               = ""
+	has_name_select         = "n"
+	name                    = "List All File Systems"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 170
+	cmd_to_exec             = "lsfs"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = "y"
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050634"
+	help_msg_loc            = ""
+################################################################################
+#                          SMIT Dialogue Definition                            
+#
+# MENU PATH(S):  Storage						       
+# 		     File System					       
+#		         Manage File Systems				       
+#			     Journaled File Systems			       
+#			         Add a Journaled File System		       
+#
+# FAST KEY:         crjfs                                                      
+#
+# UNIX COMMAND(S):  crfs -v jfs                                                
+#
+# DESIGN:  1 dialogue header		                                       
+#	   1 name select						       
+#  	   5 dialogue objects						       
+#
+# HEADER:  Add A Journaled File System					       
+#
+# NAME SELECT:  Volume Group Name					       
+#
+# OBJECTS:  1. Volume group name					       
+#	    2. SIZE of File System					       
+#           3. MOUNT POINT						       
+# 	    4. Mount AUTOMATICALLY at system restart?			       
+#	    5. PERMISSIONS						       
+#	    6. Mount OPTIONS						       
+#	    8. Fragment size
+#	    9. Number of bytes per inode
+#	   10. Compression
+#
+###############################################################################
+ 
+sm_name_hdr:
+	id			= "crjfs"
+	next_id			= "jcrfsCmdHdr"
+	option_id		= "jcrfsNameOpt"
+	name			= "Add a Journaled File System"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 180
+	type			= "j"
+	ghost			= "y"
+	cmd_to_classify		= ""
+	cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	next_type		= ""
+	help_msg_id		= "050637"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsNameOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "Volume Group Name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 185
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "lsvg"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050636"
+	help_msg_loc		= ""
+
+
+sm_cmd_hdr:
+	id                      = "jcrfsCmdHdr"
+	option_id               = "jcrfsCmdOpt"
+	has_name_select         = "y"
+	name                    = "Add a Journaled File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 180
+	cmd_to_exec             = "crfs -v jfs"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050637"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "0"
+	disc_field_name		= "_rawname"
+	name			= "Volume group name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 195
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-g"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050636"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= ""
+	name			= "SIZE of file system (in 512-byte blocks)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 200
+	op_type			= ""
+	entry_type		= "#"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-a size="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050638"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "010"
+	disc_field_name		= ""
+	name			= "MOUNT POINT"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 205
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-m"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050639"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "015"
+	disc_field_name		= ""
+	name			= "Mount AUTOMATICALLY at system restart?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 210
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-A"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ""
+	help_msg_id		= "050640"
+	help_msg_loc		= ""
+
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "020"
+	disc_field_name		= ""
+	name			= "PERMISSIONS"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 215
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-p"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "read only,read/write"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 350
+	aix_values		= "ro,rw"
+	help_msg_id		= "050641"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "025"
+	disc_field_name		= ""
+	name			= "Mount OPTIONS"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 360
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a options="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "echo nodev; echo nosuid"
+	cmd_to_list_postfix	= ""
+	multi_select		= ","
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050670"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "030"
+	disc_field_name		= ""
+	name			= "Start Disk Accounting?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 400
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-t"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ""
+	help_msg_id		= "050676"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "035"
+	disc_field_name		= ""
+	name			= "Fragment Size (bytes)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 410
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-a frag="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 3
+	disp_values		= "512,1024,2048,4096"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050674"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "040"
+	disc_field_name		= ""
+	name			= "Number of bytes per inode"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 420
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-a nbpi="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 3
+	disp_values		= "512,1024,2048,4096,8192,16384"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050675"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfsCmdOpt"
+	id_seq_num		= "045"
+	disc_field_name		= ""
+	name			= "Compression algorithm"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 430
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-a compress="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "no,LZ"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050680"
+	help_msg_loc		= ""
+
+
+###############################################################################
+#
+#                          SMIT Dialogue Definition                            
+#
+# MENU PATH(S):  Storage						       
+# 		     File System					       
+#		         Manage File Systems				       
+#			     Journaled File Systems			       
+#			         Add a Journaled File System		       
+#                                on a Previously Defined Logical Volume        
+#
+# FAST KEY:         crjfslv                                                    
+#
+# UNIX COMMAND(S):  crfs -v jfs                                                
+#
+# DESIGN:  1 dialogue header		                                       
+#  	   4 dialogue objects						       
+#
+# HEADER:  Add A Journaled File System on a Previously Defined Logical Volume  
+#
+# OBJECTS:  1. Logical Volume name					       
+#           2. MOUNT POINT						       
+# 	    3. Mount AUTOMATICALLY at system restart?			       
+#	    4. PERMISSIONS						       
+#	    5. Mount OPTIONS						       
+#	    6. Fragment size
+#	    7. Number of bytes per inode
+#	    8. Compression
+#
+###############################################################################
+
+sm_cmd_hdr:
+	id                      = "crjfslv"
+	option_id               = "jcrfslvCmdOpt"
+	has_name_select         = "n"
+	name                    = "Add a Journaled File System on a Previously Defined Logical Volume"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 310
+	cmd_to_exec             = "crfs -v jfs"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050667"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "000"
+	disc_field_name		= ""
+	name			= "LOGICAL VOLUME name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 320
+	op_type			= "l"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-d"
+	cmd_to_list_mode	= "1"
+	cmd_to_list		= "for vg in `lsvg -o`; do lsvg -l $vg | awk '{ if ($2 == \"jfs\") print $1 }';done"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050668"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= ""
+	name			= "MOUNT POINT"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 205
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-m"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050639"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "010"
+	disc_field_name		= ""
+	name			= "Mount AUTOMATICALLY at system restart?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 210
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-A"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ""
+	help_msg_id		= "050640"
+	help_msg_loc		= ""
+
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "015"
+	disc_field_name		= ""
+	name			= "PERMISSIONS"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 215
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-p"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "read only,read/write"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 350
+	aix_values		= "ro,rw"
+	help_msg_id		= "050641"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "020"
+	disc_field_name		= ""
+	name			= "Mount OPTIONS"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 360
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a options="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "echo nodev; echo nosuid"
+	cmd_to_list_postfix	= ""
+	multi_select		= ","
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050670"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "025"
+	disc_field_name		= ""
+	name			= "Start Disk Accounting?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 400
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-t"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ""
+	help_msg_id		= "050676"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "030"
+	disc_field_name		= ""
+	name			= "Fragment Size (bytes)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 410
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-a frag="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 3
+	disp_values		= "512,1024,2048,4096"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050674"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "035"
+	disc_field_name		= ""
+	name			= "Number of bytes per inode"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 420
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-a nbpi="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 3
+	disp_values		= "512,1024,2048,4096,8192,16384"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	aix_values		= ""
+	help_msg_id		= "050675"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jcrfslvCmdOpt"
+	id_seq_num		= "040"
+	disc_field_name		= ""
+	name			= "Compression algorithm"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 430
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-a compress="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "no,LZ"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050680"
+	help_msg_loc		= ""
+
+##############################################################################
+#
+#                          SMIT Dialogue Definition                            
+#
+# MENU PATH(S):  Storage						       
+# 		   File System					       	       
+#		     Manage File Systems				       
+#		       Journaled File Systems			               
+#		         Change/Show Characteristics of a Journaled File System
+#
+# FAST KEY:         chjfs                                                      
+#
+# UNIX COMMAND(S):  chfs                                                       
+#
+# DESIGN:  1 dialogue header		                                       
+#	   1 name select						       
+#  	   8 dialogue objects						       
+#
+# HEADER:  Change/Show Characteristics of a Journaled File System	       
+#
+# NAME SELECT:  File System Name					       
+#
+# OBJECTS:  1. File system name						       
+#	    2. NEW mount point						       
+#	    3. SIZE of file system					      
+#	    4. Mount GROUP						       
+#	    5. Mount AUTOMATICALLY at system restart?			       
+#	    6. PERMISSIONS						       
+#	    7. Mount OPTIONS						       
+#	    8. Fragment size						       
+#	    9. number of bytes per inode
+#	   10. Compression
+#
+###############################################################################
+ 
+sm_name_hdr:
+	id			= "chjfs"
+	next_id			= "jchfsCmdHdr"
+	option_id		= "jchfsNameOpt"
+	name			= "Change/Show Characteristics of a Journaled File System"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 220
+	type			= "j"
+	ghost			= "y"
+	cmd_to_classify		= ""
+	cmd_to_classify_postfix = ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	next_type		= ""
+	help_msg_id		= "050644"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsNameOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "File System Name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 225
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "lsfs -v jfs | awk 'NR > 1 { print $3 }'"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050643"
+	help_msg_loc		= ""
+
+
+sm_cmd_hdr:
+	id                      = "jchfsCmdHdr"
+	option_id               = "jchfsCmdOpt"
+	has_name_select         = "y"
+	name                    = "Change/Show Characteristics of a Journaled File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 220
+	cmd_to_exec             = "chfs"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = "/usr/sbin/lsjfs "
+	cmd_to_discover_postfix = "_rawname"
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050644"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "0"
+	disc_field_name		= "MountPoint"
+	name			= "File system name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 235
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050645"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= "MountPoint"
+	name			= "NEW mount point"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 240
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-m"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050646"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "010"
+	disc_field_name		= "Size"
+	name			= "SIZE of file system (in 512-byte blocks)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 200
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a size="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050647"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "015"
+	disc_field_name		= "Type"
+	name			= "Mount GROUP"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 250
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-u"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050648"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "020"
+	disc_field_name		= "AutoMount"
+	name			= "Mount AUTOMATICALLY at system restart?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 210
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= "-A"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= "yes,no"
+	help_msg_id		= "050649"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "025"
+	disc_field_name		= "Options"
+	name			= "PERMISSIONS"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 215
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= "-p"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "read only,read/write"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 350
+	aix_values		= "ro,rw"
+	help_msg_id		= "050650"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "030"
+	disc_field_name		= "OtherOptions"
+	name			= "Mount OPTIONS"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 360
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a options="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "echo nodev; echo nosuid"
+	cmd_to_list_postfix	= ""
+	multi_select		= ","
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050670"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "035"
+	disc_field_name		= "Acct"
+	name			= "Start Disk Accounting?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 400
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= "-t"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= "yes,no"
+	help_msg_id		= "050676"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "045"
+	disc_field_name		= "FragSize"
+	name			= "Fragment Size (bytes)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 410
+	op_type			= "n"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050674"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "050"
+	disc_field_name		= "Nbpi"
+	name			= "Number of bytes per inode"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 420
+	op_type			= "n"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050675"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jchfsCmdOpt"
+	id_seq_num		= "055"
+	disc_field_name		= "Compress"
+	name			= "Compression algorithm"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 430
+	op_type			= "n"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050680"
+	help_msg_loc		= ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		   File System					       	       #
+#		     Manage File Systems				       #
+#		       Journaled File Systems			               #
+#			 Remove a Journaled File System			       #
+#                                                                              #
+# FAST KEY:         rmjfs                                                      #
+# UNIX COMMAND(S):  rmfs                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#  	   1 dialogue object 						       #
+#                                                                              #
+# HEADER:  Remove a Journaled File System				       #
+#									       #
+# OBJECTS:  1. File SYSTEM name						       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "rmjfs"
+	option_id               = "jrmfsOpt"
+	has_name_select         = "n"
+	name                    = "Remove a Journaled File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 270
+	cmd_to_exec             = "rmfs"
+	ask                     = "y"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050652"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "jrmfsOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "FILE SYSTEM name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 50
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "+"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "lsfs -v jfs | awk 'NR > 1 { print $3 }'"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050653"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "jrmfsOpt"
+	id_seq_num		= "010"
+	disc_field_name		= ""
+	name			= "Remove Mount Point"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 390
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-r"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ","
+	help_msg_id		= "050671"
+	help_msg_loc		= ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		   File System					       	       #
+#		     Manage File Systems				       #
+#		       CDROM File Systems				       #
+#			 Add a CDROM File System			       #
+#                                                                              #
+# FAST KEY:         crcdrfs                                                    #
+# UNIX COMMAND(S):  crfs -v cdrfs                                              #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#  	   3 dialogue objects 						       #
+#                                                                              #
+# HEADER:  Add a CDROM File System					       #
+#									       #
+# OBJECTS:  1. DEVICE name						       #
+#	    2. MOUNT POINT						       #
+#	    3. Mount AUTOMATICALLY at system restart?			       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "crcdrfs"
+	option_id               = "cdcrfsOpt"
+	has_name_select         = "n"
+	name                    = "Add a CDROM File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 280
+	cmd_to_exec             = "crfs -v cdrfs -p ro"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050654"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "cdcrfsOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "DEVICE name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 285
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-d"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "lsdev -C -F 'class name'|grep -E 'cdrom|rwoptical'|awk '{print $2}'"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050655"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "cdcrfsOpt"
+	id_seq_num		= "005"
+	disc_field_name		= ""
+	name			= "MOUNT POINT"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 205
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-m"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050656"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "cdcrfsOpt"
+	id_seq_num		= "010"
+	disc_field_name		= ""
+	name			= "Mount AUTOMATICALLY at system restart?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 210
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-A"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ""
+	help_msg_id		= "050657"
+	help_msg_loc		= ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		   File System					       	       #
+#		     Manage File Systems				       #
+#		       CDROM File Systems				       #
+#			 Change/Show Characteristics of a CDROM File System    #
+#                                                                              #
+# FAST KEY:         chcdrfs                                                    #
+# UNIX COMMAND(S):  chfs                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#	   1 name select						       #
+#  	   5 dialogue objects						       #
+#                                                                              #
+# HEADER:  Change/Show Characteristics of a CDROM File System	               #
+#									       #
+# NAME SELECT:  File System Name					       #
+#                                                                              #
+# OBJECTS:  1. File system name						       #
+#	    2. NEW mount point						       #
+#	    3. Mount GROUP						       #
+#	    4. Mount AUTOMATICALLY at system restart?			       #
+#                                                                              #
+################################################################################
+ 
+sm_name_hdr:
+	id			= "chcdrfs"
+	next_id			= "cdchfsCmdHdr"
+	option_id		= "cdchfsNameOpt"
+	name			= "Change/Show Characteristics of a CDROM File System"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 300
+	type			= "j"
+	ghost			= "y"
+	cmd_to_classify		= ""
+	cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	next_type		= ""
+	help_msg_id		= "050644"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "cdchfsNameOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "File System Name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 225
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "lsfs -v cdrfs | awk 'NR > 1 { print $3 }'"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050659"
+	help_msg_loc		= ""
+
+
+sm_cmd_hdr:
+	id                      = "cdchfsCmdHdr"
+	option_id               = "cdchfsCmdOpt"
+	has_name_select         = "y"
+	name                    = "Change/Show Characteristics of a CDROM File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 300
+	cmd_to_exec             = "chfs"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = "lsfs -c "
+	cmd_to_discover_postfix = "_rawname"
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050644"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "cdchfsCmdOpt"
+	id_seq_num		= "0"
+	disc_field_name		= "_rawname"
+	name			= "File system name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 235
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050661"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "cdchfsCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= ""
+	name			= "NEW mount point"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 240
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-m"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050662"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "cdchfsCmdOpt"
+	id_seq_num		= "010"
+	disc_field_name		= "Type"
+	name			= "Mount GROUP"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 250
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-u"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050663"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "cdchfsCmdOpt"
+	id_seq_num		= "015"
+	disc_field_name		= "AutoMount"
+	name			= "Mount AUTOMATICALLY at system restart?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 210
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= "-A"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= "yes,no"
+	help_msg_id		= "050664"
+	help_msg_loc		= ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		   File System					       	       #
+#		     Manage File Systems				       #
+#		       CDROM File Systems				       #
+#			 Remove a CDROM File System			       #
+#                                                                              #
+# FAST KEY:         rmcdrfs                                                    #
+# UNIX COMMAND(S):  rmfs                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#  	   1 dialogue object 						       #
+#                                                                              #
+# HEADER:  Remove a CDROM File System				               #
+#									       #
+# OBJECTS:  1. FILE SYSTEM name						       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "rmcdrfs"
+	option_id               = "cdrmfsOpt"
+	has_name_select         = "n"
+	name                    = "Remove a CDROM File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 330
+	cmd_to_exec             = "rmfs"
+	ask                     = "y"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050665"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "cdrmfsOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "FILE SYSTEM name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 50
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "+"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "lsfs -v cdrfs | awk 'NR > 1 { print $3 }'"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050666"
+	help_msg_loc		= ""
+
+
+#
+# Dialogue Definition
+#
+# MENU PATH(S):  Storage
+# 		     File System
+#		         Manage File Systems
+#			     Journaled File Systems
+#			         Defrag a Journaled File System
+#
+# FAST KEY:         defragfs
+#
+# UNIX COMMAND(S):  defragfs
+#
+# DESIGN:  1 dialogue header
+#	   1 name select
+#
+# HEADER:  Defrag a Journaled File System
+#
+# NAME SELECT:  Filesystem Name
+#
+# OBJECTS:  1. [ perform | query | report ] these map to [ '' | -q | -r ]
+#
+#
+#
+ 
+sm_name_hdr:
+	id			= "dejfs"
+	next_id			= "dejfsCmdHdr"
+	option_id		= "dejfsNameOpt"
+	name			= "Defragment a Journaled File System"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 440
+	type			= "j"
+	ghost			= "y"
+	cmd_to_classify		= ""
+	cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	next_type		= ""
+	help_msg_id		= "050690"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "dejfsNameOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "File System Name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 225
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "lsjfs  | awk -F':' 'NR > 1 { print $1}'"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050643"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id                      = "dejfsCmdHdr"
+	option_id               = "dejfsCmdOpt"
+	has_name_select         = "y"
+	name                    = "Defragment a Journaled File System"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 19
+	name_msg_id             = 440
+	cmd_to_exec             = "defragfs"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050690"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "dejfsCmdOpt"
+	id_seq_num		= "0"
+	disc_field_name		= "_rawname"
+	name			= "File system name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 225
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "050643"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "dejfsCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= ""
+	name			= "Perform, Query, or Report ?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 19
+	name_msg_id		= 441
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "perform,query,report"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 442
+	aix_values		= ",-q,-r"
+	help_msg_id		= "050690"
+	help_msg_loc		= ""

@@ -1,0 +1,90 @@
+# @(#)08	1.29  src/bos/objclass/kts.add, inputdd, bos41J, 9509A_all 2/14/95 13:06:08
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Stanzas for the RS1/RS2 keyboard/tablet/sound predefined values
+#
+
+# adapter predefined values
+PdDv:
+ type = "keyboard"
+ class = "adapter"
+ subclass = "sio"
+ prefix = "siokta"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 2
+ led = 0x821
+ setno = 126
+ msgno = 22
+ catalog = "devices.cat"
+ DvDr = "ktsdd"
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgktsm"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgdevice"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "adapter/sio/keyboard"
+
+PdAt:
+ uniquetype = "adapter/sio/keyboard"
+ attribute = "bus_io_addr"
+ deflt = "0x50"
+ values = "0x50"
+ width = "0x2"
+ type = "O"
+ generic = ""
+ rep = "n"
+ nls_index = 0
+
+PdAt:
+ uniquetype = "adapter/sio/keyboard"
+ attribute = "bus_intr_lvl"
+ deflt = "1"
+ values = "1"
+ width = ""
+ type = "I"
+ generic = ""
+ rep = "n"
+ nls_index = 0
+
+PdAt:
+ uniquetype = "adapter/sio/keyboard"
+ attribute = "intr_priority"
+ deflt = "4"
+ values = "4"
+ width = ""
+ type = "P"
+ generic = ""
+ rep = "n"
+ nls_index = 0
+
+# Predefined Connections
+PdCn:
+ uniquetype = "adapter/sio/keyboard"
+ connkey = "std_k"
+ connwhere = "kbd"
+
+PdCn:
+ uniquetype = "adapter/sio/keyboard"
+ connkey = "std_t"
+ connwhere = "tablet"

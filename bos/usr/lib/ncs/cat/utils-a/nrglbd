@@ -1,0 +1,66 @@
+
+
+
+NRGLBD(1)                 User Commands                 NRGLBD(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     nnnnrrrrggggllllbbbbdddd - Non-Replicatable Global Location Broker Daemon
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     nnnnrrrrggggllllbbbbdddd [ ----vvvveeeerrrrssssiiiioooonnnn ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The Global Location Broker (GLB), part of the  Network  Com-
+     puting  System  (NCS),  helps clients to locate servers on a
+     network or internet.  The GLB database stores the  locations
+     (that  is,  the  network  addresses  and port numbers) where
+     server processes are running.  A daemon maintains this data-
+     base and provides access to it.
+
+     There are two versions of the GLB daemon, ggggllllbbbbdddd  and  nnnnrrrrggggllllbbbbdddd.
+     We  provide the replicatable version, ggggllllbbbbdddd, only for Apollo,
+     SunOS, and ULTRIX systems.  For other  systems,  we  provide
+     the non-replicatable version, nnnnrrrrggggllllbbbbdddd.
+
+     Here, we describe only nnnnrrrrggggllllbbbbdddd.
+
+     Typically, nnnnrrrrggggllllbbbbdddd is started in  background  at  boot  time.
+     Unless the host is an MS-DOS system, a Local Location Broker
+     daemon (llllllllbbbbdddd) must be running on the local host when  nnnnrrrrggggllllbbbbdddd
+     is started.
+
+     On MS-DOS systems that use  DDS  network  protocols,  nnnnrrrrggggllllbbbbdddd
+     uses DDS protocols; on other systems, it uses IP protocols.
+
+     You should run only one nnnnrrrrggggllllbbbbdddd on a network or internet, and
+     you  should not run an nnnnrrrrggggllllbbbbdddd and a ggggllllbbbbdddd on the same network
+     or internet.
+
+     See _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e for more information  about  Loca-
+     tion Broker configuration.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----vvvveeeerrrrssssiiiioooonnnn
+          Display the version of NCK that this nnnnrrrrggggllllbbbbdddd belongs to,
+          but do not start the daemon.
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     glbd, lb_admin, llbd
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          1
+
+
+

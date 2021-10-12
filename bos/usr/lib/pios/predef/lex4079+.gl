@@ -1,0 +1,54 @@
+# @(#)49        1.2  src/bos/usr/lib/pios/predef/lex4079+.gl, cmdpios, bos41J, 9517B_all 4/26/95 18:45:23
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1993, 1995
+# All Rights Reserved
+#
+#  NOTES:
+#
+#    Automatic paper eject at the end of the plot job:
+#      This file is set up to add a EJ; to each plot file.
+#      To disable this function, either;
+#        a) issue the qprt print command with "-J!"  or,
+#        b) Edit this file with lsvirprt (or SMIT) and set the "cr" attribute
+#           to blanks.
+#
+:056:__FLG::
+:791:_J:S[C950]I[1810533]%IWY:+
+:616:_j:S[C940]I[1810536]%IWY:+
+:618:_z:S[E005]I[1810520]EnR[pioattr1.cat,1,620;portrait,landscape=!,+]:+
+:060:__SYS::
+:747:sD:S[103]I[1810566]%IWY:+
+:708:sH:S[150]I[1810525]:-z+
+:709:sT:S[155]I[1810525]:-z+
+:057:__IDS::
+:276:ig::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jzJZ]
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[jJZ] ; }
+:058:__MIS::
+:330:mA::GL Emulation
+:331:mL::[devices.cat,71,205;Lexmark Color Jetprinter Plus]
+:295:mN::4079p
+:308:mp::%?%GsD%t%%!,\x04%%!%;
+:051:__CAG::
+:144:ci::\4in;sp1;%?%G_z%t%eRO 90;%;
+:152:cr::EJ;\4
+:052:__CTL::
+:113:af::pg;
+:475:__HIR::
+:686:zL::2
+:688:zM::Lexmark
+:476:zP::generic.gl
+:477:zS::!
+:685:zV::+

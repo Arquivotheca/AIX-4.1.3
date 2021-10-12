@@ -1,0 +1,4456 @@
+# @(#)64	1.29  src/bos/objclass/cmdpios.add, cmdpios, bos411, 9438C411a 9/22/94 17:16:02
+#
+#   COMPONENT_NAME: CMDQUE
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# spooler.chpq.extended
+#EXT
+sm_cmd_hdr:
+	id = "ps_chpq_attach_remoteCmdHdr"
+	option_id = "ps_chpq_attach_qnameOpt,ps_chpq_attach_remoteCmdHdrOpt"
+	has_name_select = "y"
+	name = "Change / Show Remote Spooling Characteristics"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 1
+	cmd_to_exec = "/usr/sbin/chvirprt"
+	ask = ""
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "function x { 
+		/usr/lib/lpd/pio/etc/pioevattr -q $1 -d $2 mL 2>/dev/null
+	}; x"
+	cmd_to_discover_postfix = "queue_name queue_device"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1810086"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+# change/show queue->select printer (Extended)
+# ps_chpq_ghostName will determine attach type and branch
+sm_name_hdr:
+	id = "ps_chpq_printerName"
+	next_id = "ps_chpq_ghostName"
+	option_id = "ps_chpq_printerOpt"
+	has_name_select = "y"
+	name = "Printer"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 3 
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "print"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "queue_device"
+	next_type = "n"
+
+sm_name_hdr:
+	id = "ps_chpq_ghostName"
+	next_id = ""
+	option_id = "ps_chpq_generic_2_ghostOpt"
+	has_name_select = "y"
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x { 
+	next_id=$(print $(/usr/lib/lpd/pio/etc/piolsvp -P $1:$2 -n change_queue 2>/dev/null))
+	attach_type=${next_id#* }; attach_type=${attach_type%% *}
+	next_id=${next_id##* }
+	if [[ -z \"$next_id\" ]]
+	then
+		next_id=ps_chpq_genericName
+	fi
+	print $next_id:$attach_type
+	}; x"
+	cmd_to_classify_postfix = "queue_name queue_device"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:ps_attach"
+	next_type = "n"
+
+sm_name_hdr:
+	id = "ps_chpq_remoteName"
+	next_id = ""
+	option_id = "ps_chpq_generic_2_ghostOpt"
+	has_name_select = "y"
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x {
+		case $1 in 
+		remote.local) next_id=$(/usr/lib/lpd/pio/etc/piolsvp -N local -n change_queue 2>/dev/null)
+		              [[ -z $next_id ]] && next_id=ps_chpq_genericName
+		;;
+		*) next_id=ps_chpq_attach_remote_ghostName
+		;;
+		esac
+		print $next_id
+	}; x"
+	cmd_to_classify_postfix = "ps_attach queue_name queue_device"
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "n"
+
+sm_name_hdr:
+	id = "ps_chpq_attach_remote_ghostName"
+	next_id = "ps_chpq_attach_remoteCmdHdr"
+	option_id = "ps_chpq_generic_2_ghostOpt"
+	has_name_select = "y"
+	type = "j"
+	ghost = "y"
+	next_type = "d"
+
+# Extended
+# ps_chpq_attachName: For local, xsta, ASCII, and file attachments
+sm_name_hdr:
+	id = "ps_chpq_attachName"
+	next_id = ""
+	option_id = "ps_chpq_attachOpt"
+	has_name_select = "y"
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x { case $1 in
+	1) print \"#/var/spool/lpd/pio/@local/smit/#ps_setup_$2.$3\"
+	;;
+	2) print \"#/var/spool/lpd/pio/@local/smit/#ps_jobattrs_$2.$3\"
+	;;
+	3) print ps_chpq_attach_accountCmdHdr
+	;;
+	4) print ps_chpq_attach_disciplineCmdHdr
+	;;
+	esac
+	}; x"
+	cmd_to_classify_postfix = "_rawname queue_name queue_device"
+	raw_field_name = ""
+	cooked_field_name = "cookedname"
+	next_type = "d"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_chpq_printerOpt"
+	disc_field_name = ""
+	name = "PRINTER"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 2
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/lib/lpd/pio/etc/piolsvp -P 2>/dev/null"
+	cmd_to_list_postfix = "queue_name -d" 
+
+# Extended
+sm_cmd_opt:
+	id_seq_num = "005"
+	id = "ps_chpq_attach_qnameOpt"
+	disc_field_name = "queue_name"
+	name = "Print queue name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 126 
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-q "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810091"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_chpq_attachOpt"
+	disc_field_name = ""
+	name = "Characteristic to Change / Show"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 7 
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/bin/dspmsg -s 1 piosmit.cat 3 '1 Printer Setup\n'
+	/usr/bin/dspmsg -s 1 piosmit.cat 4 '2 Default Print Job Attributes\n'
+	/usr/bin/dspmsg -s 1 piosmit.cat 5 '3 Accounting File\n'
+	/usr/bin/dspmsg -s 1 piosmit.cat 6 '4 Queuing Discipline\n'
+	"
+	help_msg_id = "1810200"
+
+sm_cmd_hdr:
+	id = "ps_chpq_attach_accountCmdHdr"
+	option_id = "ps_chpq_attach_qnameOpt,ps_chpq_attach_accountOpt"
+	has_name_select = "y"
+	name = "Change / Show Accounting File Name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 4
+	cmd_to_exec = "/usr/bin/chque"
+	ask = "n"
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "/usr/bin/lsque -c -q"
+	cmd_to_discover_postfix = "queue_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1810002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "015"
+	id = "ps_chpq_attach_accountOpt"
+	disc_field_name = "acctfile"
+	name = "ACCOUNTING FILE name\n  (full path name of an existing file)\n\nNote: The accounting file specified applies to\n      all printers on this print queue."
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 7
+	op_type = ""
+	entry_type = "f"
+	entry_size = 0
+	required = "+"
+	prefix = "-a\"acctfile = \""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810203"
+
+sm_cmd_hdr:
+	id = "ps_chpq_attach_disciplineCmdHdr"
+	option_id = "ps_chpq_attach_qnameOpt,ps_chpq_attach_disciplineOpt"
+	has_name_select = "y"
+	name = "Change / Show Queuing Discipline"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 5
+	cmd_to_exec = "/usr/bin/chque"
+	ask = "n"
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "/usr/bin/lsque -c -q"
+	cmd_to_discover_postfix = "queue_name"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1810003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "015"
+	id = "ps_chpq_attach_disciplineOpt"
+	disc_field_name = "discipline"
+	name = "Queuing DISCIPLINE\n\nNote: The queuing discipline specified applies\n      to all printers on this print queue."
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 8
+	op_type = "r"
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-a\"discipline = \""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "first come first serve,shortest job next"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 55 
+	aix_values = "fcfs,sjn"
+	help_msg_id = "1810204"
+
+sm_cmd_opt:
+	id_seq_num = "007"
+	id = "ps_chpq_attach_remoteCmdHdrOpt"
+	disc_field_name = "queue_device"
+	name = "Printer name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 22 
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810087"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+# sm_cmd_opt labelled SKIP may be added to Change/Show
+# Remote queue later. (3 options)
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "SKIP_ps_chpq_attach_remoteCmdHdrOpt"
+	disc_field_name = ""
+	name = "HOST NAME of remote server"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 58 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-a\"host = \""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "078109"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "SKIP_ps_chpq_attach_remoteCmdHdrOpt"
+	disc_field_name = ""
+	name = "TYPE of print spooler on remote server"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 107 
+	op_type = "r"
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "AIX Version 3 or 4,AIX Version 2 (RT PC),AT&T,BSD"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 108 
+	aix_values = ""
+	help_msg_id = "078109"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "SKIP_ps_chpq_attach_remoteCmdHdrOpt"
+	disc_field_name = ""
+	name = "Name of QUEUE on remote server"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 69 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-a\"rq = \""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "078112"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "ps_chpq_attach_remoteCmdHdrOpt"
+	disc_field_name = "mL"
+	name = "DESCRIPTION of printer on remote server\n"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 109 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a\"mL=\""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	help_msg_id = "1810182"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###############################################################
+# Change / Show Print Queue fixed options
+###############################################################
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_chpq_fixed"
+        disc_field_name = "queue_name"
+	name = "Print queue name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 126 
+        op_type = ""
+        entry_type = "n"
+        entry_size = 0
+        required = "y"
+        prefix = "-q "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810091"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "1"
+        id = "ps_chpq_fixed"
+        disc_field_name = "queue_device"
+	name = "Printer name\n"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 9
+        op_type = ""
+        entry_type = "n"
+        entry_size = 0
+        required = "y"
+        prefix = "-d "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810221"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+
+
+
+
+# spooler.chprinter.extended
+#EXT
+sm_name_hdr:
+	id = "ps_chprinter_attachName"
+	next_id = ""
+	option_id = "ps_chprinter_attachOpt"
+	has_name_select = "y"
+	name = "Printer to Change / Show"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 10 
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x { print `/usr/lib/lpd/pio/etc/piolsvp -N $1 -n printer_conn 2>/dev/null`
+	}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "n"
+
+sm_name_hdr:
+	id = "ps_chprinter_xstaName"
+	next_id = "ps_chprinter_xstaCmdHdr"
+	option_id = "ps_chprinter_xstaNameOpt"
+	has_name_select = "y"
+	name = "Printer to Change / Show"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 10 
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "print $1"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "xsta_printer"
+	next_type = "d"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_chprinter_attachOpt"
+	disc_field_name = ""
+	name = "Change / Show Printer Connection Characteristics"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 11 
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/lib/lpd/pio/etc/piolsvp -A -n printer_conn 2>/dev/null"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810195"
+	help_msg_loc = ""
+	help_msg_base = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_chprinter_xstaNameOpt"
+	disc_field_name = ""
+	name = "Xstation Printers"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 10
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "/usr/bin/ls -1 /var/spool/lpd/pio/@local/dev/s*#xstation 2>/dev/null | /usr/bin/sed -e 's/.*\\///' -e 's/#xstation$//'"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810097"
+	help_msg_loc = ""
+	help_msg_base = ""
+
+##############################################################
+#   Change xstation pseudo device characteristics dialog
+##############################################################
+sm_cmd_hdr:
+	id = "ps_chprinter_xstaCmdHdr"
+	option_id = "ps_chprinter_xstaCmdHdrOpt"
+	has_name_select = "y"
+	name = "Change / Show Printer Connection Characteristics"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 11 
+	cmd_to_exec = "/usr/lib/lpd/pio/etc/piomgpdev -t xstation -C"
+	ask = ""
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "/usr/lib/lpd/pio/etc/piomgpdev -t xstation -D -a speed -a parity -a bpc -a stops -a interface -a port -a xstation -p"
+	cmd_to_discover_postfix = "xsta_printer"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1810065"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "ps_chprinter_xstaCmdHdrOpt"
+	disc_field_name = "xstation"
+	name = "Xstation name"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 11
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810098"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "ps_chprinter_xstaCmdHdrOpt"
+	disc_field_name = "xsta_printer"
+	name = "Printer name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 22 
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-p "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810199"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "ps_chprinter_xstaCmdHdrOpt"
+	disc_field_name = "interface"
+	name = "Printer interface"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 12
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810207"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "ps_chprinter_xstaCmdHdrOpt"
+	disc_field_name = "port"
+	name = "Port number\n"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 13
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810211"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "60"
+        id = "ps_chprinter_xstaCmdHdrOpt"
+        disc_field_name = "speed"
+	name = "BAUD rate"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 13 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = "-a\"speed=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 7
+	disp_values = "110,150,300,600,1200,2400,4800,9600,19200,38400"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = "110,150,300,600,1200,2400,4800,9600,19200,38400"
+	help_msg_id = "0420111"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "70"
+        id = "ps_chprinter_xstaCmdHdrOpt"
+        disc_field_name = "parity"
+	name = "PARITY"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 14 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "n"
+        prefix = "-a\"parity=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+	disp_values = "none,odd,even,stuck odd,stuck even"
+	values_msg_file = "piosmit.cat"
+	values_msg_set = 1
+	values_msg_id = 15
+        aix_values = "none,odd,even,stuck odd,stuck even"
+	help_msg_id = "0420112"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "80"
+        id = "ps_chprinter_xstaCmdHdrOpt"
+        disc_field_name = "bpc"
+	name = "BITS per character"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 15 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "n"
+        prefix = "-a\"bpc=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 3
+	disp_values = "5,6,7,8"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = "5,6,7,8"
+	help_msg_id = "0420113"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "90"
+        id = "ps_chprinter_xstaCmdHdrOpt"
+        disc_field_name = "stops"
+	name = "Number of STOP BITS"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 16 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "n"
+        prefix = "-a\"stops=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+	disp_values = "1,2"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = "1,2"
+	help_msg_id = "0420114"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+
+
+
+
+# spooler.lsvirprt.extended
+#EXT
+###############################################################
+# Change / Show Printer Attribute Database
+###############################################################
+sm_name_hdr:
+	id = "ps_lsvirprt"
+	next_id = "ps_lsvirprtCmdHdr"
+	option_id = "ps_lsvirprtOpt"
+	has_name_select = "n"
+	name = "Change / Show Printer Attribute Database"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 26
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "function x { 
+		/usr/lib/lpd/pio/etc/piodmgrsu >/dev/null 2>&1
+		print \"$1\" | /usr/bin/awk '{print $1\":\"$2}'
+	}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "queue_name:queue_device"
+	next_type = "d"
+
+# Extended
+sm_cmd_hdr:
+	id = "ps_lsvirprtCmdHdr"
+	option_id = "ps_lsvirprtCmdHdrOpt"
+	has_name_select = "y"
+	name = "Change / Show Printer Attribute Database (Virtual Printers)"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	cmd_to_exec = "/usr/sbin/lsvirprt -i"
+	ask = ""
+	exec_mode = "I"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_lsvirprtCmdHdrOpt"
+	disc_field_name = "queue_name"
+	name = "Change / Show Printer Attribute Database"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 26 
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "+"
+	prefix = "-q "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+
+sm_cmd_opt:
+	id_seq_num = "1"
+	id = "ps_lsvirprtCmdHdrOpt"
+	disc_field_name = "queue_device"
+	name = "Change / Show Printer Attribute Database"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 26 
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "+"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_lsvirprtOpt"
+	disc_field_name = ""
+	name = "Change / Show Printer Attribute Database"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 26 
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "/usr/lib/lpd/pio/etc/piolsvp -v 2>/dev/null"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810112"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+
+
+
+# spooler.menus.extended
+#EXT
+sm_menu_opt:
+	id_seq_num = "010.cmdpios"
+	id = "pqtools"
+	next_id = "ps_lsvirprt"
+	text = "Change / Show Printer Attribute Database (Virtual Printers)"
+	text_msg_file = "piosmit.cat"
+	text_msg_set = 1
+	text_msg_id = 27 
+	next_type = "n"
+	alias = ""
+	help_msg_id = "1810112"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "020.cmdpios"
+	id = "pqtools"
+	next_id = "pqfilters"
+	text = "Change / Show Pre-processing Filters"
+	text_msg_file = "piosmit.cat"
+	text_msg_set = 1
+	text_msg_id = 28
+	next_type = "n"
+	alias = ""
+	help_msg_id = "1810113"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+
+
+
+# spooler.mkpq.extended
+#EXT
+#*******************************************************************
+#	Attachment type selector for Add a Print Queue
+#*******************************************************************
+sm_name_hdr:
+        id = "ps_mkpq_attachName"
+        next_id = ""
+        option_id = "ps_prt_attach_opt"
+	has_name_select = "n"
+	name = "Attachment Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 29
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x { 
+	case \"$1\" in
+	other)	cookedname='ps_mkpq_base_attach_user-defined_ghostName'
+		;;
+	*)	cookedname=$(/usr/lib/lpd/pio/etc/piolsvp -N $1 -n add_queue 2>/dev/null)
+		if [[ $? -ne 0 ]]   
+		then
+			cookedname='ptr_to_config_attachment_dialog'
+	       	else
+			cookedname=${cookedname%%*( |	)}  
+			cookedname=${cookedname##*( |	)}
+			if [[ -z $cookedname ]]
+			then
+				cookedname='ps_mkpq_base_attach_user-defined_ghostName'
+			fi
+		 fi
+		;;
+	esac
+	print $cookedname:$1:::::::::::::::\n\
+	}; x"
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name = ""
+        cooked_field_name = "cookedname:ps_attach:ps_ptype:ps_dtype:ps_device:ps_subclass:ps_parent:ps_xstation:ps_xtype:ps_xport:ps_tty:ps_file:ps_exec_cmd:ps_disc_cmd:ps_prt_comm:ps_error_msg:ps_title"
+        next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_prt_attach_opt"
+        disc_field_name = ""
+	name = "Add a Print Queue"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 104 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = "/usr/lib/lpd/pio/etc/piolsvp -A 2>/dev/null"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+#	help_msg_id = "1800226"  xxx Old xxx
+	help_msg_id = "1810195"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#	Attachment type selector for Add an Additional Printer
+#*******************************************************************
+sm_name_hdr:
+        id = "ps_mkpqprt_attachName"
+        next_id = ""
+        option_id = "ps_mkpqprt_attach_opt"
+        has_name_select = "n"
+	name = "Attachment Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 29 
+        type = "c"
+        ghost = "y"
+        cmd_to_classify = "function x { 
+	case \"$1\" in
+	other)	cookedname='ps_mkpq_base_attach_user-defined_ghostName'
+		;;
+	*)	cookedname=$(/usr/lib/lpd/pio/etc/piolsvp -N $1 -n add_printer 2>/dev/null)
+		cookedname=${cookedname%%*( |	)}  
+		cookedname=${cookedname##*( |	)}
+		;;
+	esac
+	print $cookedname:$1::::::::::::::\n\
+	}; x"
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name = ""
+        cooked_field_name = "cookedname:ps_attach:ps_ptype:ps_dtype:ps_device:ps_subclass:ps_parent:ps_xstation:ps_xtype:ps_xport:ps_tty:ps_file:ps_exec_cmd:ps_disc_cmd:ps_prt_comm:ps_title"
+        next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpqprt_attach_opt"
+        disc_field_name = ""
+	name = "Add an Additional Printer to an Existing Print Queue"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 30
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = "/usr/lib/lpd/pio/etc/piolsvp -A -n add_printer 2>/dev/null
+	print \"  other                \"$(/usr/bin/dspmsg -s 1 piosmit.cat 31 'User Defined Backend')
+	"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810031"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   printer manufacturer selector
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_makprt_prt"
+	next_id = "ps_mkpq_prt_predef"
+	option_id = "ps_prt_manufacturer_opt"
+	has_name_select = "n"
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	otherstr=$(/usr/bin/dspmsg piobe.cat -s 8 1 'Other (Select this if your printer type is not listed above)')
+	if [[ \"$otherstr\" = \"$1\" ]]  # see if they selected 'other'
+	then 
+		manuf='+++OTHER+++'
+	else
+		manuf=\"$1\"
+	fi
+	print \"$manuf\"
+	}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "ps_manuf"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_prt_manufacturer_opt"
+        disc_field_name = ""
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = "" 
+        prefix = ""
+        cmd_to_list_mode = "a"
+        cmd_to_list = "/usr/lib/lpd/pio/etc/piolspt -m"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810171"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   Predefined printer selector
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_prt_predef"
+	next_id = ""
+	option_id = "ps_prt_predef_opt"
+	has_name_select = "n"
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	otherstr=$(/usr/bin/dspmsg piobe.cat -s 8 1 'Other (Select this if your printer type is not listed above)')
+	if [[ \"$otherstr\" = \"$1\" ]]  # see if they selected 'other'
+	then 
+		# branch back to this selector with ps_manuf=+++OTHER+++
+		print 'ps_mkpq_prt_predef:+++OTHER+++::::'
+		exit 0;   
+	fi
+	# they selected one of the printer types
+	description=$(print ${1#* })   # strip off leading spaces
+	predef=${1%% *}
+	dtype=$predef
+	device_found=$(/usr/sbin/lsdev -P -c printer -t $predef) 
+	predef_found=$(/usr/bin/ls -1 /usr/lib/lpd/pio/predef/$predef.* 2>/dev/null)
+	if [[ -z $device_found && -z $predef_found ]] 
+	then
+		package=$(/usr/bin/egrep -p \"^[ 	]*type[ 	]*=[ 	]*$predef\" /usr/lib/lpd/pio/etc/printers.inv | /usr/bin/awk '$1 == \"package\" { print $3 }')
+		print \"ps_mkpq_prt_notinstalled:::::$package\"
+		exit 0
+	fi
+	if [[ -z $predef_found ]] 
+	then
+		ptype='generic'  # No predef file found for this type
+	else
+		ptype=$predef
+	fi
+	case \"$2\" in 
+	local)  if [[ -z $device_found ]]
+	        then    # no device for this type
+			# (therefore, a predef type has been found)
+	        	dtype='osp_opp'   # will be osp or opp
+			if [[ -z $(/usr/sbin/lsdev -C -c printer -t osp) && -z $(/usr/sbin/lsdev -C -c printer -t opp) ]]
+			then
+				cookedname=ps_mkpq_osp_opp_subclass
+			else
+				cookedname=ps_mkpq_exist_dev
+			fi
+		else
+			if [[ -z $(/usr/sbin/lsdev -C -c printer -t $dtype) ]]
+			then
+				cookedname=ps_mkpq_subclass
+			else
+				cookedname=ps_mkpq_exist_dev
+			fi
+		fi
+		print \"$cookedname::$dtype:$description:$ptype:\"
+	;;
+	# For xstation, ascii, file: ptype is used in place
+	# of dtype.  Not a typo.
+	xstation)  print \"ps_mkpq_attach_xsta_nameName::$ptype:$description:$ptype:\"
+	;;
+	ascii)	if [[ -n $(/usr/sbin/lsdev -Cctty) ]]
+		then print \"ps_mkpq_attach_ascii_ttynameName::$ptype:$description:$ptype:\"
+		else print \"ps_error_ghostName:::::$(/usr/bin/dspmsg -s 1 piosmit.cat 117 'There are no TTYs defined in the system!\\0134\\0134nAfter you add a TTY for the ASCII terminal to which the printer is connected,\\0134\\0134nthen you will be able to add a print queue for the printer.\n')\"
+		fi
+	;;
+	file)  print \"ps_mkpq_attach_file_nameName::$ptype:$description:$ptype:\"
+	;;
+	*)  print \"ps_error_ghostName:::::$(/usr/bin/dspmsg -s 1 piosmit.cat 90 'Unrecognized attachment type.\n')\"
+	;;
+	esac
+	}; x "
+	cmd_to_classify_postfix = "_rawname ps_attach"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:ps_manuf:ps_dtype:ps_description:ps_ptype:ps_error_msg"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_prt_predef_opt"
+        disc_field_name = ""
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = "a"
+        cmd_to_list = "function x {
+		/usr/lib/lpd/pio/etc/piolspt -t -A \"$2\" \"$1\"
+	}; x"
+        cmd_to_list_postfix = "ps_manuf ps_attach"
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810173"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   selector for existing devices 
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_exist_dev"
+	next_id = "ps_"
+	option_id = "ps_prt_exist_opt"
+	has_name_select = "n"
+	name = "Printer"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 3 
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x
+{
+	if [[ \"$2\" != \"osp_opp\" ]]
+	then
+		/usr/sbin/lsdev -C -c printer -t $2 | /usr/bin/grep -q $1
+		if [[ \"$?\" = \"0\" ]]
+		then
+			print \"build_dialog:$1\"
+		else
+			print \"mkpq_subclass:\"
+		fi
+	else
+		{ /usr/sbin/lsdev -C -c printer -t osp; /usr/sbin/lsdev -C -c printer -t opp; } | /usr/bin/grep -q $1
+		if [[ \"$?\" = \"0\" ]]
+		then
+			print \"build_dialog:$1\"
+		else
+			print \"mkpq_osp_opp_subclass:\"
+		fi
+	fi
+}; x"
+	cmd_to_classify_postfix = "_rawname ps_dtype"
+	raw_field_name = ""
+	cooked_field_name = "nextid:ps_device"
+	next_type = "n"
+ 
+sm_cmd_opt:
+ 	id = "ps_prt_exist_opt"
+ 	id_seq_num = "0"
+ 	disc_field_name = ""
+	name = "Printer"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 3
+ 	op_type = "l"
+ 	entry_type = "t"
+ 	entry_size = 0
+ 	required = "y"
+ 	prefix = ""
+ 	cmd_to_list_mode = "1"
+	cmd_to_list = "	function x {
+ 		print \"# \"
+		/usr/bin/dspmsg -s 1 piosmit.cat 33 '#   Add new printer or select\n'
+		/usr/bin/dspmsg -s 1 piosmit.cat 34 '#   existing printer below\n'
+ 		print \"#  ----------------------------------\"
+		/usr/bin/dspmsg -s 1 piosmit.cat 35 ' +      Add NEW Printer\n'
+		if [[ \"$1\" = \"osp_opp\" ]]
+		then
+			{ /usr/sbin/lsdev -C -c printer -t osp; /usr/sbin/lsdev -C -c printer -t opp; } | /usr/bin/cut -f1 -d' '
+		else
+ 			for device in $(/usr/sbin/lsdev -C -c printer -t $1 | /usr/bin/cut -f1 -d' ')
+			do
+				print \"$device     $2\"
+			done
+		fi
+	}; x "
+ 	cmd_to_list_postfix = "ps_dtype ps_description"
+ 	multi_select = ""
+  	value_index = 0
+  	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+  	aix_values = ""
+	help_msg_id = "1810174"
+  	help_msg_loc = ""
+  	help_msg_base = ""
+  	help_msg_book = ""
+
+#*******************************************************************
+#   subclass selector for Add a Print Queue (local attachment)
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_subclass"
+	next_id = "ps_makprt_parent"
+	option_id = "ps_prt_predef_class_opt"
+	has_name_select = "n"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "print"
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "ps_subclass"
+	next_type = "n"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_prt_predef_class_opt"
+	disc_field_name = ""
+	name = "Printer Interface"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 32 
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "a"
+	cmd_to_list = "	prt_type ()\n\
+	{\n\
+		/usr/sbin/lsdev -P -c printer -t \"$1\" -F subclass | 		sort -u\n\
+	}\n\
+	prt_type "
+	cmd_to_list_postfix = "ps_dtype"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810196"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#*******************************************************************
+#   subclass selector for osp and opp types
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_osp_opp_subclass"
+	next_id = "ps_makprt_parent"
+	option_id = "ps_prt_osp_opp_subclass_opt"
+	has_name_select = "n"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "function x {
+			/usr/sbin/lsdev -P -c printer -t osp  -F subclass | /usr/bin/grep -q $1
+			if [[ \"$?\" = 0 ]] 
+			then
+				print $1:osp
+			else
+				print $1:opp	
+			fi
+}; x"
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "ps_subclass:ps_dtype"
+	next_type = "n"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_prt_osp_opp_subclass_opt"
+	disc_field_name = ""
+	name = "Printer Interface"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 32 
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "a"
+	cmd_to_list = "	prt_type ()\n\
+	{\n\
+			/usr/sbin/lsdev -P -c printer -t opp  -F subclass | sort -u\n\
+			/usr/sbin/lsdev -P -c printer -t osp  -F subclass | sort -u\n\
+	}\n\
+	prt_type "
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04206"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#*******************************************************************
+#   parent adapter for Add a Print Queue (local attachment)
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_makprt_parent"
+	next_id = "ps_build_dialog"
+	option_id = "ps_makprt_parent_opt"
+	has_name_select = "y"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "ps_parent"
+	cooked_field_name = ""
+	next_type = "n"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_makprt_parent_opt"
+	disc_field_name = ""
+	name = "Parent Adapter"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 36
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/sbin/lsparent -C "
+	cmd_to_list_postfix = "-k ps_subclass"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810197"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+        id = "ps_build_dialog"
+        next_id = "#/var/spool/lpd/pio/@local/smit#ps_apqd_hdr"
+        option_id = "ps_build_dialog_opt"
+        has_name_select = "n"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+        type = ""
+        ghost = "y"
+        cmd_to_classify = "/usr/lib/lpd/pio/etc/piomkapqd"
+        cmd_to_classify_postfix = "-A ps_attach -p ps_ptype -v ps_dtype -d ps_device -s ps_subclass -r ps_parent -x ps_xstation -t ps_xtype -P ps_xport -T ps_tty -f ps_file -c ps_exec_cmd -i ps_disc_cmd -o ps_prt_comm -h ps_title ps_existing"
+        raw_field_name = ""
+        cooked_field_name = ""
+        next_type = "d"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_build_dialog_opt"
+        disc_field_name = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+
+#*******************************************************************
+#   xstation name selector for Add a Print Queue
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_attach_xsta_nameName"
+	next_id = "ps_mkpq_attach_xsta_type"
+	option_id = "ps_mkpq_attach_xsta_nameNameOpt"
+	has_name_select = "n"
+	name = "Xstation NAME"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 37
+	type = "j"
+	ghost = "n"
+	cmd_to_classify = ""
+	raw_field_name = "ps_xstation"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "1810165"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_attach_xsta_nameNameOpt"
+        disc_field_name = ""
+	name = "Xstation NAME"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 37 
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = "
+	if [ -r /usr/lpp/x_st_mgr/bin/x_st_mgrd.tmty ] 
+	then 
+		/usr/bin/sed -n 's/^\\(.*\\):.*$/\\1/p' /usr/lpp/x_st_mgr/bin/x_st_mgrd.tmty
+	fi
+	"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810172"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+# Xstation type selector for Add a Print Queue 
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_attach_xsta_type"
+	next_id = "ps_mkpq_attach_xsta_portName"
+	option_id = "ps_mkpq_attach_xsta_portOpt"
+	has_name_select = "n"
+	name = "Xstation Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 14
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = ""
+	raw_field_name = "ps_xtype"
+	cooked_field_name = ""
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_attach_xsta_portOpt"
+        disc_field_name = ""
+	name = "Xstation Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 14 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = "2"
+        cmd_to_list = "function x {
+		print "Xstation 120"
+		print "Xstation 130"
+		print "Xstation 140"
+		print "Xstation 150"
+		print "Xstation 160"
+	}; x"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810160"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+# Xstation printer interface and port selector for Add a Print Queue 
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_attach_xsta_portName"
+	next_id = "ps_build_dialog"
+	option_id = "ps_mkpq_attach_xsta_portNameOpt"
+	has_name_select = "n"
+	name = "Port Name"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 38
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "function x {
+		typeset pdevnm=\"$1@$2#xstation\"
+		if [[ -f \"/var/spool/lpd/pio/@local/dev/$pdevnm\" ]]	
+		then
+			print $1:$1@$2
+		else
+			print $1:
+		fi
+}; x"
+	cmd_to_classify_postfix = "_rawname ps_xstation"
+	raw_field_name = ""
+	cooked_field_name = "ps_xport:ps_device"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_attach_xsta_portNameOpt"
+        disc_field_name = ""
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = "function x { case $1 in
+		120) /usr/bin/dspmsg -s 1 piosmit.cat 39 'p  Parallel\n'
+		     /usr/bin/dspmsg -s 1 piosmit.cat 40 's  Serial Port\n'
+		;;
+		130) /usr/bin/dspmsg -s 1 piosmit.cat 39  'p  Parallel\n'
+		     /usr/bin/dspmsg -s 1 piosmit.cat 41 's0 Serial Port 0\n'
+		     /usr/bin/dspmsg -s 1 piosmit.cat 42 's1 Serial Port 1\n'
+		     /usr/bin/dspmsg -s 1 piosmit.cat 43 's2 Serial Port 2\n'
+		     /usr/bin/dspmsg -s 1 piosmit.cat 44 's3 Serial Port 3\n'
+		;;
+		140|150|160) /usr/bin/dspmsg -s 1 piosmit.cat 39 'p  Parallel\n'
+		     /usr/bin/dspmsg -s 1 piosmit.cat 41  's0 Serial Port 0\n'
+		     /usr/bin/dspmsg -s 1 piosmit.cat 42  's1 Serial Port 1\n'
+		;;
+		*) /usr/bin/dspmsg -s 1 piosmit.cat 45 'Unsupported Xstation type\n'
+		;;
+		esac
+		}; x"
+        cmd_to_list_postfix = "ps_xtype"
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "822077"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   TTY name selector for Add a Print Queue (ASCII)
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_attach_ascii_ttynameName"
+	next_id = "ps_build_dialog"
+	option_id = "ps_mkpq_attach_ascii_ttynameNameOpt"
+	has_name_select = "n"
+	name = "TTY Name"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 46
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "function x {
+		print $1:$1
+}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "ps_tty:ps_device"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_attach_ascii_ttynameNameOpt"
+        disc_field_name = ""
+	name = "TTY Name"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 46 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = "+"
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = "/usr/sbin/lsdev -C -c tty"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810120"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   File name selector for Add a Print Queue (File)
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_attach_file_nameName"
+	next_id = "ps_build_dialog"
+	option_id = "ps_mkpq_attach_file_nameNameOpt"
+	has_name_select = "n"
+	name = "File Name"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 47
+	type = "j"
+	ghost = "n"
+	cmd_to_classify = "function x {
+	print ${1##*/}:${1##*/}
+	}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "ps_file:ps_device"
+	next_type = "n"
+	help_msg_id = "1810163"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_attach_file_nameNameOpt"
+        disc_field_name = ""
+	name = "Name of existing FILE in /dev directory"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 48
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810121"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+# Super-ghost selector that branches to the dialog that runs
+# .config files
+#*******************************************************************
+sm_name_hdr:
+	id = "ptr_to_config_attachment_dialog"
+	next_id = "ps_run_config_dialog"
+	option_id = "ps_config_opt"
+	has_name_select = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_config_opt"
+        disc_field_name = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+
+#*******************************************************************
+#  Dialog that runs the .config files 
+#*******************************************************************
+sm_cmd_hdr:
+        id = "ps_run_config_dialog"
+        option_id = "ps_run_config_opt"
+        has_name_select = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+        cmd_to_exec = "PIOSMIT=1; export PIOSMIT; /usr/sbin/mkvirprt"
+        ask = ""
+        exec_mode = "I"
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_run_config_opt"
+        disc_field_name = "ps_attach"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = "-A "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+
+# Fixed options for dialog builder
+#****************************************************************
+#    display options for printer description and printer name
+#****************************************************************
+sm_cmd_opt:
+	id_seq_num = "1000"
+	id = "ps_apqd_desc"
+	disc_field_name = "ps_description"
+	name = "Description"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 24 
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810217"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "1010"
+	id = "ps_apqd_printer"
+	disc_field_name = "ps_device"
+	name = "Printer name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 22 
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810199"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#****************************************************************
+#          prompts/headings for new/existing print queue names
+#****************************************************************
+sm_cmd_opt:
+	id_seq_num = "3000"
+	id = "ps_apqd_qnames"
+	disc_field_name = ""
+	name = "Names of NEW print queues to add"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 49
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810128"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "2000"
+	id = "ps_apqd_existing"
+	disc_field_name = ""
+	name = "EXISTING print queues for this printer"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 50
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810129"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#****************************************************************
+#          options for blank spacing in the dialog
+#****************************************************************
+sm_cmd_opt:
+	id_seq_num = "1999"
+	id = "ps_apqd_desc"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "2999"
+	id = "ps_apqd_existing"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "2999"
+        id = "ps_apqd_spacer"
+        disc_field_name = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "3999"
+	id = "ps_apqd_common_prt"
+	disc_field_name = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#****************************************************************
+#          local serial/parallel connection parameters
+#****************************************************************
+sm_cmd_opt:
+        id_seq_num = "4000"
+        id = "ps_apqd_common_prt"
+        disc_field_name = ""
+	name = "Printer connection characteristics"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 51
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810134"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "4010"
+	id = "ps_apqd_common_prt"
+	disc_field_name = "portno"
+	name = "   PORT number"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 52
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-w "
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/sbin/lsconn"
+	cmd_to_list_postfix = "-p ps_parent -k ps_subclass"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420110"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "4020"
+	id = "ps_apqd_serial"
+	disc_field_name = "speed"
+	name = "   BAUD rate"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 53
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a\"speed=\""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/sbin/lsattr -c printer -a speed -R"
+	cmd_to_list_postfix = "-s ps_subclass -t ps_dtype"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420111"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "4025"
+	id = "ps_apqd_serial"
+	disc_field_name = "parity"
+	name = "   PARITY"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 54
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a\"parity=\""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/sbin/lsattr -c printer -a parity -R"
+	cmd_to_list_postfix = "-s ps_subclass -t ps_dtype"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420112"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "4030"
+	id = "ps_apqd_serial"
+	disc_field_name = "bpc"
+	name = "   BITS per character"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 55
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a\"bpc=\""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/sbin/lsattr -c printer -a bpc -R"
+	cmd_to_list_postfix = "-s ps_subclass -t ps_dtype"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420113"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "4035"
+	id = "ps_apqd_serial"
+	disc_field_name = "stops"
+	name = "   Number of STOP BITS"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a\"stops=\""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/sbin/lsattr -c printer -a stops -R"
+	cmd_to_list_postfix = "-s ps_subclass -t ps_dtype"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420114"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num                = "4040"
+	id                        = "ps_apqd_serial"
+	disc_field_name           = "flow_disp"
+	name                      = "   FLOW CONTROL to be used"
+	name_msg_file             = "piosmit.cat"
+	name_msg_set              = 1
+	name_msg_id               = 114
+	op_type                   = "l"
+	entry_type                = "t"
+	entry_size                = 0
+	required                  = "n"
+	prefix                    = "-a flow_disp="
+	cmd_to_list_mode          = ""
+	cmd_to_list               = "/usr/sbin/lsattr -c printer -a flow_disp -R"
+	cmd_to_list_postfix       = "-s ps_subclass -t ps_dtype"
+	multi_select              = "n"
+	value_index               = 0
+	disp_values               = ""
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "1821004"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id_seq_num = "4020"
+	id = "ps_apqd_parallel"
+	disc_field_name = "interface"
+	name = "   Type of PARALLEL INTERFACE"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 60
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = ""
+	prefix = "-a\"interface=\""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "/usr/sbin/lsattr -c printer -a interface -R"
+	cmd_to_list_postfix = "-s ps_subclass -t ps_dtype"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420130"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "4050"
+	id = "ps_apqd_common_prt"
+	disc_field_name = "ptop"
+	name = "   Printer TIME OUT period (seconds)"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 61
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = ""
+	prefix = "-a\"ptop=\""
+	cmd_to_list_mode = "r"
+	cmd_to_list = "/usr/sbin/lsattr -c printer -a ptop -R"
+	cmd_to_list_postfix = "-s ps_subclass -t ps_dtype"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420115"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "4060"
+	id = "ps_apqd_common_prt"
+	disc_field_name = "autoconfig"
+	name = "   STATE to be configured at boot time"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 62
+#	op_type = "l"
+#	entry_type = "t"
+#	entry_size = 0
+#	required = "n"
+#	prefix = "-a\"autoconfig=\""
+#	cmd_to_list_mode = "1"
+#	cmd_to_list = "/usr/sbin/lsattr -c printer -a autoconfig -R"
+#	cmd_to_list_postfix = "-s ps_subclass -t ps_dtype"
+#	multi_select = ""
+#	value_index = 0
+#	disp_values = ""
+#	values_msg_file = ""
+#	values_msg_set = 0
+#	values_msg_id = 0
+#	aix_values = ""
+	op_type                   = "r"
+	entry_type                = "n"
+	entry_size                = 0
+	required                  = "n"
+	prefix			  = "-a\"autoconfig=\""
+	cmd_to_list_mode          = ""
+	cmd_to_list               = ""
+	cmd_to_list_postfix       = ""
+	multi_select              = "n"
+	value_index               = 0
+	disp_values               = "available,defined"
+	values_msg_file           = "smit.cat"
+	values_msg_set            = 27  
+	values_msg_id             = 21 
+	aix_values                = "available,defined"
+	help_msg_id = "0420132"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#*********************************************************************
+#             Xstation connection parameters
+#*********************************************************************
+sm_cmd_opt:
+        id_seq_num = "4000"
+        id = "ps_apqd_xstation"
+        disc_field_name = ""
+	name = "\nPrinter connection characteristics"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 63
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810134"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "4010"
+        id = "ps_apqd_xstation"
+        disc_field_name = ""
+	name = "   BAUD rate"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 53 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = "-a\"speed=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 7
+	disp_values = "110,150,300,600,1200,2400,4800,9600,19200,38400"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0 
+        aix_values = ""
+	help_msg_id = "0420111"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "4020"
+        id = "ps_apqd_xstation"
+        disc_field_name = ""
+	name = "   PARITY"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 54 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = "-a\"parity=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+	disp_values = "none,odd,even,stuck odd,stuck even"
+	values_msg_file = "piosmit.cat"
+	values_msg_set = 1
+	values_msg_id = 15 
+        aix_values = ""
+	help_msg_id = "0420112"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "4030"
+        id = "ps_apqd_xstation"
+        disc_field_name = ""
+	name = "   BITS per character"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 55 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = "-a\"bpc=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 3
+	disp_values = "5,6,7,8"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0 
+        aix_values = ""
+	help_msg_id = "0420113"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "4040"
+        id = "ps_apqd_xstation"
+        disc_field_name = ""
+	name = "   Number of STOP BITS"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 56 
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = "-a\"stops=\""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+	disp_values = "1,2"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0 
+        aix_values = ""
+	help_msg_id = "0420114"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*********************************************************************
+#   prompts for adding an additional printer to an existing queue
+#*********************************************************************
+sm_cmd_opt:
+        id_seq_num = "3000"
+        id = "ps_apqd_additional"
+        disc_field_name = ""
+	name = "Name of existing PRINT QUEUE"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 64
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 41
+        required = "+"
+        prefix = "-Q "
+        cmd_to_list_mode = "1"
+        cmd_to_list = "/usr/lib/lpd/pio/etc/piolsvp -Q"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810140"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "3010"
+        id = "ps_apqd_mode"
+        disc_field_name = ""
+	name = "Printer LANGUAGE"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 65
+        op_type = "l"
+        entry_type = "n"
+        entry_size = 0
+        required = "+"
+        prefix = "-D "
+        cmd_to_list_mode = "1"
+        cmd_to_list = "function x {\n\
+for i in $(/usr/bin/ls -1 /usr/lib/lpd/pio/predef/$1.*)\n\
+do\n\
+	print \"${i##*.}\t$(/usr/bin/grep :mA: $i | /usr/bin/cut -f5 -d':')\"\n\
+done\n\
+}; x"
+        cmd_to_list_postfix = "ps_ptype"
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810141"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*********************************************************************
+#   Selector for local formatting prompt for remote mkpq
+#*********************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_attach_remoteName"
+	next_id = ""
+	option_id = "ps_mkpq_attach_remoteNameOpt"
+	has_name_select = "n"
+	name = "Remote Printing Style"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 89
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function remote_type { 
+		# Default messages (and message numbers) must 
+		# match those in the corresponding cmd_to_list.
+		case \"$1\" in
+		$(/usr/bin/dspmsg -s 1 piosmit.cat 97 'Standard processing\n')) next=ps_mkpq_base_attach_standard_remote_ghostName
+			attach_type=\"remote.remote\"
+		;;	
+		$(/usr/bin/dspmsg -s 1 piosmit.cat 99 'Standard with NFS access to server print queue attributes\n')) next=ps_mkpq_nfs_attach_remote_ghostName
+			attach_type=\"remote.nfs\"
+		;;
+		$(/usr/bin/dspmsg -s 1 piosmit.cat 98 'Local filtering before sending to print server\n')) next=ps_mkpq_remote_local_manufName
+			attach_type=\"remote\"
+		;;
+		*) next=ps_mkpq_base_attach_standard_remote_ghostName
+			attach_type=\"remote.remote\"
+		;;	
+		esac
+		next=${next%%*( |        )}; next=${next##*( |	)}
+		print \"$next:$attach_type\"
+	}; remote_type"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:ps_attach"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_attach_remoteNameOpt"
+        disc_field_name = ""
+	name = "Type of Remote Printing"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 89 
+        op_type = "r"
+        entry_type = "n"
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = "
+		/usr/bin/dspmsg -s 1 piosmit.cat 97 'Standard processing\n'
+		/usr/bin/dspmsg -s 1 piosmit.cat 99 'Standard with NFS access to server print queue attributes\n'
+		/usr/bin/dspmsg -s 1 piosmit.cat 98 'Local filtering before sending to print server\n'
+	"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1810198"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*********************************************************************
+#   Selector for NFS remote sub-attachment
+#*********************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_nfs_attach_remote_ghostName"
+	next_id = "ps_mkpq_nfs_attach_remoteCmdHdr"
+	option_id = "ps_mkpqOpt"
+	has_name_select = "y"
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "" 
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+
+sm_cmd_hdr:
+	id = "ps_mkpq_nfs_attach_remoteCmdHdr"
+	option_id = "ps_mkpq_attach_remoteCmdHdrcommonOpt,ps_mkpq_nfs_attach_remoteCmdHdrOpt,ps_mkpq_attach_extended_remoteCmdHdrOpt"
+	has_name_select = "y"
+	name = "Add a Remote Print Queue with NFS Access"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 110
+	cmd_to_exec = "/usr/lib/lpd/pio/etc/piomisc_ext mkpq_remote_ext "
+	ask = ""
+	exec_mode = "n"
+	ghost = "n"
+	cmd_to_discover = "print '#server_type'
+	print $(/usr/bin/dspmsg -s 1 piosmit.cat 96 'AIX Version 4')
+	"
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1810185"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_mkpq_nfs_attach_remoteCmdHdrOpt"
+	disc_field_name = "server_type"
+	name = "Type of print spooler on remote server"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 110
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-m "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0 
+	aix_values = ""
+	help_msg_id = "1810027"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "070"
+	id = "ps_mkpq_nfs_attach_remoteCmdHdrOpt"
+	disc_field_name = ""
+	name = "Printer DEVICE on the remote server\n   (examples: lp0, lp1, ...)\n\nNOTE:\nMounting the directory of print attributes\nlocated on the remote server allows print job\nattributes to be displayed and validated when\nstarting print jobs destined for the remote\nserver.\nNote that:\n   -The Network File System (NFS) program\n    product must be installed and running, and\n   -The remote server must be running \n\
+    AIX Version 4 and have exported the\n    directory /var/spool/lpd/pio/@local"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 111
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-n "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810030"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#*********************************************************************
+#   Local formatting remote sub-attachment
+#*********************************************************************
+#   Manufacturer selector
+#*********************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_remote_local_manufName"
+	next_id = "ps_mkpq_remote_local_predefName"
+	option_id = "ps_mkpq_remote_local_manufNameOpt"
+	has_name_select = "n"
+	name = "Remote Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 103 
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	otherstr=$(/usr/bin/dspmsg piobe.cat -s 8 1 'Other (Select this if your printer type is not listed above)')
+	if [[ \"$otherstr\" = \"$1\" ]]  # see if they selected 'other'
+	then 
+		manuf='+++OTHER+++'
+	else
+		manuf=\"$1\"
+	fi
+	print \"$manuf\"
+	}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "ps_manuf"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_remote_local_manufNameOpt"
+        disc_field_name = ""
+	name = "Remote Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 103 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = "" 
+        prefix = ""
+        cmd_to_list_mode = "a"
+        cmd_to_list = "/usr/lib/lpd/pio/etc/piolspt -m"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810171"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#   Predefined printer selector
+sm_name_hdr:
+	id = "ps_mkpq_remote_local_predefName"
+	next_id = ""
+	option_id = "ps_mkpq_remote_local_predefNameOpt"
+	has_name_select = "n"
+	name = "Remote Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 103 
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	otherstr=$(/usr/bin/dspmsg piobe.cat -s 8 1 'Other (Select this if your printer type is not listed above)')
+	if [[ \"$otherstr\" = \"$1\" ]]  # see if they selected 'other'
+	then 
+		# branch back to this selector with ps_manuf=+++OTHER+++
+		print 'ps_mkpq_remote_local_predefName:+++OTHER+++::::'
+		exit 0;   
+	fi
+	# they selected one of the printer types
+	description=$(print ${1#* })   # strip off leading spaces
+	predef=${1%% *}
+	dtype=$predef
+	device_found=$(/usr/sbin/lsdev -P -c printer -t $predef) 
+	predef_found=$(/usr/bin/ls -1 /usr/lib/lpd/pio/predef/$predef.* 2>/dev/null)
+	if [[ -z $device_found && -z $predef_found ]] 
+	then
+		# Printer not installed.  Look-up package name(s) in
+		# printers inventory file and branch to error dialog for
+		# uninstalled packages.
+		package=$(/usr/bin/egrep -p \"^[ 	]*type[ 	]*=[ 	]*$predef\" /usr/lib/lpd/pio/etc/printers.inv | /usr/bin/awk '$1 == \"package\" { print $3 }')
+		print \"ps_mkpq_prt_notinstalled:::::$package\"
+		exit 0
+	fi
+	if [[ -z $predef_found ]] 
+	then
+		ptype='generic'  # No predef file found for this type
+	else
+		ptype=$predef
+	fi
+	case \"$2\" in 
+	remote) print \"ps_mkpq_remote_local_ghostName::$ptype:$description:$ptype:\"
+	;;
+	*)  print \"ps_error_ghostName:::::$(/usr/bin/dspmsg -s 1 piosmit.cat 90 'Unrecognized attachment type.\n')\"
+	;;
+	esac
+	}; x "
+	cmd_to_classify_postfix = "_rawname ps_attach"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:ps_manuf:ps_dtype:ps_description:ps_ptype:ps_error_msg"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkpq_remote_local_predefNameOpt"
+        disc_field_name = ""
+	name = "Remote Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 103 
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = "a"
+        cmd_to_list = "function x {
+		/usr/lib/lpd/pio/etc/piolspt -t -A \"$2\" \"$1\"
+	}; x"
+        cmd_to_list_postfix = "ps_manuf ps_attach"
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810173"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_name_hdr:
+	id = "ps_mkpq_remote_local_ghostName"
+	next_id = "ps_build_dialog"
+	option_id = "ps_mkpqOpt"
+	has_name_select = "n"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0 
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "print \"[piosmit.cat,1,111;Add a Remote Print Queue with Local Filtering]:ps_mkpq_remote_localCmdHdrOpt:/usr/lib/lpd/pio/etc/piomisc_ext mkpq_remote_local :\""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "ps_title:ps_prt_comm:ps_exec_cmd:dummy"
+	next_type = "n"
+
+sm_cmd_opt:
+	id_seq_num = "994"
+	id = "ps_mkpq_remote_localCmdHdrOpt"
+	disc_field_name = ""
+	name = "\nRemote server characteristics"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 100 
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810220"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "995"
+	id = "ps_mkpq_remote_localCmdHdrOpt"
+	disc_field_name = ""
+	name = "   HOSTNAME of remote server"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 95 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-1 "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "078109"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "996"
+	id = "ps_mkpq_remote_localCmdHdrOpt"
+	disc_field_name = ""
+	name = "   Name of QUEUE on remote server"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 94 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "-5 "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "078112"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "997"
+	id = "ps_mkpq_remote_localCmdHdrOpt"
+	disc_field_name = ""
+	name = "   TYPE of print spooler on remote server"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 93
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-2 "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "AIX Version 3 or 4,BSD,System V,AIX Version 2 (RT PC)"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 108
+	aix_values = "aix,bsd,att,aixv2"
+	help_msg_id = "1810027"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "998"
+	id = "ps_mkpq_remote_localCmdHdrOpt"
+	disc_field_name = ""
+	name = "   Send PASS-THROUGH FLAG to queue\n      on remote server?\n"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 102
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-4 "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18
+	aix_values = "yes,no"
+	help_msg_id = ""
+	help_msg_loc = "1810219"
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "999"
+	id = "SKIP_ps_mkpq_remote_localCmdHdrOpt"
+	disc_field_name = ""
+	name = "   DESCRIPTION of printer on remote server\n"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 101
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-3 "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	help_msg_id = "1810028"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#*********************************************************************
+# Add a Standard Remote Print Queue
+#*********************************************************************
+sm_name_hdr:
+	id = "ps_mkpq_base_attach_standard_remote_ghostName"
+	next_id = "ps_mkpq_attach_standard_remoteCmdHdr"
+	option_id = "ps_mkpqOpt"
+	has_name_select = "y"
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "" 
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+
+sm_cmd_hdr:
+	id = "ps_mkpq_attach_standard_remoteCmdHdr"
+	option_id = "ps_mkpq_attach_remoteCmdHdrcommonOpt,ps_mkpq_attach_remoteCmdHdrOpt,ps_mkpq_attach_extended_remoteCmdHdrOpt"
+	has_name_select = "y"
+	name = "Add a Standard Remote Print Queue"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 109
+	cmd_to_exec = "/usr/lib/lpd/pio/etc/piomisc_ext mkpq_remote_ext "
+	ask = ""
+	exec_mode = "n"
+	ghost = "n"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1810186"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "ps_mkpq_attach_extended_remoteCmdHdrOpt"
+	disc_field_name = ""
+	name = "DESCRIPTION of printer on remote server\n"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 109
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-d "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	help_msg_id = "1810028"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+
+# spooler.pqfilters.extended
+#EXT
+sm_name_hdr: 
+	id = "pqfilters"
+	next_id = ""
+	option_id = "ps_pqfiltersNameOpt" 
+	has_name_select = "n"
+	name = "Change / Show Pre-processing Filters"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 28 
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	/usr/lib/lpd/pio/etc/piodmgrsu >/dev/null 2>&1
+	print_queue=$(print \"$1\" | /usr/bin/awk '{print $1\":\"$2}')
+	next=$(/usr/lib/lpd/pio/etc/piolsvp -P$print_queue -n change_filters 2>/dev/null | /usr/bin/awk '{print $3}')
+	if [ -z \"$next\" ]
+	then
+		/usr/bin/dspmsg -s 1 piosmit.cat 66 'Incorrect queue name or incorrect SMIT id in attachment file.\n'
+		exit 1
+	else
+		print $next:$print_queue
+	fi
+	}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:queue_name:queue_device"
+	next_type = "n"
+
+sm_name_hdr: 
+	id = "ps_pqfilters_ghostName"
+	next_id = "#/var/spool/lpd/pio/@local/smit/#ps_filters_"
+	option_id = "ps_pqfilters_ghostNameOpt" 
+	has_name_select = "n"
+	name = "Change / Show Pre-processing Filters"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 28 
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x { print $1.$2
+	}; x"
+	cmd_to_classify_postfix = "queue_name queue_device"
+	raw_field_name = ""
+	cooked_field_name = "cookedname"
+	next_type = "d"
+
+#Extended
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_pqfiltersNameOpt"
+	disc_field_name = ""
+	name = "Change / Show Pre-processing Filters"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 28 
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = "" 
+	cmd_to_list = "/usr/lib/lpd/pio/etc/piolsvp -v -n change_filters 2>/dev/null"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810214"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#Extended
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_pqfilters_ghostNameOpt"
+	disc_field_name = ""
+	cmd_to_list = ""
+
+
+
+
+
+# spooler.qprt.extended
+#EXT
+###############################################################
+# Start a Print Job File Type selector
+###############################################################
+sm_name_hdr:
+	id = "ps_qprt_fileName"
+	next_id = ""
+	option_id = "ps_qprt_fileNameOpt"
+	has_name_select = "y"
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x { 
+	if [ \"$4\" = \"remote.nfs\" ] 
+	then
+		remote=$(/usr/bin/lsque -q $2 | /usr/bin/awk '$0 ~ \"^[ 	]*host\" {print $NF}')
+		[[ -z $remote || ! -x /var/spool/lpd/pio/$remote ]] && { /usr/bin/dspmsg -s 1 piosmit.cat 105 'Could not access NFS mounted directory for remote queue.\n'; exit 1; }
+		rq=$(/usr/bin/lsque -q $2 | /usr/bin/awk '$0 ~ \"^[ 	]*rq\" {print $NF}')
+		rqdev=$(/usr/sbin/lsvirprt -q $2 -d $3 -f '%5$s' -a zE)
+		rqdev=$(print $rqdev)
+		print \"#/var/spool/lpd/pio/$remote/smit/#ps_qprt_$rq.$rqdev.$1:$1\"
+	else
+		print \"#/var/spool/lpd/pio/@local/smit/#ps_qprt_$2.$3.$1:$1\"
+	fi
+	}; x"
+	cmd_to_classify_postfix = "_rawname queue_name queue_device attach_type"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:datastream"
+	next_type = "d"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_qprt_fileNameOpt"
+	disc_field_name = ""
+	name = "Print File Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 67
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "function x {
+	if [ \"$3\" = \"remote.nfs\" ]
+	then
+		remote=$(/usr/bin/lsque -q $1 | /usr/bin/awk '$0 ~ \"^[ 	]*host\" {print $NF}')
+		[[ -z $remote || ! -x /var/spool/lpd/pio/$remote ]] && { /usr/bin/dspmsg -s 1 piosmit.cat 105 'Could not access NFS mounted directory for remote queue.\n'; exit 1; }
+		rq=$(/usr/bin/lsque -q $1 | /usr/bin/awk '$0 ~ \"^[ 	]*rq\" {print $NF}')
+		rqdev=$(/usr/sbin/lsvirprt -q $1 -d $2 -f '%5$s' -a zE)
+		rqdev=$(print $rqdev)
+		PIOVARDIR=/var/spool/lpd/pio/$remote /usr/sbin/lsvirprt -q $rq -d $rqdev -D
+	else
+		/usr/sbin/lsvirprt -q $1 -d $2 -D
+	fi
+	}; x"
+	cmd_to_list_postfix = "queue_name queue_device attach_type"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810145"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###############################################################
+# Start a Print Job (remote)
+###############################################################
+sm_name_hdr:
+	id = "ps_qprt_remoteName"
+	next_id = ""
+	option_id = "ps_qprt_genericOpt"
+	has_name_select = "y"
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	sub_attach=${1##*.}
+	case $sub_attach in
+	local | nfs)	next=$(/usr/lib/lpd/pio/etc/piolsvp -N local -n submit_job 2>/dev/null)
+			next=${next%%*( |	)}
+			next=${next##*( |	)}
+			print $next:$sub_attach
+	;;
+	*)	# Must be straight remote 
+		print ps_qprt_remote_ghostName:$sub_attach
+	;;
+	esac
+	}; x"
+	cmd_to_classify_postfix = "attach_type queue_name queue_device"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:sub_attach"
+	next_type = "n"
+
+sm_name_hdr:
+	id = "ps_qprt_remote_ghostName"
+	next_id = "ps_qprt_remote_"
+	option_id = "ps_qprt_genericOpt"
+	has_name_select = "y"
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x { case $(/usr/bin/lsque -q $1 | /usr/bin/awk -F/ '$0 ~ \"^[ 	]*s_statfilter\" {print $NF}') in 
+	aixshort) print aixCmdHdr
+	;;
+	aixv2short) print rtCmdHdr
+	;;
+	bsdshort | attshort | *) print bsdCmdHdr
+	;;
+	esac
+	}; x"
+	cmd_to_classify_postfix = "queue_name"
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+
+###############################################################
+# Start a Print Job Dialog (remote - RT filter type)
+###############################################################
+sm_cmd_hdr:
+	id = "ps_qprt_remote_rtCmdHdr"
+	option_id = "ps_qprt_common1Opt,ps_qprt_common4Opt,ps_qprt_remote_commonOpt"
+	has_name_select = "y"
+	name = "Start a Print Job"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 119 
+	cmd_to_exec = "/usr/bin/enq"
+	ask = "n"
+	exec_mode = "n"
+	ghost = "n"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "078147"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###############################################################
+# Start a Print Job (remote - AIX v3 or v4 filter type)
+###############################################################
+sm_cmd_hdr:
+	id = "ps_qprt_remote_aixCmdHdr"
+	option_id = "ps_qprt_common1Opt,ps_qprt_common3Opt,ps_qprt_common4Opt,ps_qprt_remote_commonOpt"
+	has_name_select = "y"
+	name = "Start a Print Job"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 119 
+	cmd_to_exec = "/usr/bin/enq"
+	ask = "n"
+	exec_mode = "n"
+	ghost = "n"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "078147"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#####################################################################
+# Common Start a Print Job options for remote 'AIX v3 or v4'
+# and 'RT' queues
+#####################################################################
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "ps_qprt_remote_commonOpt"
+	disc_field_name = ""
+	name = "REMOVE FILE from system after sending job\n   to remote print server?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 171
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-r,"
+	help_msg_id = "078152"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###############################################################
+# Start a Print Job (remote - BSD & ATT and unknown filter type)
+###############################################################
+sm_cmd_hdr:
+	id = "ps_qprt_remote_bsdCmdHdr"
+	option_id = "ps_qprt_common1Opt,ps_qprt_bsdCmdHdrOpt"
+	has_name_select = "y"
+	name = "Start a Print Job"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 119 
+	cmd_to_exec = "/usr/bin/lpr"
+	ask = "n"
+	exec_mode = "n"
+	ghost = "n"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "078147"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "Number of COPIES"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	op_type = ""
+	entry_type = "#"
+	entry_size = 0
+	required = ""
+	prefix = "-# "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "1"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 129 
+	aix_values = ""
+	help_msg_id = "078150"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "025"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "ERASE the file after spooling?"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 70
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-r,"
+	help_msg_id = "078152"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "035"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "SUPPRESS burst page?"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 71
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-h,"
+	help_msg_id = "078155"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "CLASS to print for job classification"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 72
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-C "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810147"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "045"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "Number of spaces to INDENT"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 73
+	op_type = ""
+	entry_type = "#"
+	entry_size = 0
+	required = "n"
+	prefix = "-i "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810148"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "Page WIDTH"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 74
+	op_type = ""
+	entry_type = "#"
+	entry_size = 0
+	required = "n"
+	prefix = "-w "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810149"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "055"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "JOB NAME"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 75
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-J "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810150"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "060"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "Pre-processing FILTER"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 76
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "none,pr,ditroff,print control characters,troff,tex (DVI format),plot,raster image,cifplot,FORTRAN"
+	values_msg_file = "piosmit.cat"
+	values_msg_set = 1
+	values_msg_id = 77
+	aix_values = ",-p,-n,-l,-t,-d,-g,-v,-c,-f"
+	help_msg_id = "1810151"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "065"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "TITLE STRING for pr filter"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 78
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-T "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810152"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "070"
+	id = "ps_qprt_bsdCmdHdrOpt"
+	disc_field_name = ""
+	name = "SEND MAIL upon completion of spooling?"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 79
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-m,"
+	help_msg_id = "1810153"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+###############################################################
+# Start a Print Job (dynamic dialog options)
+###############################################################
+sm_cmd_opt:
+	id_seq_num = "A100"
+	id = "ps_qprt_commonDOpt"
+	disc_field_name = "input_queue"
+	name = "Print queue name"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 126 
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-P "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810034"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "A200"
+	id = "ps_qprt_commonDOpt"
+	disc_field_name = ""
+	name = "Name of FILE to print\n"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 88 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "+"
+	prefix = "--"
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "078148"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "C100"
+	id = "ps_qprt_fixed._N"
+	disc_field_name = ""
+	name = "Number of COPIES"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 69 
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = ""
+	prefix = "-N "
+	cmd_to_list_mode = "r"
+	cmd_to_list = "print \"1..\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "1"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 129
+	aix_values = ""
+	help_msg_id = "078150"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "C200"
+	id = "ps_qprt_fixed.hold"
+	disc_field_name = ""
+	name = "Place job in 'HELD' state when queued?"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 81
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-#h,"
+	help_msg_id = "1810179"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "C300"
+	id = "ps_qprt_fixed._c"
+	disc_field_name = ""
+	name = "COPY FILE and print from copy?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 120 
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-c,"
+	help_msg_id = "078151"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "C400"
+	id = "ps_qprt_fixed._r"
+	disc_field_name = ""
+	name = "REMOVE FILE after print job completes?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 130 
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-r,"
+	help_msg_id = "078152"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "C500"
+	id = "ps_qprt_fixed._R"
+	disc_field_name = ""
+	name = "Print job PRIORITY"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 124 
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = ""
+	prefix = "-R "
+	cmd_to_list_mode = "r"
+	cmd_to_list = "print \"0..20\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "15"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 50 
+	aix_values = ""
+	help_msg_id = "078159"
+
+sm_cmd_opt:
+	id_seq_num = "F100"
+	id = "ps_qprt_fixed._B"
+	disc_field_name = "_B"
+	name = "SEPARATOR PAGES"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 132 
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "n"
+	prefix = "-B "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "none,header for job; no trailer,header for job; trailer for job,header for job; trailer for each file,header for each file; no trailer,header for each file; trailer for job,header for each file; trailer for each file,no header; trailer for job,no header; trailer for each file"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 133 
+	aix_values = "nn,gn,gg,ga,an,ag,aa,ng,na"
+	help_msg_id = "078155"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "F200"
+	id = "ps_qprt_fixed._T"
+	disc_field_name = ""
+	name = "Job TITLE"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 125 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = ""
+	prefix = "-T "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810180"
+
+sm_cmd_opt:
+	id_seq_num = "F300"
+	id = "ps_qprt_fixed._D"
+	disc_field_name = ""
+	name = "'DELIVER TO' TEXT"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 134 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = ""
+	prefix = "-D "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1810181"
+
+sm_cmd_opt:
+	id_seq_num = "G100"
+	id = "ps_qprt_fixed._C"
+	disc_field_name = ""
+	name = "MAIL MESSAGES instead of displaying them?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 131 
+	op_type = "r"
+	entry_type = ""
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-C,"
+	help_msg_id = "1810035"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "G200"
+	id = "ps_qprt_fixed._n"
+	disc_field_name = ""
+	name = "NOTIFY when job finished?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 123 
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "-n,"
+	help_msg_id = "078153"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "G300"
+	id = "ps_qprt_fixed._m"
+	disc_field_name = ""
+	name = "TEXT to display on console before printing job"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 121 
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-m "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "078157"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "G400"
+	id = "ps_qprt_fixed._M"
+	disc_field_name = ""
+	name = "FILE to display on console before printing job"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 122 
+	op_type = ""
+	entry_type = "f"
+	entry_size = 0
+	required = "n"
+	prefix = "-M "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "078158"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+
+
+
+# spooler.rmpq.extended
+#EXT
+sm_name_hdr:
+	id = "ps_rmpq_ghostName_other"
+	next_id = "ps_rmpq_CmdHdr_other"
+	option_id = "ps_rmpq_CmdHdr_ghostOpt"
+	has_name_select = "y"
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	next_type = "d"
+
+sm_name_hdr:
+	id = "ps_rmpq_ghostName_local"
+	next_id = "ps_rmpq_CmdHdr_local"
+	option_id = "ps_rmpq_CmdHdr_ghostOpt"
+	has_name_select = "y"
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	next_type = "d"
+
+sm_name_hdr:
+	id = "ps_rmpq_ghostName_local_last"
+	next_id = "ps_rmpq_CmdHdr_local_last"
+	option_id = "ps_rmpq_CmdHdr_ghostOpt"
+	has_name_select = "y"
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	next_type = "d"
+
+sm_cmd_hdr:
+	id = "ps_rmpq_CmdHdr_other"
+	option_id = "ps_rmpq_genericCmdHdrOpt,ps_rmpq_CmdHdr_otherOpt"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	has_name_select = "y"
+	cmd_to_exec = "/usr/lib/lpd/pio/etc/piomisc_ext rmpq_other "
+	ask = "y"
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = "function x { print '#remove_queue:attach_type'
+	print $1#!:$2:$3
+	}; x"
+	cmd_to_discover_postfix = "queue_name queue_device attach_type"
+	name_size = 0
+	value_size = 0
+
+sm_cmd_hdr:
+	id = "ps_rmpq_CmdHdr_local_last"
+	option_id = "ps_rmpq_CmdHdr_localOpt,ps_rmpq_CmdHdr_local_lastOpt"
+	name = "Remove a Print Queue"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 137
+	has_name_select = "y"
+	cmd_to_exec = "/usr/lib/lpd/pio/etc/piomisc_ext rmpq_local_last "
+	ask = "y"
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "function x { print '#remove_queue:device'
+	print $1#!:$2:$3
+	}; x"
+	cmd_to_discover_postfix = "queue_name queue_device device"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "078160"
+	help_msg_loc = ""
+	help_msg_base = ""
+
+sm_cmd_hdr:
+	id = "ps_rmpq_CmdHdr_local"
+	option_id = "ps_rmpq_CmdHdr_localOpt"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	has_name_select = "y"
+	cmd_to_exec = "/usr/lib/lpd/pio/etc/piomisc_ext rmpq_local "
+	ask = "y"
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = "function x { print '#remove_queue'
+	print $1#!:$2:$3
+	}; x"
+	cmd_to_discover_postfix = "queue_name queue_device"
+	name_size = 0
+	value_size = 0
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "ps_rmpq_CmdHdr_localOpt"
+	disc_field_name = "remove_queue"
+	name = "Print queue to remove"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 82
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810049"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "ps_rmpq_CmdHdr_local_lastOpt"
+	disc_field_name = ""
+	name = "KEEP the local printer device?"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 83
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = "yes,no"
+	help_msg_id = "1810159"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "ps_rmpq_CmdHdr_local_lastOpt"
+	disc_field_name = "device"
+	name = "Local printer device"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 84
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	help_msg_id = "1810212"
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_rmpq_CmdHdr_otherOpt"
+	disc_field_name = "attach_type"
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+
+
+
+# spooler.server.extended
+#EXT
+# The rest of the mkitabOpts and the corresponding selectors/dialogs
+# are in spooler.server.base 
+# The message catalog entries have stayed in cmdque.msg to prevent
+# gaps in the catalog.
+sm_cmd_opt:
+	id_seq_num = "025"
+	id = "mkitabOpts"
+	disc_field_name = "export"
+	name = "EXPORT directory containing print attributes?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 154
+	op_type = "r"
+	entry_type = "t"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 18
+	values_msg_id = 18 
+	aix_values = ""
+	help_msg_id = "1810056"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "mkitabOpts"
+	disc_field_name = ""
+	name = "\nNote:\nExporting this print server's directory\ncontaining its print attributes will allow\nprint clients to mount the directory.  The\nclients can use this server's print attributes\nto display and validate print job attributes\nwhen starting print jobs destined for this\nprint server.  Note that the Network File\nSystem (NFS) program product must be installed\nand running."
+	name_msg_file = "smit.cat"
+	name_msg_set = 18
+	name_msg_id = 155
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+
+#	Printer Not Installed Selector
+sm_name_hdr:
+	id			= "ps_mkpq_prt_notinstalled"
+	next_id			= "printerinst"
+	option_id		= "ps_mkpq_prt_notinstalled.opt"
+	has_name_select		= "n"
+	name			= "Printer Support Not Installed"
+	name_msg_file		= "piosmit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 115
+	type			= "j"
+	next_type		= "n"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "180097"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id_seq_num		= "0"
+	id			= "ps_mkpq_prt_notinstalled.opt"
+	disc_field_name		= ""
+	name			= "Software to support the printer you selected\nis not installed. Press Enter to install\nprinter support software packages."
+	name_msg_file		= "piosmit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 116 
+	op_type			= ""
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "n"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "" 
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "180097"
+	help_msg_loc		= ""
+	help_msg_base		= ""
+	help_msg_book		= ""

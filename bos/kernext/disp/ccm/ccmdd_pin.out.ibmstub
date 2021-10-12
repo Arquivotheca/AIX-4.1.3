@@ -1,0 +1,86 @@
+(ld): halt 4
+(ld): setopt strip 
+(ld): setopt member 
+(ld): savename ccmdd_pin
+(ld): filelist 22 8
+(ld): i ccm_interrupt.o
+(ld): i ccm_open.o
+(ld): i ccm_close.o
+(ld): i vtt_act.o
+(ld): i vtt_cfl.o
+(ld): i vtt_clr.o
+(ld): i vtt_cpl.o
+(ld): i vtt_dact.o
+(ld): i vtt_defc.o
+(ld): i vtt_init.o
+(ld): i vtt_movc.o
+(ld): i vtt_rds.o
+(ld): i vtt_term.o
+(ld): i vtt_text.o
+(ld): i vtt_scr.o
+(ld): i vtt_setm.o
+(ld): i vtt_stct.o
+(ld): i vtt_subrs.o
+(ld): i ccm_io_subrs.o
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a
+FILELIST: Number of previously inserted files processed: 22
+(ld): imports ../../../../../../src/bos/kernext/disp/ccm/ccmdd.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernext/disp/ccm/ccmdd.exp: 1
+(ld): imports ../../../../../../src/bos/kernel/exp/sysoverlay.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/sysoverlay.exp: 7
+(ld): imports ../../../../../../src/bos/kernel/exp/kernex.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/kernex.exp: 514
+(ld): imports ../../../../../../src/bos/kernel/exp/syscalls.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/syscalls.exp: 247
+(ld): imports ../../../../../../src/bos/kernel/exp/dead.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/dead.exp: 5
+(ld): imports ../../../../../../src/bos/kernel/exp/streams.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/streams.exp: 6
+(ld): exports ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp 
+EXPORTS: Symbols exported: 27
+(ld): entry ccm_interrupt
+ENTRY: Entry point set to ccm_interrupt
+(ld): resolve
+RESOLVE: 165 of 1167 symbols were kept.
+(ld): addgl /aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o
+ADDGL: Glink code added for 24 symbols.
+(ld): er full
+ER: There are no unresolved symbols.
+(ld): mismatch
+MISMATCH: No type mismatches exist.
+(ld): comprld
+COMPRLD: Kept 344 of 344 relocation entries.
+(ld): origin 0x0 0x0
+(ld): save 1L .
+SAVE: Section sizes = 17944+2500+4 (0x4618+0x9C4+0x4 hex)
+SAVE: Size of TOC: 188 (0xBC hex)
+SAVE: These object files and archive members were
+	used to create the output file:
+ ccm_interrupt.o
+ ccm_open.o
+ ccm_close.o
+ vtt_act.o
+ vtt_cfl.o
+ vtt_clr.o
+ vtt_cpl.o
+ vtt_dact.o
+ vtt_defc.o
+ vtt_init.o
+ vtt_movc.o
+ vtt_rds.o
+ vtt_term.o
+ vtt_text.o
+ vtt_scr.o
+ vtt_setm.o
+ vtt_stct.o
+ vtt_subrs.o
+ ccm_io_subrs.o
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[memset.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o]
+(ld): gen map ccmdd_pin.map
+(ld): rc
+RC: Highest return code was 0.

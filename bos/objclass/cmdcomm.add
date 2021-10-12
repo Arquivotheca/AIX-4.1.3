@@ -1,0 +1,92 @@
+# @(#)39        1.4  src/bos/objclass/cmdcomm.add, cmdcomm, bos411, 9428A410j 6/16/90 02:46:30
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDCOMM                                                     #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27                                                                 #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1989                     #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+################################################################################
+
+################################################################################
+#									       #
+#	COMMANDS: wall							       #
+#									       #
+################################################################################
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Broadcast Message to all Users                            #
+#                                                                              #
+# FAST KEY:         wall                                                       #
+# UNIX COMMAND(S):  wall, echo                                                 #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#	   1 dialogue option						       #
+#                                                                              #
+# HEADER:  Broadcast Message to all Users                                      #
+#                                                                              #
+# OBJECT:  1.  Press F7 to commit to the wall command;			       #
+#	       Press Esc to return to the previous menu.		       #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "wall"
+	option_id               = "wallOpts"
+	has_name_select         = "n"
+	name                    = "Broadcast Message to all Users"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 23
+	name_msg_id             = 15
+	cmd_to_exec		= "wall"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "080301"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "wallOpts"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "MESSAGE"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 23
+	name_msg_id		= 20
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "080302"
+	help_msg_loc		= ""
+

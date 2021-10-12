@@ -1,0 +1,69 @@
+# @(#)92 1.1 src/bos/objclass/POWER/ciefddi.add, sysxcie, bos411, 9428A410j 4/1/94 16:08:49
+#
+#  COMPONENT_NAME: (SYSXCIE) COMIO Emulator
+#
+#  FUNCTIONS: fddi.add - FDDI Adapter Device Objects
+#
+#  ORIGINS: 27
+#
+#    (C) COPYRIGHT International Business Machines Corp. 1989
+#    All Rights Reserved
+#    Licensed Materials - Property of IBM
+#    US Government Users Restricted Rights - Use, duplication or
+#    disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+PdAt:
+	uniquetype	= "adapter/mca/fddi"
+	attribute	= "rcv_que_size"
+	deflt		= "30"
+	values		= "20-150,1"
+	width		= ""
+	type		= "R"
+	generic 	= "DU"
+	rep		= "nr"
+	nls_index	= "5"
+
+PdAt:
+	uniquetype	= "adapter/mca/fddi"
+	attribute	= "stat_que_size"
+	deflt		= "10"
+	values		= "3-150,1"
+	width		= ""
+	type		= "R"
+	generic 	= "DU"
+	rep		= "nr"
+	nls_index	= "6"
+
+PdAt:
+	uniquetype	= "adapter/mca/fddi"
+	attribute	= "pass_bcon"
+	deflt		= "no"
+	values		= "yes,no"
+	width		= ""
+	type		= "R"
+	generic 	= "DU"
+	rep		= "sl"
+	nls_index	= "14"
+
+PdAt:
+	uniquetype	= "adapter/mca/fddi"
+	attribute	= "pass_smt"
+	deflt		= "no"
+	values		= "yes,no"
+	width		= ""
+	type		= "R"
+	generic 	= "DU"
+	rep		= "sl"
+	nls_index	= "15"
+
+PdAt:
+	uniquetype	= "adapter/mca/fddi"
+	attribute	= "pass_nsa"
+	deflt		= "no"
+	values		= "yes,no"
+	width		= ""
+	type		= "R"
+	generic 	= "DU"
+	rep		= "sl"
+	nls_index	= "16"

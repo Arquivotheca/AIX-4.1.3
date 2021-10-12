@@ -1,0 +1,201 @@
+* @(#)68        1.3  src/bos/kernext/pse/README.pse, sysxpse, bos412, 9447C 11/23/94 10:04:27
+*
+*   COMPONENT_NAME: SYSXPSE
+*
+*   FUNCTIONS:
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+                README file for the STREAMS Framework
+
+
+
+srv
+
+Purpose
+    Services queued messages for STREAMS modules or drivers. 
+
+Syntax
+     #include <sys/types.h>
+     #include <sys/stream.h>
+     #include <sys/stropts.h>
+     int <prefix>rsrv(queue_t *q);   /* read side */
+     int <prefix>wsrv(queue_t *q);   /* write side */
+
+Parameters
+     q    Pointer to the queue structure.
+
+Description
+     The optional service (<prefix>srv()) routine may be included in a
+     STREAMS module or driver for one or more of the following reasons:
+
+      * to provide greater control over the flow of messages in a stream
+
+      * to make it possible to defer the processing of some messages to
+        avoid depleting system resources
+
+      * to combine small messages into larger ones, or break large messages
+        into smaller ones
+
+      * to recover from resource allocation failure.  A module's or driver's
+	put() routine can test for the availability of a resource, and if it
+	is not available, enqueue the message for later processing by the
+	srv routine.
+
+     A message is first passed to a module's or driver's put() routine, which
+     may or may not do some processing.  It must then either:
+
+      * pass the message to the next stream component with putnext()
+
+      * if a srv routine has been included, it may call putq() to place the
+	message on the queue
+
+     Once a message has been enqueued, the STREAMS scheduler controls the
+     invocation of the service routine.  Service routines are called in FIFO
+     order by the scheduler.  No guarantees can be made about how long it will
+     take for a srv routine to be called except that it will happen before any
+     user level process is run.
+
+     Every stream component (stream head, module or driver) has limit values
+     it uses to implement flow control.  Tunable high and low water marks
+     should be checked to stop and restart the flow of message processing.
+     Flow control limits apply only between two adjacent components with srv
+     routines.
+
+     STREAMS messages can be defined to have up to 256 different priorities
+     to support requirements for multiple bands of data flow.  At a minimum,
+     a stream must distinguish between normal (priority zero) messages and high
+     priority messages (such as M_IOCACK).  High priority messages are always
+     placed at the head of the srv routine's queue, after any other enqueued
+     high priority messages.  Next are messages from all included priority
+     bands, which are enqueued in decreasing order of priority.  Each priority
+     band has its own flow control limits.  If a flow controlled band is
+     stopped, all lower priority bands are also stopped.
+
+     Once the STREAMS scheduler calls a srv routine, it must process all
+     messages  on its queue.  The following steps are general guidelines for
+     processing messages.  Keep in mind that many of the details of how a srv
+     routine should be written depend of the implementation, the direction of
+     flow (upstream  or downstream), and whether it is for a module or a
+     driver.
+
+       1. Use getq() to get the next enqueued message.
+
+       2. If the message is high priority, process it (if appropriate) and
+          pass it to the next stream component with putnext().
+
+       3. If it is not a high priority message (and therefore subject to flow
+	  control), attempt to send it to the next stream component with a srv
+	  routine.  Use canput() or bcanput() to determine if this can be done.
+
+       4. If the message cannot be passed, put it back on the queue with
+	  putbq().  If it can be passed, process it (if appropriate) and pass
+	  it with putnext().
+
+     Rules for service routines:
+
+       1. Service routines must not call any kernel services which sleep
+	  or are not interrupt safe.
+
+       2. Service routines are called by the STREAMS scheduler with most
+	  interrupts enabled.
+
+
+     NOTE:
+     Each stream module must specify a read and a write service (srv())
+     routine.  If a service routine is not needed (because the put() routine
+     processes all messages), a NULL pointer should be placed in module's qinit
+     structure.  Do not use nulldev() instead of the NULL pointer.  Use of
+     nulldev() for a srv() routine may result in flow control errors.
+
+Return Values
+     Ignored.
+
+Related Information
+     put(), bcanput(), canput(), getq(), putbq(), putnext(), putq().
+     The queue structure in /usr/include/sys/stream.h.
+     The STREAMS Entry Points article in infoExplorer.
+===========================================================
+
+	Prior to AIX 4.1, STREAMS service routines were permitted which were not coded
+to specification (i.e. the service routine called sleep or called a kernel services 
+which slept, etc. . .).  In AIX 4.1, this behavior will cause a system failure because 
+the STREAMS scheduler is executed with some interrupts disabled. Modules or drivers can 
+force the old style scheduling by oring in STR_Q_NOTTOSPEC into the sc_flags field of the 
+kstrconf_t structure. This structure is passed to the system when the module or driver 
+calls the str_install STREAMS service. This flag will cause STREAMS to schedule the 
+modules or drivers service routines with all interrupts enabled. Note: there is
+a severe performance penalty for this type of STREAMS scheduling and future releases of 
+AIX may not support STR_Q_NOTTOSPEC.
+
+===========================================================
+
+wantio
+
+Purpose
+    Register direct i/o entry points with the Stream head.
+
+Syntax
+     #include <sys/stream.h>
+
+     int wantio(queue_t *q, struct wantio *w)
+
+Parameters
+     q    Pointer to the queue structure.
+     w    Pointer to the wantio structure.
+
+Description
+     The wantio STREAMS routine may be used by a STREAMS module or 
+     driver to register input/output (read/write/select) entry points
+     with the Stream head. The Stream head then calls these entry points 
+     directly, by-passing all normal Streams processing, when an i/o 
+     request is detected. This service may be useful to increase STREAMS
+     performance in cases where normal module processing is not required or where
+     STREAMS processing is to be performed outside of AIX.
+
+     STREAMS modules and drivers should precede a wantio call by sending
+     a high priority M_LETSPLAY message upstream. The M_LETSPLAY message
+     format is a message block containing an integer followed by a pointer
+     to the write queue of the module or driver originating the M_LETSPLAY
+     message. The integer counts the number of modules which can permit 
+     direct i/o. Each module passes this message to its neighbor after 
+     incrementing the count if direct i/o is possible. When this message 
+     reaches the Stream head, the Stream head compares the count field with the 
+     number of modules and drivers in the Stream. If the count is not equal to 
+     the number of modules then a M_DONTPLAY message is sent downstream 
+     indicating direct i/o will not be permitted on the Stream. If the count is
+     equal then queued messages are cleared by sending them downstream as 
+     M_BACKWASH messages. When all messages are cleared then an M_BACKDONE 
+     message is sent downstream. This process starts at the Stream head and is 
+     repeated in every module in the Stream. Modules will wait to receive an 
+     M_BACKDONE message from upstream. Upon receipt of this message, the module 
+     will send all queued data downstream as M_BACKWASH messages. When all data 
+     is cleared the module will send an M_BACKDONE message to its downstream neighbor
+     indicating that all data has been cleared from the Stream to this point.
+
+     Wantio registration is cleared from a Stream by issuing a wantio call 
+     with a NULL pointer to the wantio structure.
+
+     Multiprocessor serialization is the responsibility of the driver or module
+     requesting direct i/o. The Stream head acquires no STREAMS locks before
+     calling the wantio entry point.
+
+     Currently, the write entry point of the wantio structure is ignored.
+
+Return Values
+     Returns 0 always.
+
+Related Information
+     wantmsg().
+     The queue and wantio structures in /usr/include/sys/stream.h.
+     The STREAMS Entry Points article in infoExplorer.
+

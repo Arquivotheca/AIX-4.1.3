@@ -1,0 +1,587 @@
+# @(#)41        1.10  src/bos/objclass/POWER/sm_tok.add, sysxtok, bos41B, 9504A 12/13/94 14:20:28
+#
+#  COMPONENT_NAME: (SYSXTOK) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Token Ring Adapter Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+#       SMIT Menu objects
+#
+sm_menu_opt:
+	id                  = "commodev"
+	id_seq_num          = "020"
+	next_id             = "token"
+	text                = "Token Ring"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 127
+	next_type           = "m"
+	alias               = ""
+	help_msg_id         = "1800144"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "token"
+	id_seq_num          = "010"
+	next_id             = "tradap"
+	text                = "Adapter"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 231
+	next_type           = "m"
+	alias               = ""
+	help_msg_id         = "00001"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "token"
+	id_seq_num          = "020"
+	next_id             = "trserv"
+	text                = "Services"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 232
+	next_type           = "m"
+	alias               = ""
+	help_msg_id         = "00001"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "token"
+	id_seq_num          = "030"
+	next_id             = "trapps"
+	text                = "User Applications"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 233
+	next_type           = "m"
+	alias               = ""
+	help_msg_id         = "00001"
+	help_msg_loc        = ""
+
+# ---- ----
+
+sm_menu_opt:
+	id                  = "tradap"
+	id_seq_num          = "010"
+	next_id             = "lsdtok"
+	text                = "List All Token Ring Adapters"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 299
+	next_type           = "d"
+	alias               = ""
+	help_msg_id         = "1800193"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "tradap"
+	id_seq_num          = "020"
+	next_id             = "chgtok"
+	text                = "Change / Show Characteristics of a Token Ring Adapter"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 300
+	next_type           = "n"
+	alias               = ""
+	help_msg_id         = "1800197"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "tradap"
+	id_seq_num          = "050"
+	next_id             = "errpt"
+	text                = "Generate an Error Report"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 88
+	next_type           = "n"
+	alias               = ""
+	help_msg_id         = "1800203"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "tradap"
+	id_seq_num          = "060"
+	next_id             = "trace_link"
+	text                = "Trace a Token Ring Adapter"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 302
+	next_type           = "m"
+	alias               = ""
+	help_msg_id         = "1800204"
+	help_msg_loc        = ""
+
+# ---- fast paths ----
+
+sm_menu_opt:
+	id                  = "chadp"
+	id_seq_num          = "020"
+	next_id             = "chgtok"
+	text                = "Change / Show Characteristics of a Token Ring Adapter"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 300
+	next_type           = "n"
+	alias               = ""
+	help_msg_id         = "1800441"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "lsadp"
+	id_seq_num          = "020"
+	next_id             = "lsdtok"
+	text                = "List All Token Ring Adapters"
+	text_msg_file       = "smit.cat"
+	text_msg_set        = 25
+	text_msg_id         = 299
+	next_type           = "d"
+	alias               = ""
+	help_msg_id         = "1800193"
+	help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "tok"
+	id_seq_num          = ""
+	next_id             = "token"
+	text                = ""
+	text_msg_file       = ""
+	text_msg_set        = 0
+	text_msg_id         = 0
+	next_type           = "m"
+	alias               = "y"
+	help_msg_id         = ""
+	help_msg_loc        = ""
+
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Token Ring Adapters
+#       Change/Show Characteristics of a Token Ring Adapter
+#
+#       Help text Id's for token ring adapter specific helps are in the
+#       range:          0420900 to 0420999
+#       This does not include menu helps.
+#
+
+#
+# List All Token Ring Adapters
+# This uses a ghost dialogue to list all the defined Token Ring adapters.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsdtok"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Token Ring Adapters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 299
+    cmd_to_exec               = "lsparent -C -k tok"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800193"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a Token Ring Adapter
+# This allows a Token Ring adapter's characteristics to be shown and, if
+# desired, changed.  First, there is a name selector used to put up a list
+# of the defined Token Ring adapters for the user to select from.  The
+# dialogue then shows all of the characteristics.
+
+# Select Token Ring adapter by logical name
+sm_name_hdr:
+    id                        = "chgtok"
+    next_id                   = "chgtok_hdr_"
+    option_id                 = "tok_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a Token Ring Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 300
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:location:status:description\" \
+  | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\1_\\2:&/' \n\
+} \n\
+xx "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:loc:state:desc"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Name selector command option for listing Token Ring adapters by logical
+# name.
+sm_cmd_opt:
+    id                        = "tok_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Token Ring Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 525
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C -k tok"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There is one for each unique Predefined
+# Token Ring adapter instance.  Their Id's are built as follows:
+#       "chgtok_hdr_xxx_yyy"
+# where xxx is the type and yyy is the subclass.
+sm_cmd_hdr:
+    id                        = "chgtok_hdr_tokenring_mca"
+    option_id                 = "tok_chg,tok_chg_rs"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Token Ring Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 300
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+
+# Dialog header command options.
+
+#Display logical name.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Token Ring adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 525
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420900"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420901"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420902"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420903"
+    help_msg_loc              = ""
+
+# Displays transmit queue size attribute.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "020"
+    disc_field_name           = "xmt_que_size"
+    name                      = "TRANSMIT queue size"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 28
+    name_msg_id               = 7
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a xmt_que_size="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c adapter -a xmt_que_size -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420911"
+    help_msg_loc              = ""
+
+# Displays ring speed.
+sm_cmd_opt:
+    id                        = "tok_chg_rs"
+    id_seq_num                = "050"
+    disc_field_name           = "ring_speed"
+    name                      = "RING speed"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 28
+    name_msg_id               = 12
+    op_type                   = "r
+    entry_type                = "n
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a ring_speed="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "4,16"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "4,16"
+    help_msg_id               = "0420914"
+    help_msg_loc              = ""
+
+# Displays "receive attention mac frames" attribute.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "060"
+    disc_field_name           = "attn_mac"
+    name                      = "Receive ATTENTION MAC frames"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 28
+    name_msg_id               = 10
+    op_type                   = "r
+    entry_type                = "n
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a attn_mac="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420915"
+    help_msg_loc              = ""
+
+# Displays "receive beacon mac frames" attribute.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "070"
+    disc_field_name           = "beacon_mac"
+    name                      = "Receive BEACON MAC frames"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 28
+    name_msg_id               = 15
+    op_type                   = "r
+    entry_type                = "n
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a beacon_mac="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420916"
+    help_msg_loc              = ""
+
+# Displays "enable alternate token ring address" attribute.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "080"
+    disc_field_name           = "use_alt_addr"
+    name                      = "Enable ALTERNATE TOKEN RING address"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 28
+    name_msg_id               = 13
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a use_alt_addr="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420917"
+    help_msg_loc              = ""
+
+# Displays alternate token ring address.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "090"
+    disc_field_name           = "alt_addr"
+    name                      = "ALTERNATE TOKEN RING address"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 28
+    name_msg_id               = 14
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a alt_addr="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "echo \"Read help information.\" "
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420918"
+    help_msg_loc              = ""
+
+# Display database only question.
+sm_cmd_opt:
+    id                        = "tok_chg"
+    id_seq_num                = "100"
+    disc_field_name           = ""
+    name                      = "Apply change to DATABASE only"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 11
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "-P ,"
+    help_msg_id               = "0420919"
+    help_msg_loc              = ""

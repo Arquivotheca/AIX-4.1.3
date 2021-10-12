@@ -1,0 +1,57 @@
+# @(#)74	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.ibm3151-7-bit/out.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:47:33
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#  out.MAP
+#   -------
+#
+#  This is the maping of characters while in Hebrew_Alpha mode.
+#  Only keys affected must be present in the file.
+#  The first value is the decimal code of the the ibm3151 Hebrew
+#  characters, the second is the ISO code values for them.
+#  This maps internal ibm3151 codes to ISO.
+#
+#
+# key          converted
+#                 to
+#
+176             96      # aleph
+177             97      # bet
+178             98      # gimmel
+179             99 	# daled
+180             100	# heh
+181             101	# vav
+182             102	# zain
+183             103 	# het
+184             104	# tet
+185             105	# yod
+188             106	# final kaf
+189             107 	# kaf
+190             108	# lamed
+191             109	# final mem
+224             110	# mem
+225             111	# final nun
+226             112	# nun
+227             113	# samech
+228             114	# ayin
+229             115	# final pay
+230             116	# pay
+231             117	# final tsadik
+232             118 	# tsadik
+233             119	# kuf
+251             120	# resh
+252             121	# shin
+253             122     # tof
+#

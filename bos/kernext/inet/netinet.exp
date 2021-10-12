@@ -1,0 +1,108 @@
+#!/unix
+* @(#)73	1.21  src/bos/kernext/inet/netinet.exp, sysxinet, bos411, 9433A411a 8/12/94 10:43:09
+*
+*   COMPONENT_NAME: SYSXINET
+*
+*   FUNCTIONS: 
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1988,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+* symbols exported from netinet loadable code.
+*
+arptimer_init
+icmpstat
+igmpstat
+in_control
+in_ifaddr
+in_ifinit
+ip_id
+ipstat
+tcb
+tcp_debug
+tcp_debx
+tcpstat
+udb
+udpstat
+in_pcbbind
+in_cksum
+ie2_llc
+ipintr 
+ip_reass 
+ip_freef 
+ip_slowtimo 
+ip_drain 
+ip_dooptions 
+ip_rtaddr 
+save_rte
+ip_srcroute 
+ip_stripoptions 
+ip_forward 
+ip_output 
+ip_insertoptions 
+ip_optcopy 
+ip_ctloutput
+ip_pcbopts 
+tcp_reass 
+tcp_xmit_timer 
+tcp_input 
+tcp_dooptions
+tcp_pulloutofband 
+tcp_mss 
+in_localaddr 
+tcp_output 
+tcp_init 
+tcp_template 
+tcp_respond 
+tcp_newtcpcb
+tcp_drop 
+tcp_close 
+tcp_drain 
+tcp_notify 
+tcp_ctlinput
+tcp_quench 
+tcp_timers 
+tcp_usrreq 
+tcp_ctloutput 
+tcp_attach 
+tcp_disconnect
+tcp_usrclosed 
+udp_input 
+udp_notify 
+udp_ctlinput 
+udp_output
+udp_usrreq
+udpcksum
+tcpcksum
+iptime 
+icmp_send
+icmp_reflect
+icmp_error
+icmp_input
+rip_output
+rip_ctloutput
+rip_input
+rip_usrreq
+raw_usrreq
+ipintrq
+driver_addmulti
+driver_delmulti
+get_ip_id
+in_lnaof
+arptnew
+arptab_lock
+in_pcbhashlookup
+in_pcb_hash_del
+in_pcb_hash_ins
+tcp_pcb_hash_table
+udp_pcb_hash_table
+udp_send
+udp_receive
+udp_cksum_and_move

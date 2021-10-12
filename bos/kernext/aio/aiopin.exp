@@ -1,0 +1,46 @@
+#!/usr/lib/drivers/aiopin
+* @(#)45        1.1  src/bos/kernext/aio/aiopin.exp, sysxaio, bos412, 9445C412a 11/1/94 09:37:50
+*
+* COMPONENT_NAME: (SYSXAIO) Asynchronous I/O
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* This module contains IBM CONFIDENTIAL code. -- (IBM
+* Confidential Restricted when combined with the aggregated
+* modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+
+* following symbols are declared in aiopin.c, and are non-pageable
+lvm_lock
+knots
+suspenders
+lvmio
+freebufp
+freebufsize
+freereqp
+freereqsize
+
+* following symbols are functions
+arl_iodone
+fetchbufs
+check_suspender
+create_suspender
+remove_suspender
+arl_suspend
+create_knot
+untie_knot
+slip_knot
+check_knot
+getreq
+releasereq
+releasebuf
+morebufs

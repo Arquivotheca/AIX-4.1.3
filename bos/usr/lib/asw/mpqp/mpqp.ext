@@ -1,0 +1,151 @@
+/*
+static char sccsid[] = "@(#)75  1.4  src/bos/usr/lib/asw/mpqp/mpqp.ext, ucodmpqp, bos411, 9428A410j 1/30/91 17:18:50";
+*/
+
+/*
+ * COMPONENT_NAME: (UCODMPQ) Multiprotocol Quad Port Adapter Software
+ *
+ * FUNCTIONS: 
+ *	mpqp.ext		: externs commonly used by many files
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */                                                                   
+
+/*****************************************************************************
+   The work queue itself is shared between interrupt service and off-level
+   processing, thus its "volatile" definition.  Each sch_lev contains a
+   single bit entry for each port with work pending at that priority level.
+*/
+
+extern volatile sch_lev		work_q [NUM_LEV];
+
+/*****************************************************************************
+   Each priority Level has a service routine which the main scheduler calls
+   with only the requesting port number as a parameter.  This array contains
+   the function vectors, NUM_LEV entries long.
+*/
+
+extern const int		( *lev_vec [NUM_LEV] )();
+
+/*****************************************************************************
+   Since higher priority (lower numbered) levels are always tested between
+   round-robin scheduling of tasks on a given level, a placeholder within
+   each level must be maintained.  This array is owned locally and is, thus,
+   not declared volatile.  Only one bit exists in each level's mask, and
+   it is shifted left 1 after work processing to indicate the next task
+   available for service.  If the bit shifts out of base_mask, the level
+   mask is reset to 1.  If the level work queue is empty on completion of
+   a task, it can also be reset to 1.
+*/
+
+extern sch_lev			task_mask [NUM_LEV];
+extern int			i_sched;
+
+#ifdef PREEMPT
+/*
+   In the preemptable version of the scheduler, the priority of the
+   currently executing task (LEVEL) must be available for the preemption
+   logic, at ISR level, to determine when to queue and when to preempt.
+*/
+
+extern volatile int		cur_pri;
+#endif
+
+/*
+   When the adapter is notified that the host detected tx buffer list empty,
+   it places a threshold value into global memory so that the freeing routine
+   can see when it should generate the acknowledgement response (interrupt)
+*/
+
+extern int			tx_int_en;
+
+/*
+   These tables help look up addresses (I/O) of hardware components on
+   the MPQP adapter.  Rely heavily on file mpqp.h.
+*/
+
+extern int	scc_io [8];
+extern int	cio_io [NUM_PORT];
+extern int	cio_pio [NUM_PORT];
+
+/*
+   Some of the global (shared) queue external definitions
+*/
+
+extern volatile byte_q		rx_free;
+extern volatile byte_q		tx_free;
+extern volatile byte_q		acqueue;
+extern volatile rqe_q		arqueue;
+
+extern volatile unsigned short	acmdreg;
+
+extern volatile unsigned char	edrr [NUM_PORT][64];
+extern volatile unsigned char	edrr_0[64],edrr_1[64],edrr_2[64],edrr_3[64];
+
+extern cmd_blk			cmdblk [48];	/* Was volatile */
+
+/*
+   These queues are not used by the driver, but only intermediate storage.
+   The pointer tables exist for assembler efficiency, but are public in case
+   anyone cares.
+*/
+
+extern volatile byte_q		port_cq [NUM_PORT];
+extern byte_q			*pcq_tab [NUM_PORT];
+
+extern volatile rqe_q		port_rq [NUM_PORT];
+extern rqe_q			*prq_tab [NUM_PORT];
+
+extern volatile word_q		tx_dma_q;
+
+extern volatile unsigned short	Dma_Count;
+extern volatile t_dma_op	Dma_Oper;
+extern volatile unsigned char	Dma_Type;
+
+extern volatile eblock		estat [NUM_PORT];
+
+extern volatile unsigned char	SleepEn [];
+extern volatile unsigned char	ReRoute [];
+
+extern unsigned char far	*XMIT_EXTENSION();
+extern unsigned char far	*XMIT_BUFFER();
+extern unsigned char far	*RECV_BUFFER();
+/*
+   The diagnostic functions, high command types 0xF? - 0xA?, are reached
+   through function tables externed here.
+*/
+
+extern const int	( *ad_cntl [16] )();
+extern const int	( *ad_diag [16] )();
+extern const int	( *ad_sest [16] )();
+extern const int	( *pt_diag [16] )();
+extern const int	( *ad_qury [16] )();
+extern const int	( *us_diag [16] )();
+
+/*
+   The only (Port 0) x.21 Call Progress Signal retry and netlog data
+   structure.
+*/
+
+extern t_x21_ctl		x21_ctl;
+
+/*
+   Adapter statistics
+*/
+
+extern volatile unsigned long		tx_dma;
+extern volatile unsigned long		tx_dma_bytes;
+extern volatile unsigned long		tx_short;
+extern volatile unsigned long		tx_short_bytes;
+extern volatile unsigned long		rx_dma;
+extern volatile unsigned long		rx_dma_bytes;
+

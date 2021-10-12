@@ -1,0 +1,33 @@
+#!/etc/drivers/vscsiddpin
+* @(#)03      1.4.1.1  R2/sysx/disk/vscsiddpin.exp, sysxdisk, bos320, 9230320a 7/19/92 16:42:20 
+*
+* COMPONENT_NAME: SYSXSCSI
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+vsc_async_stat
+vsc_buf_free
+vsc_cdt_func
+vsc_clear_dev
+vsc_dump
+vsc_free_rdbufs
+vsc_halt_dev
+vsc_issue_bdr
+vsc_iodone
+vsc_ioctl_sleep
+vsc_log_err
+vsc_recv
+vsc_strategy
+vsc_target_receive
+vsc_watchdog
+vsc_scsi_ptrs
+vsc_cdt

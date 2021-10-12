@@ -1,0 +1,555 @@
+* @(#)69	1.5  src/bos/objclass/POWER/cxia.add, cfgtty, bos41J, 9523B_all 6/1/95 10:06:41
+*
+*   ORIGINS: 27,80
+*
+*   This module contains IBM CONFIDENTIAL code. -- (IBM
+*   Confidential            when combined with the aggregated
+*   modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1995
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+PdDv:
+	type = "cxia"
+	class = "adapter"
+	subclass = "isa"
+	prefix = "cxia"
+	devid = ""
+	base = 1
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 1801
+	setno = 152
+	msgno = 2
+	catalog = "devices.cat"
+	DvDr = "cxiadd"
+	Define = "/usr/lib/methods/define_rspc"
+	Configure = "/usr/lib/methods/cfgcxma"
+	Change = "/usr/lib/methods/chgcxma"
+	Unconfigure = "/usr/lib/methods/ucfgcxma"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = "adapter/isa/cxia"
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "bus_mem_addr"
+	deflt = "0xd0000"
+	values = "0x8000-0xff8000,0x8000"
+	width = "0x8000"
+	type = "B"
+	generic = "D"
+	rep = "nr"
+	nls_index = 3
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "bus_io_addr"
+	deflt = "0x328"
+	values = "0x108, 0x118, 0x128, 0x208, 0x228, 0x308, 0x328"
+	width = "4"
+	type = "O11"
+	generic = "DU"
+	rep = "nl"
+	nls_index = 4
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "driver"
+	deflt = "cxiadd"
+	values = "cxiadd"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "bios_download"
+	deflt = "/etc/microcode/isacxbios.02.09"
+	values = "/etc/microcode/isacxbios.02.09"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "host_download"
+	deflt = "/etc/microcode/isacxfep.02.09"
+	values = "/etc/microcode/isacxfep.02.09"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "11"
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "12"
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "13"
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "14"
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "21"
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "22"
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "23"
+
+PdCn:
+	uniquetype = "adapter/isa/cxia"
+	connkey = "isa"
+	connwhere = "24"
+
+PdDv:
+	type = "16c232"
+	class = "concentrator"
+	subclass = "isa"
+	prefix = "sa"
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 2103
+	catalog = "devices.cat"
+	setno = 152
+	msgno = 8
+	DvDr = "cxiadd"
+	Define = "/usr/lib/methods/define"
+	Configure = "/usr/lib/methods/cfgsync"
+	Change = ""
+	Unconfigure = "/usr/lib/methods/ucfgsync"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = "concentrator/isa/16c232"
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "config"
+	deflt = "000e100e100e100e100e000e100e100e100e100eff"
+	values = "000e100e100e100e100e000e100e100e100e100eff"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "line1_speed"
+	deflt = "1.2M"
+	values = "9600,14.4K,19.2K,38.4K,57.6K,64K,76.8K,115K,230K,460K,920K,1.2M"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 5
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "line1_cabletype"
+	deflt = "8"
+	values = "8,4"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 6
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l1c1"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l1c2"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l1c3"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l1c4"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "line2_speed"
+	deflt = "1.2M"
+	values = "9600,14.4K,19.2K,38.4K,57.6K,64K,76.8K,115K,230K,460K,920K,1.2M"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 5
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "line2_cabletype"
+	deflt = "8"
+	values = "8,4"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 6
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l2c1"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l2c2"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l2c3"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/isa/cxia"
+	attribute = "commode_l2c4"
+	deflt = "direct"
+	values = "direct,232_modem,422_modem,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "driver"
+	deflt = "cxiadd"
+	values = "cxiadd"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+
+PdAt:
+        uniquetype = "concentrator/isa/16c232"
+        attribute = "load_module"
+        deflt = "/usr/lib/methods/cxload"
+        values = "/usr/lib/methods/cxload" 
+	width = ""
+        type = "E"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+  
+*
+* 128-port specific extension attributes for tty
+*
+PdAt:
+        uniquetype = "concentrator/isa/16c232"
+        attribute = speed
+        deflt = 9600
+        values = "0,50,75,110,134,150,200,300,600,1200,1800,2400,4800,9600,19200,38400"
+        width = ""
+        type = E
+        generic = DU
+        rep = slm
+        nls_index = 9
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "onstr"
+	deflt = "\\033[5i"
+	values = ""
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "s"
+	nls_index = 10
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "offstr"
+	deflt = "\\033[4i"
+	values = ""
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "s"
+	nls_index = 11
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "maxcps"
+	deflt = "100"
+	values = "10-5000,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 12
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "maxchar"
+	deflt = "50"
+	values = "5-5000,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 13
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "bufsize"
+	deflt = "100"
+	values = "10-65535,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 14
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "forcedcd"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 15
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "fastcook"
+	deflt = "enable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 16
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "fastbaud"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "altpin"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 17
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "edelay"
+	deflt = "100"
+	values = "0-400,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "2200flow"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "concentrator/isa/16c232"
+	attribute = "2200print"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 20
+
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "0"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "1"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "2"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "3"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "4"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "5"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "6"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "7"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "8"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "9"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "10"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "11"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "12"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "13"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "14"
+
+PdCn:
+	uniquetype = "concentrator/isa/16c232"
+	connkey = "rs232"
+	connwhere = "15"

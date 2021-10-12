@@ -1,0 +1,875 @@
+# @(#)91 1.1 src/bos/objclass/sm_bosacct.add, cmdacct, bos411, 9428A410j 5/27/94 14:30:49
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDACCT                                                     #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27, 83                                                             #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994               #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+################################################################################
+
+# NOTES
+#
+# 1. help Id's
+#
+#       Help text Id's already used for helps are in the range:
+#               055101 to 055144
+#
+# 2. the command to list the processors has to be verified when available
+#
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Performance & Resource Scheduling                             #
+#                   Resource Status & Monitors                                 #
+#                      Report System Activity                                  #
+#                                                                              #
+# FAST KEY:  sar                                                               #
+#									       #
+# UNIX COMMAND(S):  sar                                                        #
+#                                                                              #
+# DESIGN:  1 name selector + 1 option                                          #
+#          2 dialogue headers                                                  #
+#                                                                              #
+# SELECTOR:  Report System Activity per Processor ?                            #
+#                                                                              #
+# HEADER:  Report System Activity                                              #
+#          Report System Activity per Processor                                #
+#                                                                              #
+################################################################################
+
+# A name selector is used to ask the user
+# if he wants report by processors or not 
+
+# name selector header for reporting by processors or not
+sm_name_hdr:
+    id                        = "sar"
+    next_id                   = "sar_"
+    option_id                 = "sar_sel"
+    has_name_select           = "n"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    type                      = "r"
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+# name selector command option 
+sm_cmd_opt:
+    id                        = "sar_sel"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Report System Activity per Processor ?"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 17
+    name_msg_id               = 400
+    op_type                   = "l"
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "\
+echo $(dspmsg smit.cat -s 17 405 '1 no')\n\
+echo $(dspmsg smit.cat -s 17 410 '2 yes')"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Performance & Resource Scheduling                             #
+#                   Resource Status & Monitors                                 #
+#                      Report System Activity                                  #
+#                                                                              #
+# FAST KEY:  sar                                                               #
+#									       #
+# UNIX COMMAND(S):  sar                                                        #
+#                                                                              #
+# DESIGN:  1  dialogue header						       #
+#	   14 dialogue objects      		                               #
+#                                                                              #
+# HEADER:  Report System Activity                                              #
+#                                                                              #
+# OBJECTS:  1.  Interval LENGTH of each system activity sampling	       #
+#	    2.  NUMBER of sampling intervals				       #
+#           3.  Report ALL activities listed below                    	       #
+#		 - OR any combination of the following -		       #
+#           4.  Report use of FILE ACCESS system routines             	       #
+#           5.  Report BUFFER activity for transfers, accesses,        	       #
+#               and cache hit ratios              			       #
+#           6.  Report SYSTEM CALLS                                   	       #
+#           7.  Report KERNEL activity                                	       #
+#           8.  Report MESSAGE and SEMAPHORE activities               	       #
+#           9.  Report AVERAGE QUEUE LENGTH while occupied, and        	       #
+#           10. Report PAGING statistics                          	       #
+#           11. Report CPU activity                                   	       #
+#           12. Report status of TEXT, PROCESS, i-node, and FILE       	       #
+#	        TABLES                                			       #
+#           12. Report SYSTEM SWITCHING activity                      	       #
+#           14. Report TTY DEVICE activity                            	       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "sar_1"
+	option_id               = "sarcomm,sarOpts"
+	has_name_select         = "n"
+	name                    = "Report System Activity"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 17
+	name_msg_id             = 25
+	cmd_to_exec		= "/usr/sbin/sar"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "055103"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "002"
+	disc_field_name     = ""
+	name		    = "Interval LENGTH of each system activity sampling"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 200
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 0
+	required            = "+"
+	prefix              = "--"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055130"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "003"
+	disc_field_name     = ""
+	name                = "NUMBER of sampling intervals\n"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 205
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 0
+	required            = "+"
+	prefix              = "--"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055131"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "004"
+	disc_field_name     = ""
+	name                = "Report ALL activities listed below?\n\n  - OR any combination of the following -\n"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 30
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-A"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055104"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "Report use of FILE ACCESS system routines?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 35
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-a"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055105"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarOpts"
+	id_seq_num          = "010"
+	disc_field_name     = ""
+	name                = "Report BUFFER ACTIVITY for transfers, accesses,\n  and cache hit ratios?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 40
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-b"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055106"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "015"
+	disc_field_name     = ""
+	name                = "Report SYSTEM CALLS?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 45
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-c"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055107"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarOpts"
+	id_seq_num          = "020"
+	disc_field_name     = ""
+	name                = "Report KERNEL activity?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 50
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-k"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055108"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "025"
+	disc_field_name     = ""
+	name                = "Report MESSAGE and SEMAPHORE activities?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 55
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-m"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055109"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarOpts"
+	id_seq_num          = "030"
+	disc_field_name     = ""
+	name                = "Report AVERAGE QUEUE LENGTH while occupied, and\n  percentage of time occupied?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 60
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-q"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055110"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarOpts"
+	id_seq_num          = "035"
+	disc_field_name     = ""
+	name                = "Report PAGING statistics?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 65
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-r"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055111"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "040"
+	disc_field_name     = ""
+	name                = "Report CPU activity?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 70
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-u"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055112"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarOpts"
+	id_seq_num          = "045"
+	disc_field_name     = ""
+	name                = "Report status of TEXT, PROCESS, i-node, and FILE\n  TABLES?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 75
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-v"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055113"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarcomm"
+	id_seq_num          = "050"
+	disc_field_name     = ""
+	name                = "Report SYSTEM SWITCHING activity?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 80
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-w"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055114"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "sarOpts"
+	id_seq_num          = "055"
+	disc_field_name     = ""
+	name                = "Report TTY DEVICE activity?"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 85
+	op_type             = "r"
+	entry_type          = "n"
+	entry_size          = 0
+	required            = ""
+	prefix              = "-y"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 1
+	disp_values         = "yes,no"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 17
+	values_msg_id       = 5
+	aix_values          = ","
+	help_msg_id         = "055115"
+	help_msg_loc        = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Performance & Resource Scheduling                             #
+#                   Resource Status & Monitors                                 #
+#                      Report System Activity per Processor                    #
+#                                                                              #
+# FAST KEY:  sar                                                               #
+#									       #
+# UNIX COMMAND(S):  sar                                                        #
+#                                                                              #
+# DESIGN:  1  dialogue header						       #
+#	   9 dialogue objects      		                               #
+#                                                                              #
+# HEADER:  Report System Activity per Processor                                #
+#                                                                              #
+# OBJECTS:  1.  PROCESSOR IDs                                                  #
+#           2.  Interval LENGTH of each system activity sampling	       #
+#	    3.  NUMBER of sampling intervals				       #
+#           4.  Report ALL activities listed below                    	       #
+#		 - OR any combination of the following -		       #
+#           5.  Report use of FILE ACCESS system routines             	       #
+#           6.  Report SYSTEM CALLS                                   	       #
+#           7.  Report MESSAGE and SEMAPHORE activities               	       #
+#           8.  Report CPU activity                                   	       #
+#           9.  Report SYSTEM SWITCHING activity                      	       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "sar_2"
+	option_id               = "sarproc,sarcomm"
+	has_name_select         = "n"
+	name                    = "Report System Activity per Processor"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 17
+	name_msg_id             = 415
+	cmd_to_exec		= "/usr/sbin/sar"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "055145"
+	help_msg_loc            = ""
+
+
+sm_cmd_opt:
+    id                        = "sarproc"
+    id_seq_num                = "001"
+    disc_field_name           = ""
+    name                      = "PROCESSOR IDs"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 17
+    name_msg_id               = 420
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-P "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = \
+"get_cpus ()
+# if MP machine, call bindprocessor for list of cpus; otherwise, cpu = 0
+{
+MP=`/usr/sbin/bootinfo -z`
+if [ $MP = 1 ]
+then
+/usr/sbin/bindprocessor -q | 
+/usr/bin/awk '{sub(/^.*:  /,\"\");gsub(/ /,\"\\n\");print}'
+else
+echo 0
+fi
+}
+get_cpus "
+    cmd_to_list_postfix       = ""
+    multi_select              = ","
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "055146"
+    help_msg_loc              = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Performance                                               #
+#                        Resource Status				       #
+#                            Show Virtual Memory Statistics		       #
+#                                                                              #
+# FAST KEY:  vmstat    	                                                       #
+#									       #
+# UNIX COMMAND(S):  vmstat                                                     #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   2 dialogue objects 			                               #
+#                                                                              #
+# HEADER:  Show Virtual Memory Statistics				       #
+#                                                                              #
+# OBJECTS:  1.  SECONDS between samples					       #
+#           2.  NUMBER of samples              	                               #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "vmstat"
+	option_id                 = "vmstat_o"
+	has_name_select           = "n"
+	name                      = "Show Virtual Memory Statistics"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 300
+	cmd_to_exec               = "/usr/bin/vmstat"
+	ask                       = "n"
+	exec_mode                 = ""
+	ghost                     = ""
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "055137"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "vmstat_o"
+	id_seq_num                = "010"
+	disc_field_name           = ""
+	name                      = "SECONDS between samples"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 305
+	op_type                   = ""
+	entry_type                = "#"
+	entry_size                = ""
+	required                  = "+"
+	prefix                    = "--"
+	cmd_to_list_mode          = ""
+	cmd_to_list               = ""
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = "2"
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "055138"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "vmstat_o"
+	id_seq_num                = "020"
+	disc_field_name           = ""
+	name                      = "NUMBER of samples"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 310
+	op_type                   = ""
+	entry_type                = "#"
+	entry_size                = ""
+	required                  = "y"
+	prefix                    = "--"
+	cmd_to_list_mode          = ""
+	cmd_to_list               = ""
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = "5"
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "055139"
+	help_msg_loc              = ""
+ 
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Performance                                               #
+#                        Resource Status				       #
+#                            Show Input/Output Statistics		       #
+#                                                                              #
+# FAST KEY:  iostat    	                                                       #
+#									       #
+# UNIX COMMAND(S):  iostat                                                     #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   2 dialogue objects 			                               #
+#                                                                              #
+# HEADER:  Show Input/Output Statistics					       #
+#                                                                              #
+# OBJECTS:  1.  SECONDS between samples					       #
+#           2.  NUMBER of samples              	                               #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "iostat"
+	option_id                 = "iostat_o"
+	has_name_select           = "n"
+	name                      = "Show Input/Output Statistics"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 315
+	cmd_to_exec               = "/usr/bin/iostat" 
+	ask                       = "n"
+	exec_mode                 = "p"
+	ghost                     = ""
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "055140"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "iostat_o"
+	id_seq_num                = "010"
+	disc_field_name           = ""
+	name                      = "SECONDS between samples"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 320
+	op_type                   = ""
+	entry_type                = "#"
+	entry_size                = 0
+	required                  = "+"
+	prefix                    = "--"
+	cmd_to_list_mode          = ""
+	cmd_to_list               = ""
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = "2"
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "055141"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "iostat_o"
+	id_seq_num                = "020"
+	disc_field_name           = ""
+	name                      = "NUMBER of samples"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 325
+	op_type                   = ""
+	entry_type                = "#"
+	entry_size                = 0
+	required                  = "y"
+	prefix                    = "--"
+	cmd_to_list_mode          = ""
+	cmd_to_list               = ""
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = "5"
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "055142"
+	help_msg_loc              = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Performance                                               #
+#                        Analysis Tools 				       #
+#                            Show System Activity While Running a Command      #
+#                                                                              #
+# FAST KEY:  timex    	                                                       #
+#									       #
+# UNIX COMMAND(S):  timex						       #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   1 dialogue object 			                               #
+#                                                                              #
+# HEADER:  Show System Activity While Running a Command			       #
+#                                                                              #
+# OBJECTS:  1.  COMMAND name						       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "timex"
+	option_id                 = "timex_o"
+	has_name_select           = "n"
+	name                      = "Show System Activity While Running a Command"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 330
+	cmd_to_exec               = "/usr/bin/timex -s"
+	ask                       = "n"
+	exec_mode                 = ""
+	ghost                     = ""
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "055143"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "timex_o"
+	id_seq_num                = "010"
+	disc_field_name           = ""
+	name                      = "COMMAND name"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 17
+	name_msg_id               = 335
+	op_type                   = ""
+	entry_type                = "t"
+	entry_size                = 0
+	required                  = "+"
+	prefix                    = "--"
+	cmd_to_list_mode          = ""
+	cmd_to_list               = ""
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = ""
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "055144"
+	help_msg_loc              = ""

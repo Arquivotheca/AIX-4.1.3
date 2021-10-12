@@ -1,0 +1,31 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can of course put several lines between the 'a' and the '.'
+to type in lots of text at one time.  Here is a set
+of lines: type them in and name the file "fruit".
+Type "ready" when done.  Input is ...
+#create Ref
+apple
+peach
+pear
+plum
+nectarine
+orange
+#print Ref
+#user
+#cmp Ref fruit
+#log
+#next
+16.1a 10

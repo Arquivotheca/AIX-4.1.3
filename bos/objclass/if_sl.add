@@ -1,0 +1,162 @@
+# @(#) 74  1.17  src/bos/objclass/if_sl.add, sockobj, bos411, 9428A410j 1/27/94 15:25:37
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the SLIP network interface.
+
+PdDv:
+	type		= "sl"
+	class		= "if"
+	subclass	= "SL"
+	prefix		= "sl"
+	base		= 0
+	chgstatus	= 0
+	DvDr		= "if_sl"
+	led		= 0x581
+	setno		= 110
+	msgno		= 20
+	catalog		= "devices.cat"
+	Define		= "/usr/lib/methods/defif"
+	Configure	= "/usr/lib/methods/cfgif"
+	Change		= "/usr/lib/methods/chgif"
+	Unconfigure	= "/usr/lib/methods/ucfgif"
+	Undefine	= "/usr/lib/methods/udefif"
+	uniquetype	= "if/SL/sl"
+
+PdCn:
+	uniquetype	= "if/SL/sl"
+	connkey		= "TCPIP"
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "mtu"
+	deflt		= "1006"
+	values		= "60-4096,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 2
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "remmtu"
+	deflt		= "576"
+	values		= "60-4096,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 3
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "netaddr"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "state"
+	deflt		= "down"
+	values		= "up,down,detach"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 5
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "netmask"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 7
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "if_keyword"
+	deflt		= "none"
+	values		= ""
+	type		= "R"
+	generic		= ""
+	rep		= "s"
+	nls_index	= 0
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "dest"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 12
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "security"
+	deflt		= "none"
+	values		= "top_secret,secret,confidential,unclassified,none"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 9
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "authority"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 10
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "baudrate"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 13
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "ttyport"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 14
+
+PdAt:
+	uniquetype	= "if/SL/sl"
+	attribute	= "dialstring"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 15

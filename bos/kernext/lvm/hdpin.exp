@@ -1,0 +1,84 @@
+#!/etc/drivers/hd_pin_bot
+
+* Z%12  1.17  src/bos/kernext/lvm/hdpin.exp, sysxlvm, bos411, 9428A410j 5/3/94 16:29:07
+*
+*   COMPONENT_NAME: SYSXLVM
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1990
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*************************************************************************
+*
+*   Labels that are exported from pinned portion of the logical volume
+*   device driver for use by the pageable portion of the device driver
+*
+*************************************************************************
+
+*	global data structures
+
+hd_freebuf
+hd_freebad
+hd_freebad_cnt
+hd_dmpbuf
+hd_pbuf_cnt
+hd_pbuf_grab
+hd_pbuf_min
+hd_vgs_opn
+hd_lvs_opn
+hd_pvs_opn
+hd_pbuf_inuse
+hd_pbuf_maxuse
+lvm_kp_tid
+lvm_kp_wait
+glb_kp_lock
+hd_pendqblked
+hd_allow_reloc
+pending_Q
+mwcc_entries
+hd_ca_lock
+ca_alloced
+ca_grp_ptr
+bb_pbuf
+pinned_bb_dir_memory
+hd_vghead 
+hd_freebad_lk
+glb_sched_intlock
+init_global_locks
+lvm_bufcnt
+* debuglvl
+
+*       routines
+
+hd_add2pool
+hd_numpbufs
+hd_begin
+hd_end
+hd_ready
+hd_quiet
+hd_strategy
+hd_kdis_initmwc
+hd_kdis_dswadd
+hd_kproc
+hd_ca_clnup
+hd_sa_config
+hd_kdis_chgqrm
+hd_upd_bbdir
+hd_logerr
+hd_dump
+max_bb_entries
+dl_quiet
+rel_bblk
+get_bblk
+incr_pbuf_grab
+hd_stripe_xlate
+hd_nodumpvg
+hd_dumpvglist

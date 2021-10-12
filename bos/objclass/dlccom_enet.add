@@ -1,0 +1,335 @@
+# @(#)91        1.2  src/bos/objclass/dlccom_enet.add, dlccfg, bos411, 9428A410j 6/24/94 11:13:56
+# COMPONENT_NAME: (DLCCFG) Add file to create objects during install
+#
+# FUNCTIONS: none
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+#
+# (C) COPYRIGHT International Business Machines Corp. 1994
+# All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_menu_opt:
+    id                  = "eserv"
+    id_seq_num          = "010"
+    next_id             = "cmddlc_ether"
+    text                = "Ethernet Data Link Controls"
+    text_msg_file       = "smit.cat"
+    text_msg_set        = 5
+    text_msg_id         = 31
+    next_type           = "m"
+    alias               = "n"
+    help_msg_id         = "0348H01"
+    help_msg_loc        = ""
+
+sm_menu_opt:
+    id                  = "cmddlc_ether"
+    id_seq_num          = "010"
+    next_id             = "cmddlc_ether_mk"
+    text                = "Add an Ethernet Data Link Control"
+    text_msg_file       = "smit.cat"
+    text_msg_set        = 5
+    text_msg_id         = 4
+    next_type           = "n"
+    alias               = "n"
+    help_msg_id         = "0348H03"
+    help_msg_loc        = ""
+
+sm_menu_opt:
+    id                  = "cmddlc_ether"
+    id_seq_num          = "020"
+    next_id             = "cmddlc_ether_ls"
+    text                = "Change / Show an Ethernet Data Link Control"
+    text_msg_file       = "smit.cat"
+    text_msg_set        = 5
+    text_msg_id         = 5
+    next_type           = "n"
+    alias               = "n"
+    help_msg_id         = "0348H08"
+    help_msg_loc        = ""
+
+sm_menu_opt:
+    id                  = "cmddlc_ether"
+    id_seq_num          = "030"
+    next_id             = "cmddlc_ether_rm"
+    text                = "Remove an Ethernet Data Link Control"
+    text_msg_file       = "smit.cat"
+    text_msg_set        = 5
+    text_msg_id         = 6
+    next_type           = "n"
+    alias               = "n"
+    help_msg_id         = "0348H15"
+    help_msg_loc        = ""
+
+sm_name_hdr:
+    id                  = "cmddlc_ether_mk"
+    next_id             = "cmddlc_ether_mk"
+    option_id           = "cmddlc_ether_name_mk"
+    name                = "Add an Ethernet Data Link Control"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 4
+    type                = "j"
+    ghost               = "y"
+    cmd_to_classify     = "sh /usr/lpp/bos.dlc/com/sm_name_hdr.awk"
+    cmd_to_classify_postfix     = "_rawname"
+    raw_field_name      = "_rawname"
+    cooked_field_name   = "_cookedname"
+    next_type           = "d"
+    help_msg_id         = "0348H03"
+    help_msg_loc        = ""
+
+sm_name_hdr:
+    id                  = "cmddlc_ether_ls"
+    next_id             = "cmddlc_ether_ls"
+    option_id           = "cmddlc_ether_name_ls"
+    name                = "Change / Show an Ethernet Data Link Control"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 5
+    type                = "j"
+    ghost               = "y"
+    cmd_to_classify     = ""
+    cmd_to_classify_postfix     = ""
+    raw_field_name      = "_rawname"
+    cooked_field_name   = ""
+    next_type           = "d"
+    help_msg_id         = "0348H08"
+    help_msg_loc        = ""
+
+sm_name_hdr:
+    id                  = "cmddlc_ether_rm"
+    next_id             = "cmddlc_ether_rm"
+    option_id           = "cmddlc_ether_name_rm"
+    name                = "Remove an Ethernet Data Link Control"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 6
+    type                = "j"
+    ghost               = "y"
+    cmd_to_classify     = ""
+    cmd_to_classify_postfix     = ""
+    raw_field_name      = ""
+    cooked_field_name   = ""
+    next_type           = "d"
+    help_msg_id         = "0348H15"
+    help_msg_loc        = ""
+
+sm_cmd_hdr:
+    id                  = "cmddlc_ether_mk"
+    option_id           = "cmddlc_ether_infop"
+    has_name_select     = "y"
+    name                = "Add an Ethernet Data Link Control"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 4
+    cmd_to_exec         = "mkdev -c dlc -s dlc"
+    ask                 = "n"
+    exec_mode           = ""
+    ghost               = "y"
+    cmd_to_discover     = ""
+    cmd_to_discover_postfix = ""
+    name_size           = 0
+    value_size          = 0
+    help_msg_id         = "0348H03"
+    help_msg_loc        = ""
+
+sm_cmd_hdr:
+    id                  = "cmddlc_ether_ls"
+    option_id           = "cmddlc_ether_infoc"
+    has_name_select     = "y"
+    name                = "Change / Show an Ethernet Data Link Control"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 5
+    cmd_to_exec         = "chdev"
+    ask                 = "n"
+    exec_mode           = ""
+    ghost               = "n"
+    cmd_to_discover     = "lsattr -O -E -l"
+    cmd_to_discover_postfix = "_rawname"
+    name_size           = 0
+    value_size          = 0
+    help_msg_id         = "0348H08"
+    help_msg_loc        = ""
+
+sm_cmd_hdr:
+    id                  = "cmddlc_ether_rm"
+    option_id           = "cmddlc_ether_infoc"
+    has_name_select     = "y"
+    name                = "Remove an Ethernet Data Link Control"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 6
+    cmd_to_exec         = "rmdev -d"
+    ask                 = "y"
+    exec_mode           = ""
+    ghost               = "y"
+    cmd_to_discover     = ""
+    cmd_to_discover_postfix = ""
+    name_size           = 0
+    value_size          = 0
+    help_msg_id         = "0348H15"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "cmddlc_ether_infop"
+    id_seq_num          = "010"
+    disc_field_name     = "_cookedname"
+    name                = "Device name"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 2
+    op_type             = ""
+    entry_type          = "n"
+    entry_size          = 0
+    required            = "y"
+    prefix              = "-t "
+    cmd_to_list_mode    = ""
+    cmd_to_list         = ""
+    cmd_to_list_postfix = ""
+    multi_select        = ""
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "0348H12"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "cmddlc_ether_infoc"
+    id_seq_num          = "010"
+    disc_field_name     = "_rawname"
+    name                = "Device name"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 2
+    op_type             = ""
+    entry_type          = "n"
+    entry_size          = 0
+    required            = "y"
+    prefix              = "-l "
+    cmd_to_list_mode    = ""
+    cmd_to_list         = ""
+    cmd_to_list_postfix = ""
+    multi_select        = ""
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "0348H12"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "cmddlc_ether_infoc"
+    id_seq_num          = "020"
+    disc_field_name     = "queue_depth"
+    name                = "DEPTH of the receive queue"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 7
+    op_type             = "l"
+    entry_type          = "#"
+    entry_size          = 0
+    required            = "n"
+    prefix              = "-a queue_depth="
+    cmd_to_list_mode    = "r"
+    cmd_to_list         = "lsattr -R -a queue_depth -l"
+    cmd_to_list_postfix = "_rawname"
+    multi_select        = "n"
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "0348H13"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "cmddlc_ether_name_mk"
+    id_seq_num          = "0"
+    disc_field_name     = ""
+    name                = "Name of Device to Add"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 8
+    op_type             = "l"
+    entry_type          = "t"
+    entry_size          = 0
+    required            = ""
+    prefix              = ""
+    cmd_to_list_mode    = "a"
+    cmd_to_list         = "lsparent -P -k dlc_ethernet"
+    cmd_to_list_postfix = ""
+    multi_select        = "n"
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "0348H23"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "cmddlc_ether_name_ls"
+    id_seq_num          = "0"
+    disc_field_name     = ""
+    name                = "Name of Device to Change / Show"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 1
+    op_type             = "l"
+    entry_type          = "t"
+    entry_size          = 0
+    required            = ""
+    prefix              = ""
+    cmd_to_list_mode    = "1"
+    cmd_to_list         = "lsparent -C -k dlc_ethernet"
+    cmd_to_list_postfix = ""
+    multi_select        = "n"
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "0348H24"
+    help_msg_loc        = ""
+
+sm_cmd_opt:
+    id                  = "cmddlc_ether_name_rm"
+    id_seq_num          = "0"
+    disc_field_name     = ""
+    name                = "Name of Device to Remove"
+    name_msg_file       = "smit.cat"
+    name_msg_set        = 5
+    name_msg_id         = 9
+    op_type             = "l"
+    entry_type          = "t"
+    entry_size          = 0
+    required            = ""
+    prefix              = ""
+    cmd_to_list_mode    = "1"
+    cmd_to_list         = "lsparent -C -k dlc_ethernet"
+    cmd_to_list_postfix = ""
+    multi_select        = "n"
+    value_index         = 0
+    disp_values         = ""
+    values_msg_file     = ""
+    values_msg_set      = 0
+    values_msg_id       = 0
+    aix_values          = ""
+    help_msg_id         = "0348H24"
+    help_msg_loc        = ""

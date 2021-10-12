@@ -1,0 +1,138 @@
+/* @(#)95	1.9.1.8  src/bos/objclass/POWER/diagodm.cre, cmddiag, bos411, 9428A410j 3/25/94 06:10:26 */
+/*
+ *   COMPONENT_NAME: CMDDIAG
+ *
+ *   FUNCTIONS: 
+ *
+ *   ORIGINS: 27, 83
+ *
+ *
+ *   (C) COPYRIGHT International Business Machines Corp. 1991,1994
+ *   All Rights Reserved
+ *   Licensed Materials - Property of IBM
+ *   US Government Users Restricted Rights - Use, duplication or
+ *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ *
+ *   LEVEL 1, 5 Years Bull Confidential Information
+ *
+ */
+
+
+#include <sys/cfgdb.h>				/* Defines string lengths */
+
+/* Common to Predefined/Customized Object Classes */
+
+class DSMenu {
+        short           order;
+        char            comment[80];
+        char            msgkey[4];
+};
+
+class DSMOptions {
+        char            msgkey[4];
+        vchar   	catalogue[255];
+        short           order;
+        short           setid;
+        short           msgid;
+        vchar		action[255];
+	char		Diskette[5];
+};
+
+class PDiagDev {
+        char            DType[TYPESIZE];
+        char            DSClass[CLASSIZE];
+        short           Ports;
+        short           PSet;
+        short           PreTest;
+        char            AttDType[TYPESIZE];
+        char            AttSClass[CLASSIZE];
+        short           Conc;
+        short           SupTests;
+        short           Menu;
+        short           DNext;
+        vchar 		DaName[255];
+	char		Diskette[5];
+        vchar 		EnclDaName[255];
+	short		SysxFlg;
+        char            DClass[CLASSIZE];
+};
+
+class CDiagDev {
+        char            DType[TYPESIZE];
+        char            Location[LOCSIZE];
+        short           Port;
+        short           State;
+        short           TstLvl;
+        short           More;
+        short           RtMenu;
+        short           NewEntry;
+	short		SysxTime;
+	short		Periodic;
+	short		Frequency;
+};
+
+class TMInput {
+        short           exenv;
+        short           advanced;
+        short           system;
+        short           dmode;
+        char            date[80];
+        short           loopmode;
+        short           lcount;
+        short           lerrors;
+        short           console;
+        char            parent[NAMESIZE];
+        char            parentloc[LOCSIZE];
+        char            dname[NAMESIZE];
+        char            dnameloc[LOCSIZE];
+        char            child1[NAMESIZE];
+        short           state1;
+        char            childloc1[LOCSIZE];
+        char            child2[NAMESIZE];
+        short           state2;
+        char            childloc2[LOCSIZE];
+        long            pid;
+	short		cpuid;
+};
+
+class FRUB {
+        char            dname[NAMESIZE];
+        short           ftype;
+        short           sn;
+        short           rcode;
+        short           rmsg;
+        char            timestamp[80];
+};
+
+class FRUs {
+        char            dname[NAMESIZE];
+        char            fname[NAMESIZE];
+        char            floc[LOCSIZE];
+        short           ftype;
+        short           fmsg;
+        short           conf;
+};
+
+class MenuGoal {
+        char            dname[NAMESIZE];
+        longchar        tbuffer1[1000];
+        longchar        tbuffer2[1000];
+};
+
+class DAVars {
+        char            dname[NAMESIZE];
+        char            vname[30];
+        short           vtype;
+        char            vvalue[30];
+        long            ivalue;
+};
+
+class PDiagAtt {
+        char            DType[TYPESIZE];
+        char            DSClass[CLASSIZE];
+	char		attribute[NAMESIZE];
+	vchar		value[255];
+	char		rep[8];
+        char            DClass[CLASSIZE];
+        vchar           DApp[255];
+};

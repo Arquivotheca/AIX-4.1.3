@@ -1,0 +1,161 @@
+# @(#)19   1.14  src/bos/objclass/POWER/gio.add, inputdd, bos411, 9430C411a 7/27/94 09:07:09
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#  Predefined stanza file for Gio adapter, and devices
+#
+
+PdDv:
+	type = gsla
+	class = adapter
+	subclass = mca
+	prefix = gio
+	devid = 0xd5ed 
+	base = 0
+	has_vpd = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x819
+	setno = 24
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = giodd
+	Define = /usr/lib/methods/define
+	Configure = /usr/lib/methods/cfggio
+	Change = /usr/lib/methods/chggen
+	Unconfigure = /usr/lib/methods/ucfgdevice  
+	Undefine = /usr/lib/methods/undefine
+	Start = "" 
+	Stop = ""
+	uniquetype = adapter/mca/gsla
+
+PdAt:
+	uniquetype = adapter/mca/gsla
+	attribute = bus_io_addr
+	deflt = 0x0960
+	values = 0x0960
+	width = 0x10 
+	type = O 
+	generic = D 
+	rep = n
+	nls_index = 2
+
+PdAt:
+	uniquetype = adapter/mca/gsla
+	attribute = bus_intr_lvl 
+	deflt = 9 
+	values = "3,4,5,6,7,9"
+	width = "" 
+	type = I 
+	generic = D 
+	rep = nl 
+	nls_index = 3 
+
+PdAt:
+	uniquetype = adapter/mca/gsla
+	attribute = intr_priority
+	deflt = 4 
+	values = 4 
+	width = "" 
+	type = P 
+	generic = D 
+	rep = n
+	nls_index = 4 
+
+PdDv:
+	type = dials
+	class = dial
+	subclass = gio
+	prefix = dials
+	devid = ""
+	base = 0
+	has_vpd = 0
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x929
+	setno = 24
+	msgno = 6
+	fru = 1
+	catalog = devices.cat
+	DvDr = "giodd"
+	Define = "/usr/lib/methods/define"
+	Configure = "/usr/lib/methods/cfggiodev"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = dial/gio/dials
+
+PdDv:
+	type = lpfkeys
+	class = lpfk
+	subclass = gio
+	prefix = lpfk
+	devid = ""
+	base = 0
+	has_vpd = 0
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x930
+	setno = 24
+	msgno = 5
+	fru = 1
+	catalog = devices.cat
+	DvDr = "giodd"
+	Define = "/usr/lib/methods/define"
+	Configure = "/usr/lib/methods/cfggiodev"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = lpfk/gio/lpfkeys
+
+PdCn:
+        uniquetype = "adapter/mca/gsla"
+	connkey = gio
+	connwhere = "1"
+
+PdCn:
+        uniquetype = "adapter/mca/gsla"
+	connkey = gio
+	connwhere = "2"
+
+* Note: PdCn for connection to native serial ports are in the
+*       .add files that define the native I/O port
+ 
+PdAt:
+        uniquetype = lpfk/gio/lpfkeys
+        attribute = autoconfig
+        deflt = available
+        values = "available,defined"
+        width = "7"
+        type = R
+	generic = DU
+        rep = sl
+        nls_index = 7
+
+PdAt:
+        uniquetype = dial/gio/dials
+        attribute = autoconfig
+        deflt = available
+        values = "available,defined"
+        width = "8"
+        type = R
+	generic = DU
+        rep = sl
+        nls_index = 7

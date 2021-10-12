@@ -1,0 +1,322 @@
+#  @(#)65        1.4  src/bos/objclass/sm_alog.add, cmdalog, bos41J, 9515A_all 4/7/95 13:49:16
+#
+#   COMPONENT_NAME: CMDALOG
+#
+#   FUNCTIONS: stanza file for alog SMIT odm population
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+sm_name_hdr:
+	id = "alog_show"
+        next_id = "alog_show.hdr"
+        option_id = "alog_show.name_select"
+        name = "Show an Alog File"
+        name_msg_file = "smit.cat"
+        name_msg_set = 50
+        name_msg_id = 1
+        type = "j"
+        ghost = "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name = "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type = "d"
+        help_msg_id = "0453036"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id                              = "alog_show.hdr"
+        option_id                       = "alog_opts"
+        has_name_select                 = "y"
+        name                            = "Show an Alog File"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 1
+        cmd_to_exec                     = "alog -o -f"
+        ask                             = "n"
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+VALUES=`alog -L -c -t $1 | cut -d\":\" -f1-2 | grep -v \"\#\"`
+echo '#type:file\n'$VALUES
+}
+x"
+        cmd_to_discover_postfix         = "_rawname"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "0453036"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "alog_show.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "type"
+        name                            = "Alog TYPE"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 2 
+        op_type                         = "l"
+        entry_type                      = "t"
+	entry_size			= 0
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "alog -L"
+        cmd_to_list_postfix             = ""
+	multi_select			= "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453037"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "alog_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "type"
+        name                            = "Alog TYPE"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 2
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = ""
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+	multi_select			= "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453037"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "alog_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "file"
+        name                            = "Alog File NAME"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 3
+        op_type                         = ""
+        entry_type                      = "f"
+        required                        = "y"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453038"
+        help_msg_loc                    = ""
+
+sm_name_hdr:
+        id = "alog_change"
+        next_id = "alog_change.hdr"
+        option_id = "alog_change.name_select"
+        name = "Change / Show Characteristics of an Alog File"
+        name_msg_file = "smit.cat"
+        name_msg_set = 50
+        name_msg_id = 4
+        type = "j"
+        ghost = "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name = "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type = "d"
+        help_msg_id = "0453039"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id                              = "alog_change.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "type"
+        name                            = "Alog TYPE"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 2
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "alog -L"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453040"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "alog_change.hdr"
+        option_id                       = "alogchg_opts"
+        has_name_select                 = "y"
+        name                            = "Change / Show Characteristics of an Alog File"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 4
+        cmd_to_exec                     = "change_attr()
+{
+		OLDFILE=`alog -t $1 -L | grep -v \"\#\" | cut -d\":\" -f1`
+
+		# Change attributes in the ODM database.
+		alog -C -t $1 -f $2 -s $3 -w $4
+
+		# If they were changed in the ODM, then recreate
+		# the file with the new attributes if the file had
+		# previously existed.  
+		if [ $? -eq 0 -a -f $OLDFILE ] 
+		then
+			alog -f $OLDFILE -o > /tmp/smalog.$$
+
+			# Only remove the file if the filename did not
+			# change.  This is so we can create the new file     
+			# without duplicate information.
+			if [ "$OLDFILE" = "$2" ]
+			then
+				rm -f $OLDFILE	
+			fi
+			cat /tmp/smalog.$$ | alog -t $1 > /dev/null
+			rm -f /tmp/smalog.$$
+		fi
+}
+change_attr"
+        ask                             = "n"
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+VALUES=`alog -L -c -t $1 | cut -d\":\" -f1-4 | grep -v \"\#\"`
+echo '#type:file:size:verbosity\n'$VALUES
+}
+x"
+        cmd_to_discover_postfix         = "_rawname"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "0453039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "alogchg_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "type"
+        name                            = "Alog TYPE"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 2
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453040"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "alogchg_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "file"
+        name                            = "Alog File NAME"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 3
+        op_type                         = ""
+        entry_type                      = "f"
+        required                        = "y"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "alogchg_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "size"
+        name                            = "Alog File SIZE"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 5
+        op_type                         = ""
+        entry_type                      = "#"
+        required                        = "y"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453042"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "alogchg_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "verbosity"
+        name                            = "VERBOSITY"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 50
+        name_msg_id                     = 6
+        op_type                         = ""
+        entry_type                      = "#"
+        required                        = "y"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "0453043"
+        help_msg_loc                    = ""
+

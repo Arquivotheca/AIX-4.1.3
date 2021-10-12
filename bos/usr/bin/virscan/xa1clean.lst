@@ -1,0 +1,33 @@
+* @(#)36	1.2  src/bos/usr/bin/virscan/xa1clean.lst, cmdsvir, bos411, 9428A410j 4/3/91 19:12:43 
+*
+* COMPONENT_NAME: CMDSVIR
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*-------------------------------------------------------------------------
+*
+* The XA1 (XMas and April 1st) virus; displays tree on Dec 24,
+*   overwrites boot records with "April..." message on 4/1.
+*
+* Checked: Infects COM
+*
+*
+FA8BEC5832C08946028146002800
+This file may be infected with the "XA1" virus.
+(COM files only)
+*
+*-------------------------------------------------------------------------
+*
+* For VSSUPPL (XA1CLEAN.LST?)
+*
+5B83C30D8CC88ED8E81500EBFE
+A boot record of this disk may have been damaged by the "XA1" virus.
+(Boot records)
+*

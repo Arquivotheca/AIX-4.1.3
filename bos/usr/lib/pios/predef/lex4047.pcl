@@ -1,0 +1,63 @@
+# @(#)38        1.2  src/bos/usr/lib/pios/predef/lex4047.pcl, cmdpios, bos41J, 9517B_all 4/26/95 18:45:15
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1993, 1995
+# All Rights Reserved
+#
+:056:__FLG::
+:695:_Y:Dn:0
+:712:_q:Dn:300
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,785;no initialization,full initialization,send PCL language switch command only=0,1,2]:1
+:060:__SYS::
+:642:s1:S[105]I[1810521]En%IWP:1
+:643:s2:S[110]I[1810521]En%IWP:1
+:644:s3:Dn:3
+:824:s6:Dn:1
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijqpstuvxzIJLOQXYZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijqpstuvxzIJLOQXYZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jqpsuvxzIJOQYZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[jquJZY] ; }
+:058:__MIS::
+:330:mA::PCL Emulation
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,203;Lexmark ValueWriter 600]
+:295:mN::4047
+:416:mU::courier[10,3;0;0(%ImB)]courier-bold[10,3;3;0(%ImB)]courier-italic[10,3;0;1(%ImB)]courier[12,3;0;0(%ImB)]courier-bold[12,3;3;0(%ImB)]courier-italic[12,3;0;1(%ImB)]lineprinter[17,0;0;0(%ImB)]
+:516:mY::1
+:308:mp::
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,731;manual paper feed,tray 1 (upper),tray 2 (lower),manual envelope feed=0,1,2,4]
+:762:WP::R[letter,legal,B5,A4,A5,exec=1,2,3,4,6,5]
+:763:WE::R[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]
+:461:wJ::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2400}%e%gq%{2}%=%t%{2400}%e%gq%{3}%=%t%{1999}%e%gq%{4}%=%t%{2338}%e%gq%{5}%=%t%{2025}%e%{1598}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:462:wK::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3000}%e%gq%{2}%=%t%{3900}%e%gq%{3}%=%t%{2735}%e%gq%{4}%=%t%{3207}%e%gq%{5}%=%t%{2850}%e%{2180}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:463:wM::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3180}%e%gq%{2}%=%t%{4080}%e%gq%{3}%=%t%{2915}%e%gq%{4}%=%t%{3389}%e%gq%{5}%=%t%{3030}%e%{2360}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:464:wR::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2250}%e%gq%{2}%=%t%{2250}%e%gq%{3}%=%t%{1849}%e%gq%{4}%=%t%{2180}%e%gq%{5}%=%t%{1875}%e%{1448}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:458:wQ::%?%GWu%{0}%=%t%Gs0%e%GWu%{1}%=%t%Gs1%e%GWu%{2}%=%t%Gs2%e%GWu%{3}%=%t%Gs3%e%GWu%{4}%=%t%Gs4%e%Gs6%;%d
+:051:__CAG::
+:144:ci::%I[pU]%?%G_j%{1}%=%t%I[eP,c1,eT,eS,eO,ct,eF,eu,es,eC]%;
+:152:cr::%IeR%o%I[eF,eP,eO,eS,ct,eD]%IpU
+:054:__ESC::
+#
+# Generate the page size escape sequence based on _Q.
+:482:es::\33&l%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t2%e%gq%{2}%=%t3%e%gq%{3}%=%t12%e%gq%{4}%=%t26%e%gq%{5}%=%t1%e%gq%{6}%=%t13%e2%;%e%GWu%{5}%>%t%?%gq%{1}%=%t602%e%gq%{2}%=%t603%e%gq%{3}%=%t612%e%gq%{4}%=%t626%e%gq%{5}%=%t601%e%gq%{6}%=%t613%e602%;%e%?%gq%{1}%=%t80%e%gq%{2}%=%t89%e%gq%{3}%=%t81%e%gq%{4}%=%t90%e%gq%{5}%=%t91%e%gq%{6}%=%t99%e600%;%;A
+:764:eu::\33&l%?%GWu%{0}%=%t2%e%GWu%{2}%=%t4%e%GWu%{3}%=%t6%e%GWu%{4}%=%t3%e%GWu%{6}%=%t6%e1%;H
+:475:__HIR::
+:686:zL::2
+:688:zM::Lexmark
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

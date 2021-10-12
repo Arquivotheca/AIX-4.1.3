@@ -1,0 +1,66 @@
+# @(#)59	1.5  src/bos/usr/lpp/blkmux/README, sysxcat, bos411, 9428A410j 1/20/94 09:02:52
+*
+* COMPONENT_NAME: (SYSXCAT) Block Multiplexer Parallel Channel Adapter SW
+*
+* FUNCTIONS: blkmux notes to user
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1992
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+****************************************************************************
+The following is a description of a test application shipped with the blkmux 
+product.
+****************************************************************************
+
+370 based test programs CSX and STEP are used to verify the connection
+between the workstation and the 370.
+For these programs to verify the connection, the Block Multiplexer
+Channel Adapter must be on-line.
+The adapter is only on-line when it is opened by an application.
+Placing the adapter on-line with SMIT is only giving permission
+to go on-line when an application does an OPEN.
+
+For testing convenience, an application to put the card on-line
+is provided.  The application is named catcsx , and is located
+in the directory named /usr/lpp/blkmux/test.
+
+To put the card on-line for testing by CSX or STEP,
+use the following procedure.
+
+1)  Log on to the system.
+    Ask the workstation system administrator for help.
+
+2)  type "cd /usr/lpp/blkmux/test"
+
+3)  type "catcsx"
+
+4)  select option 0 - Open device.
+
+5)  select option 0 - Open cat0.
+
+6)  select option 1 - Start subchannel.
+
+7)  select option 0 - Non-claw mode.
+
+8)  type "01" or other 8 bit channel address in hex.
+    This address must be one of the allowed addresses already
+    set up using SMIT.
+
+9)  select option 1 - unsolicited device end.
+
+At this point the system should respond with a message like
+  "device /dev/cat0 has subchannel 01 online.
+
+You may now run CSX or STEP from the 370.
+
+After you have finished running CSX or STEP,
+select option 5 - Quit.
+This will close that channel address, and make it available
+for other applications.

@@ -1,0 +1,146 @@
+######################################################################
+#  @(#)80        1.6  src/bldenv/man/stack_32.man, pkgtools, bos412, GOLDA411a 5/12/93 14:55:54
+######################################################################
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: Command
+#		TOC
+#		device
+#		files
+#		image
+#		size
+#		stack41
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+  stack_32 Command
+  stack41 Command (See Implementation Specifics Section)
+
+
+  Key Concepts
+
+
+  Purpose
+
+     Creates stacked format tapes (8mm or 1/4 inch)
+     from backup or tar format installp files.
+
+
+  Syntax
+
+     stack_32 -l stack_list [-c source_directory] [-d output_device]
+               [-i image_type] [-n toc_directory] [-s size] 
+               [-1 boot_file -2 install_file] [-h|-?]
+
+
+  Description
+
+     Creates a set of stacked format tapes.  Each tape contains a complete
+     Table of Contents (TOC), and a set of product image files (in backup or
+     tar format).  Maketoc_32 is the shell which actually creates the TOC.
+
+     NOTE:  The makestack command may be used as a front end to invoke
+     the stack_32 command.  Refer to the makestack man page.
+
+  Flags
+
+     -l stack_list         File which contains the backup or tar
+                           filenames to be written to tape.
+                           (one entry per line).
+
+     -c source_directory   Source directory containing installable images.
+                           Defaults to current directory.
+
+     -d device             Tape device (path name is optional).
+                           Defaults to rmt0.
+                           Example: [-d fd0] or [-d /dev/fd0]
+
+     -i image_type	   Specifies image type by AIX release for TOC format.
+			   Valid values are 3.1, 3.2 and 4.1 which indicate
+			   type 1, 2 and 3 TOC formats, respectively.  Default
+			   is type 1. (See note under IMPLEMENTATION SPECIFICS.)
+
+     -n toc_directory      Do not generate a tape.  Instead just
+                           generate a TOC in the specified directory.
+
+     -s                    Specify maximum size (in megs) of tape.  Defaults:
+                              1/4 inch tape: 120
+                                   8mm tape: 2100
+
+     -1 boot_file          Name of bosboot image (first file on the first tape).
+
+     -2 install_file       Name of bosinstall image (second file on the first
+                           tape).
+
+     -h | -?               Lists Help message and exits.
+
+
+     NOTE:  -1 and -2 options must be used together.
+
+
+  Exit
+
+     If there is a program error: Non-zero return code.
+     No program error: Return code of zero.
+
+
+  File
+
+     None
+
+
+  Examples
+
+     1. Create a non-bootable stacked tape image on 8mm tape:
+
+        stack_32 -l stack_list -c /test/build/image -d /dev/rmt1
+
+     2. Create a bootable stacked tape image on 1/4 inch tape:
+
+        stack_32 -l stack_list -c ./bff -d /dev/rmt0 -1 boot -2 bos
+
+     3. Create a 3.2 TOC with the current set of files:
+
+        stack_32 -l stack_list -c ./bff -1 boot -2 bos -n ./ -i 3.2
+
+        See note under implementation specifics.
+
+     4. Create a non-bootable stacked tape image with a 4.1 TOC on
+        8mm tape:
+
+        stack_32 -l stack_list -c /test/build/image -d /dev/rmt1 -i 4.1
+
+	OR
+
+        stack41 -l stack_list -c /test/build/image -d /dev/rmt1
+
+        See note under implementation specifics.
+        See implementation specifics section for details on stack41.
+
+  Implementation Specifics
+
+  In the AIX 4.1 build environment there is a link between stack_32 and
+  stack41 (note no underbar).  If stack41 is invoked the -i <image_type>
+  option is not necessary.  stack41 will always generate a 4.1 (type 3) TOC
+  (refer to example 4 above).  The stack tools are located in the
+  tools/power/usr/bin directory of the 4.1 build environment.
+
+  Note: Until Boulder supports image types for toc formats other than type 1,
+        all types will default to type 1.
+
+  Related Information
+     makestack
+     Maketoc_32
+     gen_toc_entry
+

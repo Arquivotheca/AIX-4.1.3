@@ -1,0 +1,760 @@
+* @(#)31 1.33 src/bos/objclass/POWER/tty.add, cfgtty, bos41J, 9520A_all 4/27/95 11:52:46
+*
+* COMPONENT_NAME: (CFGMETHODS) tty.add
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+*
+* tty/rs232/tty object
+*
+PdDv:
+    type = tty
+    class = tty
+    subclass = rs232
+    prefix = tty
+    devid = ""
+    base = 0
+    has_vpd = 0
+    chgstatus = 1
+    detectable = 0
+    bus_ext = 0
+    led = 0x727
+    setno = 65
+    msgno = 1
+    fru = 1
+    catalog = devices.cat
+    DvDr = ""
+    Define = /etc/methods/define
+    Configure = /etc/methods/cfgtty
+    Change = /etc/methods/chgtty
+    Unconfigure = /etc/methods/ucfgtty
+    Undefine = /etc/methods/undefine
+    Start = ""
+    Stop = ""
+    uniquetype = "tty/rs232/tty"
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = "modules"
+    deflt = "ldterm,tioc"
+    values = "nls,ldterm,tioc"
+    width = ""
+    type = R
+    generic = DU
+    rep = "slm"
+    nls_index = 34
+
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = kill
+    deflt = "^u"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 4
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = erase
+    deflt = "^h"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 5
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = eof
+    deflt = "^d"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 6
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = dsusp
+    deflt = "^y"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 7
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = susp
+    deflt = "^z"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 8
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = lnext
+    deflt = "^v"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 9
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = start
+    deflt = "^q"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 10
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = stop
+    deflt = "^s"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 11
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = werase
+    deflt = "^w"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 12
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = parity
+    deflt = "none"
+    values = "none,even,odd,mark,space"
+    width = ""
+    type = R
+    generic = DU
+    rep = slm
+    nls_index = 13
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = bpc
+    deflt = "8"
+    values = "5,6,7,8"
+    width = ""
+    type = R
+    generic = DU
+    rep = slm
+    nls_index = 14
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = stops
+    deflt = "1"
+    values = "1,2"
+    width = ""
+    type = R
+    generic = DU
+    rep = slm
+    nls_index = 15
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = term
+    deflt = "dumb"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 17
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = login
+    deflt = "disable"
+    values = "enable,disable,share,delay,hold"
+    width = ""
+    type = R
+    generic = DU
+    rep = sl
+    nls_index = 18
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = runmodes
+    deflt = "hupcl,cread,brkint,icrnl,opost,tab3,onlcr,isig,icanon,echo,echoe,echok,echoctl,echoke,imaxbel,iexten"
+    values = "hupcl,cread,clocal,ignbrk,brkint,ignpar,parmrk,inpck,istrip,inlcr,igncr,icrnl,iuclc,imaxbel,isig,icanon,xcase,echo,echoe,echok,echonl,noflsh,tostop,echoctl,echoprt,echoke,flusho,pending,iexten,opost,olcuc,onlcr,ocrnl,onocr,onlret,ofill,ofdel,tab3"
+    width = ""
+    type = R
+    generic = DU
+    rep = "slm"
+    nls_index = 19
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = quit
+    deflt = "^\\"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 20
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = intr
+    deflt = "^c"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 21
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = reprint
+    deflt = "^r"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 22
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = logmodes
+    deflt = "hupcl,cread,echoe,cs8,ixon,ixoff"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 23
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = eol
+    deflt = "^@"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 24
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = eol2
+    deflt = "^?"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 2
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = discard
+    deflt = "^o"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 25
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = autoconfig
+    deflt = available
+    values = "available,defined"
+    width = ""
+    type = R
+    generic = DU
+    rep = sl
+    nls_index = 26
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = imap
+    deflt = "none"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 27
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = omap
+    deflt = "none"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 28
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = csmap
+    deflt = "sbcs"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 33
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = timeout
+    deflt = 0
+    values = 0-30,1
+    width = ""
+    type = R
+    generic = DU
+    rep = nr
+    nls_index = 31
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = "logger"
+    deflt = ""
+    values = ""
+    width = ""
+    type = "R"
+    generic = "DU"
+    rep = "s"
+    nls_index = 32
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = "flow_disp"
+    deflt = "xon"
+    values = "xon,rts,none"
+    width = ""
+    type = R
+    generic = DU
+    rep = "slm"
+    nls_index = 35
+
+PdAt:
+    uniquetype = "tty/rs232/tty"
+    attribute = "open_disp"
+    deflt = "dtropen"
+    values = "dtropen,wtopen"
+    width = ""
+    type = R
+    generic = DU
+    rep = "sl"
+    nls_index = 36
+
+
+*
+* tty/rs422/tty object
+*
+PdDv:
+    type = tty
+    class = tty
+    subclass = rs422
+    prefix = tty
+    devid = ""
+    base = 0
+    has_vpd = 0
+    chgstatus = 1
+    detectable = 0
+    bus_ext = 0
+    led = 0x727
+    setno = 65
+    msgno = 1
+    fru = 1
+    catalog = devices.cat
+    DvDr = ""
+    Define = /etc/methods/define
+    Configure = /etc/methods/cfgtty
+    Change = /etc/methods/chgtty
+    Unconfigure = /etc/methods/ucfgtty
+    Undefine = /etc/methods/undefine
+    Start = ""
+    Stop = ""
+    uniquetype = "tty/rs422/tty"
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = "modules"
+    deflt = "ldterm,tioc"
+    values = "nls,ldterm,tioc"
+    width = ""
+    type = R
+    generic = DU
+    rep = "slm"
+    nls_index = 34
+
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = kill
+    deflt = "^u"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 4
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = erase
+    deflt = "^h"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 5
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = eof
+    deflt = "^d"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 6
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = dsusp
+    deflt = "^y"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 7
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = susp
+    deflt = "^z"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 8
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = lnext
+    deflt = "^v"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 9
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = start
+    deflt = "^q"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 10
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = stop
+    deflt = "^s"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 11
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = werase
+    deflt = "^w"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 12
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = parity
+    deflt = "none"
+    values = "none,even,odd,mark,space"
+    width = ""
+    type = R
+    generic = DU
+    rep = slm
+    nls_index = 13
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = bpc
+    deflt = "8"
+    values = "5,6,7,8"
+    width = ""
+    type = R
+    generic = DU
+    rep = slm
+    nls_index = 14
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = stops
+    deflt = "1"
+    values = "1,2"
+    width = ""
+    type = R
+    generic = DU
+    rep = slm
+    nls_index = 15
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = term
+    deflt = "dumb"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 17
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = login
+    deflt = "disable"
+    values = "enable,disable,share,delay,hold"
+    width = ""
+    type = R
+    generic = DU
+    rep = sl
+    nls_index = 18
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = runmodes
+    deflt = "hupcl,cread,brkint,icrnl,opost,tab3,onlcr,isig,icanon,echo,echoe,echok,echoctl,echoke,imaxbel,iexten"
+    values = "hupcl,cread,clocal,ignbrk,brkint,ignpar,parmrk,inpck,istrip,inlcr,igncr,icrnl,iuclc,imaxbel,isig,icanon,xcase,echo,echoe,echok,echonl,noflsh,tostop,echoctl,echoprt,echoke,flusho,pending,iexten,opost,olcuc,onlcr,ocrnl,onocr,onlret,ofill,ofdel,tab3"
+    width = ""
+    type = R
+    generic = DU
+    rep = "slm"
+    nls_index = 19
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = quit
+    deflt = "^\\"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 20
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = intr
+    deflt = "^c"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 21
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = reprint
+    deflt = "^r"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 22
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = logmodes
+    deflt = "hupcl,cread,echoe,cs8,ixon,ixoff"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 23
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = eol
+    deflt = "^@"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 24
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = eol2
+    deflt = "^?"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 2
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = discard
+    deflt = "^o"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 25
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = autoconfig
+    deflt = available
+    values = "available,defined"
+    width = ""
+    type = R
+    generic = DU
+    rep = sl
+    nls_index = 26
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = imap
+    deflt = "none"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 27
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = omap
+    deflt = "none"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 28
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = csmap
+    deflt = "sbcs"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 33
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = timeout
+    deflt = 0
+    values = 0-30,1
+    width = ""
+    type = R
+    generic = DU
+    rep = nr
+    nls_index = 31
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = "logger"
+    deflt = ""
+    values = ""
+    width = ""
+    type = "R"
+    generic = "DU"
+    rep = "s"
+    nls_index = 32
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = "flow_disp"
+    deflt = "xon"
+    values = "xon,rts,none"
+    width = ""
+    type = R
+    generic = DU
+    rep = "slm"
+    nls_index = 35
+
+PdAt:
+    uniquetype = "tty/rs422/tty"
+    attribute = "open_disp"
+    deflt = "dtropen"
+    values = "dtropen,wtopen"
+    width = ""
+    type = R
+    generic = DU
+    rep = "sl"
+    nls_index = 36
+

@@ -1,0 +1,49 @@
+# @(#)03	1.1  src/bldenv/man/bldgetfamily.man, bldtools, bos412, GOLDA411a 6/24/93 16:05:41
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldgetfamily man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: bldgetfamily.man
+#
+# PURPOSE: man page for bldgetfamily command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+bldgetfamily Command
+
+Purpose
+
+Interfaces with bldhostsfile to obtain the CMVC family for a given release.
+
+Syntax
+
+	bldgetfamily <releaseName>
+
+Description
+
+The bldgetfamily command invokes bldhostsfile with the input release name.
+The value returned in environment variable $HOSTSFILE_CMVCFAMILY is written
+to stdout.
+
+Flags
+
+	None
+
+Examples
+
+	bldgetfamily bos320
+
+Related Information
+
+	bldhostsfile
+

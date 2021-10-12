@@ -1,0 +1,100 @@
+#
+# @(#)38        1.2  src/bldenv/man/bldlock.man, bldprocess, bos412, GOLDA411a 5/12/92 13:28:09
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldlock man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991,1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+bldlock
+
+
+PURPOSE
+
+	The bldlock command is a general purpose locking function which can be
+used to prevent multiple processes from accessing the same resource 
+simultaneously.
+
+
+SYNOPSIS
+
+	bldlock [-l <string> | -u <string>] [-p <permissions>]
+		[-f <lockfile>] [ -t <time>]
+
+
+DESCRIPTION
+
+	The bldlock command provides sychronization for multiple processes 
+trying to share the same resource. It uses a common flat file to achieve this. 
+Any process which wants to lock a resource passes a string (e.g - filename 'x')
+to the bldlock command which in turn appends an entry of this string to the 
+'lockfile'. Any other process trying to access the same resource 'x' has to do 
+the same thing, since the first process has already used bldlock to lock (i.e 
+added an entry to the 'lockfile') the second process has to wait. In the
+meantime, the first process which now has sole authority over the resource does
+whatever processing it has to with the resource and then calls bldlock to 
+unlock the resource by passing the same string ('x' in this case), which in 
+turn removes the entry('x') from the 'lockfile'. The second process which has
+been waiting can now lock the resource and continue processing. 
+
+	There are a few points worth noting here: (1) The actual resource is 
+locked and unlocked in an indirect way by the entry in the lockfile (2) This 
+means any process can open ,write,read etc the actual resource ('x') if the
+bldlock command is not used (3) Assuming all the processes co-operate by 
+calling the bldlock command, they must unlock when done processing otherwise it
+causes a deadlock. The wait period, by default for a process is 10 seconds.This
+can be changed by using the -t option. The maximum time a process waits for the
+lock is 10 seconds by default before bldlock prints a error message of 'timed 
+out' and returns to the calling process with a return code of 2, During this 
+period bldlock wakes up every 2 seconds and checks for the lock ( i.e if the 
+entry is no longer present in the lockfile). Co-operating processes can specify
+their own lockfile by using the -f option, otherwise bldlock tries to pick up 
+the lockfile from the environment variable 'LOCKFILE' or defaults to '$BLDTMP
+/lockfile'.
+
+	For additional security the -p flag for permissions was added. With 
+this option, any process trying to lock can also pass its own permissions 
+string along with its locking string. The bldlock command appends this new 
+entry containing both the locking and permissions strings, When another 
+process tries to unlock, it has to specify locking string and the permissions 
+string. 
+
+
+FLAGS
+
+	-l <string>		Appends an entry <string> to the lockfile
+
+	-u <string>		Removes the entry <string> from the lockfile
+
+	-p <permissions>	Permissions string <permissions>
+
+	-t <time>		The maximum wait period in seconds before 
+				timing out
+
+	-f <lockfile>		The file <lockfile> to be used as lockfile
+
+
+EXAMPLES
+
+	1. To lock v3bld with the permission string and a time out of 300 secs
+	
+		bldlock -l v3bld -p "$(hostname):$$" -t 300
+
+	2. To unlock v3bld
+
+		bldlock -u v3bld -p "$(hostname):$$"
+
+
+RELATED INFORMATION
+
+	The following file
+		/usr/bin/perl

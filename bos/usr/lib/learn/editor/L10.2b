@@ -1,0 +1,43 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can of course use "$" with other addresses.
+For example, print from the third line of this file
+through the end; then leave with the usual w, q, and ready.
+#create Ref
+:IBM
+Sperry Rand Univac
+Control Data
+Honeywell
+:"file" 6 lines, 79 characters
+#create file
+Burroughs
+National Cash Register
+IBM
+Sperry Rand Univac
+Control Data
+Honeywell
+#copyout
+#pipe
+ex +'set prompt noopt' file
+#user
+#unpipe
+#uncopyout
+tail -5 .ocopy >X1
+#cmp X1 Ref 5
+#log
+#next
+10.3c 2
+10.2c 5
+10.1b 10

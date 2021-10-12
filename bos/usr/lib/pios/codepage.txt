@@ -1,0 +1,856 @@
+# @(#)87	1.3  src/bos/usr/lib/pios/codepage.txt, cmdpios, bos411, 9428A410j 11/4/93 16:24:29
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT	International Business Machines	Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property	of IBM
+#
+# US Government	Users Restricted Rights	- Use, duplication or
+# disclosure restricted	by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# INTERMEDIATE CODE PAGE used for translation of code points in	print file
+# to code points expected by printer:
+#
+#    Print File	===Stage 1 Translation===> Intermediate	Code Page
+#    Intermediate Code Page ===Stage 2 Translation===> Printer Code Page
+#
+# Stage	1 translate tables reside in /usr/lib/lpd/pio/trans1 directory.
+# Stage	2 translate tables reside in /usr/lib/lpd/pio/trans2 directory.
+#
+# To create a new Stage	1 or Stage 2 translate table, search for the
+# "Printer Code	Page Translation Tables" heading using InfoExplorer
+#
+
+	  INTERMEDIATE CODE PAGE
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	  0	  0	NULL
+	  1	  1	Start of Header
+	  2	  2	Start of text
+	  3	  3	End of Text
+	  4	  4	End of Transmission
+	  5	  5	Enquiry
+	  6	  6	Acknowledge
+	  7	  7	Bell
+	  8	  8	Backspace
+	  9	  9	Horizontal Tab
+	 10	  A	Line Feed
+	 11	  B	Vertical Tab
+	 12	  C	Form Feed
+	 13	  D	Carriage Return
+	 14	  E	Shift Out
+	 15	  F	Shift In
+	 16	 10	Data Link Escape
+	 17	 11	Device Control 1
+	 18	 12	Device Control 2
+	 19	 13	Device Control 3
+	 20	 14	Device Control 4
+	 21	 15	Not Acknowledge
+	 22	 16	Synchronous title
+	 23	 17	End of Trans. Block
+	 24	 18	Cancel
+	 25	 19	End of Media
+	 26	 1A	Substitute character
+	 27	 1B	Escape Character
+	 28	 1C	Info Separator Four
+	 29	 1D	Info Separator Three
+	 30	 1E	Info Separator Two
+	 31	 1F	Info Separator One
+	 32	 20	Space
+	 33	 21	Exclamation point
+	 34	 22	Double Quote
+	 35	 23	Number Sign
+	 36	 24	Dollar Sign
+	 37	 25	Percent	Sign
+	 38	 26	Ampersand
+	 39	 27	Apostrophe (Acute)
+	 40	 28	Left Parenthesis
+	 41	 29	Right Parenthesis
+	 42	 2A	Asterisk
+	 43	 2B	Plus Sign
+	 44	 2C	Comma
+	 45	 2D	Hyphen (Minus)
+	 46	 2E	Period Sign
+	 47	 2F	Slash
+	 48	 30	Zero
+	 49	 31	One
+	 50	 32	Two
+	 51	 33	Three
+	 52	 34	Four
+	 53	 35	Five
+	 54	 36	Six
+	 55	 37	Seven
+	 56	 38	Eight
+	 57	 39	Nine
+	 58	 3A	Colon
+	 59	 3B	Semicolon
+	 60	 3C	Less than Sign
+	 61	 3D	Equal Sign
+	 62	 3E	Greater	than Sign
+	 63	 3F	Question Mark
+	 64	 40	At Sign
+	 65	 41	a capital
+			a capital
+			alpha capital
+	 66	 42	b capital
+			v capital
+			beta capital
+	 67	 43	c capital
+			s capital
+	 68	 44	d capital
+	 69	 45	e capital
+			e capital
+			epsilon	capital
+	 70	 46	f capital
+	 71	 47	g capital
+	 72	 48	h capital
+			n capital
+			eta capital
+	 73	 49	i capital
+			i special capital
+			iota capital
+	 74	 4A	j capital
+			j capital
+	 75	 4B	k capital
+			kappa capital
+	 76	 4C	l capital
+	 77	 4D	m capital
+			m capital
+			mu capital
+	 78	 4E	n capital
+			Nu capital
+	 79	 4F	o capital
+			omnicron capital
+			o capital
+	 80	 50	p capital
+			rho capital
+			r capital
+	 81	 51	q capital
+	 82	 52	r capital
+	 83	 53	s capital
+			s special capital
+	 84	 54	t capital
+			Tau capital
+			t capital
+	 85	 55	u capital
+	 86	 56	v capital
+	 87	 57	w capital
+	 88	 58	x capital
+			kh capital
+			chi capital
+	 89	 59	y capital
+			Upsilon	Capital
+	 90	 5A	z capital
+			Zeta Capital
+	 91	 5B	left bracket
+	 92	 5C	reverse	slash
+	 93	 5D	right bracket
+	 94	 5E	circumflex
+	 95	 5F	underline (low line)
+	 96	 60	grave
+	 97	 61	a small
+			a small
+	 98	 62	b small
+	 99	 63	c small
+			s small
+	100	 64	d small
+	101	 65	e small
+			e small
+	102	 66	f small
+	103	 67	g small
+	104	 68	h small
+	105	 69	i small
+			i special small
+	106	 6A	j small
+			j small
+	107	 6B	k small
+	108	 6C	l small
+	109	 6D	m small
+	110	 6E	n small
+	111	 6F	o small
+			omnicron small
+			o small
+	112	 70	p small
+			r small
+	113	 71	q small
+	114	 72	r small
+	115	 73	s small
+			s special small
+	116	 74	t small
+	117	 75	u small
+	118	 76	v small
+	119	 77	w small
+	120	 78	x small
+			kh small
+	121	 79	y small
+			u small
+	122	 7A	z small
+	123	 7B	Left Brace
+	124	 7C	Logical	OR (Pipe Symbol)
+	125	 7D	Right Brace
+	126	 7E	tilde accent
+	127	 7F	Del (new)
+	128	 80	c cedilla capital
+	129	 81	u umlaut small
+	130	 82	e acute	small
+	131	 83	a circumflex small
+	132	 84	a umlaut small
+	133	 85	a grave	small
+	134	 86	a overcircle small
+	135	 87	c cedilla small
+	136	 88	e circumflex small
+	137	 89	e umlaut small
+			e diaeresis small
+	138	 8A	e grave	small
+	139	 8B	i umlaut small
+			i diaeresis small
+	140	 8C	i circumflex small
+	141	 8D	i grave	small
+	142	 8E	a umlaut capital
+	143	 8F	a overcircle capital
+	144	 90	e acute	capital
+	145	 91	ae diphthong small
+	146	 92	ae diphthong capital
+	147	 93	o circumflex small
+	148	 94	o umlaut small
+	149	 95	o grave	small
+	150	 96	u circumflex small
+	151	 97	u grave	small
+	152	 98	y umlaut small
+	153	 99	o umlaut capital
+	154	 9A	u umlaut capital
+	155	 9B	o slash	small
+	156	 9C	English	Pound Sign
+	157	 9D	o slash	capital
+	158	 9E	Multiply Sign
+	159	 9F	Florin Sign
+	160	 A0	a acute	small
+	161	 A1	i acute	small
+	162	 A2	o acute	small
+	163	 A3	u acute	small
+	164	 A4	n tilde	small
+	165	 A5	n tilde	capital
+	166	 A6	Feminine Sign
+	167	 A7	Masculine Sign
+	168	 A8	Spanish	Question Mark
+	169	 A9	Registered Trademark
+	170	 AA	Logical	Not
+	171	 AB	One Half
+	172	 AC	One Quarter
+	173	 AD	Spanish	Exclamation Sign
+	174	 AE	Left angle quotes
+	175	 AF	Right angle quotes
+	176	 B0	Quarter	Hashed
+	177	 B1	Half Hashed
+	178	 B2	Full Hashed
+	179	 B3	Center Box Vertical Bar
+	180	 B4	Right Side Middle
+	181	 B5	a acute	capital
+	182	 B6	a circumflex capital
+	183	 B7	a grave	capital
+	184	 B8	Copyright Symbol
+	185	 B9	Double Right Side Middle
+	186	 BA	Double Vertical	Bar
+	187	 BB	Double Upper Right Corner Box
+	188	 BC	Double Lower Right Corner Box
+	189	 BD	Cent Sign
+	190	 BE	Yen Sign
+	191	 BF	Upper Right Corner Box
+	192	 C0	Lower Left Corner Box
+	193	 C1	Bottom Side Middle
+	194	 C2	Top Side Middle
+	195	 C3	Left Side Middle
+	196	 C4	Center Box Bar
+
+	197	 C5	Intersection
+	198	 C6	a tilde	small
+	199	 C7	a tilde	capital
+	200	 C8	Double Lower Left Corner Box
+	201	 C9	Double Upper Left Corner Box
+	202	 CA	Double Bottom Side Middle
+	203	 CB	Double Top Side	Middle
+	204	 CC	Double Left Side Middle
+	205	 CD	Double Center Box Bar
+	206	 CE	Double Intersection
+	207	 CF	International Currency Symbol
+	208	 D0	eth icelandic small
+	209	 D1	eth icelandic capital/d	stroke capital
+	210	 D2	e circumflex capital
+	211	 D3	e umlaut capital
+			e diaeresis capital
+	212	 D4	e grave	capital
+	213	 D5	small i	dotless
+	214	 D6	i acute	capital
+	215	 D7	i circumflex capital
+	216	 D8	i umlaut capital
+			i diaeresis capital
+	217	 D9	Lower Right Corner Box
+	218	 DA	Upper Left Corner Box
+	219	 DB	Bright Character Cell
+	220	 DC	Bright Character Cell-Lower Half
+	221	 DD	Vertical Line Broken
+	222	 DE	i grave	capital
+	223	 DF	Bright Charater	Cell- Upper Half
+	224	 E0	o acute	capital
+	225	 E1	s sharp	small
+	226	 E2	o circumflex capital
+	227	 E3	o grave	capital
+	228	 E4	o tilde	small
+	229	 E5	o tilde	capital
+	230	 E6	Mu Small (Micro)
+
+	231	 E7	throrn icelandic small
+	232	 E8	thorn icelandic	capital
+	233	 E9	u acute	capital
+	234	 EA	u circumflex capital
+	235	 EB	u grave	capital
+	236	 EC	y acute	small
+	237	 ED	y acute	capital
+	238	 EE	overbar
+	239	 EF	acute accent
+	240	 F0	syllable hyphen	(SP10)
+
+	241	 F1	Plus or	Minus
+	242	 F2	Double Underscore
+	243	 F3	Three Quarters
+	244	 F4	Paragraph
+	245	 F5	Section
+	246	 F6	Divide
+	247	 F7	cedilla	accent
+	248	 F8	Degree (Overcircle)
+
+	249	 F9	umlaut accent
+	250	 FA	Middle dot (Product dot) (aka SD63)
+
+	251	 FB	Superscript One
+	252	 FC	Superscript Three
+	253	 FD	Superscript Two
+	254	 FE	Vertical Solid Rectangle (aka SM47)
+
+	255	 FF	All Ones (Required Space)
+	256	100	SUBSTITUTE CHARACTER
+	257	101	Smiling	Face
+	258	102	Smiling	Face, Reverse Image
+	259	103	Heart Suit Symbol
+	260	104	Diamond	Suit Symbol
+	261	105	Club Suit Symbol
+	262	106	Spade Suit Symbol
+	263	107	Bullet
+	264	108	Bullet,	Reverse	Image
+	265	109	Open Circle
+	266	10A	Open Circle, Reverse Image
+	267	10B	Male Symbol
+	268	10C	Female Symbol
+	269	10D	Musical	Eighth Note
+	270	10E	Two Musical Sixteenth Notes
+	271	10F	Sun Symbol
+	272	110	Forward	Arrow Indicator
+	273	111	Back Arrow Indicator
+	274	112	Up-Down	Arrow
+	275	113	Double Exclamation Points
+   	276	114	Paragraph Symbol (USA)	USE F4
+   	277	115	Section	Sym(USA)/Paragraph Sym(EUROPE)
+	278	116	Solid Horizontal Rectangle
+	279	117	Up-Down	Arrow, Perpendicular
+	280	118	Up Arrow
+	281	119	Down Arrow
+	282	11A	Right Arrow
+	283	11B	Left Arrow
+	284	11C	Right Angle Symbol
+	285	11D	Left-Right Arrow
+	286	11E	Solid Triangle
+	287	11F	Solid Triangle Inverted
+	288	120	Peseta Sign
+	289	121	Start Of Line Symbol
+	290	122	Right Box Side Double to Single
+	291	123	Right Box Side Single to Double
+	292	124	Upper Right Box	Corner Single to Double
+	293	125	Upper Right Box	Corner Double to Single
+	294	126	Lower Right Box	Corner Single to Double
+	295	127	Lower Right Box	Corner Double to Single
+	296	128	Left Box Side Single to	Double
+	297	129	Left Box Side Double to	Single
+	298	12A	Middle Box Bottom Single to Double
+	299	12B	Middle Box Bottom Double to Single
+	300	12C	Middle Box Top Double to Single
+	301	12D	Middle Box Top Single to Double
+	302	12E	Lower Left Box Corner Double to	Single
+	303	12F	Lower Left Box Corner Single to	Double
+	304	130	Upper Left Box Corner Single to	Double
+	305	131	Upper Left Box Corner Double to	Single
+	306	132	Box Intersection Single	to Double
+	307	133	Box Intersection Double	to Single
+	308	134	Solid Fill Character, Right Half
+	309	135	Solid Fill Character, Left Half
+	310	136	Alpha Small
+
+	311	137	Gamma Capital
+			g capital
+	312	138	Pi Small
+	313	139	Sigma Capital
+
+	314	13A	Sigma Small
+	315	13B	Reserved
+	316	13C	Tau Small
+	317	13D	Phi Capital
+			f capital
+	318	13E	Theta Capital
+	319	13F	Omega Capital
+
+	320	140	Delta Small
+	321	141	Infinity Symbol
+	322	142	Phi Small
+	323	143	Epsilon	Small
+
+	324	144	Intersection Symbol
+	325	145	Identity Symbol
+	326	146	Greater	Than or	Equal Sign
+	327	147	Less Than or Equal Sign
+	328	148	Upper Integral Symbol Section
+	329	149	Lower Integral Symbol Section
+	330	14A	Nearly Equals Symbol
+	331	14B	Product	Dot/Middle Dot
+	332	14C	Radical	Symbol
+	333	14D	n Small	Superscript
+
+
+	LATIN-1
+	-------
+
+
+	LATIN-2
+	-------
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	334	14E	a ogonek capital
+	335	14F	breve accent
+	336	150	1 stroke capital
+	337	151	l caron	capital
+	338	152	s acute	capital
+	339	153	s caron	capital
+	340	154	s cedilla capital
+	341	155	t caron	capital
+	342	156	z acute	capital
+	343	157	z caron	capital
+	344	158	z overdot capital
+	345	159	a ogonek small
+	346	15A	ogonek accent
+	347	15B	l stroke small
+	348	15C	l caron	small
+	349	15D	s acute	small
+	350	15E	caron accent
+	351	15F	s caron	small
+	352	160	s cedilla small
+	353	161	t caron	small
+	354	162	z acute	small
+	355	163	double acute accent
+	356	164	z caron	small
+	357	165	z overdot small
+	358	166	r acute	capital
+	359	167	a breve	capital
+	360	168	l acute	capital
+	361	169	c acute	capital
+	362	16A	c caron	capital
+	363	16B	e ogonek capital
+	364	16C	e caron	capital
+	365	16D	d caron	capital
+	366	16E	n acute	capital
+	367	16F	n caron	capital
+	368	170	o double acute capital
+	369	171	r caron	capital
+	370	172	u overcircle capital
+	371	173	u double acute capital
+	372	174	t cedilla capital
+	373	175	r acute	small
+	374	176	a breve	small
+	375	177	l acute	small
+	376	178	c acute	small
+	377	179	c caron	small
+	378	17A	e ogonek small
+	379	17B	e caron	small
+	380	17C	d caron	small
+	381	17D	d stroke small
+	382	17E	n acute	small
+	383	17F	n caron	small
+	384	180	o double acute small
+	385	181	r caron	small
+	386	182	u overcircle small
+	387	183	u double acute small
+	388	184	t cedilla small
+	389	185	overdot	accent
+
+
+	LATIN-3
+	-------
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	390	186	h stroke capital
+	391	187	h circumflex capital
+	392	188	i overdot capital
+	393	189	g breve	capital
+	394	18A	j circumflex capital
+	395	18B	h stroke small
+	396	18C	h circumflex small
+	397	18D	g breve	small
+	398	18E	j circumflex small
+	399	18F	c overdot capital
+	400	190	c circumflex capital
+	401	191	g overdot capital
+	402	192	g circumflex capital
+	403	193	u breve	capital
+	404	194	s circumflex capital
+	405	195	c overdot small
+	406	196	c circumflex small
+	407	197	g overdot small
+	408	198	g circumflex small
+	409	199	u breve	small
+	410	19A	s circumflex small
+
+
+	LATIN-4
+	-------
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	411	19B	k Greenlandic small
+	412	19C	r cedilla capital
+	413	19D	i tilde	capital
+	414	19E	l cedilla capital
+	415	19F	e macron capital
+	416	1A0	g cedilla capital
+	417	1A1	t stroke capital
+	418	1A2	macron accent
+	419	1A3	r cedilla small
+	420	1A4	i tilde	small
+	421	1A5	l cedilla small
+	422	1A6	e macron small
+	423	1A7	g acute	(cedilla above)	small
+	424	1A8	t stroke small
+	425	1A9	eng Lapp capital
+	426	1AA	eng Lapp small
+	427	1AB	a macron capital
+	428	1AC	i ogonek capital
+	429	1AD	e overdot capital
+	430	1AE	i macron capital
+	431	1AF	n cedilla capital
+	432	1B0	o macron capital
+	433	1B1	k cedilla capital
+	434	1B2	u ogonek capital
+	435	1B3	u tilde	capital
+	436	1B4	u macron capital
+	437	1B5	a macron small
+	438	1B6	i ogonek small
+	439	1B7	e overdot small
+	440	1B8	i macron small
+	441	1B9	n cedilla small
+	442	1BA	o macron small
+	443	1BB	k cedilla small
+	444	1BC	u ogonek small
+	445	1BD	u tilde	small
+	446	1BE	u macron small
+
+
+	LATIN-5
+	-------
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	447	1BF	d special capital
+	448	1C0	g special capital
+	449	1C1	ye capital
+	450	1C2	lj capital
+	451	1C3	nj capital
+	452	1C4	c special capital
+	453	1C5	k special capital
+	454	1C6	u breve	capital
+	455	1C7	dz special capital
+	456	1C8	b capital
+	457	1C9	d capital
+	458	1CA	zh capital
+	459	1CB	z capital
+	460	1CC	i capital
+	461	1CD	j special capital
+	462	1CE	k capital
+	463	1CF	l capital
+	464	1D0	p capital
+	465	1D1	u capital
+	466	1D2	ts capital
+	467	1D3	ch capital
+	468	1D4	sh capital
+	469	1D5	shch capital
+	470	1D6	hard sign capital
+	471	1D7	y capital
+	472	1D8	soft sign capital
+	473	1D9	e special capital
+	474	1DA	yu capital
+	475	1DB	ya capital
+	476	1DC	b small
+	477	1DD	v small
+	478	1DE	g small
+	479	1DF	d small
+	480	1E0	zh small
+	481	1E1	z small
+	482	1E2	i small
+	483	1E3	j special small
+	484	1E4	k small
+	485	1E5	l small
+	486	1E6	m small
+	487	1E7	n small
+	488	1E8	p small
+	489	1E9	t small
+	490	1EA	f small
+	491	1EB	ts small
+	492	1EC	ch small
+	493	1ED	sh small
+	494	1EE	shch small
+	495	1EF	hard sign small
+	496	1F0	y small
+	497	1F1	soft sign small
+	498	1F2	e special small
+	499	1F3	yu small
+	500	1F4	ya small
+	501	1F5	numero sign
+	502	1F6	d special small
+	503	1F7	g special small
+	504	1F8	ye small
+	505	1F9	lj small
+	506	1FA	nj small
+	507	1FB	c special small
+	508	1FC	k special small
+	509	1FD	u breve	small
+	510	1FE	dz special small
+
+
+	GREEK
+	-----
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	511	1FF	Left single quote
+	512	200	Right single quote
+	513	201	acute and diaeresis
+	514	202	alpha acute capital
+	515	203	epsilon	acute capital
+	516	204	eta acute capital
+
+	517	205	iota acute capital
+	518	206	omnicron acute capital
+	519	207	upsilon	acute capital
+	520	208	omega acute capital
+	521	209	iota acute and diaeresis small
+	522	20A	delta capital
+
+	523	20B	lambda capital
+	524	20C	xi capital
+	525	20D	pi capital
+	526	20E	psi capital
+	527	20F	reserved
+	528	210	iota diaeresis capital
+	529	211	upsilon	diaeresis capital
+
+	530	212	alpha acute small
+	531	213	epsilon	acute small
+	532	214	eta acute small
+
+	533	215	iota acute small
+	534	216	upsilon	acute and diaeresis small
+	535	217	beta small
+	536	218	gamma small
+
+	537	219	zeta small
+	538	21A	eta small
+	539	21B	theta small (closed form)
+	540	21C	iota small
+
+	541	21D	kappa small
+	542	21E	lambda small
+	543	21F	nu small
+	544	220	xi small
+	545	221	rho small
+
+	546	222	sigma small (final form)
+	547	223	upsilon	small
+	548	224	chi small
+	549	225	psi small
+	550	226	omega small
+
+	551	227	iota diaeresis small
+	552	228	upsilon	diaeresis small
+	553	229	omnicron acute small
+	554	22A	upsilon	acute small
+	555	22B	omega acute small
+
+
+	TURKISH
+	-------
+
+
+
+	ARABIC
+	------
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	556	22C	comma rotated (ARABIC)
+	557	22D	Semicolon, rotated (ARABIC)
+	558	22E	question mark, reversed	(ARABIC)
+	559	22F	Hamza
+	560	230	Aleph Madda Isolated
+	561	231	Aleph Hamza Isolated
+	562	232	Waw Hamza
+	563	233	Hamza under Aleph
+	564	234	Yeh Hamza
+	565	235	Aleph Isolated
+	566	236	Beh Isolated-Final
+	567	237	Teh Marbuta
+	568	238	Teh Isolated-Final
+	569	239	Theh Isolated-Final
+	570	23A	Jeem Isolated-Final
+	571	23B	Hah Isolated-Final
+	572	23C	Khah Isolated-Final
+	573	23D	Dal
+	574	23E	Thal
+	575	23F	Reh(Ra)
+	576	240	Zain
+	577	241	Seen Isolated-Final
+	578	242	Sheen Isolated-Final
+	579	243	Sad Isolated-Final
+	580	244	Dud(Dad) Isolated-Final
+	581	245	Tah
+	582	246	Zah
+	583	247	Ayn(Ain) Isolated
+	584	248	Ghayn(Ghain) Isolated
+	585	249	Tatweel(connector)
+	586	24A	Feh Isolated-Final
+	587	24B	Qaf Isolated-Final
+	588	24C	Caf(Kaf) Isolated-Final
+	589	24D	Lam Isolated-Final
+	590	24E	Meem Isolated-Final
+	591	24F	Noon Isolated-Final
+	592	250	Heh(Ha)	Isolated-Final
+	593	251	Waw
+	594	252	Aleph Maksura Isolated
+	595	253	Yeh Isolated
+	596	254	Fathatan
+	597	255	Dammatan
+	598	256	Karatan
+	599	257	Fatha
+	600	258	Damma
+	601	259	Karsa
+	602	25A	Shadda Isolated
+	603	25B	Sukun
+
+
+	HEBREW
+	------
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	604	25C	Alef
+	605	25D	Bet
+	606	25E	Gimmel
+	607	25F	Dalet
+	608	260	He
+	609	261	Waw
+	610	262	Zavin
+	611	263	Het
+	612	264	Tet
+	613	265	Yod
+	614	266	Kaf (Final Form)
+	615	267	Kaf
+	616	268	Lamed
+	617	269	Mem (Final Form)
+	618	26A	Mem
+	619	26B	Nun (Final Form)
+	620	26C	Nun
+	621	26D	Samech
+	622	26E	Ayin
+	623	26F	Pe (Final Form)
+	624	270	Pe
+	625	271	Zadi (Final Form)
+	626	272	Zadi
+	627	273	Qof
+	628	274	Resh
+	629	275	Shin
+	630	276	Tav
+
+	ARABIC (CONTINUED)
+	------------------
+
+	DEC	HEX	DESCRIPTION
+	---	---	-----------
+	631	277	Lamaleph Hamza Isolated
+	632	278	Lamaleph Hamza Final
+	633	279	Lamaleph Isolated
+	634	27A	Lamaleph Final
+	635	27B	Kassah (Tail)
+	636	27C	Aleph Madda Final
+	637	27D	Aleph Hamza Final
+	638	27E	Aleph Final
+	639	27F	Zero (Arabic)
+	640	280	One (Arabic)
+	641	281	Two (Arabic)
+	642	282	Three (Arabic)
+	643	283	Four (Arabic)
+	644	284	Five (Arabic)
+	645	285	Six (Arabic)
+	646	286	Seven (Arabic)
+	647	287	Eight (Arabic)
+	648	288	Nine (Arabic)
+	649	289	Ayn Final
+	650	28A	Beh Initial-Middle
+	651	28B	Teh Initial-Middle
+	652	28C	Theh Initial-Middle
+	653	28D	Jeem Initial-Middle
+	654	28E	Hah Initial-Middle
+	655	28F	Khah Initial-Middle
+	656	290	Seen Initial-Middle
+	657	291	Sheen Initial-Middle
+	658	292	Sad Initial-Middle
+	659	293	Dud Initial-Middle
+	660	294	Ayn Initial
+	661	295	Ghayn Initial
+	662	296	Feh Initial-Middle
+	663	297	Qaf Initial-Middle
+	664	298	Caf Initial-Middle
+	665	299	Lam Initial-Middle
+	666	29A	Meem Initial-Middle
+	667	29B	Noon Initial-Middle
+	668	29C	Heh Initial-Middle
+	669	29D	Yeh Initial-Middle
+	670	29E	Ayn Middle
+	671	29F	Ghayn Final
+	672	2A0	Shadda Middle
+	673	2A1	Heh Middle
+	674	2A2	Aleph Maksura Final
+	675	2A3	Yeh Final
+	676	2A4	Ghayn Middle
+	677	2A5	Lamaleph Madda Isolated
+	678	2A6	Lamaleph Madda Final
+	679	2A7	Seen Isolated-Final, first part
+	680	2A8	Sheen Isolated-Final, first part
+	681	2A9	Sad Isolated-Final, first part
+	682	2AA	Dad Isolated-Final, first part
+	683	2AB	Fathatan Middle
+	684	2AC	Damma Middle
+	685	2AD	Kasra Middle
+	686	2AE	Sukun Middle
+	687	2AF	Fatha Middle
+	688	2B0	Yeh Hamza-Final
+	689	2B1	Lam Hamsa under Alef-Final 
+	690	2B2	Lam Hamza under Alef-Isoloated
+	691	2B3	Alef Madda-Connected
+	692	2B4	Alef Hamza-Connected
+	693	2B5	Hamza under Alef-Connected
+	694	2B6	Alef-Connected
+	695	2B7	Yeh Hamza Initial-Middle
+	696	2B8	Hamza under Alef-Final

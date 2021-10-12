@@ -1,0 +1,22 @@
+#!
+*
+* millicode routines
+*
+__mulh                     0x3100
+* .__mulh                             0x3100
+__mull                     0x3180
+* .__mull                             0x3180
+__divss                    0x3200
+* .__divss                            0x3200
+__divus                    0x3280
+*  .__divus                           0x3280
+__quoss                    0x3300
+* .__quoss                            0x3300
+__quous                    0x3380
+* .__quous                            0x3380
+_clear_lock                0x3400
+* ._clear_lock                        0x3400
+_check_lock                0x3420
+* ._check_lock                        0x3420
+
+

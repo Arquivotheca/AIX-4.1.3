@@ -1,0 +1,25 @@
+# @(#)93	1.2  src/bos/objclass/POWER/DSMenu.add, cmddiag, bos411, 9428A410j 12/8/92 09:03:54
+#
+# COMPONENT_NAME: (CMDDIAG) - DSMenu Object Class Data
+#
+# FUNCTIONS: None
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+DSMenu:
+ order = 1
+ comment = Operating-Instructions-Menu
+ msgkey = "OIM"
+
+DSMenu:
+ order = 2
+ comment = Function-Selection-Menu
+ msgkey = "FSM"

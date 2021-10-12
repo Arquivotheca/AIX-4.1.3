@@ -1,0 +1,54 @@
+* @(#)03	1.8  src/bos/objclass/POWER/psla.add, cfgmethods, bos411, 9428A410j 6/15/90 18:02:42
+*********************************************************************
+*	Predefined stanza file for psla pseudo device	
+*
+* COMPONENT_NAME : psla.stanza
+*
+* ORIGINS : 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1990
+* Unpublished Work
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* RESTRICTED RIGHTS LEGEND
+* US Government Users Restricted Rights -  Use, Duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+PdDv:
+	type = gsw 
+	class = msla
+	subclass = msla
+	prefix = gsw
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 2
+	led = 0x858
+	setno = 130
+	msgno = 1
+	catalog = devices.cat 
+	DvDr = psladd 
+	Define = /etc/methods/define -o -k
+	Configure = /etc/methods/cfgpsla
+	Change = ""
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = "" 
+	Stop = ""
+	uniquetype = msla/msla/gsw
+
+PdAt:
+	uniquetype = msla/msla/gsw
+	attribute = microcode 
+	deflt = "/etc/microcode/8787P.00.01"
+	values = "/etc/microcode/8787P.00.01"
+	width = "" 
+	type = R 
+	generic = D 
+	rep = s
+	nls_index = 5 

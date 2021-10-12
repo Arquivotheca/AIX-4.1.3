@@ -1,0 +1,63 @@
+# @(#)58	1.5  src/bos/usr/lib/piosCN/fmtrs/HPlaserjet/Makefile, ils-zh_CN, bos41J, 9521A_all 5/22/95 16:59:43
+#
+#   COMPONENT_NAME: ils-zh_CN
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+FMTRS	= ${MAKETOP}/bos/usr/lib/piosCN/fmtrs
+VPATH	= ${FMTRS}
+
+PROGRAMS = \
+	pioflaserjetxessc \
+	pioflaserjetxUTF-8
+
+CFLAGS = -DEUC
+
+pioflaserjetxessc_OFILES = \
+	defmsgEUC.o \
+	pioflaserjetx.o
+
+pioflaserjetxUTF-8_OFILES = \
+	defmsgUTF.o \
+	pioflaserjetxUTF-8.o
+
+pioflaserjetxUTF-8.o_CFLAGS = -DUTF8
+defmsgUTF.o_CFLAGS = -DUTF8
+
+
+LDFLAGS = -bnodelcsect
+
+IMPORTS = -bI:${FMTRS}/piof.imp
+EXPORTS = -bE:${FMTRS}/piof.exp
+
+INCFLAGS = -I${MAKETOP}/bos/usr/lib/piosCN/lib
+
+LIBS	= -lfontbosCN -liconv -lfont
+
+ILIST	= ${PROGRAMS}
+IDIR 	= /usr/lib/lpd/pio/fmtrs/
+
+OTHERS	= defmsgEUC.c defmsgUTF.c pioflaserjetxUTF-8.c
+
+.include <${RULES_MK}>
+
+defmsgEUC.c:	defmsg.c
+	${CAT} ${.ALLSRC} > ${.TARGET}
+
+defmsgUTF.c:	defmsg.c
+	${CAT} ${.ALLSRC} > ${.TARGET}
+
+pioflaserjetxUTF-8.c:	pioflaserjetx.c
+	${CAT} ${.ALLSRC} > ${.TARGET}

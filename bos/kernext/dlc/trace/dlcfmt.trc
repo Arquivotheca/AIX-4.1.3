@@ -1,0 +1,1303 @@
+* /etc/trcfmt
+# @(#)19        1.19.3.4  src/bos/kernext/dlc/trace/dlcfmt.trc, sysxdlcg, bos41J, 9516B_all 4/14/95 17:59:45
+#
+# COMPONENT_NAME: (SYSXDLCG) Generic Data Link Controls
+#
+# FUNCTIONS: Makefile
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1988, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
++ 240 1.3 "OpenLink_DLC "  \
+      {{$otype = X2}} {{$plc = X2}}  \
+        \n \t $otype, \
+          0x0000 {"SDLC " }, \
+          0x0001 {"HDLC " }, \
+          0x0002 {"BSC " }, \
+          0x0003 {"ASC " }, \
+          0x0004 {"PC_Network "},\
+          0x0005 {"Ethernet "},\
+          0x0006 {"IEEE_802.3_Ethernet "},\
+          0x0007 {"Token_Ring "},\
+          0x0008 {"X_25_QLLC "},\
+          0x0009 {"FDDI"}, \
+          \*     {"Unknown LAN " $otype} \
+        \n \t $plc, \
+          0x0000 {"EIA_RS232 C" \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0001 {"EIA_RS336 " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0002 {"X_21 " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0003 {"PC_Network_Broadband " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0004 {"Standard Baseband Ethernet " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0005 {"Smart_MODEM_Autodial " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0006 {"IEEE_802.3_Baseband Ethernet " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0007 {"IEEE_802.4_Token_Bus " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0008 {"IEEE_802.5_Token_Ring " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0009 {"X.25 Packet Switched Network" \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+	  0x000D {"FDDI " \
+            \n "Diagnostic_Tag= " A16 \n "Remote_Station= " A20 }, \
+          \*     {"Unknown_Physical_Link_Type " $plc} \
+       \n
++ 241 1.3 "CloseLink_DLC " \
+      {{$otype = X2}} {{$plc = X2}}   \
+        \n \t $otype, \
+          0x0000 {"SDLC " }, \
+          0x0001 {"HDLC " }, \
+          0x0002 {"BSC " }, \
+          0x0003 {"ASC " }, \
+          0x0004 {"PC_Network "},\
+          0x0005 {"Ethernet "},\
+          0x0006 {"IEEE_802.3_Ethernet "},\
+          0x0007 {"Token_Ring "},\
+          0x0008 {"X-25_QLLC "},\
+          0x0009 {"FDDI "},\
+          \*     {"Unknown LAN " $otype} \
+        \n \t   $plc, \
+          0x0000 {"EIA_RS232 C" \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0001 {"EIA_RS336 " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0002 {"X_21 " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0003 {"PC_Network_Broadband " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0004 {"Standard Baseband Ethernet " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0005 {"Smart_MODEM_Autodial " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0006 {"IEEE_802.3_Baseband Ethernet " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0007 {"IEEE_802.4_Token_Bus " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0008 {"IEEE_802.5_Token_Ring " \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+          0x0009 {"X.25 Packet Switched Network" \
+            \n "Diagnostic_Tag= "A16 \n "Remote_Station= " X20 \n "Remote_Address= " X6},\
+	  0x000D {"FDDI" \
+            \n "Diagnostic_Tag= " A16 \n "Remote_Station= " A20 }, \
+          \*     {"Unknown_Physical_Link_Type " $plc} \
+     \n
++ 242 1.2 "TimerLink_DLC "  \
+      {{$otype = X2}} {{$t2 = X2}} O8  \
+        \n \t $otype, \
+          0x0000 {"SDLC " }, \
+          0x0001 {"HDLC " }, \
+          0x0002 {"BSC " }, \
+          0x0003 {"ASC " }, \
+          0x0004 {"PC_Network "},\
+          0x0005 {"Ethernet "},\
+          0x0006 {"IEEE_802.3_Ethernet "},\
+          0x0007 {"Token_Ring "},\
+          0x0008 {"X_25_QLLC "},\
+          0x0009 {"FDDI "},\
+          \*     {"Unknown LAN " $otype} \
+        \n \t  $t2, \
+          0x0001 {"Slow_Station_Poll "}, \
+          0x0002 {"Idle_Station_Poll "}, \
+          0x0003 {"Link_Station_Aborted"}, \
+          0x0004 {"Link_Station_Receive_Inactivity"}, \
+          0x0005 {"Command_Fail_Safe"}, \
+          0x0006 {"Command_Repoll"}, \
+          0x0007 {"I_Frame_Acknowledgement"}, \
+          \*     {"Unknown_Timeout_Activity " $t2} \
+       \n
++ 243 1.4 "Send_DLC_Data: "  \
+      {{$d1 = X4}} {{$a = $HD}}  \
+        $d1, \
+          0x80001 {"QLLC  Send XID "  \n \t "Packet_Length= " $HD \n \
+            {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+            \n  \n  \t  "Packet Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+            \n LOOP $rem {X0} \n }, \
+          0x80002 {"QLLC  Send Data  "  \n \t "Packet_Length= " $HD \n \
+            {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+            \n  \n  \t  "Packet Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+            \n LOOP $rem {X0} \n }, \
+          0x0000 {"SDLC " \
+            \n \n \t  "Data_Length= "  $HD  \
+            \n \t Address X1 \
+            \n \t Control O0.7 B0.1, \
+               0 I_Frame { R1 Rcv_Seq_Number B0.3, \
+                 000 0, \
+                 001 1, \
+                 010 2, \
+                 011 3, \
+                 100 4, \
+                 101 5, \
+                 110 6, \
+                 111 7  \
+                 \t Poll B0.1 \
+                 \t Send_Seq_Number B0.3, \
+                 000 0, \
+                 001 1, \
+                 010 2, \
+                 011 3, \
+                 100 4, \
+                 101 5, \
+                 110 6, \
+                 111 7  \
+                 O0.1}, \
+               1 { R1 O0.6 B0.2, \
+                   01 Supervisory { R1 O0.4 B0.2, \
+                   00 RR, \
+                   01 RNR, \
+                   10 REJ, \
+                   11 SREJ  \
+                 \t O0.2 R1 Rcv_Seq_Number B0.3, \
+                   000 0, \
+                   001 1, \
+                   010 2, \
+                   011 3, \
+                   100 4, \
+                   101 5, \
+                   110 6, \
+                   111 7 \
+                 \t Poll B0.1 \
+                 O0.4 }, \
+               11 Unnumbered_I_Frame {R1 X1, \
+                 03 UI_NO_PF, \
+                 0F DM_NO_PF, \
+                 13 UI, \
+                 1F DM, \
+                 43 DISC_NO_PF, \
+                 53 DISC, \
+                 73 UA, \
+                 83 SNRM_NO_PF, \
+                 87 FRMR_NO_PF, \
+                 93 SNRM, \
+                 97 FRMR, \
+                 AF XID_NO_PF, \
+                 BF XID, \
+                 E3 TEST_NO_PF, \
+                 F3 TEST \
+                 O0.2} \
+            } \
+            {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+            \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+            \n LOOP $rem {X0} \n }, \
+          0x0005 {"Ethernet" \
+             \n \n \t "Data_Length= " $HD \
+             \n \t "Destination_Address= " X6, \
+                FFFFFFFFFFFF Broadcast,  \
+                \* {R6 X6} \
+             \n  \t  "Source_Address= " X6, \
+                FFFFFFFFFFFF Broadcast,  \
+                \* {R6 X6} \
+             \n  \t  Type X2, \
+                80D5 SNA  \
+             \n  \t  "LPDU_Length= " X2  O1  \
+             \n  \t  DSAP X1, \
+               00 NULL, \
+               FC Discovery \
+                 { \t  Command O2  X2, \
+                    0001 Add_Name, \
+                    0002 Add_Name_Rsp, \
+                    0003 Find, \
+                    0004 Found, \
+                    \* { X2, \
+                      0001 Find, \
+                      0002 Found  \
+                      R2  }  \
+                 R4  }, \
+               \* {R1 X1} \
+             \n  \t  SSAP X1, \
+               00 NULL, \
+               FC Discovery, \
+               \* {R1 X1} \
+             \n  \t  Control \
+               R1  O0.7  B0.1, \
+                 0 Command, \
+                 1 Response  \
+               O0.7  B0.1, \
+               0 I_Frame { R1  \n "Send_Seq_Number= " X1  \
+               \t  "Rcv_Seq_Number= " X1  R1 }, \
+                 1 {R1  X1, \
+                    01 RR { \n \t  Rcv_Seq_Number X1  R1 }, \
+                    03 UI_NO_PF, \
+                    05 RNR { \n \t  Rcv_Seq_Number X1  R1 }, \
+                    09 REJ { \n \t  Rcv_Seq_Number X1  R1 }, \
+                    0F DM_NO_PF, \
+                    13 UI, \
+                    1F DM, \
+                    43 DISC_NO_PF, \
+                    53 DISC, \
+                    63 UA_NO_PF, \
+                    6F SABME_NO_PF, \
+                    73 UA, \
+                    7F SABME, \
+                    87 FRMR_NO_PF, \
+                    97 FRMR, \
+                    AF XID_NO_PF, \
+                    BF XID, \
+                    E3 TEST_NO_PF, \
+                    F3 TEST  }  \
+              {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+               \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+               \n LOOP $rem {X0} \n }, \
+          0x0006 {"IEEE_802.3_Ethernet " \
+            \n  \n  \t  Data_Length \n $HD  \
+            \n  \t  "Destination_Address= " X6, \
+              0xFFFFFFFFFFFF Broadcast,  \
+              \* {R6 X6} \
+            \n  \t  "Source_Address= " X6, \
+              0xFFFFFFFFFFFF Broadcast,  \
+              \* {R6 X6} \
+            \n  \t  "LPDU_Length= " X2  \
+            \n  \t  DSAP X1, \
+              00 NULL, \
+              FC Discovery \
+                { \t  Command O4  X2, \
+                  0001 Find, \
+                  0002 Found  R6  }  \
+            \n  \t  SSAP X1, \
+              00 NULL, \
+              FC Discovery  \
+            \n  \t  Control \
+            R1  O0.7  B0.1, \
+              0 Command, \
+              1 Response  \
+            O0.7  B0.1, \
+              0 I_Frame { R1 \n \t "Send_Seq_Number= " X1  \
+                \n \t  "Rcv_Seq_Number= " X1  R1 }, \
+              1 {R1  X1, \
+                01 RR { \n \t  Rcv_Seq_Number X1  R1 }, \
+                03 UI_NO_PF, \
+                05 RNR { \n \t  Rcv_Seq_Number X1  R1 }, \
+                09 REJ { \n \t  Rcv_Seq_Number X1  R1 }, \
+                0F DM_NO_PF, \
+                13 UI, \
+                1F DM, \
+                43 DISC_NO_PF, \
+                53 DISC, \
+                63 UA_NO_PF, \
+                6F SABME_NO_PF, \
+                73 UA, \
+                7F SABME, \
+                87 FRMR_NO_PF, \
+                97 FRMR, \
+                AF XID_NO_PF, \
+                BF XID, \
+                E3 TEST_NO_PF, \
+                F3 TEST  }  \
+            {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+             \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+             \n LOOP $rem {X0} \n }, \
+          0x0007 {"  Token_Ring  "   \
+            \n  \n  \t  "Data_Length= "  $HD \
+            \n  \t  "Token= " O0.3 B0.1 \
+            \t  "Monitor= " B0.1 \
+            \t  "Priority= " B0.3 \
+            \n  \t  "Type= " B0.2 \
+            \n  \t  "Control= " B0.6 \
+            \n  \t  "Destination_Address= "  X6, \
+              0xFFFFFFFFFFFF Broadcast,  \
+              \* {R6 X6} \
+            \n  \t  "Source_Address= " X6, \
+              0xFFFFFFFFFFFF Broadcast,  \
+              \* {R6 X6} \
+            \n  \t  "Routing= " R6 B0.1, \
+              0 No { O0.7 O5 \
+                \n  \t  "DSAP= " X1, \
+                00 NULL, \
+                FC Discovery \
+                { \t  Command O4 X2, \
+                  0001 Find, \
+                  0002 Found  R6 },  \
+                  \* { R1 X1 } \
+                \n  \t  "SSAP= " X1, \
+                  00 NULL, \
+                  FC Discovery,  \
+                  \* {R1 X1} \
+                \n  \t  Control \
+                R1  O0.7 B0.1, \
+                  0 Command, \
+                  1 Response  \
+                O0.7 B0.1, \
+                0 I_Frame { R1 \n "Send_Seq_Number= " X1 \
+                  "Rcv_Seq_Number= " X1 R1}, \
+                1 {R1 X1, \
+                  01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+                  03 UI_NO_PF, \
+                  05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+                  09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+                  0F DM_NO_PF, \
+                  13 UI, \
+                  1F DM, \
+                  43 DISC_NO_PF, \
+                  53 DISC, \
+                  63 UA_NO_PF, \
+                  6F SABME_NO_PF, \
+                  73 UA, \
+                  7F SABME, \
+                  87 FRMR_NO_PF, \
+                  97 FRMR, \
+                  AF XID_NO_PF, \
+                  BF XID, \
+                  E3 TEST_NO_PF, \
+                  F3 TEST  }  \
+                }, \
+              1 Yes { O0.7 O5 \
+                \n  \t  Broadcast B0.3, \
+                  000 Non_Broadcast, \
+                  001 Non_Broadcast, \
+                  010 Non_Broadcast, \
+                  011 Non_Broadcast, \
+                  100 All_Routes_Broadcast, \
+                  101 All_Routes_Broadcast, \
+                  110 Single_Route_Broadcast, \
+                  111 Single_Route_Broadcast  \
+                \n \t  {{$ri = B0.5 }} R1 O0.3 Routing_Length B0.5, \
+                  00000 0, \
+                  00001 1, \
+                  00010 2, \
+                  00011 3, \
+                  00100 4, \
+                  00101 5, \
+                  00110 6, \
+                  00111 7, \
+                  01000 8, \
+                  01001 9, \
+                  01010 10, \
+                  01011 11, \
+                  01100 12, \
+                  01101 13, \
+                  01110 14, \
+                  01111 15, \
+                  10000 16, \
+                  10001 17, \
+                  10010 18, \
+                  10011 19, \
+                  10100 20, \
+                  10101 21, \
+                  10110 22, \
+                  10111 23, \
+                  11000 24, \
+                  11001 25, \
+                  11010 26, \
+                  11011 27, \
+                  11100 28, \
+                  11101 29, \
+                  11110 30, \
+                  11111 31  \
+                \n  \t  Direction B0.1 \
+                \t  Largest_Frame B0.3, \
+                  000 516_Bytes, \
+                  001 1500_Bytes, \
+                  010 2052_Bytes, \
+                  011 4472_Bytes, \
+                  100 8191_Bytes, \
+                  101 Reserved, \
+                  110 Reserved, \
+                  111 All_Route_Frame  \
+                O0.4  R2 {{$DATAPOINTER = $DATAPOINTER + $ri }} \
+                \n \t "Dsap= " X1  "Ssap= " X1 \
+                \n  \t  Control \
+                  R1  O0.7 B0.1, \
+                    0 Command, \
+                    1 Response  \
+                  O0.7 B0.1, \
+                    0 I_Frame { R1 \n "Send_Seq_Number= " X1 \
+                      "Rcv_Seq_Number= " X1 R1}, \
+                    1 {R1 X1, \
+                      01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+                      03 UI_NO_PF, \
+                      05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+                      09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+                      0F DM_NO_PF, \
+                      13 UI, \
+                      1F DM, \
+                      43 DISC_NO_PF, \
+                      53 DISC, \
+                      63 UA_NO_PF, \
+                      6F SABME_NO_PF, \
+                      73 UA, \
+                      7F SABME, \
+                      87 FRMR_NO_PF, \
+                      97 FRMR, \
+                      AF XID_NO_PF, \
+                      BF XID, \
+                      E3 TEST_NO_PF, \
+                      F3 TEST  }  \
+              }  \
+              {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+              \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+              \n LOOP $rem {X0} \n }, \
+          0x0009 {"  FDDI  "   \
+            \n  \n  \t  "Data_Length= "  $HD \
+            \n  \t O3  "Class= "  B0.1, \
+              0 Asynchronous Frame, \
+              1 Synchronous Frame \
+            \n  \t  "Frame Address Length= " B0.1, \
+              0 "16-bit Address",\
+              1 "48-bit Address" \
+            \n \t O0.3 "Priority= " B0.3 \
+            \n  \t  "Destination_Address= "  X6, \
+              0xFFFFFFFFFFFF Broadcast,  \
+              \* {R6 X6} \
+            \n  \t  "Source_Address= " X6, \
+              0xFFFFFFFFFFFF Broadcast,  \
+              \* {R6 X6} \
+            \n  \t  "Routing= " R6 B0.1, \
+              0 No { O0.7 O5 \
+                \n  \t  "DSAP= " X1, \
+                  00 NULL, \
+                  FC Discovery \
+                   { \t  Command O4 X2, \
+                    0001 Find, \
+                    0002 Found  R6 },  \
+                  \* { R1 X1 } \
+                \n  \t  "SSAP= " X1, \
+                  00 NULL, \
+                  FC Discovery,  \
+                  \* {R1 X1} \
+                \n  \t  Control \
+                R1  O0.7 B0.1, \
+                  0 Command, \
+                  1 Response  \
+                O0.7 B0.1, \
+                  0 I_Frame { R1 \n "Send_Seq_Number= " X1 \
+                    "Rcv_Seq_Number= " X1 R1}, \
+                  1 {R1 X1, \
+                    01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+                    03 UI_NO_PF, \
+                    05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+                    09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+                    0F DM_NO_PF, \
+                    13 UI, \
+                    1F DM, \
+                    43 DISC_NO_PF, \
+                    53 DISC, \
+                    63 UA_NO_PF, \
+                    6F SABME_NO_PF, \
+                    73 UA, \
+                    7F SABME, \
+                    87 FRMR_NO_PF, \
+                    97 FRMR, \
+                    AF XID_NO_PF, \
+                    BF XID, \
+                    E3 TEST_NO_PF, \
+                    F3 TEST  }  \
+                  }, \
+              1 Yes { O0.7 O5 \
+                 \n  \t  Broadcast B0.3, \
+                   000 Non_Broadcast, \
+                   001 Non_Broadcast, \
+                   010 Non_Broadcast, \
+                   011 Non_Broadcast, \
+                   100 All_Routes_Broadcast, \
+                   101 All_Routes_Broadcast, \
+                   110 Single_Route_Broadcast, \
+                   111 Single_Route_Broadcast  \
+                 \n \t  {{$ri = B0.5 }} R1 O0.3 Routing_Length B0.5, \
+                   00000 0, \
+                   00001 1, \
+                   00010 2, \
+                   00011 3, \
+                   00100 4, \
+                   00101 5, \
+                   00110 6, \
+                   00111 7, \
+                   01000 8, \
+                   01001 9, \
+                   01010 10, \
+                   01011 11, \
+                   01100 12, \
+                   01101 13, \
+                   01110 14, \
+                   01111 15, \
+                   10000 16, \
+                   10001 17, \
+                   10010 18, \
+                   10011 19, \
+                   10100 20, \
+                   10101 21, \
+                   10110 22, \
+                   10111 23, \
+                   11000 24, \
+                   11001 25, \
+                   11010 26, \
+                   11011 27, \
+                   11100 28, \
+                   11101 29, \
+                   11110 30, \
+                   11111 31  \
+                 \n  \t  Direction B0.1 \
+                 \t  Largest_Frame B0.3, \
+                   000 516_Bytes, \
+                   001 1500_Bytes, \
+                   010 2052_Bytes, \
+                   011 4472_Bytes, \
+                   100 8191_Bytes, \
+                   101 Reserved, \
+                   110 Reserved, \
+                   111 All_Route_Frame  \
+                 O0.4  R2 {{$DATAPOINTER = $DATAPOINTER + $ri }} \
+                 \n \t "Dsap= " X1  "Ssap= " X1 \
+                 \n  \t  Control \
+                   R1  O0.7 B0.1, \
+                     0 Command, \
+                     1 Response  \
+                 O0.7 B0.1, \
+                 0 I_Frame { R1 \n "Send_Seq_Number= " X1 \
+                     "Rcv_Seq_Number= " X1 R1}, \
+                 1 {R1 X1, \
+                   01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+                   03 UI_NO_PF, \
+                   05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+                   09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+                   0F DM_NO_PF, \
+                   13 UI, \
+                   1F DM, \
+                   43 DISC_NO_PF, \
+                   53 DISC, \
+                   63 UA_NO_PF, \
+                   6F SABME_NO_PF, \
+                   73 UA, \
+                   7F SABME, \
+                   87 FRMR_NO_PF, \
+                   97 FRMR, \
+                   AF XID_NO_PF, \
+                   BF XID, \
+                   E3 TEST_NO_PF, \
+                   F3 TEST  }  \
+              }  \
+              {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+              \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+              \n LOOP $rem {X0} \n }, \
+   	0x000f {"LPDU Data  "  \n \t "Packet_Length= " $HD \n \
+ 		{{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+ 		\n  \n  \t  "I-Field_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+ 		\n LOOP $rem {X0} \n }, \
+            \* {"Unknown_DLC"}
++ 244 1.4 "Receive_DLC_Data: "  \
+      {{$rtype = X4}} {{$a = $HD}}  \
+      $rtype, \
+        0x80001 {"QLLC  Receive XID "  \n \t "Packet_Length= " $HD \n \
+          {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+          \n  \n  \t  "Packet Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+          \n LOOP $rem {X0} \n }, \
+        0x80002 {"QLLC  Receive Data  "  \n \t "Packet_Length= " $HD \n \
+          {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+          \n  \n  \t  "Packet Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+          \n LOOP $rem {X0} \n }, \
+        0x0000 {"SDLC" \
+          \n  \n  \t  "Data_Length= "  $HD \
+          \n  \t  Address X1  \
+          \n  \t  Control O0.7 B0.1, \
+            0 I_Frame { R1 \n Rcv_Seq_Number B0.3, \
+              000 0, \
+              001 1, \
+              010 2, \
+              011 3, \
+              100 4, \
+              101 5, \
+              110 6, \
+              111 7  \
+            \n \t  Poll B0.1 \
+            \n \t  Send_Seq_Number B0.3, \
+              000 0, \
+              001 1, \
+              010 2, \
+              011 3, \
+              100 4, \
+              101 5, \
+              110 6, \
+              111 7  \
+              O0.1 }, \
+            1 { R1 O0.6 B0.2, \
+              01 Supervisory { R1 O0.4 B0.2, \
+              00 RR, \
+              01 RNR, \
+              10 REJ, \
+              11 SREJ  \
+              \t  O0.2 R1 Rcv_Seq_Number B0.3, \
+                000 0, \
+                001 1, \
+                010 2, \
+                011 3, \
+                100 4, \
+                101 5, \
+                110 6, \
+                111 7  \
+              \t  Poll B0.1 \
+              O0.4 }, \
+            11 Unnumbered_I_Frame {R1 X1, \
+              03 UI_NO_PF, \
+              0F DM_NO_PF, \
+              13 UI, \
+              1F DM, \
+              43 DISC_NO_PF, \
+              53 DISC, \
+              63 UA_NO_PF, \
+              73 UA, \
+              83 SNRM_NO_PF, \
+              87 FRMR_NO_PF, \
+              93 SNRM, \
+              97 FRMR, \
+              AF XID_NO_PF, \
+              BF XID, \
+              E3 TEST_NO_PF, \
+              F3 TEST  }  \
+            }  \
+           {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+            \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+            \n LOOP $rem {X0} \n }, \
+       0x0005 {"Ethernet"  \
+         \n  \n  \t  Data_Length \n $HD  \
+         \n  \t  Destination_Address X6, \
+           0xFFFFFFFFFFFF Broadcast,  \
+           \* {R6 X6} \
+         \n  \t  Source_Address X6, \
+           0xFFFFFFFFFFFF Broadcast,  \
+           \* {R6 X6} \
+         \n  \t  Type X2, \
+           80D5 SNA  \
+           \n  \t  LPDU_Length X2  O1  \
+           \n  \t  DSAP X1, \
+             00 NULL, \
+             FC Discovery  \
+               { \t  Command O2  X2, \
+                  0001 Add_Name, \
+                  0002 Add_Name_Rsp, \
+                  0003 Find, \
+                  0004 Found, \
+                  \* { X2, \
+                    0001 Find, \
+                    0002 Found  \
+                    R2  }  \
+               R4  },  \
+             \* {R1 X1} \
+           \n  \t  SSAP X1, \
+             00 NULL, \
+             FC Discovery,  \
+             \* {R1 X1} \
+           \n  \t  Control \
+             R1  O0.7  B0.1, \
+               0 Command, \
+               1 Response  \
+             O0.7  B0.1, \
+             0 I_Frame { R1 \n \t Send_Seq_Number X1  \
+             \n \t  Rcv_Seq_Number X1  R1 }, \
+               1 {R1  X1, \
+                 01 RR { \n \t  Rcv_Seq_Number X1  R1 }, \
+                 03 UI_NO_PF, \
+                 05 RNR { \n \t  Rcv_Seq_Number X1  R1 }, \
+                 09 REJ { \n \t  Rcv_Seq_Number X1  R1 }, \
+                 0F DM_NO_PF, \
+                 13 UI, \
+                 1F DM, \
+                 43 DISC_NO_PF, \
+                 53 DISC, \
+                 63 UA_NO_PF, \
+                 6F SABME_NO_PF, \
+                 73 UA, \
+                 7F SABME, \
+                 87 FRMR_NO_PF, \
+                 97 FRMR, \
+                 AF XID_NO_PF, \
+                 BF XID, \
+                 E3 TEST_NO_PF, \
+                 F3 TEST  }  \
+         {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+          \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+          \n LOOP $rem {X0} \n }, \
+       0x0006 {"IEEE_802.3_Data" \
+         \n  \n  \t  Data_Length \n $HD  \
+         \n  \t  Destination_Address X6, \
+           0xFFFFFFFFFFFF Broadcast,  \
+           \* {R6 X6} \
+         \n  \t  Source_Address X6, \
+           0xFFFFFFFFFFFF Broadcast,  \
+           \* {R6 X6} \
+         \n  \t  LPDU_Length X2  \
+         \n  \t  DSAP X1, \
+           00 NULL, \
+           FC Discovery \
+             { \t  Command O4  X2, \
+               0001 Find, \
+               0002 Found  R6  },  \
+               \* {R1 X1} \
+         \n  \t  SSAP X1, \
+           00 NULL, \
+           FC Discovery,  \
+           \* {R1 X1} \
+         \n  \t  Control \
+           R1  O0.7  B0.1, \
+             0 Command, \
+             1 Response  \
+           O0.7  B0.1, \
+           0 I_Frame { R1  \n \t Send_Seq_Number X1  \
+           \n \t  Rcv_Seq_Number X1  R1 }, \
+             1 {R1  X1, \
+               01 RR { \n \t  Rcv_Seq_Number X1  R1 }, \
+               03 UI_NO_PF, \
+               05 RNR { \n \t  Rcv_Seq_Number X1  R1 }, \
+               09 REJ { \n \t  Rcv_Seq_Number X1  R1 }, \
+               0F DM_NO_PF, \
+               13 UI, \
+               1F DM, \
+               43 DISC_NO_PF, \
+               53 DISC, \
+               63 UA_NO_PF, \
+               6F SABME_NO_PF, \
+               73 UA, \
+               7F SABME, \
+               87 FRMR_NO_PF, \
+               97 FRMR, \
+               AF XID_NO_PF, \
+               BF XID, \
+               E3 TEST_NO_PF, \
+               F3 TEST  }  \
+        {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+         \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+         \n LOOP $rem {X0} \n }, \
+      0x0007 {"  Token_Ring" \
+        \n  \n  \t  "Data_Length= "  $HD \
+        \n  \t  "Token= " O0.3 B0.1 \
+        \t  "Monitor= " B0.1 \
+        \t  "Priority= " B0.3 \
+        \n  \t  "Type= " B0.2 \
+        \n  \t  "Control= " B0.6 \
+        \n  \t  "Destination_Address= "  X6, \
+           0xFFFFFFFFFFFF Broadcast,  \
+           \* {R6 X6} \
+        \n  \t  "Source_Address= " X6, \
+          0xFFFFFFFFFFFF Broadcast,  \
+          \* {R6 X6} \
+        \n  \t  "Routing= " R6  B0.1, \
+           0 No { O0.7 O5 \
+             \n  \t  "DSAP= " X1, \
+               00 NULL, \
+               FC Discovery \
+                 { \t  Command O4 X2, \
+                   0001 Find, \
+                   0002 Found  R6 },  \
+                   \* { R1 X1 } \
+             \n  \t  "SSAP= " X1, \
+                00 NULL, \
+                FC Discovery,  \
+                \* {R1 X1} \
+             \n  \t  Control \
+              R1  O0.7 B0.1, \
+                0 Command, \
+                1 Response  \
+              O0.7 B0.1, \
+                0 I_Frame { R1 \n "Send_Seq_Number= " X1 \
+                   "Rcv_Seq_Number= " X1 R1}, \
+                  1 {R1 X1, \
+                    01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+                    03 UI_NO_PF, \
+                    05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+                    09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+                    0F DM_NO_PF, \
+                    13 UI, \
+                    1F DM, \
+                    43 DISC_NO_PF, \
+                    53 DISC, \
+                    63 UA_NO_PF, \
+                    6F SABME_NO_PF, \
+                    73 UA, \
+                    7F SABME, \
+                    87 FRMR_NO_PF, \
+                    97 FRMR, \
+                    AF XID_NO_PF, \
+                    BF XID, \
+                    E3 TEST_NO_PF, \
+                    F3 TEST  }  \
+                  }, \
+          1 Yes { O0.7 O5 \
+            \n  \t  Broadcast B0.3, \
+              000 Non_Broadcast, \
+              001 Non_Broadcast, \
+              010 Non_Broadcast, \
+              011 Non_Broadcast, \
+              100 All_Routes_Broadcast, \
+              101 All_Routes_Broadcast, \
+              110 Single_Route_Broadcast, \
+              111 Single_Route_Broadcast  \
+            \n \t  {{$ri = B0.5 }} R1 O0.3 Routing_Length B0.5, \
+              00000 0, \
+              00001 1, \
+              00010 2, \
+              00011 3, \
+              00100 4, \
+              00101 5, \
+              00110 6, \
+              00111 7, \
+              01000 8, \
+              01001 9, \
+              01010 10, \
+              01011 11, \
+              01100 12, \
+              01101 13, \
+              01110 14, \
+              01111 15, \
+              10000 16, \
+              10001 17, \
+              10010 18, \
+              10011 19, \
+              10100 20, \
+              10101 21, \
+              10110 22, \
+              10111 23, \
+              11000 24, \
+              11001 25, \
+              11010 26, \
+              11011 27, \
+              11100 28, \
+              11101 29, \
+              11110 30, \
+              11111 31  \
+            \n  \t  Direction B0.1 \
+            \t  Largest_Frame B0.3, \
+              000 516_Bytes, \
+              001 1500_Bytes, \
+              010 2052_Bytes, \
+              011 4472_Bytes, \
+              100 8191_Bytes, \
+              101 Reserved, \
+              110 Reserved, \
+              111 All_Route_Frame  \
+            O0.4  R2 {{$DATAPOINTER = $DATAPOINTER + $ri }} \
+            \n  \t  "DSAP= " X1, \
+              00 NULL, \
+              FC Discovery  \
+                { \t  Command O4 X2, \
+                   0001 Find, \
+                   0002 Found  R6 }, \
+              \* {R1 X1} \
+            \n  \t  "SSAP= " X1, \
+              00 NULL, \
+              FC Discovery,  \
+              \* {R1 X1} \
+            \n  \t  Control \
+            R1  O0.7 B0.1, \
+              0 Command, \
+              1 Response  \
+            O0.7 B0.1, \
+              0 I_Frame { R1  \n "Send_Seq_Number= " X1 \
+               "Rcv_Seq_Number= " X1 R1}, \
+              1 {R1  X1, \
+                01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+                03 UI_NO_PF, \
+                05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+                09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+                0F DM_NO_PF, \
+                13 UI, \
+                1F DM, \
+                43 DISC_NO_PF, \
+                53 DISC, \
+                63 UA_NO_PF, \
+                6F SABME_NO_PF, \
+                73 UA, \
+                7F SABME, \
+                87 FRMR_NO_PF, \
+                97 FRMR, \
+                AF XID_NO_PF, \
+                BF XID, \
+                E3 TEST_NO_PF, \
+                F3 TEST  }  \
+          }  \
+          {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+            \n  \n  \t  "Packet_Data " \n G8 LOOP $mod {X4 X4 X4 X4 \n}   \
+            \n LOOP $rem {X0} \n }, \
+       0x0009 {"  FDDI  "   \
+         \n  \n  \t  "Data_Length= "  $HD \
+         \n  \t O3  "Class= "  B0.1, \
+           0 Asynchronous Frame, \
+           1 Synchronous Frame \
+         \n  \t  "Frame Address Length= " B0.1, \
+           0 "16-bit Address",\
+           1 "48-bit Address" \
+         \n \t O0.3 "Priority= " B0.3 \
+         \n  \t  "Destination_Address= "  X6, \
+           0xFFFFFFFFFFFF Broadcast,  \
+           \* {R6 X6} \
+         \n  \t  "Source_Address= " X6, \
+           0xFFFFFFFFFFFF Broadcast,  \
+           \* {R6 X6} \
+         \n  \t  "Routing= " R6 B0.1, \
+           0 No { O0.7 O5 \
+             \n  \t  "DSAP= " X1, \
+               00 NULL, \
+               FC Discovery \
+                 { \t  Command O4 X2, \
+                   0001 Find, \
+                   0002 Found  R6 },  \
+                   \* { R1 X1 } \
+             \n  \t  "SSAP= " X1, \
+                00 NULL, \
+                FC Discovery,  \
+                \* {R1 X1} \
+             \n  \t  Control \
+              R1  O0.7 B0.1, \
+                0 Command, \
+                1 Response  \
+              O0.7 B0.1, \
+                0 I_Frame { R1 \n "Send_Seq_Number= " X1 \
+                   "Rcv_Seq_Number= " X1 R1}, \
+                  1 {R1 X1, \
+                    01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+                    03 UI_NO_PF, \
+                    05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+                    09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+                    0F DM_NO_PF, \
+                    13 UI, \
+                    1F DM, \
+                    43 DISC_NO_PF, \
+                    53 DISC, \
+                    63 UA_NO_PF, \
+                    6F SABME_NO_PF, \
+                    73 UA, \
+                    7F SABME, \
+                    87 FRMR_NO_PF, \
+                    97 FRMR, \
+                    AF XID_NO_PF, \
+                    BF XID, \
+                    E3 TEST_NO_PF, \
+                    F3 TEST  }  \
+                  }, \
+          1 Yes { O0.7 O5 \
+            \n  \t  Broadcast B0.3, \
+              000 Non_Broadcast, \
+              001 Non_Broadcast, \
+              010 Non_Broadcast, \
+              011 Non_Broadcast, \
+              100 All_Routes_Broadcast, \
+              101 All_Routes_Broadcast, \
+              110 Single_Route_Broadcast, \
+              111 Single_Route_Broadcast  \
+            \n \t  {{$ri = B0.5 }} R1 O0.3 Routing_Length B0.5, \
+              00000 0, \
+              00001 1, \
+              00010 2, \
+              00011 3, \
+              00100 4, \
+              00101 5, \
+              00110 6, \
+              00111 7, \
+              01000 8, \
+              01001 9, \
+              01010 10, \
+              01011 11, \
+              01100 12, \
+              01101 13, \
+              01110 14, \
+              01111 15, \
+              10000 16, \
+              10001 17, \
+              10010 18, \
+              10011 19, \
+              10100 20, \
+              10101 21, \
+              10110 22, \
+              10111 23, \
+              11000 24, \
+              11001 25, \
+              11010 26, \
+              11011 27, \
+              11100 28, \
+              11101 29, \
+              11110 30, \
+              11111 31  \
+            \n  \t  Direction B0.1 \
+            \t  Largest_Frame B0.3, \
+              000 516_Bytes, \
+              001 1500_Bytes, \
+              010 2052_Bytes, \
+              011 4472_Bytes, \
+              100 8191_Bytes, \
+              101 Reserved, \
+              110 Reserved, \
+              111 All_Route_Frame  \
+            O0.4  R2 {{$DATAPOINTER = $DATAPOINTER + $ri }} \
+          \n \t "Dsap= " X1  "Ssap= " X1 \
+          \n  \t  Control \
+          R1  O0.7 B0.1, \
+            0 Command, \
+            1 Response  \
+          O0.7 B0.1, \
+            0 I_Frame { R1 \n "Send_Seq_Number= " X1 \
+             "Rcv_Seq_Number= " X1 R1}, \
+            1 {R1 X1, \
+              01 RR { \n \t  Rcv_Seq_Number X1 R1}, \
+              03 UI_NO_PF, \
+              05 RNR { \n \t  Rcv_Seq_Number X1 R1}, \
+              09 REJ { \n \t  Rcv_Seq_Number X1 R1}, \
+              0F DM_NO_PF, \
+              13 UI, \
+              1F DM, \
+              43 DISC_NO_PF, \
+              53 DISC, \
+              63 UA_NO_PF, \
+              6F SABME_NO_PF, \
+              73 UA, \
+              7F SABME, \
+              87 FRMR_NO_PF, \
+              97 FRMR, \
+              AF XID_NO_PF, \
+              BF XID, \
+              E3 TEST_NO_PF, \
+              F3 TEST  }  \
+          }  \
+          {{ $mod = $a / 16}} {{$bom = $mod * 16}} {{$rem = $a - $bom}} \
+           \n  \n  \t  "Packet_Data  " \n G8 LOOP $mod {X4 X4 X4 X4 \n} \
+           \n LOOP $rem {X0} \n }, \
+        \*  {"Unknown_DLC"}
++ 245 1.3 "DLC_Performance_Hook" {{$d = X1}} {{$t = X1}} {{$t2 = X4}} \
+      \n \t $t, \
+        0x00  {"SDLC"}, \
+        0x05  {"Ethernet"}, \
+        0x06  {"IEEE_802.3_Ethernet"}, \
+        0x07  {"Token_Ring"}, \
+        0x09  {"FDDI "}, \
+        \*    {"Unknown_LAN  " $t} \
+      \n  $d, \
+        0x01  {"Begin_Wait_Call  "   \
+              \n \t "Wait_Mask= " $t2}, \
+        0x02  {"End_Wait_Call  "   \
+              \n \t "Return_Mask= " $t2}, \
+        0x03  {"Begin_Get_Rcv_Buffer  "   \
+              \n \t "Buffer_Length= " $t2}, \
+        0x04  {"End_Get_Rcv_Buffer  "   \
+              \n \t "Buffer_Length= " $t2}, \
+        0x05  {"Begin_HASH_Function  "   \
+              }, \
+        0x06  {"End_HASH_Function  "   \
+              }, \
+        0x07  {"Begin_Get_Transmit_Buffer  "   \
+              \n \t "Buffer_Length= " $t2}, \
+        0x08  {"End_Get_Transmit_Buffer  "   \
+              \n \t "Buffer_Length= " $t2}, \
+        0x09  {"Begin_Receive_Network_Data  "   \
+              \n \t "Buffer_Length= " $t2}, \
+        0x0A  {"Send_I_Frame_To_Device_Handler  "   \
+              \n \t "Buffer_length= " $t2}, \
+        0x0B  {"Put_Write_Data_in_Xmit_Queue  "   \
+              \n \t "Buffer_Length =" $t2}, \
+        0x0C  {"Put_Write_XID_in_Xmit_Queue  "   \
+              \n \t "Buffer_Length =" $t2}, \
+        0x0D  {"T1_Timeout  "   \
+              }, \
+        0x0E  {"T2_Timeout  "   \
+              }, \
+        0x0F  {"T3_Timeout  "   \
+              }, \
+        0x10  {"Send_Start_To_Device_Handler  "  \
+              }, \
+        0x11  {"Receive_Discovery_Find_Command  "  \
+              \n \t "Buffer_Address = " $t2}, \
+        0x12  {"Receive_Resolve_Find_Command  "  \
+              \n \t "Buffer_Address = " $t2}, \
+        0x13  {"Open_Physical_Link  "  \
+              }, \
+        0x14  {"Device_Started  "  \
+              }, \
+        0x15  {"Send_Non_I_Frame_Data  "  \
+              \n \t "Buffer_length= " $t2}, \
+        0x16  {"Send_Datagram_Data  "  \
+              }, \
+        0x17  {"Send_Network_Data  "  \
+              }, \
+        0x18  {"T3_Abort_Timeout  "   \
+              }, \
+       \*    {"Unknown_Type  " $d }
++ 246 1.5  "DLC_Monitor_Trace" {{$mtype = X1}} {{$lt = X1}} {{$s1 = X4}} \
+         O8 {{$s2 = X4}} {{$s3 = X2}} {{$s4 = X2}} R20 \
+      \t $mtype, \
+        0x00 {"X.25 QLLC" \n \
+             $D1, \
+             0x0008 {\t O2 {{$d1 = X1}} $d1%S1 $BREAK}, \
+             \*  {"Unknown_Trace_Type  " $mtype $BREAK} \
+          }, \
+        \* \ 
+      \n \t $lt, \
+        0x00  {"SDLC"}, \
+        0x02  {"BSC "}, \
+        0x05  {"Ethernet" \
+          \n \t "Station_Index= " $s3 \n \t "Port_ID= " $s4, \
+              0x30 "ent0" , \
+              0x31 "ent1" , \
+              0x32 "ent2" , \
+              0x33 "ent3" ,\
+              \*   "ent?" \
+          \n }, \
+       0x06  {"IEEE_802.3_Ethernet" \
+          \n \t "Station_Index= " $s3 \n \t "Port_ID= " $s4, \
+              0x30 "ent0" , \
+              0x31 "ent1" , \
+              0x32 "ent2" , \
+              0x33 "ent3" ,\
+              \*   "ent?" \
+          \n }, \
+       0x07  {"Token_Ring" \
+         \n \t "Station_Index= " $s3 \n \t "Port_ID= " $s4, \
+              0x30 "tok0" , \
+              0x31 "tok1" , \
+              0x32 "tok2" , \
+              0x33 "tok3" ,\
+              \*   "tok?" \
+          \n }, \
+       0x09  {"FDDI" \
+        \n \t "Station_Index= " $s3 \n \t "Port_ID= " $s4, \
+              0x30 "fddi0" , \
+              0x31 "fddi1" , \
+              0x32 "fddi2" , \
+              0x33 "fddi3" ,\
+              \*   "fddi?" \
+          \n }, \
+        \*    {"Unknown_LAN  " $lt} \
+     \n  $mtype, \
+       01 {"Write_Command: " {{$d1 = X4}} \
+         $d1, \
+           0x80000000 {"Normal_Data"}, \
+           0x40000000 {"XID_Data"}, \
+           0x20000000 {"Datagram"}, \
+           0x10000000 {"Network_Data"}, \
+           \*         {"Unknown_Data  " $d1} \
+         \n  "Station_Number= " X4 "Buffer_Address= " X4 \
+         \n "Buffer_Length= " X4  O4 \
+         }, \
+       02 {"Receive_Non_I_Frame_Data" {{$ct1 = X4}} O9 \
+          {{$dsap = X1}} O1 {{$ssap = X1}} \
+          R1 {{$xx7 = O0.7}} {{$cr = B0.1}} R12 \
+         \n \t $ct1, \
+            0x01 {"RR"}, \
+            0x03 {"UI_No_PF"}, \
+            0x05 {"RNR"}, \
+            0x09 {"REJ"}, \
+            0x0F {"DM_No_PF"}, \
+            0x13 {"UI"}, \
+            0x1F {"DM"}, \
+            0x43 {"Disc_No_PF"}, \
+            0x53 {"Disc"}, \
+            0x63 {"UA_No_PF"}, \
+            0x6F {"SABME_No_PF"}, \
+            0x73 {"UA"}, \
+            0x7F {"SABME"}, \
+            0x87 {"FRMR_No_PF"}, \
+            0x97 {"FRMR"}, \
+            0xAF {"XID_No_PF"}, \
+            0xBF {"XID"}, \
+            0xE3 {"TEST_No_PF"}, \
+            0xF3 {"TEST"}, \
+            \*   {"Unknown Command  " $ct1} \
+        $cr, \
+           0 "  Command", \
+           1 "  Response" \
+        \n "Buffer_Address= " X4 \
+        \n "Buffer_Length= " X4 \
+        \n O1 "Dsap= " X1 O1 " Ssap= " X1 \
+        O4  }, \
+       03 {"Receive_I_Frame_Data"  \
+         \n O1 "Nr_Count= " X1 O1 "  Ns_Count= " X1 \
+         \n "Buffer_Address= " X4  \
+         \n "Buffer_Length= " X4  \
+         \n O1 "Dsap= " X1 O1 " Ssap= " X1}, \
+       04 {"Input_Send_Command" {{$itype = X4}} {{$i2 = X4}}  \
+         {{$i3 = X4}} {{$i4 = X4}} {{$i5 = X4}} \
+         \n \t $itype, \
+           0x01 {"Open_Sap_Command"}, \
+           0x02 {"Close_Sap_Command"}, \
+           0x03 {"Start_Link_Station"}, \
+           0x04 {"Halt_Link_Station"}, \
+           0x05 {"Trace_Link_Station"}, \
+           0x06 {"Contact_Link_Station"}, \
+           0x07 {"Test_Link_Station"}, \
+           0x08 {"Alter_Link_Station"}, \
+           0x09 {"Query_Sap"}, \
+           0x0A {"Query_Link_Station"}, \
+           0x0B {"Enter_Local_Busy"}, \
+           0x0C {"Exit_Local_Busy"}, \
+	   0x0D {"Enter_Short_Hold"}, \
+	   0x0E {"Exit_Short_Hold"}, \
+	   0x0F {"Get_Exception"}, \
+	   0x10 {"Add_Group_Address"}, \
+	   0x11 {"Add_Functional_Address"}, \
+	   0x12 {"Delete_Functional_Address"}, \
+	   0x13 {"Delete_Group_Address"}, \
+           \*     {"Unknown_Input_Command  " $itype} \
+         }, \
+       05 {"Send_Command  " {{$stype = X4}} {{$s1 = X4}} R1 {{$nr = X1}} \
+         {{$s2 = X4}} R1 {{$ns = X1}} {{$s3 = X4}} R4 {{$ct1 = X1}} O1 {{$dsap = X1}} \
+         {{$ssap = X1}} R1 {{$xx7 = O0.7}} {{$cr = B0.1}} {{$s4 = X4}} \
+         $stype, \
+           0x01 {"Open_Physical_Link"}, \
+           0x02 {"Reset_Functional_Address"}, \
+           0x03 {"Send_Halt_to_Device_Handler"}, \
+           0x04 {"Send_Close_to_Device_Handler"}, \
+           0x05 {"Open_SAP"}, \
+           0x06 {"Device_Opened"}, \
+           0x07 {"Device_Started"}, \
+           0x08 {"Setup_I_Frame"  \
+           \n \t "Nr_Count= " $nr%X1 "  Ns_Count= " $ns%X1}, \
+           0x09 {"Send_Frame" \
+             \n \t $ct1, \
+            0x01 {"RR"}, \
+            0x03 {"UI_No_PF"}, \
+            0x05 {"RNR"}, \
+            0x09 {"REJ"}, \
+            0x0F {"DM_No_PF"}, \
+            0x13 {"UI"}, \
+            0x1F {"DM"}, \
+            0x43 {"Disc_No_PF"}, \
+            0x53 {"Disc"}, \
+            0x63 {"UA_No_PF"}, \
+            0x6F {"SABME_No_PF"}, \
+            0x73 {"UA"}, \
+            0x7F {"SABME"}, \
+            0x87 {"FRMR_No_PF"}, \
+            0x97 {"FRMR"}, \
+            0xAF {"XID_No_PF"}, \
+            0xBF {"XID"}, \
+            0xE3 {"TEST_No_PF"}, \
+            0xF3 {"TEST"}, \
+            \*   {"I-Frame"} \
+        $cr, \
+           0 "  Command", \
+           1 "  Response" \
+        \n \t "Buffer_Address= " $s1 \
+        \n \t "Buffer_Length= " $s2 \
+        \n \t "Dsap= "$dsap%X1 "  Ssap= "$ssap%X1 \
+        }, \
+      0x0A {\n "Set_Functional_Address= " $s1}, \
+      \*   {"Unknown_Send_Command  " $stype} \
+       }, \
+      06 {"Timer:  " {{$ttype = X4}}  O16 \
+        $ttype, \
+          0x01 {"Add_Name_Timeout"}, \
+          0x02 {"Local_Busy_Timeout"}, \
+          0x03 {"Call_Remote_Timeout"}, \
+          0x04 {"T1_Timeout"}, \
+          0x05 {"T2_Timeout"}, \
+          0x06 {"T3_Timeout"}, \
+          0x07 {"Abort_Timeout"}, \
+          0x08 {"Complete_Adding_Name"}, \
+          \*   {"Unknown_timeout  " $ttype} \
+         }, \
+      07 {"Receive Network Data "  \
+         \n "Buffer Address= " X4 "Buffer Length= " X4 \
+         \n "Correlator = " X4  O8  \
+         }, \
+      08 {"Data "  \
+         \n A4 X4 X4 X4 A4\
+      }, \
+   \*  {"Unknown_Trace_Type  " $mtype} \
+   \n

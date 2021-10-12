@@ -1,0 +1,60 @@
+# @(#)39	1.5  src/bos/etc/consdef/consdef, cfgmethods, bos411, 9428A410j 2/15/94 12:02:29
+#
+#
+# COMPONENT_NAME: (cfgmethods) Device Configuration Methods
+#
+# FUNCTIONS: consdef  Console Definition File
+#
+# ORIGINS: 27, 28
+#
+# (C) COPYRIGHT International Business Machines Corp. 1990,1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+#
+# The console definition file is used for defining async terminal devices
+# which are the console candidates at system boot.  During system boot,
+# all natively attached graphic displays, any async terminal on native serial
+# port S1, and async terminals defined in this file will display the
+# system console selection prompt.  Only one terminal may be selected as
+# console.  If the terminal attributes are not specified in this file,
+# default values from the odm database are assumed.  However, the location 
+# and connection attributes are mandatory.  The location value may be
+# displayed with the lsdev command.
+# 
+# The entries must be in the following format:
+#
+#ALTTTY:
+# 	connection=value
+#	location=nn-nn-ss-nn
+#	attribute=value
+#	.
+#	.
+#ALTTTY:
+#	connection=value
+#	location=nn-nn-ss-nn
+#	attribute=value
+#	.
+# 	. 
+#  Lines in this file must not exceed 80 characters. All comments must be
+#  preceded by a pound sign (#) in the first column. 
+#
+#  For backward compatibility, the "ALTTTY:" keyword is not required 
+#  for the first entry. 
+#
+#
+#  For example, to enable the console selection message on the tty attached to 
+#  the S2 port, uncomment the following stanza: 
+#
+#ALTTTY:
+#	connection=rs232
+#	location=00-00-S2-00
+#	speed=9600
+#	bpc=8
+#	stops=1
+#	flow_disp=xon
+#	parity=none
+#	term=ibm3151

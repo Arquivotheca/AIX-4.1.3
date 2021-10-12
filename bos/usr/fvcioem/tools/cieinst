@@ -1,0 +1,4 @@
+cp /devel/cioem/obj/power/bos/usr/lib/methods/cfgcie/cfgcie  /usr/lib/methods
+cp /devel/cioem/obj/power/bos/usr/lib/methods/cfgcie/ucfgcie /usr/lib/methods
+cp /devel/cioem/obj/power/bos/kernext/cie/ciedd /usr/lib/drivers/ciedd
+alias go='. /devel/tools/go'

@@ -1,0 +1,50 @@
+# @(#)71	1.4  src/bos/usr/bin/uucp/Dialers, cmduucp, bos41B, 9504A 1/16/95 10:52:26
+# 
+# COMPONENT_NAME: UUCP Dialers
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# Dialers special key sequences:
+#
+# Sequence	Does
+# \c		Suppress new-line (\n)
+# \D		Raw phone number
+# \T		Translated phone number
+# \N		Null character (\0)
+# \b		Backspace
+# \n		New line
+# \r		Carriage return
+# \s		Space
+# \t		Tab
+# \\		Backslash
+# \E		Turn echo check on
+# \e		Turn echo check off
+# \d		Delay two seconds
+# \p		Pause about 1/4 second
+# \K		Generate a break on the line
+# \M		Set CLOCAL on
+# \m		Turn CLOCAL off
+#		
+# Any other backslash char sequence is sent as a backslash char
+# sequence (no translation).
+#
+# Execute /usr/lib/uucp/uucpadm for on-line uucp configuration help.
+hayes	=,-,    "" \M\dATQ0&C1\r\c OK \pATDT\T\r\c CONNECT \m ""
+penril	=W-P	"" \d > s\p9\c )-W\p\r\ds\p9\c-) y\c : \E\DP > 9\c OK
+ventel	=&-%	"" \r\p \r\p-\r\p-$ <K\D%%\r>\c ONLINE!
+rixon	=&-%	"" \r\p \r\p-\r\p-$ <K\D%%\r>\c ONLINE!
+vadic	=K-K	"" \005\p *-\005\p-*\005\p-* D\p BER? \E\D\e \r\c LINE
+micom	""	"" \s\c NAME? \D\r\c GO
+#
+TCP
+direct

@@ -1,0 +1,132 @@
+
+
+
+UUID_GEN(1)               User Commands               UUID_GEN(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     uuuuuuuuiiiidddd____ggggeeeennnn - UUID generating program
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ////eeeettttcccc////nnnnccccssss////uuuuuuuuiiiidddd____ggggeeeennnn [ ----cccc ] [ ----pppp ] [ ----CCCC ] [ ----PPPP ] [ ----tttt ] [ ----vvvveeeerrrr----
+     ssssiiiioooonnnn ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The uuuuuuuuiiiidddd____ggggeeeennnn program generates Universal Unique  Identifiers
+     (UUIDs).
+
+     Without options,  uuuuuuuuiiiidddd____ggggeeeennnn  generates  the  character-string
+     representation  of a UUID.  The ----cccc and ----pppp options enable you
+     to  generate  templates  for  Network  Interface  Definition
+     Language  (NIDL) files.  The ----CCCC and ----PPPP options enable you to
+     generate source-code representations of UUIDs, suitable  for
+     initializing variables of type uuuuuuuuiiiidddd____$$$$tttt.
+
+     You can specify several options at once to generate  several
+     representations  for the same UUID.  To generate the default
+     character-string  representation  as  well  as  one  of  the
+     optional representations, use the ----tttt option.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----CCCC         Generate the C source-code  representation  of  a
+               UUID.
+
+     ----cccc         Generate a template, including a UUID  attribute,
+               for  an  interface  definition  in the C syntax of
+               NIDL.
+
+     ----PPPP         Generate the Pascal source-code representation of
+               a UUID.
+
+     ----pppp         Generate a template, including a UUID  attribute,
+               for  an  interface definition in the Pascal syntax
+               of NIDL.
+
+     ----tttt         Generate the character-string representation of a
+               UUID.   This  option  allows  you  to  request the
+               default output of uuuuuuuuiiiidddd____ggggeeeennnn while  also  requesting
+               optional output forms.
+
+     ----vvvveeeerrrrssssiiiioooonnnn   Display the version of  NCK  that  this  uuuuuuuuiiiidddd____ggggeeeennnn
+               belongs to, but do not generate a UUID.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     1.  Generate the character-string representation of a  UUID:
+     _$$$$ ////eeeettttcccc////nnnnccccssss////uuuuuuuuiiiidddd____ggggeeeennnn _3333_4444_dddd_cccc_2222_3333_4444_6666_9999_0000_0000_0000_...._0000_dddd_...._0000_0000_...._0000_0000_...._7777_cccc_...._5555_ffff_...._0000_0000_...._0000_0000_...._0000_0000
+
+     2.  Generate a template for an interface definition in the C
+     syntax   of   NIDL:    _$$$$   ////eeeettttcccc////nnnnccccssss////uuuuuuuuiiiidddd____ggggeeeennnn   ----  cccc   _%%%%_cccc   _[[[[
+
+
+
+NCS Administration        Last change:                          1
+
+
+
+
+
+
+UUID_GEN(1)               User Commands               UUID_GEN(1)
+
+
+
+     _uuuu_uuuu_iiii_dddd_((((_3333_4444_dddd_cccc_2222_3333_9999_eeee_cccc_0000_0000_0000_...._0000_dddd_...._0000_0000_...._0000_0000_...._7777_cccc_...._5555_ffff_...._0000_0000_...._0000_0000_...._0000_0000_))))_,,,,   _vvvv_eeee_rrrr_ssss_iiii_oooo_nnnn_((((_1111_))))   _]]]]
+     _iiii_nnnn_tttt_eeee_rrrr_ffff_aaaa_cccc_eeee _IIII_NNNN_TTTT_EEEE_RRRR_FFFF_AAAA_CCCC_EEEE_NNNN_AAAA_MMMM_EEEE _{{{{
+
+     _}}}}
+
+     3.  Generate the C source-code representation of a UUID:   _$$$$
+     ////eeeettttcccc////nnnnccccssss////uuuuuuuuiiiidddd____ggggeeeennnn ----CCCC _==== _{{{{ _0000_xxxx_3333_4444_dddd_cccc_2222_3333_aaaa_ffff_,,,,
+         _0000_xxxx_ffff_0000_0000_0000_,,,,
+         _0000_xxxx_0000_0000_0000_0000_,,,,
+         _0000_xxxx_0000_dddd_,,,,
+         _{{{{_0000_xxxx_0000_0000_,,,, _0000_xxxx_0000_0000_,,,, _0000_xxxx_7777_cccc_,,,, _0000_xxxx_5555_ffff_,,,, _0000_xxxx_0000_0000_,,,, _0000_xxxx_0000_0000_,,,, _0000_xxxx_0000_0000_}}}} _}}}}_;;;;
+
+     4.  Generate both the  character-string  representation  and
+     the   C   source-code   representation   of   a   UUID:    _$$$$
+     ////eeeettttcccc////nnnnccccssss////uuuuuuuuiiiidddd____ggggeeeennnn ----tttt ----CCCC _4444_5555_0000_cccc_cccc_aaaa_eeee_dddd_6666_0000_0000_0000_...._0000_dddd_...._0000_0000_...._0000_2222_...._1111_8888_...._cccc_bbbb_...._0000_0000_...._0000_0000_...._0000_0000
+     _==== _{{{{ _0000_xxxx_4444_5555_0000_cccc_cccc_aaaa_eeee_dddd_,,,,
+         _0000_xxxx_6666_0000_0000_0000_,,,,
+         _0000_xxxx_0000_0000_0000_0000_,,,,
+         _0000_xxxx_0000_dddd_,,,,
+         _{{{{_0000_xxxx_0000_0000_,,,, _0000_xxxx_0000_2222_,,,, _0000_xxxx_1111_8888_,,,, _0000_xxxx_cccc_bbbb_,,,, _0000_xxxx_0000_0000_,,,, _0000_xxxx_0000_0000_,,,, _0000_xxxx_0000_0000_}}}} _}}}}_;;;;
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          2
+
+
+

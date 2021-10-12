@@ -1,0 +1,67 @@
+#!/usr/bin/bsh
+# 
+# COMPONENT_NAME: CMDUUCP uukick
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# @(#)34	1.8  src/bos/usr/bin/uucp/uukick, cmduucp, bos411, 9428A410j 3/11/94 17:24:47
+#	This shell will start a uucico for the system given.
+
+STATUS=/usr/spool/uucp/.Status
+UUCICO=/usr/sbin/uucp/uucico
+CMD=`basename $0`
+
+X="-x5"
+SYS=
+for arg
+do
+	case $arg in
+	-x*) X=$arg;;
+	*) SYS="$arg";;
+	esac
+done
+if [ -z "$SYS" ]
+then
+     	if [ -x /usr/bin/dspmsg ];
+		then dspmsg uucp.cat 1 "%s:  system name required" $CMD;
+  		else echo "$CMD:  system name required"
+     	fi
+	exit 1
+fi
+
+#  use 7 character maximum name length (SYSNSIZE in uucp.h) for serach
+SYSTEM=`echo $SYS | cut -c1-7`
+
+#  check for existence in Systems file
+XX=
+XX=`uuname | grep $SYSTEM `
+if [ -z "$XX" ]
+then
+     	if [ -x /usr/bin/dspmsg ];
+	       then dspmsg uucp.cat 2 "Invalid system name \"%s\"" $SYSTEM;
+        	else echo "Invalid system name \"$SYSTEM\""
+     	fi
+	exit
+fi
+set $XX
+FULLNAME=$1
+for i
+do
+    if [ $i = $SYS ]; then
+	FULLNAME=$SYS
+	break
+    fi
+done
+
+rm -f $STATUS/${FULLNAME}
+
+$UUCICO  -r1  $X -s$FULLNAME &

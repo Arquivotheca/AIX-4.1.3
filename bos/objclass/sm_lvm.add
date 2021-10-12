@@ -1,0 +1,3394 @@
+# @(#)60	1.30.1.10  src/bos/objclass/sm_lvm.add, cmdlvm, bos41J, 9518A_all 4/25/95 15:41:15
+#
+# COMPONENT_NAME: (cmdlvm) Logical Volume Commands
+#
+# FUNCTIONS: sm_lvm.add
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+## [End of PROLOG]
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlvns"
+	id_seq_num                      = "0"
+	disc_field_name                 = "LVName"
+	name                            = "LOGICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 61
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -l|grep -v \"MOUNT POINT\"|grep -v \":\""
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmpvns"
+	id_seq_num                      = "0"
+	disc_field_name                 = "PVName"
+	name                            = "PHYSICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 101
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -p|grep -v '[:P]'|cut -f1 -d' '"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmspvns"
+	id_seq_num                      = "0"
+	disc_field_name                 = "PVName"
+	name                            = "SOURCE physical volume name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 131
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -p|grep -v '[:P]'|cut -f1 -d' '"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmvgns"
+	id_seq_num                      = "0"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "chlv1"
+	next_id                         = "chlvd"
+	option_id                       = "_cmdlvmlvns"
+	name                            = "Change a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 257
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "lvcls () { LVID=`getlvodm -l $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+Q1=`getlvodm -c $LVID | cut -f2-6,8 -d' ' | sed '1s/ /:/g'`; \
+Q4=`getlvodm -B $LVID`; \
+Q2=`lquerylv -L $LVID -nMPRv`; \
+Q3=`echo $Q2 |sed '1s/ /:/g'`; \
+Q5=`lquerylv -L $LVID -w`; \
+echo $1:$Q1:$Q4:$Q3:$Q5; }; \
+lvcls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "LVName:LVType:Position:\
+Range:Upbound:Strict:Reloc:Label:MaxLPs:Sched:Permissions:BadBlk:Verify:MirrWC"
+	next_type                 = "d"
+	help_msg_id                     = "0516000"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "chlvd"
+	option_id                       = "_cmdlvmchlv"
+	has_name_select                 = "y"
+	name                            = "Change a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 257
+	cmd_to_exec                     = "chlv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = "lvdisc () { Sched='p'; Perm='r'; BadBlk='n'; Verify='n'; MirrWC='n'; \
+if test "$1" -eq 1\nthen\n  Sched='s'\nfi\n\
+if test "$2" -eq 1\nthen\n  Perm='w'\nfi\n\
+if test "$3" -eq 1\nthen\n  BadBlk='y'\nfi\n\
+if test "$4" -eq 1\nthen\n  Verify='y'\nfi\n\
+if test "$5" -eq 1\nthen\n  MirrWC='y'\nfi\n\
+echo '#:::::::::Sched:Permissions:BadBlk:Verify:MirrWC'; \
+echo ':::::::::'$Sched':'$Perm':'$BadBlk':'$Verify':'$MirrWC; }; \
+lvdisc"
+	cmd_to_discover_postfix         = "Sched Permissions BadBlk Verify MirrWC"
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516000"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "LVName"
+	name                            = "Logical volume NAME"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 1
+	op_type                         = ""
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "02"
+	disc_field_name                 = "LVType"
+	name                            = "Logical volume TYPE"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 2
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-t"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516002"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "03"
+	disc_field_name                 = "Position"
+	name                            = "POSITION on physical volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 3
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-a"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values  = "outer_edge,outer_middle,center,inner_middle,inner_edge"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 251
+	aix_values                      = "e,m,c,im,ie"
+	help_msg_id                     = "0516003"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "04"
+	disc_field_name                 = "Range"
+	name                            = "RANGE of physical volumes"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 4
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-e"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "minimum,maximum"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 252
+	aix_values                      = "m,x"
+	help_msg_id                     = "0516004"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "05"
+	disc_field_name                 = "Upbound"
+	name                            = "MAXIMUM NUMBER of PHYSICAL VOLUMES\n  to use for allocation"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 5
+	op_type                         = ""
+	entry_type                      = "#"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-u"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516005"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "06"
+	disc_field_name                 = "Strict"
+	name                            = "Allocate each logical partition copy\n  on a SEPARATE physical volume?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 7
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-s"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516007"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "07"
+	disc_field_name                 = "Reloc"
+	name                            = "RELOCATE the logical volume during reorganization?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 8
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-r"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516008"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "08"
+	disc_field_name                 = "Label"
+	name                            = "Logical volume LABEL"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 14
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-L"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516014"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "09"
+	disc_field_name                 = "MaxLPs"
+	name                            = "MAXIMUM NUMBER of LOGICAL PARTITIONS"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 9
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-x"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516009"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "10"
+	disc_field_name                 = "Sched"
+	name                            = "SCHEDULING POLICY for writing logical\n  partition copies"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 12
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-d"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "parallel,sequential"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 253
+	aix_values                      = "p,s"
+	help_msg_id                     = "0516012"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "11"
+	disc_field_name                 = "Permissions"
+	name                            = "PERMISSIONS"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 10
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-p"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "read/write,readonly"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 254
+	aix_values                      = "w,r"
+	help_msg_id                     = "0516010"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "12"
+	disc_field_name                 = "BadBlk"
+	name                            = "Enable BAD BLOCK relocation?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 11
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-b"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516011"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "13"
+	disc_field_name                 = "Verify"
+	name                            = "Enable WRITE VERIFY?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 13
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-v"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516013"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchlv"
+	id_seq_num                      = "14"
+	disc_field_name                 = "MirrWC"
+	name                            = "Mirror Write Consistency?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = "15"
+	name_msg_id                     = "255"
+	op_type                         = "r"
+	entry_type                      = ""
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-w"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "2810017"
+	help_msg_loc                     = ""
+
+
+sm_cmd_hdr:
+	id                              = "chlv2"
+	option_id                       = "_cmdlvmrenamelv"
+	has_name_select                 = "n"
+	name                            = "Rename a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 15
+	cmd_to_exec                     = "chlv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516291"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrenamelv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "LVName"
+	name                            = "CURRENT logical volume name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 16
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -l|grep -v \"MOUNT POINT\"|grep -v \":\""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516292"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrenamelv"
+	id_seq_num                      = "02"
+	disc_field_name                 = "NewLVName"
+	name                            = "NEW logical volume name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 17
+	op_type                         = ""
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "-n"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516293"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "chpv"
+	next_id                         = "chpv1"
+	option_id                       = "_cmdlvmpvns"
+	name                            = "Change Characteristics of a Physical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 20
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "pvcls () { PVID=`getlvodm -p $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+Alloc='y'; Avail='r'; \
+VGID=`getlvodm -j $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+Q1=`lquerypv -p $PVID -g $VGID -c`; \
+Q2=`expr $Q1 % 2`;Q3=`expr $Q1 / 8`;Q3=`expr $Q3 % 2`; \
+if test "$Q2" -eq 1\nthen\n  Avail='a'\nfi\n\
+if test "$Q3" -eq 1\nthen\n  Alloc='n'\nfi\n\
+echo "$Alloc"":""$Avail"; }; \
+pvcls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "Alloc:Avail"
+	next_type                 = "d"
+	help_msg_id                     = "0516020"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "chpv1"
+	option_id                       = "_cmdlvmchpv"
+	has_name_select                 = "y"
+	name                            = "Change Characteristics of a Physical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 20
+	cmd_to_exec                     = "chpv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = "_rawname"
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516020"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchpv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "Physical volume NAME"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 21
+	op_type                         = ""
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchpv"
+	id_seq_num                      = "02"
+	disc_field_name                 = "Alloc"
+	name                            = "Allow physical partition ALLOCATION?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 22
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "-a"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516022"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchpv"
+	id_seq_num                      = "03"
+	disc_field_name                 = "Avail"
+	name                            = "Physical volume STATE"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 23
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = ""
+	prefix                          = "-v"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = "active,not active"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 25
+	aix_values                      = "a,r"
+	help_msg_id                     = "0516023"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "chvg"
+	next_id                         = "chvg1"
+	option_id                       = "_cmdlvmvgns"
+	name                            = "Change a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 30
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "vgcls () { getlvodm -v $1 >/dev/null; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+}; \
+vgcls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516030"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "chvg1"
+	option_id                       = "_cmdlvmchvg"
+	has_name_select                 = "y"
+	name                            = "Change a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 30
+	cmd_to_exec                     = "chvg"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover = "vgdisc () { echo '#VGName:Auto-On:quorum'; echo $1:$(getlvodm -u $1):$(getlvodm -Q $1); }; vgdisc"
+	cmd_to_discover_postfix         = "_rawname"
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516030"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = "Auto-On"
+	name                            = "Activate volume group AUTOMATICALLY\n  at system restart?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 32
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "-a"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516032"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmchvg"
+	id_seq_num                      = "03"
+	disc_field_name                 = "quorum"
+	name                            = "A QUORUM of disks required to keep the volume \n group on-line ?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 33
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "-Q"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516033"
+	help_msg_loc                     = ""
+
+
+sm_cmd_hdr:
+	id                              = "cplv"
+	option_id                       = "_cmdlvmcplv"
+	has_name_select                 = "n"
+	name                            = "Copy a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 40
+	cmd_to_exec                     = "cplv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516040"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmcplv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "LVName"
+	name                            = "SOURCE logical volume name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 41
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -l|grep -v \"MOUNT POINT\"|grep -v \":\""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516041"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmcplv"
+	id_seq_num                      = "02"
+	disc_field_name                 = ""
+	name                            = "How is the DESTINATION logical volume specified?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 42
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "new logical volume name,overwrite existing logical volume,system assigned logical volume name"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 45
+	aix_values                      = "-y,-f -e, "
+	help_msg_id                     = "2810016"
+	help_msg_loc                    = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmcplv"
+	id_seq_num                      = "03"
+	disc_field_name                 = "NewLVName"
+	name                            = "DESTINATION logical volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 43
+	op_type                         = ""
+	entry_type                      = "t"
+	required                        = "n"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516042"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmcplv"
+	id_seq_num                      = "04"
+	disc_field_name                 = "VGName"
+	name                            = "Destination VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 44
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = ""
+	prefix                          = "-v"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o"
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516043"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "exportvg"
+	option_id                       = "_cmdlvmexportvg"
+	has_name_select                 = "n"
+	name                            = "Export a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 50
+	cmd_to_exec                     = "exportvg"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516050"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmexportvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = "l"
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg"
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "extendlv"
+	next_id                         = "extendlv1"
+	option_id                       = "_cmdlvmlvns"
+	name                            = "Increase the Size of a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 60
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "extcls () { LVID=`getlvodm -l $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+VGID=`getlvodm -b $LVID`; \
+Q1=`getlvodm -c $LVID | cut -f3-6 -d' ' | sed '1s/ /:/g'`; \
+echo "$VGID":"$Q1"; }; \
+extcls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname:Position:Range:Upbound:Strict"
+	next_type                 = "d"
+	help_msg_id                     = "0516060"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "extendlv1"
+	option_id                       = "_cmdlvmextendlv"
+	has_name_select                 = "y"
+	name                            = "Increase the Size of a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 60
+	cmd_to_exec                     = "extendlv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516060"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "LOGICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 61
+	op_type                         = ""
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "02"
+	disc_field_name                 = "NumLPs"
+	name                            = "Number of ADDITIONAL logical partitions"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 62
+	op_type                         = ""
+	entry_type                      = "#"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516062"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "03"
+	disc_field_name                 = "PVNames"
+	name                            = "PHYSICAL VOLUME names"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "n"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "pvlist () { VGID=`getlvodm -v $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+getlvodm -w $VGID | cut -f2 -d' '; }; \
+pvlist"
+	cmd_to_list_postfix             = "_cookedname"
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "04"
+	disc_field_name                 = "Position"
+	name                            = "POSITION on physical volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 3
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = "-a"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values  = "outer_edge,outer_middle,center,inner_middle,inner_edge"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 251
+	aix_values                      = "e,m,c,im,ie"
+	help_msg_id                     = "0516003"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "05"
+	disc_field_name                 = "Range"
+	name                            = "RANGE of physical volumes"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 4
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = "-e"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "minimum,maximum"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 252
+	aix_values                      = "m,x"
+	help_msg_id                     = "0516004"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "06"
+	disc_field_name                 = "Upbound"
+	name                            = "MAXIMUM NUMBER of PHYSICAL VOLUMES \n  to use for allocation"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 5
+	op_type                         = ""
+	entry_type                      = "#"
+	required                        = "n"
+	prefix                          = "-u"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516005"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "07"
+	disc_field_name                 = "Strict"
+	name                            = "Allocate each logical partition copy\n  on a SEPARATE physical volume?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 7
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = "-s"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516007"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendlv"
+	id_seq_num                      = "08"
+	disc_field_name                 = "Map"
+	name                            = "File containing ALLOCATION MAP"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 68
+	op_type                         = ""
+	entry_type                      = "t"
+	required                        = "n"
+	prefix                          = "-m"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516068"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "extendvg"
+	option_id                       = "_cmdlvmextendvg"
+	has_name_select                 = "n"
+	name                            = "Add a Physical Volume to a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 70
+	cmd_to_exec                     = "extendvg -f"
+	ask                             = "y"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516286"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmextendvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = "PVName"
+	name                            = "PHYSICAL VOLUME names"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lspv | grep None | cut -f1 -d' '"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "importvg"
+	option_id                       = "_cmdlvmimportvg"
+	has_name_select                 = "n"
+	name                            = "Import a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 80
+	cmd_to_exec                     = "VGNAME=`importvg"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516080"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmimportvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "t"
+	required                        = ""
+	prefix                          = "-y"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmimportvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = "PVName"
+	name                            = "PHYSICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 101
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lspv | grep None | cut -f1 -d' '"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                    = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmimportvg"
+	id_seq_num                      = "03"
+	disc_field_name                 = "Now-On"
+	name                            = "ACTIVATE volume group after it is\n  imported?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 83
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "` && echo $VGNAME,` && echo $VGNAME && varyonvg $VGNAME"
+	help_msg_id                     = "0516289"
+	help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "_cmdlvmimportvg"
+        id_seq_num                      = "04"
+        disc_field_name                 = "MajorNum"
+        name                            = "Volume group MAJOR NUMBER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 15
+        name_msg_id                     = 176
+        op_type                         = "l"
+        entry_type                      = "#"
+        required                        = ""
+        prefix                          = "-V"
+        cmd_to_list_mode                = "r"
+        cmd_to_list                     = "lvlstmajor"
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "2810018"
+        help_msg_loc                    = ""
+
+sm_name_hdr:
+	id                              = "lslv"
+	next_id                         = "lslvd"
+	option_id                       = "_cmdlvmlvns"
+	name                            = "Show Characteristics of a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 90
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = ""
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516090"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "lslvd"
+	option_id                       = "_cmdlvmlslv"
+	has_name_select                 = "y"
+	name                            = "Show Characteristics of a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 90
+	cmd_to_exec                     = "lslv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = "_rawname"
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516090"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlslv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "LOGICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 61
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -l|grep -v \"MOUNT POINT\"|grep -v \":\""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlslv"
+	id_seq_num                      = "02"
+	disc_field_name                 = ""
+	name                            = "List OPTION"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 92
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "status,physical volume map,logical partition map"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 93
+	aix_values                      = "  ,-l,-m"
+	help_msg_id                     = "0516092"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "lslv2"
+	option_id                       = ""
+	has_name_select                 = "n"
+	name                            = "List All Logical Volumes by Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 119
+	cmd_to_exec                     = "lsvg -o|lsvg -i -l"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = "y"
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516119"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "lspv"
+	next_id                         = "lspvd"
+	option_id                       = "_cmdlvmpvns"
+	name                            = "List Contents of a Physical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 100
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = ""
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516100"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "lspvd"
+	option_id                       = "_cmdlvmlspv"
+	has_name_select                 = "y"
+	name                            = "List Contents of a Physical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 100
+	cmd_to_exec                     = "lspv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = "_rawname"
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516100"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlspv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "PHYSICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 101
+	op_type                         = "l"
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -p|grep -v '[:P]'|cut -f1 -d' '"
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlspv"
+	id_seq_num                      = "02"
+	disc_field_name                 = "Option"
+	name                            = "List OPTION"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 92
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = "status,logical volumes,physical partitions"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 103
+	aix_values                      = "  ,-l,-p"
+	help_msg_id                     = "0516102"
+	help_msg_loc                    = ""
+
+sm_cmd_hdr:
+	id                              = "lspv2"
+	option_id                       = ""
+	has_name_select                 = "n"
+	name                            = ""
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 109
+	cmd_to_exec                     = "getlvodm -C"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = "y"
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516109"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "lsvg1"
+	next_id                         = "lsvgd"
+	option_id                       = "_cmdlvmvgns"
+	name                            = "List Contents of a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 110
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = ""
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516110"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "lsvgd"
+	option_id                       = "_cmdlvmlsvg"
+	has_name_select                 = "y"
+	name                            = "List Contents of a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 110
+	cmd_to_exec                     = "lsvg"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = "_rawname"
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516110"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlsvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = "lsvg"
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlsvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = ""
+	name                            = "List OPTION"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 92
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "status,logical volumes,physical volumes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 113
+	aix_values                      = " ,-l,-p"
+	help_msg_id                     = "0516112"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "lsvg2"
+	option_id                       = "_cmdlvmlsvg2"
+	has_name_select                 = "n"
+	name                            = "List All Volume Groups"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 120
+	cmd_to_exec                     = "lsvg"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516120"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmlsvg2"
+	id_seq_num                      = "01"
+	disc_field_name                 = ""
+	name                            = "List only the ACTIVE volume groups?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 121
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "  ,-o"
+	help_msg_id                     = "0516121"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "migratepv"
+	next_id                         = "migratepvd"
+	option_id                       = "_cmdlvmspvns"
+	name                            = "Move Contents of a Physical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 130
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "getlvodm -j"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516110"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "migratepvd"
+	option_id                       = "_cmdlvmmigratepv"
+	has_name_select                 = "n"
+	name                            = "Move Contents of a Physical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 130
+	cmd_to_exec                     = "migratepv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516130"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmigratepv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "SOURCE physical volume name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 131
+	op_type                         = ""
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516131"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmigratepv"
+	id_seq_num                      = "02"
+	disc_field_name                 = "DestPVNames"
+	name                            = "DESTINATION physical volumes"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 132
+	op_type                         = "l"
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "pvlist () { lsvg -p `getlvodm -t $1`|grep -v '[:P]'|cut -f1 -d' '; }; \
+pvlist"
+	cmd_to_list_postfix             = "_cookedname"
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516294"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmigratepv"
+	id_seq_num                      = "03"
+	disc_field_name                 = "LVName"
+	name                            = "Move only data belonging to this\n  LOGICAL VOLUME?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 133
+	op_type                         = "l"
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = ""
+	prefix                          = "-l"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lvlist () { lsvg -l `getlvodm -t $1`|grep -v \"MOUNT POINT\"|grep -v \":\"; }; \
+lvlist"
+	cmd_to_list_postfix             = "_cookedname"
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516133"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "mklv"
+	next_id                         = "mklv1"
+	option_id                       = "_cmdlvmvgns"
+	name                            = "Add a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 140
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "vgcls () { getlvodm -v $1 >/dev/null; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+}; \
+vgcls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516140"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "mklv1"
+	option_id                       = "_cmdlvmmklv"
+	has_name_select                 = "y"
+	name                            = "Add a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 140
+	cmd_to_exec                     = "mklv"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516140"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "LVName"
+	name                            = "Logical volume NAME"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 1
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = ""
+	prefix                          = "-y"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "02"
+	disc_field_name                 = "_rawname"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "03"
+	disc_field_name                 = "NumLPs"
+	name                            = "Number of LOGICAL PARTITIONS"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 143
+	op_type                         = ""
+	entry_type                      = "#"
+	entry_size                      = 0
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516143"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "04"
+	disc_field_name                 = "PVNames"
+	name                            = "PHYSICAL VOLUME names"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = "l"
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "pvlist () { lsvg -p $1 | grep -v '[:P]'|cut -f1 -d' '; }; \
+pvlist"
+	cmd_to_list_postfix             = "_rawname"
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "06"
+	disc_field_name                 = "LVType"
+	name                            = "Logical volume TYPE"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 2
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-t"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516002"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "07"
+	disc_field_name                 = "Position"
+	name                            = "POSITION on physical volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 3
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-a"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values  = "outer_edge,outer_middle,center,inner_middle,inner_edge"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 251
+	aix_values                      = "e,m,c,im,ie"
+	help_msg_id                     = "0516003"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "08"
+	disc_field_name                 = "Range"
+	name                            = "RANGE of physical volumes"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 4
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-e"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "minimum,maximum"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 252
+	aix_values                      = "m,x"
+	help_msg_id                     = "0516004"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "09"
+	disc_field_name                 = "Upbound"
+	name                            = "MAXIMUM NUMBER of PHYSICAL VOLUMES\n  to use for allocation"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 5
+	op_type                         = ""
+	entry_type                      = "#"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-u"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516005"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "10"
+	disc_field_name                 = "Copies"
+	name                            = "Number of COPIES of each logical\n  partition"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 150
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-c"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "1,2,3"
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = "1,2,3"
+	help_msg_id                     = "0516150"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "11"
+	disc_field_name                 = "Strict"
+	name                            = "Mirror Write Consistency?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 255
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-w"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "2810017"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "12"
+	disc_field_name                 = "Strict"
+	name                            = "Allocate each logical partition copy\n  on a SEPARATE physical volume?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 7
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-s"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516007"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "13"
+	disc_field_name                 = "Reloc"
+	name                            = "RELOCATE the logical volume during reorganization?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 8
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-r"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516008"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "14"
+	disc_field_name                 = "Label"
+	name                            = "Logical volume LABEL"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 14
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-L"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516014"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "15"
+	disc_field_name                 = "MaxLPs"
+	name                            = "MAXIMUM NUMBER of LOGICAL PARTITIONS"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 153
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-x"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = "128"
+	help_msg_id                     = "0516153"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "16"
+	disc_field_name                 = "BadBlk"
+	name                            = "Enable BAD BLOCK relocation?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 11
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-b"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516011"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "17"
+	disc_field_name                 = "Sched"
+	name                            = "SCHEDULING POLICY for writing logical\n  partition copies"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 12
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-d"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "parallel,sequential"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 253
+	aix_values                      = "p,s"
+	help_msg_id                     = "0516012"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "18"
+	disc_field_name                 = "Verify"
+	name                            = "Enable WRITE VERIFY?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 13
+	op_type                         = "r"
+	entry_type                      = "n"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-v"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516013"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "19"
+	disc_field_name                 = "Map"
+	name                            = "File containing ALLOCATION MAP"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 68
+	op_type                         = ""
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "-m"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516068"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklv"
+	id_seq_num                      = "20"
+	disc_field_name                 = "Stripe"
+	name                            = "Stripe Size?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 0
+	name_msg_id                     = 0
+	op_type                         = "r"
+	entry_type                      = "t"
+	entry_size                      = 11
+	required                        = ""
+	prefix                          = "-S"
+	cmd_to_list_mode 		= ""
+        cmd_to_list 			= ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "Not Striped,4K,8K,16K,32K,64K,128K"
+	values_msg_file                 = ""
+	values_msg_set                  = 0
+	values_msg_id                   = 0
+	aix_values                      = ",4K,8K,16K,32K,64K,128K"
+	help_msg_id                     = "0516290"
+	help_msg_loc                    = ""
+
+
+sm_name_hdr:
+	id                              = "mklvcopy"
+	next_id                         = "mklvcopy1"
+	option_id                       = "_cmdlvmlvns"
+	name                            = "Add Copies to a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 160
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "mklvcls () { LVID=`getlvodm -l $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+VGNAME=`getlvodm -b $LVID`; \
+Q1=`getlvodm -c $LVID | cut -f3-7 -d' ' | sed '1s/ /:/g'`; \
+echo "$VGNAME":"$Q1"; }; \
+mklvcls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname:Position:Range:Upbound:Strict:NumCopies"
+	next_type                 = "d"
+	help_msg_id                     = "0516160"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "mklvcopy1"
+	option_id                       = "_cmdlvmmklvcopy"
+	has_name_select                 = "n"
+	name                            = "Add Copies to a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 160
+	cmd_to_exec                     = "mklvcopy"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = "_rawname"
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516160"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "LOGICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 61
+	op_type                         = ""
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "02"
+	disc_field_name                 = "NumCopies"
+	name                            = "NEW TOTAL number of logical partition\n  copies"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 162
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "1,2,3"
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = "1,2,3"
+	help_msg_id                     = "0516162"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "03"
+	disc_field_name                 = "PVNames"
+	name                            = "PHYSICAL VOLUME names"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "n"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "pvlist () { lsvg -p $1 | grep -v '[:P]'|cut -f1 -d' '; }; \
+					   pvlist"
+	cmd_to_list_postfix             = "_cookedname"
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "04"
+	disc_field_name                 = "Position"
+	name                            = "POSITION on physical volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 3
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = "-a"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values  = "outer_edge,outer_middle,center,inner_middle,inner_edge"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 251
+	aix_values                      = "e,m,c,im,ie"
+	help_msg_id                     = "0516003"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "05"
+	disc_field_name                 = "Range"
+	name                            = "RANGE of physical volumes"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 4
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = "-e"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "minimum,maximum"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 252
+	aix_values                      = "m,x"
+	help_msg_id                     = "0516004"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "06"
+	disc_field_name                 = "Upbound"
+	name                            = "MAXIMUM NUMBER of PHYSICAL VOLUMES \n  to use for allocation"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 5
+	op_type                         = ""
+	entry_type                      = "#"
+	required                        = "n"
+	prefix                          = "-u"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516005"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "07"
+	disc_field_name                 = "Strict"
+	name                            = "Allocate each logical partition copy\n  on a SEPARATE physical volume?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 7
+	op_type                         = "r"
+	entry_type                      = ""
+	required                        = "n"
+	prefix                          = "-s"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "n,y"
+	help_msg_id                     = "0516007"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "08"
+	disc_field_name                 = "Map"
+	name                            = "File containing ALLOCATION MAP"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 68
+	op_type                         = ""
+	entry_type                      = "t"
+	required                        = "n"
+	prefix                          = "-m"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516068"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmklvcopy"
+	id_seq_num                      = "09"
+	disc_field_name                 = "Sync"
+	name                            = "SYNCHRONIZE the data in the new\n  logical partition copies?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 169
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "  ,-k"
+	help_msg_id                     = "0516169"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "mkvg"
+	option_id                       = "_cmdlvmmkvg"
+	has_name_select                 = "n"
+	name                            = "Add a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 170
+	cmd_to_exec                     = "VGNAME=`mkvg -f"
+	ask                             = "y"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516170"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmkvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "t"
+	required                        = ""
+	prefix                          = "-y"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmkvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = "PPSize"
+	name                            = "Physical partition SIZE in megabytes"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 172
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = ""
+	prefix                          = "-s"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 2
+	disp_values                     = "1,2,4,8,16,32,64,128,256"
+	values_msg_file                 = ""
+	values_msg_id                   = 2
+	aix_values                      = "1,2,4,8,16,32,64,128,256"
+	help_msg_id                     = "0516172"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmkvg"
+	id_seq_num                      = "03"
+	disc_field_name                 = "PVName"
+	name                            = "PHYSICAL VOLUME names"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lspv | grep None | cut -f1 -d' '"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmmkvg"
+	id_seq_num                      = "04"
+	disc_field_name                 = "Auto-On"
+	name                            = "Activate volume group AUTOMATICALLY\n  at system restart?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 32
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "n"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "-n,  "
+	help_msg_id                     = "0516032"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:            
+        id                              = "_cmdlvmmkvg"
+        id_seq_num                      = "06"
+        disc_field_name                 = "MajorNum"
+        name                            = "Volume group MAJOR NUMBER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 15
+        name_msg_id                     = 176
+        op_type                         = "l"
+        entry_type                      = "#"
+        required                        = ""
+        prefix                          = "-V"
+        cmd_to_list_mode                = "r"
+        cmd_to_list                     = "lvlstmajor"
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "2810018"
+        help_msg_loc                    = ""
+
+sm_name_hdr:
+	id                              = "reducevg1"
+	next_id                         = "reducevgd"
+	option_id                       = "_cmdlvmvgns"
+	name                            = "Remove a Physical Volume from a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 181
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "vgcls () { getlvodm -v $1 >/dev/null; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+}; \
+vgcls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516181"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "reducevgd"
+	option_id                       = "_cmdlvmreducevg"
+	has_name_select                 = "y"
+	name                            = "Remove a Physical Volume from a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 181
+	cmd_to_exec                     = "reducevg"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516181"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmreducevg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmreducevg"
+	id_seq_num                      = "02"
+	disc_field_name                 = "PVNames"
+	name                            = "PHYSICAL VOLUME names"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "pvlist () { lsvg -p $1 | grep -v '[:P]'|cut -f1 -d' '; }; \
+pvlist"
+	cmd_to_list_postfix             = "_rawname"
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmreducevg"
+	id_seq_num                      = "03"
+	disc_field_name                 = "Force"
+	name                            = "FORCE deallocation of all partitions on\n  this physical volume?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 183
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = ""
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "  ,-d"
+	help_msg_id                     = "0516183"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "reducevg2"
+	next_id                         = "rmvg"
+	option_id                       = "_cmdlvmvgns"
+	name                            = "Remove a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 189
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "xlist () { VGID=`getlvodm -v $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+Q1=`getlvodm -w $VGID | cut -f2 -d' '`; \
+echo "$Q1"; }; \
+xlist"
+	cmd_to_classify_postfix         = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516189"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "rmvg"
+	option_id                       = "_cmdlvmrmvg"
+	has_name_select                 = "y"
+	name                            = "Remove a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 189
+	cmd_to_exec                     = "reducevg -df"
+	ask                             = "y"
+	exec_mode                       = ""
+	ghost                           = "y"
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516189"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrmvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrmvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = "_cookedname"
+	name                            = "PHYSICAL VOLUME names"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = ""
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "reorgvg"
+	next_id                         = "reorgvg1"
+	option_id                       = "_cmdlvmvgns"
+	name                            = "Reorganize a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 200
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "xlist () { VGID=`getlvodm -v $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+Q1=`getlvodm -w $VGID | cut -f2 -d' '`; \
+echo $Q1; }; \
+xlist"
+	cmd_to_classify_postfix         = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516200"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "reorgvg1"
+	option_id                       = "_cmdlvmreorgvg"
+	has_name_select                 = "n"
+	name                            = "Reorganize a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 200
+	cmd_to_exec                     = "reorgvg"
+	ask                             = ""
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516200"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmreorgvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = "_rawname"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = ""
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmreorgvg"
+	id_seq_num                      = "03"
+	disc_field_name                 = "LVNames"
+	name                            = "LOGICAL VOLUMES"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 202
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = ""
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lvlist () { lsvg -l $1 | grep -v \"MOUNT POINT\"|grep -v \":\"; }; \
+lvlist"
+	cmd_to_list_postfix             = "_rawname"
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516287"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "rmlv"
+	option_id                       = "_cmdlvmrmlv"
+	has_name_select                 = "n"
+	name                            = "Remove a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 210
+	cmd_to_exec                     = "rmlv -f"
+	ask                             = "y"
+	exec_mode                       = ""
+	ghost                           = "n"
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516210"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrmlv"
+	id_seq_num                      = "01"
+	disc_field_name                 = "LVName"
+	name                            = "LOGICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 61
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = ""
+	prefix                          = ""
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o|lsvg -i -l|grep -v \"MOUNT POINT\"|grep -v \":\""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_name_hdr:
+	id                              = "rmlvcopy"
+	next_id                         = "rmlvcopy1"
+	option_id                       = "_cmdlvmlvns"
+	name                            = "Remove Copies from a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 220
+	type                            = "j"
+	ghost                           = ""
+	cmd_to_classify                 = "rmlvccls () { LVID=`getlvodm -l $1`; \
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+getlvodm -c $LVID | cut -f7 -d' '; }; \
+rmlvccls"
+	cmd_to_classify_postfix                 = "_rawname"
+	raw_field_name                 = "_rawname"
+	cooked_field_name                 = "_cookedname"
+	next_type                 = "d"
+	help_msg_id                     = "0516220"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "rmlvcopy1"
+	option_id                       = "_cmdlvmrmlvcopy"
+	has_name_select                 = "n"
+	name                            = "Remove Copies from a Logical Volume"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 220
+	cmd_to_exec                     = "rmlvcopy"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516220"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrmlvcopy"
+	id_seq_num                      = "01"
+	disc_field_name                 = "_rawname"
+	name                            = "LOGICAL VOLUME name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 61
+	op_type                         = ""
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516001"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrmlvcopy"
+	id_seq_num                      = "02"
+	disc_field_name                 = "_cookedname"
+	name                            = "NEW maximum number of logical partition\n  copies"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 222
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "1,2,3"
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = "1,2,3"
+	help_msg_id                     = "0516222"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmrmlvcopy"
+	id_seq_num                      = "03"
+	disc_field_name                 = "PVNames"
+	name                            = "PHYSICAL VOLUME name(s) to remove copies from"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 63
+	op_type                         = "l"
+	entry_type                      = "t"
+	entry_size                      = 0
+	required                        = "n"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "pvlist () { lslv -l $1 | grep 'hdisk'|cut -f1 -d' '; }; \
+pvlist"
+	cmd_to_list_postfix             = "_rawname"
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516021"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "varyoffvg"
+	option_id                       = "_cmdlvmvaryoffvg"
+	has_name_select                 = "n"
+	name                            = "Deactivate a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 230
+	cmd_to_exec                     = "varyoffvg"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516230"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmvaryoffvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg -o"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "n"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmvaryoffvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = ""
+	name                            = "Put volume group in SYSTEM\n  MANAGEMENT mode?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 232
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "y"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	multi_select                    = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "  ,-s"
+	help_msg_id                     = "0516232"
+	help_msg_loc                     = ""
+
+sm_cmd_hdr:
+	id                              = "varyonvg"
+	option_id                       = "_cmdlvmvaryonvg"
+	has_name_select                 = "n"
+	name                            = "Activate a Volume Group"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 240
+	cmd_to_exec                     = "varyonvg"
+	ask                             = "n"
+	exec_mode                       = ""
+	ghost                           = ""
+	cmd_to_discover                 = ""
+	cmd_to_discover_postfix         = ""
+	name_size                       = 0
+	value_size                      = 0
+	help_msg_id                     = "0516240"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmvaryonvg"
+	id_seq_num                      = "01"
+	disc_field_name                 = "VGName"
+	name                            = "VOLUME GROUP name"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 31
+	op_type                         = "l"
+	entry_type                      = "t"
+	required                        = "+"
+	prefix                          = "--"
+	cmd_to_list_mode                = "1"
+	cmd_to_list                     = "lsvg"
+	cmd_to_list_postfix             = ""
+	multi_select                    = "y"
+	value_index                     = 0
+	disp_values                     = ""
+	values_msg_file                 = ""
+	values_msg_id                   = 0
+	aix_values                      = ""
+	help_msg_id                     = "0516031"
+	help_msg_loc                     = ""
+
+
+sm_cmd_opt:
+	id                              = "_cmdlvmvaryonvg"
+	id_seq_num                      = "02"
+	disc_field_name                 = ""
+	name                            = "RESYNCHRONIZE stale physical partitions?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 243
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = "y"
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 1
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "-n, "
+	help_msg_id                     = "0516243"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmvaryonvg"
+	id_seq_num                      = "03"
+	disc_field_name                 = ""
+	name                            = "Activate volume group in SYSTEM\n  MANAGEMENT mode?"
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 244
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = ""
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "  ,-s"
+	help_msg_id                     = "0516244"
+	help_msg_loc                     = ""
+
+sm_cmd_opt:
+	id                              = "_cmdlvmvaryonvg"
+	id_seq_num                      = "04"
+	disc_field_name                 = ""
+	name                            = "FORCE activation of the volume group?\n  Warning--this may cause loss of data\n integrity."
+	name_msg_file                   = "smit.cat"
+	name_msg_set                    = 15
+	name_msg_id                     = 246
+	op_type                         = "r"
+	entry_type                      = "n"
+	required                        = ""
+	prefix                          = ""
+	cmd_to_list_mode                = ""
+	cmd_to_list                     = ""
+	cmd_to_list_postfix             = ""
+	value_index                     = 0
+	disp_values                     = "no,yes"
+	values_msg_file                 = "smit.cat"
+	values_msg_set                  = 15
+	values_msg_id                   = 19
+	aix_values                      = "  ,-f"
+        help_msg_id                     = "0516288"
+	help_msg_loc                     = ""

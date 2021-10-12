@@ -1,0 +1,78 @@
+# @(#) 34 1.2 src/bos/usr/lpp/bosinst/data/powerdt.bnd, bosinst, bos41J, 9523A_all 6/2/95 07:00:05
+################################################################
+# COMPONENT_NAME: bosinst
+#
+# FUNCTIONS: Power Series AIX CDROM Media (PowerDesktop)
+#	     auto install bundle for CDROM install
+#	     used by bosinst.data.personal file
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+################################################################
+# 
+# BOS Client filesets
+#
+# Info hypertext support
+bos.info.rte
+bos.info.en_US.info_help
+# Base System Networking
+bos.net.nfs.client
+bos.net.uucp
+# ASCII System Management Tools
+bos.sysmgt.sysbr
+# Base Terminal Function Support
+bos.terminfo.print.data
+#Printer backend runtime
+printers.rte
+# 5 common Printer definitions
+printers.ibm4019
+printers.ibm4029
+printers.ibm4039
+printers.hplj-3
+printers.hplj-4
+#
+# GOS Client Filesets
+#
+# AIXwindows Info Support
+X11.info.rte
+# AIXwindows Client Applications
+X11.apps.config
+X11.apps.custom
+#
+# DOS Utilities
+#
+bos.dosutil
+#
+# Text Formatting Services
+#
+bos.txt.tfs
+bos.txt.ts
+#
+# AIXwindows Desktop
+#
+X11.Dt.rte
+X11.Dt.helpinfo
+#
+# Ulti-Media Services
+#
+UMS.objects
+UMS.speech
+UMS.samples
+UMS.demo
+UMS.video_ext
+UMS.dictation
+UMS.info.en_US
+#
+# SoftWindows           
+#
+SoftWindows.obj 
+SoftWindows.local 
+SoftWindows.winfiles 

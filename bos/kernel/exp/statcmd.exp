@@ -1,0 +1,66 @@
+#!/unix
+* @(#)29        1.18  src/bos/kernel/exp/statcmd.exp, cmdstat, bos411, 9428A410j 2/7/94 11:07:01
+* 
+* COMPONENT_NAME: (CMDSTAT) 
+* 
+* FUNCTIONS: 
+*
+* ORIGINS: 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1989 
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+*************************************************************************
+*
+* statcmd.exp:  Common labels that are exported for obtaining status 
+*		information from the kernel. Typical users are the vmstat
+*		and iostat commands.
+*
+*************************************************************************
+*	ps command
+
+avenrun
+
+*	iostat data structures
+
+iostat	
+vmker
+vmminfo
+
+*	mbuf data structures
+
+bucket
+kmemstats
+kmemnames
+thewall
+max_linkhdr
+max_protohdr
+max_hdr
+max_datalen
+ndd
+demuxers
+
+*	network data structures
+
+ifnet
+if_index
+rawcb
+rtstat
+radix_node_head
+unixsw
+
+*	locking data structures
+
+lock_pinned
+lock_pageable
+family_lock_statistics
+lockl_hstat
+problem_lock
+pinned_cb
+pageable_cb

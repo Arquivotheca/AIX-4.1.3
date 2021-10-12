@@ -1,0 +1,237 @@
+# @(#)99 1.3 src/bldenv/man/mkodmupdt.man, pkgtools, bos412, GOLDA411a 8/26/94 11:34:29
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: mkodmupdt command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  mkodmupdt Command
+  
+  
+  Purpose
+
+  The mkodmupdt command creates executable scripts and stanza files
+  that are used to modify the odm database.
+
+  Syntax
+
+  mkodmupdt [ -p previous_stanza_file ] -c current_stanza_file
+		-o option -t obj_class_db [ -d output_files_dir ]
+                [-i] [-u]
+  
+
+  Description
+
+  mkodmupdt is provided with an object class database file as input
+  (specified with the -t flag).  The object class database file is used
+  to validate keys and fields for each object class stanza given in
+  the input file(s) (specified with the -p and -c flags).  For each
+  stanza in the input file(s), mkodmupdt queries the object class
+  database file to make sure the stanza is defined correctly and
+  generates a fatal error if there is a problem with a stanza.  If all
+  the stanzas are correctly defined, mkodmupdt generates the appropriate
+  .odmadd, .unodmadd, and .odmdel scripts.  The previous stanza file, 
+  if specified with the -p flag, is updated with new, modified, and 
+  deleted stanzas.
+
+  The names of the output files are generated based on the option parameter
+  specified with the -o option and the file name specified with the
+  -c option.  For example, if the option name is 'bos.diag.rte' and the 
+  stanza file name is 'DSMOpt.add' then the output files will be:
+  	bos.diag.rte.DSMOpt.odmadd 
+	bos.diag.rte.DSMOpt.unodmadd 
+	bos.diag.rte.DSMOpt.odmdel
+
+
+  Flags
+
+  -p previous_stanza_file      Specifies the previous version of the object
+                               class definition file.  This option should
+                               only be used if the scripts are being
+                               generated for an update package.
+
+*  -c current_stanza_file      Specifies the current version of the object
+                               class definition file.
+
+*  -o option                   Specifies the lpp option name.
+
+*  -t obj_class_db             Specifies the file containing the valid keys
+                               and fields for all known object classes.
+
+   -d output_files_dir         Specifies the directory where the output
+                               files are to be placed.  The default
+                               location is the current directory.
+  
+   -i                          Specifies an install type of .odmdel script to
+                               be generated.  The .odmdel script will not
+                               contain the odmget commands.  Not valid with
+                               -p flag.
+  
+   -u                          Specifies an update type of .odmdel script to
+                               be generated.  The .odmdel script will contain
+                               the odmget commands.  Not necessary with -p
+                               flag.
+
+   * Options indicated with an asterisk are required.
+
+
+ Fatal Errors
+    Fatal errors contain the word "FATAL" followed by a message printed
+    to stderr.  Fatal errors are given for the following conditions:
+       - usage 
+       - an input file does not exist or cannot be opened
+       - invalid object class definition
+       - a stanza with the same key values was duplicated
+
+    mkodmupdt exits with a non-zero return code if an error is detected.
+
+  Errors
+    Errors contain the word "ERROR" followed by a message printed to
+    stderr.  mkodmupdt will continue normally after an error is issued.
+    Error message are given for the following conditions in the object
+    class database file:
+       - unrecognized object class format
+       - duplicate object class 
+       - object class key field not listed in list of fields 
+  
+    Invalid lines in the object class database will be ignored. 
+
+  Warnings
+
+    Warnings contain the word "WARNING" followed by a message printed to
+    stderr.  mkodmupdt will continue normally after a warning is issued.  
+    Warning messages are given for the following conditions:
+       - if the stanza file name does not end with '.add'
+       - if the directory specified with the -d flag cannot be created
+
+
+  Input Files
+
+  object description (.add) file(s)
+
+    	This file contains one or more object class definitions in stanza
+    	format.  The format of a stanza is:
+
+		object_class_name:
+			<key> = <value>
+			...
+			<attribute> = <value>
+			...
+
+
+  object class database file
+
+    	This is the internal database file mkodmupdt uses to verify the object
+    	classes from the stanza files and generate the appropriate odm commands
+    	for the output odm scripts.  This database file contains one entry for 
+    	each object class, where the entries are described as follows:
+
+       	<object class>:<List of keys>:<list of fields including keys>
+
+    	The list of keys is separated by '%'.  The list of fields is 
+	comma-separated.
+
+        Object classes that should not be updated are indicated buy placing
+        a 99 after the object class name.
+
+    	For example:
+
+       	GAI:Adapter_Id%Module_Key%Module_Path:Adapter_Id,Module_Key,Module_Path
+       	CuAt:99
+                               
+
+
+  Output Files
+ 
+  <option>*.odmadd file:
+      Install
+         This file contains a complete stanza for each stanza in the 
+         current .add file.
+
+      Updates 
+         This file contains a complete stanza for each new and modified 
+         stanzas.
+
+      This file is used as input to the odmadd command which adds 
+      information to the odm database.
+
+  <option>*.odmdel file:
+      Install
+         This file is an executable script that may contain odmget commands
+         for each stanza in the current stanza file if the -i flag is
+         not specified.  It also contains odmdelete commands for each stanza
+         in the current stanza file.
+
+
+      Updates
+         This file is an executable script that contains odmget and 
+         odmdelete commands for each new and modified stanza in the current
+         stanza file. It also contains one odmget and odmdelete command
+         for each stanza that is to be deleted from the previous stanza file.
+
+      This script is executed to delete previous odm information before
+      the odmadd is executed.
+
+  <option>*.unodmadd file:
+      Install
+         This file is an executable script that contains odmdelete commands 
+         for every stanza in the current .add file.
+      
+      Updates
+         This file is an executable script that contains odmdelete commands 
+         for every new and modified stanza in the current .add file. 
+
+
+      The unodmadd script is executed to reject an update to the odm
+      database.
+
+  *.add file:
+      Updates
+         This file is the same file as specified with the -p flag.  
+         For stanzas that are new, modified, or deleted, only the object
+         class name and keys are added to this file.  If a stanza is 
+         unchanged, the entire stanza is added.
+
+   
+  Related Information
+ 
+  4.1 BLDENV mkodmextract command
+  4.1 BLDENV processStanza command
+  4.1 BLDENV odmupdate command
+  
+
+Examples
+
+  1. Call mkodmupdt for an install where the input files are in the
+     current directory
+
+     mkodmupdt -c DSMOpt.add -o bos.diag.rte -t objclassdb 
+ 
+     output files:
+  	bos.diag.rte.DSMOpt.odmadd 
+	bos.diag.rte.DSMOpt.unodmadd 
+	bos.diag.rte.DSMOpt.odmdel
+
+
+ 
+  2. Call mkodmupdt for an update where the output directory is
+     specified
+
+     mkodmupdt  -p history/DSMenu.add  -c DSMenu.add
+		-o bos.diag.rte -t objclassdb  -d /a/b/c 
+
+     output files:
+  	/a/b/c/bos.diag.rte.DSMenu.odmadd 
+	/a/b/c/bos.diag.rte.DSMenu.unodmadd 
+	/a/b/c/bos.diag.rte.DSMenu.odmdel
+                   and
+        the file specified with the -p flag will be updated

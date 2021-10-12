@@ -1,0 +1,125 @@
+#
+# @(#)96 1.1 src/bldenv/man/OrderImages.man, pkgtools, bos412, GOLDA411a 5/20/94 14:58:08
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: OrderImages command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+OrderImages command
+
+Purpose
+
+The OrderImages command orders the images in the stacklist file 
+in an optimal way in order to reduce tape seek time.
+
+
+Syntax
+
+OrderImages [ -s ] [ -a master_file ] stacklist_file
+
+
+Description
+
+The OrderImages command takes a list of image names as input and creates
+an ordered list in the current directory called stack.list.  If the -s
+flag is specified, stack.list.short is also generated in the current
+directory.  If the command is not run in the directory where the images 
+reside, the list of image names must contain the full path names of the
+image files.
+
+If running in the ODE environment, the command will use the predefined master
+file located in $ODE_TOOLS/usr/lib/masterfile.  If not running in the ODE
+environment or the user wants to specify an alternate master file, the -a
+flag must be set to specify the location of the master file.  The master file
+is a list of options from the bos and gos autoi files and options installed
+as part of the Base Operating System.  The master file is used to determine 
+what images should go first. It is also used to create the short stack list 
+when the -s flag is set.
+
+If you are not creating your own master file, you can extract the master file
+from CMVC and put it in your own directory.  The master file is located in
+src/bldenv/pkgtools/masterfile.
+
+
+The information from the lpp_name file associated with each image is
+processed; error messages are displayed for the following conditions:
+
+   . the file is not an image file
+   
+   . an image file in the input stack list is not found
+ 
+   . an option appeared in more than one image file 
+
+   . an option was referenced as a prereq or coreq but didn't appear in any
+     of the image files
+
+
+
+
+Flags
+
+-s               (optional)  Specifies that stack.list.short should be
+			     generated in addition to stack.list.
+
+-a master_file   (optional)  Specifies the full path name of the alternate
+                             master file.
+
+Environment Variables
+
+ODE_TOOLS       This variable is set when running in the build environment.
+
+Note:           In most cases this command will not be run in the build
+                environment.  Therefore, the -a flag must be specified.
+
+
+
+Input Files
+
+stacklist       This file contains the list of image names to be ordered.
+                The full path name must be given for each image if the images 
+                do not reside in the current directory.
+
+image           This file is a bff file which contains the lpp_name file.
+
+master_file     This file contains a list of options for bos and gos autoi
+                and options installed as part of bos.
+
+
+
+
+
+
+Output Files
+
+stack.list               This file contains the ordered list of image names.
+
+stack.list.short         This file contains only the image names associated with
+                         the options in the master file.
+
+stacklist.errors.<pid>   This file contains errors found while processing the
+                         lpp_name files.
+
+Examples 
+
+ 1. Call OrderImages to generate stack.list using the predefined master file.
+
+    OrderImages stacklist
+
+ 2. Call OrderImages to generate stack.list using a specified master file.
+
+    OrderImages -a mymaster_file stacklist
+
+ 3. Call OrderImages to generate stack.list and stack.list.short using the
+    predefined master file.
+
+    OrderImages -s -a mymaster_file stacklist

@@ -1,0 +1,270 @@
+*@(#)19  1.6  src/bos/objclass/POWER/sys.node.sys_p.add, cfgmethods, bos41B, 412_41B_sync 1/12/95 14:55:05
+* 
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 83
+* 
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+* sys device
+PdDv:
+	type = sys_p
+	class = sys
+	subclass = node
+	prefix = sys
+	devid = "rs6ksmp"
+	base = 1
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 1
+	bus_ext = 0
+	led = 0x811
+	setno = 1
+	msgno = 1
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/usr/lib/methods/define -n"
+	Configure = "/usr/lib/methods/cfgsys_p"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = ""
+	Undefine = ""
+	Start = ""
+	Stop = ""
+	uniquetype = sys/node/sys_p
+
+
+PdCn:
+	uniquetype = sys/node/sys_p
+	connkey = sys
+	connwhere = 0
+
+PdCn:
+	uniquetype = sys/node/sys_p
+	connkey = sys
+	connwhere = 1
+
+PdCn:
+	uniquetype = sys/node/sys_p
+	connkey = sys
+	connwhere = 2
+
+PdCn:
+	uniquetype = sys/node/sys_p
+	connkey = sys
+	connwhere = 3
+
+PdCn:
+	uniquetype = sys/node/sys_p
+	connkey = sys
+	connwhere = 4
+
+PdCn:
+	uniquetype = sys/node/sys_p
+	connkey = sys
+	connwhere = 5
+
+PdCn:
+	uniquetype = sys/node/sys_p
+	connkey = sys
+	connwhere = 6
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "syscons"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "sysconsp"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "altcons"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "tmpcons"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "modelcode"
+	deflt = "0x0"
+	values = "0x0-0xffffffff,0x1"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "nr"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "keylock"
+	deflt = ""
+	values = "service,normal,secure"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "sl"
+	nls_index = 17
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "maxbuf"
+	deflt = "20"
+	values = "20-1000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "maxmbuf"
+	deflt = "2048"
+	values = "2048-524288,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "maxuproc"
+	deflt = "40"
+	values = "40-131072,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 20
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "autorestart"
+	deflt = "false"
+	values = "false,true"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 21
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "iostat"
+	deflt = "true"
+	values = "false,true"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 22
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "realmem"
+	deflt = "0x0"
+	values = "0x0-0xffffffff,0x1"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nr"
+	nls_index = 23
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "conslogin"
+	deflt = "enable"
+	values = "enable,disable"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "sl"
+	nls_index = 26
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "rostime"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "maxpout"
+	deflt = "0"
+	values = "0-131072,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 27
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "minpout"
+	deflt = "0"
+	values = "0-131072,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 28
+
+PdAt:
+	uniquetype = "sys/node/sys_p"
+	attribute = "fullcore"
+	deflt = "false"
+	values = "false,true"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 45
+
+PdAt:
+        uniquetype = "sys/node/sys_p"
+        attribute = "rds_facility"
+        deflt = "n"
+        values = "y,n"
+        width = ""
+        type = "R"
+        generic = ""
+        rep = "sl"
+        nls_index = 0

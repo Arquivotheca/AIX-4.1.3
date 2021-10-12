@@ -1,0 +1,44 @@
+# @(#)66	1.4  src/bldenv/man/abstracts.man, bldtools, bos412, GOLDA411a 6/1/92 12:46:41
+#
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: abstracts file format man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/HISTORY/abstracts
+        List of APAR numbers with CMVC abstract and system information
+        associated with the APAR.  Created by bldretain (for production)
+        or bldmid (for development).
+
+	Format:
+          <APAR>TAB<abstract>
+          <SPACE>[ <SymptomInformation> ]
+          <SPACE>[ <SymptomInformation> ]
+			.
+			.
+           <@>
+          <APAR>TAB<abstract>
+          <SPACE>[ <SymptomInformation> ]
+          <SPACE>[ <SymptomInformation> ]
+			.
+			.
+           <@>
+                 
+		    .
+		    .
+          <APAR>TAB<abstract>
+          <SPACE>[ <SymptomInformation> ]
+          <SPACE>[ <SymptomInformation> ]
+			.
+			.
+           <@>

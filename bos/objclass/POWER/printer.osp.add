@@ -1,0 +1,639 @@
+* @(#)25	1.12  src/bos/objclass/POWER/printer.osp.add, cfgprinters, bos411, 9438A411a 9/19/94 11:51:22
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27, 83
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+
+
+
+
+
+
+PdDv:
+	type = "osp"
+	class = "printer"
+	subclass = "rs232"
+	prefix = "lp"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 1
+	led = 1831
+	setno = 72
+	msgno = 14
+	catalog = "devices.cat"
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfgtty"
+	Change = "/etc/methods/chgtty"
+	Unconfigure = "/etc/methods/ucfgtty"
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = "printer/rs232/osp"
+
+PdDv:
+	type = "osp"
+	class = "printer"
+	subclass = "rs422"
+	prefix = "lp"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 1
+	led = 1831
+	setno = 72
+	msgno = 14
+	catalog = "devices.cat"
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfgtty"
+	Change = "/etc/methods/chgtty"
+	Unconfigure = "/etc/methods/ucfgtty"
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = "printer/rs422/osp"
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "flow_disp"
+	deflt = "dtr"
+	values = "xon,dtr,rts,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 38
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "rtrig"
+	deflt = "3"
+	values = "0-3,1"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "nr"
+	nls_index = 40
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "speed"
+	deflt = "9600"
+	values = "0,50,75,110,134,150,300,600,1200,1800,2400,4800,9600,19200,38400"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 15
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "bpc"
+	deflt = "8"
+	values = "5,6,7,8"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 30
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "stops"
+	deflt = "1"
+	values = "1,2"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 31
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "open_disp"
+	deflt = "dtropen"
+	values = "dtropen"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 39
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "modules"
+	deflt = "sptr,tioc"
+	values = "sptr,tioc"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "slm"
+	nls_index = 37
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "tbc16"
+	deflt = "16"
+	values = "1-16,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 36
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "tbc64"
+	deflt = "64"
+	values = "2-64,2"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 36
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "ptop"
+	deflt = "60"
+	values = "1-2000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 17
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "line"
+	deflt = "66"
+	values = "0-2147483647,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "col"
+	deflt = "80"
+	values = "1-2147483647,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "parity"
+	deflt = "none"
+	values = "none,even,odd"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 16
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "ind"
+	deflt = "0"
+	values = "0-2147483646,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 20
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "backspace"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 21
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "case"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 22
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "cr"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 23
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "mode"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 24
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "form"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 25
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "lf"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 26
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "plot"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 27
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "tabs"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 28
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "wrap"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 29
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "addcr"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 32
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "autoconfig"
+	deflt = "available"
+	values = "available,defined"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 33
+
+PdAt:
+	uniquetype = "printer/rs232/osp"
+	attribute = "altpin"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 41
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "modules"
+	deflt = "sptr,tioc"
+	values = "sptr,tioc"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "slm"
+	nls_index = 37
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "tbc16"
+	deflt = "16"
+	values = "1-16,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 36
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "tbc64"
+	deflt = "64"
+	values = "1-64,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 36
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "ptop"
+	deflt = "60"
+	values = "1-2000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 17
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "line"
+	deflt = "66"
+	values = "0-2147483647,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "col"
+	deflt = "80"
+	values = "1-2147483647,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "parity"
+	deflt = "none"
+	values = "none,even,odd"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 16
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "ind"
+	deflt = "0"
+	values = "0-2147483646,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 20
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "backspace"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 21
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "case"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 22
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "cr"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 23
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "mode"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 24
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "form"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 25
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "lf"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 26
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "plot"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 27
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "tabs"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 28
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "wrap"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 29
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "addcr"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 32
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "autoconfig"
+	deflt = "available"
+	values = "available,defined"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 33
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "open_disp"
+	deflt = "dtropen"
+	values = "dtropen"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 39
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "speed"
+	deflt = "9600"
+	values = "0,50,75,110,134,150,300,600,1200,1800,2400,4800,9600,19200,38400"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 15
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "bpc"
+	deflt = "8"
+	values = "5,6,7,8"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 30
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "stops"
+	deflt = "1"
+	values = "1,2"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 31
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "rtrig"
+	deflt = "3"
+	values = "0-3,1"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "nr"
+	nls_index = 40
+
+PdAt:
+	uniquetype = "printer/rs422/osp"
+	attribute = "flow_disp"
+	deflt = "dtr"
+	values = "xon,dtr,rts,none"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 38

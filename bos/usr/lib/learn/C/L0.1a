@@ -1,0 +1,32 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This script is loosely based on the material in
+"The C Programming Language", by Brian Kernighan
+and Dennis Ritchie (Prentice-Hall, 1978).
+You may find it helpful to have that at hand.
+Some of the lessons will indicate
+the section that they are based on.
+
+Do you have a copy at hand?  Answer yes or no.
+#copyin
+#user
+#uncopyin
+#match yes
+Fine.
+#match no
+It might help, but it's not critical.
+#log
+#next
+1.1a 10

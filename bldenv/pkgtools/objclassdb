@@ -1,0 +1,66 @@
+# @(#)76        1.16  src/bldenv/pkgtools/objclassdb, pkgtools, bos41J, 9523A_all 6/1/95 13:46:53
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# The format of this file is:
+#  	object:key1%key2%key3:field1,field2,field3
+CC:locale%codeset%messages%keyboards:locale,text_string,text_string_id,codeset,messages,keyboards,package,variables,sbcs_variables,bosinst_menu,icon_path,menu,messageLink,keyboardLink
+CDiagDev:99
+Config_Rules:phase%rule%seq:phase,seq,rule,boot_mask
+CuAt:99
+CuDep:99
+CuDv:99
+CuDvDr:99
+CuVPD:99
+DAVars:99
+DSMOptions:order%setid%msgid%msgkey%action:catalogue,action,Diskette,msgid,setid,order,msgkey
+DSMenu:order%msgkey:order,comment,msgkey
+FONT:codeset:codeset,font_cmd
+FRUB:99
+FRUs:99
+GAI:Adapter_Id%Module_Key%Module_Path:Adapter_Id,Module_Key,Module_Path,Processor_Id
+KEYBOARD:locale%codeset%keyboard_map:locale,keyboard_map,text_string,text_string_id,codeset,package,variables,keyboard_cmd,key_text,key_text_id,bosinst_menu
+MESSAGES:locale%codeset:locale,text_string,text_string_id,codeset,package,variables,bosinst_translated,bosinst_menu
+MenuGoal:99
+PDiagAtt:DType%DSClass%attribute%DClass:DType,DSClass,attribute,value,rep,DClass,DApp
+PDiagDev:DType%DSClass%DClass:DType,DSClass,DClass,Ports,PSet,PreTest,AttDType,AttSClass,Conc,SupTests,Menu,DNext,DaName,Diskette,EnclDaName,SysxFlg
+PdAt:uniquetype:uniquetype,attribute,deflt,values,width,type,generic,rep,nls_index
+PdCn:uniquetype:uniquetype,connkey,connwhere
+PdDv:uniquetype:type,class,subclass,prefix,devid,base,has_vpd,detectable,chgstatus,bus_ext,fru,led,setno,msgno,catalog,DvDr,Define,Configure,Change,Unconfigure,Undefine,Start,Stop,uniquetype,inventory_only
+SRCsubsys:subsysname:subsysname,synonym,cmdargs,path,uid,auditid,standin,standout,standerr,action,multi,contact,svrkey,svrmtype,priority,signorm,sigforce,display,waittime,grpname
+errnotify:en_name%en_label:en_name,en_label,en_pid,en_persistenceflg,en_crcid,en_symptom,en_method,en_class,en_type,en_alertflg,en_resource,en_rtype,en_rclass
+fix:99
+history:99
+inventory:99
+lpp:99
+nim_attr:99
+nim_object:99
+nim_pdattr:class%subclass%type%attr:class,subclass,type,attr,name,mask,value,h_num,verbose_num
+pmmi_data:attribute:attribute,value1,value2
+pmmd_start:99
+product:99
+slips:99
+sm_cmd_hdr:id:id,option_id,has_name_select,name,name_msg_file,name_msg_set,name_msg_id,cmd_to_exec,ask,exec_mode,ghost,cmd_to_discover,cmd_to_discover_postfix,name_size,value_size,help_msg_id,help_msg_loc,help_msg_base,help_msg_book
+sm_cmd_opt:id%id_seq_num:id,id_seq_num,disc_field_name,name,name_msg_file,name_msg_set,name_msg_id,op_type,entry_type,entry_size,required,prefix,cmd_to_list_mode,cmd_to_list,cmd_to_list_postfix,multi_select,value_index,disp_values,values_msg_file,values_msg_set,values_msg_id,aix_values,help_msg_id,help_msg_loc,help_msg_base,help_msg_book
+sm_menu_opt:id%id_seq_num%next_id:id,id_seq_num,next_id,text,text_msg_file,text_msg_set,text_msg_id,next_type,alias,help_msg_id,help_msg_loc,help_msg_base,help_msg_book
+sm_name_hdr:id:id,next_id,option_id,has_name_select,name,name_msg_file,name_msg_set,name_msg_id,type,ghost,cmd_to_classify,cmd_to_classify_postfix,raw_field_name,cooked_field_name,next_type,help_msg_id,help_msg_loc,help_msg_base,help_msg_book
+sysdflts:99
+userprofiles:99
+users:99
+usrdflts:99
+usrprofs:99
+x25pvc:line_name%pvc_num:line_name,pvc_num,pvc_rx_win,pvc_tx_win,pvc_rx_size,pvc_tx_size,pvc_d_bit
+SWservAt:attribute%deflt%value:attribute,deflt,value
+TMInput:99
+XINPUT:DeviceName%GenericName%ModuleName%Class:DeviceName,GenericName,ModuleName,Class,SubClass,connwhere

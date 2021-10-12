@@ -1,0 +1,526 @@
+* @(#)84      1.2  src/bos/objclass/POWER/sm_mpa.add, mpaodm, bos411, 9428A410j 5/26/93 08:29:14
+*
+*   COMPONENT_NAME: (MPAODM) MP/A ODM FILES
+*
+*   FUNCTIONS: 
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+
+
+*
+*   Add SDLC Device Driver support to 'Manage device drivers' option
+*
+
+sm_menu_opt:
+        id_seq_num = "010"
+        id = "mngmpadd"
+        next_id = "mpasdlc_dd"
+        text = "Manage SDLC Device Driver"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 9
+        next_type = "m"
+        alias = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+
+
+*
+*       Menu Items under SDLC Device Driver support
+*
+
+
+sm_menu_opt:
+        id_seq_num = "010"
+        id = "mpasdlc_dd"
+        next_id = "mksdlcmpadd"
+        text = "Add a Device Driver"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 10
+        next_type = "n"
+        alias = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+
+sm_menu_opt:
+        id_seq_num = "020"
+        id = "mpasdlc_dd"
+        next_id = "chsdlcmpadd"
+        text = "Change/Show Characteristics of an SDLC Device Driver"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 16
+        next_type = "n"
+        alias = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+
+sm_menu_opt:
+        id_seq_num = "030"
+        id = "mpasdlc_dd"
+        next_id = "rmsdlcmpadd"
+        text = "Remove a Device Driver"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 12
+        next_type = "n"
+        alias = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+
+sm_menu_opt:
+        id_seq_num = "040"
+        id = "mpasdlc_dd"
+        next_id = "cfgsdlcmpadd"
+        text = "Configure a Defined Device Driver"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 13
+        next_type = "n"
+        alias = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+
+
+*
+*       Add the SDLC Device Driver support
+*
+
+sm_name_hdr:
+        id                  = "mksdlcmpadd"
+        next_id             = "mk_sdlcmpa_dd"
+        option_id           = "ln_sdlcmpa_opt3"
+        has_name_select     = "n"
+        name                = "Add a Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 10
+        type                = ""
+        ghost               = "y"
+        cmd_to_classify     = ""
+        cmd_to_classify_postfix     = ""
+        raw_field_name      = "parent"
+        cooked_field_name   = ""
+        next_type           = "d"
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+        id                  = "mk_sdlcmpa_dd"
+        option_id           = "mk_sdlcmpa_mk"
+        has_name_select     = "y"
+        name                = "Add a Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 10
+        cmd_to_exec         = "mkdev -c driver -s mpaa -t mpa -w 0 "
+        ask                 = ""
+        exec_mode           = ""
+        ghost               = "n"
+        cmd_to_discover     = ""
+        cmd_to_discover_postfix = ""
+        name_size           = 0
+        value_size          = 0
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+*
+*	Change/Show Characteristics of an SDLC Device Driver
+*
+
+
+sm_name_hdr:
+        id                  = "chsdlcmpadd"
+        next_id             = "ch_sdlcmpa_dd"
+        option_id           = "ln_sdlcmpa_opt"
+        has_name_select     = "n"
+        name                = "Change/Show Characteristics of an SDLC Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 16
+        type                = ""
+        ghost               = "y"
+        cmd_to_classify     = ""
+        cmd_to_classify_postfix     = ""
+        raw_field_name      = "logicname"
+        cooked_field_name   = ""
+        next_type           = "d"
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+        id                  = "ch_sdlcmpa_dd"
+        option_id           = "ch_sdlcmpa_l,ch_sdlcmpa_ch"
+        has_name_select     = "y"
+        name                = "Change/Show Characteristics of an SDLC Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 16
+        cmd_to_exec         = "chdev "
+        ask                 = ""
+        exec_mode           = "P"
+        ghost               = "n"
+        cmd_to_discover     = "lsattr "
+        cmd_to_discover_postfix = "-l logicname -E -O"
+        name_size           = 0
+        value_size          = 0
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+*
+*       Remove a SDLC Device Driver
+*
+
+sm_name_hdr:
+        id                  = "rmsdlcmpadd"
+        next_id             = "rm_sdlcmpa_dd"
+        option_id           = "ln_sdlcmpa_opt"
+        has_name_select     = "n"
+        name                = "Remove a Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 12
+        type                = ""
+        ghost               = "y"
+        cmd_to_classify     = ""
+        cmd_to_classify_postfix     = ""
+        raw_field_name      = "logicname"
+        cooked_field_name   = ""
+        next_type           = "d"
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "ln_sdlcmpa_opt"
+        id_seq_num          = "0"
+        disc_field_name     = ""
+        name                = "SDLC Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 14
+        op_type             = "l"
+        entry_type          = "t"
+        entry_size          = 0
+        required            = "y"
+        prefix              = ""
+        cmd_to_list_mode    = "1"
+        cmd_to_list         = "lsdev -C -c driver -s mpaa -t mpa"
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "ln_sdlcmpa_opt2"
+        id_seq_num          = "0"
+        disc_field_name     = ""
+        name                = "SDLC Device Driver Support"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 14
+        op_type             = "l"
+        entry_type          = "t"
+        entry_size          = 0
+        required            = "y"
+        prefix              = ""
+        cmd_to_list_mode    = "1"
+        cmd_to_list         = "lsdev -C -c driver -s mpaa -t mpa -S d"
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "ln_sdlcmpa_opt3"
+        id_seq_num          = "0"
+        disc_field_name     = ""
+        name                = "Single Port Multiprotocol Adapter/A"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 1
+        op_type             = "l"
+        entry_type          = "t"
+        entry_size          = 0
+        required            = "y"
+        prefix              = ""
+        cmd_to_list_mode    = "1"
+        cmd_to_list         = "lsdev -C -c adapter -s mca -t mpaa -S a"
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+        id                  = "rm_sdlcmpa_dd"
+        option_id           = "rm_sdlcmpa_rm"
+        has_name_select     = "y"
+        name                = "Remove a Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 12
+        cmd_to_exec         = "rmdev"
+        ask                 = "y"
+        exec_mode           = ""
+        ghost               = "n"
+        cmd_to_discover     = ""
+        cmd_to_discover_postfix = ""
+        name_size           = 0
+        value_size          = 0
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "rm_sdlcmpa_rm"
+        id_seq_num          = "010"
+        disc_field_name     = "logicname"
+        name                = "SDLC Device Driver support"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 14
+        op_type             = ""
+        entry_type          = ""
+        entry_size          = 0
+        required            = "y"
+        prefix              = "-l "
+        cmd_to_list_mode    = ""
+        cmd_to_list         = ""
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "mk_sdlcmpa_mk"
+        id_seq_num          = "010"
+        disc_field_name     = "parent"
+        name                = "Single Port Multiprotocol Adapter/A"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 1
+        op_type             = ""
+        entry_type          = ""
+        entry_size          = 0
+        required            = "y"
+        prefix              = "-p "
+        cmd_to_list_mode    = ""
+        cmd_to_list         = ""
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "ch_sdlcmpa_l"
+        id_seq_num          = "010"
+        disc_field_name     = "logicname"
+        name                = "SDLC Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 14
+        op_type             = ""
+        entry_type          = "n"
+        entry_size          = 0
+        required            = "y"
+        prefix              = "-l"
+        cmd_to_list_mode    = ""
+        cmd_to_list         = ""
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = "04201000"
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "ch_sdlcmpa_ch"
+        id_seq_num          = "020"
+        disc_field_name     = "rdto"
+        name                = "Receive Data Transfer Offset"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 1
+        name_msg_id         = 10
+        op_type             = "l"
+        entry_type          = "#"
+        entry_size          = 0
+        required            = "n"
+        prefix              = "-a rdto="
+        cmd_to_list_mode    = "r"
+        cmd_to_list         = "lsattr -c driver -s mpaa -t mpa -a rdto -R"
+        cmd_to_list_postfix = ""
+        multi_select        = "n"
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = "04201011"
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "ch_sdlcmpa_ch"
+        id_seq_num          = "030"
+        disc_field_name     = ""
+        name                = "Apply change to DATABASE only"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 27
+        name_msg_id         = 11
+        op_type             = "r"
+        entry_type          = "n"
+        entry_size          = 0
+        required            = "n"
+        prefix              = ""
+        cmd_to_list_mode    = ""
+        cmd_to_list         = ""
+        cmd_to_list_postfix = ""
+        multi_select        = "n"
+        value_index         = 1
+        disp_values         = "yes,no"
+        values_msg_file     = "smit.cat"
+        values_msg_set      = 27
+        values_msg_id       = 12
+        aix_values          = "-P"
+        help_msg_id         = "04201014"
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "rm_sdlcmpa_rm"
+        id_seq_num          = "020"
+        disc_field_name     = ""
+        name                = "Keep Definition in Database"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 27
+        name_msg_id         = 10
+        op_type             = "r"
+        entry_type          = "n"
+        entry_size          = 0
+        required            = "n"
+        prefix              = ""
+        cmd_to_list_mode    = ""
+        cmd_to_list         = ""
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = "yes,no"
+        values_msg_file     = "mpa.cat"
+        values_msg_set      = 27
+        values_msg_id       = 12
+        aix_values          = ",-d "
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+*
+*       Configure a Defined RIC AIX Support Device Driver
+*
+
+sm_name_hdr:
+        id                  = "cfgsdlcmpadd"
+        next_id             = "cfg_sdlcmpa_dd"
+        option_id           = "ln_sdlcmpa_opt2"
+        has_name_select     = "n"
+        name                = "Configure a Defined Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 13
+        type                = ""
+        ghost               = "y"
+        cmd_to_classify     = ""
+        cmd_to_classify_postfix     = ""
+        raw_field_name      = "logicname"
+        cooked_field_name   = ""
+        next_type           = "d"
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+        id                  = "cfg_sdlcmpa_dd"
+        option_id           = "cfg_sdlcmpa_cfg"
+        has_name_select     = "y"
+        name                = "Configure a Defined Device Driver"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 13
+        cmd_to_exec         = "mkdev "
+        ask                 = ""
+        exec_mode           = ""
+        ghost               = "n"
+        cmd_to_discover     = ""
+        cmd_to_discover_postfix = ""
+        name_size           = 0
+        value_size          = 0
+        help_msg_id         = ""
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id                  = "cfg_sdlcmpa_cfg"
+        id_seq_num          = "010"
+        disc_field_name     = "logicname"
+        name                = "SDLC Device Driver support"
+        name_msg_file       = "mpa.cat"
+        name_msg_set        = 2
+        name_msg_id         = 14
+        op_type             = ""
+        entry_type          = ""
+        entry_size          = 0
+        required            = "y"
+        prefix              = "-l "
+        cmd_to_list_mode    = ""
+        cmd_to_list         = ""
+        cmd_to_list_postfix = ""
+        multi_select        = ""
+        value_index         = 0
+        disp_values         = ""
+        values_msg_file     = ""
+        values_msg_set      = 0
+        values_msg_id       = 0
+        aix_values          = ""
+        help_msg_id         = ""
+        help_msg_loc        = ""
+

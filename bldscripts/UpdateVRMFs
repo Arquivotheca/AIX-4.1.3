@@ -1,0 +1,209 @@
+#!/bin/ksh
+# @(#)24	1.1  UpdateVRMFs, ade_build, bos41J 2/17/95 13:24:26
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+
+alias  dataman=`whence dataman`
+alias  CMVCman="`whence bldenv` `whence CMVCman`"
+alias  DBenv="`whence bldenv` `whence DBenv`" 
+
+typeset RELEASE_FIX_LEVEL=$(dataman -q packman[RELEASE_FIX_LEVEL])
+
+#
+# list all shipped files in file /tmp/shipped.$$
+#
+function list_filesets {
+
+
+	trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; clean_up ; exit 1' ERR
+
+	#
+	# All ship files have to have resolved ship files
+	#
+	if grep -sq -E 'NoFileset|UNKNOWN' $TOP/PTF/$BLDCYCLE/*/lmupdatelist
+	then
+		print "ERROR: ship files in lmupdatelist are in UNKNOWN filesets or NoFileset"
+		false # force clean exit
+	fi
+
+	#
+	# Extract filesets from lmupdatelists
+	#
+	awk '{print $2}' $TOP/PTF/$BLDCYCLE/*/lmupdatelist |
+		sort -u > /tmp/filesets.$$
+
+}
+
+#
+# 
+#
+function clean_up {
+
+        #
+        # remove temporary files
+	#
+	for i in shipped filesets
+	do
+		if [[ -f /tmp/$i.$$ ]]
+		then
+			rm /tmp/$i.$$
+		fi
+	done
+}
+
+
+#
+# find libpp.a files from lmupdatelists
+#
+function find_pkg_updates {
+
+
+	#
+	# Identify shipped files from lmupdatelists (excluding pkg)
+	#
+	grep liblpp.a $TOP/PTF/$BLDCYCLE/pkg*/lmupdatelist |
+		while read file
+		do
+			fileset_raw=${file#*UPDATE/}
+			fileset_raw=${fileset_raw%/*} 
+			fileset=$(print $fileset_raw | sed 's/\//\./g')
+			print $fileset >> /tmp/filesets.$$
+		done
+}
+
+#
+# update vrmf values for fileset
+#
+function update_vrmf {
+
+	fileset=$1
+
+	integer version
+	integer release
+	integer maintenance
+	integer fix
+
+	trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED ; clean_up ; exit 1' ERR
+
+	#
+	# If the file is not an update candidate then
+	# do not update the VRMF value
+	if grep -sq -E "^"$fileset"$|[^ ]*"$fileset"[ *]$|[^ ]*"$fileset"$" \
+		${ODE_TOOLS}/usr/lib/no_update_list
+	then
+		return 0
+	fi
+
+	print $fileset | sed 's/\./\//g' | read dirFileset
+
+	if [[ ! -f $TOP/UPDATE/$dirFileset/vrmfFile ]]
+	then
+		print -u2 "ERROR: Cannot find file: $TOP/UPDATE/$dirFileset/vrmfFile"
+		 false # force clean clean-exit
+	fi
+	#
+	# get existing vrmf values
+	#
+	cat $TOP/UPDATE/$dirFileset/vrmfFile |
+		awk -F'.' '{printf("%d %d %d %d\n",$1,$2,$3,$4)}' |
+		read version release maintenance fix
+
+        #
+	# if 'first' update for release
+	# set maintenance level
+	#
+	if (( fix == 0 ))
+	then
+		(( fix = $RELEASE_FIX_LEVEL ))
+	fi
+
+        #
+        # increment the fix level
+        #
+	(( fix = fix + 1 ))
+
+	print $version"."$release"."$maintenance"."$fix > $TOP/UPDATE/$dirFileset/vrmfFile
+
+        #
+        # record vrmf value in dataman
+        #
+        dataman -a leveldata[$BLDCYCLE][fs_vrmf]=`print $fileset"\t"$version"."$release"."$maintenance"."$fix`  
+
+}
+
+#
+# initialize
+#
+
+cmd=${0##*/}
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; clean_up ; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+	(( 1 == 0 )) # force clean clean-exit
+fi
+
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+export     TOP=$treetop/selfix
+typeset    RC=0
+
+if [[ ! -f ${ODE_TOOLS}/usr/lib/no_update_list ]]
+then
+	print "ERROR: file ${ODE_TOOLS}/usr/lib/no_update_list missing"
+	false # force clean clean-exit
+fi
+
+clean_up
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+
+#
+# list_filesets 
+#
+list_filesets
+
+#
+# identify updates from pkg lmupdatelists
+#
+#find_pkg_updates
+
+#
+# remove duplicate filesets     
+#
+sort -u /tmp/filesets.$$ >> /tmp/filesets.sort.$$
+mv /tmp/filesets.sort.$$ /tmp/filesets.$$
+
+#
+# sequence through filesets affected and 
+# 1) update vrmf values
+# 2) store vrmf change status
+#
+cat /tmp/filesets.$$ |
+	while read fileset
+	do
+		update_vrmf $fileset
+	done
+
+#
+# completion steps
+#
+clean_up
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE
+

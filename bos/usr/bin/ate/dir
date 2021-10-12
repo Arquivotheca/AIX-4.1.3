@@ -1,0 +1,23 @@
+# @(#)69   1.4  src/bos/usr/bin/ate/dir, cmdate, bos411, 9428A410j 4/18/91 11:00:27
+# 
+# COMPONENT_NAME: BOS dir
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 27 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# dir -  sample dialing directory 
+# 
+#
+Micom   9,555-9400 1200 7 1 2 0 0
+R20     9,555-9491 1200 7 1 2 0 0
+QT      9,555-8455 1200 7 1 2 0 0
+Dallas1 9,555-7051 1200 8 1 0 0 0

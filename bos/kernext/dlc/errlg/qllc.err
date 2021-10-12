@@ -1,0 +1,156 @@
+* @(#)26       1.3  src/bos/kernext/dlc/errlg/qllc.err, sysxdlcq, bos411, 9428A410j 12/1/93 17:20:16
+*   COMPONENT_NAME: SYSXDLCQ
+*
+*   FUNCTIONS: QLLC error description stanza file
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
++ QLLC_ALERT_1:
+        Comment      = " QLLC Alert 1, Received Q-packet info-field too long "
+        Class        = S
+        Log          = TRUE
+        Report       = TRUE
+        Alert        = TRUE
+        Err_Type     = PERM
+	Err_Desc     = 3320
+	Prob_Causes  = 2052,8003,3500
+        User_Causes  = FFFF
+	User_Actions = 1503
+	Inst_Causes  = 80C4
+	Inst_Actions = FFFF
+	Fail_Causes  = F023
+	Fail_Actions = 3302,3107
+        Detail_Data  = 4,8102,HEX
+        Detail_Data  = 15,8101,ALPHA               
+        Detail_Data  = 15,8100,ALPHA               
+
+******************************************************************************
+* QLLC ALERT 2 :  Alert 2 is only implemented by ELLC.
+******************************************************************************
+
++ QLLC_ALERT_3:
+        Comment      = " QLLC Alert 3, No response from remote, repolls ceased"
+        Class        = S
+        Log          = TRUE
+        Report       = TRUE
+        Alert        = TRUE
+        Err_Type     = PERM
+	Err_Desc     = 3320
+	Prob_Causes  = 2052,8003,2200
+	User_Causes  = FFFF
+	User_Actions = 1503
+	Inst_Causes  = 80C4
+        Inst_Actions = FFFF
+	Fail_Causes  = 2200,F017
+	Fail_Actions = 3302,3107
+        Detail_Data  = 4,8102,HEX
+        Detail_Data  = 15,8101,ALPHA               
+        Detail_Data  = 15,8100,ALPHA               
+
++ QLLC_ALERT_4:
+        Comment      = " QLLC4, QFRMR rcvd, invalid control field sent  "
+        Class        = S
+        Log          = TRUE
+        Report       = TRUE
+        Alert        = TRUE
+        Err_Type     = PERM
+	Err_Desc     = 3320
+	Prob_Causes  = 2052,3500
+        User_Causes  = FFFF
+        User_Actions = FFFF
+        Inst_Causes  = FFFF
+        Inst_Actions = FFFF
+	Fail_Causes  = 2006,F010
+	Fail_Actions = 3302,3107
+        Detail_Data  = 4,8102,HEX
+        Detail_Data  = 15,8101,ALPHA               
+        Detail_Data  = 15,8100,ALPHA               
+
++ QLLC_ALERT_5:
+        Comment      = " QLLC5, QFRMR rcvd, invalid I field sent  "
+        Class        = S
+        Log          = TRUE
+        Report       = TRUE
+        Alert        = TRUE
+        Err_Type     = PERM
+	Err_Desc     = 3320
+	Prob_Causes  = 2052
+        User_Causes  = FFFF
+        User_Actions = FFFF
+        Inst_Causes  = FFFF
+        Inst_Actions = FFFF
+	Fail_Causes  = 2006,F011
+	Fail_Actions = 3302,3107
+        Detail_Data  = 4,8102,HEX
+        Detail_Data  = 15,8101,ALPHA               
+        Detail_Data  = 15,8100,ALPHA               
+
++ QLLC_ALERT_6:
+        Comment      = " QLLC6, QFRMR rcvd, oversized I field sent"
+        Class        = S
+        Log          = TRUE
+        Report       = TRUE
+        Alert        = TRUE
+        Err_Type     = PERM
+	Err_Desc     = 3320
+	Prob_Causes  = 2052
+        User_Causes  = FFFF
+	User_Actions = 1503
+	Inst_Causes  = 80C4
+        Inst_Actions = FFFF
+	Fail_Causes  = 2006,F013
+	Fail_Actions = 3302,3107
+        Detail_Data  = 4,8102,HEX
+        Detail_Data  = 15,8101,ALPHA               
+        Detail_Data  = 15,8100,ALPHA               
+
++ QLLC_ALERT_8:
+        Comment      = " QLLC8, Invalid control field received "
+        Class        = S
+        Log          = TRUE
+        Report       = TRUE
+        Alert        = TRUE
+        Err_Type     = PERM
+	Err_Desc     = 3320
+	Prob_Causes  = 2052
+        User_Causes  = FFFF
+        User_Actions = FFFF
+        Inst_Causes  = FFFF
+        Inst_Actions = FFFF
+	Fail_Causes  = 2006,F020
+	Fail_Actions = 3302,3107
+        Detail_Data  = 4,8102,HEX
+        Detail_Data  = 15,8101,ALPHA               
+        Detail_Data  = 15,8100,ALPHA               
+
++ QLLC_ALERT_9:
+        Comment      = " QLLC9, Invalid I field received "
+        Class        = S
+        Log          = TRUE
+        Report       = TRUE
+        Alert        = TRUE
+        Err_Type     = PERM
+	Err_Desc     = 3320
+	Prob_Causes  = 2052
+        User_Causes  = FFFF
+        User_Actions = FFFF
+        Inst_Causes  = FFFF
+        Inst_Actions = FFFF
+	Fail_Causes  = 2006,F021,1021
+	Fail_Actions = 3302,3107
+        Detail_Data  = 4,8102,HEX
+        Detail_Data  = 15,8101,ALPHA               
+        Detail_Data  = 15,8100,ALPHA               
+
+*******************************************************************************
+* End of QLLC ALERTS                                                          *
+*******************************************************************************

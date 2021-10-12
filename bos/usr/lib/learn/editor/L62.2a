@@ -1,0 +1,72 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+A very useful command in the UNIX editor
+is the 'm' command, which moves a lot of
+lines from one place to another in a file. For example, 
+  5,10m20
+picks up lines 5 through 10 and moves them after line 20.  Try
+that on the file "list" in this directory: move lines 5 to 10 after 
+line 20, rewrite the file, and type "ready".
+#create Ref
+ computer languages
+
+fortran
+cobol
+snobol
+comit
+lex
+yacc
+c
+tmg
+ratfor
+basic
+bon
+bcpl
+algol 60
+algol 68
+pl/i
+pl/c
+pl/360
+apl
+altran
+formac
+#create list
+ computer languages
+
+fortran
+cobol
+algol 60
+algol 68
+pl/i
+pl/c
+pl/360
+apl
+snobol
+comit
+lex
+yacc
+c
+tmg
+ratfor
+basic
+bon
+bcpl
+altran
+formac
+#user
+#cmp list Ref
+#log
+#next
+62.2b 5

@@ -1,0 +1,166 @@
+# @(#)38	1.1  src/bos/objclass/POWER/mca_kma.add, inputdd, bos41J, 9509A_all 2/16/95 16:24:26
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Stanzas for the MCA keyboard & mouse adapter (f6f8)  predefines
+#
+
+# keyboard/mouse adapter predefined values
+PdDv:
+ type = kma
+ class = adapter
+ subclass = mca
+ prefix = mcakma
+ devid = 0xf8f6
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x748
+ setno = 126
+ msgno = 25
+ catalog = devices.cat
+ DvDr = ""
+ Define = /usr/lib/methods/define
+ Configure = /usr/lib/methods/cfgkma
+ Change = /usr/lib/methods/chggen
+ Unconfigure = /usr/lib/methods/ucfgdevice
+ Undefine = /usr/lib/methods/undefine
+ Start = ""
+ Stop = ""
+ uniquetype = adapter/mca/kma
+
+PdCn:
+ uniquetype = adapter/mca/kma
+ connkey = kma
+ connwhere = ka
+
+PdCn:
+ uniquetype = adapter/mca/kma
+ connkey = kma
+ connwhere = ma
+
+PdAt:
+ uniquetype = adapter/mca/kma
+ attribute = bus_io_addr
+ deflt = 0x48
+ values = 0x48
+ width = 0x0e
+ type = O
+ generic = D
+ rep = n
+ nls_index = 19
+
+PdAt:
+ uniquetype = adapter/mca/kma
+ attribute = bus_intr_lvl
+ deflt = 1
+ values = 1
+ width = ""
+ type = I
+ generic = D
+ rep = n
+ nls_index = 20
+
+PdAt:
+ uniquetype = adapter/mca/kma
+ attribute = intr_priority
+ deflt = 4
+ values = 4
+ width = ""
+ type = P
+ generic = D
+ rep = n
+ nls_index = 21
+
+PdAt:
+ uniquetype = adapter/mca/kma
+ attribute  = children
+ deflt      = ""
+ width      = ""
+ type       = R
+ generic    = ""
+ rep    = sl
+ nls_index  = 0
+ values     = "\
+adapter/kma/keyboard ka \
+adapter/kma/mouse ma"
+
+# keyboard adapter predefined values
+PdDv:
+ type = keyboard
+ class = adapter
+ subclass = kma
+ prefix = mcaka
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 2
+ led = 0x821
+ setno = 126
+ msgno = 1
+ catalog = devices.cat
+ DvDr = kbddd
+ Define = /usr/lib/methods/define
+ Configure = /usr/lib/methods/cfgktsm
+ Change = /usr/lib/methods/chggen
+ Unconfigure = /usr/lib/methods/ucfgdevice
+ Undefine = /usr/lib/methods/undefine
+ Start = ""
+ Stop = ""
+ uniquetype = adapter/kma/keyboard
+
+PdCn:
+ uniquetype = adapter/kma/keyboard
+ connkey = std_k
+ connwhere = kbd
+
+# mouse adapter predefined values
+PdDv:
+ type = mouse
+ class = adapter
+ subclass = kma
+ prefix = mcama
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 2
+ led = 0x823
+ setno = 127
+ msgno = 1
+ catalog = devices.cat
+ DvDr = mousedd
+ Define = /usr/lib/methods/define
+ Configure = /usr/lib/methods/cfgktsm
+ Change = /usr/lib/methods/chggen
+ Unconfigure = /usr/lib/methods/ucfgdevice
+ Undefine = /usr/lib/methods/undefine
+ Start = ""
+ Stop = ""
+ uniquetype = adapter/kma/mouse
+
+PdCn:
+ uniquetype = adapter/kma/mouse
+ connkey = std_m
+ connwhere = mouse

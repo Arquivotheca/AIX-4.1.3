@@ -1,0 +1,1108 @@
+# @(#)44	1.20 src/bos/objclass/sm_lft.add, lftdd, bos41J, 9520B_all 5/18/95 16:01:55
+#
+#  COMPONENT_NAME: LFTDD
+#
+#  FUNCTIONS: none
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_cmd_hdr:
+    id                        = "lskbd"
+    option_id                 = ""
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    cmd_to_exec               = "lskbd"
+    ask                       = "n"
+    exec_mode                 = "p"
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "chdisp"
+    option_id                 = "chdisp_1"
+    has_name_select           = ""
+    name                      = "Move the LFT to Another Display"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 51
+    cmd_to_exec               = "chdisp"
+    ask                       = "n"
+    exec_mode                 = "e"
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "038036"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chdisp_1"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "Display Mnemonic"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 52
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "--"
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdisp -l"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "038037"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chdisp_1"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "Take Effect Now, Next IPL, Both"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 53
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "--"
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "Now,Next IPL,Both"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 7
+    values_msg_id             = 54
+    aix_values                = "-d,-p,-d -p"
+    help_msg_id               = "038038"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "lsdisp"
+    option_id                 = ""
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    cmd_to_exec               = "lsdisp"
+    ask                       = "n"
+    exec_mode                 = "p"
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "lsfont"
+    option_id                 = ""
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    cmd_to_exec               = "lsfont"
+    ask                       = "n"
+    exec_mode                 = "p"
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "chfont"
+    option_id                 = "chfont_1"
+    has_name_select           = ""
+    name                      = "Select the Active Font for Next System Restart"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 79
+    cmd_to_exec               = "chfont"
+    ask                       = "n"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "038063"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chfont_1"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "Font Identifier"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 80
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsfont -l"	
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "038064"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "mkfont"
+    option_id                 = "mkfont_2"
+    has_name_select           = ""
+    name                      = "Add a Font to the System"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 91
+    cmd_to_exec               = "mkfont"
+    ask                       = "n"
+    exec_mode                 = "p"
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "038074"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "mkfont_2"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "PATHNAME of Font File"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 92
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "/bin/ls /usr/lpp/fonts/*"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "038075"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "chkbd"
+    option_id                 = "_chkbd"
+    has_name_select           = ""
+    name                      = "Change the Keyboard Map for Next System Restart"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 98
+    cmd_to_exec               = "chkbd "
+    ask                       = "n"
+    exec_mode                 = "p"
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180066"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "_chkbd"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "PATHNAME of Keyboard Map"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 99
+    op_type                   = "l"
+    entry_type                = "f"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list   = "find /usr/lib/nls/loc -name '*lftkeymap' -print"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "038030"
+    help_msg_loc              = ""
+
+
+# ----- List All Graphics Adapters Available -----
+
+sm_cmd_hdr:
+	id                        = "g_lsdisp"
+	option_id                 = ""
+	has_name_select           = ""
+	name                      = "List All Graphics Adapters Available"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 7
+	name_msg_id               = 130
+	cmd_to_exec               = "lsdisp"
+	ask                       = "n"
+	exec_mode                 = "p"
+	ghost                     = "y"
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = ""
+	help_msg_loc              = ""
+
+
+# ---- Change Display Size ----
+
+sm_name_hdr:
+    id                        = "chdispsz"
+    next_id                   = "chdispsz_dial"
+    option_id                 = "chdispsz_sel"
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "display"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chdispsz_sel"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Select the Display"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 107
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C -k display"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "chdispsz_dial"
+    option_id                 = "chdispsz_opt"
+    has_name_select           = "y"
+    name                      = "Select the Display Size"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 108
+    cmd_to_exec               = "chdev -P -l "
+    ask                       = ""
+    exec_mode                 = "n"
+    ghost                     = ""
+    cmd_to_discover           = "\
+Discover_the_workstation () \n\
+{\n\
+lsattr -E -l \"$1\" -a scrn_width_mm -a scrn_height_mm |\\\n\
+  awk '    {size_list = size_list $2 \":\"}\n\
+       END {printf(\"#screen_width:screen_height:\\n%s\",size_list)}'\n\
+}\n\
+Discover_the_workstation "
+    cmd_to_discover_postfix   = "display"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = "180089"
+
+sm_cmd_opt:
+    id                        = "chdispsz_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "display"
+    name                      = "Display"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 109
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201708"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chdispsz_opt"
+    id_seq_num                = "020"
+    disc_field_name           = "screen_width"
+    name                      = "Display screen WIDTH (in millimeters)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 110
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 5
+    required                  = "+"
+    prefix                    = "-a scrn_width_mm="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "038091"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chdispsz_opt"
+    id_seq_num                = "030"
+    disc_field_name           = "screen_height"
+    name                      = "Display screen HEIGHT (in millimeters)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 111
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 5
+    required                  = "+"
+    prefix                    = "-a scrn_height_mm="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "038092"
+    help_msg_loc              = ""
+
+
+# ----- Change the Display Type -----
+
+sm_name_hdr:
+        id 			= "chdisptype"
+        next_id 		= "chdisptype_dial"
+        option_id 		= "chdisptype_sel"
+        has_name_select		= ""
+        name 			= ""
+        name_msg_file 		= ""
+        name_msg_set 		= 0
+        name_msg_id 		= 0
+        type 			= "j"
+        ghost 			= "y"
+        cmd_to_classify		= ""
+        cmd_to_classify_postfix = ""
+        raw_field_name 		= "display"
+        cooked_field_name 	= ""
+        next_type 		= "d"
+        help_msg_id 		= "038095"
+        help_msg_loc 		= ""
+
+sm_cmd_opt:
+        id                      = "chdisptype_sel"
+        id_seq_num              = "0"
+        disc_field_name         = ""
+        name                    = "Graphics Adapter"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 7
+        name_msg_id             = 133
+        op_type                 = ""
+        entry_type              = "t"
+        entry_size              = 0
+        required                = "n"
+        prefix                  = ""
+        cmd_to_list_mode        = "1"
+        cmd_to_list             = "function get_all_dspys\n\
+{ \n\
+temp=`odmget -q \"attribute=chg_monitortype\" PdAt`\n\
+if [ -z \"$temp\" ]\n\
+then\n\
+        exit 0\n\
+fi\n\
+echo \"# name       status     location   description\\n# \" \n\
+odmget -q \"attribute=chg_monitortype\" PdAt | sed -n '\n\
+/uniquetype = /p' | sed 's/uniquetype = /PdDvLn=/' | sed 's/\"//g' | \n\
+while read PdDvLn \n\
+do \n\
+        echo `odmget -q $PdDvLn CuDv | sed -n '/name = /p' | \n\
+        sed 's/name = /  /' | sed 's/\"//g'` \n\
+done | awk '{ \n\
+  for (i=1; i <= NF; i++) { \n\
+    system(\"lsdev -C -F \\\"name	     status	location	   description\\\" -l\" $i) \n\
+  } \n\
+}' | sed 's/^/  /' \n\
+exit 0\n\
+} \n\
+get_all_dspys"
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "04202"
+        help_msg_loc            = ""
+
+sm_cmd_hdr:
+    	id                        = "chdisptype_dial"
+    	option_id                 = "chdisptype_opt"
+    	has_name_select           = "y"
+    	name                      = "Select the Display Type"
+    	name_msg_file             = "smit.cat"
+    	name_msg_set              = 7
+    	name_msg_id               = 131
+    	cmd_to_exec               = "chdev -P -l"
+    	ask                       = "n"
+    	exec_mode                 = "n"
+    	ghost                     = ""
+    	cmd_to_discover           = "function get_monitor_type \n\
+{ \n\
+value=`lsattr -E -a monitor_type -l \"$1\" | awk '{print $2}'`\n\
+echo \"#monitor_type:dsp_id:\\n$value:$1\"\n\
+} \n\
+get_monitor_type"
+    	cmd_to_discover_postfix   = "display"
+    	name_size                 = 0
+    	value_size                = 0
+    	help_msg_id               = "038095"
+    	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id 			= "chdisptype_opt"
+	id_seq_num 		= "010"
+	disc_field_name 	= "dsp_id"
+	name 			= "Graphics Adapter"
+	name_msg_file 		= "smit.cat"
+	name_msg_set 		= 7
+	name_msg_id 		= 133
+	op_type 		= ""
+	entry_type 		= ""
+	entry_size 		= 0
+	required 		= "y"
+	prefix 			= ""
+	cmd_to_list_mode 	= ""
+	cmd_to_list 		= ""
+	cmd_to_list_postfix 	= ""
+	multi_select 		= ""
+	value_index 		= 0
+	disp_values 		= ""
+	values_msg_file 	= ""
+	values_msg_set 		= 0
+	values_msg_id 		= 0
+	aix_values 		= ""
+	help_msg_id 		= "038097"
+	help_msg_loc 		= ""
+
+sm_cmd_opt:
+	id_seq_num 		= "020"
+	id 			= "chdisptype_opt"
+	disc_field_name 	= "monitor_type"
+	name 			= "Select the Display Type"
+	name_msg_file 		= "smit.cat"
+	name_msg_set 		= 7
+	name_msg_id 		= 131
+	op_type 		= "l"
+	entry_type 		= "n"
+	entry_size 		= 0
+	required 		= "y"
+	prefix 			= "-a monitor_type="
+	cmd_to_list_mode 	= ""
+	cmd_to_list 		= "lsattr -a monitor_type -R "
+	cmd_to_list_postfix 	= "-l dsp_id"
+	multi_select 		= "n"
+	value_index 		= 0
+	disp_values 		= ""
+	values_msg_file 	= "smit.cat"
+	values_msg_set 		= 0
+	values_msg_id 		= 0
+	aix_values 		= ""
+	help_msg_id 		= "038098"
+	help_msg_loc 		= ""
+
+
+# ----- Change the Display Resolution and Refresh Rate -----
+
+sm_name_hdr:
+        id 			= "chres_refrt"
+        next_id 		= "ch_"
+        option_id 		= "chres_refrt_sel"
+        has_name_select 	= ""
+        name 			= ""
+        name_msg_file 		= ""
+        name_msg_set 		= 0
+        name_msg_id 		= 0
+        type 			= "c"
+        ghost		 	= "y"
+        cmd_to_classify 	= "function get_next_id_postfix\n\
+{\n\
+temp=`echo $1`
+temp=`print ${temp%?}`
+if [ "$temp" = "ppr" ] || [ "$temp" = "hispd3d" ]
+then \n\
+    print refrt_only_dial \n\
+else \n\
+    print res_refrt_dial\n\
+fi\n\
+}\n\
+get_next_id_postfix"
+        cmd_to_classify_postfix = "display"
+        raw_field_name 		= "display"
+        cooked_field_name 	= ""
+        next_type 		= "d"
+        help_msg_id 		= "0380111"
+        help_msg_loc 		= ""
+
+sm_cmd_opt:
+        id_seq_num              = "0"
+        id                      = "chres_refrt_sel"
+        disc_field_name         = ""
+        name                    = "Graphics Adapter"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 7
+        name_msg_id             = 133
+        op_type                 = ""
+        entry_type              = "t"
+        entry_size              = 0
+        required                = "n"
+        prefix                  = ""
+        cmd_to_list_mode        = "1"
+        cmd_to_list             = "function get_all_dspys\n\
+{ \n\
+temp=`odmget -q \"attribute=chg_res_refrate\" PdAt`\n\
+if [ -z \"$temp\" ]\n\
+then\n\
+        temp=`odmget -q \"attribute=chg_ref_rate\" CuAt`\n\
+        if [ -z \"$temp\" ]\n\
+        then\n\
+                exit 0\n\
+        else\n\
+                echo \"# name       status    location    description\\n# \" \n\
+                odmget -q \"attribute=chg_ref_rate\" CuAt | sed -n '\n\
+                /name = /p' | sed 's/name = /  /' | sed 's/\"//g' | \n\
+                while read display \n\
+                do \n\
+                        lsdev -C  | grep $display | sed 's/^/  /'\n\
+                done\n\
+        fi\n\
+else\n\
+    echo \"# name       status     location   description\\n# \" \n\
+	odmget -q \"attribute=chg_monitortype\" PdAt | sed -n '\n\
+	/uniquetype = /p' | sed 's/uniquetype = /PdDvLn=/' | \n\
+	sed 's/\"//g' | \n\
+	while read PdDvLn \n\
+	do \n\
+            echo `odmget -q $PdDvLn CuDv | sed -n '/name = /p' | \n\
+            sed 's/name = /  /' | sed 's/\"//g'` \n\
+    done | awk '{ \n\
+      for (i=1; i <= NF; i++) { \n\
+        system(\"lsdev -C -F \\\"name	     status	location	   description\\\" -l\" $i) \n\
+      } \n\
+    }' | sed 's/^/  /' \n\
+fi\n\
+exit 0\n\
+} \n\
+get_all_dspys"
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "04202"
+        help_msg_loc            = ""
+
+sm_cmd_hdr:
+    	id                        = "ch_res_refrt_dial"
+    	option_id                 = "chres_refrt_opt"
+    	has_name_select           = "y"
+    	name                      = "Select the Display Resolution and Refresh Rate"
+    	name_msg_file             = "smit.cat"
+    	name_msg_set              = 7
+    	name_msg_id               = 132
+    	cmd_to_exec               = ""
+    	ask                       = "y"
+    	exec_mode                 = "n"
+    	ghost                     = ""
+    	cmd_to_discover           = "function get_res_refrate \n\
+{ \n\
+def_disptype=`lsattr -E -a monitor_type -l \"$1\" | awk '{print $2}' | cut -c1-15
+`\n\
+value=`lsattr -E -a $def_disptype -l \"$1\" | awk '{print $2}'`\n\
+echo \"#refresh_rate:dsp_type:dsp_id:\\n$value:$def_disptype:$1\"\n\
+} \n\
+get_res_refrate"
+    	cmd_to_discover_postfix   = "display"
+    	name_size                 = 0
+    	value_size                = 0
+    	help_msg_id               = "0380111"
+    	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id_seq_num 		= "010"
+	id 			= "chres_refrt_opt"
+	disc_field_name 	= "dsp_id"
+	name 			= "Graphics Adapter"
+	name_msg_file 		= "smit.cat"
+	name_msg_set 		= 7
+	name_msg_id 		= 133
+	op_type 		= ""
+	entry_type 		= ""
+	entry_size 		= 0
+	required 		= "y"
+	prefix 			= "tmp_dsp_id="
+	cmd_to_list_mode 	= ""
+	cmd_to_list 		= ""
+	cmd_to_list_postfix 	= ""
+	multi_select 		= ""
+	value_index 		= 0
+	disp_values 		= ""
+	values_msg_file 	= ""
+	values_msg_set 		= 0
+	values_msg_id 		= 0
+	aix_values 		= ""
+	help_msg_id 		= "038097"
+	help_msg_loc 		= ""
+
+sm_cmd_opt:
+	id_seq_num 		= "020"
+	id 			= "chres_refrt_opt"
+	disc_field_name 	= "dsp_type"
+	name 			= "Display Type" 
+	name_msg_file 		= "smit.cat"
+	name_msg_set 		= 7
+	name_msg_id 		= 134
+	op_type 		= ""
+	entry_type 		= ""
+	entry_size 		= 0
+	required 		= "y"
+	prefix 			= "; tmp_dsp_type="
+	cmd_to_list_mode 	= ""
+	cmd_to_list 		= ""
+	cmd_to_list_postfix 	= ""
+	multi_select 		= ""
+	value_index 		= 0
+	disp_values 		= ""
+	values_msg_file		= "smit.cat"
+	values_msg_set 		= 0
+	values_msg_id 		= 0
+	aix_values 		= ""
+	help_msg_id 		= "038099"
+	help_msg_loc 		= ""
+
+sm_cmd_opt:
+	id_seq_num 		= "030"
+	id 			= "chres_refrt_opt"
+	disc_field_name 	= "refresh_rate"
+	name 			= "Select the Display Resolution and Refresh Rate"
+	name_msg_file 		= "smit.cat"
+	name_msg_set 		= 7
+	name_msg_id 		= 132
+	op_type 		= "l"
+	entry_type 		= "n"
+	entry_size 		= 0
+	required 		= "y"
+	prefix 			= "; chdev -P -l $tmp_dsp_id -a $tmp_dsp_type="
+	cmd_to_list_mode 	= ""
+	cmd_to_list 		= "lsattr -R"
+	cmd_to_list_postfix 	= "-l dsp_id -a dsp_type"
+	multi_select 		= "n"
+	value_index 		= 0
+	disp_values 		= ""
+	values_msg_file 	= "smit.cat"
+	values_msg_set 		= 0
+	values_msg_id 		= 0
+	aix_values 		= ""
+	help_msg_id 		= "0380200"
+	help_msg_loc 		= ""
+
+
+# ---- Change Refresh Rate ----
+
+sm_cmd_hdr:
+    id                        = "ch_refrt_only_dial"
+    option_id                 = "chrefrate_opt"
+    has_name_select           = "y"
+    name                      = "Select the Display Refresh Rate"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 124
+    cmd_to_exec               = "chdev -P -l"
+    ask                       = "y"
+    exec_mode                 = "n"
+    ghost                     = ""
+    cmd_to_discover           = "\
+function get_ref_rate \n\
+{ \n\
+value=\`lsattr -E -a refresh_rate -l \"$1\" | awk \'{print $2}\'\`\n\
+echo \"#refresh_rate:dsp_id:\\n\$value:$1\"
+} \n\
+get_ref_rate"
+    cmd_to_discover_postfix   = "display"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "038093"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chrefrate_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "dsp_id"
+    name                      = "Display"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 109
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201708"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chrefrate_opt"
+    id_seq_num                = "020"
+    disc_field_name           = "refresh_rate"
+    name                      = "Display Refresh RATE (in hertz)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 125
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-a refresh_rate="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = "0"
+    disp_values               = "60,77"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "60,77"
+    help_msg_id               = "038094"
+    help_msg_loc              = ""
+
+
+sm_cmd_opt:
+    id                        = "chrefrate_opt"
+    id_seq_num                = "030"
+    disc_field_name           = ""
+    name                      = "\n\
+WARNING: Make sure the selected monitor supports \n\
+         the refresh rate chosen before executing \n\
+         this command or the monitor will not be \n\
+         readable. The selected refresh rate will \n\
+         not take effect until the next system \n\
+         reboot."
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 126
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = ""
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+
+
+#------  Set timeout values for LFT Display Power Management ------.
+
+# If Power Management (PM) runs on the system, jump to PM SMIT menu so that
+# DPMS values are changed via PM function.
+
+sm_name_hdr:
+    id                        = "display_pm_select"
+    next_id                   = ""
+    option_id                 = "display_pm_select_opt"
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = \
+ "pm_select()
+  {
+    pmctrl -a > /dev/null 2>&1
+    if [ $? -eq 0 ]
+    then
+      echo pmDisplay
+    else
+      echo display_pm
+    fi
+  }
+  pm_select "
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = "_cookedname"
+    next_type                 = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "display_pm_select_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "display_pm"
+    option_id                 = "phase_timeout"
+    has_name_select           = ""
+    name                      = "Display Power Management"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 7
+    name_msg_id               = 135
+    cmd_to_exec               = "chdev -l lft0 -P"
+    ask                       = "n"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -E -O -l lft0"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "phase_timeout"
+	disc_field_name = "pwr_mgr_t1"
+	name = "Time before display dimmed (in minutes)"
+	name_msg_file = "smit.cat"
+	name_msg_set = 7
+	name_msg_id = 136
+	op_type = ""
+	entry_type = "#"
+	entry_size = 0
+	required = "+"
+	prefix = "-a pwr_mgr_t1="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "phase_timeout"
+	disc_field_name = "pwr_mgr_t2"
+	name = "Time before display power suspended (in minutes)"
+	name_msg_file = "smit.cat"
+	name_msg_set = 7
+	name_msg_id = 137
+	op_type = ""
+	entry_type = "#"
+	entry_size = 0
+	required = "+"
+	prefix = "-a pwr_mgr_t2="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "025"
+	id = "phase_timeout"
+	disc_field_name = "pwr_mgr_t3"
+	name = "Time before display power turned off (in minutes)"
+	name_msg_file = "smit.cat"
+	name_msg_set = 7
+	name_msg_id = 139
+	op_type = ""
+	entry_type = "#"
+	entry_size = 0
+	required = "+"
+	prefix = "-a pwr_mgr_t3="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "phase_timeout"
+	disc_field_name = ""
+	name = "\n\n\n\ 
+ To disable Display Power Managemt,\n\
+ set the dimmed time to zero.  Note \n\
+ all changes will take effect next IPL"
+	name_msg_file = "smit.cat"
+	name_msg_set = 7
+	name_msg_id = 138
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set  = 0
+	values_msg_id   = 0
+	aix_values      = ""
+	help_msg_id     = ""
+	help_msg_loc    = ""
+	help_msg_base   = ""
+	help_msg_book   = ""

@@ -1,0 +1,367 @@
+#
+# @(#)91	1.1  src/bldenv/man/adeinv.man, pkgtools, bos412, GOLDA411a 5/20/94 14:56:16
+#
+#  COMPONENT_NAME: (pkgtools)  AIX Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: adeinv command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  adeinv Command
+  
+  
+  Purpose
+  
+  The adeinv command generates the apply list, inventory, tcb, and size 
+  files, which are necessary for a product install.
+
+  For updates, adeinv also creates the xref file.  For library updates,
+  adeinv also creates the file 'lpp.acf'.
+
+  Syntax
+  
+  adeinv -i <inslist> -s <ship_path1:ship_path2:...> -l <lppname>
+		-u <lppfilename> [ -t <tablefilename> ] [ -r ] [ -D]
+                 [ -L] [-d <outputDir> ] [ -U <v.r.m.f.> ] [ -Y ] [ -v ]
+
+  Description
+  
+  The adeinv command reads the inslist and lpp_name input files.  The
+  lpp_name file defines overall information about the product option.  The
+  inslist defines information about the files and directories that make
+  up the product option.  The inslist file (specified with the -i option)
+  is processed to create the following output files:  
+
+  the apply list (.al suffix) - the names of files to be restored from the 
+				installable medium,
+  the inventory file (.inventory suffix) - SWVPD information for each file 
+				to be restored,
+  the size file (.size suffix) - size requirements by directory, 
+  the tcb file (.tcb suffix) - information about those files that are part 
+				of the Trusted Computing Base,
+  the xref file (.xref suffix) - a data file used only for update creation.  
+
+  The xref file is generated only when the -U flag (update mode) is specified. 
+  The other files are necessary for a product install using the installp 
+  command.
+  
+  For library updates, adeinv also generates the 'lpp.acf' file.  This
+  file is used by the installp command to identify which members of a
+  shared library need to be replaced during an update.
+
+  The prefix for the output file names is determined from the contents of the
+  lpp_name file (specified with the -u option).  The first non-blank, non-
+  comment line of this file contains the prefix.  For the following line
+  in the lpp_name file,
+
+	bosdev.sendmail.obj N U En_US Berkeley sendmail #comment
+
+  the prefix for the adeinv output files would be 'bosdev.sendmail.obj'.
+
+  The -r option specifies that only root inslist entries should be
+  processed.  Root entries are denoted by a lower case file type in the
+  inslist.
+
+  The file specified with the -t flag is an optional user-provided
+  table file that contains a mapping of user ids to user names.  This
+  table overrides the default userid/username mapping provided by the
+  system (i.e. the '/etc/group' and '/etc/passwd' files).
+
+  The user has the option to provide additional size entry information
+  using the <option>.insize file.
+
+
+  Flags
+
+* -i  <inslist>       Fully qualified path name to the inslist file.
+ 
+* -s <ship_paths>     One or more path names to the ship trees.  Multiple
+		      path names should be separated by a colon ":".
+		      The first occurrence of an inslist file in one of
+		      the ship tree paths is used to determine size
+		      information.
+
+* -l <lppname>	      The name of the lpp.  This is used during 'usr'
+		      processing to calculate the name of the
+                      /usr/lpp/<lppname> install directory.
+
+* -u <lppnamefile>    Fully qualified path name to the lpp_name file.
+
+  -t <tablefile>      Fully qualified path name to the user-provided table
+		      file.  This table is used to convert the numerical 
+		      representation of owner and group (specified in the
+		      inslist file) to an appropriate character representation.
+
+  -r		      Indicates that only root entries should be processed.  
+                      Root entries are lower case type file entries in the
+                      inslist file.
+
+  -D                  Indicates that the option is a share data option.
+                      The object repository directory for these options
+                      is /usr/share/lib/objrepos.
+
+  -L                  Indicates that symlink and hardlink information 
+                      should be written to the apply list.  By default,
+		      links are not written to the apply list.  The sysck
+		      command creates links from the inventory file during
+		      installation.
+                      
+  -d <outputDir>      Specifies the directory location for the output
+                      files.
+
+  -U <v.r.m.f>        Indicates update mode. The vrmf (version, release,
+		      modification, fix) level specified is used to put
+                      the root files for the update in the
+                      /usr/lpp/<lppname>/inst_<v.r.m.f.>/inst_root directory.
+
+  -Y                  Indicates that adeinv should not return an error 
+                      (non-zero return code) if one or more files from the
+                      inslist are not found in the ship trees.  When this
+                      flag is specified, entries are not included in the
+                      inventory file or the apply list for the package.
+                      This allows an install for the package to complete for
+                      all of the files that are found in the ship trees
+                      and included on the media.
+                      This flag is intended for development purposes ONLY
+                      and should NOT be used for product level packages.
+
+  -v 		      Use verbose messages.
+  
+  * Options indicated with an asterisk are required.
+
+
+  Warnings
+
+  Warning messages contain the word "WARNING" and do not halt processing.
+  If any action is taken by adeinv as the result of the warning, the
+  message will state the action.  
+
+  Fatal Errors
+
+  Fatal errors contain the word "ERROR" or "USAGE" and processing is
+  terminated.  adeinv exits with a non-zero return code if an error
+  is detected.
+
+  Input Files
+
+  <lppname>.lp (-u option)
+
+	The input lpp_name file. The first field in this file is the name of 
+	the product option.  An example of this file is:
+
+	# comment (optional)
+	bos.obj  N U En_US Base Operating System  # comments (optional)
+
+	The five fields in this file are: 
+        1) the name of the installable entity, 
+        2) the quiesce character (Y/N), (indicates whether the subsystem must 
+		be stopped prior to updating this product option)
+        3) the content character, (used to determine which SWVPD to update)
+        4) language supported by this product option, 
+        5) description of this product option.
+
+  inslist
+
+      	Required input file containing a list of file names as they
+      	should be found in the ship tree.  The format of an inslist
+      	entry for a file or directory is:
+
+	<type> <uid> <gid> <mode>	<fileName> 
+
+	Example:
+
+	F 2 2 555       /usr/bin/awk 
+
+	If the file or directory has symbolic or hard links, then its entry 
+	may be followed by one or more link entries.  The format of an 
+	inslist entry for a link is:
+
+	<type> <uid> <gid> <mode>	<linkName> <targetFile> 
+
+	Example:
+
+	H 2 2 777	/usr/bin/nawk /usr/bin/awk 
+
+	NOTE:  Hard links must immediately follow the inslist entry for their
+	target file.  This requirement does not apply to symbolic link entries.
+
+	Each field is described in more detail below.
+ 
+      Type
+
+	The type field indicates whether an entry is a directory or a file, 
+	including several file categories. 
+
+	Processing "usr" and "root" parts of an lpp is accomplished by the 
+	case of the type field character and the use of the "-r" flag.  The 
+	characters in the type file can be upper or lower case, but have 
+	different meanings. 
+
+	Valid values for the type field are:
+
+  	Type:    Description:       Entries are created in output files:
+	D or d   DIRECTORY     	    apply list and inventory 
+	F or f   FILE, FIXED SIZE   apply list and inventory
+	V or v   FILE, VOLATILE     apply list and inventory
+	A or a   FILE, TEMPORARY    apply list (file is used during install 
+				    		    and then deleted)
+	I or i   FILE, VOLATILE     inventory (file is created during install)
+	N or n   FILE, NON-VOLATILE inventory (file is created during install)
+	B or b   block device
+	C or c   character device
+
+ 	For files and directories that are part of the Trusted Computing Base, 
+	specify a T or t as the second character in the type field.  
+
+      Owner and Group (<uid> and <gid>)
+
+	The owner and group fields must be a valid numeric user or group id,
+	as appropriate.  The numeric id is converted to a valid user (or
+	group) name, obtained from the /etc/passwd file (or, from the table 
+	specified by the -t parameter).
+
+      Permission (<mode>)
+
+	The permission field must be a three or four digit octal number,
+	representing the file mode.  
+
+      FileName 
+
+	The fileName field identifies a file or directory.  
+
+      LinkName 
+
+	The linkName field identifies a hard link or symbolic link for a 
+   	file or directory. 
+
+
+  <lppname>.insize
+
+	Optional file used to modify or override size values calculated
+	for the .size file.  An entry in the insize file contains a
+	directory name, size value (for permanent space), and optional size
+	value (for temporary space).  Relative values (+ or -) will add to 
+	or subtract from the calculated size values as appropriate.  For
+        absolute values, the larger value between the insize and the
+	calculated size is included in the .size file.  If a matching
+	entry is not found in the .size file, the insize entry is simply
+	added to the .size file.  An example of an insize file follows:
+
+		/usr/lib/ps/ditroff.font +4096 10
+		/usr/lib/font +2560
+		/usr/bin/psplot 500
+
+	This insize file specifies the following adjustments to the default
+	size information:
+		- add 4096 blocks to the size value calculated by the adeinv 
+		  command for the /usr/lib/ps/ditroff.font directory, and
+		  allocate 10 blocks during the installation for temporary
+		  processing space.  
+		- add 2560 blocks to the size value calculated for the 
+		  /usr/lib/font directory.  
+		- the larger value between the regular size value calculated 
+		  for /usr/bin/psplot and 500 will be reflected in the .size 
+		  file.  
+
+	Note that relative values in the insize file may be negative, in 
+	which case the value is subtracted from the calculated size.  In 
+	this case, if no matching entry is found in the .size file, the 
+	insize entry is ignored.
+	
+  User specified table file (-t option)
+
+	Optional file used to add to or supersede usr and group id
+	data for the system.  The format of this file is:
+
+		<user name> <uid> <group name> <gid>
+
+	Example:
+		dbadmuser 200 dbadmgroup 300
+
+	For any entries in the inslist file with owner id 200 and
+	group id 300 the .inventory file will reflect
+
+		owner = dbadmuser
+		group = dbadmgroup
+
+
+  Output Files
+  
+  <lppname>.al
+
+	This file is often referred to as the apply list.  It contains a 
+	list of all files, directories, and links that are to be restored 
+	from distribution media during installation.  The pathnames in this 
+	file are defined relative to the root directory.
+
+  <lppname>.inventory
+
+	This file is an ASCII text file in stanza format, and contains 
+	information about each file that makes up an installable option 
+	after the installation or update is complete (i.e. any file that 
+	is not temporary to the installation).  The inventory information 
+	is put into the SWVPD inventory database.  
+
+	An example stanza for '/usr/bin/li' is shown below:
+
+	/usr/bin/li:
+    		type = FILE
+    		owner = bin
+    		group = bin
+    		mode = 755
+    		symlinks = /etc/li,/etc/ls
+    		links = /usr/bin/ls
+    		size = 123
+    		checksum = "456 5"
+
+  <lppname>.size
+
+	This file contains a list of unique directories and the amount 
+	of space, in 512 byte blocks, that the sum of files in each 
+	directory require in order to be restored from media.  
+
+	For files and directories that are part of the Trusted Computing 
+	Base, the corresponding size information is also added to /etc/security.
+
+
+  <lppname>.tcb
+
+	This file contains stanzas for a product option if it includes 
+	files and directories that are part of the Trusted Computing Base.  
+	The format of this file is the same as the option.inventory file.
+
+  <lppname>.xref
+
+	This file is generated only for updates.  
+
+  lpp.acf
+
+	This file is generated only for library updates.  It is used 
+	by the installp command to identify which members of a shared
+	library need to be replaced during update processing.
+
+  Examples
+  
+  1.  Call adeinv to process the inslist file for the 'bos_net.tcp.server'
+      product where the ship tree paths are /project/ship1 and
+      /project/ship2.
+
+      adeinv -s /project/ship1:/project/ship2 -l bos_net.tcp.server
+	 -i /project/src/bos.net.tcp.server.il -u bos_net.tcp.server.lp
+
+  2.  Call adeinv to process root entries for 'bos_net.tcp.server' using
+      the file '/tmp/user.table' to determine user names and group names
+      from the ids specified in the inslist.
+
+      adeinv -s /project/ship1:/project/ship2 -l bos_net.tcp.server
+	-i /project/src/bos.net.tcp.server.il -t /tmp/user.table -r
+	-u bos_net.tcp.server.lp
+

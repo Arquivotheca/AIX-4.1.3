@@ -1,0 +1,2649 @@
+# @(#)39        1.14.6.1  src/bos/objclass/POWER/sm_tape.add, cfgmethods, bos41B, 9504A 12/13/94 14:20:48
+*
+*  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+*
+*  FUNCTIONS: Tape Drive Interfaces
+*
+*  ORIGINS: 27
+*
+*  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*  combined with the aggregated modules for this product)
+*                   SOURCE MATERIALS
+*  (C) COPYRIGHT International Business Machines Corp. 1989,1994
+*  All Rights Reserved
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+*
+* The following SMIT functions are supported by the dialogues in this
+* file:
+*       List All Defined Tape Drives
+*       List All Supported Tape Drives
+*       Add a Tape Drive
+*       Change/Show Characteristics of a Tape Drive
+*       Remove a Tape Drive
+*       Configure a Defined Tape Drive
+*
+*       Help text Id's for tape specific helps are in the range:
+*               0420700 to 0420799
+*       This does not include menu helps.
+*
+
+*
+* List All Defined Tape Drives
+* This uses a ghost dialogue to list all the defined Tape Drives.
+* The lsdev command is executed from this dialogue.
+*
+sm_cmd_hdr:
+    id                        = "lsdtpe"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined Tape Drives"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 118
+    cmd_to_exec               = "lsdev -C -c tape"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800132"
+    help_msg_loc              = ""
+
+*
+* List All Supported Tape Drives
+* This uses a ghost dialogue to list all the Predefined Tape Drives.
+* The lsdev command is executed from this dialogue.
+*
+sm_cmd_hdr:
+    id                        = "lsstpe"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Supported Tape Drives"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 119
+    cmd_to_exec               = "lsdev -P -c tape -F \"type subclass description\""
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800133"
+    help_msg_loc              = ""
+
+*
+* Add a Tape Drive
+* This allows a Tape drive to be added by defining and configuring it.
+* There are two name selectors followed by the dialogue.  The first
+* name selector is used to put up a list of Predefined Tape drives for the
+* user to select from.  The second name selector is device dependent, that
+* is, there is one for each unique predefined tape drive type.  This name
+* selector puts up a list of defined adapters which can have the selected
+* type of tape drive attached to it.  The dialogue then puts up a list of
+* all the user configurable attributes.
+
+* Select type of Tape drive
+sm_name_hdr:
+    id                        = "maktpe"
+    next_id                   = "maktpe_"
+    option_id                 = "tape_predef_opt"
+    has_name_select           = "n"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+class () # str1 str2 str3\n\
+{\n\
+echo $1 | sed 's/^\\([^ ]*\\)[ ]*\\([^ ]*\\)[ ]*/\\1_\\2:\\1:\\2:/'\n\
+}\n\
+class "
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "_cookedname:type:subclass:desc"
+    next_type                 = "n"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+
+* Name selector command option for type of Tape
+sm_cmd_opt:
+    id                        = "tape_predef_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Tape Drive Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 476
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "lsdev -P -c tape -F \"type subclass description \"" | sort
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201"
+    help_msg_loc              = ""
+
+* Select parent adapter
+* There is a name selector at this level for each unique Predefined tape
+* instance.  The Id's for these name selectors are built as follows:
+*       "maktpe_xxx_yyy"
+* where xxx is the type and yyy is the subclass.
+
+* SCSI 8mm tape drive
+sm_name_hdr:
+    id                        = "maktpe_8mm_scsi"
+    next_id                   = "maktpe_8mm_scsi_hdr"
+    option_id                 = "maktpe_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+* SCSI half-inch tape drive
+sm_name_hdr:
+    id                        = "maktpe_9trk_scsi"
+    next_id                   = "maktpe_9trk_scsi_hdr"
+    option_id                 = "maktpe_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+* SCSI quarter-inch tape drive
+sm_name_hdr:
+    id                        = "maktpe_150mb_scsi"
+    next_id                   = "maktpe_150mb_scsi_hdr"
+    option_id                 = "maktpe_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+* SCSI quarter-inch tape drive
+sm_name_hdr:
+    id                        = "maktpe_525mb_scsi"
+    next_id                   = "maktpe_525mb_scsi_hdr"
+    option_id                 = "maktpe_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+* SCSI quarter-inch tape drive
+sm_name_hdr:
+    id                        = "maktpe_1200mb-c_scsi"
+    next_id                   = "maktpe_1200mb-c_scsi_hdr"
+    option_id                 = "maktpe_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+* SCSI other scsi tape drive
+sm_name_hdr:
+    id                        = "maktpe_ost_scsi"
+    next_id                   = "maktpe_ost_scsi_hdr"
+    option_id                 = "maktpe_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+* Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "maktpe_parent_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter "
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+* The dialogue headers follow.  There can be a unique header for each
+* predefined tape drive instance, or several drive instances may share
+* a common header.  Since each of the SCSI tape drives currently supported
+* have slightly different sets of attributes, they have their own headers.
+
+* SCSI 8mm tape drive
+sm_cmd_hdr:
+    id                        = "maktpe_8mm_scsi_hdr"
+    option_id                 = "tape_add,tape_common,tape_8mm"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    cmd_to_exec               = "mkdev -c tape "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c tape"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800134"
+    help_msg_loc              = ""
+
+* SCSI half-inch tape drive
+sm_cmd_hdr:
+    id                        = "maktpe_9trk_scsi_hdr"
+    option_id                 = "tape_add,tape_common,tape_9trk"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    cmd_to_exec               = "mkdev -c tape "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c tape"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800134"
+    help_msg_loc              = ""
+
+* SCSI quarter-inch tape drive
+sm_cmd_hdr:
+    id                        = "maktpe_150mb_scsi_hdr"
+    option_id                 = "tape_add,tape_common,tape_quarter"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    cmd_to_exec               = "mkdev -c tape "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c tape"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800134"
+    help_msg_loc              = ""
+
+* SCSI 525mb tape drive
+sm_cmd_hdr:
+    id				= "maktpe_525mb_scsi_hdr"
+    option_id			= "tape_add,tape_common,tape_525mb"
+    has_name_select		= "y"
+    name			= "Add a Tape Drive"
+    name_msg_file		= "smit.cat"
+    name_msg_set		= 25
+    name_msg_id			= 120
+    cmd_to_exec			= "mkdev -c tape "
+    ask				= ""
+    exec_mode			= ""
+    ghost			= "n"
+    cmd_to_discover		= "lsattr -c tape"
+    cmd_to_discover_postfix	= "-s subclass -t type -D -O"
+    name_size			= 0
+    value_size			= 0
+    help_msg_id			= "1800134"
+    help_msg_loc		= ""
+
+* SCSI 1200mb-c tape drive
+sm_cmd_hdr:
+    id                      = "maktpe_1200mb-c_scsi_hdr"
+    option_id               = "tape_add,tape_common,tape_1200mb-c"
+    has_name_select         = "y"
+    name                    = "Add a Tape Drive"
+    name_msg_file           = "smit.cat"
+    name_msg_set            = 25
+    name_msg_id             = 120
+    cmd_to_exec             = "mkdev -c tape "
+    ask                     = ""
+    exec_mode               = ""
+    ghost                   = "n"
+    cmd_to_discover         = "lsattr -c tape"
+    cmd_to_discover_postfix = "-s subclass -t type -D -O"
+    name_size               = 0
+    value_size              = 0
+    help_msg_id             = "1800134"
+    help_msg_loc            = ""
+
+* SCSI other scsi tape drive
+sm_cmd_hdr:
+    id                        = "maktpe_ost_scsi_hdr"
+    option_id                 = "tape_add,tape_common,tape_ost"
+    has_name_select           = "y"
+    name                      = "Add a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 120
+    cmd_to_exec               = "mkdev -c tape "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c tape"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800134"
+    help_msg_loc              = ""
+
+*
+* Change/Show Characteristics of a Tape Drive
+* This allows a Tape drive's characteristics to be shown and, if desired,
+* changed.  First, there is a name selector used to put up a list of the
+* defined Tape drives for the user to select from.  The dialogue then
+* shows all of the characteristics.
+
+* Select Tape drive by logical name
+sm_name_hdr:
+    id                        = "chgtpe"
+    next_id                   = "chgtpe_"
+    option_id                 = "tape_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 121
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\" \
+  | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\1_\\2:&/' \n\
+} \n\
+xx "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:parent:port:loc:state:desc"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+* The dialogue headers follow.  There is one for each unique Predefined
+* Tape drive instance.  Their Id's are built as follows:
+*       "chgtpe_hdr_xxx_yyy"
+* where xxx is the type and yyy is the subclass.
+
+* SCSI 8mm tape drive
+sm_cmd_hdr:
+    id                        = "chgtpe_8mm_scsi"
+    option_id                 = "tape_chg,tape_common,tape_8mm"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 121
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+* SCSI half-inch tape drive
+sm_cmd_hdr:
+    id                        = "chgtpe_9trk_scsi"
+    option_id                 = "tape_chg,tape_common,tape_9trk"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 121
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+* SCSI quarter-inch tape drive
+sm_cmd_hdr:
+    id                        = "chgtpe_150mb_scsi"
+    option_id                 = "tape_chg,tape_common,tape_quarter"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 121
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+* SCSI 525mb tape drive
+sm_cmd_hdr:
+    id                      = "chgtpe_525mb_scsi"
+    option_id               = "tape_chg,tape_common,tape_525mb"
+    name                    = "Change/Show Characteristics of a Tape Drive"
+    has_name_select         = "y"
+    name_msg_file           = "smit.cat"
+    name_msg_set            = 25
+    name_msg_id             = 121
+    cmd_to_exec             = "chdev "
+    ask                     = ""
+    exec_mode               = "P"
+    ghost                   = "n"
+    cmd_to_discover         = "lsattr "
+    cmd_to_discover_postfix = "-l logicname -E -O"
+    name_size               = 0
+    value_size              = 0
+    help_msg_id             = "1800197"
+    help_msg_loc            = ""
+
+* SCSI 1200mb-c tape drive
+sm_cmd_hdr:
+    id                      = "chgtpe_1200mb-c_scsi"
+    option_id               = "tape_chg,tape_common,tape_1200mb-c"
+    name                    = "Change/Show Characteristics of a Tape Drive"
+    has_name_select         = "y"
+    name_msg_file           = "smit.cat"
+    name_msg_set            = 25
+    name_msg_id             = 121
+    cmd_to_exec             = "chdev "
+    ask                     = ""
+    exec_mode               = "P"
+    ghost                   = "n"
+    cmd_to_discover         = "lsattr "
+    cmd_to_discover_postfix = "-l logicname -E -O"
+    name_size               = 0
+    value_size              = 0
+    help_msg_id             = "1800197"
+    help_msg_loc            = ""
+
+* SCSI other scsi tape drive
+sm_cmd_hdr:
+    id                        = "chgtpe_ost_scsi"
+    option_id                 = "tape_chg,tape_common,tape_ost"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 121
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+*
+* Remove a Tape Drive
+* This allows a Tape drive to be removed, including its definition in the
+* database, from the system.  A name selector is used to put up a list
+* of the "defined" and "configured" Tape drives for the user to select from.
+* The dialogue then uses the rmdev command to remove the selected device.
+
+* Select Tape drive by logical name
+sm_name_hdr:
+    id                        = "rmvtpe"
+    next_id                   = "rmvtpe_hdr"
+    option_id                 = "tape_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 122
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+* Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvtpe_hdr"
+    option_id                 = "rmvtpe_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 122
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+* Command options
+sm_cmd_opt:
+    id                        = "rmvtpe_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 475
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420700"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvtpe_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "0420716"
+    help_msg_loc              = ""
+
+*
+* Configure a Defined Tape Drive
+* This allows a Tape drive that is defined but not configured to be
+* configured.  A name selector is used to put up a list of the "defined"
+* Tape drives for the user to select from.  The dialogue then uses the
+* mkdev command to configure the selected device.
+
+* Select Tape drive by logical name
+sm_name_hdr:
+    id                        = "cfgtpe"
+    next_id                   = "cfgtpe_hdr"
+    option_id                 = "tape_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 123
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800138"
+    help_msg_loc              = ""
+
+* Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgtpe_hdr"
+    option_id                 = "cfgtpe_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 123
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800138"
+    help_msg_loc              = ""
+
+* Command option
+sm_cmd_opt:
+    id                        = "cfgtpe_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 475
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420700"
+    help_msg_loc              = ""
+
+
+*
+* Name selector command option for listing Tape drives by logical name.
+* Used by: change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "tape_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 475
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c tape"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+*
+* Dialog header command options.  Specific to add.
+* Used by: add function.
+
+* Displays Tape drive type.
+sm_cmd_opt:
+    id                        = "tape_add"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "Tape Drive type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 477
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420701"
+    help_msg_loc              = ""
+
+* Displays Tape drive subclass.
+sm_cmd_opt:
+    id                        = "tape_add"
+    id_seq_num                = "002"
+    disc_field_name           = "subclass"
+    name                      = "Tape Drive interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 478
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420703"
+    help_msg_loc              = ""
+
+* Displays device's description.
+sm_cmd_opt:
+    id                        = "tape_add"
+    id_seq_num                = "003"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420704"
+    help_msg_loc              = ""
+
+* Displays Tape drive's parent adapter.
+sm_cmd_opt:
+    id                        = "tape_add"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420702"
+    help_msg_loc              = ""
+
+* Displays SCSI address of tape drive.
+sm_cmd_opt:
+    id                        = "tape_add"
+    id_seq_num                = "005"
+    disc_field_name           = "port"
+    name                      = "CONNECTION address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 5
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420710"
+    help_msg_loc              = ""
+
+
+*
+* Dialog header command options.  Specific to show/change.
+* Used by: show/change function.
+
+* Displays the Tape drive's logical name.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Tape Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 475
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420700"
+    help_msg_loc              = ""
+
+* Displays Tape drive type.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "type"
+    name                      = "Tape Drive type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 477
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420701"
+    help_msg_loc              = ""
+
+* Displays Tape drive subclass.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "subclass"
+    name                      = "Tape Drive interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 478
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420703"
+    help_msg_loc              = ""
+
+* Displays device's description.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420704"
+    help_msg_loc              = ""
+
+* Displays device's state.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420705"
+    help_msg_loc              = ""
+
+* Displays device's location.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420706"
+    help_msg_loc              = ""
+
+* Displays parent adapter.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "007"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420702"
+    help_msg_loc              = ""
+
+* Displays SCSI address of tape drive.
+sm_cmd_opt:
+    id                        = "tape_chg"
+    id_seq_num                = "008"
+    disc_field_name           = "port"
+    name                      = "Connection address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 6
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420710"
+    help_msg_loc              = ""
+
+
+*
+* Dialog header command options.  Common to add and show/change.
+* Used by: add and show/change functions.
+
+* Specific to 8mm SCSI tape drive.
+* Displays block size.
+sm_cmd_opt:
+    id                        = "tape_8mm"
+    id_seq_num                = "010"
+    disc_field_name           = "block_size"
+    name                      = "BLOCK size (0=variable length)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 6
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a block_size="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a block_size -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420711"
+    help_msg_loc              = ""
+
+* Specific to 9 track SCSI tape drive.
+* Displays block size.
+sm_cmd_opt:
+    id                        = "tape_9trk"
+    id_seq_num                = "010"
+    disc_field_name           = "block_size"
+    name                      = "BLOCK size (0=variable length)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 6
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a block_size="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a block_size -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420711"
+    help_msg_loc              = ""
+
+* Specific to 1/4-inch SCSI tape drive.
+* Displays block size.
+sm_cmd_opt:
+    id                        = "tape_quarter"
+    id_seq_num                = "010"
+    disc_field_name           = "block_size"
+    name                      = "BLOCK size (0=variable length)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 6
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a block_size="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "512,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "512,0"
+    help_msg_id               = "0420711"
+    help_msg_loc              = ""
+
+* Specific to 1/4-inch SCSI tape drive.
+* Displays block size.
+sm_cmd_opt:
+    id                        = "tape_525mb"
+    id_seq_num                = "010"
+    disc_field_name           = "block_size"
+    name                      = "BLOCK size (0=variable length)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 6
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a block_size="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "1024,512,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "1024,512,0"
+    help_msg_id               = "0420711"
+    help_msg_loc              = ""
+
+* Specific to 1/4-inch SCSI tape drive.
+* Displays block size.
+sm_cmd_opt:
+    id                        = "tape_1200mb-c"
+    id_seq_num                = "010"
+    disc_field_name           = "block_size"
+    name                      = "BLOCK size (0=variable length)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 6
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a block_size="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "1024,512,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "1024,512,0"
+    help_msg_id               = "0420711"
+    help_msg_loc              = ""
+
+* Specific to Other SCSI tape drive.
+* Displays block size.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "010"
+    disc_field_name           = "block_size"
+    name                      = "BLOCK size (0=variable length)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 6
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a block_size="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a block_size -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420711"
+    help_msg_loc              = ""
+
+* Display "Use Device Buffers during writes" attribute.
+sm_cmd_opt:
+    id                        = "tape_common"
+    id_seq_num                = "020"
+    disc_field_name           = "mode"
+    name                      = "Use DEVICE BUFFERS during writes"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 5
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a mode="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420712"
+    help_msg_loc              = ""
+
+* Specific to 8mm SCSI tape drive.
+* Displays extended file mark attribute.
+sm_cmd_opt:
+    id                        = "tape_8mm"
+    id_seq_num                = "030"
+    disc_field_name           = "extfm"
+    name                      = "Use EXTENDED file marks"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 8
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a extfm="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420713"
+    help_msg_loc              = ""
+
+* Specific to SCSI ost tape drive
+* Displays extended file mark attribute.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "030"
+    disc_field_name           = "extfm"
+    name                      = "Use EXTENDED file marks"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 8
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a extfm="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420713"
+    help_msg_loc              = ""
+
+* Specific to 1/4-inch SCSI tape drive.
+* Displays retension attribute.
+sm_cmd_opt:
+    id                        = "tape_quarter"
+    id_seq_num                = "030"
+    disc_field_name           = "ret"
+    name                      = "RETENSION on tape change or reset"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 7
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a ret="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420715"
+    help_msg_loc              = ""
+
+* Specific to 525mb SCSI tape drive.
+* Displays extended file mark attribute
+sm_cmd_opt:
+    id                      = "tape_525mb"
+    id_seq_num              = "030"
+    disc_field_name         = "ret"
+    name                    = "RETENSION on tape change or reset"
+    name_msg_file           = "devices.cat"
+    name_msg_set            = 54
+    name_msg_id             = 7
+    op_type                 = "r"
+    entry_type              = "n"
+    entry_size              = 0
+    required                = ""
+    prefix                  = "-a ret="
+    cmd_to_list_mode        = ""
+    cmd_to_list             = ""
+    cmd_to_list_postfix     = ""
+    multi_select            = ""
+    value_index             = 0
+    disp_values             = "yes,no"
+    values_msg_file         = "smit.cat"
+    values_msg_set          = 27
+    values_msg_id           = 12
+    aix_values              = "yes,no"
+    help_msg_id             = "0420715"
+    help_msg_loc            = ""
+
+* Specific to 1200mb-c SCSI tape drive.
+* Displays extended file mark attribute
+sm_cmd_opt:
+    id                      = "tape_1200mb-c"
+    id_seq_num              = "030"
+    disc_field_name         = "ret"
+    name                    = "RETENSION on tape change or reset"
+    name_msg_file           = "devices.cat"
+    name_msg_set            = 54
+    name_msg_id             = 7
+    op_type                 = "r"
+    entry_type              = "n"
+    entry_size              = 0
+    required                = ""
+    prefix                  = "-a ret="
+    cmd_to_list_mode        = ""
+    cmd_to_list             = ""
+    cmd_to_list_postfix     = ""
+    multi_select            = ""
+    value_index             = 0
+    disp_values             = "yes,no"
+    values_msg_file         = "smit.cat"
+    values_msg_set          = 27
+    values_msg_id           = 12
+    aix_values              = "yes,no"
+    help_msg_id             = "0420715"
+    help_msg_loc            = ""
+
+* Specific to 9 track SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_9trk"
+    id_seq_num                = "030"
+    disc_field_name           = "density_set_1"
+    name                      = "DENSITY setting #1"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 12
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_1="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "3,2,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "3,2,0"
+    help_msg_id               = "0420717"
+    help_msg_loc              = ""
+
+* Specific to Other SCSI tape drive.
+* Displays reserve/release attribute.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "040"
+    disc_field_name           = "res_support"
+    name                      = "RESERVE/RELEASE support"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 9
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a res_support="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420719"
+    help_msg_loc              = ""
+
+* Specific to 9 track SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_9trk"
+    id_seq_num                = "040"
+    disc_field_name           = "density_set_2"
+    name                      = "DENSITY setting #2"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 13
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_2="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "2,3,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "2,3,0"
+    help_msg_id               = "0420718"
+    help_msg_loc              = ""
+
+* Specific to 1/4-inch SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_quarter"
+    id_seq_num                = "040"
+    disc_field_name           = "density_set_1"
+    name                      = "DENSITY setting #1"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 12
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_1="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = "16,15,0"
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "16,15,0"
+    help_msg_id               = "0420717"
+    help_msg_loc              = ""
+
+* Specific to 1/4-inch SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_quarter"
+    id_seq_num                = "050"
+    disc_field_name           = "density_set_2"
+    name                      = "DENSITY setting #2"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 13
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_2="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "15,16,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "15,16,0"
+    help_msg_id               = "0420718"
+    help_msg_loc              = ""
+
+* Specific to 525mb SCSI tape drive.
+* Displays density setting 1 for tape special files
+sm_cmd_opt:
+    id                      = "tape_525mb"
+    id_seq_num              = "040"
+    disc_field_name         = "density_set_1"
+    name                    = "DENSITY setting #1"
+    name_msg_file           = "devices.cat"
+    name_msg_set            = 54
+    name_msg_id             = 12
+    op_type                 = "r"
+    entry_type              = "n"
+    entry_size              = 0
+    required                = ""
+    prefix                  = "-a density_set_1="
+    cmd_to_list_mode        = ""
+    cmd_to_list             = ""
+    cmd_to_list_postfix     = ""
+    multi_select            = ""
+    value_index             = 0
+    disp_values             = ""
+    values_msg_file         = "17,16,15,0"
+    values_msg_set          = 0
+    values_msg_id           = 0
+    aix_values              = "17,16,15,0"
+    help_msg_id             = "0420717"
+    help_msg_loc            = ""
+
+* Specific to 525mb SCSI tape drive.
+* Displays density setting 2 for tape special files
+sm_cmd_opt:
+    id                      = "tape_525mb"
+    id_seq_num              = "050"
+    disc_field_name         = "density_set_2"
+    name                    = "DENSITY setting #2"
+    name_msg_file           = "devices.cat"
+    name_msg_set            = 54
+    name_msg_id             = 13
+    op_type                 = "r"
+    entry_type              = "n"
+    entry_size              = 0
+    required                = ""
+    prefix                  = "-a density_set_2="
+    cmd_to_list_mode        = ""
+    cmd_to_list             = ""
+    cmd_to_list_postfix     = ""
+    multi_select            = ""
+    value_index             = 0
+    disp_values             = ""
+    values_msg_file         = "17,16,15,0"
+    values_msg_set          = 0
+    values_msg_id           = 0
+    aix_values              = "17,16,15,0"
+    help_msg_id             = "0420718"
+    help_msg_loc            = ""
+
+* Specific to 1200mb-c SCSI tape drive.
+* Displays density setting 1 for tape special files
+sm_cmd_opt:
+    id                      = "tape_1200mb-c"
+    id_seq_num              = "040"
+    disc_field_name         = "density_set_1"
+    name                    = "DENSITY setting #1"
+    name_msg_file           = "devices.cat"
+    name_msg_set            = 54
+    name_msg_id             = 12
+    op_type                 = "r"
+    entry_type              = "n"
+    entry_size              = 0
+    required                = ""
+    prefix                  = "-a density_set_1="
+    cmd_to_list_mode        = ""
+    cmd_to_list             = ""
+    cmd_to_list_postfix     = ""
+    multi_select            = ""
+    value_index             = 0
+    disp_values             = ""
+    values_msg_file         = "21,17,16,15,0"
+    values_msg_set          = 0
+    values_msg_id           = 0
+    aix_values              = "21,17,16,15,0"
+    help_msg_id             = "0420717"
+    help_msg_loc            = ""
+
+* Specific to 1200mb-c SCSI tape drive.
+* Displays density setting 2 for tape special files
+sm_cmd_opt:
+    id                      = "tape_1200mb-c"
+    id_seq_num              = "050"
+    disc_field_name         = "density_set_2"
+    name                    = "DENSITY setting #2"
+    name_msg_file           = "devices.cat"
+    name_msg_set            = 54
+    name_msg_id             = 13
+    op_type                 = "r"
+    entry_type              = "n"
+    entry_size              = 0
+    required                = ""
+    prefix                  = "-a density_set_2="
+    cmd_to_list_mode        = ""
+    cmd_to_list             = ""
+    cmd_to_list_postfix     = ""
+    multi_select            = ""
+    value_index             = 0
+    disp_values             = ""
+    values_msg_file         = "21,17,16,15,0"
+    values_msg_set          = 0
+    values_msg_id           = 0
+    aix_values              = "21,17,16,15,0"
+    help_msg_id             = "0420718"
+    help_msg_loc            = ""
+
+* Specific to Other SCSI tape drive.
+* Displays blocksize for variable length attribute.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "050"
+    disc_field_name           = "var_block_size"
+    name                      = "BLOCK SIZE for variable length support"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 11
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a var_block_size="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a var_block_size -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420721"
+    help_msg_loc              = ""
+
+* Specific to Other SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "060"
+    disc_field_name           = "density_set_1"
+    name                      = "DENSITY setting #1"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 12
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_1="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a density_set_1 -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420717"
+    help_msg_loc              = ""
+
+* Specific to Other SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "070"
+    disc_field_name           = "density_set_2"
+    name                      = "DENSITY setting #2"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 13
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_2="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a density_set_2 -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420718"
+    help_msg_loc              = ""
+
+* Specific to Other SCSI tape drive.
+* Displays watchdog timer timeout feature.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "080"
+    disc_field_name           = "delay"
+    name                      = "Set delay after a FAILED command"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 23
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a delay="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a delay -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420720"
+    help_msg_loc              = ""
+
+* Specific to Other SCSI tape drive.
+* Displays read and write command timout feature.
+sm_cmd_opt:
+    id                        = "tape_ost"
+    id_seq_num                = "090"
+    disc_field_name           = "rwtimeout"
+    name                      = "Set maximum delay for the READ/WRITE command"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 24
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a rwtimeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tape -a rwtimeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420723"
+    help_msg_loc              = ""
+
+*SCSI 8mm5gb tape drive
+sm_name_hdr:
+    id= "maktpe_8mm5gb_scsi"
+    next_id= "maktpe_8mm5gb_scsi_hdr"
+    option_id= "maktpe_parent_opt"
+    has_name_select= "y"
+    name= "Add a Tape Drive"
+    name_msg_file= "smit.cat"
+    name_msg_set= 25
+    name_msg_id= 120
+    type= ""
+    ghost= "y"
+    cmd_to_classify= ""
+    cmd_to_classify_postfix= ""
+    raw_field_name= "parent"
+    cooked_field_name= ""
+    next_type= "d"
+    help_msg_id= "1800102"
+    help_msg_loc= ""
+
+* SCSI 8mm 5gb tape drive
+sm_cmd_hdr:
+    id= "maktpe_8mm5gb_scsi_hdr"
+    option_id= "tape_add,tape_common,tape_8mm5gb"
+    has_name_select= "y"
+    name= "Add a Tape Drive"
+    name_msg_file= "smit.cat"
+    name_msg_set= 25
+    name_msg_id= 120
+    cmd_to_exec= "mkdev -c tape "
+    ask= ""
+    exec_mode= ""
+    ghost= "n"
+    cmd_to_discover= "lsattr -c tape"
+    cmd_to_discover_postfix= "-s subclass -t type -D -O"
+    name_size= 0
+    value_size= 0
+    help_msg_id= "1800134"
+    help_msg_loc= ""
+
+* SCSI 8mm5gb tape drive
+sm_cmd_hdr:
+    id= "chgtpe_8mm5gb_scsi"
+    option_id= "tape_chg,tape_common,tape_8mm5gb"
+    name= "Change/Show Characteristics of a Tape Drive"
+    has_name_select= "y"
+    name_msg_file= "smit.cat"
+    name_msg_set= 25
+    name_msg_id= 121
+    cmd_to_exec= "chdev "
+    ask= ""
+    exec_mode= "P"
+    ghost= "n"
+    cmd_to_discover= "lsattr "
+    cmd_to_discover_postfix= "-l logicname -E -O"
+    name_size= 0
+    value_size= 0
+    help_msg_id= "1800197"
+    help_msg_loc= ""
+
+* Specific to  8mm5gb SCSI tape drive
+sm_cmd_opt:
+    id= "tape_8mm5gb"
+    id_seq_num= "010"
+    disc_field_name= "block_size"
+    name= "BLOCK size (0=variable length)"
+    name_msg_file= "devices.cat"
+    name_msg_set= 54
+    name_msg_id= 6
+    op_type= "l"
+    entry_type= "#"
+    entry_size= 0
+    required= ""
+    prefix= "-a block_size="
+    cmd_to_list_mode= "r"
+    cmd_to_list= "lsattr -c tape -a block_size -R"
+    cmd_to_list_postfix= "-s subclass -t type"
+    multi_select= ""
+    value_index= 0
+    disp_values= ""
+    values_msg_file= ""
+    values_msg_set= 0
+    values_msg_id= 0
+    aix_values= ""
+    help_msg_id= "0420711"
+    help_msg_loc= ""
+
+* Specific to 8mm5gb SCSI tape drive.
+* Displays extended file mark attribute
+sm_cmd_opt:
+    id= "tape_8mm5gb"
+    id_seq_num= "030"
+    disc_field_name= "extfm"
+    name= "Use EXTENDED file marks"
+    name_msg_file= "devices.cat"
+    name_msg_set= 54
+    name_msg_id= 8
+    op_type= "r"
+    entry_type= "n"
+    entry_size = 0
+    required= ""
+    prefix= "-a extfm="
+    cmd_to_list_mode= ""
+    cmd_to_list= ""
+    cmd_to_list_postfix= ""
+    multi_select= ""
+    value_index= 0
+    disp_values= "yes,no"
+    values_msg_file= "smit.cat"
+    values_msg_set= 27
+    values_msg_id= 12
+    aix_values= "yes,no"
+    help_msg_id= "0420713"
+    help_msg_loc= ""
+
+* Specific to 8mm5gb SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_8mm5gb"
+    id_seq_num                = "040"
+    disc_field_name           = "density_set_1"
+    name                      = "DENSITY setting #1"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 12
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_1="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = "140,21,20,0"
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "140,21,20,0"
+    help_msg_id               = "0420717"
+    help_msg_loc              = ""
+
+* Specific to 8mm5gb SCSI tape drive.
+* Displays density setting 2 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_8mm5gb"
+    id_seq_num                = "050"
+    disc_field_name           = "density_set_2"
+    name                      = "DENSITY setting #2"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 13
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_2="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "20,21,140,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "20,21,140,0"
+    help_msg_id               = "0420718"
+    help_msg_loc              = ""
+
+* Specific to 8mm5gb SCSI tape drive.
+* Compression mode
+sm_cmd_opt:
+    id= "tape_8mm5gb"
+    id_seq_num= "060"
+    disc_field_name= "compress"
+    name= "Use data COMPRESSION"
+    name_msg_file= "devices.cat"
+    name_msg_set= 54
+    name_msg_id= 15
+    op_type= "r"
+    entry_type= "n"
+    entry_size= 0
+    required= ""
+    prefix= "-a compress="
+    cmd_to_list_mode= ""
+    cmd_to_list= ""
+    cmd_to_list_postfix= ""
+    multi_select= ""
+    value_index= 0
+    disp_values= "yes,no"
+    values_msg_file= "smit.cat"
+    values_msg_set= 27
+    values_msg_id= 12
+    aix_values= "yes,no"
+    help_msg_id= "0420722"
+    help_msg_loc= ""
+
+*SCSI 8mm7gb tape drive
+sm_name_hdr:
+    id				= "maktpe_8mm7gb_scsi"
+    next_id			= "maktpe_8mm7gb_scsi_hdr"
+    option_id			= "maktpe_parent_opt"
+    has_name_select		= "y"
+    name			= "Add a Tape Drive"
+    name_msg_file		= "smit.cat"
+    name_msg_set		= 25
+    name_msg_id			= 120
+    type			= ""
+    ghost			= "y"
+    cmd_to_classify		= ""
+    cmd_to_classify_postfix	= ""
+    raw_field_name		= "parent"
+    cooked_field_name		= ""
+    next_type			= "d"
+    help_msg_id			= "1800102"
+    help_msg_loc		= ""
+
+* SCSI 8mm 7gb tape drive
+sm_cmd_hdr:
+    id				= "maktpe_8mm7gb_scsi_hdr"
+    option_id			= "tape_add,tape_common,tape_8mm7gb"
+    has_name_select		= "y"
+    name			= "Add a Tape Drive"
+    name_msg_file		= "smit.cat"
+    name_msg_set		= 25
+    name_msg_id			= 120
+    cmd_to_exec			= "mkdev -c tape "
+    ask				= ""
+    exec_mode			= ""
+    ghost			= "n"
+    cmd_to_discover		= "lsattr -c tape"
+    cmd_to_discover_postfix	= "-s subclass -t type -D -O"
+    name_size			= 0
+    value_size			= 0
+    help_msg_id			= "1800134"
+    help_msg_loc		= ""
+
+* SCSI 8mm7gb tape drive
+sm_cmd_hdr:
+    id				= "chgtpe_8mm7gb_scsi"
+    option_id			= "tape_chg,tape_common,tape_8mm7gb"
+    name			= "Change/Show Characteristics of a Tape Drive"
+    has_name_select		= "y"
+    name_msg_file		= "smit.cat"
+    name_msg_set		= 25
+    name_msg_id			= 121
+    cmd_to_exec			= "chdev "
+    ask				= ""
+    exec_mode			= "P"
+    ghost			= "n"
+    cmd_to_discover		= "lsattr "
+    cmd_to_discover_postfix	= "-l logicname -E -O"
+    name_size			= 0
+    value_size			= 0
+    help_msg_id			= "1800197"
+    help_msg_loc		= ""
+
+* Specific to  8mm7gb SCSI tape drive
+sm_cmd_opt:
+    id				= "tape_8mm7gb"
+    id_seq_num			= "010"
+    disc_field_name		= "block_size"
+    name			= "BLOCK size (0=variable length)"
+    name_msg_file		= "devices.cat"
+    name_msg_set		= 54
+    name_msg_id			= 6
+    op_type			= "l"
+    entry_type			= "#"
+    entry_size			= 0
+    required			= ""
+    prefix			= "-a block_size="
+    cmd_to_list_mode		= "r"
+    cmd_to_list			= "lsattr -c tape -a block_size -R"
+    cmd_to_list_postfix		= "-s subclass -t type"
+    multi_select		= ""
+    value_index			= 0
+    disp_values			= ""
+    values_msg_file		= ""
+    values_msg_set		= 0
+    values_msg_id		= 0
+    aix_values			= ""
+    help_msg_id			= "0420711"
+    help_msg_loc		= ""
+
+* Specific to 8mm7gb SCSI tape drive.
+* Displays extended file mark attribute
+sm_cmd_opt:
+    id				= "tape_8mm7gb"
+    id_seq_num			= "030"
+    disc_field_name		= "extfm"
+    name			= "Use EXTENDED file marks"
+    name_msg_file		= "devices.cat"
+    name_msg_set		= 54
+    name_msg_id			= 8
+    op_type			= "r"
+    entry_type			= "n"
+    entry_size 			= 0
+    required			= ""
+    prefix			= "-a extfm="
+    cmd_to_list_mode		= ""
+    cmd_to_list			= ""
+    cmd_to_list_postfix		= ""
+    multi_select		= ""
+    value_index			= 0
+    disp_values			= "yes,no"
+    values_msg_file		= "smit.cat"
+    values_msg_set		= 27
+    values_msg_id		= 12
+    aix_values			= "yes,no"
+    help_msg_id			= "0420713"
+    help_msg_loc		= ""
+
+* Specific to 8mm7gb SCSI tape drive.
+* Displays density setting 1 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_8mm7gb"
+    id_seq_num                = "040"
+    disc_field_name           = "density_set_1"
+    name                      = "DENSITY setting #1"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 12
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_1="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = "140,21,20,0"
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "140,21,20,0"
+    help_msg_id               = "0420717"
+    help_msg_loc              = ""
+
+* Specific to 8mm7gb SCSI tape drive.
+* Displays density setting 2 for tape special files.
+sm_cmd_opt:
+    id                        = "tape_8mm7gb"
+    id_seq_num                = "050"
+    disc_field_name           = "density_set_2"
+    name                      = "DENSITY setting #2"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 54
+    name_msg_id               = 13
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a density_set_2="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "20,21,140,0"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "20,21,140,0"
+    help_msg_id               = "0420718"
+    help_msg_loc              = ""
+
+* Specific to 8mm7gb SCSI tape drive.
+* Compression mode
+sm_cmd_opt:
+    id				= "tape_8mm7gb"
+    id_seq_num			= "060"
+    disc_field_name		= "compress"
+    name			= "Use data COMPRESSION"
+    name_msg_file		= "devices.cat"
+    name_msg_set		= 54
+    name_msg_id			= 15
+    op_type			= "r"
+    entry_type			= "n"
+    entry_size			= 0
+    required			= ""
+    prefix			= "-a compress="
+    cmd_to_list_mode		= ""
+    cmd_to_list			= ""
+    cmd_to_list_postfix		= ""
+    multi_select		= ""
+    value_index			= 0
+    disp_values			= "yes,no"
+    values_msg_file		= "smit.cat"
+    values_msg_set		= 27
+    values_msg_id		= 12
+    aix_values			= "yes,no"
+    help_msg_id			= "0420722"
+    help_msg_loc		= ""
+
+*SCSI 4mm2gb tape drive
+sm_name_hdr:
+        id                      = "maktpe_4mm2gb_scsi"
+        next_id                 = "maktpe_4mm2gb_scsi_hdr"
+        option_id               = "maktpe_parent_opt"
+        has_name_select         = "y"
+        name                    = "Add a Tape Drive"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 25
+        name_msg_id             = 120
+        type                    = ""
+        ghost                   = "y"
+        cmd_to_classify         = ""
+        cmd_to_classify_postfix = ""
+        raw_field_name          = "parent"
+        cooked_field_name       = ""
+        next_type               = "d"
+        help_msg_id             = "1800102"
+        help_msg_loc            = ""
+
+* SCSI 4mm2gb tape drive
+sm_cmd_hdr:
+        id                      = "maktpe_4mm2gb_scsi_hdr"
+        option_id               = "tape_add,tape_common,tape_4mm2gb"
+        has_name_select         = "y"
+        name                    = "Add a Tape Drive"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 25
+        name_msg_id             = 120
+        cmd_to_exec             = "mkdev -c tape "
+        ask                     = ""
+        exec_mode               = ""
+        ghost                   = "n"
+        cmd_to_discover         = "lsattr -c tape"
+        cmd_to_discover_postfix = "-s subclass -t type -D -O"
+        name_size               = 0
+        value_size              = 0
+        help_msg_id             = "1800134"
+        help_msg_loc            = ""
+
+* SCSI 4mm2gb tape drive
+sm_cmd_hdr:
+        id                      = "chgtpe_4mm2gb_scsi"
+        option_id               = "tape_chg,tape_common,tape_4mm2gb"
+        name                    = "Change/Show Characteristics of a Tape Drive"
+        has_name_select         = "y"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 25
+        name_msg_id             = 121
+        cmd_to_exec             = "chdev "
+        ask                     = ""
+        exec_mode               = "P"
+        ghost                   = "n"
+        cmd_to_discover         = "lsattr "
+        cmd_to_discover_postfix = "-l logicname -E -O"
+        name_size               = 0
+        value_size              = 0
+        help_msg_id             = "1800197"
+        help_msg_loc            = ""
+
+* Specific to  4mm2gb SCSI tape drive
+sm_cmd_opt:
+        id                      = "tape_4mm2gb"
+        id_seq_num              = "010"
+        disc_field_name         = "block_size"
+        name                    = "BLOCK size (0=variable length)"
+        name_msg_file           = "devices.cat"
+        name_msg_set            = 54
+        name_msg_id             = 6
+        op_type                 = "l"
+        entry_type              = "#"
+        entry_size              = 0
+        required                = ""
+        prefix                  = "-a block_size="
+        cmd_to_list_mode        = "r"
+        cmd_to_list             = "lsattr -c tape -a block_size -R"
+        cmd_to_list_postfix     = "-s subclass -t type"
+        multi_select            = ""
+        value_index             = 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "0420711"
+        help_msg_loc            = ""
+
+* Specific to 4mm2gb SCSI tape drive.
+* Compression mode
+sm_cmd_opt:
+        id                      = "tape_4mm2gb"
+        id_seq_num              = "050"
+        disc_field_name         = "compress"
+        name                    = "Use data COMPRESSION"
+        name_msg_file           = "devices.cat"
+        name_msg_set            = 54
+        name_msg_id             = 15
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = ""
+        prefix                  = "-a compress="
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = ""
+        value_index             = 0
+        disp_values             = "yes,no"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 27
+        values_msg_id           = 12
+        aix_values              = "yes,no"
+        help_msg_id             = "0420722"
+        help_msg_loc            = ""
+
+#SCSI 4mm4gb tape drive
+sm_name_hdr:
+	id			= "maktpe_4mm4gb_scsi"
+	next_id			= "maktpe_4mm4gb_scsi_hdr"
+	option_id		= "maktpe_parent_opt"
+	has_name_select		= "y"
+	name			= "Add a Tape Drive"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 25
+	name_msg_id		= 120
+	type			= ""
+	ghost			= "y"
+	cmd_to_classify		= ""
+	cmd_to_classify_postfix	= ""
+	raw_field_name		= "parent"
+	cooked_field_name	= ""
+	next_type		= "d"
+	help_msg_id		= "1800102"
+	help_msg_loc		= ""
+
+# SCSI 4mm4gb tape drive
+sm_cmd_hdr:
+	id			= "maktpe_4mm4gb_scsi_hdr"
+	option_id		= "tape_add,tape_common,tape_4mm4gb"
+	has_name_select		= "y"
+	name			= "Add a Tape Drive"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 25
+	name_msg_id		= 120
+	cmd_to_exec		= "mkdev -c tape "
+	ask			= ""
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= "lsattr -c tape"
+	cmd_to_discover_postfix	= "-s subclass -t type -D -O"
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800134"
+	help_msg_loc		= ""
+
+# SCSI 4mm4gb tape drive
+sm_cmd_hdr:
+	id			= "chgtpe_4mm4gb_scsi"
+	option_id		= "tape_chg,tape_common,tape_4mm4gb"
+	name			= "Change/Show Characteristics of a Tape Drive"
+	has_name_select		= "y"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 25
+	name_msg_id		= 121
+	cmd_to_exec		= "chdev "
+	ask			= ""
+	exec_mode		= "P"
+	ghost			= "n"
+	cmd_to_discover		= "lsattr "
+	cmd_to_discover_postfix	= "-l logicname -E -O"
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800197"
+	help_msg_loc		= ""
+
+# Specific to  4mm4gb SCSI tape drive
+sm_cmd_opt:
+	id			= "tape_4mm4gb"
+	id_seq_num		= "010"
+	disc_field_name		= "block_size"
+	name			= "BLOCK size (0=variable length)"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 54
+	name_msg_id		= 6
+	op_type			= "l"
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a block_size="
+	cmd_to_list_mode	= "r"
+	cmd_to_list		= "lsattr -c tape -a block_size -R"
+	cmd_to_list_postfix	= "-s subclass -t type"
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0420711"
+	help_msg_loc		= ""
+
+# Specific to 4mm4gb SCSI tape drive.
+# Compression mode
+sm_cmd_opt:
+	id			= "tape_4mm4gb"
+	id_seq_num		= "050"
+	disc_field_name		= "compress"
+	name			= "Use data COMPRESSION"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 54
+	name_msg_id		= 15
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a compress="
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 27
+	values_msg_id		= 12
+	aix_values		= "yes,no"
+	help_msg_id		= "0420722"
+	help_msg_loc		= ""
+
+#SCSI 3490e tape drive
+sm_name_hdr:
+	id = "maktpe_3490e_scsi"
+	next_id = "maktpe_3490e_scsi_hdr"
+	option_id = "maktpe_parent_opt"
+	has_name_select = "y"
+	name = "Add a Tape Drive"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 120
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "parent"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "1800102"
+	help_msg_loc = ""
+
+# SCSI 3490e tape drive
+sm_cmd_hdr:
+	id = "maktpe_3490e_scsi_hdr"
+	option_id = "tape_add,tape_common,tape_3490e"
+	has_name_select = "y"
+	name = "Add a Tape Drive"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 120
+	cmd_to_exec = "mkdev -c tape "
+	ask = ""
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "lsattr -c tape"
+	cmd_to_discover_postfix = "-s subclass -t type -D -O"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1800134"
+	help_msg_loc = ""
+
+# SCSI 3490e tape drive
+sm_cmd_hdr:
+	id = "chgtpe_3490e_scsi"
+	option_id = "tape_chg,tape_common,tape_3490e"
+	name = "Change/Show Characteristics of a Tape Drive"
+	has_name_select = "y"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 121
+	cmd_to_exec = "chdev "
+	ask = ""
+	exec_mode = "P"
+	ghost = "n"
+	cmd_to_discover = "lsattr "
+	cmd_to_discover_postfix = "-l logicname -E -O"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1800197"
+	help_msg_loc = ""
+
+# Specific to  3490e SCSI tape drive
+sm_cmd_opt:
+	id = "tape_3490e"
+	id_seq_num = "010"
+	disc_field_name = "block_size"
+	name = "BLOCK size (0=variable length)"
+	name_msg_file = "devices.cat"
+	name_msg_set = 54
+	name_msg_id = 6
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = ""
+	prefix = "-a block_size="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c tape -a block_size -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420711"
+	help_msg_loc = ""
+
+# Specific to 3490e SCSI tape drive.
+# Compression mode
+sm_cmd_opt:
+	id = "tape_3490e"
+	id_seq_num = "050"
+	disc_field_name = "compress"
+	name = "Use data COMPRESSION"
+	name_msg_file = "devices.cat"
+	name_msg_set = 54
+	name_msg_id = 15
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = "-a compress="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 27
+	values_msg_id = 12
+	aix_values = "yes,no"
+	help_msg_id = "0420722"
+	help_msg_loc = ""
+
+# Specific to 3490e SCSI tape drive.
+# Autoloader
+sm_cmd_opt:
+	id = "tape_3490e"
+	id_seq_num = "060"
+	disc_field_name = "autoload"
+	name = "AUTOLOAD next cartridge"
+	name_msg_file = "devices.cat"
+	name_msg_set = 54
+	name_msg_id = 22
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = "-a autoload="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "yes,no"
+	values_msg_file = "smit.cat"
+	values_msg_set = 27
+	values_msg_id = 12
+	aix_values = "yes,no"
+	help_msg_id = "0420722"
+	help_msg_loc = ""
+

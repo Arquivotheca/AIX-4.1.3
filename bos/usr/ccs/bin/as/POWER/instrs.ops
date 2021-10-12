@@ -1,0 +1,2371 @@
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS: 
+* *
+* * ORIGINS: 3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+*/* @(#)66	1.2  src/bos/usr/ccs/bin/as/POWER/instrs.ops, cmdas, bos411, 9428A410j 6/15/90 16:58:57*/
+***********************************************************************
+*                  ****  IBM CONFIDENTIAL  ****                       *
+* R2 Instruction Set:                                                 *
+*    Architecture version: 1.4 Only valid ops + RTC,RYO,and ILOP      *
+*	                    + new rc syntax
+*                                                                     *
+#    V1.4B  *** Version Id for assembler listing                      *
+*               CHAR(6) no imbedded blanks                            *
+*                                                                     *
+*    Updated:                                                         *
+*       08/15/87 -lew- Updated to change ' to . for instructions.     *
+*       05/05/87 -lew- Updated for Version 1.30 changes, corrected    *
+*                  BDNZ to be BDN, Corrected CLCS to be rt,ra and x6  *
+*       04/06/87 -chh- Updated MFSRI instruction                      *
+*       03/31/87 -chh- Updated to latest version 1.2 ops              *
+*       03/25/87 -lew- Changed imm shift fields back to 0-31          *
+*       03/19/87 -lew- Added Cohen's extended branches (new de,df,dn, *
+*        do). Changed M Form rrryz to rrry?ztt - others changed also  *
+*       03/18/87 -lew- Added optional mask for M form instructions    *
+*                      M Form rrrtt changed to rrryz                  *
+*       03/16/87 -lew- Added MULS - Fixed SI opc - Fixed Imm R/S 1-32 *
+*       03/13/87 -lew- revised to only V1.2 ops.                      *
+*       03/11/87 -chh- Fixed EXTS,MTSR, added BR,BRL,MTCR,MR          *
+*       02/11/87 -chh- Updated FRSP instruction                       *
+*       01/26/87 -chh- Added changed proposed mnemonics               *
+*       12/01/86 -chh- Corrected ABS extended op code value           *
+*       11/11/86 -chh- Added ZZRFSVC and extended mnemonics           *
+*       10/28/86 -chh- Added ZZSVC op and RYO for simulator testing   *
+*       10/27/86 -chh- Added ZZBxx ops for the simulator testing      *
+*       10/24/86 -chh- Updated level 1.0 set of instructions          *
+*       09/16/88 -lbg- Add bdz,bdz extensions                         *
+*                                                                     *
+***********************************************************************
+* Instruction Definition format:
+*    mnenmonic   if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb
+* ---------------------------------------------------------------------
+*| opc | frt | fra | frb |ov|            exopc                  |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+***********************************************************************
+* *** *-vvv-* ***
+* Above line used by AMERSORT EXEC. Everything above it is retained   *
+* Other comments with blank in column 8 will be deleted.
+*                                                                     *
+*   processing rtn->(get_ope asseode)                                 *
+*                        V      V                                     *
+*                       input  out  out   instruction                 *
+*                       format fmt  fmt    format                     *
+*  -------------------------------   |                                *
+* | D-Format Instructions         |  V                                *
+* |-------------------------------|                                   *
+* | D-Form: base-disp ||      |   |    -----------------------        *
+* |   op1,disp(op2)   || rs   |ds | ds|op1 |op2 |displacement |       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | SI-Form: sign-imme||      |   |    -----------------------        *
+* |   op1,op2,immed   || rri  |di | di|op1 |op2 | immediate   |       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* | Extended inst     ||      |   |                                   *
+* |       :minus-immed||      |   |    -----------------------        *
+* |   op1,op2,immed   || rri  |dm | dm|op1 |op2 | -immediate  |       *
+* | (si rt,ra,i --    ||      |   |    -----------------------        *
+* |  = ai rt,ra,-i)   ||      |   |    6    11   16         31        *
+* |                   ||      |   |                                   *
+* | Extended inst     ||      |   |                                   *
+* |   op1 filled in   ||      |   |    -----------------------        *
+* |       op2,immed   || ri   |dz | dz| -- |op2 | immediate   |       *
+* | (tlgti ra,immed   ||      |   |    -----------------------        *
+* |  = ti 1,ra,immed) ||      |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | UI-Form: unsgn-imm||      |   |    -----------------------        *
+* |   op1,op2,immed   || rri  |du | du|op1 |op2 | unsign-immed|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | UL-Form: unsgn-log||      |   |    -----------------------        *
+* |   op2,op1,immed   || rri  |dr | dl|op1 |op2 | unsign-logic|       *
+* |(op1,op2 reversed) ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | B-Form: branches  ||      |   |                                   *
+* |  Relative:        ||      |   |    -----------------------        *
+* |   op1,op2,disp    || ocd  |db | db|op1 |op2 | disp  |0 |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |  Extended mnemonics|      |   |    6    11   16      30 31        *
+* |  Relative:        ||      |   |    -----------------------        *
+* |   op1,disp        || cd   |de | de| O  |op1 | disp  |0 |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16      30 31        *
+* |  Relative:        ||      |   |    -----------------------        *
+* |   disp            || d    |df | df| O  | C  | disp  |0 |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16      30 31        *
+* |  Absolute:        ||      |   |    -----------------------        *
+* |   op1,op2,disp    || ocp  |da | da|op1 |op2 | disp  |1 |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16      30 31        *
+* |-------------------||----------|                                   *
+* | SC-Form: SVC      ||      |   |                                   *
+* |  AA=1:(Bit 30)    ||      |   |    -----------------------        *
+* |   bd              || v    |dc | dc| -- | -- | bd    | 1|LK|       *
+* |  (svca bd)        ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16      30 31        *
+* |  AA=0:(Bit 30)    ||      |   |    -----------------------        *
+* |   lev,fl1,fl2     || jhk  |dy | dp|--|--|fl1|lev|fl2| 0|LK|       *
+* |         (reloc)   ||      |   |    -----------------------        *
+* |                   ||      |   |    6  11 16  20  27  30 31        *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | X-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | X-Form:           ||      |   |    -----------------------        *
+* |   op1,op2,op3     || rrr  |x7 | x7|op1|op2|op3|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XR-Form           ||      |   |    -----------------------        *
+* |   op2,op1,op3     || rrr  |xf | xf|op1|op2|op3|   EO   |Rc|       *
+* | (op2,op1 reversed)||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XR2-Form          ||      |   |    -----------------------        *
+* |   op2,op1         || rr   |xe | xe|op1|op2|---|   EO   |Rc|       *
+* | (op2,op1 reversed)||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XAT-Form          ||      |   |    -----------------------        *
+* |   op2,op1         || rr   |xe | xe|op1|op2|---|   EO   |Rc|       *
+* | (op2,op1 reversed)||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XAB-Form:         ||      |   |    -----------------------        *
+* |   op2,op3         || rr   |x3 | x3|---|op2|op3|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XTA-Form:         ||      |   |    -----------------------        *
+* |   op1,op2         || rr   |x6 | x6|op1|op2|---|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XTB-Form:         ||      |   |    -----------------------        *
+* |   op1,op3         || ci   |x5 | x5|op1|---|op3|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | X1-Form:          ||      |   |    -----------------------        *
+* |   op1             || r    |x4 | x4|op1|---|---|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XZ-Form:          ||      |   |    -----------------------        *
+* |                   || n    |x0 | x0|---|---|---|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XZL-Form:         ||      |   |    -----------------------        *
+* |                   || n    |x0 | x0|---|---|---|   EO   |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XBC-Form          ||      |   |    -----------------------        *
+* |   op1,op2         || oc   |x6 | x6|op1|op2|---|   EO   |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XBX-Form          ||      |   |    -----------------------        *
+* |   op1,op2,op3     || ccc  |x7 | x7|op1|op2|op3|   EO   |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XO-Form:          ||      |   |    -----------------------        *
+* |   op1,op2,op3     || rrr  |x7 | x7|op1|op2|op3|OV| EO  |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21 22    31        *
+* |-------------------||----------|                                   *
+* | XO2-Form:         ||      |   |    -----------------------        *
+* |   op1,op2         || rr   |x6 | x6|op1|op2|---|OV| EO  |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21 22    31        *
+* |-------------------||----------|                                   *
+* | XM-Form:          ||      |   |    -----------------------        *
+* |   fm,op1          || ir   |xc | xc|op1| mask  |   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11      21       31        *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | M-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | M-Form:           ||      |   |    ------------------------       *
+* |  op2,op1,op3,mb,me|| rrrtt|m  | m |op1|op2|op3| mb | me |Rc|      *
+* |                   ||      |   |    ------------------------       *
+* |                   ||      |   |    6   11  16  21   26   31       *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | A-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | A-Form:           ||      |   |    -----------------------        *
+* |   op2,op1,op3,op4 || rrrr |a  | a |op1|op2|op3|op4| EO |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21  26   31        *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | I-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | I-Form:           ||      |   |    --------------------------     *
+* |   li              || a    |la | la|      li (absolute) |1 |Rc|    *
+* |   absolute        ||      |   |    --------------------------     *
+* |                   ||      |   |    6                    30  31    *
+* |   relative        ||      |   |    --------------------------     *
+* |   li              || l    |li | li|     li (relative)  |0 |Rc|    *
+* |                   ||      |   |    --------------------------     *
+* |                   ||      |   |    6                    30  31    *
+* |                   ||      |   |                                   *
+*  -------------------------------                                    *
+*                                                                     *
+* Input format descriptors                                            *
+*  where:
+*        a = 26-bit absolute address (relocatable)
+*        b = 1-bit bit data, (0 or 1)
+*        c = 5-bit condition code bit number (values between 0-31)
+*        d = 16-bit relative displacement value (relocatable)
+*        e = 5-bit segment register (value between 0-15)
+*        f = 3-bit CRi field in condition register ((0-7) (adjust*4))
+*        g = 5-Bit special purpose register field (0-31)
+*        h = 4-bit field (value between 0-15)
+*        i = 16-bit signed immediate data
+*        j = 7-bit field (value between 0-127)
+*        k = 3-bit field (value between 0-7)
+*        l = 26-bit relative address (relocatable)
+*        m = 5-bit immediate value (values between 1-32)
+*        n = no parameters (therefore no values period)
+*        o = 4-bit branch operation to perform (values 0-15 (adjust*2))
+*        p = 16-bit absolute value (relocatable)
+*        r = register (values of 0-31)
+*        s = base displacement form of operand( d(ra))
+*        t = 5-bit immediate value (values between 0-31)
+*        u = 16-bit unsigned immediate data
+*        v = 14-bit svc field
+*        w = 8-bit cr field mask (value 0-255)
+*        x = 6-bit special opcode for RYO
+*        y = 32-bit absolute anything used for first m form mask operand
+*        z = Optional 5-bit mask used for m form second operand
+*        0 = 16-bit relative disp value (rel) with implied 0 5-bit prec
+*        1 = missing optional absolute operand value 0
+*        2 = 16-bit absolute disp value (r/a) with implied 0 5-bit prec
+*
+*       y? = two input formats, listed onechartwochar in the following
+*            ex.:  y?XZZ.  Therefore, f1=ZZ f2=X.
+*       ?! = two input formats, listed onecharonechar in the following
+*            ex.:  ?!XZ.  Therefore, f1=X f2=Z. 
+*
+* Output format                                                       *
+*  where d = d-form instruction                                       *
+*          2nd letter                                                 *
+*            s = displacement (ra & rb)                               *
+*            x = extended format (really ds format) (ra & rb)         *
+*            i = immediate data (ra & rb)                             *
+*            t = displacement with only rt used                       *
+*            d = only displacement used                               *
+*            a = displacement with only ra used                       *
+*            l = displacement with lk and ar bits                     *
+*            z = immediate signed data with ra                        *
+*        x = x-form instruction                                       *
+*          2nd letter is a hex character indicating which regs        *
+*            are active.  For example 5 indicates rt and rb are       *
+*            active.                                                  *
+*          or                                                         *
+*          f = rs and ra reversed in nmemonic                         *
+*          r = x format with link and absolute/relative bit           *
+*          c = condition register bit mask                            *
+*          x = blanket form of instruction to allow any field to be   *
+*              set for testing purposes                               *
+*        m = m-form instruction                                       *
+*        a = a-form instruction                                       *
+*        li = li form of address                                      *
+*        la = absolute form of li address                             *
+*                                                                     *
+*                                                                     *
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mnenmonic   if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb
+*
+*   where
+*      mnenmonic = op code mnenmonic
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+*
+*
+***********************************************************************
+*mnenmonic |input  |out |op code value                                *
+*          |format |fmt |                                             *
+***********************************************************************
+*                        OP-EXT-RC/LK-OV-FRT-FRA-AB-FRB
+* The following is a proposal for an update to the architecture
+* document with the following:
+*
+*  Instruction Formats Expanded
+*  Assembler operand formats specified.
+*  Recommendation to change some of the Instruction mnemonics and names
+*
+*
+***********************************************************************
+***********************************************************************
+***********************************************************************
+*  D-Form instructions                                                *
+***********************************************************************
+***********************************************************************
+***********************************************************************
+*
+***********************************************************************
+*  D-Form instructions                                                *
+***********************************************************************
+*
+*   Instruction Format: D-FORM    (Displacement ..signed..)
+*
+*       ------------------------------------------------
+*      |OPCODE|   OP1   |   RA   |          D           |
+*       ------------------------------------------------
+*       0    5 6      10 11    15 16                  31
+*
+*                 OP1 = RT | RS | FRT | FRS
+*
+*   Assembler Format:
+*
+*       mnemonic  OP1,D(RA|0)
+*
+***********************************************************************
+*
+**********************************
+**** /*** Storage Access ***/ ****
+**********************************
+* Line below used by AMERSORT EXEC. Keep it! Comments sort above it   *
+* *** *=====* ***
+*       mnem  |input     |out |op code value
+*22    lbz    rt,d(ra)       Load Byte and Zero
+       lbz        rs       ds   34
+*2A    lha    rt,d(ra)       Load Half Algebraic
+       lha        rs       ds   42
+*28    lhz    rt,d(ra)       Load Half and Zero
+       lhz        rs       ds   40
+*20    l      rt,d(ra)       Load
+       l          rs       ds   32
+*26    stb    rs,d(ra)       Store Byte
+       stb        rs       ds   38
+*2C    sth    rs,d(ra)       Store Half
+       sth        rs       ds   44
+*24    st     rs,d(ra)       Store
+       st         rs       ds   36
+*23    lbzu   rt,d(ra)       Load Byte and Zero with Update
+       lbzu       rs       ds   35
+*2B    lhau   rt,d(ra)       Load Half Algebraic with Update
+       lhau       rs       ds   43
+*29    lhzu   rt,d(ra)       Load Half and Zero with Update
+       lhzu       rs       ds   41
+*21    lu     rt,d(ra)       Load with Update
+       lu         rs       ds   33
+*27    stbu   rs,d(ra)       Store Byte with Update
+       stbu       rs       ds   39
+*2D    sthu   rs,d(ra)       Store Half with Update
+       sthu       rs       ds   45
+*25    stu    rs,d(ra)       Store and Update Address
+       stu        rs       ds   37
+***************************************************
+**** /*** Instruction Address Computation ***/ ****
+***************************************************
+*0E    ca     rt,d(ra)       Compute Address
+       ca         rs       ds   14
+*0E    cal    rt,d(ra)       Compute Address Lower
+       cal        rs       ds   14
+*0E    lil    rt,i           Load Immediate Lower
+       lil        ri       dt   14
+*0E    li     rt,i           Load Immediate
+       li         ri       dt   14
+************************************
+**** /*** Rotate and Shift ***/ ****
+************************************
+*2E    lm     rt,d(ra)       Load Multiple
+       lm         rs       ds   46
+*2F    stm    rs,d(ra)       Store Multiple
+       stm        rs       ds   47
+*************************************************
+**** /*** Floating Point Load and Store ***/ ****
+*************************************************
+*32    lfd    frt,d(ra)      Load Floating Point Double
+       lfd        rs       ds   50
+*30    lfs    frt,d(ra)      Load Floating Point Single
+       lfs        rs       ds   48
+*31    lfsu   frt,d(ra)      Load FP Single with Update
+       lfsu       rs       ds   49
+*33    lfdu   frt,d(ra)      Load FP Double with Update
+       lfdu       rs       ds   51
+*34    stfs   frs,d(ra)      Store Floating Point Single
+       stfs       rs       ds   52
+*36    stfd   frs,d(ra)      Store Floating Point Double
+       stfd       rs       ds   54
+*35    stfsu  frs,d(ra)      Store FP Single with Update
+       stfsu      rs       ds   53
+*37    stfdu  frs,d(ra)      Store FP Double with Update
+       stfdu      rs       ds   55
+*
+***********************************************************************
+*       SI-Form instructions
+***********************************************************************
+*
+*       Instruction Format: SI-FORM  (Signed Immediate)
+*
+*       ------------------------------------------------
+*      |OPCODE|   OP1   |   RA   |         SI           |
+*       ------------------------------------------------
+*       0    5 6      10 11    15 16                  31
+*
+*                 OP1 = RT | TO | BF
+*                 SI  = D
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,RA,SI
+*
+***********************************************************************
+****************************************
+**** /*** Arithmetic & Compare ***/ ****
+****************************************
+*       mnem  |input     |out |op code value
+*0C    ai     rt,ra,si       Add Immediate (no cr set)
+       ai         rri      di   12
+*0C    si     rt,ra,si       Subtract Immediate (no cr set)
+       si         rri      ym   12
+*0D    ai.    rt,ra,si       Add Immediate and Record
+       ai.        rri      di   13
+*0D    si.    rt,ra,si       Subtract Immediate and Record
+       si.        rri      dm   13
+*08    sfi    rt,ra,si       Subtract from Immediate
+       sfi        rri      di   08
+*09    dozi   rt,ra,si       Difference or Zero Immediate
+       dozi       rri      di   09
+*07    muli   rt,ra,si       Multiply Immediate
+       muli       rri      di   07
+*
+*********************************************
+**** /*** Supervisor Linkage & Trap ***/ ****
+*********************************************
+*       mnem  |input     |out |op code value
+*03    ti     to,ra,i        Trap Immediate
+       ti         tri      di   03
+       tlgti      ri       dz   03-000-0-0-01
+       tllti      ri       dz   03-000-0-0-02
+       tlnei      ri       dz   03-000-0-0-03
+       teqi       ri       dz   03-000-0-0-04
+       tlgei      ri       dz   03-000-0-0-05
+       tllei      ri       dz   03-000-0-0-06
+       tgti       ri       dz   03-000-0-0-08
+       tgei       ri       dz   03-000-0-0-12
+       tlti       ri       dz   03-000-0-0-16
+       tlei       ri       dz   03-000-0-0-20
+       tnei       ri       dz   03-000-0-0-24
+*0B    cmpi   bf,ra,i        Compare Immediate
+       cmpi       fri      di   11
+***********************************************************************
+*       UI-Form instructions
+***********************************************************************
+*
+*       Instruction Format: UI-FORM  (Unsigned Immediate)
+*
+*       ------------------------------------------------
+*      |OPCODE|  OP1    |   RA   |         UI           |
+*       ------------------------------------------------
+*       0    5 6      10 11    15 16                  31
+*
+*                 UI = UL
+*                 OP1 = RT | BF
+*
+*   Asm Formats:
+*
+*       mnemonic  RT,RA,UI
+*
+***********************************************************************
+***************************************************
+**** /*** Instruction Address Computation ***/ ****
+***************************************************
+*       mnem  |input     |out |op code value
+*0F    cau    rt,ra,ui       Compute Address Upper
+       cau        rru      du   15
+*0F    liu    rt,ui          Load Immediate Upper
+       liu        ru       dt   15
+*0A    cmpli  bf,ra,i        Compare Logical Immediate
+       cmpli      fru      du   10
+*
+***********************************************************************
+*       UL-Form instructions
+***********************************************************************
+*
+*       Instruction Format: UL-FORM  (Unsigned Logical Immediate)
+*
+*       ------------------------------------------------
+*      |OPCODE|   RS    |   RA   |         UL           |
+*       ------------------------------------------------
+*       0    5 6      10 11    15 16                  31
+*
+*                 UL = UL
+*
+*   Asm Formats:
+*
+*       mnemonic  RA,RS,UL
+*
+*       NOTE: *** Bits 11-15 (RA) is the first assembler operand
+*
+***********************************************************************
+***************************
+**** /*** Logical ***/ ****
+***************************
+*       mnem  |input     |out |op code value
+*1C    andil  ra,rs,ul       AND Immediate Lower
+       andil.     rru      dr   28
+*1D    andiu  ra,rs,ul       AND Immediate Upper
+       andiu.     rru      dr   29
+*18    oril   ra,rs,ul       OR Immediate Lower
+       oril       rru      dr   24
+*19    oriu   ra,rs,ul       OR Immediate Upper
+       oriu       rru      dr   25
+*1A    xoril  ra,rs,ul       XOR Immediate Lower
+       xoril      rru      dr   26
+*1B    xoriu  ra,rs,ul       XOR Immediate Upper
+       xoriu      rru      dr   27
+*
+***********************************************************************
+*       B-Form instructions
+***********************************************************************
+*
+*       Instruction Format: B-FORM  (Branch Displacement)
+*
+*       ------------------------------------------------------
+*      |OPCODE|   BO    |   BI   |         BD           |AR|LK|
+*       ------------------------------------------------------
+*       0    5 6      10 11    15 16                  29 30 31
+*
+*                 BD = d
+*
+*   Asm Formats:
+*
+*       mnemonic  BO,BI,BD
+*       ext mnem  BI,BD
+*       ext mnem  BD
+*
+*       Note: *** BO = type,  BI = condition,  BD = branch displacement
+*
+***********************************************************************
+****************************
+**** /*** Branches ***/ ****
+****************************
+*       mnem  |input     |out |op code value
+*10    bc     BO,BI,d        Branch Condition Relative        (AR=0 LK=0)
+       bc         ocd      db   16-000
+*10    bcl    BO,BI,d        Branch Condition and Link Rel    (AR=0 LK=1)
+       bcl        ocd      db   16-000-1
+*10    bca    BO,BI,d        Branch Condition Absolute        (AR=1 LK=0)
+       bca        ocp      dp   16-000-0-0-0-0-1
+*10    bcla   BO,BI,d        Branch Condition and link Abs    (AR=1 LK=1)
+       bcla       ocp      dp   16-000-1-0-0-0-1
+*
+*       Extended Branch Condition Mnemonics
+*
+*       Many extended mnemonics which have implied and/or optional field
+*
+*      bxxxx  BI,d        BO implied
+*      bxxxx  <BI>,d      BO implied, BI optional, implied 0 if omitted
+*      bxxxx  d           BO and BI implied
+*
+*       All extended branch ops formed using Cohen's algorithm of 3/11/8
+*
+*       Branch Relative
+*
+*       Branch and Decrement Count Register Relative
+*10    bdz    d    Decrement CTR and Branch CTR = 0                 (AR=0 LK=0)
+       bdz        0        de   16-000-0-0-18-00
+*10    bdzlt  d    Decrement CTR and Branch CTR = 0 and less than   (AR=0 LK=0)
+       bdzlt      0        de   16-000-0-0-10-00
+*10    bdzgt  d    Decrement CTR and Branch CTR = 0 and greater than(AR=0 LK=0)
+       bdzgt      0        de   16-000-0-0-10-01
+*10    bdzeq  d    Decrement CTR and Branch CTR = 0 and equal to    (AR=0 LK=0)
+       bdzeq      0        de   16-000-0-0-10-02
+*10    bdzso  d    Decrement CTR and Branch CTR = 0 and summary over(AR=0 LK=0)
+       bdzso      0        de   16-000-0-0-10-03
+*10    bdzle  d    Decrement CTR and Branch CTR = 0 and less/equal  (AR=0 LK=0)
+       bdzle      0        de   16-000-0-0-02-01
+*10    bdzge  d    Decrement CTR and Branch CTR = 0 and greater/equa(AR=0 LK=0)
+       bdzge      0        de   16-000-0-0-02-00
+*10    bdzne  d    Decrement CTR and Branch CTR = 0 and not equal   (AR=0 LK=0)
+       bdzne      0        de   16-000-0-0-02-02
+*10    bdzns  d    Decrement CTR and Branch CTR = 0 and not summ ove(AR=0 LK=0)
+       bdzns      0        de   16-000-0-0-02-03
+*
+*10    bdn    d    Decrement CTR and Branch CTR ^=0                 (AR=0 LK=0)
+       bdn        0        de   16-000-0-0-16-00
+*10    bdnlt  d    Decrement CTR and Branch CTR ^=0 and less than   (AR=0 LK=0)
+       bdnlt      0        de   16-000-0-0-08-00
+*10    bdngt  d    Decrement CTR and Branch CTR ^=0 and greater than(AR=0 LK=0)
+       bdngt      0        de   16-000-0-0-08-01
+*10    bdneq  d    Decrement CTR and Branch CTR ^=0 and equal       (AR=0 LK=0)
+       bdneq      0        de   16-000-0-0-08-02
+*10    bdnso  d    Decrement CTR and Branch CTR ^=0 and summary over(AR=0 LK=0)
+       bdnso      0        de   16-000-0-0-08-03
+*10    bdnle  d    Decrement CTR and Branch CTR ^=0 and less/equal  (AR=0 LK=0)
+       bdnle      0        de   16-000-0-0-00-01
+*10    bdnge  d    Decrement CTR and Branch CTR ^=0 and greater/equa(AR=0 LK=0)
+       bdnge      0        de   16-000-0-0-00-00
+*10    bdnne  d    Decrement CTR and Branch CTR ^=0 and not equal   (AR=0 LK=0)
+       bdnne      0        de   16-000-0-0-00-02
+*10    bdnns  d    Decrement CTR and Branch CTR ^=0 and not summ ove(AR=0 LK=0)
+       bdnns      0        de   16-000-0-0-00-03
+*
+*       Branch on Condition Register Bit Relative
+*10    bbt    BI,d           Branch Bit True                  (AR=0 LK=0)
+       bbt        cd       df   16-000-0-0-12-00
+*10    bbf    BI,d           Branch Bit True                  (AR=0 LK=0)
+       bbf        cd       df   16-000-0-0-04-00
+*
+*       Branch on Condition Relative
+*10    blt    CRi,d          Branch Less Than                 (AR=0 LK=0)
+*10    blt    d              Branch Less Than                 (AR=0 LK=0)
+       blt        y?0fd    de   16-000-0-0-12-00
+*10    bnl    CRi,d          Branch Not Less Than             (AR=0 LK=0)
+*10    bnl    d              Branch Not Less Than             (AR=0 LK=0)
+       bnl        y?0fd    de   16-000-0-0-04-00
+*10    bge    CRi,d          Branch Not Less Than             (AR=0 LK=0)
+*10    bge    d              Branch Not Less Than             (AR=0 LK=0)
+       bge        y?0fd    de   16-000-0-0-04-00
+*10    bgt    CRi,d          Branch Greater Than              (AR=0 LK=0)
+*10    bgt    d              Branch Greater Than              (AR=0 LK=0)
+       bgt        y?0fd    de   16-000-0-0-12-01
+*10    bng    CRi,d          Branch Not Greater Than          (AR=0 LK=0)
+*10    bng    d              Branch Not Greater Than          (AR=0 LK=0)
+       bng        y?0fd    de   16-000-0-0-04-01
+*10    ble    CRi,d          Branch Not Greater Than          (AR=0 LK=0)
+*10    ble    d              Branch Not Greater Than          (AR=0 LK=0)
+       ble        y?0fd    de   16-000-0-0-04-01
+*10    beq    d              Branch Equal                     (AR=0 LK=0)
+*10    beq    CRi,d          Branch Equal                     (AR=0 LK=0)
+       beq        y?0fd    de   16-000-0-0-12-02
+*10    bz     d              Branch Zero                      (AR=0 LK=0)
+*10    bz     CRi,d          Branch Zero                      (AR=0 LK=0)
+       bz         y?0fd    de   16-000-0-0-12-02
+*10    bne    d              Branch Not Equal                 (AR=0 LK=0)
+*10    bne    CRi,d          Branch Not Equal                 (AR=0 LK=0)
+       bne        y?0fd    de   16-000-0-0-04-02
+*10    bnz    d              Branch Not Zero                  (AR=0 LK=0)
+*10    bnz    CRi,d          Branch Not Zero                  (AR=0 LK=0)
+       bnz        y?0fd    de   16-000-0-0-04-02
+*10    bso    d              Branch Summary Overflow          (AR=0 LK=0)
+*10    bso    CRi,d          Branch Summary Overflow          (AR=0 LK=0)
+       bso        y?0fd    de   16-000-0-0-12-03
+*10    bns    d              Branch Not Summary Overflow      (AR=0 LK=0)
+*10    bns    CRi,d          Branch Not Summary Overflow      (AR=0 LK=0)
+       bns        y?0fd    de   16-000-0-0-04-03
+*
+*
+*       Branch and Decrement Count Register and Link Relative
+*10    bdzl   d              Decrement CTR and Branch CTR = 0 (AR=0 LK=1)
+       bdzl       0        de   16-000-1-0-18-00
+*10    bdnl   d              Decrement CTR and Branch CTR ^=0 (AR=0 LK=1)
+       bdnl       0        de   16-000-1-0-16-00
+*
+*       Branch on Condition Register Bit and Link Relative
+*10    bbtl   BI,d           Branch Bit True                  (AR=0 LK=1)
+       bbtl       cd       df   16-000-1-0-12-00
+*10    bbfl   BI,d           Branch Bit True                  (AR=0 LK=1)
+       bbfl       cd       df   16-000-1-0-04-00
+*
+*       Branch on Condition and Link Relative
+*10    bltl   d              Branch Less Than and Link        (AR=0 LK=1)
+*10    bltl   CRi,d          Branch Less Than and Link        (AR=0 LK=1)
+       bltl       y?0fd    de   16-000-1-0-12-00
+*10    bnll   d              Branch Not Less Than and Link    (AR=0 LK=1)
+*10    bnll   CRi,d          Branch Not Less Than and Link    (AR=0 LK=1)
+       bnll       y?0fd    de   16-000-1-0-04-00
+*10    bgel   d              Branch Not Less Than and Link    (AR=0 LK=1)
+*10    bgel   CRi,d          Branch Not Less Than and Link    (AR=0 LK=1)
+       bgel       y?0fd    de   16-000-1-0-04-00
+*10    bgtl   d              Branch Greater Than and Link     (AR=0 LK=1)
+*10    bgtl   CRi,d          Branch Greater Than and Link     (AR=0 LK=1)
+       bgtl       y?0fd    de   16-000-1-0-12-01
+*10    bngl   d              Branch Not Greater Than and Link (AR=0 LK=1)
+*10    bngl   CRi,d          Branch Not Greater Than and Link (AR=0 LK=1)
+       bngl       y?0fd    de   16-000-1-0-04-01
+*10    blel   d              Branch Not Greater Than and Link (AR=0 LK=1)
+*10    blel   CRi,d          Branch Not Greater Than and Link (AR=0 LK=1)
+       blel       y?0fd    de   16-000-1-0-04-01
+*10    beql   d              Branch Equal and Link            (AR=0 LK=1)
+*10    beql   CRi,d          Branch Equal and Link            (AR=0 LK=1)
+       beql       y?0fd    de   16-000-1-0-12-02
+*10    bzl    d              Branch Zero and Link             (AR=0 LK=1)
+*10    bzl    CRi,d          Branch Zero and Link             (AR=0 LK=1)
+       bzl        y?0fd    de   16-000-1-0-12-02
+*10    bnel   d              Branch Not Equal and Link        (AR=0 LK=1)
+*10    bnel   CRi,d          Branch Not Equal and Link        (AR=0 LK=1)
+       bnel       y?0fd    de   16-000-1-0-04-02
+*10    bnzl   d              Branch Not Zero and Link         (AR=0 LK=1)
+*10    bnzl   CRi,d          Branch Not Zero and Link         (AR=0 LK=1)
+       bnzl       y?0fd    de   16-000-1-0-04-02
+*10    bsol   d              Branch Summary Overflow and Link (AR=0 LK=1)
+*10    bsol   CRi,d          Branch Summary Overflow and Link (AR=0 LK=1)
+       bsol       y?0fd    de   16-000-1-0-12-03
+*10    bnsl   d              Branch Not Summary Overflow and L(AR=0 LK=1)
+*10    bnsl   CRi,d          Branch Not Summary Overflow and L(AR=0 LK=1)
+       bnsl       y?0fd    de   16-000-1-0-04-03
+*
+*       Branch Absolute
+*
+*       Branch and Decrement Count Register Absolute
+*10    bdza   d              Decrement CTR and Branch CTR = 0 (AR=1 LK=0)
+       bdza       2        do   16-000-0-0-18-00-1
+*10    bdna   d              Decrement CTR and Branch CTR ^=0 (AR=1 LK=0)
+       bdna       2        do   16-000-0-0-16-00-1
+*
+*       Branch on Condition Register Bit Absolute
+*10    bbta   BI,d           Branch Bit True                  (AR=1 LK=0)
+       bbta       cp       dn   16-000-0-0-12-00-1
+*10    bbfa   BI,d           Branch Bit True                  (AR=1 LK=0)
+       bbfa       cp       dn   16-000-0-0-04-00-1
+*
+*       Branch on Condition Absolute
+*10    blta   d              Branch Less Than                 (AR=1 LK=0)
+*10    blta   CRi,d          Branch Less Than                 (AR=1 LK=0)
+       blta       y?2fp    do   16-000-0-0-12-00-1
+*10    bnla   d              Branch Not Less Than             (AR=1 LK=0)
+*10    bnla   CRi,d          Branch Not Less Than             (AR=1 LK=0)
+       bnla       y?2fp    do   16-000-0-0-04-00-1
+*10    bgea   d              Branch Not Less Than             (AR=1 LK=0)
+*10    bgea   CRi,d          Branch Not Less Than             (AR=1 LK=0)
+       bgea       y?2fp    do   16-000-0-0-04-00-1
+*10    bgta   d              Branch Greater Than              (AR=1 LK=0)
+*10    bgta   CRi,d          Branch Greater Than              (AR=1 LK=0)
+       bgta       y?2fp    do   16-000-0-0-12-01-1
+*10    bnga   d              Branch Not Greater Than          (AR=1 LK=0)
+*10    bnga   CRi,d          Branch Not Greater Than          (AR=1 LK=0)
+       bnga       y?2fp    do   16-000-0-0-04-01-1
+*10    blea   d              Branch Not Greater Than          (AR=1 LK=0)
+*10    blea   CRi,d          Branch Not Greater Than          (AR=1 LK=0)
+       blea       y?2fp    do   16-000-0-0-04-01-1
+*10    beqa   d              Branch Equal                     (AR=1 LK=0)
+*10    beqa   CRi,d          Branch Equal                     (AR=1 LK=0)
+       beqa       y?2fp    do   16-000-0-0-12-02-1
+*10    bza    d              Branch Zero                      (AR=1 LK=0)
+*10    bza    CRi,d          Branch Zero                      (AR=1 LK=0)
+       bza        y?2fp    do   16-000-0-0-12-02-1
+*10    bnea   d              Branch Not Equal                 (AR=1 LK=0)
+*10    bnea   CRi,d          Branch Not Equal                 (AR=1 LK=0)
+       bnea       y?2fp    do   16-000-0-0-04-02-1
+*10    bnza   d              Branch Not Zero                  (AR=1 LK=0)
+*10    bnza   CRi,d          Branch Not Zero                  (AR=1 LK=0)
+       bnza       y?2fp    do   16-000-0-0-04-02-1
+*10    bsoa   d              Branch Summary Overflow          (AR=1 LK=0)
+*10    bsoa   CRi,d          Branch Summary Overflow          (AR=1 LK=0)
+       bsoa       y?2fp    do   16-000-0-0-12-03-1
+*10    bnsa   d              Branch Not Summary Overflow      (AR=1 LK=0)
+*10    bnsa   CRi,d          Branch Not Summary Overflow      (AR=1 LK=0)
+       bnsa       y?2fp    do   16-000-0-0-04-03-1
+*
+*       Branch and Decrement Count Register and Link Absolute
+*10    bdzla  d              Decrement CTR and Branch CTR = 0 (AR=1 LK=1)
+       bdzla      2        do   16-000-1-0-18-00-1
+*10    bdnla  d              Decrement CTR and Branch CTR ^=0 (AR=1 LK=1)
+       bdnla      2        do   16-000-1-0-16-00-1
+*
+*       Branch on Condition Register Bit and Link Absolute
+*10    bbtla  BI,d           Branch Bit True                  (AR=1 LK=1)
+       bbtla      cp       dn   16-000-1-0-12-00-1
+*10    bbfla  BI,d           Branch Bit True                  (AR=1 LK=1)
+       bbfla      cp       dn   16-000-1-0-04-00-1
+*
+*       Branch on Condition and Link Absolute
+*10    bltla  d              Branch Less Than and Link        (AR=1 LK=1)
+*10    bltla  CRi,d          Branch Less Than and Link        (AR=1 LK=1)
+       bltla      y?2fp    do   16-000-1-0-12-00-1
+*10    bnlla  d              Branch Not Less Than and Link    (AR=1 LK=1)
+*10    bnlla  CRi,d          Branch Not Less Than and Link    (AR=1 LK=1)
+       bnlla      y?2fp    do   16-000-1-0-04-00-1
+*10    bgela  d              Branch Not Less Than and Link    (AR=1 LK=1)
+*10    bgela  CRi,d          Branch Not Less Than and Link    (AR=1 LK=1)
+       bgela      y?2fp    do   16-000-1-0-04-00-1
+*10    bgtla  d              Branch Greater Than and Link     (AR=1 LK=1)
+*10    bgtla  CRi,d          Branch Greater Than and Link     (AR=1 LK=1)
+       bgtla      y?2fp    do   16-000-1-0-12-01-1
+*10    bngla  d              Branch Not Greater Than and Link (AR=1 LK=1)
+*10    bngla  CRi,d          Branch Not Greater Than and Link (AR=1 LK=1)
+       bngla      y?2fp    do   16-000-1-0-04-01-1
+*10    blela  d              Branch Not Greater Than and Link (AR=1 LK=1)
+*10    blela  CRi,d          Branch Not Greater Than and Link (AR=1 LK=1)
+       blela      y?2fp    do   16-000-1-0-04-01-1
+*10    beqla  d              Branch Equal and Link            (AR=1 LK=1)
+*10    beqla  CRi,d          Branch Equal and Link            (AR=1 LK=1)
+       beqla      y?2fp    do   16-000-1-0-12-02-1
+*10    bzla   d              Branch Zero and Link             (AR=1 LK=1)
+*10    bzla   CRi,d          Branch Zero and Link             (AR=1 LK=1)
+       bzla       y?2fp    do   16-000-1-0-12-02-1
+*10    bnela  d              Branch Not Equal and Link        (AR=1 LK=1)
+*10    bnela  CRi,d          Branch Not Equal and Link        (AR=1 LK=1)
+       bnela      y?2fp    do   16-000-1-0-04-02-1
+*10    bnzla  d              Branch Not Zero and Link         (AR=1 LK=1)
+*10    bnzla  CRi,d          Branch Not Zero and Link         (AR=1 LK=1)
+       bnzla      y?2fp    do   16-000-1-0-04-02-1
+*10    bsola  d              Branch Summary Overflow and Link (AR=1 LK=1)
+*10    bsola  CRi,d          Branch Summary Overflow and Link (AR=1 LK=1)
+       bsola      y?2fp    do   16-000-1-0-12-03-1
+*10    bnsla  d              Branch Not Summary Overflow and L(AR=1 LK=1)
+*10    bnsla  CRi,d          Branch Not Summary Overflow and L(AR=1 LK=1)
+       bnsla      y?2fp    do   16-000-1-0-04-03-1
+*
+*
+***********************************************************************
+*       SC-Form instructions
+***********************************************************************
+*
+*       Instruction Format: SC-FORM  (System Call)
+*
+*       ------------------------------------------------------
+*      |OPCODE| / / / / | / / / /|         BD           |AR|LK|
+*       ------------------------------------------------------
+*       0    5 6      10 11    15 16                  29 30 31
+*
+*                                 ----------------------
+*       .........................|  FL1  |  LEV   | FL2 |.....
+*                                 ----------------------
+*                                 16   19 20    26 27 29
+*
+*   Asm Formats:
+*
+*       mnemonic  BD
+*       mnemonic  LEV,FL1,FL2
+*
+***********************************************************************
+*********************************************
+**** /*** Supervisor Linkage & Trap ***/ ****
+*********************************************
+*       mnem  |input     |out |op code value
+*11    svc    lev,fl1,fl2    Supervisor Call                  (AR=0 LK=0)
+       svc        jhk      dy   17-000
+*11    svcl   lev,fl1,fl2    Supervisor Call and Link         (AR=0 LK=1)
+       svcl       jhk      dy   17-000-1
+*11    svca   bd             Supervisor Call                  (AR=1 LK=0)
+       svca       v        dc   17-000-0-0-0-0-1
+*11    svcla  bd             Supervisor Call and Link         (AR=1 LK=1)
+       svcla      v        dc   17-000-1-0-0-0-1
+*
+***********************************************************************
+***********************************************************************
+***********************************************************************
+*       X-Form  (output format) instructions
+***********************************************************************
+***********************************************************************
+***********************************************************************
+*
+***********************************************************************
+*       X-Form instructions
+***********************************************************************
+*
+*       Instruction Format: X-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | RS | FRT | FRS | BF
+*              OP2 = RA | FRA
+*              OP3 = RB | FRB | NB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2,OP3         ----- RC=0
+*       mnemonic. OP1,OP2,OP3         ----- RC=1
+*
+***********************************************************************
+*
+**********************************
+**** /*** Storage Access ***/ ****
+**********************************
+*Opcode = 1F
+*       mnem  |input     |out |op code value
+*057   lbzx   rt,ra,rb       Load Byte indexed
+       lbzx       rrr      x7   31-087
+*157   lhax   rt,ra,rb       Load Half Algebraic indexed
+       lhax       rrr      x7   31-343
+*117   lhzx    rt,ra,rb       Load Half and Zero indexed
+       lhzx       rrr      x7   31-279
+*316   lhbrx  rt,ra,rb       Load Half Byte Reverse indexed
+       lhbrx      rrr      x7   31-790
+*017   lx     rt,ra,rb       Load indexed
+       lx         rrr      x7   31-023
+*216   lbrx   rt,ra,rb       Load Byte Reverse indexed
+       lbrx       rrr      x7   31-534
+*0D7   stbx   rs,ra,rb       Store Byte indexed
+       stbx       rrr      x7   31-215
+*197   sthx   rs,ra,rb       Store Half indexed
+       sthx       rrr      x7   31-407
+*396   sthbrx rs,ra,rb       Store Half Byte Reverse indexed
+       sthbrx     rrr      x7   31-918
+*097   stx    rs,ra,rb       Store indexed
+       stx        rrr      x7   31-151
+*296   stbrx  rs,ra,rb       Store Byte Reverse indexed
+       stbrx      rrr      x7   31-662
+*
+*077   lbzux  rt,ra,rb       Load Byte and Zero with Update indexed
+       lbzux      rrr      x7   31-119
+*177   lhaux  rt,ra,rb       Load Half Algebraic with Update indexed
+       lhaux      rrr      x7   31-375
+*137   lhzux  rt,ra,rb       Load Half and Zero with Update indexed
+       lhzux      rrr      x7   31-311
+*037   lux    rt,ra,rb       Load with Update indexed
+       lux        rrr      x7   31-055
+*0F7   stbux  rs,ra,rb       Store Byte with Update indexed
+       stbux      rrr      x7   31-247
+*1B7*  sthux  rs,ra,rb       Store Half with Update indexed
+       sthux      rrr      x7   31-439
+*0B7   stux   rs,ra,rb       Store with Update indexed
+       stux       rrr      x7   31-183
+****************************************
+**** /***    Compares          ***/ ****
+****************************************
+*       mnem  |input     |out |op code value
+*020   cmpl   bf,ra,rb       Compare Logical
+       cmpl       frr      x7   31-032
+*000   cmp    bf,ra,rb       Compare
+       cmp        frr      x7   31-000
+*********************************************************
+**** /*** Floating Point Arithmetic and Compare ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*000   fcmpu  bf,fra,frb     Floating Compare
+       fcmpu      frr      x7   63-000
+*000   fcmpo  bf,fra,frb     Floating Compare
+       fcmpo      frr      x7   63-032
+************************************
+**** /*** Rotate and Shift ***/ ****
+************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*215   lsx    rt,ra,rb       Load String
+       lsx        rrr      x7   31-533
+*255   lsi    rt,ra,nb       Load String Immediate
+       lsi        rrm      x7   31-597
+*295   stsx   rs,ra,rb       Store String
+       stsx       rrr      x7   31-661
+*2d5   stsi   rs,ra,nb       Store String Immediate
+       stsi       rrm      x7   31-725
+*115   lscbx  rt,ra,rb       Load Multiple and Compare
+       lscbx      rrr      x7   31-277
+       lscbx.     rrr      x7   31-277-1
+*************************************************
+**** /*** Floating Point Load and Store ***/ ****
+*************************************************
+*       mnem  |input     |out |op code value
+*217   lfsx   frt,ra,rb      Load Float Single indexed
+       lfsx       rrr      x7   31-535
+*257   lfdx   frt,ra,rb      Load Float Double indexed
+       lfdx       rrr      x7   31-599
+*237   lfsux  frt,ra,rb      Load Float Single with Update indexed
+       lfsux      rrr      x7   31-567
+*277   lfdux  frt,ra,rb      Load Float Double with Update indexed
+       lfdux      rrr      x7   31-631
+*297   stfsx  frs,ra,rb      Store Float Single indexed
+       stfsx      rrr      x7   31-663
+*2D7   stfdx  frs,ra,rb      Store Float Double indexed
+       stfdx      rrr      x7   31-727
+*2B7   stfsux frs,ra,rb      Store Float Single with Update indexed
+       stfsux     rrr      x7   31-695
+*2F7   stfdux frs,ra,rb      Store Float Double with Update indexed
+       stfdux     rrr      x7   31-759
+*********************************************
+**** /*** Supervisor Linkage & Trap ***/ ****
+*********************************************
+*       mnem  |input     |out |op code value
+*004   t      to,ra,rb       Trap
+       t          trr      x7   31-004
+       tlgt       rr       x3   31-004-0-0-01
+       tllt       rr       x3   31-004-0-0-02
+       tlne       rr       x3   31-004-0-0-03
+       teq        rr       x3   31-004-0-0-04
+       tlge       rr       x3   31-004-0-0-05
+       tlle       rr       x3   31-004-0-0-06
+       tgt        rr       x3   31-004-0-0-08
+       tge        rr       x3   31-004-0-0-12
+       tlt        rr       x3   31-004-0-0-16
+       tle        rr       x3   31-004-0-0-20
+       tne        rr       x3   31-004-0-0-24
+*0B2   mtsri  rs,ra,rb       Move to Segment Register Indirect
+       mtsri      rrr      x7   31-242
+*232   mfsri  rt,ra,rb       Move from segment Register Indirect
+       mfsri      rrr      x7   31-627
+*332   rac    rt,ra,rb       Real address compute
+*332   rac.   rt,ra,rb       Real address compute (Rc=1)
+       rac        rrr      x7   31-818
+       rac.       rrr      x7   31-818-1
+*0D3   mtsr   sr,ra          Move to segment register
+       mtsr       er       xe   31-210
+***********************************************************************
+*       XO-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XO-FORM
+*
+*       ----------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |OV|      EO       |Rc|
+*       ----------------------------------------------------
+*       0    5 6    10 11   15 16   20 21 22           30 31
+*
+*              OP1 = RT
+*              OP2 = RA
+*              OP3 = RB
+*              OV  = OV Bit
+*
+*
+*   Asm Formats:
+*
+*       mnemonic   OP1,OP2,OP3        ---- OV=0 Rc=0
+*       mnemonic.  OP1,OP2,OP3        ---- OV=0 Rc=1
+*       mnemonicO  OP1,OP2,OP3        ---- OV=1 Rc=0
+*       mnemonicO. OP1,OP2,OP3        ---- OV=1 Rc=1
+*
+***********************************************************************
+*
+****************************************
+**** /*** Arithmetic & Compare ***/ ****
+****************************************
+*       mnem  |input     |out |op code value
+*00A   a      rt,ra,rb       Add
+*00A   a.     rt,ra,rb       Add (Rc=1)
+*00A   ao     rt,ra,rb       Add and Set Overflow
+*00A   ao.    rt,ra,rb       Add and Set Overflow (Rc=1)
+       a          rrr      x7   31-010
+       a.         rrr      x7   31-010-1
+       ao         rrr      x7   31-010-0-1
+       ao.        rrr      x7   31-010-1-1
+*08A   ae     rt,ra,rb       Add Extended
+*08A   ae.    rt,ra,rb       Add Extended (Rc=1)
+*08A   aeo    rt,ra,rb       Add Extended and set Overflow
+*08A   aeo.   rt,ra,rb       Add Extended and set Overflow (Rc=1)
+       ae         rrr      x7   31-138
+       ae.        rrr      x7   31-138-1
+       aeo        rrr      x7   31-138-0-1
+       aeo.       rrr      x7   31-138-1-1
+*008   sf     rt,ra,rb       Subtract From
+*008   sf.    rt,ra,rb       Subtract From (Rc=1)
+*008   sfo    rt,ra,rb       Subtract From and set Overflow
+*008   sfo.   rt,ra,rb       Subtract From and set Overflow (Rc=1)
+       sf         rrr      x7   31-008
+       sf.        rrr      x7   31-008-1
+       sfo        rrr      x7   31-008-0-1
+       sfo.       rrr      x7   31-008-1-1
+*088   sfe    rt,ra,rb       Subtract From Extended
+*088   sfe.   rt,ra,rb       Subtract From Extended (Rc=1)
+*088   sfeo   rt,ra,rb       Subtract From Extended and set Overflow
+*088   sfeo.  rt,ra,rb       Subtract From Extended and set Ovfl (Rc=1)
+       sfe        rrr      x7   31-136
+       sfe.       rrr      x7   31-136-1
+       sfeo       rrr      x7   31-136-0-1
+       sfeo.      rrr      x7   31-136-1-1
+*108   doz    rt,ra,rb       Difference or Zero
+*108   doz.   rt,ra,rb       Difference or Zero (Rc=1)
+*108   dozo   rt,ra,rb       Difference or Zero and set Overflow
+*108   dozo.  rt,ra,rb       Difference or Zero and set Overflow (Rc=1)
+       doz        rrr      x7   31-264
+       doz.       rrr      x7   31-264-1
+       dozo       rrr      x7   31-264-0-1
+       dozo.      rrr      x7   31-264-1-1
+*10B   mul    rt,ra,rb       Multiply
+*10B   mul.   rt,ra,rb       Multiply (Rc=1)
+*10B   mulo   rt,ra,rb       Multiply and set Overflow
+*10B   mulo.  rt,ra,rb       Multiply and set Overflow (Rc=1)
+       mul        rrr      x7   31-107
+       mul.       rrr      x7   31-107-1
+       mulo       rrr      x7   31-107-0-1
+       mulo.      rrr      x7   31-107-1-1
+*10B   muls   rt,ra,rb       Multiply
+*10B   muls.  rt,ra,rb       Multiply (Rc=1)
+*10B   mulso  rt,ra,rb       Multiply and set Overflow
+*10B   mulso. rt,ra,rb       Multiply and set Overflow (Rc=1)
+       muls       rrr      x7   31-235
+       muls.      rrr      x7   31-235-1
+       mulso      rrr      x7   31-235-0-1
+       mulso.     rrr      x7   31-235-1-1
+*14B   div    rt,ra,rb       Divide
+*14B   div.   rt,ra,rb       Divide (Rc=1)
+*14B   divo   rt,ra,rb       Divide and set Overflow
+*14B   divo.  rt,ra,rb       Divide and set Overflow (Rc=1)
+       div        rrr      x7   31-331
+       div.       rrr      x7   31-331-1
+       divo       rrr      x7   31-331-0-1
+       divo.      rrr      x7   31-331-1-1
+*16B   divs   rt,ra,rb       Divide Short
+*16B   divs.  rt,ra,rb       Divide Short (Rc=1)
+*16B   divso  rt,ra,rb       Divide Short and set Overflow
+*16B   divso. rt,ra,rb       Divide Short and set Overflow (Rc=1)
+       divs       rrr      x7   31-363
+       divs.      rrr      x7   31-363-1
+       divso      rrr      x7   31-363-0-1
+       divso.     rrr      x7   31-363-1-1
+***************************************************
+**** /*** Instruction Address Computation ***/ ****
+***************************************************
+*       mnem  |input     |out |op code value
+*10A   cax    rt,ra,rb       Compute Address indexed
+       cax        rrr      x7   31-266
+       cax.       rrr      x7   31-266-1
+       caxo       rrr      x7   31-266-0-1
+       caxo.      rrr      x7   31-266-1-1
+*
+***********************************************************************
+*       XO2-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XO2-FORM
+*
+*       ----------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |OV|      EO       |Rc|
+*       ----------------------------------------------------
+*       0    5 6    10 11   15 16   20 21 22           30 31
+*
+*              OP1 = RT
+*              OP2 = RA
+*              OV  = OV Bit
+*
+*
+*   Asm Formats:
+*
+*       mnemonic   OP1,OP2            ---- OV=0 Rc=0
+*       mnemonic.  OP1,OP2            ---- OV=0 Rc=1
+*       mnemonicO  OP1,OP2            ---- OV=1 Rc=0
+*       mnemonicO. OP1,OP2            ---- OV=1 Rc=1
+*
+***********************************************************************
+*
+****************************************
+**** /*** Arithmetic & Compare ***/ ****
+****************************************
+*       mnem  |input     |out |op code value
+*0EA   ame    rt,ra          Add to Minus One Extended
+*0EA   ame.   rt,ra          Add to Minus One Extended (Rc=1)
+*0EA   ameo   rt,ra          Add to Minus One Extended and set ovfl
+*0EA   ameo.  rt,ra          Add to Minus One Extended set Ovfl (Rc=1)
+       ame        rr       x6   31-234
+       ame.       rr       x6   31-234-1
+       ameo       rr       x6   31-234-0-1
+       ameo.      rr       x6   31-234-1-1
+*0CA   aze    rt,ra          Add to Zero Extended
+*0CA   aze.   rt,ra          Add to Zero Extended (Rc=1)
+*0CA   azeo   rt,ra          Add to Zero Extended and set Overflow
+*0CA   azeo.  rt,ra          Add to Zero Extended set Overflow (Rc=1)
+       aze        rr       x6   31-202
+       aze.       rr       x6   31-202-1
+       azeo       rr       x6   31-202-0-1
+       azeo.      rr       x6   31-202-1-1
+*
+*0E8   sfme   rt,ra          Subtract From Minus One Extended
+*0E8   sfme.  rt,ra          Subtract From Minus One Extended (Rc=1)
+*0E8   sfmeo  rt,ra          Subtract From Minus One Extended set Ovfl
+*0E8   sfmeo. rt,ra          Subtract From Minus One Extended Ovfl (Rc=1)
+       sfme       rr       x6   31-232
+       sfme.      rr       x6   31-232-1
+       sfmeo      rr       x6   31-232-0-1
+       sfmeo.     rr       x6   31-232-1-1
+*0C8   sfze   rt,ra          Subtract from Zero Extended
+*0C8   sfze.  rt,ra          Subtract from Zero Extended (Rc=1)
+*0C8   sfzeo  rt,ra          Subtract from Zero Extended and set Ovfl
+*0C8   sfzeo. rt,ra          Subtract from Zero Extended set Ovfl (Rc=1)
+       sfze       rr       x6   31-200
+       sfze.      rr       x6   31-200-1
+       sfzeo      rr       x6   31-200-0-1
+       sfzeo.     rr       x6   31-200-1-1
+*068   neg    rt,ra          Negate
+*068   neg.   rt,ra          Negate (Rc=1)
+*068   nego   rt,ra          Negate and set Overflow
+*068   nego.  rt,ra          Negate and set Overflow (Rc=1)
+       neg        rr       x6   31-104
+       neg.       rr       x6   31-104-1
+       nego       rr       x6   31-104-0-1
+       nego.      rr       x6   31-104-1-1
+*168   abs    rt,ra          Absolute
+*168   abs.   rt,ra          Absolute (Rc=1)
+*168   abso   rt,ra          Absolute and set Overflow
+*168   abso.  rt,ra          Absolute and set Overflow (Rc=1)
+       abs        rr       x6   31-360
+       abs.       rr       x6   31-360-1
+       abso       rr       x6   31-360-0-1
+       abso.      rr       x6   31-360-1-1
+*1E8   nabs   rt,ra          Negative Absolute
+*1E8   nabs.  rt,ra          Negative Absolute (Rc=1)
+*1E8   nabso  rt,ra          Negative Absolute and set Overflow
+*1E8   nabso. rt,ra          Negative Absolute and set Overflow (Rc=1)
+       nabs       rr       x6   31-488
+       nabs.      rr       x6   31-488-1
+       nabso      rr       x6   31-488-0-1
+       nabso.     rr       x6   31-488-1-1
+*
+***********************************************************************
+*       XR-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XR-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RS
+*              OP2 = RA
+*              OP3 = RB | SH
+*
+*   Asm Formats:
+*
+*       mnemonic  OP2,OP1,OP3         ----- RC=0
+*       mnemonic. OP2,OP1,OP3         ----- RC=1
+*
+*       Note: *** OP2 is the first assembler operand.
+*
+***********************************************************************
+*
+***************************
+**** /*** Logical ***/ ****
+***************************
+*       mnem  |input     |out |op code value
+*01C   and    ra,rs,rb       AND
+*01C   and.   ra,rs,rb       AND (Rc=1)
+       and        rrr      xf   31-028
+       and.       rrr      xf   31-028-1
+*1BC   or     ra,rs,rb       OR
+*1BC   or.    ra,rs,rb       OR (Rc=1)
+       or         rrr      xf   31-444
+       or.        rrr      xf   31-444-1
+*1BC   mr     ra,rs          Move Register (OR)
+       mr         rr       xr   31-444
+*1BC   mr.    ra,rs          Move Register (and Test) (OR)
+       mr.        rr       xr   31-444-1
+*13C   xor    ra,rs,rb       XOR
+*13C   xor.   ra,rs,rb       XOR (Rc=1)
+       xor        rrr      xf   31-316
+       xor.       rrr      xf   31-316-1
+*11C   eqv    ra,rs,rb       Equivalent (XNOR)
+*11C   eqv.   ra,rs,rb       Equivalent (XNOR) (Rc=1)
+       eqv        rrr      xf   31-284
+       eqv.       rrr      xf   31-284-1
+*03C   andc   ra,rs,rb       AND with Complement
+*03C   andc.  ra,rs,rb       AND with Complement (Rc=1)
+       andc       rrr      xf   31-060
+       andc.      rrr      xf   31-060-1
+*19C   orc    ra,rs,rb       OR with Complement
+*19C   orc.   ra,rs,rb       OR with Complement (Rc=1)
+       orc        rrr      xf   31-412
+       orc.       rrr      xf   31-412-1
+*07C   nor    ra,rs,rb       NOT OR
+*07C   nor.   ra,rs,rb       NOT OR (Rc=1)
+       nor        rrr      xf   31-124
+       nor.       rrr      xf   31-124-1
+*1DC   nand   ra,rs,rb       NOT AND
+*1DC   nand.  ra,rs,rb       NOT AND (Rc=1)
+       nand       rrr      xf   31-476
+       nand.      rrr      xf   31-476-1
+************************************
+**** /*** Rotate and Shift ***/ ****
+************************************
+*       mnem  |input     |out |op code value
+*219   rrib   ra,rs,rb       Rotate Right and Insert Bit
+*219   rrib.  ra,rs,rb       Rotate Right and Insert Bit (Rc=1)
+       rrib       rrr      xf   31-537
+       rrib.      rrr      xf   31-537-1
+*018   sl     ra,rs,rb       Shift Left
+*018   sl.    ra,rs,rb       Shift Left (Rc=1)
+       sl         rrr      xf   31-024
+       sl.        rrr      xf   31-024-1
+*0B8   sliq   ra,rs,sh       Shift Left Immediate with MQ
+*0B8   sliq.  ra,rs,sh       Shift Left Immediate with MQ (Rc=1)
+       sliq       rrt      xf   31-184
+       sliq.      rrt      xf   31-184-1
+*098   slq    ra,rs,rb       Shift Left with MQ
+*098   slq.   ra,rs,rb       Shift Left with MQ (Rc=1)
+       slq        rrr      xf   31-152
+       slq.       rrr      xf   31-152-1
+*0F8   slliq  ra,rs,sh       Shift Left Long Immediate with MQ
+*0F8   slliq. ra,rs,sh       Shift Left Long Immediate with MQ (Rc=1)
+       slliq      rrt      xf   31-248
+       slliq.     rrt      xf   31-248-1
+*0D8   sllq   rs,ra,rb       Shift Left Long with MQ
+*0D8   sllq.  ra,rs,rb       Shift Left Long with MQ (Rc=1)
+       sllq       rrr      xf   31-216
+       sllq.      rrr      xf   31-216-1
+*218   sr     ra,rs,rb       Shift Right
+*218   sr.    ra,rs,rb       Shift Right (Rc=1)
+       sr         rrr      xf   31-536
+       sr.        rrr      xf   31-536-1
+*2B8   sriq   ra,rs,sh       Shift Right Immediate with MQ
+*2B8   sriq.  ra,rs,sh       Shift Right Immediate with MQ (Rc=1)
+       sriq       rrt      xf   31-696
+       sriq.      rrt      xf   31-696-1
+*298   srq    ra,rs,rb       Shift Right with MQ
+*298   srq.   ra,rs,rb       Shift Right with MQ (Rc=1)
+       srq        rrr      xf   31-664
+       srq.       rrr      xf   31-664-1
+*2F8   srliq  ra,rs,sh       Shift Right Long Immediate with MQ
+*2F8   srliq. ra,rs,sh       Shift Right Long Immediate with MQ (Rc=1)
+       srliq      rrt      xf   31-760
+       srliq.     rrt      xf   31-760-1
+*2D8   srlq   ra,rs,rb       Shift Right Long with MQ
+*2D8   srlq.  ra,rs,rb       Shift Right Long with MQ (Rc=1)
+       srlq       rrr      xf   31-728
+       srlq.      rrr      xf   31-728-1
+*338   srai   ra,rs,sh       Shift Right Algebraic Immediate
+*338   srai.  ra,rs,sh       Shift Right Algebraic Immediate (Rc=1)
+       srai       rrt      xf   31-824
+       srai.      rrt      xf   31-824-1
+*318   sra    ra,rs,rb       Shift Right Algebraic
+*318   sra.   ra,rs,rb       Shift Right Algebraic (Rc=1)
+       sra        rrr      xf   31-792
+       sra.       rrr      xf   31-792-1
+*398   sraq   ra,rs,rb       Shift Right Algebraic with MQ
+*398   sraq.  ra,rs,rb       Shift Right Algebraic with MQ (Rc=1)
+       sraq       rrr      xf   31-920
+       sraq.      rrr      xf   31-920-1
+*3B8   sraiq  ra,rs,sh       Shift Right Algebraic Immediate w MQ
+*3B8   sraiq. ra,rs,sh       Shift Right Algebraic Immediate w MQ (Rc=1)
+       sraiq      rrt      xf   31-952
+       sraiq.     rrt      xf   31-952-1
+*099   sle    ra,rs,rb       Shift Left Extended
+*099   sle.   ra,rs,rb       Shift Left Extended (Rc=1)
+       sle        rrr      xf   31-153
+       sle.       rrr      xf   31-153-1
+*0D9   sleq   ra,rs,rb       Shift Left Extended with MQ
+*0D9   sleq.  ra,rs,rb       Shift Left Extended with MQ (Rc=1)
+       sleq       rrr      xf   31-217
+       sleq.      rrr      xf   31-217-1
+*299   sre    ra,rs,rb       Shift Right Extended
+*299   sre.   ra,rs,rb       Shift Right Extended (Rc=1)
+       sre        rrr      xf   31-665
+       sre.       rrr      xf   31-665-1
+*2D9   sreq   ra,rs,rb       Shift Right Extended with MQ
+*2D9   sreq.  ra,rs,rb       Shift Right Extended with MQ (Rc=1)
+       sreq       rrr      xf   31-729
+       sreq.      rrr      xf   31-729-1
+*399   srea   ra,rs,rb       Shift Right Extended
+*399   srea.  ra,rs,rb       Shift Right Extended (Rc=1)
+       srea       rrr      xf   31-921
+       srea.      rrr      xf   31-921-1
+*01D   maskg  ra,rs,rb       Mask Generate
+       maskg      rrr      xf   31-029
+       maskg.     rrr      xf   31-029-1
+*21D   maskir ra,rs,rb       Mask insert register
+       maskir     rrr      xf   31-541
+       maskir.    rrr      xf   31-541-1
+*
+***********************************************************************
+*       XR2-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XR2-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RS
+*              OP2 = RA
+*
+*   Asm Formats:
+*
+*       mnemonic  OP2,OP1             ----- RC=0
+*       mnemonic. OP2,OP1             ----- RC=1
+*
+*       Note: *** OP2 is the first assembler operand.
+*
+***********************************************************************
+*
+***************************
+**** /*** Logical ***/ ****
+***************************
+*       mnem  |input     |out |op code value
+*01A   cntlz  ra,rs          Count Leading Zeros
+*01A   cntlz. ra,rs          Count Leading Zeros (Rc=1)
+       cntlz      rr       xe   31-026
+       cntlz.     rr       xe   31-026-1
+*       mnem  |input     |out |op code value
+***********************************************************************
+*       XBC-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XBC-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  BO   |  BI   | / / / |       EO       |LK |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic  BO,BI               ----- LK=0
+*       mnemonic  BO,BI               ----- LK=1
+*       ext mnem  BI                  ----- LK=0
+*       ext mnem  BI                  ----- LK=1
+*       ext mnem                      ----- LK=0
+*       ext mnem                      ----- LK=1
+*
+***********************************************************************
+*
+****************************
+**** /*** Branches ***/ ****
+****************************
+*
+*       mnem  |input     |out |op code value
+*010   bcr    bo,bi          Branch Condition Register (via link)  (LK=0)
+       bcr        oc       x6   19-016
+*010   bcrl   bo,bi          Branch Condition Register and Link    (LK=1)
+       bcrl       oc       x6   19-016-1
+*
+*010   bcc    bo,bi          Branch Condition Register (via count) (LK=0)
+       bcc        oc       x6   19-528
+*010   bccl   bo,bi          Branch Condition Register and Link    (LK=1)
+       bccl       oc       x6   19-528-1
+*
+*
+*       Extended Branch Register Mnemonics
+*         Instructions which specify the Link register as the branch
+*           register have  r  as the suffix (BGTR, BZR, etc).
+*         Instructions which specify the Count register as the branch
+*           register have  c  as the suffix (BGTC, BZC, etc).
+*
+*
+*      bxxxx  BI             Many extended mnemonics which combine
+*      bxxxx  <BI>           the type and cond fields
+*      bxxxx                 the type and cond fields
+*
+*       All extended branch ops formed using Cohen's algorithm of 3/11/8
+*
+*       Branch via Link Register
+*010   br                    Branch Register (via link reg)        (LK=0)
+       br         n        x0   19-016-0-0-20
+*
+*       Branch via Count Register
+*010   bctr                  Branch Register (via count reg)       (LK=0)
+       bctr       n        x0   19-528-0-0-20
+*
+*
+*       Branch via Link Register and Decrement Count Register
+*10    bdzr   n              Decrement CTR and Branch CTR = 0      (LK=0)
+       bdzr       n        x0   19-016-0-0-18-00
+*10    bdnr   n              Decrement CTR and Branch CTR ^=0      (LK=0)
+       bdnr       n        x0   19-016-0-0-16-00
+*
+*       Branch via Link Register on Bit in Condition Register
+*010   bbtr   bi             Branch Bit True Register              (LK=0)
+       bbtr       c        x2   19-016-0-0-12-00
+*010   bbfr   bi             Branch Bit False Register             (LK=0)
+       bbfr       c        x2   19-016-0-0-04-00
+*
+*       Branch via Count Register on Bit in Condition Register
+*010   bbtc   bi             Branch Bit True Register              (LK=0)
+       bbtc       c        x2   19-528-0-0-12-00
+*010   bbfc   bi             Branch Bit False Register             (LK=0)
+       bbfc       c        x2   19-528-0-0-04-00
+*
+*       Branch via Link Register on Condition
+*010   bltr                  Branch Less Than Register             (LK=0)
+*010   bltr   CRi            Branch Less Than Register             (LK=0)
+       bltr       ?!1f     q2   19-016-0-0-12-00
+*010   bnlr                  Branch Not Less Than Register         (LK=0)
+*010   bnlr   CRi            Branch Not Less Than Register         (LK=0)
+       bnlr       ?!1f     q2   19-016-0-0-04-00
+*010   bger                  Branch Not Less Than Register         (LK=0)
+*010   bger   CRi            Branch Not Less Than Register         (LK=0)
+       bger       ?!1f     q2   19-016-0-0-04-00
+*010   bgtr                  Branch Greater Than Register          (LK=0)
+*010   bgtr   CRi            Branch Greater Than Register          (LK=0)
+       bgtr       ?!1f     q2   19-016-0-0-12-01
+*010   bngr                  Branch Not Greater Than Register      (LK=0)
+*010   bngr   CRi            Branch Not Greater Than Register      (LK=0)
+       bngr       ?!1f     q2   19-016-0-0-04-01
+*010   bler                  Branch Not Greater Than Register      (LK=0)
+*010   bler   CRi            Branch Not Greater Than Register      (LK=0)
+       bler       ?!1f     q2   19-016-0-0-04-01
+*010   beqr                  Branch Equal Register                 (LK=0)
+*010   beqr   CRi            Branch Equal Register                 (LK=0)
+       beqr       ?!1f     q2   19-016-0-0-12-02
+*010   bzr                   Branch Equal Register                 (LK=0)
+*010   bzr    CRi            Branch Equal Register                 (LK=0)
+       bzr        ?!1f     q2   19-016-0-0-12-02
+*010   bner                  Branch Not Equal Register             (LK=0)
+*010   bner   CRi            Branch Not Equal Register             (LK=0)
+       bner       ?!1f     q2   19-016-0-0-04-02
+*010   bnzr                  Branch Not Equal Register             (LK=0)
+*010   bnzr   CRi            Branch Not Equal Register             (LK=0)
+       bnzr       ?!1f     q2   19-016-0-0-04-02
+*010   bsor                  Branch Summary Overflow Register      (LK=0)
+*010   bsor   CRi            Branch Summary Overflow Register      (LK=0)
+       bsor       ?!1f     q2   19-016-0-0-12-03
+*010   bnsr                  Branch Not Summary Overflow Reg       (LK=0)
+*010   bnsr   CRi            Branch Not Summary Overflow Reg       (LK=0)
+       bnsr       ?!1f     q2   19-016-0-0-04-03
+*
+*       Branch via Count Register on Condition
+*010   bltc                  Branch Less Than Register             (LK=0)
+*010   bltc   CRi            Branch Less Than Register             (LK=0)
+       bltc       ?!1f     q2   19-528-0-0-12-00
+*010   bnlc                  Branch Not Less Than Register         (LK=0)
+*010   bnlc   CRi            Branch Not Less Than Register         (LK=0)
+       bnlc       ?!1f     q2   19-528-0-0-04-00
+*010   bgec                  Branch Not Less Than Register         (LK=0)
+*010   bgec   CRi            Branch Not Less Than Register         (LK=0)
+       bgec       ?!1f     q2   19-528-0-0-04-00
+*010   bgtc                  Branch Greater Than Register          (LK=0)
+*010   bgtc   CRi            Branch Greater Than Register          (LK=0)
+       bgtc       ?!1f     q2   19-528-0-0-12-01
+*010   bngc                  Branch Not Greater Than Register      (LK=0)
+*010   bngc   CRi            Branch Not Greater Than Register      (LK=0)
+       bngc       ?!1f     q2   19-528-0-0-04-01
+*010   blec                  Branch Not Greater Than Register      (LK=0)
+*010   blec   CRi            Branch Not Greater Than Register      (LK=0)
+       blec       ?!1f     q2   19-528-0-0-04-01
+*010   beqc                  Branch Equal Register                 (LK=0)
+*010   beqc   CRi            Branch Equal Register                 (LK=0)
+       beqc       ?!1f     q2   19-528-0-0-12-02
+*010   bzc                   Branch Equal Register                 (LK=0)
+*010   bzc    CRi            Branch Equal Register                 (LK=0)
+       bzc        ?!1f     q2   19-528-0-0-12-02
+*010   bnec                  Branch Not Equal Register             (LK=0)
+*010   bnec   CRi            Branch Not Equal Register             (LK=0)
+       bnec       ?!1f     q2   19-528-0-0-04-02
+*010   bnzc                  Branch Not Equal Register             (LK=0)
+*010   bnzc   CRi            Branch Not Equal Register             (LK=0)
+       bnzc       ?!1f     q2   19-528-0-0-04-02
+*010   bsoc                  Branch Summary Overflow Register      (LK=0)
+*010   bsoc   CRi            Branch Summary Overflow Register      (LK=0)
+       bsoc       ?!1f     q2   19-528-0-0-12-03
+*010   bnsc                  Branch Not Summary Overflow Reg       (LK=0)
+*010   bnsc   CRi            Branch Not Summary Overflow Reg       (LK=0)
+       bnsc       ?!1f     q2   19-528-0-0-04-03
+*
+*       Branch via Link Register and Link
+*010   brl                   Branch Register and Link (via link)   (LK=1)
+*010   brl    CRi            Branch Register and Link (via link)   (LK=1)
+       brl        n        x0   19-016-1-0-20
+*
+*       Branch via Count Register and Link
+*010   bctrl                 Branch Register and Link (via ctr)    (LK=1)
+*010   bctrl  CRi            Branch Register and Link (via ctr)    (LK=1)
+       bctrl      n        x0   19-528-1-0-20
+*
+*       Branch via Link Register and Link and Decrement Count Register
+*10    bdzrl  n              Decrement CTR and Branch CTR = 0      (LK=1)
+       bdzrl      n        x0   19-016-1-0-18-00
+*10    bdnrl  n              Decrement CTR and Branch CTR ^=0      (LK=1)
+       bdnrl      n        x0   19-016-1-0-16-00
+*
+*       Branch via Count Register and Link and Decrement Count Register
+*         None of these forms are valid instructions.
+*
+*       Branch via Link Register and Link, on Bit in Condition Register
+*010   bbtrl  bi             Branch Bit True Register and Link     (LK=1)
+       bbtrl      c        x2   19-016-1-0-12-00
+*010   bbfrl  bi             Branch Bit False Register and Link    (LK=1)
+       bbfrl      c        x2   19-016-1-0-04-00
+*
+*       Branch via Count Register and Link, on Bit in Condition Register
+*010   bbtcl  bi             Branch Bit True Register and Link     (LK=1)
+       bbtcl      c        x2   19-528-1-0-12-00
+*010   bbfcl  bi             Branch Bit False Register and Link    (LK=1)
+       bbfcl      c        x2   19-528-1-0-04-00
+*
+*       Branch via Link Register and Link, on Condition
+*010   bltrl                 Branch Less Than Register             (LK=1)
+*010   bltrl  CRi            Branch Less Than Register             (LK=1)
+       bltrl      ?!1f     q2   19-016-1-0-12-00
+*010   bnlrl                 Branch Not Less Than Register         (LK=1)
+*010   bnlrl  CRi            Branch Not Less Than Register         (LK=1)
+       bnlrl      ?!1f     q2   19-016-1-0-04-00
+*010   bgerl                 Branch Not Less Than Register         (LK=1)
+*010   bgerl  CRi            Branch Not Less Than Register         (LK=1)
+       bgerl      ?!1f     q2   19-016-1-0-04-00
+*010   bgtrl                 Branch Greater Than Register          (LK=1)
+*010   bgtrl  CRi            Branch Greater Than Register          (LK=1)
+       bgtrl      ?!1f     q2   19-016-1-0-12-01
+*010   bngrl                 Branch Not Greater Than Register      (LK=1)
+*010   bngrl  CRi            Branch Not Greater Than Register      (LK=1)
+       bngrl      ?!1f     q2   19-016-1-0-04-01
+*010   blerl                 Branch Not Greater Than Register      (LK=1)
+*010   blerl  CRi            Branch Not Greater Than Register      (LK=1)
+       blerl      ?!1f     q2   19-016-1-0-04-01
+*010   beqrl                 Branch Equal Register                 (LK=1)
+*010   beqrl  CRi            Branch Equal Register                 (LK=1)
+       beqrl      ?!1f     q2   19-016-1-0-12-02
+*010   bzrl                  Branch Equal Register                 (LK=1)
+*010   bzrl   CRi            Branch Equal Register                 (LK=1)
+       bzrl       ?!1f     q2   19-016-1-0-12-02
+*010   bnerl                 Branch Not Equal Register             (LK=1)
+*010   bnerl  CRi            Branch Not Equal Register             (LK=1)
+       bnerl      ?!1f     q2   19-016-1-0-04-02
+*010   bnzrl                 Branch Not Equal Register             (LK=1)
+*010   bnzrl  CRi            Branch Not Equal Register             (LK=1)
+       bnzrl      ?!1f     q2   19-016-1-0-04-02
+*010   bsorl                 Branch Summary Overflow Register      (LK=1)
+*010   bsorl  CRi            Branch Summary Overflow Register      (LK=1)
+       bsorl      ?!1f     q2   19-016-1-0-12-03
+*010   bnsrl                 Branch Not Summary Overflow Reg       (LK=1)
+*010   bnsrl  CRi            Branch Not Summary Overflow Reg       (LK=1)
+       bnsrl      ?!1f     q2   19-016-1-0-04-03
+*
+*       Branch via Count Register and Link, on Condition
+*010   bltcl                 Branch Less Than Register             (LK=1)
+*010   bltcl  CRi            Branch Less Than Register             (LK=1)
+       bltcl      ?!1f     q2   19-528-1-0-12-00
+*010   bnlcl                 Branch Not Less Than Register         (LK=1)
+*010   bnlcl  CRi            Branch Not Less Than Register         (LK=1)
+       bnlcl      ?!1f     q2   19-528-1-0-04-00
+*010   bgecl                 Branch Not Less Than Register         (LK=1)
+*010   bgecl  CRi            Branch Not Less Than Register         (LK=1)
+       bgecl      ?!1f     q2   19-528-1-0-04-00
+*010   bgtcl                 Branch Greater Than Register          (LK=1)
+*010   bgtcl  CRi            Branch Greater Than Register          (LK=1)
+       bgtcl      ?!1f     q2   19-528-1-0-12-01
+*010   bngcl                 Branch Not Greater Than Register      (LK=1)
+*010   bngcl  CRi            Branch Not Greater Than Register      (LK=1)
+       bngcl      ?!1f     q2   19-528-1-0-04-01
+*010   blecl                 Branch Not Greater Than Register      (LK=1)
+*010   blecl  CRi            Branch Not Greater Than Register      (LK=1)
+       blecl      ?!1f     q2   19-528-1-0-04-01
+*010   beqcl                 Branch Equal Register                 (LK=1)
+*010   beqcl  CRi            Branch Equal Register                 (LK=1)
+       beqcl      ?!1f     q2   19-528-1-0-12-02
+*010   bzcl                  Branch Equal Register                 (LK=1)
+*010   bzcl   CRi            Branch Equal Register                 (LK=1)
+       bzcl       ?!1f     q2   19-528-1-0-12-02
+*010   bnecl                 Branch Not Equal Register             (LK=1)
+*010   bnecl  CRi            Branch Not Equal Register             (LK=1)
+       bnecl      ?!1f     q2   19-528-1-0-04-02
+*010   bnzcl                 Branch Not Equal Register             (LK=1)
+*010   bnzcl  CRi            Branch Not Equal Register             (LK=1)
+       bnzcl      ?!1f     q2   19-528-1-0-04-02
+*010   bsocl                 Branch Summary Overflow Register      (LK=1)
+*010   bsocl  CRi            Branch Summary Overflow Register      (LK=1)
+       bsocl      ?!1f     q2   19-528-1-0-12-03
+*010   bnscl                 Branch Not Summary Overflow Reg       (LK=1)
+*010   bnscl  CRi            Branch Not Summary Overflow Reg       (LK=1)
+       bnscl      ?!1f     q2   19-528-1-0-04-03
+*
+***********************************************************************
+*       XBX-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XBX-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  BT   |  BA   |  BB   |       EO       |LK |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic  BT,BA,BB            ----- LK=0
+*       mnemonic. BT,BA,BB            ----- LK=1
+*
+***********************************************************************
+*
+**************************************
+**** /*** Logical on CR Bits ***/ ****
+**************************************
+*       mnem  |input     |out |op code value
+*121   creqv  bt,ba,bb       Condition Register Equivalent
+       creqv      ccc      x7   19-289
+*0C1   crxor  bt,ba,bb       Condition Register Exclusive OR
+       crxor      ccc      x7   19-193
+*101   crand  bt,ba,bb       Condition Register AND
+       crand      ccc      x7   19-257
+*1C1   cror   bt,ba,bb       Condition Register OR
+       cror       ccc      x7   19-449
+*081   crandc bt,ba,bb       Condition Register AND with Complement
+       crandc     ccc      x7   19-129
+*1A1   crorc  bt,ba,bb       Condition Register OR with Complement
+       crorc      ccc      x7   19-417
+*021   crnor  bt,ba,bb       Condition Register NOT OR
+       crnor      ccc      x7   19-033
+*0E1   crnand bt,ba,bb       Condition Register NOT AND
+       crnand     ccc      x7   19-225
+*
+***********************************************************************
+*       XM1-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XM1-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|      FM       |  FRB  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6            15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FM,FRB              ----- RC=0
+*       mnemonic. FM,FRB              ----- RC=1
+*
+***********************************************************************
+*
+*********************************************************
+**** /*** Floating Point Status and Control Reg ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*2C7   mtfsf  fm,frb         Move to FPSCR field
+       mtfsf      wr       xm   63-711
+       mtfsf.     wr       xm   63-711-1
+*2C7   mtfs   frb            Move to FPSCR
+       mtfs       r        x1   63-711-0-0-15-30-0-0
+       mtfs.      r        x1   63-711-1-0-15-30-0-0
+***********************************************************************
+*       XM2-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XM2-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  RS   |      FM       |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11           20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic  FM,RS               ----- RC=0
+*       mnemonic. FM,RS               ----- RC=1
+*
+*       NOTE: *** Bits 11-20 (FM) is the first assembler operand
+*
+***********************************************************************
+*
+****************************************************
+**** /*** Special Purpose Register Control ***/ ****
+****************************************************
+*       mnem  |input     |out |op code value
+*Opcode 1F
+*090   mtcrf  fm,rs          Move to Condition Register Fields
+       mtcrf      wr       xc   31-144
+*090   mtcr   rs             Move to Condition Register (mtcrf ext)
+       mtcr       r        x4   31-144-0-0-0-15-0-30
+***********************************************************************
+*       XZ-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XZ-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / | / / / | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic                      ----- RC=0
+*       mnemonic.                     ----- RC=1
+*
+***********************************************************************
+*
+***********************************
+**** /*** Storage Control ***/ ****
+***********************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*112   tlbp                  TLB Purge
+       tlbp       n        x0   31-274
+*256   dcs                   Data cache synchronize
+       dcs        n        x0   31-598
+***********************************************************************
+*       XZL-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XZL-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / | / / / | / / / |       EO       |LK |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic                      ----- LK=0
+*       mnemonic.                     ----- LK=1
+*
+***********************************************************************
+*
+***********************************
+**** /*** Storage Control ***/ ****
+***********************************
+*       mnem  |input     |out |op code value
+*Opcode 1F
+*092   ics                   Instruction cache synchronize
+       ics        n        x0   19-150
+*
+**********************************************
+**** /*** Machine State Modification ***/ ****
+**********************************************
+*       mnem  |input     |out |op code value
+*032   rfi                   Return From Interrupt
+       rfi        n        x0   19-050
+*052   rfsvc                 Return From SVC
+       rfsvc      n        x0   19-082
+*
+***********************************************************************
+*       XT-Form instructions
+***********************************************************************
+*
+*       Instruction Format: X1-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  | / / / | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | FRT | BF
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1                 ----- RC=0
+*       mnemonic. OP1                 ----- RC=1
+*
+***********************************************************************
+*
+*********************************************************
+**** /*** Floating Point Status and Control Reg ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*247   mffs   frt            Move from FPSCR
+       mffs       r        x4   63-583
+       mffs.      r        x4   63-583-1
+*026   mtfsb1 bf             Move to FPSCR Bit "one"
+       mtfsb1     r        x4   63-038
+       mtfsb1.    r        x4   63-038-1
+*046   mtfsb0 bf             Move to FPSCR Bit "zero"
+       mtfsb0     r        x4   63-070
+       mtfsb0.    r        x4   63-070-1
+*093   mtmsr  rs             Move to MSR
+       mtmsr      r        x4   31-146
+*
+****************************************************
+**** /*** Special Purpose Register Control ***/ ****
+****************************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*013   mfcr   rt             Move from Condition Register
+       mfcr       r        x4   31-019
+**********************************************
+**** /*** Machine State Modification ***/ ****
+**********************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*053   mfmsr  rt             Move from Machine State Register
+       mfmsr      r        x4   31-083
+*212   clcs   rt,ra          Cache line compute size
+       clcs       rr       x6   31-531
+***********************************************************************
+*       XTA-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XTA-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | BF | BFT | FRT
+*              OP2 = RA | BFA | FRA
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2             ----- RC=0
+*       mnemonic. OP1,OP2             ----- RC=1
+*
+***********************************************************************
+*
+***************************************************
+**** /*** Instruction Address Computation ***/ ****
+***************************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*      exts   ra,rs          Extend Sign
+*      exts.  ra,rs          Extend Sign (Rc=1)
+       exts       rr       xe   31-922
+       exts.      rr       xe   31-922-1
+*********************************************************
+**** /*** Floating Point Status and Control Reg ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*040   mcrfs  bf,bfa         Move to CR from FPSCR
+       mcrfs      ff       x6   63-064
+*
+*********************************************************
+**** /*** Floating Point Arithmetic and Compare ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*00C   frsp   frt,frb        Floating round to Single Precision
+*00C   frsp.  frt,frb        Floating round to Single Precision (Rc=1)
+       frsp       rr       x5   63-012
+       frsp.      rr       x5   63-012-1
+************************************************
+**** /*** Floating Point Move Register ***/ ****
+************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*108   fabs   frt,frb        Floating absolute value
+*108   fabs.  frt,frb        Floating absolute value (Rc=1)
+       fabs       rr       x5   63-264
+       fabs.      rr       x5   63-264-1
+*088   fnabs  frt,frb        Floating negative absolute value
+*088   fnabs. frt,frb        Floating negative absolute value (Rc=1)
+       fnabs      rr       x5   63-136
+       fnabs.     rr       x5   63-136-1
+*028   fneg   frt,frb        Floating negate
+*028   fneg.  frt,frb        Floating negate (Rc=1)
+       fneg       rr       x5   63-040
+       fneg.      rr       x5   63-040-1
+*048   fmr    frt,frb        Floating move register
+*048   fmr.   frt,frb        Floating move register (Rc=1)
+       fmr        rr       x5   63-072
+       fmr.       rr       x5   63-072-1
+****************************************************
+**** /*** Special Purpose Register Control ***/ ****
+****************************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*153   mfspr  rt,spr         Move from Special Purpose Register
+       mfspr      rr       x6   31-339
+*200   mcrxr  bf             Move to CR from XER
+       mcrxr      f        x4   31-512
+*000   mcrf   bft,bfa        Move Condition Register Field
+       mcrf       ff       x6   19-000
+*253   mfsr   rt,sr          Move from segment register
+       mfsr       re       x6   31-595
+***********************************************************************
+*       XAT-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XAT-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  RS   |  SPR  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  SPR,RS              ----- RC=0
+*       mnemonic. SPR,RS              ----- RC=1
+*
+*       NOTE: *** Bits 11-15 (SPR) is the first assembler operand
+*
+***********************************************************************
+*
+****************************************************
+**** /*** Special Purpose Register Control ***/ ****
+****************************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*1D3   mtspr  spr,rs         Move to Special Purpose Register
+       mtspr      rr       xe   31-467
+*
+***********************************************************************
+*       XAB-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XAB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / |  RA   |  RB   |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  RA,RB               ----- RC=0
+*       mnemonic. RA,RB               ----- RC=1
+*
+***********************************************************************
+***********************************
+**** /*** Storage Control ***/ ****
+***********************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*1F6   cli    ra,rb          Cache Line Invalidate
+       cli        rr       x3   31-502
+*3F6   dclz   ra,rb          Data cache line set to zero
+       dclz       rr       x3   31-1014
+*0F6   clf    ra,rb          Cache Line Flush
+       clf        rr       x3   31-118
+*2F6   dclst  ra,rb          Data cache line store
+       dclst      rr       x3   31-630
+*132   tlbi   ra,rb          TLB invalidate entry
+       tlbi       rr       x3   31-306
+***********************************************************************
+*       XTB-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XTB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  BF   | / / / |   I   |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  BF,I                ----- RC=0
+*       mnemonic. BF,I                ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /*** Floating Point Status and Control Reg ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*086   mtfsfi bf,i           Move to FPSCR Field immediate
+       mtfsfi     fq       x5   63-134
+       mtfsfi.    fq       x5   63-134-1
+*
+***********************************************************************
+***********************************************************************
+*       M-Form  (output format) instructions
+***********************************************************************
+***********************************************************************
+*
+***********************************************************************
+*       M-Form instructions
+***********************************************************************
+*
+*       Instruction Format: M-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  RS   |  RA   |  OP3  |  MBGN  | MEND  |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21    25 26   30 31
+*
+*              OP3 = RB | SH
+*
+*   Asm Formats:
+*
+*       mnemonic  RA,RS,OP3,MASK      ----- RC=0
+*       mnemonic. RA,RS,OP3,MASK      ----- RC=1
+*       mnemonic  RA,RS,OP3,MBGN,MEND ----- RC=0
+*       mnemonic. RA,RS,OP3,MBGN,MEND ----- RC=1
+*
+*       NOTE: *** Bits 11-15 (RA) is the first assembler operand
+*
+***********************************************************************
+*
+************************************
+**** /*** Rotate and Shift ***/ ****
+************************************
+*       mnem  |input     |out |op code value
+*14    rlimi  ra,rs,sh,mb,me    Rotate Left Immediate then Mask Insert
+*14    rlimi. ra,rs,sh,mb,me    Rotate Left Immed then Mask Insert (Rc=1)
+*14    rlimi  ra,rs,sh,mask     Rotate Left Immediate then Mask Insert
+*14    rlimi. ra,rs,sh,mask     Rotate Left Immed then Mask Insert (Rc=1)
+       rlimi      rrty?ztt m    20-000
+       rlimi.     rrty?ztt m    20-000-1
+*16    rlmi   ra,rs,rb,mb,me    Rotate Left then Mask Insert
+*16    rlmi.  ra,rs,rb,mb,me    Rotate Left then Mask Insert (Rc=1)
+*16    rlmi   ra,rs,rb,mask     Rotate Left then Mask Insert
+*16    rlmi.  ra,rs,rb,mask     Rotate Left then Mask Insert (Rc=1)
+       rlmi       rrry?ztt m    22-000
+       rlmi.      rrry?ztt m    22-000-1
+*15    rlinm  ra,rs,sh,mb,me  Rotate Left Immediate then AND with Mask
+*15    rlinm. ra,rs,sh,mb,me  Rotate Left Immed then AND with Mask (Rc=1)
+*15    rlinm  ra,rs,sh,mask   Rotate Left Immediate then AND with Mask
+*15    rlinm. ra,rs,sh,mask   Rotate Left Immed then AND with Mask (Rc=1)
+       rlinm      rrty?ztt m    21-000
+       rlinm.     rrty?ztt m    21-000-1
+*15    sli    ra,rs,sh        Shift Left Immediate (rlinm)
+*15    sli.   ra,rs,sh        Shift Left Immediate (Rc=1)
+       sli        rrt      ml   21-000
+       sli.       rrt      ml   21-000-1
+*15    sri    ra,rs,sh        Shift Right Immediate (rlinm)
+*15    sri.   ra,rs,sh        Shift Right Immediate (Rc=1)
+       sri        rrt      mr   21-000
+       sri.       rrt      mr   21-000-1
+*17    rlnm   ra,rs,rb,mb,me    Rotate Left then AND with Mask
+*17    rlnm.  ra,rs,rb,mb,me    Rotate Left then AND with Mask (Rc=1)
+*17    rlnm   ra,rs,rb,mask     Rotate Left then AND with Mask
+*17    rlnm.  ra,rs,rb,mask     Rotate Left then AND with Mask (Rc=1)
+       rlnm       rrry?ztt m    23-000
+       rlnm.      rrry?ztt m    23-000-1
+***********************************************************************
+***********************************************************************
+*       A-Form  (output format) instructions
+***********************************************************************
+***********************************************************************
+*
+***********************************************************************
+*       A-Form instructions
+***********************************************************************
+*
+*       Instruction Format: A-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  FRA  |  FRB  |  FRC  |   XO   |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRA,FRC,FRB     ----- RC=0
+*       mnemonic. FRT,FRA,FRC,FRB     ----- RC=1
+*
+***********************************************************************
+********************************
+*       floating point         *
+********************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*01D   fma                     frt=(fra*frc)+frb
+*01D   fma    frt,fra,frc,frb  Floating Multiply Add
+*01D   fma.   frt,fra,frc,frb  Floating Multiply Add (Rc=1)
+       fma        rrrr     a    63-029
+       fma.       rrrr     a    63-029-1
+*
+*01C   fnms                    frt= -((fra*frc)-frb)
+*01C   fnms   frt,fra,frc,frb  Floating negative multiply subtract
+*01C   fnms.  frt,fra,frc,frb  Floating negative multiply subtract (Rc=1)
+       fnms       rrrr     a    63-030
+       fnms.      rrrr     a    63-030-1
+*
+*01E   fms                     frt=(fra*frc)-frb
+*01E   fms    frt,fra,frc,frb  Floating Multiply Subtract
+*01E   fms.   frt,fra,frc,frb  Floating Multiply Subtract (Rc=1)
+       fms        rrrr     a    63-028
+       fms.       rrrr     a    63-028-1
+*
+*01F   fnma                    frt=-((fra*frc)+frb)
+*01F   fnma   frt,fra,frc,frb  Floating negative multiply add
+*01F   fnma.  frt,fra,frc,frb  Floating Negative Multiply Add  (Rc=1)
+       fnma       rrrr     a    63-031
+       fnma.      rrrr     a    63-031-1
+***********************************************************************
+*       AB-Form instructions
+***********************************************************************
+*
+*       Instruction Format: AB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  FRA  |  FRB  | ////  |   XO   |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRA,FRB         ----- RC=0
+*       mnemonic. FRT,FRA,FRB         ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /*** Floating Point Arithmetic and Compare ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*015   fa     frt,fra,frb    Floating Add
+*015   fa.    frt,fra,frb    Floating Add (Rc=1)
+       fa         rrr      ab   63-021
+       fa.        rrr      ab   63-021-1
+*014   fs     frt,fra,frb    Floating Subtract
+*014   fs.    frt,fra,frb    Floating Subtract (Rc=1)
+       fs         rrr      ab   63-020
+       fs.        rrr      ab   63-020-1
+*012   fd     frt,fra,frb    Floating Divide
+*012   fd.    frt,fra,frb    Floating Divide (Rc=1)
+       fd         rrr      ab   63-018
+       fd.        rrr      ab   63-018-1
+***********************************************************************
+*       AC-Form instructions
+***********************************************************************
+*
+*       Instruction Format: AC-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  FRA  | ////  |  FRC  |   XO   |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRA,FRC         ----- RC=0
+*       mnemonic. FRT,FRA,FRC         ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /*** Floating Point Arithmetic and Compare ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*019   fm     frt,fra,frc    Floating Multiply
+*019   fm.    frt,fra,frc    Floating Multiply (Rc=1)
+       fm         rrr      ac   63-025
+       fm.        rrr      ac   63-025-1
+***********************************************************************
+***********************************************************************
+*       I-Form  (output format) instructions
+***********************************************************************
+***********************************************************************
+*
+***********************************************************************
+*       I-Form instructions
+***********************************************************************
+*
+*       Instruction Format: I-FORM
+*
+*       --------------------------------------------------
+*      |OPCODE|              LI                     |AR|LK|
+*       --------------------------------------------------
+*       0    5 6                                  29 30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  LI
+*
+***********************************************************************
+*       mnem  |input     |out |op code value
+****************************
+**** /*** Branches ***/ ****
+****************************
+*12    b      li             Branch  relative                 (AR=0 LK=0)
+       b          l        li   18-000
+*12    bl     li             Branch and Link relative         (AR=0 LK=1)
+       bl         l        li   18-000-1
+*12    ba     li             Branch absolute                  (AR=1 LK=0)
+       ba         a        la   18-000-0-0-0-0-1
+*12    bla    li             Branch and link absolute         (AR=1 LK=1)
+       bla        a        la   18-000-1-0-0-0-1
+***********************************************************************
+***********************************************************************
+**             Some special extended mnemonics                      ***
+**             No particular instruction format order               ***
+***********************************************************************
+*       mnem  |input     |out |op code value
+*3F    rtc    i,ra,rb        RTC Special simulator op
+       rtc        trr      z7   63-300
+*00    ryo    op,1,2,3,4,5   Roll your own - m-form
+       ryo        xrrrrr   z8   00-000
+*00    ryod   op,op1,op2,imm Roll your own - d-form
+       ryod       xrri     z9   00-000
+*1D3   mtmq   rs             Move to MQ register (mtspr)
+       mtmq       r        x4   31-467-0-0-0-00
+*1D3   mtxer  rs             Move to XER -Fixed Pt Exception- (mtspr)
+       mtxer      r        x4   31-467-0-0-0-01
+*1D3   mtlr   rs             Move to LR -Link Reg- (mtspr)
+       mtlr       r        x4   31-467-0-0-0-08
+*1D3   mtctr  rs             Move to CTR -Count Reg- (mtspr)
+       mtctr      r        x4   31-467-0-0-0-09
+*1D3   mtsdr0 rs             Move to SDR0 register (mtspr)
+       mtsdr0     r        x4   31-467-0-0-0-24
+*1D3   mttid  rs             Move to TID register (mtspr)
+       mttid      r        x4   31-467-0-0-0-17
+*1D3   mtdsisr rs            Move to DSISR register (mtspr)
+       mtdsisr    r        x4   31-467-0-0-0-18
+*1D3   mtdar  rs             Move to DAR register (mtspr)
+       mtdar      r        x4   31-467-0-0-0-19
+*1D3   mtsdr1 rs             Move to SDR1 register (mtspr)
+       mtsdr1     r        x4   31-467-0-0-0-25
+*1D3   mtsrr0 rs             Move to SRR0 register (mtspr)
+       mtsrr0     r        x4   31-467-0-0-0-26
+*1D3   mtsrr1 rs             Move to SRR1 register (mtspr)
+       mtsrr1     r        x4   31-467-0-0-0-27
+*1D3   mtrtcu rs             Move to real time clock upper (mtspr)
+       mtrtcu     r        x4   31-467-0-0-0-20
+*1D3   mtrtcl rs             Move to real time clock lower (mtspr)
+       mtrtcl     r        x4   31-467-0-0-0-21
+*1D3   mtdec  rs             Move to decrementer (mtspr)
+       mtdec      r        x4   31-467-0-0-0-22
+*153   mfmq   rt             Move from MQ register (mfspr)
+       mfmq       r        x4   31-339-0-0-0-00
+*153   mfxer  rt             Move from XER -Fixed Pt Exception- (mfspr)
+       mfxer      r        x4   31-339-0-0-0-01
+*153   mflr   rt             Move from LR -Link Reg- (mfspr)
+       mflr       r        x4   31-339-0-0-0-08
+*153   mfctr  rt             Move from CTR -Count Reg- (mfspr)
+       mfctr      r        x4   31-339-0-0-0-09
+*153   mfsdr0 rt             Move from SDR0 register (mfspr)
+       mfsdr0     r        x4   31-339-0-0-0-24
+*153   mftid  rt             Move from TID register (mfspr)
+       mftid      r        x4   31-339-0-0-0-17
+*153   mfdsisr rt            Move from DSISR register (mfspr)
+       mfdsisr    r        x4   31-339-0-0-0-18
+*153   mfdar   rt            Move from DAR register (mfspr)
+       mfdar      r        x4   31-339-0-0-0-19
+*153   mfsdr1  rt            Move from SDR1 register (mfspr)
+       mfsdr1     r        x4   31-339-0-0-0-25
+*153   mfsrr0  rt            Move from SRR0 register (mfspr)
+       mfsrr0     r        x4   31-339-0-0-0-26
+*153   mfsrr1  rt            Move from SRR1 register (mfspr)
+       mfsrr1     r        x4   31-339-0-0-0-27
+*153   mfrtcu  rt            Move from real time clock upper (mfspr)
+*      mfrtcu     r        x4   31-339-0-0-0-20
+       mfrtcu     r        x4   31-339-0-0-0-04
+*153   mfrtcl  rt            Move from real time clock lower (mfspr)
+*      mfrtcl     r        x4   31-339-0-0-0-21
+       mfrtcl     r        x4   31-339-0-0-0-05
+*153   mfdec   rt            Move from decrementer (mfspr)
+*      mfdec      r        x4   31-339-0-0-0-22
+       mfdec      r        x4   31-339-0-0-0-06
+***********************************************************************
+***********************************************************************
+**             Some special temporary mnemonics                     ***
+**             No particular instruction format order               ***
+***********************************************************************
+*       mnem  |input     |out |op code value
+*00    ilop                  Illegal op code no operands
+       ilop       n        z0   00-000
+*00    ilopi  rt,ra,i        Illegal op code 16-bit immediate
+       ilopi      rri      yi   00-000
+*00    ilopr  rt,ra,rb       Illegal op code 3 reg operands
+       ilopr      rrr      z7   00-000
+*
+***********************************************************************
+***********************************************************************
+*****   END   ****   END   ********************************************
+***********************************************************************
+***********************************************************************

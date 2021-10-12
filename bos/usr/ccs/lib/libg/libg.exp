@@ -1,0 +1,20 @@
+* @(#)12	1.4  src/bos/usr/ccs/lib/libg/libg.exp, libg, bos411, 9428A410j 10/10/91 17:17:59
+*
+* COMPONENT_NAME: (CMDDBX) - dbx symbolic debugger
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1991
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+__dbsubc
+__dbsubn
+__dbargs
+__dbsubg

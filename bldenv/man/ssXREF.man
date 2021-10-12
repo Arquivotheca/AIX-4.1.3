@@ -1,0 +1,25 @@
+# @(#)80	1.2  src/bldenv/man/ssXREF.man, bldprocess, bos412, GOLDA411a 4/15/94 12:27:43
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: ssXREF file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/PTF/$BLDCYCLE/<release-name>/ssXREF
+        Contains records, one per line, of defect to subsystem option
+        mappings.  Created by prebuild when chksubsys is called.  Used
+        by subptf.
+
+	Format:
+          <defect-number>|<valid.subsystem.option>
+          <defect-number>|<valid.subsystem.option>
+                .
+                .

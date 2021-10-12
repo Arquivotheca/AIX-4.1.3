@@ -1,0 +1,302 @@
+# @(#)92  1.8  src/bos/objclass/POWER/rcs_sm_menu_opt.add, rcs, bos41B, 9506B 1/27/95 13:04:54
+# 
+#   COMPONENT_NAME: RCS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_menu_opt:
+	id_seq_num = "098"
+	id = "top_menu"
+	next_id = "RCS_remote"
+	text = "Remote Customer Support and Services"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 44
+	next_type = "m"
+	alias = ""
+	help_msg_id = "6000028"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "020"
+	id = "RCS_profiles"
+	next_id = "RCS_chusrprof_sel"
+	text = "Change / Show a User Profile"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 12
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000039"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "RCS_profiles"
+	next_id = "RCS_rcs_add_profile"
+	text = "Add a User Profile"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 4
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000038"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "RCS_remote"
+	next_id = "RCS_slipadminf"
+	text = "Administrator Functions"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 6
+	next_type = "m"
+	alias = ""
+	help_msg_id = "6000029"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "020"
+	id = "RCS_remote"
+	next_id = "RCS_usrfunc_getname"
+	text = "User Functions"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 67
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000044"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "030"
+	id = "RCS_remote"
+	next_id = "RCS_connectslip"
+	text = "Connect SLIP Link"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 14
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000045"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "050"
+	id = "RCS_remote"
+	next_id = "RCS_ibmlogon"
+	text = "Login to IBMLink"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 38
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000049"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "035"
+	id = "RCS_remote"
+	next_id = "RCS_get_slip"
+	text = "Reconfigure SLIP Addresses"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 42
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000047"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "070"
+	id = "RCS_remote"
+	next_id = "RCS_usr_disconnslip"
+	text = "Disconnect SLIP Link"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 24
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000051"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "RCS_slipadminf"
+	next_id = "RCS_profiles"
+	text = "User Profiles"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 70
+	next_type = "m"
+	alias = ""
+	help_msg_id = "6000030"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "020"
+	id = "RCS_slipadminf"
+	next_id = "RCS_lsslip"
+	text = "List All SLIP Connections"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 37
+	next_type = "d"
+	alias = ""
+	help_msg_id = "6000031"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "030"
+	id = "RCS_slipadminf"
+	next_id = "RCS_mkslipc"
+	text = "Add a SLIP Connection"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 2
+	next_type = "d"
+	alias = ""
+	help_msg_id = "6000032"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "040"
+	id = "RCS_slipadminf"
+	next_id = "RCS_chgslip"
+	text = "Change / Show Characteristics of a SLIP Connection"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 9
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000033"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "050"
+	id = "RCS_slipadminf"
+	next_id = "RCS_rmslip"
+	text = "Remove a SLIP Connection"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 47
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000034"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "060"
+	id = "RCS_slipadminf"
+	next_id = "RCS_slipsubsys"
+	text = "SLIP Connection Subsystem Control"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 51
+	next_type = "m"
+	alias = ""
+	help_msg_id = "6000035"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "030"
+	id = "RCS_profiles"
+	next_id = "RCS_rmusrprof_sel"
+	text = "Remove a User Profile"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 49
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000040"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "RCS_slipsubsys"
+	next_id = "RCS_startslip"
+	text = "Start the SLIP Connection Subsystem"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 59
+	next_type = "d"
+	alias = ""
+	help_msg_id = "6000036"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "020"
+	id = "RCS_slipsubsys"
+	next_id = "RCS_stopslipserver"
+	text = "Stop the SLIP Connection Subsystem"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 60
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000053"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "030"
+	id = "RCS_slipsubsys"
+	next_id = "RCS_sub_sys_disconn_slip"
+	text = "Disconnect a SLIP Connection"
+	text_msg_file = "rcs.cat"
+	text_msg_set = 1
+	text_msg_id = 25
+	next_type = "n"
+	alias = ""
+	help_msg_id = "6000037"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""

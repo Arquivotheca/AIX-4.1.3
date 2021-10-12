@@ -1,0 +1,115 @@
+* @(#)36	1.3  src/bos/objclass/POWER/sol.add, cfgmethods, bos411, 9428A410j 6/11/91 08:59:16
+* COMPONENT_NAME: sol.stanza
+*
+* FUNCTIONS: N/A
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+********** PdDv ***************************************************************
+
+PdDv:
+	uniquetype = "adapter/sys/slc"
+	class = adapter
+	subclass = sys
+	type = slc
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfgsol"
+	Change = ""
+	prefix = slc
+	devid = ""
+	led = 0x861
+	base = 0
+	has_vpd = 0
+	detectable  = 1
+	chgstatus = 0
+	bus_ext = 0
+	Start = ""
+	Stop = ""
+	fru = 2
+	setno = 4
+	msgno = 2
+	catalog = "devices.cat"
+	Unconfigure = "/etc/methods/ucfgdevice"
+	Undefine = "/etc/methods/undefine"
+
+PdDv:
+	uniquetype = "adapter/slc/otp"
+	class = adapter
+	subclass = slc
+	type = otp
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfgsol"
+	Change = ""
+	prefix = otp
+	devid = ""
+	led = 0x861
+	base = 0
+	has_vpd = 0
+	detectable  = 1
+	chgstatus = 0
+	bus_ext = 0
+	Start = ""
+	Stop = ""
+	fru = 1
+	setno = 4
+	msgno = 3
+	catalog = "devices.cat"
+	Unconfigure = "/etc/methods/ucfgdevice"
+	Undefine = "/etc/methods/undefine"
+
+PdDv:
+	uniquetype = "adapter/otp/op"
+	class = adapter
+	subclass = otp
+	type = op
+	DvDr = "soldd"
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfgsol"
+	Change = ""
+	prefix = op
+	devid = ""
+	led = 0x861
+	base = 0
+	has_vpd = 1
+	detectable  = 1
+	chgstatus = 0
+	bus_ext = 0
+	Start = ""
+	Stop = ""
+	fru = 2
+	setno = 4
+	msgno = 4
+	catalog = "devices.cat"
+	Unconfigure = "/etc/methods/ucfgdevice"
+	Undefine = "/etc/methods/undefine"
+
+********** PdCn ***************************************************************
+
+PdCn:
+	connwhere = "0"
+	uniquetype = "adapter/sys/slc"
+	connkey = slc
+
+PdCn:
+	connwhere = "1"
+	uniquetype = "adapter/sys/slc"
+	connkey = slc
+
+PdCn:
+	connwhere = "1"
+	uniquetype = "adapter/slc/otp"
+	connkey = otp
+
+PdCn:
+	connwhere = "2"
+	uniquetype = "adapter/slc/otp"
+	connkey = otp

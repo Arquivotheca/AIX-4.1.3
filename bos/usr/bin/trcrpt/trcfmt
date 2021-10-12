@@ -1,0 +1,734 @@
+# @(#)65        1.139  src/bos/usr/bin/trcrpt/trcfmt, cmdtrace, bos411, 9434B411a 8/22/94 10:56:27
+# COMPONENT_NAME: CMDTRACE   system trace logging and reporting facility
+#
+# FUNCTIONS: template file for trcrpt
+#
+# ORIGINS: 27, 83
+#
+# (C) COPYRIGHT International Business Machines Corp. 1988, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# 
+# LEVEL 1, 5 Years Bull Confidential Information
+# 
+
+# I. General Information
+#
+# A. Binary format for the tracehook calls. (1 column = 4 bits)
+#    trchk        MMMTDDDD
+#    trchkt       MMMTDDDDtttttttt
+#    trchkl       MMMTDDDD11111111
+#    trchklt      MMMTDDDD11111111tttttttt
+#    trchkg       MMMTDDDD1111111122222222333333334444444455555555
+#    trchkg       MMMTDDDD1111111122222222333333334444444455555555tttttttt
+#    trcgen       MMMTLLLL11111111vvvvvvvvvvvvvvvvvvvvvvvvvvxxxxxx
+#    trcgent      MMMTLLLL11111111vvvvvvvvvvvvvvvvvvvvvvvvvvxxxxxxtttttttt
+#
+#         legend:
+#      MMM = hook id
+#      T   = hooktype
+#      D   = hookdata
+#      t   = nanosecond timestamp
+#      1   = d1  (see trchkid.h for calling syntax for the tracehook routines)
+#      2   = d2, etc.
+#      v   = trcgen variable length buffer
+#      L   = length of variable length data in bytes.
+#
+#   The DATA_POINTER starts at the third byte in the event, ie.,
+#     at the 16 bit hookdata DDDD.
+#   The trcgen() type (6,7) is an exception. The DATA_POINTER starts at
+#     the fifth byte, ie., at the 'd1' parameter 11111111.
+#
+# B. Indentation levels
+#    The left margin is set per template using the 'L=XXXX' command.
+#    The default is L=KERN, the second column.
+#    L=APPL moves the left margin to the first  column.
+#    L=SVC  moves the left margin to the second column.
+#    L=KERN moves the left margin to the third  column.
+#    L=INT  moves the left margin to the fourth column.
+#    The command if used must go just after the version code.
+#
+#    Example usage:
+#113 1.7 L=INT "stray interrupt" ... \
+#
+# C. Continuation code and delimiters.
+#    A '\' at the end of the line must be used to continue the template
+#      on the next line.
+#    Individual strings (labels) can be separated by one or more blanks
+#      or tabs. However, all whitespace is squeezed down to 1 blank on
+#      the report. Use '\t' for skipping to the next tabstop, or use
+#      A0.X format (see below) for variable space.
+#
+#
+# II. FORMAT codes
+#
+# A. Codes that manipulate the DATA_PONTER
+# Gm.n
+#     "Goto"    Set DATA_POINTER to byte.bit location m.n
+#
+# Om.n
+#     "Omit"    Advance DATA_POINTER by m.n byte.bits
+#
+# Rm
+#     "Reverse" Decrement DATA_POINTER by m bytes. R0 byte aligns.
+#
+# B. Codes that cause data to be output.
+# Am.n
+#     Left justified ascii.
+#     m=length in bytes of the binary data.
+#     n=width of the displayed field.
+#     The data pointer is rounded up to the next byte boundary.
+#     Example
+#      DATA_POINTER|
+#                  V
+#             xxxxxhello world\0xxxxxx
+#
+#  i.   A8.16 results in:                       |hello wo        |
+#       DATA_POINTER--------|
+#                           V
+#              xxxxxhello world\0xxxxxx
+#
+#  ii.  A16.16 results in:                      |hello world     |
+#       DATA_POINTER----------------|
+#                                   V
+#              xxxxxhello world\0xxxxxx
+#
+#  iii. A16 results in:                         |hello world|
+#       DATA_POINTER----------------|
+#                                   V
+#              xxxxxhello world\0xxxxxx
+#
+#  iv.  A0.16 results in:                       |                |
+#       DATA_POINTER|
+#                   V
+#              xxxxxhello world\0xxxxxx
+#
+# S1, S2, S4
+#     Left justified ascii string.
+#     The length of the string is in the first byte (half-word, word) of
+#      the data. This length of the string does not include this byte.
+#     The data pointer is advanced by the length value.
+#     Example
+#      DATA_POINTER|
+#                  V
+#             xxxxxBhello worldxxxxxx     (B = hex 0x0b)
+#
+#  i.   S1 results in:                          |hello world|
+#       DATA_POINTER-----------|
+#                              V
+#              xxxxBhello worldxxxxxx
+#
+# $reg%S1
+#     A register with the format code of 'Sx' works "backwards" from
+#     a register with a differnet type. The format is Sx, but the length
+#     of the string comes from $reg instead of the next n bytes.
+#
+# Bm.n
+#     Binary format.
+#     m = length in bytes
+#     n = length in bits
+#     The length in bits of the data is m * 8 + n. B2.3 and B0.19 are the same.
+#     Unlike the other printing FORMAT codes, the DATA_POINTER
+#     can be bit aligned and is not rounded up to the next byte boundary.
+#
+# Xm
+#     Hex format.
+#     m = length in bytes. m=0 thru 16
+#     The DATA_POINTER is advanced by m.
+#
+# D2, D4
+#     Signed decimal format.
+#     The length of the data is 2 (4) bytes.
+#     The DATA_POINTER is advanced by 2 (4).
+#
+# U2, U4
+#     Unsigned decimal format.
+#     The length of the data is 2 (4) bytes.
+#     The DATA_POINTER is advanced by 2 (4).
+#
+# F4
+#     Floating point format. (like %0.4E)
+#     The length of the data is 4 bytes.
+#     The format of the data is that of C type 'float'.
+#     The DATA_POINTER is advanced by 4.
+#
+# F8
+#     Floating point format. (like %0.4E)
+#     The length of the data is 8 bytes.
+#     The format of the data is that of C type 'double'.
+#     The DATA_POINTER is advanced by 8.
+#
+# HB
+#     Number of bytes in trcgen() variable length buffer.
+#     This is also equal to the 16 bit hookdata.
+#     The DATA_POINTER is not changed.
+#
+# HT
+#     The hooktype. (0 - E)
+#     trcgen  = 0, trchk  = 1, trchl  = 2, trchkg  = 6
+#     trcgent = 8, trchkt = 9, trchlt = A, trchkgt = E
+#     HT & 0x07 masks off the timestamp bit
+#     This is used for allowing multiple, different trchook() calls with
+#       the same template.
+#     The DATA_POINTER is not changed.
+#
+# C. Codes that interpret the data in some way before output.
+# T4
+#     Output the next 4 bytes as a data and time string,
+#     in GMT timezone format.  (as in ctime(&seconds))
+#     The DATA_POINTER is advanced by 4.
+#
+# E1,E2,E4
+#     Output the next byte (half_word, word) as an 'errno' value, replacing
+#     the numeric code with the corresponding #define name in
+#     /usr/include/sys/errno.h
+#     The DATA_POINTER is advanced by 1, 2, or 4.
+#
+# P4
+#     Use the next word as a process id (pid), and
+#     output the pathname of the executable with that process id.
+#     Process ids and their pathnames are acquired by the trace command
+#     at the start of a trace and by trcrpt via a special EXEC tracehook.
+#     The DATA_POINTER is advanced by 4.
+#
+# \t
+#     Output a tab. \t\t\t outputs 3 tabs. Tabs are expanded to spaces,
+#     using a fixed tabstop separation of 8. If L=0 indentation is used,
+#     the first tabstop is at 3.
+#     The DATA_POINTER advances over the \t.
+#
+# \n
+#     Output a newline. \n\n\n outputs 3 newlines.
+#     The newline is left-justified according to the INDENTATION LEVEL.
+#     The DATA_POINTER advances over the \n.
+#
+# $macro
+#     The value of 'macro' is output as a %04X value. Undefined macros
+#     have the value of 0000.
+#     The DATA_POINTER is not changed.
+#     An optional format can be used with macros:
+#        $v1%X4    will output the value $v1 in X4 format.
+#        $zz%B0.8  will output the value $v1 in 8 bits of binary.
+#     Understood formats are: X, D, U, B. Others default to X2.
+#
+# "string"     'string' data type
+#     Output the characters inside the double quotes exactly. A string
+#     is treated as a descriptor. Use "" as a NULL string.
+#
+# `string format $macro` If a string is backquoted, it is expanded
+#     as a quoted string, except that FORMAT codes and $registers are
+#     expanded as registers.
+#
+# III. SWITCH statement
+#     A format code followed by a comma is a SWITCH statement.
+#     Each CASE entry of the SWITCH statement consists of
+#       1. a 'matchvalue' with a type (usually numeric) corresponding to
+#          the format code.
+#       2. a simple 'string' or a new 'descriptor' bounded by braces.
+#          A descriptor is a sequence of format codes, strings, switches,
+#          and loops.
+#       3. and a comma delimiter.
+#       The switch is terminated by a CASE entry without a comma delimiter.
+#     The CASE entry is selected to as the first entry whose matchvalue
+#     is equal to the expansion of the format code.
+#     The special matchvalue '\*' is a wildcard and matches anything.
+#     The DATA_POINTER is advanced by the format code.
+#
+#
+# IV. LOOP statement
+#     The syntax of a 'loop' is
+#     LOOP format_code { descriptor }
+#     The descriptor is executed N times, where N is the numeric value
+#       of the format code.
+#     The DATA_POINTER is advanced by the format code plus whatever the
+#       descriptor does.
+#     Loops are used to output binary buffers of data, so descriptor is
+#       usually simply X1 or X0. Note that X0 is like X1 but does not
+#       supply a space separator ' ' between each byte.
+#
+#
+# V. macro assignment and expressions
+#   'macros' are temporary (for the duration of that event) variables
+#   that work like shell variables.
+#   They are assigned a value with the syntax:
+#   {{ $xxx = EXPR }}
+#   where EXPR is a combination of format codes, macros, and constants.
+#   Allowed operators are + - / *
+#   For example:
+#{{ $dog = 7 + 6 }} {{ $cat = $dog * 2 }} $dog $cat
+#
+#   will output:
+#000D 001A
+#
+#   Macros are useful in loops where the loop count is not always
+#   just before the data:
+#G1.5 {{ $count = B0.5 }} G11 LOOP $count {X0}
+#
+#   Up to 25 macros can be defined per template.
+#
+#
+# VI. Special macros:
+# $RELLINENO   line number for this event. The first line starts at 1.
+# $D1 - $D5    dataword 1 through dataword 5. No change to datapointer.
+# $HD          hookdata (lower 16 bits)
+# $SVC         Output the name of the current SVC
+# $EXECPATH    Output the pathname of the executable for current process.
+# $PID         Output the current process id.
+# $TID         Output the current thread id.
+# $CPUID       Output the current processor id.
+# $PRI	       Output the current process priority
+# $ERROR       Output an error message to the report and exit from the
+#              template after the current descriptor is processed.
+#              The error message supplies the logfile, logfile offset of the
+#              start of that event, and the traceid.
+# $LOGIDX      Current logfile offset into this event.
+# $LOGIDX0     Like $LOGIDX, but is the start of the event.
+# $LOGFILE     Name of the logfile being processed.
+# $TRACEID     Traceid of this event.
+# $DEFAULT     Use the DEFAULT template 008
+# $STOP        End the trace report right away
+# $BREAK       End the current trace event
+# $SKIP        Like break, but don't print anything out.
+# $DATAPOINTER The DATA_POINTER. It can be set and manipulated
+#              like other user-macros.
+#              {{ $DATAPOINTER = 5 }} is equivalent to G5
+# $BASEPOINTER Usually 0. It is the starting offset into an event. The actual
+#              offset is the DATA_POINTER + BASE_POINTER. It is used with
+#              template subroutines, where the parts on an event have the
+#              same structure, and can be printed by the same template, but
+#              may have different starting points into an event.
+#
+# VII. Template subroutines
+#    If a macro name consists of 3 hex digits, it is a "template subroutine".
+#    The template whose traceid equals the macro name is inserted in place
+#    of the macro.
+#
+#    The data pointer is where is was when the template
+#    substitution was encountered. Any change made to the data pointer
+#    by the template subroutine remains in affect when the template ends.
+#
+#    Macros used within the template subroutine correspond to those in the
+#    calling template. The first definition of a macro in the called template
+#    is the same variable as the first in the called. The names are not
+#    related.
+#
+#    Example:
+#    Output the trace label ESDI STRATEGY.
+#    The macro '$stat' is set to bytes 2 and 3 of the trace event.
+#    Then call template 90F to interpret a buf header. The macro '$return'
+#    corresponds to the macro '$rv', since they were declared in the same
+#    order. A macro definition with no '=' assignment just declares the name
+#    like a place holder. When the template returns, the saved special
+#    status word is output and the returned minor device number.
+#
+#900 1.0 "ESDI STRATEGY" {{ $rv = 0 }} {{ $stat = X2 }} \
+#       $90F \n\
+#special_esdi_status=$stat for minor device $rv
+#
+#90F 1.0 "" G4 {{ $return }} \
+#       block number X4 \n\
+#       byte count   X4 \n\
+#       B0.1, 1 B_FLAG0 \
+#       B0.1, 1 B_FLAG1 \
+#       B0.1, 1 B_FLAG2 \
+#       G16 {{ $return = X2 }}
+#
+#
+#    Note: The $DEFAULT reserved macro is the same as $008
+#
+# VII. BITFLAGS statement
+#     The syntax of a 'bitflags' is
+#     BITFLAGS [format_code|register],
+#         flag_value string {optional string if false},   or
+#         '&' mask field_value string,
+#                 ...
+#
+#     This statement simplifies expanding state flags, since it look
+#       a lot like a series of #defines.
+#     The '&' mask is used for interpreting bit fields.
+#     The mask is anded to the register and the result is compared to
+#       the field_value. If a match, the string is printed.
+#     The base is 16 for flag_values and masks.
+#     The DATA_POINTER is advanced if a format code is used.
+#     Note: the default base for BITFLAGS is 16. If the mask or field value
+#     has a leading "o", the number is octal. 0x or 0X makes the number hex.
+
+
+# A 000 traceid will use this template
+# This id is also used to define most of the template functions.
+#  filemode(omode)    expand omode the way  ls -l does. The
+#                     call to setdelim() inhibits spaces between the chars.
+#
+004 1.0 L=0 "TRACEID IS ZERO" G0 hookword=X4 file=$LOGFILE index=$LOGIDX0 \
+{{ \
+sinaddr(addr) \
+        {{ $addr }} \
+        $addr, \
+        0xBADFCA11 { $addr }, \
+        \* { \
+                {{ $z1 = $addr%W24.31 }} \
+                {{ $z2 = $addr%W16.23 }} \
+                {{ $z3 = $addr%W8.15 }} \
+                {{ $z4 = $addr%W0.7 }} \
+                setdelim(0) \
+                $z1%D1"."$z2%D1"."$z3%D1"."$z4%D1 \
+                setdelim(1)  \
+        } \
+}} \
+{{ \
+prfd(fd) \
+        $fd%D1 \
+}} \
+{{ \
+prpid(pid) \
+        $pid, 0 {} {{ $n = $pid }} $n%D1 \
+}} \
+{{ \
+filemode(omode) \
+        setdelim(0) \
+        $omode%o4 & 04000, \
+        04000 { {{ $suid = "s" }} {{ $suidn = "S" }} }, \
+        \*    { {{ $suid = "x" }} {{ $suidn = "-" }} } \
+        $omode%o4 & 02000, \
+        02000 { {{ $sgid = "s" }} {{ $sgidn = "S" }} }, \
+        \*    { {{ $sgid = "x" }} {{ $sgidn = "-" }} } \
+        $omode%o4 & 01000, \
+        01000 { \
+                $omode%o4 & 0170000, \
+                00020000 { {{ $svtxt = "T" }} {{ $svtxtn = "T" }} }, \
+                \*       { {{ $svtxt = "t" }} {{ $svtxtn = "T" }} } \
+        }, \
+        \*           { {{ $svtxt = "x" }} {{ $svtxtn = "-" }} } \
+        BITFLAGS $omode%o4, \
+        & 0170000 00040000 "d", \
+        & 0170000 00020000 "c", \
+        & 0170000 00060000 "b", \
+        & 0170000 00100000 "-", \
+        & 0170000 00010000 "p", \
+        & 0170000 00120000 "l", \
+        & 0170000 00140000 "s", \
+        00400  "r" "-" ,\
+        00200  "w" "-" ,\
+        00100  $suid $suidn ,\
+        00040  "r" "-" ,\
+        00020  "w" "-" ,\
+        00010  $sgid $sgidn ,\
+        00004  "r" "-" ,\
+        00002  "w" "-" ,\
+        00001  $svtxt $svtxtn \
+        setdelim(1) \
+}} \
+{{ \
+prsignal(sig) \
+        $sig%D1, \
+        1   SIGHUP, \
+        2   SIGINT, \
+        3   SIGQUIT, \
+        4   SIGILL, \
+        5   SIGTRAP, \
+        6   SIGABRT, \
+        7   SIGEMT, \
+        8   SIGFPE, \
+        9   SIGKILL, \
+        10  SIGBUS, \
+        11  SIGSEGV, \
+        12  SIGSYS, \
+        13  SIGPIPE, \
+        14  SIGALRM, \
+        15  SIGTERM, \
+        16  SIGURG, \
+        17  SIGSTOP, \
+        18  SIGTSTP, \
+        19  SIGCONT, \
+        20  SIGCHLD, \
+        21  SIGTTIN, \
+        22  SIGTTOU, \
+        23  SIGIO, \
+        24  SIGXCPU, \
+        25  SIGXFSZ, \
+        27  SIGMSG, \
+        28  SIGWINCH, \
+        29  SIGPWR, \
+        30  SIGUSR1, \
+        31  SIGUSR2, \
+        32  SIGPROF, \
+        33  SIGDANGER, \
+        34  SIGVTALRM, \
+        35  SIGMIGRATE, \
+        36  SIGPRE, \
+        60  SIGGRANT, \
+        61  SIGRETRACT, \
+        62  SIGSOUND, \
+        63  SIGSAK, \
+        \*  { $sig%D1 } \
+}} \
+{{ \
+openflagsk(flags) \
+        BITFLAGS $flags%o4, \
+        & 003 001 "RDONLY", \
+        & 003 002 "WRONLY", \
+        & 003 003 "RDWR", \
+        00400     "CREAT", \
+        01000     "TRUNC", \
+        02000     "EXCL", \
+        04000     "NOCTTY", \
+        00004     "NONBLOCK", \
+        00010     "APPEND", \
+      0100000     "NDELAY" \
+}} \
+{{ \
+openflags(flags) \
+        BITFLAGS $flags%o4, \
+        & 003 000 "RDONLY", \
+        & 003 001 "WRONLY", \
+        & 003 002 "RDWR", \
+        00400     "CREAT", \
+        01000     "TRUNC", \
+        02000     "EXCL", \
+        04000     "NOCTTY", \
+        00004     "NONBLOCK", \
+        00010     "APPEND", \
+      0100000     "NDELAY" \
+}} \
+{{ \
+dopenflags(flags) \
+        BITFLAGS $flags%o4, \
+        00001 "READ", \
+        00002 "WRITE", \
+        00004 "NONBLOCK", \
+        00010 "APPEND", \
+        00400 "CREAT", \
+        01000 "TRUNC", \
+        02000 "EXCL", \
+        04000 "NOCTTY", \
+      0100000 "NDELAY" \
+}} \
+{{ \
+messagetype(mess) \
+	$mess, \
+	00000000 "M_DATA", \
+	00000001 "M_PROTO", \
+	00000008 "M_BREAK", \
+	00000009 "M_PASSFP", \
+	0000000b "M_SIG", \
+	0000000c "M_DELAY", \
+	0000000d "M_CTL", \
+	0000000e "M_IOCTL", \
+	00000010 "M_SETOPTS", \
+	00000011 "M_RSE", \
+	00000081 "M_IOCACK", \
+	00000082 "M_IOCNAK", \
+	00000083 "M_PCPROTO", \
+	00000084 "M_PCSIG", \
+	00000085 "M_READ", \
+	00000086 "M_FLUSH", \
+	00000087 "M_STOP", \
+	00000088 "M_START", \
+	00000089 "M_HANGUP", \
+	0000008a "M_ERROR", \
+	0000008b "M_COPYIN", \
+	0000008c "M_COPYOUT", \
+	0000008d "M_IOCDATA", \
+	0000008e "M_PCRSE", \
+	0000008f "M_STOPI", \
+	00000090 "M_STARTI", \
+	00000093 "M_HPDATA", \
+	00000094 "M_NOTIFY", \
+        \* { $mess%X4 } \
+}} \
+{{ \
+ioctlname(cmd) \
+        $cmd, \
+        00004801 "HFTGETID", \
+        00004802 "HFQUERY", \
+        00004803 "HFSKBD", \
+        00004805 "HFSMON", \
+        00004806 "HFCMON", \
+        0000480A "HFRCONF", \
+        0000480B "HFESOUND", \
+        0000480C "HFDSOUND", \
+        0000480F "HFSKEP", \
+        00004810 "HFCKEP", \
+        00004812 "HFSJKBD", \
+        00004814 "HFTQSMGR", \
+        00004815 "HFQERROR", \
+        00004816 "HFCHGLOC", \
+        00004817 "HFESWKBD", \
+        00004818 "HFTSECHO", \
+        00004819 "HFTSBREAK", \
+        0000481A "HFTCSMGR", \
+        0000481B "HFTQDEV", \
+        0000481C "HFHANDLE", \
+        00005800 "TXISATTY", \
+        00005801 "TXTTYNAME", \
+        00005802 "TXGETLD", \
+        00005803 "TXSETLD", \
+        00005804 "TXGETCD", \
+        00005805 "TXADDCD", \
+        00005806 "TXDELCD", \
+        00005807 "TXSBAUD", \
+        00005808 "TXGBAUD", \
+        00005809 "TXSETIHOG", \
+        0000580A "TXSETOHOG", \
+        00005401 "TCGETS", \
+        00005402 "TCSETS", \
+        00005403 "TCSETSW", \
+        00005404 "TCSETSF", \
+        00005405 "TCGETA", \
+        00005406 "TCSETA", \
+        00005407 "TCSETAW", \
+        00005408 "TCSETAF", \
+        00005409 "TCSBRK", \
+        0000540a "TCSBREAK", \
+        0000540b "TCXONC", \
+        0000540c "TCFLSH", \
+        0000540d "TCGLEN", \
+        0000540e "TCSLEN", \
+        0000540f "TCSAK", \
+        00005410 "TCQSAK", \
+        00005411 "TCTRUST", \
+        00005412 "TCQTRUST", \
+        00005413 "TCSMAP", \
+        00005414 "TCGMAP", \
+        00005415 "TCKEP", \
+        00005416 "TCGSAK", \
+        00005417 "TCLOOP", \
+        00005418 "TCVPD", \
+        00005419 "TCREG", \
+        0000541a "TCGSTATUS", \
+        0000541b "TCSCONTROL", \
+        0000541c "TCSCSMAP", \
+        0000541d "TCGCSMAP", \
+        001b0000 "LI_GETVT", \
+        001b0001 "LI_SETVT", \
+        001b0002 "LI_GETXP", \
+        001b0003 "LI_SETXP", \
+        001b0004 "LI_SLP1", \
+        001b0005 "LI_DSLP", \
+        001b0006 "LI_SLP0", \
+        001b0007 "LI_PRES", \
+        001b0008 "LI_DRAM", \
+        001b0009 "LI_GETTBC", \
+        001b000a "LI_SETTBC", \
+        001c8000 "RS_GETA", \
+        001c8001 "RS_SETA", \
+        40047400 "TIOCGETD", \
+        80047401 "TIOCSETD", \
+        20007402 "TIOCHPCL", \
+        40047403 "TIOCMODG", \
+        80047404 "TIOCMODS", \
+        40067408 "TIOCGETP", \
+        80067409 "TIOCSETP", \
+        8006740a "TIOCSETN", \
+        2000740d "TIOCEXCL", \
+        2000740e "TIOCNXCL", \
+        80047410 "TIOCFLUSH", \
+        80067411 "TIOCSETC", \
+        40067412 "TIOCGETC", \
+        8004747f "TIOCLBIS", \
+        8004747e "TIOCLBIC", \
+        8004747d "TIOCLSET", \
+        4004747c "TIOCLGET", \
+        2000747b "TIOCSBRK", \
+        2000747a "TIOCCBRK", \
+        20007479 "TIOCSDTR", \
+        20007478 "TIOCCDTR", \
+        40047477 "TIOCGPGRP", \
+        80047476 "TIOCSPGRP", \
+        80067475 "TIOCSLTC", \
+        40067474 "TIOCGLTC", \
+        40047473 "TIOCOUTQ", \
+        80017472 "TIOCSTI", \
+        20007471 "TIOCNOTTY", \
+        80047470 "TIOCPKT", \
+        2000746f "TIOCSTOP", \
+        2000746e "TIOCSTART", \
+        8004746d "TIOCMSET", \
+        8004746c "TIOCMBIS", \
+        8004746b "TIOCMBIC", \
+        4004746a "TIOCMGET", \
+        80047469 "TIOCREMOTE", \
+        40087468 "TIOCGWINSZ", \
+        80087467 "TIOCSWINSZ", \
+        80047466 "TIOCUCNTL", \
+        20006601 "FIOCLEX", \
+        20006602 "FIONCLEX", \
+        4004667f "FIONREAD", \
+        8004667e "FIONBIO", \
+        8004667d "FIOASYNC", \
+        8004667c "FIOSETOWN", \
+        4004667b "FIOGETOWN", \
+	00006c11 "LPRGETA", \
+	00006c12 "LPRSETA", \
+	00006c13 "LPRGTOV", \
+	00006c14 "LPRSTOV", \
+	00006c17 "LPQUERY", \
+	00006c1a "LPDIAG", \
+	00006c1b "LPRMODG", \
+	00006c1c "LPRMODS", \
+        80047300 "SIOCSHIWAT", \
+        40047301 "SIOCGHIWAT", \
+        80047302 "SIOCSLOWAT", \
+        40047303 "SIOCGLOWAT", \
+        40047307 "SIOCATMARK", \
+        80047308 "SIOCSPGRP", \
+        40047309 "SIOCGPGRP", \
+        8030720a "SIOCADDRT", \
+        8030720b "SIOCDELRT", \
+        8020690c "SIOCSIFADDR", \
+        8020690e "SIOCSIFDSTADDR", \
+        c020690f "SIOCGIFDSTADDR", \
+        80206910 "SIOCSIFFLAGS", \
+        80206913 "SIOCSIFBRDADDR", \
+        c020690d "SIOCGIFADDR", \
+        c0206912 "SIOCGIFBRDADDR", \
+        c0206911 "SIOCGIFFLAGS", \
+        c0086914 "SIOCGIFCONF", \
+        c0206915 "SIOCGIFNETMASK", \
+        80206916 "SIOCSIFNETMASK", \
+        c0206917 "SIOCGIFMETRIC", \
+        80206918 "SIOCSIFMETRIC", \
+        8024691e "SIOCSARP", \
+        c024691f "SIOCGARP", \
+        80246920 "SIOCDARP", \
+        80016921 "SIOCSNETOPT", \
+        c0016922 "SIOCGNETOPT", \
+        c0016923 "SIOCDNETOPT", \
+        8024695d "SIOCSARP_TOKEN", \
+        c024695e "SIOCGARP_TOKEN", \
+        8024695f "SIOCDARP_TOKEN", \
+        80246960 "SIOCSARP_X25", \
+        c0246961 "SIOCGARP_X25", \
+        80246962 "SIOCDARP_X25", \
+        \* { $cmd%X4 } \
+}} \
+{{ \
+bflags(flags) \
+        BITFLAGS $flags, \
+        0x0001 "B_READ" "B_WRITE", \
+        0x0002 "B_DONE", \
+        0x0004 "B_ERROR", \
+        0x0008 "B_BUSY", \
+        0x0020 "B_INFLIGHT", \
+        0x0080 "B_AGE", \
+        0x0100 "B_ASYNC", \
+        0x0200 "B_DELWRI", \
+        0x0400 "B_NOHIDE", \
+        0x0800 "B_STALE" \
+}} \
+{{ \
+prstate(flags) \
+        $flags%D1, \
+        0 "NONE", \
+        1 "IDLE", \
+        2 "RUNABLE", \
+        3 "SLEEPING", \
+        4 "SWAPPED", \
+        5 "STOPPED", \
+        6 "DEFUNCT", \
+        \*  { $flags%D1 } \
+}}
+

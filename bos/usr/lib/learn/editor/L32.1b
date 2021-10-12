@@ -1,0 +1,31 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Note that the substitute command changes the first
+instance of something that matches.  Consider the
+line
+  now is the time for all good men
+and the substitute command
+   s/tim/TIM/
+applied to it.
+Which word in the line will be altered by that command?
+Type "answer WORD" where WORD is the word that will
+be changed.
+#copyin
+#user
+#uncopyin
+#match time
+#log
+#next
+32.1c 10

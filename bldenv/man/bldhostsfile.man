@@ -1,0 +1,261 @@
+#
+# @(#)95	1.8  src/bldenv/man/bldhostsfile.man, bldprocess, bos412, GOLDA411a 9/29/93 17:11:30
+#
+#  COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+#  FUNCTIONS: Manual page for bldhostsfile
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1992, 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  bldhostsfile Command
+  
+  
+  Purpose
+  
+  The bldhostsfile command is the interface to retrieve data from the
+  $HOSTSFILE file.
+  
+
+  Syntax
+ 
+  bldhostsfile <release> <log_errors> 
+
+  bldhostsfile_checkfile <log_errors>
+
+  bldhostsfile_search <request> <log_errors>
+
+
+  Description
+
+  The functions in bldhostsfile retrieve data from $HOSTSFILE and
+  return them to the caller in environment variables.  This interface
+  allows the format of $HOSTSFILE to be transparent to the caller.
+
+  The function bldhostsfile is called to return the data associated
+  with the release supplied.  The function bldhostsfile always calls
+  bldhostsfile_checkfile.  The function bldhostsfile returns 0 if no error
+  occurs, 1 if a error occurs, and 2 if multiple entries for one
+  release are found in $HOSTSFILE.  The environment variables returned
+  are: HOSTSFILE_AFSBASE, HOSTSFILE_AFSDELTA, HOSTSFILE_AFSPROD,
+  HOSTSFILE_BASE, HOSTSFILE_BLDNODE, HOSTSFILE_BUILD, HOSTSFILE_CMVCFAMILY,
+  HOSTSFILE_DATA1, HOSTSFILE_DELTA, HOSTSFILE_ENVIRONMENT, HOSTSFILE_HOST,
+  HOSTSFILE_OBJECT, HOSTSFILE_PROD, HOSTSFILE_REL and HOSTSFILE_SHIP.
+
+  The function bldhostsfile_checkfile is called to check and insure the
+  file $HOSTSFILE exists.  This function is provided for functions that
+  need to check for a valid $HOSTSFILE.  The function bldhostsfile_checkfile
+  returns 0 if the $HOSTSFILE exists and 1 if $HOSTSFILE does not exist.
+  No environment variables are returned.
+
+  The function bldhostsfile_search sequentially returns each entry
+  in the $HOSTSFILE file.  The value of request being $SEARCH_FIRST
+  checks the existence of $HOSTSFILE via bldhostfile_check, opens the
+  file and gets the first entry.  The value of request being $SEARCH_NEXT
+  gets the next entry from $HOSTSFILE.  The value of request being
+  $SEARCH_STOP closes $HOSTSFILE.  The function bldhostsfile_search
+  returns 0 if no error occurs and 1 if a error occurs.  The environment
+  variables returned are: HOSTSFILE_AFSBASE, HOSTSFILE_AFSDELTA,
+  HOSTSFILE_AFSPROD, HOSTSFILE_BASE, HOSTSFILE_BLDNODE, HOSTSFILE_BUILD,
+  HOSTSFILE_CMVCFAMILY, HOSTSFILE_DATA1, HOSTSFILE_DELTA,
+  HOSTSFILE_ENVIRONMENT, HOSTSFILE_HOST, HOSTSFILE_OBJECT, HOSTSFILE_PROD,
+  HOSTSFILE_REL and HOSTSFILE_SHIP.
+
+  The function bldhostsfile_search opens file descriptor 8, if file
+  descriptor 8 is open before calling bldhostsfile_search it will be
+  closed after the call to bldhostsfile_search.  DO NOT call
+  bldhostsfile_search in a subshell or as $(bldhostsfile_search ...)
+  because file descriptor 8 will not remain open across calls
+  under these conditions.
+
+
+  Flags
+
+  log_errors    Value is either TRUE or FALSE.  A value of TRUE will
+                result in a error message being displayed through the
+                log function for any error encountered.  A value of
+                FALSE will not display the error messages.  The error
+                codes returned are independent of the setting of 
+                log_errors.
+
+  release       Release name that bldhostsfile should search for.
+
+  request       $SEARCH_FIRST checks for $HOSTSFILE existence, opens
+                $HOSTSFILE, and get first entry.  $SEARCH_NEXT reads
+                the next entry from $HOSTSFILE.  $SEARCH_STOP closes
+                $NODENAMES.
+
+
+  Environment Variables
+
+  AFSBASE      Base of the AFS tree.  Value is /afs/austin/aix.
+
+  HOSTSFILE    The pathname for 'hostsfile.dat', If not set, defaults to
+	       "$BLDENV/usr/bin/hostsfile.dat"
+
+  HOSTSFILE_AFSBASE
+               AFS tree of last release name passed to bldhostsfile.
+
+  HOSTSFILE_AFSDELTA
+               AFS delta source trees of last release name passed to
+               bldhostsfile.
+
+  HOSTSFILE_AFSPROD
+               AFS full source tree of last release name passed to
+               bldhostsfile.
+
+  HOSTSFILE_BASE
+               Production tree of last release name passed to
+               bldhostsfile.
+
+  HOSTSFILE_BLDNODE
+               CMVC name of release directory for the last release name
+               passed to bldhostsfile.
+
+  HOSTSFILE_BUILD 
+               Directory where a full build should start.
+
+  HOSTSFILE_CMVCFAMILY
+               The CMVC Family the release resides in.  The default is
+               aix@ausaix02@2035.  Format is:
+                  familyname[@hostname[@portnumber]]
+               where values in [] are optional.
+
+  HOSTSFILE_DATA1
+               Data field one.  Uses of this field are currently:
+               1) if $HOSTSFILE_ENVIRONMENT is ade then this field contains
+                  the first arguments that will be passed to setup.sh,
+                  build.sh, install.sh and onecmd.sh in v3bld.
+
+  HOSTSFILE_DELTA
+               Production delta source tree of last release name passed
+               to bldhostsfile.
+
+  HOSTSFILE_ENVIRONMENT
+               Type of environment the build occurs in.  Values are are
+               aix32 or ade.
+
+  HOSTSFILE_HOST
+               Host the last release name passed to bldhostsfile is built
+               on.
+
+  HOSTSFILE_OBJECT
+               Directory where the objects files are located.
+
+  HOSTSFILE_PROD 
+               Full source tree of last release name passed to bldhostsfile.
+
+  HOSTSFILE_REL
+               REL name of the last release name passed to bldhostsfile.
+
+  HOSTSFILE_RELEASE
+               Release name of entry.  Set only when calling
+               bldhostsfile_search.
+
+  HOSTSFILE_SHIP
+               Directory where the ship tree is located.
+
+  NODENAMES_NODE
+               Source name of release directory on build machines.
+
+  NODENAMES_NODENAME
+               Source name of release directory in AFS.
+
+  SEARCH_FIRST General search constant.  Passed to functions that perform
+               searches and indicates that the search should be initialized
+               and the first element returned.
+
+  SEARCH_NEXT  General search constant.  Passed to functions that perform
+	       searches and indicates that the search should display the 
+               next element in the search.
+
+  SEARCH_STOP  General search constant.  Passed to functions that perform
+               searches and indicates that the search is complete and all
+               unneeded resources created for the search should be released.
+
+
+  Messages
+
+    Fatal Errors
+
+    "Searching for <release> and found <hostsfile_release> in <HOSTSFILE>"
+    This error should never occur.  Indicates a entry for <release> was found
+    but when processing the data begin the <release> value has changed.
+
+    Errors
+
+    "File <HOSTSFILE> does not exist"
+    The file environment variable HOSTSFILE is set to does not exist.
+    
+    "<release> not found in <HOSTSFILE>"
+    The entry for <release> is not the file <HOSTSFILE>.  Entry needs to be
+    added or another HOSTSFILE needs to be set to another file.
+
+    "Multiple <release>'s found in <HOSTSFILE>"
+    Multiple entries for <release> were found in <HOSTSFILE>.  Only one
+    entry for <release> is allowed.
+
+    "Cannot determine HOSTSFILE_REL for <release>
+     Check for nodename entry in <NODENAMES>"
+    The <release> did not have a entry for the REL field in <HOSTSFILE>.
+    The value for REL needs to be calculated but no value from the
+    <NODENAMES> file is correct.  Most likely a value needs to be added to
+    <NODENAMES>; or possibility the release names needs to be changed.
+
+    "Cannot determine HOSTSFILE_BLDNODE for <release>
+     Check rel field entry in <HOSTSFILE>"
+    The <release> did not have a entry for the BLDNODE field in
+    <HOSTSFILE>.  The value for BLDNODE needs to be calculated but the
+    calculation is not returning a correct value.  Problem is most likely
+    a mismatch between the release name the REL value.
+
+
+  Examples
+  
+  1. Call bldhostsfile on release bos320.  Log any errors encountered.
+
+     bldhostsfile bos320 "${TRUE}"
+
+  2. Call bldhostsfile on release bos320.  Do not log errors encountered.
+
+     bldhostsfile bos320 "${FALSE}"
+
+  3. Call bldhostsfile_search for first entry.  Log errors encountered.
+
+     bldhostsfile_search ${SEARCH_FIRST} "${TRUE}"
+
+  4. Call bldhostsfile_search for second entry.  Log errors encountered.
+
+     bldhostsfile_search ${SEARCH_NEXT} "${TRUE}"
+
+  5. Call bldhostsfile_search for third entry.  Log errors encountered.
+
+     bldhostsfile_search ${SEARCH_NEXT} "${TRUE}"
+
+  6. Call bldhostsfile_search to close file.  Log errors encountered.
+
+     bldhostsfile_search ${SEARCH_STOP} "${TRUE}"
+  
+
+  Input Files
+
+#include "hostsfile.dat.man"
+
+#include "nodenames.dat.man"
+
+
+  Related Information
+  
+  $BLDENV/usr/man/bldloginit      The man page for the logging commands.
+  $BLDENV/usr/man/bldnodenames    The man page for bldnodenames functions.
+  $BLDENV/usr/man/hostsfile.dat   The man page with the description of the
+                                  $HOSTSFILE file.
+  $BLDENV/usr/man/nodenames.dat   The man page with the description of the
+                                  $NODENAMES file.

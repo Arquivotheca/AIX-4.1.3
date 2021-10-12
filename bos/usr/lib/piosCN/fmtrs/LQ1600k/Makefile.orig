@@ -1,0 +1,46 @@
+# @(#)62	1.5  src/bos/usr/lib/piosCN/fmtrs/LQ1600k/Makefile, ils-zh_CN, bos41J, 9521A_all 5/22/95 16:59:58
+#
+#   COMPONENT_NAME: ils-zh_CN
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+FMTRS	= ${MAKETOP}/bos/usr/lib/piosCN/fmtrs
+
+PROGRAMS = \
+	pioflq1600kessc \
+	pioflq1600kehsc \
+	pioflq1600kUTF-8
+
+pioflq1600kessc_OFILES = \
+	display.o \
+	pioflq1600kessc.o
+
+pioflq1600kUTF-8_OFILES = \
+	display.o \
+	pioflq1600kUTF-8.o
+
+LDFLAGS = -bnodelcsect
+
+IMPORTS = -bI:${FMTRS}/piof.imp
+EXPORTS = -bE:${FMTRS}/piof.exp
+
+INCFLAGS = -I${MAKETOP}/bos/usr/lib/piosCN/lib
+
+LIBS	= -lfontbosCN -lfont -liconv
+
+ILIST	= ${PROGRAMS}
+IDIR 	= /usr/lib/lpd/pio/fmtrs/
+
+.include <${RULES_MK}>

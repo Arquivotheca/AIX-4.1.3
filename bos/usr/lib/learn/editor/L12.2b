@@ -1,0 +1,30 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Now use the editor to copy file "first"
+to file "second".
+Then type "ready".
+#create Ref
+Bell Telephone Laboratories
+ 600 Mountain Avenue
+  Murray Hill, New Jersey 07974
+#create first
+Bell Telephone Laboratories
+ 600 Mountain Avenue
+  Murray Hill, New Jersey 07974
+#user
+#cmp Ref second
+#log
+#next
+12.2c 5

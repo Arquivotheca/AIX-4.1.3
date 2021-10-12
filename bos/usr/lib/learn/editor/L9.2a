@@ -1,0 +1,49 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can print several lines at once by
+using commands like
+  1,3p
+which prints lines 1, 2 and 3.  Again,
+I'll put you into the editor.  Print
+lines 1 to 3 of the file;  then type
+w, q and ready.
+Your commands should look like
+  1,3p
+  w
+  q
+  ready
+#create Ref
+:george washington
+john adams
+thomas jefferson
+:"file" 6 lines, 91 characters
+#create file
+george washington
+john adams
+thomas jefferson
+james madison
+james monroe
+john quincy adams
+#copyout
+#pipe
+ex +'set prompt noopt' file
+#user
+#unpipe
+#uncopyout
+tail -4 .ocopy >X1
+#cmp X1 Ref 4
+#log
+#next
+9.2b 5

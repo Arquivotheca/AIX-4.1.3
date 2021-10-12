@@ -1,0 +1,90 @@
+# @(#)33	1.4 src/bos/usr/lib/piosk/predef/oki801ps.kps, cmdpiosk, bos411, 9428A410j 5/16/94 14:54:24
+#
+# COMPONENT_NAME: (CMDPIOSK) Printer Backend for Japanese Printers
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or 
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:063:_a::0
+:066:_d::s
+:070:_f::
+:072:_h::
+:076:_j::1
+:079:_l::66
+:083:_p::%?%G_2%t%{1}%e%{0}%;%?%G_z%t%{1}%e%{0}%;%+%{2}%=%t7%e10%;
+:090:_s::Courier
+:093:_u::2
+:100:_w::80
+:107:_z::0
+:013:_A::1
+:022:_H::
+:027:_J::+
+:030:_L::+
+:795:_X::IBM-932
+:050:_Z::!
+:466:_1::!
+:467:_2::!
+:469:_3::!
+:470:_4::!
+:471:_5::!
+:060:__SYS::
+:323:sp::
+:322:si::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j]
+:324:st::%Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j]
+:325:sw::78
+:057:__IDS::
+:274:ia::{ test "$PIOTITLE" !=  %I@1 && BFLAG=" -b $PIOTITLE "; if [[ ! -x /usr/bin/enscript ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 801 "Error\072 The /usr/bin/enscript command was not found."; exit 1; fi; LANG=%Iw6 /usr/bin/enscript -X%I_X -p- -W8.26771 -D11.69291 -q%?%G_2%t -2%;%?%G_z%t -r%;%?%G_3%t -G%;%?%G_1%t%e -B%;%?%G_L%t%e -c%;%?%Ch%t%fbh%e%?%L_h%t -b'%I_h'%e"$BFLAG"%;%; -L%G_l%d -f%?%Cs%t%f!s%e%I_s%;%G_p%d %?%G_1%t-F%Iw7%G_p%d%;%?%G_4%t -g%;%?%G_5%t -o%;%?%L_f%t%e %I@1%;;} | %Iis
+:465:in::{ if [[ ! -x /usr/bin/psc ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 805 "Error\072 The /usr/bin/psc command was not found."; exit 1; fi; /usr/bin/psc; } | %Iis 
+:277:ip::%Iis
+:273:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[ju]
+:001:Is::
+:055:__FIL::
+:269:fn::{ if [[ ! -x /usr/bin/psc ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 805 "Error\072 The /usr/bin/psc command was not found."; exit 1; fi; LANG=%Iw6 /usr/bin/psc; }%is
+:270:fp::LANG=%Iw6 /bin/pr -l%G_l%d -w%G_w%d%F[h] %I@1%ia
+:053:__DIR::
+:165:df::%I@4/fmtrs
+:163:dd::%I@5/ddi
+:162:db::%I@4/burst
+:164:de::%I@4/etc
+:166:dn::%I@4/fonts
+:167:dz::/tmp
+:058:__MIS::
+:313:mt::
+:302:md::
+:306:mn::
+:309:mq::
+:316:mv::
+:305:mm::
+:303:mf::%Idf/piofpt
+:311:mr::
+:307:mo::%Ide/pioout %v[ABCDFINOPRS]
+:319:mz::14688
+:301:mc::\0
+:287:mF::
+:304:mi::s
+:308:mp::%%!
+:331:mL::[devices.cat,72,119;OKI MICROLINE 801PS/+F,801PSII/+F,800PSIILT]
+:330:mA::PostScript
+:332:mD::pioattr1.cat
+:062:__WKV::
+:370:wl::1
+:381:wu::3
+:062:w6::%`"/usr/bin/awk '/^%I_X/ && !/En_JP|en_JP|en_KR|en_TW/ {print $2; exit 1}' /usr/lib/lpd/pio/etc/nls.dir"
+:472:w7::%?%S_s%"Courier"%=%tCourier-Bold%e%S_s%"Times-Roman"%=%tTimes-Bold%e%S_s%"Helvetica"%=%tHelvetica-Bold%e%S_s%"Times-Italic"%=%tTimes-BoldItalic%e%S_s%"Helvetica-Oblique"%=%tHelvetica-BoldOblique%e%Iw8%;
+:472:w8::%?%S_s%"Courier-Oblique"%=%tCourier-BoldOblique%e%S_s%"Palatino-Roman"%=%tPalatino-Bold%e%S_s%"Palatino-Italic"%=%tPalatino-BoldItalic%e%S_s%"Optima"%=%tOptima-Bold%e%S_s%"Optima-Oblique"%=%tOptima-BoldOblique%e%Iw9%;
+:472:w9::%?%S_s%"NewCenturySchlbk-Italic"%=%tNewCenturySchlbk-BoldItalic%e%S_s%"Helvetica-Narrow"%=%tHelvetica-Narrow-Bold%e%S_s%"Helvetica-Narrow-Oblique"%=%tHelvetica-Narrow-BoldOblique%e%I_s%;
+:051:__CAG::
+:144:ci::
+:152:cr::\4
+:113:af::showpage
+:054:__ESC::

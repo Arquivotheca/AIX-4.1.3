@@ -1,0 +1,18 @@
+#!/sbin/comp.uext
+* @(#)92	1.2  src/bos/kernext/jfsc/comp.uext.exp, sysxjfsc, bos411, 9428A410j 4/15/94 11:03:00
+*
+* COMPONENT_NAME: SYSXJFSC (JFS Compression)
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+encode_decode
+getcompent

@@ -1,0 +1,204 @@
+* @(#)48 1.2 src/bos/objclass/POWER/bus.sys.mca.add, cfgmethods, bos411, 9428A410j 3/27/94 14:53:33
+*
+*   COMPONENT_NAME: (CFGMETHODS) bus.sys.mca.add
+*
+*   FUNCTIONS: Standard MCA bus predefined data
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = "mca"
+	class = "bus"
+	subclass = "sys"
+	prefix = "bus"
+	devid = ""
+	base = 1
+	has_vpd = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 2
+	led = 0x520
+	setno = 3
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = ""
+	Define = "/usr/lib/methods/define"
+	Configure = "/usr/lib/methods/cfgbus"
+	Change = ""
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = "bus/sys/mca"
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "bus_id"
+	deflt = "0x82000000"
+	values = "0x82000000"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "n"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "bus_type"
+	deflt = "1"
+	values = "1"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "bus_iocc_mem"
+	deflt = "0xfffff0"
+	values = "0xfffff0"
+	width = ""
+	type = "M"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "bimw"
+	deflt = "0x0"
+	values = "0x0,0x10"
+	width = "bus_iocc_mem"
+	type = "W"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "resv_ccm_rom1"
+	deflt = "0xc0000"
+	values = "0xc0000"
+	width = ""
+	type = "M"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "rcrw1"
+	deflt = "0x0"
+	values = "0x0,0x4000"
+	width = "resv_ccm_rom1"
+	type = "W"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "resv_ccm_rom2"
+	deflt = "0x100000"
+	values = "0x100000"
+	width = ""
+	type = "M"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "rcrw2"
+	deflt = "0x0"
+	values = "0x0,0x100000"
+	width = "resv_ccm_rom2"
+	type = "W"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "resv_ccm_rom3"
+	deflt = "0xc8000"
+	values = "0xc8000"
+	width = ""
+	type = "M"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+
+PdAt:
+	uniquetype = "bus/sys/mca"
+	attribute = "rcrw3"
+	deflt = "0x0"
+	values = "0x0,0x2000"
+	width = "resv_ccm_rom3"
+	type = "W"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "1"
+
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "2"
+
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "3"
+
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "4"
+
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "5"
+
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "6"
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "7"
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "8"
+
+PdCn:
+	uniquetype = "bus/sys/mca"
+	connkey = mca
+	connwhere = "0"
+

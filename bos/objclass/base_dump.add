@@ -1,0 +1,255 @@
+#  @(#)64        1.2  src/bos/objclass/base_dump.add, cmddump, bos411, 9428A410j 6/30/94 15:57:37 
+#
+#   COMPONENT_NAME: CMDDUMP
+#
+#   FUNCTIONS: stanza file for base dump SMIT odm population
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_cmd_opt:
+        id_seq_num = "010"
+        id = "dump_change1"
+        disc_field_name = ""
+        name = "PRIMARY dump device"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 9
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = "-P -p"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0453007"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "010"
+        id = "dump_change2"
+        disc_field_name = ""
+        name = "SECONDARY dump device"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 10
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = "-P -s"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0453009"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_show"
+        option_id = ""
+        has_name_select = ""
+        name = "Show Current Dump Devices"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 1
+        cmd_to_exec = "sysdumpdev -l"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453005"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dumpchgp"
+        option_id = "dump_change1"
+        has_name_select = ""
+        name = "Change Primary Dump Device"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 2
+        cmd_to_exec = "sysdumpdev"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453006"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dumpchgs"
+        option_id = "dump_change2"
+        has_name_select = ""
+        name = "Change Secondary Dump Device"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 3
+        cmd_to_exec = "sysdumpdev"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453008"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_showprev"
+        option_id = ""
+        has_name_select = ""
+        name = "Show Current Dump Devices"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 1
+        cmd_to_exec = "sysdumpdev -L"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453010"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_estimate"
+        option_id = ""
+        has_name_select = "n"
+        name = "Show Estimated Dump Size"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 24
+        cmd_to_exec = "sysdumpdev -e"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453023"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_chgd"
+        option_id = "dump_chgdOpts"
+        has_name_select = "n"
+        name = "Change the Directory to which Dump is Copied on Boot"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 25
+        cmd_to_exec = "sysdumpdev"
+        ask = "n"
+        exec_mode = ""
+        ghost = ""
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453024"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "020"
+        id = "dump_chgdOpts"
+        disc_field_name = ""
+        name= "CONTINUE Boot if Copy Fails"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 26
+        op_type = "r"
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 1
+        disp_values = "yes,no"
+        values_msg_file = "smit.cat"
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = "-d,-D"
+        help_msg_id = "0453025"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "010"
+        id = "dump_chgdOpts"
+        disc_field_name = ""
+        name= "DIRECTORY full pathname"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 27
+        op_type = ""
+        entry_type = "f"
+        entry_size = 0
+        required = "+"
+        prefix = "--"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0453026"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+

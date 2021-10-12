@@ -1,0 +1,105 @@
+# @(#)26	1.4  src/bldenv/man/bldmid.man, bldtools, bos412, GOLDA411a 6/24/93 16:02:40
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldmid man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: bldmid.man
+#
+# PURPOSE: man page for bldmid command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+bldmid Command
+
+Purpose
+
+Creates and/or updates files for Developer and Area builds that would 
+normally be created/updated during the bldretain process.
+
+Syntax
+
+	bldmid
+
+Description
+
+The bldmid command creates and/or updates four files used in the Developer
+and Area build process.  These files are:
+
+	$TOP/PTF/$BLDCYCLE/ptfids
+	$TOP/PTF/$BLDCYCLE/ptfids.org
+	$TOP/PTF/$BLDCYCLE/defectapars
+	$TOP/HISTORY/abstracts
+
+The first two files, 'ptfids' and 'ptfids.org', are simply touched by bldmid
+using the UNIX 'touch' command.  Thus if they did not exist prior to the 
+invocation of bldmid they are at least present (though possibly empty) 
+afterwards.  
+
+The 'defectapars' file is created by writing the defect/feature numbers 
+contained in a particular build, along with each defect/feature's corresponding 
+APAR number, in the following format:
+
+	<defect/feature #>|<APAR #>
+
+For example:
+
+	43131|IX10987
+
+APAR numbers are retrieved from the CMVC database using the 'Report' command.
+A valid APAR number is one that is of the form: 
+	
+	IXinteger
+	ixinteger
+	Ixinteger
+	iXinteger
+	
+For example:
+
+	IX10987    or
+	iX20389
+
+If the 'Report' command does not return a valid APAR number (or there is no
+APAR associated with the defect/feature) then the APAR number field in the 
+'defectapars' file is left blank.  The bldmid command overwrites the 
+'defectapars' file on invocation.
+
+Each line of the 'abstracts' file contains an entry of the following form:
+
+	<APAR #><defect/feature abstract>
+	blank line
+	symptom
+	<@>
+
+For example:
+
+	IX23620 SMIT:Add A SPOT, Input Device selection screen doesnt work.     
+
+	Required 3.2 update.
+	<@>
+
+The bldmid command appends to any previous 'abstracts' file on each invocation.
+
+Flags
+
+	None
+
+Examples
+
+	bldmid
+
+Related Information
+
+	$TOP/PTF/$BLDCYCLE/ptfids
+	$TOP/PTF/$BLDCYCLE/defectapars
+	$TOP/HISTORY/abstracts
+

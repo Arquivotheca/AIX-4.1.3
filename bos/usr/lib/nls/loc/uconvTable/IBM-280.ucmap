@@ -1,0 +1,308 @@
+# @(#)38	1.2  src/bos/usr/lib/nls/loc/uconvTable/IBM-280.ucmap, cmdiconv, bos411, 9428A410j 11/2/93 08:25:21
+#
+#   COMPONENT_NAME:	CMDICONV
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   ISO 10646-1: UCS-2
+#
+#   Table Format:
+#	Columns separated by spaces:
+#	Col1: (pos.  1- 7) ISO 10646 code as <Uxxxx>
+#	Col2: (pos. 16-30) IBM-280 code as \xhh
+#	Col3: (pos. 32-39) IBM GCGID
+#	Col4: (pos. 42-49) Mapping indicator to specify:
+#		1. Arabic Shared hapes:
+#			NOMINAL, ISOLATED, INITIAL, MEDIAL, FINAL
+#		2. Synonym GCGID used when direct mapping for
+#		   the main GCGID is not available.
+#	Col5: (pos. 56-> ) ISO 10646 character name
+#
+#   Sorting:	The entries are in IBM CCSID 00280 code point order
+#
+#   Statistics:	IBM CCSID  00280:  256 (of 256) code points mapped to
+#		ISO 10646, UCS-2:  256 code points
+#
+<code_set_name>         "IBM-280"
+<char_name_mask>        "AXXXX"
+<mb_cur_max>            1
+<mb_cur_min>            1
+<uconv_class>		"SBCS"
+#
+#
+#
+CHARMAP
+#
+#ISO 10646     Codepoint        GCGID    SYN/SHAPE     ISO 10646 Name
+#---------     ---------        -------- ---------     ------------------------
+<U0000>        \x00            #                       ===
+<U0001>        \x01            #                       ===
+<U0002>        \x02            #                       ===
+<U0003>        \x03            #                       ===
+<U009C>        \x04            #                       ===
+<U0009>        \x05            #                       ===
+<U0086>        \x06            #                       ===
+<U007F>        \x07            #                       ===
+<U0097>        \x08            #                       ===
+<U008D>        \x09            #                       ===
+<U008E>        \x0A            #                       ===
+<U000B>        \x0B            #                       ===
+<U000C>        \x0C            #                       ===
+<U000D>        \x0D            #                       ===
+<U000E>        \x0E            #                       ===
+<U000F>        \x0F            #                       ===
+<U0010>        \x10            #                       ===
+<U0011>        \x11            #                       ===
+<U0012>        \x12            #                       ===
+<U0013>        \x13            #                       ===
+<U009D>        \x14            #                       ===
+<U0085>        \x15            #                       ===
+<U0008>        \x16            #                       ===
+<U0087>        \x17            #                       ===
+<U0018>        \x18            #                       ===
+<U0019>        \x19            #                       ===
+<U0092>        \x1A            #                       ===
+<U008F>        \x1B            #                       ===
+<U001C>        \x1C            #                       ===
+<U001D>        \x1D            #                       ===
+<U001E>        \x1E            #                       ===
+<U001F>        \x1F            #                       ===
+<U0080>        \x20            #                       ===
+<U0081>        \x21            #                       ===
+<U0082>        \x22            #                       ===
+<U0083>        \x23            #                       ===
+<U0084>        \x24            #                       ===
+<U000A>        \x25            #                       ===
+<U0017>        \x26            #                       ===
+<U001B>        \x27            #                       ===
+<U0088>        \x28            #                       ===
+<U0089>        \x29            #                       ===
+<U008A>        \x2A            #                       ===
+<U008B>        \x2B            #                       ===
+<U008C>        \x2C            #                       ===
+<U0005>        \x2D            #                       ===
+<U0006>        \x2E            #                       ===
+<U0007>        \x2F            #                       ===
+<U0090>        \x30            #                       ===
+<U0091>        \x31            #                       ===
+<U0016>        \x32            #                       ===
+<U0093>        \x33            #                       ===
+<U0094>        \x34            #                       ===
+<U0095>        \x35            #                       ===
+<U0096>        \x36            #                       ===
+<U0004>        \x37            #                       ===
+<U0098>        \x38            #                       ===
+<U0099>        \x39            #                       ===
+<U009A>        \x3A            #                       ===
+<U009B>        \x3B            #                       ===
+<U0014>        \x3C            #                       ===
+<U0015>        \x3D            #                       ===
+<U009E>        \x3E            #                       ===
+<U001A>        \x3F            #                       ===
+<U0020>        \x40            # SP010000              SPACE
+<U00A0>        \x41            # SP300000              NO-BREAK SPACE
+<U00E2>        \x42            # LA150000              LATIN SMALL LETTER A WITH CIRCUMFLEX
+<U00E4>        \x43            # LA170000              LATIN SMALL LETTER A WITH DIAERESIS
+<U007B>        \x44            # SM110000              LEFT CURLY BRACKET
+<U00E1>        \x45            # LA110000              LATIN SMALL LETTER A WITH ACUTE
+<U00E3>        \x46            # LA190000              LATIN SMALL LETTER A WITH TILDE
+<U00E5>        \x47            # LA270000              LATIN SMALL LETTER A WITH RING ABOVE
+<U005C>        \x48            # SM070000              REVERSE SOLIDUS
+<U00F1>        \x49            # LN190000              LATIN SMALL LETTER N WITH TILDE
+<U00B0>        \x4A            # SM190000              DEGREE SIGN
+<U002E>        \x4B            # SP110000              FULL STOP
+<U003C>        \x4C            # SA030000              LESS-THAN SIGN
+<U0028>        \x4D            # SP060000              LEFT PARENTHESIS
+<U002B>        \x4E            # SA010000              PLUS SIGN
+<U0021>        \x4F            # SP020000              EXCLAMATION MARK
+<U0026>        \x50            # SM030000              AMPERSAND
+<U005D>        \x51            # SM080000              RIGHT SQUARE BRACKET
+<U00EA>        \x52            # LE150000              LATIN SMALL LETTER E WITH CIRCUMFLEX
+<U00EB>        \x53            # LE170000              LATIN SMALL LETTER E WITH DIAERESIS
+<U007D>        \x54            # SM140000              RIGHT CURLY BRACKET
+<U00ED>        \x55            # LI110000              LATIN SMALL LETTER I WITH ACUTE
+<U00EE>        \x56            # LI150000              LATIN SMALL LETTER I WITH CIRCUMFLEX
+<U00EF>        \x57            # LI170000              LATIN SMALL LETTER I WITH DIAERESIS
+<U007E>        \x58            # SD190000              TILDE
+<U00DF>        \x59            # LS610000              LATIN SMALL LETTER SHARP S (German)
+<U00E9>        \x5A            # LE110000              LATIN SMALL LETTER E WITH ACUTE
+<U0024>        \x5B            # SC030000              DOLLAR SIGN
+<U002A>        \x5C            # SM040000              ASTERISK
+<U0029>        \x5D            # SP070000              RIGHT PARENTHESIS
+<U003B>        \x5E            # SP140000              SEMICOLON
+<U005E>        \x5F            # SD150000              CIRCUMFLEX ACCENT
+<U002D>        \x60            # SP100000              HYPHEN-MINUS
+<U002F>        \x61            # SP120000              SOLIDUS
+<U00C2>        \x62            # LA160000              LATIN CAPITAL LETTER A WITH CIRCUMFLEX
+<U00C4>        \x63            # LA180000              LATIN CAPITAL LETTER A WITH DIAERESIS
+<U00C0>        \x64            # LA140000              LATIN CAPITAL LETTER A WITH GRAVE
+<U00C1>        \x65            # LA120000              LATIN CAPITAL LETTER A WITH ACUTE
+<U00C3>        \x66            # LA200000              LATIN CAPITAL LETTER A WITH TILDE
+<U00C5>        \x67            # LA280000              LATIN CAPITAL LETTER A WITH RING ABOVE
+<U00C7>        \x68            # LC420000              LATIN CAPITAL LETTER C WITH CEDILLA
+<U00D1>        \x69            # LN200000              LATIN CAPITAL LETTER N WITH TILDE
+<U00F2>        \x6A            # LO130000              LATIN SMALL LETTER O WITH GRAVE
+<U002C>        \x6B            # SP080000              COMMA
+<U0025>        \x6C            # SM020000              PERCENT SIGN
+<U005F>        \x6D            # SP090000              LOW LINE
+<U003E>        \x6E            # SA050000              GREATER-THAN SIGN
+<U003F>        \x6F            # SP150000              QUESTION MARK
+<U00F8>        \x70            # LO610000              LATIN SMALL LETTER O WITH STROKE
+<U00C9>        \x71            # LE120000              LATIN CAPITAL LETTER E WITH ACUTE
+<U00CA>        \x72            # LE160000              LATIN CAPITAL LETTER E WITH CIRCUMFLEX
+<U00CB>        \x73            # LE180000              LATIN CAPITAL LETTER E WITH DIAERESIS
+<U00C8>        \x74            # LE140000              LATIN CAPITAL LETTER E WITH GRAVE
+<U00CD>        \x75            # LI120000              LATIN CAPITAL LETTER I WITH ACUTE
+<U00CE>        \x76            # LI160000              LATIN CAPITAL LETTER I WITH CIRCUMFLEX
+<U00CF>        \x77            # LI180000              LATIN CAPITAL LETTER I WITH DIAERESIS
+<U00CC>        \x78            # LI140000              LATIN CAPITAL LETTER I WITH GRAVE
+<U00F9>        \x79            # LU130000              LATIN SMALL LETTER U WITH GRAVE
+<U003A>        \x7A            # SP130000              COLON
+<U00A3>        \x7B            # SC020000              POUND SIGN
+<U00A7>        \x7C            # SM240000              SECTION SIGN
+<U0027>        \x7D            # SP050000              APOSTROPHE
+<U003D>        \x7E            # SA040000              EQUALS SIGN
+<U0022>        \x7F            # SP040000              QUOTATION MARK
+<U00D8>        \x80            # LO620000              LATIN CAPITAL LETTER O WITH STROKE
+<U0061>        \x81            # LA010000              LATIN SMALL LETTER A
+<U0062>        \x82            # LB010000              LATIN SMALL LETTER B
+<U0063>        \x83            # LC010000              LATIN SMALL LETTER C
+<U0064>        \x84            # LD010000              LATIN SMALL LETTER D
+<U0065>        \x85            # LE010000              LATIN SMALL LETTER E
+<U0066>        \x86            # LF010000              LATIN SMALL LETTER F
+<U0067>        \x87            # LG010000              LATIN SMALL LETTER G
+<U0068>        \x88            # LH010000              LATIN SMALL LETTER H
+<U0069>        \x89            # LI010000              LATIN SMALL LETTER I
+<U00AB>        \x8A            # SP170000              LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+<U00BB>        \x8B            # SP180000              RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+<U00F0>        \x8C            # LD630000              LATIN SMALL LETTER ETH (Icelandic)
+<U00FD>        \x8D            # LY110000              LATIN SMALL LETTER Y WITH ACUTE
+<U00FE>        \x8E            # LT630000              LATIN SMALL LETTER THORN (Icelandic)
+<U00B1>        \x8F            # SA020000              PLUS-MINUS SIGN
+<U005B>        \x90            # SM060000              LEFT SQUARE BRACKET
+<U006A>        \x91            # LJ010000              LATIN SMALL LETTER J
+<U006B>        \x92            # LK010000              LATIN SMALL LETTER K
+<U006C>        \x93            # LL010000              LATIN SMALL LETTER L
+<U006D>        \x94            # LM010000              LATIN SMALL LETTER M
+<U006E>        \x95            # LN010000              LATIN SMALL LETTER N
+<U006F>        \x96            # LO010000              LATIN SMALL LETTER O
+<U0070>        \x97            # LP010000              LATIN SMALL LETTER P
+<U0071>        \x98            # LQ010000              LATIN SMALL LETTER Q
+<U0072>        \x99            # LR010000              LATIN SMALL LETTER R
+<U00AA>        \x9A            # SM210000              FEMININE ORDINAL INDICATOR
+<U00BA>        \x9B            # SM200000              MASCULINE ORDINAL INDICATOR
+<U00E6>        \x9C            # LA510000              LATIN SMALL LIGATURE AE
+<U00B8>        \x9D            # SD410000              CEDILLA
+<U00C6>        \x9E            # LA520000              LATIN CAPITAL LIGATURE AE
+<U00A4>        \x9F            # SC010000              CURRENCY SIGN
+<U00B5>        \xA0            # SM170000              MICRO SIGN
+<U00EC>        \xA1            # LI130000              LATIN SMALL LETTER I WITH GRAVE
+<U0073>        \xA2            # LS010000              LATIN SMALL LETTER S
+<U0074>        \xA3            # LT010000              LATIN SMALL LETTER T
+<U0075>        \xA4            # LU010000              LATIN SMALL LETTER U
+<U0076>        \xA5            # LV010000              LATIN SMALL LETTER V
+<U0077>        \xA6            # LW010000              LATIN SMALL LETTER W
+<U0078>        \xA7            # LX010000              LATIN SMALL LETTER X
+<U0079>        \xA8            # LY010000              LATIN SMALL LETTER Y
+<U007A>        \xA9            # LZ010000              LATIN SMALL LETTER Z
+<U00A1>        \xAA            # SP030000              INVERTED EXCLAMATION MARK
+<U00BF>        \xAB            # SP160000              INVERTED QUESTION MARK
+<U00D0>        \xAC            # LD620000              LATIN CAPITAL LETTER ETH (Icelandic)
+<U00DD>        \xAD            # LY120000              LATIN CAPITAL LETTER Y WITH ACUTE
+<U00DE>        \xAE            # LT640000              LATIN CAPITAL LETTER THORN (Icelandic)
+<U00AE>        \xAF            # SM530000              REGISTERED SIGN
+<U00A2>        \xB0            # SC040000              CENT SIGN
+<U0023>        \xB1            # SM010000              NUMBER SIGN
+<U00A5>        \xB2            # SC050000              YEN SIGN
+<U00B7>        \xB3            # SD630000              MIDDLE DOT
+<U00A9>        \xB4            # SM520000              COPYRIGHT SIGN
+<U0040>        \xB5            # SM050000              COMMERCIAL AT
+<U00B6>        \xB6            # SM250000              PILCROW SIGN
+<U00BC>        \xB7            # NF040000              VULGAR FRACTION ONE QUARTER
+<U00BD>        \xB8            # NF010000              VULGAR FRACTION ONE HALF
+<U00BE>        \xB9            # NF050000              VULGAR FRACTION THREE QUARTERS
+<U00AC>        \xBA            # SM660000              NOT SIGN
+<U007C>        \xBB            # SM130000              VERTICAL LINE
+<U00AF>        \xBC            # SM150000              MACRON
+<U00A8>        \xBD            # SD170000              DIAERESIS
+<U00B4>        \xBE            # SD110000              ACUTE ACCENT
+<U00D7>        \xBF            # SA070000              MULTIPLICATION SIGN
+<U00E0>        \xC0            # LA130000              LATIN SMALL LETTER A WITH GRAVE
+<U0041>        \xC1            # LA020000              LATIN CAPITAL LETTER A
+<U0042>        \xC2            # LB020000              LATIN CAPITAL LETTER B
+<U0043>        \xC3            # LC020000              LATIN CAPITAL LETTER C
+<U0044>        \xC4            # LD020000              LATIN CAPITAL LETTER D
+<U0045>        \xC5            # LE020000              LATIN CAPITAL LETTER E
+<U0046>        \xC6            # LF020000              LATIN CAPITAL LETTER F
+<U0047>        \xC7            # LG020000              LATIN CAPITAL LETTER G
+<U0048>        \xC8            # LH020000              LATIN CAPITAL LETTER H
+<U0049>        \xC9            # LI020000              LATIN CAPITAL LETTER I
+<U00AD>        \xCA            # SP320000              SOFT HYPHEN
+<U00F4>        \xCB            # LO150000              LATIN SMALL LETTER O WITH CIRCUMFLEX
+<U00F6>        \xCC            # LO170000              LATIN SMALL LETTER O WITH DIAERESIS
+<U00A6>        \xCD            # SM650000              BROKEN BAR
+<U00F3>        \xCE            # LO110000              LATIN SMALL LETTER O WITH ACUTE
+<U00F5>        \xCF            # LO190000              LATIN SMALL LETTER O WITH TILDE
+<U00E8>        \xD0            # LE130000              LATIN SMALL LETTER E WITH GRAVE
+<U004A>        \xD1            # LJ020000              LATIN CAPITAL LETTER J
+<U004B>        \xD2            # LK020000              LATIN CAPITAL LETTER K
+<U004C>        \xD3            # LL020000              LATIN CAPITAL LETTER L
+<U004D>        \xD4            # LM020000              LATIN CAPITAL LETTER M
+<U004E>        \xD5            # LN020000              LATIN CAPITAL LETTER N
+<U004F>        \xD6            # LO020000              LATIN CAPITAL LETTER O
+<U0050>        \xD7            # LP020000              LATIN CAPITAL LETTER P
+<U0051>        \xD8            # LQ020000              LATIN CAPITAL LETTER Q
+<U0052>        \xD9            # LR020000              LATIN CAPITAL LETTER R
+<U00B9>        \xDA            # ND011000              SUPERSCRIPT ONE
+<U00FB>        \xDB            # LU150000              LATIN SMALL LETTER U WITH CIRCUMFLEX
+<U00FC>        \xDC            # LU170000              LATIN SMALL LETTER U WITH DIAERESIS
+<U0060>        \xDD            # SD130000              GRAVE ACCENT
+<U00FA>        \xDE            # LU110000              LATIN SMALL LETTER U WITH ACUTE
+<U00FF>        \xDF            # LY170000              LATIN SMALL LETTER Y WITH DIAERESIS
+<U00E7>        \xE0            # LC410000              LATIN SMALL LETTER C WITH CEDILLA
+<U00F7>        \xE1            # SA060000              DIVISION SIGN
+<U0053>        \xE2            # LS020000              LATIN CAPITAL LETTER S
+<U0054>        \xE3            # LT020000              LATIN CAPITAL LETTER T
+<U0055>        \xE4            # LU020000              LATIN CAPITAL LETTER U
+<U0056>        \xE5            # LV020000              LATIN CAPITAL LETTER V
+<U0057>        \xE6            # LW020000              LATIN CAPITAL LETTER W
+<U0058>        \xE7            # LX020000              LATIN CAPITAL LETTER X
+<U0059>        \xE8            # LY020000              LATIN CAPITAL LETTER Y
+<U005A>        \xE9            # LZ020000              LATIN CAPITAL LETTER Z
+<U00B2>        \xEA            # ND021000              SUPERSCRIPT TWO
+<U00D4>        \xEB            # LO160000              LATIN CAPITAL LETTER O WITH CIRCUMFLEX
+<U00D6>        \xEC            # LO180000              LATIN CAPITAL LETTER O WITH DIAERESIS
+<U00D2>        \xED            # LO140000              LATIN CAPITAL LETTER O WITH GRAVE
+<U00D3>        \xEE            # LO120000              LATIN CAPITAL LETTER O WITH ACUTE
+<U00D5>        \xEF            # LO200000              LATIN CAPITAL LETTER O WITH TILDE
+<U0030>        \xF0            # ND100000              DIGIT ZERO
+<U0031>        \xF1            # ND010000              DIGIT ONE
+<U0032>        \xF2            # ND020000              DIGIT TWO
+<U0033>        \xF3            # ND030000              DIGIT THREE
+<U0034>        \xF4            # ND040000              DIGIT FOUR
+<U0035>        \xF5            # ND050000              DIGIT FIVE
+<U0036>        \xF6            # ND060000              DIGIT SIX
+<U0037>        \xF7            # ND070000              DIGIT SEVEN
+<U0038>        \xF8            # ND080000              DIGIT EIGHT
+<U0039>        \xF9            # ND090000              DIGIT NINE
+<U00B3>        \xFA            # ND031000              SUPERSCRIPT THREE
+<U00DB>        \xFB            # LU160000              LATIN CAPITAL LETTER U WITH CIRCUMFLEX
+<U00DC>        \xFC            # LU180000              LATIN CAPITAL LETTER U WITH DIAERESIS
+<U00D9>        \xFD            # LU140000              LATIN CAPITAL LETTER U WITH GRAVE
+<U00DA>        \xFE            # LU120000              LATIN CAPITAL LETTER U WITH ACUTE
+<U009F>        \xFF            #                       ===
+#--------------------------------------------------------------------------
+#           IBM CCSID  00280:  256 (of 256) code points mapped to
+#           ISO 10646, UCS-2:  256 code points
+#
+END CHARMAP

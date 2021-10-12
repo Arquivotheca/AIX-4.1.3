@@ -1,0 +1,4203 @@
+# @(#)98	1.12  src/bos/usr/bin/netls/netls.add, netls, bos411, 9428A410j 6/14/94 11:03:12
+#
+#   COMPONENT_NAME: netls
+#
+#   FUNCTIONS: stanza file for netls SMIT odm population
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+
+sm_menu_opt:
+        id                  = "top_menu"
+        id_seq_num          = "015"
+        next_id             = "licenses"
+        text                = "Software License Management"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 60
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "9000000"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "licenses"
+        id_seq_num          = "010"
+        next_id             = "manage_nodelocked"
+        text                = "Manage Nodelocked Licenses"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 40
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "9000004"
+
+sm_menu_opt:
+	id                  = "licenses"
+        id_seq_num          = "020"
+        next_id             = "manage_servers"
+        text                = "Manage License Servers and License Databases"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 37
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "9000001"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+	id                  = "licenses"
+        id_seq_num          = "030"
+        next_id             = "verify_servers"
+        text                = "Show Available License Servers"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 39
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000003"
+	help_msg_loc	    = ""	
+
+sm_menu_opt:
+	id                  = "licenses"
+        id_seq_num          = "040"
+        next_id             = "show_server_status"
+        text                = "Show License Usage On Servers"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 38
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "9000002"
+	help_msg_loc	    = ""	
+
+sm_menu_opt:
+	id                  = "licenses"
+        id_seq_num          = "050"
+        next_id             = "show_target_id"
+        text                = "Show Target ID"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 41
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000023"
+
+sm_menu_opt:
+	id                  = "manage_servers"
+        id_seq_num          = "010"
+        next_id             = "show_server_characteristics"
+        text                = "Show Server Characteristics"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 44
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000011"
+
+sm_menu_opt:
+	id                  = "manage_servers"
+        id_seq_num          = "020"
+        next_id             = "manage_prod_licenses"
+        text                = "Manage Concurrent Use and Use Once Licenses"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 42
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "9000009"
+
+sm_menu_opt:
+	id                  = "manage_servers"
+        id_seq_num          = "030"
+        next_id             = "manage_vendors"
+        text                = "Manage Vendor Information in License Databases"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 43
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "9000010"
+
+sm_menu_opt:
+	id                  = "manage_servers"
+        id_seq_num          = "040"
+        next_id             = "standalone_config"
+        text                = "Perform Standalone Configuration for Adding/Using Licenses"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 61
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000999"
+
+sm_menu_opt:
+	id                  = "manage_prod_licenses"
+        id_seq_num          = "010"
+        next_id             = "add_vendor_prod_licenses"
+        text                = "Add New Licenses and New Vendor Information"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 24
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000022"
+
+sm_menu_opt:
+	id                  = "manage_prod_licenses"
+        id_seq_num          = "020"
+        next_id             = "add_prod_licenses"
+        text                = "Add New Licenses for a Previously Added Vendor"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 45
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000016"
+
+sm_menu_opt:
+	id                  = "manage_prod_licenses"
+        id_seq_num          = "030"
+        next_id             = "show_installed_licenses"
+        text                = "Show License Information By Server"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 38
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000007"
+	help_msg_loc	    = ""	
+
+sm_menu_opt:
+	id                  = "manage_prod_licenses"
+        id_seq_num          = "040"
+        next_id             = "show_prod_licenses"
+        text                = "Show Concurrent Use and Use Once Licenses"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 11
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000017"
+
+sm_menu_opt:
+	id                  = "manage_prod_licenses"
+        id_seq_num          = "050"
+        next_id             = "delete_prod_licenses"
+        text                = "Delete Licenses"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 15
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000018"
+
+sm_menu_opt:
+	id                  = "manage_vendors"
+        id_seq_num          = "010"
+        next_id             = "add_vendors"
+        text                = "Add Vendors"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 17
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000019"
+
+sm_menu_opt:
+	id                  = "manage_vendors"
+        id_seq_num          = "020"
+        next_id             = "show_vendors"
+        text                = "Show Vendors"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 21
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000020"
+
+sm_menu_opt:
+	id                  = "manage_vendors"
+        id_seq_num          = "030"
+        next_id             = "delete_vendors"
+        text                = "Delete Vendors"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 20
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000021"
+
+sm_menu_opt:
+	id                  = "show_server_status"
+        id_seq_num          = "010"
+        next_id             = "show_total_license_usage"
+        text                = "Show License Usage Summary"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 36
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000005"
+
+sm_menu_opt:
+	id                  = "show_server_status"
+        id_seq_num          = "020"
+        next_id             = "show_current_license_usage"
+        text                = "Show Licenses Currently Being Used"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 47
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000007"
+
+sm_menu_opt:
+	id                  = "show_server_status"
+        id_seq_num          = "030"
+        next_id             = "show_installed_licenses"
+        text                = "Show License Information By Server"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 46
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000006"
+
+sm_menu_opt:
+	id                  = "show_server_status"
+        id_seq_num          = "040"
+        next_id             = "show_user_license_held"
+        text                = "Show Licenses Held by a Specific User"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 48
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "9000008"
+
+sm_menu_opt:
+	id                  = "manage_nodelocked"
+        id_seq_num          = "010"
+        next_id             = "add_nodelocked_from_file"
+        text                = "Add a Nodelocked License from a File"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 30
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000012"
+
+sm_menu_opt:
+        id                  = "manage_nodelocked"
+        id_seq_num          = "015"
+        next_id             = "add_nodelocked_from_keyboard"
+        text                = "Add a Nodelocked License from the Keyboard"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 27
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000013"
+
+sm_menu_opt:
+	id                  = "manage_nodelocked"
+        id_seq_num          = "030"
+        next_id             = "show_nodelocked"
+        text                = "Show Nodelocked Licenses"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 32
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000015"
+
+sm_menu_opt:
+	id                  = "manage_nodelocked"
+        id_seq_num          = "040"
+        next_id             = "delete_nodelocked"
+        text                = "Delete a Nodelocked License"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 51
+        text_msg_id         = 33
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "9000014"
+
+# Show Target ID
+
+sm_cmd_hdr:
+        id 		    = "show_target_id"
+        option_id 	    = ""
+        has_name_select     = ""
+        name 	 	    = "Show Target ID"
+        name_msg_file 	    = "smit.cat"
+        name_msg_set 	    = 51
+        name_msg_id         = 3
+        cmd_to_exec         = "/usr/lib/netls/bin/ls_targetid"
+        ask                 = "n"
+        exec_mode           = "p"
+        ghost               = "y"
+        cmd_to_discover     = ""
+        cmd_to_discover_postfix = ""
+        name_size           = 0
+        value_size          = 0
+        help_msg_id         = "9000023"
+        help_msg_loc        = ""
+        help_msg_base       = ""
+        help_msg_book       = ""
+
+# Add New Licenses for a Previously Added Vendor
+
+sm_name_hdr:
+        id                  = "add_prod_licenses"
+        next_id 	    = "add_prod_licenses.hdr"
+        option_id           = "add_prod_licenses.name_select"
+        name                = "Add New Licenses for a Previously Added Vendor"
+        name_msg_file       = "smit.cat"
+        name_msg_set        = 51
+        name_msg_id         = 4
+        type                = "j"
+        ghost               = "y"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name      = "_rawname"
+        cooked_field_name   = "_cookedname"
+        next_type           = "d"
+        help_msg_id         = "9000016"
+        help_msg_loc        = ""
+        help_msg_base       = ""
+        help_msg_book       = ""
+
+sm_cmd_opt:
+        id                              = "add_prod_licenses.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000048"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "add_prod_licenses.hdr"
+        option_id                       = "add_prod_licenses_opts"
+        has_name_select                 = "y"
+        name                            = "Add New Licenses for a Previously Added Vendor"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 4
+        cmd_to_exec                     = "x()
+{
+# The command must be called in this fashion because the
+# product password and version come in reverse from what
+# the ls_admin command expects.
+
+/usr/lib/netls/bin/ls_admin -a $1 $2 $8 $9 $3 \"$4\" \"$5\" $7 $6
+}
+x"
+        ask                             = "n"
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+echo '#server\n'$1
+}
+x"
+        cmd_to_discover_postfix         = "_rawname"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "9000016"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_prod_licenses_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 5
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000048"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_prod_licenses_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 6
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+/usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000025"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_prod_licenses_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 7
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000026"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_prod_licenses_opts"
+        id_seq_num                      = "050"
+        disc_field_name                 = "password"
+        name                            = "Product PASSWORD"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 8
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000028"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_prod_licenses_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "version"
+        name                            = "VERSION"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 9
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000027"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_prod_licenses_opts"
+        id_seq_num                      = "060"
+        disc_field_name                 = ""
+        name                            = "LICENSE Annotation"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 10
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "?"
+        prefix                          = "-l "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000029"
+        help_msg_loc                    = ""
+
+# Show Concurrent Use and Use Once Licenses
+
+sm_name_hdr:
+        id                    = "show_prod_licenses"
+        next_id               = "show_prod_licenses_1"
+        option_id             = "show_prod_licenses.name_select"
+        name                  = "Show Concurrent Use and Use Once Licenses"
+        name_msg_file         = "smit.cat"
+        name_msg_set          = 51
+        name_msg_id           = 11
+        type                  = "j"
+        ghost                 = "y"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name        = "_rawname"
+        cooked_field_name     = "_cookedname"
+        next_type             = "n"
+        help_msg_id           = "9000017"
+        help_msg_loc          = ""
+        help_msg_base         = ""
+        help_msg_book         = ""
+
+sm_name_hdr:
+        id                    = "show_prod_licenses_1"
+        next_id               = "show_prod_licenses_2"
+        option_id             = "show_prod_licenses.name_select1"
+	has_name_select       = "n"
+        name                  = "Show Concurrent Use and Use Once Licenses"
+        name_msg_file         = "smit.cat"
+        name_msg_set          = 51
+        name_msg_id           = 11
+        type                  = "j"
+        ghost                 = "n"
+        cmd_to_classify       = ""
+        cmd_to_classify_postfix = "_rawname1"
+        raw_field_name        = "_rawname1"
+        cooked_field_name     = "_cookedname1"
+        next_type             = "n"
+        help_msg_id           = "9000017"
+        help_msg_loc          = ""
+        help_msg_base         = ""
+        help_msg_book         = ""
+
+sm_name_hdr:
+        id                    = "show_prod_licenses_2"
+        next_id               = "show_prod_licenses.hdr1"
+        option_id             = "show_prod_licenses.name_select2"
+        has_name_select       = "n"
+        name                  = "Show Concurrent Use and Use Once Licenses"
+        name_msg_file         = "smit.cat"
+        name_msg_set          = 51
+        name_msg_id           = 11
+        type                  = "j"
+        ghost                 = "n"
+        cmd_to_classify       = ""
+        cmd_to_classify_postfix = "_rawname2"
+        raw_field_name        = "_rawname2"
+        cooked_field_name     = "_cookedname2"
+        next_type             = "d"
+        help_msg_id           = "9000017"
+        help_msg_loc          = ""
+        help_msg_base         = ""
+        help_msg_book         = ""
+
+sm_cmd_opt:
+        id                              = "show_prod_licenses.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list	                = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_prod_licenses.name_select1"
+        id_seq_num                      = "0"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+/usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000030"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_prod_licenses.name_select2"
+        id_seq_num                      = "0"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "n"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+/usr/lib/netls/bin/ls_admin -n $1 -s -p \"$2\" | grep \"$PRODUCT\" | cut -d\" \" -f2- | cut -d\"[\" -f1 
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000031"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "show_prod_licenses.hdr1"
+        option_id                       = "show_prod_licenses_opts"
+        has_name_select                 = "y"
+        name                            = "Show Concurrent Use and Use Once Licenses"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 11
+	cmd_to_exec			= "x()
+{
+        while getopts z:r:n:p: FLAG \"$@\"; do
+                case $FLAG in 
+                        z)      PRODUCT=$OPTARG;; 
+                        r)      VERSION=$OPTARG;; 
+			n)	SERVER=$OPTARG;; 
+			p)	VENDOR=$OPTARG;; 
+			*)	QUESTION=$OPTARG;;
+                esac \n\
+        done \n\
+ 	if [[ -z \"$VERSION\" ]];    # no version is specified 
+	then
+		if [ \"$PRODUCT\" = \"all\" ]
+		then 
+			/usr/lib/netls/bin/ls_admin -n $SERVER -s -p \"$VENDOR\"
+		else
+			/usr/lib/netls/bin/ls_admin -n $SERVER -s -p \"$VENDOR\" \"$PRODUCT\" -r
+		fi
+	else
+		/usr/lib/netls/bin/ls_admin -n $SERVER -s -p \"$VENDOR\" \"$PRODUCT\" -r \"$VERSION\"
+	fi 
+}
+x"
+        ask                             = "n"
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+echo '#server:vendor:product\n'$1:$2:$3
+}
+x"
+        cmd_to_discover_postfix         = "_rawname _rawname1 _rawname2"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "9000017"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_prod_licenses_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_prod_licenses_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "+"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000030"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_prod_licenses_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-z "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+        values_msg_set                  = 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000031"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_prod_licenses_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "version"
+        name                            = "VERSION"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 9
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "n"
+        prefix                          = "-r "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "y()
+{
+PRODUCT=`/usr/bin/dspmsg lss.cat -s 2 641 \"Product\"`
+/usr/lib/netls/bin/ls_admin -n $1 -s -p \"$2\" \"$3\" -r | grep \"$PRODUCT\" | awk -F\"[\" '{print $2}' | tr -d \"]\" 
+}
+y"
+        cmd_to_list_postfix             = "_rawname _rawname1 _rawname2"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+        values_msg_set                  = 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000032"
+        help_msg_loc                    = ""
+
+# Delete Licenses
+
+sm_name_hdr:
+        id                  = "delete_prod_licenses"
+        next_id             = "delete_prod_licenses_1"
+        option_id           = "delete_prod_licenses.name_select"
+        name                = "Delete Licenses"
+        name_msg_file       = "smit.cat"
+        name_msg_set        = 51
+        name_msg_id         = 15
+        type                = "j"
+        ghost               = "y"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name       = "_rawname"
+        cooked_field_name    = "_cookedname"
+        next_type            = "n"
+        help_msg_id          = "9000018"
+        help_msg_loc         = ""
+        help_msg_base        = ""
+        help_msg_book        = ""
+
+sm_name_hdr:
+        id                   = "delete_prod_licenses_1"
+        next_id              = "delete_prod_licenses_2"
+        option_id            = "delete_prod_licenses.name_select1"
+        has_name_select      = "n"
+        name                 = "Delete Licenses"
+        name_msg_file        = "smit.cat"
+        name_msg_set         = 51
+        name_msg_id          = 15
+        type                 = "j"
+        ghost                = "n"
+        cmd_to_classify      = ""
+        cmd_to_classify_postfix = "_rawname1"
+        raw_field_name       = "_rawname1"
+        cooked_field_name    = "_cookedname1"
+        next_type            = "n"
+        help_msg_id          = "9000018"
+        help_msg_loc         = ""
+        help_msg_base        = ""
+        help_msg_book        = ""
+
+sm_name_hdr:
+        id                   = "delete_prod_licenses_2"
+        next_id              = "delete_prod_licenses.hdr1"
+        option_id            = "delete_prod_licenses.name_select2"
+        has_name_select      = "n"
+        name                 = "Delete Licenses"
+        name_msg_file        = "smit.cat"
+        name_msg_set         = 51
+        name_msg_id          = 15
+        type                 = "j"
+        ghost                = "n"
+        cmd_to_classify      = ""
+        cmd_to_classify_postfix = "_rawname2"
+        raw_field_name       = "_rawname2"
+        cooked_field_name    = "_cookedname2"
+        next_type            = "d"
+        help_msg_id          = "9000018"
+        help_msg_loc         = ""
+        help_msg_base        = ""
+        help_msg_book        = ""
+
+sm_cmd_opt:
+        id                              = "delete_prod_licenses.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "_rawname"
+        name                            = "SERVER "
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "delete_prod_licenses.name_select1"
+        id_seq_num                      = "0"
+        disc_field_name                 = "_rawname1"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+/usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2-
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000033"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "delete_prod_licenses.name_select2"
+        id_seq_num                      = "0"
+        disc_field_name                 = "_rawname2"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+/usr/lib/netls/bin/ls_admin -n $1 -s -p \"$2\" | grep \"$PRODUCT\" | cut -d\":\" -f2- | cut -d\"[\" -f1
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000034"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "delete_prod_licenses.hdr1"
+        option_id                       = "delete_prod_licenses_opts"
+        has_name_select                 = "y"
+        name                            = "Delete Licenses"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 15
+        cmd_to_exec                     = "/usr/lib/netls/bin/ls_admin -d"
+        ask                             = "n"
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+echo '#server:vendor:product\n'$1:$2:$3
+}
+x"
+        cmd_to_discover_postfix         = "_rawname _rawname1 _rawname2"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "9000018"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "delete_prod_licenses_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "delete_prod_licenses_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000033"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "delete_prod_licenses_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000034"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "delete_prod_licenses_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "license"
+        name                            = "LICENSE Timestamp"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 16
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+TIMESTAMP=`dspmsg smit.cat -s 51 2 \"timestamp\"`
+/usr/lib/netls/bin/ls_admin -n $1 -s -p \"$2\" \"$3\" | grep \"$TIMESTAMP\" | cut -d\",\" -f2 | awk '{print $2}' 
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1 _rawname2"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000035"
+        help_msg_loc                    = ""
+
+# Add Vendors
+
+sm_name_hdr:
+        id                = "add_vendors"
+        next_id           = "add_vendors.hdr"
+        option_id         = "add_vendors.name_select"
+	has_name_select   = "n"
+        name              = "Add Vendors"
+        name_msg_file     = "smit.cat"
+        name_msg_set      = 51
+        name_msg_id       = 48
+        type              = "j"
+        ghost             = "y"
+        cmd_to_classify = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	FIRST_SERVER=`cat /tmp/$$netls.servers`
+	echo \"$FIRST_SERVER\" | awk '{print $1}'
+	rm -f /tmp/$$netls.servers
+else
+	echo \"$HOST\"
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_classify_postfix = ""
+        raw_field_name    = ""
+        cooked_field_name = "_cookedname_server"
+        next_type         = "d"
+        help_msg_id       = "9000019"
+        help_msg_loc      = ""
+        help_msg_base     = ""
+        help_msg_book     = ""
+
+sm_cmd_opt:
+        id                              = "add_vendors.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = ""
+        name                            = ""
+        name_msg_file                   = ""
+        name_msg_set                    = 0
+        name_msg_id                     = 0
+        op_type                         = ""
+        entry_type                      = ""
+        entry_size                      = 0
+        required                        = ""
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000019"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                = "add_vendors.hdr"
+        option_id         = "add_vendors_opts"
+        has_name_select   = "y"
+        name              = "Add Vendors"
+        name_msg_file     = "smit.cat"
+        name_msg_set      = 51
+        name_msg_id       = 17
+        cmd_to_exec       = "/usr/lib/netls/bin/ls_admin -a "
+        ask               = "n"
+        exec_mode         = ""
+        ghost             = "n"
+        cmd_to_discover   = "x()
+{
+echo '#server:\n'$1
+}
+x"
+        cmd_to_discover_postfix = "_cookedname_server"
+        name_size         = 0
+        value_size        = 0
+        help_msg_id       = "9000019"
+        help_msg_loc      = ""
+        help_msg_base     = ""
+        help_msg_book     = ""
+
+sm_cmd_opt:
+        id                              = "add_vendors_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendors_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor_name"
+        name                            = "Vendor NAME"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000036"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendors_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "vendor_id"
+        name                            = "Vendor ID"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 18
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000037"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendors_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "vendor_password"
+        name                            = "Vendor PASSWORD"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 19
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000038"
+        help_msg_loc                    = ""
+
+# Delete Vendors
+
+sm_name_hdr:
+        id 		= "delete_vendors"
+        next_id 	= "delete_vendors.hdr"
+        option_id 	= "delete_vendors.name_select"
+        name 		= "Delete Vendors"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 20
+        type 		= "j"
+        ghost 		= "y"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name 	= "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type 	= "d"
+        help_msg_id 	= "9000021"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "delete_vendors.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id 		= "delete_vendors.hdr"
+        option_id 	= "delete_vendors_opts"
+        has_name_select = "y"
+        name 		= "Delete Vendors"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 20
+        cmd_to_exec 	= "/usr/lib/netls/bin/ls_admin -d "
+        ask 		= "n"
+        exec_mode 	= ""
+        ghost 		= "n"
+        cmd_to_discover = "x()
+{
+echo '#server\n'$1
+} 
+x"
+        cmd_to_discover_postfix = "_rawname"
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000021"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "delete_vendors_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 5
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "delete_vendors_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "Vendor NAME"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 6
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+/usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2-
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000040"
+        help_msg_loc                    = ""
+
+# Show Vendors
+
+sm_name_hdr:
+        id 		= "show_vendors"
+        next_id 	= "show_vendors.hdr"
+        option_id 	= "show_vendors.name_select"
+        name 		= "Show Vendors"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id	= 21
+        type 		= "j"
+        ghost 		= "y"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name 	= "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type 	= "d"
+        help_msg_id 	= "9000020"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "show_vendors.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname` 
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x" 
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id 		= "show_vendors.hdr"
+        option_id 	= "show_vendors_opts"
+        has_name_select = "y"
+        name 		= "Show Vendors"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 21
+        cmd_to_exec = "x()
+{ 
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        while getopts n:v: FLAG \"$@\"; do\n\
+                case $FLAG in \n\
+                        n)      SERVER=$OPTARG;; \n\
+                        v)      VENDOR=$OPTARG;; \n\
+                esac \n\
+        done \n\
+	
+        if [ \"$VENDOR\" = \"$ALL\" ]
+        then 
+              	/usr/lib/netls/bin/ls_admin -s -n $SERVER -v 
+        else
+		/usr/lib/netls/bin/ls_admin -s -n $SERVER -v \"$VENDOR\"	
+	fi
+}
+x"
+        ask 		= "n"
+        exec_mode 	= ""
+        ghost 		= "n"
+        cmd_to_discover = "x()
+{
+echo '#server\n'$1
+}
+x"
+        cmd_to_discover_postfix = "_rawname"
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000020"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "show_vendors_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 22
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_vendors_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "Vendor NAME"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 23
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+/usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2-
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+        values_msg_set                  = 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+# Add New Licenses and New Vendor Information
+
+sm_name_hdr:
+        id 		= "add_vendor_prod_licenses"
+        next_id 	= "add_vendor_prod_licenses.hdr"
+        option_id 	= "add_vendor_prod_licenses.name_select"
+        has_name_select = "n"
+        name 		= "Add New Licenses and New Vendor Information"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 48
+        type 		= "j"
+        ghost 		= "y"
+        cmd_to_classify = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	FIRST_SERVER=`cat /tmp/$$netls.servers`
+	echo \"$FIRST_SERVER\" | awk '{print $1}'
+	rm -f /tmp/$$netls.servers
+else
+	echo \"$HOST\"
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_classify_postfix = ""
+        raw_field_name = ""
+        cooked_field_name = "_cookedname_server"
+        next_type 	= "d"
+        help_msg_id 	= "9000022"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = ""
+        name                            = ""
+        name_msg_file                   = ""
+        name_msg_set                    = 0
+        name_msg_id                     = 0
+        op_type                         = ""
+        entry_type                      = ""
+        entry_size                      = 0
+        required                        = ""
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000022"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id 		= "add_vendor_prod_licenses.hdr"
+        option_id 	= "add_vendor_prod_licenses_opts"
+        has_name_select = "y"
+        name 		= "Add New Licenses and New Vendor Information"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 24
+        cmd_to_exec = "x()
+{
+	while getopts n:v:p:l:i:r:w:y: FLAG \"$@\"; do
+		case $FLAG in 
+			l)	ANNOTE=$OPTARG;; 
+			n) 	SERVER=$OPTARG;; 
+			v) 	VENDOR=$OPTARG;; 
+			p)	PRODUCT=$OPTARG;; 
+			i)      VENDID=$OPTARG;; 
+                        w)      VENDPASS=$OPTARG;; 
+                        y)      PRODPASS=$OPTARG;; 
+                        r)      VERSION=$OPTARG;; 
+		esac 
+	done 
+	if [ -n \"${ANNOTE}\" ] 
+	then 
+		/usr/lib/netls/bin/ls_admin -a -n $SERVER -v \"$VENDOR\" $VENDID $VENDPASS 
+		/usr/lib/netls/bin/ls_admin -a -n $SERVER -l $ANNOTE -p \"$VENDOR\" \"$PRODUCT\" $PRODPASS $VERSION 
+	else
+		/usr/lib/netls/bin/ls_admin -a -n $SERVER -v \"$VENDOR\" $VENDID $VENDPASS 
+		/usr/lib/netls/bin/ls_admin -a -n $SERVER -p \"$VENDOR\" \"$PRODUCT\" $PRODPASS $VERSION 
+	fi 
+}
+x"
+        ask 		= "n"
+        exec_mode 	= ""
+        ghost 		= "n"
+        cmd_to_discover = "x()
+{
+echo '#server:\n'$1
+}
+x"
+        cmd_to_discover_postfix = "_cookedname_server"
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000022"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 22
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x" 
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000024"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor_name"
+        name                            = "Vendor NAME"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 23
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000036"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "vendor_id"
+        name                            = "Vendor ID"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 18
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-i "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000037"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "vendor_password"
+        name                            = "Vendor PASSWORD"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 19
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-w "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000038"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "050"
+        disc_field_name                 = "product_name"
+        name                            = "Product NAME"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 25
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000026"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "070"
+        disc_field_name                 = "product_password"
+        name                            = "Product PASSWORD"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 8
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-y "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000028"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "060"
+        disc_field_name                 = "version"
+        name                            = "VERSION"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 9
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "+"
+        prefix                          = "-r "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000027"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_vendor_prod_licenses_opts"
+        id_seq_num                      = "080"
+        disc_field_name                 = ""
+        name                            = "LICENSE Annotation"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 10
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "?"
+        prefix                          = "-l "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000029"
+        help_msg_loc                    = ""
+
+# Run standalone_config
+
+sm_cmd_hdr:
+        id 		    = "standalone_config"
+        option_id 	    = ""
+        has_name_select     = ""
+        name 	 	    = "Perform Standalone Configuration for Adding/Using Licenses"
+        name_msg_file 	    = "smit.cat"
+        name_msg_set 	    = 51
+        name_msg_id         = 61
+        cmd_to_exec         = "/usr/lib/netls/conf/auto_config"
+        ask                 = "y"
+        exec_mode           = "p"
+        ghost               = "y"
+        cmd_to_discover     = ""
+        cmd_to_discover_postfix = ""
+        name_size           = 0
+        value_size          = 0
+        help_msg_id         = "9000999"
+        help_msg_loc        = ""
+        help_msg_base       = ""
+        help_msg_book       = ""
+
+# Show Server Characteristics
+
+sm_cmd_hdr:
+        id 		= "show_server_characteristics"
+        option_id 	= "show_server_characteristics_opts"
+        has_name_select = "n"
+        name 		= "Show Server Characteristics"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 26
+        cmd_to_exec = "x()
+{
+	while getopts n: FLAG \"$@\"; do 
+		case $FLAG in 
+			n)	SERVER=$OPTARG;; 
+		esac 
+	done 
+
+	if [ -n \"${SERVER}\" ] 
+	then 
+		/usr/lib/netls/bin/ls_admin -s -n $SERVER 
+	else 
+		for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+		do
+			/usr/lib/netls/bin/ls_admin -s -n $server
+		done
+	fi 
+}
+x"
+        ask 		= "n"
+        exec_mode 	= "p"
+        ghost 		= "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000011"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "show_server_characteristics_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51 
+        name_msg_id                     = 5
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "n"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+# Add a Nodelocked License from the Keyboard
+
+sm_cmd_hdr:
+        id 		= "add_nodelocked_from_keyboard"
+        option_id 	= "add_nodelocked_from_keyboard_opts"
+        has_name_select = "n"
+        name 		= "Add Nodelocked License from the Keyboard"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 27
+        cmd_to_exec = "x() 
+{ 
+# Put the comment and the new license in the nodelocked license
+# file.  Make sure there is a pound sign in front of the comment.
+
+		if [ \"$2\" != \"\" ]
+		then :
+			echo \"$2\" | grep '^#' > /dev/null 2>&1
+			if [ $? = 1 ]
+			then
+				echo \"#$2\" >> /usr/lib/netls/conf/nodelock
+			else
+				echo \"$2\" >> /usr/lib/netls/conf/nodelock 
+			fi
+		fi	
+		echo \"$1\" >> /usr/lib/netls/conf/nodelock 
+} 
+x"
+        ask 		= "n"
+        exec_mode 	= "p"
+        ghost 		= "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000013"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "add_nodelocked_from_keyboard_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "license"
+        name                            = "Nodelocked LICENSE"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 28
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "y"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000044"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "add_nodelocked_from_keyboard_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "comment"
+        name                            = "Nodelocked License COMMENT"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 29
+        op_type                         = ""
+        entry_type                      = "t"
+        required                        = "n"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000045"
+        help_msg_loc                    = ""
+
+# Add a Nodelocked License from a File
+
+sm_cmd_hdr:
+        id 		= "add_nodelocked_from_file"
+        option_id 	= "add_nodelocked_from_file_opts"
+        has_name_select = "n"
+        name 		= "Add Nodelocked License from a File"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 30
+        cmd_to_exec = "x()
+{
+MAGIC=`dspmsg smit.cat -s 51 58 \"This file contains new nodelocked licenses.\"`
+ERROR=`dspmsg smit.cat -s 51 59 \"The file supplied is not a valid nodelocked license file.\n\"` 
+first_pass=1
+
+		cat $1 | while read line
+		do
+		if [ \"$first_pass\" = \"1\" ]
+		then 
+			first_pass=0	
+			if [ \"$line\" = \"#$MAGIC\" ]
+			then
+				continue
+			else
+				echo \"$ERROR\"
+				break
+			fi
+		else
+			echo \"$line\" >> /usr/lib/netls/conf/nodelock
+		fi
+		done	
+}
+x"
+        ask 		= "n"
+        exec_mode 	= "p"
+        ghost 		= "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000012"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "add_nodelocked_from_file_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "file"
+        name                            = "FILE Containing the Nodelocked License"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 31
+        op_type                         = ""
+        entry_type                      = "f"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000049"
+        help_msg_loc                    = ""
+
+# Show Nodelocked Licenses
+
+sm_cmd_hdr:
+        id 		= "show_nodelocked"
+        option_id 	= ""
+        has_name_select = "n"
+        name 		= "Show Nodelocked Licenses"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 32
+        cmd_to_exec 	= "cat /usr/lib/netls/conf/nodelock"
+        ask 		= "n"
+        exec_mode 	= "p"
+        ghost 		= "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000015"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+# Delete Nodelocked Licenses
+
+sm_cmd_hdr:
+        id 		= "delete_nodelocked"
+        option_id 	= "delete_nodelocked_opts"
+        has_name_select = "n"
+        name 		= "Delete a Nodelocked License"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 33
+        cmd_to_exec 	= "x()
+{
+
+	cat /usr/lib/netls/conf/nodelock | while read license
+	do
+		echo \"$license\" | grep \"$1\" > /dev/null 2>&1
+		if [ $? -eq 0 ]
+		then
+			echo \"#$license\" >> /usr/lib/netls/conf/XXXnewnodelock
+		else
+			echo \"$license\" >> /usr/lib/netls/conf/XXXnewnodelock
+		fi
+	done
+
+	mv /usr/lib/netls/conf/XXXnewnodelock /usr/lib/netls/conf/nodelock
+}
+x"
+        ask 		= "n"
+        exec_mode 	= "p"
+        ghost 		= "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000014"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "delete_nodelocked_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "license"
+        name                            = "LICENSE"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 34
+        op_type                         = "l"
+        entry_type                      = "n"
+        required                        = "+"
+        prefix                          = ""
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "cat /usr/lib/netls/conf/nodelock"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000046"
+        help_msg_loc                    = ""
+
+
+# Show Available License Servers
+
+sm_cmd_hdr:
+        id              = "verify_servers"
+        option_id 	= ""
+        has_name_select = "n"
+        name 		= "Show Available License Servers"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 35
+	cmd_to_exec 	= "/usr/lib/netls/bin/ls_tv"
+        ask 		= "n"
+        exec_mode 	= "p"
+        ghost 		= "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size 	= 0
+        value_size 	= 0
+        help_msg_id 	= "9000003"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+# Show Total License Usage
+
+sm_name_hdr:
+        id 		= "show_total_license_usage"
+        next_id 	= "show_total_license_usage_1"
+        option_id 	= "show_total_license_usage.name_select"
+        name 		= "Show Total License Usage"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 36
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name 	= "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type 	= "n"
+        help_msg_id 	= "9000005"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_total_license_usage_1"
+        next_id 	= "show_total_license_usage_2"
+        option_id 	= "show_total_license_usage.name_select1"
+        has_name_select = "n"
+        name 		= "Show Total License Usage"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 36
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname1"
+        raw_field_name 	= "_rawname1"
+        cooked_field_name = "_cookedname1"
+        next_type 	= "n"
+        help_msg_id 	= "9000005"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_total_license_usage_2"
+        next_id 	= "show_total_license_usage.hdr1"
+        option_id 	= "show_total_license_usage.name_select2"
+        has_name_select = "n"
+        name 		= "Show Total License Usage"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 36
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname2"
+        raw_field_name 	= "_rawname2"
+        cooked_field_name = "_cookedname2"
+        next_type 	= "d"
+        help_msg_id 	= "9000005"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "show_total_license_usage.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_total_license_usage.name_select1"
+        id_seq_num                      = "0"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+	if [ \"$1\" = \"$ALL\" ]
+	then :
+                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' |
+			 cut -d\"(\" -f1 | cut -c5-`
+                do
+                        /usr/lib/netls/bin/ls_admin -s -n $server -v | grep \"$VENDOR\" |
+				 cut -d\":\" -f2 | cut -c2- >> /tmp/XXXnetls
+                done
+		cat /tmp/XXXnetls| sort | uniq
+		rm /tmp/XXXnetls
+	else
+		/usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" |
+			 cut -d\":\" -f2 | cut -c2- | sort
+	fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_total_license_usage.name_select2"
+        id_seq_num                      = "0"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+	if [ \"$1\" = \"$ALL\" ]   
+	then :
+		if [ \"$2\" = \"$ALL\" ]  
+		then :
+			# Both vendor and server are all.  Generate a list of servers, list of 
+ 			# vendors for those servers, and then a list of products for each vendor.  
+			# Sort this list and remove duplicates.
+			for server in  `/usr/lib/netls/bin/ls_tv | awk '/    /' |
+						cut -d\"(\" -f1 | cut -c5-`
+			do
+				/usr/lib/netls/bin/ls_admin -s -n $server -v |  grep \"$VENDOR\" |
+					cut -d\":\" -f2 |	
+                 		while read vendor
+				do
+					 /usr/lib/netls/bin/ls_admin -s -n $server -p \"$vendor\" | grep \"$PRODUCT\" |
+						cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products 
+				done
+			done
+			cat /tmp/XXXnetls.products | sort | uniq 
+			rm /tmp/XXXnetls.products
+		else
+			# The server is all and the vendor is specified.  Generate a list of
+			# servers, and get the products for this vendor on each server. 
+			# Sort these and remove duplicates.
+                	for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' |
+                                                cut -d\"(\" -f1 | cut -c5-`
+                	do
+                        	/usr/lib/netls/bin/ls_admin -s -n $server -p \"$2\" | grep \"$PRODUCT\" | 
+					cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products 
+			done
+			cat /tmp/XXXnetls.products | sort | uniq	
+			rm /tmp/XXXnetls.products
+		fi
+	else  		
+		if [ \"$2\" = \"$ALL\" ]  
+		then :
+			# The server is specified and the vendor is all.  Generate a list of vendors
+			# which is used to then generate a list of products.  Sort these and remove
+			# duplicates.
+			/usr/lib/netls/bin/ls_admin -s -n $1 -v | grep \"$VENDOR\" | cut -d\":\" -f2 |
+			while read vendor
+			do 
+				 /usr/lib/netls/bin/ls_admin -s -n $1 -p \"$vendor\" | grep \"$PRODUCT\" |
+					cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products 
+			done
+			cat /tmp/XXXnetls.products | sort | uniq
+			rm /tmp/XXXnetls.products
+		else	
+			# Both server and vendor are specified.  Get all products for the specific
+			# vendor and server. 
+			/usr/lib/netls/bin/ls_admin -n \"$1\" -s -p \"$2\" | grep \"$PRODUCT\" |
+				 cut -d\":\" -f2- | cut -d\"[\" -f1 | sort
+		fi
+	fi	
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000042"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "show_total_license_usage.hdr1"
+        option_id                       = "show_total_license_usage_opts"
+        has_name_select                 = "y"
+        name                            = "Show Total License Usage"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 36
+	cmd_to_exec			= "x()
+{
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        while getopts r:n:p:v: FLAG \"$@\"; do\n\
+                case $FLAG in \n\
+                        p)      PRODUCT=$OPTARG 
+				if [ \"$PRODUCT\" != \"$ALL\" ];
+				then	
+					PRODFLG=\"-p \"
+					PROD=$PRODUCT
+				fi ;;	
+                        r)      VERSION=$OPTARG
+				if [ \"$VERSION\" != \"$ALL\" ];
+				then
+					VER=\"-r $VERSION\"
+				fi;;
+                        n)      SERVER=$OPTARG
+				if [ \"$SERVER\" != \"$ALL\" ]; 
+				then
+					SERV=\"-n $SERVER\"
+				fi;;
+                        v)      VENDOR=$OPTARG
+				if [ \"$VENDOR\" != \"$ALL\" ];
+				then
+					VENDFLG=\"-v \"
+					VEND=$VENDOR
+				fi;;
+                esac \n\
+        done \n\
+
+if [ -n \"${PROD}\" ]    # if there is a product specified
+then 
+	if [ -n \"${VEND}\" ] # if there is a vendor specified
+	then
+		/usr/lib/netls/bin/ls_stat -t $SERV $VENDFLG \"$VEND\" $PRODFLG \"$PROD\" $VER
+	else
+		/usr/lib/netls/bin/ls_stat -t $SERV $PRODFLG \"$PROD\" $VER
+	fi
+else
+	/usr/lib/netls/bin/ls_stat -t $SERV $VENDFLG \"$VEND\" $VER
+fi
+}
+x"
+        ask                             = "n"
+        exec_mode                       = ""
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+echo '#server:vendor:product\n'$1:$2:$3
+}
+x"
+        cmd_to_discover_postfix         = "_rawname _rawname1 _rawname2"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "9000005"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_total_license_usage_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_total_license_usage_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_total_license_usage_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000042"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_total_license_usage_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "version"
+        name                            = "VERSION"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 9
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "y"
+        prefix                          = "-r "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+	if [ \"$3\" = \"$ALL\" ]
+	then :
+		# The version was specifed when no product was chosen.  Display an error
+		# message.
+		dspmsg smit.cat -s 51 51 \"You must choose all if you have not specified a product.\n\"
+	else
+		if [ \"$1\" = \"$ALL\" ]
+		then :
+			if [ \"$2\" = \"$ALL\" ]  
+			then :
+				# Both the server and vendor are all.  Generate a list of servers and
+				# from that list generate a list of vendors.  Use this list to find
+				# the version for a specific product.  Sort these and remove duplicates.
+                		for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                		do
+					/usr/lib/netls/bin/ls_admin -n $server -s -v | grep \"$VENDOR\" |
+						cut -d\":\" -f2- |
+					while read vendor
+					do
+						/usr/lib/netls/bin/ls_admin -n $server -s -p \"$vendor\" \"$3\" -r |
+							 grep \"$PRODUCT\" | cut -d\"[\" -f2 | tr -d \"]\" >> /tmp/XXXnetls.versions
+					done
+				done
+				cat /tmp/XXXnetls.versions | sort | uniq
+				rm /tmp/XXXnetls.versions
+			else  
+				# The server is all and the vendor is specified.  Generate a list
+				# of servers.  For each server get the versions for the specific vendor
+				# and product.  Sort these and remove duplicates. 
+				for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+				do
+					/usr/lib/netls/bin/ls_admin -s -n $server -p \"$2\" \"$3\" -r | 
+						grep \"$PRODUCT\" | cut -d\"[\" -f2 | tr -d \"]\" >> /tmp/XXXnetls.versions
+				done
+				cat /tmp/XXXnetls.versions | sort | uniq
+				rm /tmp/XXXnetls.versions
+			fi
+		else
+			if [ \"$2\" = \"$ALL\" ] 
+			then :
+				# The server is specified and the vendor is all.  Generate a list
+				# of vendors for the specified server.  Use this list to generate
+				# a list of versions for the specific product.  
+				/usr/lib/netls/bin/ls_admin -n $1 -s -v | grep \"$VENDOR\" |
+					cut -d\":\" -f2- |
+				while read vendor
+				do
+					/usr/lib/netls/bin/ls_admin -n $1 -s -p \"$vendor\" \"$3\" -r |
+						 grep \"$PRODUCT\" | cut -d\"[\" -f2 | tr -d \"]\"
+				done
+			else    
+				# Both the server and vendor are specified.  
+				/usr/lib/netls/bin/ls_admin -s -n $1 -p \"$2\" \"$3\" -r | grep \"$PRODUCT\" |
+					 cut -d\"[\" -f2 | tr -d \"]\"
+			fi
+		fi	
+	fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1 _rawname2"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+        values_msg_set                  = 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000043"
+        help_msg_loc                    = ""
+
+# Show Installed License Usage
+
+sm_name_hdr:
+        id 		= "show_installed_licenses"
+        next_id 	= "show_installed_licenses_1"
+        option_id 	= "show_installed_licenses.name_select"
+        name 		= "Show License Information By Server"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 46
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name 	= "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type 	= "n"
+        help_msg_id 	= "9000006"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_installed_licenses_1"
+        next_id 	= "show_installed_licenses_2"
+        option_id 	= "show_installed_licenses.name_select1"
+        has_name_select = "n"
+        name 		= "Show License Information By Server"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 46
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname1"
+        raw_field_name 	= "_rawname1"
+        cooked_field_name = "_cookedname1"
+        next_type 	= "n"
+        help_msg_id 	= "9000006"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_installed_licenses_2"
+        next_id 	= "show_installed_licenses.hdr1"
+        option_id 	= "show_installed_licenses.name_select2"
+        has_name_select = "n"
+        name 		= "Show License Information By Server"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 46
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname2"
+        raw_field_name 	= "_rawname2"
+        cooked_field_name = "_cookedname2"
+        next_type 	= "d"
+        help_msg_id 	= "9000006"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "show_installed_licenses.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_installed_licenses.name_select1"
+        id_seq_num                      = "0"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$1\" = \"$ALL\" ]
+        then :
+                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' |
+ 			cut -d\"(\" -f1 | cut -c5-`
+                do
+                        /usr/lib/netls/bin/ls_admin -s -n $server -v | grep \"$VENDOR\" |
+				 cut -d\":\" -f2 | cut -c2- >> /tmp/XXXnetls.vendors 
+                done
+		cat /tmp/XXXnetls.vendors | sort | uniq
+		rm /tmp/XXXnetls.vendors	
+        else
+                /usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2 |
+			 cut -c2- | sort
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_installed_licenses.name_select2"
+        id_seq_num                      = "0"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`  
+	PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$1\" = \"$ALL\" ]   
+        then :
+                if [ \"$2\" = \"$ALL\" ]  
+                then :
+			# Both vendor and server are all.  Generate a list of servers, list of 
+                        # vendors for those servers, and then a list of products for each vendor.
+                        # Sort this list and remove duplicates.
+                        for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                        do
+				/usr/lib/netls/bin/ls_admin -s -n $server -v | grep \"$VENDOR\" |
+				 	cut -d\":\" -f2 |
+				while read vendor
+				do
+                                        /usr/lib/netls/bin/ls_admin -n $server -s -p \"$vendor\" | grep \"$PRODUCT\" |
+						 cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                                done
+                        done
+                else 	
+			# The server is all and the vendor is specified.  Generate a list of
+                        # servers, and get the products for this vendor on each server.
+                        # Sort these and remove duplicates.
+                        for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                        do
+                                /usr/lib/netls/bin/ls_admin -s -n $server -p $2 | grep \"$PRODUCT\" |
+					 cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                        done
+                fi
+		cat /tmp/XXXnetls.products | sort | uniq
+		rm /tmp/XXXnetls.products
+        else   
+	        if [ \"$2\" = \"$ALL\" ]  
+                then :
+		 	# The server is specified and the vendor is all.  Generate a list of vendors
+                 	# which is used to then generate a list of products.  Sort these and remove
+                 	# duplicates.
+                        /usr/lib/netls/bin/ls_admin -s -n $1 -v | grep \"$VENDOR\" |
+				 cut -d\":\" -f2 |
+			while read vendor
+                        do
+                                /usr/lib/netls/bin/ls_admin -s -n $1 -p \"$vendor\" | grep \"$PRODUCT\" |
+					 cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                        done
+                        cat /tmp/XXXnetls.products | sort | uniq
+			rm /tmp/XXXnetls.products
+		else
+   			# Both server and vendor are specified.  Get all products for the specific
+                        # vendor and server.
+                	/usr/lib/netls/bin/ls_admin -n \"$1\" -s -p \"$2\" | grep \"$PRODUCT\" |
+				 cut -d\":\" -f2- | cut -d\"[\" -f1 | sort
+		fi	
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000042"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "show_installed_licenses.hdr1"
+        option_id                       = "show_installed_licenses_opts"
+        has_name_select                 = "y"
+        name                            = "Show License Information By Server"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 46
+        cmd_to_exec                     = "x()
+{
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+        while getopts r:n:p:v: FLAG \"$@\"; do\n\
+                case $FLAG in \n\
+                        p)      PRODUCT=$OPTARG
+                                if [ \"$PRODUCT\" != \"$ALL\" ];
+                                then
+                                        PRODFLG=\"-p \"
+                                        PROD=$PRODUCT
+                                fi ;;
+                        r)      VERSION=$OPTARG
+                                if [ \"$VERSION\" != \"$ALL\" ];
+                                then
+                                        VER=\"-r $VERSION\"
+                                fi;;
+                        n)      SERVER=$OPTARG
+                                if [ \"$SERVER\" != \"$ALL\" ];
+                                then
+                                        SERV=\"-n $SERVER\"
+                                fi;;
+                        v)      VENDOR=$OPTARG
+                                if [ \"$VENDOR\" != \"$ALL\" ];
+                                then
+                                        VENDFLG=\"-v \"
+                                        VEND=$VENDOR
+                                fi;;
+                esac \n\
+        done \n\
+
+# The if statement below is necessary because the vendor and product
+# must both be in quotes.  Multiple statements must be used in case
+# either the vendor or product is not specified. 
+
+if [ -n \"${PROD}\" ]    # if there is a product specified
+then
+        if [ -n \"${VEND}\" ] # if there is a vendor specified
+        then
+                /usr/lib/netls/bin/ls_stat -i $SERV $VENDFLG \"$VEND\" $PRODFLG \"$PROD\" $VER
+        else
+                /usr/lib/netls/bin/ls_stat -i $SERV $PRODFLG \"$PROD\" $VER
+        fi
+else
+	/usr/lib/netls/bin/ls_stat -i $SERV $VENDFLG \"$VEND\" $VER
+fi
+}
+x"
+        ask                             = "n"
+        exec_mode                       = ""
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+echo '#server:vendor:product\n'$1:$2:$3
+}
+x"
+        cmd_to_discover_postfix         = "_rawname _rawname1 _rawname2"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "9000006"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_installed_licenses_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_installed_licenses_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_installed_licenses_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000042"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_installed_licenses_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "version"
+        name                            = "VERSION"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 9
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "y"
+        prefix                          = "-r "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$3\" = \"$ALL\" ]
+        then :
+		# A version was specified without a product.  Display an error message.
+		dspmsg smit.cat -s 51 51 \"You must choose all if you have not specified a product.\n\" 
+        else
+                if [ \"$1\" = \"$ALL\" ]
+                then :
+                        if [ \"$2\" = \"$ALL\" ]  
+                        then :
+				# Both the server and vendor are all.  Generate a list of servers and
+                                # from that list generate a list of vendors.  Use this list to find
+                                # the version for a specific product.  Sort these and remove duplicates.
+                                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                                do
+					/usr/lib/netls/bin/ls_admin -n $server -s -v | grep \"$VENDOR\" |
+						 cut -d\":\" -f2 |
+					while read vendor
+                                        do
+                                                /usr/lib/netls/bin/ls_admin -n $server -s -p \"$vendor\" \"$3\" -r |
+							 grep \"$PRODUCT\" | cut -d\"[\" -f2 | tr -d \"]\" >> /tmp/XXXnetls.versions
+                                        done
+                                done
+                        else  
+				# The server is all and the vendor is specified.  Generate a list
+                                # of servers.  For each server get the versions for the specific vendor
+                                # and product.  Sort these and remove duplicates.
+                                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                                do
+                                        /usr/lib/netls/bin/ls_admin -s -n $server -p \"$2\" \"$3\" -r | grep \"$PRODUCT\" |
+						 cut -d\"[\" -f2 | tr -d \"]\" >> /tmp/XXXnetls.versions
+                                done
+                        fi
+			cat /tmp/XXXnetls.versions | sort | uniq
+			rm /tmp/XXXnetls.versions
+                else
+                        if [ \"$2\" = \"$ALL\" ]
+                        then :
+				# The server is specified and the vendor is all.  Generate a list
+                                # of vendors for the specified server.  Use this list to generate
+                                # a list of versions for the specific product.
+				/usr/lib/netls/bin/ls_admin -n $1 -s -v | grep \"$VENDOR\" |
+					 cut -d\":\" -f2 |
+				while read vendor
+				do
+					/usr/lib/netls/bin/ls_admin -n $1 -s -p \"$vendor\" \"$3\" -r | grep \"$PRODUCT\" |
+						 cut -d\"[\" -f2 | tr -d \"]\"
+				done
+                        else    
+				# Both the server and vendor are specified.
+                                /usr/lib/netls/bin/ls_admin -s -n $1 -p \"$2\" \"$3\" -r | grep \"$PRODUCT\" |
+					 cut -d\"[\" -f2 | tr -d \"]\"
+                        fi
+                fi
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1 _rawname2"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+        values_msg_set                  = 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000043"
+        help_msg_loc                    = ""
+
+# Show Licenses Currently Being Used
+
+sm_name_hdr:
+        id 		= "show_current_license_usage"
+        next_id 	= "show_current_license_usage_1"
+        option_id 	= "show_current_license_usage.name_select"
+        name 		= "Show Licenses Currently Being Used"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 47
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name 	= "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type 	= "n"
+        help_msg_id 	= "9000007"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_current_license_usage_1"
+        next_id 	= "show_current_license_usage_2"
+        option_id 	= "show_current_license_usage.name_select1"
+        has_name_select = "n"
+        name 		= "Show Licenses Currently Being Used"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 47
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname1"
+        raw_field_name 	= "_rawname1"
+        cooked_field_name = "_cookedname1"
+        next_type 	= "n"
+        help_msg_id 	= "9000007"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_current_license_usage_2"
+        next_id 	= "show_current_license_usage.hdr1"
+        option_id 	= "show_current_license_usage.name_select2"
+        has_name_select = "n"
+        name 		= "Show Licenses Currently Being Used"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 47
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname2"
+        raw_field_name 	= "_rawname2"
+        cooked_field_name = "_cookedname2"
+        next_type 	= "d"
+        help_msg_id 	= "9000007"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "show_current_license_usage.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_current_license_usage.name_select1"
+        id_seq_num                      = "0"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$1\" = \"$ALL\" ]
+        then :
+                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                do
+                        /usr/lib/netls/bin/ls_admin -s -n $server -v | grep \"$VENDOR\" | 
+				cut -d\":\" -f2 >> /tmp/XXXnetls.vendors 
+                done
+		cat /tmp/XXXnetls.vendors | sort | uniq
+		rm /tmp/XXXnetls.vendors	
+        else
+                /usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2 | sort
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_current_license_usage.name_select2"
+        id_seq_num                      = "0"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+        ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$1\" = \"$ALL\" ]   
+        then :
+                if [ \"$2\" = \"$ALL\" ]  
+                then :
+			# Both vendor and server are all.  Generate a list of servers, list of
+			# vendors for those servers, and then a list of products for each vendor.
+			# Sort this list and remove duplicates.	
+                        for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                        do
+                                /usr/lib/netls/bin/ls_admin -s -n $server -v | grep \"$VENDOR\" |
+					 cut -d\":\" -f2 |
+				while read vendor
+                                do
+                                        /usr/lib/netls/bin/ls_admin -s -n $server -p \"$vendor\" | grep \"$PRODUCT\" |
+						 cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                                done
+                        done
+                        cat /tmp/XXXnetls.products | sort | uniq
+                        rm /tmp/XXXnetls.products
+                else
+			# The server is all and the vendor is specified.  Generate a list of
+                        # servers, and get the products for this vendor on each server.
+                        # Sort these and remove duplicates.
+                        for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                        do
+                                /usr/lib/netls/bin/ls_admin -s -n $server -p \"$2\" | grep \"$PRODUCT\" |
+					 cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                        done
+                        cat /tmp/XXXnetls.products | sort | uniq
+                        rm /tmp/XXXnetls.products
+                fi
+        else
+                if [ \"$2\" = \"$ALL\" ]  
+                then :
+			# The server is specified and the vendor is all.  Generate a list of vendors
+                        # which is used to then generate a list of products.  Sort these and remove
+                        # duplicates.
+                        /usr/lib/netls/bin/ls_admin -s -n $1 -v | grep \"$VENDOR\" |
+				 cut -d\":\" -f2 |
+			while read vendor
+                        do
+                                /usr/lib/netls/bin/ls_admin -s -n $1 -p \"$vendor\" | grep \"$PRODUCT\" |
+					 cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                        done
+                        cat /tmp/XXXnetls.products | sort | uniq
+                        rm /tmp/XXXnetls.products
+                else
+			# Both the server and vendor are specified.
+                        /usr/lib/netls/bin/ls_admin -n \"$1\" -s -p \"$2\" | grep \"$PRODUCT\" |
+				 cut -d\":\" -f2- | cut -d\"[\" -f1 | sort 
+                fi
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000042"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "show_current_license_usage.hdr1"
+        option_id                       = "show_current_license_usage_opts"
+        has_name_select                 = "y"
+        name                            = "Show Licenses Currently Being Used"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 47
+        cmd_to_exec                     = "x()
+{
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        while getopts r:n:p:v: FLAG \"$@\"; do\n\
+                case $FLAG in \n\
+                        p)      PRODUCT=$OPTARG
+                                if [ \"$PRODUCT\" != \"$ALL\" ];
+                                then
+                                        PRODFLG=\"-p \"
+                                        PROD=$PRODUCT
+                                fi ;;
+                        r)      VERSION=$OPTARG
+                                if [ \"$VERSION\" != \"$ALL\" ];
+                                then
+                                        VER=\"-r $VERSION\"
+                                fi;;
+                        n)      SERVER=$OPTARG
+                                if [ \"$SERVER\" != \"$ALL\" ];
+                                then
+                                        SERV=\"-n $SERVER\"
+                                fi;;
+                        v)      VENDOR=$OPTARG
+                                if [ \"$VENDOR\" != \"$ALL\" ];
+                                then
+                                        VENDFLG=\"-v \"
+                                        VEND=$VENDOR
+                                fi;;
+                esac \n\
+        done \n\
+
+# The if statement below is necessary because the vendor and product
+# must both be in quotes.
+
+if [ -n \"${PROD}\" ]    # if there is a product specified
+then
+        if [ -n \"${VEND}\" ] # if there is a vendor specified
+        then
+                /usr/lib/netls/bin/ls_stat -a $SERV $VENDFLG \"$VEND\" $PRODFLG \"$PROD\" $VER
+        else
+                /usr/lib/netls/bin/ls_stat -a $SERV $PRODFLG \"$PROD\" $VER
+        fi
+else
+        /usr/lib/netls/bin/ls_stat -a $SERV $VENDFLG \"$VEND\" $VER
+fi
+}
+x"
+        ask                             = "n"
+        exec_mode                       = ""
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+echo '#server:vendor:product\n'$1:$2:$3
+}
+x"
+        cmd_to_discover_postfix         = "_rawname _rawname1 _rawname2"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "9000007"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_current_license_usage_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_current_license_usage_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_current_license_usage_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000042"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_current_license_usage_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "version"
+        name                            = "VERSION"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 9
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "y"
+        prefix                          = "-r "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+        ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$3\" = \"$ALL\" ]
+        then :
+		# A version was specified without choosing a product.  Display an error.
+                dspmsg smit.cat -s 51 51 \"You must choose all if you have not specified a product.\n\"
+        else
+                if [ \"$1\" = \"$ALL\" ]
+                then :
+                        if [ \"$2\" = \"$ALL\" ]  
+                        then :
+				# Both the server and vendor are all.  Generate a list of servers and
+                                # from that list generate a list of vendors.  Use this list to find
+                                # the version for a specific product.  Sort these and remove duplicates.
+                                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                                do
+					/usr/lib/netls/bin/ls_admin -n $server -s -v | grep \"$VENDOR\" |
+						cut -d\":\" -f2- |
+					while read vendor
+                                        do
+                                                /usr/lib/netls/bin/ls_admin -n $server -s -p \"$vendor\" \"$3\" -r |
+							 grep \"$PRODUCT\" | cut -d\"[\" -f2 | tr -d \"]\" >> /tmp/XXXnetls.versions
+                                        done
+                                done
+                                cat /tmp/XXXnetls.versions | sort | uniq
+                                rm /tmp/XXXnetls.versions
+                        else  
+				# The server is all and the vendor is specified.  Generate a list
+                                # of servers.  For each server get the versions for the specific vendor
+                                # and product.  Sort these and remove duplicates.
+                                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                                do
+                                        /usr/lib/netls/bin/ls_admin -s -n $server -p \"$2\" \"$3\" -r | grep \"$PRODUCT\" |
+						 cut -d\"[\" -f2 | tr -d \"]\" >> /tmp/XXXnetls.versions
+                                done
+                                cat /tmp/XXXnetls.versions | sort | uniq
+                                rm /tmp/XXXnetls.versions
+                        fi
+                else
+                        if [ \"$2\" = \"$ALL\" ]  
+                        then :
+                                # The server is specified and the vendor is all.  Generate a list
+                                # of vendors for the specified server.  Use this list to generate
+                                # a list of versions for the specific product.
+				/usr/lib/netls/bin/ls_admin -n $1 -s -v | grep \"$VENDOR\" | 
+					cut -d\":\" -f2- |
+				while read vendor	
+                                do
+                                        /usr/lib/netls/bin/ls_admin -n $1 -s -p \"$vendor\" \"$3\" -r | grep \"$PRODUCT\" |
+						 cut -d\"[\" -f2 | tr -d \"]\"
+                                done
+                        else    
+				# Both the vendor and server are specified.
+                                /usr/lib/netls/bin/ls_admin -s -n $1 -p \"$2\" \"$3\" -r | grep \"$PRODUCT\" |
+					 cut -d\"[\" -f2 | tr -d \"]\"
+                        fi
+                fi
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname _rawname1 _rawname2"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+        values_msg_set                  = 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000043"
+        help_msg_loc                    = ""
+
+# Show Licenses Held by a Specific User 
+
+sm_name_hdr:
+        id 		= "show_user_license_held"
+        next_id 	= "show_user_license_held_1"
+        option_id 	= "show_user_license_held.name_select"
+        name 		= "Show Licenses Held by a Specific User"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 48
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname"
+        raw_field_name 	= "_rawname"
+        cooked_field_name = "_cookedname"
+        next_type 	= "n"
+        help_msg_id 	= "9000008"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_user_license_held_1"
+        next_id 	= "show_user_license_held_2"
+        option_id 	= "show_user_license_held.name_select1"
+        has_name_select = "n"
+        name 		= "Show Licenses Held by a Specific User"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 48
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = ""
+        raw_field_name 	= "_rawname1"
+        cooked_field_name = "_cookedname1"
+        next_type 	= "n"
+        help_msg_id 	= "9000008"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_name_hdr:
+        id 		= "show_user_license_held_2"
+        next_id 	= "show_user_license_held.hdr1"
+        option_id 	= "show_user_license_held.name_select2"
+        has_name_select = "n"
+        name 		= "Show Licenses Held by a Specific User"
+        name_msg_file 	= "smit.cat"
+        name_msg_set 	= 51
+        name_msg_id 	= 48
+        type 		= "j"
+        ghost 		= "n"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = "_rawname2"
+        raw_field_name 	= "_rawname2"
+        cooked_field_name = "_cookedname2"
+        next_type 	= "d"
+        help_msg_id 	= "9000008"
+        help_msg_loc 	= ""
+        help_msg_base 	= ""
+        help_msg_book 	= ""
+
+sm_cmd_opt:
+        id                              = "show_user_license_held.name_select"
+        id_seq_num                      = "0"
+        disc_field_name                 = "user"
+        name                            = "USER Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 50
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "+"
+        prefix                          = "-u "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "lsuser -a ALL"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000047"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_user_license_held.name_select2"
+        id_seq_num                      = "0"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 100
+        required                        = "n"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$1\" = \"$ALL\" ]
+        then :
+                for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                do
+                        /usr/lib/netls/bin/ls_admin -s -n $server -v | grep \"$VENDOR\" |
+				 cut -d\":\" -f2 >> /tmp/XXXnetls.vendors
+                done
+		cat /tmp/XXXnetls.vendors | sort | uniq
+		rm /tmp/XXXnetls.vendors
+        else
+                /usr/lib/netls/bin/ls_admin -s -v -n $1 | grep \"$VENDOR\" | cut -d\":\" -f2 
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname1"
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_user_license_held.name_select1"
+        id_seq_num                      = "0"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = "l"
+        entry_type                      = "t"
+        entry_size                      = 0
+        required                        = "n"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+HOST=`hostname`
+/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5- > /tmp/$$netls.servers
+grep \"$HOST\" /tmp/$$netls.servers > /dev/null 2>&1
+if [ $? -eq 1 ]
+then
+	cat /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers
+else
+	grep -v \"$HOST\" /tmp/$$netls.servers > /tmp/$$netls.servers.nohost
+	echo \"$HOST\"
+	cat /tmp/$$netls.servers.nohost
+	rm -f /tmp/$$netls.servers
+	rm -f /tmp/$$netls.servers.nohost
+fi
+}
+x"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+	values_msg_set			= 51	
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_hdr:
+        id                              = "show_user_license_held.hdr1"
+        option_id                       = "show_user_license_held_opts"
+        has_name_select                 = "y"
+        name                            = "Show Licenses Held by a Specific User"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 48
+        cmd_to_exec                     = "x()
+{
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`	
+
+        while getopts r:n:p:v:u: FLAG \"$@\"; do\n\
+                case $FLAG in \n\
+			u)      USERNAME=$OPTARG
+				if [ \"$USERNAME\" != \"$ALL\" ];
+				then
+					USER=\"-u $USERNAME\"
+				fi ;;
+                        p)      PRODUCT=$OPTARG
+                                if [ \"$PRODUCT\" != \"$ALL\" ];
+                                then
+                                        PRODFLG=\"-p \"
+                                        PROD=$PRODUCT
+                                fi ;;
+                        r)      VERSION=$OPTARG
+                                if [ \"$VERSION\" != \"$ALL\" ];
+                                then
+                                        VER=\"-r $VERSION\"
+                                fi;;
+                        n)      SERVER=$OPTARG
+                                if [ \"$SERVER\" != \"$ALL\" ];
+                                then
+                                        SERV=\"-n $SERVER\"
+                                fi;;
+                        v)      VENDOR=$OPTARG
+                                if [ \"$VENDOR\" != \"$ALL\" ];
+                                then
+                                        VENDFLG=\"-v \"
+                                        VEND=$VENDOR
+                                fi;;
+                esac \n\
+        done \n\
+
+# The if statement below is necessary because the vendor and product
+# must both be in quotes.
+
+if [ -n \"${PROD}\" ]    # if there is a product specified
+then
+        if [ -n \"${VEND}\" ] # if there is a vendor specified
+        then
+                /usr/lib/netls/bin/ls_stat $USER $SERV $VENDFLG \"$VEND\" $PRODFLG \"$PROD\" $VER
+        else
+                /usr/lib/netls/bin/ls_stat $USER $SERV $PRODFLG \"$PROD\" $VER
+        fi
+else
+        /usr/lib/netls/bin/ls_stat $USER $SERV $VENDFLG \"$VEND\" $VER
+fi
+}
+x"
+        ask                             = "n"
+        exec_mode                       = ""
+        exec_mode                       = ""
+        ghost                           = "n"
+        cmd_to_discover                 = "x()
+{
+echo '#user:server:vendor\n'$1:$2:$3
+}
+x"
+        cmd_to_discover_postfix         = "_rawname _rawname1 _rawname2"
+        name_size                       = 0
+        value_size                      = 0
+        help_msg_id                     = "9000008"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_user_license_held_opts"
+        id_seq_num                      = "010"
+        disc_field_name                 = "user"
+        name                            = "USER Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 50
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-u "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "lsuser -a ALL"
+        cmd_to_list_postfix             = ""
+        multi_select                    = "n"
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_id                   = 0
+        aix_values                      = ""
+        help_msg_id                     = "9000047"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_user_license_held_opts"
+        id_seq_num                      = "020"
+        disc_field_name                 = "server"
+        name                            = "SERVER"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 12
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-n "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 0 
+        values_msg_id                   = 0 
+        aix_values                      = ""
+        help_msg_id                     = "9000041"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_user_license_held_opts"
+        id_seq_num                      = "030"
+        disc_field_name                 = "vendor"
+        name                            = "VENDOR Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 13
+        op_type                         = ""
+        entry_type                      = "n"
+        required                        = "y"
+        prefix                          = "-v "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = ""
+        cmd_to_list_postfix             = ""
+        value_index                     = 0
+        disp_values                     = ""
+        values_msg_file                 = ""
+        values_msg_set                  = 15
+        values_msg_id                   = 93
+        aix_values                      = ""
+        help_msg_id                     = "9000039"
+        help_msg_loc                    = ""
+
+sm_cmd_opt:
+        id                              = "show_user_license_held_opts"
+        id_seq_num                      = "040"
+        disc_field_name                 = "product"
+        name                            = "PRODUCT Name"
+        name_msg_file                   = "smit.cat"
+        name_msg_set                    = 51
+        name_msg_id                     = 14
+        op_type                         = "l"
+        entry_type                      = "t"
+        required                        = "y"
+        prefix                          = "-p "
+        cmd_to_list_mode                = ""
+        cmd_to_list                     = "x()
+{
+	VENDOR=`dspmsg lss.cat -s 2 640 \"Vendor\"`
+	PRODUCT=`dspmsg lss.cat -s 2 641 \"Product\"`
+	ALL=`dspmsg smit.cat -s 51 1 \"all\"`
+
+        if [ \"$1\" = \"$ALL\" ]   
+        then :
+                if [ \"$2\" = \"$ALL\" ]  
+                then :
+                        # Both vendor and server are all.  Generate a list of servers, list of
+                        # vendors for those servers, and then a list of products for each vendor.
+                        # Sort this list and remove duplicates.
+                        for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                        do
+				/usr/lib/netls/bin/ls_admin -n $server -s -v | grep \"$VENDOR\" |
+					 cut -d\":\" -f2 |
+				while read vendor
+                                do
+                                        /usr/lib/netls/bin/ls_admin -n $server -s -p \"$vendor\" | grep \"$PRODUCT\" |
+						 cut -d\":\" -f2 | cut -d\"[\" -f1 >> /tmp/XXXnetls.products 
+                                done
+                        done
+                else
+                        # The server is all and the vendor is specified.  Generate a list of
+                        # servers, and get the products for this vendor on each server.
+                        # Sort these and remove duplicates.
+                        for server in `/usr/lib/netls/bin/ls_tv | awk '/    /' | cut -d\"(\" -f1 | cut -c5-`
+                        do
+                                /usr/lib/netls/bin/ls_admin -s -n $server -p \"$2\" | grep \"$PRODUCT\" |
+					 cut -d\":\" -f2 | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                        done
+                fi
+		cat /tmp/XXXnetls.products | sort | uniq
+		rm /tmp/XXXnetls.products	
+        else
+		if [ \"$2\" = \"$ALL\" ]  
+		then :
+                        # The server is specified and the vendor is all.  Generate a list of vendors
+                        # which is used to then generate a list of products.  Sort these and remove
+                        # duplicates.
+                        /usr/lib/netls/bin/ls_admin -s -n $1 -v | grep \"$VENDOR\" |
+				 cut -d\":\" -f2 |
+			while read vendor
+                        do
+                                /usr/lib/netls/bin/ls_admin -s -n $1 -p \"$vendor\" | grep \"$PRODUCT\" |
+					 cut -d\":\" -f2- | cut -d\"[\" -f1 >> /tmp/XXXnetls.products
+                        done
+                        cat /tmp/XXXnetls.products | sort | uniq
+                        rm /tmp/XXXnetls.products
+		else
+			# Both the vendor and server are specified.
+                	/usr/lib/netls/bin/ls_admin -n \"$1\" -s -p \"$2\" | grep \"$PRODUCT\" |
+				 cut -d\":\" -f2 | cut -d\"[\" -f1 | sort
+		fi
+        fi
+}
+x"
+        cmd_to_list_postfix             = "_rawname1 _rawname2"
+        value_index                     = 0
+        disp_values                     = "all"
+        values_msg_file                 = "smit.cat"
+        values_msg_set                  = 51
+        values_msg_id                   = 1
+        aix_values                      = ""
+        help_msg_id                     = "9000042"
+        help_msg_loc                    = ""
+

@@ -1,0 +1,393 @@
+#!/usr/bin/rexx
+
+  parse arg comp files
+
+  nfiles = words(files)
+
+  cd   = directory()
+
+      fl = cd'/ciedd.files'
+      fm = cd'/ciedd.func'
+
+  if comp = 'cie' then
+    do
+      base  = '/devel/cioem/src/bos/kernext/cie/'
+      fl    = cd'/ciedd.files'
+      fm    = cd'/ciedd.func'
+    end
+  else if comp = 'cfg' then
+    do
+      base  = '/devel/cioem/src/bos/usr/lib/methods/cfgcie/'
+      fl    = cd'/cfg.files'
+      fm    = cd'/cfg.func'
+    end
+  else
+    do
+      say 'Component' comp 'unrecognized'
+      exit
+    end
+
+  if (directory(base) = '') then
+    do
+      say "Can't change to base directory" base
+      exit
+    end
+
+  fn. = ''
+  ft. = ''
+  fu. = ''
+  fx. = ''
+
+  i = 0
+
+    do while lines(fl)
+      l = linein(fl)
+      parse var l fn title
+
+      if nfiles \= 0 then
+        do
+          w = wordpos(fn,files)
+          if w = 0 then
+              fn = ''
+          else
+              files = delword(files,w,1)
+        end
+
+      if fn \= '' then
+        do
+          i = i + 1
+          fn.i  = fn
+          ft.i  = space(title)
+          fx.fn = i
+        end
+    end
+
+  call lineout(fl)
+  fn.0 = i
+
+    do i = 1 by 1 while lines(fm)
+      l = linein(fm)
+      parse var l . '$' . '$' . '$' func '$' file .
+      x = fx.file
+      fu.x = fu.x func
+    end
+
+  call lineout(fm)
+
+    do i = 1 to fn.0
+      call process fn.i,ft.i,fu.i
+    end
+
+  return
+
+
+process:
+procedure
+
+  parse arg iname,title,funcs
+
+  oname = iname'.new'
+
+  say 'Processing' iname
+  'rm' oname '>/dev/null 2>&1'
+
+  rc = loadFile(iname)
+
+  if rc <> 0 then
+    do
+      say 'Error loading file' iname
+      return -1
+    end
+
+  rc = parseProlog()
+
+  if rc <> 0 then
+    do
+      say 'Error parsing prolog for' iname
+      return -1
+    end
+
+  match = 0
+
+  if (np = 0) then call newProlog title
+
+  match = updProlog(funcs)
+
+  if match = 1 & np > 0 then
+      say iname 'not updated'
+  else
+      call writeFile oname
+
+  return
+
+updProlog:
+procedure expose ns s.
+
+  parse arg funcs
+
+  f = 0
+  c = 0
+
+    do i = 1 to ns while f=0
+
+      if f = 0 & translate(left(s.i,9)) = 'FUNCTIONS' then
+          f = i
+      else if c = 0 & translate(left(s.i,9)) = 'COMPONENT' then
+          c = i
+    end
+
+  if f=0 then
+    do
+      if c=0 then c = 1
+
+        do i = ns to c by -1
+          d = i+1
+          s.d = s.i
+            do j = 0 to s.i.0
+              s.d.j = s.i.j
+            end
+        end
+      f = c
+      s.f   = 'FUNCTIONS:'
+      s.f.0 = 0
+    end
+
+  match = 0
+
+  if s.f.0 = words(funcs) then
+    do
+      match = 1
+        do i = 1 to words(funcs) while match
+          match = (s.f.i = word(funcs,i))
+        end
+    end
+
+  if (match = 0) then
+    do
+      s.f.0 = words(funcs)
+
+        do j = 1 to words(funcs)
+          s.f.j ='  'word(funcs,j)
+        end
+    end
+
+  return match
+
+writeFile:
+procedure expose ns s. nl l.
+
+  parse arg fid
+
+  parse var fid fn '.' ext '.' rest
+
+  say 'Generating' fid
+
+  sccs = '@(#)27   1.1  src/bos/usr/fvcioem/tools/genprolog, fvcioem, bos411, 9428A410j 4/26/94 13:55:26'
+
+    select
+      when ext = 'c'   then sccsid = 'static char sccsid[]="'sccs'";'
+      when ext = 'h'   then sccsid = '/*' sccs '*/'
+      otherwise             sccsid = ''
+    end
+
+  if sccsid <> '' then
+    do
+      call lineout fid,sccsid
+      call lineout fid,''
+    end
+
+  call lineout fid,'/* '
+
+    do i = 1 to ns
+
+      call lineout fid,' * '
+      call lineout fid,' * 's.i
+
+      if s.i.0 > 0 then
+        do
+          call lineout fid,' * '
+            do j = 1 to s.i.0
+              call lineout fid,' * 's.i.j
+            end
+        end
+    end
+
+  call lineout fid,' * '
+  call lineout fid,' */'
+
+  call lineout fid,''
+
+    do i = 1 to nl
+      call lineout fid,l.i
+    end
+
+  call lineout fid
+
+  return
+
+newProlog:
+procedure expose ns s.
+
+  parse arg title
+
+  ns = 4
+
+  s.1   = 'COMPONENT_NAME: (SYSXCIE) COMIO Emulator'
+
+  s.2   = 'FUNCTIONS:'
+  s.2.0 = 0
+
+
+  s.3   ='DESCRIPTION:'
+
+  s.3.0 = 1
+  s.3.1 ='  'title
+
+  s.4   ='ORIGINS: 27'
+
+  s.4.0 = 6
+  s.4.1 ='  (C) COPYRIGHT International Business Machines Corp. 1988, 1994    '
+  s.4.2 ='  All Rights Reserved                                               '
+  s.4.3 ='  Licensed Materials - Property of IBM                              '
+  s.4.4 ='                                                                  '
+  s.4.5 ='  US Government Users Restricted Rights - Use, duplication or       '
+  s.4.6 ='  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. '
+
+  return
+
+loadFile:
+procedure expose np nl p. l.
+
+  parse arg fid
+
+  parse var fid fn '.' ext
+
+  state = 0
+  np    = 0
+  nl    = 0
+  p.    = ''
+  l.    = ''
+
+    do i = 1 by 1 while lines(fid)
+
+      l = linein(fid)
+
+      if (state = 0) then
+        do
+          if l = '' then
+              nop
+          else if ext = 'c' & left(l,20) = 'static char sccsid[]' then
+              state = 1
+          else if ext = 'h' & left(l,06) = '/* @(#)'               then
+              state = 1
+          else if l = '/*'                                        then
+              state = 2
+          else
+            do
+              state = 5
+              nl   = nl + 1
+              l.nl = l
+            end
+        end
+      else if (state = 1) then
+        do
+          if l = ''        then
+              nop
+          else if l = '/*' then
+              state = 2
+          else
+            do
+              state = 5
+              nl   = nl + 1
+              l.nl = l
+            end
+        end
+      else if (state = 2) then
+        do
+          if l = ''                 then
+              nop
+          else if left(l,3) = ' * ' then
+            do
+              np   = np + 1
+              p.np = substr(l,4)
+            end
+          else if l = ' */'         then
+              state = 4
+          else
+              return -1
+        end
+      else if (state = 4) then
+        do
+          if l = '' then
+              nop
+          else
+            do
+              state = 5
+              nl   = nl + 1
+              l.nl = l
+            end
+        end
+      else if (state = 5) then
+        do
+          nl   = nl + 1
+          l.nl = l
+        end
+    end
+
+    call lineout fid
+
+  return 0
+
+parseProlog:
+procedure expose np p. ns s.
+
+
+  ns = 0
+  sl = 0
+  s. = ''
+
+    do i = 1 to np
+
+      if p.i = '' then
+        do
+
+          if sl > 0 then
+            do
+              sl = sl + 1
+              s.ns.sl = p.i
+            end
+          else
+              nop
+
+        end
+      else
+        do
+
+          if left(p.i,1) <> '' & right(word(p.i,1),1) = ':' then
+            do
+              if ns > 0 then
+                do
+                do s.ns.0 = sl to 1 by -1 while value('s.ns.'s.ns.0) = ''
+                end
+                end
+              ns = ns + 1
+              sl = 0
+              s.ns = p.i
+            end
+          else
+            do
+              if ns = 0 then return -1
+
+              sl = sl + 1
+              s.ns.sl = p.i
+            end
+
+        end
+
+    end
+
+  if ns > 0 then
+    do s.ns.0 = sl to 1 by -1 while value('s.ns.'s.ns.0) = ''
+    end
+
+  return 0

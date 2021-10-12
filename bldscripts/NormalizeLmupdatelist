@@ -1,0 +1,72 @@
+#!/bin/ksh
+# @(#)25	1.2  src/bldscripts/NormalizeLmupdatelist, ade_build, bos41J, 9509A_all 2/22/95 16:37:46
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+trap : 1
+export PAGERID=packager
+export PAGERSEVERITY=3
+alias  dataman=`whence dataman`
+
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED ; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset DBGLEVEL=1
+eval ${DEBUGX}
+typeset -r cmd=$(basename $0)
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+typeset -r SELFIX_PTF=$treetop/selfix/PTF
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+
+if [[ ! -f ${ODE_TOOLS}/usr/lib/no_update_list ]]
+then
+        print "ERROR: file ${ODE_TOOLS}/usr/lib/no_update_list missing"
+        false # force clean clean-exit
+fi
+
+#
+# The following excludes the ship file
+# from the normalize lmupdatelist if 
+# the ship file's fileset is on the no_update_list
+#
+cat ${SELFIX_PTF}/$BLDCYCLE/*/lmupdatelist |
+     sed "s![^ ]*ship/power/!/!g;
+     s![^ ]*selfix/UPDATE/!/!g;
+     s!//!/!g;
+     s!^\./!/!g;
+     s!.*liblpp.a!liblpp.a!" |
+     sort -u |
+	awk '{print $1,$2}' |
+	while read shipfile fileset
+	do
+	if grep -sq -E "^"$fileset"$|[^ ]*"$fileset"[ *]$|[^ ]*"$fileset"$" \
+                ${ODE_TOOLS}/usr/lib/no_update_list 
+	then
+		true
+	else
+		print $shipfile" "$fileset
+	fi 
+	done |
+	dataman -s leveldata[$BLDCYCLE][lmupdatelist]
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

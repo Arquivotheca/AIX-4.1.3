@@ -1,0 +1,22 @@
+# @(#)61        1.1  src/bldenv/man/ptf_pkg_back.man, pkgtools, bos412, GOLDA411a 12/1/93 17:32:37
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: ptf_pkg_back file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/UPDATE/<lpp-name>/ptf_pkg_back.$BLDCYCLE:
+        Backup of $TOP/UPDATE/<lpp-name>/ptf_pkg.$BLDCYCLE that is done
+        each time ptfpkg is invoked.  Created by the ptfpkg command.
+        Comment lines begin with a "#".
+
+	Format: See $TOP/UPDATE/<lpp-name>/ptf_pkg.$BLDCYCLE.

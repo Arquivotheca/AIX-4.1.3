@@ -1,0 +1,234 @@
+#
+# @(#)93        1.1  src/bldenv/man/adepackage.man, pkgtools, bos412, GOLDA411a 5/20/94 14:56:54
+#
+#  COMPONENT_NAME: (pkgtools) AIX Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: adepackage command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  adepackage Command
+ 
+
+  Purpose
+ 
+  The adepackage command creates an install image in bff (backup format file) 
+  or tar format.
+
+
+  Syntax
+ 
+  adepackage -s <ship_path1:ship_path2:...> -l <lppname> -f <output_device>
+        -i <inslist> [ -b <blocksize> ] [ -F <filename> ] [ -t ] [ -D ]
+         [ -L ] [ -U <v.r.m.f.> ] [ -Y ]
+
+  Description
+
+  The adepackage command reads the inslist file specified with the -i option
+  and produces an install image in the location specified by the
+  -f option.  The default format of the install image is backup format.
+  The -t option overrides the default and produces a tar image.
+ 
+  adepackage searches for the files from the inslist in consecutive order, 
+  first in the current directory and then in the ship trees.  The first
+  occurrance of a file in the ship tree list is included in the install
+  image.
+
+  adepackage assumes the 'lpp_name' file is in the current directory.
+  It will also look for the 'liblpp.a' archive file in the current directory 
+  unless the -D option is specified.
+
+  Flags
+
+* -s pathname(s)      Specifies the path(s) to the ship trees.  Multiple
+                      paths are supported and must be separated by a
+                      colon (:), similar to the PATH environment variable
+		      format.
+
+* -l lppname          Specifies the name of the package to be processed.
+
+* -i inslist          Specifies the name of the inslist file.
+
+* -f output_device    Specifies the location for the install image.  This
+                      value can be a file name or a device name (/dev/rmt0).
+
+  -b blocksize        Overrides the default blocksize of 10240.  The value
+                      of the blocksize parameter may be one of the following:
+
+                      <integer>b  Specifies that the positive integer argument
+                                  be multipled by 512 to determine the
+                                  blocksize.
+
+                      <integer>k  Specifies that the positive integer argument
+                                  be multiplied by 1024 to determine the
+                                  blocksize.
+
+                      <integer>m  Specifies that the positive integer argument
+                                  be multiplied by 1024*1024 to determine the
+                                  blocksize.
+
+                      <int+int>   Specifies that the blocksize should be
+                                  determined by adding the 2 positive
+                                  integers.
+
+                      NOTE:  The m, k, and b conversion cannot be applied to
+                      the addition expression.  This format is consistent
+                      with the pax command.
+
+   -F filename        Specifies the name of a file containing a list of
+                      one or more files which should be placed first on the
+		      output image, before the 'lpp_name' file and the
+		      'liblpp.a' file.
+
+   -t                 Specifies that the output image should be in tar
+                      format.
+
+   -D                 Specifies that adepackage is to process shared data.
+                      If this option is specified, adepackage obtains
+                      the 'liblpp.a' file from the 'data' subdirectory
+                      (relative to the current directory).  The 'liblpp.a'
+                      file will be backed up in the /usr/share/lpp/<lppname>
+                      directory, where <lppname> is specified by the
+                      -l option.
+
+   -L                 Specifies that the hardlink and symlink information
+                      should be included in the output image.
+
+   -U v.r.m.f.        Indicates that this bff is for an update image and
+                      not for an install image.  The v.r.m.f. (version,
+		      release, modification, and fix level) argument is
+                      used to calculate the inst_root directory for the
+                      install as follows:
+                      /usr/lpp/<lppname>/inst_<v.r.m.f.>/inst_root
+                      where <lppname> is specified by the -l option.
+
+   -Y                 Indicates that adepackage should not fatally
+                      exit if one or more of the files from the inslist
+                      are not found in the ship trees.  If this flag is
+                      specified, missing files are ignored and
+                      adepackage will continue to back up only the
+                      files found in the ship trees.  This flag is
+                      intended for development purposes ONLY and should
+                      NOT be used for product level packages.
+
+  * Options indicated with an asterisk are required.
+
+  Fatal Errors
+
+  In the event of a fatal error, a message is displayed and adepackage
+  exits with a non-zero return code.  Errors include the following
+  conditions:
+
+        An invalid flag was specified on the command line.
+
+        A required argument was not supplied to an option.
+
+        The inslist file cannot be opened for read access.
+
+        A write error was detected while the image is being created.
+
+        The output device cannot be opened for write access.
+
+        Temporary buffer space could not be allocated during backup.
+
+        The file specified with the -F option cannot be opened for
+        read access.
+
+        An unrecognizable or invalid blocksize was specified with the
+        -b option.
+
+        A space allocation problem was detected.
+
+
+  Warnings
+
+  Warning messages may be displayed during execution of adepackage, but will
+  not cause a non-zero return code.  Warnings include:
+
+        A file in the inslist could not be found in any of the ship trees.
+
+        An invalid type was specified in the inslist.
+
+        The backup volume header record has an unrecognized type.
+
+        A socket was detected in the inslist and will not be backed up.
+
+        A file or link name is too long.
+
+        A read error occurred during backup.
+
+        An invalid format was detected in an inslist entry.
+
+        Early EOF was detected while the output image was being written.
+
+
+  Examples
+
+   1.  Generate a backup image with a blocksize of 1024 blocks, where
+       a block is 512 bytes.  The output device is /dev/rmt0 and the
+       inslist file is 'bos.net.tcp.server.il'.  The ship trees are
+       /project/ship1:/project/ship2.
+
+       adepackage -b 1024b -i /project/src/bos.net.tcp.server.il
+                -f /dev/rmt0 -s /project/ship1:/project/ship2
+                -l bos_net.tcp.server
+
+   2.  Generate a tar image in /selfix/tmp/tar.image with a blocksize
+       of (512+256=768) bytes.
+
+       adepackage -b512+256 -i/project/src/bos.net.tcp.server.il
+                -f /selfix/tmp/tar.image -t -l bos_net.tcp.server
+                -s /project/ship1:/project/ship2
+
+  Input Files
+
+  inslist
+
+        Required input file containing a list of file names as they
+        should be found on the customer's system.  The format of an 
+        inslist file entry is:
+
+        <type> <uid> <gid> <mode>       <fileName> 
+
+        Example:
+
+        F 2 2 555       /usr/bin/awk 
+
+        The format of a link entry in the inslist is:
+
+        <type> <uid> <gid> <mode>       <linkName> <targetFile> 
+
+        Example:
+
+        H 2 2 777       /usr/bin/nawk /usr/bin/awk 
+
+        NOTE:  Hard links must immediately follow the inslist entry for
+        their target file.  This requirement does not apply to symbolic
+        link entries.
+
+  firstFile
+
+	Specified with the -F option.  This file contains a list of
+	filenames that should be included first on the media.  These
+	files will be backed up before the 'lpp_name' file and 'liblpp.a'.
+
+	The format of this file is one file name per line.  Comments
+	should be denoted by a # in the first character of the line
+	and will be ignored.
+
+	Example:
+
+	# Comments
+	#
+	#
+
+	/bosinst.data
+	/image.data

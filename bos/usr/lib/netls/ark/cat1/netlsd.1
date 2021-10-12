@@ -1,0 +1,132 @@
+
+
+
+netlsd(1M)            Maintenance Commands             netlsd(1M)
+
+
+
+NNNNAAAAMMMMEEEE
+     netlsd - Starts the license server
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     nnnneeeettttllllssssdddd [[[[[[[[ ----nnnnoooo eeeevvvveeeennnntttt____lllliiiisssstttt |||| ----oooo |||| ----vvvv |||| ----zzzz |||| ----llll _l_o_g__n_a_m_e ]]
+
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The nnnneeeettttllllssssdddd command starts a  license  server  on  the  local
+     node. There is no graphic interface for this command.
+
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----nnnnoooo  Turns  off  logging  of   the   events   specified   in
+          event_list.  Any  combination  of  events is valid, but
+          items in the list of events must not  be  separated  by
+          spaces  or  other  characters.  Following are the event
+          types that you may specify:
+
+          llll    License-grant and license-release events.
+
+          cccc    License checkin events. (Licensed products usually
+               check in with the license server at regular inter-
+               vals while a user is using the product).
+
+          wwww    Waiting events: these include wait events (a  user
+               was  waiting  for  a license), waitgrant events (a
+               user was  waiting  for  and  then  was  granted  a
+               license),  and waitremove events (a user was wait-
+               ing for a license and then  asked  to  be  removed
+               from the queues before a license was granted).
+
+          vvvv    Vendor events: a  vendor  was  added,  renamed  or
+               deleted.
+
+          pppp    Product events: a product was added,  renamed,  or
+               deleted.
+
+          eeee    Error events.
+
+          tttt    License timeout events. (When a  licensed  product
+               fails  to check in with the license server, it may
+               stop running after it times out."  The  vendor  of
+               the  product  sets  the timeout interval, which is
+               how long a product may run after it has lost  con-
+               tact with the license server).
+
+          mmmm    Message events.
+
+          ssss    License server start/stop events.
+
+     ----llll _l_o_g__n_a_m_e
+
+
+
+NetLS Version 2           Last change:                          1
+
+
+
+
+
+
+netlsd(1M)            Maintenance Commands             netlsd(1M)
+
+
+
+          Overrides the default name and  location  of  the  file
+          used  to  store  log  information.  This allows the I/O
+          activity to the files used by the license server to  be
+          spread across multiple disks which may become important
+          for large installations.
+
+     ----oooo   Overrides the in-use flag at a license server database.
+          While  a  license  server  is  running, its database is
+          flagged as being in use to prevent more than one server
+          from  running  on  the same node. When a license server
+          stops running, the flag is reset. However, if a license
+          server  exits  abnormally,  the  flag may not be reset,
+          which prevents  the  server  from  restarting.  The  ----oooo
+          option  overrides an inuse flag, allowing the server to
+          be restarted. Do not use ----oooo unless  you  are  sure  the
+          license server isn't running.
+
+     ----ssss   Secure option.  Will only allow changes to the  license
+          database to be initiated from tools run on that partic-
+          ular workstation.  Ls_admin commands  (like  add  user,
+          delete  product,  etc) run from other workstations will
+          not be allowed.
+
+     ----vvvv   NetLS library verbose mode.
+
+     ----zzzz   Debugging flag. (Prints RPC debugging information).
+
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     Start a license server; do not log checkin, vendor, product,
+     timeout, or message events:
+
+     nnnneeeettttllllssssdddd ----nnnnoooo ccccvvvvppppttttmmmm
+
+     SSSSttttaaaarrrrtttt aaaa lllliiiicccceeeennnnsssseeee sssseeeerrrrvvvveeeerrrr,,,, oooovvvveeeerrrrrrrriiiiddddiiiinnnngggg tttthhhheeee iiiinnnnuuuusssseeee ffffllllaaaagggg::::
+
+     nnnneeeettttllllssssdddd ----oooo
+
+     SSSSttttaaaarrrrtttt aaaa lllliiiicccceeeennnnsssseeee sssseeeerrrrvvvveeeerrrr,,,, oooovvvveeeerrrrrrrriiiiddddiiiinnnngggg tttthhhheeee ddddeeeeffffaaaauuuulllltttt lllloooogggg ffffiiiilllleeee::::
+
+     nnnneeeettttllllssssdddd ----llll/_l_o_g_s/_l_i_c_e_n_s_e__s_e_r_v_e_r__l_o_g
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NetLS Version 2           Last change:                          2
+
+
+

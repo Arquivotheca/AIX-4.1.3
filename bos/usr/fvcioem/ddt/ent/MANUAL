@@ -1,0 +1,699 @@
+#  @(#)95   1.1  src/bos/usr/fvcioem/ddt/ent/MANUAL, fvcioem, bos411, 9428A410j 4/26/94 13:54:14
+#
+#  COMPONENT_NAME: (sysxcie_tc) COMIO Emulator Test Tools
+#
+#  DESCRIPTION:
+#     Ethernet DDT Test Tool Documentation
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1988, 1994
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  --------------------------------------------------------------------
+             Communications Device Driver Tool
+         User's Manual
+            15 DEC 90  Mark McLemore  (823-4803)
+  --------------------------------------------------------------------
+  OVERVIEW
+
+  The Communications Device Driver Tool is a menu-driven interface
+  to device drivers in the Communications I/O Subsystem.  This tool
+  allows the device driver developer or maintainer to directly interact
+  with the driver and adapter card during testing and debug sessions
+  without the need for external protocol code.  The devices currently
+  supported are:
+
+      Ethernet Device "ent"
+      Token Ring Device "tok"
+      Multiprotocol Quad Port Device "mpqp"
+
+  The Device Driver Tool (DDT) can be used standalone to exercise a
+  device driver interactively, or it can be used with shell script
+  test cases for automated functionality and regression tests (see
+  the MPQP test cases for examples).  If DDT is to be used in
+  "kernel" mode (to test the driver's interface to the kernel),
+  the Kernel Interface Driver (KID) must be present and
+  configured (see the manual for the Kernel Interface Driver).
+  Both the "user" and "kernel" modes of DDT and KID are coded
+  to Chapter 5 of "Writing Kernel Extensions" (The Communications
+  I/O Subsystem).
+    The main menu presents two panels; the first (upper panel)
+  is the "Control Panel" to the device driver -- each selection
+  represents a call to a driver entry point or ioctl operation.  The
+  Control Panel operations common to all drivers are Open, Close,
+  Start, Halt, Get Status, and Query Statistics.  In addition,
+  there are driver-specific IOCTL operations that appear only
+  in certain menus depending on the device that DDT is built for.
+  The Control Panel is used to test and debug individual entry
+  points; it is intended for functionality testing of the driver.
+  An "Edit Defaults" option is provided to profile the default
+  parameters of prompts that appear for certain menu items.
+          Defaults appear in square brackets "[]" for most prompts;
+  a press of the enter key is required to take the default.  At any
+  given prompt, entering a period "." will return you to the main menu
+  and entering a "q" will exit back to the shell.   If a "." is entered
+  during the edit of a start block (MPQP) or from the Edit Defaults
+  menu, any changes entered up to the "." are accepted.  Automated
+  regression tests can be written to pipe keystrokes to the menus,
+  allowing an almost infinite number of test cases to be created
+  without compiling a single line of "C" source code.
+    The "Client/Server Tests" panel is used for regression
+  testing of functional (or almost functional) drivers.  The Client/
+  Server test protocol tests the device driver by establishing
+  a session between two adapters (either on two different machines
+  or on the same machine).  The "Client" side of the session sends
+  test packets to a "Server" that verifies the test data and responds
+  with an ack for every W test packets received.  To prevent the
+  Client side from receiving its own test packets, an address
+  resolution handshake is performed before the tests are started
+  (LAN devices only) -- the Client sends an ARP broadcast with its
+  hardware address to the Server.  The Server receives this packet
+  and saves the hardware address (for use in ack'ing the Client)
+  before returning an ARP response back to the Client with the
+  Server hardware address.
+          After address resolution is completed, the Client sends
+    a test parameters packet that configures the Server side with
+  parameters for verifying subsequent test frames (these parameters are
+  prompted for at the Client side).  The Server responds with an ack
+  and waits for test frames from the Client.  The Client sends W
+  test frames to the Server and awaits an ack before continuing
+  with the next burst of W test frames.
+    When all test frames have been sent, the Client sends
+  a halt frame; the Server responds with a "test results" frames
+  that contains error statistics logged on the Server side of the
+  session.  The Client combines this information with its own
+  statistics and displays them at the end of the tests. Two types
+  of errors are checked for; lost frames and corrupted test data
+  frames.  Each frame has a sequence number that reveals lost frames
+  (indicated by frames arriving without consecutive sequence numbers).
+  Each test data frame is validated byte-for-byte at the Server end
+  when zero, ones, or incrementing modulo-N data patterns are used.
+    Both the Client and Server are equipped with error recovery
+  logic in the event of dropped or corrupted frames; retries are
+  performed at each end of the connection to avoid deadlock situations.
+  If the Client times out waiting for an ack, it sends the next burst of
+  test frames and listens again for a response before giving up.  If
+  the Server times out waiting for a test frame, it sends an ack and
+  waits again for a test frame before giving up.
+
+
+  ----------------------------------------------------------------------
+  HOW TO USE IT
+  ----------------------------------------------------------------------
+
+  BUILDING THE DEVICE DRIVER TOOL
+
+  DDT is built as a system command in the "cmd" portion of your clone
+  tree.  Create a subdirectory in this clone tree (R2/cmd/tok is used
+  for Token Ring, for example) and place the source there:
+
+
+    Makefile  DDT makefile
+    ddt_com.h DDT common definitions
+    ddt_csp.h DDT client/server protocol definitions
+    kiduser.h Kernel Interface Driver definitions
+    ddt_com.c DDT common code
+
+
+  Depending on the driver you wish to test, add one of the following
+  pairs of device-specific files:
+
+    ddt_tok.h DDT Token Ring definitions
+    ddt_tok.c DDT Token Ring code
+
+    ddt_ent.h DDT Ethernet definitions
+    ddt_ent.c DDT Ethernet code
+
+    ddt_mpqp.h  DDT Multiprotocol Quad Port definitions
+    ddt_mpqp.c  DDT Multiprotocol Quad Port code
+
+
+  Set the Makefile for your driver by editing the makefile and changing
+  all XXX's to the keyword corresponding to your driver:
+
+    tok   Token Ring driver
+    ent   Ethernet Driver
+    mpqp    Multiprotocol Driver
+
+  Or run the makefile through sed -- the following example will
+  customize the makefile for Token Ring:
+
+    sed s%XXX%tok%g Makefile > MyMakefile
+    rm Makefile
+    cp MyMakefile Makefile
+
+  Run libmake in your clone tree; the resulting executable will
+  depend on the driver you are building for:
+
+    tokddt    Token Ring Driver DDT
+    entddt    Ethernet Driver DDT
+    mpqpddt   Multiprotocol Driver DDT
+
+  Alternately, DDT can be compiled natively on an RS/6000 by
+  modifying the Makefile to reflect that build environment.
+  The source files are available on CARRERA (192.100.145.58) from the
+  /u/ddt directory; this document is also there as MANUAL.  You
+  can get the source by entering the following:
+
+    rcp guest@carrera:/u/ddt/* .
+
+  In addition, the source for the Kernel Interface Driver (used with
+  the Driver Debugger/Tester for kernel-mode testing) can be accessed
+  as follows (also includes a MANUAL):
+
+    rcp guest@carrera:/u/kid/* .
+
+
+  ----------------------------------------------------------------------
+  INSTALLING DDT
+  ----------------------------------------------------------------------
+
+  Simply copy the executable file to the /etc directory of your
+  machine.  Make certain it is executable by changing it's RWE flags:
+
+      chmod 555 tokddt
+
+  This will make the Token Ring DDT readable and executable.
+
+  ----------------------------------------------------------------------
+  USING DDT
+  ----------------------------------------------------------------------
+
+  To run DDT, enter the name of the executable; the main menu will
+  scroll up on the screen and prompt for a selection.
+
+  OPEN
+
+  The first choice is almost always "Open" since no other driver calls
+  can be executed until the driver is opened.  If you choose to open
+  the driver in kernel mode (through /dev/kid), the Kernel Interface
+  Driver must be installed and configured.  If you choose to open
+  in blocking mode, menu commands such as "Read" will hang until
+  the driver completes the operation or a timeout occurs.  Opening in
+  non-blocking mode will cause all menu commands to return immediately,
+  even if the driver has not completed the operation.
+
+  CLOSE
+
+  Closes the driver.  If the driver was opened in kernel mode, the
+  driver under test is closed before the Kernel Interface Driver
+  is closed.
+
+  WRITE
+
+  Performs a write to the driver.  The destination address is the
+  hardware address of the destination adapter, this is typically
+  set to broadcast (all F's) for Token Ring and Ethernet.  The
+  source address of the frame is automatically filled in from the
+  default source address (see Edit Defaults, below).  For non-LAN
+  devices (MPQP), no destination or source addresses are used.
+  The test data can be either keyed in by the user or generated
+  automatically:
+
+    1's   All data is binary ones (hex F's).
+    0's   All data is binary zeroes.
+    Incrementing  The value of a given data byte is equal to
+        its index modulo 128.
+    Random    The value of a given data byte is a random
+        variable following a normal probability
+        distribution.
+
+  Multiple writes can be paced by having DDT require status back
+  from the driver for every N writes; if no status waits are to be
+  performed, enter 0.
+
+  READ
+
+  Reads frames from the device under test.  The default number of
+  bytes to read is calculated from the default number of bytes to
+  write plus the additional header size of a read packet.
+  If you wish to display each frame as it is read, the tester will
+  scroll a formatted display of each frame (in both hex and ASCII)
+  as it is read from the driver.  This display can be scrolled forward
+  by pressing enter (or entering "F") and backwards by entering a "B"
+  as prompted.  On drivers that allow wrap-around of write data, an
+  option to compare the read data with that of the last write is
+  displayed; this is a simple way to run regression tests of data
+  integrity without running Client/Server tests.
+      Each read issued to the driver is preceded by a poll that
+  has a timeout of several seconds; if it is not desirable to poll the
+  driver before a read, the poll can be turned off from the Edit
+  Defaults selection.
+
+  START
+
+  Issues the CIO_START ioctl command to the device driver and prompts
+  for the netid associated with this start.  The session block
+  returned from the driver is displayed.  MPQP only -- the last changes
+  made to the start block (Modify Start Block) are used when a start
+  is issued to a port; if you want to change parameters, halt the
+  port, modify the start block, then restart the port with the new
+  parameters.
+
+  HALT
+
+  Issues the CIO_HALT ioctl command to the device driver and prompts
+  for the netid associated with this halt.  The session block returned
+  from the driver is displayed.
+
+  GET STATUS
+
+  Issues the CIO_GET_STAT ioctl command to the device driver; decodes
+  and formats the returned status block to the display.
+
+  LIST STATISTICS
+
+  Issues the CIO_QUERY ioctl command to the device driver; prints
+  the returned statistics to the display.
+
+  QUERY VITAL PRODUCT DATA
+
+  Issues the query vital product data ioctl command to the device
+  driver; decodes and formats the returned vital product data to
+  the display.
+
+  EDIT DEFAULTS
+
+  Mbuf Size Threshold:
+
+      This value determines the maximum number of bytes that each
+      mbuf is to hold during writes in kernel mode.  By reducing
+      this value to some arbitrarily smaller value, the data of a
+      single write can be spread among multiple mbufs -- this is
+      used to test gather operations in the driver.  For example,
+      if the mbuf threshold is reduced to 1024 and a write of 4096
+      bytes is performed, the write data will be placed in a chain
+      of 4 mbuf clusters rather than 1 mbuf cluster.  If this value
+      is set to MLEN (112) bytes or less, all data will be placed
+      in non-clustered mbufs.
+
+  Mbuf Write Data Transfer Data Offset:
+
+      This specifies the offset (in the write mbuf data area) where
+      write data is to start.  The offset field of the mbuf is
+      updated to point to this location.
+
+  Free Mbufs on Writes:
+      This is a flag that decides whether mbufs are freed by the driver
+      under test or by DDT/KID  -- the default is to have the driver
+      free the mbuf.  If mbufs are not to be freed after writes, the
+      CIO_NOFREE_MBUF flag is set and mbufs are freed by DDT/KID
+
+  Mbuf Cross Page Boundary:
+      The default is NO (use normal mbufs); if YES is selected, the
+      data area of the mbuf will be manufactured to cross a page
+      boundary at exactly MLEN (112) bytes after the start of data.
+      This means that a write of length > 112 is then needed to
+      cause a "funky" mbuf to be issued to the driver under test.
+
+  Default Destination Address:
+
+      Ethernet and Token Ring only -- This is the default address that
+      will be placed in the destination field of frame headers on
+      writes.
+
+  Default Source Address:
+
+      Ethernet and Token Ring only -- This is the default address that
+      will be placed in the source field of frame headers on writes.
+
+  Default Netid:
+
+      Ethernet and Token Ring only -- This is the default netid that
+      will be placed in the netid field of frame headers on writes.
+      This netid is also the default to be used for starts and halts.
+
+  Default Netid Size:
+
+      Ethernet only -- This is the default number of bytes in a netid
+      (for IEEE 802.3; one byte, otherwise, two bytes).
+
+  Default Data Size:
+
+      The default number of data bytes written to or read from test
+      frames.
+
+  Default Number of Writes:
+
+      The default number of writes that will be issued when write
+      is selected from the menu.
+
+  Default Number of Reads:
+
+      The default number of reads that will be issued when read
+      is selected from the menu.
+
+  Poll for Data Before Issuing a Read:
+
+      This is normally yes, but some tests may not allow a poll to
+      proceed a read call (see read above).
+
+
+  CLIENT/SERVER TESTS
+
+  You will need either two machines or one machine with two ports
+  and two terminal sessions to run client/server tests.  The two
+  machines (or two ports) should be connected together in a way
+  that permits half or full-duplex communications between them.  The
+  connection must be isolated, i.e, with no other traffic on the media.
+  Open each adapter from a different terminal session; start one as
+  the "Server" session by entering a "1"; the Server will open the
+  adapter or port and poll until it receives a client frame or times
+  out.  Start the other session as the "Client" by entering a "2" and
+  then enter the test parameters:
+
+  Number of Test Frames:
+      This is the total number of test frames that the Client will
+      send to the Server (not including ARP and control frames).
+
+  Ack Per How Many Frames:
+      The Client will send a burst of test frames before requiring
+      an acknowledgement frame back from the Server.  This "ack
+      spacing" determines the size of the burst; one ack is returned
+      for every burst.  For MPQP, this ack is a DLE ACK character
+      sequence; for LAN's a short packet with a sequence number is
+      returned.
+
+  Issue How Many Additional Writes Before 1st Ack:
+      The number of additional writes issued before the 1st ack is
+      called the "load".  By making the first burst larger than
+      subsequent bursts, the user can force concurrent packet
+      reception and transmission -- since the first acks will arrive
+      before the entire first burst is transmitted, both sides are
+      forced to receive and transmit at the same time.  This condition
+      exists for the duration of the test since the Server is always
+      "ahead" of the Client in response acks; the Client is never
+      waiting for an ack to send the next burst.
+
+  How Many Test Bytes per Frame:
+      This is the total number of test bytes placed in each frame
+      (not including datalink header).  If random size is selected,
+      the size of each test packet will follow a random probability
+      distribution between the entered lower and upper limits.
+
+  Test Data:
+      The test data can be either keyed in by the user or automatically
+      generated by the debugger/tester:
+
+    1's   All data is binary ones (hex F's).
+    0's   All data is binary zeroes.
+    Incrementing  The value of a given data byte is equal to
+        its index modulo 128.
+    Random    The value of a given data byte is a normally
+        distributed random variable.
+
+  Halt After How Many Errors:
+      Since the Client/Server tests will attempt to recover from
+      data corruption, dropped frames, etc., it may be desirable to
+      set a limit on the number of errors that can occur before
+      aborting the test.  If the test should be aborted because of
+      any errors, set this value to 1.
+
+  Issue device starts/halts device during test:
+      The default (No) is to start the device and leave it started during
+      Client/Server tests -- by answering yes to this prompt, the device
+      driver will be halted and then restarted between transmit bursts;
+      this results in more rigorous testing of the device handler.
+
+  The Client/Server tests begin by handshaking the test parameters
+  and (for LAN's) the hardware addresses of the adapters; when the
+  send/ack test data sequence is reached, both sides display "Test in
+  Progress" until the Client sends a halt frame.  If errors are found,
+  the side reaching the error limit will abort the test and signal
+  the other side to stop; the specifics of the errors are displayed
+  on the Client side with "Tests completed with errors".  If the
+  test completes without errors, "Tests completed successfully" will
+  be displayed by both sides.   Frames exhibiting data corruption are
+  logged to "/tmp/clientdata" on the Client side and "/tmp/serverdata"
+  on the Server side.  These files are created if they do not exist;
+  data from corrupted frames is appended to this file during execution
+  of the tests.  Since DDT never deletes these files, test cases that
+  drive DDT should delete /tmp/clientdata and /tmp/serverdata before
+  starting.
+      If the Client is started first, it will retry the Server up to 5
+  times. The Client sends L test frames to the Server before waiting
+  for a first ack frame from the Server; subsequently, the Client will
+  send W test frames for every ack required of the Server.  The L test
+  frames determines the initial loading of the driver queues before
+  the actual "windowing" of the protocol (determined by W) takes place.
+  This ensures that both sides are simultaneously receiving and
+  transmitting frames at the same time.  The data for the test frames
+  is the same as that used by WRITE above; however, when the data is
+  0's, 1's, or incrementing modulo-N, the Server side verifies the
+  integrity of the data in each received packet before returning the
+  next ack.  The size of the test frames can be fixed or it can follow
+  a random probability distribution with fixed upper and lower limits.
+
+
+  ----------------------------------------------------------------------
+  DRIVER-SPECIFIC COMMANDS
+  ----------------------------------------------------------------------
+
+  TOKDDT
+
+
+  POS REGISTERS
+
+  Permits reading and writing of all POS registers on the
+  Token Ring adapter card.  You must open the driver in diagnostic
+  mode to access POS registers.
+
+
+  GROUP ADDRESS
+
+  Deletes and adds group addresses on the Token Ring adapter.
+
+
+  SET INIT OPTIONS
+
+  Sets initialization options including initializations options
+  flags, receive burst size, transmit burst size, and DMA abort
+  threshold.
+
+
+  OPEN OPTIONS
+
+  Sets open options including open options flags, buffer size,
+  transmit buffer minimum count, transmit buffer maximum count,
+  and network address.
+
+
+  FUNCTIONAL ADDR
+
+  Deletes and adds functional addresses on the Token Ring adapter.
+
+
+  QUERY VP DATA
+
+  Reads and formats to the display the vital product data contained
+  on the Token Ring adapter.
+
+
+  RING INFO
+
+  Returns information about the attached token ring including
+  adapter physical address, upstream node address, upstream
+  physical address, last poll address, authorized environment,
+  transmit access priority, source class authority, last
+  attention code, last source address, last beacon type, last
+  major vector, ring status, software error timer value, front
+  end timer value, monitor error code, beacon transmit type,
+  beacon receive type, frame correlator save, and
+  beaconing station's NAUN.
+
+
+  GET TOKINFO
+
+  Returns device information including device type, device subtype,
+  support for broadcast packet wrap, receive data transfer offset,
+  ring speed, adapter token ring address, and the token ring address
+  in use.
+
+
+  ----------------------------------------------------------------------
+  ENTDDT
+
+
+  ADAPTER RAM
+
+        Allows reading and writing to adapter memory.  This command can
+        be used as a powerful debugging tool to look at the data structures
+  on the Ethernet card.  The maximum read size is 2048 bytes.
+      Once memory has been read, it is possible to scroll forward
+        and backward through the memory image by entering <Enter> to
+        scroll forward and <b> <Enter> to scroll backwards.
+
+
+  POS REGISTERS
+
+  Permits reading and writing of all POS registers on the
+  Ethernet adapter card.  You must open the driver in diagnostic
+  mode to access POS registers.
+
+
+  I/O REGISTERS
+
+  Permits reading and writing of I/O registers on the
+  Ethernet adapter card.  You must open the driver in diagnostic
+  mode to access I/O registers.
+
+
+  IOCINFO
+
+  Returns device information including device type, device subtype,
+  support for broadcast packet wrap, receive data transfer offset,
+  adapter ethernet address, and the ethernet address in use.
+
+
+  QUERY VP DATA
+
+  Reads and formats to the display the vital product data contained
+  on the Ethernet adapter.
+
+
+  DMA TRANSFERS
+
+  Tests the Ethernet Adapter's ability to perform Microchannel DMA
+  operations to and from system memory.
+
+
+  MULTICAST ADDRESS
+
+  Deletes and adds multicast addresses on the Ethernet adapter.
+
+
+  ----------------------------------------------------------------------
+  MPQPDDT
+
+
+  AUTO RESPONSE
+
+  Starts or halts auto response mode; prompts for parameters used by
+  this driver IOCTL command.  For more information on autoresponse,
+  consult the RS/6000 Kernel Calls and Subroutines Reference (volume
+  5) under MP_START_AR.
+
+
+  DOWNLOAD ASW
+
+  Downloads adapter software to the MPQP adapter card.  The adapter
+  software is read from /etc/asw/mpqpasw and written to the card;
+  the adapter is then reset and the port is closed.  No other ports
+  can be open on that adapter or an error will be returned.
+  After the download takes place, the card is reset and the
+  downloading port is closed.
+
+
+  CHANGE PARMS
+
+  Changes device parameters without having to stop and restart the
+  port.  For more information, see the RS/6000 Kernel Calls and
+  Subroutines Reference (volume 5) under MP_CHG_PARMS.
+
+
+  MODIFY START BLK
+
+  This command is used to edit the start device block used by the
+  start command.  DDT maintains a start block image that can be
+  edited from this command; this image is handed to the driver
+  at start port time (changes to the start block have no effect
+  until the next start is issued).  Changes made by the CHANGE
+  PARM command do not affect this start block image.  Each
+  field of the start block is prompted for; it is not necessary
+  to fill in the entire start block -- entering a "." escapes
+  from the start block edit, retaining all changes made up to
+  the ".".   The parameters of the start block are documented
+  in the RS/6000 Kernel Calls and Subroutines Reference (volume
+  5) under the CIO_START subcommand of mpqioctl.
+
+
+  ADAPTER COMMANDS
+
+  This command presents a sub-menu of commands that are specific
+  to the MPQP adapter; the port must be opened in diagnostic mode
+  for these subcommands to work:
+
+  Adapter Diagnostic Commands:
+
+      RAM TEST - Performs a RAM memory diagnostic on the adapter.
+      ROM TEST - Performs a ROM memory diagnostic on the adapter.
+      CPU TEST - Performs diagnostics on the adapter's CPU.
+      CIO TEST - Performs diagnostics on each of the Z8036 chips.
+      SCC TEST - Performs diagnostics on each of the SN26562 chips.
+      BUS MASTER DMA - Performs tests of the adapter's Microchannel
+    DMA capability.
+
+  Adapter Setup and Status Commands:
+
+      CONFIGURE CIO PORT - Permits editing of the Z8036 control
+    registers.
+      CONFIGURE HARDWARE TIMER - Allows setting of the
+    MPQP adapter hardware timer.
+      CONFIGURE SCC CHANNEL - Permits editing of the SN26562
+    control registers.
+      CONFIGURE DMA CHANNEL - Allows configuration of one of the
+    four DUSCC DMA channels used by that port.
+      INITIALIZE WATCHDOG TIMER - Initializes the adapter's
+    hardware watchdog timer.
+      MEMORY SIZE - Returns the memory size of the adapter.
+      GET ROS VERSION - Returns the ROS version of the adapter.
+      GET INTERFACE ID - Returns the ID of the MPQP Adapter
+      GET EIB ID - Returns the ID of the Electrical Interface Board.
+
+      I/O READ - Allows a read from the 80186 I/O address space.
+      I/O WRITE - Performs a write to the 80186 I/O address space.
+
+  Port Specific Diagnostic Commands:
+
+      CIO REGISTERS - Displays the contents of each register of
+    the Z8036 used by that port.
+      DUSCC REGISTERS - Displays the contents of each register of
+    the SN26562 used by that port.
+      DMA REGISTERS - Displays the contents of the registers used
+    by the selected port DMA channel.
+      CPU TIMERS - Displays the contents of the selected CPU
+    timer.
+      CPU DMA REGISTERS - Displays the contents of the selected
+    CPU DMA register.
+
+        Unless formatted to the display otherwise, each command returns
+        information in an "Extended Diagnostics Response Region" (EDRR)
+        that is dumped to the display; the format of this output is described
+        in the "MPQP Adapter Software Design" chapter of the "RIOS Component
+        Interface Specification".
+
+
+        BUS MEMORY
+
+        Allows reading and writing to MPQP adapter memory.  This command can
+        be used as a powerful debugging tool to look at the data structures on
+        the MPQP adapter.  The maximum read size is one page (4096), so a
+        prompt for reading the next page follows the end of each read --
+        entering "N" or "." at this point leaves the BUS MEMORY command.
+      Once a page has been read, it is possible to scroll forward
+        and backward through the memory image by entering <Enter> to
+        scroll forward and <b> <Enter> to scroll backwards.  The default
+        addresses and lengths display the trace area of the Adapter.
+          It is possible to quickly "step through" receive and transmit
+        buffers on the adapter by entering a length of 140 for the read
+        size, the starting address of the first buffer, then take the
+        default "Y" to preceed to the next page as prompted -- this displays
+        the first 140 bytes of each buffer on the adapter.
+
+
+        EXAMINE ADAPTER
+
+        This command is actually a "front end" to the BUS MEMORY read command
+        described above.  Adapter data structures (currently the port control
+        block and adapter command queue) are read and formatted to the display
+        in a more readable form than that of a raw memory dump.  NOTE: the
+        output of this command is accurate only if the offsets of adapter
+        data structures defined in ddt_mpqp.h are aligned to those of the
+        adapter software image.  If the latter changes, the definitions
+        in ddt_mpqp.h must be updated to the new offsets in mpqpasw.map.

@@ -1,0 +1,487 @@
+# @(#)92        1.4.6.21  src/bos/objclass/POWER/DSMOpt.add, cmddiag, bos41J, 9520A_all 5/15/95 18:10:47
+#
+#
+# COMPONENT_NAME: (CMDDIAG) DSMOpt Object Class Data
+#
+# FUNCTIONS: None
+#
+# ORIGINS: 27, 83
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+
+# Multi-Processor Service Aids and Bump Service Aids added
+# (see feature 82273)
+
+# Electronic Mode Switch Service Aids added
+
+# The following is used to display the Operating Instructions Screen
+DSMOptions:
+ msgkey = "OIM"
+ catalogue = "diags.cat"
+ order = 1
+ setid = 1
+ msgid = 1
+ action = ""
+ Diskette = "0"
+
+# The following are used to display the Function Selection Screen
+DSMOptions:
+ msgkey = "FSM"
+ catalogue = "diags.cat"
+ order = 1
+ setid = 2
+ msgid = 1
+ action = ""
+ Diskette = "0"
+
+DSMOptions:
+ msgkey = "FSM"
+ catalogue = "diags.cat"
+ order = 2
+ setid = 2
+ msgid = 2
+ action = "dctrl -C"
+ Diskette = "0"
+
+DSMOptions:
+ msgkey = "FSM"
+ catalogue = "diags.cat"
+ order = 3
+ setid = 2
+ msgid = 3
+ action = "dutil -mUSM"
+ Diskette = "0"
+
+DSMOptions:
+ msgkey = "FSM"
+ catalogue = "diags.cat"
+ order = 4
+ setid = 2
+ msgid = 4
+ action = "dctrl -A"
+ Diskette = "0"
+
+DSMOptions:
+ msgkey = "FSM"
+ catalogue = "diags.cat"
+ order = 5
+ setid = 2
+ msgid = 5
+ action = "sysx"
+ Diskette = "0"
+
+DSMOptions:
+ msgkey = "FSM"
+ catalogue = "diags.cat"
+ order = 6
+ setid = 2
+ msgid = 6
+ action = ""
+ Diskette = "0"
+
+# The following are used to display the Service Aids Screen
+#       Title
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = -1
+ setid = 1
+ msgid = 1
+ action = ""
+ Diskette = "99"
+
+#       Last Line
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = -2
+ setid = 1
+ msgid = 2
+ action = ""
+ Diskette = "99"
+
+# The following are all the Service Aid selections. The setid should be set 
+# 2 for consistency and ease of maintenance. Use the "order" field to
+# specify the order of the selections on the screen. Each "setid/msgid"
+# combination has to match the respective message in dutil.cat.
+
+#       Service Hints
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 1
+ setid = 2
+ msgid = 1
+ action = "uhint"
+ Diskette = "8"
+
+#       Display Previous Diagnostic Results
+# This SA is not supported on standalone diagnostic media. 
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 2
+ setid = 2
+ msgid = 2
+ action = "diagrpt"
+ Diskette = "0"
+
+#       Product Topology
+# The "100" prefix in the Diskette field indicates that
+# this SA requires all diskettes to be read in.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 3
+ setid = 2
+ msgid = 3
+ action = "umlc"
+ Diskette = "3008"
+
+#       Hardware Error Reporting Service Aid
+# This SA is not supported on the standalone diagnostic package.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 4
+ setid = 2
+ msgid = 4
+ action = "udsense"
+ Diskette = "0"
+
+#       Display or Change Configuration or Vital Product Data (VPD)
+# The "100" prefix in the Diskette field indicates that
+# this SA requires all diskettes to be read in.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 5
+ setid = 2
+ msgid = 5
+ action = "ucfgvpd"
+ Diskette = "1008"
+
+#       Disk Media
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 6
+ setid = 2
+ msgid = 6
+ action = "uformat"
+ Diskette = "5"
+
+#       Diskette Media
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 7
+ setid = 2
+ msgid = 7
+ action = "ufd"
+ Diskette = "5"
+
+#       Display Test Patterns
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 8
+ setid = 2
+ msgid = 8
+ action = "u5081"
+ Diskette = "8"
+
+# Fixed to not show up on a RSPC system
+#       Lan Service Aid
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 9
+ setid = 2
+ msgid = 9
+ action = "ulan"
+ Diskette = "206A"
+
+# Fixed to not show up on a RSPC system
+#       Ethernet Service Aid
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 10
+ setid = 2
+ msgid = 10
+ action = "uenet"
+ Diskette = "206A"
+
+#       Display or Change Diagnostic Test List
+# The "100" prefix in the Diskette field indicates that
+# this SA requires all diskettes to be read in.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 11
+ setid = 2
+ msgid = 11
+ action = "udtl"
+ Diskette = "1008"
+
+#       Scsi Bus
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 12
+ setid = 2
+ msgid = 12
+ action = "uscsi"
+ Diskette = "5"
+
+#       Diagnostics Package Utility Service Aid
+# This SA is not supported on the standalone diagnostic package.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 13
+ setid = 2
+ msgid = 13
+ action = "umkdskt"
+ Diskette = "0"
+
+#       Update Hard File Diskette Service Aid
+# This SA is not supported on the standalone diagnostic package.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 14
+ setid = 2
+ msgid = 14
+ action = "udiagup"
+ Diskette = "0"
+
+#       Microcode Download
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 15
+ setid = 2
+ msgid = 15
+ action = "umcode"
+ Diskette = "5"
+
+#       Trace Service Aid
+#	Removed - no longer used - replace ureserve with new name
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 16
+ setid = 2
+ msgid = 16
+ action = "ureserve"
+ Diskette = "0"
+
+#       Display/Alter Bootlist
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 17
+ setid = 2
+ msgid = 17
+ action = "umblist"
+ Diskette = "2005"
+
+#       Periodic Diagnostic
+# This SA is not supported on the standalone diagnostic package.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 18
+ setid = 2
+ msgid = 18
+ action = "udiagmon"
+ Diskette = "0"
+
+#  The following are service aids which are unique.
+
+#       Dials and Lpfkeys Configuration Service Aid
+# This SA is only supported in systems with more than 8MB of memory.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 99
+ setid = 3
+ msgid = 1
+ action = "ucfgdev"
+ Diskette = "7A"
+
+#  AIX Shell Prompt Service Aid
+# This SA is only supported in Service Mode from hardfile.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "dutil.cat"
+ order = 0
+ setid = 3
+ msgid = 2
+ action = "ush"
+ Diskette = "2000"
+
+#       Multi-Processor Service Aids
+# This SA is not supported on the standalone diagnostic package.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "ump.cat"
+ order = 0
+ setid = 1
+ msgid = 1
+ action = "ump"
+ Diskette = "2000"
+
+#       Bump Service Aids
+# This SA is not supported on the standalone diagnostic package.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "ubump.cat"
+ order = 0
+ setid = 1
+ msgid = 1
+ action = "ubump"
+ Diskette = "2000"
+
+#       Electronic Mode Switch Service Aids
+# This SA is not supported on the standalone diagnostic package.
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "ukey.cat"
+ order = 0
+ setid = 1
+ msgid = 1
+ action = "ukey"
+ Diskette = "2000"
+
+#       Generic Microcode Download Service Aid
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "ugenucodesa.cat"
+ order = 0
+ setid = 1
+ msgid = 1
+ action = "ugenucodesa"
+ Diskette = "5"
+
+
+#       Backup/Restore Media Service Aid
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "ubackrest.cat"
+ order = 0
+ setid = 1
+ msgid = 1
+ action = "ubackrest"
+ Diskette = "5"
+
+#       Disk Maintenance Service Aid
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "udiskmnt.cat"
+ order = 0
+ setid = 1
+ msgid = 1
+ action = "udiskmnt"
+ Diskette = "5"
+
+
+# Conditions for allowing Service Aid on menu selection
+# Bits definition of attribute value are defined as :
+#          - Bit positions  16 8 4 2 1
+#                            | | | | |
+#                            | | | | |_______Can only be run in Service Mode
+#                            | | | |_________Can only be run from hardfile
+#                            | | |___________Can only be run on MP machine
+#                            | |_____________Can only be run if there is ISA bus
+#                            |_______________Can only be run on non-RSPC systems
+#
+
+# Only display if in service mode and from hard file
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "3"
+	rep = "n"
+	DClass = ""
+	DApp = "ush"
+
+# Only display if on a non-rspc machine
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "16"
+	rep = "n"
+	DClass = ""
+	DApp = "umlc"
+
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "16"
+	rep = "n"
+	DClass = ""
+	DApp = "umblist"
+
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "16"
+	rep = "n"
+	DClass = ""
+	DApp = "ulan"
+
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "16"
+	rep = "n"
+	DClass = ""
+	DApp = "uenet"
+
+# Only display if on MP and from hard file
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "6"
+	rep = "n"
+	DClass = ""
+	DApp = "ump"
+
+# Are ubump and ukey only for MP  ???
+# Or is it another bit to indicate Service Processor machine only? 
+# If not, then their value should be set to 2 for hardfile only.
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "6"
+	rep = "n"
+	DClass = ""
+	DApp = "ubump"
+
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "6"
+	rep = "n"
+	DClass = ""
+	DApp = "ukey"
+

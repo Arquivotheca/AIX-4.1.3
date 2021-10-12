@@ -1,0 +1,69 @@
+* @(#)filesystems @(#)29	1.20  src/bos/etc/filesystems/filesystems, cmdfs, bos411, 9428A410j 4/16/93 15:38:14
+*
+* COMPONENT_NAME: CMDFS
+* 
+* FUNCTIONS: none 
+*
+* ORIGINS: 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1985, 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+* This version of /etc/filesystems assumes that only the root file system
+* is created and ready.  As new file systems are added, change the check,
+* mount, free, log, vol and vfs entries for the appropriate stanza.
+*
+
+/:
+	dev       = /dev/hd4
+	vol       = "root"
+	mount     = automatic
+	check     = false
+	free      = true
+	vfs	  = jfs
+	log	  = /dev/hd8
+	type	  = bootfs
+
+/home:
+	dev       = /dev/hd1
+	vol       = "/home"
+	mount     = true
+	check     = true
+	free      = false
+	vfs	  = jfs
+	log	  = /dev/hd8
+
+/usr:
+	dev       = /dev/hd2
+	vol       = "/usr"
+	mount     = automatic
+	check     = false
+	free      = false
+	vfs	  = jfs
+	log	  = /dev/hd8
+	type	  = bootfs
+
+/var:
+	dev       = /dev/hd9var
+	vol       = "/var"
+	mount     = automatic
+	check     = false
+	free      = false
+	vfs	  = jfs
+	log	  = /dev/hd8
+	type	  = bootfs
+
+/tmp:
+	dev       = /dev/hd3
+	vol       = "/tmp"
+	mount     = automatic
+	check     = false
+	free      = false
+	vfs	  = jfs
+	log	  = /dev/hd8

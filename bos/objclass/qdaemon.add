@@ -1,0 +1,83 @@
+# "@(#)67       1.6  src/bos/objclass/qdaemon.add, cmdque, bos411, 9428A410j 6/22/93 16:07:19";
+
+#
+# COMPONENT_NAME: CMDQUE
+#
+# FUNCTIONS: none
+#
+# ORIGIN: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+SRCsubsys:
+	subsysname = "qdaemon"
+	synonym = ""
+	cmdargs = ""
+	path = "/usr/sbin/qdaemon"
+	uid = 0
+	auditid = 0
+	standin = "/dev/console"
+	standout = "/dev/console"
+	standerr = "/dev/console"
+	action = 1
+	multi = 0
+	contact = 2
+	svrkey = 0
+	svrmtype = 0
+	priority = 20
+	signorm = 30
+	sigforce = 15
+	display = 1
+	waittime = 20
+	grpname = "spooler"
+
+SRCsubsys:
+	subsysname = "writesrv"
+	synonym = ""
+	cmdargs = ""
+	path = "/usr/sbin/writesrv"
+	uid = 0
+	auditid = 0
+	standin = "/dev/console"
+	standout = "/dev/console"
+	standerr = "/dev/console"
+	action = 1
+	multi = 0
+	contact = 2
+	svrkey = 0
+	svrmtype = 0
+	priority = 20
+	signorm = 30
+	sigforce = 31
+	display = 1
+	waittime = 20
+	grpname = "spooler"
+
+SRCsubsys:
+	subsysname = "lpd"
+	synonym = ""
+	cmdargs = ""
+	path = "/usr/sbin/lpd"
+	uid = 0
+	auditid = 0
+	standin = "/dev/console"
+	standout = "/dev/console"
+	standerr = "/dev/console"
+	action = 1
+	multi = 0
+	contact = 3
+	svrkey = 0
+	svrmtype = 0
+	priority = 20
+	signorm = 0
+	sigforce = 0
+	display = 1
+	waittime = 20
+	grpname = "spooler"
+

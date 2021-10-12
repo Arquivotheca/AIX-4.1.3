@@ -1,0 +1,27 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Again, remember the possibility of arithmetic
+combinations.  If "$" is the last line, what
+is the line before the last line?  Type "answer XXX"
+where "XXX" is the way you would refer to the line
+before the last line of the file.
+#copyin
+#user
+#uncopyin
+#match $-1
+#match $-
+#log
+#next
+10.3f 10

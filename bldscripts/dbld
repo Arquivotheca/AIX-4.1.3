@@ -1,0 +1,451 @@
+#!/bin/ksh
+#
+# @(#)54        1.5  src/bldscripts/dbld, ade_build, bos412, GOLDA411a 9/13/94 16:24:07
+#
+#   COMPONENT_NAME: 
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#------------------------------------------------------------------------------
+#
+# Description:
+#
+#    Builds each stage listed in input file.
+#
+# Inputs: file containing list of stages to build
+#
+# Outputs: build logs to BLD_LOG_DIR
+#          built portions of each stage
+#          database updates to $BLD_LOG_DIR/buildDB/$BLDCYCLE/
+#
+# History:
+#
+#        04/29/94  JDS Initial version.
+#
+#------------------------------------------------------------------------------
+
+. `/usr/bin/dirname $0`/bldDBfunctions
+SAVEPATH=$PATH
+. `/usr/bin/dirname $0`/common.sh
+PATH=$SAVEPATH
+
+function logName
+{ 
+
+	# INPUTS:      
+        #            	LPP_TO_BUILD 
+        # 
+        # OUTPUTS:  
+        #
+        #            	NAME_OF_LOG
+        #
+        # RETURN CODES:
+        #           	 0 = good return
+        #
+	# DESCRIPTION:
+        #
+        # 		Based on the LPP_TO_BUILD the next available
+        #               build log file is returned (via a print command).
+        #	        The log files are assumed to be located in
+        #               the $BLD_LOG_DIR directory. 
+        #
+     
+
+	LPP_TO_BUILD=$1
+
+	integer latest_log_count
+
+	latest_log_count=1
+
+	ls -rt "$BLD_LOG_DIR"/"$LPP_TO_BUILD".log.[0-9]* >/dev/null
+	if (( $? != 0 ))
+	then
+		latest_log_count=1 
+	else
+		ls -rt "$BLD_LOG_DIR"/"$LPP_TO_BUILD".log.[0-9]* |
+		 	tail -1 	|
+			read latest_log
+		latest_log_count=${latest_log##*\.}
+		((latest_log_count = $latest_log_count + 1))
+	fi
+
+	LOG_NAME=$BLD_LOG_DIR"/"$LPP_TO_BUILD".log."$latest_log_count
+
+	print $LOG_NAME
+
+        return 0
+
+}
+
+#------------------------------------------------------------------------------
+#
+function build_lpp
+{ 
+	# INPUTS:      
+        #            	LPP_TO_BUILD 
+        #               FORCE_FLAG
+        # 
+        #
+	# OUTPUTS: 
+	#
+	#		none
+	#
+        # RETURN CODES:
+        #           	 0 = lpp is already built 
+	#		 1 = lpp is currently being built by someone 
+	#		 2 = lpp is broken
+        #
+	# DESCRIPTION:
+        #
+        # 		Based on the LPP_TO_BUILD the function
+        #		1) checks to see if the lpp has already built
+        #                  succesfully
+	#		2) if the lpp has not built successfully 
+	#                  and the FORCE_FLAG is not equal to Y
+	# 		   calls wait_on_prereqs to make sure
+ 	#		   the prereqs to the LPP_TO_BUILD have
+	#                  completed
+        #               3) determines the necessary parameters used
+        #                  to build the lpp
+        #               4) updates the database to indicate that the 
+        #                  lpp is building
+        #               5) builds the lpp
+        #               6) checks the log to see if the lpp completed
+        #                  succesfully. If the build was successful the
+        #                  database is updated to reflect this.
+        #
+
+	LPP_TO_BUILD=$1
+        FORCE_FLAG=$2
+
+#
+#       check to see if it is already built 
+#
+	maintainBuildStage -r -k $BLDCYCLE/$LPP_TO_BUILD -f COMPLETE | 
+		read COMPLETE
+	case $COMPLETE in
+		Y)      if [[ $FORCE_FLAG != 'Y' ]]
+                	    then return 0 	# already built
+			fi 
+			;;
+		W)	return 1	# somebody is currently building
+			;;
+	esac
+
+#
+#	If the FORCE_FLAG is set then don't bother waiting
+#       for prereqs
+#
+	if [[ $FORCE_FLAG != 'Y' ]]
+	then
+		wait_on_prereqs $LPP_TO_BUILD
+	fi
+
+	showStage -k $LPP_TO_BUILD -f "RELEASE" | 
+		tail +2 | 
+		awk '{FS="|" ; print $1}' |
+		read RELEASE 
+	showStage -k $LPP_TO_BUILD -f "SCRIPT" | 
+		tail +2 | 
+		awk '{FS="|" ; print $1}' |
+		read SCRIPT 
+	showStage -k $LPP_TO_BUILD -f "MAKE_PASS" | 
+		tail +2 | 
+		awk '{FS="|" ; print $1}' |
+		read MAKE_PASS
+ 	showStage -k $LPP_TO_BUILD -f "STAGE_DIRS" | 
+ 		tail +2 | 
+ 		awk '{FS="|" ; print $1}' |
+ 		read STAGE_DIRS
+ 	showStage -k $LPP_TO_BUILD -f "LABEL" | 
+ 		tail +2 | 
+ 		awk '{FS="|" ; print $1}' |
+ 		read LABEL_TO_CONVERT
+	print $LABEL_TO_CONVERT | sed 's/ /_/g' | read LABEL
+
+	print "\n\nReady to build: " $LPP_TO_BUILD
+
+#
+# Update the database to show that the stage is being built
+# on the current machine
+#
+#
+# ADD GOOD LOCKING MECHANISM HERE!!!!
+#
+	maintainBuildStage -k $BLDCYCLE/$LPP_TO_BUILD -v COMPLETE="W"
+	maintainBuildStage -k $BLDCYCLE/$LPP_TO_BUILD -v BUILD_MACHINE=$(hostname)
+
+	cd $BUILDBASE/$BLDCYCLE"/src"
+ 
+#
+#  	Get a log to print output to
+#
+	log_name=$(logName "$LPP_TO_BUILD")
+
+        cmd="$SCRIPT $LABEL $MAKE_PASS $STAGE_DIRS"
+
+	print "  Building $LPP_TO_BUILD (see $log_name)"
+
+	$cmd >$log_name 2>&1 
+
+	if [[ $? -eq 0 ]] ; then
+ 		maintainBuildStage -k $BLDCYCLE/$LPP_TO_BUILD -v COMPLETE="Y"
+		return 0
+	else
+ 		maintainBuildStage -k $BLDCYCLE/$LPP_TO_BUILD -v COMPLETE="B"
+		return 2
+ 	fi
+}
+
+#------------------------------------------------------------------------------
+#
+function check_prereq_complete
+{ 
+	# INPUTS:      
+        #            	PREREQ_TO_CHECK
+        # 
+        # RETURN CODES:
+        #           	 0 = prereq has succesfully built
+	#                1 = prereq did not succesfully build 
+        #
+	# DESCRIPTION:
+        #
+        # 		The database is checked to see if the PREREQ_TO_CHECK
+	#               has built succesfully.
+        #
+
+	PREREQ_TO_CHECK=$1
+
+	maintainBuildStage -r -k $BLDCYCLE/$PREREQ_TO_CHECK -f COMPLETE |
+		read PREREQ_COMPLETE
+	if [[ $PREREQ_COMPLETE != "Y" ]]
+	then
+		return 1
+	else 
+		return 0
+	fi 
+
+}
+#------------------------------------------------------------------------------
+#
+function wait_on_prereqs
+{
+	# INPUTS:      
+        #            	LPP_TO_BUILD 
+        # 
+        # RETURN CODES:
+        #           	 0 = all prereqs are satisfied
+        #
+	# DESCRIPTION:
+        #
+        # 		Based on the LPP_TO_BUILD the database is
+	#               checked to determine all lpp's necessary to
+        #               be built prior to building the LPP_TO_BUILD.
+        #               If the prereq's to the LPP_TO_BUILD are have
+        #               not completed the function sleeps for 60
+        #               seconds and checks again.
+        #
+
+	LPP_TO_BUILD=$1
+	 
+	integer READY_TO_BUILD
+	integer	PREREQS_CHECKED
+
+	PREREQS_CHECKED=1
+	FOO=0; PP=""
+
+	while (( PREREQS_CHECKED == 1))
+	do
+	READY_TO_BUILD=0
+	showStageReq -k $1 -f "STAGE_REQ" 2>/dev/null |
+		tail +2 |
+		while read PREREQ
+		do
+			if [[ "$PREREQ" != "$PP" ]] ; then
+				print "PREREQ to $LPP_TO_BUILD : " $PREREQ
+				PP=$PREREQ
+				FOO=0
+			fi
+			check_prereq_complete $PREREQ
+			if (( $? != 0 )) 
+			then
+				READY_TO_BUILD=1
+			fi
+		done 
+	PREREQS_CHECKED=READY_TO_BUILD
+	if ((READY_TO_BUILD == 1 ))
+	then
+		if [[ $FOO -eq 0 ]] ; then
+ 			echo "\nWaiting on prereqs for: $LPP_TO_BUILD \c"
+			FOO=1
+		fi
+		echo ".\c"
+		sleep 60
+	fi
+	done
+	
+	echo ""
+	return 0
+	
+}
+
+#===========================================================================
+# Main Program
+#===========================================================================
+#
+# INITIALIZATION
+#
+#
+# create the database for the build ;
+# it will be stored 'locally' with the
+# logs 
+#
+initDB
+
+USAGE="USAGE: "$(basename $0)" [-b <break process>] [-c <completion process>] <file_containing_list_of_LPPs>"
+if [[ $# < 1 ]] ; then
+	print $USAGE
+	exit 99
+fi
+
+#
+# Get Options
+#
+# --- b specifies a 'break' process
+# --- c specifies a 'completion' process
+#
+while getopts b:c: arguments
+do      case $arguments in
+        b)      BREAK_PROCESS=$OPTARG    ;;
+        c)      COMPLETE_PROCESS=$OPTARG ;;
+        esac
+done
+
+#
+# determine the number of arguments that are 'switched'
+# shift that number 'out of the input'
+#
+((positions_occupied_by_switches = OPTIND - 1))
+shift $positions_occupied_by_switches
+
+#
+# Identify input file
+#
+LPP_FILE=$1
+   
+#
+#
+# BUILDBASE and BLDCYCLE must exist!
+#
+# BUILDBASE is the top of the build tree 
+#           (ex: /.../bai.cell.austin.ibm.com/fs/project/aix4/build/red )
+#
+if [[ -z "$BUILDBASE" ]] ; then 
+	print "Variable BUILDBASE must be defined"
+	exit 1
+fi
+
+#
+# BLDCYCLE is the build cycle (ex: 9405A)
+#
+if [[ -z "$BLDCYCLE" ]] ; then 
+	print "Variable BLDCYCLE must be defined"
+	exit 1
+fi
+
+#
+# TD_BLDCYCLE is the build cycle (ex: 9405A)
+#
+if [[ -z "$TD_BLDCYCLE" ]] ; then 
+	export TD_BLDCYCLE=$BLDCYCLE
+fi
+
+#
+# Build source must exist
+#
+if [[ ! -d "$BUILDBASE/$BLDCYCLE/src" ]] ; then
+	print "Build $BUILDBASE/$BLDCYCLE does not exist"
+	exit 1
+fi
+
+#
+# Must be able to write to the log directory
+#
+if [[ ! -w $BLD_LOG_DIR ]]
+then
+	print "Cannot write to $BLD_LOG_DIR"
+	exit 1
+fi
+
+#
+#
+#
+if [[ -f $BUILDBASE/$BLDCYCLE/STATUS/using_backing_tree_links ]]
+then
+	export USE_BACKING_TREE_LINKS=yes
+fi
+
+
+#
+# The input file must exist
+#
+if [[ ! -f "$LPP_FILE" ]] ; then
+	print "The $LPP_FILE input file was not found"
+	exit 1
+fi
+
+
+#
+#
+# MAIN LOOP
+#
+
+#
+# for each lpp in the input file
+#     try to build
+#
+grep -E '^[a-z]|^[A-Z]' $LPP_FILE |
+	while read LPP_TO_BUILD FORCE_FLAG
+	do
+#
+#               if the database is being updated then rest
+#
+
+		while [[ ! -f $BLD_LOG_DIR/buildDB/DB_UPDATE ]]
+		do
+			print "...waiting for database update to complete"
+			sleep 60
+		done
+
+		echo "[Attempting to build: ${LPP_TO_BUILD}]" 
+		build_lpp $LPP_TO_BUILD $FORCE_FLAG
+		case $? in 
+			0) echo "  LPP ${LPP_TO_BUILD} is SUCCESSFULLY built!"
+                           if [[ ! -z "$COMPLETE_PROCESS" ]] ; then
+                                $COMPLETE_PROCESS "Build- $BLDCYCLE - $LPP_TO_BUILD IS COMPLETE"
+                           fi
+			   ;;
+			1) echo "  LPP ${LPP_TO_BUILD} is being built \c"
+			   echo "on another machine"
+			   ;;
+			2) echo "  LPP ${LPP_TO_BUILD} is BROKE..."
+                           if [[ ! -z "$BREAK_PROCESS" ]] ; then
+                                $BREAK_PROCESS "Build- $BLDCYCLE - $LPP_TO_BUILD IS BROKEN"
+                           fi
+
+			   ;;
+		esac
+	done
+
+exit 0

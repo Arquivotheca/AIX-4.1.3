@@ -1,0 +1,46 @@
+###################################################################
+# xmit_ptf.table
+###################################################################
+# SCCSID: @(#)06	1.13   src/bldenv/pkgtools/xmit_ptf.table, pkgtools, bos412, GOLDA411a   17:34:36
+#
+#   COMPONENT_NAME: PKGTOOLS 
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business machines Corp. 1991,1993
+#   All Rights Reserved
+#
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   rules:
+#     - data starts in column 1
+#     - all data fields delimited with ':'
+#     - comments allowed with '#' in column 1
+#
+#   Names of people notified on CCSS or Retain update failures
+#   distribution_notification: techlead@bonzo samorris@ausvm6 
+#
+#
+#   change log:
+#    01/23/92-wht-added 'distribution_notification' field and
+#                   '@@dist_notify@@' keyword.
+#    01/09/92-wt-changed default for boulder testing
+#    12/12/91-wt-updated location of jcl's to shipserver
+#    10/16/91-wt-updated afs filename of the jcl
+#    10/09/91-wht-added support for mvs_userid and mvs_password.
+#    08/06/91-wht-added support for aix_hostname,userid.
+#    08/01/91-wht-created
+###################################################################
+TARGETHOST=${TARGETHOST:-"burnham.swm.boulder.ibm.com"}; export TARGETHOST
+# or TARGETHOST=${TARGETHOST:-"9.99.32.234"}; export TARGETHOST
+TARGETLOGIN=${TARGETLOGIN:-"ausptf"}; export TARGETLOGIN
+TARGETPTFDIR=${TARGETPTFDIR:-"/home/ausptf"};  export TARGETPTFDIR
+TARGETCCSSDIR=${TARGETCCSSDIR:-"/home/ausptf/ptfs"}; export TARGETCCSSDIR

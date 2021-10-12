@@ -1,0 +1,88 @@
+* @(#)23 1.17 src/bos/objclass/POWER/pty.add, cfgmethods, bos411, 9428A410j 6/2/94 07:42:26
+*
+* COMPONENT_NAME: (CFGMETHODS) Predefined data for streams based pty
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+PdDv:
+        type = pty
+        class = pty
+        subclass = pty
+        prefix = pty
+        devid = ""
+        base = 0
+        has_vpd = 0
+        chgstatus = 1
+        detectable = 0
+        bus_ext = 0
+        led = 0x731
+        fru = 0
+        setno = 50
+        msgno = 1
+        catalog = "devices.cat"
+        DvDr = ptydd
+        Define = "/etc/methods/define -o -n"
+        Configure = "/etc/methods/cfgpty"
+        Change = "/etc/methods/chgpty"
+        Unconfigure = "/etc/methods/ucfgpty"
+        Undefine = "/etc/methods/undefine"
+        Start = ""
+        Stop = ""
+        uniquetype = "pty/pty/pty"
+
+PdAt:
+        uniquetype = "pty/pty/pty"
+        attribute = ATTnum
+        deflt = 256
+        values =
+        width = ""
+        type = R
+        generic = DU
+        rep = n
+        nls_index = 2
+
+PdAt:
+        uniquetype = "pty/pty/pty"
+        attribute = BSDnum
+        deflt = 16
+        values =
+        width = ""
+        type = R
+        generic = DU
+        rep = n
+        nls_index = 3
+
+PdAt:
+        uniquetype = "pty/pty/pty"
+        attribute = autoconfig
+        deflt = available
+        values = "available,defined"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 4
+
+PdAt:
+    uniquetype = "pty/pty/pty"
+    attribute = csmap
+    deflt = "sbcs"
+    values = ""
+    width = ""
+    type = R
+    generic = DU
+    rep = s
+    nls_index = 0
+

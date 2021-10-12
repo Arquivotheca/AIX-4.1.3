@@ -1,0 +1,1666 @@
+# @(#)32        1.14.1.4  src/bos/objclass/POWER/sm_disk.add, cfgmethods, bos41J, 9510A_all 2/20/95 22:01:33
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Disk Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined Disks
+#       List All Supported Disks
+#       Add a Disk
+#       Change/Show Characteristics of a Disk
+#       Remove a Disk
+#       Configure a Defined Disk
+#
+#       Help text Id's for disk specific helps are in the range:
+#               0420400 to 0420499
+#       This does not include menu helps.
+#
+
+#
+# List All Defined Disks
+# This uses a ghost dialogue to list all the defined disk devices.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsddsk"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined Disks"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 95
+    cmd_to_exec               = "lsdev -C -c disk"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800100"
+    help_msg_loc              = ""
+
+#
+# List All Supported Disks
+# This uses a ghost dialogue to list all the Predefined disk devices.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lssdsk"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Supported Disks"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 96
+    cmd_to_exec               = "lsdev -P -c disk -F \"type subclass description \""
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800101"
+    help_msg_loc              = ""
+
+#
+# Add a Disk
+# This allows a disk device to be added by defining and configuring it.
+# There are two name selectors followed by the dialogue.  The first
+# name selector is used to put up a list of Predefined disk devices for the
+# user to select from.  The second name selector depends on the type of
+# disk selected.  If the disk is a scsi disk (including osdisk), the
+# name selector puts up a list of defined SCSI adapters which can have
+# the selected disk attached to it.  The SCSI dialogue then puts up a 
+# list of all of the user configurable attributes.  Direct attached
+# and serial disks cannot be added.
+
+# Select type of disk
+sm_name_hdr:
+    id                        = "makdsk"
+    next_id                   = "makdsk_"
+    option_id                 = "disk_predef_opt"
+    has_name_select           = "n"
+    name                      = "Add a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 97
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+class () # str1 str2 str3\n\
+{\n\
+echo $1 | sed 's/^\\([^ ]*\\)[ ]*\\([^ ]*\\)[ ]*/\\2:\\1:\\2:/' \
+     |sed s/"scsi:osdisk"/"osdisk_scsi:osdisk"/g \n\
+}\n\
+class "
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "_cookedname:type:subclass:desc"
+    next_type                 = "n"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+# Name selector command option for type of disk
+sm_cmd_opt:
+    id                        = "disk_predef_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Disk Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 401
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "lsdev -P -c disk -F 'type subclass description' | awk '!/mca/ && !/serdasdc/' -"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201"
+    help_msg_loc              = ""
+
+# Select parent adapter
+# There is a name selector at this level for each unique Predefined disk
+# subclass.  The Id's for these name selectors are built as follows:
+#       "makdsk_xxx_yyy"
+# where xxx is the subclass and yyy will only exist for type = osdisk.
+
+# SCSI disk
+sm_name_hdr:
+    id                        = "makdsk_scsi"
+    next_id                   = "makdsk_scsi_hdr"
+    option_id                 = "makdsk_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 97
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+
+# Other SCSI disk
+sm_name_hdr:
+    id                        = "makdsk_osdisk_scsi"
+    next_id                   = "makdsk_osdisk_scsi_hdr"
+    option_id                 = "makdsk_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 97
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "makdsk_parent_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter "
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There is one header for SCSI disks and
+# one for direct attached disks.
+
+# SCSI disk's dialogue header
+sm_cmd_hdr:
+    id                        = "makdsk_scsi_hdr"
+    option_id                 = "disk_scsi_add"
+    has_name_select           = "y"
+    name                      = "Add a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 97
+    cmd_to_exec               = "mkdev -c disk"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+# Other SCSI disk's dialogue header
+sm_cmd_hdr:
+    id                        = "makdsk_osdisk_scsi_hdr"
+    option_id                 = "disk_scsi_add,disk_osdisk_scsi_add"
+    has_name_select           = "y"
+    name                      = "Add a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 97
+    cmd_to_exec               = "mkdev -c disk"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c disk"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800102"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a Disk
+# This allows a disk device's characteristics to be shown and, if desired,
+# changed.  First, there is a name selector used to put up a list of the
+# defined disks for the user to select from.  The dialogue then
+# shows all of the characteristics.
+
+# Select disk by logical name
+sm_name_hdr:
+    id                        = "chgdsk"
+    next_id                   = "chgdsk_"
+    option_id                 = "disk_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 98
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\" \
+  | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\2:&/'\\
+  |sed s/"ide:oidisk"/"oidisk_ide:oidisk"/g \\
+  |sed s/"scsi:osdisk"/"osdisk_scsi:osdisk"/g \n\
+} \n\
+xx "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:parent:port:loc:state:desc"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+
+# The dialogue headers follow.  There is one for each unique Predefined
+# disk subclass.  Also there is one for other SCSI disks 
+# Their Id's are built as follows:
+#       "chgdsk_xxx_yyy
+# where yyy is subclass and xxx only exists for the osdisk type.  All
+# other cases will have the _yyy  omitted.
+
+# SCSI disk
+sm_cmd_hdr:
+    id                        = "chgdsk_scsi"
+    option_id                 = "disk_chg,disk_scsi_chg"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 98
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Other SCSI disk
+sm_cmd_hdr:
+    id                        = "chgdsk_osdisk_scsi"
+    option_id                 = "disk_chg,disk_scsi_chg,disk_osdisk_scsi_chg"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 98
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Serial Link Disk
+sm_cmd_hdr:
+    id                        = "chgdsk_serdasdc"
+    option_id                 = "disk_chg,disk_serial_chg"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 98
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Direct attached disk
+sm_cmd_hdr:
+    id                        = "chgdsk_mca"
+    option_id                 = "disk_chg,disk_mca_chg"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 98
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+#
+# Remove a Disk
+# This allows a disk to be removed, including its definition in the
+# database, from the system.  A name selector is used to put up a list
+# of the "defined" and "configured" disks for the user to select from.
+# The dialogue then uses the rmdev command to remove the selected device.
+
+# Select disk by logical name
+sm_name_hdr:
+    id                        = "rmvdsk"
+    next_id                   = "rmvdsk_hdr"
+    option_id                 = "disk_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 99
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvdsk_hdr"
+    option_id                 = "rmvdsk_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 99
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvdsk_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 400
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420400"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvdsk_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = " "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "0420412"
+    help_msg_loc              = ""
+
+# Configure a Defined Disk
+# This allows a disk that is defined but not configured to be
+# configured.  A name selector is used to put up a list of the "defined"
+# disks for the user to select from.  The dialogue then uses the
+# mkdev command to configure the selected device.
+
+# Select disk by logical name
+sm_name_hdr:
+    id                        = "cfgdsk"
+    next_id                   = "cfgdsk_hdr"
+    option_id                 = "disk_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 100
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800106"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgdsk_hdr"
+    option_id                 = "cfgdsk_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 100
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800106"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgdsk_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 400
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420400"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing disks by logical name.
+# Used by: move, change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "disk_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 400
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c disk"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to adding a SCSI disk.
+# Used by: add function.
+
+# Displays disk device type.
+sm_cmd_opt:
+    id                        = "disk_scsi_add"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "Disk type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 402
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420401"
+    help_msg_loc              = ""
+
+# Displays disk subclass.
+sm_cmd_opt:
+    id                        = "disk_scsi_add"
+    id_seq_num                = "002"
+    disc_field_name           = "subclass"
+    name                      = "Disk interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 403
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420402"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "disk_scsi_add"
+    id_seq_num                = "003"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420403"
+    help_msg_loc              = ""
+
+# Displays disk's parent adapter.
+sm_cmd_opt:
+    id                        = "disk_scsi_add"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420406"
+    help_msg_loc              = ""
+
+# Displays SCSI address of disk.
+sm_cmd_opt:
+    id                        = "disk_scsi_add"
+    id_seq_num                = "005"
+    disc_field_name           = "port"
+    name                      = "CONNECTION address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 5
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn"
+    cmd_to_list_postfix       = "-p parent -k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420410"
+    help_msg_loc              = ""
+
+# Assign PVID (pv attribute)
+sm_cmd_opt:
+    id                        = "disk_scsi_add"
+    id_seq_num                = "010"
+    disc_field_name           = ""
+    name                      = "ASSIGN physical volume identifier"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 406
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a pv="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420415"
+    help_msg_loc              = ""
+
+
+#Set Queue Depth for osdisks
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_add"
+    id_seq_num                = "020"
+    disc_field_name           = "queue_depth"
+    name                      = "Queue DEPTH"
+    name_msg_file             = "devices.cat"
+    name_msg_set              =  57
+    name_msg_id               =  30
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a queue_depth="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a queue_depth -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420420"
+    help_msg_loc              = ""
+
+
+
+#Set Queuing Type for osdisks
+
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_add"
+    id_seq_num                = "030"
+    disc_field_name           = "q_type"
+    name                      = "Queuing TYPE"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 57
+    name_msg_id               = 31
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a q_type="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c disk -a q_type -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420421"
+    help_msg_loc              = ""
+
+
+
+#Set Use Qerr Bit Option for osdisks
+
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_add"
+    id_seq_num                = "040"
+    disc_field_name           = "q_err"
+    name                      = "Use QERR Bit"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 57
+    name_msg_id               = 32
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a q_err="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c disk -a q_err -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420422"
+    help_msg_loc              = ""
+
+
+
+#Set Device Clears its Queue on Error Option for osdisks
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_add"
+    id_seq_num                = "050"
+    disc_field_name           = "clr_q"
+    name                      = "Device CLEARS its Queue on Error"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 57
+    name_msg_id               = 33
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a clr_q="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c disk -a clr_q -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420423"
+    help_msg_loc              = ""
+
+# Set read time out attribute for osdisk.
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_add"
+    id_seq_num                = "060"
+    disc_field_name           = "rw_timeout"
+    name                      = "READ/WRITE time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 34
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a rw_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a rw_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420570"
+    help_msg_loc              = ""
+
+
+# Set start unit time out attribute for osdisk.
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_add"
+    id_seq_num                = "070"
+    disc_field_name           = "start_timeout"
+    name                      = "START unit time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 35
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a start_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a start_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420573"
+    help_msg_loc              = ""
+
+# Set reassign unit time out attribute for osdisk.
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_add"
+    id_seq_num                = "080"
+    disc_field_name           = "reassign_to"
+    name                      = "REASSIGN time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 36
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a reassign_to="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a reassign_to -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420572"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Specific to adding a Direct attached disk.
+# Used by: add function.
+
+# Displays message saying "Cannot add this type".
+sm_cmd_opt:
+    id                        = "disk_mca_add"
+    id_seq_num                = "001"
+    disc_field_name           = ""
+    name                      = "Cannot add this type of disk."
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 404
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = " "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change a SCSI disk.
+# Used by: show/change function.
+
+# Displays device's location (SCSI specific because of help msg Id).
+sm_cmd_opt:
+    id                        = "disk_scsi_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420405"
+    help_msg_loc              = ""
+
+# Displays disk's parent adapter.
+sm_cmd_opt:
+    id                        = "disk_scsi_chg"
+    id_seq_num                = "010"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420406"
+    help_msg_loc              = ""
+
+# Displays SCSI address of disk.
+sm_cmd_opt:
+    id                        = "disk_scsi_chg"
+    id_seq_num                = "020"
+    disc_field_name           = "port"
+    name                      = "Connection address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 6
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420410"
+    help_msg_loc              = ""
+
+#Set Queue Depth 
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "070"
+    disc_field_name           = "queue_depth"
+    name                      = "Queue DEPTH"
+    name_msg_file             = "devices.cat"
+    name_msg_set              =  57
+    name_msg_id               =  30
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a queue_depth="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a queue_depth -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420420"
+    help_msg_loc              = ""
+
+
+
+#Set Queuing Type 
+
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "080"
+    disc_field_name           = "q_type"
+    name                      = "Queuing TYPE"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 57
+    name_msg_id               = 31
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a q_type="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c disk -a q_type -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420421"
+    help_msg_loc              = ""
+
+
+
+#Set Use Qerr Bit Option
+
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "090"
+    disc_field_name           = "q_err"
+    name                      = "Use QERR Bit"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 57
+    name_msg_id               = 32
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a q_err="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c disk -a q_err -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420422"
+    help_msg_loc              = ""
+
+
+
+#Set Device Clears its Queue on Error Option
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "100"
+    disc_field_name           = "clr_q"
+    name                      = "Device CLEARS its Queue on Error"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 57
+    name_msg_id               = 33
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a clr_q="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c disk -a clr_q -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420423"
+    help_msg_loc              = ""
+
+
+# Set read time out attribute for osdisk.
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "110"
+    disc_field_name           = "rw_timeout"
+    name                      = "READ/WRITE time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 34
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a rw_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a rw_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420570"
+    help_msg_loc              = ""
+
+
+# Set start unit time out attribute for osdisk.
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "120"
+    disc_field_name           = "start_timeout"
+    name                      = "START unit time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 35
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a start_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a start_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420573"
+    help_msg_loc              = ""
+
+# Set reassign unit time out attribute for osdisk.
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "130"
+    disc_field_name           = "reassign_to"
+    name                      = "REASSIGN time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 36
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a reassign_to="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c disk -a reassign_to -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420572"
+    help_msg_loc              = ""
+
+# Display database only question.
+sm_cmd_opt:
+    id                        = "disk_osdisk_scsi_chg"
+    id_seq_num                = "140"
+    disc_field_name           = ""
+    name                      = "Apply change to DATABASE only"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 11
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "-P ,"
+    help_msg_id               = "0420919"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Specific to show/change a Serial linked disk.
+# Used by: show/change function.
+
+# Displays device's location (Serial linked specific because of help msg Id).
+sm_cmd_opt:
+    id                        = "disk_serial_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420419"
+    help_msg_loc              = ""
+
+# Displays serial disk's parent controller.
+sm_cmd_opt:
+    id                        = "disk_serial_chg"
+    id_seq_num                = "010"
+    disc_field_name           = "parent" 
+    name                      = "Parent controller"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 407
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420416"
+    help_msg_loc              = ""
+
+# Displays lun address of disk.
+sm_cmd_opt:
+    id                        = "disk_serial_chg"
+    id_seq_num                = "020"
+    disc_field_name           = "port"
+    name                      = "Connection address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 6
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420417"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change a Direct
+# attached disk.
+# Used by: show/change function.
+
+# Displays device's location (Direct attached specific because of help msg Id).
+sm_cmd_opt:
+    id                        = "disk_mca_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420418"
+    help_msg_loc              = ""
+
+# Display bb attribute.
+sm_cmd_opt:
+    id                        = "disk_mca_chg"
+    id_seq_num                = "010"
+    disc_field_name           = "bb"
+    name                      = "BATTERY backed adapter"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 31
+    name_msg_id               = 6
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a bb="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c disk -a bb -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420411"
+    help_msg_loc              = ""
+
+# Display database only question (last item on screen).
+sm_cmd_opt:
+    id                        = "disk_mca_chg"
+    id_seq_num                = "100"
+    disc_field_name           = ""
+    name                      = "Apply change to DATABASE only"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 11
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "-P ,"
+    help_msg_id               = "0420413"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Common to show/change for SCSI,
+# Direct attached disks, and Serial-linked disks.
+# Used by: show/change function.
+
+# Displays disk device name.
+sm_cmd_opt:
+    id                        = "disk_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 400
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420400"
+    help_msg_loc              = ""
+
+# Displays disk device type.
+sm_cmd_opt:
+    id                        = "disk_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "type"
+    name                      = "Disk type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 402
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420401"
+    help_msg_loc              = ""
+
+# Displays disk subclass.
+sm_cmd_opt:
+    id                        = "disk_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "subclass"
+    name                      = "Disk interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 403
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420402"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "disk_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420403"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "disk_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420404"
+    help_msg_loc              = ""
+
+# Display PVID
+sm_cmd_opt:
+    id                        = "disk_chg"
+    id_seq_num                = "050"
+    disc_field_name           = "pvid"
+    name                      = "Physical volume IDENTIFIER"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 405
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420414"
+    help_msg_loc              = ""
+
+# Assign PVID (pv attribute)
+sm_cmd_opt:
+    id                        = "disk_chg"
+    id_seq_num                = "060"
+    disc_field_name           = ""
+    name                      = "ASSIGN physical volume identifier"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 406
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a pv="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420415"
+    help_msg_loc              = ""
+
+

@@ -1,0 +1,132 @@
+#!/bin/ksh
+# @(#)27	1.1  src/bldscripts/NoUnresolvableUnexpecteds, ade_build, bos41J, 9509A_all 2/17/95 13:30:56
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+
+alias  dataman=`whence dataman`
+cmd=${0##*/}
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; exit 1' ERR
+
+#
+# Return on stdout an apar associated with the given ship file.
+# The algorithm is to setup bldquery data for each defect in the
+# buildcycle.  Pick a defect that caused that file to ship and
+# map them to the apar number using $TOP/PTF/$BLDCYCLE/defectapars.
+#
+get_apar () {
+    file=$1
+
+    #
+    # Have we already set up the targets of the defects?
+    if dataman -q leveldata[$BLDCYCLE][defects][*][targets] >/dev/null
+    then :
+    else
+	Report -view levelmemberview -raw -w "levelname='$BLDCYCLE' and
+	    $RELEASEQUERY" | awk -F\| '{print $3}' | sort -u |
+	while read defect
+	do
+	    bldquery41 -d $defect | awk 'NF=2 {print}' |
+	    dataman -s leveldata[$BLDCYCLE][defects][$defect][targets]
+	done
+    fi
+
+    #
+    # Figure out which defect shipped the file.
+    for defect in $(dataman -q leveldata[$BLDCYCLE][defects][*?][targets])
+    do
+	dataman -q leveldata[$BLDCYCLE][defects][$defect][targets] |
+	fgrep -qs "$file " && {
+	    cat $TOP/PTF/$BLDCYCLE/defectapars |
+	    awk -F\| -v def=$defect '$1 == def {print $2}'
+	    return
+        }
+    done
+}
+
+#
+# Return the ptf on stdout that corresponds to the given fileset.
+#
+get_ptf () {
+    fileset=$1
+
+    #
+    # Look in the ptf_pkg files for this build cycle.
+    ptf=$(grep -w $fileset $TOP/UPDATE/*/ptf_pkg.$BLDCYCLE |
+          sed 's/|.*//' | head -1)
+}
+
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+export     TOP=$treetop/selfix
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+
+#
+# In order to add an unexpectedshipfile to the ptf_pkg file we
+# need to know the apar(defect) that caused the file to build,
+# the fileset that the file belongs to, and the ptf number that
+# corresponds to that file.  If a ptf has not been created for
+# the fileset in this buildcycle then we have an unresolvable
+# unexpected ship file and will need manual intervention before
+# making the ptfs.
+#
+dataman -r leveldata[$BLDCYCLE][resolvedunexpectedships] || :
+dataman -r leveldata[$BLDCYCLE][unresolvedunexpectedships] || :
+cd $TOP/UPDATE
+dataman -q leveldata[$BLDCYCLE][unexpectedshipfiles] |
+while read shipfile fileset
+do
+    if [ -z "$fileset" ]
+    then unresolved=yes
+    else
+	ptf=$(get_ptf $fileset)
+	if [ -z "$ptf" ]
+	then unresolved=yes
+	else
+	    apar=$(get_apar $shipfile)
+	    if [ -z "$apar" ]
+	    then unresolved=yes
+	    else unresolved=no
+	    fi
+	fi
+    fi
+
+    if [ $unresolved = no ]
+    then
+	print "$ptf|$apar|$shipfile|$fileset||||" |
+	dataman -a leveldata[$BLDCYCLE][resolvedunexpectedships]
+    else
+	print "$ptf|$apar|$shipfile|$fileset||||" |
+	dataman -a leveldata[$BLDCYCLE][unresolvedunexpectedships]
+    fi
+done
+
+if dataman -q leveldata[$BLDCYCLE][unresolvedunexpectedships]
+then
+    \print "The preceding shipfiles could not be resolved."
+    dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED
+    exit 1
+fi
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

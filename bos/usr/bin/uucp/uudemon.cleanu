@@ -1,0 +1,190 @@
+#!/bin/bsh
+# @(#)31	1.9  src/bos/usr/bin/uucp/uudemon.cleanu, cmduucp, bos411, 9428A410j 11/29/93 16:38:49
+#
+#   COMPONENT_NAME: CMDUUCP
+#
+#   FUNCTIONS: then
+#
+#   ORIGINS: 10,27,3
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1985,1989
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#	uucp:uudemon.cleanup	1.7
+#
+#	This demon cleans up uucp directories.
+#	It should be started by 'cron' from a line in
+#	  /usr/spool/cron/crontabs/uucp;
+#	it can be run daily, weekly, whatever depending on the system
+#	  uucp load.
+#	The log files get large so you may have to up the ulimit.
+#	e.g.
+#
+# 45 23 * * * ulimit 5000; /bin/su uucp -c "/usr/sbin/uucp/uudemon.cleanu"
+#
+
+
+MAILTO=uucp
+MAILDIR=/usr/mail
+export PATH
+PATH=/bin:/usr/bin:/usr/sbin/uucp:/usr/lib/uucp
+TMP=/tmp/uu$$
+
+#
+#	These are taken from the Makefile.  If changed in Makefile
+#	they must be changed here also.
+#
+PUBDIR=/var/spool/uucppublic
+SPOOL=/var/spool/uucp
+XQTDIR=/var/spool/uucp/.Xqtdir
+CORRUPT=/var/spool/uucp/.Corrupt
+LOGDIR=/var/spool/uucp/.Log
+SEQDIR=/var/spool/uucp/.Sequence
+STATDIR=/var/spool/uucp/.Status
+WORKDIR=/var/spool/uucp/.Workspace
+ADMIN=/var/spool/uucp/.Admin
+
+#	OLD is the directory for archiving old admin/log files
+OLD=$SPOOL/.Old
+O_LOGS=$OLD/Log-Week
+
+mv $ADMIN/xferstats $OLD/xferstats
+mv $ADMIN/audit $OLD/audit
+mv $ADMIN/errors $OLD/errors
+mv $ADMIN/Foreign $OLD/Foreign
+
+> $ADMIN/xferstats
+> $ADMIN/audit
+> $ADMIN/errors
+> $ADMIN/Foreign
+
+#
+#	The list in the for controls how many old LOG files are retained.
+#	O_LOGS-2 goes to O_LOGS-3, O_LOGS-1 goes to O_LOGS-2.
+#	Todays goes to O_LOGS-1
+#
+for i in  2 1
+do
+	j=`expr $i + 1`
+	mv ${O_LOGS}-$i ${O_LOGS}-$j
+done
+
+#
+#	Combine all log files into O_LOGS-1.
+#	Add a name separator between each system.
+#
+> ${O_LOGS}-1
+for i in uucico uucp uux uuxqt
+do
+    if cd $LOGDIR/$i ; then
+	for j in * ; do
+	    if [ "$j" != "*" ] ; then
+		echo "********** $j **********" >> ${O_LOGS}-1
+		cat $j >> ${O_LOGS}-1
+		rm -f $j
+	    fi
+	done
+    fi
+done
+
+#	Execute the system directory cleanup program
+#	See uucleanup.1m for details.
+uucleanup -D7 -C7 -X2 -o2 -W1
+#	Use the grep instead of the mv to ignore warnings to uucp
+# grep -v 'warning message sent to uucp' $ADMIN/uucleanup > $OLD/uucleanup
+mv $ADMIN/uucleanup $OLD/uucleanup
+if [ -s $OLD/uucleanup ]
+then
+	(echo "Subject: cleanup"; cat $OLD/uucleanup) | mail $MAILTO
+fi
+>$ADMIN/uucleanup
+
+#  cleanup funny directories that may have been created in the spool areas
+for d in $SPOOL/[A-z]*
+do
+	if [ ! -d $d -o -z "`ls $d 2>/dev/null`" ]; then
+		continue
+	fi
+
+	if cd $d ; then
+	    for s in * ; do
+		if [ -d "$s" ] ; then
+		    rm -fr $s
+		fi
+	    done
+
+#		if it is now empty, remove it.
+	    cd ..
+	    rmdir $d
+	fi
+done 2>&1 >/dev/null
+
+#
+#	Find old cores
+#
+find $SPOOL -name core -print > $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: cores"; cat $TMP) | mail $MAILTO
+fi
+
+#
+#	Remove old files and directories
+#
+find $PUBDIR -type f -mtime +30 -exec rm -f {} \;
+find $PUBDIR/* -depth -type d -exec rmdir {} \; 2>/dev/null
+find $SEQDIR/* -mtime +30 -exec rm -f {} \; 2>/dev/null
+find $WORKDIR/* -mtime +1 -exec rm -f {} \; 2>/dev/null
+find $STATDIR/* -mtime +2 -exec rm -f {} \; 2>/dev/null
+find $CORRUPT/* -mtime +10 -exec rm -f {} \; 2>/dev/null
+
+rm -f $SPOOL/LTMP*
+rmdir $SPOOL/[A-z]* 2>/dev/null
+
+#
+#	Mail a daily summary of status
+#
+grep passwd ${O_LOGS}-1 > $TMP
+grep "REQUEST.*/" ${O_LOGS}-1 >> $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: uucp requests"; cat $TMP) | mail $MAILTO
+fi
+
+
+awk '/(DENIED)/	{print prev}
+		{prev = $0}' ${O_LOGS}-1 > $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: uucp DENIED"; cat $TMP) | mail $MAILTO
+fi
+
+uustat -q > $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: uu-status"; cat $TMP) | mail $MAILTO
+fi
+
+ls $CORRUPT > $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: $CORRUPT"; cat $TMP) | mail $MAILTO
+fi
+
+tail $OLD/errors 2>/dev/null > $TMP
+tail $OLD/Foreign 2>/dev/null >> $TMP
+if [ -s $TMP ]
+then
+	(echo "Subject: uucp Admin"; cat $TMP) | mail $MAILTO
+fi
+(echo "Subject: uucleanup ran; $SPOOL du"; du $SPOOL) | mail $MAILTO
+
+#
+#	Dispose of mail to uucp and nuucp
+#
+rm -f $MAILDIR/uucp $MAILDIR/nuucp $TMP

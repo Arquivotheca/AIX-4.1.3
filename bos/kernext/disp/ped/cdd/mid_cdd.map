@@ -1,0 +1,29 @@
+ADDRESS MAP FOR mid_cdd
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+    00000000 002DF8  2 PR SD S1    <>                        ../../../../../../../src/bos/kernext/disp/ped/cdd/cdd_entry.c(cdd_entry.o)
+    00000000           PR LD S2    .cdd_entry
+    00000128           PR LD S3    <.cdd_blit>
+    000006BC           PR LD S4    <.preload_strings>
+    000007D4           PR LD S5    <.get_vpd_descriptor>
+    000008D8           PR LD S6    <.cdd_qvpd>
+    00000E50           PR LD S7    <.cdd_load_ucode>
+    00001050           PR LD S8    <.cdd_set_POS>
+    00001A10           PR LD S9    <.cdd_disable>
+    00001C6C           PR LD S10   <.cdd_enable>
+    00001EC4           PR LD S11   <.cdd_init>
+    0000203C           PR LD S12   <.reset>
+    000020D8           PR LD S13   <.set_color>
+    000022F0           PR LD S14   <.download>
+    000024A4           PR LD S15   <.downsec>
+    000026E0           PR LD S16   <.input>
+    00002810           PR LD S17   <.run>
+    00002AE0           PR LD S18   <.halt>
+    00002C04           PR LD S19   <.getlong>
+    00002C48           PR LD S20   <.getshort>
+    00002C7C           PR LD S21   <.check_cdd_structures>
+    00002DF8 000040  2 PR SD S22   <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    00002DF8           PR LD S23   ._ptrgl
+    00002DF8           PR LD S24   .$PTRGL
+* E 00000000 00000C  2 DS SD S25   cdd_entry                 ../../../../../../../src/bos/kernext/disp/ped/cdd/cdd_entry.c(cdd_entry.o)
+    0000000C 000000  2 T0 SD S26   <TOC>

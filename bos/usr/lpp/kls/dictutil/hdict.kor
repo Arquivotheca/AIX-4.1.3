@@ -1,0 +1,320 @@
+#!/bin/ksh
+# @(#)82	1.2  src/bos/usr/lpp/kls/dictutil/hdict.kor, cmdkr, bos411, 9428A410j 6/9/94 09:54:55
+#
+# COMPONENT_NAME:	(CMDKR)	User Dictionary Utility
+#
+# FUNCTIONS:		Top Level Shell
+#
+# ORIGINS:		27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp.  1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# User Dictionary File Check Process
+USRTEST()
+{
+ if test -f $USRDIC
+   then
+     if test ! -w $USRDIC
+       then
+	 echo "hdict: File open error...'$USRDIC'. Permission denied.";
+	 exit;
+       elif test ! -r $USRDIC
+	    then echo "hdict: File open error...'$USRDIC'. Permission denied.";
+		 exit;
+     fi
+   else
+     echo "hdict: File open error...'$USRDIC'. There is no such a file.";
+     exit;
+ fi
+
+ UDIR=`dirname $USRDIC`
+ UBAS=`basename $USRDIC`
+ UBAK=`basename $USRDIC | awk '{print substr($0,1,10)}'`
+
+ # File Name Check(same name)
+ if test $UDIR/$UBAS = $UDIR/$UBAK.bak
+   then  echo "hdict: The user dictionary file name '$USRDIC' is invalid."
+         echo "        Please change the file name, and try again.        "
+	 exit
+ fi
+ if test $UDIR/$UBAS = $UDIR/$UBAK.tmp
+   then  echo "hdict: The user dictionary file name '$USRDIC' is invalid."
+         echo "        Please change the file name, and try again.        "
+	 exit
+ fi
+
+ # Permission Check(Backup , Temporary)
+ if test -w ./
+ then
+ if test ! -w  $UDIR
+    then
+      echo "hdict: File creation error... directory '$UDIR'. Permission denied."
+      exit ;
+    elif test -f $UDIR/$UBAK.bak
+      then
+	if test -w $UDIR/$UBAK.bak
+	   then
+	     if test -f $UBAK.tmp
+		then
+		  if test -w  $UBAK.tmp
+		     then  rm -f $UBAK.tmp
+		     else  echo "hdict: File open error...'$UBAK.tmp'. Permission denied.";
+			   exit;
+		  fi;
+	     fi;
+	   else echo "hdict: File open error...'$UDIR/$UBAK.bak'. Permission denied.";
+		exit ;
+	fi ;
+      else
+	if test -f $UBAK.tmp
+	   then
+	     if test -w  $UBAK.tmp
+		then  rm -f $UBAK.tmp
+		else  echo "hdict: File open error...'$UBAK.tmp'. Permission denied.";
+		      exit;
+	     fi;
+	fi;
+ fi;
+ else UCUR=`pwd` ;
+      echo "hdict: File creation error... directory '$UCUR'. Permission denied."
+      exit ;
+ fi
+
+ AA=`LANG=C wc -c $USRDIC`
+ BB=`echo $AA | awk '{print $1}'`
+ if test $BB -ge 7168 -a $BB -le 54272
+   then
+    count=`expr $BB % 1024`;
+    if test $count -ne 0
+      then echo "hdict: File '$USRDIC' is not User Dictionary."
+	   exit;
+      else break;
+    fi;
+  else echo "hdict: File '$USRDIC' is not User Dictionary."
+       exit;
+ fi
+
+ return
+}
+
+
+OTHRTEST()
+{
+# Check /tmp
+#if test ! -w /tmp
+#  then
+#    echo "hdict: File open error.../tmp/..hdict.err. Permission denied.";
+#    exit
+#fi
+
+# System Dictionary Check
+if test "$KIMSYSDICT"
+ then
+  if test ! -f $KIMSYSDICT
+   then
+    echo "hdict: File open error...'$KIMSYSDICT'. There is no such a file."
+    exit
+   else
+    if test ! -r $KIMSYSDICT
+       then
+	echo "hdict: File open error...'$KIMSYSDICT'. Permission denied.";
+	exit;
+    fi
+    AA=`LANG=C wc -c $KIMSYSDICT`
+    BB=`echo $AA | awk '{print $1}'`
+    if test $BB -gt 0
+      then
+       count=`expr $BB % 2048`;
+       if test $count -ne 0
+	 then echo "hdict: File '$KIMSYSDICT' is not System Dictionary."
+	      exit;
+	 else break;
+       fi;
+     else echo "hdict: File '$KIMSYSDICT' is not System Dictionary."
+	  exit;
+    fi
+  fi
+ elif test "${KIMSYSDICT+null}" = null
+  then
+   echo "hdict: File open error...'$KIMSYSDICT'. There is no such a file."
+   exit
+ else
+  if test ! -f /usr/lpp/kls/dict/sysdict
+   then
+    echo "hdict: File open error...'/usr/lpp/kls/dict/sysdict'. There is no such a file."
+    exit
+   else
+    if test ! -r /usr/lpp/kls/dict/sysdict
+       then
+	echo "hdict: File open error...'/usr/lpp/kls/dict/sysdict'. Permission denied.";
+	exit;
+    fi
+    AA=`LANG=C wc -c /usr/lpp/kls/dict/sysdict`
+    BB=`echo $AA | awk '{print $1}'`
+    if test $BB -gt 0
+      then
+       count=`expr $BB % 2048`;
+       if test $count -ne 0
+	 then echo "hdict: File '/usr/lpp/kls/dict/sysdict' is not System Dictionary."
+	      exit;
+	 else break;
+       fi;
+     else echo "hdict: File '/usr/lpp/kls/dict/sysdict' is not System Dictionary."
+	  exit;
+    fi
+  fi
+fi
+
+#  Message file check
+if test ! -f $MSGDIC
+   then echo "hdict: File open error...'$MSGDIC'. There is no such a file."
+   exit ;
+fi
+
+if test ! -r $MSGDIC
+   then echo "hdict: File open error...'$MSGDIC'. Permission denied."
+   exit ;
+fi
+
+return;
+}
+
+################################
+# hdict start!!
+################################
+echo "\nUser dictionary utility program"
+echo "(C) COPYRIGHT IBM CORP. 1991\n"
+
+# Check Display type
+case $TERM in
+  ibm6153)  break;;
+  ibm6154)  break;;
+  ibm6155)  break;;
+  ibm5081)  break;;
+  aixterm)  break;;
+  dtterm)   break;;
+  *)        echo "hdict: Invalid terminal type '$TERM' "
+	    exit;;
+esac
+
+# enhedit off
+#stty -enhedit
+
+# Display Message File Default Define
+MSGDIC=/usr/lpp/kls/etc/hdict.msg
+
+if test "$KIMUSRDICT"
+   then
+   if test -f $KIMUSRDICT
+      then USRDIC=$KIMUSRDICT;
+      else echo "hdict: File open error...'$KIMUSRDICT'. There is no such a file."
+	   exit;
+   fi
+
+elif test "${KIMUSRDICT+null}" = null
+   then echo "hdict: File open error...'$KIMUSRDICT'. There is no such a file."
+	exit;
+fi
+
+if test ! "$USRDIC"
+   then
+   if test -f $HOME/.usrdict
+   then USRDIC=$HOME/.usrdict;
+   else USRDIC='/usr/lpp/kls/dict/usrdict';
+   fi
+fi ;
+
+# Parameter process
+case $# in
+  # No Parameter
+      # User Dictionary File Search
+  0)
+      USRTEST
+      # OTHRTEST
+      break ;;
+
+  # Input Parameter 1
+  1)  case $1 in
+	-d) 
+	    # OTHRTEST
+	# User Dictionary File Name Select
+	    while true
+	    do
+	      echo "Please enter User Dictionary file name. \c";
+	      read USRDIC
+	      if test $USRDIC
+		then
+		  USRTEST
+		  break;
+	      fi
+	    done
+	    break;;
+
+	 *) echo "hdict: Invalid option(s) '$1'.";
+	    exit;;
+      esac
+      break;;
+
+  # Input Parameter 2
+  2)
+      case $1 in
+	-d) case $2 in
+	    # User Dictionary File Search
+	    -d) echo "hdict: Invalid option(s) '$2'." ;
+		exit ;;
+
+	    # User Dictionary File Set
+	    *) USRDIC=$2;
+		 USRTEST
+		 # OTHRTEST
+		 break;;
+	    esac;;
+	 *) echo "hdict: Invalid option(s) '$1 $2'.";
+	    exit;;
+      esac
+      break;;
+
+  *)  echo "hdict: Invalid option(s) '$*'."
+      exit;;
+esac
+
+if [ $USRDIC = "./usrdict" ]
+	then    UDISP=1
+elif [ $USRDIC = "$HOME/.usrdict" ]
+	then    UDISP=2
+else    UDISP=0
+fi
+
+# /usr/lpp/kls/bin/dictmain $USRDIC $UDISP
+/usr/lpp/kls/bin/dictmain $USRDIC 0
+if test $? = 1
+   then
+	echo "Saving Dictionary...\n"
+        cp $USRDIC $UDIR/$UBAK.bak
+	cp $UBAK.tmp $USRDIC
+	if test $? = 0
+	   then
+	       rm -f $UBAK.tmp
+	       break ;
+	fi
+	break ;
+   else
+       rm -f $UBAK.tmp
+       break ;
+
+fi ;
+
+if test -f $HOME/.huprn
+   then rm -f $HOME/.huprn
+fi
+
+exit;
+

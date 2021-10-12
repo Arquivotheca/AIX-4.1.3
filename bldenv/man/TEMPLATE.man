@@ -1,0 +1,278 @@
+#
+# @(#)05	1.1  src/bldenv/man/TEMPLATE.man, bldtools, bos412, GOLDA411a 5/13/92 16:17:41
+#
+#  COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#  FUNCTIONS: Template for man pages
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+**
+** All lines beginning with a ** are comments to help you build the
+** manual page.  They do not belong in the manual page you create.
+**
+** Lines with just a ** on them are to be removed.  Blank lines should
+** remain.
+**
+** Each heading (Purpose, Syntax, Description, ...) will have two
+** blank lines before it.  One blank line between the heading and the
+** narrative of the heading.  The entire man page is indented two
+** characters.
+**
+** Entries of the form <string> must be replaced, hopefully the string
+** with in the <> will tell you what value should appear.
+**   <COMMAND_NAME> : name of the command you are creating the man page
+**                    for.
+**
+** The manual page you create will have a '.man' extension.  A rule
+** exists in the com/TOOLS/man Makefile to convert the '.man' extension
+** to a file with no extension.  The rule invokes the preprocessor
+** (/lib/cpp) on the '.man' file.  The man page can therefore include
+** preprocessor directives.  Lines within the man page beginning with a #
+** will be removed.
+**
+** If a section heading does not belong in the man page you are creating,
+** don't include the section heading.
+**
+** Add SCCS identification line by running 'addkey'.
+**
+** The following is a sample of the copyright that must be in the file.  The
+** # should be in the first column (they are preceded by ** here to prevent
+** from being removed when this file is preprocessed).
+**
+**#
+**#  COMPONENT_NAME: (<component>) <description>
+**#
+**#  FUNCTIONS: Template for man pages
+**#
+**#  ORIGINS: 27
+**#
+**#  (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+**#  All Rights Reserved
+**#  Licensed Materials - Property of IBM
+**#
+**#  US Government Users Restricted Rights - Use, duplication or
+**#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+**#
+
+  <COMMAND_NAME> Command
+  
+  
+  Purpose
+  
+** What the command is used for.  A concise sentence.
+  
+
+  Syntax
+  
+** <COMMAND_NAME> arguments
+**
+** optional arguments are to be enclosed in [].
+** multiple arguments are indicated by a following '...'.
+** argument choices are separated by a |
+**
+** For example:
+**
+** bldcommand [ -p <package_ptf> ] 
+**            [ -l <lpp> | -b <build> | -f <file> ]
+**            argument_1 argument_2 ...
+
+
+  Description
+  
+** Detailed description of what the command is to accomplish.  
+** The arguments on the command should be described here.
+** The input and output files may be described here; for example,
+** it is not always obvious in files with multiple fields what
+** data will be used.  Stating which fields are used and how the
+** command uses the data would be helpful.  Environment variables
+** may be described here if the command uses them in a manner that
+** is not obvious.
+  
+
+  Flags
+
+** Detailed description of every argument listed under Syntax above.
+** General format is 'flag<space>option<spaces>description'.
+**
+** For example:
+**
+** -p <package_ptf>   The PTFID of the packaging PTF.
+** -l <lpp>           The install LPP to which this package of PTFs belong.
+** -b <build>         The build name to use.
+** -f <file>          The file to read data from.
+ 
+
+  Environment Variables
+
+** Any external environment variables referenced or changed are to
+** be listed here (use 'bldman ENV_variables' to get a list). If you
+** introduce new external environment variables not described by the
+** ENV_variables manual page, add them to the ENV_variables manual page.
+** Try to use the same description used in the ENV_variables man page.
+** General format is 'variable<tabs>description'.
+**
+** For example:
+**
+** BLDENV     Full pathname to the top of the build environment
+**            (e.g. /bldenv/3.2/prod).  A fatal error occurs if this value
+**            is not set.
+
+
+  Messages
+
+    Informative
+
+** Any output messages the command may generate, that you feel may
+** benefit from further explanation (i.e. you do not need to list every
+** message the command may generate).  The message should be
+** enclosed in "".  Below the message should be a description of
+** what the message means.  Enclose variable fields within the message
+** with <>. 
+**
+** These messages should appear on stdout.
+**
+** For example:
+**
+** "PTF <ptfid> (<filename>) prereqs U402153 -- .o file."
+** A prereq to U402153 was added to <ptfid> because <filename> 
+** has a .o extension.
+
+
+    Warnings
+
+** Any warning messages the command may generate, that you feel may
+** benefit from further explanation (i.e. you do not need to list every
+** warning the command may generate).  The warning message should be
+** enclosed in "".  Below the message should be a description of what
+** the warning message means and special actions the program may be
+** taking because of the warning.  Enclose variable fields within the
+** message with <>.
+**
+** These messages should appear on stderr.
+**
+** For example:
+**
+** "PTF <ptfid> file <filename> is member of TCB."
+** File <filename> is marked as a member of the TCB, check to insure
+** that LPP for this file correctly handles removal of files that are
+** members of the TCB.
+
+
+    Errors
+
+** Any error messages the command may generate, that you feel may
+** benefit from further explanation (i.e. you do not need to list every
+** error the command may generate).  The error message should be
+** enclosed in "".  Below the message should be a description
+** of what the fatal error message means and reasons the error occurred.
+** Suggestions for correction of the problem should also be given.
+** Enclose variable fields within the message with <>.  Error messages
+** do not cause termination, but do imply some data loss may occur
+**
+** These messages should appear on stderr.
+**
+** For example:
+**
+**
+** "Cannot parse line <linenumber> in file <filename>.
+**     <line_from_file>
+**  Line ignored."
+** The line <line_from_file> cannot be recognized in the inslist file
+** <filename>.  The line is ignored and processing continues with the
+** next line.
+
+
+    Fatal Errors
+
+** Any fatal error messages the command may generate, that you feel may
+** benefit from further explanation (i.e. you do not need to list every
+** fatal error the command may generate).  The fatal error message
+** should be enclosed in "".  Below the message should be a
+** description of what the fatal error message means and
+** reasons the error occurred.  Suggestions for correction of the problem
+** should also be given.  Enclose variable fields within the message with <>.
+** Fatal errors cause termination.
+**
+** These messages should appear on stderr.
+**
+** For example:
+**
+** "Lockfile indicates <command> is running.  Cannot continue."
+** The command <command> is currently being run.  Complete the command or
+** cancel it before retrying this command.
+
+
+  Examples
+  
+** Give a few examples of running the command with a description
+** of what the invocation will do.
+**
+** For example:
+**
+** 1. Call command with no arguments.  User will be prompted for the
+**    package_ptf and LPP.
+**
+**    <command>
+**
+** 2. Call command supplying package_ptf on command line.  If package_ptf
+**    does not exist, then LPP will be prompted for; otherwise, the LPP will
+**    be determined from the package_ptf.
+**
+**    <command> -p PTF001
+**
+** 3. Call command supplying package_ptf and LPP on command line.  If
+**    package_ptf exists, its LPP must match LPP on command line or a
+**    fatal error will occur.
+**
+**    <command> -p PTF001 -l bos
+**
+  
+
+  Input Files
+
+** List any shared external files which you read data from.
+**
+** Do not describe intermediate internal files.
+**
+** Files shared between commands will usually have a separate description
+** within the man pages.  These file descriptions can be included by the
+** following '#include "filename.man"'.  BE SURE the include has the .man
+** extension, if the man page is included without the extension and has
+** not been created there will be just blank lines and no error messages
+** will have been generated.
+**
+** For example:
+**
+** #include "ptf_pkg.man"
+
+
+  Output Files
+  
+** List any shared external files which you write data to.  The detailed
+** description given under Input Files applies here.  Do not describe
+** intermediate internal files.
+  
+
+  Prerequisite Information
+  
+** List any special actions that may need to occur before this command
+** is run.
+  
+
+  Related Information
+  
+** List of other commands this command uses or the manual page makes
+** reference to.  General format is 'FULL_PATH/command<tabs>description'.
+**
+** For example:
+**
+** $BLDENV/usr/bin/bldlock         The "bldlock" command.
+** $BLDENV/usr/man/bldlock         The "bldlock" command man page.

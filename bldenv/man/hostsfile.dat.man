@@ -1,0 +1,109 @@
+#
+# @(#)91	1.8  src/bldenv/man/hostsfile.dat.man, bldprocess, bos412, GOLDA411a 1/17/94 16:35:36
+#
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: hostsfile.dat manual page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1992, 1993
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  $BLDENV/usr/bin/hostsfile.dat
+
+    Accessing hostsfile.dat should only be done through functions in
+    bldhostsfile.
+
+    Format of this file is:
+
+      <release>|<host>|<environment>|<cmvc_family>|<rel>|<bldnode>|
+      <base>|<prod>|<delta>|<build>|<object>|<ship>|
+      <afsbase>|<afsprod>|<afsdelta>|<data1>
+
+    where there is only entry per line.  Each field is described below,
+    relative pathnames are those that do not begin with a '/':
+
+      release (required) - Release name.
+      host (optional) - Host machine where release is built.  The default
+                        value will be current machine.
+      environment (optional) - The type of building environment, values
+                               are: aix32 and ade.  The default is aix32.
+      cmvc_family (optional) - The CMVC Family the release resides in.
+                               The default is aix@ausaix02@2035.  Format
+                               is familyname[@hostname[@portnumber]] where
+                               values in [] are optional.  The CMVC family
+                               name must also exist in the file
+                               $BLDENV/usr/bin/bldCMVCfamily.dat.  This field
+                               is validated by calling bldCMVCfamily.
+      rel (optional) - The rel portion of the release name.
+      bldnode (optional) - CMVC directory name for the release.
+      base (optional) - Production tree for release.
+                          1) If not specified the value will be
+                             '/<host>/<rel>/<node>', where <node>
+                             is what <bldnode> maps to in the
+                             nodenames.dat file.
+                          2) If a relative pathname, '/<host>/' will
+                             be prepended to the directory name.
+      prod (optional) - Production full source directory for release.
+                          1) If not specified the value will be
+                             '/<base>/src'.
+                          2) If a relative pathname, '<base>/' will
+                             be prepended to the directory name.
+      delta (optional) - Production delta source directory for release.
+                           1) If not specified the value will be
+                              '/<base>/delta'.
+                           2) If a relative pathname, '<base>/' will
+                              be prepended to the directory name.
+      build (optional) - Production directory where a full build will
+                         start from.  If the environment is ade the
+                         directory must end with '/src'.
+                           1) If not specified the value will be
+                              '<prod>' for aix32 environment and
+                              '<prod>/src' for the ade environment.
+                           2) If a relative pathname, '<prod>/' will
+                              be prepended to the directory name.
+      object (optional) - Production directory where the object files
+                          are located.
+                            1) If not specified the value will be
+                               '<prod>/nls' for aix32 environment and
+                               '<prod>/obj' for the ade environment.
+                            2) If a relative pathname, '<prod>/' will
+                               be prepended to the directory name.
+      ship (optional) - Production directory where the ship tree is located.
+                          1) If not specified the value will be
+                             '<prod>/nls/ship' for aix32 environment and
+                             '<prod>/ship' for the ade environment.
+                          2) If a relative pathname, '<prod>/' will
+                             be prepended to the directory name.
+      afsbase (optional) - AFS tree for release.
+                             1) If a '*' then no tracking to afs is done.
+                             2) If not specified the value will be
+                                '/afs/austin/aix/<bldnode>/<rel>'.
+                             3) If a relative pathname, '/afs/austin/aix/'
+                                will be prepended to the directory name.
+      afsprod (optional) - AFS full source directory for release
+                             1) If not specified the value will be
+                                '/<afsbase>/prod/src'.
+                             2) If a relative pathname, '<afsbase>/' will
+                                be prepended to the directory name.
+      afsdelta (optional) - AFS delta source directory for release.
+                              1) If not specified the value will be
+                                 '/<afsbase>/delta'.
+                              2) If a relative pathname, '<afsbase>/' will
+                                 be prepended to the directory name.
+      data1 (optional) - Data field.
+                           Format of field is:
+                             <assignment1><space><assignment2><space> ...
+                             <assignmentn>
+                             where assignment? is: ARG="arg1 arg2 ... argn"
+                           Current values for ARG are:
+                             ADE_ARGS - when environment is ADE these values
+                                        will be the first arguments passed into
+                                        setup.sh, build.sh, install.sh and
+                                        onecmd.sh in v3bld.
+                             V3BLD_BADARGS - arguments that v3bld should not
+                                             pass onto make.

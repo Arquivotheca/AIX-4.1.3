@@ -1,0 +1,652 @@
+# @(#)77        1.5  src/bos/objclass/cmdps.add, cmdps, bos411, 9428A410j 6/16/90 02:47:35
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDPS                                                       #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27                                                                 #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1990               #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+################################################################################
+
+################################################################################
+#									       #
+#	SMIT DIALOGUES FOR COMMANDS: chps, lsps, mkps, rmps, swapon	       #
+#									       #
+#	MESSAGE SET: 28							       #
+#	HELP MSG ID: 0517						       #
+#									       #
+################################################################################
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		     Paging Space					       #
+#		         List All Paging Spaces				       #
+#                                                                              #
+# FAST KEY:         lsps                                                       #
+# UNIX COMMAND(S):  lsps                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#                                                                              #
+# HEADER:  List All Paging Spaces					       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "lsps"
+	option_id               = ""
+	has_name_select         = "n"
+	name                    = "List All Paging Spaces"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 28
+	name_msg_id             = 1
+	cmd_to_exec             = "lsps -a"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = "y"
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "051701"
+	help_msg_loc            = ""
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		     Paging Space					       #
+#		         Add Another Paging Space			       #
+#                                                                              #
+# FAST KEY:         mkps                                                       #
+# UNIX COMMAND(S):  mkps                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#	   1 name select						       #
+#  	   5 dialogue objects						       #
+#                                                                              #
+# HEADER:  Add Another Paging Space					       #
+#									       #
+# NAME SELECT:  VOLUME GROUP name					       #
+#                                                                              #
+# OBJECTS:  1. Volume group name					       #
+#	    2. SIZE of paging space (in logical partitions)		       #
+#           3. PHYSICAL VOLUME name					       #
+# 	    4. Start using this paging space NOW?			       #
+# 	    5. Use this paging space each time the system is		       #
+#              		RESTARTED?                                             #
+#                                                                              #
+################################################################################
+ 
+sm_name_hdr:
+	id			= "mkps"
+	next_id			= "mkpsCmdHdr"
+	option_id		= "mkpsNameOpt"
+	name			= "Add Another Paging Space"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 2
+	type			= "j"
+	ghost			= "y"
+	cmd_to_classify		= ""
+	cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	next_type		= ""
+	help_msg_id		= "051702"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "mkpsNameOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "VOLUME GROUP name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 3
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= "1"
+	cmd_to_list		= "lsvg"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051703"
+	help_msg_loc		= ""
+
+
+sm_cmd_hdr:
+	id                      = "mkpsCmdHdr"
+	option_id               = "mkpsCmdOpt"
+	has_name_select         = "y"
+	name                    = "Add Another Paging Space"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 28
+	name_msg_id             = 2
+	cmd_to_exec             = "mkps"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "051702"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "mkpsCmdOpt"
+	id_seq_num		= "000"
+	disc_field_name		= "_rawname"
+	name			= "Volume group name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 4
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051703"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "mkpsCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= ""
+	name			= "SIZE of paging space (in logical partitions)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 5
+	op_type			= ""
+	entry_type		= "#"
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-s"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051704"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "mkpsCmdOpt"
+	id_seq_num		= "010"
+	disc_field_name		= ""
+	name			= "PHYSICAL VOLUME name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 6
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= "--"
+	cmd_to_list_mode	= "1"
+	cmd_to_list		= "pvlist () { lsvg -p $1 | sed '1,2d' | cut -f1 -d' '; }; pvlist "
+	cmd_to_list_postfix	= "_rawname"
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051705"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "mkpsCmdOpt"
+	id_seq_num		= "015"
+	disc_field_name		= ""
+	name			= "Start using this paging space NOW?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 7
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "n"
+	prefix			= "-n"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ","
+	help_msg_id		= "051706"
+	help_msg_loc		= ""
+
+
+sm_cmd_opt:
+	id			= "mkpsCmdOpt"
+	id_seq_num		= "020"
+	disc_field_name		= ""
+	name			= "Use this paging space each time the system is\n\tRESTARTED?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 8
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "n"
+	prefix			= "-a"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= ","
+	help_msg_id		= "051707"
+	help_msg_loc		= ""
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		     Paging Space					       #
+#		        Change / Show Characteristics of a Paging Space	       #
+#                                                                              #
+# FAST KEY:         chps                                                       #
+# UNIX COMMAND(S):  chps                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#	   1 name select						       #
+#  	   5 dialogue objects						       #
+#                                                                              #
+# HEADER:  Change / Show Characteristics of a Paging Space		       #
+#									       #
+# NAME SELECT:  PAGING SPACE name					       #
+#                                                                              #
+# OBJECTS:  1. Paging space name					       #
+#	    2. Volume group name					       #
+#           3. Physical volume name					       #
+#	    4. NUMBER of additional logical partitions			       #
+# 	    5. Use this paging space each time the system is		       #
+#              		RESTARTED?                                             #
+#                                                                              #
+################################################################################
+ 
+sm_name_hdr:
+	id			= "chps"
+	next_id			= "chpsCmdHdr"
+	option_id		= "chpsNameOpt"
+	name			= "Change / Show Characteristics of a Paging Space"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 9
+	type			= "j"
+	ghost			= "y"
+	cmd_to_classify		= ""
+	cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	next_type		= ""
+	help_msg_id		= "051708"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chpsNameOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "PAGING SPACE name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 10
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= "1"
+	cmd_to_list		= "lsps -l -a"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051709"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id                      = "chpsCmdHdr"
+	option_id               = "chpsCmdOpt"
+	has_name_select         = "y"
+	name			= "Change / Show Characteristics of a Paging Space"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 28
+	name_msg_id             = 9
+	cmd_to_exec             = "chps"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = "lsps -c "
+	cmd_to_discover_postfix = "_rawname"
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "051708"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "chpsCmdOpt"
+	id_seq_num		= "000"
+	disc_field_name		= "_rawname"
+	name			= "Paging space name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 11
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051709"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chpsCmdOpt"
+	id_seq_num		= "005"
+	disc_field_name		= "Vgname"
+	name			= "Volume group name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 4
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051703"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chpsCmdOpt"
+	id_seq_num		= "010"
+	disc_field_name		= "Pvname"
+	name			= "Physical volume name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 12
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051705"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chpsCmdOpt"
+	id_seq_num		= "015"
+	disc_field_name		= ""
+	name			= "NUMBER of additional logical partitions"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 15
+	op_type			= ""
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-s"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051712"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "chpsCmdOpt"
+	id_seq_num		= "020"
+	disc_field_name		= "Auto"
+	name			= "Use this paging space each time the system is\n\tRESTARTED?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 8
+	op_type			= "r"
+	entry_type		= ""
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 19
+	values_msg_id		= 5
+	aix_values		= "y,n"
+	help_msg_id		= "051707"
+	help_msg_loc		= ""
+
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		     Paging Space					       #
+#		        Remove a Paging Space				       #
+#                                                                              #
+# FAST KEY:         rmps                                                       #
+# UNIX COMMAND(S):  rmps                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#  	   1 dialogue object 						       #
+#                                                                              #
+# HEADER:  Remove a Paging Space					       #
+#									       #
+# OBJECTS:  1. PAGING SPACE name					       #
+#                                                                              #
+################################################################################
+
+
+sm_cmd_hdr:
+	id                      = "rmps"
+	option_id               = "rmpsOpt"
+	has_name_select         = "n"
+	name                    = "Remove a Paging Space"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 28
+	name_msg_id             = 13
+	cmd_to_exec             = "rmps"
+	ask                     = "y"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "051710"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "rmpsOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "PAGING SPACE name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 10
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= "1"
+	cmd_to_list		= "lsps -l -a"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051709"
+	help_msg_loc		= ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Storage						       #
+# 		     Paging Space					       #
+#		        Activate a Paging Space				       #
+#                                                                              #
+# FAST KEY:         swapon                                                     #
+# UNIX COMMAND(S):  swapon                                                     #
+#                                                                              #
+# DESIGN:  1 dialogue header		                                       #
+#  	   1 dialogue object 						       #
+#                                                                              #
+# HEADER:  Activate a Paging Space					       #
+#									       #
+# OBJECTS:  1. PAGING SPACE name					       #
+#                                                                              #
+################################################################################
+
+
+sm_cmd_hdr:
+	id                      = "swapon"
+	option_id               = "swaponOpt"
+	has_name_select         = "n"
+	name                    = "Activate a Paging Space"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 28
+	name_msg_id             = 14
+	cmd_to_exec             = "swapon"
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "051711"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "swaponOpt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "PAGING SPACE name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 28
+	name_msg_id		= 10
+	op_type			= "l"
+	entry_type		= ""
+	entry_size		= 0
+	required		= "y"
+	prefix			= "/dev/"
+	cmd_to_list_mode	= "1"
+	cmd_to_list		= "lsps -l -a"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "051709"
+	help_msg_loc		= ""
+

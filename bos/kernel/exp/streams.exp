@@ -1,0 +1,25 @@
+#!/unix
+* @(#)20	1.2  src/bos/kernel/exp/streams.exp, sysexp, bos411, 9438C411a 9/18/94 13:43:28
+*
+*
+*   COMPONENT_NAME: sysexp
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+allocated
+devtosth
+fdtosth
+devsetsth
+ufdalloc
+ufdsetf

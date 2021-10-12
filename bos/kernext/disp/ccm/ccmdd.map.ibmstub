@@ -1,0 +1,194 @@
+ADDRESS MAP FOR ccmdd
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+ I                        ER S1    ccm_open                  ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S2    ccm_close                 ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S3    ccm_vtt_act               ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S4    ccm_vtt_clr               ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S5    ccm_vtt_dact              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S6    ccm_vtt_cfl               ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S7    ccm_vtt_cpl               ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S8    ccm_vtt_defc              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S9    ccm_vtt_term              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S10   ccm_vtt_init              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S11   ccm_vtt_movc              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S12   ccm_vtt_rds               ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S13   ccm_vtt_text              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S14   ccm_vtt_scr               ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S15   ccm_vtt_setm              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S16   ccm_vtt_stct              ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S17   ccmdd_svcs_lockl          ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S18   ccmdd_svcs_busgetl        ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S19   ccmdd_svcs_busgets        ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S20   ccmdd_svcs_busgetc        ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S21   ccmdd_svcs_busputl        ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S22   ccmdd_svcs_busputs        ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S23   ccmdd_svcs_busputc        ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S24   ccmdd_svcs_buscpy         ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S25   _CCMDD                    ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S26   _CCMDD_INTR               ../../../../../../src/bos/kernext/disp/ccm/ccmdd_pin.exp{/usr/lib/drivers/ccmdd_pin}
+ I                        ER S27   kernel_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S28   pinned_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S29   devswadd                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S30   devswdel                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S31   devswqry                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S32   fp_open                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S33   fp_read                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S34   i_clear                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S35   i_init                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S36   i_unmask                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S37   kmod_entrypt              ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S38   kmod_unload               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S39   nodev                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S40   uiomove                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S41   unlockl                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S42   xmalloc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S43   xmfree                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S44   pincode                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S45   unpincode                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S46   busgetl                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S47   io_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I  00009000           XO ER S48   i_disable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009300           XO ER S49   i_enable                  ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I                        ER S50   _system_configuration     ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+    00000000 000118  2 PR SD S51   <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config.c(ccm_config.o)
+    00000000           PR LD S52   .ccm_config
+    00000118 000DF0  2 PR SD S53   <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_subrs.c(ccm_config_subrs.o)
+    00000118           PR LD S54   .ccm_init_data
+    000004AC           PR LD S55   .init_interrupt_handler
+    000005B4           PR LD S56   .init_phys_displays
+    00000888           PR LD S57   .read_ucode_file
+    00000A90           PR LD S58   .init_cdd_intr_dev_attrs
+    00000B9C           PR LD S59   .init_cdd_dev_attrs
+    00000D0C           PR LD S60   .init_cdd_svcs
+    00000D94           PR LD S61   .err_cleanup_1
+    00000E3C           PR LD S62   .err_cleanup_0
+    00000EB8           PR LD S63   .bad_func
+    00000EDC           PR LD S64   .good_func
+    00000F08 000024  2 GL SD S65   <.xmalloc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000F08           GL LD S66   .xmalloc
+    00000F2C 000090  2 PR SD S67   .bzero                    bzero.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o])
+    00000FBC 000024  2 GL SD S68   <.xmfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000FBC           GL LD S69   .xmfree
+    00000FE0 000024  2 GL SD S70   <.uiomove>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00000FE0           GL LD S71   .uiomove
+    00001004 000024  2 GL SD S72   <.kmod_entrypt>           glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001004           GL LD S73   .kmod_entrypt
+    00001028 000024  2 GL SD S74   <.pincode>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001028           GL LD S75   .pincode
+    0000104C 000024  2 GL SD S76   <.i_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000104C           GL LD S77   .i_init
+    00001070 000024  2 GL SD S78   <.i_unmask>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001070           GL LD S79   .i_unmask
+    00001094 000024  2 GL SD S80   <.fp_open>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001094           GL LD S81   .fp_open
+    000010B8 0000C4  2 PR SD S82   .bcopy                    moveeq.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o])
+    000010B8           PR LD S83   .ovbcopy
+    000010C4           PR LD S84   ._moveeq
+    000010C4           PR LD S85   .memcpy
+    000010C4           PR LD S86   .memmove
+    0000117C 000024  2 GL SD S87   <.fp_read>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000117C           GL LD S88   .fp_read
+    000011A0 0000C0  2 PR SD S89   <>                        ../../../../../../src/bos/usr/ccs/lib/libc/strncmp.c(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strncmp.o])
+    000011A0           PR LD S90   .strncmp
+    00001260 000024  2 GL SD S91   <.kmod_unload>            glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001260           GL LD S92   .kmod_unload
+    00001284 000778  2 PR SD S93   <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_init.c(ccm_config_init.o)
+    00001284           PR LD S94   .ccm_config_init
+    000019FC 000024  2 GL SD S95   <.devswqry>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000019FC           GL LD S96   .devswqry
+    00001A20 0000B0  2 PR SD S97   <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_ioctl.c(ccm_ioctl.o)
+    00001A20           PR LD S98   .ccm_ioctl
+    00001AD0 000024  2 GL SD S99   <.devswadd>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001AD0           GL LD S100  .devswadd
+    00001AF4 00013C  2 PR SD S101  .strcmp                   strcmp.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strcmp.o])
+    00001C30 000040  2 PR SD S102  <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    00001C30           PR LD S103  ._ptrgl
+    00001C30           PR LD S104  .$PTRGL
+    00001C70 000024  2 GL SD S105  <.io_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001C70           GL LD S106  .io_att
+    00001C94 000024  2 GL SD S107  <.busgetl>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001C94           GL LD S108  .busgetl
+    00001CB8 000238  2 PR SD S109  <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_term.c(ccm_config_term.o)
+    00001CB8           PR LD S110  .ccm_config_term
+    00001EF0 000024  2 GL SD S111  <.unpincode>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001EF0           GL LD S112  .unpincode
+    00001F14 000024  2 GL SD S113  <.i_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001F14           GL LD S114  .i_clear
+    00001F38 000024  2 GL SD S115  <.devswdel>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00001F38           GL LD S116  .devswdel
+    00001F5C 000038  2 PR SD S117  <>                        ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_qvpd.c(ccm_config_qvpd.o)
+    00001F5C           PR LD S118  .ccm_config_qvpd
+    00000000 00005D  3 RW SD S119  <_$STATIC>                ../../../../../../src/bos/usr/ccs/lib/libc/strncmp.c(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strncmp.o])
+    00000060 000070  3 RW SD S120  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_subrs.c(ccm_config_subrs.o)
+    000000D0 00006A  3 RW SD S121  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_ioctl.c(ccm_ioctl.o)
+    00000140 00008B  3 RW SD S122  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_init.c(ccm_config_init.o)
+    000001D0 00006F  3 RW SD S123  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_term.c(ccm_config_term.o)
+    00000240 000070  3 RW SD S124  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_qvpd.c(ccm_config_qvpd.o)
+    000002B0 00006A  3 RW SD S125  <_$STATIC>                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config.c(ccm_config.o)
+* E 0000031C 00000C  2 DS SD S126  ccm_config                ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config.c(ccm_config.o)
+    00000328 00000C  2 DS SD S127  bad_func                  ../../../../../../src/bos/kernext/disp/ccm/config/ccm_config_subrs.c(ccm_config_subrs.o)
+    00000334 00000C  2 DS SD S128  strncmp                   ../../../../../../src/bos/usr/ccs/lib/libc/strncmp.c(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strncmp.o])
+    00000340 00000C  2 DS SD S129  ccm_ioctl                 ../../../../../../src/bos/kernext/disp/ccm/config/ccm_ioctl.c(ccm_ioctl.o)
+    0000034C 000000  2 T0 SD S130  <TOC>
+    0000034C 000004  2 TC SD S131  <_CCMDD>
+    00000350 000004  2 TC SD S132  <pinned_heap>
+    00000354 000004  2 TC SD S133  <_CCMDD_INTR>
+    00000358 000004  2 TC SD S134  <xmalloc>
+    0000035C 000004  2 TC SD S135  <xmfree>
+    00000360 000004  2 TC SD S136  <uiomove>
+    00000364 000004  2 TC SD S137  <kmod_entrypt>
+    00000368 000004  2 TC SD S138  <pincode>
+    0000036C 000004  2 TC SD S139  <i_init>
+    00000370 000004  2 TC SD S140  <i_unmask>
+    00000374 000004  2 TC SD S141  <ccm_vtt_act>
+    00000378 000004  2 TC SD S142  <ccm_vtt_cfl>
+    0000037C 000004  2 TC SD S143  <ccm_vtt_clr>
+    00000380 000004  2 TC SD S144  <ccm_vtt_cpl>
+    00000384 000004  2 TC SD S145  <ccm_vtt_dact>
+    00000388 000004  2 TC SD S146  <bad_func>
+    0000038C 000004  2 TC SD S147  <ccm_vtt_defc>
+    00000390 000004  2 TC SD S148  <ccm_vtt_term>
+    00000394 000004  2 TC SD S149  <ccm_vtt_init>
+    00000398 000004  2 TC SD S150  <ccm_vtt_movc>
+    0000039C 000004  2 TC SD S151  <ccm_vtt_rds>
+    000003A0 000004  2 TC SD S152  <ccm_vtt_text>
+    000003A4 000004  2 TC SD S153  <ccm_vtt_scr>
+    000003A8 000004  2 TC SD S154  <ccm_vtt_setm>
+    000003AC 000004  2 TC SD S155  <ccm_vtt_stct>
+    000003B0 000004  2 TC SD S156  <fp_open>
+    000003B4 000004  2 TC SD S157  <kernel_heap>
+    000003B8 000004  2 TC SD S158  <fp_read>
+    000003BC 000004  2 TC SD S159  <ccmdd_svcs_lockl>
+    000003C0 000004  2 TC SD S160  <unlockl>
+    000003C4 000004  2 TC SD S161  <i_enable>
+    000003C8 000004  2 TC SD S162  <i_disable>
+    000003CC 000004  2 TC SD S163  <strncmp>
+    000003D0 000004  2 TC SD S164  <_$STATIC>
+    000003D4 000004  2 TC SD S165  <ccmdd_svcs_busgetl>
+    000003D8 000004  2 TC SD S166  <ccmdd_svcs_busgets>
+    000003DC 000004  2 TC SD S167  <ccmdd_svcs_busgetc>
+    000003E0 000004  2 TC SD S168  <ccmdd_svcs_busputl>
+    000003E4 000004  2 TC SD S169  <ccmdd_svcs_busputs>
+    000003E8 000004  2 TC SD S170  <ccmdd_svcs_busputc>
+    000003EC 000004  2 TC SD S171  <ccmdd_svcs_buscpy>
+    000003F0 000004  2 TC SD S172  <kmod_unload>
+    000003F4 000004  2 TC SD S173  <_$STATIC>
+    000003F8 000004  2 TC SD S174  <devswqry>
+    000003FC 000004  2 TC SD S175  <nodev>
+    00000400 000004  2 TC SD S176  <ccm_close>
+    00000404 000004  2 TC SD S177  <ccm_config>
+    00000408 000004  2 TC SD S178  <ccm_open>
+    0000040C 000004  2 TC SD S179  <ccm_ioctl>
+    00000410 000004  2 TC SD S180  <_$STATIC>
+    00000414 000004  2 TC SD S181  <devswadd>
+    00000418 000004  2 TC SD S182  <_$STATIC>
+    0000041C 000004  2 TC SD S183  <_system_configuration>
+    00000420 000004  2 TC SD S184  <io_att>
+    00000424 000004  2 TC SD S185  <busgetl>
+    00000428 000004  2 TC SD S186  <unpincode>
+    0000042C 000004  2 TC SD S187  <i_clear>
+    00000430 000004  2 TC SD S188  <devswdel>
+    00000434 000004  2 TC SD S189  <_$STATIC>
+    00000438 000004  2 TC SD S190  <_$STATIC>
+    0000043C 000004  2 TC SD S191  <_$STATIC>

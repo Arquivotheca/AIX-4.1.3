@@ -1,0 +1,1505 @@
+# @(#)32 1.7 src/bos/objclass/sm_rds.add, snm, bos41B, 412_41B_sync 12/13/94 09:55:22
+# COMPONENT_NAME: CFGMETHODS
+#
+# FUNCTIONS: SMIT Removable Disk Management interface
+#
+# ORIGINS: 83 
+#
+# (C) COPYRIGHT International Business Machines Corp.1993, 1994
+# All Rights Reserved
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+
+
+################################################################################
+#    
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#
+#      List All Mounted File Systems on a Disk
+#      Unmount File Systems on a Disk
+#      Remove a Disk with Data
+#      Remove a Disk without Data
+#      Remove a Disk
+#      Open Door
+#
+#       Help text Id's for Removable Disk Management helps are in the range:
+#               1400100 to  1400127
+#
+#       menu helps are in the range 1400003 to 1400007, 1400010 to 1400011
+#   
+################################################################################
+
+# NOTES
+#
+# (by P.Cugny@frec.bull.fr)
+#
+# 1. The menus for Removable Disk Management are not in sm_bosmenu.add file
+#
+# 2. for cabinet and disk retrieval, wait for approval
+#    of feature 127849.
+#    According to DCR 127849, cabinet number and bus location are the
+#    the value of bus_loc attribute of the controller.
+
+################################################################################
+#
+#                          SMIT Menu Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#
+# FAST KEY: rds
+#
+# DESIGN:  1 menu
+#
+# MENU:    Removable Disk Management
+#
+################################################################################
+
+sm_menu_opt:
+    id                        = "storage"
+    id_seq_num                = "035"
+    next_id                   = "rds"
+    text                      = "Removable Disk Management"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 200
+    next_type                 = "m"
+    alias                     = "n"
+    help_msg_id               = "1400003"
+    help_msg_loc              = ""
+
+################################################################################
+#
+#                          SMIT Menu Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                      List All Mounted File Systems on a Disk
+#                      Unmount File Systems on a Disk
+#                      Remove a Disk from the Operating System
+#                      Remove a Disk
+#                      Open Door
+#                     
+#
+# FAST KEY: lsmntdsk, umntdsk, removedsk, rmvdsk1 , opendoor
+#
+# DESIGN:  5 menus
+#
+# MENUS:    List All Mounted File Systems on a Disk
+#           Unmount File Systems on a Disk
+#           Remove a Disk from the Operating System
+#           Remove a Disk
+#           Open Door
+#
+################################################################################
+
+sm_menu_opt:
+    id                        = "rds"
+    id_seq_num                = "010"
+    next_id                   = "lsmntdsk"
+    text                      = "List All Mounted File Systems on a Disk"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 205
+    next_type                 = "n"
+    alias                     = "n"
+    help_msg_id               = "1400004"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "rds"
+    id_seq_num                = "020"
+    next_id                   = "umntdsk"
+    text                      = "Unmount File Systems on a Disk"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 210
+    next_type                 = "n"
+    alias                     = "n"
+    help_msg_id               = "1400005"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "rds"
+    id_seq_num                = "030"
+    next_id                   = "removedsk"
+    text                      = "Remove a Disk from the Operating System"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 215
+    next_type                 = "m"
+    alias                     = "n"
+    help_msg_id               = "1400006"
+    help_msg_loc              = ""
+
+
+sm_menu_opt:
+    id                        = "rds"
+    id_seq_num                = "040"
+    next_id                   = "rmvdsk1"
+    text                      = "Remove a Disk"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 220
+    next_type                 = "n"
+    alias                     = "n"
+    help_msg_id               = "1400007"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "rds"
+    id_seq_num                = "050"
+    next_id                   = "opendoor"
+    text                      = "Open Door"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 400
+    next_type                 = "n"
+    alias                     = "n"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+################################################################################
+#
+#                          SMIT Menu Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                      Remove a Disk from the Operating System
+#                         Remove a Disk with Data
+#                         Remove a Disk without Data
+#                     
+#
+# FAST KEY: exportvgrds, reducevgrds
+#
+# DESIGN:  2 menus
+#
+# MENUS:    Remove a Disk with Data
+#           Remove a Disk without Data
+#
+################################################################################
+
+sm_menu_opt:
+    id                        = "removedsk"
+    id_seq_num                = "010"
+    next_id                   = "exportvgrds"
+    text                      = "Remove a Disk with Data"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 235
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "1400010"
+    help_msg_loc              = ""
+
+sm_menu_opt:
+    id                        = "removedsk"
+    id_seq_num                = "020"
+    next_id                   = "reducevgrds"
+    text                      = "Remove a Disk without Data"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 46
+    text_msg_id               = 240
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "1400011"
+    help_msg_loc              = ""
+
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                     List All Mounted File Systems on a Disk
+#                 
+#                    
+#
+# FAST KEY: lsmntdsk 
+#
+# UNIX COMMAND(S): lspv, mount
+#
+# DESIGN:  1 selector + option
+#          1 dialogue header
+#          1 dialogue option
+#
+# SELECTOR: DISK Name
+#
+# HEADER:  List All Mounted File Systems on a Disk
+#
+# OPTIONS:  1. DISK Name
+#
+################################################################################
+
+# List All Mounted File Systems on a Disk
+# Physical volumes belonging to a volume group are listed;
+# all logical volumes belonging to that physical volume are retrieved;
+# then only logical volumes corresponding to mounted file systems are kept;
+# Finally the file systems are listed.
+
+sm_name_hdr:
+    id                        = "lsmntdsk"
+    next_id                   = "lsmntdsk_hdr"
+    option_id                 = "mntdsk_sel"
+    has_name_select           = "n"
+    name                      = "List All Mounted File Systems on a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 5
+    type                      = "j"
+    ghost                     = ""
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1400100"
+    help_msg_loc              = ""
+
+# COMMON to lsmntdsk and umntdsk name selectors
+# Name selector command option for listing physical volume
+sm_cmd_opt:
+    id                        = "mntdsk_sel"
+    id_seq_num                = "0"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "pvlist() { lspv | grep -v \"None\" | awk '{print $1}' ; }; \
+pvlist"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400101"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "lsmntdsk_hdr"
+    option_id                 = "lsmntdsk_opt"
+    has_name_select           = "y"
+    name                      = "List All Mounted File Systems on a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 5
+    cmd_to_exec               = "mountlist() {
+lspv $1 >/dev/null
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+lspv -l $1 | sed -e 1d -e 2d \
+|awk '{ print $1 }'> /tmp/rds$$; \
+mount | sed -e 1d -e 2d -e 's/^[^       ]*//' \
+|awk '{ print $2,$1 }'|grep -w -f /tmp/rds$$ \
+|awk '{ print $1 }';rm -f /tmp/rds$$
+}
+mountlist"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400102"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "lsmntdsk_opt"
+    id_seq_num                = "10"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "--"
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400103"
+    help_msg_loc              = ""
+
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                     Unmount File Systems on a Disk
+#                 
+#                    
+#
+# FAST KEY: umntdsk 
+#
+# UNIX COMMAND(S): lspv, mount, umount
+#
+# DESIGN:  1 selector + option
+#          1 dialogue header
+#
+# SELECTOR: DISK Name
+#
+# HEADER:  Unmount File Systems on a Disk
+#
+# OPTIONS:  1. DISK Name
+#
+################################################################################
+
+# Unmount File Systems on a Disk
+# A name selector is used to put up a list of the physical volumes
+# for the user to select from.
+# File systems mounted on that disk are retrieved from logical volumes
+# belonging to that disk.
+
+sm_name_hdr:
+    id                        = "umntdsk"
+    next_id                   = "umntdsk_hdr"
+    option_id                 = "mntdsk_sel"
+    has_name_select           = "n"
+    name                      = "Unmount File Systems on a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 15
+    type                      = "j"
+    ghost                     = ""
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1400104"
+    help_msg_loc              = ""
+
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "umntdsk_hdr"
+    option_id                 = "umntdsk_opt"
+    has_name_select           = "y"
+    name                      = "Unmount File Systems on a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 15
+    cmd_to_exec               = "umntdisk() {
+ mountlist() {
+ lspv -l $1 | sed -e 1d -e 2d \
+ |awk '{ print $1 }'> /tmp/rds$$; \
+ mount | sed -e 1d -e 2d -e 's/^[^       ]*//' \
+ |awk '{ print $2,$1 }'|grep -w -f /tmp/rds$$ \
+ |awk '{ print $1 }';rm -f /tmp/rds$$
+ }
+ERR=0
+lspv $1 >/dev/null
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+FSNAME=`mountlist $1`
+dspmsg smit.cat -s 46 100 'file systems mounted on %s are :\n' $1
+echo $FSNAME
+for i in $FSNAME
+do
+   umount $i
+   if [ $? -eq 0 ]
+   then
+   dspmsg smit.cat -s 46 105 'file system %s unmounted.\n' $i
+   ERR=0
+   else
+   dspmsg smit.cat -s 46 110 'Cannot umount file system %s.\n' $i
+   ERR=1
+   fi
+done
+exit $ERR
+}
+umntdisk"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400105"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "umntdsk_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "--"
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400106"
+    help_msg_loc              = ""
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                     Remove a Disk from the Operating System
+#                        Remove a Disk with Data
+#                 
+# FAST KEY: exportvgrds 
+#
+# UNIX COMMAND(S): lspv, varyoffvg, exportvg, rmdev
+#
+# DESIGN:  1 selector + option
+#          1 dialogue header
+#          6 dialogue options
+#
+# SELECTOR: DISK Name
+#
+# HEADER:  Remove a Disk with Data
+#
+# OPTIONS:  1. DISK Name
+#           2. VOLUME GROUP Name
+#           3. CABINET Number
+#           4. BUS ID
+#           5. CONNECTION Address
+#           6. KEEP definition in database?
+#
+################################################################################
+
+# Remove a Disk with Data
+# This dialog allows to move a volume group containing one disk
+# to another system.
+# A name selector is used to list the disks which are alone in a volume group.
+# The following commands are then executed:
+#    - the varyoffvg command to deactivate the volume group, 
+#    - the exportvg command to remove the definition of the volume group,
+#    - the rmdev command to unconfigure the disk.
+#    - the open_door command to open the door if the disk is located
+#      in the lower row at the front side of the cabinet.
+#       i.e. on bus A in slot 3,4 or 5
+
+# the following stanza builds the next_id to the correct options
+# based on the type of sys0 object.
+sm_name_hdr:
+    id                        = "exportvgrds"
+    next_id                   = "exportvgrds_hdr_"
+    option_id                 = "exportvgrds_sel"
+    has_name_select           = "n"
+    name                      = "Remove a Disk with Data"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 20
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "xx () { lspv $1 >/dev/null
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+RDS=\"y\" \n\
+PEG=\"sys_p\" \n\
+OTH=\"othsys\" \n\
+type=$(odmget -q \"name = sys0\" CuDv | grep PdDvLn) \n\
+mach_type=$(echo $type | sed 's/.*\"\\(.*\\)\".*/\\1/' | cut -f3 -d/) \n\
+if [ $mach_type != \"$PEG\" ] \n\
+then \n\
+	mach_type=\"$OTH\" \n\
+else \n\
+	rds=$(odmget -q \"name = sys0 and attribute = rds_facility\" CuAt | grep value) \n\
+	if test $? -eq 0 \n\
+	then\n\
+		rds_fac=$(echo $rds | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+		if [ $rds_fac != \"$RDS\" ] \n\
+		then \n\
+			mach_type=\"$OTH\"\n\
+		else
+			mach_type=\"$PEG\" \n\
+		fi \n\
+	else
+		mach_type=\"$OTH\"\n\
+
+	fi \n\
+fi \n\
+adapter=$(lsdev -C -l $1 -F \"parent\") \n\
+connwhere=$(lsdev -C -l $1 -F \"connwhere\") \n\
+machbusloc=$(odmget -q \"name = $adapter and attribute = bus_loc\" CuAt | grep value) \n\
+busloc=$(echo $machbusloc | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+cabinet=$(echo $busloc | cut -c1) \n\
+bus=$(echo $busloc | cut -c3) \n\
+vgid=$(getlvodm -j $1) \n\
+vgname=$(getlvodm -t $vgid) \n\
+print $mach_type:$cabinet:$bus:$connwhere:$vgname \n\
+} \n\
+xx"
+    cmd_to_classify_postfix   = "logicname"
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:cabinet:bus:connwhere:vgname"
+    next_type                 = "d"
+    help_msg_id               = "1400107"
+    help_msg_loc              = ""
+
+# Name selector command option for listing physical volumes which are
+# alone in a volume group.
+sm_cmd_opt:
+    id                        = "exportvgrds_sel"
+    id_seq_num                = "0"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lspv | awk '{
+if ($3 != \"None\")
+t[$3]++ 
+T[NR]=$0
+} 
+END { for (u in T) 
+        { split(T[u],X)
+        if (t[X[3]]==1)
+          print X[1],X[3] 
+        }
+}'"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400108"
+    help_msg_loc              = ""
+
+# dialog header for each type of sys0 object follow.
+# Their Id's are built as follows:
+#       "exportvgrds_hdr_xxx"
+# where xxx is the type of sys0 object (i.e not sys_p or sys_p).
+# when the type of sys0 is sys_p, 3 additionnal options
+# are provided in dialogs for hot removability feature:
+#   cabinet number
+#   bus id
+#   connection address
+# (devices can be physically removed without powering off the system)
+# (the config methods are in charge of powering off the devices)
+
+# Dialogue header when the type of sys0 is not sys_p
+sm_cmd_hdr:
+    id                        = "exportvgrds_hdr_othsys"
+    option_id                 = "exportvgrds_opt,vg_opt,rmdsk_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Disk with Data"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 20
+    cmd_to_exec               = "exportdisk() {
+varyoffvg $2
+if [ $? -ne 0 ]
+then
+ exit 1
+else
+ dspmsg smit.cat -s 46 115 'The volume group %s is varied off.\n' $2
+fi
+exportvg $2
+if [ $? -ne 0 ]
+then
+ exit 1
+else
+ dspmsg smit.cat -s 46 120 'The volume group %s is exported.\n' $2
+fi
+rmdev -l $1 $3
+}
+exportdisk"
+    ask                      = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400109"
+    help_msg_loc              = ""
+
+# Dialogue header when the type of sys0 is sys_p
+sm_cmd_hdr:
+    id                        = "exportvgrds_hdr_sys_p"
+    option_id                 = "exportvgrds_opt,vg_opt,nb_opt,rmdsk_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Disk with Data"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 20
+    cmd_to_exec               = "exportdisk() {
+varyoffvg $2
+if [ $? -ne 0 ]
+then
+ exit 1
+else
+ dspmsg smit.cat -s 46 115 'The volume group %s is varied off.\n' $2
+fi
+exportvg $2
+if [ $? -ne 0 ]
+then
+ exit 1
+else
+ dspmsg smit.cat -s 46 120 'The volume group %s is exported.\n' $2
+fi
+ rmdev -l $1 $6
+if [ $? -eq 0 ]
+then
+    dspmsg smit.cat -s 46 300 'Before physically remove the disk plugged on slot
+ %s on bus %s in cabinet %s,\n verify that the disk light is off.\n' $5 $4 $3
+    if [ $4 = \"A\" ] 
+     then
+	id=$(echo $5 | cut -c1)
+	if [ $3 -eq 0 ]
+	then
+		if [ $id -eq 3 -o $id -eq 4 -o $id -eq 5 ]
+		then
+    			open_door -c $3
+		fi
+	else
+		if [ $id -eq 4 -o $id -eq 5 -o $id -eq 6 ]
+		then
+    			open_door -c $3
+		fi
+	fi
+     fi
+fi
+}
+exportdisk"
+    ask                      = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400113"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "exportvgrds_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400110"
+    help_msg_loc              = ""
+
+#COMMON to exportvgrds, reducevgrds
+sm_cmd_opt:
+    id                        = "vg_opt"
+    id_seq_num                = "020"
+    disc_field_name           = "vgname"
+    name                      = "VOLUME GROUP Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 30
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400111"
+    help_msg_loc              = ""
+
+# COMMON to exportvgrds, reducevgrds, rmvdsk1
+sm_cmd_opt:
+    id                        = "nb_opt"
+    id_seq_num                = "040"
+    disc_field_name           = "cabinet"
+    name                      = "CABINET Number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 35
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400112"
+    help_msg_loc              = ""
+
+# COMMON to exportvgrds, reducevgrds, rmvdsk1
+sm_cmd_opt:
+    id                        = "nb_opt"
+    id_seq_num                = "050"
+    disc_field_name           = "bus"
+    name                      = "BUS ID"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 310
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400125"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "nb_opt"
+    id_seq_num                = "060"
+    disc_field_name           = "connwhere"
+    name                      = "CONNECTION Address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 320
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400126"
+    help_msg_loc              = ""
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                     Remove a Disk from the Operating System
+#                        Remove a Disk without Data
+#                 
+# FAST KEY: reducevgrds 
+#
+# UNIX COMMAND(S): lspv, reducevg, rmdev
+#
+# DESIGN:  1 selector + option
+#          1 dialogue header
+#          7 dialogue options
+#
+# SELECTOR: DISK Name
+#
+# HEADER:  Remove a Disk without Data
+#
+# OPTIONS:  1. DISK Name
+#           2. VOLUME GROUP Name
+#           3. FORCE deallocation of all partitions on this physical volume?
+#           4. CABINET Number
+#           5. BUS ID
+#           6. CONNECTION Address
+#           7. KEEP definition in database?
+#
+################################################################################
+
+# Remove a Disk without Data
+# This dialog allows to remove a disk from a volume group, unconfigure
+# the disk.
+# A name selector is used to list the disks belonging to a volume group.
+# The following commands are then executed:
+#    - the reducevg command to remove the disk from the volume group, 
+#    - the rmdev command to unconfigure the disk.
+#    - the open_door command to open the door if the disk is located
+#      in the lower row at the front side of the cabinet.
+#       i.e. on bus A in slot 3,4 or 5
+
+# the following stanza builds the next_id to the correct options
+# based on the type of sys0 object.
+
+# Select disk 
+sm_name_hdr:
+    id                        = "reducevgrds"
+    next_id                   = "reducevgrds_hdr_"
+    option_id                 = "reducevgrds_sel"
+    has_name_select           = "n"
+    name                      = "REMOVE a Disk without Data"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 60
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "xx () { lspv $1 >/dev/null
+if test $? -ne 0\nthen\n  exit 1\nfi\n\
+RDS=\"y\" \n\
+PEG=\"sys_p\" \n\
+OTH=\"othsys\" \n\
+type=$(odmget -q \"name = sys0\" CuDv | grep PdDvLn) \n\
+mach_type=$(echo $type | sed 's/.*\"\\(.*\\)\".*/\\1/' | cut -f3 -d/) \n\
+if [ $mach_type != \"$PEG\" ] \n\
+then \n\
+	mach_type=\"$OTH\" \n\
+else \n\
+	rds=$(odmget -q \"name = sys0 and attribute = rds_facility\" CuAt | grep value) \n\
+	if test $? -eq 0 \n\
+	then\n\
+		rds_fac=$(echo $rds | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+		if [ $rds_fac != \"$RDS\" ] \n\
+		then \n\
+			mach_type=\"$OTH\"\n\
+		else
+			mach_type=\"$PEG\" \n\
+		fi \n\
+	else
+		mach_type=\"$OTH\"\n\
+
+	fi \n\
+fi \n\
+adapter=$(lsdev -C -l $1 -F \"parent\") \n\
+connwhere=$(lsdev -C -l $1 -F \"connwhere\") \n\
+machbusloc=$(odmget -q \"name = $adapter and attribute = bus_loc\" CuAt | grep value) \n\
+busloc=$(echo $machbusloc | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+cabinet=$(echo $busloc | cut -c1) \n\
+bus=$(echo $busloc | cut -c3) \n\
+vgid=$(getlvodm -j $1) \n\
+vgname=$(getlvodm -t $vgid) \n\
+print $mach_type:$cabinet:$bus:$connwhere:$vgname \n\
+} \n\
+xx"
+    cmd_to_classify_postfix   = "logicname"
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:cabinet:bus:connwhere:vgname"
+    next_type                 = "d"
+    help_msg_id               = "1400116"
+    help_msg_loc              = ""
+
+# Name selector command option for listing physical volume
+sm_cmd_opt:
+    id                        = "reducevgrds_sel"
+    id_seq_num                = "0"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "pvvglist() { lspv | grep -v \"None\" | awk '{print $1,$3}' ; }; \
+pvvglist"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400117"
+    help_msg_loc              = ""
+
+# dialog header for each type of sys0 object follow.
+# Their Id's are built as follows:
+#       "reducevgrds_hdr_xxx"
+# where xxx is the type of sys0 object (i.e not sys_p or sys_p).
+# when the type of sys0 is sys_p, 3 additionnal options
+# are provided in dialogs for hot removability feature:
+#   cabinet number
+#   bus id
+#   connection address
+# (devices can be physically removed without powering off the system)
+# (the config methods are in charge of powering off the devices)
+
+# Dialogue header when type of sys0 is not sys_p
+sm_cmd_hdr:
+    id                        = "reducevgrds_hdr_othsys"
+    option_id                 = "reducevgrds_opt,vg_opt,rmdsk_opt"
+    has_name_select           = "y"
+    name                      = "REMOVE a Disk without Data"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 60
+    cmd_to_exec               = "reducedisk() {
+if [ $3 != \"-force\" ]
+then
+reducevg $2 $1
+else
+reducevg -d $2 $1
+fi
+if [ $? -ne 0 ]
+then
+   exit 1
+else
+dspmsg smit.cat -s 46 135 'The volume group %s is reduced.\n' $2
+fi
+rmdev -l $1 $4
+}
+reducedisk"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400118"
+    help_msg_loc              = ""
+
+# Dialogue header when type of sys0 is sys_p
+sm_cmd_hdr:
+    id                        = "reducevgrds_hdr_sys_p"
+    option_id                 = "reducevgrds_opt,vg_opt,nb_opt,rmdsk_opt"
+    has_name_select           = "y"
+    name                      = "REMOVE a Disk without Data"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 60
+    cmd_to_exec               = "reducedisk() {
+if [ $3 != \"-force\" ]
+then
+reducevg $2 $1
+else
+reducevg -d $2 $1
+fi
+if [ $? -ne 0 ]
+then
+ exit 1
+else
+dspmsg smit.cat -s 46 135 'The volume group %s is reduced.\n' $2
+fi
+rmdev -l $1 $7
+if [ $? -eq 0 ]
+then
+    dspmsg smit.cat -s 46 300 'Before physically remove the disk plugged on slot
+ %s on bus %s in cabinet %s,\n verify that the disk light is off.\n' $6 $5 $4
+    if [ $5 = \"A\" ] 
+     then
+	id=$(echo $6 | cut -c1)
+	if [ $4 -eq 0 ]
+	then
+		if [ $id -eq 3 -o $id -eq 4 -o $id -eq 5 ]
+		then
+    			open_door -c $4
+		fi
+	else
+		if [ $id -eq 4 -o $id -eq 5 -o $id -eq 6 ]
+		then
+    			open_door -c $4
+		fi
+	fi
+     fi
+fi
+}
+reducedisk"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400114"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "reducevgrds_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400119"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "reducevgrds_opt"
+    id_seq_num                = "030"
+    disc_field_name           = ""
+    name                      = "FORCE deallocation of all partitions on\n  this physical volume?"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 65
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "no,yes"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 46
+    values_msg_id             = 70
+    aix_values                = "-noforce,-force"
+    help_msg_id               = "1400120"
+    help_msg_loc              = ""
+
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                    Remove a Disk
+#
+# FAST KEY:  rmvdsk1
+#
+# UNIX COMMAND(S):  rmdev
+#
+# DESIGN:  1 name selector + 1 option
+#          1 dialogue header
+#          5 dialogue options
+#
+# SELECTOR: Select a DISK
+#
+# HEADER:  Remove a Disk
+#
+# OPTIONS:  1. DISK Name
+#           2. CABINET Number
+#           3. BUS ID
+#           4. CONNECTION Address
+#           5. KEEP definition in database?
+#
+################################################################################
+#
+# Remove a Disk
+# This allows a disk to be removed, including its definition in the
+# database, from the system.  A name selector is used to put up a list
+# of the "defined" and "configured" disks for the user to select from.
+# The dialogue then uses the rmdev command to remove the selected device
+# and the open_door command to open the door if the disk is located
+#      in the lower row at the front side of the cabinet.
+#       i.e. on bus A in slot 3,4 or 5
+
+# the following stanza builds the next_id to the correct options
+# based on the type of sys0 object.
+
+# Select disk by logical name
+sm_name_hdr:
+    id                        = "rmvdsk1"
+    next_id                   = "rmvdsk1_hdr_"
+    option_id                 = "rmvdsk1_sel"
+    has_name_select           = "n"
+    name                      = "Remove a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 75
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "xy () { \n\
+RDS=\"y\" \n\
+PEG=\"sys_p\" \n\
+OTH=\"othsys\" \n\
+type=$(odmget -q \"name = sys0\" CuDv | grep PdDvLn) \n\
+mach_type=$(echo $type | sed 's/.*\"\\(.*\\)\".*/\\1/' | cut -f3 -d/) \n\
+if [ $mach_type != \"$PEG\" ] \n\
+then \n\
+	mach_type=\"$OTH\" \n\
+else \n\
+	rds=$(odmget -q \"name = sys0 and attribute = rds_facility\" CuAt | grep value) \n\
+	if test $? -eq 0 \n\
+	then\n\
+		rds_fac=$(echo $rds | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+		if [ $rds_fac != \"$RDS\" ] \n\
+		then \n\
+			mach_type=\"$OTH\"\n\
+		else
+			mach_type=\"$PEG\" \n\
+		fi \n\
+	else
+		mach_type=\"$OTH\"\n\
+
+	fi \n\
+fi \n\
+adapter=$(lsdev -C -l $1 -F \"parent\") \n\
+connwhere=$(lsdev -C -l $1 -F \"connwhere\") \n\
+machbusloc=$(odmget -q \"name = $adapter and attribute = bus_loc\" CuAt | grep value) \n\
+busloc=$(echo $machbusloc | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+cabinet=$(echo $busloc | cut -c1) \n\
+bus=$(echo $busloc | cut -c3) \n\
+print $mach_type:$cabinet:$bus:$connwhere \n\
+}\n\
+xy "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:cabinet:bus:connwhere"
+    next_type                 = "d"
+    help_msg_id               = "1400121"
+    help_msg_loc              = ""
+
+# Name selector command option for listing disks by logical name.
+sm_cmd_opt:
+    id                        = "rmvdsk1_sel"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Select a DISK"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 25
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c disk"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400122"
+    help_msg_loc              = ""
+
+# dialog header for each type of sys0 object follow.
+# Their Id's are built as follows:
+#       "rmvdsk1_hdr_xxx"
+# where xxx is the type of sys0 object (i.e not sys_p or sys_p).
+# when the type of sys0 is sys_p, 3 additionnal options
+# are provided in dialogs for hot removability feature:
+#   cabinet number
+#   bus id
+#   connection address
+# (devices can be physically removed without powering off the system)
+# (the config methods are in charge of powering off the devices)
+
+# Dialogue header when type of sys0 is not sys_p
+sm_cmd_hdr:
+    id                        = "rmvdsk1_hdr_othsys"
+    option_id                 = "rmvdsk1_opt,rmdsk_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 75
+    cmd_to_exec               = "rmdev -l $1 $2"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400115"
+    help_msg_loc              = ""
+
+# Dialogue header when type of sys0 is sys_p
+sm_cmd_hdr:
+    id                        = "rmvdsk1_hdr_sys_p"
+    option_id                 = "rmvdsk1_opt,rmdsk_opt,nb_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Disk"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 75
+    cmd_to_exec               = "rmdisk() {
+rmdev -l $1 $5
+if [ $? -eq 0 ]
+then
+    dspmsg smit.cat -s 46 300 'Before physically remove the disk plugged on slot
+ %s on bus %s in cabinet %s,\n verify that the disk light is off.\n' $4 $3 $2
+    if [ $3 = \"A\" ] 
+     then
+	id=$(echo $4 | cut -c1)
+	if [ $2 -eq 0 ]
+	then
+		if [ $id -eq 3 -o $id -eq 4 -o $id -eq 5 ]
+		then
+    			open_door -c $2
+		fi
+	else
+		if [ $id -eq 4 -o $id -eq 5 -o $id -eq 6 ]
+		then
+    			open_door -c $2
+		fi
+	fi
+     fi
+fi
+}
+rmdisk"
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1400127"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvdsk1_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "DISK Name"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 10
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400124"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmdsk_opt"
+    id_seq_num                = "070"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database?"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 45
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "no,yes"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 46
+    values_msg_id             = 70
+    aix_values                = "-d,"
+    help_msg_id               = "1400123"
+    help_msg_loc              = ""
+
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S): Physical & Logical Storage
+#                  Removable Disk Management
+#                    Open Door
+#
+# FAST KEY:  opendoor
+#
+# UNIX COMMAND(S):  open_door
+#
+# DESIGN:  1 name selector + 1 option
+#          1 dialogue header
+#          1 dialogue option
+#
+# SELECTOR: CABINET Number
+#
+# HEADER:  Open Door
+#
+# OPTIONS:  1. CABINET Number
+#
+################################################################################
+#
+# Open Door
+# This allows to open the door in front side of cabinet
+
+# Select cabinet number
+
+sm_name_hdr:
+    id                        = "opendoor"
+    next_id                   = "opendoor_hdr"
+    option_id                 = "opendoor_sel"
+    has_name_select           = "n"
+    name                      = "Open Door"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 400
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = "xx () { \n\
+connwhere=$(lsdev -C -l $1 -F \"connwhere\") \n\
+print $connwhere \n\
+} \n\
+xx"
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = "_rawname"
+    cooked_field_name         = "_cookedname"
+    next_type                 = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+# Name selector command option for listing disks by logical name.
+sm_cmd_opt:
+    id                        = "opendoor_sel"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "CABINET Number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 35
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c container -t cabinet1"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400112"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "opendoor_hdr"
+    option_id                 = "opendoor_opt"
+    has_name_select           = "y"
+    name                      = "Open Door"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 400
+    cmd_to_exec               = "open_door "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "opendoor_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "_cookedname"
+    name                      = "CABINET Number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 46
+    name_msg_id               = 35
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-c "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1400112"
+    help_msg_loc              = ""

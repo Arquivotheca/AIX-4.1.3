@@ -1,0 +1,103 @@
+* @(#)81        1.2  src/bos/kernext/pse/mods/README.dlpi, sysxpse, bos412, 9445C412a 11/10/94 15:46:04
+*
+*   COMPONENT_NAME: SYSXPSE
+*
+*   FUNCTIONS: 
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+		README file for the STREAMS DLPI Driver
+
+Following are addenda to the STREAMS DLPI driver manpages:
+
+DL_PROMISCON_REQ:
+         If the DLS user enables the promiscuous mode at the physical level,
+         the DLS user receives a copy of every packet on the wire for all SAPs.
+
+         If the DLS user enables the promiscuous mode at the SAP level, the DLS
+         user will receive a copy of every packet on the wire directed to the
+         DLS user for all SAPs.
+
+         If the DLS user enables the promiscuous mode for all multicast
+         addresses, the DLS user receives all packets on the wire that have
+         either a multicast or group destination address.  This includes
+         broadcast.
+
+DL_PROMISCOFF_REQ:
+         If the DLS user disables the promiscuous mode at the physical level,
+         the DLS user no longer receives a copy of every packet on the wire for
+         all SAPs.
+
+         If the DLS user disables the promiscuous mode at the SAP level, the
+         DLS user no longer receives a copy of every packet on the wire
+         directed to the DLS user for all SAPs.
+
+         If the DLS user disables the promiscuous mode for all multicast
+         addresses, the DLS user no longer receives all packets on the wire
+         that have either a multicast or group destination address.  This
+         includes broadcast.
+
+DL_ENABMULTI_REQ:
+DL_DISABMULTI_REQ:
+        The DLS user is *NOT* required to have root authority to issue
+        either the DL_ENABMULTI_REQ or DL_DISABMULTI_REQ primitives.
+
+
+The following briefly describes the hierarchical and peer binding system
+support in the STREAMS DLPI driver:
+
+DL_BIND_REQ:
+	dl_sap is a ulong containing an ethertype for DL_ETHER,
+	or a single byte SAP for 802.2 networks.
+
+DL_SUBS_BIND_REQ:
+	DL_ETHER supports only DL_PEER_BIND, and dl_subs_sap_offset
+	must point to an ethertype (dl_subs_sap_length == sizeof(ushort)).
+
+	The 802.2 networks will accept either DL_HIERARCHICAL_BIND
+	or DL_PEER_BIND.  dl_subs_sap_length must be 5 (sizeof snap)
+	for hierarchical binds, and dl_subs_sap_offset must point to a
+	complete SNAP.  For peer binds, dl_subs_sap_length may be
+	either 1 or 5, and dl_subs_sap_offset must point to either
+	a single byte SAP or a complete SNAP (as in hierarchical binds).
+
+	In the case of SNAP binds, DL_PEER_BIND and DL_HIERARCHICAL_BIND
+	are synonymous, and fully interchangeable.
+
+	Several distinct SAPs/SNAPs may be bound on any single stream.
+	Closing the stream or issuing DL_UNBIND_REQ will cause all
+	SAPs and SNAPs to be unbound automatically, or each subs sap
+	can be individually unbound.
+
+	Examples:
+
+		request					sap
+		-------					---
+				(preferred)
+		DL_BIND_REQ				0xaa
+		DL_SUBS_BIND_REQ/DL_HIERARCHICAL_BIND	08.00.07.80.9b
+		DL_SUBS_BIND_REQ/DL_HIERARCHICAL_BIND	08.00.07.80.f3
+
+		or
+
+				(equivalent effect)
+		DL_BIND_REQ				0xaa
+		DL_SUBS_BIND_REQ/DL_PEER_BIND		08.00.07.80.9b
+		DL_SUBS_BIND_REQ/DL_PEER_BIND		08.00.07.80.f3
+
+		or
+
+				(equivalent effect)
+		DL_BIND_REQ				0xaa
+		DL_SUBS_BIND_REQ/DL_HIERARCHICAL_BIND	08.00.07.80.9b
+		DL_SUBS_BIND_REQ/DL_PEER_BIND		08.00.07.80.f3
+

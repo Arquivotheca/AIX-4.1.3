@@ -1,0 +1,88 @@
+# @(#)95	1.3  src/bldenv/man/bldquerydb.man, bldtools, bos412, GOLDA411a 6/1/92 15:02:48
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: bldquerydb.man
+#
+# PURPOSE: man page for bldquerydb command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+  bldquerydb Command
+
+  Purpose
+
+  Builds all the data base files necessary for the execution of the bldquery
+  command.
+
+  Syntax 
+
+	bldquerydb
+
+  Description
+
+  The bldquerydb command uses raw data from input files created during the
+  build process in order to build all the necessary database files required 
+  for the execution of the bldquery command.
+
+  Flags
+
+	None.
+
+  Environment Variables
+
+	TOP		Full pathname of the top of the build tree.  Must be 
+			set prior to command invocation otherwise bldquerydb
+			will exit with an error.
+
+  Examples
+
+	1) bldquerydb
+
+  Input Files
+
+	$TOP/HISTORY/bldquery/xreflist
+	$TOP/HISTORY/bldquery/<release_name>/makelist
+
+  Output Files
+
+	$TOP/HISTORY/bldquery/DEPENDLIST
+	$TOP/HISTORY/bldquery/NDEPENDLIST
+	$TOP/HISTORY/bldquery/TARGLIST
+	$TOP/HISTORY/bldquery/NTARGLIST
+	$TOP/HISTORY/bldquery/DECODE.dir
+	$TOP/HISTORY/bldquery/DECODE.pag
+	$TOP/HISTORY/bldquery/ENCODE.dir
+	$TOP/HISTORY/bldquery/ENCODE.pag
+	$TOP/HISTORY/bldquery/PRODS_BUILT.dir
+	$TOP/HISTORY/bldquery/PRODS_BUILT.pag
+	$TOP/HISTORY/bldquery/SRCPROD.dir
+	$TOP/HISTORY/bldquery/SRCPROD.pag
+	$TOP/HISTORY/bldquery/<release_name>/BLDENV
+	$TOP/HISTORY/bldquery/<release_name>/NSHIP
+	$TOP/HISTORY/bldquery/<release_name>/NSRC
+	$TOP/HISTORY/bldquery/<release_name>/SHIP
+	$TOP/HISTORY/bldquery/<release_name>/SRC
+	$TOP/HISTORY/bldquery/LPP/LPPLIST.dir
+	$TOP/HISTORY/bldquery/LPP/LPPLIST.pag
+	$TOP/HISTORY/bldquery/LPP/LPPNAMES.dir
+	$TOP/HISTORY/bldquery/LPP/LPPNAMES.pag
+	$TOP/HISTORY/bldquery/LPP/<lpp_name>.SHIP
+	$TOP/HISTORY/bldquery/LPP/<lpp_name>.SRC
+	$TOP/HISTORY/bldquery/LPP/<lpp_name>.NSHIP
+	$TOP/HISTORY/bldquery/LPP/<lpp_name>.NSRC
+
+  Related Information
+
+	$BLDENV/usr/bin/bldquery		the bldquery command
+	$BLDENV/usr/bin/bldquerymerge		the bldquerymerge command
+

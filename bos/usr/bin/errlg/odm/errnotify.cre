@@ -1,0 +1,71 @@
+/*
+# @(#)88	1.5  src/bos/usr/bin/errlg/odm/errnotify.cre, cmderrlg, bos411, 9428A410j 9/28/93 13:19:46
+
+#
+# COMPONENT_NAME: (CMDERRLG)  Configuration Stanza File
+#
+# FUNCTIONS: errnotify object class .cre file
+#
+# ORIGIN: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Each errnotify object contains a qualifier for a particular error.
+# The qualifiers are for the
+#   error id       (ERRID_ #define for that specific error)
+#   error class    (H=hardware, S=software)
+#   error type     (PERM, TEMP, PEND, PERF)
+#   alert          ("TRUE" for alertable errors only)
+#   resource name  (configured 'name' of the device, or executable for sw)
+#   resource type  (configured 'type' of the device)
+#   resource class (configured 'class' of the device)
+#   symptom data   ("TRUE" for errors w/ symptom data)
+#
+# For each error logged by the errdemon, the errdemon searches the ernotify
+# object class for a matching error. If the contents of the above seven
+# fields is "" or "-" of 0 for the numeric errorid, this matches.
+* If the contents is equal to the corresponding errlog field, this matches.
+# A '*' at the end of a string is wildcard and matches anything to the right
+# of the '*'. The comparison is case sensitive but is not padded-blank
+# sensitive.
+# If a match is found, the errdemon fork/exec`s with sh -c the
+# en_method string. (Note: this is not an odm method. It is handled by
+# the errdemon.)
+#
+# These keywords are expanded by the errdemon as arguments to the command:
+#   $1    unique sequence number for the error as assigned by the errdemon
+#         Programs can use this to select the entry using error -l seqno
+#   $2    error id
+#   $3    error class
+#   $4    error type
+#   $5    TRUE if the error is alertable, FALSE otherwise.
+#   $6    resource name
+#   $7    resource type
+#   $8    resource class
+#   $9    error label
+*/
+
+class errnotify {
+	long  en_pid;            /* process id of owner of this object */
+	char  en_name[16];       /* optional identifier for owner of this object */
+	short en_persistenceflg; /* if non-zero, do not delete at IPL time */
+	char  en_label[20];      /* like et_label in errtmplt. 1 to 1 with crcid */
+	ulong en_crcid;          /* error id */
+	char  en_class[2];       /* H, S, O */
+	char  en_type[5];        /* PERM, TEMP, */
+	char  en_alertflg[6];    /* TRUE for alertable errors */
+	char  en_resource[16];   /* configured 'name' of desired device */
+	char  en_rtype[16];      /* resource type of desired device */
+	char  en_rclass[16];     /* resource class of desired device */
+	char  en_symptom[6];     /* attribute that will match symptom string */
+	char  en_method[255];    /* shell script invoked by errdemon */
+};
+

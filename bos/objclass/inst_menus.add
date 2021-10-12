@@ -1,0 +1,642 @@
+#  @(#)06  1.13  src/bos/objclass/inst_menus.add, cmdinstl, bos41J, 9523C_all 6/9/95 15:35:39
+#
+#   COMPONENT_NAME: CMDINSTL
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+#------------------------------------------------------------------------------
+# This file contains all of the menus for the first SMIT menu item,
+# `Software Installation & Maintenance'
+#
+# The dialogs for these menu items are spread out over a couple different
+# dialog files.
+#------------------------------------------------------------------------------
+
+
+#------------------------------------------------------------------------------
+# `top_menu'
+#   Software Installation & Maintenance					install
+#------------------------------------------------------------------------------
+sm_menu_opt:
+        id			= "top_menu"
+        id_seq_num		= "010"
+        next_id			= "install"
+        text			= "Software Installation and Maintenance"
+        text_msg_file		= "smit.cat"
+        text_msg_set		= 1
+        text_msg_id		= 1
+        next_type		= "m"
+        alias			= ""
+        help_msg_id		= "1800501"
+        help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "updatep"
+        id_seq_num		= ""
+        next_id			= "install"
+        text			= ""
+        text_msg_file		= ""
+        text_msg_set		= 0
+        text_msg_id		= 0
+        next_type		= "m"
+        alias			= "y"
+        help_msg_id		= ""
+        help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "install_update_alias"
+        id_seq_num		= ""
+        next_id			= "install_update"
+        text			= ""
+        text_msg_file		= ""
+        text_msg_set		= 0
+        text_msg_id		= 0
+        next_type		= "m"
+        alias			= "y"
+        help_msg_id		= ""
+        help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Software Installation & Maintenance			                install
+#   Install and Update Software				         install_update
+#   Maintain Installed Software                               maintain_software
+#   Network Installation and Updates                                        nim
+#------------------------------------------------------------------------------
+sm_menu_opt:
+        id			= "install"
+        id_seq_num		= "010"
+        next_id			= "install_update"
+        text			= "Install and Update Software"
+        text_msg_file		= "smit.cat"
+        text_msg_set		= 1
+        text_msg_id		= 489
+        next_type		= "m"
+        alias			= ""
+        help_msg_id		= "180060"
+        help_msg_loc		= ""
+
+
+sm_menu_opt:
+        id			= "install"
+        id_seq_num		= "030"
+        next_id			= "maintain_software"
+        text			= "Maintain Installed Software"
+        text_msg_file		= "smit.cat"
+        text_msg_set		= 1
+        text_msg_id		= 611
+        next_type		= "m"
+        alias			= ""
+        help_msg_id		= "0504001"
+        help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Install / Update Software					 install_update
+#   Install Bundles of Software (Easy Install)       	           easy_install
+#   Install/Update Selectable Software (Custom Install)      install_selectable
+#   Copy Software to Hard Disk for Future Installation		      bffcreate
+#   List All Software on Installation Media			   install_list
+#   List All Problems Fixed by Software on Installati>>>  install_list_problems
+#   List User Instructions for Update Media           install_list_instructions
+#   Clean Up After a Interrupted Installation			install_cleanup
+#------------------------------------------------------------------------------
+sm_menu_opt:
+	id			= "install_update"
+	id_seq_num		= "010"
+	next_id			= "easy_install"
+	text			= "Install Bundles of Software (Easy Install)"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 631
+	next_type		= "m"
+	alias			= ""
+	help_msg_id		= "0504002"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_update"
+	id_seq_num		= "020"
+	next_id			= "install_selectable"
+	text			= "Install/Update Selectable Software (Custom Install)"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 613
+	next_type		= "m"
+	alias			= ""
+	help_msg_id		= "1800604"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "installp"
+        id_seq_num		= ""
+        next_id			= "install_selectable"
+        text			= ""
+        text_msg_file		= ""
+        text_msg_set		= 0
+        text_msg_id		= 0
+        next_type		= "m"
+        alias			= "y"
+        help_msg_id		= ""
+        help_msg_loc		= ""
+
+
+sm_menu_opt:
+	id			= "install_update"
+	id_seq_num		= "030"
+	next_id			= "bffcreate"
+	text			= "Copy Software to Hard Disk for Future Installation"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 486
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "1800510"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "install_bffcreate"
+        id_seq_num		= ""
+        next_id			= "bffcreate"
+        text			= ""
+        text_msg_file		= ""
+        text_msg_set		= 0
+        text_msg_id		= 0
+        next_type		= "n"
+        alias			= "y"
+        help_msg_id		= ""
+        help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_update"
+	id_seq_num		= "040"
+	next_id			= "install_list"
+	text			= "List All Software on Installation Media"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 494
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "1800505"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_update"
+	id_seq_num		= "050"
+	next_id			= "install_list_problems"
+	text			= "List All Problems Fixed by Software on Installation Media"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 493
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "1800506"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_update"
+	id_seq_num		= "060"
+	next_id			= "install_list_instructions"
+	text			= "List User Instructions for Update Media"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 490
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "2840026"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_update"
+	id_seq_num		= "070"
+	next_id			= "install_cleanup"
+	text			= "Clean Up After an Interrupted Installation"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 7
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800511"
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Install Bundles of Software (Easy Install)	    	           easy_install 
+#     View Bundle Contents				      easy_install_view	
+#     Install Bundle Contents			            easy_install_bundle
+#------------------------------------------------------------------------------
+sm_menu_opt:
+        id                      = "easy_install"
+        id_seq_num              = "010"
+        next_id                 = "easy_install_view"
+        text                    = "View Bundle Contents"
+        text_msg_file           = "smit.cat"
+        text_msg_set            = 1
+        text_msg_id             = 632
+        next_type               = "n"
+        alias                   = ""
+        help_msg_id             = "0504008"
+        help_msg_loc            = ""
+
+
+sm_menu_opt:
+        id                      = "easy_install"
+        id_seq_num              = "010"
+        next_id                 = "easy_install_bundle"
+        text                    = "Install Bundle Contents"
+        text_msg_file           = "smit.cat"
+        text_msg_set            = 1
+        text_msg_id             = 633
+        next_type               = "n"
+        alias                   = ""
+        help_msg_id             = "0504009"
+        help_msg_loc            = ""
+
+
+
+#------------------------------------------------------------------------------
+# Install/Update Selectable Software (Custom Install)	     install_selectable
+#     Install Software Products at Latest Level	                 install_latest
+#     Install Bundles of Software			  custom_install_bundle
+#     Install Fileset Updates by FixID		               install_filesets
+#     Install/Update From All Available Software       	 install_selectable_all
+#------------------------------------------------------------------------------
+sm_menu_opt:
+	id			= "install_selectable"
+	id_seq_num		= "010"
+	next_id			= "install_latest1"
+	text			= "Install Software Products at Latest Level"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 630
+	next_type		= "m"
+	alias			= ""
+	help_msg_id		= "0504006"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_selectable"
+	id_seq_num		= "020"
+	next_id			= "custom_install_bundles"
+	text			= "Install Bundles of Software"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 634
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "0504002"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_selectable"
+	id_seq_num		= "050"
+	next_id			= "install_fileset"
+	text			= "Install Fileset Updates by Fix"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 618
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "1800608"
+	help_msg_loc		= ""
+
+# manual printer & device install
+
+sm_menu_opt:
+	id			= "install_selectable"
+	id_seq_num		= "055"
+	next_id			= "printerinst"
+	text			= "Install Additional Printer/Plotter Software"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 25
+	text_msg_id		= 734
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "1800099"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_selectable"
+	id_seq_num		= "056"
+	next_id			= "devinst"
+	text			= "Install Additional Device Software"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 25
+	text_msg_id		= 735
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "1800098"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "install_selectable"
+	id_seq_num		= "060"
+	next_id			= "install_selectable_all"
+	text			= "Install/Update From All Available Software"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 619
+	next_type		= "n"
+	alias			= ""
+	help_msg_id		= "1800617"
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Install Software Products at Latest Level	                install_latest1
+#     Install New Software Products at Latest Level		 install_latest
+#     Update Currently Installed Software Products to Latest Level   update_all
+#------------------------------------------------------------------------------
+
+sm_menu_opt:
+        id                      = "install_latest1"
+        id_seq_num              = "010"
+        next_id                 = "install_latest"
+        text                    = "Install New Software Products at Latest Level"
+        text_msg_file           = "smit.cat"
+        text_msg_set            = 1
+        text_msg_id             = 653
+        next_type               = "n"
+        alias                   = ""
+        help_msg_id             = "1800605"
+        help_msg_loc            = ""
+
+
+sm_menu_opt:
+        id                      = "install_latest1"
+        id_seq_num              = "020"
+        next_id                 = "update_all"
+        text                    = "Update Currently Installed Software Products to Latest Level"
+        text_msg_file           = "smit.cat"
+        text_msg_set            = 1
+        text_msg_id             = 654
+        next_type               = "n"
+        alias                   = ""
+        help_msg_id             = "0504013"
+        help_msg_loc            = ""
+
+#------------------------------------------------------------------------------
+# Maintain Installed Software                                 maintain_software
+#   List Installed Software				                  lslpp
+#   Commit Applied Software Updates (Remove Saved Files)	 install_commit
+#   Reject Applied Software Updates (Use Previous Version)	 install_reject
+#   Remove Software Products			   	 	 install_remove
+#   Clean Up After an Interrupted Installation                  install_cleanup
+#   Check Software File Sizes After Installation 	         install_verify
+#   Verify Software Requisites and Installations                 lppchk
+#------------------------------------------------------------------------------
+sm_menu_opt:
+        id			= "maintain_software"
+        id_seq_num		= "010"
+        next_id			= "lslpp"
+        text			= "List Installed Software"
+        text_msg_file		= "smit.cat"
+        text_msg_set		= 1
+        text_msg_id		= 610
+        next_type		= "m"
+        alias			= ""
+        help_msg_id		= "1800502"
+        help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "inventory"
+        id_seq_num              = ""
+        next_id			= "lslpp"
+        next_type		= "m"
+        alias			= "y"
+
+sm_menu_opt:
+	id			= "maintain_software"
+	id_seq_num		= "020"
+	next_id			= "install_commit"
+	text			= "Commit Applied Software Updates (Remove Saved Files)"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 41
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800508"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "maintain_software"
+	id_seq_num		= "030"
+	next_id			= "install_reject"
+	text			= "Reject Applied Software Updates (Use Previous Version)"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 52
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800509"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "maintain_software"
+	id_seq_num		= "040"
+	next_id			= "install_remove"
+	text			= "Remove Software Products"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 53
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800599"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+        id                      = "maintain_software"
+        id_seq_num              = "050"
+        next_id                 = "install_cleanup"
+        text                    = "Clean Up After an Interrupted Installation"
+        text_msg_file           = "smit.cat"
+        text_msg_set            = 1
+        text_msg_id             = 7
+        next_type               = "d"
+        alias                   = ""
+        help_msg_id             = "1800511"
+        help_msg_loc            = ""
+
+
+sm_menu_opt:
+        id                      = "maintain_software"
+        id_seq_num              = "060"
+        next_id                 = "install_verify"
+        text                    = "Check Software File Sizes After Installation"
+        text_msg_file           = "smit.cat"
+        text_msg_set            = 1
+        text_msg_id             = 602
+        next_type               = "d"
+        alias                   = ""
+        help_msg_id             = "1800521"
+        help_msg_loc            = ""
+
+sm_menu_opt:
+	id                      = "maintain_software"
+	id_seq_num              = "070"
+	next_id                 = "lppchk"
+	text                    = "Verify Software Requisites and Installations"
+	text_msg_file           = "smit.cat"
+	text_msg_set            = 1
+	text_msg_id             = 507
+	next_type               = "d"
+	alias                   = ""
+	help_msg_id             = "180045"
+	help_msg_loc            = ""
+
+
+
+#------------------------------------------------------------------------------
+# List Installed Software						  lslpp
+#   List the Installed Software				        lslpp_installed
+#   List All Applied but Not Committed Software	Updates	   install_list_applied 
+#   List Maintenance Level of a Software Product	      lslpp_maintenance
+#   Show History of a Software Product				  lslpp_history
+#   List Requisites of a Software Product			   lslpp_prereq
+#   List Dependents of a Software Product			lslpp_depedents
+#   List Files Included in a Software Product 			    lslpp_files
+#------------------------------------------------------------------------------
+sm_menu_opt:
+	id			= "lslpp"
+	id_seq_num		= "010"
+	next_id			= "lslpp_installed"
+	text			= "List the Installed Software"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 599
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800513"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "lslpp"
+	id_seq_num		= "015"
+	next_id			= "install_list_applied"
+	text			= "List All Applied but Not Committed Software Updates"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 40
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800507"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "lslpp"
+	id_seq_num		= "020"
+	next_id			= "lslpp_maintenance"
+	text			= "List Maintenance Level of a Software Product"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 601
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800611"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "lslpp"
+	id_seq_num		= "030"
+	next_id			= "lslpp_history"
+	text			= "Show History of a Software Product"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 501
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800515"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "lslpp"
+	id_seq_num		= "040"
+	next_id			= "lslpp_prereq"
+	text			= "List Requisites of a Software Product"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 498
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800516"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "lslpp_prereqs"
+        id_seq_num		= ""
+        next_id			= "lslpp_prereq"
+        text			= ""
+        text_msg_file		= ""
+        text_msg_set		= 0
+        text_msg_id		= 0
+        next_type		= "m"
+        alias			= "y"
+        help_msg_id		= ""
+        help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "lslpp"
+	id_seq_num		= "050"
+	next_id			= "lslpp_dependents"
+	text			= "List Dependents of a Software Product"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 496
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800517"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "lslpp_dependent"
+        id_seq_num		= ""
+        next_id			= "lslpp_dependents"
+        text			= ""
+        text_msg_file		= ""
+        text_msg_set		= 0
+        text_msg_id		= 0
+        next_type		= "m"
+        alias			= "y"
+        help_msg_id		= ""
+        help_msg_loc		= ""
+
+sm_menu_opt:
+	id			= "lslpp"
+	id_seq_num		= "070"
+	next_id			= "lslpp_files"
+	text			= "List Files Included in a Software Product"
+	text_msg_file		= "smit.cat"
+	text_msg_set		= 1
+	text_msg_id		= 497
+	next_type		= "d"
+	alias			= ""
+	help_msg_id		= "1800519"
+	help_msg_loc		= ""
+
+sm_menu_opt:
+        id			= "lslpp_file"
+        id_seq_num		= ""
+        next_id			= "lslpp_files"
+        text			= ""
+        text_msg_file		= ""
+        text_msg_set		= 0
+        text_msg_id		= 0
+        next_type		= "m"
+        alias			= "y"
+        help_msg_id		= ""
+        help_msg_loc		= ""
+
+

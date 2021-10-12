@@ -1,0 +1,20 @@
+# @(#)30        1.1  src/bldenv/inutoc/README, cmdinstl, bos412, GOLDA411a 9/8/94 17:22:51
+# COMPONENT_NAME: (CMDINSTL) command install
+#
+# ORIGINS: 27 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1994
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#---------------------------------------------------------------------
+
+Any time changes are made that affect the toc processing code a 3.2
+inutoc executable must be created for BAI.  In order to do this one 
+must cd to src/bldenv/inutoc and copy Makefile.org to Makefile.  Once
+this is done execute 'build' as normally done.  Upon successful comple-
+tion of the build copy ../../../../obj/power/bldenv/inutoc/inutoc to
+the current directory so that it can be dropped from here.
+

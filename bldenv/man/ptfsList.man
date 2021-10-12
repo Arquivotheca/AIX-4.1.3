@@ -1,0 +1,25 @@
+# @(#)62        1.1  src/bldenv/man/ptfsList.man, pkgtools, bos412, GOLDA411a 12/1/93 17:33:01
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: ptfsList file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/UPDATE/<option>/<subsystem>/ptfsList:
+        List of PTF's created for the subsystem since the last cumulative
+        PTF was produced.  Updated by ptfpkg.
+
+	Format:
+                <ptf>
+                <ptf>
+                  .
+                  .

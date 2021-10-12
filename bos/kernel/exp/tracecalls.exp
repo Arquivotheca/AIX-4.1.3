@@ -1,0 +1,74 @@
+#!/unix
+* @(#)17        1.7  src/bos/kernel/exp/tracecalls.exp, systrace, bos411, 9428A410j 1/28/94 09:10:10
+*
+*   COMPONENT_NAME: SYSTRACE 
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27 83
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*  @IBM_COPYRIGHT@
+*
+* (C) COPYRIGHT International Business Machines Corp. 1994
+* All Rights Reserved
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+*
+*
+***********************************************
+* Exported kernel variables and kernel services
+***********************************************
+_ptrgl
+bzero
+bcopy
+strncpy
+trc_timestamp
+trc_savefp
+test_and_set
+
+kerntrc
+getfx
+ukerncopy
+trc_timerp
+trc_timeoutinit
+trc_timeout
+initfp_lock
+
+*********************************************
+* Exported global function pointers for trace
+*********************************************
+_trcgenfp
+_trcgentfp
+_trcgenkfp
+_trcgenktfp
+ 
+*********************************************************
+* Exported global function pointers for dumpdd and errdd
+*********************************************************
+_trc_trcofffp
+_trc_trconfp
+Jprintf_fp
+jsnap_fp
+trc_ptrdmy
+trc_ptrdmy0
+
+*********************************************************
+* Exported global function pointers for trchook routine
+*********************************************************
+_trcbuffullfp
+
+* trchdr_ptr
+* fake_trchdr
+
+trc_bussreg
+trc_busaddr
+
+

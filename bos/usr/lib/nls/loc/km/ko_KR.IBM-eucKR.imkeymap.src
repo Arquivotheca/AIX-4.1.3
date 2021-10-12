@@ -1,0 +1,1055 @@
+# @(#)70	1.2  src/bos/usr/lib/nls/loc/km/ko_KR.IBM-eucKR.imkeymap.src, cfgnlskm, bos411, 9428A410j 12/14/93 00:07:17
+#
+# COMPONENT_NAME:       (CFGNLSKM)
+#
+# FUNCTIONS:		KOREAN KEYBOARD TABLE
+#
+# ORIGINS:              27
+#
+# (C) COPYRIGHT International Business Machines Corp.  1991, 1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# 
+#		Version: VRMkeymaps/v850ja.00c2.00
+#
+#	Each entry must have more than 32 items so that the keycomp
+#	generates 256 states map. Actually, each entry has 33 items.
+#
+#	-1- base	-2- Shift	-3- Caps	-4- Shift+Caps
+#	-5- Ctrl	-9- Alt 	-17- AltGraph	-33- Hangul
+#	-34- Han+St	-35- Han+Cp	-36- Han+St+Cp	-65- Jeonja
+#	-66- Jeo+St	-67- Jeo+Cp	-68- Jeo+St+Cp	-97- Jeo+Han
+#	-98- Jeo+Han+St	-99- Jeo+Han+Cp	-100- Jeo+Han+St+Cp
+#
+#	1(Base) 33(Hangul) 66(Jeonja)
+#
+
+#  XK_Hangul (141)
+0xff31  U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+#  XK_Hangul_Conversion  (139)
+0xff3a  U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+#  XK_Hangul_NonConversion (140)
+0xff3b	U U U U U U U U U U U U U U U U U U U U \
+	U U U U U U U U U U U U U
+#  XK_Hangul_Hanja (68) 
+0xff34  U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# XK_Hangul_Jamo (211)                 
+#0xff35	U U U U U U U U U U U U U U U U U U U U \
+#	U U U U U U U U U U U U U
+# XK_Hangul_Codeinput (138)          
+0xff37	U U U U U U U U U U U U U U U U U U U U \
+	U U U U U U U U U U U U U
+# XK_Hangul_Jeonja (108)            
+0xff38	U U U U U U U U U U U U U U U U U U U U \
+	U U U U U U U U U U U U U
+# XK_Hangul_MultipleCandidate (210) 
+#0xff3d	U U U U U U U U U U U U U U U U U U U U \
+#	U U U U U U U U U U U U U
+#
+# keycode 22
+# XK_Korean_Won (verticalbar is 0x7c - but brokenbar not exist in our EUC 
+# In Jeonja, print WON sign - Won(a3dc) bar(a6a2) 
+0xff3c	'\\'		XK_bar		'\\'		XK_bar		\
+	U		U		U		'\\'		\
+	XK_bar		'\\'		XK_bar		"\xa3\xdc"	\
+	"\xa6\xa2"	"\xa3\xdc"	"\xa6\xa2"	"\xa3\xdc"	\
+	"\xa6\xa2"	"\xa3\xdc"	"\xa6\xa2"	U		\
+	U U U U U U U U U U U U U
+# XK_grave
+0x60	'`'		XK_asciitilde 	'`'		XK_asciitilde	\
+	'\x00'		U		U		'`'		\
+	XK_asciitilde	'`'		XK_asciitilde	"\243\340"	\
+	"\241\255"	"\243\340"	"\241\255"	"\243\340"	\
+	"\241\255"	"\243\340"	"\241\255"	U		\
+	U U U U U U U U U U U U U
+# XK_asciitilde
+0x7e	'~'		U 		'~'		U		\
+	U		U		U		'~'		\
+	U		'~'		U		"\xa1\xad"	\
+	U		"\xa1\xad"	U		"\xa1\xad"	\
+	U		"\xa1\xad"	U		U		\
+	U U U U U U U U U U U U U
+# XK_1
+0x31	'1'		XK_exclam	'1'		XK_exclam	\
+	U		U 		U		'1'		\
+	XK_exclam	'1'		XK_exclam	"\243\261"	\
+	XK_exclam	"\243\261"	XK_exclam	"\243\261"	\
+	XK_exclam	"\243\261"	XK_exclam	U		\
+	U U U U U U U U U U U U U
+# XK_exclam
+0x21	'!'		U		'!'		U		\
+	U		U 		U		'!'		\
+	U		'!'		U		"\243\241"	\
+	U		"\243\241"	U		"\243\241"	\
+	U		"\243\241"	U		"\243\241"	\
+	U U U U U U U U U U U U U
+# XK_2
+0x32	'2'		XK_at		'2'		XK_at		\
+	'\x00'		U		U		'2'		\
+	XK_at    	'2'		XK_at		"\243\262"	\
+	XK_at		"\243\262"	XK_at		"\243\262"	\
+	XK_at		"\243\262"	XK_at		U		\
+	U U U U U U U U U U U U U
+# XK_at
+0x40	'@'		U		'@'		U		\
+	U		U		U		'@'		\
+	U    		'@'		U		"\243\300"	\
+	U		"\243\300"	U		"\243\300"	\
+	U		"\243\300"	U		U		\
+	U U U U U U U U U U U U U
+# XK_3
+0x33	'3'		XK_numbersign	'3'		XK_numbersign	\
+	U		U		U 		'3'		\
+	XK_numbersign		'3'		XK_numbersign	"\243\263"	\
+	XK_numbersign	"\243\263"	XK_numbersign	"\243\263"	\
+	XK_numbersign	"\243\263"	XK_numbersign	U		\
+	U U U U U U U U U U U U U
+# XK_numbersign
+0x23	'#'		U		'#'		U		\
+	U		U		U 		'#'		\
+	U		'#'		U		"\243\243"	\
+	U		"\243\243"	U		"\243\243"	\
+	U		"\243\243"	U		U		\
+	U U U U U U U U U U U U U
+# XK_4
+0x34	'4'		XK_dollar	'4'		XK_dollar		\
+	U		U		U		'4'		\
+	XK_dollar	'4'		XK_dollar	"\243\264"	\
+	XK_dollar	"\243\264"	XK_dollar	"\243\264"	\
+	XK_dollar	"\243\264"	XK_dollar	U		\
+	U U U U U U U U U U U U U
+# XK_dollar
+0x24	'$'		U		'$'		U		\
+	U		U		U		'$'		\
+	U		'$'		U		"\243\244"	\
+	U		"\243\244"	U		"\243\244"	\
+	U		"\243\244"	U		U		\
+	U U U U U U U U U U U U U
+# XK_5
+0x35	'5'		XK_percent	'5'		XK_percent	\
+	U		U		U		'5'		\
+	XK_percent	'5'		XK_percent	"\243\265"	\
+	XK_percent	"\243\265"	XK_percent	"\243\265"	\
+	XK_percent	"\243\265"	XK_percent	U		\
+	U U U U U U U U U U U U U
+# XK_percent
+0x25	'%'		U		'%'		U		\
+	U		U		U		'%'		\
+	U		'%'		U		"\xa3\xa5"	\
+	U		"\xa3\xa5"	U		"\xa3\xa5"	\
+	U		"\xa3\xa5"	U		U		\
+	U U U U U U U U U U U U U
+# XK_6
+0x36	'6'		XK_asciicircum	'6'	XK_asciicircum		\
+	"\36"		U		U		'6'		\
+	XK_asciicircum	'6'		XK_asciicircum	"\243\266"	\
+	XK_asciicircum	"\243\266"	XK_asciicircum	"\243\266"	\
+	XK_asciicircum	"\243\266"	XK_asciicircum	U		\
+	U U U U U U U U U U U U U
+# XK_asciicircum
+0x5e	'^'		U		'^'		U		\
+	U		U		U		'^'		\
+	U		'^'		U		"\243\336"	\
+	U		"\243\336"	U		"\243\336"	\
+	U		"\243\336"	U		U		\
+	U U U U U U U U U U U U U
+# XK_7
+0x37	'7'		XK_ampersand	'7'	XK_ampersand		\
+	U		U		U 		'7'		\
+	XK_ampersand	'7'		XK_ampersand	"\243\267"	\
+	XK_ampersand	"\243\267"	XK_ampersand	"\243\267"	\
+	XK_ampersand	"\243\267"	XK_ampersand	U		\
+	U U U U U U U U U U U U U
+# XK_ampersand
+0x26	'&'		U		'&'		U		\
+	U		U		U 		'&'		\
+	U		'&'		U		"\243\246"	\
+	U		"\243\246"	U		"\243\246"	\
+	U		"\243\246"	U		U		\
+	U U U U U U U U U U U U U
+# XK_8
+0x38	'8'		XK_asterisk	'8'		XK_asterisk	\
+	U		U		U		'8'		\
+	XK_asterisk	'8'		XK_asterisk	"\243\270"	\
+	XK_asterisk	"\243\270"	XK_asterisk	"\243\270"	\
+	XK_asterisk	"\243\270"	XK_asterisk	U		\
+	U U U U U U U U U U U U U
+# XK_asterisk
+0x2a	'*'		U		'*'		U		\
+	U		U		U		'*'		\
+	U		'*'		U		"\243\252"	\
+	U		"\243\252"	U		"\243\252"	\
+	U		"\243\252"	U		U		\
+	U U U U U U U U U U U U U
+# XK_9
+0x39	'9'		XK_parenleft	'9'		XK_parenleft	\
+	U		U		U		'9'		\
+	XK_parenleft	'9'		XK_parenleft	"\243\271"	\
+	XK_parenleft	"\243\271"	XK_parenleft	"\243\271"	\
+	XK_parenleft	"\243\271"	XK_parenleft	U		\
+	U U U U U U U U U U U U U
+# XK_parenleft
+0x28	'('		U		'('		U		\
+	U		U		U		'('		\
+	U		'('		U		"\243\250"	\
+	U	"\243\250"	U	"\243\250"	\
+	U	"\243\250"	U	U		\
+	U U U U U U U U U U U U U
+# XK_0
+0x30	'0'		XK_parenright	'0'		XK_parenright	\
+	U		U		U		'0'		\
+	XK_parenright	'0'		XK_parenright	"\243\260"	\
+	XK_parenright	"\243\260"	XK_parenright	"\243\260"	\
+	XK_parenright	"\243\260"	XK_parenright	U		\
+	U U U U U U U U U U U U U
+# XK_parenright
+0x29	')'		U		')'		U		\
+	U		U		U		')'		\
+	U		')'		U		"\243\251"	\
+	U		"\243\251"	U		"\243\251"	\
+	U		"\243\251"	U		U		\
+	U U U U U U U U U U U U U
+# XK_minus
+0x2d	'-'		XK_underscore	'-'		XK_underscore	\
+	"\37"		U		U 		'-'		\
+	XK_underscore	'-'		XK_underscore	"\243\255"	\
+	XK_underscore	"\243\255"	XK_underscore	"\243\255"	\
+	XK_underscore	"\243\255"	XK_underscore	U		\
+	U U U U U U U U U U U U U
+# XK_underscore
+0x5f	'_'		U		'_'		U		\
+	U		U		U 		'_'		\
+	U		'_'		U		"\243\337"	\
+	U		"\243\337"	U		"\243\337"	\
+	U		"\243\337"	U		U		\
+	U U U U U U U U U U U U U
+# XK_equal
+0x3d	'='		XK_plus		'='		XK_plus		\
+	U		U		U		'='		\
+	XK_plus		'='		XK_plus		"\243\275"	\
+	XK_plus		"\243\275"	XK_plus		"\243\275"	\
+	XK_plus		"\243\275"	XK_plus		U		\
+	U U U U U U U U U U U U U
+# XK_plus
+0x2b	'+'		U		'+'		U		\
+	U		U		U		'+'		\
+	U		'+'		U		"\243\253"	\
+	U		"\243\253"	U		"\243\253"	\
+	U		"\243\253"	U		U		\
+	U U U U U U U U U U U U U
+# Backspace Key
+0xff08	"\10"		"\10"		"\10"		"\10"		\
+	"\177"		U		U		"\10"		\
+	"\10"		"\10"		"\10"		"\10"		\
+	"\10"		"\10"		"\10"		"\10"		\
+	"\10"		"\10"		"\10"		U		\
+	U U U U U U U U U U U U U
+# Tab key
+0xff09	"\11"		U           	"\11"		U		\
+	U		U		U		"\11"		\
+	U       	"\11"		U         	"\11"		\
+	U               "\11"		U		"\11"		\
+	U		"\11"		U		U		\
+	U U U U U U U U U U U U U
+# XK_q
+0x71	'q'		XK_Q		XK_Q		'q'		\
+	"\21"		U 		U		"\244\262"	\
+	XK_Q		"\244\262"	XK_Q		"\243\361"	\
+	XK_Q		"\243\321"	XK_Q		"\244\262"	\
+	XK_Q		"\244\262"	XK_Q		U		\
+	U U U U U U U U U U U U U
+# XK_Q
+0x51	'Q'		U		U		'Q'		\
+	"\21"		U 		U		"\244\263"	\
+	U		"\244\263"	U		"\243\321"	\
+	U         	"\243\361"	U        	"\244\263"	\
+	U		"\244\263"	U		U		\
+	U U U U U U U U U U U U U
+# XK_w
+0x77	'w'		XK_W		XK_W		'w'		\
+	"\27"		U		U  		"\244\270"	\
+	XK_W		"\244\270"	XK_W		"\243\367"	\
+	XK_W         	"\243\327"	XK_W        	"\244\270"	\
+	XK_W        	"\244\270"	XK_W        	U		\
+	U U U U U U U U U U U U U
+# XK_W
+0x57	'W'		U		U		'W'		\
+	"\27"		U		U  		"\244\271"	\
+	U         	"\244\271"	U         	"\243\327"	\
+	U        	"\243\367"	U         	"\244\271"	\
+	U         	"\244\271"	U         	U		\
+	U U U U U U U U U U U U U
+# XK_e
+0x65	'e'		XK_E		XK_E		'e'		\
+	"\5"		U		U		"\244\247"	\
+	XK_E		"\244\247"	XK_E		"\243\345"	\
+	XK_E		"\243\305"	XK_E		"\244\247"	\
+	XK_E		"\244\247"	XK_E		U		\
+	U U U U U U U U U U U U U
+# XK_E
+0x45	'E'		U		U		'E'		\
+	"\5"		U		U		"\244\250"	\
+	U		"\244\250"	U		"\243\305"	\
+	U		"\243\345"	U		"\244\250"	\
+	U		"\244\250"	U		U		\
+	U U U U U U U U U U U U U
+# XK_r
+0x72	'r'		XK_R		XK_R		'r'		\
+	"\22"		U		U		"\244\241"	\
+	XK_R		"\244\241"	XK_R		"\243\362"	\
+	XK_R		"\243\322"	XK_R		"\244\241"	\
+	XK_R		"\244\241"	XK_R		U		\
+	U U U U U U U U U U U U U
+# XK_R
+0x52	'R'		U		U		'R'		\
+	"\22"		U		U		"\244\242"	\
+	U		"\244\242"	U		"\243\322"	\
+	U		"\243\362"	U		"\244\242"	\
+	U		"\244\242"	U		U		\
+	U U U U U U U U U U U U U
+# XK_t
+0x74	't'		XK_T		XK_T		't'		\
+	"\24"		U		U		"\244\265"	\
+	XK_T		"\244\265"	XK_T		"\243\364"	\
+	XK_T		"\243\324"	XK_T		"\244\265"	\
+	XK_T		"\244\265"	XK_T		U		\
+	U U U U U U U U U U U U U
+# XK_T
+0x54	'T'		U		U		'T'		\
+	"\24"		U		U		"\244\266"	\
+	U		"\244\266"	U		"\243\324"	\
+	U		"\243\364"	U		"\244\266"	\
+	U		"\244\266"	U		U		\
+	U U U U U U U U U U U U U
+# XK_y
+0x79	'y'		XK_Y		XK_Y		'y'		\
+	"\31"		U		U		"\244\313"	\
+	XK_Y		"\244\313"	XK_Y		"\243\371"	\
+	XK_Y		"\243\331"	XK_Y		"\244\313"	\
+	XK_Y		"\244\313"	XK_Y		U		\
+	U U U U U U U U U U U U U
+# XK_Y
+0x59	'Y'		U		U		'Y'		\
+	"\31"		U		U		"\244\313"	\
+	U		"\244\313"	U		"\243\331"	\
+	U		"\243\371"	U		"\244\313"	\
+	U		"\244\313"	U		U		\
+	U U U U U U U U U U U U U
+# XK_u
+0x75	'u'		XK_U		XK_U		'u'		\
+	"\25"		U		U		"\244\305"	\
+	XK_U		"\244\305"	XK_U		"\243\365"	\
+	XK_U		"\243\325"	XK_U		"\244\305"	\
+	XK_U		"\244\305"	XK_U		U		\
+	U U U U U U U U U U U U U
+# XK_U
+0x55	'U'		U		U		'U'		\
+	"\25"		U		U		"\244\305"	\
+	U		"\244\305"	U		"\243\325"	\
+	U		"\243\365"	U		"\244\305"	\
+	U		"\244\305"	U		U		\
+	U U U U U U U U U U U U U
+# XK_i
+0x69	'i'		XK_I		XK_I		'i'		\
+	"\11"		U		U		"\244\301"	\
+	XK_I		"\244\301"	XK_I		"\243\351"	\
+	XK_I		"\243\311"	XK_I		"\244\301"	\
+	XK_I		"\244\301"	XK_I		U		\
+	U U U U U U U U U U U U U
+# XK_I
+0x49	'I'		U		U		'I'		\
+	"\11"		U		U		"\244\301"	\
+	U		"\244\301"	U		"\243\311"	\
+	U		"\243\351"	U		"\244\301"	\
+	U		"\244\301"	U		U		\
+	U U U U U U U U U U U U U
+# XK_o
+0x6f	'o'		XK_O		XK_O		'o'		\
+	"\17"		U		U		"\244\300"	\
+	XK_O		"\244\300"	XK_O		"\243\357"	\
+	XK_O		"\243\317"	XK_O		"\244\300"	\
+	XK_O		"\244\300"	XK_O		U		\
+	U U U U U U U U U U U U U
+# XK_O
+0x4f	'O'		U		U		'O'		\
+	"\17"		U		U		"\244\302"	\
+	U		"\244\302"	U		"\243\317"	\
+	U		"\243\357"	U		"\244\302"	\
+	U		"\244\302"	U		U		\
+	U U U U U U U U U U U U U
+# XK_p
+0x70	'p'		XK_P		XK_P		'p'		\
+	"\20"		U		U		"\244\304"	\
+	XK_P		"\244\304"	XK_P		"\243\360"	\
+	XK_P		"\243\320"	XK_P		"\244\304"	\
+	XK_P		"\244\304"	XK_P		U		\
+	U U U U U U U U U U U U U
+# XK_P
+0x50	'P'		U		U		'P'		\
+	"\20"		U		U		"\244\306"	\
+	U		"\244\306"	U		"\243\320"	\
+	U		"\243\360"	U		"\244\306"	\
+	U		"\244\306"	U		U		\
+	U U U U U U U U U U U U U
+# XK_bracketleft
+0x5b	'['		XK_braceleft	'['	XK_braceleft		\
+	"\33"		U		U		'['		\
+	XK_braceleft	'['		XK_braceleft	"\243\333"	\
+	XK_braceleft	"\243\333"	XK_braceleft	"\243\333"	\
+	XK_braceleft	"\243\333"	XK_braceleft	U		
+# XK_braceleft
+0x7b	'{'		U		'{'		U		\
+	U		U		U		'{'		\
+	U		'{'		U		"\243\373"	\
+	U		"\243\373"	U		"\243\373"	\
+	U		"\243\373"	U		U		\
+	U U U U U U U U U U U U U
+# CK_bracketright
+0x5d	']'		XK_braceright	']'		XK_braceright	\
+	"\35"		U		U		']'		\
+	XK_braceright	']'		XK_braceright	"\243\335"	\
+	XK_braceright	"\243\335"	XK_braceright	"\243\335"	\
+	XK_braceright	"\243\335"	XK_braceright	U		\
+	U U U U U U U U U U U U U
+# CK_braceright
+0x7d	'}'		U		'}'		U		\
+	"\35"		U		U		'}'		\
+	U		'}'		U		"\243\375"	\
+	U		"\243\375"	U		"\243\375"	\
+	U		"\243\375"	U		U		\
+	U U U U U U U U U U U U U
+# XK_a
+0x61	'a'		XK_A		XK_A		'a'		\
+	"\1"		U		U		"\244\261"	\
+	XK_A		"\244\261"	XK_A		"\243\341"	\
+	XK_A		"\243\301"	XK_A		"\244\261"	\
+	XK_A		"\244\261"	XK_A		U		\
+	U U U U U U U U U U U U U
+# XK_A
+0x41	'A'		U		U		'A'		\
+	"\1"		U		U		"\244\261"	\
+	U		"\244\261"	U		"\243\301"	\
+	U		"\243\341"	U		"\244\261"	\
+	U		"\244\261"	U		U		\
+	U U U U U U U U U U U U U
+# XK_s
+0x73	's'		XK_S		XK_S		's'		\
+	"\23"		U		U		"\244\244"	\
+	XK_S		"\244\244"	XK_S		"\243\363"	\
+	XK_S		"\243\323"	XK_S		"\244\244"	\
+	XK_S		"\244\244"	XK_S		U		\
+	U U U U U U U U U U U U U
+# XK_S
+0x53	'S'		U		U		'S'		\
+	"\23"		U		U		"\244\244"	\
+	U		"\244\244"	U		"\243\323"	\
+	U		"\243\363"	U		"\244\244"	\
+	U		"\244\244"	U		U		\
+	U U U U U U U U U U U U U
+# XK_d
+0x64	'd'		XK_D		XK_D		'd'		\
+	"\4"		U		U		"\244\267"	\
+	XK_D		"\244\267"	XK_D		"\243\344"	\
+	XK_D		"\243\304"	XK_D		"\244\267"	\
+	XK_D		"\244\267"	XK_D		U		\
+	U U U U U U U U U U U U U
+# XK_D
+0x44	'D'		U		U		'D'		\
+	"\4"		U		U		"\244\267"	\
+	U		"\244\267"	U		"\243\304"	\
+	U		"\243\344"	U		"\244\267"	\
+	U		"\244\267"	U		U		\
+	U U U U U U U U U U U U U
+# XK_f
+0x66	'f'		XK_F		XK_F		'f'		\
+	"\6"		U		U		"\244\251"	\
+	XK_F		"\244\251"	XK_F		"\243\346"	\
+	XK_F		"\243\306"	XK_F		"\244\251"	\
+	XK_F		"\244\251"	XK_F		U		\
+	U U U U U U U U U U U U U
+# XK_F
+0x46	'F'		U		U		'F'		\
+	"\6"		U		U		"\244\251"	\
+	U		"\244\251"	U		"\243\306"	\
+	U		"\243\346"	U		"\244\251"	\
+	U		"\244\251"	U		U		\
+	U U U U U U U U U U U U U
+# XK_g
+0x67	'g'		XK_G		XK_G		'g'		\
+	"\7"		U		U		"\244\276"	\
+	XK_G		"\244\276"	XK_G		"\243\347"	\
+	XK_G		"\243\307"	XK_G		"\244\276"	\
+	XK_G		"\244\276"	XK_G		U		\
+	U U U U U U U U U U U U U
+# XK_G
+0x47	'G'		U		U 		'G'		\
+	"\7"		U		U		"\244\276"	\
+	U		"\244\276"	U		"\243\307"	\
+	U		"\243\347"	U		"\244\276"	\
+	U		"\244\276"	U		U		\
+	U U U U U U U U U U U U U
+# XK_h
+0x68	'h'		XK_H		XK_H		'h'		\
+	"\10"		U		U		"\244\307"	\
+	XK_H		"\244\307"	XK_H		"\243\350"	\
+	XK_H		"\243\310"	XK_H		"\244\307"	\
+	XK_H		"\244\307"	XK_H		U		\
+	U U U U U U U U U U U U U
+# XK_H
+0x48	'H'		U		U		'H'		\
+	"\10"		U		U		"\244\307"	\
+	U		"\244\307"	U		"\243\310"	\
+	U		"\243\350"	U		"\244\307"	\
+	U		"\244\307"	U		U		\
+	U U U U U U U U U U U U U
+# XK_j
+0x6a	'j'		XK_J		XK_J		'j'		\
+	"\12"		"\033[093q"	"\033[093q"	"\244\303"	\
+	XK_J		"\244\303"	XK_J		"\243\352"	\
+	XK_J		"\243\312"	XK_J		"\244\303"	\
+	XK_J		"\244\303"	XK_J		U		\
+	U U U U U U U U U U U U U
+# XK_J
+0x4a	'J'		U		U		'J'		\
+	"\12"		"\033[093q"	"\033[093q"	"\244\303"	\
+	U		"\244\303"	U		"\243\312"	\
+	U		"\243\352"	U		"\244\303"	\
+	U		"\244\303"	U		U		\
+	U U U U U U U U U U U U U
+# XK_k
+0x6b	'k'		XK_K		XK_K		'k'		\
+	"\13"		U		U		"\244\277"	\
+	XK_K		"\244\277"	XK_K		"\243\353"	\
+	XK_K		"\243\313"	XK_K		"\244\277"	\
+	XK_K		"\244\277"	XK_K		U		\
+	U U U U U U U U U U U U U
+# XK_K
+0x4b	'K'		U		U		'K'		\
+	"\13"		U		U		"\244\277"	\
+	U		"\244\277"	U		"\243\313"	\
+	U		"\243\353"	U		"\244\277"	\
+	U		"\244\277"	U		U		\
+	U U U U U U U U U U U U U
+# XK_l
+0x6c	'l'		XK_L		XK_L		'l'		\
+	"\14"		U		U		"\244\323"	\
+	XK_L		"\244\323"	XK_L		"\243\354"	\
+	XK_L		"\243\314"	XK_L		"\244\323"	\
+	XK_L		"\244\323"	XK_L		U		\
+	U U U U U U U U U U U U U
+# XK_L
+0x4c	'L'		U		U		'L'		\
+	"\14"		U		U		"\244\323"	\
+	U		"\244\323"	U		"\243\314"	\
+	U		"\243\354"	U		"\244\323"	\
+	U		"\244\323"	U		U		\
+	U U U U U U U U U U U U U
+# XK_semicolon
+0x3b	';'		XK_colon	';'		XK_colon	\
+	U		U		U		';'		\
+	XK_colon	';'		XK_colon	"\243\273"	\
+	XK_colon	"\243\273"	XK_colon	"\243\273"	\
+	XK_colon	"\243\273"	XK_colon	U		\
+	U U U U U U U U U U U U U
+# XK_colon
+0x3a	':'		U		':'		U		\
+	U		U		U		':'		\
+	U		':'		U		"\243\272"	\
+	U		"\243\272"	U		"\243\272"	\
+	U		"\243\272"	U		U		\
+	U U U U U U U U U U U U U
+# XK_quoteright
+0x27	'\''		XK_quotedbl	'\''		XK_quotedbl	\
+	U		U		U		'\''		\
+	XK_quotedbl	'\''		XK_quotedbl	"\243\247"	\
+	XK_quotedbl	"\243\247"	XK_quotedbl	"\243\247"	\
+	XK_quotedbl	"\243\247"	XK_quotedbl	U		\
+	U U U U U U U U U U U U U
+# XK_quotedbl (0xa1b1)
+0x22	'"'		U		'"'		U		\
+	U		U		U		'"'		\
+	U		'"'		U		"\xa1\xb1"	\
+	U		"\xa1\xb1"	U		"\xa1\xb1"	\
+	U		"\xa1\xb1"	U		U		\
+	U U U U U U U U U U U U U
+# XK_bar
+#0x7c	'|'		U		'|'		U		\
+#	"\035"		U		U		'|'		\
+#	U		'|'		U		"\xa6\xa2"	\
+#	"\xa1\xcb"	"\xa6\xa2"	"\xa1\xcb"	"\xa6\xa2"	\
+#	"\xa1\xcb"	"\xa6\xa2"	"\xa1\xcb"	U		\
+#	U U U U U U U U U U U U U
+# XK_bar
+0x7c	'|'		U		'|'		U		\
+	"\035"		U		U		'|'		\
+	U		'|'		U		"\xa6\xa2"	\
+	XK_cent		"\xa6\xa2"	XK_cent		"\xa6\xa2"	\
+	XK_cent		"\xa6\xa2"	XK_cent		U		\
+	U U U U U U U U U U U U U
+# XK_cent
+0xa2	U		U		U		U		\
+	U		U		U		U		\
+	U		U		U		"\xa1\xcb"	\
+	U		"\xa1\xcb"	U		"\xa1\xcb"	\
+	U		"\xa1\xcb"	U		U		\
+	U U U U U U U U U U U U U
+
+# XK_backslash (a1ac)   XK_notsign (a1fe)
+#0x5c	'\\'		U		'\\'		U		\
+#	"\34"		U		U		'\\'		\
+#	U		'\\'		U		"\xa1\xac"	\
+#	"\xa1\xfe"	"\xa1\xac"	"\xa1\xfe"	"\xa1\xac"	\
+#	"\xa1\xfe"	"\xa1\xac"	"\xa1\xfe"	U		\
+#	U U U U U U U U U U U U U
+# XK_backslash (a1ac)   
+0x5c	'\\'		U		'\\'		U		\
+	"\34"		U		U		'\\'		\
+	U		'\\'		U		"\xa1\xac"	\
+	XK_notsign	"\xa1\xac"	XK_notsign	"\xa1\xac"	\
+	XK_notsign	"\xa1\xac"	XK_notsign	U		\
+	U U U U U U U U U U U U U
+# XK_notsign (a1fe)
+0xac	U		U		U		U		\
+	U		U		U		U		\
+	U		U		U		"\xa1\xfe"	\
+	U		"\xa1\xfe"	U		"\xa1\xfe"	\
+	U		"\xa1\xfe"	U		U		\
+	U U U U U U U U U U U U U
+
+
+# XK_Return
+0xff0d	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		U		U		"\15"		\
+	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		"\15"		"\15"		U		\
+	U U U U U U U U U U U U U
+
+# XK_KP_Enter
+0xff8d	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		U		U		"\15"		\
+	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		"\15"		"\15"		U		\
+	U U U U U U U U U U U U U
+
+# XK_z
+0x7a	'z'		XK_Z		XK_Z		'z'		\
+	"\32"		U		U		"\244\273"	\
+	XK_Z		"\244\273"	XK_Z		"\243\372"	\
+	XK_Z		"\243\332"	XK_Z		"\244\273"	\
+	XK_Z		"\244\273"	XK_Z		U		\
+	U U U U U U U U U U U U U
+# XK_Z
+0x5a	'Z'		U		U		'Z'		\
+	"\32"		U		U		"\244\273"	\
+	U		"\244\273"	U		"\243\332"	\
+	U		"\243\372"	U		"\244\273"	\
+	U		"\244\273"	U		U		\
+	U U U U U U U U U U U U U
+# XK_x
+0x78	'x'		XK_X		XK_X		'x'		\
+	"\30"		U		U		"\244\274"	\
+	XK_X		"\244\274"	XK_X		"\243\370"	\
+	XK_X		"\243\330"	XK_X		"\244\274"	\
+	XK_X		"\244\274"	XK_X		U		\
+	U U U U U U U U U U U U U
+# XK_X
+0x58	'X'		U		U		'X'		\
+	"\30"		U		U		"\244\274"	\
+	U		"\244\274"	U		"\243\330"	\
+	U		"\243\370"	U		"\244\274"	\
+	U		"\244\274"	U		U		\
+	U U U U U U U U U U U U U
+# XK_c
+0x63	'c'		XK_C		XK_C		'c'		\
+	"\3"		U		U		"\244\272"	\
+	XK_C		"\244\272"	XK_C		"\243\343"	\
+	XK_C		"\243\303"	XK_C		"\244\272"	\
+	XK_C		"\244\272"	XK_C		U		\
+	U U U U U U U U U U U U U
+# XK_C
+0x43	'C'		U		U		'C'		\
+	"\3"		U		U		"\244\272"	\
+	U		"\244\272"	U		"\243\303"	\
+	U		"\243\343"	U		"\244\272"	\
+	U		"\244\272"	U		U		\
+	U U U U U U U U U U U U U
+# XK_v
+0x76	'v'		XK_V		XK_V		'v'		\
+	"\26"		U		U		"\244\275"	\
+	XK_V		"\244\275"	XK_V		"\243\366"	\
+	XK_V		"\243\326"	XK_V		"\244\275"	\
+	XK_V		"\244\275"	XK_V		U		\
+	U U U U U U U U U U U U U
+# XK_V
+0x56	'V'		U		U		'V'		\
+	"\26"		U		U		"\244\275"	\
+	U		"\244\275"	U		"\243\326"	\
+	U		"\243\366"	U		"\244\275"	\
+	U		"\244\275"	U		U		\
+	U U U U U U U U U U U U U
+# XK_b
+0x62	'b'		XK_B		XK_B		'b'		\
+	"\2"		U		U		"\244\320"	\
+	XK_B		"\244\320"	XK_B		"\243\342"	\
+	XK_B		"\243\302"	XK_B		"\244\320"	\
+	XK_B		"\244\320"	XK_B		U		\
+	U U U U U U U U U U U U U
+# XK_B
+0x42	'B'		U		U		'B'		\
+	"\2"		U		U		"\244\320"	\
+	U		"\244\320"	U		"\243\302"	\
+	U		"\243\342"	U		"\244\320"	\
+	U		"\244\320"	U		U		\
+	U U U U U U U U U U U U U
+# XK_n
+0x6e	'n'		XK_N		XK_N		'n'		\
+	"\16"		U		U		"\244\314"	\
+	XK_N		"\244\314"	XK_N		"\243\356"	\
+	XK_N		"\243\316"	XK_N		"\244\314"	\
+	XK_N		"\244\314"	XK_N		U		\
+	U U U U U U U U U U U U U
+# XK_N
+0x4e	'N'		U		U		'N'		\
+	"\16"		U		U		"\244\314"	\
+	U		"\244\314"	U		"\243\316"	\
+	U		"\243\356"	U		"\244\314"	\
+	U		"\244\314"	U		U		\
+	U U U U U U U U U U U U U
+# XK_m
+0x6d	'm'		XK_M		XK_M		'm'		\
+	"\15"		U		U		"\244\321"	\
+	XK_M		"\244\321"	XK_M		"\243\355"	\
+	XK_M		"\243\315"	XK_M		"\244\321"	\
+	XK_M		"\244\321"	XK_M		U		\
+	U U U U U U U U U U U U U
+# XK_M
+0x4d	'M'		U		U		'M'		\
+	"\15"		U		U		"\244\321"	\
+	U		"\244\321"	U		"\243\315"	\
+	U		"\243\355"	U		"\244\321"	\
+	U		"\244\321"	U		U		\
+	U U U U U U U U U U U U U
+# XK_comma 
+0x2c	','		XK_less		','		XK_less		\
+	U		U		U		','		\
+	XK_less		','		XK_less		"\243\254"	\
+	XK_less		"\243\254"	XK_less		"\243\254"	\
+	XK_less		"\243\254"	XK_less		U		\
+	U U U U U U U U U U U U U
+# XK_less 
+0x3c	'<'		U		'<'		U		\
+	U		U		U		'<'		\
+	U		'<'		U		"\243\274"	\
+	U		"\243\274"	U		"\243\274"	\
+	U		"\243\274"	U		U		\
+	U U U U U U U U U U U U U
+# XK_period
+0x2e	'.'		XK_greater	'.'	XK_greater		\
+	U		U		U               '.'		\
+	XK_greater	'.'		XK_greater	"\243\256"	\
+	XK_greater	"\243\256"	XK_greater	"\243\256"	\
+	XK_greater	"\243\256"	XK_greater	U		\
+	U U U U U U U U U U U U U
+# XK_greater
+0x3e	'>'		U		'>'		U		\
+	U		U		U               '>'		\
+	U		'>'		U		"\243\276"	\
+	U		"\243\276"	U		"\243\276"	\
+	U		"\243\276"	U		U		\
+	U U U U U U U U U U U U U
+# XK_slash
+0x2f	'/'		XK_question	'/'		XK_question		\
+	U		U		U		'/'		\
+	XK_question	'/'	XK_question		"\243\257"	\
+	XK_question	"\243\257"	XK_question	"\243\257"	\
+	XK_question	"\243\257"	XK_question	U		\
+	U U U U U U U U U U U U U
+# XK_question
+0x3f	'?'		U		'?'		U		\
+	U		U		U		'?'		\
+	U		'?'		U		"\243\277"	\
+	U		"\243\277"	U		"\243\277"	\
+	U		"\243\277"	U		U		\
+	U U U U U U U U U U U U U
+# XK_space 
+0x20	' '		' '		' '		' '		\
+	U   		U		' '		' '		\
+	' '		"\201\100"	"\201\100"	"\241\241"	\
+	"\241\241"	"\241\241"	"\241\241"	"\241\241"	\
+	"\241\241"	"\241\241"	"\241\241"	U		\
+	U U U U U U U U U U U U U
+# XK_Num_Lock 
+0xff7f	U		U		U		U		\
+	"\23"		U               U          	U		\
+	U		U		U		U		\
+	U		U		U		U		\
+	U		U		U		U		\
+	U U U U U U U U U U U U U
+# XK_KP_0
+0xffb0	'0'		'0'		'0'		'0'		\
+	U		'0'		'0'		'0'		\
+	'0'		'0'		'0'		"\243\260"	\
+	"\243\260"	"\243\260"	"\243\260"	"\243\260"	\
+	"\243\260"	"\243\260"	"\243\260"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_1
+0xffb1	'1'		'1'		'1'		'1'		\
+	U		'1'		'1'		'1'		\
+	'1'		'1'		'1'		"\243\261"	\
+	"\243\261"	"\243\261"	"\243\261"	"\243\261"	\
+	"\243\261"	"\243\261"	"\243\261"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_2
+0xffb2	'2'		'2'		'2'		'2'		\
+	U		'2'		'2'		'2'		\
+	'2'		'2'		'2'		"\243\262"	\
+	"\243\262"	"\243\262"	"\243\262"	"\243\262"	\
+	"\243\262"	"\243\262"	"\243\262"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_3
+0xffb3	'3'		'3'		'3'		'3'		\
+	U		'3'		'3'		'3'		\
+	'3'		'3'		'3'		"\243\263"	\
+	"\243\263"	"\243\263"	"\243\263"	"\243\263"	\
+	"\243\263"	"\243\263"	"\243\263"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_4
+0xffb4	'4'		'4'		'4'		'4'		\
+	U		'4'		'4'		'4'		\
+	'4'		'4'		'4'		"\243\264"	\
+	"\243\264"	"\243\264"	"\243\264"	"\243\264"	\
+	"\243\264"	"\243\264"	"\243\264"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_5
+0xffb5	'5'		'5'		'5'		'5'		\
+	U		'5'		'5'		'5'		\
+	'5'		'5'		'5'		"\243\265"	\
+	"\243\265"	"\243\265"	"\243\265"	"\243\265"	\
+	"\243\265"	"\243\265"	"\243\265"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_6
+0xffb6	'6'		'6'		'6'		'6'		\
+	U		'6'		'6'		'6'		\
+	'6'		'6'		'6'		"\243\266"	\
+	"\243\266"	"\243\266"	"\243\266"	"\243\266"	\
+	"\243\266"	"\243\266"	"\243\266"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_7
+0xffb7	'7'		'7'		'7'		'7'		\
+	U		'7'		'7'		'7'		\
+	'7'		'7'		'7'		"\243\267"	\
+	"\243\267"	"\243\267"	"\243\267"	"\243\267"	\
+	"\243\267"	"\243\267"	"\243\267"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_8
+0xffb8	'8'		'8'		'8'		'8'		\
+	U		'8'		'8'		'8'		\
+	'8'		'8'		'8'		"\243\270"	\
+	"\243\270"	"\243\270"	"\243\270"	"\243\270"	\
+	"\243\270"	"\243\270"	"\243\270"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_9
+0xffb9	'9'		'9'		'9'		'9'		\
+	U		'9'		'9'		'9'		\
+	'9'		'9'		'9'		"\243\271"	\
+	"\243\271"	"\243\271"	"\243\271"	"\243\271"	\
+	"\243\271"	"\243\271"	"\243\271"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_Separator
+0xffac	','		','		','		','		\
+	U		U		U		','		\
+	','		','		','		"\243\254"	\
+	"\243\254"	"\243\254"	"\243\254"	"\243\254"	\
+	"\243\254"	"\243\254"	"\243\254"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_Decimal
+0xffae	'.'		'.'		'.'		'.'		\
+	U		U		U		'.'		\
+	'.'		'.'		'.'		"\243\256"	\
+	"\243\256"	"\243\256"	"\243\256"	"\243\256"	\
+	"\243\256"	"\243\256"	"\243\256"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_Divide
+0xffaf	'/'		'/'		'/'		'/'		\
+	U		U		U		'/'		\
+	'/'		'/'		'/'		"\243\257"	\
+	"\243\257"	"\243\257"	"\243\257"	"\243\257"	\
+	"\243\257"	"\243\257"	"\243\257"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_Subtract
+0xffad	'-'		'-'		'-'		'-'		\
+	U		U		U		'-'		\
+	'-'		'-'		'-'		"\243\255"	\
+	"\243\255"	"\243\255"	"\243\255"	"\243\255"	\
+	"\243\255"	"\243\255"	"\243\255"	U		\
+	U U U U U U U U U U U U U
+# XK_KP_Multiply
+0xffaa	'*'		XK_KP_Add	'*'		XK_KP_Add	\
+	U		U		U		'*'		\
+	XK_KP_Add	'*'		XK_KP_Add	"\243\252"	\
+	XK_KP_Add	"\243\252"	XK_KP_Add 	"\243\252"	\
+	XK_KP_Add 	"\243\252"	XK_KP_Add 	U		\
+	U U U U U U U U U U U U U
+# XK_KP_Add
+0xffab	'+'		U		'+'		U		\
+	U		U		U		'+'		\
+	U		'+'		U		"\243\253"	\
+	U		"\243\253"	U		"\243\253"	\
+	U		"\243\253"	U		U		\
+	U U U U U U U U U U U U U
+# XK_KP_Enter key
+0xff8d	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		U		U		"\15"		\
+	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		"\15"		"\15"		"\15"		\
+	"\15"		"\15"		"\15"		U		\
+	U U U U U U U U U U U U U
+# Escape key
+0xff1b	'\x1b' 		U 		'\x1b' 		U  	\
+	'\x1b' 		XK_Reset 	U 		'\x1b'  \
+	U 		U 		XK_Reset 	'\x1b'  \
+	U 		U 		XK_Reset 	'\x1b' 	\
+	U 		XK_Reset 	U 		U 	\
+	U U U U U U U U U U U U U
+# XK_Alt_R 
+0xffea	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# XK_Caps_Lock (0xffe5)
+0xffe5	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# XK_Shift_L 
+0xffe1	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# XK_Shift_R 
+0xffe2	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# XK_Control_L 
+0xffe3	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# XK_Reset
+XK_Reset U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# XK_Execute (Action)
+0xff62	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Insert key
+0xff63	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Delete key
+0xffff	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Left key
+0xff51	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Home key
+0xff50	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# End key
+0xff57	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Up key
+0xff52	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Down key
+0xff54	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Prior key
+0xff55	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Next key
+0xff56	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Right key
+0xff53	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F1 key
+0xffbe	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F2 key
+0xffbf	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F3 key
+0xffc0	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F4 key
+0xffc1	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F5 key
+0xffc2	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F6 key
+0xffc3	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F7 key
+0xffc4	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F8 key
+0xffc5	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# f9 key
+0xffc6	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F10 key
+0xffc7	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F11 key
+0xffc8	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# F12 key
+0xffc9	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Print key
+0xff61	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Cancel key
+0xff69	U U U U U U U U U U U U U U U U U U U U 	\
+	U U U U U U U U U U U U U
+# Pause key
+0xff13	U 		U 		U 		U  	\
+	U 		XK_Break 	U 		U       \
+	U 		U 		XK_Break 	U       \
+	U 		U 		XK_Break 	U 	\
+	U 		U 		U 		U 	\
+	U U U U U U U U U U U U U
+# Break key
+0xff6b	'\x7f' 		XK_Break        XK_Break 	XK_Break  	\
+	XK_Break 	XK_Break 	XK_Break	XK_Break       \
+	XK_Break 	XK_Break 	XK_Break	XK_Break       \
+	XK_Break 	XK_Break 	XK_Break	XK_Break       \
+	XK_Break 	XK_Break 	XK_Break	XK_Break       \
+	U U U U U U U U U U U U U
+#	Declare States to be used. Since more then 32 states are used
+#	keycomp will automatically allocate 256 states.	Any state not mapped
+#	will be set to be UNBOUND. The #S control is done after the keypositions
+#	inorder to have to use only 16 states.	The #S is mapped into the
+#	already built states.
+# S 1 2 3 4 5 9 17 33 34 35 36 65 66 67 68 97 98 99 100
+#S 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+#M 19 100
+#M 18 99
+#M 17 98
+#M 16 97
+#M 15 68
+#M 14 67
+#M 13 66
+#M 12 65
+#M 11 36
+#M 10 35
+#M 9 34
+#M 8 33
+#M 7 17
+#M 6 9
+# ReMap other states to default states
+# ReMap is done at the end to help keycomp performance
+#M 5 6 7 8 13 14 15 16 21 22 23 24 29 30 31 32 37 38 39 40 45 46 47 48 53 54 55 56 61 62 63 64 69 70 71 72 77 78 79 80 85 86 87 88 93 94 95 96 101 102 103 104 109 110 111 112 117 118 119 120 125 126 127 128
+#M 9 10 11 12 25 26 27 28 41 42 43 44 57 58 59 60 73 74 75 76 89 90 91 92 105 106 107 108 121 122 123 124
+#M 17 18 19 20 49 50 51 52 81 82 83 84 113 114 115 116

@@ -1,0 +1,45 @@
+(ld): halt 4
+(ld): setopt strip 
+(ld): setopt member 
+(ld): savename rby_cdd
+(ld): filelist 4 7
+(ld): i cdd_entry.o
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a
+FILELIST: Number of previously inserted files processed: 4
+(ld): imports ../../../../../../../src/bos/kernel/exp/sysoverlay.exp 
+IMPORTS: Symbols imported from import file ../../../../../../../src/bos/kernel/exp/sysoverlay.exp: 7
+(ld): imports ../../../../../../../src/bos/kernel/exp/kernex.exp 
+IMPORTS: Symbols imported from import file ../../../../../../../src/bos/kernel/exp/kernex.exp: 514
+(ld): imports ../../../../../../../src/bos/kernel/exp/syscalls.exp 
+IMPORTS: Symbols imported from import file ../../../../../../../src/bos/kernel/exp/syscalls.exp: 247
+(ld): imports ../../../../../../../src/bos/kernel/exp/dead.exp 
+IMPORTS: Symbols imported from import file ../../../../../../../src/bos/kernel/exp/dead.exp: 5
+(ld): imports ../../../../../../../src/bos/kernel/exp/streams.exp 
+IMPORTS: Symbols imported from import file ../../../../../../../src/bos/kernel/exp/streams.exp: 6
+(ld): exports ../../../../../../../src/bos/kernext/disp/rby/cdd/rby_cdd.exp 
+EXPORTS: Symbols exported: 1
+(ld): entry cdd_entry
+ENTRY: Entry point set to cdd_entry
+(ld): resolve
+RESOLVE: 6 of 949 symbols were kept.
+(ld): addgl /aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o
+ADDGL: Glink code added for 0 symbols.
+(ld): er full
+ER: There are no unresolved symbols.
+(ld): mismatch
+MISMATCH: No type mismatches exist.
+(ld): comprld
+COMPRLD: Kept 55 of 55 relocation entries.
+(ld): origin 0x0 0x0
+(ld): save 1L .
+SAVE: Section sizes = 9448+116+0 (0x24E8+0x74+0x0 hex)
+SAVE: Size of TOC: 4 (0x4 hex)
+SAVE: These object files and archive members were
+	used to create the output file:
+ cdd_entry.o
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o]
+(ld): gen map rby_cdd.map
+(ld): rc
+RC: Highest return code was 0.

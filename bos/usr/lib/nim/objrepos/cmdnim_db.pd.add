@@ -1,0 +1,2634 @@
+/* @(#)94 1.67.1.8  src/bos/usr/lib/nim/objrepos/cmdnim_db.pd.add, cmdnim, bos41J, 9518A_all  4/27/95  09:38:32 */
+/*******************************************************************************
+*
+* COMPONENT_NAME: (CMDNIM) Network Install Manager
+*
+* FUNCTIONS: ./usr/lib/nim/objrepos/cmdnim_db.pd.add
+*
+* ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1993
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+********************************************************************************
+*
+*                             cmdnim_db.pd.add
+*
+* this file contains the NIM predefined information
+* it includes all of the NIM #defines
+* it also includes the message definitions which mkcatdefs creates, but which
+*		have been passed through an awk script to strip out structs
+******************************************************************************/
+
+#include "cmdnim_defines.h"
+#include "cmdnim_msgdefs.h"
+#include <sys/mode.h>
+
+/* currently, NIM is not allowing operations to be scheduled */
+#define ALLOW_SCHEDULING	0
+
+/*----------------------------- nim_pdattr -----------------------------*/
+/* the "type" field is used to group related attributes together */
+/* in order to ensure that queries match correctly, the "type" field must */
+/*		begin with a "," and each arg in the string must be followed by a "," */
+
+/*---------------------------- object classes */
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_CLASS,
+	type = ,ATTR_CLASS_MACHINES,
+	attr = ATTR_CLASS_MACHINES
+	name = ATTR_CLASS_MACHINES_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_CLASS_MACHINES
+	verbose_num = VERBOSE_ATTR_CLASS_MACHINES
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_CLASS,
+	type = ,ATTR_CLASS_RESOURCES,
+	attr = ATTR_CLASS_RESOURCES
+	name = ATTR_CLASS_RESOURCES_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_CLASS_RESOURCES
+	verbose_num = VERBOSE_ATTR_CLASS_RESOURCES
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_CLASS,
+	type = ,ATTR_CLASS_NETWORKS,
+	attr = ATTR_CLASS_NETWORKS
+	name = ATTR_CLASS_NETWORKS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_CLASS_NETWORKS
+	verbose_num = VERBOSE_ATTR_CLASS_NETWORKS
+
+nim_pdattr:
+	class = ATTR_CLASS_ATTRS
+	subclass = ,ATTR_SUBCLASS_CLASS,
+	type = ,ATTR_CLASS_ATTRS,
+	attr = ATTR_CLASS_ATTRS
+	name = ATTR_CLASS_ATTRS_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_CLASS_ATTRS
+	verbose_num = VERBOSE_ATTR_CLASS_ATTRS
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_CLASS,
+	type = ,ATTR_CLASS_STATES,
+	attr = ATTR_CLASS_STATES
+	name = ATTR_CLASS_STATES_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_CLASS_STATES
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_RESULTS
+	subclass = ,ATTR_SUBCLASS_CLASS,
+	type = ,ATTR_CLASS_RESULTS,
+	attr = ATTR_CLASS_RESULTS
+	name = ATTR_CLASS_RESULTS_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_CLASS_RESULTS
+	verbose_num = VERBOSE_ATTR_CLASS_RESULTS
+
+/*---------------------------- object subclasses */
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ATTR_SUBCLASS_TYPE
+	attr = ATTR_SUBCLASS_TYPE
+	name = ATTR_SUBCLASS_TYPE_T" = "ATTR_SUBCLASS_TYPE
+	mask = PDATTR_MASK_NOTHING
+	value = ATTR_SUBCLASS_TYPE_T
+	h_num = H_ATTR_SUBCLASS_TYPE
+	verbose_num = VERBOSE_ATTR_SUBCLASS_TYPE
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ATTR_SUBCLASS_OPERATION
+	attr = ATTR_SUBCLASS_OPERATION
+	name = ATTR_SUBCLASS_OPERATION_T" = "ATTR_SUBCLASS_OPERATION
+	mask = PDATTR_MASK_NOTHING
+	value = ATTR_SUBCLASS_OPERATION_T
+	h_num = H_ATTR_SUBCLASS_OPERATION
+	verbose_num = VERBOSE_ATTR_SUBCLASS_OPERATION
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ATTR_SUBCLASS_CONTROL
+	attr = ATTR_SUBCLASS_CONTROL
+	name = ATTR_SUBCLASS_CONTROL_T" = "ATTR_SUBCLASS_CONTROL
+	mask = PDATTR_MASK_NOTHING
+	value = ATTR_SUBCLASS_CONTROL_T
+	h_num = H_ATTR_SUBCLASS_CONTROL
+	verbose_num = VERBOSE_ATTR_SUBCLASS_CONTROL
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ATTR_SUBCLASS_ROS_SUPPORT
+	attr = ATTR_SUBCLASS_ROS_SUPPORT
+	name = ATTR_SUBCLASS_ROS_SUPPORT_T" = "ATTR_SUBCLASS_ROS_SUPPORT
+	mask = PDATTR_MASK_NOTHING
+	value = ATTR_SUBCLASS_ROS_SUPPORT_T
+	h_num = H_ATTR_SUBCLASS_ROS_SUPPORT
+	verbose_num = VERBOSE_ATTR_SUBCLASS_ROS_SUPPORT
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ATTR_SUBCLASS_PDIR_TYPE
+	attr = ATTR_SUBCLASS_PDIR_TYPE
+	name = ATTR_SUBCLASS_PDIR_TYPE_T" = "ATTR_SUBCLASS_PDIR_TYPE
+	mask = PDATTR_MASK_NOTHING
+	value = ATTR_SUBCLASS_PDIR_TYPE_T
+	h_num = H_ATTR_SUBCLASS_PDIR_TYPE
+	verbose_num = VERBOSE_ATTR_SUBCLASS_PDIR_TYPE
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ATTR_SUBCLASS_BOOT
+	attr = ATTR_SUBCLASS_BOOT
+	name = ATTR_SUBCLASS_BOOT_T" = "ATTR_SUBCLASS_BOOT
+	mask = PDATTR_MASK_NOTHING
+	value = ATTR_SUBCLASS_BOOT_T
+	h_num = H_ATTR_SUBCLASS_BOOT
+	verbose_num = VERBOSE_ATTR_SUBCLASS_BOOT
+
+/*---------------------------- object subclasses which user can use */
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_CLASS
+	attr = ATTR_SUBCLASS_CLASS
+	name = ATTR_SUBCLASS_CLASS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_CLASS_T
+	h_num = H_ATTR_SUBCLASS_CLASS
+	verbose_num = VERBOSE_ATTR_SUBCLASS_CLASS
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_PLATFORM
+	attr = ATTR_SUBCLASS_PLATFORM
+	name = ATTR_SUBCLASS_PLATFORM_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_PLATFORM_T
+	h_num = H_ATTR_SUBCLASS_PLATFORM
+	verbose_num = VERBOSE_ATTR_SUBCLASS_PLATFORM
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_RS6K
+	attr = ATTR_SUBCLASS_RS6K
+	name = ATTR_SUBCLASS_RS6K_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_RS6K_T
+	h_num = H_ATTR_SUBCLASS_RS6K
+	verbose_num = VERBOSE_ATTR_SUBCLASS_RS6K
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_RS6KSMP
+	attr = ATTR_SUBCLASS_RS6KSMP
+	name = ATTR_SUBCLASS_RS6KSMP_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_RS6KSMP_T
+	h_num = H_ATTR_SUBCLASS_RS6KSMP
+	verbose_num = VERBOSE_ATTR_SUBCLASS_RS6KSMP
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_RSPC
+	attr = ATTR_SUBCLASS_RSPC
+	name = ATTR_SUBCLASS_RSPC_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_RSPC_T
+	h_num = H_ATTR_SUBCLASS_RSPC
+	verbose_num = VERBOSE_ATTR_SUBCLASS_RSPC
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_INFO
+	attr = ATTR_SUBCLASS_INFO
+	name = ATTR_SUBCLASS_INFO_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_INFO_T
+	h_num = H_ATTR_SUBCLASS_INFO
+	verbose_num = VERBOSE_ATTR_CLASS_ATTRS
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_CLASS_FLAGS
+	attr = ATTR_CLASS_FLAGS
+	name = ATTR_CLASS_FLAGS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_CLASS_FLAGS_T
+	h_num = H_ATTR_SUBCLASS_FLAGS
+	verbose_num = VERBOSE_ATTR_CLASS_ATTRS
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_SEQNO
+	attr = ATTR_SUBCLASS_SEQNO
+	name = ATTR_SUBCLASS_SEQNO_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_SEQNO_T
+	h_num = H_ATTR_SUBCLASS_SEQNO
+	verbose_num = VERBOSE_ATTR_SUBCLASS_SEQNO
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_IF
+	attr = ATTR_SUBCLASS_IF
+	name = ATTR_SUBCLASS_IF_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_IF_T
+	h_num = H_ATTR_SUBCLASS_IF
+	verbose_num = VERBOSE_ATTR_SUBCLASS_IF
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_DKLS_RES
+	attr = ATTR_SUBCLASS_DKLS_RES
+	name = ATTR_SUBCLASS_DKLS_RES_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_DKLS_RES_T
+	h_num = H_ATTR_SUBCLASS_DKLS_RES
+	verbose_num = VERBOSE_ATTR_SUBCLASS_DKLS_RES
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_DTLS_RES
+	attr = ATTR_SUBCLASS_DTLS_RES
+	name = ATTR_SUBCLASS_DTLS_RES_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_DTLS_RES_T
+	h_num = H_ATTR_SUBCLASS_DTLS_RES
+	verbose_num = VERBOSE_ATTR_SUBCLASS_DTLS_RES
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_STD_RES
+	attr = ATTR_SUBCLASS_STD_RES
+	name = ATTR_SUBCLASS_STD_RES_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_STD_RES_T
+	h_num = H_ATTR_SUBCLASS_STD_RES
+	verbose_num = VERBOSE_ATTR_SUBCLASS_STD_RES
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_MSTR_RES
+	attr = ATTR_SUBCLASS_MSTR_RES
+	name = ATTR_SUBCLASS_MSTR_RES_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_MSTR_RES_T
+	h_num = H_ATTR_SUBCLASS_MSTR_RES
+	verbose_num = VERBOSE_ATTR_SUBCLASS_MSTR_RES
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_PULL_OPS
+	attr = ATTR_SUBCLASS_PULL_OPS
+	name = ATTR_SUBCLASS_PULL_OPS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_PULL_OPS_T
+	h_num = H_ATTR_SUBCLASS_PULL_OPS
+	verbose_num = VERBOSE_ATTR_SUBCLASS_PULL_OPS
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_BOS
+	attr = ATTR_SUBCLASS_BOS
+	name = ATTR_SUBCLASS_BOS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_BOS_T
+	h_num = H_ATTR_SUBCLASS_BOS
+	verbose_num = VERBOSE_ATTR_SUBCLASS_BOS
+
+nim_pdattr:
+	class = ATTR_SUBCLASS
+	subclass = ,ATTR_SUBCLASS,
+	type = ATTR_SUBCLASS_CUST
+	attr = ATTR_SUBCLASS_CUST
+	name = ATTR_SUBCLASS_CUST_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_SUBCLASS_CUST_T
+	h_num = H_ATTR_SUBCLASS_CUST
+	verbose_num = VERBOSE_ATTR_SUBCLASS_CUST
+
+/*---------------------------- machine types */
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_RS6K,
+	type = ""
+	attr = ATTR_DISKLESS
+	name = ATTR_DISKLESS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_DISKLESS
+	verbose_num = VERBOSE_ATTR_DISKLESS
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_RS6K,
+	type = ""
+	attr = ATTR_DATALESS
+	name = ATTR_DATALESS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_DATALESS
+	verbose_num = VERBOSE_ATTR_DATALESS
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_RS6K,ATTR_SUBCLASS_RS6KSMP,\
+ATTR_SUBCLASS_RSPC,
+	type = ""
+	attr = ATTR_STANDALONE
+	name = ATTR_STANDALONE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_STANDALONE
+	verbose_num = VERBOSE_ATTR_STANDALONE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_RS6K,ATTR_SUBCLASS_RS6KSMP,\
+ATTR_SUBCLASS_RSPC,
+	type = ""
+	attr = ATTR_MASTER
+	name = ATTR_MASTER_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_MASTER
+	verbose_num = VERBOSE_ATTR_MASTER
+
+/*---------------------------- machine actions */
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_MASTER,
+	attr = ATTR_UNCONFIG
+	name = ATTR_UNCONFIG_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_UNCONFIG
+	h_num = H_ATTR_UNCONFIG
+	verbose_num = VERBOSE_ATTR_UNCONFIG
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,
+	attr = ATTR_DEFINE
+	name = ATTR_DEFINE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MKMAC
+	h_num = H_ATTR_DEFINE
+	verbose_num = VERBOSE_ATTR_DEFINE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_MASTER,
+	attr = ATTR_CHANGE
+	name = ATTR_CHANGE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CHMASTER
+	h_num = H_ATTR_CHANGE
+	verbose_num = VERBOSE_ATTR_CHANGE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,
+	attr = ATTR_CHANGE
+	name = ATTR_CHANGE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CHMAC
+	h_num = H_ATTR_CHANGE
+	verbose_num = VERBOSE_ATTR_CHANGE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,
+	attr = ATTR_REMOVE
+	name = ATTR_REMOVE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_RMMAC
+	h_num = H_ATTR_REMOVE
+	verbose_num = VERBOSE_ATTR_REMOVE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_PULL_OPS,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_ALLOCATE
+	name = ATTR_ALLOCATE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_ALLOCATE
+	h_num = H_ATTR_ALLOCATE
+	verbose_num = VERBOSE_ATTR_ALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_PULL_OPS,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_DEALLOCATE
+	name = ATTR_DEALLOCATE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_DEALLOCATE
+	h_num = H_ATTR_DEALLOCATE
+	verbose_num = VERBOSE_ATTR_DEALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_DISKLESS,
+	attr = ATTR_DKLS_INIT
+	name = ATTR_DKLS_INIT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_DKLS_INST
+	h_num = H_ATTR_DKLS_INIT
+	verbose_num = VERBOSE_ATTR_DKLS_INIT
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_DATALESS,
+	attr = ATTR_DTLS_INIT
+	name = ATTR_DTLS_INIT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_DTLS_INST
+	h_num = H_ATTR_DTLS_INIT
+	verbose_num = VERBOSE_ATTR_DTLS_INIT
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,
+	attr = ATTR_DIAG
+	name = ATTR_DIAG_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_DIAG
+	h_num = H_ATTR_DIAG
+	verbose_num = VERBOSE_ATTR_DIAG
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,\
+ATTR_SUBCLASS_PULL_OPS,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_CUST
+	name = ATTR_CUST_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CUST
+	h_num = H_ATTR_CUST
+	verbose_num = VERBOSE_ATTR_CUST
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,\
+ATTR_SUBCLASS_PULL_OPS,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_BOS_INST
+	name = ATTR_BOS_INST_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_BOS_INST
+	h_num = H_ATTR_BOS_INST
+	verbose_num = VERBOSE_ATTR_BOS_INST
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_MAINT
+	name = ATTR_MAINT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MAINT
+	h_num = H_ATTR_MAINT
+	verbose_num = VERBOSE_ATTR_MAINT
+
+#if ALLOW_SCHEDULING
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_SCHEDULE
+	name = ATTR_SCHEDULE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_SCHEDULE
+	h_num = H_ATTR_SCHEDULE
+	verbose_num = VERBOSE_ATTR_SCHEDULE
+#endif
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_ABORT
+	name = ATTR_ABORT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_ABORT
+	h_num = H_ATTR_ABORT
+	verbose_num = VERBOSE_ATTR_ABORT
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_LSLPP
+	name = ATTR_LSLPP_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_LSLPP
+	h_num = H_ATTR_LSLPP
+	verbose_num = VERBOSE_ATTR_LSLPP
+
+nim_pdattr:
+        class = ATTR_CLASS_MACHINES
+        subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+        type = ,ATTR_STANDALONE,ATTR_MASTER,
+        attr = ATTR_FIXQUERY
+        name = ATTR_FIXQUERY_T
+        mask = PDATTR_MASK_DISPLAY
+        value = M_FIXQUERY
+        h_num = H_ATTR_FIXQUERY
+        verbose_num = VERBOSE_ATTR_FIXQUERY
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,
+	attr = ATTR_CHECK
+	name = ATTR_CHECK_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CKMAC
+	h_num = H_ATTR_CHECK
+	verbose_num = VERBOSE_ATTR_CHECK
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_REBOOT
+	name = ATTR_REBOOT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_REBOOT
+	h_num = H_ATTR_REBOOT
+	verbose_num = VERBOSE_ATTR_REBOOT
+
+
+/*---------------------------- machine platform info */
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_PLATFORM,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_RS6K
+	name = ATTR_RS6K_T
+	mask = PDATTR_MASK_DISPLAY
+	value = "unix_up"
+	h_num = H_ATTR_RS6K
+	verbose_num = VERBOSE_ATTR_RS6K
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_PLATFORM,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_RS6KSMP
+	name = ATTR_RS6KSMP_T
+	mask = PDATTR_MASK_DISPLAY
+	value = "unix_mp"
+	h_num = H_ATTR_RS6KSMP
+	verbose_num = VERBOSE_ATTR_RS6KSMP
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_PLATFORM,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_RSPC
+	name = ATTR_RSPC_T
+	mask = PDATTR_MASK_DISPLAY
+	value = "unix_up"
+	h_num = H_ATTR_RSPC
+	verbose_num = VERBOSE_ATTR_RSPC
+
+/*---------------------------- customizable machine info */
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_RESERVED
+	name = ATTR_RESERVED_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_RESERVED
+	verbose_num = VERBOSE_ATTR_RESERVED
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_CONTROL
+	name = ATTR_CONTROL_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_CONTROL
+	verbose_num = VERBOSE_ATTR_CONTROL
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_INFO
+	name = ATTR_INFO_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_INFO
+	verbose_num = VERBOSE_ATTR_INFO
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_MISSING
+	name = ATTR_MISSING_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_MISSING
+	verbose_num = VERBOSE_ATTR_MISSING
+
+/* seqno required here because each trans event must be unique in order to */
+/*		delete them correctly - look at the exec_trans_event function */
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_TRANS
+	name = ATTR_TRANS_T
+	mask = PDATTR_MASK_SEQNO_REQ
+	value = ""
+	h_num = H_ATTR_TRANS
+	verbose_num = VERBOSE_ATTR_TRANS
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_ROOT_INITIALIZED
+	name = ATTR_ROOT_INITIALIZED_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_ROOT_INITIALIZED
+	verbose_num = VERBOSE_ATTR_ROOT_INITIALIZED
+
+#if ALLOW_SCHEDULING
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_AT
+	name = ATTR_AT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_AT
+	verbose_num = VERBOSE_ATTR_AT
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_AT_ARG
+	name = ATTR_AT_ARG_T
+	mask = PDATTR_MASK_SEQNO_REQ
+	value = ""
+	h_num = H_ATTR_AT_ARG
+	verbose_num = VERBOSE_ATTR_AT_ARG
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_AT_JOB
+	name = ATTR_AT_JOB_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_AT_JOB
+	verbose_num = VERBOSE_ATTR_AT_JOB
+#endif
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_LOCKED
+	name = ATTR_LOCKED_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_LOCKED
+	verbose_num = VERBOSE_ATTR_LOCKED
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_BOOT_INFO
+	name = ATTR_BOOT_INFO_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = 0
+	verbose_num = VERBOSE_ATTR_BOOT_INFO
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_EXPORTED
+	name = ATTR_EXPORTED_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_EXPORTED
+	verbose_num = VERBOSE_ATTR_EXPORTED
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_COMMENTS
+	name = ATTR_COMMENTS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_COMMENTS
+	verbose_num = VERBOSE_ATTR_COMMENTS
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_MSTATE
+	name = ATTR_MSTATE_T
+	mask = PDATTR_MASK_STATE
+	value = STATE_SHUTDOWN_T
+	h_num = H_ATTR_MSTATE
+	verbose_num = VERBOSE_ATTR_MSTATE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_CSTATE
+	name = ATTR_CSTATE_T
+	mask = PDATTR_MASK_STATE
+	value = STATE_INCOMPLETE_T
+	h_num = H_ATTR_CSTATE
+	verbose_num = VERBOSE_ATTR_CSTATE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_CRESULT
+	name = ATTR_CRESULT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_CRESULT
+	verbose_num = VERBOSE_ATTR_CRESULT
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_PREV_STATE
+	name = ATTR_PREV_STATE_T
+	mask = PDATTR_MASK_STATE
+	value = ""
+	h_num = H_ATTR_PREV_STATE
+	verbose_num = VERBOSE_ATTR_PREV_STATE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_SERVES
+	name = ATTR_SERVES_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_SERVES
+	verbose_num = VERBOSE_ATTR_SERVES
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_IF,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_IF
+	name = ATTR_IF_T
+	mask = PDATTR_MASK_SEQNO
+	value = ""
+	h_num = H_ATTR_IF
+	verbose_num = VERBOSE_ATTR_IF
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_CPUID
+	name = ATTR_CPUID_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_CPUID
+	verbose_num = VERBOSE_ATTR_CPUID
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_IF,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_RING_SPEED
+	name = ATTR_RING_SPEED_T
+	mask = PDATTR_MASK_SEQNO
+	value = "16"
+	h_num = H_ATTR_RING_SPEED
+	verbose_num = VERBOSE_ATTR_RING_SPEED
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_IF,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_CABLE_TYPE
+	name = ATTR_CABLE_TYPE_T
+	mask = PDATTR_MASK_SEQNO
+	value = "bnc"
+	h_num = H_ATTR_CABLE_TYPE
+	verbose_num = VERBOSE_ATTR_CABLE_TYPE
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,
+	attr = ATTR_IPLROM_EMU
+	name = ATTR_IPLROM_EMU_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_IPLROM_EMU
+	verbose_num = VERBOSE_ATTR_IPLROM_EMU
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_MASTER,
+	attr = ATTR_MASTER_PORT
+	name = ATTR_MASTER_PORT_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = "1058"
+	h_num = H_ATTR_MASTER_PORT
+	verbose_num = VERBOSE_ATTR_MASTER_PORT
+
+nim_pdattr:
+	class = ATTR_CLASS_MACHINES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_PLATFORM
+	name = ATTR_PLATFORM_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ATTR_RS6K_T
+	h_num = H_ATTR_PLATFORM
+	verbose_num = VERBOSE_ATTR_PLATFORM
+
+/*---------------------------- resource types */
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_BOOT,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,ATTR_SUBCLASS_STD_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,
+	attr = ATTR_BOOT
+	name = ATTR_BOOT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_BOOT
+	verbose_num = VERBOSE_ATTR_BOOT
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_BOOT,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,ATTR_SUBCLASS_STD_RES,\
+ATTR_SUBCLASS_MSTR_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_NIM_SCRIPT
+	name = ATTR_NIM_SCRIPT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_NIM_SCRIPT
+	verbose_num = VERBOSE_ATTR_NIM_SCRIPT
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_BOS,ATTR_SUBCLASS_ONLY_1,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,ATTR_SUBCLASS_STD_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_SPOT
+	name = ATTR_SPOT_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SPOT
+	verbose_num = VERBOSE_ATTR_SPOT
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_PDIR_TYPE,ATTR_SUBCLASS_ONLY_1,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_ROOT
+	name = ATTR_ROOT_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_ROOT
+	verbose_num = VERBOSE_ATTR_ROOT
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_PDIR_TYPE,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_PAGING
+	name = ATTR_PAGING_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_PAGING
+	verbose_num = VERBOSE_ATTR_PAGING
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_PDIR_TYPE,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_DUMP
+	name = ATTR_DUMP_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_DUMP
+	verbose_num = VERBOSE_ATTR_DUMP
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_PDIR_TYPE,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_HOME
+	name = ATTR_HOME_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_HOME
+	verbose_num = VERBOSE_ATTR_HOME
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_SHARED_HOME
+	name = ATTR_SHARED_HOME_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SHARED_HOME
+	verbose_num = VERBOSE_ATTR_SHARED_HOME
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_PDIR_TYPE,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_TMP
+	name = ATTR_TMP_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_TMP
+	verbose_num = VERBOSE_ATTR_TMP
+
+/*------------------------------- README --------------------------------------
+ * the log resource has been remove for now because:
+ *   1) it can't be used with standalone installs because the
+ *      bos.sysmgt.serv_aid fileset installs stuff into /var/adm/ras, which
+ *      means that it won't end up on the target when a log resource is used
+ *   2) if it's used for diskless/dataless, it's only mounted during the boot
+ *      process, which means the info that gets generated during a root sync
+ *      operation will not be in the client's log directory (it'll be in its
+ *      root directory) */
+#if 0
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_PDIR_TYPE,\
+ATTR_SUBCLASS_DKLS_RES,ATTR_SUBCLASS_DTLS_RES,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_LOG
+	name = ATTR_LOG_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_LOG
+	verbose_num = VERBOSE_ATTR_LOG
+#endif
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_CUST,ATTR_SUBCLASS_STD_RES,\
+ATTR_SUBCLASS_MSTR_RES,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+	attr = ATTR_LPP_SOURCE
+	name = ATTR_LPP_SOURCE_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_LPP_SOURCE
+	verbose_num = VERBOSE_ATTR_LPP_SOURCE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_CUST,ATTR_SUBCLASS_STD_RES,\
+ATTR_SUBCLASS_MSTR_RES,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+	attr = ATTR_INSTALLP_BUNDLE
+	name = ATTR_INSTALLP_BUNDLE_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_INSTALLP_BUNDLE
+	verbose_num = VERBOSE_ATTR_INSTALLP_BUNDLE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_CUST,ATTR_SUBCLASS_STD_RES,\
+ATTR_SUBCLASS_MSTR_RES,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+	attr = ATTR_FIX_BUNDLE
+	name = ATTR_FIX_BUNDLE_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_FIX_BUNDLE
+	verbose_num = VERBOSE_ATTR_FIX_BUNDLE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_STD_RES,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_BOSINST_DATA
+	name = ATTR_BOSINST_DATA_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_BOSINST_DATA
+	verbose_num = VERBOSE_ATTR_BOSINST_DATA
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_ONLY_1,ATTR_SUBCLASS_STD_RES,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_IMAGE_DATA
+	name = ATTR_IMAGE_DATA_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_IMAGE_DATA
+	verbose_num = VERBOSE_ATTR_IMAGE_DATA
+
+/* NOTE that the following object is NOT a resource type! */
+/* it is included in the database because it IS a member of the bos_subclass */
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_BOS,
+	type = ,ATTR_SPOT,
+	attr = ATTR_RTE
+	name = ATTR_RTE_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_RTE
+	verbose_num = VERBOSE_ATTR_RTE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_BOS,ATTR_SUBCLASS_ONLY_1,\
+ATTR_SUBCLASS_STD_RES,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,
+	attr = ATTR_MKSYSB
+	name = ATTR_MKSYSB_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_MKSYSB
+	verbose_num = VERBOSE_ATTR_MKSYSB
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_SUBCLASS_CUST,ATTR_SUBCLASS_STD_RES,\
+ATTR_SUBCLASS_MSTR_RES,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+	attr = ATTR_SCRIPT
+	name = ATTR_SCRIPT_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SCRIPT
+	verbose_num = VERBOSE_ATTR_SCRIPT
+
+/*---------------------------- resource actions */
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_SHARED_HOME,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_SCRIPT\
+,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE,
+	attr = ATTR_DEFINE
+	name = ATTR_DEFINE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MKRES
+	h_num = H_ATTR_DEFINE
+	verbose_num = VERBOSE_ATTR_DEFINE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_MKSYSB,
+	attr = ATTR_DEFINE
+	name = ATTR_DEFINE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MKBOSI
+	h_num = H_ATTR_DEFINE
+	verbose_num = VERBOSE_ATTR_DEFINE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_LPP_SOURCE,
+	attr = ATTR_DEFINE
+	name = ATTR_DEFINE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MK_LPP_SOURCE
+	h_num = H_ATTR_DEFINE
+	verbose_num = VERBOSE_ATTR_DEFINE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_SPOT,
+	attr = ATTR_DEFINE
+	name = ATTR_DEFINE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MKSPOT
+	h_num = H_ATTR_DEFINE
+	verbose_num = VERBOSE_ATTR_DEFINE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_PDIR_TYPE,
+	type = ,ATTR_ROOT,ATTR_HOME,ATTR_PAGING,ATTR_DUMP,ATTR_TMP,ATTR_LOG,
+	attr = ATTR_DEFINE
+	name = ATTR_DEFINE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MKPDIR
+	h_num = H_ATTR_DEFINE
+	verbose_num = VERBOSE_ATTR_DEFINE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB,ATTR_SCRIPT,
+	attr = ATTR_CHANGE
+	name = ATTR_CHANGE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CHRES
+	h_num = H_ATTR_CHANGE
+	verbose_num = VERBOSE_ATTR_CHANGE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_PDIR_TYPE,
+	type = ,ATTR_ROOT,ATTR_HOME,ATTR_PAGING,ATTR_DUMP,ATTR_TMP,ATTR_LOG\
+,ATTR_LPP_SOURCE,
+	attr = ATTR_REMOVE
+	name = ATTR_REMOVE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_RMPDIR
+	h_num = H_ATTR_REMOVE
+	verbose_num = VERBOSE_ATTR_REMOVE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB,ATTR_SCRIPT\
+,ATTR_INSTALLP_BUNDLE,ATTR_SHARED_HOME,ATTR_FIX_BUNDLE,
+	attr = ATTR_REMOVE
+	name = ATTR_REMOVE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_RMRES
+	h_num = H_ATTR_REMOVE
+	verbose_num = VERBOSE_ATTR_REMOVE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_SPOT,
+	attr = ATTR_REMOVE
+	name = ATTR_REMOVE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_RMSPOT
+	h_num = H_ATTR_REMOVE
+	verbose_num = VERBOSE_ATTR_REMOVE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_SPOT,
+	attr = ATTR_CUST
+	name = ATTR_CUST_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_INSTSPOT
+	h_num = H_ATTR_CUST
+	verbose_num = VERBOSE_ATTR_CUST
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_SPOT,
+	attr = ATTR_SYNC_ROOTS
+	name = ATTR_SYNC_ROOTS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_SYNC_ROOTS
+	h_num = H_ATTR_SYNC_ROOTS
+	verbose_num = VERBOSE_ATTR_SYNC_ROOTS
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_SPOT,
+	attr = ATTR_MAINT
+	name = ATTR_MAINT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_SPOTMAINT
+	h_num = H_ATTR_MAINT
+	verbose_num = VERBOSE_ATTR_MAINT
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_SPOT,
+	attr = ATTR_LSLPP
+	name = ATTR_LSLPP_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_LSLPP
+	h_num = H_ATTR_LSLPP
+	verbose_num = VERBOSE_ATTR_LSLPP
+
+nim_pdattr:
+        class = ATTR_CLASS_RESOURCES
+        subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+        type = ,ATTR_SPOT,
+        attr = ATTR_FIXQUERY
+        name = ATTR_FIXQUERY_T
+        mask = PDATTR_MASK_DISPLAY
+        value = M_FIXQUERY
+        h_num = H_ATTR_FIXQUERY
+        verbose_num = VERBOSE_ATTR_FIXQUERY
+
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_SPOT,
+	attr = ATTR_CHECK
+	name = ATTR_CHECK_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CKSPOT
+	h_num = H_ATTR_CHECK
+	verbose_num = VERBOSE_ATTR_CHECK
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_LPP_SOURCE,
+	attr = ATTR_LSLPP
+	name = ATTR_LSLPP_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_LS_LPP_SOURCE
+	h_num = H_ATTR_LSLPP
+	verbose_num = VERBOSE_ATTR_LSLPP
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_OPERATION,ATTR_SUBCLASS_CONTROL,
+	type = ,ATTR_LPP_SOURCE,
+	attr = ATTR_CHECK
+	name = ATTR_CHECK_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CK_LPP_SOURCE
+	h_num = H_ATTR_CHECK
+	verbose_num = VERBOSE_ATTR_CHECK
+
+/*---------------------------- methods for internal use only */
+
+/* README: the subclass in the following objects are NULL for a reason - we */
+/*		don't want these operations to appear as a user-executable operations; */
+/*		they will only be executed internally by NIM */
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_SPOT,
+	attr = ATTR_ALLOCATE
+	name = ATTR_ALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_ALLOC_SPOT
+	h_num = H_ATTR_ALLOCATE
+	verbose_num = VERBOSE_ATTR_ALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_SPOT,
+	attr = ATTR_DEALLOCATE
+	name = ATTR_DEALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_DEALLOC_SPOT
+	h_num = H_ATTR_DEALLOCATE
+	verbose_num = VERBOSE_ATTR_DEALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_BOOT,
+	attr = ATTR_ALLOCATE
+	name = ATTR_ALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_ALLOC_BOOT
+	h_num = H_ATTR_ALLOCATE
+	verbose_num = VERBOSE_ATTR_ALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_BOOT,
+	attr = ATTR_DEALLOCATE
+	name = ATTR_DEALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_DEALLOC_BOOT
+	h_num = H_ATTR_DEALLOCATE
+	verbose_num = VERBOSE_ATTR_DEALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_NIM_SCRIPT,
+	attr = ATTR_ALLOCATE
+	name = ATTR_ALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_ALLOC_NS
+	h_num = H_ATTR_ALLOCATE
+	verbose_num = VERBOSE_ATTR_ALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_NIM_SCRIPT,
+	attr = ATTR_DEALLOCATE
+	name = ATTR_DEALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_DEALLOC_NS
+	h_num = H_ATTR_DEALLOCATE
+	verbose_num = VERBOSE_ATTR_DEALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_ROOT,ATTR_HOME,ATTR_PAGING,ATTR_DUMP,ATTR_TMP,ATTR_LOG,
+	attr = ATTR_ALLOCATE
+	name = ATTR_ALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_ALLOC_PDIR
+	h_num = H_ATTR_ALLOCATE
+	verbose_num = VERBOSE_ATTR_ALLOCATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ""
+	type = ,ATTR_ROOT,ATTR_HOME,ATTR_PAGING,ATTR_DUMP,ATTR_TMP,ATTR_LOG,
+	attr = ATTR_DEALLOCATE
+	name = ATTR_DEALLOCATE_T
+	mask = PDATTR_MASK_NOTHING
+	value = M_DEALLOC_PDIR
+	h_num = H_ATTR_DEALLOCATE
+	verbose_num = VERBOSE_ATTR_DEALLOCATE
+
+/*---------------------------- customizable resource info */
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_RESERVED
+	name = ATTR_RESERVED_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_RESERVED
+	verbose_num = VERBOSE_ATTR_RESERVED
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_INSTALLP_BUNDLE,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA\
+,ATTR_MKSYSB,ATTR_SCRIPT,ATTR_FIX_BUNDLE,
+	attr = ATTR_MODE
+	name = ATTR_MODE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = "0100444"
+	h_num = H_ATTR_MODE
+	verbose_num = VERBOSE_ATTR_MODE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_INFO
+	name = ATTR_INFO_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_INFO
+	verbose_num = VERBOSE_ATTR_INFO
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_MISSING
+	name = ATTR_MISSING_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_MISSING
+	verbose_num = VERBOSE_ATTR_MISSING
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_TRANS
+	name = ATTR_TRANS_T
+	mask = PDATTR_MASK_SEQNO_REQ
+	value = ""
+	h_num = H_ATTR_TRANS
+	verbose_num = VERBOSE_ATTR_TRANS
+
+#if ALLOW_SCHEDULING
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_AT
+	name = ATTR_AT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_AT
+	verbose_num = VERBOSE_ATTR_AT
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_AT_ARG
+	name = ATTR_AT_ARG_T
+	mask = PDATTR_MASK_SEQNO_REQ
+	value = ""
+	h_num = H_ATTR_AT_ARG
+	verbose_num = VERBOSE_ATTR_AT_ARG
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_AT_JOB
+	name = ATTR_AT_JOB_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_AT_JOB
+	verbose_num = VERBOSE_ATTR_AT_JOB
+#endif
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_LOCKED
+	name = ATTR_LOCKED_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_LOCKED
+	verbose_num = VERBOSE_ATTR_LOCKED
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_COMMENTS
+	name = ATTR_COMMENTS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_COMMENTS
+	verbose_num = VERBOSE_ATTR_COMMENTS
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_RSTATE
+	name = ATTR_RSTATE_T
+	mask = PDATTR_MASK_STATE
+	value = STATE_INCOMPLETE_T
+	h_num = H_ATTR_RSTATE
+	verbose_num = VERBOSE_ATTR_RSTATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_PREV_STATE
+	name = ATTR_PREV_STATE_T
+	mask = PDATTR_MASK_STATE
+	value = STATE_INCOMPLETE_T
+	h_num = H_ATTR_PREV_STATE
+	verbose_num = VERBOSE_ATTR_PREV_STATE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_ALLOC_COUNT
+	name = ATTR_ALLOC_COUNT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_ALLOC_COUNT
+	verbose_num = VERBOSE_ATTR_ALLOC_COUNT
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_SERVER
+	name = ATTR_SERVER_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SERVER
+	verbose_num = VERBOSE_ATTR_SERVER
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_LOCATION
+	name = ATTR_LOCATION_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_LOCATION
+	verbose_num = VERBOSE_ATTR_LOCATION
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_FIRST_DIR
+	name = ATTR_FIRST_DIR_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_FIRST_DIR
+	verbose_num = VERBOSE_ATTR_FIRST_DIR
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,ATTR_SHARED_HOME\
+,ATTR_TMP,ATTR_LOG,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_FIX_BUNDLE\
+,ATTR_BOSINST_DATA,ATTR_IMAGE_DATA,ATTR_MKSYSB\
+,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_BOOT,
+	attr = ATTR_DIR_CREATED
+	name = ATTR_DIR_CREATED_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_DIR_CREATED
+	verbose_num = VERBOSE_ATTR_DIR_CREATED
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_LPP_SOURCE,ATTR_INSTALLP_BUNDLE,ATTR_BOSINST_DATA\
+,ATTR_IMAGE_DATA,ATTR_MKSYSB,ATTR_SCRIPT,ATTR_NIM_SCRIPT,ATTR_FIX_BUNDLE,
+	attr = ATTR_NFS_PERMS
+	name = ATTR_NFS_PERMS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_NFS_RO_T
+	h_num = H_ATTR_NFS_PERMS
+	verbose_num = VERBOSE_ATTR_NFS_PERMS
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_ROOT,ATTR_PAGING,ATTR_DUMP,ATTR_HOME,\
+ATTR_SHARED_HOME,ATTR_TMP,ATTR_LOG, 
+	attr = ATTR_NFS_PERMS
+	name = ATTR_NFS_PERMS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ATTR_NFS_RW_T 
+	h_num = H_ATTR_NFS_PERMS
+	verbose_num = VERBOSE_ATTR_NFS_PERMS
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_LPP_SOURCE,
+	attr = ATTR_SIMAGES
+	name = ATTR_SIMAGES_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SIMAGES
+	verbose_num = VERBOSE_ATTR_SIMAGES
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_LPP_SOURCE,
+	attr = ATTR_CDROM
+	name = ATTR_CDROM_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_CDROM
+	verbose_num = VERBOSE_ATTR_CDROM
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_MKSYSB,
+	attr = ATTR_VERSION
+	name = ATTR_VERSION_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = "4"
+	h_num = H_ATTR_VERSION
+	verbose_num = VERBOSE_ATTR_VERSION
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_MKSYSB,
+	attr = ATTR_RELEASE
+	name = ATTR_RELEASE_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = "1"
+	h_num = H_ATTR_RELEASE
+	verbose_num = VERBOSE_ATTR_RELEASE
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,ATTR_MKSYSB,
+	attr = ATTR_LEVEL
+	name = ATTR_LEVEL_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_LEVEL
+	verbose_num = VERBOSE_ATTR_LEVEL
+
+/*------------------------ SPOT specific attrs --------------*/
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,
+	attr = ATTR_ENTER_DBG
+	name = ATTR_ENTER_DBG_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_ENTER_DBG
+	verbose_num = VERBOSE_ATTR_ENTER_DBG
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,
+	attr = ATTR_SPOT_OPTIONS
+	name = ATTR_SPOT_OPTIONS_T
+	mask = PDATTR_MASK_DISPLAY
+	value = "\
+bos.rte.com \
+bos.rte.up \
+bos.rte.mp \
+bos.sysmgt.nim.client \
+bos.sysmgt.nim.spot \
+bos.sysmgt.sysbr \
+bos.dev.all \
+bos.net.tcpip.client \
+bos.net.nfs.client"
+	h_num = H_ATTR_SPOT_OPTIONS
+	verbose_num = VERBOSE_ATTR_SPOT_OPTIONS
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,
+	attr = ATTR_IF_SUPPORTED
+	name = ATTR_IF_SUPPORTED_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_IF_SUPPORTED
+	verbose_num = VERBOSE_ATTR_IF_SUPPORTED
+
+nim_pdattr:
+	class = ATTR_CLASS_RESOURCES
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_SPOT,
+	attr = ATTR_MK_NETBOOT
+	name = ATTR_MK_NETBOOT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_MK_NETBOOT
+	verbose_num = VERBOSE_ATTR_MK_NETBOOT
+
+
+/*---------------------------- network types */
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ""
+	attr = ATTR_TOK
+	name = ATTR_TOK_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_TOK
+	verbose_num = VERBOSE_ATTR_TOK
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ""
+	attr = ATTR_ENT
+	name = ATTR_ENT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_ENT
+	verbose_num = VERBOSE_ATTR_ENT
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_TYPE,
+	type = ""
+	attr = ATTR_FDDI
+	name = ATTR_FDDI_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_FDDI
+	verbose_num = VERBOSE_ATTR_FDDI
+
+/*---------------------------- network actions */
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_DEFINE
+	name = ATTR_DEFINE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_MKNET
+	h_num = H_ATTR_DEFINE
+	verbose_num = VERBOSE_ATTR_DEFINE
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_CHANGE
+	name = ATTR_CHANGE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_CHNET
+	h_num = H_ATTR_CHANGE
+	verbose_num = VERBOSE_ATTR_CHANGE
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_OPERATION,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_REMOVE
+	name = ATTR_REMOVE_T
+	mask = PDATTR_MASK_DISPLAY
+	value = M_RMNET
+	h_num = H_ATTR_REMOVE
+	verbose_num = VERBOSE_ATTR_REMOVE
+
+/*---------------------------- customizable network info */
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_RESERVED
+	name = ATTR_RESERVED_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_RESERVED
+	verbose_num = VERBOSE_ATTR_RESERVED
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_INFO
+	name = ATTR_INFO_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_INFO
+	verbose_num = VERBOSE_ATTR_INFO
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_MISSING
+	name = ATTR_MISSING_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_MISSING
+	verbose_num = VERBOSE_ATTR_MISSING
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_TRANS
+	name = ATTR_TRANS_T
+	mask = PDATTR_MASK_SEQNO_REQ
+	value = ""
+	h_num = H_ATTR_TRANS
+	verbose_num = VERBOSE_ATTR_TRANS
+
+#if ALLOW_SCHEDULING
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_AT
+	name = ATTR_AT_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_AT
+	verbose_num = VERBOSE_ATTR_AT
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_AT_ARG
+	name = ATTR_AT_ARG_T
+	mask = PDATTR_MASK_SEQNO_REQ
+	value = ""
+	h_num = H_ATTR_AT_ARG
+	verbose_num = VERBOSE_ATTR_AT_ARG
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_AT_JOB
+	name = ATTR_AT_JOB_T
+	mask = PDATTR_MASK_NOTHING
+	value = ""
+	h_num = H_ATTR_AT_JOB
+	verbose_num = VERBOSE_ATTR_AT_JOB
+#endif
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_LOCKED
+	name = ATTR_LOCKED_T
+	mask = PDATTR_MASK_DISPLAY
+	value = ""
+	h_num = H_ATTR_LOCKED
+	verbose_num = VERBOSE_ATTR_LOCKED
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_COMMENTS
+	name = ATTR_COMMENTS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_COMMENTS
+	verbose_num = VERBOSE_ATTR_COMMENTS
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_NSTATE
+	name = ATTR_NSTATE_T
+	mask = PDATTR_MASK_STATE
+	value = STATE_INCOMPLETE_T
+	h_num = H_ATTR_NSTATE
+	verbose_num = VERBOSE_ATTR_NSTATE
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_PREV_STATE
+	name = ATTR_PREV_STATE_T
+	mask = PDATTR_MASK_STATE
+	value = STATE_INCOMPLETE_T
+	h_num = H_ATTR_PREV_STATE
+	verbose_num = VERBOSE_ATTR_PREV_STATE
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_NET_ADDR
+	name = ATTR_NET_ADDR_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_NET_ADDR
+	verbose_num = VERBOSE_ATTR_NET_ADDR
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_SNM
+	name = ATTR_SNM_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SNM
+	verbose_num = VERBOSE_ATTR_SNM
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_SEQNO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_ROUTING
+	name = ATTR_ROUTING_T
+	mask = PDATTR_MASK_SEQNO
+	value = ""
+	h_num = H_ATTR_ROUTING
+	verbose_num = VERBOSE_ATTR_ROUTING
+
+nim_pdattr:
+	class = ATTR_CLASS_NETWORKS
+	subclass = ,ATTR_SUBCLASS_INFO,
+	type = ,ATTR_TOK,ATTR_ENT,ATTR_FDDI,
+	attr = ATTR_OTHER_NET_TYPE
+	name = ATTR_OTHER_NET_TYPE_T
+	mask = PDATTR_MASK_SEQNO
+	value = ""
+	h_num = H_ATTR_OTHER_NET_TYPE
+	verbose_num = VERBOSE_ATTR_OTHER_NET_TYPE
+
+/*---------------------------- NIM flags */
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_DISKLESS,ATTR_DATALESS,
+	attr = ATTR_SIZE
+	name = ATTR_SIZE_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = "32"
+	h_num = H_ATTR_SIZE
+	verbose_num = VERBOSE_ATTR_SIZE
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_IGNORE_LOCK
+	name = ATTR_IGNORE_LOCK_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_IGNORE_LOCK
+	verbose_num = VERBOSE_ATTR_IGNORE_LOCK
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_FORCE
+	name = ATTR_FORCE_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_FORCE
+	verbose_num = VERBOSE_ATTR_FORCE
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_ALL
+	name = ATTR_ALL_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_ALL
+	verbose_num = VERBOSE_ATTR_ALL
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_LPP_SOURCE,
+	attr = ATTR_OPTIONS
+	name = ATTR_OPTIONS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_OPTIONS
+	verbose_num = VERBOSE_ATTR_OPTIONS
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_VERBOSE
+	name = ATTR_VERBOSE_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_VERBOSE
+	verbose_num = VERBOSE_ATTR_VERBOSE
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_DEBUG
+	name = ATTR_DEBUG_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_DEBUG
+	verbose_num = VERBOSE_ATTR_DEBUG
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_SUBCLASS
+	name = ATTR_SUBCLASS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SUBCLASS
+	verbose_num = VERBOSE_ATTR_SUBCLASS
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_BOOT_ENV
+	name = ATTR_BOOT_ENV_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_BOOT_ENV
+	verbose_num = VERBOSE_ATTR_BOOT_ENV
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_NO_NIM_CLIENT
+	name = ATTR_NO_NIM_CLIENT_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_NO_NIM_CLIENT
+	verbose_num = VERBOSE_ATTR_NO_NIM_CLIENT
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_FORCE_PUSH
+	name = ATTR_FORCE_PUSH_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_FORCE_PUSH
+	verbose_num = VERBOSE_ATTR_FORCE_PUSH
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_NO_CLIENT_BOOT
+	name = ATTR_NO_CLIENT_BOOT_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_NO_CLIENT_BOOT
+	verbose_num = VERBOSE_ATTR_NO_CLIENT_BOOT
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_SET_BOOTLIST
+	name = ATTR_SET_BOOTLIST_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SET_BOOTLIST
+	verbose_num = VERBOSE_ATTR_SET_BOOTLIST
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_INST_WARNING
+	name = ATTR_INST_WARNING_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_INST_WARNING
+	verbose_num = VERBOSE_ATTR_INST_WARNING
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_PULL_REQUEST
+	name = ATTR_PULL_REQUEST_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_PULL_REQUEST
+	verbose_num = VERBOSE_ATTR_PULL_REQUEST
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_ASYNC
+	name = ATTR_ASYNC_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_ASYNC
+	verbose_num = VERBOSE_ATTR_ASYNC
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_IGNORE_STATE
+	name = ATTR_IGNORE_STATE_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_IGNORE_STATE
+	verbose_num = VERBOSE_ATTR_IGNORE_STATE
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,
+	attr = ATTR_PRESERVE_RES
+	name = ATTR_PRESERVE_RES_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_PRESERVE_RES
+	verbose_num = VERBOSE_ATTR_PRESERVE_RES
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,ATTR_SPOT,ATTR_LPP_SOURCE,
+	attr = ATTR_SOURCE
+	name = ATTR_SOURCE_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_SOURCE
+	verbose_num = VERBOSE_ATTR_SOURCE
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_SPOT,
+	attr = ATTR_NUM_PARALLEL_SYNCS
+	name = ATTR_NUM_PARALLEL_SYNCS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_NUM_PARALLEL_SYNCS
+	verbose_num = VERBOSE_ATTR_NUM_PARALLEL_SYNCS
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+	attr = ATTR_INSTALLP_FLAGS
+	name = ATTR_INSTALLP_FLAGS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = "-ag"
+	h_num = H_ATTR_INSTALLP_FLAGS
+	verbose_num = VERBOSE_ATTR_INSTALLP_FLAGS
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,ATTR_SUBCLASS_CUST,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+	attr = ATTR_INSTALLP_OPTIONS
+	name = ATTR_INSTALLP_OPTIONS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = ""
+	h_num = H_ATTR_INSTALLP_OPTIONS
+	verbose_num = VERBOSE_ATTR_INSTALLP_OPTIONS
+
+nim_pdattr:
+        class = ATTR_CLASS_FLAGS
+        subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,ATTR_SUBCLASS_CUST,ATTR_SUBCLASS_FIXQUERY,
+        type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+        attr = ATTR_FIXES
+        name = ATTR_FIXES_T
+        mask = PDATTR_MASK_USER_ENTERABLE
+        value = ""
+        h_num = H_ATTR_FIXES
+        verbose_num = VERBOSE_ATTR_FIXES
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+	attr = ATTR_LSLPP_FLAGS
+	name = ATTR_LSLPP_FLAGS_T
+	mask = PDATTR_MASK_USER_ENTERABLE
+	value = "-al"
+	h_num = H_ATTR_LSLPP_FLAGS
+	verbose_num = VERBOSE_ATTR_LSLPP_FLAGS
+
+nim_pdattr:
+        class = ATTR_CLASS_FLAGS
+        subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+        type = ,ATTR_STANDALONE,ATTR_MASTER,ATTR_SPOT,
+        attr = ATTR_FIXQUERY_FLAGS
+        name = ATTR_FIXQUERY_FLAGS_T
+        mask = PDATTR_MASK_USER_ENTERABLE
+        value = "-ik"
+        h_num = H_ATTR_FIXQUERY_FLAGS
+        verbose_num = VERBOSE_ATTR_FIXQUERY_FLAGS
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_DISP_MNTPNT
+	name = ATTR_DISP_MNTPNT_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_DISP_MNTPNT
+	verbose_num = VERBOSE_ATTR_DISP_MNTPNT
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ""
+	attr = ATTR_MOUNT_CTRL
+	name = ATTR_MOUNT_CTRL_T
+	mask = PDATTR_MASK_INFO
+	value = ""
+	h_num = H_ATTR_MOUNT_CTRL
+	verbose_num = VERBOSE_ATTR_MOUNT_CTRL
+
+nim_pdattr:
+	class = ATTR_CLASS_FLAGS
+	subclass = ,ATTR_SUBCLASS_TYPE,ATTR_CLASS_FLAGS,
+	type = ,ATTR_SPOT,
+	attr = ATTR_AUTO_EXPAND
+	name = ATTR_AUTO_EXPAND_T
+	mask = PDATTR_MASK_DISPLAY
+	value = "no"
+	h_num = H_ATTR_AUTO_EXPAND
+	verbose_num = VERBOSE_ATTR_AUTO_EXPAND
+
+/*---------------------------- NIM states */
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_ANY
+	attr = ATTR_CLASS_STATES
+	name = STATE_ANY_T" = "STATE_ANY
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_ANY_T
+	h_num = H_STATE_ANY
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_INCOMPLETE
+	attr = ATTR_CLASS_STATES
+	name = STATE_INCOMPLETE_T" = "STATE_INCOMPLETE
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_INCOMPLETE_T
+	h_num = H_STATE_INCOMPLETE
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_SHUTDOWN
+	attr = ATTR_CLASS_STATES
+	name = STATE_SHUTDOWN_T" = "STATE_SHUTDOWN
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_SHUTDOWN_T
+	h_num = H_STATE_SHUTDOWN
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_BOOTING
+	attr = ATTR_CLASS_STATES
+	name = STATE_BOOTING_T" = "STATE_BOOTING
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_BOOTING_T
+	h_num = H_STATE_BOOTING
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_RUNNING
+	attr = ATTR_CLASS_STATES
+	name = STATE_RUNNING_T" = "STATE_RUNNING
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_RUNNING_T
+	h_num = H_STATE_RUNNING
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_CREADY
+	attr = ATTR_CLASS_STATES
+	name = STATE_CREADY_T" = "STATE_CREADY
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_CREADY_T
+	h_num = H_STATE_CREADY
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_SCHEDULED
+	attr = ATTR_CLASS_STATES
+	name = STATE_SCHEDULED_T" = "STATE_SCHEDULED
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_SCHEDULED_T
+	h_num = H_STATE_SCHEDULED
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_DD_BOOT
+	attr = ATTR_CLASS_STATES
+	name = STATE_DD_BOOT_T" = "STATE_DD_BOOT
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_DD_BOOT_T
+	h_num = H_STATE_DD_BOOT
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_DKLS_INIT
+	attr = ATTR_CLASS_STATES
+	name = STATE_DKLS_INIT_T" = "STATE_DKLS_INIT
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_DKLS_INIT_T
+	h_num = H_STATE_DKLS_INIT
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_DTLS_INIT
+	attr = ATTR_CLASS_STATES
+	name = STATE_DTLS_INIT_T" = "STATE_DTLS_INIT
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_DTLS_INIT_T
+	h_num = H_STATE_DTLS_INIT
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_DIAG
+	attr = ATTR_CLASS_STATES
+	name = STATE_DIAG_T" = "STATE_DIAG
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_DIAG_T
+	h_num = H_STATE_DIAG
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_CUST
+	attr = ATTR_CLASS_STATES
+	name = STATE_CUST_T" = "STATE_CUST
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_CUST_T
+	h_num = H_STATE_CUST
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_BOS_INST
+	attr = ATTR_CLASS_STATES
+	name = STATE_BOS_INST_T" = "STATE_BOS_INST
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_BOS_INST_T
+	h_num = H_STATE_BOS_INST
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_BOS_INST_1
+	attr = ATTR_CLASS_STATES
+	name = STATE_BOS_INST_1_T" = "STATE_BOS_INST_1
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_BOS_INST_1_T
+	h_num = H_STATE_BOS_INST_1
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_BOS_INST_2
+	attr = ATTR_CLASS_STATES
+	name = STATE_BOS_INST_2_T" = "STATE_BOS_INST_2
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_BOS_INST_2_T
+	h_num = H_STATE_BOS_INST_2
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_BOS_INST_3
+	attr = ATTR_CLASS_STATES
+	name = STATE_BOS_INST_3_T" = "STATE_BOS_INST_3
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_BOS_INST_3_T
+	h_num = H_STATE_BOS_INST_3
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_MAINT
+	attr = ATTR_CLASS_STATES
+	name = STATE_MAINT_T" = "STATE_MAINT
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_MAINT_T
+	h_num = H_STATE_MAINT
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_AVAILABLE
+	attr = ATTR_CLASS_STATES
+	name = STATE_AVAILABLE_T" = "STATE_AVAILABLE
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_AVAILABLE_T
+	h_num = H_STATE_AVAILABLE
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_UNAVAILABLE
+	attr = ATTR_CLASS_STATES
+	name = STATE_UNAVAILABLE_T" = "STATE_UNAVAILABLE
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_UNAVAILABLE_T
+	h_num = H_STATE_UNAVAILABLE
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+nim_pdattr:
+	class = ATTR_CLASS_STATES
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = STATE_NREADY
+	attr = ATTR_CLASS_STATES
+	name = STATE_NREADY_T" = "STATE_NREADY
+	mask = PDATTR_MASK_NOTHING
+	value = STATE_NREADY_T
+	h_num = H_STATE_NREADY
+	verbose_num = VERBOSE_ATTR_CLASS_STATES
+
+/*---------------------------- NIM results */
+
+nim_pdattr:
+	class = ATTR_CLASS_RESULTS
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = RESULT_SUCCESS
+	attr = ATTR_CLASS_RESULTS
+	name = RESULT_SUCCESS_T" = "RESULT_SUCCESS
+	mask = PDATTR_MASK_NOTHING
+	value = RESULT_SUCCESS_T
+	h_num = H_RESULT_SUCCESS
+	verbose_num = VERBOSE_ATTR_CLASS_RESULTS
+
+nim_pdattr:
+	class = ATTR_CLASS_RESULTS
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = RESULT_FAILURE
+	attr = ATTR_CLASS_RESULTS
+	name = RESULT_FAILURE_T" = "RESULT_FAILURE
+	mask = PDATTR_MASK_NOTHING
+	value = RESULT_FAILURE_T
+	h_num = H_RESULT_FAILURE
+	verbose_num = VERBOSE_ATTR_CLASS_RESULTS
+
+nim_pdattr:
+	class = ATTR_CLASS_RESULTS
+	subclass = ,ATTR_SUBCLASS_INFO,ATTR_SUBCLASS_TYPE,
+	type = RESULT_ABORT
+	attr = ATTR_CLASS_RESULTS
+	name = RESULT_ABORT_T" = "RESULT_ABORT
+	mask = PDATTR_MASK_NOTHING
+	value = RESULT_ABORT_T
+	h_num = H_RESULT_ABORT
+	verbose_num = VERBOSE_ATTR_CLASS_RESULTS
+
+

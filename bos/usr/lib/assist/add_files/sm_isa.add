@@ -1,0 +1,33 @@
+#
+#  @(#)38  1.1  src/bos/usr/lib/assist/add_files/sm_isa.add, cmdassist, bos411, 9428A410j 6/24/94 08:59:17
+#
+#   COMPONENT_NAME:  cmdassist
+#
+#   FUNCTIONS: link to isa stanzas
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+sm_menu_opt:
+    id                        = "assist_net"
+    id_seq_num                = "005"
+    next_id                   = "mkdev_isa"
+    text                      = "Add an ISA Adapter"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 58
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "04201730"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+

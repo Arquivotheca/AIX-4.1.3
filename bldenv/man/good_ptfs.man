@@ -1,0 +1,22 @@
+# @(#)07        1.1  src/bldenv/man/good_ptfs.man, bldtools, bos412, GOLDA411a 12/10/93 15:21:44
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: good_ptfs file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/UPDATE/good_ptfs.$BLDCYCLE
+        Records from $TOP/UPDATE/<lpp-name>/ptf_pkg.$BLDCYCLE for
+        PTF's that were successfully created.  Comments begin with
+        a "#".  Created by ptfpkg.
+
+	Format: See $TOP/UPDATE/<lpp-name>/ptf_pkg.$BLDCYCLE.

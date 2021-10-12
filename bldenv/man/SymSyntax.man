@@ -1,0 +1,29 @@
+# @(#)86	1.3  src/bldenv/man/SymSyntax.man, bldprocess, bos412, GOLDA411a 1/10/94 18:38:27
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: Symptom string syntax man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+			BNF form of SYMPTOM NOTE SYNTAX
+			--------------------------------
+
+  *		Occurs 0 or more times
+  \n		Newline
+  \s		Whitespace (Tab, Space, Newline)
+  [a-zA-Z]	Matches any single character of set
+  .		Matches any charactor
+
+  SYMPTOM NOTE		:= BEGIN START_SYMPTOM SYMPTOM_STRING STOP_SYMPTOM.*
+  BEGIN			:= .*\n\s*|\s*
+  START_SYMPTOM		:= [sS][tT][aA][rR][tT]_[sS][yY][mM][pP][tT][oO][mM]
+  STOP_SYMPTOM		:= [sS][tT][oO][pP]_[sS][yY][mM][pP][tT][oO][mM]
+  SYMPTOM_STRING	:= .*

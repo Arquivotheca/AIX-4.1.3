@@ -1,0 +1,36 @@
+*@(#)16  1.1  src/bos/objclass/POWER/ioplanar.planar.mcaplanar1.add, cfgmethods, bos411, 9428A410j 3/7/94 07:42:08
+*
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 83
+*
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+* mcaplanar device
+PdDv:
+	type = mcaplanar1
+	class = ioplanar
+	subclass = planar 
+	prefix = mcaplanar
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 1
+	bus_ext = 0
+	led = 0x520
+	setno = 3
+	msgno = 1
+	fru = 1
+	catalog = devices_p.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = ioplanar/planar/mcaplanar1

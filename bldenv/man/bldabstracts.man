@@ -1,0 +1,62 @@
+# @(#)78	1.4  src/bldenv/man/bldabstracts.man, bldprocess, bos412, GOLDA411a 3/28/94 15:56:16
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: bldabstracts man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+bldabstracts
+
+
+PURPOSE
+	The bldabstracts command creates (appends) the files 'abstracts' and
+'memo_info' in the directory pointed to by 'bldhistorypath'.
+
+
+DESCRIPTION
+	The bldabstracts command uses the files 'symptoms', 'memos',
+'defectapars' and 'abstractlist' in the directory pointed to by 'bldglobalpath'
+to create the files 'abstracts' and 'memo_info'. For every defect and its
+corresponding APAR in the 'defectapars' file, it calls lower level commands by
+passing the defect, APAR, 'symptoms' file, 'memos' file and 'abstractlist' file
+to create the entries in the 'abstracts' and 'memo_info' files.
+	The bldabstracts command uses the status commands to record status
+entries in the STATUS_FILE. However, if there are any failures of 'CheckSymptom'
+for that particular BLDCYCLE, the command will be recorded as a failure in the
+STATUS_FILE. Any bldabstracts failure will affect the processing of the subptf
+command.
+	The bldabstracts command logs its execution process using the log
+commands 'log' and 'logset'. The logfile to be used can be passed on the 
+command line and if it is not passed,it defaults to the file 'bldabstracts.all'
+in the directory pointed to by 'bldlogpath'.
+	The blabstracts command is usually used to create or append to the 
+files 'abstracts' and 'memo_info'. For modification of these files, please 
+refer to the man pages of 'ChangeSymptoms' and 'ChangeMemos'.
+
+
+FLAGS
+
+	-l <logfile>	The file to be used for logging
+
+
+#include "abstracts.man"
+#include "memo_info.man"
+
+
+RELATED INFORMATION
+
+		bldhistorypath
+		bldglobalpath
+		bldhistorypath
+		bldlogpath
+		bldsetstatus
+		log
+		logset

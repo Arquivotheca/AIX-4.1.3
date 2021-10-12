@@ -1,0 +1,235 @@
+# @(#)78	1.2  src/bos/usr/lib/nls/loc/uconvTable/JISX0201.1976-0.ucmap, cmdiconv, bos411, 9428A410j 11/2/93 08:51:18
+#
+#   COMPONENT_NAME:	CMDICONV
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   ISO 10646-1: UCS-2
+#
+#   Table Format:
+#	Columns separated by spaces:
+#	Col1: (pos.  1- 7) ISO 10646 code as <Uxxxx>
+#	Col2: (pos. 16-30) JISX0201.1976-0 code as \xhh
+#	Col3: (pos. 32-39) IBM GCGID
+#	Col4: (pos. 42-49) Mapping indicator to specify:
+#		1. Arabic Shared hapes:
+#			NOMINAL, ISOLATED, INITIAL, MEDIAL, FINAL
+#		2. Synonym GCGID used when direct mapping for
+#		   the main GCGID is not available.
+#	Col5: (pos. 56-> ) ISO 10646 character name
+#
+<code_set_name>         "JISX0201.1976-0"
+<char_name_mask>        "AXXXX"
+<mb_cur_max>            1
+<mb_cur_min>            1
+<uconv_class>		"SBCS"
+#
+#
+#
+CHARMAP
+#
+#ISO 10646     Codepoint        GCGID    SYN/SHAPE     ISO 10646 Name
+#---------     ---------        -------- ---------     ------------------------
+<U0000>        \x00            #                       ===
+<U0001>        \x01            #                       ===
+<U0002>        \x02            #                       ===
+<U0003>        \x03            #                       ===
+<U0004>        \x04            #                       ===
+<U0005>        \x05            #                       ===
+<U0006>        \x06            #                       ===
+<U0007>        \x07            #                       ===
+<U0008>        \x08            #                       ===
+<U0009>        \x09            #                       ===
+<U000A>        \x0A            #                       ===
+<U000B>        \x0B            #                       ===
+<U000C>        \x0C            #                       ===
+<U000D>        \x0D            #                       ===
+<U000E>        \x0E            #                       ===
+<U000F>        \x0F            #                       ===
+<U0010>        \x10            #                       ===
+<U0011>        \x11            #                       ===
+<U0012>        \x12            #                       ===
+<U0013>        \x13            #                       ===
+<U0014>        \x14            #                       ===
+<U0015>        \x15            #                       ===
+<U0016>        \x16            #                       ===
+<U0017>        \x17            #                       ===
+<U0018>        \x18            #                       ===
+<U0019>        \x19            #                       ===
+<U001A>        \x1A            #                       ===
+<U001B>        \x1B            #                       ===
+<U001C>        \x1C            #                       ===
+<U001D>        \x1D            #                       ===
+<U001E>        \x1E            #                       ===
+<U001F>        \x1F            #                       ===
+<U0020>        \x20            # SP010000              SPACE
+<U0021>        \x21            # SP020000              EXCLAMATION MARK
+<U0022>        \x22            # SP040000              QUOTATION MARK
+<U0023>        \x23            # SM010000              NUMBER SIGN
+<U0024>        \x24            # SC030000              DOLLAR SIGN
+<U0025>        \x25            # SM020000              PERCENT SIGN
+<U0026>        \x26            # SM030000              AMPERSAND
+<U0027>        \x27            # SP050000              APOSTROPHE
+<U0028>        \x28            # SP060000              LEFT PARENTHESIS
+<U0029>        \x29            # SP070000              RIGHT PARENTHESIS
+<U002A>        \x2A            # SM040000              ASTERISK
+<U002B>        \x2B            # SA010000              PLUS SIGN
+<U002C>        \x2C            # SP080000              COMMA
+<U002D>        \x2D            # SP100000              HYPHEN-MINUS
+<U002E>        \x2E            # SP110000              FULL STOP
+<U002F>        \x2F            # SP120000              SOLIDUS
+<U0030>        \x30            # ND100000              DIGIT ZERO
+<U0031>        \x31            # ND010000              DIGIT ONE
+<U0032>        \x32            # ND020000              DIGIT TWO
+<U0033>        \x33            # ND030000              DIGIT THREE
+<U0034>        \x34            # ND040000              DIGIT FOUR
+<U0035>        \x35            # ND050000              DIGIT FIVE
+<U0036>        \x36            # ND060000              DIGIT SIX
+<U0037>        \x37            # ND070000              DIGIT SEVEN
+<U0038>        \x38            # ND080000              DIGIT EIGHT
+<U0039>        \x39            # ND090000              DIGIT NINE
+<U003A>        \x3A            # SP130000              COLON
+<U003B>        \x3B            # SP140000              SEMICOLON
+<U003C>        \x3C            # SA030000              LESS-THAN SIGN
+<U003D>        \x3D            # SA040000              EQUALS SIGN
+<U003E>        \x3E            # SA050000              GREATER-THAN SIGN
+<U003F>        \x3F            # SP150000              QUESTION MARK
+<U0040>        \x40            # SM050000              COMMERCIAL AT
+<U0041>        \x41            # LA020000              LATIN CAPITAL LETTER A
+<U0042>        \x42            # LB020000              LATIN CAPITAL LETTER B
+<U0043>        \x43            # LC020000              LATIN CAPITAL LETTER C
+<U0044>        \x44            # LD020000              LATIN CAPITAL LETTER D
+<U0045>        \x45            # LE020000              LATIN CAPITAL LETTER E
+<U0046>        \x46            # LF020000              LATIN CAPITAL LETTER F
+<U0047>        \x47            # LG020000              LATIN CAPITAL LETTER G
+<U0048>        \x48            # LH020000              LATIN CAPITAL LETTER H
+<U0049>        \x49            # LI020000              LATIN CAPITAL LETTER I
+<U004A>        \x4A            # LJ020000              LATIN CAPITAL LETTER J
+<U004B>        \x4B            # LK020000              LATIN CAPITAL LETTER K
+<U004C>        \x4C            # LL020000              LATIN CAPITAL LETTER L
+<U004D>        \x4D            # LM020000              LATIN CAPITAL LETTER M
+<U004E>        \x4E            # LN020000              LATIN CAPITAL LETTER N
+<U004F>        \x4F            # LO020000              LATIN CAPITAL LETTER O
+<U0050>        \x50            # LP020000              LATIN CAPITAL LETTER P
+<U0051>        \x51            # LQ020000              LATIN CAPITAL LETTER Q
+<U0052>        \x52            # LR020000              LATIN CAPITAL LETTER R
+<U0053>        \x53            # LS020000              LATIN CAPITAL LETTER S
+<U0054>        \x54            # LT020000              LATIN CAPITAL LETTER T
+<U0055>        \x55            # LU020000              LATIN CAPITAL LETTER U
+<U0056>        \x56            # LV020000              LATIN CAPITAL LETTER V
+<U0057>        \x57            # LW020000              LATIN CAPITAL LETTER W
+<U0058>        \x58            # LX020000              LATIN CAPITAL LETTER X
+<U0059>        \x59            # LY020000              LATIN CAPITAL LETTER Y
+<U005A>        \x5A            # LZ020000              LATIN CAPITAL LETTER Z
+<U005B>        \x5B            # SM060000              LEFT SQUARE BRACKET
+<U00A5>        \x5C            # SC050000              YEN SIGN
+<U005D>        \x5D            # SM080000              RIGHT SQUARE BRACKET
+<U005E>        \x5E            # SD150000              CIRCUMFLEX ACCENT
+<U005F>        \x5F            # SP090000              LOW LINE
+<U0060>        \x60            # SD130000              GRAVE ACCENT
+<U0061>        \x61            # LA010000              LATIN SMALL LETTER A
+<U0062>        \x62            # LB010000              LATIN SMALL LETTER B
+<U0063>        \x63            # LC010000              LATIN SMALL LETTER C
+<U0064>        \x64            # LD010000              LATIN SMALL LETTER D
+<U0065>        \x65            # LE010000              LATIN SMALL LETTER E
+<U0066>        \x66            # LF010000              LATIN SMALL LETTER F
+<U0067>        \x67            # LG010000              LATIN SMALL LETTER G
+<U0068>        \x68            # LH010000              LATIN SMALL LETTER H
+<U0069>        \x69            # LI010000              LATIN SMALL LETTER I
+<U006A>        \x6A            # LJ010000              LATIN SMALL LETTER J
+<U006B>        \x6B            # LK010000              LATIN SMALL LETTER K
+<U006C>        \x6C            # LL010000              LATIN SMALL LETTER L
+<U006D>        \x6D            # LM010000              LATIN SMALL LETTER M
+<U006E>        \x6E            # LN010000              LATIN SMALL LETTER N
+<U006F>        \x6F            # LO010000              LATIN SMALL LETTER O
+<U0070>        \x70            # LP010000              LATIN SMALL LETTER P
+<U0071>        \x71            # LQ010000              LATIN SMALL LETTER Q
+<U0072>        \x72            # LR010000              LATIN SMALL LETTER R
+<U0073>        \x73            # LS010000              LATIN SMALL LETTER S
+<U0074>        \x74            # LT010000              LATIN SMALL LETTER T
+<U0075>        \x75            # LU010000              LATIN SMALL LETTER U
+<U0076>        \x76            # LV010000              LATIN SMALL LETTER V
+<U0077>        \x77            # LW010000              LATIN SMALL LETTER W
+<U0078>        \x78            # LX010000              LATIN SMALL LETTER X
+<U0079>        \x79            # LY010000              LATIN SMALL LETTER Y
+<U007A>        \x7A            # LZ010000              LATIN SMALL LETTER Z
+<U007B>        \x7B            # SM110000              LEFT CURLY BRACKET
+<U007C>        \x7C            # SM130000              VERTICAL LINE
+<U007D>        \x7D            # SM140000              RIGHT CURLY BRACKET
+<U00AF>        \x7E            # SM150000              MACRON
+<U007F>        \x7F            #                       ===
+<UFF61>        \xA1            # JQ700000              HALFWIDTH IDEOGRAPHIC FULL STOP
+<UFF62>        \xA2            # JQ710000              HALFWIDTH LEFT CORNER BRACKET
+<UFF63>        \xA3            # JQ720000              HALFWIDTH RIGHT CORNER BRACKET
+<UFF64>        \xA4            # JQ730000              HALFWIDTH IDEOGRAPHIC COMMA
+<UFF65>        \xA5            # JQ740000              HALFWIDTH KATAKANA MIDDLE DOT
+<UFF66>        \xA6            # JW500000              HALFWIDTH KATAKANA LETTER WO
+<UFF67>        \xA7            # JA010000              HALFWIDTH KATAKANA LETTER SMALL A
+<UFF68>        \xA8            # JI010000              HALFWIDTH KATAKANA LETTER SMALL I
+<UFF69>        \xA9            # JU010000              HALFWIDTH KATAKANA LETTER SMALL U
+<UFF6A>        \xAA            # JE010000              HALFWIDTH KATAKANA LETTER SMALL E
+<UFF6B>        \xAB            # JO010000              HALFWIDTH KATAKANA LETTER SMALL O
+<UFF6C>        \xAC            # JY110000              HALFWIDTH KATAKANA LETTER SMALL YA
+<UFF6D>        \xAD            # JY310000              HALFWIDTH KATAKANA LETTER SMALL YU
+<UFF6E>        \xAE            # JY510000              HALFWIDTH KATAKANA LETTER SMALL YO
+<UFF6F>        \xAF            # JT310000              HALFWIDTH KATAKANA LETTER SMALL TU
+<UFF70>        \xB0            # JX700000              HALFWIDTH KATAKANA-HIRAGANA PROLONGED SOUND MARK
+<UFF71>        \xB1            # JA000000              HALFWIDTH KATAKANA LETTER A
+<UFF72>        \xB2            # JI000000              HALFWIDTH KATAKANA LETTER I
+<UFF73>        \xB3            # JU000000              HALFWIDTH KATAKANA LETTER U
+<UFF74>        \xB4            # JE000000              HALFWIDTH KATAKANA LETTER E
+<UFF75>        \xB5            # JO000000              HALFWIDTH KATAKANA LETTER O
+<UFF76>        \xB6            # JK100000              HALFWIDTH KATAKANA LETTER KA
+<UFF77>        \xB7            # JK200000              HALFWIDTH KATAKANA LETTER KI
+<UFF78>        \xB8            # JK300000              HALFWIDTH KATAKANA LETTER KU
+<UFF79>        \xB9            # JK400000              HALFWIDTH KATAKANA LETTER KE
+<UFF7A>        \xBA            # JK500000              HALFWIDTH KATAKANA LETTER KO
+<UFF7B>        \xBB            # JS100000              HALFWIDTH KATAKANA LETTER SA
+<UFF7C>        \xBC            # JS200000              HALFWIDTH KATAKANA LETTER SI
+<UFF7D>        \xBD            # JS300000              HALFWIDTH KATAKANA LETTER SU
+<UFF7E>        \xBE            # JS400000              HALFWIDTH KATAKANA LETTER SE
+<UFF7F>        \xBF            # JS500000              HALFWIDTH KATAKANA LETTER SO
+<UFF80>        \xC0            # JT100000              HALFWIDTH KATAKANA LETTER TA
+<UFF81>        \xC1            # JT200000              HALFWIDTH KATAKANA LETTER TI
+<UFF82>        \xC2            # JT300000              HALFWIDTH KATAKANA LETTER TU
+<UFF83>        \xC3            # JT400000              HALFWIDTH KATAKANA LETTER TE
+<UFF84>        \xC4            # JT500000              HALFWIDTH KATAKANA LETTER TO
+<UFF85>        \xC5            # JN100000              HALFWIDTH KATAKANA LETTER NA
+<UFF86>        \xC6            # JN200000              HALFWIDTH KATAKANA LETTER NI
+<UFF87>        \xC7            # JN300000              HALFWIDTH KATAKANA LETTER NU
+<UFF88>        \xC8            # JN400000              HALFWIDTH KATAKANA LETTER NE
+<UFF89>        \xC9            # JN500000              HALFWIDTH KATAKANA LETTER NO
+<UFF8A>        \xCA            # JH100000              HALFWIDTH KATAKANA LETTER HA
+<UFF8B>        \xCB            # JH200000              HALFWIDTH KATAKANA LETTER HI
+<UFF8C>        \xCC            # JH300000              HALFWIDTH KATAKANA LETTER HU
+<UFF8D>        \xCD            # JH400000              HALFWIDTH KATAKANA LETTER HE
+<UFF8E>        \xCE            # JH500000              HALFWIDTH KATAKANA LETTER HO
+<UFF8F>        \xCF            # JM100000              HALFWIDTH KATAKANA LETTER MA
+<UFF90>        \xD0            # JM200000              HALFWIDTH KATAKANA LETTER MI
+<UFF91>        \xD1            # JM300000              HALFWIDTH KATAKANA LETTER MU
+<UFF92>        \xD2            # JM400000              HALFWIDTH KATAKANA LETTER ME
+<UFF93>        \xD3            # JM500000              HALFWIDTH KATAKANA LETTER MO
+<UFF94>        \xD4            # JY100000              HALFWIDTH KATAKANA LETTER YA
+<UFF95>        \xD5            # JY300000              HALFWIDTH KATAKANA LETTER YU
+<UFF96>        \xD6            # JY500000              HALFWIDTH KATAKANA LETTER YO
+<UFF97>        \xD7            # JR100000              HALFWIDTH KATAKANA LETTER RA
+<UFF98>        \xD8            # JR200000              HALFWIDTH KATAKANA LETTER RI
+<UFF99>        \xD9            # JR300000              HALFWIDTH KATAKANA LETTER RU
+<UFF9A>        \xDA            # JR400000              HALFWIDTH KATAKANA LETTER RE
+<UFF9B>        \xDB            # JR500000              HALFWIDTH KATAKANA LETTER RO
+<UFF9C>        \xDC            # JW100000              HALFWIDTH KATAKANA LETTER WA
+<UFF9D>        \xDD            # JN000000              HALFWIDTH KATAKANA LETTER N
+<UFF9E>        \xDE            # JX710000              HALFWIDTH KATAKANA VOICED SOUND MARK
+<UFF9F>        \xDF            # JX720000              HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
+#
+END CHARMAP

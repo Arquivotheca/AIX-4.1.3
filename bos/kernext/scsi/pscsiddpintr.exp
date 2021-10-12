@@ -1,0 +1,59 @@
+#!/etc/drivers/pscsiddpin
+* @(#)25        1.1  src/bos/kernext/scsi/pscsiddpintr.exp, sysxscsi, bos411, 9428A410j 1/15/93 17:45:48
+*
+* COMPONENT_NAME: (SYSXSCSI) IBM SCSI Adapter Driver Bottom Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1992
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+adp_str_inited
+epow_struct
+psc_cdt
+adp_str
+INSTRUCTIONS
+A_abort_msg_error_Used
+A_abort_select_failed_Used
+A_abort_io_complete_Used
+R_dummy_int_Used
+A_uninitialized_reselect_Used
+scsi_0_lun_Used
+scsi_1_lun_Used
+scsi_2_lun_Used
+scsi_3_lun_Used
+scsi_4_lun_Used
+scsi_5_lun_Used
+scsi_6_lun_Used
+scsi_7_lun_Used
+psc_chip_register_init
+psc_config_adapter
+psc_logerr
+psc_read_reg
+psc_write_reg
+psc_read_POS
+psc_write_POS
+psc_strategy
+psc_iodone
+psc_dump
+psc_cdt_func
+psc_delay
+psc_intr
+psc_epow
+psc_command_watchdog
+psc_fail_cmd
+psc_free_resources
+psc_enq_abort_bdr
+psc_patch_iowait_int_on
+psc_reset_iowait_jump
+psc_enq_active
+psc_issue_bdr_script
+psc_trace_1
+psc_trace_2
+psc_trace_3

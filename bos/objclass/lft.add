@@ -1,0 +1,197 @@
+# @(#)34	1.5  src/bos/objclass/lft.add, lftdd, bos411, 9438B411a 9/20/94 17:47:01
+#
+#   COMPONENT_NAME: LFTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+#
+# Stanzas for the lft predefined values
+#
+PdDv:
+	type = "lft"
+	class = "lft"
+	subclass = "node"
+	prefix = "lft"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 0
+	led = 0x593
+	setno = 128
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = "lft_loadpin"
+	Define = "/etc/methods/define -n -o"
+	Configure = "/etc/methods/cfglft"
+	Change = "/etc/methods/chggen"
+	Unconfigure = "/etc/methods/ucfglft"
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = "lft/node/lft"
+
+
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "default_disp"
+	deflt = ""
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 3
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "swkb_path"
+	deflt = "/usr/lib/nls/loc/C.lftkeymap"
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 4
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font1_path"
+	deflt = "/usr/lpp/fonts/Erg22.iso1.snf"
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 5
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font2_path"
+	deflt = "/usr/lpp/fonts/Erg11.iso1.snf"
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 6
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font3_path"
+	deflt = ""
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 7
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font4_path"
+	deflt = ""
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 8
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font5_path"
+	deflt = ""
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 9
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font6_path"
+	deflt = ""
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 10
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font7_path"
+	deflt = ""
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 11
+	  
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "font8_path"
+	deflt = ""
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 12
+
+# Default timeout values for LFT Dipslay Power Management.
+# Note all values are in minutes.  We have moved the 3
+# PdAts to a new file, lft_dpm.add.  The reason is that
+# we don't want DPMS run during installation.  We'll add
+# lft_dpm.add when devices.graphics package is installed
+#
+#PdAt:
+#	uniquetype = "lft/node/lft"
+#	attribute = "pwr_mgr_t1"
+#	deflt = "20"
+#	values = "20"
+#	width = ""
+#	type = "R"
+#	generic = "DU"
+#	rep = "s"
+#	nls_index = 13
+#
+#PdAt:
+#	uniquetype = "lft/node/lft"
+#	attribute = "pwr_mgr_t2"
+#	deflt = "30"
+#	values = "30"
+#	width = ""
+#	type = "R"
+#	generic = "DU"
+#	rep = "s"
+#	nls_index = 14
+#
+#PdAt:
+#	uniquetype = "lft/node/lft"
+#	attribute = "pwr_mgr_t3"
+#	deflt = "40"
+#	values = "40"
+#	width = ""
+#	type = "R"
+#	generic = "DU"
+#	rep = "s"
+#	nls_index = 15

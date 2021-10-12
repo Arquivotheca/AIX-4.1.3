@@ -1,0 +1,24 @@
+# @(#)37	1.2  src/bldenv/man/ptfids.man, bldtools, bos412, GOLDA411a 11/15/91 15:09:52
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: ptfids file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    $TOP/PTF/$BLDCYCLE/ptfids:
+	Maps APARS to the ptfids assigned by the Retain system.  An APAR
+        will occur on multiple lines when multiple PTFIDs map to it.  Created
+        by bldretain (for production) or bldmid (for development).
+
+	Format:
+ 	       <APAR>|<PTFID>
+        	<APAR>|<PTFID>
+                      .
+                      .

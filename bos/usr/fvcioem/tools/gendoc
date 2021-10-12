@@ -1,0 +1,176 @@
+#!/usr/bin/rexx
+
+  fl  = 'ciedd.flist'
+  pl  = 'ciedd.plist'
+  out = 'ciedd.doc'
+
+  f.  = ''
+  fx. = ''
+
+    do i = 1 by 1 while lines(fl)
+      l = linein(fl)
+      parse var l type '$' class '$' func '$' fattr '$',
+                  ret  '$' mdef  '$' file
+
+      f.i._type  = type
+      f.i._class = class
+      f.i._func  = func
+      f.i._fattr = fattr
+      f.i._ret   = ret
+      f.i._mdef  = mdef
+      f.i._file  = file
+
+      fx.func = i
+    end
+
+  call lineout fl
+  f.0 = i-1
+
+    do i = 1 by 1 while lines(pl)
+      l = linein(pl)
+      parse var l func '$' name '$' attr '$' type '$' com
+      x = fx.func
+      if f.x._parm.0 = '' then
+          f.x._parm.0 = 1
+      else
+          f.x._parm.0 = f.x._parm.0 + 1
+      n = f.x._parm.0
+      f.x._parm.n._name = name
+      f.x._parm.n._attr = attr
+      f.x._parm.n._type = type
+      f.x._parm.n._com  = com
+    end
+
+  call lineout pl
+
+  'rm' out
+
+    do i = 1 to f.0
+
+      say 'Processing' f.i._file f.i._func
+
+      if f.i._type = 'F' then
+          kw = 'func'
+      else
+          kw = 'macro'
+
+      call lineout out,':'copies('-',70)
+      call lineout out,':'kw f.i._func '('f.i._file')'
+      call lineout out,':title'
+      if f.i._type \= 'M' then  call genproto i
+      if f.i._type \= 'F' then  call genmdef i
+      call genparm i
+      call lineout out,':desc'
+      call lineout out,':returns' f.i._ret
+      if f.i.type = 'F' then
+        do
+          call lineout out,':lock'
+          call lineout out,'   complex dataLock(RO); simple devLock'
+          call lineout out,':env'
+          call lineout out,'Process only'
+        end
+
+    end
+
+  call lineout out
+
+  exit
+
+genparm:
+procedure expose out f.
+
+  arg i
+
+    do n = 1 to f.i._parm.0
+      if f.i._parm.n._com = '' then
+          com = ''
+      else
+          com = '//' f.i._parm.n._com
+
+      call lineout out,':parm' f.i._parm.n._name':',
+                               genattr(f.i._parm.n._attr),
+                               f.i._parm.n._type,
+                               com
+    end
+
+  return
+
+genproto:
+procedure expose out f.
+
+  arg i
+
+  call lineout out,':prototype'
+  if f.i._ret \= '' then call lineout out,f.i._ret
+  call lineout out,'   'f.i._func'('
+
+  parm. = ''
+  awidth = 28
+  nwidth = 0
+    do n = 1 to f.i._parm.0
+      parm.n = '      'genattr(f.i._parm.n._attr)||f.i._parm.n._type
+      awidth = max(awidth,length(parm.n))
+      nwidth = max(nwidth,length(f.i._parm.n._name))
+    end
+
+  nwidth = max(nwidth,40-awidth)
+
+    do n = 1 to f.i._parm.0
+
+      if awidth = 28 & length(parm.n) < 28 & right(parm.n,1)='*' then
+        do
+          w = length(parm.n)
+          parm.n = insert(' ',parm.n,w-1,28-w)
+        end
+
+      if f.i._parm.n._com \= '' then
+        do
+          ai  = substr(' I',(pos('I',f.i._parm.n._attr) > 0)+1,1)
+          ao  = substr(' O',(pos('O',f.i._parm.n._attr) > 0)+1,1)
+          com = '//' ai||ao'-'f.i._parm.n._com
+        end
+      else
+          com = ''
+
+      if n = f.i._parm.0 then
+          comma = ' '
+      else
+          comma = ','
+
+      call lineout out,left(parm.n,awidth),
+                       left(f.i._parm.n._name,nwidth)||comma||com
+    end
+
+  call lineout out,'   );'
+
+  return
+
+genmdef:
+procedure expose out f.
+
+  arg i
+
+  call lineout out,':mdef'
+  call lineout out,f.i._mdef
+
+  return
+
+genattr:
+procedure
+
+  arg attr
+
+  kw.  = ''
+  kw.R = 'register'
+  kw.C = 'const'
+  kw.V = 'volatile'
+
+  kl   = ''
+
+    do i = 1 to length(attr)
+      c = substr(attr,i,1)
+      kl = kl kw.c
+    end
+
+  return space(kl)' '
+

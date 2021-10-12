@@ -1,0 +1,91 @@
+# @(#)62	1.2  src/bldenv/man/makediagboot.man, pkgtools, bos412, GOLDA411a 5/20/94 15:01:14
+######################################################################
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: Command
+#		makediagboot
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+  makediagboot Command
+
+
+  Key Concept
+
+
+  Purpose
+
+     Creates the diagnostic tapes that contain diagnostic code.
+
+
+  Syntax
+
+     makediagboot [-l stack_list] [-c img_dir] [-d device] [-v] [-h]
+
+
+  Description
+   
+     The makediagboot command reads the image names from the
+     stack_list file (specified by -l option) and copies the 
+     images to the tapes.
+
+
+  Flags
+
+     -l stack_list	The path and filename of the stack list file.    
+
+     -c img_dir		The directory that contains the installable
+           		images. The default is the current directory.
+
+     -d device		Name of the tape device. The default is rmt0.
+
+     -v      		Displays source version information. For ISO
+			calibration.
+
+     -h			Lists help message.
+
+
+  NOTE: The boot image file name can be set via the environment
+        variable DIAGBOOT_IMAGE. This is used to replace the
+	default boot image with one that has the Kernel Debugger
+	enabled.
+
+
+  Examples 	
+
+     1. Generate a diagnostic tape for images listed in 
+	/tmp/stack.list that reside in the /image directory:
+
+	makediagboot -c /image  -l /tmp/stack.list
+
+  
+
+  Prerequisite Information
+
+     none.
+
+  Implementation Specifics
+
+     none.
+
+
+  Related Information
+
+     none.
+
+  Customers
+
+     Testing organization (CET, MPV, bos PVT, ART Lab) and Manufacturing
+     Engineering.
+

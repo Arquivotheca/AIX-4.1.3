@@ -1,0 +1,29 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Will the command
+  ls georg[a-f]
+match the name
+  george
+Type yes or no.
+Experiment first if you want.
+#create george
+#copyin
+#user
+#uncopyin
+#match yes
+#log
+#next
+8.2b 5
+9.1a 10

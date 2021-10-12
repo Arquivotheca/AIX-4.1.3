@@ -1,0 +1,274 @@
+# @(#)78	  1.3  src/bos/objclass/POWER/tape.scsi.ost.add, cfgmethods, bos41J, 9513A_all 3/24/95 16:22:01
+*
+*  COMPONENT_NAME: (CFGMETHODS) SCSI TAPE PREDEFINED DATA STANZAS
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 27
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = ost
+	class = tape
+	subclass = scsi
+	prefix = rmt
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x973
+	setno = 54
+	msgno = 4
+	fru = 1
+	catalog = devices.cat
+	DvDr = tape
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsctape
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = tape/scsi/ost
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = mode
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 5
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = block_size
+	deflt = 512
+	values = "0-2147483648,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 6
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = extfm
+	deflt = yes
+	values = yes,no
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 8
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = ret
+	deflt = no
+	values = no
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = dev_type
+	deflt = 4
+	values = 4
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = model_name
+	deflt = "DEFAULT_TAPE    "
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = min_read_error
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = min_write_error
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = read_ratio
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = write_ratio
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = mode_data
+	deflt = 0x000010080000000000000200
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = res_support
+	deflt = no
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 9
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = var_block_size
+	deflt = 0
+	values = "0-2147483648,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 11
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = density_set_1
+	deflt = 0
+	values = "0-255,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 12
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = density_set_2
+	deflt = 0
+	values = "0-255,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 13
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = delay
+	deflt = 45
+	values = "2-4294967295,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 23
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = rwtimeout
+	deflt = 144
+	values = "2-4294967295,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 24
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = vpd_map
+	deflt = "MF0808C,TM1010C,SN260CC,Z32402X"
+	values = ""
+	width = ""
+	type = V
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = pm_dev_itime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/ost
+	attribute = pm_dev_stime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+        uniquetype = tape/scsi/ost
+        attribute = pm_device_id
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x0018
+4000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b0
+00,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0

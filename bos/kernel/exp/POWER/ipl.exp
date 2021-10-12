@@ -1,0 +1,69 @@
+#!
+* @(#)40	1.25.1.8  src/bos/kernel/exp/POWER/ipl.exp, sysexp, bos411, 9428A410j 3/23/94 10:23:00
+*
+*   COMPONENT_NAME: SYSEXP
+*
+*   ORIGINS: 27, 83
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*   LEVEL 1,  5 Years Bull Confidential Information
+*
+*-----------------------------------------------------------------------*
+*                                                                       *
+*       ipl.exps -- symbols imported by the kernel during IPL.          *
+*                                                                       *
+*  This file is used during the final bind of the kernel to resolve     *
+*  addresses that are not provided by any object file in the bind.      *
+*  Typically these are symbols that are "hardwired" to a specific       *
+*  location, or whose value will be computed during IPL.                *
+*                                                                       *
+*  Note: proc/strtdisp.c depends on "thread" denoting end of "proc" and *
+*  "lock_pinned" denoting end of "thread".                              *
+*									*
+*  Note: sys/user.h depends on __ublock being at offset 0x400 from a	*
+*  page boundary.							*
+*									*
+*  Note: usr/include/POWER/execargs.h depends on the layout of environ, *
+*  errno and errnop at the end of the user region of the process        *
+*  private segment.							*
+*									*
+*-----------------------------------------------------------------------*
+
+*  Kernel and kernel extension segment global addresses.
+
+sys_resource    	0xE0000000
+TCE_space		0xE1000000
+proc            	0xE3000000
+thread			0xE6000000
+lock_pinned		0xE8000000
+lock_pageable		0xE8800000
+family_lock_statistics	0xE9000000
+lockl_hstat		0xE9010000
+problem_lock		0xE9012000
+
+* special virtual memory manager data segments
+
+vmmdseg         0xB0000000
+ptaseg          0xC0000000
+
+* Per-process user structure.  On this platform, the
+* u-block is at the same location in every address space.
+
+__ublock        0x2FF3B400
+
+* Addresses in per-process user stack and kernel regions.
+* These addresses are exported to user-level programs.
+* Of each pair, the name with fewer underscores is correct.
+
+environ         0x2FF22FF4
+_environ        0x2FF22FF4
+errno           0x2FF22FF8
+_errno          0x2FF22FF8
+errnop          0x2FF22FFC
+_errnop         0x2FF22FFC

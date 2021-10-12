@@ -1,0 +1,36 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Write a main program which counts the number of command-line arguments
+it has which begin with the letter 'b'.  Print the
+result in decimal.  Compile and test it as usual.
+Then type "ready".
+#user
+a.out abc bcd efg rpq b bbvd  >xxx
+grep 3 xxx >/dev/null
+#succeed
+/*  a possible solution */
+main(argc, argv)
+char *argv[];
+{
+	int i, k;
+
+	for(i=k=0; i<argc; i++)
+		if (argv[i][0] == 'b')
+			k++;
+	printf("%d\n", k);
+}
+#log
+#next
+37.1a 10

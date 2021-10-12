@@ -1,0 +1,45 @@
+#!/bin/bsh
+#  aix_sccsid[] = "src/bos/usr/lib/sendmail/smdemon.cleanu, cmdsend, bos411, 9428A410j AIX 1/24/94 10:31:58"
+# 
+# COMPONENT_NAME: CMDSEND smdemon.cleanu
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  26  27 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#  SENDMAIL CRON
+#  This cron forces a run of the sendmail queue for periodic 
+#  housekeeping.
+#  It also maintains the sendmail file /var/spool/mqueue/log.
+#  Enable it by uncommenting the line containing:
+#  	ulimit 5000; /usr/lib/smdemon.cleanu > /dev/null 
+#  in /var/spool/cron/crontabs/root. 
+#
+#  If the queue directory doesn't exist, don't do anything to it.
+#
+#  Note: You can arrange the number of log files to suit yourself.
+#  The idea is that the average size of a log file for each daemon
+#  session times the number of log files won't use more space than
+#  you desire.
+#
+    if [ -d /var/spool/mqueue ]
+       then
+	 cd /var/spool/mqueue
+        mv log.2  log.3  2> /dev/null	# slide the log files down
+        mv log.1  log.2  2> /dev/null
+        mv log.0  log.1  2> /dev/null
+        cp log    log.0  2> /dev/null
+        cat /dev/null > log 2> /dev/null
+    fi
+
+    if [ -f /usr/sbin/sendmail ]
+       then
+	 /usr/sbin/sendmail -q &
+    fi	

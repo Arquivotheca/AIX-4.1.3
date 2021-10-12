@@ -1,0 +1,39 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+And as an example of the [] operators again,
+print all the files in this directory whose
+names begin with either 'a' or 'c'.
+That will tell you to type either 'yes'
+or 'no' - do what it says.
+#create a1
+Type
+#create a2
+y
+#create b
+n
+o
+#create cxx
+e
+#create cz23
+s
+(on one line, please)
+#copyin
+#user
+#uncopyin
+#match yes
+#log
+#next
+10.1a 10
+10.3a 2

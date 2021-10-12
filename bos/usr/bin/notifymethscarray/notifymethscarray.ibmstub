@@ -1,0 +1,300 @@
+#!/bin/sh
+# @(#)04        1.2  R2/cfg/methods/notifymeth.sh, sysxarray, allsf325a 9/13/94 21:28:09
+# COMPONENT_NAME:  ALLTHORN_SW 
+#
+# FUNCTIONS:  error notification script
+#
+# ORIGINS: 30
+#
+# (C) COPYRIGHT International Business Machines Corp. 1988, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+#
+# This script is invoked by the errdemon for every entry in the
+# errnotify class added in /usr/lpp/scarray/notifylist
+#
+# The crecho routine puts a "\r" at the end of each line in case
+# the console in in raw mode and does not convert \n to \r\n
+#
+# The intermediate tmpfile minimizes the time spent writing to the
+# console and the possibility of having this message written on top of.
+#
+# Run notifymeth -i from the /etc/rc file after the errdemon has been
+# started, bacause errdemon will clear the non-persistent (en_persistenceflg=0)
+# objects when it is first started.
+#
+
+[ $# -gt 0 ] || exit 0
+
+IPLPATH=`odmget -q"attribute=keylock and value=normal" CuAt`
+if [ -z "$IPLPATH" ]; then
+    # skip concurrent error notification if boot was from service position
+    exit 0
+fi
+
+PROGNAME=`basename $0`
+ERRNOTIFYADD=/usr/lib/ras/errnotify.add
+ERRNOTIFYCRE=/usr/lib/ras/errnotify.cre
+TMPFILE=/tmp/errnotify$$
+CONSOLE=/dev/console
+ERRPT=/usr/bin/errpt
+LANG_ERRD=$LANG
+[ -z "$LANG_ERRD" -o "$LANG_ERRD" = "" ] && LANG_ERRD=En_US
+DSPMSG=/usr/bin/dspmsg
+ODMADD=/usr/bin/odmadd
+ODMCREATE=/usr/bin/odmcreate
+ODMDELETE=/usr/bin/odmdelete
+[ -z "$ODMDIR" -o "$ODMDIR" = "" ] && ODMDIR=/etc/objrepos
+
+if [ "$_VERSION2" = "_VERSION2" ] ; then   # override when run on local machine
+	CONSOLE=/dev/tty1
+	ERRPT=errpt
+	CATDIR=$HOME/cat2
+	DSPCAT=dspcat2
+	ODMADD=odmadd
+	ODMCREATE=odmcreate
+	ODMDELETE=odmdelete
+fi
+
+# We like the output messages with proper indentation. "echo" interpret 
+# "\t" that means all indentations disappear.
+# To solve the problem I incorporate cio code in to crecho.
+
+crecho()
+{
+
+	echo "$1\c" >> $TMPFILE
+	echo "\r" >> $TMPFILE
+        #  echo "$1" | cio >> $TMPFILE
+}
+
+cio()
+{
+
+	while read LINE ; do
+		echo "$LINE\c"
+		echo "\r"
+	done
+}
+
+USAGE="
+Usage:
+$PROGNAME -i -l seqno err_label resource
+
+default errnotify method
+
+   -i        initialize errnotify object class
+	     from $ERRNOTIFYADD (/etc/rc).
+
+   -c        clear all non-persistent objects from
+             the errnotify class.
+
+   -l n l r  print recommend actions to the console
+
+   -r rsrc   resource information 
+
+   -t label  error notification label
+"
+
+OPTIONS="`getopt Hicl:t:r: $*`"
+[ $? -eq 0 ] || { echo "$USAGE" ; exit 1 ; }
+
+set -- $OPTIONS
+
+SEQNO=
+LABEL=
+RESOURCE=
+for i in $* ; do
+	ARG=$1
+	case $ARG in
+	-c)
+		$ODMDELETE -o errnotify -q "en_persistenceflg = 0"
+		exit $?
+		;;
+	-i)
+		if [ ! -f $ODMDIR/errnotify ] ; then
+			$ODMCREATE $ERRNOTIFYCRE 
+			[ $? -eq 0 ] || exit $?
+		fi
+		[ -f $ERRNOTIFYADD ] || exit 0
+		$ODMADD $ERRNOTIFYADD
+		exit $?
+		;;
+	-l)
+		SEQNO=$2
+		shift
+		;;
+	-t)
+		LABEL=$2
+		shift
+		;;
+	-r)
+		RESOURCE=$2
+		shift
+		;;
+	-H)
+		echo "$USAGE"
+		exit 1
+		;;
+	--)
+		shift
+		break
+		;;
+	*)
+		echo "$PROGNAME: invalid argument $i"
+		echo "$USAGE"
+		exit 1
+		;;
+	esac
+	shift
+done
+
+[ -z "$SEQNO" ] && exit 0
+
+rm -f $TMPFILE 
+
+crecho ""
+crecho "\
+-----------------------------------------------------------------------------"
+
+if [ -z "$LABEL" ]
+then
+  Z=`$DSPMSG cmderrlg.cat -s 2 1 "A condition has been detected that requires immediate attention."`
+  crecho "$Z"
+
+  crecho ""
+
+  $ERRPT -l $SEQNO | cio >> $TMPFILE
+
+  crecho ""
+
+  Z=`$DSPMSG cmderrlg.cat -s 2 2 "For details, run the following command:"`
+  crecho "$Z"
+
+  crecho "    errpt -a -l $SEQNO"
+
+else
+
+  case $LABEL in 
+    DISK_ARRAY_ERR6)
+               Z=`echo "A degradation condition been detected on device"`
+               crecho "\t$Z $RESOURCE"
+
+               Z=`echo "Either the disk has become degraded or the disk's"`
+               crecho "\t$Z" 
+
+               Z=`echo "controller has detected an error."`
+               crecho "\t$Z" 
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+
+	       ;;
+    DISK_ARRAY_ERR7)
+               Z=`echo "A health check on an inactive controller has failed on device"`
+               crecho "\t$Z $RESOURCE"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+	       ;;
+    DISK_ARRAY_ERR8)
+               Z=`echo "A condition has occurred which caused an array controller"`
+               crecho "\t$Z" 
+
+               Z=`echo "to be switched for device"`
+               crecho "\t$Z $RESOURCE"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+	       ;;
+    DISK_ARRAY_ERR9)
+               Z=`echo "An array controller switch failed on device"`
+
+               crecho "\t$Z $RESOURCE"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+		;;
+    DISK_ARRAY_ERR10)
+               Z=`echo "A condition has occurred which caused an array controller"`
+               crecho "\t$Z" 
+               Z=`echo "configuration to change for device"`
+               crecho "\t$Z $RESOURCE"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+		;;
+    DISK_ARRAY_ERR11)
+               Z=`echo "An array drive replacement problem has occurred on device"`
+
+               crecho "\t$Z $RESOURCE"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+		;;
+    DISK_ARRAY_ERR13)
+               Z=`echo "An array inter-controller communications problem"`
+               crecho "\t$Z" 
+
+               Z=`echo "has occurred on device"`
+               crecho "\t$Z $RESOURCE"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+	       ;;
+    DISK_ARRAY_ERR14)
+               Z=`echo "An array disk problem"`
+               crecho "\t$Z" 
+
+               Z=`echo "has occurred on device"`
+               crecho "\t$Z $RESOURCE"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 5 "To examine the error entry, execute the following command:"`
+               crecho "\t$Z" 
+               crecho "\t\terrpt -a -l $SEQNO"
+
+               Z=`$DSPMSG cmderrlg.cat -s 2 7 "If problem persists run diagnostics on the device."`
+               crecho "\t$Z" 
+	       ;;
+
+  esac
+fi
+crecho "\
+-----------------------------------------------------------------------------"
+echo "">$>>$TMPFILE
+
+cp $TMPFILE /tmp/x
+(cat $TMPFILE > $CONSOLE ; rm -f $TMPFILE) &
+

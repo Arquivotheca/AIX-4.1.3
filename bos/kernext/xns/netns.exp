@@ -1,0 +1,85 @@
+#!
+* @(#)38	1.2  src/bos/kernext/xns/netns.exp, sysxxns, bos411, 9428A410j 4/23/91 10:38:13
+*
+*
+* COMPONENT_NAME: (SYSXINET) TCP/IP services. 
+* 
+* FUNCTIONS: 
+*
+* ORIGINS: 27 
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1989 
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* 
+
+* symbols exported from netxns loadable code.
+*
+idp_abort
+idp_ctlinput
+idp_ctloutput
+idp_do_route
+idp_drop
+idp_forward
+idp_input
+idp_output
+idp_raw_usrreq
+idp_undo_route
+idp_usrreq
+idpip_input
+idpstat
+ns_control
+ns_echo
+ns_err_input
+ns_error
+ns_errstat
+ns_iaonnetof
+ns_ifinit
+ns_init
+ns_output
+ns_pcballoc
+ns_pcbbind
+ns_pcbconnect
+ns_pcbdetach
+ns_pcbdisconnect
+ns_pcblookup
+ns_pcbnotify
+ns_printhost
+ns_setpeeraddr
+ns_setsockaddr
+ns_thishost
+ns_watch_output
+nsintr
+nsip_ctlinput
+nsip_free
+nsip_route
+nsip_rtchange
+nsipattach
+nsipioctl
+nsipoutput
+nspcb
+spp_abort
+spp_close
+spp_ctlinput
+spp_ctloutput
+spp_disconnect
+spp_drop
+spp_fasttimo
+spp_init
+spp_input
+spp_istat
+spp_output
+spp_reass
+spp_setpersist
+spp_slowtimo
+spp_template
+spp_timers
+spp_trace
+spp_usrclosed
+spp_usrreq
+spp_usrreq_sp

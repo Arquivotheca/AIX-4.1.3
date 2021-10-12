@@ -1,0 +1,84 @@
+# @(#)38	1.1  src/bos/usr/lib/nls/loc/km/dead.imkeymap.src, cfgnlskm, bos411, 9428A410j 7/8/93 19:09:36
+#
+# COMPONENT_NAME: (CFGNLSKM) National Language Support
+#
+# FUNCTIONS: Other Vendor's deadkey keysyms
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Following are the DEC, HP and SUN dead_keysyms.
+# Einar Johannesson, 02/22/1993
+#              --- DECmutesym.h ---
+#define DXK_ring_accent         0x1000FEB0
+#define DXK_circumflex_accent   0x1000FE5E
+#define DXK_cedilla_accent      0x1000FE2C
+#define DXK_acute_accent        0x1000FE27
+#define DXK_grave_accent        0x1000FE60
+#define DXK_tilde               0x1000FE7E
+#define DXK_diaeresis           0x1000FE22
+
+#              --- HPmutesym.h ---
+#define XK_mute_acute           0x100000a8
+#define XK_mute_grave           0x100000a9
+#define XK_mute_asciicircum     0x100000aa
+#define XK_mute_diaeresis       0x100000ab
+#define XK_mute_asciitilde      0x100000ac
+
+#              --- SUNmutesym.h ---
+#define SunXK_FA_Grave          0x1005FF00
+#define SunXK_FA_Circum         0x1005FF01
+#define SunXK_FA_Tilde          0x1005FF02
+#define SunXK_FA_Acute          0x1005FF03
+#define SunXK_FA_Diaeresis      0x1005FF04
+#define SunXK_FA_Cedilla        0x1005FF05
+#
+
+# The following are mappings of DEC, HP and SUN hex values of their
+# dead_keysyms to the IBM XK_dead_keysym names.
+# Modified 03/01/1993, by Einar Johannesson
+
+#DEC DXK_acute_accent        0x1000FE27
+0x1000FE27              XK_dead_acute
+#HP XK_mute_acute           0x100000a8
+0x100000a8              XK_dead_acute
+#  SunXK_FA_Acute          0x1005FF03
+0x1005FF03              XK_dead_acute
+#DEC DXK_grave_accent        0x1000FE60
+0x1000FE60              XK_dead_grave
+#HP XK_mute_grave           0x100000a9
+0x100000a9              XK_dead_grave
+# SunXK_FA_Grave          0x1005FF00
+0x1005FF00              XK_dead_grave
+#DEC DXK_circumflex_accent   0x1000FE5E
+0x1000FE5E              XK_dead_circumflex
+#HP XK_mute_asciicircum     0x100000aa
+0x100000aa              XK_dead_circumflex
+# SunXK_FA_Circum         0x1005FF01
+0x1005FF01              XK_dead_circumflex
+#DEC DXK_diaeresis           0x1000FE22
+0x1000FE22              XK_dead_diaeresis
+#HP XK_mute_diaeresis       0x100000ab
+0x100000ab              XK_dead_diaeresis
+# SunXK_FA_Diaeresis      0x1005FF04
+0x1005FF04              XK_dead_diaeresis
+#DEC DXK_tilde               0x1000FE7E
+0x1000FE7E              XK_dead_tilde
+#HP XK_mute_asciitilde      0x100000ac
+0x100000ac              XK_dead_tilde
+# SunXK_FA_Tilde          0x1005FF02
+0x1005FF02              XK_dead_tilde
+#DEC DXK_ring_accent 0x1000FEB0
+0x1000FEB0              XK_dead_degree
+#DEC DXK_cedilla_accent      0x1000FE2C
+0x1000FE2C              XK_dead_cedilla
+# SunXK_FA_Cedilla        0x1005FF05
+0x1005FF05              XK_dead_cedilla

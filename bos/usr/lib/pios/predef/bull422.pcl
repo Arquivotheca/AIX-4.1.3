@@ -1,0 +1,44 @@
+# @(#)54        1.7  src/bos/usr/lib/pios/predef/bull422.pcl, cmdpios, bos411, 9428A410j 4/27/94 19:31:25
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1992, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# BULL SOURCE FILE
+#
+:056:__FLG::
+:003:_Y:Dn:
+:060:__SYS::
+:641:s0:S[115]I[1810521]En%IWP:4
+:765:s1:S[105]I[1810521]En%IWP:4
+:766:s2:S[110]I[1810521]En%IWP:4
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLOQXZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLOQXZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJOQZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:500:__HTP::
+:321:sh::%Ide/bull.header %IwW | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -J! %IsH -u%IuH
+:324:st::%Ide/bull.trailer | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -t-14 %IsT -u%IuT
+:058:__MIS::
+:330:mA::PCL Emulation
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,90;Bull Compuprint PageMaster 422]
+:295:mN::422
+:416:mU::courier[10,3;0;0(%ImB)]courier-bold[10,3;3;0(%ImB)]courier-italic[10,3;0;1(%ImB)]courier[12,3;0;0(%ImB)]courier-bold[12,3;3;0(%ImB)]courier-italic[12,3;0;1(%ImB)]lineprinter[17,0;0;0(%ImB)]
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,639;manual paper,tray 1,tray 2,envelope feeder,manual envelope=0,1,2,3,4]
+:475:__HIR::
+:686:zL::2
+:688:zM::Bull
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

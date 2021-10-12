@@ -1,0 +1,797 @@
+
+sm_name_hdr:
+	id = "mkdevisa_hdr_cxia_isa"
+	next_id = "mkcxia_hdr_isa"
+	option_id = "mkcxia_name_opt"
+	has_name_select = "y"
+	name = "Add an IBM 128-Port Async, EIA-232 (ISA) Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 3
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "chdevisa_hdr_cxia_isa"
+	next_id = "chgcxia_hdr_isa"
+	option_id = "chcxia_name_opt"
+	has_name_select = "y"
+	name = "Change/Show Characteristics of an IBM 128-port Async, EIA-232 (ISA) Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 4
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "mkcxia_hdr_isa"
+	option_id = "mkcxia_isa,cxia_common"
+	has_name_select = "y"
+	name = "Add an IBM 128-Port Async, EIA-232 (ISA) Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 3
+	cmd_to_exec = "x()\n\
+{\n\
+mkdev $* \n\
+cfgmgr\n\
+echo $* \n\
+}\n\
+x"
+	ask = "n"
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "lsattr -c adapter -s isa -t cxia -D -O"
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "chgcxia_hdr_isa"
+	option_id = "cxia_chg,cxia_common"
+	has_name_select = "y"
+	name = "Change/Show Characteristics of an IBM 128-port Async, EIA-232 (ISA) Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 4
+	cmd_to_exec = "chdev "
+	ask = "n"
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover  = "lsattr -E -O"
+	cmd_to_discover_postfix = "-l logicname"
+	name_size = 0
+	value_size = 0
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "mkcxia_name_opt"
+	disc_field_name = ""
+	name = "Add an IBM 128-Port Async, EIA-232 (ISA) Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 3
+	op_type = "n"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04202"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "mkcxia_isa"
+	disc_field_name = "type"
+	name = "Device Type"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "mkcxia_isa"
+	disc_field_name = "class"
+	name = "Device Class"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-c "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "mkcxia_isa"
+	disc_field_name = "subclass"
+	name = "Device Subclass"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-s "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "mkcxia_isa"
+	disc_field_name = "parent"
+	name = "Parent Device"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-p "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "chcxia_name_opt"
+	disc_field_name = ""
+	name = "Change/Show Characteristics of an IBM 128-port Async, EIA-232 (ISA) Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 4
+	op_type = "n"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "cxia_chg"
+	disc_field_name = "logicname"
+	name = "IBM 128-Port Async, EIA (ISA) Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 152
+	name_msg_id = 2
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-l "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "cxia_chg"
+	disc_field_name = "desc"
+	name = "Description"
+	name_msg_file = "devices.cat"
+	name_msg_set = 152
+	name_msg_id = 2
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "cxia_chg"
+	disc_field_name = "state"
+	name = "Status"
+	name_msg_file = "smit.cat"
+	name_msg_set = 27
+	name_msg_id = 8
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "cxia_chg"
+	disc_field_name = "loc"
+	name = "Location"
+	name_msg_file = "smit.cat"
+	name_msg_set = 27
+	name_msg_id = 9
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "100"
+	id = "cxia_common"
+	disc_field_name = "bus_io_addr"
+	name = "Bus I/O Address"
+	name_msg_file = "devices.cat"
+	name_msg_set = 152
+	name_msg_id = 3
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = "-a bus_io_addr="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "0x108,0x118,0x128,0x208,0x228,0x308,0x328"
+	values_msg_file = "devices.cat"
+	values_msg_set = 152
+	values_msg_id = 3
+	aix_values = "0x108,0x118,0x128,0x208,0x228,0x308,0x328"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "110"
+	id = "cxia_common"
+	disc_field_name = "line1_speed"
+	name = "Line 1 Speed"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 5
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line1_speed="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"      4-wire direct  8-wire direct   8-wire 232modem   8-wire 422modem\n\
+9600         -          supported       supported         supported\n\
+14.4K        -              -           supported         supported\n\
+19.2K        -          supported       supported         supported\n\
+38.4K        -          supported       supported         supported\n\
+57.6K        -          supported       supported         supported\n\
+64K          -              -           supported             -    \n\
+76.8K        -          supported       supported         supported\n\
+115K         -          supported           -             supported\n\
+230K     supported      supported           -             supported\n\
+460K     supported      supported           -             supported\n\
+920K         -          supported           -             supported\n\
+1.2M         -          supported           -             supported\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "120"
+	id = "cxia_common"
+	disc_field_name = "line1_cabletype"
+	name = "Line 1 Cable Type"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 6
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line1_cabletype="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"4 -wire:  232modem:none  422modem:none  direct:230K,460K\n\
+8 -wire:  232modem:all   422modem:all   direct:all except 14.4K,64K\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "130"
+	id = "cxia_common"
+	disc_field_name = "commode_l1c1"
+	name = "	Node 1 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 7
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c1="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "140"
+	id = "cxia_common"
+	disc_field_name = "commode_l1c2"
+	name = "	Node 2 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 8
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c2="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "150"
+	id = "cxia_common"
+	disc_field_name = "commode_l1c3"
+	name = "	Node 3 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 9
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c3="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "160"
+	id = "cxia_common"
+	disc_field_name = "commode_l1c4"
+	name = "	Node 4 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 10
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c4="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "170"
+	id = "cxia_common"
+	disc_field_name = "line2_speed"
+	name = "Line 2 Speed"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 11
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line2_speed="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"      4-wire direct  8-wire direct   8-wire 232modem   8-wire 422modem\n\
+9600         -          supported       supported         supported\n\
+14.4K        -              -           supported         supported\n\
+19.2K        -          supported       supported         supported\n\
+38.4K        -          supported       supported         supported\n\
+57.6K        -          supported       supported         supported\n\
+64K          -              -           supported             -    \n\
+76.8K        -          supported       supported         supported\n\
+115K         -          supported           -             supported\n\
+230K     supported      supported           -             supported\n\
+460K     supported      supported           -             supported\n\
+920K         -          supported           -             supported\n\
+1.2M         -          supported           -             supported\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "180"
+	id = "cxia_common"
+	disc_field_name = "line2_cabletype"
+	name = "Line 2 Cable Type"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 12
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line2_cabletype="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"4 -wire:  232modem:none  422modem:none  direct:230K,460K\n\
+8 -wire:  232modem:all   422modem:all   direct:all except 14.4K,64K\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "190"
+	id = "cxia_common"
+	disc_field_name = "commode_l2c1"
+	name = "	Node 1 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 7
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c1="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "200"
+	id = "cxia_common"
+	disc_field_name = "commode_l2c2"
+	name = "	Node 2 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 8
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c2="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "210"
+	id = "cxia_common"
+	disc_field_name = "commode_l2c3"
+	name = "	Node 3 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 9
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c3="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "220"
+	id = "cxia_common"
+	disc_field_name = "commode_l2c4"
+	name = "	Node 4 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 153
+	name_msg_id = 10
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c4="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"direct       4wire:230K,460K   8wire:all baud rates except 14.4K,64K.\n\
+232_modem    4wire:none        8wire:all baud rates 76.8K and less.\n\
+422_modem    4wire:none        8wire:all baud rates except 64K.\n\
+none         no RAN configured at this node.\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+

@@ -1,0 +1,34 @@
+# @(#)19	1.3  src/bos/usr/bin/mh/support/MailAliases.S, cmdmh, bos411, 9428A410j 2/15/93 12:17:31
+#   COMPONENT_NAME: CMDMH
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 26,27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+; See comments at end of this file
+; This file is almost empty as MH now supports personal aliases.
+
+;everyone: *
+
+; Blank lines and lines beginning with a ; are ignored.
+; < file	-> read more aliases from "file"
+; foo: fum      -> simple replacement
+; foo: fum, fie -> list replacement
+; foo: < file   -> list replacement from "file"
+; foo: = group  -> list replacement from UNIX group
+; foo: + group  -> list replacement by ALL users in /etc/passwd
+;		      with gid == group
+; foo: *        -> list replacement by ALL users in /etc/passwd
+;                     with uid >= 200
+; foo*: fum     -> matches foo<string> (including the empty string)
+;
+; using a ';' instead of a ':' indicates that the alias should be displayed
+; along with the addresses used (normally, the addresses replace the alias
+; completely)

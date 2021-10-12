@@ -1,0 +1,31 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Do the inputs
+
+Let $x sub i$ and $y sub i$ be $>= z sub i$.
+
+and
+
+Let $x sub i$ and $y sub i$ be $>=$ $z sub i$.
+
+produce the same output?
+Answer yes or no.
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+7.1a

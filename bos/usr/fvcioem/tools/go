@@ -1,0 +1,23 @@
+#!/bin/ksh
+base=""
+path=""
+
+case "$2" in
+  "src" )   base=/devel/cioem/src;;
+  "obj" )   base=/devel/cioem/obj/power;;
+  *)        echo "src/obj flag $2 not recognized";;
+esac
+
+case "$1" in
+  "kid" )      path=/bos/usr/sbin/ddt/kid;;
+  "ddttok" )   path=/bos/usr/sbin/ddt/tok;;
+  "ddtfddi")   path=/bos/usr/sbin/ddt/fddi;;
+  "ddtent")    path=/bos/usr/sbin/ddt/ent;;
+  "cie" )      path=/bos/kernext/cie;;
+  "cfg" )      path=/bos/usr/lib/methods/cfgcie;;
+  "pkg" )      path=/packages/bos/compat/lan;;
+  *     )      echo "Component $1 not recognized";;
+esac
+
+[[ -n "$base" && -n "$path" ]] && cd $base$path
+

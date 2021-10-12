@@ -1,0 +1,86 @@
+# @(#)83	1.1  src/bos/objclass/POWER/diag.edd2.add, cmddiag, bos411, 9428A410j 3/10/93 16:04:29
+#
+#   COMPONENT_NAME: CMDDIAG
+#
+#   FUNCTIONS: 8-Port Async Adapter MIL-STD 188 Predefined Diagnostic Stanzas 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#
+# DClass   - name uniquely identifying a device class
+# DType    - name uniquely identifying a device type
+# DSClass  - name uniquely identifying a device subclass
+# Ports    - number of ports on the card if a multi-port card
+# Pset     - set id of message set in catalog file dcda.msg (vendor.msg)
+#	     (see Menu bit 16 below if not using dcda.msg file)
+# PreTest  - set if device is to be tested before system comes up.
+#          - value equals 1 if not a display device
+#          - value equals 2 if a display device
+# AttDType - names a device that has a device driver that supports DType.
+# Conc     - 0 not supported in concurrent mode
+#          - 1 supports Diagnostic Tests in concurrent mode
+#          - 2 supports ELA
+# SupTests - Bit positions 32 16 8 4 2 1
+#                           |  | | | | |__Shared Tests
+#                           |  | | | |____Subtests Tests
+#                           |  | | |______Full Tests
+#                           |  | |________Missing Options 1
+#                           |  |__________Missing Options 2
+#                           |_____________HFT Devices (used for X)
+#					  device will not be in test list if
+#					  running under X-windows
+#
+# Menu     - Bit positions 16 8 4 2 1
+#                           | | | | |_____Diagnostic Test List Menu
+#                           | | | |_______Not allowed to be deleted from DTL Menu
+#                           | | |_________Diagnostic Selection Menu
+#                           | |___________Conditional Diagnostic Selection Menu
+#			    |_____________Devices SRN numbers are located in the
+#					  Diagnostic Application catalog file.
+#					  Pset indicates the set number	
+# DNext    - 2 Test Sibling next
+#          - 1 Test Parent next
+# DaName   - name of Diagnostic Application associated with device
+#            When DaName is prefixed with a "*", the diagnostic controller will
+#            get the value of the attribute name that follows the "*", then
+#            uses the attribute value obtained to get the real DaName from the
+#            PDiagAtt object class. This method is used to allow support of
+#            devices having the same DType, but requiring different DA.
+# Diskette - 0 => Not on any diskette
+#            X => Diskette number
+#            S => Supplemental Diskette 
+# EnclDaName - name of Diagnostic Application associated with enclosure for
+#              device
+# SysxFlg  - Bit positions  8 4 2 1
+#                           | | | |__System Exerciser NOT supported
+#                           | | |____DA must run separately from similar DAs
+#                           | |______DA requires media
+#                           |________DA is considered a long test
+#
+#
+PDiagDev:
+        DClass  = "adapter"
+        DType = "8p188"
+        DSClass  = "mca"
+        Ports    = 0
+        PSet     = 42
+        PreTest  = 0
+        AttDType = "tty"
+        AttSClass= "rs232"
+        Conc     = 1
+        SupTests = 6
+        Menu     = 5
+        DNext    = 1
+        DaName   = "dasync"
+        Diskette = "7A"
+        EnclDaName   = ""
+        SysxFlg  = 0x0008
+

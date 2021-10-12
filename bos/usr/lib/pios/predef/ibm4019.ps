@@ -1,0 +1,56 @@
+# @(#)12        1.14  src/bos/usr/lib/pios/predef/ibm4019.ps, cmdpios, bos411, 9428A410j 5/25/94 19:47:15
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1989
+# All Rights Reserved
+#
+:056:__FLG::
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,812;no initialization,full initialization,send PostScript language switch command only=0,1,2]:1
+:638:_u:S[E015]I[1810516]En%IW9:1
+:060:__SYS::
+:641:s0:S[115]I[1810521]En%IWP:1
+:642:s1:S[105]I[1810521]En%IWP:1
+:643:s2:S[110]I[1810521]En%IWP:1
+:724:mZ:S[101]I[1810548]%IWY:!
+:655:uH:S[140]I[1810527]En%IW9:1
+:656:uT:S[145]I[1810527]En%IW9:1
+:841:mY:S[177]I[1810544]EnR[PPDS,PCL,GL,PostScript=1,2,3,8]:8
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsH -u%GuH%d
+:324:st::%Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsT -u%GuT%d
+:057:__IDS::
+:273:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[juJZ]
+:058:__MIS::
+:330:mA::PostScript
+:331:mL::[devices.cat,71,6;IBM 4019 LaserPrinter]
+:295:mN::4019
+:301:mc::\0
+:319:mz::14688
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,739;manual paper feed,tray 1 (upper),tray 2 (lower),envelope feeder,manual envelope feed=0,1,2,3,4]
+:543:wM::!
+:723:ws::%?%G_u%{0}%=%t3%e%G_u%{4}%<%t%G_u%{1}%-%d%e4%;
+:051:__CAG::
+:144:ci::%?%GmZ%t%Iez\4%;%?%G_j%{1}%=%t statusdict begin %Gws%d setpapertray end%;
+:152:cr::\4%?%GmZ%t%Iex%;
+:054:__ESC::
+:514:ex::\33[K\3\0\4\61%GmY%c
+:263:ez::\33[K\5\0%GwM%{4}%+%c\61\10\0\0
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.ps
+:477:zS::!
+:685:zV::+

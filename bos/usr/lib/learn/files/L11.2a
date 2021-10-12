@@ -1,0 +1,29 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+To make a new copy of a file, the easiest
+way is to use the "cp" command.
+If you type 
+  cp x y
+a copy of file "x" is made and named "y".
+This directory contains a file named "george";
+make a copy named  "steve".
+Then type "ready".
+#create george
+this is file george
+#user
+#cmp steve george
+#log
+#next
+11.2b 5

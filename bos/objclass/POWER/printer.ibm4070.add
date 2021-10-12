@@ -1,0 +1,233 @@
+* @(#)39	1.5  src/bos/objclass/POWER/printer.ibm4070.add, cfgmethods, bos411, 9428A410j 5/3/94 20:32:34
+*********************************************************************
+*       Predefined stanza file for IBM ibm4070 printer
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1992, 1994
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+PdDv:
+	type = "ibm4070"
+	class = "printer"
+	subclass = "parallel"
+	prefix = "lp"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 1
+	led = 1832
+	setno = 71
+	msgno = 96
+	catalog = "devices.cat"
+	DvDr = ""
+	Define = "/usr/lib/methods/define"
+	Configure = "/usr/lib/methods/cfgpp"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = "/usr/lib/methods/ucfgpp"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = "printer/parallel/ibm4070"
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "ptop"
+	deflt = "60"
+	values = "1-2000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 17
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "line"
+	deflt = "63"
+	values = "0-2147483647,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "col"
+	deflt = "80"
+	values = "1-2147483647,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "ind"
+	deflt = "0"
+	values = "0-2147483646,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 20
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "plot"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 21
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "backspace"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 22
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "cr"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 23
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "form"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 24
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "lf"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 25
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "addcr"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 26
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "case"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 27
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "tabs"
+	deflt = "yes"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 28
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "wrap"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 29
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "mode"
+	deflt = "no"
+	values = "yes,no"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 30
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "interface"
+	deflt = "standard"
+	values = "standard"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 31
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+	attribute = "autoconfig"
+	deflt = "available"
+	values = "available,defined"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 32
+
+PdAt:
+	uniquetype = "printer/parallel/ibm4070"
+        attribute = busy_delay
+        deflt = 0
+        values = "0-100000,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 33

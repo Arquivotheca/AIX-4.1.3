@@ -1,0 +1,170 @@
+# @(#)90	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.vt100-7-bit/out.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:48:47
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# HTABLES
+# -------
+#
+# This file contains the requested internal to external conversion tables
+# for hterm. Since at current version, font code points are code page
+# 856, this values are used for internal representation.
+# If 7 bit ASCII codes are required for external data representation
+# a conversion is required.
+#
+# First  number is the internal (code page 856) decimal character value.
+# Second number is the external (ASCII)         decimal character value.
+#
+# Only characters with external values different from the internal,
+# must be entered.
+#
+#
+#
+#
+#  PC 856 to 7 bit ASCII conversion table                                 */
+#  --------------------------------------                                 */
+#                                                                         */
+#
+#P850         ASCII           P850
+#value        value           name
+#
+128             0   #
+129             0   #
+130             0   #
+131             0   #
+132             0   #
+133             0   #
+134             0   #
+135             0   #
+136             0   #
+137             0   #
+138             0   #
+139             0   #
+140             0   #
+141             0   #
+142             0   #
+143             0   #
+144             0   #
+145             0   #
+146             0   #
+147             0   #
+148             0   #
+149             0   #
+150             0   #
+151             0   #
+152             0   #
+153             0   #
+154             0   #
+155             0   #
+156             0   #
+157             0   #
+158             0   #
+159             0   #
+160             0   #
+161             0   #
+162             0   #
+163             0   #
+164             0   #
+165             0   #
+166             0   #
+167             0   #
+168             0   #
+169             0   #
+170             0   #
+171             0   #
+172             0   #
+173             0   #
+174             0   #
+175             0   #
+176             0   #
+177             0   #
+178             0   #
+179             0   #
+180             0   #
+181             0   #
+182             0   #
+183             0   #
+184             0   #
+185             0   #
+186             0   #
+187             0   #
+188             0   #
+189             0   #
+190             0   #
+191             0   #
+192             0   #
+193             0   #
+194             0   #
+195             0   #
+196             0   #
+197             0   #
+198             0   #
+199             0   #
+200             0   #
+201             0   #
+202             0   #
+203             0   #
+204             0   #
+205             0   #
+206             0   #
+207             0   #
+208             0   #
+209             0   #
+210             0   #
+211             0   #
+212             0   #
+213             0   #
+214             0   #
+215             0   #
+216             0   #
+217             0   #
+218             0   #
+219             0   #
+220             0   #
+221             0   #
+222             0   #
+223             0   #
+224            96   #         aleph
+225            97   #         beth
+226            98   #         gimel
+227            99   #         daled
+228           100   #         he
+229           101   #         vav
+230           102   #         zain
+231           103   #         chet
+232           104   #         tet
+233           105   #         jod
+234           106   #         chaf sofit
+235           107   #         chaf
+236           108   #         lamed
+237           109   #         mem sofit
+238           110   #         mem
+239           111   #         nun sofit
+240           112   #         nun
+241           113   #         samach
+242           114   #         ain
+243           115   #         peh sofit
+244           116   #         peh
+245           117   #         tzadik sofit
+246           118   #         tzadik
+247           119   #         kuf
+248           120   #         resh
+249           121   #         shin
+250           122   #         taf
+251             0   #
+252             0   #
+253             0   #
+254             0   #
+255             0   #
+#                         end of map

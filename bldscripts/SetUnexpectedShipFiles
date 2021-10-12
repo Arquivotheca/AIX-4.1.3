@@ -1,0 +1,59 @@
+#!/bin/ksh
+# @(#)28	1.1  src/bldscripts/SetUnexpectedShipFiles, ade_build, bos41J, 9509A_all 2/17/95 13:32:35
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+trap : 1
+export PAGERID=packager
+export PAGERSEVERITY=3
+alias  dataman=`whence dataman`
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED ; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset DBGLEVEL=1
+eval ${DEBUGX}
+
+typeset -r cmd=$(basename $0)
+typeset -r lmupdates=/tmp/$cmd.lmupdates.$$
+typeset -r xreqships=/tmp/$cmd.xreqships.$$
+typeset -i fscnt=0
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+dataman -q leveldata[$BLDCYCLE][xreqshipped] >$xreqships
+dataman -q leveldata[$BLDCYCLE][lmupdatelist] >$lmupdates
+
+# set notbuiltshipfiles to files that xreq expected to ship that don't
+# show up in the lmupdatelist.
+comm -2 -3 $lmupdates $xreqships |
+while read file fileset
+do
+    if [[ "$file" = *liblpp.a ]]
+    then
+	grep $fileset $lmupdates | wc -l | read fscnt
+	if (( fscnt == 1 ))
+	then
+	    print "$file $fileset"
+	fi
+    else
+	print "$file $fileset"
+    fi
+done |
+dataman -s leveldata[$BLDCYCLE][unexpectedshipfiles]
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

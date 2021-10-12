@@ -1,0 +1,53 @@
+/* @(#)22 1.6 src/bos/usr/lpp/bosinst/db/default.client, bosinst, bos411, 9428A410j 93/01/11 13:43:44    */
+/*
+ *
+ * COMPONENT_NAME: (BOSINST) Base Operating System Install
+ *
+ * FUNCTIONS: sample client description file
+ *
+ * ORIGINS: 27
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+/*
+	This is the default client description file.
+*/
+
+/* #include "defaults" */
+
+servername	script		hostname
+
+curdate		runtime		curdate
+
+servertz	script		echo "TZ=$TZ"
+
+clienttype	script		echo $Clients_Type
+
+clients_header_version	script		echo $Clients_Header_Version
+
+client_ip_address	script		echo $Client_IP_Address
+
+gateway_ip_address	script		echo $Gateway_IP_Address
+
+server_ip_address	script		echo $Server_IP_Address
+
+subnetmask		script		echo $Subnetmask
+
+use_gateway		script		echo $Use_Gateway
+
+install_device		script		echo $Install_Device_Name
+
+nameserver		script		[ -r /etc/resolv.conf ] && awk '$0 ~ /^[ 	]*nameserver[ 	]/{print $2}' /etc/resolv.conf
+
+domain			script		[ -r /etc/resolv.conf ] && awk '$0 ~ /^[ 	]*domain[ 	]/{print $2}' /etc/resolv.conf
+
+defaultgatewayaddr	value		129.35.17.2
+
+defaultgatewayname	value		bcroom
+

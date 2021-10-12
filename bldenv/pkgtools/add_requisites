@@ -1,0 +1,24 @@
+# @(#)21	1.1  src/bldenv/pkgtools/add_requisites, ptfscreen41, bos41J, 9521B_all 5/24/95 14:10:12
+#
+#   COMPONENT_NAME: ptfscreen41
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Adding missing requisites
+Original defect which left out the reqs: 174007?
+Reason for adding the reqs: executables need the new libSpmi library
+List of fileset to fileset requisites being added:
+perfmgr ifreqs perfagent.server
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

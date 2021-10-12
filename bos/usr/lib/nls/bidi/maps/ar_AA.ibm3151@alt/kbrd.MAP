@@ -1,0 +1,94 @@
+# @(#)52	1.1  src/bos/usr/lib/nls/bidi/maps/ar_AA.ibm3151@alt/kbrd.MAP, cfgnls, bos411, 9428A410j 11/4/93 15:56:30
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#  KHB.map
+#   -------
+#
+#  This is the maping of the keyboard while in Arabic mode.
+#  Only keys affected must be present in the file.
+#  The first value is the ASCII decimal code of the the "ENGLISH"
+#  mode, the second is the value of the INTERNAL ( at the moment
+#  code page 1046) ASCII decimal representation of
+#  corresponding arabic character.
+#
+#
+# key          converted
+#                 to
+#
+32                         # SP ->      RSP
+39              ×          # '	->	tah
+44              è          # ,	->	waw
+46              Ò          # .	->	zain
+47              Ø          # /	->	zah
+59              ã          # ;	->	kaf
+63              ¿          # ?	->	arabic_questionmark
+65              \          # A  ->	\
+66              äÂ         # B	->	maddaonlamalef
+67              ğ          # C	->	kasra
+68              ,          # D	->	English comma
+69              ï          # E	->	damma
+70              .          # F	->	full stop
+71              äÃ         # G	->	hamzaoverlamalef
+72              Ã          # H	->	hamzaonalef	
+73              ç          # I	->	heh
+74              Ê          # J	->	teh
+75              ¬          # K	->	arabic_comma
+76              /          # L  ->	/
+77              É          # M	->	tehmarbuta
+78              Â          # N	->	maddaonalef
+79              Î          # O	->	khah
+80              »          # P	->	arabic_semicolon
+81              î          # Q	-> 	fatha
+82              ì          # R	->	dammatan
+83              Ó          # S	->	seen
+84              äÅ         # T	->	hamzaunderlamalef
+85              Ù          # U	->	ain
+86              í          # V	->	kasratan
+87              ë          # W	->	fathatan
+88              ò          # X	->	sukun
+89              Å          # Y	->	hamzaunderalef
+90              Æ          # Z	->	hamzaonyeh
+91              Ì          # [	->	jeem
+92              à          # \	->	tatweel
+93              Ï          # ]	->	dal
+96              Ğ          # `	->	thal
+97              Ô          # a	->	sheen
+98              äÇ         # b	->	lamalef
+99              Ä          # c	->	hamzaonwaw
+100             ê          # d	->	yeh
+101             Ë          # e	->	theh
+102             È          # f	->	beh
+103             ä          # g	->	lam
+104             Ç          # h	->	alef
+105             ç          # i	->	heh
+106             Ê          # j	->	teh
+107             æ          # k	->	noon
+108             å          # l	->	meem
+109             É          # m	->	tehmarbuta
+110             é          # n	->	alefmaksura
+111             Î          # o	->	khah
+112             Í          # p	->	hah
+113             Ö          # q 	-> 	dad
+114             â          # r	->	qaf
+115             Ó          # s	->	seen
+116             á          # t	->	feh
+117             Ù          # u	->	ain
+118             Ñ          # v	->	reh
+119             Õ          # w	->	sad
+120             Á          # x	->	hamza
+121             Ú          # y	->	ghain
+122             Æ          # z	->	hamzaonyeh
+126             ñ          # ~	->	shadda

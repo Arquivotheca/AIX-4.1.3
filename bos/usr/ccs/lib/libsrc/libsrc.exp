@@ -1,0 +1,90 @@
+*
+* @(#)94	1.10  src/bos/usr/ccs/lib/libsrc/libsrc.exp, libsrc, bos411, 9428A410j 2/26/91 14:02:18
+* COMPONENT_NAME: (cmdsrc) System Resource Controller
+*
+* FUNCTIONS:
+*       none
+*
+* ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregate modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1990, 1991
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*-----------------------------------------------------------------------
+*       libsrc.exp
+*-----------------------------------------------------------------------
+
+delssys
+addssys
+ckeckssys
+ckcontact
+chssys
+defssys
+getssys
+getsubsvr
+finishupdate
+bldview
+Justpid
+Long
+Stopforce
+Stopcancel
+Contact
+Nolong
+argview
+cmdargs
+parseopt
+opensubsys
+closeclass
+readclass
+SRCsubsys_CLASS
+SRCsubsvr_CLASS
+SRCnotify_CLASS
+getdbfields
+putdbfields
+update_obj
+readrec
+src_odm_init
+src_odm_terminate
+srcrrqs
+srcsbuf
+srcsrpy
+srcsrqt
+srcstat
+srcstathdr
+srcstattxt
+srcstop
+srcstrt
+srcrecvpkt
+srcerr
+src_err_msg
+tellsrc
+srcsendpkt
+srcelog
+srcsockset
+src_setup_socket
+srcsockaddr
+src_odm_auditlog
+srcafunixsockaddr
+srcgetport
+src_close_socket
+active_srcmstr
+lock_srcmstr
+unlock_srcmstr
+src_get_sun_path
+srcaddinet
+srcdelinet
+src_what_sockaddr_size
+src_print_all_notify
+src_print_all_subsvr
+src_print_all_subsystem
+src_print_default_subsystem
+src_print_one_notify
+src_print_one_subsvr
+src_print_one_subsystem
+Smitformat

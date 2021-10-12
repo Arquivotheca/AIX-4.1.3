@@ -1,0 +1,1623 @@
+* @(#)  43     1.6 12/18/92 10:30:47
+* COMPONENT_NAME: (sysxdlcs) SDLC Generic Data Link Control
+*
+*   FUNCTIONS: SDLC error description stanza file
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989, 1992
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+*
+* The following errors are SDLC temporary/informational error
+*
+
++ SDL0001:
+        Comment         = "Invalid state to receive tx endframe ack"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8BB
+        Fail_Actions    = 2010
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0003:
+        Comment         = "Invalid state for CLOSE ack"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8A4
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0004:
+        Comment         = "Invalid state for START ack"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8A5
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0005:
+        Comment         = "Session limit has been exceeded"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E863
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0006:
+        Comment         = "Invalid state to send an XID (sec)"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8A6
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL000A:
+        Comment         = "Invalid write command, not in NRM"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8A7
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL000B:
+        Comment         = "Invalid write, link not opened"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8A8
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0013:
+        Comment         = "Unexpected ack, tx complete"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8A9
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0014:
+        Comment         = "Threshold value exceeded (repoll count)"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8AA
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0015:
+        Comment         = "Threshold value exceeded (retxed bursts)"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8AB
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0016:
+        Comment         = "Invalid state for OPEN SAP command"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8AC
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0020:
+        Comment         = "Invalid state for CONTACT command"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E815
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0021:
+        Comment         = "Primary station can not alter inactivity timeout"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8AD
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0022:
+        Comment         = "Invalid state for the TEST command"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E834
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0026:
+        Comment         = "Unknown status returned with received data"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 3302
+        Fail_Causes     = 3200,E8AF
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0028:
+        Comment         = "Invalid state for the CLOSE SAP command"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B0
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0030:
+        Comment         = "Command not valid while sap is not opened"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B1
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0031:
+        Comment         = "Can not query the link until it has been opened"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200, E8B2
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0032:
+        Comment         = "Invalid Link Station correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B3
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0038:
+        Comment         = "Invalid state for HALT LS command"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B4
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0039:
+        Comment         = "Invalid transmit window size"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E876
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0040:
+        Comment         = "Invalid forced halt"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E868
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0041:
+        Comment         = "Must select half duplex mode"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B5
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0042:
+        Comment         = "Invalid Repoll threshold"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B6
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0043:
+        Comment         = "Invalid Idle list timer"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B7
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0045:
+        Comment         = "Invalid retransmission count"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B8
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0046:
+        Comment         = "Invalid retransmission threshold"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8C6
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0047:
+        Comment         = "Invalid remote name length"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E86F
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0048:
+        Comment         = "Invalid remote address"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E870
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0050:
+        Comment         = "Invalid repoll count"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E86D
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0051:
+        Comment         = "Invalid repoll timeout"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E871
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0052:
+        Comment         = "Invalid local address"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8C7
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0053:
+        Comment         = "Invalid inactivity timer"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E869
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0054:
+        Comment         = "Negotiable mode not valid"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8C8
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0057:
+        Comment         = "Invalid max ls value (pt-pt)"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8B9
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0058:
+        Comment         = "Invalid max link station"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8BA
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0059:
+        Comment         = "Invalid status block type"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 3302
+        Fail_Causes     = 3200,E898
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0061:
+        Comment         = "Bad rc (XID function)"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E895
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0062:
+        Comment         = "Bad rc (I frame function)"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E891
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0063:
+        Comment         = "Bad rc (network data function)"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8A3
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0064:
+        Comment         = "user function still busy"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,B8BC
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0065:
+        Comment         = "Invalid type field on asyncronous status block"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 3302
+        Fail_Causes     = 3200,E8BD
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0066:
+        Comment         = "Invalid ioctl command from user"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8BE
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0067:
+        Comment         = "Alter: invalid flag"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E804
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0068:
+        Comment         = "Alter: invalid force halt timeout"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E805
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0069:
+        Comment         = "Alter: invalid inactivity timeout"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E806
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL006A:
+        Comment         = "Alter: invalid maximum i field"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E808
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL006B:
+        Comment         = "Alter: invalid maximum repoll timeout"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E80A
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL006C:
+        Comment         = "Alter: invalid transmit window size"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E80D
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL006D:
+        Comment         = "Exit Local Busy: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E82C
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL006E:
+        Comment         = "Enter Local Busy: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E82A
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL006F:
+        Comment         = "Query LS: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E84E
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0070:
+        Comment         = "Contact: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8A1
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0071:
+        Comment         = "Test: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E8A2
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0072:
+        Comment         = "Alter: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E807
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0073:
+        Comment         = "Halt: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E830
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL0074:
+        Comment         = "Trace: Invalid LS correlator"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = TEMP
+        Err_Desc        = 2100
+        Prob_Causes     = 7004
+        Fail_Causes     = 3200,E87B
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
+*
+* The following errors are SDLC alertable errors
+*
+
+
+* SDLC Alert 1
+*
++ SDL8001:
+        Comment         = "Exceeded maximum repolls of secondary station"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 3300
+        Prob_Causes     = 2104,2031
+        User_Causes     = 0209
+        User_Actions    = 0200
+        Fail_Causes     = 2104,3511,F017
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 2
+*
++ SDL8002:
+        Comment         = "Received DM from secondary station"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 2004,F01A
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 3
+*
++ SDL8003:
+        Comment         = "Reveived SNRM command while in Normal Respone Mode"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1023
+        Fail_Causes     = 1023,F015
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 4
+*
++ SDL8004:
+        Comment         = "Primary sent an invalid or unsupported command"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1000
+        Fail_Causes     = 1000,F010
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 5
+*
++ SDL8005:
+        Comment         = "Primary sent an I field when not permitted"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1000
+        Fail_Causes     = 1000, F011
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 6
+*
++ SDL8006:
+        Comment         = "Primary station sent frame with an invalid nr count"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1000
+        Fail_Causes     = 1000,F012
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 7
+*
++ SDL8007:
+        Comment         = "Primary sent frame with an I field that is too long"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1000
+        Fail_Causes     = 1000,F013
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 8
+*
++ SDL8008:
+        Comment         = "Secondary sent an invalid or unsupported command"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1023
+        Fail_Causes     = 1023,F020
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 9
+*
++ SDL8009:
+        Comment         = "Secondary sent an I frame when not permitted"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1023
+        Fail_Causes     = 1023,F021
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 10
+*
++ SDL800A:
+        Comment         = "Secondary sent a frame with an invalid nr count"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1023
+        Fail_Causes     = 1023,F022
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 12
+*
++ SDL800C:
+        Comment         = "The secondary stations inactivity timer expired"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2104,2031
+        User_Causes     = 0209
+        User_Actions    = 0200
+        Fail_Causes     = 2104,3511,F019
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 13
+*
++ SDL800D:
+        Comment         = "Local stations retry limit for XID has been exceeded"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 3300
+        Prob_Causes     = 2104,2031
+        User_Causes     = 0209
+        User_Actions    = 0200
+        Fail_Causes     = 2104,3511,F018
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*SDLC Alert 14
+*
++ SDL800E:
+        Comment         = "Secondary station sent an unidentified FRMR"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = TRUE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004,1000
+        Fail_Causes     = 1000,F014
+        Fail_Actions    = 0400,2100
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+	Detail_Data     = 160,8001,HEX
+
+*
+* The following errors are SDLC permanent, non-alertable errors
+*
+
++ SDL8011:
+        Comment         = "CTS or failsafe timeout"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8AE
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8019:
+        Comment         = "Invalid response to I/S frame"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8C9
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
+
+
++ SDL801D:
+        Comment         = "Retransmission of I frames"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8BF
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL803C:
+        Comment         = "Invalid address received"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8C0
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8043:
+        Comment         = "Data Set Ready (DSR) line dropped"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3600,3200,F035
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8046:
+        Comment         = "No mbufs are available"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 0503 
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8047:
+        Comment         = "Could not add an element to the ring queue"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8C1
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8051:
+        Comment         = "Unexpected rc, halt device"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E88A
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8052:
+        Comment         = "Unexpected rc, start device"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E88D
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8053:
+        Comment         = "Unexpected rc, devwrite"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E88E
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8055:
+        Comment         = "Bad write id returned by device handler"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8C2
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8056:
+        Comment         = "System Interface"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E878
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8061:
+        Comment         = "Unexpected return code from devopen()"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E88B
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8062:
+        Comment         = "Unexpected return code from devclose()"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E880
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8065:
+        Comment         = "Unexpected return code from malloc()"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8C3
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8066:
+        Comment         = "Unexpected return code from copyin()"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200, E881
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8067:
+        Comment         = "Unexpected return code from copyout()"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200, E882
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8068:
+        Comment         = "Link station not found: delete_ls()"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8C4
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL8069:
+        Comment         = "Link station already in list: add_ls()"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200,E8C5
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
++ SDL806A:
+        Comment         = "Unexpected rc: Start Auto Response"
+        Class           = S
+        Report          = TRUE
+        Log             = TRUE
+        Alert           = FALSE
+        Err_Type        = PERM
+        Err_Desc        = 2100
+        Prob_Causes     = 2004
+        Fail_Causes     = 3200, E8CA
+        Fail_Actions    = 2010 
+	Detail_Data	= 16,8019,ALPHA
+	Detail_Data	= 16,8016,ALPHA
+	Detail_Data	= 20,00A2,ALPHA
+	Detail_Data	= 4,8017,DEC
+	Detail_Data     = 8,0011,HEX
+
+* Added for MPU secondary support.
+* Fail_Causes message id (EA2D) put in codepoint.cat via errinstall.
++ SDL806B:
+	Comment         = "Cannot be Primary or Negotiable on MPU Start LS"
+	Class           = S
+	Report          = TRUE
+	Log             = TRUE
+	Alert           = FALSE
+	Err_Type        = TEMP
+	Err_Desc        = 2100
+	Prob_Causes     = 7004
+	Fail_Causes     = 3200,E818,EA2D
+	Fail_Actions    = 2010
+	Detail_Data     = 16,8019,ALPHA
+	Detail_Data     = 16,8016,ALPHA
+	Detail_Data     = 20,00A2,ALPHA
+	Detail_Data     = 4,8017,DEC
+	Detail_Data     = 8,0011,HEX

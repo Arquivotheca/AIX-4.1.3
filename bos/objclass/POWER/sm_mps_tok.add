@@ -1,0 +1,68 @@
+* @(#)39        1.1  src/bos/objclass/POWER/sm_mps_tok.add, tu_mps, bos412, 9445C412a 11/7/94 13:53:00
+*********************************************************************
+*
+* COMPONENT_NAME : SYSXMPS
+*
+* FUNCTIONS: sm_mps_tok.add
+*
+* ORIGINS : 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+
+
+# The dialogue headers follow.  There is one for each unique Predefined
+# Token Ring adapter instance.  Their Id's are built as follows:
+#       "chgtok_hdr_xxx_yyy"
+# where xxx is the type and yyy is the subclass.
+sm_cmd_hdr:
+    id                        = "chgtok_hdr_mps_mca"
+    option_id                 = "tok_chg,tok_chg_auto"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Token Ring Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 300
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Displays ring speed.
+sm_cmd_opt:
+    id                        = "tok_chg_auto"
+    id_seq_num                = "051"
+    disc_field_name           = "ring_speed"
+    name                      = "RING speed"
+    name_msg_file             = "devices_tok.cat"
+    name_msg_set              = 28
+    name_msg_id               = 12
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a ring_speed="
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "lsattr -c adapter -a ring_speed -R "
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "28, 25"
+    help_msg_loc              = "devices_tok.cat"
+

@@ -1,0 +1,64 @@
+/* @(#)45	1.2  src/bos/objclass/ILS.cre, cfgnls, bos411, 9428A410j 3/2/94 09:46:59 */
+/*
+ * COMPONENT_NAME: CFGNLS (Input file to odmcreate)
+ *
+ * FUNCTIONS: International Language Support Configuration File
+ *
+ * ORIGINS: 27
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1993,1994
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+class MESSAGES {
+	char locale[20];
+	char text_string[24];
+	short text_string_id;
+	char codeset[20];
+	vchar package[80];
+	vchar variables[80];
+	char bosinst_translated[4];
+	char bosinst_menu[4];
+};
+
+class KEYBOARD {
+	char locale[20];
+	char keyboard_map[20];
+	char text_string[24];
+	short text_string_id;
+	char codeset[20];
+	vchar package[20];
+	vchar variables[20];
+	vchar keyboard_cmd[80];
+	vchar key_text[80];
+	short key_text_id;
+	char bosinst_menu[4];
+};
+
+class FONT {
+	char codeset[20];
+	vchar font_cmd[128];
+};
+
+
+class CC {
+	char locale[20];
+	char text_string[24];
+	short text_string_id;
+	char codeset[20];
+	char messages[20];
+	char keyboards[20];
+	vchar package[80];
+	char variables[80];
+	vchar sbcs_variables[80];
+	char bosinst_menu[4];
+	char icon_path[80];
+	char menu[20];
+	link MESSAGES MESSAGES locale messageLink[20];
+	link KEYBOARD KEYBOARD keyboard_map keyboardLink[20];
+};
+

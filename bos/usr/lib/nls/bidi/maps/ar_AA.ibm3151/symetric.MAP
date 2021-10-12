@@ -1,0 +1,35 @@
+# @(#)55	1.1  src/bos/usr/lib/nls/bidi/maps/ar_AA.ibm3151/symetric.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:46:18
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# symetric.map
+# ____________
+#
+# This is the maping of the "symetric" swaping characters in arabic bterm
+# internal representation (currently code page CP 1046).
+#
+#
+40           41         #    ( -> )
+41           40         #    ) -> (
+60           62         #    < -> >
+62           60         #    > -> <
+91           93         #    [ -> ]
+93           91         #    ] -> [
+123          125        #    { -> }
+125          123        #    } -> {
+140          141        #    upper right corner  -> upper left corner
+141          140        #    upper left corner   -> upper right corner 
+142          143        #    lower right corner  -> lower left corner
+143          142        #    lower left corner   -> lower right corner

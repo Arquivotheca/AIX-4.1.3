@@ -1,0 +1,1366 @@
+# @(#)69        1.4  src/bos/objclass/POWER/diag.disksa.add, cmddiag, bos411, 9437B411a 9/14/94 16:34:38
+#
+#   COMPONENT_NAME: CMDDIAG
+#
+#   FUNCTIONS: SCSI Disk Device Service Aid
+#
+#   ORIGINS: 27
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# DClass   - name uniquely identifying a device class
+# DType    - name uniquely identifying a device type
+# DSClass  - name uniquely identifying a device subclass
+# Ports    - number of ports on the card if a multi-port card
+# Pset     - set id of message set in catalog file dcda.msg (vendor.msg)
+#	     (see Menu bit 16 below if not using dcda.msg file)
+# PreTest  - set if device is to be tested before system comes up.
+#          - value equals 1 if not a display device
+#          - value equals 2 if a display device
+# AttDType - names a device that has a device driver that supports DType.
+# Conc     - 0 not supported in concurrent mode
+#          - 1 supports Diagnostic Tests in concurrent mode
+#          - 2 supports ELA
+# SupTests - Bit positions 32 16 8 4 2 1
+#                           |  | | | | |__Shared Tests
+#                           |  | | | |____Subtests Tests
+#                           |  | | |______Full Tests
+#                           |  | |________Missing Options 1
+#                           |  |__________Missing Options 2
+#                           |_____________HFT Devices (used for X)
+#					  device will not be in test list if
+#					  running under X-windows
+
+# Menu     - Bit positions 16 8 4 2 1
+#                           | | | | |_____Diagnostic Test List Menu
+#                           | | | |_______Not allowed to be deleted from DTL Menu
+#                           | | |_________Diagnostic Selection Menu
+#                           | |___________Conditional Diagnostic Selection Menu
+#			    |_____________Devices SRN numbers are located in the
+#					  Diagnostic Application catalog file.
+#					  Pset indicates the set number	
+# DNext    - 2 Test Sibling next
+#          - 1 Test Parent next
+# DaName   - name of Diagnostic Application associated with device
+#            When DaName is prefixed with a "*", the diagnostic controller will
+#            get the value of the attribute name that follows the "*", then
+#            uses the attribute value obtained to get the real DaName from the
+#           PDiagAtt object class. This method is used to allow support of
+#            devices having the same DType, but requiring different DA.
+# Diskette - 0 = Not on any diskette
+#            X = Diskette number
+#            S = Supplemental Diskette 
+# EnclDaName - name of Diagnostic Application associated with enclosure for
+#              device
+# SysxFlg  - Bit positions  8 4 2 1
+#                           | | | |__System Exerciser NOT supported
+#                           | | |____DA must run separately from similar DAs
+#                           | |______DA requires media
+#                           |________DA is considered a long test
+
+
+# 	Note: Soft Data Error rate and Soft Equipment Error rate are
+#		computed by taking the maximum number of allowable errors
+#		and divide it by the number of megabytes read. For example,
+#		the soft data error rate value of 0.625 of 857mb drive
+#		was computed by dividing 25 by 40, i.e the drive is allowed
+#		25 soft data errors for every 40mb of data read.
+#	*NOTE*: (IMPORTANT)
+#	The soft error rates (data and equipment) mightnot agree with the
+#	values specified in the stanzas due to unknown reasons.
+#	Further more, the error rates might not agree with the ones specified
+#	by the PDG. The reason is not known. Notice also that the ELA code 
+#	in dhf.c doesnot do as specified by the PDG.
+# ============================================================================ 
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "hard_eqp_errs"
+	value = "0"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "hard_data_errs"
+	value = "3"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "loadid_byte"
+	value = "8"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+	
+#       Soft data error threshold : 10 errors / 125 mb read
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "sde_threshold"
+	value = "0.00008"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+#       Soft equipment error threshold: 125 errors / 1000 mb read
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.00125"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "soft_data_errs"
+	value = "10"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "125"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+PDiagAtt:
+	DType = "deflt_diag_att"
+	DSClass = "scsi"
+	attribute = "de_card_fru"
+	value = "0"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+PDiagAtt:
+        DClass  = "disk"
+	DSClass = "scsi"
+	DType = "deflt_diag_att"
+	attribute = "send_diag"
+	value = 0x0400000000
+	rep = "s"
+	DApp = ""
+
+PDiagAtt:
+        DClass  = "disk"
+	DSClass = "scsi"
+	DType = "deflt_diag_att"
+	attribute = "use_subsys_diag"
+	value = "0"
+	rep = "n"
+	DApp = ""
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x00000008000000000000020001012402026060070105080100000100
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "de_card_fru"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "8"
+	rep = "n"
+
+#	Soft data error threshold : 25 errors / 40 mb read
+PDiagAtt:
+        DClass  = "disk"
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "sde_threshold"
+	value = "0.625"
+	rep = "n"
+
+#	Soft equipment error threshold: 12500 errors / 10000 mb read
+PDiagAtt:
+        DClass  = "disk"
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "1.25"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "12500"
+	rep = "n"
+
+PDiagAtt:
+	DType = "857mb"
+	DSClass = "scsi"
+	attribute = "loadid_byte"
+	value = "4"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "670mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "670mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010624100c0000ff020a94940000000000000000080a0000ffff0000ffffffff
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "670mb"
+	DSClass = "scsi"
+	attribute = "send_diag"
+	value = 0x0500000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "670mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "10"
+	rep = "n"
+
+#	Soft data error threshold : 10 errors / 125 mb read
+PDiagAtt:
+        DClass  = "disk"
+	DType = "670mb"
+	DSClass = "scsi"
+	attribute = "sde_threshold"
+	value = "0.08"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "355mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "355mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010624100c0000ff020a94940000000000000000080a0000ffff0000ffffffff
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "355mb"
+	DSClass = "scsi"
+	attribute = "send_diag"
+	value = 0x0500000000
+	rep = "s"
+
+#	Soft data error threshold : 10 errors / 125 mb read
+PDiagAtt:
+        DClass  = "disk"
+	DType = "355mb"
+	DSClass = "scsi"
+	attribute = "sde_threshold"
+	value = "0.08"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "355mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "320mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "320mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x00000008000000000000020001012402028e8e070105080100000100
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "320mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "320mb"
+	DSClass = "scsi"
+	attribute = "sde_threshold"
+	value = "0.0014"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "320mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "3"
+	rep = "n"
+
+#	Soft data error threshold : 10 errors / 125 mb read
+PDiagAtt:
+        DClass  = "disk"
+	DType = "320mb"
+	DSClass = "scsi"
+	attribute = "soft_data_errs"
+	value = "7"
+	rep = "n"
+
+PDiagAtt:
+	DType = "320mb"
+	DSClass = "scsi"
+	attribute = "loadid_byte"
+	value = "4"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "400mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "400mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x00000008000000000000020001012402028e8e070105080100000100
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "400mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "4"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "400mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+#	Soft data error threshold : 7 errors / 5000 mb read
+PDiagAtt:
+        DClass  = "disk"
+	DType = "400mb"
+	DSClass = "scsi"
+	attribute = "sde_threshold"
+	value = "0.0014"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "400mb"
+	DSClass = "scsi"
+	attribute = "soft_data_errs"
+	value = "7"
+	rep = "n"
+
+PDiagAtt:
+	DType = "400mb"
+	DSClass = "scsi"
+	attribute = "loadid_byte"
+	value = "4"
+	rep = "n"
+	DClass = "disk"
+	DApp = ""
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "160mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "160mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a240100000000010000000202c1c108020000
+	rep = "s"
+
+#	Soft equipment error threshold: 100 errors / 1000 mb read
+PDiagAtt:
+        DClass  = "disk"
+	DType = "160mb"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.01"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "160mb"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "100"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "160mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "3"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24010000000001000000020e6666000000000000000000000000070a0501000000000000000008120000ffff0000ffffffff0004000000000000000a000000000000000000000a06000100000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "8"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1370mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1370mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a241e0c0000000100ffff020e2828000a00000000000000000000070a050c070000000000ffff0812000000000000006000000004000000000000000a000000000000000000000a06000100000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1370mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1370mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "10"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "osdisk"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "osdisk"
+	DSClass = "scsi"
+	attribute = "deflt_mode_data"
+	value = 0x00000008000000000000020001012402029494070105080100000100
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "osdisk"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "osdisk"
+	DSClass = "scsi"
+	attribute = "sde_threshold"
+	value = "0.08"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "osdisk"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.0125"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "osdisk"
+	DSClass = "scsi"
+	attribute = "loadid_byte"
+	value = "4"
+	rep = "n"
+
+PDiagAtt:
+	DClass  = "disk"
+	DType = "osdisk"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "15"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "200mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "200mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a240100000000010000000202c1c108020000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "200mb"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.01"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "200mb"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "100"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "200mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "3"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1200mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1200mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24010000000001000000020e6666000000000000000000000000070a0501000000000000000008120000ffff0000ffffffff0004000000000000000a000000000000000000000a06000100000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1200mb"
+	DSClass = "scsi"
+	attribute = "de_card_fru"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1200mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1200mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "8"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "540mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+ 	DType = "540mb"
+ 	DSClass = "scsi"
+ 	attribute = "mode_data"
+        value = 0x000000080000000000000200010a24011606020001000000020e0000000000000000000000000000080a010000000000000000000a06000100000000
+ 	rep = "s"
+ 
+# Value of 2 for download_ucode means size 64K blocks will be downloaded.
+ 
+PDiagAtt:
+        DClass  = "disk"
+ 	DType = "540mb"
+ 	DSClass = "scsi"
+ 	attribute = "download_ucode"
+ 	value = "2"
+ 	rep = "n"
+ 
+PDiagAtt:
+        DClass  = "disk"
+ 	DType = "540mb"
+ 	DSClass = "scsi"
+ 	attribute = "sde_threshold"
+ 	value = "0.000008"
+ 	rep = "n"
+ 
+PDiagAtt:
+        DClass  = "disk"
+ 	DType = "540mb"
+ 	DSClass = "scsi"
+ 	attribute = "certify_time"
+ 	value = "6"
+ 	rep = "n"
+ 
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2000mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+ 	DType = "2000mb"
+ 	DSClass = "scsi"
+ 	attribute = "mode_data"
+ 	value = 0x000000080000000000000200010a24010000000001000000020e2828000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06000100000000000a00000000000000000000
+ 	rep = "s"
+ 
+PDiagAtt:
+        DClass  = "disk"
+ 	DType = "2000mb"
+ 	DSClass = "scsi"
+ 	attribute = "download_ucode"
+ 	value = "1"
+ 	rep = "n"
+ 
+PDiagAtt:
+        DClass  = "disk"
+ 	DType = "2000mb"
+ 	DSClass = "scsi"
+ 	attribute = "certify_time"
+ 	value = "15"
+ 	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mbde"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mbde"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24010000000001000000020e6666000000000000000000000000070a0501000000000000000008120000ffff0000ffffffff0004000000000000000a000000000000000000000a06000100000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "1000mbde"
+        DSClass = "scsi"
+        attribute = "download_ucode"
+        value = "1"
+        rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "1000mbde"
+        DSClass = "scsi"
+        attribute = "certify_time"
+        value = "8"
+        rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2000mbde"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2000mbde"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24010000000001000000020e2828000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06000100000000000a00000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mbde"
+        DSClass = "scsi"
+        attribute = "download_ucode"
+        value = "1"
+        rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mbde"
+        DSClass = "scsi"
+        attribute = "certify_time"
+        value = "15"
+        rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2000mb16bit"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mb16bit"
+        DSClass = "scsi"
+        attribute = "mode_data"
+        value = 0x000000080000000000000200010a24010000000001000000020e2828000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06000100000000000a00000000000000000000
+        rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mb16bit"
+        DSClass = "scsi"
+        attribute = "download_ucode"
+        value = "1"
+        rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mb16bit"
+        DSClass = "scsi"
+        attribute = "certify_time"
+        value = "15"
+        rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2000mb16bitde"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mb16bitde"
+        DSClass = "scsi"
+        attribute = "mode_data"
+        value = 0x000000080000000000000200010a24010000000001000000020e2828000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06000100000000000a00000000000000000000
+        rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mb16bitde"
+        DSClass = "scsi"
+        attribute = "download_ucode"
+        value = "1"
+        rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+        DType = "2000mb16bitde"
+        DSClass = "scsi"
+        attribute = "certify_time"
+        value = "15"
+        rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb16bitde"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb16bitde"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24010000000001000000020e0000000000000000000000000000070a0501000000000000000008120100ffff00000080ffff00040000000000000a06001300000000000a40100000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb16bitde"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1000mb16bitde"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "8"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "730mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "730mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24010000000001000000020a00000000000000000000070a05000000000000000000080c0100000000000000000000030a060003000000000d0a0001000000000001800000020000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "730mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "6"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "730mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "730mb"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.0125"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "730mb"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "200"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "8"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "1100mb"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bit"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bit"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bit"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "8"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bit"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "1100mb16bit"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bit"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bitde"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bitde"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bitde"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "8"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bitde"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "1100mb16bitde"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "1100mb16bitde"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "15"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "2200mb"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bit"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bit"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bit"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "15"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bit"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "2200mb16bit"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bite"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bitde"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bitde"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bitde"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "15"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bitde"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "2200mb16bitde"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "2200mb16bitde"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bit"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bit"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bit"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "30"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bit"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "4500mb16bit"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bit"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"
+
+# ============================================================================ 
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bitde"
+	DSClass = "scsi"
+	attribute = "test_mode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bitde"
+	DSClass = "scsi"
+	attribute = "mode_data"
+	value = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000041600000000000000000000000000000000000000000000070a0501000000000000000008120100ffff0000ffffffff00040000000000000a06001300000000000e0010000000000000000000000000
+	rep = "s"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bitde"
+	DSClass = "scsi"
+	attribute = "certify_time"
+	value = "30"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bitde"
+	DSClass = "scsi"
+	attribute = "download_ucode"
+	value = "1"
+	rep = "n"
+
+PDiagAtt:
+	DClass = "disk"
+	DType = "4500mb16bitde"
+	DSClass = "scsi"
+	attribute = "see_threshold"
+	value = "0.000025"
+	rep = "n"
+
+PDiagAtt:
+        DClass  = "disk"
+	DType = "4500mb16bitde"
+	DSClass = "scsi"
+	attribute = "soft_eqp_errs"
+	value = "2.5"
+	rep = "n"

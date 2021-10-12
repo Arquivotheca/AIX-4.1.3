@@ -1,0 +1,174 @@
+.# #ident "@(#)lsadmin.hlp:3.1  File Date:93/03/25 Last Delta:91/09/06 13:59:45"
+
+
+.#  This is the ls_admin Help File
+
+.I             ls_admin help index
+
+     s_on_v_add     On Adding a Vendor
+     s_on_p_add     On Adding a Product
+     s_on_l_add     On Adding a License
+     s_on_v_rename  On Renaming a Vendor
+     s_on_p_rename  On Renaming a Product
+     s_on_v_copy    On Copying a Vendor
+.#
+.#
+.# Screens
+.#
+.S   s_v_add     Help On Adding a Vendor
+.#
+To add a new vendor to the currently selected server, 
+enter the name of the vendor, then the vendor UUID and 
+vendor password as supplied by the vendor.  
+
+At this point the 'Done' button will become active.  
+Either click on this button with the mouse or press 
+<return> to enter the new vendor.
+.#
+.#
+.S   s_p_add     Help On Adding a Product
+.#
+To add a new product to the currently selected server
+and vendor, you must have a license password for the
+new product supplied by the vendor.  Enter the name of 
+the product, the product version, and the license
+password as supplied by the vendor.  If the vendor has 
+supplied an annotation for the entered license password, 
+the annotation must also be entered.
+
+At this point the 'Done' button will become active.  
+Either click on this button with the mouse or press 
+<return> to enter the new product.
+.#
+.#
+.S   s_l_add     Help On Adding a License
+.#
+To add an additional license to the currently selected
+server, vendor, and product, you must have a license 
+password for the product supplied to you by the vendor.
+Enter the license password as supplied by the vendor. 
+If the vendor has supplied an annotation for the 
+entered license password, the annotation must also be
+entered.
+
+At this point the 'Done' button will become active.  
+Either click on this button with the mouse or press 
+<return> to enter the new product.
+.#
+.#
+.S   s_v_rename  Help On Renaming a Vendor
+.#
+To rename a vendor for the currently selected server, 
+enter the new vendor name in the data entry field.
+
+Either click on the 'Done' button with the mouse or press 
+<return> to enter the new vendor name.
+.#
+.#
+.S   s_p_rename  Help On Renaming a Product
+.#
+To rename a product for the currently selected server and
+vendor, enter the new product name in the data entry field.
+
+Either click on the 'Done' button with the mouse or press 
+<return> to enter the new product name.
+.#
+.#
+.S   s_v_copy    Help On Copying a Vendor
+.#
+Select the destination server from the supplied list of
+servers.  The list contains all active servers
+except the server containing the vendor to be copied.
+
+Either click on the 'Done' button with the mouse or press 
+<return> to copy the vendor to the destination server.
+.#
+.#
+.#
+.#
+.#
+.#
+.#
+.#
+.S   s_on_v_add     Help On Adding a Vendor
+.#
+To add a new vendor to a server, first select 'Server' 
+in the top left menu.  Then select the destination server
+for this vendor.  Then select 'Add Vendor...' in the 
+operations menu at the left.  In the popup that appears, 
+enter the name of the vendor, then the vendor UUID and 
+vendor password as supplied by the vendor. 
+.#
+.#
+.S   s_on_p_add     Help On Adding a Product
+.#
+To add a new product to a vendor, you must have a license 
+password for the new product supplied by the vendor.
+First select the server you want to modify, then select 
+'Vendor' in the top left menu and select the vendor which
+is to contain the new product.  (If the vendor is not 
+present, then either find the vendor listed for another 
+server and copy the vendor to the server you want, or else
+return to 'Server' and add this vendor using the vendor 
+password supplied by the vendor.)  Then select 
+'Add Product...' in the operations menu at the left.  In 
+the popup that appears, enter the name of the product, the 
+product version, and the license password as supplied by 
+the vendor.  If the vendor has supplied an annotation for 
+the entered license password, the annotation must also be 
+entered.
+.#
+.#
+.S   s_on_l_add     Help On Adding a License
+.#
+To add additional licenses to the currently selected
+server, vendor, and product, you must have a license 
+password for the product supplied by the vendor.
+First select the server you want to modify, then the 
+correct vendor, and then select 'Product' in the top 
+left menu and select the product which contains the 
+additional license.  (If the product is not there,
+select 'Vendor' instead and add a new product using
+your license password.)  Then select 'Add Licenses...'
+in the operations menu at the left.  In the popup that 
+appears, enter the license password, and, if
+the vendor has supplied an annotation for the license 
+password, the annotation must also be entered.
+.#
+.#
+.S   s_on_v_rename  Help On Renaming a Vendor
+.#
+To rename a vendor for a server, first select the server 
+containing the vendor you want to rename.  Then select 
+'Vendor' in the top left menu and select the vendor you 
+want to change.  Then select 'Rename...' in the operations 
+menu at the left.  In the popup that appears, enter the 
+new name of the vendor.   If you want to rename the vendor 
+on all servers, you must select each server in turn and 
+repeat this action for each one.
+.#
+.#
+.S   s_on_p_rename  Help On Renaming a Product
+.#
+To rename a product for a vendor and server, first select 
+the server and then the vendor containing the product you
+want to modify.  Then select 'Product' in the top left 
+menu and select the product you want to change. Then 
+select 'Rename...' in the operations menu at the left.  
+In the popup that appears, enter the new name of the 
+product.   If you want to rename the product on all 
+servers, you must select each server in turn and repeat 
+this action for each one.
+.#
+.#
+.S   s_on_v_copy    Help On Copying a Vendor
+.#
+First select the server containing the vendor you want to 
+copy.  Then select 'Vendor' in the top left menu and 
+select the vendor you want to copy.  Then select the
+'Copy Vendor...' option.  In the popup that appears, 
+select the destination server from the supplied list of
+servers.  The list contains all active servers except 
+the server containing the vendor to be copied.
+.#
+.#

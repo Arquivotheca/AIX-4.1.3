@@ -1,0 +1,67 @@
+# @(#)40        1.2  src/bos/usr/lib/pios/predef/ibm3112.ps, cmdpios, bos41J, 9517A_all 4/20/95 15:37:35
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1995
+# (C) COPYRIGHT Lexmark International, Inc. 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:695:_Y:S[E030]I[1810560]EnR[pioattr1.cat,1,696;simplex,duplex,duplex with tumble=0,1,2]:0
+:970:_e::0
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,812;no initialization,full initialization,send PostScript language switch command only=0,1,2]:1
+:712:_q:S[B045]I[1810554]EnR[=300,600,1200]:600
+:638:_u:S[E015]I[1810516]En%IW9:1
+:060:__SYS::
+:641:s0:S[115]I[1810521]En%IWP:1
+:642:s1:S[105]I[1810521]En%IWP:1
+:643:s2:S[110]I[1810521]En%IWP:1
+:824:s6:S[113]I[1810521]En%IWP:1
+:655:uH:S[140]I[1810527]En%IW9:1
+:656:uT:S[145]I[1810527]En%IW9:1
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j] %IsH -u%GuH%d
+:324:st::%Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j] %IsT -u%GuT%d
+:057:__IDS::
+:273:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[ejquHJZ]%?%Gmw%t %f[Y]%;
+:058:__MIS::
+:330:mA::PostScript Emulation
+:331:mL::[devices.cat,71,180;IBM 3112 Page Printer]
+:295:mN::3112
+:545:mw::+
+:301:mc::\0
+:319:mz::14688
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,740;manual paper feed,tray 1 (upper),tray 2 (lower),envelope feeder,manual envelope feed,100-sheet auxiliary feeder=0,1,2,3,4,6]
+:458:wQ::%?%G_u%{0}%=%t%Gs0%e%G_u%{1}%=%t%Gs1%e%G_u%{2}%=%t%Gs2%e%G_u%{3}%=%t%Gs3%e%G_u%{4}%=%t%Gs4%e%Gs6%;%d
+:051:__CAG::
+:144:ci::%Iez%?%G_j%{1}%=%tstatusdict begin %Iat %Iar %?%Gmw%t%IaF%; end\012%;
+:152:cr::%o\4%Iex
+:052:__CTL::
+:512:aF::duplexer { %?%G_Y%ttrue setduplexmode %?%G_Y%{1}%=%tfalse settumble%etrue settumble%;%efalse setduplexmode%; } {false settumble false setduplexmode}ifelse
+:608:ar::%G_q%d setresolution
+:540:at::%?%G_u%{1}%=%t0 setpapertray%e%G_u%{0}%=%t3 setpapertray%e%G_u%{4}%=%t4 setpapertray%e%G_u%{3}%=%tenvelopefeeder { 2 setpapertray } { 4 setpapertray }ifelse%e%G_u%{6}%=%tenvelopefeeder { 2 setpapertray } { 0 setpapertray }ifelse%eoptionalfeeder { 1 setpapertray } { 0 setpapertray }ifelse%;
+:054:__ESC::
+:609:ex::%IpU
+:610:ez::%I[pU,pA,pL]
+#
+# support for Stat Alert via -e flag
+:970:pA::%?%G_e%{1}%=%t%IA1%e%G_e%{2}%=%t%IA2%e%G_e%{3}%=%t%IA3%;
+:970:A1::@PJL\040LENGINEPRT\040C1="0x3D"\040C2="0x01"\040C3="0x00"\12
+:970:A2::@PJL\040LENGINEPRT\040C1="0x3D"\040C2="0x02"\040C3="0x00"\12
+:970:A3::@PJL\040LENGINEPRT\040C1="0x3D"\040C2="0x03"\040C3="0x00"\12
+#
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.ps
+:477:zS::!
+:685:zV::+

@@ -1,0 +1,242 @@
+# @(#)89 1.1 src/bos/objclass/cmddate.add, cmdstat, bos411, 9428A410j 5/27/94 14:30:18
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDSTAT                                                     #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27, 83                                                             #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994               #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+################################################################################
+
+# NOTES
+#
+# 1. help Id's
+#
+#       Help text Id's already used for helps are in the range:
+#               055101, 055102, 055132-055136
+#
+# 2. the command to list the processors has to be verified when available
+#
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  FAST PATH ONLY -> "smit date"                                 #
+#                    Set Day or Time                                           #
+#                                                                              #
+# FAST KEY:  date                                                              #
+#									       #
+# UNIX COMMAND(S):  date, printf, echo                                         #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   6 dialogue objects		    	                               #
+#                                                                              #
+# HEADER:  Set Day or Time                                                     #
+#                                                                              #
+# OBJECTS:  1. *YEAR (00-99)						       #
+#	    2. *MONTH (01-12)						       #
+#	    3. *DAY (01-31)						       #
+#	    4. *HOUR (00-23)						       #
+#	    5. *MINUTES (00-59)						       #
+#	    6. *SECONDS (00-59)						       #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "date"
+	option_id               = "dateOpts"
+	has_name_select         = ""
+	name                    = "Change / Show Day and Time"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 17
+	name_msg_id             = 15
+	cmd_to_exec             = \
+"date_proc () 		# MM dd hh mm ss yy
+# dialogue param order	#  2  3  4  5  6  1
+{
+DATE_STR=`/usr/bin/printf \"%02d%02d%02d%02d.%02d%02d\" $(($2)) $(($3)) $(($4)) $(($5)) $(($6)) $(($1))`
+/usr/bin/date \"$DATE_STR\"
+}
+date_proc "
+	ask                     = ""
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = \
+"/usr/bin/echo '#cur_month:cur_day:cur_hour:cur_min:cur_sec:cur_year'\n\
+ /usr/bin/date +%m:%d:%H:%M:%S:%y"
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "055101"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "dateOpts"
+	id_seq_num          = "10"
+	disc_field_name     = "cur_year"
+	name                = "YEAR (00-99)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 135
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055102"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "dateOpts"
+	id_seq_num          = "20"
+	disc_field_name     = "cur_month"
+	name                = "MONTH (01-12)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 140
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055132"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "dateOpts"
+	id_seq_num          = "30"
+	disc_field_name     = "cur_day"
+	name                = "DAY (01-31)\n" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 145
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055133"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "dateOpts"
+	id_seq_num          = "40"
+	disc_field_name     = "cur_hour"
+	name                = "HOUR (00-23)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 150
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055134"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "dateOpts"
+	id_seq_num          = "50"
+	disc_field_name     = "cur_min"
+	name                = "MINUTES (00-59)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 155
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055135"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "dateOpts"
+	id_seq_num          = "60"
+	disc_field_name     = "cur_sec"
+	name                = "SECONDS (00-59)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 17
+	name_msg_id         = 160
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055136"
+	help_msg_loc        = ""

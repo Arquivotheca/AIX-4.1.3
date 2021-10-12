@@ -1,0 +1,285 @@
+ADDRESS MAP FOR giodd
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+ I                        ER S1    getpid                    ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S2    Trconflag                 ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S3    trchook                   ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S4    pinned_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S5    clrjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S6    copyin                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S7    copyout                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S8    curtime                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S9    delay                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S10   devswadd                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S11   devswdel                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S12   e_sleep                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S13   e_wakeup                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S14   errsave                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S15   getc                      ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S16   i_clear                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S17   i_init                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S18   lockl                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S19   longjmpx                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S20   nodev                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S21   pidsig                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S22   pinu                      ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S23   putc                      ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S24   putcbp                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S25   putcfl                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S26   setjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S27   talloc                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S28   tfree                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S29   tstart                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S30   tstop                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S31   uiomove                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S32   unlockl                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S33   unpinu                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S34   ureadc                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S35   w_clear                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S36   w_init                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S37   w_start                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S38   w_stop                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S39   waitcfree                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S40   xmalloc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S41   xmattach                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S42   xmdetach                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S43   xmemin                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S44   xmemout                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S45   xmfree                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S46   pincode                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S47   unpincode                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S48   io_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S49   io_det                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I  00003100           XO ER S50   __mulh                    ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003100           XO ER S51   .__mulh                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003300           XO ER S52   __quoss                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003300           XO ER S53   .__quoss                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003380           XO ER S54   __quous                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003380           XO ER S55   .__quous                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00009000           XO ER S56   i_disable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009000           XO ER S57   .i_disable                ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009300           XO ER S58   i_enable                  ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009300           XO ER S59   .i_enable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    00000000 003210  2 PR SD S60   <>                        ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000000           PR LD S61   .gio_trace
+    000000A4           PR LD S62   .stop_idle
+    00000148           PR LD S63   .start_idle
+    000001D0           PR LD S64   .stop_dev
+    00000590           PR LD S65   .start_dev
+    000007E0           PR LD S66   .chk_dev
+    00000DA0           PR LD S67   .find_dev
+    00000E2C           PR LD S68   .send_dial
+    00000F90           PR LD S69   .send_lpfk
+    00001188           PR LD S70   .find_gio
+    000011E4           PR LD S71   .gio_drain
+    00001314           PR LD S72   .gio_ioctl
+    00001AE4           PR LD S73   .send_mess
+    00001DE0           PR LD S74   .gio_pause
+    00001EDC           PR LD S75   .gio_close
+    00002098           PR LD S76   .gio_setup
+    000022B8           PR LD S77   .gio_open
+    000025AC           PR LD S78   .gio_del
+    000027A8           PR LD S79   .gio_allocate
+    000028C4           PR LD S80   .gio_add
+    00002EC8           PR LD S81   .gio_config
+    00003210 000024  2 GL SD S82   <.trchook>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00003210           GL LD S83   .trchook
+    00003234 000024  2 GL SD S84   <.tstop>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00003234           GL LD S85   .tstop
+    00003258 000024  2 GL SD S86   <.tstart>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00003258           GL LD S87   .tstart
+    0000327C 000024  2 GL SD S88   <.io_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000327C           GL LD S89   .io_att
+    000032A0 001098  2 PR SD S90   <>                        ../../../../../../src/bos/kernext/inputdd/giodd/giol.c(giol.o)
+    000032A0           PR LD S91   .add_to_ring
+    00003600           PR LD S92   .gio_dial_hit
+    00003730           PR LD S93   .gio_lpfk_hit
+    000037B4           PR LD S94   .gio_watch
+    00003830           PR LD S95   .gio_pio_catch
+    00003944           PR LD S96   .gio_slih
+    00003E3C           PR LD S97   .gio_out
+    000042E0           PR LD S98   .gio_wakeup
+    00004338 000024  2 GL SD S99   <.xmemin>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004338           GL LD S100  .xmemin
+    0000435C 000024  2 GL SD S101  <.curtime>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000435C           GL LD S102  .curtime
+    00004380 000024  2 GL SD S103  <.xmemout>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004380           GL LD S104  .xmemout
+    000043A4 000024  2 GL SD S105  <.pidsig>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000043A4           GL LD S106  .pidsig
+    000043C8 000024  2 GL SD S107  <.e_wakeup>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000043C8           GL LD S108  .e_wakeup
+    000043EC 000024  2 GL SD S109  <.io_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000043EC           GL LD S110  .io_det
+    00004410 0000C4  2 PR SD S111  .bcopy                    moveeq.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o])
+    00004410           PR LD S112  .ovbcopy
+    0000441C           PR LD S113  ._moveeq
+    0000441C           PR LD S114  .memcpy
+    0000441C           PR LD S115  .memmove
+    000044D4 000024  2 GL SD S116  <.errsave>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000044D4           GL LD S117  .errsave
+    000044F8 000024  2 GL SD S118  <.setjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000044F8           GL LD S119  .setjmpx
+    0000451C 000040  2 PR SD S120  <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    0000451C           PR LD S121  ._ptrgl
+    0000451C           PR LD S122  .$PTRGL
+    0000455C 000024  2 GL SD S123  <.longjmpx>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000455C           GL LD S124  .longjmpx
+    00004580 000024  2 GL SD S125  <.putc>                   glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004580           GL LD S126  .putc
+    000045A4 000024  2 GL SD S127  <.getc>                   glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000045A4           GL LD S128  .getc
+    000045C8 000024  2 GL SD S129  <.clrjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000045C8           GL LD S130  .clrjmpx
+    000045EC 000024  2 GL SD S131  <.w_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000045EC           GL LD S132  .w_clear
+    00004610 000024  2 GL SD S133  <.i_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004610           GL LD S134  .i_clear
+    00004634 000024  2 GL SD S135  <.tfree>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004634           GL LD S136  .tfree
+    00004658 000024  2 GL SD S137  <.delay>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004658           GL LD S138  .delay
+    0000467C 000024  2 GL SD S139  <.i_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000467C           GL LD S140  .i_init
+    000046A0 000024  2 GL SD S141  <.w_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000046A0           GL LD S142  .w_init
+    000046C4 000024  2 GL SD S143  <.e_sleep>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000046C4           GL LD S144  .e_sleep
+    000046E8 000024  2 GL SD S145  <.w_start>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000046E8           GL LD S146  .w_start
+    0000470C 000024  2 GL SD S147  <.w_stop>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000470C           GL LD S148  .w_stop
+    00004730 000024  2 GL SD S149  <.lockl>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004730           GL LD S150  .lockl
+    00004754 000090  2 PR SD S151  .bzero                    bzero.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o])
+    000047E4 000024  2 GL SD S152  <.copyout>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000047E4           GL LD S153  .copyout
+    00004808 000024  2 GL SD S154  <.copyin>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004808           GL LD S155  .copyin
+    0000482C 000024  2 GL SD S156  <.xmdetach>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000482C           GL LD S157  .xmdetach
+    00004850 000024  2 GL SD S158  <.unpinu>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004850           GL LD S159  .unpinu
+    00004874 000024  2 GL SD S160  <.pinu>                   glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004874           GL LD S161  .pinu
+    00004898 000024  2 GL SD S162  <.xmattach>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004898           GL LD S163  .xmattach
+    000048BC 000024  2 GL SD S164  <.unlockl>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000048BC           GL LD S165  .unlockl
+    000048E0 000024  2 GL SD S166  <.talloc>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000048E0           GL LD S167  .talloc
+    00004904 000024  2 GL SD S168  <.putcbp>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004904           GL LD S169  .putcbp
+    00004928 000024  2 GL SD S170  <.waitcfree>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004928           GL LD S171  .waitcfree
+    0000494C 000024  2 GL SD S172  <.putcfl>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000494C           GL LD S173  .putcfl
+    00004970 000024  2 GL SD S174  <.getpid>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004970           GL LD S175  .getpid
+    00004994 000024  2 GL SD S176  <.xmfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004994           GL LD S177  .xmfree
+    000049B8 000024  2 GL SD S178  <.devswdel>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000049B8           GL LD S179  .devswdel
+    000049DC 000024  2 GL SD S180  <.unpincode>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000049DC           GL LD S181  .unpincode
+    00004A00 000024  2 GL SD S182  <.xmalloc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A00           GL LD S183  .xmalloc
+    00004A24 000024  2 GL SD S184  <.uiomove>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A24           GL LD S185  .uiomove
+    00004A48 000024  2 GL SD S186  <.pincode>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A48           GL LD S187  .pincode
+    00004A6C 000024  2 GL SD S188  <.devswadd>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A6C           GL LD S189  .devswadd
+    00004A90 000024  2 GL SD S190  <.ureadc>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A90           GL LD S191  .ureadc
+    00000000 000145  3 RW SD S192  <_$STATIC>                ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000148 00000C  3 RW SD S193  gio_edge                  ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000158 000080  3 RW SD S194  <_$STATIC>                ../../../../../../src/bos/kernext/inputdd/giodd/giol.c(giol.o)
+    000001D8 000001  2 RW SD S195  lpfk_ring_registered      ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    000001DC 000001  2 RW SD S196  dials_ring_registered     ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    000001E0 000004  2 RW SD S197  gio_init_string           ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    000001E4 000004  2 RW SD S198  gio_lock                  ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    000001E8 000002  2 RW SD S199  gio_stop                  ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    000001EC 000002  2 RW SD S200  gio_start                 ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+*   000001F0 00000C  2 DS SD S201  gio_config                ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    000001FC 00000C  2 DS SD S202  gio_open                  ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000208 00000C  2 DS SD S203  gio_close                 ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000214 00000C  2 DS SD S204  gio_ioctl                 ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000220 00000C  2 DS SD S205  gio_pio_catch             ../../../../../../src/bos/kernext/inputdd/giodd/giol.c(giol.o)
+    0000022C 00000C  2 DS SD S206  gio_out                   ../../../../../../src/bos/kernext/inputdd/giodd/giol.c(giol.o)
+    00000238 00000C  2 DS SD S207  gio_wakeup                ../../../../../../src/bos/kernext/inputdd/giodd/giol.c(giol.o)
+    00000244 00000C  2 DS SD S208  gio_slih                  ../../../../../../src/bos/kernext/inputdd/giodd/giol.c(giol.o)
+    00000250 00000C  2 DS SD S209  gio_watch                 ../../../../../../src/bos/kernext/inputdd/giodd/giol.c(giol.o)
+    0000025C 000000  2 T0 SD S210  <TOC>
+    0000025C 000004  2 TC SD S211  <Trconflag>
+    00000260 000004  2 TC SD S212  <trchook>
+    00000264 000004  2 TC SD S213  <tstop>
+    00000268 000004  2 TC SD S214  <tstart>
+    0000026C 000004  2 TC SD S215  <_$STATIC_BSS>
+    00000270 000004  2 TC SD S216  <_$STATIC>
+    00000274 000004  2 TC SD S217  <io_att>
+    00000278 000004  2 TC SD S218  <gio_pio_catch>
+    0000027C 000004  2 TC SD S219  <xmemin>
+    00000280 000004  2 TC SD S220  <curtime>
+    00000284 000004  2 TC SD S221  <xmemout>
+    00000288 000004  2 TC SD S222  <pidsig>
+    0000028C 000004  2 TC SD S223  <gio_edge>
+    00000290 000004  2 TC SD S224  <dials_report>
+    00000294 000004  2 TC SD S225  <dials_ring>
+    00000298 000004  2 TC SD S226  <lpfk_report>
+    0000029C 000004  2 TC SD S227  <lpfk_ring>
+    000002A0 000004  2 TC SD S228  <_$STATIC>
+    000002A4 000004  2 TC SD S229  <e_wakeup>
+    000002A8 000004  2 TC SD S230  <io_det>
+    000002AC 000004  2 TC SD S231  <errsave>
+    000002B0 000004  2 TC SD S232  <setjmpx>
+    000002B4 000004  2 TC SD S233  <longjmpx>
+    000002B8 000004  2 TC SD S234  <lpfk_ring_registered>
+    000002BC 000004  2 TC SD S235  <dials_ring_registered>
+    000002C0 000004  2 TC SD S236  <putc>
+    000002C4 000004  2 TC SD S237  <getc>
+    000002C8 000004  2 TC SD S238  <clrjmpx>
+    000002CC 000004  2 TC SD S239  <w_clear>
+    000002D0 000004  2 TC SD S240  <i_clear>
+    000002D4 000004  2 TC SD S241  <tfree>
+    000002D8 000004  2 TC SD S242  <delay>
+    000002DC 000004  2 TC SD S243  <i_init>
+    000002E0 000004  2 TC SD S244  <w_init>
+    000002E4 000004  2 TC SD S245  <gio_init_string>
+    000002E8 000004  2 TC SD S246  <e_sleep>
+    000002EC 000004  2 TC SD S247  <w_start>
+    000002F0 000004  2 TC SD S248  <w_stop>
+    000002F4 000004  2 TC SD S249  <gio_lock>
+    000002F8 000004  2 TC SD S250  <lockl>
+    000002FC 000004  2 TC SD S251  <copyout>
+    00000300 000004  2 TC SD S252  <copyin>
+    00000304 000004  2 TC SD S253  <xmdetach>
+    00000308 000004  2 TC SD S254  <unpinu>
+    0000030C 000004  2 TC SD S255  <pinu>
+    00000310 000004  2 TC SD S256  <xmattach>
+    00000314 000004  2 TC SD S257  <unlockl>
+    00000318 000004  2 TC SD S258  <talloc>
+    0000031C 000004  2 TC SD S259  <gio_out>
+    00000320 000004  2 TC SD S260  <putcbp>
+    00000324 000004  2 TC SD S261  <waitcfree>
+    00000328 000004  2 TC SD S262  <putcfl>
+    0000032C 000004  2 TC SD S263  <gio_wakeup>
+    00000330 000004  2 TC SD S264  <gio_stop>
+    00000334 000004  2 TC SD S265  <gio_start>
+    00000338 000004  2 TC SD S266  <getpid>
+    0000033C 000004  2 TC SD S267  <pinned_heap>
+    00000340 000004  2 TC SD S268  <xmfree>
+    00000344 000004  2 TC SD S269  <devswdel>
+    00000348 000004  2 TC SD S270  <gio_slih>
+    0000034C 000004  2 TC SD S271  <unpincode>
+    00000350 000004  2 TC SD S272  <xmalloc>
+    00000354 000004  2 TC SD S273  <uiomove>
+    00000358 000004  2 TC SD S274  <gio_watch>
+    0000035C 000004  2 TC SD S275  <pincode>
+    00000360 000004  2 TC SD S276  <devswadd>
+    00000364 000004  2 TC SD S277  <ureadc>
+    00000368 00000F  3 RW CM S278  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000378 00000C  3 RW CM S279  dials_report              ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000388 00000C  3 RW CM S280  dials_ring                ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    00000398 00000C  3 RW CM S281  lpfk_report               ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)
+    000003A8 00000C  3 RW CM S282  lpfk_ring                 ../../../../../../src/bos/kernext/inputdd/giodd/giou.c(giou.o)

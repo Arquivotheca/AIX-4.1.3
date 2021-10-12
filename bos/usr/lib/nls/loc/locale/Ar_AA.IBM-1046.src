@@ -1,0 +1,1296 @@
+# @(#)28	1.4  src/bos/usr/lib/nls/loc/locale/Ar_AA.IBM-1046.src, cfgnls, bos411, 9428A410j 4/16/94 11:04:42
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# Locale Source for Ar_AA ( IBM-1046 ) locale                        #
+######################################################################
+
+#############
+LC_CTYPE
+#############
+
+upper   <A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>
+
+lower   <a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>
+
+alpha   <A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<final-hamzaunderalef>;\
+	<final-seen>;\
+	<final-sheen>;\
+	<final-sad>;\
+	<final-dad>;\
+	<connected-fathatan>;\
+	<connected-damma>;\
+	<connected-kasra>;\
+	<connected-shadda>;\
+	<connected-sukun>;\
+	<connected-fatha>;\
+	<final-hamzaonyeh>;\
+	<final-alefmaksura>;\
+	<initial-yeh>;\
+	<final-yeh>;\
+	<final-ghain>;\
+	<initial-ghain>;\
+	<middle-ghain>;\
+	<connected-maddaonlamalef>;\
+	<connected-hamzaonlamalef>;\
+	<connected-hamzaunderlamalef>;\
+	<connected-lamalef>;\
+	<special-maddaonalef>;\
+	<special-hamzaonalef>;\
+	<special-hamzaunderalef>;\
+	<special-alef>;\
+	<initial-hamzaonyeh>;\
+	<initial-beh>;\
+	<initial-teh>;\
+	<initial-theh>;\
+	<initial-jeem>;\
+	<initial-hah>;\
+	<initial-khah>;\
+	<initial-seen>;\
+	<hindi-zero>;\
+	<hindi-one>;\
+	<hindi-two>;\
+	<hindi-three>;\
+	<hindi-four>;\
+	<hindi-five>;\
+	<hindi-six>;\
+	<hindi-seven>;\
+	<hindi-eight>;\
+	<hindi-nine>;\
+	<initial-sheen>;\
+	<initial-sad>;\
+	<initial-dad>;\
+	<final-ain>;\
+	<initial-ain>;\
+	<hamza>;\
+	<maddaonalef>;\
+	<hamzaonalef>;\
+	<hamzaonwaw>;\
+	<hamzaunderalef>;\
+	<hamzaonyeh>;\
+	<arabic-alef>;\
+	<beh>;\
+	<tehmarbuta>;\
+	<teh>;\
+	<theh>;\
+	<jeem>;\
+	<hah>;\
+	<khah>;\
+	<dal>;\
+	<thal>;\
+	<reh>;\
+	<arabic-zain>;\
+	<seen>;\
+	<sheen>;\
+	<sad>;\
+	<dad>;\
+	<tah>;\
+	<zah>;\
+	<arabic-ain>;\
+	<ghain>;\
+	<middle-ain>;\
+	<final-maddaonalef>;\
+	<final-hamzaonalef>;\
+	<final-alef>;\
+	<initial-feh>;\
+	<tatweel>;\
+	<feh>;\
+	<qaf>;\
+	<arabic-kaf>;\
+	<lam>;\
+	<meem>;\
+	<noon>;\
+	<arabic-heh>;\
+	<waw>;\
+	<alefmaksura>;\
+	<yeh>;\
+	<fathatan>;\
+	<dammatan>;\
+	<kasratan>;\
+	<fatha>;\
+	<damma>;\
+	<kasra>;\
+	<shadda>;\
+	<sukun>;\
+	<initial-qaf>;\
+	<initial-kaf>;\
+	<initial-lam>;\
+	<tail>;\
+	<isolated-maddaonlamalef>;\
+	<isolated-hamzaonlamalef>;\
+	<isolated-hamzaunderlamalef>;\
+	<isolated-lamalef>;\
+	<initial-meem>;\
+	<initial-noon>;\
+	<middle-heh>;\
+	<final-heh>
+
+space  	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+	<form-feed>;\
+	<carriage-return>;\
+	<space>;\
+	<nobreakspace>
+
+cntrl   <NUL>;\
+	<SOH>;\
+	<STX>;\
+	<ETX>;\
+	<EOT>;\
+	<ENQ>;\
+	<ACK>;\
+	<BEL>;\
+	<alert>;\
+	<backspace>;\
+	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+	<form-feed>;\
+	<carriage-return>;\
+	<SO>;\
+	<SI>;\
+	<DLE>;\
+	<DC1>;\
+	<DC2>;\
+	<DC3>;\
+	<DC4>;\
+	<NAK>;\
+	<SYN>;\
+	<ETB>;\
+	<CAN>;\
+	<EM>;\
+	<SUB>;\
+	<ESC>;\
+	<IS4>;\
+	<IS3>;\
+	<IS2>;\
+	<IS1>;\
+	<DEL>
+
+punct   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<arabic-comma>;\
+	<arabic-semicolon>;\
+	<arabic-questionmark>
+
+graph   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<final-hamzaunderalef>;\
+	<arabic-multiply>;\
+	<arabic-divide>;\
+	<final-seen>;\
+	<final-sheen>;\
+	<final-sad>;\
+	<final-dad>;\
+	<connected-fathatan>;\
+	<boxfill>;\
+	<box-vertical>;\
+	<box-horizontal>;\
+	<box-top-right>;\
+	<box-top-left>;\
+	<box-bottom-left>;\
+	<box-bottom-right>;\
+	<connected-damma>;\
+	<connected-kasra>;\
+	<connected-shadda>;\
+	<connected-sukun>;\
+	<connected-fatha>;\
+	<final-hamzaonyeh>;\
+	<final-alefmaksura>;\
+	<initial-yeh>;\
+	<final-yeh>;\
+	<final-ghain>;\
+	<initial-ghain>;\
+	<middle-ghain>;\
+	<connected-maddaonlamalef>;\
+	<connected-hamzaonlamalef>;\
+	<connected-hamzaunderlamalef>;\
+	<connected-lamalef>;\
+	<nobreakspace>;\
+	<special-maddaonalef>;\
+	<special-hamzaonalef>;\
+	<special-hamzaunderalef>;\
+	<currency>;\
+	<special-alef>;\
+	<initial-hamzaonyeh>;\
+	<initial-beh>;\
+	<initial-teh>;\
+	<initial-theh>;\
+	<initial-jeem>;\
+	<initial-hah>;\
+	<arabic-comma>;\
+	<shy>;\
+	<initial-khah>;\
+	<initial-seen>;\
+	<hindi-zero>;\
+	<hindi-one>;\
+	<hindi-two>;\
+	<hindi-three>;\
+	<hindi-four>;\
+	<hindi-five>;\
+	<hindi-six>;\
+	<hindi-seven>;\
+	<hindi-eight>;\
+	<hindi-nine>;\
+	<initial-sheen>;\
+	<arabic-semicolon>;\
+	<initial-sad>;\
+	<initial-dad>;\
+	<final-ain>;\
+	<arabic-questionmark>;\
+	<initial-ain>;\
+	<hamza>;\
+	<maddaonalef>;\
+	<hamzaonalef>;\
+	<hamzaonwaw>;\
+	<hamzaunderalef>;\
+	<hamzaonyeh>;\
+	<arabic-alef>;\
+	<beh>;\
+	<tehmarbuta>;\
+	<teh>;\
+	<theh>;\
+	<jeem>;\
+	<hah>;\
+	<khah>;\
+	<dal>;\
+	<thal>;\
+	<reh>;\
+	<arabic-zain>;\
+	<seen>;\
+	<sheen>;\
+	<sad>;\
+	<dad>;\
+	<tah>;\
+	<zah>;\
+	<arabic-ain>;\
+	<ghain>;\
+	<middle-ain>;\
+	<final-maddaonalef>;\
+	<final-hamzaonalef>;\
+	<final-alef>;\
+	<initial-feh>;\
+	<tatweel>;\
+	<feh>;\
+	<qaf>;\
+	<arabic-kaf>;\
+	<lam>;\
+	<meem>;\
+	<noon>;\
+	<arabic-heh>;\
+	<waw>;\
+	<alefmaksura>;\
+	<yeh>;\
+	<fathatan>;\
+	<dammatan>;\
+	<kasratan>;\
+	<fatha>;\
+	<damma>;\
+	<kasra>;\
+	<shadda>;\
+	<sukun>;\
+	<initial-qaf>;\
+	<initial-kaf>;\
+	<initial-lam>;\
+	<tail>;\
+	<isolated-maddaonlamalef>;\
+	<isolated-hamzaonlamalef>;\
+	<isolated-hamzaunderlamalef>;\
+	<isolated-lamalef>;\
+	<initial-meem>;\
+	<initial-noon>;\
+	<middle-heh>;\
+	<final-heh>
+
+print   <space>;\
+	<exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<final-hamzaunderalef>;\
+	<arabic-multiply>;\
+	<arabic-divide>;\
+	<final-seen>;\
+	<final-sheen>;\
+	<final-sad>;\
+	<final-dad>;\
+	<connected-fathatan>;\
+	<boxfill>;\
+	<box-vertical>;\
+	<box-horizontal>;\
+	<box-top-right>;\
+	<box-top-left>;\
+	<box-bottom-left>;\
+	<box-bottom-right>;\
+	<connected-damma>;\
+	<connected-kasra>;\
+	<connected-shadda>;\
+	<connected-sukun>;\
+	<connected-fatha>;\
+	<final-hamzaonyeh>;\
+	<final-alefmaksura>;\
+	<initial-yeh>;\
+	<final-yeh>;\
+	<final-ghain>;\
+	<initial-ghain>;\
+	<middle-ghain>;\
+	<connected-maddaonlamalef>;\
+	<connected-hamzaonlamalef>;\
+	<connected-hamzaunderlamalef>;\
+	<connected-lamalef>;\
+	<nobreakspace>;\
+	<special-maddaonalef>;\
+	<special-hamzaonalef>;\
+	<special-hamzaunderalef>;\
+	<currency>;\
+	<special-alef>;\
+	<initial-hamzaonyeh>;\
+	<initial-beh>;\
+	<initial-teh>;\
+	<initial-theh>;\
+	<initial-jeem>;\
+	<initial-hah>;\
+	<arabic-comma>;\
+	<shy>;\
+	<initial-khah>;\
+	<initial-seen>;\
+	<hindi-zero>;\
+	<hindi-one>;\
+	<hindi-two>;\
+	<hindi-three>;\
+	<hindi-four>;\
+	<hindi-five>;\
+	<hindi-six>;\
+	<hindi-seven>;\
+	<hindi-eight>;\
+	<hindi-nine>;\
+	<initial-sheen>;\
+	<arabic-semicolon>;\
+	<initial-sad>;\
+	<initial-dad>;\
+	<final-ain>;\
+	<arabic-questionmark>;\
+	<initial-ain>;\
+	<hamza>;\
+	<maddaonalef>;\
+	<hamzaonalef>;\
+	<hamzaonwaw>;\
+	<hamzaunderalef>;\
+	<hamzaonyeh>;\
+	<arabic-alef>;\
+	<beh>;\
+	<tehmarbuta>;\
+	<teh>;\
+	<theh>;\
+	<jeem>;\
+	<hah>;\
+	<khah>;\
+	<dal>;\
+	<thal>;\
+	<reh>;\
+	<arabic-zain>;\
+	<seen>;\
+	<sheen>;\
+	<sad>;\
+	<dad>;\
+	<tah>;\
+	<zah>;\
+	<arabic-ain>;\
+	<ghain>;\
+	<middle-ain>;\
+	<final-maddaonalef>;\
+	<final-hamzaonalef>;\
+	<final-alef>;\
+	<initial-feh>;\
+	<tatweel>;\
+	<feh>;\
+	<qaf>;\
+	<arabic-kaf>;\
+	<lam>;\
+	<meem>;\
+	<noon>;\
+	<arabic-heh>;\
+	<waw>;\
+	<alefmaksura>;\
+	<yeh>;\
+	<fathatan>;\
+	<dammatan>;\
+	<kasratan>;\
+	<fatha>;\
+	<damma>;\
+	<kasra>;\
+	<shadda>;\
+	<sukun>;\
+	<initial-qaf>;\
+	<initial-kaf>;\
+	<initial-lam>;\
+	<tail>;\
+	<isolated-maddaonlamalef>;\
+	<isolated-hamzaonlamalef>;\
+	<isolated-hamzaunderlamalef>;\
+	<isolated-lamalef>;\
+	<initial-meem>;\
+	<initial-noon>;\
+	<middle-heh>;\
+	<final-heh>
+
+digit   <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>
+
+xdigit  <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>
+
+blank  	<space>;\
+	<tab>
+
+toupper (<a>,<A>);(<b>,<B>);(<c>,<C>);(<d>,<D>);(<e>,<E>);\
+        (<f>,<F>);(<g>,<G>);(<h>,<H>);(<i>,<I>);(<j>,<J>);\
+        (<k>,<K>);(<l>,<L>);(<m>,<M>);(<n>,<N>);(<o>,<O>);\
+        (<p>,<P>);(<q>,<Q>);(<r>,<R>);(<s>,<S>);(<t>,<T>);\
+        (<u>,<U>);(<v>,<V>);(<w>,<W>);(<x>,<X>);(<y>,<Y>);\
+        (<z>,<Z>)
+
+
+END LC_CTYPE
+
+
+#############
+LC_COLLATE
+#############
+
+#################
+# Case weight collation symbols
+#################
+
+collating-symbol <lower-case>
+collating-symbol <upper-case>
+collating-symbol <arabic-is-fi-marbout>
+collating-symbol <arabic-is>
+collating-symbol <arabic-is-fi>
+collating-symbol <arabic-is-fi-in-mi>
+collating-symbol <arabic-fi>
+collating-symbol <arabic-special-fi>
+collating-symbol <arabic-in>
+collating-symbol <arabic-in-mi>
+collating-symbol <arabic-mi>
+
+#################
+# Diacritical collation weight symbols
+#################
+
+collating-symbol <accent-madda>
+collating-symbol <accent-hamza>
+collating-symbol <accent-hamza-on-waw>
+collating-symbol <accent-hamza-under>
+collating-symbol <accent-hamza-on-yeh>
+collating-symbol <accent-under-yeh>
+collating-symbol <ligature>
+collating-symbol <non-accented>
+
+####################################
+# Collation definition begins here #
+####################################
+
+order_start forward;forward;forward;forward,position
+
+###############################
+# Case collation weights      #
+###############################
+
+<lower-case>
+<upper-case>
+<arabic-is-fi-marbout>
+<arabic-is>
+<arabic-is-fi>
+<arabic-is-fi-in-mi>
+<arabic-fi>
+<arabic-special-fi>
+<arabic-in>
+<arabic-in-mi>
+<arabic-mi>
+
+###############################
+# Diacritical collation weights
+###############################
+<accent-madda>
+<accent-hamza>
+<accent-hamza-on-waw>
+<accent-hamza-under>
+<accent-hamza-on-yeh>
+<accent-under-yeh>
+<ligature>
+<non-accented>
+
+########################################
+# Special characters begin here        #
+########################################
+
+<NUL>			IGNORE;IGNORE;IGNORE;<NUL>
+<SOH>			IGNORE;IGNORE;IGNORE;<SOH>
+<STX>			IGNORE;IGNORE;IGNORE;<STX>
+<ETX>			IGNORE;IGNORE;IGNORE;<ETX>
+<EOT>			IGNORE;IGNORE;IGNORE;<EOT>
+<ENQ>			IGNORE;IGNORE;IGNORE;<ENQ>
+<ACK>			IGNORE;IGNORE;IGNORE;<ACK>
+<BEL>			IGNORE;IGNORE;IGNORE;<BEL>
+<backspace>		IGNORE;IGNORE;IGNORE;<backspace>
+<tab>			IGNORE;IGNORE;IGNORE;<tab>
+<newline>		IGNORE;IGNORE;IGNORE;<newline>
+<vertical-tab>		IGNORE;IGNORE;IGNORE;<vertical-tab>
+<form-feed>		IGNORE;IGNORE;IGNORE;<form-feed>
+<carriage-return>	IGNORE;IGNORE;IGNORE;<carriage-return>
+<SO>			IGNORE;IGNORE;IGNORE;<SO>
+<SI>			IGNORE;IGNORE;IGNORE;<SI>
+<DLE>			IGNORE;IGNORE;IGNORE;<DLE>
+<DC1>			IGNORE;IGNORE;IGNORE;<DC1>
+<DC2>			IGNORE;IGNORE;IGNORE;<DC2>
+<DC3>			IGNORE;IGNORE;IGNORE;<DC3>
+<DC4>			IGNORE;IGNORE;IGNORE;<DC4>
+<NAK>			IGNORE;IGNORE;IGNORE;<NAK>
+<SYN>			IGNORE;IGNORE;IGNORE;<SYN>
+<ETB>			IGNORE;IGNORE;IGNORE;<ETB>
+<CAN>			IGNORE;IGNORE;IGNORE;<CAN>
+<EM>			IGNORE;IGNORE;IGNORE;<EM>
+<SUB>			IGNORE;IGNORE;IGNORE;<SUB>
+<ESC>			IGNORE;IGNORE;IGNORE;<ESC>
+<IS4>			IGNORE;IGNORE;IGNORE;<IS4>
+<IS3>			IGNORE;IGNORE;IGNORE;<IS3>
+<IS2>			IGNORE;IGNORE;IGNORE;<IS2>
+<IS1>			IGNORE;IGNORE;IGNORE;<IS1>
+<DEL>			IGNORE;IGNORE;IGNORE;<DEL>
+<space>                IGNORE;IGNORE;IGNORE;<space>
+<low-line>             IGNORE;IGNORE;IGNORE;<low-line>
+<shy>                  IGNORE;IGNORE;IGNORE;<shy>
+<hyphen>               IGNORE;IGNORE;IGNORE;<hyphen>
+<comma>                IGNORE;IGNORE;IGNORE;<comma>
+<arabic-comma>         IGNORE;IGNORE;IGNORE;<arabic-comma>
+<semicolon>            IGNORE;IGNORE;IGNORE;<semicolon>
+<arabic-semicolon>     IGNORE;IGNORE;IGNORE;<arabic-semicolon>
+<colon>                IGNORE;IGNORE;IGNORE;<colon>
+<exclamation-mark>     IGNORE;IGNORE;IGNORE;<exclamation-mark>
+<question-mark>        IGNORE;IGNORE;IGNORE;<question-mark>
+<arabic-questionmark>  IGNORE;IGNORE;IGNORE;<arabic-questionmark>
+<solidus>              IGNORE;IGNORE;IGNORE;<solidus>
+<full-stop>            IGNORE;IGNORE;IGNORE;<full-stop>
+<grave-accent>         IGNORE;IGNORE;IGNORE;<grave-accent>
+<left-parenthesis>     IGNORE;IGNORE;IGNORE;<left-parenthesis>
+<right-parenthesis>    IGNORE;IGNORE;IGNORE;<right-parenthesis>
+<left-square-bracket>  IGNORE;IGNORE;IGNORE;<left-square-bracket>
+<right-square-bracket> IGNORE;IGNORE;IGNORE;<right-square-bracket>
+<left-brace>           IGNORE;IGNORE;IGNORE;<left-brace>
+<right-brace>          IGNORE;IGNORE;IGNORE;<right-brace>
+<commercial-at>        IGNORE;IGNORE;IGNORE;<commercial-at>
+<currency>             IGNORE;IGNORE;IGNORE;<currency>
+<dollar-sign>          IGNORE;IGNORE;IGNORE;<dollar-sign>
+<asterisk>             IGNORE;IGNORE;IGNORE;<asterisk>
+<reverse-solidus>      IGNORE;IGNORE;IGNORE;<reverse-solidus>
+<ampersand>            IGNORE;IGNORE;IGNORE;<ampersand>
+<number-sign>          IGNORE;IGNORE;IGNORE;<number-sign>
+<percent-sign>         IGNORE;IGNORE;IGNORE;<percent-sign>
+<plus-sign>            IGNORE;IGNORE;IGNORE;<plus-sign>
+<arabic-divide>        IGNORE;IGNORE;IGNORE;<arabic-divide>
+<arabic-multiply>      IGNORE;IGNORE;IGNORE;<arabic-multiply>
+<less-than-sign>       IGNORE;IGNORE;IGNORE;<less-than-sign>
+<equals-sign>          IGNORE;IGNORE;IGNORE;<equals-sign>
+<greater-than-sign>    IGNORE;IGNORE;IGNORE;<greater-than-sign>
+<circumflex-accent>    IGNORE;IGNORE;IGNORE;<circumflex-accent>
+<tilde>                IGNORE;IGNORE;IGNORE;<tilde>
+<apostrophe>           IGNORE;IGNORE;IGNORE;<apostrophe>
+<quotation-mark>       IGNORE;IGNORE;IGNORE;<quotation-mark>
+<vertical-line>        IGNORE;IGNORE;IGNORE;<vertical-line>
+
+<tatweel>              IGNORE;IGNORE;IGNORE;<tatweel>
+
+<nobreakspace>         <space>;<non-accented>;<lower-case>;IGNORE
+<tail>                 <tail>;<non-accented>;<arabic-fi>;IGNORE
+
+############################
+# Alphanumerics start here #
+############################
+
+<zero>                 <zero>;<non-accented>;<lower-case>;IGNORE
+<hindi-zero>           <hindi-zero>;<non-accented>;<lower-case>;IGNORE
+<one>                  <one>;<non-accented>;<lower-case>;IGNORE
+<hindi-one>            <hindi-one>;<non-accented>;<lower-case>;IGNORE
+<two>                  <two>;<non-accented>;<lower-case>;IGNORE
+<hindi-two>            <hindi-two>;<non-accented>;<lower-case>;IGNORE
+<three>                <three>;<non-accented>;<lower-case>;IGNORE
+<hindi-three>          <hindi-three>;<non-accented>;<lower-case>;IGNORE
+<four>                 <four>;<non-accented>;<lower-case>;IGNORE
+<hindi-four>           <hindi-four>;<non-accented>;<lower-case>;IGNORE
+<five>                 <five>;<non-accented>;<lower-case>;IGNORE
+<hindi-five>           <hindi-five>;<non-accented>;<lower-case>;IGNORE
+<six>                  <six>;<non-accented>;<lower-case>;IGNORE
+<hindi-six>            <hindi-six>;<non-accented>;<lower-case>;IGNORE
+<seven>                <seven>;<non-accented>;<lower-case>;IGNORE
+<hindi-seven>          <hindi-seven>;<non-accented>;<lower-case>;IGNORE
+<eight>                <eight>;<non-accented>;<lower-case>;IGNORE
+<hindi-eight>          <hindi-eight>;<non-accented>;<lower-case>;IGNORE
+<nine>                 <nine>;<non-accented>;<lower-case>;IGNORE
+<hindi-nine>           <hindi-nine>;<non-accented>;<lower-case>;IGNORE
+
+<a>                    <a>;<non-accented>;<lower-case>;IGNORE
+<b>                    <b>;<non-accented>;<lower-case>;IGNORE
+<c>                    <c>;<non-accented>;<lower-case>;IGNORE
+<d>                    <d>;<non-accented>;<lower-case>;IGNORE
+<e>                    <e>;<non-accented>;<lower-case>;IGNORE
+<f>                    <f>;<non-accented>;<lower-case>;IGNORE
+<g>                    <g>;<non-accented>;<lower-case>;IGNORE
+<h>                    <h>;<non-accented>;<lower-case>;IGNORE
+<i>                    <i>;<non-accented>;<lower-case>;IGNORE
+<j>                    <j>;<non-accented>;<lower-case>;IGNORE
+<k>                    <k>;<non-accented>;<lower-case>;IGNORE
+<l>                    <l>;<non-accented>;<lower-case>;IGNORE
+<m>                    <m>;<non-accented>;<lower-case>;IGNORE
+<n>                    <n>;<non-accented>;<lower-case>;IGNORE
+<o>                    <o>;<non-accented>;<lower-case>;IGNORE
+<p>                    <p>;<non-accented>;<lower-case>;IGNORE
+<q>                    <q>;<non-accented>;<lower-case>;IGNORE
+<r>                    <r>;<non-accented>;<lower-case>;IGNORE
+<s>                    <s>;<non-accented>;<lower-case>;IGNORE
+<t>                    <t>;<non-accented>;<lower-case>;IGNORE
+<u>                    <u>;<non-accented>;<lower-case>;IGNORE
+<v>                    <v>;<non-accented>;<lower-case>;IGNORE
+<w>                    <w>;<non-accented>;<lower-case>;IGNORE
+<x>                    <x>;<non-accented>;<lower-case>;IGNORE
+<y>                    <y>;<non-accented>;<lower-case>;IGNORE
+<z>                    <z>;<non-accented>;<lower-case>;IGNORE
+
+<A>                    <a>;<non-accented>;<upper-case>;IGNORE
+<B>                    <b>;<non-accented>;<upper-case>;IGNORE
+<C>                    <c>;<non-accented>;<upper-case>;IGNORE
+<D>                    <d>;<non-accented>;<upper-case>;IGNORE
+<E>                    <e>;<non-accented>;<upper-case>;IGNORE
+<F>                    <f>;<non-accented>;<upper-case>;IGNORE
+<G>                    <g>;<non-accented>;<upper-case>;IGNORE
+<H>                    <h>;<non-accented>;<upper-case>;IGNORE
+<I>                    <i>;<non-accented>;<upper-case>;IGNORE
+<J>                    <j>;<non-accented>;<upper-case>;IGNORE
+<K>                    <k>;<non-accented>;<upper-case>;IGNORE
+<L>                    <l>;<non-accented>;<upper-case>;IGNORE
+<M>                    <m>;<non-accented>;<upper-case>;IGNORE
+<N>                    <n>;<non-accented>;<upper-case>;IGNORE
+<O>                    <o>;<non-accented>;<upper-case>;IGNORE
+<P>                    <p>;<non-accented>;<upper-case>;IGNORE
+<Q>                    <q>;<non-accented>;<upper-case>;IGNORE
+<R>                    <r>;<non-accented>;<upper-case>;IGNORE
+<S>                    <s>;<non-accented>;<upper-case>;IGNORE
+<T>                    <t>;<non-accented>;<upper-case>;IGNORE
+<U>                    <u>;<non-accented>;<upper-case>;IGNORE
+<V>                    <v>;<non-accented>;<upper-case>;IGNORE
+<W>                    <w>;<non-accented>;<upper-case>;IGNORE
+<X>                    <x>;<non-accented>;<upper-case>;IGNORE
+<Y>                    <y>;<non-accented>;<upper-case>;IGNORE
+<Z>                    <z>;<non-accented>;<upper-case>;IGNORE
+
+<hamza>                  <hamza>;<non-accented>;<arabic-is>;IGNORE
+<maddaonalef>            <arabic-alef>;<accent-madda>;<arabic-is>;IGNORE
+<final-maddaonalef>      <arabic-alef>;<accent-madda>;<arabic-fi>;IGNORE
+<special-maddaonalef>    <arabic-alef>;<accent-madda>;<arabic-special-fi>;IGNORE
+<hamzaonalef>            <arabic-alef>;<accent-hamza>;<arabic-is>;IGNORE
+<final-hamzaonalef>      <arabic-alef>;<accent-hamza>;<arabic-fi>;IGNORE
+<special-hamzaonalef>    <arabic-alef>;<accent-hamza>;<arabic-special-fi>;IGNORE
+<hamzaonwaw>             <arabic-alef>;<accent-hamza-on-waw>;<arabic-is-fi>;IGNORE
+<hamzaunderalef>         <arabic-alef>;<accent-hamza-under>;<arabic-is>;IGNORE
+<final-hamzaunderalef>   <arabic-alef>;<accent-hamza-under>;<arabic-fi>;IGNORE
+<special-hamzaunderalef> <arabic-alef>;<accent-hamza-under>;<arabic-special-fi>;IGNORE
+<hamzaonyeh>             <arabic-alef>;<accent-hamza-on-yeh>;<arabic-is>;IGNORE
+<final-hamzaonyeh>       <arabic-alef>;<accent-hamza-on-yeh>;<arabic-fi>;IGNORE
+<initial-hamzaonyeh>     <arabic-alef>;<accent-hamza-on-yeh>;<arabic-in-mi>;IGNORE
+<arabic-alef>            <arabic-alef>;<non-accented>;<arabic-is>;IGNORE
+<final-alef>             <arabic-alef>;<non-accented>;<arabic-fi>;IGNORE
+<special-alef>           <arabic-alef>;<non-accented>;<arabic-special-fi>;IGNORE
+<beh>                    <beh>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-beh>            <beh>;<non-accented>;<arabic-in-mi>;IGNORE
+<tehmarbuta>             <teh>;<non-accented>;<arabic-is-fi-marbout>;IGNORE
+<teh>                    <teh>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-teh>            <teh>;<non-accented>;<arabic-in-mi>;IGNORE
+<theh>                   <theh>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-theh>           <theh>;<non-accented>;<arabic-in-mi>;IGNORE
+<jeem>                   <jeem>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-jeem>           <jeem>;<non-accented>;<arabic-in-mi>;IGNORE
+<hah>                    <hah>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-hah>            <hah>;<non-accented>;<arabic-in-mi>;IGNORE
+<khah>                   <khah>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-khah>           <khah>;<non-accented>;<arabic-in-mi>;IGNORE
+<dal>                    <dal>;<non-accented>;<arabic-is-fi>;IGNORE
+<thal>                   <thal>;<non-accented>;<arabic-is-fi>;IGNORE
+<reh>                    <reh>;<non-accented>;<arabic-is-fi>;IGNORE
+<arabic-zain>            <arabic-zain>;<non-accented>;<arabic-is-fi>;IGNORE
+<seen>                   <seen>;<non-accented>;<arabic-is-fi-marbout>;IGNORE
+<final-seen>             <seen>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-seen>           <seen>;<non-accented>;<arabic-in-mi>;IGNORE
+<sheen>                  <sheen>;<non-accented>;<arabic-is-fi-marbout>;IGNORE
+<final-sheen>            <sheen>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-sheen>          <sheen>;<non-accented>;<arabic-in-mi>;IGNORE
+<sad>                    <sad>;<non-accented>;<arabic-is-fi-marbout>;IGNORE
+<final-sad>              <sad>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-sad>            <sad>;<non-accented>;<arabic-in-mi>;IGNORE
+<dad>                    <dad>;<non-accented>;<arabic-is-fi-marbout>;IGNORE
+<final-dad>              <dad>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-dad>            <dad>;<non-accented>;<arabic-in-mi>;IGNORE
+<tah>                    <tah>;<non-accented>;<arabic-is-fi-in-mi>;IGNORE
+<zah>                    <zah>;<non-accented>;<arabic-is-fi-in-mi>;IGNORE
+<arabic-ain>             <arabic-ain>;<non-accented>;<arabic-is>;IGNORE      
+<final-ain>              <arabic-ain>;<non-accented>;<arabic-fi>;IGNORE
+<initial-ain>            <arabic-ain>;<non-accented>;<arabic-in>;IGNORE
+<middle-ain>             <arabic-ain>;<non-accented>;<arabic-mi>;IGNORE
+<ghain>                  <ghain>;<non-accented>;<arabic-is>;IGNORE
+<final-ghain>            <ghain>;<non-accented>;<arabic-fi>;IGNORE
+<initial-ghain>          <ghain>;<non-accented>;<arabic-in>;IGNORE
+<middle-ghain>           <ghain>;<non-accented>;<arabic-mi>;IGNORE
+<feh>                    <feh>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-feh>            <feh>;<non-accented>;<arabic-in-mi>;IGNORE
+<qaf>                    <qaf>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-qaf>            <qaf>;<non-accented>;<arabic-in-mi>;IGNORE
+<arabic-kaf>             <arabic-kaf>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-kaf>            <arabic-kaf>;<non-accented>;<arabic-in-mi>;IGNORE
+<lam>                    <lam>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-lam>            <lam>;<non-accented>;<arabic-in-mi>;IGNORE
+
+<isolated-maddaonlamalef>     <lam><arabic-alef>;<ligature><accent-madda>;<arabic-in><arabic-fi>;IGNORE
+<connected-maddaonlamalef>    <lam><arabic-alef>;<ligature><accent-madda>;<arabic-mi><arabic-fi>;IGNORE
+<isolated-hamzaonlamalef>     <lam><arabic-alef>;<ligature><accent-hamza>;<arabic-in><arabic-fi>;IGNORE
+<connected-hamzaonlamalef>    <lam><arabic-alef>;<ligature><accent-hamza>;<arabic-mi><arabic-fi>;IGNORE
+<isolated-hamzaunderlamalef>  <lam><arabic-alef>;<ligature><accent-hamza-under>;<arabic-in><arabic-fi>;IGNORE
+<connected-hamzaunderlamalef> <lam><arabic-alef>;<ligature><accent-hamza-under>;<arabic-mi><arabic-fi>;IGNORE
+<isolated-lamalef>            <lam><arabic-alef>;<ligature><non-accented>;<arabic-in><arabic-fi>;IGNORE
+<connected-lamalef>           <lam><arabic-alef>;<ligature><non-accented>;<arabic-mi><arabic-fi>;IGNORE
+
+<meem>                   <meem>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-meem>           <meem>;<non-accented>;<arabic-in-mi>;IGNORE
+<noon>                   <noon>;<non-accented>;<arabic-is-fi>;IGNORE
+<initial-noon>           <noon>;<non-accented>;<arabic-in-mi>;IGNORE
+<final-heh>              <arabic-heh>;<non-accented>;<arabic-is-fi>;IGNORE
+<arabic-heh>             <arabic-heh>;<non-accented>;<arabic-in>;IGNORE
+<middle-heh>             <arabic-heh>;<non-accented>;<arabic-mi>;IGNORE
+<waw>                    <waw>;<non-accented>;<arabic-is-fi>;IGNORE
+<alefmaksura>            <alefmaksura>;<non-accented>;<arabic-is>;IGNORE
+<final-alefmaksura>      <alefmaksura>;<non-accented>;<arabic-fi>;IGNORE
+<yeh>                    <alefmaksura>;<accent-under-yeh>;<arabic-is>;IGNORE
+<final-yeh>              <alefmaksura>;<accent-under-yeh>;<arabic-fi>;IGNORE
+<initial-yeh>            <alefmaksura>;<accent-under-yeh>;<arabic-in-mi>;IGNORE
+
+<fathatan>               IGNORE;IGNORE;<arabic-is>;<fathatan>
+<connected-fathatan>     IGNORE;IGNORE;<arabic-mi>;<fathatan>
+<dammatan>               IGNORE;IGNORE;<arabic-is>;<dammatan>
+<kasratan>               IGNORE;IGNORE;<arabic-is>;<kasratan>
+<fatha>                  IGNORE;IGNORE;<arabic-is>;<fatha>
+<connected-fatha>        IGNORE;IGNORE;<arabic-mi>;<fatha>
+<damma>                  IGNORE;IGNORE;<arabic-is>;<damma>
+<connected-damma>        IGNORE;IGNORE;<arabic-mi>;<damma>
+<kasra>                  IGNORE;IGNORE;<arabic-is>;<kasra>
+<connected-kasra>        IGNORE;IGNORE;<arabic-mi>;<kasra>
+<sukun>                  IGNORE;IGNORE;<arabic-is>;<sukun>
+<connected-sukun>        IGNORE;IGNORE;<arabic-mi>;<sukun>
+<shadda>                 IGNORE;IGNORE;<arabic-is>;<shadda>
+<connected-shadda>       IGNORE;IGNORE;<arabic-mi>;<shadda>
+
+###################################
+#      Box Drawing Characters     #
+###################################
+
+<boxfill>
+<box-vertical>
+<box-horizontal>
+<box-top-right>
+<box-top-left>
+<box-bottom-left>
+<box-bottom-right>
+
+###################################
+# Ignore all undefined characters #
+###################################
+
+UNDEFINED              IGNORE;IGNORE;IGNORE;IGNORE
+ 
+order_end
+
+END LC_COLLATE
+
+#############
+LC_MONETARY
+#############
+
+currency_symbol   "<currency>"
+mon_decimal_point <comma>
+mon_thousands_sep "<period>"
+mon_grouping      3
+positive_sign     ""
+negative_sign     "<hyphen-minus>"
+int_frac_digits   2
+frac_digits       2
+p_cs_precedes     1
+p_sep_by_space    0
+n_cs_precedes     1
+n_sep_by_space    0
+p_sign_posn       2
+n_sign_posn       2
+debit_sign        "<D><B>"
+credit_sign       "<C><R>"
+left_parenthesis  "<left-parenthesis>"
+right_parenthesis "<right-parenthesis>"
+
+END LC_MONETARY
+
+
+#############
+LC_NUMERIC
+#############
+
+decimal_point     <comma>
+thousands_sep     "<period>"
+grouping          3
+
+END LC_NUMERIC
+
+#############
+LC_TIME
+#############
+abday	" <hah>";\
+	" <noon>";\
+	" <theh>";\
+	" <reh>";\
+	" <khah>";\
+	" <jeem>";\
+	" <seen>"
+
+day	"<arabic-alef><lam><hamzaonalef><hah><dal>";\
+	"<arabic-alef><lam><hamzaonalef><theh><noon><yeh><noon>";\
+	"<arabic-alef><lam><theh><lam><arabic-alef><theh><arabic-alef><hamza>";\
+	"<arabic-alef><lam><hamzaonalef><reh><beh><arabic-ain><arabic-alef><hamza>";\
+	"<arabic-alef><lam><khah><meem><yeh><seen>";\
+	"<arabic-alef><lam><jeem><meem><arabic-ain><arabic-heh>";\
+	"<arabic-alef><lam><seen><beh><teh>"
+
+abmon	"<yeh><noon><arabic-alef>";\
+	"<feh><beh><reh>";\
+	"<meem><arabic-alef><reh>";\
+	"<hamzaunderalef><beh><reh>";\
+	"<meem><arabic-alef><yeh>";\
+	"<yeh><waw><noon>";\
+	"<yeh><waw><lam>";\
+	"<hamzaonalef><ghain><seen>";\
+	"<seen><beh><meem>";\
+	"<hamzaonalef><arabic-kaf><teh>";\
+	"<noon><waw><feh>";\
+	"<dal><yeh><seen>"
+
+mon	"<yeh><noon><arabic-alef><yeh><reh>";\
+	"<feh><beh><reh><arabic-alef><yeh><reh>";\
+	"<meem><arabic-alef><reh><seen>";\
+	"<hamzaunderalef><beh><reh><yeh><lam>";\
+	"<meem><arabic-alef><yeh><waw>";\
+	"<yeh><waw><noon><yeh><arabic-heh>";\
+	"<yeh><waw><lam><yeh><arabic-heh>";\
+	"<hamzaonalef><ghain><seen><tah><seen>";\
+	"<seen><beh><teh><meem><beh><reh>";\
+	"<hamzaonalef><arabic-kaf><teh><waw><beh><reh>";\
+	"<noon><waw><feh><meem><beh><reh>";\
+	"<dal><yeh><seen><meem><beh><reh>"
+
+d_t_fmt " %A %e %B %H:%M:%S %Y"
+
+d_fmt   "%d/%m/%y"
+
+t_fmt   "%H:%M:%S"
+
+am_pm   "<A><M>";"<P><M>"
+
+t_fmt_ampm      "%I:%M:%S %p"
+
+nlldate	"%e %b %Y"
+
+END LC_TIME
+
+
+#############
+LC_MESSAGES
+#############
+
+
+yesexpr "^([yY][eE][sS]|[yY]|[<noon>][<arabic-ain>][<meem>]|[<noon>])"
+noexpr "^([nN][oO]|[nN]|[<lam>][<arabic-alef>]|[<lam>])"
+yesstr  "yes:y:Y:<noon><arabic-ain><meem>:<noon>:"
+nostr   "no:n:N:<lam><arabic-alef>:<lam>:"
+
+
+END LC_MESSAGES

@@ -1,0 +1,478 @@
+# @(#)93	1.6  src/bos/objclass/POWER/diag.8efc.add, cmddiag, bos411, 9430C411a 7/27/94 16:14:17
+#
+#   COMPONENT_NAME: CMDDIAG
+#
+#   FUNCTIONS: Wide SCSI I/O Controller Predefined Stanzas 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#
+# DClass   - name uniquely identifying a device class
+# DType    - name uniquely identifying a device type
+# DSClass  - name uniquely identifying a device subclass
+# Ports    - number of ports on the card if a multi-port card
+# Pset     - set id of message set in catalog file dcda.msg (vendor.msg)
+#	     (see Menu bit 16 below if not using dcda.msg file)
+# PreTest  - set if device is to be tested before system comes up.
+#          - value equals 1 if not a display device
+#          - value equals 2 if a display device
+# AttDType - names a device that has a device driver that supports DType.
+# Conc     - 0 not supported in concurrent mode
+#          - 1 supports Diagnostic Tests in concurrent mode
+#          - 2 supports ELA
+# SupTests - Bit positions 64 32 16 8 4 2 1
+#                           |  |  | | | | |__Shared Tests
+#                           |  |  | | | |____Subtests Tests
+#                           |  |  | | |______Full Tests
+#                           |  |  | |________Missing Options 1
+#                           |  |  |__________Missing Options 2
+#                           |  |_____________Graphics related Devices (used for X)
+#		            |		     device will not be in test list if
+#			    |		     running under X-windows
+#			    |________________Support Diagnostic Extension
+#
+# Menu     - Bit positions 16 8 4 2 1
+#                           | | | | |_____Diagnostic Test List Menu
+#                           | | | |_______Not allowed to be deleted from DTL Menu
+#                           | | |_________Diagnostic Selection Menu
+#                           | |___________Conditional Diagnostic Selection Menu
+#			    |_____________Devices SRN numbers are located in the
+#					  Diagnostic Application catalog file.
+#					  Pset indicates the set number	
+# DNext    - 2 Test Sibling next
+#          - 1 Test Parent next
+# DaName   - name of Diagnostic Application associated with device
+#            When DaName is prefixed with a "*", the diagnostic controller will
+#            get the value of the attribute name that follows the "*", then
+#            uses the attribute value obtained to get the real DaName from the
+#            PDiagAtt object class. This method is used to allow support of
+#            devices having the same DType, but requiring different DA.
+# Diskette - 0 => Not on any diskette
+#            X => Diskette number
+#            S => Supplemental Diskette 
+# EnclDaName - name of Diagnostic Application associated with enclosure for
+#              device
+# SysxFlg  - Bit positions  8 4 2 1
+#                           | | | |__System Exerciser NOT supported
+#                           | | |____DA must run separately from similar DAs
+#                           | |______DA requires media
+#                           |________DA is considered a long test
+#
+#
+PDiagDev:
+	DClass = "adapter"
+        DType = "8efc"
+        DSClass  = "mca"
+        Ports    = 0
+        PSet     = 1
+        PreTest  = 0
+        AttDType = ""
+        Conc     = 1
+        SupTests = 68
+        Menu     = 21
+        DNext    = 1
+        DaName   = "dacorv"
+        Diskette = "5"
+        EnclDaName   = ""
+        SysxFlg  = 0x0002
+
+PDiagDev:
+	DClass = "adapter"
+        DType = "8efc"
+        DSClass  = "sio"
+        Ports    = 0
+        PSet     = 1
+        PreTest  = 0
+        AttDType = ""
+        Conc     = 1
+        SupTests = 68
+        Menu     = 21
+        DNext    = 1
+        DaName   = "dacorv"
+        Diskette = "5"
+        EnclDaName   = ""
+        SysxFlg  = 0x0002
+
+PDiagDev:
+	DClass = "driver"
+	DType = "vscsi"
+	DSClass = "scsi_scb"
+	Ports = 0
+	PSet = 1
+	PreTest = 0
+	AttDType = ""
+	AttSClass = ""
+	Conc = 1
+	SupTests = 68
+	Menu = 0
+	DNext = 1
+	DaName = ""
+	Diskette = "5"
+	EnclDaName = ""
+	SysxFlg = 1
+
+# SCSI-2 Fast/Wide Diagnostics application is a data driven code. The
+# Diagnostics Application gets one of the following stanzas:
+#
+# attribute = "DA_TASK" or "VSCSI_TASK" or "MCODE_TASK".
+#
+# In each stanza the value field contains a task.
+#
+# Task is a string of four digits, will be interpreted by the DA to run
+# certain functions. The first character in each task is key code to an
+# action be taken by the DA. The Second character is the mode type indicate
+# when the task is able to execute, the mode type ranges from 0 to A. When
+# a task any special mode type other then 0 the task sequence must inlude all
+# the modes supported for the task. Task code could not have a 0 and special
+# mode case. The remaining characters are the tu number or the action code.
+# The following are detailed task string data.
+# 
+#                  3 0 0 1
+#                  | | | |
+#                  | | |_|_____ Screen subtask action code.
+#                  | |
+#                  | |_________ Mode type
+#                  |             0 - execute in all modes except when no console
+#                  |                 DA should check for not to use the display.
+#                  |             1 - execute in IPL pretest.
+#                  |             2 - execute in StandAlone.
+#                  |             3 - execute in Advanced mode.
+#                  |             4 - execute in EnterLoop mode.
+#                  |             5 - execute in InLoop and Advanced mode.
+#                  |             6 - execute in ExitLoop mode.
+#                  |             7 - execute in Customer mode.
+#                  |             8 - execute in StandAlone and Advanced mode.
+#                  |             9 - execute in ELA mode.
+#                  |             A - execute in PD mode.
+#                  |
+#                  |___________ Task function code.( Range 0 to Z)
+#  
+#                  4 0 0 1
+#                  | | | |
+#                  | | |_|_____ Adapter subtask action code or TU number.
+#                  | |
+#                  | |_________ Mode status
+#                  |             0 - execute in all modes except when no console
+#                  |                 DA should check for not to use the display.
+#                  |             1 - execute in IPL pretest.
+#                  |             2 - execute in StandAlone.
+#                  |             3 - execute in Advanced mode.
+#                  |             4 - execute in EnterLoop mode.
+#                  |             5 - execute in InLoop and Advanced mode.
+#                  |             6 - execute in ExitLoop mode.
+#                  |             7 - execute in Customer mode.
+#                  |             8 - execute in StandAlone and Advanced mode.
+#                  |             9 - execute in ELA mode.
+#                  |             A - execute in PD mode.
+#                  |
+#                  |___________ Task function code.( Range 0 to Z)
+#  
+
+# SCSI-2 Diagnostics Task sequence.
+PDiagAtt:
+	DClass = "adapter"
+	DType	= "8efc"
+	DSClass	= "mca"
+	attribute = "DA_TASK"
+	value	= "3001 3002 4001 4003 3002 4004 4005 3002 4206 3002 7900 7A00  "
+	rep	= "s"
+
+# Task executed prior to exit the DA when necessary.
+
+PDiagAtt:
+	DClass = "adapter"
+	DType	= "8efc"
+	DSClass	= "mca"
+	attribute	= "CLEAN_UP"
+	value	= "4002"
+	rep	= "s"
+
+# Task executed for vscsi device only.
+
+PDiagAtt:
+	DClass = "adapter"
+	DType	= "8efc"
+	DSClass	= "mca"
+	attribute	= "VSCSI_TASK"
+	value	= "7900"
+	rep	= "s"
+
+# Task executed microcode download is called.
+
+PDiagAtt:
+	DClass = "adapter"
+	DType	= "8efc"
+	DSClass	= "mca"
+	attribute	= "MCODE_TASK"
+	value	= "8001 8008"
+	rep	= "s"
+
+# Each task have an error recovery procedure as follow:
+# 
+# (E)xit return code followed by five characters. Each character represent
+# status code required by the controller ( detailed exit code in Diagnostics
+# Subsystem Architecture.). The order of the characters are as follow DA_STATUS,
+# DA_USER, DA_ERROR, DA_TEST and DA_MORE. The following is an example of an
+# (E)xit reaction:
+# 
+# 
+#  
+#                  E 0 2 0 1 0
+#                  | | | | | |____ DA Exit More Status
+#                  | | | | |       DA_MORE_NOCONT=0
+#                  | | | | |       DA_MORE_CONT=1
+#                  | | | | |
+#                  | | | | |______ DA Exit Test Status
+#                  | | | |         DA_TEST_NOTEST=0
+#                  | | | |         DA_TEST_FULL=1
+#                  | | | |
+#                  | | | |________ DA Exit Error Status
+#                  | | |            DA_ERROR_NONE=0
+#                  | | |            DA_ERROR_OPEN=1
+#                  | | |            DA_ERROR_OTHER=2
+#                  | | |
+#                  | | |__________ DA Exit User Status
+#                  | |             DA_USER_NOKEY=0
+#                  | |              DA_USER_EXIT=1
+#                  | |              DA_USER_QUIT=2
+#                  | |
+#                  | |____________ DA Exit Hardware Status
+#                  |               DA_STATUS_GOOD=0
+#                  |               DA_STATUS_BAD=1
+#                  |
+#                  |______________ Exit code
+#  
+#  
+#  
+# (S)RN followed a value points to SRN entry in array of SRNs.
+# (G)oal report a menugoal followed by a menugoal number in the catalog
+# file. MenuGoal maybe followed by an SRN.
+# (J)ump is a jump instruction to jump forward or backward in the task.
+# Jump instruction always followed by three characters, the first character is
+# a loop counter to count the number of retries, the next to characters are the
+# number of tasks needs to be executed next. The following is detailed format
+# of (J)ump.
+# 
+# 
+#                  J 1 0 2 , S 0,E ......
+#                  | | | |
+#                  | | |_|________ Pointer to Task Number (task number
+#                  | |             start from 0 to 0xFF) in the Task Sequence.
+#                  | |             Example: Let's say we're using Stand Alone
+#                  | |             sequence and we 're executing task 4004 and
+#                  | |             we have an Reaction J102,... The DA will do
+#                  | |             the following:
+#                  | |                 - Check retry count if retry > counter
+#                  | |                   then report SRN else next step to be
+#                  | |                   executed is (task_sequence[1]) 4001.
+#                  | |
+#                  | |____________ Max. Number of retries.
+#                  |
+#                  |______________ Jump code.
+#  
+#  
+# Error Recovery Data for task 3000 ( ASL return codes )
+# (This ERD will be used by all asl returned code)
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "3000"
+	value = "   0:E02010    3:E01010    -1:E00210"
+	rep = "s"
+
+# Error Recovery Data for task 4001.
+# (TU #1 return code)
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "4001"
+	value = " -12:E00210  -14:E00110   -21:S0,E10010   -24:S0,E10210"
+	rep = "s"
+
+# Error Recovery Data for task 4002.
+# (TU #2 return code)
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "4002"
+	value = "  -10:S6,E10010   -11:J102,S6,E10010   -12:S6,E10010"
+	rep = "s"
+
+# Error Recovery Data for task 4003_ISR.
+# (TU #3 return code PTC values.)
+# Note return codes are in a decimal format.
+	
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "4003_ISR"
+	value = " 771:S5,E10010  772:S6,E10010    8:S7,E10010   10:S8,E10010"
+	rep = "s"
+
+# Error Recovery Data for task 4003.
+#	(TU #3 return code)
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "4003"
+	value = " -10:S1,E10010  -11:J102,S1,E10010  -12:S1,E10010"
+	rep = "s"
+
+# Error Recovery Data for task 4004
+# (TU #4 return code)
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "4004"
+	value = " -10:S2,E10010  -11:J102,S2,E10010  -12:S2,E10010"
+	rep = "s"
+
+# Error Recovery Data for task 4005.
+# (TU #5 return code)
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "4005"
+	value = " -10:S3,E10010  -11:J102,S3,E10010  -12:S3,E10010"
+	rep = "s"
+
+# Error Recovery Data for task 4206.
+# (TU #6 return code)
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "4006"
+	value = " -10:S4,E10010  -11:J102,S9,E10010  -12:S9,E10010"
+	rep = "s"
+
+
+# ELA reaction code for SCSI_ERR1
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "E001"
+	value = "   1:S10,E10010    5:S11,E10010   10:S12,E10010"
+	rep = "s"
+
+# ELA reaction code for SCSI_ERR2
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "E002"
+	value = " ALL:J901,S13,E10010"
+	rep = "s"
+
+# ELA reaction code for SCSI_ERR3
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "E003"
+	value = " ALL:S14,E10010"
+	rep = "s"
+
+# ELA reaction code for SCSI_ERR10
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "E004"
+	value = "  256:NOP  257:NOP   ALL:J901,S19,E10010"
+	rep = "s"
+
+
+# ELA reaction code for SCSI_ERR10
+# ISR Values detailed data (ascsi).
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "E005"
+	value = "  48:S15,E10010   49:S16,E10010  143:S17,E10010  175:S18,E10010"
+	rep = "s"
+
+# ELA reaction code for SCSI_ERR10
+# Internal PTC error or internal bus error for vscsi.
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "E006"
+	value = " 256:NOP   257:NOP   25:S15,E10010   ALL:J901,S17,E10010"
+	rep = "s"
+
+# ELA reaction code for SCSI_ERR10
+# External PTC error or External bus error for vscsi.
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "E007"
+	value = " 256:NOP   257:NOP   25:S16,E10010    26:S18,E10010  ALL:J901,S18,E10010"
+	rep = "s"
+
+
+
+# PDiagAtt required entry to dwonload microcode.
+
+
+PDiagAtt:
+	DClass = "adapter"
+        DType = "8efc"
+        DSClass = "mca"
+        attribute = "download_ucode"
+        value = "1"
+        rep = "n"
+
+# PDiagAtt error recovery procedure for downloading microcode
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "8001"
+	value = "   0:NOP   ALL:E00001"
+	rep = "s"
+
+
+# PDiagAtt error recovery procedure for downloading microcode
+
+PDiagAtt:
+	DClass = "adapter"
+	DType = "8efc"
+	DSClass = "mca"
+	attribute = "8008"
+	value = "   0:NOP   ALL:E00001"
+	rep = "s"

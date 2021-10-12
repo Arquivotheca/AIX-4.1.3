@@ -1,0 +1,701 @@
+* @(#)65      1.14  src/bos/objclass/POWER/sm_cat.add, sysxcat, bos41J, 9520A_a 5/16/95 15:56:13
+*********************************************************************
+*
+* COMPONENT_NAME : (SYSXCAT)
+*
+* FUNCTIONS: SMIT/ODM data for 370 PCA adapter
+*
+* ORIGINS : 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1992,1994
+* Unpublished Work
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* RESTRICTED RIGHTS LEGEND
+* US Government Users Restricted Rights -  Use, Duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+ 
+sm_menu_opt:
+	id_seq_num = 070
+	id = commodev
+	next_id = cat
+	text = "370 Parallel Channel"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 510
+	next_type = "m"
+	alias = ""
+	help_msg_id = 00001
+ 
+sm_menu_opt:
+	id_seq_num = 010
+	id = cat
+	next_id = catadap
+	text = "Adapter"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 231
+	next_type = "m"
+	alias = ""
+	help_msg_id = 00001
+ 
+sm_menu_opt:
+	id_seq_num = 020
+	id = cat
+	next_id = catserv
+	text = "Services"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 232
+	next_type = "m"
+	alias = ""
+	help_msg_id = 00001
+ 
+sm_menu_opt:
+	id_seq_num = 030
+	id = cat
+	next_id = catuser
+	text = "User Applications"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 233
+	next_type = "m"
+	alias = ""
+	help_msg_id = 00001
+ 
+sm_menu_opt:
+	id_seq_num = 010
+	id = catadap
+	next_id = lscat
+	text = "List all 370 Parallel Channel Adapters"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 511
+	next_type = "d"
+	alias = ""
+	help_msg_id = 1800193
+ 
+sm_menu_opt:
+	id_seq_num = 020
+	id = catadap
+	next_id = chgcat
+	text = "Change/Show Characteristics of a 370 Parallel Channel Adapter"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 512
+	next_type = "n"
+	alias = ""
+	help_msg_id = 1800197
+ 
+sm_menu_opt:
+	id_seq_num = 040
+	id = catadap
+	next_id = errpt
+	text = "Generate an Error Report"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 88
+	next_type = "n"
+	alias = ""
+	help_msg_id = 00001
+ 
+sm_menu_opt:
+	id_seq_num = 050
+	id = catadap
+	next_id = trace_link
+	text = "Trace a 370 Parallel Channel Adapter"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 513
+	next_type = "m"
+	alias = ""
+	help_msg_id = 00001
+ 
+sm_cmd_hdr:
+	id = lscat
+	option_id = ""
+	has_name_select = "n"
+	name = "List All 370 Parallel Channel Adapters"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 511
+	ghost = "y"
+	cmd_to_exec = "lsparent -C -k cat"
+ 
+sm_name_hdr:
+	id = "chgcat"
+	next_id = "chgcat_hdr_"
+	option_id = "cat_ln_opt"
+	has_name_select = "n"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:location:status:description\"   | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\1_\\2:&/' \n\
+} \n\
+xx "
+	cmd_to_classify_postfix = " logicname "
+	raw_field_name = "logicname"
+	cooked_field_name = "_cookedname:type:subclass:loc:state:desc"
+	next_type = "d"
+	help_msg_id = "1800197"
+	help_msg_loc = ""
+ 
+sm_cmd_hdr:
+	id = "chgcat_hdr_pca_mca"
+	option_id = "cat_chg"
+	has_name_select = "y"
+	name = "Change/Show Characteristics of a 370 Parallel Channel Adapter"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 512
+	cmd_to_exec = "chdev "
+	ask = ""
+	exec_mode = "P"
+	ghost = "n"
+	cmd_to_discover = "\
+zzz()\n\
+{\n\
+chdev -P -l $1 -a check_ind=1 -a indicator=0 > /dev/null 2>&1\n\
+lsattr -l $1 -E -O\n\
+}\n\
+zzz"
+	cmd_to_discover_postfix = "logicname"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1800197"
+	help_msg_loc = ""
+ 
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "cat_ln_opt"
+	disc_field_name = ""
+	name = "370 Parallel Channel"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 510
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "lsparent -C -k cat"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04202"
+	help_msg_loc = ""
+ 
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "cat_chg"
+	disc_field_name = "logicname"
+	name = "370 Parallel Channel"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 510
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-l "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420800"
+	help_msg_loc = ""
+ 
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "cat_chg"
+	disc_field_name = "desc"
+	name = "Description"
+	name_msg_file = "smit.cat"
+	name_msg_set = 27
+	name_msg_id = 7
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420801"
+	help_msg_loc = ""
+ 
+sm_cmd_opt:
+	id_seq_num = "030"
+	id = "cat_chg"
+	disc_field_name = "state"
+	name = "Status"
+	name_msg_file = "smit.cat"
+	name_msg_set = 27
+	name_msg_id = 8
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420802"
+	help_msg_loc = ""
+ 
+sm_cmd_opt:
+	id_seq_num = "040"
+	id = "cat_chg"
+	disc_field_name = "loc"
+	name = "Location"
+	name_msg_file = "smit.cat"
+	name_msg_set = 27
+	name_msg_id = 9
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0420803"
+	help_msg_loc = ""
+ 
+sm_cmd_opt:
+	id_seq_num = "050"
+	id = "cat_chg"
+	disc_field_name = "rdto"
+	name = "Receive Data Transfer OFFSET"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 10
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = "n"
+	prefix = "-a rdto="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c adapter -a rdto -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = "0"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,1"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "060"
+	id = "cat_chg"
+	disc_field_name = "speed"
+	name = "Channel SPEED"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 11
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = "n"
+	prefix = "-a speed="
+	cmd_to_list_mode = ""
+	cmd_to_list = "lsattr -c adapter -a speed -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,2"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "070"
+	id = "cat_chg"
+	disc_field_name = "xmitno"
+	name = "NUMBER of transmit buffers"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 7
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = "n"
+	prefix = "-a xmitno="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c adapter -a xmitno -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = "26"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,3"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "080"
+	id = "cat_chg"
+	disc_field_name = "recvno"
+	name = "NUMBER of receive buffers"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 9
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = "n"
+	prefix = "-a recvno="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c adapter -a recvno -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = "26"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,4"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "090"
+	id = "cat_chg"
+	disc_field_name = "xmitsz"
+	name = "Transmit buffer SIZE"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 6
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 5
+	required = "n"
+	prefix = "-a xmitsz="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c adapter -a xmitsz -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = "4096"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,5"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "100"
+	id = "cat_chg"
+	disc_field_name = "recvsz"
+	name = "Receive buffer SIZE"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 8
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 5
+	required = "n"
+	prefix = "-a recvsz="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c adapter -a recvsz -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = "4096"
+	values_msg_file = ""
+	values_msg_set = 27
+	values_msg_id = 803
+	aix_values = "4096"
+	help_msg_id = "1,6"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "110"
+	id = "cat_chg"
+	disc_field_name = "first_sc"
+	name = "Starting valid subchannel"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 12
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a first_sc="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c adapter -a first_sc -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = "0"
+	values_msg_file = ""
+	values_msg_set = 27
+	values_msg_id = 0
+	aix_values = "0"
+	help_msg_id = "1,7"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "120"
+	id = "cat_chg"
+	disc_field_name = "num_sc"
+	name = "Number of valid subchannels"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 13
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 3
+	required = "n"
+	prefix = "-a num_sc="
+	cmd_to_list_mode = "r"
+	cmd_to_list = "lsattr -c adapter -a num_sc -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = "256"
+	values_msg_file = ""
+	values_msg_set = 27
+	values_msg_id = 0
+	aix_values = "256"
+	help_msg_id = "1,8"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+
+sm_cmd_opt:
+	id_seq_num = "130"
+	id = "cat_chg"
+	disc_field_name = ""
+	name = "CLAW mode"
+	name_msg_file = "/usr/lpp/blkmux/helpmux.cat"
+	name_msg_set = 2
+	name_msg_id = 4
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,14"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+
+sm_cmd_opt:
+	id_seq_num = "140"
+	id = "cat_chg"
+	disc_field_name = "host_name"
+	name = "\tHost NAME"
+	name_msg_file = "/usr/lpp/blkmux/helpmux.cat"
+	name_msg_set = 2
+	name_msg_id = 1
+	op_type = "l"
+	entry_type = "r"
+	entry_size = 0
+	required = "n"
+	prefix = "-a host_name="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,12"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+
+sm_cmd_opt:
+	id_seq_num = "150"
+	id = "cat_chg"
+	disc_field_name = "adapter_name"
+	name = "\tAdapter NAME"
+	name_msg_file = "/usr/lpp/blkmux/helpmux.cat"
+	name_msg_set = 2
+	name_msg_id = 2
+	op_type = "l"
+	entry_type = "r"
+	entry_size = 0
+	required = "n"
+	prefix = "-a adapter_name="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,13"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+
+sm_cmd_opt:
+	id_seq_num = "160"
+	id = "cat_chg"
+	disc_field_name = "clawset"
+	name = "\tsubchannel set"
+	name_msg_file = "/usr/lpp/blkmux/helpmux.cat"
+	name_msg_set = 2
+	name_msg_id = 3
+	op_type = "l"
+	entry_type = "r"
+	entry_size = 0
+	required = "n"
+	prefix = "-a clawset="
+	cmd_to_list_mode = ""
+	cmd_to_list = "\
+echo \"none\"\n\
+i=0\n\
+while [ "$i" -lt 256 ]\n\
+do\n\
+	echo \"$i\" \n\
+	i=`expr $i + 2`\n\
+done | awk '/none/ { print \"none\" } /^[0-9][0-9]*/{ printf(\"0x%x\", $1); print \"\"}'"
+	cmd_to_list_postfix = ""
+	multi_select = ","
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 27
+	values_msg_id = 803
+	aix_values = ""
+	help_msg_id = "1,9"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "170"
+	id = "cat_chg"
+	disc_field_name = "switch"
+	name = "Online/Offline SWITCH"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 15
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a switch="
+	cmd_to_list_mode = ""
+	cmd_to_list = "lsattr -c adapter -a switch -R"
+	cmd_to_list_postfix = "-s subclass -t type"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,10"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "180"
+	id = "cat_chg"
+	disc_field_name = "indicator"
+	name = "Online/Offline INDICATOR"
+	name_msg_file = "devices.cat"
+	name_msg_set = 79
+	name_msg_id = 16
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "n"
+	prefix = "-a indicator="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = "offline,online"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1,11"
+	help_msg_loc = "/usr/lpp/blkmux/helpmux.cat"
+ 
+sm_cmd_opt:
+	id_seq_num = "190"
+	id = "cat_chg"
+	disc_field_name = ""
+	name = "Apply change to DATABASE only"
+	name_msg_file = "smit.cat"
+	name_msg_set = 27
+	name_msg_id = 11
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 1
+	disp_values = "yes,no"
+	values_msg_file = ""
+	values_msg_set = 27
+	values_msg_id = 804
+	aix_values = "-P ,"
+	help_msg_id = "0420819"
+	help_msg_loc = ""

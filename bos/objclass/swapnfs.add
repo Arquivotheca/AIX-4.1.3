@@ -1,0 +1,63 @@
+# @(#)37  1.5  src/bos/objclass/swapnfs.add, nfs, bos411, 9428A410j 6/9/94 15:07:32
+#
+# COMPONENT_NAME: (BOSBUILD)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the NFS swapping device
+
+PdDv:
+	type		= "paging"
+	class		= "swap"
+	subclass	= "nfs"
+	prefix		= "swapnfs"
+	base		= 1
+	chgstatus	= 1
+	DvDr		= "swapnfsdd"
+	led		= 0x590
+	setno		= 141
+	msgno		= 1
+	catalog		= "devices.cat"
+	Define		= "/etc/methods/define -n"
+	Configure	= "/etc/methods/cfgswpnfs"
+	Change		= "/etc/methods/chggen"
+	Unconfigure	= "/etc/methods/ucfgdevice"
+	Undefine	= "/etc/methods/undefine"
+	Start		= ""
+	Stop		= ""
+	uniquetype	= "swap/nfs/paging"
+
+PdAt:
+	uniquetype	= "swap/nfs/paging"
+	attribute	= "hostname"
+	deflt		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 2
+
+PdAt:
+	uniquetype	= "swap/nfs/paging"
+	attribute	= "swapfilename"
+	deflt		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 3
+
+PdAt:
+	uniquetype	= "swap/nfs/paging"
+	attribute	= "swapkprocs"
+	deflt		= "4"
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4

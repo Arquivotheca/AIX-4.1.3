@@ -1,0 +1,81 @@
+# @(#)46	1.1  src/bldenv/man/chkbld.man, bldtools, bos412, GOLDA411a 10/18/91 11:07:58
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: chkbld man page
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+chkbld
+
+PURPOSE
+
+    Checks the output of libmake (libbld, v3bld) for errors and warnings.
+
+SYNTAX
+
+    chkbld [-s]  [File]
+
+DESCRIPTION
+
+    The chkbld command searches for error messages and warnings in a log
+    file created by libmake, libbld or v3bld.  When building with either
+    the -i or -k flags, which cause make to continue even if errors are
+    detected, it is important to check the log for errors.
+
+    Libbld creates a log file whose name consists of the hostname, in upper
+    case characters, followed by the last component of the active tty.  If
+    no File parameter is specified, chkbld uses this name as the default.
+
+    The patterns searched for are defined in a file, chkbld.errs.  Included
+    in this file are patterns that match the "Visiting <dirname>" and
+    "Leaving  <dirname>" lines that are printed to the log file when
+    subdirectories are entered or exited.  This is helpful in determining
+    in which directories errors have occurred.
+
+    When the -s flag is specified, matching "Visiting" and "Leaving" lines
+    with no reported errors between them are stripped from the output.
+    This may significantly shorten the output if a large parts of a source
+    tree are built.
+
+PARAMETERS
+
+    -s     Strip unnecessary "Visiting" and "Leaving" lines from the output
+
+    File   Name of the log file to check for errors and warnings.
+
+EXAMPLES
+
+    1.  To check for errors in the log file created by running the libbld
+        command from the same tty, use the command:
+
+            chkbld
+
+    2.  To check for errors in the log file, nohup.out, in shortened format,
+        use the command:
+
+            chkbld -s nohup.out
+
+IMPLEMENTATION SPECIFICS
+
+    This command is part of the AIX 3.2 Build Environment and is only
+    supported internally for development of the AIX 3.2 products.
+
+FILES
+
+    $BLDENV/usr/bin/chkbld.errs
+
+    $BLDENV/usr/bin/bldfilt
+
+    $BLDENV/usr/bin/chkbld  Command executable file
+
+RELATED INFORMATION
+
+    The libmake command, libbld command, v3bld command.

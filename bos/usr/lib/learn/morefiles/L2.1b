@@ -1,0 +1,31 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Now make a list of the files in this directory whose
+names begin with "t" in the file "foo".
+Type "ready" when you are done.
+#create X1
+#create foo
+#create this
+#create Ref
+that
+theother
+this
+#create that
+#create theother
+#user
+#cmp foo Ref
+#log
+#next
+2.1c 10

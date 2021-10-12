@@ -1,0 +1,288 @@
+* @(#)20        1.12.1.5  src/bos/objclass/POWER/mpqp.add, cfgmethods, bos411, 9434B411a 8/25/94 11:08:38
+*
+*   COMPONENT_NAME: mpqp.stanza
+*
+*   FUNCTIONS:
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+********** PdDv ***************************************************************
+
+PdDv:
+        uniquetype= "driver/portmaster/mpqp"
+        class= driver
+        subclass= portmaster
+        type= mpqp
+        DvDr= ""
+        Define= "/etc/methods/defmpqd"
+        Configure= "/etc/methods/cfgmpqd"
+        Change= ""
+        prefix= mpqd
+        devid= ""
+        led= 0x855
+        base= 0
+        has_vpd= 0
+        detectable= 0
+        chgstatus= 0
+        bus_ext= 0
+        Start= ""
+        Stop= ""
+        fru= 1
+        setno= 61
+        msgno= 5
+        catalog= "devices.cat"
+        Unconfigure= "/etc/methods/ucfgdevice"
+        Undefine= "/etc/methods/undefine"
+
+PdDv:
+	uniquetype= "port/mpqp/mpqport"
+	class= port
+	subclass= mpqp
+	type= mpqport
+	DvDr= "mpqpdd"
+	Define= "/etc/methods/define"
+	Configure = "/etc/methods/cfgmpqp"
+	Change= "/etc/methods/chggen"
+	prefix= mpq
+	devid= ""
+	led= 0x855
+	base= 0
+	has_vpd= 0
+	detectable = 0
+	chgstatus= 0
+	bus_ext= 0
+	Start= ""
+	Stop= ""
+	fru= 1
+	setno= 61
+	msgno= 1
+	catalog= "devices.cat"
+	Unconfigure= "/etc/methods/ucfgdevice"
+	Undefine= "/etc/methods/undefine"
+
+********** PdCn ***************************************************************
+
+PdCn:
+        connwhere= "0"
+        uniquetype= "driver/portmaster/mpqp"
+        connkey= mpqp
+
+PdCn:
+	connwhere= "1"
+	uniquetype= "driver/portmaster/mpqp"
+	connkey= mpqp
+
+PdCn:
+	connwhere= "2"
+	uniquetype= "driver/portmaster/mpqp"
+	connkey= mpqp
+
+PdCn:
+	connwhere= "3"
+	uniquetype= "driver/portmaster/mpqp"
+	connkey= mpqp
+
+********** PdAt ***************************************************************
+
+PdAt:
+	uniquetype= "driver/portmaster/mpqp"
+	attribute= ucode
+	values= "mpqpasw"
+	type= R
+	generic= D
+	nls_index= 8
+	width= ""
+	deflt="/usr/lib/asw/mpqpasw"
+	rep = s
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rdto
+	values= "6-128,1"
+	type= R
+	deflt= 92
+	generic= DU
+	nls_index= 2
+	width= ""
+	rep= nr
+
+
+************************************************
+** The following stanza is a "dummy" entry to
+** provide SNA support. (Defect #67901)
+************************************************
+
+PdAt:
+	uniquetype= "mpqport/mpqp/port"
+	attribute= rdto
+	values= "6-128,1"
+	type= R
+	deflt= 92
+	generic= ""
+	nls_index= 0
+	width= ""
+	rep= nr
+** End of SNA "dummy" entry
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= max_rx_bsiz
+	values= "256-4096,1"
+	type= R
+	deflt= 4096
+	generic= DU
+	nls_index= 9
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= tx_err_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 10
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rx_err_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 11
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= tx_err_percent
+	values= "0-100,1"
+	type= R
+	deflt= 0
+	generic= DU
+	nls_index= 12
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rx_err_percent
+	values= "0-100,1"
+	type= R
+	deflt= 0
+	generic= DU
+	nls_index= 13
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= tx_urun_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 14
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= tx_ctsdp_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 15
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= tx_ctsto_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 16
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= tx_fsto_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 17
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rx_orun_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 18
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rx_abort_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 19
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rx_frame_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 20
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rx_par_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 21
+	width= ""
+	rep= nr
+
+PdAt:
+	uniquetype= "port/mpqp/mpqport"
+	attribute= rx_dma_thresh
+	values= "1-10000,1"
+	type= R
+	deflt= 1
+	generic= DU
+	nls_index= 22
+	width= ""
+	rep= nr

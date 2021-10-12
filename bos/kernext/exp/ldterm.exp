@@ -1,0 +1,21 @@
+* @(#)69 1.2 src/bos/kernext/exp/ldterm.exp, sysxtty, bos411, 9428A410j 11/24/93 14:33:27
+#!/unix
+*
+* COMPONENT_NAME: SYSXTTY
+*
+* FUNCTIONS:
+*
+* ORIGINS: 83
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+* For the spty module
+termios_to_sgttyb
+sgttyb_to_termios
+termios_to_tchars
+tchars_to_termios
+termios_to_ltchars
+ltchars_to_termios
+ldtty_compatgetflags
+flags_to_termios

@@ -1,0 +1,59 @@
+# @(#)35        1.5  src/bos/usr/lib/pios/predef/ibm4037.pcl, cmdpios, bos411, 9428A410j 5/25/94 19:46:30
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1993
+# All Rights Reserved
+#
+:056:__FLG::
+:003:_Y:Dn:
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,785;no initialization,full initialization,send PCL language switch command only=0,1,2]:1
+:060:__SYS::
+:642:s1:S[105]I[1810521]En%IWP:1
+:643:s2:S[110]I[1810521]En%IWP:1
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLOQXZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLOQXZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJOQZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:058:__MIS::
+#
+# set the paper sizes used in set initial conditions updated with
+# value of _Q specified on the command line
+:452:m0::%?%GWu%{0}%=%t%G_Q%e%Gs0%;%c
+:452:m1::%?%GWu%{1}%=%t%G_Q%e%Gs1%;%c
+:452:m2::%?%GWu%{2}%=%t%G_Q%e%Gs2%;%c
+:452:m3::%?%GWu%{3}%=%t%G_Q%e%Gs3%;%c
+:452:m4::%?%GWu%{4}%=%t%G_Q%e%Gs4%;%c
+:330:mA::PCL Emulation
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,111;IBM 4037 LP printer]
+:295:mN::4037
+:416:mU::courier[10,3;0;0(%ImB)]courier-bold[10,3;3;0(%ImB)]courier-italic[10,3;0;1(%ImB)]courier[12,3;0;0(%ImB)]courier-bold[12,3;3;0(%ImB)]courier-italic[12,3;0;1(%ImB)]lineprinter[17,0;0;0(%ImB)]
+:516:mY::1
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,840;manual paper feed,tray 1 (upper),tray 2 (lower),manual envelope feed=0,1,2,4]
+:762:WP::R[letter,legal,B5,A4,exec=1,2,3,4,5]
+:763:WE::R[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]
+:051:__CAG::
+:144:ci::%Iez%?%G_j%{1}%=%t%I[eP,c1,eT,eO,ct,eF,eC]%;
+:152:cr::%IeR%o%I[eF,eP,eO,eS,ct,eD]%Iex
+:054:__ESC::
+:514:ex::\33[K\3\0\4\61%?%GmY%{2}%>%t\10%e%GmY%{1}%+%c%;
+:263:ez::\33[K\17\0\4\61\2\240\0\0\0\0\0%G_z%GWu%{8}%*%+%{128}%+%c%Im0%Im1%Im2%Im3%Im4
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

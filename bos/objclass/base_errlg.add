@@ -1,0 +1,143 @@
+#   @(#)66        1.3  src/bos/objclass/base_errlg.add, cmderrlg, bos411, 9431A411a 8/1/94 09:42:02
+#
+#   COMPONENT_NAME: CMDERRLG
+#
+#   FUNCTIONS: stanza file for base errlg SMIT odm population
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+sm_cmd_hdr:
+        id = "errdemon"
+        option_id = "errdemon"
+        has_name_select = ""
+        name = "Change / Show Characteristics of the Error Log"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 27
+        cmd_to_exec = "/usr/lib/errdemon"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "n"
+        cmd_to_discover = "#Get current max size of errlog file, excluding header\n\
+COUNT=`expr 0`\n\
+ LOGFILE= \n\
+ BUFFER= \n\
+ LOGSIZE= \n\
+LANG=C /usr/lib/errdemon -l | \n\
+while read A1 \n\
+        do \n\
+        COUNT=`expr $COUNT + 1` \n\
+        if [ $COUNT -eq 3 ] \n\
+        then \n\
+                LOGFILE=`echo $A1 | awk '{print $3}'` \n\
+        fi \n\
+        if [ $COUNT -eq 4 ] \n\
+        then \n\
+                LOGSIZE=`echo $A1 | awk '{print $3}'` \n\
+        fi \n\
+        if [ $COUNT -eq 5 ] \n\
+        then \n\
+                BUFFER=`echo $A1 | awk '{print $4}'` \n\
+        fi \n\
+done \n\
+print '#logfilepath:num_of_bytes:buffer\\n'$LOGFILE:$LOGSIZE:$BUFFER\n\
+"
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "1800580"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "020"
+        id = "errdemon"
+        disc_field_name = "num_of_bytes"
+        name = "Maximum LOGSIZE"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 28
+        op_type = ""
+        entry_type = "#"
+        entry_size = 0
+        required = "+"
+        prefix = "-s"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315032"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "030"
+        id = "errdemon"
+        disc_field_name = "buffer"
+        name = "Memory BUFFER SIZE"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 34
+        op_type = ""
+        entry_type = "#"
+        entry_size = 0
+        required = "n"
+        prefix = "-B"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0316001"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "010"
+        id = "errdemon"
+        disc_field_name = "logfilepath"
+        name = "LOGFILE"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 29
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-i"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0316000"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""

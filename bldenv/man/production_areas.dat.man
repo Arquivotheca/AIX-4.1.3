@@ -1,0 +1,36 @@
+#
+# @(#)34        1.3  src/bldenv/man/production_areas.dat.man, bldtools, bos412, GOLDA411a 9/16/92 13:51:22
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: production_areas.dat man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $BLDENV/usr/bin/production_areas.dat
+        Default file used by prebuild to determine which areas are
+        allowed to do production builds.
+
+        Format of file is area names enclosed in single quotes (').
+        Areas are separated by a comma (,).  All areas must be on one
+        line.  Blank lines and those beginning with a # are ignored.
+        All Alphabetic characters must be upper case, when prebuild issues
+        the command to check the user it turns the area name to uppercase.
+
+        The area names are those listed in a 'Report -view Users' command.
+
+        To allow just area AUS/D05 the file entry would be 'AUS/D05'.  To
+        allow areas AUS/D05 or AUS/D05S the file entry would be
+        'AUS/D05','AUS/D05S'.
+
+        Format:
+          '<area1>','<area2>',',<area3>',...,'<arean>'
+

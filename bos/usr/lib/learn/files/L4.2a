@@ -1,0 +1,32 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+If a file name is given with the "ls" command,
+it tells you whether that file exists.
+The file name is listed if the file exists;
+if it doesn't, a complaint is typed.
+For example,
+  ls george
+will type "george" if the file exists,
+and "george not found" if it is missing.
+
+Is there a file named "alexander" in the
+current directory?  Find out, then type "yes" or "no".
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+4.2b 10

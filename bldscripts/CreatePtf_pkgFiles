@@ -1,0 +1,49 @@
+#!/bin/ksh
+# @(#)38	1.1  src/bldscripts/CreatePtf_pkgFiles, ade_build, bos41J, 9509A_all 2/16/95 12:16:48
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+trap : 1
+export PAGERID=packager
+export PAGERSEVERITY=3
+alias  dataman=`whence dataman`
+alias  DBenv="`whence bldenv` `whence DBenv` "
+alias  RETAINenv="`whence bldenv` `whence RETAINenv` "
+alias  execman="`whence bldenv` `whence execman` "
+
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset -r cmd=$(basename $0)
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+export     TOP=${treetop}/selfix
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+
+if dataman -q leveldata[$BLDCYCLE][type]=area
+then
+    RETAINenv DBenv prepkg -b $BLDCYCLE -d /tmp -f
+else
+    RETAINenv DBenv prepkg -b $BLDCYCLE -d /tmp $(dataman -q BPDvalue[prepkg_DEFAULT_PTF_FLAGS] || :)
+fi
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

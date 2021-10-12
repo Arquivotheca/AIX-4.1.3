@@ -1,0 +1,167 @@
+* @(#)47	1.1  src/bos/objclass/POWER/disk.mca.badisk.add, cfgmethods, bos411, 9428A410j 3/25/93 16:00:42
+*********************************************************************
+* 			PREDEFINED DATA
+*		     FOR BUS ATTACHED DISK
+*
+* COMPONENT_NAME : badadp.stz
+*
+* ORIGINS : 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989
+* Unpublished Work
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* RESTRICTED RIGHTS LEGEND
+* US Government Users Restricted Rights -  Use, Duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+
+PdDv:
+	type = badisk
+	class = disk
+	subclass = mca
+       	prefix = hdisk
+	devid = 0x9fdf
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x949
+	setno = 31
+        msgno = 0
+	catalog = "devices.cat"
+	DvDr = badisk
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfgbadisk"
+	Change = "/etc/methods/chgdisk"
+	Unconfigure = "/etc/methods/ucfgdevice"
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+        uniquetype = disk/mca/badisk
+
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "bus_io_addr"
+        deflt = 0x3510
+        values = "0x3510,0x3518"
+        width = 0x8
+        type = O      
+        generic = D 
+	rep = nl
+	nls_index = 2
+             
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "bus_intr_lvl"
+        deflt = 14  
+        values = 14
+	width = ""
+        type = I       
+	generic = D
+	rep = nl
+	nls_index = 3
+               
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "intr_priority"
+        deflt = 3
+        values = 3
+	width = ""
+        type = P
+	generic = D
+	rep = nl
+	nls_index = 4
+                
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "dma_lvl"
+        deflt = 3
+        values = "0-14,1"
+	width = ""
+        type = A
+        generic = D 
+	rep = nr
+	nls_index = 5
+                
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "bb"
+        deflt = "no"
+        values = "yes,no"
+	width = ""
+        type = R
+	generic = DU
+	rep = sl
+	nls_index = 6
+                
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "max_coalesce"
+        deflt = 0x8000
+        values = 0x8000 
+	width = ""
+        type = R
+        generic = ""
+	rep = n 
+	nls_index = 0
+                
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "badisk_intr"
+        deflt = ""
+        values = "bus_intr_lvl"
+	width = ""
+	type = S
+        generic = ""
+	rep = sl
+	nls_index = 0
+                
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "pv"
+        deflt = "no"
+        values = "yes,no,clear"
+	width = ""
+	type = R
+        generic = "U"
+	rep = sl
+	nls_index = 0
+                
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "pvid"
+        deflt = "none"
+        values = ""
+	width = ""
+	type = R
+        generic = "D"
+	rep = s
+	nls_index = 7
+
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "size"
+        deflt = "120"
+        values = "0-0xffffffff,0x1"
+	width = ""
+	type = R
+        generic = "D"
+	rep = nr
+	nls_index = 8
+
+PdAt:
+        uniquetype = disk/mca/badisk
+        attribute = "desc"
+        deflt = "1"
+        values = "1,9,10"
+	width = ""
+	type = T
+        generic = ""
+	rep = nl
+	nls_index = 0
+

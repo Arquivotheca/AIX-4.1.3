@@ -1,0 +1,29 @@
+# @(#)29	1.5  src/bldenv/man/changeview.man, bldtools, bos412, GOLDA411a 4/15/94 12:27:14
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: changeview file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/PTF/$BLDCYCLE/<release-name>/changeview
+        List of CMVC query lines for each defect being built for
+        the release specified by <release-name>.  The CMVC query is
+        a "Report -view changeview -raw" with defect number and release
+        names specified in a "-where" clause.  Created by prebuild
+        (for production) or ptfsetup (for development).  See 'The CMVC
+        Commands Reference Guide' for a complete description of the
+        "Report" command and "changeview" view.
+
+	Format:
+          <release>|<defect>|<bid>|<sid>|<file>|<type>|<ref>|<abstract>|<prefix>
+          <release>|<defect>|<bid>|<sid>|<file>|<type>|<ref>|<abstract>|<prefix>
+                                           .
+                                           .

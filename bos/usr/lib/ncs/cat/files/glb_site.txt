@@ -1,0 +1,132 @@
+
+
+
+GLB_SITE.TXT(5)    Headers, Tables, and Macros    GLB_SITE.TXT(5)
+
+
+
+NNNNAAAAMMMMEEEE
+     ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt - file listing possible Global Location  Broker
+     sites
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ////eeeettttcccc////nnnnccccssss////ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt  (Apollo  workstations  at  SR10.2  or
+     later)
+     ////eeeettttcccc////nnnnccccssss////ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt (other UNIX systems)
+     nnnnccccssss$$$$eeeexxxxeeee::::ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt (VMS systems)
+     \\\\nnnnccccssss\\\\ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt (MS-DOS systems)
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt file lists the network addresses  of  hosts
+     where a Global Location Broker (GLB) daemon may be running.
+
+     There are two versions of the GLB daemon:  ggggllllbbbbdddd and  nnnnrrrrggggllllbbbbdddd.
+     We  provide the replicatable version, ggggllllbbbbdddd, only for Apollo,
+     SunOS, and ULTRIX systems.  For other  systems,  we  provide
+     the non-replicatable version, nnnnrrrrggggllllbbbbdddd.
+
+     Ordinarily, programs contact a GLB by  broadcasting  on  the
+     local  network.  However, some systems do not support broad-
+     casting.  Also,  in  certain  internet  configurations,  not
+     every  network  can  have  a GLB.  (This typically occurs in
+     internets that use nnnnrrrrggggllllbbbbdddd, but  it  can  also  occur  in  an
+     internet  that  uses ggggllllbbbbdddd if not all networks include a host
+     that can run a ggggllllbbbbdddd.)  For hosts that cannot  locate  a  GLB
+     via  broadcast,  the  ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt  file  provides a list of
+     addresses where the host can try to directly contact a GLB.
+
+     Each line in ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt contains a network address where a
+     GLB may be running.  Hosts that have a ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt file try
+     these addresses in order.  Each address  has  the  following
+     form:   _f_a_m_i_l_y::::_h_o_s_t  The  _f_a_m_i_l_y  is  the textual name of an
+     address family.  Possible values include iiiipppp and ddddddddssss.
+
+     The _h_o_s_t is a host name.  A leading # can be used  to  indi-
+     cate that the host name is in the standard numeric form (for
+     example, ####111199992222....9999....8888....7777 or ####555511115555cccc....111111111111gggg).
+
+     Blank lines and lines beginning with #### are ignored.
+
+     If a host has a ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt file but does not find a GLB at
+     any of the addresses listed in the file, the host then tries
+     to locate one via broadcast.
+
+     See _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e  for  information  about  Location
+     Broker configuration.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEE
+     The following are sample ggggllllbbbb____ssssiiiitttteeee....ttttxxxxtttt files for the  IP  and
+     DDS  address  families:   _iiii_pppp_::::_pppp_iiii_gggg_llll_eeee_tttt  _iiii_pppp_::::_####_1111_9999_2222_...._9999_...._8888_...._7777 _dddd_dddd_ssss_::::_////_////_oooo_wwww_llll
+
+
+
+NCS Configuration         Last change:                          1
+
+
+
+
+
+
+GLB_SITE.TXT(5)    Headers, Tables, and Macros    GLB_SITE.TXT(5)
+
+
+
+     _dddd_dddd_ssss_::::_####_1111_3333_5555_ffff_...._1111_3333_2222_aaaa
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NCS Configuration         Last change:                          2
+
+
+

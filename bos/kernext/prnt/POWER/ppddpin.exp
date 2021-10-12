@@ -1,0 +1,36 @@
+#!/etc/drivers/ppddpin
+* @(#)45        1.5  src/bos/kernext/prnt/POWER/ppddpin.exp, sysxprnt, bos411, 9428A410j 5/3/94 17:47:01
+*
+* COMPONENT_NAME: (SYSXPRNT)  Parallel Port Device Driver
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+ppddpin
+ppglobal_lock
+ppheader
+pppulst
+ppreadchar
+ppreadctrl
+ppreadstat
+ppready
+ppsendchar
+pptail
+ppwritechar
+ppwritedata
+ppwritestat
+ppwritectrl
+pp_timer_pop
+ppdelay
+ppstart_tmr
+pp_proc_timeout

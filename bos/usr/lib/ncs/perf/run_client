@@ -1,0 +1,66 @@
+#!/bin/sh
+
+#
+# $Log: run_client,v $
+# Revision 1.1.1.1  1994/08/16  21:42:37  frank
+# Source for GRI 1.1.1f
+#
+# Revision 1.1  1991/04/23  21:59:04  robin
+# Initial revision
+#
+# $EndLog$
+#
+# Unix Bourne shell script for running perf client tests
+#
+
+CLIENT=client
+DEBUG=
+PC=false
+
+for ARG
+do
+    case $ARG in
+    -d)
+        DEBUG="-d"
+        shift 
+        ;;
+    -dx)
+        DEBUG="-dx"
+        shift 
+        ;;
+    -pc)
+        PC=true
+        shift 
+        ;;
+    *) 
+        break
+        ;;
+    esac
+done
+
+echo "Testing against $1:$2..."
+
+${CLIENT} ${DEBUG} 0 $1:$2 3 400 y n                # Null call  
+${CLIENT} -a ${DEBUG} 0 $1:$2 3 400 y n             # Null call (use alarms)
+${CLIENT} ${DEBUG} 0 $1:$2 3 400 y y                # Null idempotent call
+${CLIENT} -a ${DEBUG} 0 $1:$2 3 400 y y             # Null idempotent call (use alarms)
+${CLIENT} ${DEBUG} 1 $1:$2 3 50 y n 3000            # Ins 
+${CLIENT} ${DEBUG} 1 $1:$2 3 50 y y 3000            # Ins, idempotent
+${CLIENT} ${DEBUG} 2 $1:$2 3 50 y n 3000            # Outs
+${CLIENT} ${DEBUG} 2 $1:$2 3 50 y y 3000            # Outs idempotent
+if [ $PC != "true" ]
+then
+    ${CLIENT} ${DEBUG} 1 $1:$2 3 3 y n 100000       # Ins (100K)
+    ${CLIENT} ${DEBUG} 1 $1:$2 3 3 y y 100000       # Ins, idempotent (100K)
+    ${CLIENT} ${DEBUG} 2 $1:$2 3 3 y n 100000       # Outs (100K)
+    ${CLIENT} ${DEBUG} 2 $1:$2 3 3 y y 100000       # Outs idempotent (100K)
+fi
+${CLIENT} ${DEBUG} 3 $1                             # Broadcast
+${CLIENT} ${DEBUG} 4 $1:$2                          # Maybe
+${CLIENT} ${DEBUG} 5 $1                             # Broadcast/maybe
+${CLIENT} ${DEBUG} 6 $1:$2 3 100 y n                # Floating point
+${CLIENT} ${DEBUG} 7 $1:$2                          # Unregistered interface
+${CLIENT} ${DEBUG} 8 $1:$2 n                        # Forwarding
+${CLIENT} ${DEBUG} 9 $1:$2                          # Exception
+${CLIENT} ${DEBUG} 10 $1:$2 2 2 y n 60              # Slow call
+${CLIENT} ${DEBUG} 10 $1:$2 2 2 y y 60              # Slow idempotent call

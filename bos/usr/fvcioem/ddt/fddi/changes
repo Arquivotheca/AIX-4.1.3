@@ -1,0 +1,103 @@
+#  @(#)06   1.1  src/bos/usr/fvcioem/ddt/fddi/changes, fvcioem, bos411, 9428A410j 4/26/94 13:54:41
+#
+#  COMPONENT_NAME: (sysxcie_tc) COMIO Emulator Test Tools
+#
+#  DESCRIPTION:
+#     FDDI DDT Test Tool Documentation
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1988, 1994
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+The following is a summary of the changes I've made to the DDT.
+I've tried to list only non-FDDI specific changes.
+
+Some of these changes are bug fixes and may be of interest to
+other developers.
+
+Also, since there is talk of making another common base -
+different from the base I used - some of these changes may want to
+make it into that base.
+
+	1. added a SIGALRM catcher to handle an alarm when a BLOCKING read
+	   times out. This will interrupt the e_sleep in the driver. This
+	   is the way an application would do reads if it did not use the
+	   poll() routines.
+
+	2. Determine if stdin is a 'person' or a file. If it is a file
+	   then echo back inputted characters so stdout makes more sense.
+	
+	3. Remove checks to see if device is open or not so that error
+	   paths can be checked.
+
+	4. Allow for multiple opens. A stack of open descriptors is
+	   pushed on a successful open and poped on a close.
+	
+	5. Changed write test to alternately use fastwrite and to
+	   alternately pass in NULL for the write extension.
+	
+	6. Changed read test to not use polling if the device was openned
+	   in blocking mode. If not then you only do a read when there is
+	   something there to read and the blocking-nonblocking code in
+	   the driver never gets executed
+
+	7. added defaults: use_tx_ext boolean, frames_req for frames to
+	   chain together on a fastwrite, ack_tx_done boolean.
+	
+	8. code to check whether kid actually called the fastwrite
+	   entry point or just chained the last request waiting for
+	   frames_req.
+
+	9. Changed CLient to use specific patterns of sizes.
+	
+	10. Don't fill the data portion of the packet with a pattern - just
+	   transmit garbage for the sake of speed. (If the hardware
+	   garbles individual bytes - which we have never seen and
+	   according to the sniffer salesman he has never seen on anyone's
+	   hardware - then we will eventually find out because the header
+	   will be garbled.
+	
+	11. Have CLient use write_ids in the extension.
+
+	12. Routines to dump the length and sequence number of every
+	    packet transmitted by the client and every packed received
+	    by the server. (If the driver messes up these dumps are
+	    helpful in finding out where and how it messed up.)
+	
+	13. Determine bytes/sec throughput of all client/server tests.
+
+	14. Changed the way the ARP protocol defined packet and header
+	    sizes so that changes in the datalink header can be made
+	    by changing only one #define (instead of a handfull).
+
+	15. Changed server to check for an exact sequence number in the
+	    packet. The previous check would allow the client's device
+	    driver to drop packets.
+
+	16. Don't verify the data portion of a packet only the length
+	    and sequence numbers in the packets ARP header. (saves time)
+
+	17. Made same changes to the client/server read/write primitives
+	    that were made to the read and write tests.
+	
+	18. Changed random number generator agorithm to generate more
+	    'random' numbers.
+
+	19. Removed all sanity checks against illegal size packet transfers
+	    (except for those sizes that would cause the DDT to core dump).
+	
+	20. Added capability to specify the netid used in client/server
+	    test. It was hard coded so that you could not run multiple
+	    client/servers on the same device.
+
+	21. Changed get status test to NOT poll first. There was no way
+	    to get a NULL block from the driver the old way. Is FDDI the
+	    only driver that gives NULL status blocks?
+
+	22. Changed decode_error to use perror().

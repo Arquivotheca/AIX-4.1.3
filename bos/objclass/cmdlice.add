@@ -1,0 +1,101 @@
+# @(#)71        1.8  src/bos/objclass/cmdlice.add, cmdlicense, bos411, 9428A410j 6/6/94 18:20:50
+#*****************************************************************************\
+# COMPONENT_NAME: CMDLICENSE (SMIT DIALOGS)
+#
+# FUNCTIONS: none
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#*****************************************************************************/
+
+sm_menu_opt:
+        id                  = "system"
+        id_seq_num          = "070"
+        next_id             = "chlicense"
+        text                = "Change / Show Number of Licensed Users"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 59
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "8000000"
+        help_msg_loc        = ""
+
+sm_cmd_hdr:
+        id                       ="chlicense"
+        option_id                ="chlicense"
+        has_name_select          ="n"
+        name                     ="Change / Show Number of Licensed Users"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =29
+        name_msg_id              =1
+        cmd_to_exec              ="chlicense"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    =""
+        cmd_to_discover          ="lslicense -c "
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="8000000"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="chlicense"
+        id_seq_num               ="01"
+        disc_field_name          ="fixed"
+        name                     ="Maximum number of FIXED licenses"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =29
+        name_msg_id              =2
+        op_type                  ="n"
+        entry_type               ="#"
+        entry_size               =0
+        required                 ="n"
+        prefix                   ="-u"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values 		 =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="8000001"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="chlicense"
+        id_seq_num               ="05"
+        disc_field_name          ="floating"
+        name                     ="FLOATING licensing"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =29
+        name_msg_id              =3
+        op_type                  ="r"
+        entry_type               ="n"
+        entry_size               =0
+        required                 ="n"
+        prefix                   ="-f"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values		 ="on,off"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =29
+        values_msg_id            =4
+        aix_values               ="on,off"
+        help_msg_id              ="8000002"
+        help_msg_loc             =""

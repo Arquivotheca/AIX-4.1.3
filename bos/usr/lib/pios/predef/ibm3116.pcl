@@ -1,0 +1,79 @@
+# @(#)44        1.2  src/bos/usr/lib/pios/predef/ibm3116.pcl, cmdpios, bos41J, 9517A_all 4/20/95 15:37:41
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1995
+# (C) COPYRIGHT Lexmark International, Inc. 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:970:_e::0
+:712:_q:S[B045]I[1810554]EnR[=300,600,1200]:600
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,785;no initialization,full initialization,send PCL language switch command only=0,1,2]:1
+:060:__SYS::
+:642:s1:S[105]I[1810521]En%IWP:1
+:643:s2:S[110]I[1810521]En%IWP:1
+:824:s6:S[113]I[1810521]En%IWP:1
+:747:sD:S[103]I[1810566]%IWY:+
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[begijqpstuvxzIJLOQXYZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[begijqpstuvxzIJLOQXYZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[ejqpsuvxzIJOQYZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[ejquJZY] ; }
+:058:__MIS::
+:330:mA::PCL Emulation
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,181;IBM 3116 Page Printer]
+:295:mN::3116
+:416:mU::%IF1%IF2%IF3%IF4%IF5%IF6%IF7lineprinter[17,0;0;0(%ImB)]
+:516:mY::1
+:308:mp::%?%GsD%t%%!,\x04%%!,,,x T %;
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,740;manual paper feed,tray 1 (upper),tray 2 (lower),envelope feeder,manual envelope feed,100-sheet auxiliary feeder=0,1,2,3,4,6]
+:762:WP::R[letter,legal,B5,A4,A5,exec=1,2,3,4,6,5]
+:763:WE::R[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]
+:461:wJ::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2400}%e%gq%{2}%=%t%{2400}%e%gq%{3}%=%t%{1999}%e%gq%{4}%=%t%{2338}%e%gq%{5}%=%t%{2025}%e%{1598}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:462:wK::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3000}%e%gq%{2}%=%t%{3900}%e%gq%{3}%=%t%{2735}%e%gq%{4}%=%t%{3207}%e%gq%{5}%=%t%{2850}%e%{2180}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:463:wM::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3180}%e%gq%{2}%=%t%{4080}%e%gq%{3}%=%t%{2915}%e%gq%{4}%=%t%{3389}%e%gq%{5}%=%t%{3030}%e%{2360}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:464:wR::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2250}%e%gq%{2}%=%t%{2250}%e%gq%{3}%=%t%{1849}%e%gq%{4}%=%t%{2180}%e%gq%{5}%=%t%{1875}%e%{1448}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:458:wQ::%?%GWu%{0}%=%t%Gs0%e%GWu%{1}%=%t%Gs1%e%GWu%{2}%=%t%Gs2%e%GWu%{3}%=%t%Gs3%e%GWu%{4}%=%t%Gs4%e%Gs6%;%d
+:051:__CAG::
+:144:ci::%I[pU,pR,pA,pL]%?%G_j%{1}%=%t%I[eP,c1,eT,eS,eO,ct,eF,eu,es,eC]%;
+:152:cr::%IeR%o%I[eF,eP,eO,eS,ct,eD]%IpU
+:054:__ESC::
+#
+# Generate the page size escape sequence based on _Q.
+:482:es::\33&l%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t2%e%gq%{2}%=%t3%e%gq%{3}%=%t12%e%gq%{4}%=%t26%e%gq%{5}%=%t1%e%gq%{6}%=%t13%e2%;%e%GWu%{5}%>%t%?%gq%{1}%=%t602%e%gq%{2}%=%t603%e%gq%{3}%=%t612%e%gq%{4}%=%t626%e%gq%{5}%=%t601%e%gq%{6}%=%t613%e602%;%e%?%gq%{1}%=%t80%e%gq%{2}%=%t89%e%gq%{3}%=%t81%e%gq%{4}%=%t90%e%gq%{5}%=%t91%e%gq%{6}%=%t99%e600%;%;A
+:764:eu::\33&l%?%GWu%{0}%=%t2%e%GWu%{2}%=%t4%e%GWu%{3}%=%t6%e%GWu%{4}%=%t3%e%GWu%{6}%=%t6%e1%;H
+:608:pR::@PJL SET RESOLUTION = %G_q%d\12
+#
+# Generate font selection list
+#
+:416:F1::courier[8,3;0;0(%ImB)]courier[10,3;0;0(%ImB)]courier[12,3;0;0(%ImB)]courier[15,3;0;0(%ImB)]courier[17,3;0;0(%ImB)]courier[20,3;0;0(%ImB)]
+:416:F2::courier-bold[8,3;3;0(%ImB)]courier-bold[10,3;3;0(%ImB)]courier-bold[12,3;3;0(%ImB)]courier-bold[15,3;3;0(%ImB)]courier-bold[17,3;3;0(%ImB)]courier-bold[20,3;3;0(%ImB)]
+:416:F3::courier-italic[10,3;0;1(%ImB)]courier-italic[12,3;0;1(%ImB)]courier-italic[15,3;0;1(%ImB)]
+:416:F4::courier-bolditalic[10,3;3;1(%ImB)]courier-bolditalic[12,3;3;1(%ImB)]courier-bolditalic[15,3;3;1(%ImB)]
+:416:F5::gothic[10,6;0;0(%ImB)]gothic[12,6;0;0(%ImB)]gothic[15,6;0;0(%ImB)]
+:416:F6::gothic-italic[10,6;0;1(%ImB)]gothic-italic[12,6;0;1(%ImB)]gothic-italic[15,6;0;1(%ImB)]
+:416:F7::gothic-bold[10,6;3;0(%ImB)]gothic-bold[12,6;3;0(%ImB)]gothic-bold[15,6;3;0(%ImB)]
+#
+# support for Stat Alert via -e flag     
+:970:pA::%?%G_e%{1}%=%t%IA1%e%G_e%{2}%=%t%IA2%e%G_e%{3}%=%t%IA3%;
+:970:A1::@PJL\040LENGINEPRT\040C1="0x3D"\040C2="0x01"\040C3="0x00"\12
+:970:A2::@PJL\040LENGINEPRT\040C1="0x3D"\040C2="0x02"\040C3="0x00"\12
+:970:A3::@PJL\040LENGINEPRT\040C1="0x3D"\040C2="0x03"\040C3="0x00"\12
+#
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

@@ -1,0 +1,108 @@
+#!/bin/ksh
+#
+# @(#)34        1.1  src/bldscripts/whatHasBuilt, ade_build, bos412, GOLDA411a 5/5/94 16:06:03
+#
+#   COMPONENT_NAME: 
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#------------------------------------------------------------------------------
+#
+# Description:
+#
+#    Displays the status of STAGES built for a build cycle
+#
+# Inputs: build cycle
+#
+# Outputs: report to standard out identifying status of
+#          STAGES for build cycle
+#
+#------------------------------------------------------------------------------
+#
+# Establish Database Connectivity
+#
+. `/usr/bin/dirname $0`/bldDBfunctions
+SAVEPATH=$PATH
+. `/usr/bin/dirname $0`/common.sh
+PATH=$SAVEPATH
+initDB
+
+USAGE="USAGE: "$(basename $0)" <build_cycle>"
+
+if [[ $# -ne 1 ]] && [[ $# -ne 0 ]] 
+ then
+        print $USAGE
+        exit 99
+fi
+
+if [[ $# = 1 ]]
+then
+	BUILD=$1
+else
+	BUILD=$BLDCYCLE
+fi 
+
+print "STATUS of Build " $BUILD "\n"
+
+(showStage -f "STAGE"  	| 
+	tail +2 	|
+	while read STAGE
+	do
+		print -n $STAGE
+		showBuildStage -k $BUILD"/"$STAGE -f "COMPLETE" 2>/dev/null |
+			tail +2 |
+			read COMPLETE
+			case $COMPLETE in
+                	Y)      print " is Complete"
+                        ;;
+                	W)      print " is Working"
+                        ;;
+	                B)      print " is Broken"
+	                ;;
+			*)	print " not started"
+			;;
+        esac
+
+	done) | sort > /tmp/whb$$
+
+
+for i in 'not started' 'Broken' 'Working' 'Complete'
+do
+	print "\n=========== $i =============\n"
+	grep $i /tmp/whb$$ 2>/dev/null > /tmp/whb1$$
+	case $i in
+		Working)	awk '{print $1}' /tmp/whb1$$ |
+				while read STAGE
+				do	
+	  				print -n "$STAGE is being built on "
+					print $(maintainBuildStage -r -k "$BUILD"/"$STAGE" -f BUILD_MACHINE)
+				done 
+				;;
+
+		Broken)	awk '{print $1}' /tmp/whb1$$ |
+				while read STAGE
+				do	
+					print -n "$STAGE is broken"
+					print -n " ; Blocked by: "
+					maintainBuildStage -r -k "$BUILD"/"$STAGE" -f BLOCKING_DEFECT
+				done 
+				;;
+				
+		*)		cat /tmp/whb1$$
+				;;
+	esac
+done
+
+rm /tmp/whb$$
+rm /tmp/whb1$$

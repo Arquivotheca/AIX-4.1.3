@@ -1,0 +1,28 @@
+#!/unix
+* @(#)07	1.1  src/bos/kernext/aixif/slip.exp, sysxaixif, bos411, 9428A410j 2/17/94 08:59:42
+*
+* COMPONENT_NAME: (SYSXAIXF) Network Interface
+* 
+* FUNCTIONS: 
+*
+* ORIGINS: 27 
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1994 
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+* slip exported symbols   
+*
+config_slip
+sl_close
+sl_open
+sl_rput
+sl_rsrv
+sl_wput
+sl_wsrv

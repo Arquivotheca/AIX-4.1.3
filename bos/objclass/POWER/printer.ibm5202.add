@@ -1,0 +1,229 @@
+* @(#)07	1.6  src/bos/objclass/POWER/printer.ibm5202.add, cfgmethods, bos411, 9428A410j 5/3/94 20:35:08
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+        type = ibm5202
+        class = printer
+        subclass = parallel
+        prefix = lp
+        devid = ""
+        base = 0
+        has_vpd = 0
+        detectable = 0
+        chgstatus = 1
+        bus_ext = 0
+        led = 0x728
+        setno = 71
+        msgno = 3
+        fru = 1
+        catalog = devices.cat
+        DvDr = ""
+        Define = /usr/lib/methods/define
+        Configure = /usr/lib/methods/cfgpp
+        Change = /usr/lib/methods/chggen
+        Unconfigure = "/usr/lib/methods/ucfgpp"
+        Undefine = /usr/lib/methods/undefine
+        Start = ""
+        Stop = ""
+        uniquetype = printer/parallel/ibm5202
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = ptop
+        deflt = 60
+        values = "1-1000,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 17
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = line
+        deflt = 66
+        values = "0-2147483647,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 18
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = col
+        deflt = 80
+        values = "1-2147483647,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 19
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = ind
+        deflt = 0
+        values = "0-2147483646,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 20
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = plot
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 21
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = backspace
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 22
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = cr
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 23
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = form
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 24
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = lf
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 25
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = addcr
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 26
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = case
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 27
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = tabs
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 28
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = wrap
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 29
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = mode
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 30
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = interface
+        deflt = standard
+        values = standard
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 31
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = autoconfig
+        deflt = available
+        values = "available,defined"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 32
+
+PdAt:
+        uniquetype = printer/parallel/ibm5202
+        attribute = busy_delay
+        deflt = 0
+        values = "0-100000,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 33
+

@@ -1,0 +1,74 @@
+# @(#)26        1.2  src/bos/usr/lib/pios/predef/hplj-4v.gl, cmdpios, bos41J, 9519A_all 5/7/95 22:07:21
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:791:_J:S[C950]I[1810533]%IWY:+
+:683:_Q:S[E020]I[1810505]En%IW6:%IwQ
+:695:_Y:S[E030]I[1810560]DnEnR[pioattr1.cat,1,759;simplex (single-sided),duplex-- long-edge binding,duplex-- short edge binding=0,1,2]:0
+:616:_j:S[C940]I[1810536]%IWY:+
+:712:_q:S[B045]I[1810554]EnR[=300,600]:300
+:638:_u:S[E015]I[1810516]En%IW9:1
+:618:_z:S[E005]I[1810520]EnR[pioattr1.cat,1,620;portrait,landscape=!,+]:+
+:060:__SYS::
+:823:mZ:S[101]I[1810563]%IWY:!
+:641:s0:S[115]I[1810521]En%IWP:1
+:833:s1:S[105]I[1810521]En%IWP:1
+:834:s2:S[110]I[1810521]En%IWP:1
+:837:s3:S[120]I[1810522]En%IWE:3
+:645:s4:S[125]I[1810522]En%IWE:3
+:836:s5:S[117]I[1810522]En%IWE:3
+#:824:s6:S[113]I[1810521]En%IWP:1
+:835:s7:S[112]I[1810521]En%IWP:1
+:747:sD:S[103]I[1810566]%IWY:+
+:708:sH:S[150]I[1810525]:
+:709:sT:S[155]I[1810525]:
+:822:sl:S[187]I[1810577]E#G[0..]:60
+:655:uH:S[140]I[1810527]En%IW9:1
+:656:uT:S[145]I[1810527]En%IW9:1
+:500:__HTP::
+:321:sh::{ ddi=$(/usr/bin/find %Idd/%Imt.pcl.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 819 -a PCL "Error\72 Cannot print separator page because no %%s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@$ddi -!%Idf/piofpcl -J+ -L! -z! %IsH -u%IuH ; }
+:324:st::{ ddi=$(/usr/bin/find %Idd/%Imt.pcl.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 819 -a PCL "Error\72 Cannot print separator page because no %%s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioburst %F[H] %Idb/T.ascii | %Ide/pioformat -@$ddi -!%Idf/piofpcl -j1 -z! %?%Gsl%{14}%>%t-t%Gsl%{14}%-%d%; %IsT -u%IuT ; }
+:057:__IDS::
+:276:ig::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jquzJQZ]
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[jquJZ] ; }
+:058:__MIS::
+:330:mA::HP-GL/2
+:331:mL::[devices.cat,72,132;Hewlett-Packard LaserJet 4V]
+:295:mN::hplj-4v
+:308:mp::%?%GsD%t%?%GmZ%t%%!,\x04%%!%;%;
+:062:__WKV::
+:689:W6::%?%G_u%{3}%<%G_u%{5}%>%|%t%IWP%e%IWE%;
+:760:W9::R[pioattr1.cat,1,844;standard 250-sheet cassette,multipurpose tray (paper),optional 500-sheet lower cassette,manual paper feed=1,2,7,0]
+:763:WE::R[7 3/4,10,DL,C5,other=1,3,4,5,7]
+:762:WP::R[letter,legal,A4,exec=1,2,4,5]
+:458:wQ::%?%G_u%{0}%=%t%Gs0%e%G_u%{1}%=%t%Gs1%e%G_u%{2}%=%t%Gs2%e%Gs7%;%d
+:051:__CAG::
+:144:ci::%I[pU,pR,pL,eR,eO,eu,es]\033%%1Bin;sp1;
+:152:cr::in;\033%%1A%IeR%o%IeO%IpU
+:054:__ESC::
+:202:eO::\33&l%G_z%dO
+:208:eR::\33E
+:513:eS::\33&l%G_Y%dS
+:482:es::\33&l%G_Q%Pq%?%G_u%{3}%<%G_u%{5}%>%|%t%?%gq%{1}%=%t2%e%gq%{2}%=%t3%e%gq%{4}%=%t26%e%gq%{5}%=%t1%e2%;%e%?%gq%{1}%=%t80%e%gq%{3}%=%t81%e%gq%{4}%=%t90%e%gq%{5}%=%t91%e80%;%;A
+:764:eu::\33&l%?%G_u%{0}%=%t2%e%G_u%{2}%=%t4%e%G_u%{3}%=%t6%e%G_u%{4}%=%t3%e%G_u%{5}%=%t4%e%G_u%{7}%=%t5%e1%;H
+:610:pL::@PJL ENTER LANGUAGE = PCL\012
+:608:pR::@PJL SET RESOLUTION = %G_q%d\12
+:609:pU::\33%%-12345X
+:475:__HIR::
+:686:zL::2
+:688:zM::Hewlett-Packard
+:476:zP::generic.gl
+:477:zS::!
+:685:zV::+

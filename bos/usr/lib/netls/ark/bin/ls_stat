@@ -1,0 +1,63 @@
+#! /bin/ksh
+#
+#  Check to see if X11R5 is installed.  If so, just run the command.
+#  Otherwise X11R5 is not executable or nonexistent; so the LIBPATH is
+#  temporarily modified for access to the stubbed out X libraries.
+
+# set up of variables because this is an Internationalized script
+MSGCAT=netls.cat                        # message catalog number
+MSGSET=1                                # message set number
+MSG1=100                                # 1st message
+MSG2=101                                # etc
+
+PATH=/usr/lib/netls/ark/ils:/usr/lib/netls/bin:$PATH
+export PATH
+
+# Go to where this script is running
+RUNNING=`pwd`
+cd `dirname $0`
+
+X11R5="NOTFOUND"
+
+# look for the X11R5 package for AIX 4.1 first.  If that fails, look for 
+# the X11R5 package for AIX 3.2.
+ODMDIR=/usr/lib/objrepos odmget -q"lpp_name=X11.base.rte and state=5" \
+  product | grep "X11.base.rte" > /dev/null 
+if [ $? -eq 0 ]
+then
+  X11R5="FOUND"
+else
+  ODMDIR=/usr/lib/objrepos odmget -q"lpp_name=X11rte.obj and ver=1 and \
+    rel=2 and mod=3 and state<6 and state>2 and state!=4 and ptf=''" \
+    product | grep "X11rte.obj" > /dev/null
+  if [ $? -eq 0 ]
+  then
+    X11R5="FOUND"
+  fi
+fi
+
+# If X11R5 not installed, then run in command only mode.
+if [ "$X11R5" = "NOTFOUND" ]
+then
+        if [ "$#" -eq 0 ]
+        then
+                i18necho -s $MSGSET -f $MSGCAT -n $MSG1 -m "You do not have X11R5 installed and are trying to run the X version of this command."
+                i18necho -s $MSGSET -f $MSGCAT -n $MSG2 -m "Please run this command with some arguments or install X11R5."
+                exit
+        fi
+        LIBPATH=/usr/lib/netls/ark/lib:/usr/lib:$LIBPATH
+        export LIBPATH
+fi
+
+if [ "$#" -ne 0 ]
+then
+        _ls_stat "$@"
+else
+        _ls_stat
+fi
+
+# Go back to original directory
+cd $RUNNING
+
+
+

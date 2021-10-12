@@ -1,0 +1,194 @@
+# @(#)41 1.4  src/bldenv/man/bldloginit.man, bldprocess, bos412, GOLDA411a 10/30/92 14:13:45
+#
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldloginit man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  
+  bldloginit Command
+  
+  
+  Purpose
+  
+  This is a ksh script containing two functions 'log' and 'logset'
+  which act as ksh script's interface to 'bldlog' and 'bldlogset' 
+  commands respectively.
+  
+  
+  Syntax
+  
+  log [-L <level> -l] [-C <context>] [-1 <subcontext1>]
+      [-2 <subcontext2>] [-c <command>] [-F <log_file>]
+      [-xewafb] <log_message>
+  
+  logset [-L <level> -l] [-C <context>] [-1 <subcontext1>]
+         [-2 <subcontext2>] [-c <command>] [-F <log_file>]
+         [-r] <log_message>
+  
+  
+  Description
+  
+  The bldloginit script has two functions 'log' and 'logset' which are
+  interfaces to 'bldlog' and 'bldlogset' commands respectively from ksh
+  scripts.  It is always assumed that both the 'bldlog' and 'bldlogset'
+  commands would be called from ksh scripts through these interfaces,
+  there are two advantages to this approach, The first being, whenever
+  'logset' is used from a shell script, it redirects STDERR to the log
+  file so thereby saving all the errors for later viewing. The second
+  advantage is whenever a fatal error occurs, these interfaces return the
+  QUIT signal to the calling program which can be trapped in the calling
+  program.
+    
+  To use the 'log' and 'logset' functions in a ksh script, The bldloginit
+  script has to be used as a dot command in that ksh script (Calling script)
+  as shown below,
+  
+    . bldloginit
+  
+  This defines the functions in the current environment of the calling
+  script.
+  
+  For a detailed description of how these functions can be used in 
+  debugging and keeping logs, Please see man pages for 'bldlogset' and
+  'bldlog'.
+  
+  
+  Flags 
+  
+  logset
+  
+    +l              Increment or decrement the current level. Here
+    -l              level indicates the level of any routine
+                    relative to others, default being 1. 
+  
+    -L level        Set level to absolute value of <num>
+  
+    -C context      Set context to <context> as default.
+  
+    -1 subcontext1  Set subcontext1 to <subcontext1> as default.
+  
+    -2 subcontext2  Set subcontext2 to <subcontext2> as default.
+  
+    -c command      Set command to <command> as default.
+  
+    -F log_file     Set log file to <log_file> as default.
+  
+    -r              Removes the last updated default values.
+  
+    <log_message>   Set log message to <log_message> as default.
+  
+  
+  log
+  
+    +l              Increments or decrements the previous level
+    -l              of logging. Here level indicates the level
+                    of any routine relative to others, default
+                    being 1. This is mutually exclusive with the
+                    L flag.
+  
+    -L level        Changes the level to a absolute value of num.
+                    This is mutually exclusive with the l flag
+  
+    -C context      Changes the default value of "undefined" or     
+                    the value set by logset to <context>. This    
+                    indicates the context of logging. 
+  
+    -1 subcontext1  Changes the default value of "undefined" or     
+                    the value set by logset to <subcontext1>. This    
+                    indicates the first subcontext of logging. 
+  
+    -2 subcontext2  Changes the default value of "undefined" or     
+                    the value set by logset to <subcontext2>. This    
+                    indicates the second subcontext of logging. 
+    
+    -c command      Changes the default value of "undefined" or     
+                    the value set by logset to <command>. This    
+                    indicates the command in the script where
+                    logging is being done.
+  
+    -F log_file     Writes the output of all logging to log_file,
+                    default being "LOG" in the current directory.
+  
+    <log_message>   Prints log_message as the status or debugging
+                    or logging message to the log file. Default is
+                    "undefined" or the value set by logset.
+  
+  In the following commands only one of them can be used at a time
+  and also the + option can be used in which case the command not only
+  logs anything on the command line but also from standard input.
+  
+  
+  -x                Prints "FATAL ERROR" in the log file along
+                    with the optional values. It also prints it
+                    on the terminal but without the optional values,
+                    However the calling function would exit.
+  
+  -e                Prints "ERROR" in the log file along
+                    with the optional values. It also prints it
+                    on the terminal but without the optional values.
+  
+  -w                Prints "WARNING" in the log file along with the
+                    optional values. It also prints it on the
+                    terminal but without the optional values.
+  
+  -a                Prints "ALERT" in the log file along with the
+                    optional values. It also prints it on the
+                    terminal but without the optional values. It also
+                    sounds the bell.
+  
+  -f                Prints the log message with the other options to the
+                    log file.
+  
+  -b                Prints the log message with the other options to the
+                    log file and also to the terminal.
+   
+  
+  Environment Variables
+  
+  BLDLOG_DATABASE
+               Override the standard name for the database file the
+               logging functions use.  Used primarily for functions
+               executed remotely that do logging.  Since the remote
+               process has no tty assigned, the logging functions will
+               not be able to create a unique file by using the tty
+               name.  The file specified should be unique (contain a
+               process id).  When the function doing the logging is
+               finished, it should call 'logset -r' to remove the
+               database file.
+  
+  
+  Examples
+  
+  1. To create default values for context and subcontext1.
+  
+     logset -C build -1 bos
+  
+  2. To reset default values.
+  
+     logset -r
+  
+  3. To log a warning message with context
+  
+     log -w -C "wrong compiler"
+  
+  4. To log from stdin to give out a fatal error
+  
+     ......... | log +x "File read error"
+  
+  
+  Related Information
+    
+  $BLDENV/usr/bin/bldlog                  The "bldlog" command.
+  $BLDENV/usr/bin/bldlogset               The "bldlogset" command.
+  $BLDENV/usr/bin/bldperllog              The "bldperllog" command.
+  $BLDENV/usr/bin/showlog                 The "showlog" command.

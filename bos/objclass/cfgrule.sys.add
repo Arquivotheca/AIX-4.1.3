@@ -1,0 +1,33 @@
+* "@(#)12       1.1  src/bos/objclass/cfgrule.sys.add, cfgmethods, bos411, 9428A410j 12/29/93 09:57:59";
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: cfgrule.sys.add - Add file for defsys method
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+Config_Rules:
+	phase = 1
+	seq = 1
+	rule = "/etc/methods/defsys"
+
+Config_Rules:
+	phase = 2
+	seq = 10
+	rule = "/etc/methods/defsys"
+
+Config_Rules:
+	phase = 3
+	seq = 10
+	rule = "/etc/methods/defsys"
+
+
+

@@ -1,0 +1,35 @@
+# @(#)60        1.2  src/bldenv/man/pkgptf.name.man, pkgtools, bos412, GOLDA411a 12/3/93 14:35:40
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: pkgptf.man file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/HISTORY/pkgptf.name
+        Contains apar with comment that should be used when the PTF
+        image is created.  Lines beginning with the key word
+        ADDITIONAL_COMMENT allow comments to span multiple lines.
+        Lines beginning with a "#" are ignored.  The comment field
+        overrides the comment field taken from the lpp_name file
+        for the PTF.
+
+	Format:
+                <apar><spaces_or_tabs><comment>
+                [ ADDITIONAL_COMMENT<spaces_or_tabs><comment> ]
+                          .
+                          .
+                                   .
+                                   .
+                <apar><spaces_or_tabs><comment>
+                [ ADDITIONAL_COMMENT<spaces_or_tabs><comment> ]
+                          .
+                          .

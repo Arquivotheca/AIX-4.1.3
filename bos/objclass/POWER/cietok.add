@@ -1,0 +1,36 @@
+# @(#)94 1.1 src/bos/objclass/POWER/cietok.add, sysxcie, bos411, 9428A410j 4/1/94 16:16:21
+#
+#  COMPONENT_NAME: (SYSXCIE) COMIO Emulator
+#
+#  FUNCTIONS: tok.add - TokenRing Adapter Device Attributes
+#
+#  ORIGINS: 27
+#
+#    (C) COPYRIGHT International Business Machines Corp. 1989
+#    All Rights Reserved
+#    Licensed Materials - Property of IBM
+#    US Government Users Restricted Rights - Use, duplication or
+#    disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+PdAt:
+	uniquetype = "adapter/mca/tokenring"
+	attribute = rec_que_size
+	deflt = 30
+	values = "20-150,1"
+	width = ""
+	type = R
+	generic = DU
+	rep = nr
+	nls_index = 8
+
+PdAt:
+	uniquetype = "adapter/mca/tokenring"
+	attribute = sta_que_size
+	deflt = 10
+	values = "3-20,1"
+	width = ""
+	type = R
+	generic = DU
+	rep = nr
+	nls_index = 9

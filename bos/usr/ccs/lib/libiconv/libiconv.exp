@@ -1,0 +1,25 @@
+* @(#)10	1.6  src/bos/usr/ccs/lib/libiconv/libiconv.exp, libiconv, bos411, 9428A410j 11/2/93 11:08:02
+*
+*   COMPONENT_NAME:	CMDICONV
+*
+*   FUNCTIONS:
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+iconv_open
+iconv_close
+iconv
+_ascii_exec
+_iconv_ct_ett
+_iconv_fold7_ett
+_iconv_fold8_ett
+_iconv_host
+ccsidtocs
+cstoccsid

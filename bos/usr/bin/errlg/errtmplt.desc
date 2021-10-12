@@ -1,0 +1,54 @@
+*
+* @(#)90        1.1  src/bos/usr/bin/errlg/errtmplt.desc, cmderrlg, bos411, 9428A410j 1/11/94 19:20:42
+*
+*   COMPONENT_NAME: CMDERRLG
+*
+*   FUNCTIONS: error description stanza file
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+*
+* errtmplt.desc
+* error logging template file
+*
+*
+* The message corresponding to each codepoint is in codepoint.desc
+*
+ 
++ ERRLOG_OFF:
+        Err_Type = TEMP
+        Class = O
+        Report = TRUE
+        Log    = TRUE
+        Alert  = FALSE
+        Comment = "errdemon turned off"
+        Err_Desc = E843
+        Prob_Causes = E824
+	User_Causes = E803
+	User_Actions= E808,E809
+        Fail_Causes =  FFFF
+        Fail_Actions=  FFFF
+ 
++ ERRLOG_ON:
+        Err_Type = TEMP
+        Class = O
+        Report = TRUE
+        Log    = TRUE
+        Alert  = FALSE
+        Comment = "errdemon turned on"
+        Err_Desc = E844
+        Prob_Causes = E825
+	User_Causes = E804
+	User_Actions= E810
+        Fail_Causes =  FFFF
+        Fail_Actions=  FFFF
+ 

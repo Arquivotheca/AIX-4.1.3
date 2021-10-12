@@ -1,0 +1,28 @@
+#!/unix
+* @(#)75	1.8.2.4  src/bos/kernel/exp/dead.exp, sysexp, bos411, 9428A410j 3/13/94 11:32:59
+*
+* COMPONENT_NAME: (SYSEXP) dead exports
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1990, 1994
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* These exports should not be used by anyone outside
+* the kernel. They are being exported for release 3.1
+* only and will be remove in 3.2. They can only be 
+* used in 3.1 by code in the bos lpp.
+*
+proc
+thread
+conconfig
+d_kmove
+__ublock

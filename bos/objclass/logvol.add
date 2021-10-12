@@ -1,0 +1,347 @@
+# @(#)41	1.13.1.2  src/bos/objclass/logvol.add, cmdlvm, bos411, 9428A410j 3/4/94 17:31:49
+#
+# COMPONENT_NAME: (cmdlvm) Logical Volume Commands
+#
+# FUNCTIONS: logvol.add
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+## [End of PROLOG]
+
+PdDv:
+	type = "vgtype"
+	class = "logical_volume"
+	subclass = "vgsubclass"
+	prefix = "vg"
+	devid = ""
+	base = 1
+	has_vpd = 0
+	chgstatus = 0
+	bus_ext = 0
+	fru = 0
+	led = 0
+	setno = 1
+	msgno = 698
+	catalog = "cmdlvm.cat"
+	DvDr = ""
+	Define = ""
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = ""
+	Start = ""
+	Stop = ""
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+
+PdDv:
+	type = "lvtype"
+	class = "logical_volume"
+	subclass = "lvsubclass"
+	prefix = "lv"
+	devid = ""
+	base = 1
+	has_vpd = 0
+	chgstatus = 0
+	bus_ext = 0
+	fru = 0
+	led = 0
+	setno = 1
+	msgno = 699
+	catalog = "cmdlvm.cat"
+	DvDr = ""
+	Define = ""
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = ""
+	Start = ""
+	Stop = ""
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+
+PdAt:
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+        attribute = "quorum"
+        deflt = "y"
+        values = ""
+        width = ""
+        type = "R"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+PdAt:
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+	attribute = "vgserial_id"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "n"
+	nls_index = 637
+
+PdAt:
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+	attribute = "pv"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "sl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+	attribute = "lock"
+	deflt = "n"
+	values = "y,n"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "l"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+	attribute = "state"
+	deflt = "1"
+	values = "0,1,2"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "l"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+	attribute = "auto_on"
+	deflt = "y"
+	values = "y,n"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "l"
+	nls_index = 638
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "type"
+	deflt = "jfs"
+	values = "jfs"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 639
+
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "label"
+	deflt = "None"
+	values = "None"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 640
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "intra"
+	deflt = "m"
+	values = "e,m,c"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "l"
+	nls_index = 641
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "copies"
+	deflt = "1"
+	values = "1-3,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "r"
+	nls_index = 642
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "inter"
+	deflt = "m"
+	values = "m,x"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "l"
+	nls_index = 643
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "relocatable"
+	deflt = "y"
+	values = "y,n"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "l"
+	nls_index = 644
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "strictness"
+	deflt = "y"
+	values = "y,n"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "l"
+	nls_index = 645
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "upperbound"
+	deflt = "32"
+	values = "1-32,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "r"
+	nls_index = 646
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "copyflag"
+	deflt = "y"
+	values = "y,n"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "l"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "size"
+	deflt = "1"
+	values = "1-10000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "r"
+	nls_index = 647
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "lvserial_id"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "n"
+	nls_index = 648
+
+PdAt:
+	uniquetype = "logical_volume/prefix"
+	attribute = "jfs"
+	deflt = "fslv"
+	values = "fslv"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 649
+
+PdAt:
+	uniquetype = "logical_volume/prefix"
+	attribute = "jfslog"
+	deflt = "loglv"
+	values = "loglv"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 649
+
+PdAt:
+	uniquetype = "logical_volume/prefix"
+	attribute = "paging"
+	deflt = "pagelv"
+	values = "pagelv"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 649
+
+PdAt:
+	uniquetype = "logical_volume/prefix"
+	attribute = "boot"
+	deflt = "bootlv"
+	values = "bootlv"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 649
+
+PdAt:
+	uniquetype = "logical_volume/prefix"
+	attribute = "lvdefault"
+	deflt = "lv"
+	values = "lv"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 650
+
+PdAt:
+	uniquetype = "logical_volume/prefix"
+	attribute = "vgdefault"
+	deflt = "vg"
+	values = "vg"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 651
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "stripe_width"
+	deflt = ""
+	values = "2-32,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "r"
+	nls_index = 1100
+
+PdAt:
+	uniquetype = "logical_volume/lvsubclass/lvtype"
+	attribute = "stripe_size"
+	deflt = ""
+	values = "9-27,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "r"
+	nls_index = 1101
+
+PdCn:
+	uniquetype = "logical_volume/vgsubclass/vgtype"
+	connkey = "lvsubclass"
+	connwhere = ""

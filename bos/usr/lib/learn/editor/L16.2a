@@ -1,0 +1,53 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+So far you have always appended to an empty file,
+so that there was no problem about where the appended lines
+were placed in the file.  If the file you're appending to
+already has lines in it, you can say where you want the
+new material to be placed by giving a line address with 'a',
+and you can check on this by printing the file.
+Try the following sequence and note what happens to the new lines
+that are added with the "3a" command:
+
+ex rivers
+1,$p
+3a
+merrimack
+connecticut
+hudson
+.
+1,$p
+wq
+ready
+#create Ref
+penobscot
+androscoggin
+kennebec
+merrimack
+connecticut
+hudson
+delaware
+susquehanna
+#create rivers
+penobscot
+androscoggin
+kennebec
+delaware
+susquehanna
+#user
+#cmp rivers Ref
+#log
+#next
+16.2c 5

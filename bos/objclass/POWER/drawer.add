@@ -1,0 +1,124 @@
+*@(#)36  1.4  src/bos/objclass/POWER/drawer.add, cfgmethods, bos411, 9428A410j 6/15/90 18:01:43
+* 
+*  COMPONENT_NAME: (CFGMETH) SYSTEM DEVICES STANZA FILE
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+PdDv:
+	type = media1
+	class = drawer
+	subclass = media
+	prefix = drawer
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	led = 0xfff
+	setno = 1
+	msgno = 8
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = drawer/media/media1
+
+
+PdDv:
+	type = scsi1
+	class = drawer
+	subclass = dasd
+	prefix = drawer
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	led = 0xfff
+	setno = 1
+	msgno = 9
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = drawer/dasd/scsi1
+
+
+PdDv:
+	type = async1
+	class = drawer
+	subclass = async
+	prefix = drawer
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	led = 0xfff
+	setno = 1
+	msgno = 10
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = drawer/async/async1
+
+
+PdDv:
+	type = cpu1
+	class = drawer
+	subclass = cpu
+	prefix = drawer
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	led = 0xfff
+	setno = 1
+	msgno = 11
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = drawer/cpu/cpu1
+

@@ -1,0 +1,314 @@
+# @(#)75	1.3  src/bos/usr/lib/nls/charmap/ISO8859-2, cfgnls, bos411, 9428A410j 3/11/94 00:08:53
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   Charmap for ISO8859-2 codeset
+#
+
+<code_set_name>                 "ISO8859-2"
+<mb_cur_max>			1
+<mb_cur_min>			1
+
+CHARMAP
+
+#	Control Characters and ASCII
+
+<NUL>				\x00
+<SOH>				\x01
+<STX>				\x02
+<ETX>				\x03
+<EOT>				\x04
+<ENQ>				\x05
+<ACK>				\x06
+<BEL>				\x07
+<alert>				\x07
+<backspace>			\x08
+<tab>				\x09
+<newline>			\x0a
+<vertical-tab>			\x0b
+<form-feed>			\x0c
+<carriage-return>		\x0d
+<SO>				\x0e
+<SI>				\x0f
+<DLE>				\x10
+<DC1>				\x11
+<DC2>				\x12
+<DC3>				\x13
+<DC4>				\x14
+<NAK>				\x15
+<SYN>				\x16
+<ETB>				\x17
+<CAN>				\x18
+<EM>				\x19
+<SUB>				\x1a
+<ESC>				\x1b
+<IS4>				\x1c
+<IS3>				\x1d
+<IS2>				\x1e
+<IS1>				\x1f
+<SP>				\x20
+<space>				\x20
+<exclamation-mark>		\x21
+<quotation-mark>		\x22
+<number-sign>			\x23
+<dollar-sign>			\x24
+<percent-sign>			\x25
+<ampersand>			\x26
+<apostrophe>			\x27
+<left-parenthesis>		\x28
+<right-parenthesis>		\x29
+<asterisk>			\x2a
+<plus-sign>			\x2b
+<comma>				\x2c
+<hyphen>			\x2d
+<hyphen-minus>			\x2d
+<period>			\x2e
+<full-stop>			\x2e
+<slash>				\x2f
+<solidus>			\x2f
+<zero>				\x30
+<one>				\x31
+<two>				\x32
+<three>				\x33
+<four>				\x34
+<five>				\x35
+<six>				\x36
+<seven>				\x37
+<eight>				\x38
+<nine>				\x39
+<colon>				\x3a
+<semicolon>			\x3b
+<less-than-sign>		\x3c
+<equals-sign>			\x3d
+<greater-than-sign>		\x3e
+<question-mark>			\x3f
+<commercial-at>			\x40
+<A>				\x41
+<B>				\x42
+<C>				\x43
+<D>				\x44
+<E>				\x45
+<F>				\x46
+<G>				\x47
+<H>				\x48
+<I>				\x49
+<J>				\x4a
+<K>				\x4b
+<L>				\x4c
+<M>				\x4d
+<N>				\x4e
+<O>				\x4f
+<P>				\x50
+<Q>				\x51
+<R>				\x52
+<S>				\x53
+<T>				\x54
+<U>				\x55
+<V>				\x56
+<W>				\x57
+<X>				\x58
+<Y>				\x59
+<Z>				\x5a
+<left-square-bracket>		\x5b
+<backslash>			\x5c
+<reverse-solidus>		\x5c
+<right-square-bracket>		\x5d
+<circumflex>			\x5e
+<circumflex-accent>		\x5e
+<underscore>			\x5f
+<low-line>			\x5f
+<grave-accent>			\x60
+<a>				\x61
+<b>				\x62
+<c>				\x63
+<d>				\x64
+<e>				\x65
+<f>				\x66
+<g>				\x67
+<h>				\x68
+<i>				\x69
+<j>				\x6a
+<k>				\x6b
+<l>				\x6c
+<m>				\x6d
+<n>				\x6e
+<o>				\x6f
+<p>				\x70
+<q>				\x71
+<r>				\x72
+<s>				\x73
+<t>				\x74
+<u>				\x75
+<v>				\x76
+<w>				\x77
+<x>				\x78
+<y>				\x79
+<z>				\x7a
+<left-brace>			\x7b
+<left-curly-bracket>		\x7b
+<vertical-line>			\x7c
+<right-brace>			\x7d
+<right-curly-bracket>		\x7d
+<tilde>				\x7e
+<DEL>				\x7f
+
+#
+# Latin-1 extended Control characters
+# (names taken from ISO 6429
+#
+<PAD>                           \x80
+<HOP>                           \x81
+<BPH>				\x82
+<NBH>				\x83
+<IND>				\x84
+<NEL>				\x85
+<SSA>				\x86
+<ESA>				\x87
+<HTS>				\x88
+<HTJ>				\x89
+<VTS>				\x8a
+<PLD>				\x8b
+<PLU>				\x8c
+<RI>				\x8d
+<SS2>				\x8e
+<SS3>				\x8f
+<DCS>				\x90
+<PU1>				\x91
+<PU2>				\x92
+<STS>				\x93
+<CCH>				\x94
+<MW>				\x95
+<SPS>				\x96
+<EPA>				\x97
+<SOS>				\x98
+<SGCI>				\x99
+<SCI>				\x9a
+<CSI>				\x9b
+<ST>				\x9c
+<OSC>				\x9d
+<PM>				\x9e
+<APC>				\x9f
+
+
+#
+# Latin-2 extended characters
+#
+
+<nobreakspace>			\xa0
+<A-ogonek>                      \xa1
+<breve>                         \xa2
+<L-stroke>                      \xa3
+<currency>			\xa4
+<L-caron>                       \xa5
+<S-acute>                       \xa6
+<section>			\xa7
+<diaresis>			\xa8
+<S-caron>                       \xa9
+<S-cedilla>                     \xaa
+<T-caron>                       \xab
+<Z-acute>                       \xac
+<dash>				\xad
+<Z-caron>                       \xae
+<Z-abovedot>                    \xaf
+<degree>			\xb0
+<a-ogonek>                      \xb1
+<ogonek>                        \xb2
+<l-stroke>                      \xb3
+<acute>				\xb4
+<l-caron>                       \xb5
+<s-acute>                       \xb6
+<caron>                         \xb7
+<cedilla>			\xb8
+<s-caron>                       \xb9
+<s-cedilla>                     \xba
+<t-caron>                       \xbb
+<z-acute>                       \xbc
+<doubleacute>                   \xbd
+<z-caron>                       \xbe
+<z-abovedot>                    \xbf
+<R-acute>                       \xc0
+<A-acute>			\xc1
+<A-circumflex>			\xc2
+<A-breve>                       \xc3
+<A-diaresis>			\xc4
+<L-acute>                       \xc5
+<C-acute>                       \xc6
+<C-cedilla>			\xc7
+<C-caron>                       \xc8
+<E-acute>			\xc9
+<E-ogonek>                      \xca
+<E-diaresis>			\xcb
+<E-caron>                       \xcc
+<I-acute>			\xcd
+<I-circumflex>			\xce
+<D-caron>                       \xcf
+<D-stroke>                      \xd0
+<N-acute>                       \xd1
+<N-caron>                       \xd2
+<O-acute>			\xd3
+<O-circumflex>			\xd4
+<O-doubleacute>                 \xd5
+<O-diaresis>			\xd6
+<multiply>			\xd7
+<R-caron>                       \xd8
+<U-ring>                        \xd9
+<U-acute>			\xda
+<U-doubleacute>                 \xdb
+<U-diaresis>			\xdc
+<Y-acute>			\xdd
+<T-cedilla>                     \xde
+<s-sharp>			\xdf
+<r-acute>                       \xe0
+<a-acute>			\xe1
+<a-circumflex>			\xe2
+<a-breve>                       \xe3
+<a-diaresis>			\xe4
+<l-acute>                       \xe5
+<c-acute>                       \xe6
+<c-cedilla>			\xe7
+<c-caron>                       \xe8
+<e-acute>			\xe9
+<e-ogonek>                      \xea
+<e-diaresis>			\xeb
+<e-caron>                       \xec
+<i-acute>			\xed
+<i-circumflex>			\xee
+<d-caron>                       \xef
+<d-stroke>                      \xf0
+<n-acute>                       \xf1
+<n-caron>                       \xf2
+<o-acute>			\xf3
+<o-circumflex>			\xf4
+<o-doubleacute>                 \xf5
+<o-diaresis>			\xf6
+<divide>			\xf7
+<division>			\xf7
+<r-caron>                       \xf8
+<u-ring>                        \xf9
+<u-acute>			\xfa
+<u-doubleacute>                 \xfb
+<u-diaresis>			\xfc
+<y-acute>			\xfd
+<t-cedilla>                     \xfe
+<abovedot>                      \xff
+
+END CHARMAP
+
+CHARSETID
+
+<NUL>...<DEL>			0
+<PAD>...<abovedot>              1
+
+END CHARSETID

@@ -1,0 +1,458 @@
+*/* @(#)60	1.2  src/bos/usr/ccs/bin/as/POWER/instrs.ops.ppc, cmdas, bos411, 9428A410j 3/10/94 10:29:31*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.ppc
+* *
+* *      V4.1 instructions set for common to PowerPC architecture   
+* *      and are supported in 601 processor                          
+* *      Since all the implementations are at least 32-bit, so       
+* *      this instruction set does not contains 64-bit implementation 
+* *      only instructions. But it does have the 32-bit implementation
+* *      only instructions.                                          
+* *                                                                   
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1994
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+*
+***********************************************************************
+*
+*** - *** Type indicator: Bit map for PowerPC common instructions and
+*                         supported in 601 is 0x8078
+% 32888
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*       X-Form  (output format) instructions
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*
+***********************************************************************
+*       X-Form instructions
+***********************************************************************
+*
+*       Instruction Format: X-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | RS | FRT | FRS | BF
+*              OP2 = RA | FRA
+*              OP3 = RB | FRB | NB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2,OP3         ----- RC=0
+*       mnemonic. OP1,OP2,OP3         ----- RC=1
+*
+***********************************************************************
+*
+**********************************
+**** /*** Storage Access ***/ ****
+**********************************
+*Opcode = 1F
+*       mnem  |input     |out |op code value
+*014   lwarx  rt,ra,rb       Load Word and Reserve indexed
+       lwarx      rrr      x7   31-020
+*96    stwcx. rs,ra,rb       Store Word Conditional Indexed (Rc=1)
+       stwcx.     rrr      x7   31-150-1
+*
+***********************************************************************
+*       XO-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XO-FORM
+*
+*       ----------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |OV|      EO       |Rc|
+*       ----------------------------------------------------
+*       0    5 6    10 11   15 16   20 21 22           30 31
+*
+*              OP1 = RT
+*              OP2 = RA
+*              OP3 = RB
+*              OV  = OV Bit
+*
+*
+*   Asm Formats:
+*
+*       mnemonic   OP1,OP2,OP3        ---- OV=0 Rc=0
+*       mnemonic.  OP1,OP2,OP3        ---- OV=0 Rc=1
+*       mnemonicO  OP1,OP2,OP3        ---- OV=1 Rc=0
+*       mnemonicO. OP1,OP2,OP3        ---- OV=1 Rc=1
+*
+***********************************************************************
+*
+****************************************
+**** /*** Arithmetic & Compare ***/ ****
+****************************************
+* Opcde 1F
+*       mnem  |input     |out |op code value
+*1EB    divw   rt,ra,rb        Divide Word 
+*1EB    divw.  rt,ra,rb        Divide Word (Rc=1) 
+*1EB    divwo  rt,ra,rb        Divide Word and set Overflow  
+*1EB    divwo. rt,ra,rb        Divide Word and set Overflow (Rc=1) 
+        divw    rrr       x7   31-491
+        divw.   rrr       x7   31-491-1
+        divwo   rrr       x7   31-491-0-1
+        divwo.  rrr       x7   31-491-1-1
+*
+*1CB    divwu   rt,ra,rb       Divide Word Unsigned
+*1CB    divwu.  rt,ra,rb       Divide Word Unsigned (Rc=1)
+*1CB    divwuo  rt,ra,rb       Divide Word Unsigned and Set Overflow
+*1CB    divwuo. rt,ra,rb       Divide Word Unsigned and set Overflow (Rc=1)
+        divwu    rrr      x7   31-459
+        divwu.   rrr      x7   31-459-1
+        divwuo   rrr      x7   31-459-0-1
+        divwuo.  rrr      x7   31-459-1-1
+*
+*04B    mulhw    rt,ra,rb      Multiply High Word
+*04B    mulhw.   rt,ra,rb      Multiply High Word (Rc=1)
+        mulhw    rrr      x7   31-075
+        mulhw.   rrr      x7   31-075-1
+*011    mulhwu   rt,ra,rb      Multiply High Word Unsigned
+*011    mulhwu.  rt,ra,rb      Multiply High Word Unsigned (Rc=1)
+        mulhwu   rrr      x7   31-011
+        mulhwu.  rrr      x7   31-011-1
+*028    subf     rt,ra,rb      Subtract From
+*028    subf.    rt,ra,rb      Subtract From (Rc=1)
+*028    subfo    rt,ra,rb      Subtract From and Set Overflow
+*028    subfo.   rt,ra,rb      Subtract From and Set Overflow (Rc=1)
+        subf     rrr      x7   31-040
+        subf.    rrr      x7   31-040-1
+        subfo    rrr      x7   31-040-0-1
+        subfo.   rrr      x7   31-040-1-1
+****   entended MN for subf
+        sub      rrr      xg   31-040
+        sub.     rrr      xg   31-040-1
+        subo     rrr      xg   31-040-0-1
+        subo.    rrr      xg   31-040-1-1
+*
+***********************************************************************
+*       XR2-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XR2-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RS
+*              OP2 = RA
+*
+*   Asm Formats:
+*
+*       mnemonic  OP2,OP1             ----- RC=0
+*       mnemonic. OP2,OP1             ----- RC=1
+*
+*       Note: *** OP2 is the first assembler operand.
+*
+***********************************************************************
+*
+***************************************************
+**** /*** Instruction Address Computation ***/ ****
+***************************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*3BA   extsb   ra,rs          Extend Sign Byte
+*3BA   extsb.  ra,rs          Extend Sign Byte (Rc=1)
+       extsb     rr       xe   31-954
+       extsb.    rr       xe   31-954-1
+*
+***************************************************
+** / ** Extended mnemonics for SPR control  ** / **
+***************************************************
+*1D3    mtsprg   n,rs           Move to SPR G0 through G3
+        mtsprg   4r        xe   31-467-0-0-0-16-0-08
+***********************************************************************
+*       XZ-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XZ-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / | / / / | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic                      ----- RC=0
+*
+***********************************************************************
+*
+***********************************
+**** /*** Storage Control ***/ ****
+***********************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*356   eieio                 Enforce In-order Execution of I/O
+       eieio      n        x0   31-854
+*
+***********************************************************************
+*       XTA-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XTA-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | BF | BFT | FRT
+*              OP2 = RA | BFA | FRA | SR | SPR
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2             ----- RC=0
+*       mnemonic. OP1,OP2             ----- RC=1
+*
+***********************************************************************
+***************************************************
+** / ** Extended mnemonics for SPR control  ** / **
+***************************************************
+*Opcde 1F
+*       mnem  |input     |out |op code value
+*153    mfsprg   rt,n           Move from SPR G0 through G3
+        mfsprg   r4        x6   31-339-0-0-0-16-0-08
+*
+***********************************************************************
+*
+*       Instruction Format: XTB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  ///  |   OP2 |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = BF | FRT
+*              OP2 = I | FRB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2             ----- RC=0
+*       mnemonic. OP1,OP2             ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /***  Segment Register  *** / ****
+*********************************************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*
+*293   mfsrin  rt,rb         Move from Segment Reg. Indirect (32-bit only)
+       mfsrin     rr       x5   31-659
+* 
+***********************************************************************
+*       XAB-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XAB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / |  RA   |  RB   |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  RA,RB               ----- RC=0
+*       mnemonic. RA,RB               ----- RC=1
+*
+***********************************************************************
+***********************************
+**** /*** Storage Control ***/ ****
+***********************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*
+*3D6   icbi    ra,rb         Instruction Cache Block Invalidate
+       icbi       rr       x3   31-982
+*116   dcbt    ra,rb         Data Cache Block Touch
+       dcbt       rr       x3   31-278
+*F6    dcbtst  ra,rb         Data Cache Block Touch for Store 
+       dcbtst     rr       x3   31-246
+*3F6   dcbz   ra,rb          Data cache Block set to zero
+       dcbz       rr       x3   31-1014
+*36    dcbst   ra,rb         Data Cache Block Store
+       dcbst      rr       x3   31-54
+*56    dcbf    ra,rb         Data Cache Block Flush
+       dcbf       rr       x3   31-86
+*1D6   dcbi   ra,rb          Data Cache Block Invalidate
+       dcbi       rr       x3   31-470
+*
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*       A-Form  (output format) instructions
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*
+***********************************************************************
+*       A-Form instructions
+***********************************************************************
+*
+*       Instruction Format: A-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  FRA  |  FRB  |  FRC  |   XO   |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRA,FRC,FRB     ----- RC=0
+*       mnemonic. FRT,FRA,FRC,FRB     ----- RC=1
+*
+***********************************************************************
+********************************
+*       floating point         *
+********************************
+*Opcode 3B
+*       mnem  |input     |out |op code value
+*01D   fmadds                     frt=(fra*frc)+frb
+*01D   fmadds    frt,fra,frc,frb  Floating Multiply Add Single
+*01D   fmadds.   frt,fra,frc,frb  Floating Multiply Add Single (Rc=1)
+       fmadds     rrrr     a    59-029
+       fmadds.    rrrr     a    59-029-1
+*
+*01C   fmsubs                     frt=(fra*frc)-frb
+*01C   fmsubs    frt,fra,frc,frb  Floating Multiply Subtract Single
+*01C   fmsubs.   frt,fra,frc,frb  Floating Multiply Subtract Single
+*                                  (Rc=1)
+       fmsubs     rrrr     a    59-028
+       fmsubs.    rrrr     a    59-028-1
+*01F   fnmadds                   frt=-((fra*frc)+frb)
+*01F   fnmadds   frt,fra,frc,frb  Floating negative multiply add
+*01F   fnmadds.  frt,fra,frc,frb  Floating Negative Multiply Add  (Rc=1)
+       fnmadds    rrrr     a    59-031
+       fnmadds.   rrrr     a    59-031-1
+*
+*01E   fnmsubs                    frt= -((fra*frc)-frb)
+*01E   fnmsubs   frt,fra,frc,frb  Floating negative multiply subtract
+*                                 Single
+*01E   fnmsubs.  frt,fra,frc,frb  Floating negative multiply subtract
+*                                 Single (Rc=1)
+       fnmsubs    rrrr     a    59-030
+       fnmsubs.   rrrr     a    59-030-1
+***********************************************************************
+*       AB-Form instructions
+***********************************************************************
+*
+*       Instruction Format: AB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  FRA  |  FRB  | ////  |   XO   |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRA,FRB         ----- RC=0
+*       mnemonic. FRT,FRA,FRB         ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /*** Floating Point Arithmetic and Compare ***/ ****
+*********************************************************
+*       mnem  |input     |out |op code value
+*Opcode 3B
+*015   fadds    frt,fra,frb    Floating Add Single
+*015   fadds.   frt,fra,frb    Floating Add Single (Rc=1)
+       fadds        rrr      ab   59-021
+       fadds.       rrr      ab   59-021-1
+*014   fsubs    frt,fra,frb    Floating Subtract Single
+*014   fsubs.   frt,fra,frb    Floating Subtract Single (Rc=1)
+       fsubs        rrr      ab   59-020
+       fsubs.       rrr      ab   59-020-1
+*012   fdivs    frt,fra,frb    Floating Divide Single
+*012   fdivs.   frt,fra,frb    Floating Divide Single (Rc=1)
+       fdivs        rrr      ab   59-018
+       fdivs.       rrr      ab   59-018-1
+***********************************************************************
+*       AC-Form instructions
+***********************************************************************
+*
+*       Instruction Format: AC-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  FRA  | ////  |  FRC  |   XO   |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRA,FRC         ----- RC=0
+*       mnemonic. FRT,FRA,FRC         ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /*** Floating Point Arithmetic and Compare ***/ ****
+*********************************************************
+*Opcode 3B
+*       mnem  |input     |out |op code value
+*019   fmuls    frt,fra,frc    Floating Multiply Single
+*019   fmuls.   frt,fra,frc    Floating Multip Single (Rc=1)
+       fmuls        rrr      ac   59-025
+       fmuls.       rrr      ac   59-025-1
+*
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+**             Some special extended mnemonics                      ***
+**             No particular instruction format order               ***
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*       mnem  |input     |out |op code value
+*1D3   mtear    rs         Move to EAR (External Access Reg.)
+       mtear      r        x4   31-467-0-0-0-26-0-08
+*153   mfear    rs         Move from EAR (External Access Reg.)
+       mfear      r        x4   31-339-0-0-0-26-0-08
+*153   mfpvr    rs         Move from PVR (processor Version Reg.)
+       mfpvr      r        x4   31-339-0-0-0-31-0-08
+*
+***********************************************************************
+*****   END   ****   END   ********************************************
+***********************************************************************

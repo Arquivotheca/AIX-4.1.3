@@ -1,0 +1,226 @@
+* @(#)24	1.5  src/bos/objclass/POWER/printer.opp.add, cfgmethods, bos411, 9428A410j 5/3/94 17:46:07
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+PdDv:
+        type = opp
+        class = printer
+        subclass = parallel
+        prefix = lp
+        devid = ""
+        base = 0
+        has_vpd = 0
+        detectable = 0
+        chgstatus = 1
+        bus_ext = 0
+        led = 0x728
+        setno = 71
+        msgno = 16
+        fru = 1
+        catalog = devices.cat
+        Define = /usr/lib/methods/define
+        Configure = /usr/lib/methods/cfgpp
+        Change = /usr/lib/methods/chggen
+        Unconfigure = /usr/lib/methods/ucfgpp
+        Undefine = /usr/lib/methods/undefine
+        Start = ""
+        Stop = ""
+        uniquetype = printer/parallel/opp
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = ptop
+        deflt = 60
+        values = "1-2000,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 17
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = line
+        deflt = 66
+        values = "0-2147483647,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 18
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = col
+        deflt = 80
+        values = "1-2147483647,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 19
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = ind
+        deflt = 0
+        values = "0-2147483646,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 20
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = plot
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 21
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = backspace
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 22
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = cr
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 23
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = form
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 24
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = lf
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 25
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = addcr
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 26
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = case
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 27
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = tabs
+        deflt = yes
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 28
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = wrap
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 29
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = mode
+        deflt = no
+        values = "yes,no"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 30
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = interface
+        deflt = standard
+        values = "standard,converged"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 31
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = autoconfig
+        deflt = available
+        values = "available,defined"
+        width = ""
+        type = R
+        generic = DU
+        rep = sl
+        nls_index = 32
+
+PdAt:
+        uniquetype = printer/parallel/opp
+        attribute = busy_delay
+        deflt = 0
+        values = "0-100000,1"
+        width = ""
+        type = R
+        generic = DU
+        rep = nr
+        nls_index = 33

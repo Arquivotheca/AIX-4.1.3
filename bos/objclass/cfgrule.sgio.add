@@ -1,0 +1,26 @@
+* "@(#)36       1.1  src/bos/objclass/cfgrule.sgio.add, inputdd, bos41J, 9510A_all 2/28/95 12:53:31";
+*
+*   COMPONENT_NAME: INPUTDD
+*
+*   FUNCTIONS: cfgrule.sgio.add - Add file for sgio devices
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1995
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+Config_Rules:
+	phase = 2
+	seq = 27
+	rule = "/etc/methods/startsgio"
+
+Config_Rules:
+	phase = 3
+	seq = 27
+	rule = "/etc/methods/startsgio"
+

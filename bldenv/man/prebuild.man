@@ -1,0 +1,439 @@
+#
+# @(#)32        1.24  src/bldenv/man/prebuild.man, bldprocess, bos412, GOLDA411a 6/28/94 11:36:50
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: prebuild man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  prebuild Command
+
+
+  Purpose
+
+  The prebuild command extracts source resulting from defects and 
+  features for production or development builds. The primary tasks
+  of the prebuild command include interfacing with CMVC, verifying
+  required states, extracting and storing source, logging information
+  about processing and posting status about the tasks.
+
+
+  Syntax
+
+  prebuild  [-a <area_list>] [-f <area_filename>] [-h <hosts_filename>]
+            [-n <node_filename>] [-l] [-s] [-c] [-u] [<release> ...]
+
+
+  Description
+
+  The primary tasks of the prebuild command include interfacing with CMVC,
+  verifying required states, extracting and storing source, and logging.
+  If no specific releases are specified on the command line, prebuild 
+  defaults to all releases based on CMVC levels. The primary "object" in 
+  prebuild is a CMVC level; the releases specified determine which CMVC
+  levels can be processed (as described later). 
+
+  The prebuild command must run on a RISC System/6000 because of 
+  incompatibilities with the RT ksh.  All CMVC configuration requirements
+  must be met before prebuild is run (e.g. export file configured with the
+  correct mount permissions). 
+
+  The prebuild command uses the logging function 'bldlog' and 'bldlogset'
+  to log the activities of every run. STDERR is redirected to the log file. 
+
+  The prebuild command posts status success or failure at the four stages
+  of build extract, CMVC merge, release merge and CMVC commit in the status 
+  file.
+
+  Note: a part of the prebuild  command's normal processing is to take one
+  or more development levels for a release and combine these levels into a
+  single new production level; this step consolidates the data (tracks)
+  which may be coming from different sources.
+
+  After initialization, a menu with the following options will be displayed:
+
+    1) Show Level List
+         Shows the levels currently in the level list for processing.
+    2) Create Level
+         Allows the user to create a new CMVC level by entering defect
+         numbers (and adding the level to the level list).
+    3) Prune the Level List
+         Allows the user to remove CMVC levels from the level list.  The
+         initial level list is comprised of all CMVC levels belonging to
+         the selected releases.  The level list defines which CMVC levels
+         will be further processed (extracted, etc).
+    4) Process Level List
+         The primary prebuild task; it starts processing the levels in
+         the level list.
+    5) Show Logs for LEVELNAME by Release
+         Displays previous log data for a selected release.  
+    6) Show Master Logs for LEVELNAME
+         Displays logs from previous prebuild runs.
+    7) Show Errors for LEVELNAME
+         Displays error data from previous prebuild runs.
+    8) Show Merge List (Production)
+         Shows a history of source merges.
+    9) Show Defect Abstracts
+         List all the defects and abstracts for the current level.
+    10) Exit
+         Terminates the command.
+
+  The prebuild command uses a table driven flat file called $HOSTSFILE
+  to determine the source tree structure for a release. For example the
+  following is the source tree structure for bos,
+
+	/LASER
+		bos
+			3.1
+			3.1.1
+			3.1.2
+			3.2
+				delta
+					levelname
+					levelnamea
+					levelnameb
+					levelnamec
+					.
+					.
+				src
+
+
+  This structure differs by releases. The prebuild command uses the 
+  release name, $HOSTSFILE and $NODENAMES (also a flatfile that
+  translates release names to directory names like 320 to 3.2) to determine
+  the structure for a release. The prebuild command will automatically
+  create any directory it needs.
+
+  Below is a basic algorithm which illustrates the prebuild's command 
+  functionality.
+
+    Get Level List from CMVC (all levels assigned to $BLDOWNER for the
+      specified releases).
+    Display menu to user for choices.
+    While menu selection from user is not "Process Level List"
+      If user selects "Create Level"
+        Prompt user for data and create a new Level.
+      If user selects "Prune the Level List"
+        Allow user to delete levels from level List.
+      If user selects "Show Logs for LEVELNAME by Release"
+        Display all log data from this level for the selected release.	
+      If user selects "Show Master Logs for LEVELNAME"
+	Display the selected master log (prebuild creates a master log
+        each time it is run).
+      If user selects "Show Errors for LEVELNAME by Release"
+	Display all error data from this level for the selected release.
+      If user selects "Show Merge List (Production)"
+	Display all source merges which have been done
+      If user selects "Exit"
+	Terminate Program.
+      Redisplay menu to user for choices after each selection except exit
+
+    While menu selection from user is "Process Level List"
+      For each selected Level
+        IF development Level 
+          For all development levels belonging to the release
+            Get from the level all the Must Fix tracks.
+            Combine all the must fix tracks which came from the releases
+            development levels.
+            Remove any duplicate tracks.
+            Create a new production level with the gathered tracks.
+          Extract the delta source tree for the level
+        If Production Level
+           Commit the production level.
+           Copy delta source tree to CMVC Source Server.
+           Execute .gone on CMVC Source Server.
+           Merge the delta source tree with the release level source tree.
+           Execute .gone in the release level source tree.
+
+
+  Flags
+
+  -a area_list       Comma separated list of areas that may perform
+                     production builds.  Each entry must be enclosed with
+                     single quotes.
+
+  -c                 set PREBUILD_RUN_LEVELCHECK to 'No'.  This
+                     overrides the value of the setting in the
+                     environment.
+
+  -f area_filename   Select file to look for list of builders allowed
+                     to do production builds.  Overrides the value of
+                     the environment variable PRODUCTION_AREAS.
+
+  -h hosts_filename  Select file to look for the releases and their
+                     host machines.  Overrides the value of the
+                     environment variable HOSTSFILE.
+
+  -l                 All level checks will be performed with the "-long"
+                     option.  The value of environment variable
+                     LEVELCHECK_FLAGS will have "-long" appended unless
+                     LEVELCHECK_FLAGS already contains the "-long" option.
+
+  -n node_filename   Select file to look for the release suffixes to
+                     source directory names and priorities accepted.
+                     Overrides the value of the environment variable
+                     NODENAMES.
+
+  -s                 set PREBUILD_SAVE_REPLACED_SRC to 'No'.  This
+                     overrides the value of the setting in the
+                     environment.
+
+  -u                 set PTF_UPDATE to 'yes'.  This overrides the value
+                     of the setting in the environment.
+
+  release            Release name to process.
+
+  Note: -a and -f cannot both be supplied at the same time.
+
+
+  Environment Variables
+
+  AUTO         If set, LCOMMIT, LMERGE, and LSSMRG are set to 'Y',  but
+               if any of these three flag are explicitly set, they are not
+               changed.
+
+  BLDENV       Full pathname to the top of the build environment.
+               Typical value is /bldenv/3.2/prod.  Fatal error occurs
+               if not set.
+
+  BLDOWNER     The CMVC userlogin that should be used when searching for
+               levels.  Only levels assigned to this userlogin will be
+               found.  Value will be prompted for if not defined.
+
+  BLDTMP       Temporary directory. The default is /tmp.
+
+  BUILDER      The builder's name.  The default is null.
+
+  CMVC_BECOME  Specifies the CMVC user ID.  Prompting for value occurs
+               if not set.
+
+  EXBASE       The base directory for extraction.  If not set, the location
+               will be determined from the file $HOSTSFILE.  The user 
+	       must use an absolute path name when setting this variable.
+
+  HOSTSFILE_AFSBASE
+               AFS tree of last release name passed to bldhostsfile.
+
+  HOSTSFILE_AFSDELTA
+               AFS delta source trees of last release name passed to
+               bldhostsfile.
+
+  HOSTSFILE_AFSPROD
+               AFS full source tree of last release name passed to
+               bldhostsfile.
+
+  HOSTSFILE_BASE
+               Production tree of last release name passed to
+               bldhostsfile.
+
+  HOSTSFILE_BLDNODE
+               CMVC name of release directory for the last release name
+               passed to bldhostsfile.
+
+  HOSTSFILE_DELTA
+               Production delta source tree of last release name passed
+               to bldhostsfile.
+
+  HOSTSFILE_HOST
+               Host the last release name passed to bldhostsfile is built
+               on.
+
+  HOSTSFILE_REL
+               REL name of the last release name passed to bldhostsfile.
+
+  HOSTSFILE_PROD 
+               Full source tree of last release name passed to bldhostsfile.
+
+  LBMERGEDIRS
+               If set to "[Nn][Oo]" then there will be no attempt made to
+               merge source files into any directories besides the production
+               directory.  If it is not set or empty then the user will be
+               prompted to enter directories (one at a time) to merge the
+               source into.  Otherwise, it should be set to a list of
+               directories that need to have the source merged.  You should
+               give full pathnames.  If you enter a name that is not a
+               directory, you will be given the opportunity to change or
+               correct the problem.
+
+  LDONLY       If set, only an CMVC level for a release is created.  The
+               extract, etc., is not done.
+
+  LEVELCHECK_FLAGS
+               Argument(s) to be supplied when running the Level command
+               with the "-check" flag.  The values of LEVELCHECK_FLAG are
+               "" and "-long".
+
+  LEVELNAME    Name of the current level.  Default  computed from BLDCYCLE
+               and the last three digits of CMVC_RELEASE, which are of the
+               form 'vrl', where v = version, r = release, and l = level.
+               The base LEVELNAME then is 'yywwvrl'.  A single letter,
+               lower-case alpha character is normally appended to the base
+               to differentiate between builds within the same build cycle
+               (e.g.  9214320d).  Prompting for value occurs if not set.
+
+  LCOMMIT      If not set, user is prompted before commit.  If set, the
+               value is used and no prompt is given. 'y' will commit the
+               production level; 'n' will not commit the level.
+
+  LCONT        If not set and a development level contains one or more
+               tracks in an illegal state (e.g. not must fix), user is
+               prompted for decision to continue with the defective level
+               (the bad tracks are excluded).  If set, the value is used
+               and no prompt is given.  'y' will continue with the level,
+               'n' will skip the level.
+
+  LMERGE       If not set, user is prompted before merge. If set the
+               value is used and no prompt is given. 'y' will merge the
+               delta tree with the level source tree; 'n' will not merge
+               the delta.
+
+  LMFIX        If not set, tracks must be in the mustfix state in order
+               to be included in a production level.
+
+  LNAMES       If set, automatically exclude all levels whose name does
+               not include LNAMES.
+
+  LOGPREBUILD  Full pathname of the log file. Default is
+               $TOP/LOG/prebuild.<n>, where <n> is the first unused
+               integer
+
+  LSSMRG       If not set, user is prompted before the CMVC source server 
+	       merge. If set,the value is used and no prompt is given.
+               'y' will merge the delta tree with the CMVC source server.
+               'n' will not merge the delta.
+
+  NODENAMES_NODE
+               Source name of release directory.
+
+  NODENAMES_PRIORITIES
+               Priorities tracks must be to be acceptable for this build.
+
+  PREBUILD_SAVE_REPLACED_SRC
+               If set to 'Yes', prebuild will, for each release processed,
+               backup the files which will be overwritten or deleted by
+               the extract.  The backup will be removed when the next level
+               is processed or when prebuild is terminated.  If, for some
+               reason the merge into the source tree fails, then prebuild
+               can attempt to restore your level for you.  Set this to 'No'
+               if you don't want to make a backup copy.  The default value
+               is 'Yes'.
+
+  PREBUILD_RUN_LEVELCHECK
+               If set to 'Yes', prebuild will, for each release processed,
+               check its associated level.  Set this to 'No' if you are
+               sure that the level is ok.  The default value is 'Yes'.
+
+  PRODUCTION_AREAS
+               Comma separated list of areas that may perform production
+               builds.  Each entry must be enclosed with single quotes.
+               No default value.  PRODUCTION_AREAS and PRODUCTION_FILE
+               cannot both be defined at the same time.
+
+               Example: PRODUCTION_AREAS="'AUS/D05','AUS/D05S'"
+
+               Note: You must enclose within double quotes so that shell
+                     does not remove the single quotes.
+
+  PRODUCTION_FILE
+               File to get list of areas that may perform production builds.
+               Default value is $BLDENV/usr/bin/production_areas.dat  Format
+               is one line composed of each area entry enclosed with single
+               quotes separated by commas. PRODUCTION_AREAS and
+               PRODUCTION_FILE cannot both be defined at the same time.
+
+  PTERM        If equal to \"aixterm\", windows are created to examine
+               log files; otherwise, pg is used.  Its is the user's
+               responsibility to be configured for X if this option is
+               used.
+
+  PTF_UPDATE
+               If set to 'yes', then prebuild will create selective fix
+               data required later in the build cycle.  Set this variable
+               to 'no' if you do not plan to create ptfs in this build
+               cycle.  The default value is 'yes'.
+
+  RELS         Releases to process.  Command line release parameters
+               override.
+
+  STATUS_FILE  Status file usually set to $TOP/HISTORY/STATUS_FILE,
+               defaults to /tmp/status.db if not set in environment.
+
+  TOP          Always set to /selfix
+
+  VERSION      If set, automatically exclude all levels whose release name
+               does not include VERSION.
+
+
+  Examples
+
+  1. Just use the defaults.
+
+     prebuild
+
+  2. Override the areas allowed to do production builds.  Users of areas
+     AUS/D05, AUS/D05S, and AUS/D07 are allowed to do production builds.
+
+     prebuild -a "'AUS/D05','AUS/D05S','AUS/D07'"
+
+     Note: You must enclose within double quotes so that shell does not
+           remove the single quotes.
+
+  3. Use another file to get areas allowed to do production builds.
+
+     prebuild -f /tmp/new_production_areas
+
+  4. Only process bos320 and gos320.
+
+     prebuild bos320 bos320
+
+
+  Input Files
+
+#include "production_areas.dat.man"
+#include "nodenames.dat.man"
+#include "hostsfile.dat.man"
+#include "bldCMVCfamily.dat.man"
+
+  Output Files
+
+#include "abstractlist.man"
+#include "all_defects.man"
+#include "changeview.man"
+#include "defects.man"
+#include "memos.man"
+#include "ptfrequisites.man"
+#include "renamelist.man"
+#include "ssXREF.man"
+#include "symptoms.man"
+
+  Related Information
+
+  $BLDENV/usr/bin/CheckSymptom            The "CheckSymptom" command. Creates
+                                          memos and symptoms file.
+  $BLDENV/usr/bin/DeleteStatus            The "DeleteStatus" command.
+  $BLDENV/usr/bin/SetStatus               The "SetStatus" command.
+  $BLDENV/usr/bin/QueryStatus             The "QueryStatus" command.
+  $BLDENV/usr/bin/bldglobalpath           The "bldglobalpath" command.
+  $BLDENV/usr/bin/bldlog                  The "bldlog" command.
+  $BLDENV/usr/bin/bldlogpath              The "bldlogpath" command.
+  $BLDENV/usr/bin/bldlogset               The "bldlogset" command.
+  $BLDENV/usr/bin/bldhostsfile		  Routines to access hostsfile.dat.
+  $BLDENV/usr/bin/chksubsys		  The "chksubsys" command.  Creates
+                                          ssXREF file.
+  $BLDENV/usr/bin/hostsfile.dat           The list of releases and their
+                                          build machines.
+  $BLDENV/usr/bin/bldnodenames            Routines to access nodenames.dat.
+  $BLDENV/usr/bin/nodenames.dat           The list of release names 
+                                          translated to directory names.
+  $BLDENV/usr/bin/production_areas.dat    The list of areas allowed to do
+                                          production builds.
+  $TOP/HISTORY/STATUS_FILE                The status file.

@@ -1,0 +1,89 @@
+#
+# @(#)35        1.3  src/bldenv/man/CheckStatus.man, bldprocess, bos412, GOLDA411a 6/1/92 11:53:23
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS:  CheckStatus man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991,1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+CheckStatus
+
+
+PURPOSE
+
+	Search the status database file for any record whose fields match
+fields specified on the command line and returns zero on successful match and 
+one on failure.
+
+
+SYNOPSIS
+
+	 CheckStatus [-a <avalue>] [-b <bvalue>] [-c <cvalue>] [-d <dvalue>]
+                     [-e <evalue>] [-f <fvalue>] [-g <gvalue>] [-h <hvalue>]
+                     [-i <ivalue>] [-j <jvalue>] filename
+
+
+DESCRIPTION
+
+	The CheckStatus command searches the status database file for any 
+record whose fields match the fields specified on the command line. CheckStatus
+always expects the last argument to be the database file where the information 
+is stored, if the filename is not specified then it checks for the value of 
+the environment variable STATUS_FILE and if not set, then it uses the default 
+file "$BLDTMP/status.db".
+	CheckStatus returns zero on a successful match  and one on errors. All 
+errors go to STDERR.
+
+
+FLAGS
+
+	-a <avalue>      The first field with the string <avalue>
+
+        -b <bvalue>      The second field with the string <bvalue>  
+
+        -c <cvalue>      The third field with the string <cvalue>  
+
+        -d <dvalue>      The fourth field with the string <dvalue>  
+
+        -e <evalue>      The fifth field with the string <evalue>  
+
+        -f <fvalue>      The sixth field with the string <fvalue>  
+
+        -g <gvalue>      The seventh field with the string <gvalue>  
+
+        -h <hvalue>      The eight field with the string <hvalue>
+	
+	-i <ivalue>      The ninth field with the string <ivalue>  
+
+        -j <jvalue>      The tenth field with the string <jvalue>  
+
+        filename        The database file where status information is stored
+
+
+EXAMPLES
+
+	1. To check for prebuild success for the cmvccommit task
+
+                CheckStatus -a prebuild -i cmvccommit -j success
+
+
+RELATED INFORMATION
+
+	The following commands
+                SetStatus
+                QueryStatus
+                DeleteStatus
+                bldsetstatus
+                bldlock
+	
+	The followinf file
+		$BLDTMP/status.db

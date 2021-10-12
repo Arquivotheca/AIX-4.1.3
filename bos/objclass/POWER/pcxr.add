@@ -1,0 +1,295 @@
+* @(#)70	1.5  src/bos/objclass/POWER/pcxr.add, cfgtty, bos41J, 9523B_all 6/1/95 10:06:43
+*
+*   ORIGINS: 27,80
+*
+*   This module contains IBM CONFIDENTIAL code. -- (IBM
+*   Confidential            when combined with the aggregated
+*   modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1995
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+PdDv:
+	type = "pcxr"
+	class = "adapter"
+	subclass = "isa"
+	prefix = "sa"
+	devid = ""
+	base = 1
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 2096
+	setno = 152
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = "cxiadd"
+	Define = "/usr/lib/methods/define_rspc"
+	Configure = "/usr/lib/methods/cfgcxma"
+	Change = "/usr/lib/methods/chggen_rspc"
+	Unconfigure = "/usr/lib/methods/ucfgcxma"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = "adapter/isa/pcxr"
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "bus_mem_addr"
+	deflt = "0xd0000"
+	values = "0x8000-0xff8000,0x8000"
+	width = "0x8000"
+	type = "B"
+	generic = "D"
+	rep = "nr"
+	nls_index = 3
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "bus_io_addr"
+	deflt = "0x324"
+	values = "0x104, 0x114, 0x124, 0x204, 0x224, 0x304, 0x324"
+	width = "4"
+	type = "O11"
+	generic = "DU"
+	rep = "nl"
+	nls_index = 4
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "driver"
+	deflt = "cxiadd"
+	values = "cxiadd"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "bios_download"
+	deflt = "/etc/microcode/sxbios.02.01"
+	values = "/etc/microcode/sxbios.02.01"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "host_download"
+	deflt = "/etc/microcode/sxfep.02.01"
+	values = "/etc/microcode/sxfep.02.01"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/isa/pcxr"
+        attribute = "load_module"
+        deflt = "/usr/lib/methods/cxload"
+        values = "/usr/lib/methods/cxload"
+        width = ""
+        type = "E"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+
+*
+* 8-port specific extension attributes for tty 
+*
+PdAt:
+        uniquetype = "adapter/isa/pcxr"
+        attribute = speed
+        deflt = 9600
+        values = "0,50,75,110,134,150,200,300,600,1200,1800,2400,4800,9600,19200,38400"
+        width = ""
+        type = E
+        generic = DU
+        rep = slm
+        nls_index = 9
+
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "onstr"
+	deflt = "\\033[5i"
+	values = ""
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "s"
+	nls_index = 10
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "offstr"
+	deflt = "\\033[4i"
+	values = ""
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "s"
+	nls_index = 11
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "maxcps"
+	deflt = "100"
+	values = "10-5000,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 12
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "maxchar"
+	deflt = "50"
+	values = "5-5000,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 13
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "bufsize"
+	deflt = "100"
+	values = "10-65535,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 14
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "forcedcd"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 15
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "fastcook"
+	deflt = "enable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 16
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "fastbaud"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "altpin"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 17
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "edelay"
+	deflt = "100"
+	values = "0-400,1"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "2200flow"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "adapter/isa/pcxr"
+	attribute = "2200print"
+	deflt = "disable"
+	values = "enable,disable"
+	width = ""
+	type = "E"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 20
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "0"
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "1"
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "2"
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "3"
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "4"
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "5"
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "6"
+
+PdCn:
+	uniquetype = "adapter/isa/pcxr"
+	connkey = "rs232"
+	connwhere = "7"
+

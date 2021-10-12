@@ -1,0 +1,23 @@
+# @(#)75 1.1 src/bos/usr/bin/setmaps/IBM-eucCN, ils-zh_CN, bos41B, 9504A 12/16/94 16:56:58
+#
+# COMPONENT_NAME: ILS-ZH_CN
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+Name : IBM-eucCN
+Type : M
+Multibyte handling : EUC
+ioctl EUC_WSET : 2:2,0:0,0:0

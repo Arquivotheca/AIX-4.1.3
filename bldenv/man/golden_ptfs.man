@@ -1,0 +1,25 @@
+# @(#)57        1.1  src/bldenv/man/golden_ptfs.man, pkgtools, bos412, GOLDA411a 12/1/93 17:30:03
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: golden_ptfs file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/HISTORY/golden_ptfs:
+        Force the packaging of all PTF's found in this file to be
+        golden updates (mediatype "G").  Comments begin with a "#".
+
+	Format:
+                <ptf>
+                <ptf>
+                  .
+                  .

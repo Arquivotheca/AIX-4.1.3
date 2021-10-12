@@ -1,0 +1,4 @@
+for i in tok0 tok1 fddi0 fddi1 ent0 ent1
+do
+   /usr/lib/methods/ucfgcie -l $i
+done

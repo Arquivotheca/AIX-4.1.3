@@ -1,0 +1,87 @@
+#
+# @(#)38        1.1  src/bldenv/man/cptools.man, bldtools, bos412, GOLDA411a 5/11/93 16:16:44
+#
+#  COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#  FUNCTIONS: cptools man page.
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  cptools Command
+  
+  
+  Purpose
+  
+  The cptools tools command is used to copy the current build environment
+  from the production build machine to selected area build machines and
+  afs.
+
+
+  Syntax
+ 
+  cptools 
+
+
+  Description
+ 
+  The cptools command processes command types contained in the file 
+  $BLDENV/usr/bin/cptools.dat.  The following is a list of command
+  types cptools can process:
+     builders  - list of builders to notify each time cptools is run.
+     directory - directory to copy.
+     file      - file to copy.
+     message   - message to send to the builders each time cptools is run.
+     subject   - subject of message sent to the builders each time cptools
+                 is run.
+
+  The cptools command begins by copying all directory and file entries.
+  If the type is a directory the complete directory structure is copied.
+  A mail message is then created out of the message types with a subject
+  created out of the subject types and is sent to all builders in the
+  builders type.
+
+
+  Environment Variables
+
+  BLDENV       Full pathname to the top of the build environment.  Typical
+               value is /bldenv/3.2/prod.
+
+  BLDTMP       Temporary directory. The default is /tmp.
+
+  BUILDER      The builder's name.  The default is null.
+
+  HOSTSFILE_AFSBASE
+               AFS tree of last release name passed to bldhostsfile.  Used
+               in cptools.dat
+
+  HOSTSFILE_PROD
+               Full source tree of last release name passed to bldhostsfile.
+               Used in cptools.dat
+
+  TOP          Full pathname of the top of the tree from which the build
+               is initiated.
+
+
+  Examples
+
+   1.  Call cptools.  There are no arguments.
+
+       cptools
+  
+
+  Input Files
+
+#include "cptools.dat.man"
+
+
+  Related Information
+  
+    $BLDENV/usr/man/bldafsmerge         The "bldafsmerge" command man page.

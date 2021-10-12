@@ -1,0 +1,48 @@
+#
+# $Log: uuidname.txt,v $
+# Revision 1.1.1.1  1994/08/16  21:42:17  frank
+# Source for GRI 1.1.1f
+#
+# Revision 1.2  1993/11/24  20:03:39  ddj
+# Added iforls_2.0 uuid.
+#
+# Revision 1.1  1991/04/29  14:47:17  robin
+# Initial revision
+#
+# $EndLog$
+#
+# uuidname.txt
+#
+#   uuid <-> name mapping.
+#
+# Format:
+#   UUID name {aliases}                 [ name mapping ]
+#   # comment                           [ # in column 0 begins comment ]
+#   <white space>                       [ ignored ]
+#   #include "filename"                 [ include fully qualified pathname ]
+
+
+#
+# Define system wide names
+#
+
+000000000000.00.00.00.00.00.00.00.00    *
+333b91c50000.0d.00.00.87.84.00.00.00    glb/object
+333b91de0000.0d.00.00.87.84.00.00.00    glb/type
+333b2e690000.0d.00.00.87.84.00.00.00    glb/interface
+34b45208a000.0d.00.00.87.84.00.00.00    rgy/object
+3a12316bb000.0d.00.01.2e.df.00.00.00    rgy/heterogeneous
+34b45208b000.0d.00.00.87.84.00.00.00    rgy/test
+34b4521dd000.0d.00.00.87.84.00.00.00    rgy/type
+3727ee604000.0d.00.00.87.84.00.00.00    rgy/query
+3727ee605000.0d.00.00.87.84.00.00.00    rgy/update
+38f1fca95000.0d.00.00.24.34.00.00.00    rgy/replication
+3983c21c4000.0d.00.00.c3.66.00.00.00    wwv/interface
+3805055bd000.0d.00.00.91.5b.00.00.00    mandelbrot/block
+3805055ab000.0d.00.00.91.5b.00.00.00    mandelbrot/line
+37b06226e000.0d.00.00.be.8a.00.00.00    pi/interface
+35c442db1000.0d.00.00.3a.dd.00.00.00    print/interface
+34275946a000.0d.00.00.05.55.00.00.00    nls
+3b433e031000.0d.00.01.2e.df.00.00.00    bsd4.3_lpd
+3bd624ea7000.0d.00.00.80.9c.00.00.00    iforls_2.0
+

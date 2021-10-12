@@ -1,0 +1,40 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+How would you find a string of digits? Remember
+[1234567890][1234567890]* 
+as an expression? In this directory is a file
+"table" which contains some numbers.  On every
+line of the file, follow all numbers by the
+character '%'.  It should only take one 's' command.
+Then rewrite the file and type "ready".
+#create Ref
+  Budget Outlays
+Salaries  32%
+Equipment 40%
+Rent      13%  (incl. utilities)
+Interest   9%
+Misc.      6%
+#create table
+  Budget Outlays
+Salaries  32
+Equipment 40
+Rent      13  (incl. utilities)
+Interest   9
+Misc.      6
+#user
+#cmp table Ref
+#log
+#next
+37.2d 5

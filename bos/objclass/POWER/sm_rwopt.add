@@ -1,0 +1,1075 @@
+# @(#)99        1.3  src/bos/objclass/POWER/sm_rwopt.add, cfgmethods, bos41B, 9504A 12/13/94 14:20:22
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Read/Write Optical Drive Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1992,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined R/W Optical Drives
+#       List All Supported R/W Optical Drives
+#       Add a R/W Optical Drive
+#       Change/Show Characteristics of a R/W Optical Drive
+#       Remove a R/W Optical Drive
+#       Configure a Defined R/W Optical Drive
+#
+#       Help text Id's for R/W Optical specific helps are in the range:
+#               0420550 to 0420599
+#       This does not include menu helps.
+#
+
+#
+# List All Defined R/W Optical Drives
+# This uses a ghost dialogue to list all the defined R/W Optical drives.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsdomd"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined R/W Optical Drives"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 601
+    cmd_to_exec               = "lsdev -C -c rwoptical"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800111"
+    help_msg_loc              = ""
+
+#
+# List All Supported R/W Optical Drives
+# This uses a ghost dialogue to list all the Predefined R/W Optical drives.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lssomd"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Supported R/W Optical Drives"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25 
+    name_msg_id               = 602 
+    cmd_to_exec               = "lsdev -P -c rwoptical -F \"type subclass description\""
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800112"
+    help_msg_loc              = ""
+
+#
+# Add a R/W Optical Drive
+# This allows a R/W Optical drive to be added by defining and configuring it.
+# There are two name selectors followed by the dialogue.  The first
+# name selector is used to put up a list of Predefined R/W Optical drives for 
+# the user to select from.  The second name selector puts up a list of
+# defined adapters which can have the selected type of R/W Optical drive
+# attached to it.  The dialogue then puts up a list of all the user
+# configurable attributes.
+
+# Select type of R/W Optical
+sm_name_hdr:
+    id                        = "makomd"
+    next_id                   = "makomd_"
+    option_id                 = "rwopt_predef_opt"
+    has_name_select           = "n"
+    name                      = "Add a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 603 
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+class () # str1 str2 str3\n\
+{\n\
+echo $1 | sed 's/^\\([^ ]*\\)[ ]*\\([^ ]*\\)[ ]*/\\2:\\1:\\2:/' \
+     |sed s/"scsi:osomd"/"osomd_scsi:osomd"/g \n\
+}\n\
+class "
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "_cookedname:type:subclass:desc"
+    next_type                 = "n"
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+# Name selector command option for type of R/W Optical
+sm_cmd_opt:
+    id                        = "rwopt_predef_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "R/W Optical Drive Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 436
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "lsdev -P -c rwoptical -F \"type subclass description\""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201"
+    help_msg_loc              = ""
+
+# Select parent adapter
+# There is a name selector at this level for each unique Predefined R/W Optical
+# subclass.  The Id's for these name selectors are built as follows:
+#       "makomd_xxx_yyy"
+# where xxx is the subclass and yyy will only exist for the type = osomd.
+
+# SCSI R/W Optical drive
+sm_name_hdr:
+    id                        = "makomd_scsi"
+    next_id                   = "makomd_scsi_hdr"
+    option_id                 = "makomd_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 603 
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+# Other SCSI R/W Optical drive
+sm_name_hdr:
+    id                        = "makomd_osomd_scsi"
+    next_id                   = "makomd_osomd_scsi_hdr"
+    option_id                 = "makomd_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 603 
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "makomd_parent_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter "
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There can be a unique header for each
+# predefined R/W Optical drive instance, or several drive instances may share
+# a common header.
+
+# SCSI R/W Optical drive's dialogue header.
+sm_cmd_hdr:
+    id                        = "makomd_scsi_hdr"
+    option_id                 = "rwopt_add,rwopt_common"
+    has_name_select           = "y"
+    name                      = "Add a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 603
+    cmd_to_exec               = "mkdev -c rwoptical"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c rwoptical"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+# Other SCSI R/W Optical drive's dialogue header.
+sm_cmd_hdr:
+    id                        = "makomd_osomd_scsi_hdr"
+    option_id                 = "rwopt_add,rwopt_common,rwopt_osomd_common"
+    has_name_select           = "y"
+    name                      = "Add a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 603
+    cmd_to_exec               = "mkdev -c rwoptical"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c rwoptical"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a R/W Optical Drive
+# This allows a R/W Optical drive's characteristics to be shown and, if desired,
+# changed.  First, there is a name selector used to put up a list of the
+# defined R/W Optical drives for the user to select from.  The dialogue then
+# shows all of the characteristics.
+
+# Select R/W Optical by logical name
+sm_name_hdr:
+    id                        = "chgomd"
+    next_id                   = "chgomd_"
+    option_id                 = "rwopt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 604
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\" \
+  | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\2:&/'\\
+  |sed s/"scsi:osomd"/"osomd_scsi:osomd"/g \n\
+} \n\
+xx "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:parent:port:loc:state:desc"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There is one for each unique Predefined
+# R/W Optical drive instance.  Their Id's are built as follows:
+#       "chgomd_xxx_yyy"
+# where xxx is the subclass and yyy exists only for the osomd type.
+
+# SCSI R/W Optical
+sm_cmd_hdr:
+    id                        = "chgomd_scsi"
+    option_id                 = "rwopt_chg,rwopt_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 604
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Other SCSI R/W Optical
+sm_cmd_hdr:
+    id                        = "chgomd_osomd_scsi"
+    option_id                 = "rwopt_chg,rwopt_common,rwopt_osomd_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 604
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+
+#
+# Remove a R/W Optical Drive
+# This allows a R/W Optical drive to be removed, including its definition in the
+# database, from the system.  A name selector is used to put up a list
+# of the "defined" and "configured" R/W Optical drives for the user to select
+# from.  The dialogue then uses the rmdev command to remove the selected
+# device.
+
+# Select R/W Optical by logical name
+sm_name_hdr:
+    id                        = "rmvomd"
+    next_id                   = "rmvomd_hdr"
+    option_id                 = "rwopt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 605
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvomd_hdr"
+    option_id                 = "rmvomd_opt"
+    has_name_select           = "y"
+    name                      = "Remove a R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 605
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvomd_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 435
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420550"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvomd_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = " "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "0420512"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined R/W Optical Drive
+# This allows a R/W Optical drive that is defined but not configured to be
+# configured.  A name selector is used to put up a list of the "defined"
+# R/W Optical drives for the user to select from.  The dialogue then uses the
+# mkdev command to configure the selected device.
+
+# Select R/W Optical by logical name
+sm_name_hdr:
+    id                        = "cfgomd"
+    next_id                   = "cfgomd_hdr"
+    option_id                 = "rwopt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 606
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800117"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgomd_hdr"
+    option_id                 = "cfgomd_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 606 
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800117"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgomd_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 435
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420550"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing R/W Opticals by logical name.
+# Used by: move, change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "rwopt_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 435
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c rwoptical"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add.
+# Used by: add function.
+
+# Displays R/W Optical device type.
+sm_cmd_opt:
+    id                        = "rwopt_add"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "R/W Optical Drive type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 437
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420551"
+    help_msg_loc              = ""
+
+# Displays R/W Optical device subclass.
+sm_cmd_opt:
+    id                        = "rwopt_add"
+    id_seq_num                = "002"
+    disc_field_name           = "subclass"
+    name                      = "R/W Optical Drive interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 438
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420552"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "rwopt_add"
+    id_seq_num                = "003"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420554"
+    help_msg_loc              = ""
+
+# Displays R/W Optical device's parent adapter.
+sm_cmd_opt:
+    id                        = "rwopt_add"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420553"
+    help_msg_loc              = ""
+
+# Displays connection address of R/W Optical device.
+sm_cmd_opt:
+    id                        = "rwopt_add"
+    id_seq_num                = "005"
+    disc_field_name           = ""
+    name                      = "CONNECTION address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 5
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420560"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change.
+# Used by: show/change function.
+
+# Displays the R/W Optical logical name.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "R/W Optical Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 435
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420550"
+    help_msg_loc              = ""
+
+# Displays R/W Optical device type.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "type"
+    name                      = "R/W Optical Drive type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 437
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420551"
+    help_msg_loc              = ""
+
+# Displays R/W Optical device subclass.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "subclass"
+    name                      = "R/W Optical Drive interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 438
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420552"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420554"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420555"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420405"
+    help_msg_loc              = ""
+
+# Displays R/W Optical device's parent adapter.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "007"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420553"
+    help_msg_loc              = ""
+
+# Displays connection address of R/W Optical device.
+sm_cmd_opt:
+    id                        = "rwopt_chg"
+    id_seq_num                = "008"
+    disc_field_name           = "port"
+    name                      = "Connection address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 6
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420560"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Used by: add and show/change functions.
+
+# Display the reserve device attribute.
+sm_cmd_opt:
+    id                        = "rwopt_common"
+    id_seq_num                = "010"
+    disc_field_name           = "reserve_lock"
+    name                      = "RESERVE device on open"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 2
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a reserve_lock="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420561"
+    help_msg_loc              = ""
+
+# Display the prevent eject attribute.
+sm_cmd_opt:
+    id                        = "rwopt_common"
+    id_seq_num                = "020"
+    disc_field_name           = "prevent_eject"
+    name                      = "PREVENT ejection of media when open"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 3 
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a prevent_eject="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420513"
+    help_msg_loc              = ""
+
+# Set read time out attribute for osomd.
+sm_cmd_opt:
+    id                        = "rwopt_osomd_common"
+    id_seq_num                = "030"
+    disc_field_name           = "rw_timeout"
+    name                      = "READ/WRITE time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 34
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a rw_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c rwoptical -a rw_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420570"
+    help_msg_loc              = ""
+
+
+# Set start unit time out attribute for osomd.
+sm_cmd_opt:
+    id                        = "rwopt_osomd_common"
+    id_seq_num                = "040"
+    disc_field_name           = "start_timeout"
+    name                      = "START unit time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 35
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a start_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c rwoptical -a start_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420573"
+    help_msg_loc              = ""
+
+# Set reassign unit time out attribute for osomd.
+sm_cmd_opt:
+    id                        = "rwopt_osomd_common"
+    id_seq_num                = "050"
+    disc_field_name           = "reassign_to"
+    name                      = "REASSIGN time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 36
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a reassign_to="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c rwoptical -a reassign_to -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420572"
+    help_msg_loc              = ""
+
+# Set format unit time out attribute for osomd.
+sm_cmd_opt:
+    id                        = "rwopt_osomd_common"
+    id_seq_num                = "060"
+    disc_field_name           = "fmt_timeout"
+    name                      = "FORMAT unit time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 37
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a fmt_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c rwoptical -a fmt_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420571"
+    help_msg_loc              = ""
+

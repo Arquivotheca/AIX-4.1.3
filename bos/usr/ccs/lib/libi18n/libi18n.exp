@@ -1,0 +1,26 @@
+* @(#)94	1.1  src/bos/usr/ccs/lib/libi18n/libi18n.exp, libi18n, bos411, 9428A410j 8/24/93 11:01:51
+*
+*   COMPONENT_NAME: LIBI18N
+*
+*   FUNCTIONS: 
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+layout_object_create
+layout_object_free
+layout_object_transform
+wcslayout_object_transform
+layout_object_editshape
+wcslayout_object_editshape
+layout_object_shapeboxchars
+layout_object_getvalue
+layout_object_setvalue

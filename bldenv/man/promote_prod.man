@@ -1,0 +1,113 @@
+######################################################################
+#  @(#)78        1.2  src/bldenv/man/promote_prod.man, pkgtools, bos412, GOLDA411a 6/24/93 13:41:27
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: PTF_filename
+#		PTFfilename
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# promote_prod.man
+#
+# Change log:
+#    10/22/91-wt-added header
+######################################################################
+  promote_prod Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+    Moves CCSS format PTFs to production server
+    and updates server index files appropriately.
+    No requisite checking is done.
+
+
+  Syntax
+
+    promote_prod  -b Build_dirname [-p Prod_dirname]
+                    [-s Ship_dirname] [-n] [-h | -?]  PTFfilename(s)
+
+
+  Description
+
+    Moves PTF and updates server index files.
+    No requisite checking is done.
+
+
+  Flags
+
+    -s ship_directory    Path to the 'ship' server.
+                         Normally picked up from 32_pkg_environment.
+
+    -p prod_directory    Path to the 'production' server.
+                         Normally picked up from 32_pkg_environment.
+
+    -b build_directory   Path to the 'build' server.
+
+    -n                   No execute flag.  Before requisite checking was
+                         disabled this option could be used to identify
+                         the group of PTFs that reference each other.
+
+    -h | -?              Print help message and exit regardless of
+                         other options specified.
+
+    PTF_filename(s)      List of PTFs to be promoted or checked.
+                         For example:
+                                U0000257.ptf  U0000032.ptf U000001.ptf
+                                           < or >
+                                U0000257 U0000032 U000001
+
+
+  Exit
+
+    Without -n option:
+      If there are missing requisites:  Error:  non-zero return code.
+      No missing requisites:  Successful:  return code of zero.
+
+    With -n option:
+      If there is a program error: Non-zero return code.
+      No program error: Return code of zero.
+
+
+  File
+
+    None
+
+
+  Examples
+
+    1. 'promoteprod  -b build -n u40000 u93458 u93459.ptf'
+
+       List the requisite PTFs required to promote
+       PTFs u40000, u93458, and u93459.
+       No promotion of the ptfs would occur.
+
+    2. 'promoteprod  -b build  u40000.ptf u93458.ptf u93459.ptf'
+
+       Promote the PTFs u40000, u93458, and u93459.
+       All PTFs requisited by them would already have
+       to be on the prod or ship servers.
+
+
+  Implementation Specifics
+
+    None
+
+
+  Related Information
+
+    prereq_list

@@ -1,0 +1,187 @@
+static char sccsid[] = "@(#)73  1.3  src/bos/usr/lib/nls/loc/iconv/fold_lower/KSC5601.1987-GL_IBM-eucKR.c, cmdiconv, bos411, 9428A410j 8/26/93 01:14:33";
+/*
+ *   COMPONENT_NAME:	CMDICONV
+ *
+ *   FUNCTIONS:		_iconv_exec
+ *			_iconv_close
+ *			init
+ *			instantiate
+ *
+ *   ORIGINS: 27
+ *
+ *   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ *   combined with the aggregated modules for this product)
+ *                    SOURCE MATERIALS
+ *
+ *   (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+ *   All Rights Reserved
+ *   US Government Users Restricted Rights - Use, duplication or
+ *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+#include <stdlib.h>
+#include <iconv.h>
+#include "fold_lower.h"
+#include "iconvEUCkr.h"
+
+/*
+ *   NAME:      _iconv_exec
+ *
+ *   FUNCTION:  Conversion.
+ *
+ *   RETURNS:   >= 0    - Number of substitutions.
+ *              -1      - Error.
+ *
+ *   NOTE:      This routine returns always 0 on successful condition,
+ *              does actually not count number of substitutions.
+ */
+
+static	size_t	_iconv_exec (
+	_LC_fold_lower_iconv_t *cd,
+	uchar_t **inbuf,  size_t *inbytesleft,
+	uchar_t **outbuf, size_t *outbytesleft) {
+
+	uchar_t		*in, *out, *e_in, *e_out;
+	int		err_flag = FALSE;
+
+
+	if ((cd == NULL) || (cd == -1)) {
+		errno =	EBADF; return -1;
+	}
+	if (inbuf == NULL) return 0;
+
+	e_in  = (in  = *inbuf)  + *inbytesleft;
+	e_out =	(out = *outbuf)	+ *outbytesleft;
+
+	while (1) {
+		if (e_in - in <	2) {
+			if (e_in - in == 1) {
+				if (in[0] < 0x21 || 0x7d < in[0] || in[0] == 0x49 ||
+				   (in[0] > 0x2c && in[0] < 0x30)) {
+					errno =	EILSEQ;	err_flag = TRUE;
+				}
+				else {
+					errno =	EINVAL;	err_flag = TRUE;
+				}
+			}
+			break;
+		}
+		if (in[0] >= 0x30) {
+			if (in[1] < 0x21 || in[0] == 0x49 ||
+			    in[0] > 0x7d || in[1] > 0x7e) {
+				errno =	EILSEQ;	err_flag = TRUE; break;
+			}
+
+		}
+		else if	(in[0] > 0x20 && in[0] < 0x2d) {
+			int		found =	0;
+			ushort_t	code;
+			int		i, high, low;
+
+			if (in[1] < 0x21) {
+				errno =	EILSEQ;	err_flag = TRUE; break;
+			} 
+			low = 0;
+			high = sizeof (KSC5601_special)	/
+			       sizeof (KSC5601_special[0]);
+			code = (in[0] << 8 & 0xff00) + (in[1] &	0xff);
+			code |=	0x8080 ;
+			while (low <= high) {
+				i = low	+ high >> 1;
+				if (code < KSC5601_special[i])
+					high = i - 1;
+				else if	(code >	KSC5601_special[i])
+					low = i	+ 1;
+				else {
+					found =	1;
+					break;
+				}
+			}
+			if (!found) {
+				errno =	EILSEQ;	err_flag = TRUE; break;
+			}
+		}
+		else {
+			errno =	EILSEQ;	err_flag = TRUE; break;
+		}
+		if (e_out - out	< 2) {
+			errno =	E2BIG; err_flag = TRUE; break;
+		}
+		*out = *in | 0x80;
+		*(out +	1) = *(in + 1) | 0x80;
+		in += 2;
+		out += 2;
+	}
+	*inbuf        = in;
+	*outbuf	      = out;
+	*inbytesleft  = e_in - in;
+	*outbytesleft =	e_out -	out;
+
+	if (!err_flag) return 0;
+	else           return -1;
+}
+
+/*
+ *   NAME:      _iconv_close
+ *
+ *   FUNCTION:  Termination.
+ *
+ *   RETURNS:   0       - Successful completion.
+ *              -1      - Error.
+ */
+
+static	int	_iconv_close (iconv_t cd) {
+
+	if ((cd != NULL) && (cd != -1)) {
+		free (cd);
+		return 0;
+	}
+	else {
+		errno =	EBADF;
+		return -1;
+	}
+}
+
+/*
+ *   NAME:      init
+ *
+ *   FUNCTION:  Initialization.
+ *
+ *   RETURNS:   Pointer to a descriptor, or -1 if error.
+ */
+
+static	_LC_fold_lower_iconv_t	*init (
+	_LC_core_iconv_t	*core_cd,
+	uchar_t			*toname,
+	uchar_t			*fromname) {
+
+	_LC_fold_lower_iconv_t	*cd;
+
+	if ((cd = malloc (
+		sizeof (_LC_fold_lower_iconv_t))) == NULL)
+		return (_LC_fold_lower_iconv_t*)-1;
+	cd->core = *core_cd;
+	return cd;
+}
+
+/*
+ *   NAME:      instantiate
+ *
+ *   FUNCTION:  Instantiation method of this converter.
+ *
+ *   RETURNS:   Pointer to the descriptor.
+ */
+
+_LC_core_iconv_t	*instantiate(void) {
+
+	static _LC_core_iconv_t	cd;
+
+	cd.hdr.__magic   = _LC_MAGIC;
+	cd.hdr.__version = _LC_VERSION;
+	cd.hdr.__type_id = _LC_ICONV;
+	cd.hdr.__size    = sizeof (_LC_core_iconv_t);
+	cd.init          = (_LC_core_iconv_t*(*)())init;
+	cd.exec          = (size_t(*)())_iconv_exec;
+	cd.close         = (int(*)())_iconv_close;
+	return &cd;
+}

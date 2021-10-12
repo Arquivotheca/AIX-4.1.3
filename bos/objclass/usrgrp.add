@@ -1,0 +1,4123 @@
+# @(#)38        1.29  src/bos/objclass/usrgrp.add, cmdsuser, bos411, 9428A410j 6/24/94 16:23:02
+#
+# COMPONENT_NAME: CMDSUSER (SMIT DIALOGS)
+#
+# FUNCTIONS: none
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_cmd_hdr:
+        id                       ="lsuser"
+        option_id                =""
+        has_name_select          ="n"
+        name                     ="List All Users"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =1
+        cmd_to_exec              ="lsuser -c -a id home ALL | sed '/^#.*/d' | tr ':' '\\011'"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="y"
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              =""
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="mkuser"
+        option_id                ="user_add"
+        has_name_select          ="n"
+        name                     ="Add a User"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =166
+        cmd_to_exec              ="mkuser"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          ="lsuser -D"
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="1800168"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="01"
+        disc_field_name          ="_rawname"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004031"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="02"
+        disc_field_name          ="id"
+        name                     ="User ID"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =6
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 ="n"
+        prefix                   ="id="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004042"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="03"
+        disc_field_name          ="admin"
+        name                     ="ADMINISTRATIVE USER?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =4
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="admin="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="300404K"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="04"
+        disc_field_name          ="pgrp"
+        name                     ="Primary GROUP"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =8
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="pgrp="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004044"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="05"
+        disc_field_name          ="groups"
+        name                     ="Group SET"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =9
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="groups="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004045"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="06"
+        disc_field_name          ="admgroups"
+        name                     ="ADMINISTRATIVE GROUPS"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =10
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="admgroups="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004046"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="07"
+        disc_field_name          ="su"
+        name                     ="Another user can SU TO USER?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =15
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="su="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="300404Q"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="08"
+        disc_field_name          ="sugroups"
+        name                     ="SU GROUPS"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =11
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="sugroups="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004047"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="09"
+        disc_field_name          ="home"
+        name                     ="HOME directory"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =12
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="home="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404N"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="10"
+        disc_field_name          ="shell"
+        name                     ="Initial PROGRAM"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =13
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="shell="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404P"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="11"
+        disc_field_name          ="gecos"
+        name                     ="User INFORMATION"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =14
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="gecos="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404M"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="12"
+        disc_field_name          ="expires"
+        name                     ="EXPIRATION date (MMDDhhmmyy)"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =30
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="expires="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404J"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="13"
+        disc_field_name          ="account_locked"
+        name                     ="Is this user ACCOUNT LOCKED?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =42
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="account_locked="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004303"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="14"
+        disc_field_name          ="login"
+        name                     ="User can LOGIN?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =7
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="login="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004043"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="15"
+        disc_field_name          ="rlogin"
+        name                     ="User can LOGIN REMOTELY?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =16
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="rlogin="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="300404O"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="16"
+        disc_field_name          ="logintimes"
+        name                     ="Allowed LOGIN TIMES"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =56
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="logintimes="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004304"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="17"
+        disc_field_name          ="loginretries"
+        name                     ="\
+Number of FAILED LOGINS before\n     user account is locked"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =57
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="loginretries="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004305"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="18"
+        disc_field_name          ="SYSTEM"
+        name                     ="Login AUTHENTICATION GRAMMAR"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =58
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="SYSTEM="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004306"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="19"
+        disc_field_name          ="ttys"
+        name                     ="Valid TTYs"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =19
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="ttys="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004049"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+    id                        ="user_add"
+    id_seq_num                = "20"
+    disc_field_name           = "pwdwarntime"
+    name                      = "Days to WARN USER before password expires"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 43
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "pwdwarntime="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004307"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "21"
+    disc_field_name           = "pwdchecks"
+    name                      = "Password CHECK METHODS"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 44
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "pwdchecks="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004402"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "22"
+    disc_field_name           = "dictionlist"
+    name                      = "Password DICTIONARY FILES"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 45
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "dictionlist="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004403"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "23"
+    disc_field_name           = "histsize"
+    name                      = "NUMBER OF PASSWORDS before reuse"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 46
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "histsize="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004404"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "24"
+    disc_field_name           = "histexpire"
+    name                      = "WEEKS before password reuse"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 47
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "histexpire="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004405"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "25"
+    disc_field_name           = "maxexpired"
+    name                      = "Weeks between password EXPIRATION and LOCKOUT"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 48
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxexpired="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004406"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "26"
+    disc_field_name           = "maxage"
+    name                      = "Password MAX. AGE"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 49
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxage="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004407"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "27"
+    disc_field_name           = "minage"
+    name                      = "Password MIN. AGE"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 50
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minage="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004408"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "28"
+    disc_field_name           = "minlen"
+    name                      = "Password MIN. LENGTH"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 51
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minlen="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004409"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "29"
+    disc_field_name           = "minalpha"
+    name                      = "Password MIN. ALPHA characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 52
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minalpha="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004410"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "30"
+    disc_field_name           = "minother"
+    name                      = "Password MIN. OTHER characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 53
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minother="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004411"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "31"
+    disc_field_name           = "maxrepeats"
+    name                      = "Password MAX. REPEATED characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 54
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxrepeats="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004412"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "32"
+    disc_field_name           = "mindiff"
+    name                      = "Password MIN. DIFFERENT characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 55
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "mindiff="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004413"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_add"
+    id_seq_num                = "33"
+    disc_field_name           = "registry"
+    name                      = "Password REGISTRY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 59
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "registry="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004414"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="34"
+        disc_field_name          ="fsize"
+        name                     ="MAX. FILE size"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =23
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="fsize="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404D"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="35"
+        disc_field_name          ="cpu"
+        name                     ="MAX. CPU time"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =24
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="cpu="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404E"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="36"
+        disc_field_name          ="data"
+        name                     ="MAX. DATA segment"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =25
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="data="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404F"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="37"
+        disc_field_name          ="stack"
+        name                     ="MAX. STACK size"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =26
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="stack="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404G"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="38"
+        disc_field_name          ="core"
+        name                     ="MAX. CORE file size"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =27
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="core="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404H"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="39"
+        disc_field_name          ="umask"
+        name                     ="File creation UMASK"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =29
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="umask="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404R"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="40"
+        disc_field_name          ="auditclasses"
+        name                     ="AUDIT classes"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =20
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="auditclasses="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="grep -p "^classes:" /etc/security/audit/config 2>/dev/null | sed -n 's/ //g;s/	//g;s/=.*$//p'"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404A"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="41"
+        disc_field_name          ="tpath"
+        name                     ="TRUSTED PATH?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =18
+        op_type                  ="l"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="tpath="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="\
+echo nosak
+echo on
+echo notsh
+echo always
+"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004048"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="42"
+        disc_field_name          ="auth1"
+        name                     ="PRIMARY authentication method"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =21
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="auth1="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404B"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_add"
+        id_seq_num               ="43"
+        disc_field_name          ="auth2"
+        name                     ="SECONDARY authentication method"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =22
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="auth2="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404C"
+        help_msg_loc             =""
+
+sm_name_hdr:
+        id                       ="chuser"
+        next_id                  ="user_change.hdr"
+        option_id                ="user_change.name_select"
+        name                     ="Change / Show Characteristics of a User"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =167
+        type                     ="j"
+        ghost                    ="n"
+        cmd_to_classify          =""
+        cmd_to_classify_postfix  ="_rawname"
+        raw_field_name           ="_rawname"
+        cooked_field_name        ="_cookedname"
+        next_type                ="d"
+        help_msg_id              ="1800169"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="user_change.hdr"
+        option_id                ="user_change"
+        has_name_select          ="y"
+        name                     ="Change / Show Characteristics of a User"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =167
+        cmd_to_exec              ="x() {
+if [ $# -ge 2 ] 
+then
+	for i in \"$@\" 
+	do
+		spam=\"$spam \\\"$i\\\"\"
+	done
+	eval chuser $spam
+fi
+}
+x"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          ="lsuser -c "
+        cmd_to_discover_postfix  ="_rawname"
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="1800169"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change.name_select"
+        id_seq_num               ="0"
+        disc_field_name          ="name"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="01"
+        disc_field_name          ="name"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  =""
+        entry_type               ="n"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="02"
+        disc_field_name          ="id"
+        name                     ="User ID"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =6
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 ="n"
+        prefix                   ="id="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004042"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="03"
+        disc_field_name          ="admin"
+        name                     ="ADMINISTRATIVE USER?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =4
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="admin="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="300404K"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="04"
+        disc_field_name          ="pgrp"
+        name                     ="Primary GROUP"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =8
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="pgrp="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004044"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="05"
+        disc_field_name          ="groups"
+        name                     ="Group SET"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =9
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="groups="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004045"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="06"
+        disc_field_name          ="admgroups"
+        name                     ="ADMINISTRATIVE GROUPS"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =10
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="admgroups="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004046"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="07"
+        disc_field_name          ="su"
+        name                     ="Another user can SU TO USER?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =15
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="su="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="300404Q"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="08"
+        disc_field_name          ="sugroups"
+        name                     ="SU GROUPS"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =11
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="sugroups="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004047"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="09"
+        disc_field_name          ="home"
+        name                     ="HOME directory"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =12
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="home="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404N"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="10"
+        disc_field_name          ="shell"
+        name                     ="Initial PROGRAM"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =13
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="shell="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404P"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="11"
+        disc_field_name          ="gecos"
+        name                     ="User INFORMATION"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =14
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="gecos="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404M"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="12"
+        disc_field_name          ="expires"
+        name                     ="EXPIRATION date (MMDDhhmmyy)"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =30
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="expires="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404J"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="13"
+        disc_field_name          ="account_locked"
+        name                     ="Is this user ACCOUNT LOCKED?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =42
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="account_locked="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004303"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="14"
+        disc_field_name          ="login"
+        name                     ="User can LOGIN?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =7
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="login="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004043"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="15"
+        disc_field_name          ="rlogin"
+        name                     ="User can LOGIN REMOTELY?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =16
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="rlogin="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="300404O"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="16"
+        disc_field_name          ="logintimes"
+        name                     ="Allowed LOGIN TIMES"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =56
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="logintimes="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004304"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="17"
+        disc_field_name          ="loginretries"
+        name                     ="\
+Number of FAILED LOGINS before\n     user account is locked"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =57
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="loginretries="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004305"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="18"
+        disc_field_name          ="SYSTEM"
+        name                     ="Login AUTHENTICATION GRAMMAR"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =58
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="SYSTEM="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004306"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="19"
+        disc_field_name          ="ttys"
+        name                     ="Valid TTYs"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =19
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="ttys="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004049"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+    id                        ="user_change"
+    id_seq_num                = "20"
+    disc_field_name           = "pwdwarntime"
+    name                      = "Days to WARN USER before password expires"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 43
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "pwdwarntime="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004307"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "21"
+    disc_field_name           = "pwdchecks"
+    name                      = "Password CHECK METHODS"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 44
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "pwdchecks="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004402"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "22"
+    disc_field_name           = "dictionlist"
+    name                      = "Password DICTIONARY FILES"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 45
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "dictionlist="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004403"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "23"
+    disc_field_name           = "histsize"
+    name                      = "NUMBER OF PASSWORDS before reuse"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 46
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "histsize="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004404"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "24"
+    disc_field_name           = "histexpire"
+    name                      = "WEEKS before password reuse"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 47
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "histexpire="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004405"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "25"
+    disc_field_name           = "maxexpired"
+    name                      = "Weeks between password EXPIRATION and LOCKOUT"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 48
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxexpired="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004406"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "26"
+    disc_field_name           = "maxage"
+    name                      = "Password MAX. AGE"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 49
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxage="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004407"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "27"
+    disc_field_name           = "minage"
+    name                      = "Password MIN. AGE"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 50
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minage="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004408"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "28"
+    disc_field_name           = "minlen"
+    name                      = "Password MIN. LENGTH"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 51
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minlen="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004409"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "29"
+    disc_field_name           = "minalpha"
+    name                      = "Password MIN. ALPHA characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 52
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minalpha="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004410"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "30"
+    disc_field_name           = "minother"
+    name                      = "Password MIN. OTHER characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 53
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minother="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004411"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "31"
+    disc_field_name           = "maxrepeats"
+    name                      = "Password MAX. REPEATED characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 54
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxrepeats="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004412"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "32"
+    disc_field_name           = "mindiff"
+    name                      = "Password MIN. DIFFERENT characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 55
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "mindiff="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004413"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "user_change"
+    id_seq_num                = "33"
+    disc_field_name           = "registry"
+    name                      = "Password REGISTRY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 59
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "registry="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004414"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="34"
+        disc_field_name          ="fsize"
+        name                     ="MAX. FILE size"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =23
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="fsize="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404D"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="35"
+        disc_field_name          ="cpu"
+        name                     ="MAX. CPU time"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =24
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="cpu="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404E"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="36"
+        disc_field_name          ="data"
+        name                     ="MAX. DATA segment"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =25
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="data="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404F"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="37"
+        disc_field_name          ="stack"
+        name                     ="MAX. STACK size"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =26
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="stack="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404G"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="38"
+        disc_field_name          ="core"
+        name                     ="MAX. CORE file size"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =27
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="core="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404H"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="39"
+        disc_field_name          ="umask"
+        name                     ="File creation UMASK"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =29
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="umask="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404R"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="40"
+        disc_field_name          ="auditclasses"
+        name                     ="AUDIT classes"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =20
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="auditclasses="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="grep -p "^classes:" /etc/security/audit/config 2>/dev/null | sed -n 's/ //g;s/	//g;s/=.*$//p'"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404A"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="41"
+        disc_field_name          ="tpath"
+        name                     ="TRUSTED PATH?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =18
+        op_type                  ="l"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="tpath="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="\
+echo on
+echo notsh
+echo nosak
+echo always
+"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004048"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="42"
+        disc_field_name          ="auth1"
+        name                     ="PRIMARY authentication method"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =21
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="auth1="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404B"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_change"
+        id_seq_num               ="43"
+        disc_field_name          ="auth2"
+        name                     ="SECONDARY authentication method"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =22
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="auth2="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="300404C"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="rmuser"
+        option_id                ="user_remove"
+        has_name_select          ="n"
+        name                     ="Remove a User from the System"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =31
+        cmd_to_exec              ="rmuser "
+        ask                      ="y"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="1800170"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_remove"
+        id_seq_num               ="01"
+        disc_field_name          =""
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004081"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="user_remove"
+        id_seq_num               ="02"
+        disc_field_name          =""
+        name                     ="Remove AUTHENTICATION information?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =32
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 ="y"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="yes,no"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =69
+        aix_values               ="-p,"
+        help_msg_id              ="3004082"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="lsgroup"
+        option_id                =""
+        has_name_select          ="n"
+        name                     ="List All Groups"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =33
+        cmd_to_exec              ="lsgroup -c ALL | sed '/^#.*/d' | tr ':' '\\011'"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="y"
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="30040A0"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="mkgroup"
+        option_id                ="group_add"
+        has_name_select          ="n"
+        name                     ="Add a Group"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =170
+        cmd_to_exec              ="mkgroup"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="1800172"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_add"
+        id_seq_num               ="01"
+        disc_field_name          =""
+        name                     ="Group NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =35
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004051"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_add"
+        id_seq_num               ="02"
+        disc_field_name          =""
+        name                     ="ADMINISTRATIVE group?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =36
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 ="y"
+        prefix                   ="-"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =1
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="a,A"
+        help_msg_id              ="3004063"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_add"
+        id_seq_num               ="03"
+        disc_field_name          =""
+        name                     ="Group ID"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =38
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="id="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004062"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_add"
+        id_seq_num               ="04"
+        disc_field_name          =""
+        name                     ="USER list"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =39
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="users="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004064"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_add"
+        id_seq_num               ="05"
+        disc_field_name          =""
+        name                     ="ADMINISTRATOR list"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =40
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="adms="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004065"
+        help_msg_loc             =""
+
+sm_name_hdr:
+        id                       ="chgroup"
+        next_id                  ="group_change.hdr"
+        option_id                ="group_change.name_select"
+        name                     ="Change Group Attributes"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =37
+        type                     ="j"
+        ghost                    ="n"
+        cmd_to_classify          =""
+        cmd_to_classify_postfix  ="_rawname"
+        raw_field_name           ="_rawname"
+        cooked_field_name        ="_cookedname"
+        next_type                ="d"
+        help_msg_id              ="1800173"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="group_change.hdr"
+        option_id                ="group_change"
+        has_name_select          ="y"
+        name                     ="Change Group Attributes"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =37
+        cmd_to_exec              ="x(){
+CHGROUP=chgroup
+CGD=0
+CGMD=0
+CGAD=0
+for arg in \"$@\"; do
+case \"$arg\" in
+    id=*|admin=*)
+	 CHGROUP=\"$CHGROUP $arg\"
+	 CGD=1
+	 ;;
+    users=*)
+ 	 CHGRPMEM=\"chgrpmem -m = `echo $arg | sed -e 's/users=//' -e 's/ //g'`\"
+	 CGMD=1
+	 ;;
+    adms=*)
+ 	 CHGRPADM=\"chgrpmem -a = `echo $arg | sed -e 's/adms=//' -e 's/ //g'`\"
+	 CGAD=1
+	 ;;
+esac
+done
+rc=0
+if [ $CGMD = 1 ]; then
+	eval \"$CHGRPMEM $arg\"
+	[ $? != 0 ] && rc=1
+fi
+if [ $CGAD = 1 ]; then
+	eval \"$CHGRPADM $arg\"
+	[ $? != 0 ] && rc=1
+fi
+if [ $CGD = 1 ]; then
+	eval \"$CHGROUP $arg\"
+	[ $? != 0 ] && rc=1
+fi
+exit $rc
+}
+x"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    =""
+        cmd_to_discover          ="lsgroup -c"
+        cmd_to_discover_postfix  ="_rawname"
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="1800173"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_change.name_select"
+        id_seq_num               ="0"
+        disc_field_name          =""
+        name                     ="Group NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =35
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="y"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004061"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_change"
+        id_seq_num               ="01"
+        disc_field_name          ="_rawname"
+        name                     ="Group NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =35
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="y"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004061"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_change"
+        id_seq_num               ="02"
+        disc_field_name          ="id"
+        name                     ="Group ID"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =38
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="id="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004062"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_change"
+        id_seq_num               ="03"
+        disc_field_name          ="admin"
+        name                     ="ADMINISTRATIVE group?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =36
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="admin="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004063"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_change"
+        id_seq_num               ="04"
+        disc_field_name          ="users"
+        name                     ="USER list"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =39
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="users="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004064"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_change"
+        id_seq_num               ="05"
+        disc_field_name          ="adms"
+        name                     ="ADMINISTRATOR list"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =40
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="adms="
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             =","
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004065"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="rmgroup"
+        option_id                ="group_remove"
+        has_name_select          ="n"
+        name                     ="Remove a Group from the System"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =41
+        cmd_to_exec              ="rmgroup "
+        ask                      ="y"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="1800174"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="group_remove"
+        id_seq_num               ="01"
+        disc_field_name          =""
+        name                     ="Group NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =35
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="y"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsgroup -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004071"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="passwd"
+        option_id                ="passwd"
+        has_name_select          ="n"
+        name                     ="Change a User's Password"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =37
+        cmd_to_exec              ="x() {
+passwd $1
+if [ $? -ne 0 ]
+then
+        dspmsg -s 3 smit.cat 71 'Press Enter to continue.'
+        read
+fi
+}
+x"
+        ask                      =""
+        exec_mode                ="i"
+        ghost                    ="n"
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="3004400"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="passwd"
+        id_seq_num               ="01"
+        disc_field_name          =""
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="n"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004091"
+        help_msg_loc             =""
+
+sm_name_hdr:
+        id                       ="lockuser"
+        next_id                  ="lockuser.hdr"
+        option_id                ="lockuser.name_select"
+        name                     ="Lock / Unlock a User's Account"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =642
+        type                     ="j"
+        ghost                    ="n"
+        cmd_to_classify          =""
+        cmd_to_classify_postfix  ="_rawname"
+        raw_field_name           ="_rawname"
+        cooked_field_name        ="_cookedname"
+        next_type                ="d"
+        help_msg_id              ="3004300"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="lockuser.name_select"
+        id_seq_num               ="0"
+        disc_field_name          ="name"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="lockuser.hdr"
+        option_id                ="lockuser_opt"
+        has_name_select          ="y"
+        name                     ="Lock / Unlock a User's Account"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =642
+        cmd_to_exec              ="x() {
+if [ $# -ge 2 ]
+then
+        for i in \"$@\"
+        do
+                args=\"$args \\\"$i\\\"\"
+        done
+        eval chuser $args
+fi
+}
+x"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          ="lsuser -c "
+        cmd_to_discover_postfix  ="_rawname"
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="3004300"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="lockuser_opt"
+        id_seq_num               ="010"
+        disc_field_name          ="_rawname"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  =""
+        entry_type               ="n"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="lockuser_opt"
+        id_seq_num               ="020"
+        disc_field_name          ="account_locked"
+        name                     ="Is this user ACCOUNT LOCKED?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =42
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="account_locked="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004303"
+        help_msg_loc             =""
+
+sm_name_hdr:
+    id                        = "passwdattrs"
+    next_id                   = "passwdattrs.hdr"
+    option_id                 = "passwdattrs.name_slct"
+    name                      = "Change / Show Password Attributes for a User"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 641
+    type                      = "j"
+    ghost                     = "n"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = "_rawname"
+    cooked_field_name         = "_cookedname"
+    next_type                 = "d"
+    help_msg_id               = "3004401"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+     id                       ="passwdattrs.hdr"
+     option_id                ="passwdattrs.chg"
+     has_name_select          ="y"
+     name                     ="Change / Show Password Attributes for a User"
+     name_msg_file            ="smit.cat"
+     name_msg_set             =25
+     name_msg_id              =641
+     cmd_to_exec              ="x() {
+if [ $# -ge 2 ]
+then
+        for i in \"$@\"
+        do
+                args=\"$args \\\"$i\\\"\"
+        done
+        eval chuser $args
+fi
+}
+x"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          ="lsuser -c "
+        cmd_to_discover_postfix  ="_rawname"
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="3004401"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="passwdattrs.name_slct"
+        id_seq_num               ="0"
+        disc_field_name          ="name"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="passwdattrs.chg"
+        id_seq_num               ="01"
+        disc_field_name          ="name"
+        name                     ="User Name"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  =""
+        entry_type               ="n"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+    id                        ="passwdattrs.chg"
+    id_seq_num                = "02"
+    disc_field_name           = "pwdwarntime"
+    name                      = "Days to WARN USER before password expires"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 43
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "pwdwarntime="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004307"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "03"
+    disc_field_name           = "pwdchecks"
+    name                      = "Password CHECK METHODS"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 44
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "pwdchecks="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004402"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "04"
+    disc_field_name           = "dictionlist"
+    name                      = "Password DICTIONARY FILES"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 45
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "dictionlist="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004403"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "05"
+    disc_field_name           = "histsize"
+    name                      = "NUMBER OF PASSWORDS before reuse"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 46
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "histsize="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004404"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "06"
+    disc_field_name           = "histexpire"
+    name                      = "WEEKS before password reuse"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 47
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "histexpire="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004405"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "07"
+    disc_field_name           = "maxexpired"
+    name                      = "Weeks between password EXPIRATION and LOCKOUT"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 48
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxexpired="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004406"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "08"
+    disc_field_name           = "maxage"
+    name                      = "Password MAX. AGE"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 49
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxage="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004407"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "09"
+    disc_field_name           = "minage"
+    name                      = "Password MIN. AGE"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 50
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minage="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004408"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "10"
+    disc_field_name           = "minlen"
+    name                      = "Password MIN. LENGTH"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 51
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minlen="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004409"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "11"
+    disc_field_name           = "minalpha"
+    name                      = "Password MIN. ALPHA characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 52
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minalpha="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004410"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "12"
+    disc_field_name           = "minother"
+    name                      = "Password MIN. OTHER characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 53
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "minother="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004411"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "13"
+    disc_field_name           = "maxrepeats"
+    name                      = "Password MAX. REPEATED characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 54
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "maxrepeats="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004412"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "14"
+    disc_field_name           = "mindiff"
+    name                      = "Password MIN. DIFFERENT characters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 55
+    op_type                   = ""
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "mindiff="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004413"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "passwdattrs.chg"
+    id_seq_num                = "15"
+    disc_field_name           = "registry"
+    name                      = "Password REGISTRY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 3
+    name_msg_id               = 59
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "registry="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "3004414"
+    help_msg_loc              = ""
+
+sm_name_hdr:
+        id                       ="login_user"
+        next_id                  ="login_user.hdr"
+        option_id                ="login_user.name_select"
+        name                     ="Change / Show Login Attributes for a User"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =644
+        type                     ="j"
+        ghost                    ="n"
+        cmd_to_classify          =""
+        cmd_to_classify_postfix  ="_rawname"
+        raw_field_name           ="_rawname"
+        cooked_field_name        ="_cookedname"
+        next_type                ="d"
+        help_msg_id              ="3004301"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user.name_select"
+        id_seq_num               ="0"
+        disc_field_name          ="name"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="login_user.hdr"
+        option_id                ="login_user_opt"
+        has_name_select          ="y"
+        name                     ="Change / Show Login Attributes for a User"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =644
+        cmd_to_exec              ="x() {
+if [ $# -ge 2 ]
+then
+        for i in \"$@\"
+        do
+                args=\"$args \\\"$i\\\"\"
+        done
+        eval chuser $args
+fi
+}
+x"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          ="lsuser -c "
+        cmd_to_discover_postfix  ="_rawname"
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="3004301"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="010"
+        disc_field_name          ="_rawname"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  =""
+        entry_type               ="n"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="--"
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004041"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="020"
+        disc_field_name          ="login"
+        name                     ="User can LOGIN?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =7
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="login="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004043"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="030"
+        disc_field_name          ="rlogin"
+        name                     ="User can LOGIN REMOTELY?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =16
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="rlogin="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="300404O"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="040"
+        disc_field_name          ="ttys"
+        name                     ="Valid TTYs"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =19
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="ttys="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004049"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="050"
+        disc_field_name          ="logintimes"
+        name                     ="Allowed LOGIN TIMES"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =56
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="logintimes="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004304"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="060"
+        disc_field_name          ="account_locked"
+        name                     ="Is this user ACCOUNT LOCKED?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =42
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="account_locked="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004303"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="070"
+        disc_field_name          ="loginretries"
+        name                     ="\
+Number of FAILED LOGINS before\n     user account is locked"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =57
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="loginretries="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004305"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_user_opt"
+        id_seq_num               ="080"
+        disc_field_name          ="SYSTEM"
+        name                     ="Login AUTHENTICATION GRAMMAR"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =58
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="SYSTEM="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004306"
+        help_msg_loc             =""
+
+sm_name_hdr:
+        id                       ="login_port"
+        next_id                  ="login_port.hdr"
+        option_id                ="login_port.name_select"
+        name                     ="Change / Show Login Attributes for a Port"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =643
+        type                     ="j"
+        ghost                    ="n"
+        cmd_to_classify          =""
+        cmd_to_classify_postfix  ="_rawname"
+        raw_field_name           ="_rawname"
+        cooked_field_name        ="_cookedname"
+        next_type                ="d"
+        help_msg_id              ="3004302"
+        help_msg_loc             =""
+
+
+sm_cmd_opt:
+        id                       ="login_port.name_select"
+        id_seq_num               ="0"
+        disc_field_name          ="port"
+        name                     ="Port NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =66
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004308"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="login_port.hdr"
+        option_id                ="login_port_opt"
+        has_name_select          ="y"
+        name                     ="Change / Show Login Attributes for a Port"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =643
+        cmd_to_exec              ="chsec -f /etc/security/login.cfg"
+        cmd_to_exec              ="x() {
+if [ $# -gt 2 ]
+then
+  for i in \"$@\"
+  do
+        args=\"$args \\\"$i\\\"\"
+  done
+  eval chsec -f /etc/security/login.cfg $args
+fi
+}
+x"
+        ask                      ="n"
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          ="lssec -c -f /etc/security/login.cfg \
+-a logintimes \
+-a logindelay \
+-a logindisable \
+-a logininterval \
+-a loginreenable \
+-a port_locked \
+-s"
+        cmd_to_discover_postfix  ="_rawname"
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="3004302"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_port_opt"
+        id_seq_num               ="010"
+        disc_field_name          ="_rawname"
+        name                     ="Port NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =66
+        op_type                  =""
+        entry_type               ="n"
+        entry_size               =0
+        required                 ="+"
+        prefix                   ="-s "
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004308"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_port_opt"
+        id_seq_num               ="020"
+        disc_field_name          ="logintimes"
+        name                     ="Allowed LOGIN TIMES"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =56
+        op_type                  =""
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   ="-a logintimes="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004309"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_port_opt"
+        id_seq_num               ="030"
+        disc_field_name          ="logindelay"
+        name                     ="Login RETRY DELAY"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =60        
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="-a logindelay="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004310"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_port_opt"
+        id_seq_num               ="040"
+        disc_field_name          ="logindisable"
+        name                     ="\
+Number of FAILED LOGINS before\n     port is locked"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =62
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="-a logindisable="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004311"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_port_opt"
+        id_seq_num               ="050"
+        disc_field_name          ="logininterval"
+        name                     ="INTERVAL for counting failed logins"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =63
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="-a logininterval="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004312"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_port_opt"
+        id_seq_num               ="060"
+        disc_field_name          ="loginreenable"
+        name                     ="REENABLE DELAY for locked port"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =64
+        op_type                  =""
+        entry_type               ="#"
+        entry_size               =0
+        required                 =""
+        prefix                   ="-a loginreenable="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004313"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="login_port_opt"
+        id_seq_num               ="070"
+        disc_field_name          ="port_locked"
+        name                     ="Is this PORT LOCKED?"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =65
+        op_type                  ="r"
+        entry_type               =""
+        entry_size               =0
+        required                 =""
+        prefix                   ="-a port_locked="
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="true,false"
+        values_msg_file          ="smit.cat"
+        values_msg_set           =3
+        values_msg_id            =70
+        aix_values               ="true,false"
+        help_msg_id              ="3004314"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+        id                       ="failed_logins"
+        option_id                ="failed_logins.name_select"
+        has_name_select          ="n"
+        name                     ="Reset User's Failed Login Count"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =770
+        cmd_to_exec              ="chsec -f /etc/security/lastlog -a \"unsuccessful_login_count=0\" -s "
+        ask                      =""
+        exec_mode                =""
+        ghost                    ="n"
+        cmd_to_discover          =""
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="3004315"
+        help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="failed_logins.name_select"
+        id_seq_num               ="01"
+        disc_field_name          ="name"
+        name                     ="User NAME"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =3
+        name_msg_id              =3
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 ="+"
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              ="lsuser -a ALL"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               =""
+        help_msg_id              ="3004316"
+        help_msg_loc             =""
+

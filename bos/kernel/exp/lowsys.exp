@@ -1,0 +1,25 @@
+#!
+* @(#)12	1.1  src/bos/kernel/exp/lowsys.exp, sysexp, bos411, 9428A410j 11/2/92 17:30:19
+*
+* COMPONENT_NAME: (SYSEXP)
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1992
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* millicode routines
+*
+
+__mulh			0x3100
+__mull			0x3180
+__divss			0x3200
+__divus			0x3280
+__quoss			0x3300
+__quous			0x3380

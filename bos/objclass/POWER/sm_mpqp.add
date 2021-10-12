@@ -1,0 +1,1309 @@
+# @(#)35        1.8.2.3  src/bos/objclass/POWER/sm_mpqp.add, cfgcommo, bos41B, 9504A 12/13/94 14:20:16
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Multiprotocol Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined Multiprotocol Ports
+#       Add a Multiprotocol Port
+#       Move a Multiprotocol Port Definition to Another Port
+#       Change/Show Characteristics of a Multiprotocol Port
+#       Remove a Multiprotocol Port
+#       Configure a Defined Multiprotocol Port
+#
+#       Help text Id's for mpqp specific helps are in the range:
+#               04201000 to 04201099
+#       This does not include menu helps.
+#
+
+sm_menu_opt:
+        id_seq_num = "010"
+        id = "portmaster_dd"
+        next_id = "mpqp_dd"
+        text = "Manage 4-Port Multiprotocol Device Driver"
+        text_msg_file = "smit.cat"
+        text_msg_set = 27
+        text_msg_id = 553
+        next_type = "m"
+        alias = ""
+        help_msg_id = "120003"
+        help_msg_loc = ""
+
+sm_menu_opt:
+        id_seq_num = "010"
+        id = "mpqp_dd"
+        next_id = "mpqp_add"
+        text = "Add a Device Driver to a Portmaster Adapter/A"
+        text_msg_file = "smit.cat"
+        text_msg_set = 27
+        text_msg_id = 554
+        next_type = "n"
+        alias = ""
+        help_msg_id = "120004"
+        help_msg_loc = ""
+
+sm_menu_opt:
+        id_seq_num = "020"
+        id = "mpqp_dd"
+        next_id = "mpqp_rm"
+        text = "Remove a Device Driver"
+        text_msg_file = "smit.cat"
+        text_msg_set = 27
+        text_msg_id = 555
+        next_type = "n"
+        alias = ""
+        help_msg_id = "120005"
+        help_msg_loc = ""
+
+sm_menu_opt:
+        id_seq_num = "030"
+        id = "mpqp_dd"
+        next_id = "mpqp_cfg"
+        text = "Configure a Defined Device Driver"
+        text_msg_file = "smit.cat"
+        text_msg_set = 27
+        text_msg_id = 556
+        next_type = "n"
+        alias = ""
+        help_msg_id = "120006"
+        help_msg_loc = ""
+
+sm_menu_opt:
+        id_seq_num = "040"
+        id = "mpqp_dd"
+        next_id = "mpqp_port"
+        text = "Manage Ports"
+        text_msg_file = "smit.cat"
+        text_msg_set = 27
+        text_msg_id = 557
+        next_type = "m"
+        alias = ""
+        help_msg_id = "120007"
+        help_msg_loc = ""
+
+
+#
+# Add a Multiprotocol Device Driver
+# This allows a multiprotocol device driver to be added by defining and
+# configuring it.  There is one name selector followed by the dialogue.
+# The name selector is used to put up a list of defined portmaster
+# adapters for the user to select from.  The dialogue then puts up a list
+# of the user configurable attributes.
+
+# Select parent adapter
+sm_name_hdr:
+    id                        = "mpqp_add"
+    next_id                   = "makmpdd_hdr"
+    option_id                 = "mp_mkdd_parent"
+    has_name_select           = "n"
+    name                      = "Add a Device Driver to a Portmaster Adapter/A"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 554
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "120004"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "mp_mkdd_parent"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list         = "odmget -q \"name LIKE 'apm*' and attribute='_subtype' and value='1'\" CuAt | grep apm | sed 's/\"//g' | sed 's/name =//g' | while read card; do lsdev -C -t portmaster -l $card; done;"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# The dialogue header.
+sm_cmd_hdr:
+    id                        = "makmpdd_hdr"
+    option_id                 = "mpa_add"
+    has_name_select           = "y"
+    name                      = "Add a Device Driver to a Portmaster Adapter/A"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 554
+    cmd_to_exec               = "mkdev -c driver -s portmaster -t mpqp -w 0 "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "120004"
+    help_msg_loc              = ""
+
+#
+# Remove a Multiprotocol Device Driver
+# This allows a multiprotocol device driver to be removed, including its
+# definition in the database, from the system.  A name selector is used to
+# put up a list of the "defined" and "configured" multiprotocol device
+# drivers for the user to select from.  The dialogue then uses the rmdev
+# command to remove the selected device.
+
+# Select multiprotocol device driver by logical name
+sm_name_hdr:
+    id                        = "mpqp_rm"
+    next_id                   = "rmvmpdd_hdr"
+    option_id                 = "mp_lndd_opt"
+    has_name_select           = "n"
+    name                      = "Remove a Device Driver"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 555
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "120005"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvmpdd_hdr"
+    option_id                 = "rmvmpdd_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Device Driver"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 555
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "120005"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvmpdd_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Device Driver Name"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 61
+    name_msg_id               = 5
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201000"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvmpdd_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "04201012"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined Multiprotocol Device Driver
+# This allows a multiprotocol device driver that is defined but not
+# configured to be configured.  A name selector is used to put up a list of
+# the "defined" multiprotocol device drivers for the user to select from.
+# The dialogue then uses the mkdev command to configure the selected device.
+
+# Select multiprotocol device driver by logical name
+sm_name_hdr:
+    id                        = "mpqp_cfg"
+    next_id                   = "cfgmpdd_hdr"
+    option_id                 = "mp_lndd_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined Device Driver "
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 556
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "120006"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgmpdd_hdr"
+    option_id                 = "cfgmpdd_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined Device Driver"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 556
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "120006"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgmpdd_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Multiprotocol Device Driver"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 61
+    name_msg_id               = 5
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201000"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing multiprotocol device drivers by
+# logical name.
+# Used by: move, change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "mp_lndd_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Multiprotocol Device Driver"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 61
+    name_msg_id               = 5
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c driver -s portmaster -t mpqp"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add.
+# Used by: add function.
+
+# Displays multiprotocol port's parent adapter.
+sm_cmd_opt:
+    id                        = "mpa_add"
+    id_seq_num                = "001"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201001"
+    help_msg_loc              = ""
+
+
+sm_cmd_hdr:
+    id                        = "lsdmp"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined Multiprotocol Ports"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 304
+    cmd_to_exec               = "lsdev -C -t mpqport"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800193"
+    help_msg_loc              = ""
+
+#
+# Add a Multiprotocol Port
+# This allows a multiprotocol port to be added by defining and configuring
+# it.  There is one name selector followed by the dialogue.  The name
+# selector is used to put up a list of defined multiprotocol adapters
+# for the user to select from.  The dialogue then puts up a list of the
+# user configurable attributes.
+
+# Select parent adapter
+sm_name_hdr:
+    id                        = "makmp"
+    next_id                   = "makmp_hdr"
+    option_id                 = "mp_mk_parent"
+    has_name_select           = "n"
+    name                      = "Add a Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 305
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800485"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "mp_mk_parent"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C -k mpqp"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# The dialogue header.
+sm_cmd_hdr:
+    id                        = "makmp_hdr"
+    option_id                 = "mp_add,mp_common"
+    has_name_select           = "y"
+    name                      = "Add a Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 305
+    cmd_to_exec               = "mkdev -c port -s mpqp -t mpqport "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c port -s mpqp -t mpqport -D -O"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800485"
+    help_msg_loc              = ""
+
+#
+# Move a Multiprotocol Port Definition to Another Port
+# This allows a multiprotocol port definition to be moved to another port
+# or another adapter.  There are two name selectors followed by the
+# dialogue.  The first name selector is used to put up a list of defined
+# multiprotocol ports for the user to select from.  The second name selector
+# puts up a list of defined multiprotocol adapters which can have the
+# selected port definition moved to.  The dialogue then allows for a new
+# port to be selected.
+
+# Select multiprotocol port by logical name
+sm_name_hdr:
+    id                        = "movmp"
+    next_id                   = "movmp_parent"
+    option_id                 = "mp_ln_opt"
+    has_name_select           = "n"
+    name                      = "Move a Multiprotocol Port Definition to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 306
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "n"
+    help_msg_id               = "1800484"
+    help_msg_loc              = ""
+
+# Select parent adapter
+sm_name_hdr:
+    id                        = "movmp_parent"
+    next_id                   = "movmp_hdr"
+    option_id                 = "mp_mv_parent"
+    has_name_select           = "y"
+    name                      = "Move a Multiprotocol Port Definition to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 306
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800484"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "mp_mv_parent"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "movmp_hdr"
+    option_id                 = "mp_mv"
+    has_name_select           = "y"
+    name                      = "Move a Multiprotocol Port Definition to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 306
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800484"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a Multiprotocol Port
+# This allows a multiprotocol port's characteristics to be shown and,
+# if desired, changed.  First, there is a name selector used to put up a
+# list of the defined multiprotocol ports for the user to select from.  The
+# dialogue then shows all of the characteristics.
+
+# Select multiprotocol port by logical name
+sm_name_hdr:
+    id                        = "chgmp"
+    next_id                   = "chgmp_hdr"
+    option_id                 = "mp_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 307
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = "lsdev -C -F \"parent:connwhere:location:status\" -l "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "parent:port:loc:state"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# The dialogue header.
+sm_cmd_hdr:
+    id                        = "chgmp_hdr"
+    option_id                 = "mp_chg,mp_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 307
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+#
+# Remove a Multiprotocol Port
+# This allows a multiprotocol port to be removed, including its definition
+# in the database, from the system.  A name selector is used to put up a
+# list of the "defined" and "configured" multiprotocol ports for the user
+# to select from.  The dialogue then uses the rmdev command to remove the
+# selected device.
+
+# Select multiprotocol port by logical name
+sm_name_hdr:
+    id                        = "rmvmp"
+    next_id                   = "rmvmp_hdr"
+    option_id                 = "mp_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 308
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvmp_hdr"
+    option_id                 = "rmvmp_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 308
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvmp_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 550
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201000"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvmp_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "04201012"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined Multiprotocol Port
+# This allows a multiprotocol port that is defined but not configured to
+# be configured.  A name selector is used to put up a list of the "defined"
+# multiprotocol ports for the user to select from.  The dialogue then uses
+# the mkdev command to configure the selected device.
+
+# Select multiprotocol port by logical name
+sm_name_hdr:
+    id                        = "cfgmp"
+    next_id                   = "cfgmp_hdr"
+    option_id                 = "mp_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 309
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800489"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgmp_hdr"
+    option_id                 = "cfgmp_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 309
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800489"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgmp_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 550
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201000"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing multiprotocol ports by
+# logical name.
+# Used by: move, change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "mp_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 550
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -t mpqport"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add.
+# Used by: add function.
+
+# Displays multiprotocol port's parent adapter.
+sm_cmd_opt:
+    id                        = "mp_add"
+    id_seq_num                = "001"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201001"
+    help_msg_loc              = ""
+
+# Displays physical port number being defined.
+sm_cmd_opt:
+    id                        = "mp_add"
+    id_seq_num                = "002"
+    disc_field_name           = ""
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn -k mpqp "
+    cmd_to_list_postfix       = "-p parent"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201010"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change.
+# Used by: show/change function.
+
+# Displays the multiprotocol port's logical name.
+sm_cmd_opt:
+    id                        = "mp_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 550
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201000"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "mp_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201002"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "mp_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201003"
+    help_msg_loc              = ""
+
+# Displays parent adapter.
+sm_cmd_opt:
+    id                        = "mp_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-p"
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201001"
+    help_msg_loc              = ""
+
+# Displays physical port number being defined.
+sm_cmd_opt:
+    id                        = "mp_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "port"
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201010"
+    help_msg_loc              = ""
+
+# Display database only question (last item on screen).
+sm_cmd_opt:
+    id                        = "mp_chg"
+    id_seq_num                = "050"
+    disc_field_name           = ""
+    name                      = "Apply change to DATABASE only"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 11
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "-P ,"
+    help_msg_id               = "04201014"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Used by: add and show/change functions.
+
+# Displays rdto attribute.
+sm_cmd_opt:
+    id                        = "mp_common"
+    id_seq_num                = "010"
+    disc_field_name           = "rdto"
+    name                      = "RECEIVE DATA TRANSFER OFFSET"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 61
+    name_msg_id               = 2
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a rdto="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c port -s mpqp -t mpqport -a rdto -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201011"
+    help_msg_loc              = ""
+
+# Displays autoconfig attribute.
+sm_cmd_opt:
+    id                        = "mp_common"
+    id_seq_num                = "020"
+    disc_field_name           = "autoconfig"
+    name                      = "STATE to be configured at boot time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 61
+    name_msg_id               = 4
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c port -s mpqp -t mpqport -a autoconfig -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201013"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to move.
+# Used by: move function.
+
+# Displays the multiprotocol port's logical name.
+sm_cmd_opt:
+    id                        = "mp_mv"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Multiprotocol Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 550
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201000"
+    help_msg_loc              = ""
+
+# Displays parent adapter.
+sm_cmd_opt:
+    id                        = "mp_mv"
+    id_seq_num                = "002"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201001"
+    help_msg_loc              = ""
+
+# Displays physical port number being defined.
+sm_cmd_opt:
+    id                        = "mp_mv"
+    id_seq_num                = "003"
+    disc_field_name           = "port"
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201010"
+    help_msg_loc              = ""
+
+
+
+sm_menu_opt:
+        id                  = "mpqp_port"
+        id_seq_num          = "010"
+        next_id             = "lsdmp"
+        text                = "List All Defined Multiprotocol Ports"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 304
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800193"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "mpqp_port"
+        id_seq_num          = "020"
+        next_id             = "makmp"
+        text                = "Add a Multiprotocol Port"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 305
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800485"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "mpqp_port"
+        id_seq_num          = "030"
+        next_id             = "movmp"
+        text                = "Move a Multiprotocol Port Definition to Another Port"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 306
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800484"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "mpqp_port"
+        id_seq_num          = "040"
+        next_id             = "chgmp"
+        text                = "Change / Show Characteristics of a Multiprotocol Port"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 307
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800197"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "mpqp_port"
+        id_seq_num          = "050"
+        next_id             = "rmvmp"
+        text                = "Remove a Multiprotocol Port"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 308
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800198"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "mpqp_port"
+        id_seq_num          = "060"
+        next_id             = "cfgmp"
+        text                = "Configure a Defined Multiprotocol Port"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 309
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800489"
+        help_msg_loc        = ""
+
+

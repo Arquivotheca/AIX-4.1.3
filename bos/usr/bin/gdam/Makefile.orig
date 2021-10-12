@@ -1,0 +1,153 @@
+# @(#)85  1.17 src/bos/usr/bin/gdam/Makefile, sysxgdam, bos41J, 9522A_all  5/30/95  10:31:29
+#
+# COMPONENT_NAME: ALLTHORN_SW
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27,30
+#
+# (C) COPYRIGHT International Business Machines Corp. 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+#------------------------------------------------------------------------------------
+#   GUI Disk Array Manager makefile
+#------------------------------------------------------------------------------------
+
+VPATH 		= ${MAKETOP}/bos/usr/bin/gdam
+
+CFLAGS          = $(COMPFLAGS) -D_BSD  -DXOPEN_CATALOG -DAIXV3 \
+	-I$(ENVPLAT)/inc/aic -I$(ENVPLAT)/R5/inc -D_NO_PROTO
+
+INCFLAGS	= -I${MAKETOP}/dtuimx/ibmr2/uimxdir/include
+LIBFLAGS	= -L${MAKETOP}/dtuimx/ibmr2/uimxdir/lib
+
+MSGHDRS		= gdam_msg.h
+CATFILES	= gdam.cat
+MSGLANGPATH	= /usr/lib/methods
+
+#LDFLAGS		= -L${ODE_TOOLS}/usr/lib -L${ODE_TOOLS}/usr/include
+
+SCRIPTS		=	7135_subsys_config \
+	7135_device_config \
+	7135_drive_config \
+	7135_get_subsys_info \
+	7135_get_lun_info \
+	7135_get_drive_info \
+	7135_subsys_status \
+	7135_device_status \
+	7135_drive_status \
+	7135_change_drive \
+	7135_set_subsys_info \
+	7135_set_lun_info \
+	7135_ctrlr.active.pm \
+	7135_ctrlr.dead.pm \
+	7135_ctrlr.dualactive.pm \
+	7135_ctrlr.passive.pm \
+	scsipv.l.pm \
+	scsipv.dead.pm \
+	scsipv.opt.pm \
+	scsipv.spare.pm \
+	scsipv.warn.pm \
+	scsipv.none.pm \
+	lun.opt.pm \
+	lun.warn.pm \
+	lun.dead.pm \
+	adapter.l.bm 
+
+PROGRAMS = gdam
+
+OFILES = gdam.o catalog.o xarrays.o cmdparse.o colon.o \
+	debug.o dad.o menu.o odmparse.o raid_disp_hdr.o \
+	raid_disp_opt.o syscalls.o topLevelShell1.o wind_cmd.o \
+	wind_dev.o wind_drv.o wind_ss.o refresh.o help.o cmdqueue.o
+
+OTHERS = raid_disp_opt raid_disp_opt.vc raid_disp_hdr raid_disp_hdr.vc
+
+ILIST = gdam \
+	7135_subsys_config \
+	7135_device_config \
+	7135_drive_config \
+	7135_get_subsys_info \
+	7135_get_lun_info \
+	7135_get_drive_info \
+	7135_subsys_status \
+	7135_device_status \
+	7135_drive_status \
+	7135_change_drive \
+	7135_set_subsys_info \
+	7135_set_lun_info \
+	7135_ctrlr.active.pm \
+	7135_ctrlr.dead.pm \
+	7135_ctrlr.dualactive.pm \
+	7135_ctrlr.passive.pm \
+	scsipv.l.pm \
+	scsipv.dead.pm \
+	scsipv.opt.pm \
+	scsipv.spare.pm \
+	scsipv.warn.pm \
+	scsipv.none.pm \
+	lun.opt.pm \
+	lun.warn.pm \
+	lun.dead.pm \
+	adapter.l.bm \
+	raid_disp_hdr \
+	raid_disp_opt \
+	raid_disp_hdr.vc \
+	raid_disp_opt.vc \
+
+gdam_IDIR= /usr/bin/
+7135_subsys_config_IDIR = /usr/bin/
+7135_device_config_IDIR = /usr/bin/
+7135_drive_config_IDIR = /usr/bin/
+7135_get_subsys_info_IDIR = /usr/bin/
+7135_get_lun_info_IDIR = /usr/bin/
+7135_get_drive_info_IDIR = /usr/bin/
+7135_subsys_status_IDIR = /usr/bin/
+7135_device_status_IDIR = /usr/bin/
+7135_drive_status_IDIR = /usr/bin/
+7135_change_drive_IDIR = /usr/bin/
+7135_set_subsys_info_IDIR = /usr/bin/
+7135_set_lun_info_IDIR = /usr/bin/
+7135_ctrlr.active.pm_IDIR = /etc/array/bitmaps/
+7135_ctrlr.dead.pm_IDIR = /etc/array/bitmaps/
+7135_ctrlr.dualactive.pm_IDIR = /etc/array/bitmaps/
+7135_ctrlr.passive.pm_IDIR = /etc/array/bitmaps/
+scsipv.l.pm_IDIR = /etc/array/bitmaps/
+scsipv.dead.pm_IDIR = /etc/array/bitmaps/
+scsipv.opt.pm_IDIR = /etc/array/bitmaps/
+scsipv.spare.pm_IDIR = /etc/array/bitmaps/
+scsipv.warn.pm_IDIR = /etc/array/bitmaps/
+scsipv.none.pm_IDIR = /etc/array/bitmaps/
+lun.opt.pm_IDIR = /etc/array/bitmaps/
+lun.warn.pm_IDIR = /etc/array/bitmaps/
+lun.dead.pm_IDIR = /etc/array/bitmaps/
+adapter.l.bm_IDIR = /etc/array/bitmaps/
+raid_disp_hdr_IDIR = /etc/objrepos/
+raid_disp_opt_IDIR = /etc/objrepos/
+raid_disp_hdr.vc_IDIR = /etc/objrepos/
+raid_disp_opt.vc_IDIR = /etc/objrepos/
+
+
+LIBS            = -lux -lXpm -lXm -lXt -lX11 -lm -lodm -lcfg -lc
+
+.include <${RULES_MK}>
+
+
+${OTHERS}	: raid_disp.make
+
+raid_disp.make	: raid_disp_hdr.cre raid_disp_hdr.add raid_disp_opt.cre raid_disp_opt.add
+		${RM} -f ${OTHERS}
+		${ECHO} creating raid_disp_hdr
+		${ODMCREATE} -c ${raid_disp_hdr.cre:P}
+		${ODMADD} ${raid_disp_hdr.add:P}
+		${ECHO} creating raid_disp_opt
+		${ODMCREATE} -c ${raid_disp_opt.cre:P}
+		${ODMADD} ${raid_disp_opt.add:P}
+		${TOUCH} raid_disp.make
+
+

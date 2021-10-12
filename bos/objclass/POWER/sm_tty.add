@@ -1,0 +1,3321 @@
+# @(#)59	1.17  src/bos/objclass/POWER/sm_tty.add, cfgtty, bos41J, 9520A_all 4/27/95 12:15:27
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: TTY Interfaces
+#
+#  ORIGINS: 27, 83
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined TTYs
+#       Add a TTY
+#       Move a TTY to Another Port
+#       Change/Show Characteristics of a TTY
+#       Remove a TTY
+#       Configure a Defined TTY
+#
+#       Help text Id's for TTY specific helps are in the range:
+#               0420200 to 0420299
+#       This does not include menu helps.
+#
+# NOTES
+#
+# ( by P.Cugny@frec.bull.fr)
+#
+# 1. the following new attributes of TTY devices are taken into account:
+#
+# for 8- or 16-port and standard i/o serial ports adapters:
+#       tbc16, rtrig, modules, open_disp, flow_disp
+#
+# for 64-port adapters:
+#       tbc64, modules, open_disp, flow_disp,
+#       xprint_priority, xprint_on_str, xprint_off_str
+#
+# removal of following attributes:
+# 
+#       xon, shell
+#
+# 3. help Id's
+#
+#	New help Id's are in the range:
+#		0420244 to 0420249
+#
+#
+# List All Defined TTYs
+# This uses a ghost dialogue to list all the defined TTY devices.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsdtty"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined TTYs"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 82
+    cmd_to_exec               = "lsdev -C -c tty -H"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180079"
+    help_msg_loc              = ""
+
+#
+# Add a TTY
+# This allows a TTY device to be added by defining and configuring it.
+# There are two name selectors followed by the dialogue.  The first
+# name selector is used to put up a list of Predefined TTY devices for the
+# user to select from.  The second name selector puts up a list of
+# defined serial adapters which can have the selected type of TTY
+# attached to it.  Then there is the  dialogue header for
+# for putting up all the user configurable attributes.
+
+# Select type of TTY
+sm_name_hdr:
+    id                        = "maktty"
+    next_id                   = "maktty_parent"
+    option_id                 = "tty_predef_opt"
+    has_name_select           = "n"
+    name                      = "Add a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 83
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+class () # str1 str2 str3\n\
+{\n\
+echo $1 | sed 's/^\\([^ ]*\\)[ ]*\\([^ ]*\\)[ ]*/\\1:\\2:/'\n\
+}\n\
+class "
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "type:subclass:desc"
+    next_type                 = "n"
+    help_msg_id               = "180080"
+    help_msg_loc              = ""
+
+# Name selector command option for type of TTY
+sm_cmd_opt:
+    id                        = "tty_predef_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "TTY Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 101
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "lsdev -P -c tty -F \"type subclass description\""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201"
+    help_msg_loc              = ""
+
+# Select parent adapter
+# This name selector displays possible parent device's as determined
+# by tty subclass.
+
+sm_name_hdr:
+    id                        = "maktty_parent"
+    next_id                   = "maktty_hdr_sel"
+    option_id                 = "maktty_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 83
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "n"
+    help_msg_id               = "180080"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "maktty_parent_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# stanzas for tty
+# this stanza builds the next_id to the correct add options
+# based on the driver controlling the parent adapter
+
+sm_name_hdr:
+        id              = "maktty_hdr_sel"
+        next_id         = "maktty_hdr_"
+        option_id       = "maktty_hdr.opt"
+        has_name_select = "y"
+        name            = ""
+        name_msg_file   = 0
+        name_msg_id     = 0
+        type            = "c"
+        ghost           = "y"
+        cmd_to_classify = "drvr () \n\
+{ \n\
+type=$(odmget -q \"name = $1\" CuDv | grep PdDvLn) \n\
+parent_unique_type=$(echo $type | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+driver_name=$(odmget -q \"uniquetype = $parent_unique_type\" PdDv | grep DvDr | \n\
+sed -e 's/.*\"\\(.*\\)\".*/\\1/' -e 's#^isa/##' -e 's/_rspc$//' -e 's#^pcmcia/pcrsdd#rsdd#') \n\
+print $driver_name \n\
+} \n\
+drvr "
+        cmd_to_classify_postfix   = "parent"
+        raw_field_name  = "driver"
+        cooked_field_name = "_cookedname"
+        next_type       = "d"
+        help_msg_id     = ""
+        help_msg_loc    = ""
+
+sm_cmd_opt:
+    id                        = "maktty_hdr.opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = ""
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+
+# The dialogue headers follow.  There is one for each tty
+# based on the driver controlling the parent adapter
+# Their id's are built as follows:
+#	"maktty_hdr_xxx"
+# where xxx is the driver type i.e. rsdd, liondd, cxmadd.
+
+# dialog for tty on an 8-, or 16-port adapter
+# or on one of the standard i/o serial ports
+
+sm_cmd_hdr:
+    id                        = "maktty_hdr_rsdd"
+    option_id                 = "tty_add,tty_common,tty_rsdd"
+    has_name_select           = "y"
+    name                      = "Add a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 83
+    cmd_to_exec               = "mkdev -c tty "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover = "attribs () \n\
+{ \n\
+l1=$( lsattr -c tty -s $1 -t $2 -D -O ) \n\
+l11=$( echo \"$l1\" | head -1 ) \n\
+l12=$( echo \"$l1\" | tail -1 ) \n\
+l2=$( lsattr -l $3 -D -O ) \n\
+l21=$( echo \"$l2\" | head -1 | sed -e 's/.//' ) \n\
+l22=$( echo \"$l2\" | tail -1 ) \n\
+echo \"$l11:$l21\" \n\
+echo \"$l12:$l22\" \n\
+} \n\
+attribs "
+    cmd_to_discover_postfix = "subclass type parent"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180080"
+    help_msg_loc              = ""
+
+# dialog for tty on a 64-port adapter
+sm_cmd_hdr:
+    id                        = "maktty_hdr_liondd"
+    option_id                 = "tty_add,tty_common,tty_liondd"
+    has_name_select           = "y"
+    name                      = "Add a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 83
+    cmd_to_exec               = "mkdev -c tty "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover = "attribs () \n\
+{ \n\
+l1=$( lsattr -c tty -s $1 -t $2 -D -O ) \n\
+l11=$( echo \"$l1\" | head -1 ) \n\
+l12=$( echo \"$l1\" | tail -1 ) \n\
+l2=$( lsattr -l $3 -D -O | sed -e 's/\\\\/\\\\\\\\\\\\\\\\/g' ) \n\
+l21=$( echo \"$l2\" | head -1 | sed -e 's/.//' ) \n\
+l22=$( echo \"$l2\" | tail -1 ) \n\
+echo \"$l11:$l21\" \n\
+echo \"$l12:$l22\" \n\
+} \n\
+attribs "
+    cmd_to_discover_postfix = "subclass type parent"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180080"
+    help_msg_loc              = ""
+
+# dialog for tty on a 128-port adapter
+sm_cmd_hdr:
+    id                        = "maktty_hdr_cxmadd"
+    option_id                 = "tty_add,tty_common,tty_cxmadd"
+    has_name_select           = "y"
+    name                      = "Add a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 83
+    cmd_to_exec               = "mkdev -c tty "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover = "attribs () \n\
+{ \n\
+l1=$( lsattr -c tty -s $1 -t $2 -D -O ) \n\
+l11=$( echo \"$l1\" | head -1 ) \n\
+l12=$( echo \"$l1\" | tail -1 ) \n\
+l2=$( lsattr -l $3 -D -O | sed -e 's/\\\\/\\\\\\\\\\\\\\\\/g' ) \n\
+l21=$( echo \"$l2\" | head -1 | sed -e 's/.//' ) \n\
+l22=$( echo \"$l2\" | tail -1 ) \n\
+echo \"$l11:$l21\" \n\
+echo \"$l12:$l22\" \n\
+} \n\
+attribs "
+    cmd_to_discover_postfix = "subclass type parent"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180080"
+    help_msg_loc              = ""
+
+#
+# Move a TTY to Another Port
+# This allows a TTY device to be moved to another port or another
+# adapter.  There are two name selectors followed by the dialogue.  The
+# first name selector is used to put up a list of defined TTY devices
+# for the user to select from.  The second name selector puts up a list of
+# defined serial adapters which can have the selected TTY device
+# attached.  The dialogue then allows for a new port to be selected.
+
+# Select TTY by logical name
+sm_name_hdr:
+    id                        = "movtty"
+    next_id                   = "movtty_parent"
+    option_id                 = "tty_ln_opt"
+    has_name_select           = "n"
+    name                      = "Move a TTY to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 84
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "n"
+    help_msg_id               = "1800161"
+    help_msg_loc              = ""
+
+# Select parent adapter
+sm_name_hdr:
+    id                        = "movtty_parent"
+    next_id                   = "movtty_hdr"
+    option_id                 = "tty_mv_parent"
+    has_name_select           = "y"
+    name                      = "Move a TTY to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 84
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800161"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "tty_mv_parent"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "movtty_hdr"
+    option_id                 = "tty_mv"
+    has_name_select           = "y"
+    name                      = "Move a TTY to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 84
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800161"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a TTY
+# This allows a TTY device's characteristics to be shown and, if desired,
+# changed.  First, there is a name selector used to put up a list of the
+# defined TTY devices for the user to select from.  The dialogue then
+# shows all of the characteristics.
+
+# this stanza builds the next_id to the correct Change/Show options
+# based on the driver controlling the parent adapter
+
+# Select TTY by logical name
+sm_name_hdr:
+    id                        = "chgtty"
+    next_id                   = "chgtty_hdr_"
+    option_id                 = "tty_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 85
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "drvr () \n\
+{ \n\
+parent=$(lsdev -C -l $1 -F \"parent\") \n\
+tty=$(lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\") \n\
+type=$(odmget -q \"name = $parent\" CuDv | grep PdDvLn) \n\
+parent_unique_type=$(echo $type | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+driver_name=$(odmget -q \"uniquetype = $parent_unique_type\" PdDv | grep DvDr | \n\
+sed -e 's/.*\"\\(.*\\)\".*/\\1/' -e 's#^isa/##' -e 's/_rspc$//' -e 's#^pcmcia/pcrsdd#rsdd#') \n\
+print $driver_name:$tty \n\
+} \n\
+drvr "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:parent:port:loc:state:desc"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There is one for each tty
+# based on the driver controlling the parent adapter
+# Their id's are built as follows:
+#	"chgtty_hdr_xxx"
+# where xxx is the driver type i.e. rsdd, liondd, cxmadd.
+
+# dialog for tty on an 8-, or 16-port adapter
+# or on one of the standard i/o serial ports
+sm_cmd_hdr:
+    id                        = "chgtty_hdr_rsdd"
+    option_id                 = "tty_chg,tty_common,tty_rsdd"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 85
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# dialog for tty on a 64-port adapter
+sm_cmd_hdr:
+    id                        = "chgtty_hdr_liondd"
+    option_id                 = "tty_chg,tty_common,tty_liondd"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 85
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# dialog for tty on a 128-port adapter
+sm_cmd_hdr:
+    id                        = "chgtty_hdr_cxmadd"
+    option_id                 = "tty_chg,tty_common,tty_cxmadd"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 85
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+#
+# Remove a TTY
+# This allows a TTY device to be removed, including its definition in the
+# database, from the system.  A name selector is used to put up a list
+# of the "defined" and "configured" TTY devices for the user to select from.
+# The dialogue then uses the rmdev command to remove the selected device.
+
+# Select TTY by logical name
+sm_name_hdr:
+    id                        = "rmvtty"
+    next_id                   = "rmvtty_hdr"
+    option_id                 = "tty_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 86
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvtty_hdr"
+    option_id                 = "rmvtty_opt"
+    has_name_select           = "y"
+    name                      = "Remove a TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 86
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvtty_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 100
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420200"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvtty_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "0420235"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined TTY
+# This allows a TTY device that is defined but not configured to be
+# configured.  A name selector is used to put up a list of the "defined"
+# TTY devices for the user to select from.  The dialogue then uses the
+# mkdev command to configure the selected device.
+
+# Select TTY by logical name
+sm_name_hdr:
+    id                        = "cfgtty"
+    next_id                   = "cfgtty_hdr"
+    option_id                 = "tty_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined TTY "
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 87
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "180483"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgtty_hdr"
+    option_id                 = "cfgtty_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined TTY "
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 87
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "180483"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgtty_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 100
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420200"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing TTYs by logical name.
+# Used by: move, change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "tty_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 100
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c tty"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options. Specific to add.
+# Common to all driver types controlling the parent adapter.
+# Used by: add function.
+
+# Displays TTY device type.
+sm_cmd_opt:
+    id                        = "tty_add"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "TTY type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 102
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420201"
+    help_msg_loc              = ""
+
+# Displays TTY device subclass.
+sm_cmd_opt:
+    id                        = "tty_add"
+    id_seq_num                = "002"
+    disc_field_name           = "subclass"
+    name                      = "TTY interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 103
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420203"
+    help_msg_loc              = ""
+
+# Displays TTY device's description.
+sm_cmd_opt:
+    id                        = "tty_add"
+    id_seq_num                = "003"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420204"
+    help_msg_loc              = ""
+
+# Displays TTY device's parent adapter.
+sm_cmd_opt:
+    id                        = "tty_add"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420202"
+    help_msg_loc              = ""
+
+# Displays port number TTY device is connected to.
+sm_cmd_opt:
+    id                        = "tty_add"
+    id_seq_num                = "005"
+    disc_field_name           = ""
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420210"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change.
+# Common to all driver types controlling the parent adapter.
+# Used by: show/change function.
+
+# Displays the TTY logical name.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 100
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420200"
+    help_msg_loc              = ""
+
+# Displays TTY device type.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "type"
+    name                      = "TTY type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 102
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420201"
+    help_msg_loc              = ""
+
+# Displays TTY device subclass.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "subclass"
+    name                      = "TTY interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 103
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420203"
+    help_msg_loc              = ""
+
+# Displays TTY device's description.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420204"
+    help_msg_loc              = ""
+
+# Displays TTY device's state.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420205"
+    help_msg_loc              = ""
+
+# Displays TTY device's location.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420206"
+    help_msg_loc              = ""
+
+# Displays parent adapter.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "007"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-p"
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420202"
+    help_msg_loc              = ""
+
+# Displays port number TTY device is connected to.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "008"
+    disc_field_name           = "port"
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420210"
+    help_msg_loc              = ""
+
+# This is last line of change/show screen.
+sm_cmd_opt:
+    id                        = "tty_chg"
+    id_seq_num                = "400"
+    disc_field_name           = ""
+    name                      = "Apply change to DATABASE only"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 11
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "-P ,"
+    help_msg_id               = "0420241"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Common to all driver types controlling the parent adapter.
+# Used by: add and show/change functions.
+
+# Displays login attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "010"
+    disc_field_name           = "login"
+    name                      = "Enable LOGIN"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 18
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a login="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "enable,disable,share,delay"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 105
+    aix_values                = "enable,disable,share,delay"
+    help_msg_id               = "0420215"
+    help_msg_loc              = ""
+
+# Displays speed attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "020"
+    disc_field_name           = "speed"
+    name                      = "BAUD rate"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a speed="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -a speed -R"
+    cmd_to_list_postfix       = "-l parent"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420211"
+    help_msg_loc              = ""
+
+# Displays parity attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "030"
+    disc_field_name           = "parity"
+    name                      = "PARITY"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 13
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a parity="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c tty -a parity -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420212"
+    help_msg_loc              = ""
+
+# Displays bpc attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "040"
+    disc_field_name           = "bpc"
+    name                      = "BITS per character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 14
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a bpc="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c tty -a bpc -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420213"
+    help_msg_loc              = ""
+
+# Displays number of stop bits.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "050"
+    disc_field_name           = "stops"
+    name                      = "Number of STOP BITS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 15
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a stops="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c tty -a stops -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420214"
+    help_msg_loc              = ""
+
+# Displays timeout attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "060"
+    disc_field_name           = "timeout"
+    name                      = "TIME before advancing to next port setting"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 31
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c tty -a timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420237"
+    help_msg_loc              = ""
+
+# Displays term attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "070"
+    disc_field_name           = "term"
+    name                      = "TERMINAL type"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 17
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a term="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420217"
+    help_msg_loc              = ""
+
+# Displays flow_disp attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "080"
+    disc_field_name           = "flow_disp"
+    name                      = "FLOW CONTROL to be used"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 35
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a flow_disp="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c tty -a flow_disp -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420248"
+    help_msg_loc              = ""
+
+# Displays open_disp attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "090"
+    disc_field_name           = "open_disp"
+    name                      = "OPEN DISCIPLINE to be used"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 36
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a open_disp="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c tty -a open_disp -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420249"
+    help_msg_loc              = ""
+
+# Displays runmodes attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "100"
+    disc_field_name           = "runmodes"
+    name                      = "STTY attributes for RUN time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 19
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a runmodes="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c tty -a runmodes -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ","
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420233"
+    help_msg_loc              = ""
+
+# Displays logmodes attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "110"
+    disc_field_name           = "logmodes"
+    name                      = "STTY attributes for LOGIN"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 23
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a logmodes="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420234"
+    help_msg_loc              = ""
+
+
+# Displays logger attribute.
+sm_cmd_opt:
+   id                         = "tty_common"
+   id_seq_num                 = "130"
+   disc_field_name            = "logger"
+   name                       = "LOGGER name"
+   name_msg_file              = "devices.cat"
+   name_msg_set               = 65
+   name_msg_id                = 32
+   op_type                    = ""
+   entry_type                 = "t"
+   entry_size                 = 0
+   required                   = ""
+   prefix                     = "-a logger="
+   cmd_to_list_mode           = ""
+   cmd_to_list                = ""
+   cmd_to_list_postfix        = ""
+   multi_select               = ""
+   value_index                = 0
+   disp_values                = ""
+   values_msg_file            = ""
+   values_msg_set             = 0
+   values_msg_id              = 0
+   aix_values                 = ""
+   help_msg_id                = "0420242"
+   help_msg_loc               = ""
+
+# Displays autoconfig attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "140"
+    disc_field_name           = "autoconfig"
+    name                      = "STATUS of device at BOOT time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 26
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c tty -a autoconfig -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420236"
+    help_msg_loc              = ""
+
+# Displays modules attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "170"
+    disc_field_name           = "modules"
+    name                      = "STREAMS modules to be pushed at OPEN time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 34
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a modules="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c tty -a modules -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ","
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420247"
+    help_msg_loc              = ""
+
+# Displays imap attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "210"
+    disc_field_name           = "imap"
+    name                      = "INPUT map file"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 27
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a imap="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "echo none ; cd /usr/lib/nls/termmap ; ls *.in | awk -F\. '{print $1}'"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420238"
+    help_msg_loc              = ""
+
+# Displays omap attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "220"
+    disc_field_name           = "omap"
+    name                      = "OUTPUT map file"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 28
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a omap="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "echo none ; cd /usr/lib/nls/termmap ; ls *.out | awk -F\. '{print $1}'"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420239"
+    help_msg_loc              = ""
+
+# Displays omap attribute.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "230"
+    disc_field_name           = "csmap"
+    name                      = "CODESET map file"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 33
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a csmap="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "cd /usr/lib/nls/csmap ; ls * | awk -F\. '{print $1}'"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420243"
+    help_msg_loc              = ""
+
+# Displays instructional statement.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "240"
+    disc_field_name           = ""
+    name                      = "\n\
+POSIX special control characters:\n"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 106
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+# Displays interrupt character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "250"
+    disc_field_name           = "intr"
+    name                      = "INTERRUPT character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 21
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a intr="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420218"
+    help_msg_loc              = ""
+
+# Displays quit character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "260"
+    disc_field_name           = "quit"
+    name                      = "QUIT character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 20
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a quit="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420219"
+    help_msg_loc              = ""
+
+# Displays erase character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "270"
+    disc_field_name           = "erase"
+    name                      = "ERASE character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 5
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a erase="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420220"
+    help_msg_loc              = ""
+
+# Displays kill character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "280"
+    disc_field_name           = "kill"
+    name                      = "KILL character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 4
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a kill="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420221"
+    help_msg_loc              = ""
+
+# Displays end of file character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "290"
+    disc_field_name           = "eof"
+    name                      = "END OF FILE character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 6
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a eof="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420222"
+    help_msg_loc              = ""
+
+# Displays end of line character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "300"
+    disc_field_name           = "eol"
+    name                      = "END OF LINE character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 24
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a eol="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420223"
+    help_msg_loc              = ""
+
+# Displays end of line 2 character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "310"
+    disc_field_name           = "eol2"
+    name                      = "2nd END OF LINE character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a eol2="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420224"
+    help_msg_loc              = ""
+
+# Displays delayed suspend process character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "320"
+    disc_field_name           = "dsusp"
+    name                      = "DELAYED SUSPEND PROCESS character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a dsusp="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420225"
+    help_msg_loc              = ""
+
+# Displays suspend process character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "330"
+    disc_field_name           = "susp"
+    name                      = "SUSPEND PROCESS character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a susp="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420226"
+    help_msg_loc              = ""
+
+# Displays literal next character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "340"
+    disc_field_name           = "lnext"
+    name                      = "LITERAL NEXT character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a lnext="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420227"
+    help_msg_loc              = ""
+
+# Displays start character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "350"
+    disc_field_name           = "start"
+    name                      = "START character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 10
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a start="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420228"
+    help_msg_loc              = ""
+
+# Displays stop character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "360"
+    disc_field_name           = "stop"
+    name                      = "STOP character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 11
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a stop="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420229"
+    help_msg_loc              = ""
+
+# Displays word erase character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "370"
+    disc_field_name           = "werase"
+    name                      = "WORD ERASE character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 12
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a werase="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420230"
+    help_msg_loc              = ""
+
+# Displays reprint line character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "380"
+    disc_field_name           = "reprint"
+    name                      = "REPRINT LINE character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 22
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a reprint="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420231"
+    help_msg_loc              = ""
+
+# Displays discard character.
+sm_cmd_opt:
+    id                        = "tty_common"
+    id_seq_num                = "390"
+    disc_field_name           = "discard"
+    name                      = "DISCARD character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 25
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a discard="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420232"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Specific to  8- or 16-port and standard i/o serial ports adapters.
+# Used by: add and show/change functions.
+
+# Displays tbc16 attribute.
+sm_cmd_opt:
+    id                        = "tty_rsdd"
+    id_seq_num                = "150"
+    disc_field_name           = "tbc16"
+    name                      = "TRANSMIT buffer count"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 29
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a tbc16="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -a tbc16 -R"
+    cmd_to_list_postfix       = "-l parent"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420244"
+    help_msg_loc              = ""
+
+# Displays rtrig attribute.
+sm_cmd_opt:
+    id                        = "tty_rsdd"
+    id_seq_num                = "160"
+    disc_field_name           = "rtrig"
+    name                      = "RECEIVE trigger level"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 37
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a rtrig="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -a rtrig -R"
+    cmd_to_list_postfix       = "-l parent"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420246"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Specific to  64-port adapters.
+# Used by: add and show/change functions.
+
+# Displays tbc64 attribute.
+sm_cmd_opt:
+    id                        = "tty_liondd"
+    id_seq_num                = "150"
+    disc_field_name           = "tbc64"
+    name                      = "TRANSMIT buffer count"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 29
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a tbc64="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -a tbc64 -R"
+    cmd_to_list_postfix       = "-l parent"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420245"
+    help_msg_loc              = ""
+
+# Displays xprint_on_str attribute.
+sm_cmd_opt:
+    id                        = "tty_liondd"
+    id_seq_num                = "180"
+    disc_field_name           = "xprint_on_str"
+    name                      = "Transparent Print ON String"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 44
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a xprint_on_str="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1850004"
+    help_msg_loc              = ""
+
+# Displays xprint_off_str attribute.
+sm_cmd_opt:
+    id                        = "tty_liondd"
+    id_seq_num                = "190"
+    disc_field_name           = "xprint_off_str"
+    name                      = "Transparent Print OFF String"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 45
+    op_type                   = ""
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a xprint_off_str="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1850005"
+    help_msg_loc              = ""
+
+# Displays xprint_priority attribute.
+sm_cmd_opt:
+    id                        = "tty_liondd"
+    id_seq_num                = "200"
+    disc_field_name           = "xprint_priority"
+    name                      = "Priority of transparent print"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 43
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a xprint_priority="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -a xprint_priority -R"
+    cmd_to_list_postfix       = "-l parent"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1850022"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Specific to move.
+# Used by: move function.
+
+# Displays the TTY logical name.
+sm_cmd_opt:
+    id                        = "tty_mv"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "TTY"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 100
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420200"
+    help_msg_loc              = ""
+
+# Displays TTY device's parent adapter.
+sm_cmd_opt:
+    id                        = "tty_mv"
+    id_seq_num                = "002"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420202"
+    help_msg_loc              = ""
+
+# Displays port number TTY device is connected to.
+sm_cmd_opt:
+    id                        = "tty_mv"
+    id_seq_num                = "003"
+    disc_field_name           = "port"
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420210"
+    help_msg_loc              = ""
+
+
+  
+#
+# Dialog header command options.  Common to add and show/change.
+# Specific to  128-port adapters.
+# Used by: add and show/change functions.
+ 
+
+# Displays onstr attribute for 128-port.
+sm_cmd_opt:
+	id_seq_num 		= "180"
+	id 			= "tty_cxmadd"
+	disc_field_name 	= "onstr"
+	name 			= "Transparent Print ON String"
+	name_msg_file 		= "devices.cat"
+	name_msg_set 		= 65
+	name_msg_id 		= 44
+	op_type 		= ""
+	entry_type 		= "t"
+	entry_size 		= 0
+	required 		= "n"
+	prefix 			= "-a onstr="
+	cmd_to_list_mode 	= ""
+	cmd_to_list 		= ""
+	cmd_to_list_postfix 	= ""
+	multi_select 		= "n"
+	value_index 		= 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "1850004"
+        help_msg_loc            = ""
+
+# Displays offstr attribute for 128-port.
+sm_cmd_opt:
+	id_seq_num 		= "182"
+	id 			= "tty_cxmadd"
+	disc_field_name 	= "offstr"
+	name 			= "Transparent Print OFF String"
+	name_msg_file 		= "devices.cat"
+	name_msg_set 		= 65
+	name_msg_id 		= 45
+	op_type 		= ""
+	entry_type 		= "t"
+	entry_size 		= 0
+	required 		= "n"
+	prefix 		        = "-a offstr="
+	cmd_to_list_mode 	= ""
+	cmd_to_list 		= ""
+	cmd_to_list_postfix 	= ""
+	multi_select 		= "n"
+        value_index             = 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "1850005"
+        help_msg_loc            = ""
+
+
+# Displays maxcps attribute for 128-port.
+sm_cmd_opt:
+        id_seq_num 		= "184"
+        id 			= "tty_cxmadd"
+        disc_field_name 	= "maxcps"
+        name 			= "Transparent Print Maximum Characters per Second"
+        name_msg_file 		= "devices.cat"
+        name_msg_set 		= 65
+        name_msg_id 		= 46
+        op_type 		= "l"
+        entry_type 		= "#"
+        entry_size 		= 4
+        required 		= "n"
+        prefix 			= "-a maxcps="
+        cmd_to_list_mode 	= "r"
+    	cmd_to_list             = "lsattr -a maxcps -R"
+    	cmd_to_list_postfix     = "-l parent"
+        multi_select 		= ""
+        value_index 		= 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "1850006"
+        help_msg_loc            = ""
+
+
+# Displays maxchar attribute for 128-port.
+sm_cmd_opt:
+        id_seq_num 		= "186"
+        id 			= "tty_cxmadd"
+        disc_field_name 	= "maxchar"
+        name 			= "Transparent Print Maximum Character Packet Size"
+        name_msg_file 		= "devices.cat"
+        name_msg_set 		= 65
+        name_msg_id 		= 47
+        op_type 		= "l"
+        entry_type 		= "#"
+        entry_size 		= 4
+        required 		= ""
+        prefix 			= "-a maxchar="
+        cmd_to_list_mode 	= "r"
+    	cmd_to_list             = "lsattr -a maxchar -R"
+    	cmd_to_list_postfix     = "-l parent"
+        multi_select 		= ""
+        value_index 		= 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "1850007"
+        help_msg_loc            = ""
+
+
+# Displays bufsize attribute for 128-port.
+sm_cmd_opt:
+        id_seq_num 		= "188"
+        id 			= "tty_cxmadd"
+        disc_field_name 	= "bufsize"
+        name 			= "Transparent Print Buffer Size"
+        name_msg_file 		= "devices.cat"
+        name_msg_set 		= 65
+        name_msg_id 		= 48
+        op_type 		= "l"
+        entry_type 		= "#"
+        entry_size 		= 0
+        required 		= "n"
+        prefix 			= "-a bufsize="
+        cmd_to_list_mode 	= "r"
+    	cmd_to_list             = "lsattr -a bufsize -R"
+    	cmd_to_list_postfix     = "-l parent"
+        multi_select 		= ""
+        value_index 		= 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "1850008"
+        help_msg_loc            = ""
+
+# Displays forcedcd attribute for 128-port.
+sm_cmd_opt:
+        id_seq_num 		= "190"
+        id 			= "tty_cxmadd"
+        disc_field_name 	= "forcedcd"
+        name 			= "Ignore Carrier Detect"
+        name_msg_file 		= "devices.cat"
+        name_msg_set 		= 65
+        name_msg_id 		= 49
+        op_type 		= "r"
+        entry_type 		= "n"
+        entry_size 		= 0
+        required 		= ""
+        prefix 			= "-a forcedcd="
+        cmd_to_list_mode 	= ""
+        cmd_to_list 		= ""
+        cmd_to_list_postfix 	= ""
+        multi_select 		= "n"
+        value_index 		= 0
+        disp_values             = "enable,disable"
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = "enable,disable"
+        help_msg_id             = "1850009"
+        help_msg_loc            = ""
+
+# Displays altpin attribute for 128-port.
+sm_cmd_opt:
+        id_seq_num 		= "192"
+        id 			= "tty_cxmadd"
+        disc_field_name 	= "altpin"
+        name 			= "Use Alternate RJ-45 Pinouts"
+        name_msg_file 		= "devices.cat"
+        name_msg_set 		= 65
+        name_msg_id 		= 51
+        op_type 		= "r"
+        entry_type 		= "n"
+        entry_size 		= 0
+        required 		= ""
+        prefix 			= "-a altpin="
+        cmd_to_list_mode 	= ""
+        cmd_to_list 		= ""
+        cmd_to_list_postfix 	= ""
+        multi_select 		= "n"
+        value_index 		= 0
+        disp_values             = "enable,disable"
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = "enable,disable"
+        help_msg_id             = "1850011"
+        help_msg_loc            = ""
+
+# Displays edelay attribute for 128-port.
+sm_cmd_opt:
+        id_seq_num 		= "194"
+        id 			= "tty_cxmadd"
+        disc_field_name 	= "edelay"
+        name 			= "Receive Event Delay Time"
+        name_msg_file 		= "devices.dat"
+        name_msg_set 		= 65
+        name_msg_id 		= 89
+        op_type 		= "l"
+        entry_type 		= "#"
+        entry_size 		= 3
+        required 		= "n"
+        prefix 			= "-a edelay="
+        cmd_to_list_mode 	= "r"
+    	cmd_to_list             = "lsattr -a edelay -R"
+ 	cmd_to_list_postfix     = "-l parent"
+        multi_select 		= ""
+        value_index 		= 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "1850012"
+        help_msg_loc            = ""
+
+
+
+
+ 
+
+*************************************************************************
+* Asyncronous Adapter stanzas for sm_menu_opt object class.
+*************************************************************************
+sm_menu_opt:
+	id_seq_num = "035"
+	id = "dev"
+	next_id = "ttyadapters"
+	text = "Asynchronous Adapters"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 88
+	next_type = "m"
+	alias = ""
+	help_msg_id = "1500007"
+	help_msg_loc = ""
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "ttyadapters"
+	next_id = "128psync"
+	text = "128-Port Asynchronous Adapter"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 62
+	next_type = "m"
+	alias = ""
+	help_msg_id = "1500007"
+	help_msg_loc = ""
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "128psync"
+	next_id = "lsd128psync"
+	text = "List All Defined 128-Port Async Adapters"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 63
+	next_type = "d"
+	alias = ""
+	help_msg_id = "1800193"
+	help_msg_loc = ""
+
+sm_menu_opt:
+	id_seq_num = "020"
+	id = "128psync"
+	next_id = "chg128psync"
+	text = "Change / Show Characteristics of a 128-Port Async Adapter"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 64
+	next_type = "n"
+	alias = ""
+	help_msg_id = "1800571"
+	help_msg_loc = ""
+
+sm_menu_opt:
+	id_seq_num = "030"
+	id = "128psync"
+	next_id = "cfg128psync"
+	text = "Configure a Defined 128-Port Async Adapter"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 65
+	next_type = "n"
+	alias = ""
+	help_msg_id = "1800483"
+	help_msg_loc = ""
+
+sm_menu_opt:
+	id_seq_num = "040"
+	id = "128psync"
+	next_id = "errpt"
+	text = "Generate an Error Report"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 66
+	next_type = "n"
+	alias = ""
+	help_msg_id = "1800203"
+	help_msg_loc = ""
+
+sm_menu_opt:
+	id_seq_num = "050"
+	id = "128psync"
+	next_id = "t128psync"
+	text = "Trace a 128-Port Async Adapter"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 67
+	next_type = "m"
+	alias = ""
+	help_msg_id = "1800204"
+	help_msg_loc = ""
+
+# This menu option needs a help id, eventually
+sm_menu_opt:
+	id_seq_num = "060"
+	id = "128psync"
+	next_id = "mon128psync"
+	text = "Monitor 128-Port Async Adapters"
+	text_msg_file = "devices.cat"
+	text_msg_set = 65
+	text_msg_id = 61
+	next_type = "d"
+	alias = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+
+sm_menu_opt:
+	id_seq_num = "010"
+	id = "t128psync"
+	next_id = "trcstart"
+	text = "Start Trace"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 175
+	next_type = "d"
+	alias = ""
+	help_msg_id = "1800322"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "020"
+	id = "t128psync"
+	next_id = "trcstop"
+	text = "Stop Trace"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 176
+        next_type = "d"
+	alias = ""
+	help_msg_id = "1800323"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_menu_opt:
+	id_seq_num = "030"
+	id = "t128psync"
+	next_id = "trcrpt"
+	text = "Generate a Trace Report"
+	text_msg_file = "smit.cat"
+	text_msg_set = 25
+	text_msg_id = 177
+	next_type = "n"
+	alias = ""
+	help_msg_id = "1800324"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+*************************************************************************
+* 128-port adapter stanzas for sm_name_hdr object class.
+*************************************************************************
+
+sm_name_hdr:
+	id = "chg128psync"
+	next_id = "chg128psync_hdr"
+	option_id = "128psync_ln_opt"
+	has_name_select = "n"
+	name = "Change/Show Characteristics of a 128-Port Async Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 64
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\" \n\
+} \n\
+xx "
+	cmd_to_classify_postfix = " logicname "
+	raw_field_name = "logicname"
+	cooked_field_name = "type:subclass:parent:port:loc:state:desc"
+	next_type = "d"
+	help_msg_id = "1800571"
+	help_msg_loc = ""
+
+sm_name_hdr:
+	id = "cfg128psync"
+	next_id = "cfg128psync_hdr"
+	option_id = "128psync_ln_opt"
+	has_name_select = "n"
+	name = "Configure a Defined 128-Port Async Adapter "
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 65
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "logicname"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "1800483"
+	help_msg_loc = ""
+
+*************************************************************************
+* 128-port Adapter stanzas for sm_cmd_hdr object class.
+*************************************************************************
+# This eventually needs a help msg id
+sm_cmd_hdr:
+	id = "mon128psync"
+	option_id = ""
+	has_name_select = "n"
+	name = "Monitor 128-Port Async Adapters"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 61
+	cmd_to_exec = "/usr/lbin/tty/mon-cxma"
+	ask = ""
+	exec_mode = "i"
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = ""
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "lsd128psync"
+	option_id = ""
+	has_name_select = "n"
+	name = "List All Defined 128-Port Async Adapters"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 63
+	cmd_to_exec = "lsdev -C -c adapter -t 128psync -H"
+	ask = ""
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1800193"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "chg128psync_hdr"
+	option_id = "128psync_chg"
+	has_name_select = "y"
+	name = "Change/Show Characteristics of a 128-Port Async Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 64
+	cmd_to_exec = "chdev "
+	ask = ""
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "lsattr "
+	cmd_to_discover_postfix = "-l logicname -E -O"
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1800571"
+	help_msg_loc = ""
+
+sm_cmd_hdr:
+	id = "cfg128psync_hdr"
+	option_id = "cfg128psync_opt"
+	has_name_select = "y"
+	name = "Configure a Defined 128-Port Async Adapter "
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 65
+	cmd_to_exec = "mkdev "
+	ask = ""
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "1800483"
+	help_msg_loc = ""
+
+*************************************************************************
+* 128-port Adapter stanzas for sm_cmd_opt object class.
+*************************************************************************
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "128psync_ln_opt"
+	disc_field_name = ""
+	name = "128-Port Async Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 68
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "lsdev -C -c adapter -t 128psync"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04202"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "128psync_predef_opt"
+	disc_field_name = ""
+	name = "128-Port Async Adapter Type"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 69
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "a"
+	cmd_to_list = "lsdev -P -c adapter -t 128psync -F \"type subclass description\""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04201"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "128psync_parent_opt"
+	disc_field_name = ""
+	name = "Parent Device"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 74
+	op_type = "l"
+	entry_type = "t"
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "lsparent -C "
+	cmd_to_list_postfix = "-k subclass"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04203"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "100"
+	id = "128psync_chg"
+	disc_field_name = "logicname"
+	name = "128-Port Async Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 68
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "y"
+	prefix = "-l "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04201708"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "130"
+	id = "128psync_chg"
+	disc_field_name = "desc"
+	name = "Description"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 71
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04201709"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "140"
+	id = "128psync_chg"
+	disc_field_name = "state"
+	name = "Status"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 72
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04201710"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "150"
+	id = "128psync_chg"
+	disc_field_name = "loc"
+	name = "Location"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 73
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "n"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04201711"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "202"
+	id = "128psync_chg"
+	disc_field_name = "line1_speed"
+	name = "Line 1 Speed"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 77
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line1_speed="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+        4-wire direct  8-wire direct  8-wire 232 modem  8-wire 422 modem\n\
+9600         -           supported        supported         supported\n\
+14.4K        -               -            supported         supported\n\
+19.2K        -           supported        supported         supported\n\
+38.4K        -           supported        supported         supported\n\
+57.6K        -           supported        supported         supported\n\
+64K          -               -            supported             -\n\
+76.8K        -           supported        supported         supported\n\
+115K         -           supported            -             supported\n\
+230K      supported      supported            -             supported\n\
+460K      supported      supported            -             supported\n\
+920K         -           supported            -             supported\n\
+1.2M         -           supported            -             supported\n\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500001"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "204"
+	id = "128psync_chg"
+	disc_field_name = "line1_cabletype"
+	name = "Line 1 Cable Type"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 78
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line1_cabletype="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+4 -wire: 232modem:none  422mode:none  direct:230K,460K\n\
+8 -wire: 232modem:all   422modem:all  direct:all except 14.4K,64K\n\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500003"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "206"
+	id = "128psync_chg"
+	disc_field_name = "commode_l1c1"
+	name = "    Node 1 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 79
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c1="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "216"
+	id = "128psync_chg"
+	disc_field_name = "commode_l1c2"
+	name = "    Node 2 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 80
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c2="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "226"
+	id = "128psync_chg"
+	disc_field_name = "commode_l1c3"
+	name = "    Node 3 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 81
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c3="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "236"
+	id = "128psync_chg"
+	disc_field_name = "commode_l1c4"
+	name = "    Node 4 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 82
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l1c4="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "242"
+	id = "128psync_chg"
+	disc_field_name = "line2_speed"
+	name = "Line 2 Speed"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 83
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line2_speed="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+        4-wire direct  8-wire direct  8-wire 232 modem  8-wire 422 modem\n\
+9600         -           supported        supported         supported\n\
+14.4K        -               -            supported         supported\n\
+19.2K        -           supported        supported         supported\n\
+38.4K        -           supported        supported         supported\n\
+57.6K        -           supported        supported         supported\n\
+64K          -               -            supported             -\n\
+76.8K        -           supported        supported         supported\n\
+115K         -           supported            -             supported\n\
+230K      supported      supported            -             supported\n\
+460K      supported      supported            -             supported\n\
+920K         -           supported            -             supported\n\
+1.2M         -           supported            -             supported\n\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500004"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "244"
+	id = "128psync_chg"
+	disc_field_name = "line2_cabletype"
+	name = "Line 2 Cable Type"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 84
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a line2_cabletype="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+4 -wire: 232modem:none  422mode:none  direct:230K,460K\n\
+8 -wire: 232modem:all   422modem:all  direct:all except 14.4K,64K\n\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500005"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "246"
+	id = "128psync_chg"
+	disc_field_name = "commode_l2c1"
+	name = "    Node 1 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 79
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c1="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "256"
+	id = "128psync_chg"
+	disc_field_name = "commode_l2c2"
+	name = "    Node 2 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 80
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c2="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "266"
+	id = "128psync_chg"
+	disc_field_name = "commode_l2c3"
+	name = "    Node 3 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 81
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c3="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "276"
+	id = "128psync_chg"
+	disc_field_name = "commode_l2c4"
+	name = "    Node 4 Comm Mode"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 82
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-a commode_l2c4="
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo \"\
+direct     4wire:230K,460K  8wire:all baud rates except 14.4K,64K\n\
+232_modem  4wire:none       8wire:all baud rates 76.8K and less\n\
+422_modem  4wire:none       8wire:all baud rates except 64K\n\
+none       no RAN configured at this node\n\
+\""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	help_msg_id = "1500002"
+	help_msg_loc = ""
+
+sm_cmd_opt:
+	id_seq_num = "010"
+	id = "cfg128psync_opt"
+	disc_field_name = "logicname"
+	name = "128-Port Async Adapter"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 68
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = "-l "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "04201708"
+	help_msg_loc = ""
+
+
+

@@ -1,0 +1,61 @@
+* @(#)60        1.1  src/bos/kernext/dlpi/README.dlpi, sysxdlpi, bos41J, 9514A_all 4/4/95 13:43:05
+*
+*   COMPONENT_NAME: SYSXDLPI
+*
+*   FUNCTIONS: 
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1994, 1995
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+		README file for the STREAMS DLPI Driver
+
+The DLPI driver now supports both the connectionless and connection-oriented
+modes of communication.  See the infoExplorer article, "Data Link Provider
+Interface Information", for specific information on the implementation of this
+version of the AIX DLPI driver.
+
+
+For binary compatibility purposes, you should be aware of the following
+temporary features in the connectionless/connection-oriented AIX dlpi driver:
+
+(1) For binary compatibility purposes, there are no new statistics added for
+    the connection-oriented functions.  Statistics for the connection-oriented
+    statistics will be provided in a future full release of AIX.
+
+(2) For binary compatibility purposes, a DL_UNITDATA_IND header is provided in
+    the messages for promiscuous mode and raw mode.  Be aware that this header
+    will be removed in a future full release of AIX.
+
+    The following sample code fragment will work with the 4.1 version of dlpi
+    and future releases of dlpi:
+
+        if (raw_mode) {
+                if (mp->b_datap->db_type == M_PROTO) {
+                        union DL_primitives *p;
+                        p = (union DL_primitives *)mp->b_rptr;
+                        if (p->dl_primitive == DL_UNITDATA_IND) {
+                                mblk_t *mp1 = mp->b_cont;
+                                freeb(mp);
+                                mp = mp1;
+                        }
+                }
+        }
+
+   The above code fragment simply discards the DL_UNITDATA_IND header.
+
+   For compatibility with future releases, it is recommended that you parse
+   the frame yourself.  The MAC and LLC headers are presented in the M_DATA
+   message for both promiscuous mode and raw mode.
+
+   Raw mode currently accepts, but does not require, a DL_UNITDATA_REQ.  In a
+   future release of AIX, raw mode will not accept a DL_UNITDATA_REQ; only
+   M_DATA will be accepted.
+

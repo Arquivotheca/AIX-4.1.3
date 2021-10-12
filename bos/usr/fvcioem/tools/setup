@@ -1,0 +1,7 @@
+
+#!/bin/ksh
+
+alias go='. /devel/tools/go'
+PATH=/devel/tools:$PATH
+#export CIE_TRACE_DEV=/dev/lft0
+#export CIE_TRACE_FILE=*

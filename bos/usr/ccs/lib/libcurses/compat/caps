@@ -1,0 +1,343 @@
+# @(#)37        1.1  src/bos/usr/ccs/lib/libcurses/compat/caps, libcurses, bos411, 9428A410j 9/2/93 12:10:12
+#
+# COMPONENT_NAME: (LIBCURSES) Curses Library
+#
+# FUNCTIONS:  caps
+#
+# ORIGINS: 3, 10, 27
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1985, 1988
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# NAME:        cpas
+#
+# EXECUTION ENVIRONMENT:
+#
+#       Be sure to add new capabilties at the END of the appropriate
+#       section!
+#
+
+--- begin bool
+auto_left_margin,       "bw"    "bw"    cub1 wraps from column 0 to last column
+auto_right_margin,      "am"    "am"    Terminal has automatic margins
+beehive_glitch,         "xsb"   "xb"    Beehive (f1=escape, f2=ctrl C)
+ceol_standout_glitch,   "xhp"   "xs"    Standout not erased by overwriting (hp)
+eat_newline_glitch,     "xenl"  "xn"    newline ignored after 80 cols (Concept)
+erase_overstrike,       "eo"    "eo"    Can erase overstrikes with a blank
+generic_type,           "gn"    "gn"    Generic line type (e.g. dialup, switch).
+hard_copy,              "hc"    "hc"    Hardcopy terminal
+has_meta_key,           "km"    "km"    Has a meta key (shift, sets parity bit)
+has_status_line,        "hs"    "hs"    Has extra "status line"
+insert_null_glitch,     "in"    "in"    Insert mode distinguishes nulls
+memory_above,           "da"    "da"    Display may be retained above the screen
+memory_below,           "db"    "db"    Display may be retained below the screen
+move_insert_mode,       "mir"   "mi"    Safe to move while in insert mode
+move_standout_mode,     "msgr"  "ms"    Safe to move in standout modes
+over_strike,            "os"    "os"    Terminal overstrikes
+status_line_esc_ok,	"eslok"	"es"	Escape can be used on the status line
+teleray_glitch,		"xt"	"xt"	Tabs destructive, magic so char (t1061)
+tilde_glitch,		"hz"	"hz"	Hazeltine; can't print ~'s
+transparent_underline,	"ul"	"ul"	underline character overstrikes
+xon_xoff,		"xon"	"xo"	Terminal uses xon/xoff handshaking
+# Add new Booleans before this line.
+--- end bool
+
+--- begin num
+columns,		"cols"	"co"	Number of columns in a line
+init_tabs,		"it"	"it"	Tabs initially every # spaces.
+lines,			"lines"	"li"	Number of lines on screen or page
+lines_of_memory,	"lm"	"lm"	Lines of memory if > lines.  0 => varies
+magic_cookie_glitch,	"xmc"	"sg"	Number blank chars left by smso or rmso
+padding_baud_rate,	"pb"	"pb"	Lowest baud rate where padding needed
+virtual_terminal,	"vt"	"vt"	Virtual terminal number (CB/Unix)
+width_status_line,	"wsl"	"ws"	# columns in status line
+# Add new numbers before this line.
+--- end num
+
+--- begin str
+back_tab,		"cbt"	"bt"	Back tab (P)
+bell,			"bel"	"bl"	Audible signal (bell) (P)
+carriage_return,	"cr"	"cr"	Carriage return (P*)
+change_scroll_region,	"csr"	"cs"	change to lines #1 thru #2 (vt100) (PG)
+clear_all_tabs,		"tbc"	"ct"	Clear all tab stops. (P)
+clear_screen,		"clear"	"cl"	Clear screen (P*)
+clr_eol,		"el"	"ce"	Clear to end of line (P)
+clr_eos,		"ed"	"cd"	Clear to end of display (P*)
+column_address,         "hpa"   "ch"    Set cursor column (PG)
+command_character,	"cmdch"	"CC"	Term. settable cmd char in prototype
+cursor_address,		"cup"	"cm"	Cursor motion to row #1 col #2 (PG)
+cursor_down,		"cud1"	"do"	Down one line
+cursor_home,		"home"	"ho"	Home cursor (if no cup)
+cursor_invisible,	"civis"	"vi"	Make cursor invisible
+cursor_left,		"cub1"	"le"	Move cursor left one space.
+cursor_mem_address,	"mrcup"	"CM"	Memory relative cursor addressing.
+cursor_normal,		"cnorm"	"ve"	Make cursor appear normal (undo vs/vi)
+cursor_right,		"cuf1"	"nd"	Non-destructive space (cursor right)
+cursor_to_ll,		"ll"	"ll"	Last line, first column (if no cup)
+cursor_up,		"cuu1"	"up"	Upline (cursor up)
+cursor_visible,		"cvvis"	"vs"	Make cursor very visible
+delete_character,	"dch1"	"dc"	Delete character (P*)
+delete_line,		"dl1"	"dl"	Delete line (P*)
+dis_status_line,	"dsl"	"ds"	Disable status line
+down_half_line,		"hd"	"hd"	Half-line down (forward 1/2 linefeed)
+enter_alt_charset_mode,	"smacs"	"as"	Start alternate character set (P)
+enter_blink_mode,	"blink"	"mb"	Turn on blinking
+enter_bold_mode,	"bold"	"md"	Turn on bold (extra bright) mode
+enter_ca_mode,		"smcup"	"ti"	String to begin programs that use cup
+enter_delete_mode,	"smdc"	"dm"	Delete mode (enter)
+enter_dim_mode,		"dim"	"mh"	Turn on half-bright mode
+enter_insert_mode,	"smir"	"im"	Insert mode (enter);
+enter_secure_mode,	"invis"	"mk"	Turn on blank mode (chars invisible)
+enter_protected_mode,	"prot"	"mp"	Turn on protected mode
+enter_reverse_mode,	"rev"	"mr"	Turn on reverse video mode
+enter_standout_mode,	"smso"	"so"	Begin stand out mode
+enter_underline_mode,	"smul"	"us"	Start underscore mode
+erase_chars,		"ech"	"ec"	Erase #1 characters (PG)
+exit_alt_charset_mode,	"rmacs"	"ae"	End alternate character set (P)
+exit_attribute_mode,	"sgr0"	"me"	Turn off all attributes
+exit_ca_mode,		"rmcup"	"te"	String to end programs that use cup
+exit_delete_mode,	"rmdc"	"ed"	End delete mode
+exit_insert_mode,	"rmir"	"ei"	End insert mode;
+exit_standout_mode,	"rmso"	"se"	End stand out mode
+exit_underline_mode,	"rmul"	"ue"	End underscore mode
+flash_screen,		"flash"	"vb"	Visible bell (may not move cursor)
+form_feed,		"ff"	"ff"	Hardcopy terminal page eject (P*)
+from_status_line,	"fsl"	"fs"	Return from status line
+init_1string,		"is1"	"i1"	Terminal initialization string
+init_2string,		"is2"	"is"	Terminal initialization string
+init_3string,		"is3"	"i2"	Terminal initialization string
+init_file,		"if"	"if"	Name of file containing is
+insert_character,	"ich1"	"ic"	Insert character (P)
+insert_line,            "il1"   "al"    Add new blank line (P*)
+insert_padding,		"ip"	"ip"	Insert pad after character inserted (P*)
+key_backspace,		"kbs"	"kb"	Sent by backspace key
+key_catab,		"ktbc"	"ka"	Sent by clear-all-tabs key.
+key_clear,		"kclr"	"kC"	Sent by clear screen or erase key.
+key_ctab,		"kctab"	"kt"	Sent by clear-tab key
+key_dc,			"kdch1"	"kD"	Sent by delete character key.
+key_dl,			"kdl1"	"kL"	Sent by delete line key.
+key_down,		"kcud1"	"kd"	Sent by terminal down arrow key
+key_eic,		"krmir"	"kM"	Sent by rmir or smir in insert mode.
+key_eol,		"kel"	"kE"	Sent by clear-to-end-of-line key.
+key_eos,		"ked"	"kS"	Sent by clear-to-end-of-screen key.
+key_f0,			"kf0"	"k0"	Sent by function key f0.
+key_f1,			"kf1"	"k1"	Sent by function key f1.
+key_f10,		"kf10"	"k;"	Sent by function key f10.
+key_f2,			"kf2"	"k2"	Sent by function key f2.
+key_f3,			"kf3"	"k3"	Sent by function key f3.
+key_f4,			"kf4"	"k4"	Sent by function key f4.
+key_f5,			"kf5"	"k5"	Sent by function key f5.
+key_f6,			"kf6"	"k6"	Sent by function key f6.
+key_f7,			"kf7"	"k7"	Sent by function key f7.
+key_f8,			"kf8"	"k8"	Sent by function key f8.
+key_f9,			"kf9"	"k9"	Sent by function key f9.
+key_home,		"khome"	"kh"	Sent by home key.
+key_ic,			"kich1"	"kI"	Sent by ins char/enter ins mode key.
+key_il,			"kil1"	"kA"	Sent by insert line.
+key_left,		"kcub1"	"kl"	Sent by terminal left arrow key
+key_ll,			"kll"	"kH"	Sent by home-down key
+key_npage,		"knp"	"kN"	Sent by next-page key
+key_ppage,		"kpp"	"kP"	Sent by previous-page key
+key_right,		"kcuf1"	"kr"	Sent by terminal right arrow key
+key_sf,			"kind"	"kF"	Sent by scroll-forward/down key
+key_sr,			"kri"	"kR"	Sent by scroll-backward/up key
+key_stab,		"khts"	"kT"	Sent by set-tab key
+key_up,			"kcuu1"	"ku"	Sent by terminal up arrow key
+keypad_local,		"rmkx"	"ke"	Out of "keypad transmit" mode
+keypad_xmit,		"smkx"	"ks"	Put terminal in "keypad transmit" mode
+lab_f0,			"lf0"	"l0"	Labels on function key f0 if not f0
+lab_f1,			"lf1"	"l1"	Labels on function key f1 if not f1
+lab_f10,		"lf10"	"la"	Labels on function key f10 if not f10
+lab_f2,			"lf2"	"l2"	Labels on function key f2 if not f2
+lab_f3,			"lf3"	"l3"	Labels on function key f3 if not f3
+lab_f4,			"lf4"	"l4"	Labels on function key f4 if not f4
+lab_f5,			"lf5"	"l5"	Labels on function key f5 if not f5
+lab_f6,			"lf6"	"l6"	Labels on function key f6 if not f6
+lab_f7,			"lf7"	"l7"	Labels on function key f7 if not f7
+lab_f8,			"lf8"	"l8"	Labels on function key f8 if not f8
+lab_f9,			"lf9"	"l9"	Labels on function key f9 if not f9
+meta_off,		"rmm"	"mo"	Turn off "meta mode"
+meta_on,		"smm"	"mm"	Turn on "meta mode" (8th bit)
+newline,		"nel"	"nw"	Newline (behaves like cr followed by lf)
+pad_char,		"pad"	"pc"	Pad character (rather than null)
+parm_dch,		"dch"	"DC"	Delete #1 chars (PG*)
+parm_delete_line,	"dl"	"DL"	Delete #1 lines (PG*)
+parm_down_cursor,	"cud"	"DO"	Move cursor down #1 lines. (PG*)
+parm_ich,		"ich"	"IC"	Insert #1 blank chars (PG*)
+parm_index,		"indn"	"SF"	Scroll forward #1 lines. (PG)
+parm_insert_line,	"il"	"AL"	Add #1 new blank lines (PG*)
+parm_left_cursor,	"cub"	"LE"	Move cursor left #1 spaces (PG)
+parm_right_cursor,	"cuf"	"RI"	Move cursor right #1 spaces. (PG*)
+parm_rindex,		"rin"	"SR"	Scroll backward #1 lines. (PG)
+parm_up_cursor,		"cuu"	"UP"	Move cursor up #1 lines. (PG*)
+pkey_key,		"pfkey"	"pk"	Prog funct key #1 to type string #2
+pkey_local,		"pfloc"	"pl"	Prog funct key #1 to execute string #2
+pkey_xmit,		"pfx"	"px"	Prog funct key #1 to xmit string #2
+print_screen,		"mc0"	"ps"	Print contents of the screen
+prtr_off,		"mc4"	"pf"	Turn off the printer
+prtr_on,		"mc5"	"po"	Turn on the printer
+repeat_char,		"rep"	"rp"	Repeat char #1 #2 times.  (PG*)
+reset_1string,		"rs1"	"r1"	Reset terminal completely to sane modes.
+reset_2string,		"rs2"	"r2"	Reset terminal completely to sane modes.
+reset_3string,		"rs3"	"r3"	Reset terminal completely to sane modes.
+reset_file,		"rf"	"rf"	Name of file containing reset string.
+restore_cursor,		"rc"	"rc"	Restore cursor to position of last sc.
+row_address,		"vpa"	"cv"	Like hpa but sets row. (PG)
+save_cursor,		"sc"	"sc"	Save cursor position. (P)
+scroll_forward,		"ind"	"sf"	Scroll text up (P)
+scroll_reverse,		"ri"	"sr"	Scroll text down (P)
+set_attributes,		"sgr"	"sa"	Define the video attributes (PG9)
+set_tab,		"hts"	"st"	Set a tab in all rows, current column.
+set_window,		"wind"	"wi"	Current window is lines #1-#2 cols #3-#4
+tab,			"ht"	"ta"	Tab to next 8 space hardware tab stop.
+to_status_line,		"tsl"	"ts"	Go to status line
+underline_char,		"uc"	"uc"	Underscore one char and move past it
+up_half_line,		"hu"	"hu"	Half-line up (reverse 1/2 linefeed)
+init_prog,		"iprog"	"iP"	Path name of program for init.
+key_a1,			"ka1"	"K1"	Upper left of keypad
+key_a3,			"ka3"	"K3"	Upper right of keypad
+key_b2,			"kb2"	"K2"	Center of keypad
+key_c1,			"kc1"	"K4"	Lower left of keypad
+key_c3,			"kc3"	"K5"	Lower right of keypad
+prtr_non,		"mc5p"	"pO"	Turn on the printer for #1 bytes.
+box_chars_1,            "box1"  "bx"    Box characters primary set
+box_chars_2,            "box2"  "by"    Box characters alternate set
+box_attr_1,             "batt1" "Bx"    Attributes for box_chars_1
+box_attr_2,             "batt2" "By"    Attributes for box_chars_2
+color_bg_0,             "colb0" "d0"    Background color 0 black
+color_bg_1,             "colb1" "d1"    Background color 1 red
+color_bg_2,             "colb2" "d2"    Background color 2 green
+color_bg_3,             "colb3" "d3"    Background color 3 brown
+color_bg_4,             "colb4" "d4"    Background color 4 blue
+color_bg_5,             "colb5" "d5"    Background color 5 magenta
+color_bg_6,             "colb6" "d6"    Background color 6 cyan
+color_bg_7,             "colb7" "d7"    Background color 7 white
+color_fg_0,             "colf0" "c0"    Foreground color 0 white
+color_fg_1,             "colf1" "c1"    Foreground color 1 red
+color_fg_2,             "colf2" "c2"    Foreground color 2 green
+color_fg_3,             "colf3" "c3"    Foreground color 3 brown
+color_fg_4,             "colf4" "c4"    Foreground color 4 blue
+color_fg_5,             "colf5" "c5"    Foreground color 5 magenta
+color_fg_6,             "colf6" "c6"    Foreground color 6 cyan
+color_fg_7,             "colf7" "c7"    Foreground color 7 black
+font_0,                 "font0" "f0"    Select font 0
+font_1,                 "font1" "f1"    Select font 1
+font_2,                 "font2" "f2"    Select font 2
+font_3,                 "font3" "f3"    Select font 3
+font_4,                 "font4" "f4"    Select font 4
+font_5,                 "font5" "f5"    Select font 5
+font_6,                 "font6" "f6"    Select font 6
+font_7,                 "font7" "f7"    Select font 7
+key_back_tab,           "kbtab" "kO"    Backtab key
+key_do,                 "kdo"   "ki"    Do request key
+key_command,            "kcmd"  "kc"    Command request key
+key_command_pane,       "kcpn"  "kW"    Command pane key
+key_end,                "kend"  "kw"    End key
+key_help,               "khlp"  "kq"    Help key
+key_newline,            "knl"   "kn"    Newline key
+key_next_pane,          "knpn"  "kv"    Next pane key
+key_prev_cmd,           "kpcmd" "kp"    Previous command key
+key_prev_pane,          "kppn"  "kV"    Previous pane key
+key_quit,               "kquit" "kQ"    Quit key
+key_select,             "ksel"  "kU"    Select key
+key_scroll_left,        "kscl"  "kz"    Scroll left
+key_scroll_right,       "kscr"  "kZ"    Scroll right
+key_tab,                "ktab"  "ko"    Tab key
+key_smap_in1,           "kmpf1" "Kv"    input for special mapped key 1
+key_smap_out1,          "kmpt1" "KV"    output for mapped key 1
+key_smap_in2,           "kmpf2" "Kw"    input for special mapped key 2
+key_smap_out2,          "kmpt2" "KW"    output for mapped key 2
+key_smap_in3,           "kmpf3" "Kx"    input for special mapped key 3
+key_smap_out3,          "kmpt3" "KX"    output for mapped key 3
+key_smap_in4,           "kmpf4" "Ky"    input for special mapped key 4
+key_smap_out4,          "kmpt4" "KY"    output for mapped key 4
+key_smap_in5,           "kmpf5" "Kz"    input for special mapped key 5
+key_smap_out5,          "kmpt5" "KZ"    output for mapped key 5
+appl_defined_str,       "apstr" "za"    Application defined terminal string
+key_smap_in6,           "kmpf6" "Kr"    input for special mapped key 6
+key_smap_out6,          "kmpt6" "KR"    output for mapped key 6
+key_smap_in7,           "kmpf7" "Ks"    input for special mapped key 7
+key_smap_out7,          "kmpt7" "KS"    output for mapped key 7
+key_smap_in8,           "kmpf8" "Kt"    input for special mapped key 8
+key_smap_out8,          "kmpt8" "KT"    output for mapped key 8
+key_smap_in9,           "kmpf9" "Ku"    input for special mapped key 9
+key_smap_out9,          "kmpt9" "KU"    output for mapped key 9
+key_sf1,                "ksf1"  "S1"    Special function key 1
+key_sf2,                "ksf2"  "S2"    Special function key 2
+key_sf3,                "ksf3"  "S3"    Special function key 3
+key_sf4,                "ksf4"  "S4"    Special function key 4
+key_sf5,                "ksf5"  "S5"    Special function key 5
+key_sf6,                "ksf6"  "S6"    Special function key 6
+key_sf7,                "ksf7"  "S7"    Special function key 7
+key_sf8,                "ksf8"  "S8"    Special function key 8
+key_sf9,                "ksf9"  "S9"    Special function key 9
+key_sf10,               "ksf10" "SA"    Special function key 10
+key_f11,                "kf11"  "k<"    Sent by function key f11.
+key_f12,                "kf12"  "k>"    Sent by function key f12.
+key_f13,                "kf13"  "k!"    Sent by function key f13.
+key_f14,                "kf14"  "k@"    Sent by function key f14.
+key_f15,                "kf15"  "k#"    Sent by function key f15.
+key_f16,                "kf16"  "k$"    Sent by function key f16.
+key_f17,                "kf17"  "k%"    Sent by function key f17.
+key_f18,                "kf18"  "k^"    Sent by function key f18.
+key_f19,                "kf19"  "k&"    Sent by function key f19.
+key_f20,                "kf20"  "k*"    Sent by function key f20.
+key_f21,                "kf21"  "k("    Sent by function key f21.
+key_f22,                "kf22"  "k)"    Sent by function key f22.
+key_f23,                "kf23"  "k-"    Sent by function key f23.
+key_f24,                "kf24"  "k_"    Sent by function key f24.
+key_f25,                "kf25"  "k+"    Sent by function key f25.
+key_f26,                "kf26"  "k,"    Sent by function key f26.
+key_f27,                "kf27"  "k:"    Sent by function key f27.
+key_f28,                "kf28"  "k?"    Sent by function key f28.
+key_f29,                "kf29"  "k["    Sent by function key f29.
+key_f30,                "kf30"  "k]"    Sent by function key f30.
+key_f31,                "kf31"  "k{"    Sent by function key f31.
+key_f32,                "kf32"  "k}"    Sent by function key f32.
+key_f33,                "kf33"  "k|"    Sent by function key f33.
+key_f34,                "kf34"  "k~"    Sent by function key f34.
+key_f35,                "kf35"  "k/"    Sent by function key f35.
+key_f36,                "kf36"  "k="    Sent by function key f36.
+key_f37,                "kf37"  "F@"    Sent by function key f37.
+key_f38,                "kf38"  "FA"    Sent by function key f38.
+key_f39,                "kf39"  "FB"    Sent by function key f39.
+key_f40,                "kf40"  "FC"    Sent by function key f40.
+key_f41,                "kf41"  "FD"    Sent by function key f41.
+key_f42,                "kf42"  "FE"    Sent by function key f42.
+key_f43,                "kf43"  "FF"    Sent by function key f43.
+key_f44,                "kf44"  "FG"    Sent by function key f44.
+key_f45,                "kf45"  "FH"    Sent by function key f45.
+key_f46,                "kf46"  "FI"    Sent by function key f46.
+key_f47,                "kf47"  "FJ"    Sent by function key f47.
+key_f48,                "kf48"  "FK"    Sent by function key f48.
+key_f49,                "kf49"  "FL"    Sent by function key f49.
+key_f50,                "kf50"  "FM"    Sent by function key f50.
+key_f51,                "kf51"  "FN"    Sent by function key f51.
+key_f52,                "kf52"  "FO"    Sent by function key f52.
+key_f53,                "kf53"  "FP"    Sent by function key f53.
+key_f54,                "kf54"  "FQ"    Sent by function key f54.
+key_f55,                "kf55"  "FR"    Sent by function key f55.
+key_f56,                "kf56"  "FS"    Sent by function key f56.
+key_f57,                "kf57"  "FT"    Sent by function key f57.
+key_f58,                "kf58"  "FU"    Sent by function key f58.
+key_f59,                "kf59"  "FV"    Sent by function key f59.
+key_f60,                "kf60"  "FW"    Sent by function key f60.
+key_f61,                "kf61"  "FX"    Sent by function key f61.
+key_f62,                "kf62"  "FY"    Sent by function key f62.
+key_f63,                "kf63"  "FZ"    Sent by function key f63.
+key_action,             "kact"  "kJ"    Sent by the action key.
+enter_topline_mode,     "topl"  "tp"    Start topline mode.
+enter_bottom_mode,      "btml"  "bm"    Start bottom mode.
+enter_rvert_mode,       "rvert" "rv"    Start right vertical line mode.
+enter_lvert_mode,       "lvert" "lv"    Start left vertical line mode.
+# Add new strings before this line
+--- end str

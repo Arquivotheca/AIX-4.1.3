@@ -1,0 +1,93 @@
+######################################################################
+#  @(#)90        1.2  src/bldenv/man/gen_inst.man, pkgtools, bos412, GOLDA411a 6/24/93 13:36:52
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: gen_inst
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# gen_inst.man
+#
+# Change log:
+#    11/20/91-rlk-man file created.
+#
+######################################################################
+  gen_inst Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+     From bosinst binary file, generate ccss-formatted bosinst
+     package on the ship server and add bosinst entry to ship index.
+
+
+  Syntax
+
+     gen_inst -b bosinst-filename [-h|-?]
+
+
+  Description
+
+     The 'gen_inst' command executes '32_pkg_environment' as a subcommand
+     to obtain the paths of the ship directory and the log file. Next,
+     the bosinst file is blocked to 31K block size. Then 'ccss_pack'
+     command is executed to reformat the bosinst file to ccss format
+     in the ship directory. Finally, any previous entries about bosinst
+     in the ship-dir index are replaced by a new entry, and a log entry
+     is written to the log file about this action.
+
+
+  Flags
+
+     -b bosinst-filename   path and file name of the input bosinst
+                           binary file. (Required parameter, no
+                           default.) Partial or complete path is ok.
+
+     -h | -?               Lists Help message and exits
+
+  Exit
+
+     If there is a file problem: Non-zero return code.
+     No file problem: Return code of zero.
+
+
+  File
+
+    None
+
+
+  Examples
+
+     1. Create ccss-formatted bosinst package, named bosinst.ptf,
+	on the ship server from the specified input:
+
+            gen_inst -b ../any/afs/accessable/bosinst
+
+     2. Only echo the usage message on the screen:
+
+        gen_inst      (or  gen_inst -h     or  gen_inst -? )
+
+
+  Implementation Specifics
+
+     None
+
+
+  Related Information
+
+     gen_boot
+     ccss_pack

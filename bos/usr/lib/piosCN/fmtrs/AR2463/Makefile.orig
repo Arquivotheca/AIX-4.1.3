@@ -1,0 +1,41 @@
+# @(#)68	1.5  src/bos/usr/lib/piosCN/fmtrs/AR2463/Makefile, ils-zh_CN, bos41J, 9521A_all 5/22/95 16:59:34
+#
+#   COMPONENT_NAME: ils-zh_CN
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+FMTRS	= ${MAKETOP}/bos/usr/lib/piosCN/fmtrs
+
+PROGRAMS = \
+	piofar2463ehsc \
+	piofar2463essc
+
+piofar2463essc_OFILES = \
+	display.o \
+	piofar2463essc.o
+
+LDFLAGS = -bnodelcsect
+
+IMPORTS = -bI:${FMTRS}/piof.imp
+EXPORTS = -bE:${FMTRS}/piof.exp
+
+INCFLAGS = -I${MAKETOP}/bos/usr/lib/piosCN/lib
+
+LIBS	= -lfontbosCN -liconv -lfont
+
+ILIST	= ${PROGRAMS}
+IDIR 	= /usr/lib/lpd/pio/fmtrs/
+
+.include <${RULES_MK}>

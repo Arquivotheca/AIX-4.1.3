@@ -1,0 +1,121 @@
+*/* @(#)58	1.2  src/bos/usr/ccs/bin/as/POWER/instrs.ops.601, cmdas, bos411, 9428A410j 3/10/94 10:25:47*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.601
+*
+* *       V4.1 601 processor unique instructions that are optional 
+* *       instructions in  PowerPC architecture and implemented in
+* *       601 processor.
+* *                                                                   
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1994
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+*
+************************************************************************
+*** - *** Type indicator:  Bit map for 601 unique instructions is
+*                           0x8010
+% 32784
+************************************************************************
+***********************************************************************
+*       X-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XTA-format
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | BF | BFT | FRT
+*              OP2 = RA | BFA | FRA | SR | SPR
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2             ----- RC=0
+*       mnemonic. OP1,OP2             ----- RC=1
+*
+***********************************************************************
+***************************************************
+** / ** Extended mnemonics for SPR control  ** / **
+*Opcde 1F
+*       mnem  |input     |out |op code value
+*
+*153    mfbatu  rt,n           Move from BAT Registers, Upper
+*                                ( BAT0U - BAT3U)
+        mfbatu  r4        xp   31-339-0-0-0-16-0-16
+*
+*153    mfbatl  rt,n           Move from BAT Registers, Lower
+*                                ( BAT0L - BAT3L)
+        mfbatl  r4        xp   31-339-0-0-0-17-0-16
+***********************************************************************
+*       XAT-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XAT-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  RS   |  SPR  | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  SPR,RS              ----- RC=0
+*       mnemonic. SPR,RS              ----- RC=1
+*
+*       NOTE: *** Bits 11-15 (SPR) is the first assembler operand
+*
+***********************************************************************
+***************************************************
+** / ** Extended mnemonics for SPR control  ** / **
+***************************************************
+*1D3    mtbatu  n,rs           Move to BAT Registers, Upper
+*                                ( BAT0U - BAT3U)
+        mtbatu  4r        xv   31-467-0-0-0-16-0-16
+*1D3    mtbatl  n,rs           Move to BAT Registers, Lower
+*                                ( BAT0L - BAT3L)
+        mtbatl  4r        xv   31-467-0-0-0-17-0-16
+***************************************************

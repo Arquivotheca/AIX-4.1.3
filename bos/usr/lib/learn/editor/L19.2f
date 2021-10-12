@@ -1,0 +1,39 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+There is a file "counties" in this directory.
+Try deleting the first five lines of the file.
+Then type "ready".
+#create Ref
+Morris
+Warren
+Union
+Somerset
+Hunterdon
+#create counties
+Bergen
+Passaic
+Sussex
+Hudson
+Essex
+Morris
+Warren
+Union
+Somerset
+Hunterdon
+#user
+#cmp counties Ref
+#log
+#next
+20.01a 10

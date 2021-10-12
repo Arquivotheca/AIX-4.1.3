@@ -1,0 +1,29 @@
+#!/bin/ksh
+#
+# @(#)35        1.1  src/bldscripts/dDB, ade_build, bos412, GOLDA411a 5/5/94 16:06:54
+#
+#   COMPONENT_NAME: bldprocess
+#
+#   ORIGINS: 27,71
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Establish Database Connectivity
+#
+. `/usr/bin/dirname $0`/bldDBfunctions
+SAVEPATH=$PATH
+. `/usr/bin/dirname $0`/common.sh
+PATH=$SAVEPATH
+initDB
+#
+# Execute command
+#
+$*

@@ -1,0 +1,27 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Now make a file containing the line
+
+The Hon. Brendan Byrne
+
+and write it on file "gov".
+Then type "ready".
+#create Ref
+The Hon. Brendan Byrne
+#user
+#cmp gov Ref
+#log
+#next
+15.1b 10

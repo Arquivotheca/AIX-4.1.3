@@ -1,0 +1,24 @@
+#!
+* @(#)85	1.1  src/bos/usr/ccs/lib/libc/libdes.imp, libc, bos411, 9428A410j 2/9/93 17:23:20
+*
+* COMPONENT_NAME: LIBC
+*
+* FUNCTION:
+*
+* ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1985,1991
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* Kludge for now, until -bexpall works.
+* This contains common, RT and R2 exports.
+*
+__crypt
+__encrypt
+__setkey

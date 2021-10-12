@@ -1,0 +1,589 @@
+* @(#)10 1.6 src/bos/objclass/POWER/adapter.sio.s1a.add, cfgtty, bos41J, 9520A_all 4/27/95 11:52:48
+*
+* COMPONENT_NAME: (CFGMETHODS) adapter.sio.s1a.add
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+*
+* Define the first serial port of the NATIVE card.
+*
+
+PdDv:
+	type = s1a
+	class = adapter
+	subclass = sio
+	prefix = sa
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x826
+	setno = 39
+	msgno = 1
+	fru = 2
+	catalog = devices.cat
+	DvDr = "rsdd"
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgasync
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgasync
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = "adapter/sio/s1a"
+
+PdCn:
+	uniquetype = "adapter/sio/s1a"
+	connkey = rs232
+	connwhere = s1
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = bus_io_addr
+	deflt = 0x30
+	values = 0x30
+	width = 0x08
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 3
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = arb_reg
+	deflt = 0x40
+	values = 0x40
+	width = 0x02
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 4
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = arb_sio_key
+	deflt = ""
+	values = arb_reg
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = bus_intr_lvl
+	deflt = 2
+	values = 2
+	width = ""
+	type = I
+	generic = D
+	rep = nl
+	nls_index = 5
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = intr_sio_key
+	deflt = ""
+	values = bus_intr_lvl
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = intr_priority
+	deflt = 1
+	values = 1
+	width = ""
+	type = P
+	generic = D
+	rep = n
+	nls_index = 6
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = frequency
+	deflt = 8000000
+	values = 8000000
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = id_seg_reg
+	deflt = 0x800C0080
+	values = 0x800C0080
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = nseg_reg
+	deflt = 0x80080060
+	values = 0x80080060
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a"
+	attribute = eu_arb_reg
+	deflt = 0x134
+	values = 0x134
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/sio/s1a"
+        attribute = "load_module"
+        deflt = "/usr/lib/methods/rsddload"
+        values = "/usr/lib/methods/rsddload"
+        width = ""
+        type = "E"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/sio/s1a"
+        attribute = rtrig
+        deflt = 3
+        values = "0-3,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/sio/s1a"
+        attribute = tbc16
+        deflt = 16
+        values = "1-16,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 10
+
+PdAt:
+        uniquetype = "adapter/sio/s1a"
+        attribute = speed
+        deflt = 9600
+        values = "0,50,75,110,134,150,200,300,600,1200,1800,2400,4800,9600,19200,38400"
+        width = ""
+        type = E
+        generic = DU
+        rep = slm
+        nls_index = 12
+
+
+
+*
+* Define the first serial port of the NATIVE card for the serial
+* adapter on the Stilwell/Gomez ioplanar.
+*
+
+PdDv:
+	type = s1a_1
+	class = adapter
+	subclass = sio
+	prefix = sa
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x826
+	setno = 39
+	msgno = 1
+	fru = 2
+	catalog = devices.cat
+	DvDr = "rsdd"
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgasync
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgasync
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/sio/s1a_1
+
+PdCn:
+	uniquetype = adapter/sio/s1a_1
+	connkey = rs232
+	connwhere = s1
+
+PdAt:
+	uniquetype = adapter/sio/s1a_1
+	attribute = bus_io_addr
+	deflt = 0x30
+	values = 0x30
+	width = 0x08
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 3
+
+PdAt:
+	uniquetype = adapter/sio/s1a_1
+	attribute = arb_reg
+	deflt = 0x40
+	values = 0x40
+	width = 0x02
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 4
+
+PdAt:
+	uniquetype = adapter/sio/s1a_1
+	attribute = arb_sio_key
+	deflt = ""
+	values = arb_reg
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = adapter/sio/s1a_1
+	attribute = bus_intr_lvl
+	deflt = 2
+	values = 2
+	width = ""
+	type = I
+	generic = D
+	rep = nl
+	nls_index = 5
+
+PdAt:
+	uniquetype = adapter/sio/s1a_1
+	attribute = intr_sio_key
+	deflt = ""
+	values = bus_intr_lvl
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = adapter/sio/s1a_1
+	attribute = intr_priority
+	deflt = 1
+	values = 1
+	width = ""
+	type = P
+	generic = D
+	rep = n
+	nls_index = 6
+
+PdAt:
+	uniquetype = adapter/sio/s1a_1
+	attribute = frequency
+	deflt = 24000000
+	values = 24000000
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_1"
+	attribute = id_seg_reg
+	deflt = 0x800C0080
+	values = 0x800C0080
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_1"
+	attribute = nseg_reg
+	deflt = 0x80080060
+	values = 0x80080060
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_1"
+	attribute = eu_arb_reg
+	deflt = 0x134
+	values = 0x134
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_1"
+        attribute = "load_module"
+        deflt = "/usr/lib/methods/rsddload"
+        values = "/usr/lib/methods/rsddload"
+        width = ""
+        type = "E"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_1"
+        attribute = rtrig
+        deflt = 3
+        values = "0-3,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_1"
+        attribute = tbc16
+        deflt = 16
+        values = "1-16,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 10
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_1"
+        attribute = speed
+        deflt = 9600
+        values = "0,50,75,110,134,150,200,300,600,1200,1800,2400,4800,9600,19200,38400"
+        width = ""
+        type = E
+        generic = DU
+        rep = slm
+        nls_index = 12
+
+
+*
+* Define the first serial port of the NATIVE card
+* for the serial adapter on multi-processor.
+*
+
+PdDv:
+	type = s1a_3
+	class = adapter
+	subclass = sio
+	prefix = sa
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x826
+	setno = 39
+	msgno = 1
+	fru = 2
+	catalog = devices.cat
+	DvDr = "rsdd"
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgasync
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgasync
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = "adapter/sio/s1a_3"
+
+PdCn:
+	uniquetype = "adapter/sio/s1a_3"
+	connkey = rs232
+	connwhere = s1
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = bus_io_addr
+	deflt = 0x30
+	values = 0x30
+	width = 0x08
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 3
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = arb_reg
+	deflt = 0x40
+	values = 0x40
+	width = 0x02
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 4
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = arb_sio_key
+	deflt = ""
+	values = arb_reg
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = bus_intr_lvl
+	deflt = 2
+	values = 2
+	width = ""
+	type = I
+	generic = D
+	rep = nl
+	nls_index = 5
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = intr_sio_key
+	deflt = ""
+	values = bus_intr_lvl
+	width = ""
+	type = S
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = intr_priority
+	deflt = 1
+	values = 1
+	width = ""
+	type = P
+	generic = D
+	rep = n
+	nls_index = 6
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = frequency
+	deflt = 1843200
+	values = 1843200
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = id_seg_reg
+	deflt = 0x800C0080
+	values = 0x800C0080
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = nseg_reg
+	deflt = 0x80080060
+	values = 0x80080060
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/sio/s1a_3"
+	attribute = eu_arb_reg
+	deflt = 0x134
+	values = 0x134
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_3"
+        attribute = "load_module"
+        deflt = "/usr/lib/methods/rsddload"
+        values = "/usr/lib/methods/rsddload"
+        width = ""
+        type = "E"
+        generic = ""
+        rep = "sl"
+        nls_index = 0
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_3"
+        attribute = rtrig
+        deflt = 3
+        values = "0-3,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 11
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_3"
+        attribute = tbc16
+        deflt = 16
+        values = "1-16,1"
+        width = ""
+        type = E
+        generic = DU
+        rep = nr
+        nls_index = 10
+
+PdAt:
+        uniquetype = "adapter/sio/s1a_3"
+        attribute = speed
+        deflt = 9600
+        values = "0,50,75,110,134,150,200,300,600,1200,1800,2400,4800,9600,19200,38400"
+        width = ""
+        type = E
+        generic = DU
+        rep = slm
+        nls_index = 12
+

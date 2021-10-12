@@ -1,0 +1,86 @@
+/* @(#)99       1.3  src/bos/usr/ccs/bin/lint/llib-lansi, cmdprog, bos411, 9428A410j 6/21/91 10:12:20 */
+/*
+ * COMPONENT_NAME: (CMDPROG) Programming Utilities
+ *
+ * FUNCTIONS:
+ *
+ * ORIGINS: 27; 32
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+/*
+** Standard ANSI C library include files.
+*/
+
+#ifdef _POSIX_SOURCE
+#define _POSIX_REMEMBER
+#undef _POSIX_SOURCE
+#endif
+
+#ifdef _XOPEN_SOURCE
+#define _XOPEN_REMEMBER
+#undef _XOPEN_SOURCE
+#endif
+
+#ifdef _ALL_SOURCE
+#define _ALL_REMEMBER
+#undef _ALL_SOURCE
+#endif
+
+#ifdef _ANSI_C_SOURCE
+#define _ANSI_C_REMEMBER
+#else
+#define _ANSI_C_SOURCE
+#endif
+
+/*NOTDEFINED*/
+/*NOTUSED*/
+/*LINTLIBRARY*/
+/*LINTSTDLIB*/
+#include        <assert.h>
+#include        <ctype.h>
+#include        <errno.h>
+#include        <float.h>
+#include        <limits.h>
+#include        <locale.h>
+#include        <math.h>
+#include        <setjmp.h>
+#include        <signal.h>
+#include        <stdarg.h>
+#include        <stddef.h>
+#include        <stdio.h>
+
+
+#include        <stdlib.h>
+#include        <string.h>
+#include        <time.h>
+
+
+#ifdef _POSIX_REMEMBER
+#define _POSIX_SOURCE
+#undef _POSIX_REMEMBER
+#endif
+
+#ifdef _XOPEN_REMEMBER
+#define _XOPEN_SOURCE
+#undef _XOPEN_REMEMBER
+#endif
+
+#ifdef _ALL_REMEMBER
+#define _ALL_SOURCE
+#undef _ALL_REMEMBER
+#endif
+
+#ifdef _ANSI_C_REMEMBER
+#undef _ANSI_C_REMEMBER
+#else
+#undef _ANSI_C_SOURCE
+#endif
+
+#line   1
+

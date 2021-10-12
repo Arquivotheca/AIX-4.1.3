@@ -1,0 +1,64 @@
+#!/bin/ksh
+# @(#)48        1.1  src/bldscripts/walk_packages, ade_build, bos41J, 9514A_all 4/4/95 21:03:19
+#
+#   COMPONENT_NAME: ADE_BUILD
+#
+#   ORIGINS: 27,71
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991, 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# 
+# Each entry in this file represents a 'row' in a relational database.
+# The STAGE column is the key value for the row and therefore must
+# be unique.
+#
+if [ ! -d $BUILDBASE/$BLDCYCLE/src ]
+then
+	print " $BUILDBASE/$BLDCYCLE/src not found"
+	exit 1
+fi
+
+for i in $*
+do
+
+	if [ ! -d $BUILDBASE/$BLDCYCLE/src/packages/$i ]
+	then
+		print " $BUILDBASE/$BLDCYCLE/src/packages/$i not found"
+		exit 1
+	fi
+	
+	
+	cd $BUILDBASE/$BLDCYCLE/src
+	
+	BUILD_INSTALL_IMAGES=no sh -x bldscripts/aixlpp.sh \
+	        "Walk packages" build \
+		packages/$i ""
+	if [[ $? != 0 ]]
+	then
+		exit 1
+	fi
+
+# Walking client images before UpdateVRMFs is run can cause a mismatch in
+# vrmf's between client image and server image
+#	if [[ $i = "bos" ]]
+#	then
+#		for j in net sysmgt
+#		do
+#		        BUILD_INSTALL_IMAGES=no sh -x bldscripts/aixlpp.sh "build bos.$i.client" build packages/bos/$j"/client" ""
+#		done
+#	fi
+	if [[ $? != 0 ]]
+	then
+		exit 1
+	fi
+done
+
+exit 0
+

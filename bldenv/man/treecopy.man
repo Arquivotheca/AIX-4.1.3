@@ -1,0 +1,116 @@
+# @(#)47	1.1  src/bldenv/man/treecopy.man, bldtools, bos412, GOLDA411a 10/18/91 11:08:37
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: treecopy man page
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+treecopy
+
+PURPOSE
+
+    Transfers the contents of a directory, recursively between a local
+    host and a remote host, two remote hosts, or within one host.
+
+SYNTAX
+
+    treecopy [[User@]Host:]Source [[User@]Host:]Dest [File]
+
+DESCRIPTION
+
+    The treecopy command is used to copy all of the contents of one
+    directory from one machine to another.  The syntax is similar to the
+    rcp command, but is more restrictive.  Both the source and destination
+    paths must be directories, and must exist.  Treecopy will not create
+    the destination directory if it does not exist.  /* Actually much of
+    the content of this man page was taken from the rcp man page. */
+
+    Treecopy simply parses the arguments and creates a command using remsh,
+    tar, and find (if the File parameter is specified).  The command thus
+    constucted is echoed prior to being invoked.
+
+    Remote directories require a specified Host: parameter.  Local directory
+    names do not require a Host: parameter.  If Host is not prefixed by a
+    User@ parameter, the local user name is used at the remote host, otherwise
+    the name specified is used.
+
+    In order to keep a copy of a directory up-to-date that was previously
+    copyied, a reference file may be specified as the third parameter.
+    If the File parameter is specified, treecopy will only copy files that
+    are newer than the specified file.  This file must exist on the host
+    containing the source directory, and either be a fully-qualified path
+    or a path relative to the source directory.
+
+    FILE PERMISSIONS AND OWNERSHIP
+
+    Treecopy perserves the file permissions and timestamp of the files
+    being copied.  The owner of the files copied will be the user on the
+    destination host, unless that owner is root, in which case the file
+    ownership is the same as in the source directory.  This behavior is
+    due to tar being the means of copying the files.
+
+    REMOTE ACCESS PERMISSIONS
+
+    Remote access is obtained through the use of remsh.  That is, the local
+    host must be included in either the /etc/hosts.equiv file on the remote
+    system or the $HOME/.rhosts file on the remote user account.
+
+PARAMETERS
+
+    Source     The directory containing the data to be copied.
+
+    Dest       The directory to which the data from source will be copied.
+               This directory must exist.  It will not be created.
+
+    Host       The name of the remote host where either the source or
+               destination directory resides.
+
+    User       The user name on the Host machine whose account will be used.
+
+    File       The pathname to a file whose timestamp is a reference so that
+               all files newer than this file will be copied.  This file must
+               be present on the source host's machine, and the path
+               must be either absolute or relative to the source directory.
+
+EXAMPLES
+
+    1.  To copy a directory called /REL2/bldenv/3.2/prod from a machine
+        named puddytat to the local machine to /bldenv/3.2/prod using the
+        problem user id on puddytat, issue the command:
+
+           treecopy problem@puddytat:/REL2/bldenv/3.2/prod /bldenv/3.2/prod
+
+    2.  To get the changes made to the above directory made later than the
+        file /REL2/bldenv/3.2/prod/9142320f.bldlvl was created, use the
+        command:
+
+treecopy problem@puddytat:/REL2/bldenv/3.2/prod /bldenv/3.2/prod 9142320f.bldlvl
+
+       Note that the pathname is relative to the source directory.
+
+IMPLEMENTATION SPECIFICS
+
+    This command is part of the AIX 3.2 Build Environment and is only
+    supported internally for development of the AIX 3.2 products.
+
+FILES
+
+    /etc/hosts.equiv  Contains a list of remote hosts that can execute
+                      commands on the local host.
+
+    $HOME/.rhosts     Contains a list of remote users that can use a local
+                      user account.
+
+    $BLDENV/usr/bin/treecopy  Command executable file
+
+RELATED INFORMATION
+
+    The remsh command, tar command, rcp command, find command.

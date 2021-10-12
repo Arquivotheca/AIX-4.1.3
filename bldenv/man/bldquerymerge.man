@@ -1,0 +1,124 @@
+# @(#)94	1.5  src/bldenv/man/bldquerymerge.man, bldtools, bos412, GOLDA411a 8/3/93 14:02:57
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: bldquerymerge.man
+#
+# PURPOSE: man page for bldquerymerge command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+#include "bldenv_defines.h"
+
+  bldquerymerge Command
+
+  Purpose
+
+  The bldquerymerge command merges the most recent release makelist files with 
+  the release makelist files from previous builds and then executes the 
+  bldquerydb command to build an up-to-date version of the bldquery database 
+  files.  Once this is complete, bldquerymerge copies all the bldquery database 
+  files out to AFS.  For this reason it is required that the user have write 
+  permissions to AFS (klog) before running the bldquerymerge command.
+
+  Syntax 
+
+	bldquerymerge [-d]
+
+  Description
+
+  The bldquerymerge command searches the following directories looking for a
+  file called "makelist":
+
+	$TOP/PTF/$BLDCYCLE/<release_name>
+
+  If found then this indicates that the release was built during the build 
+  cycle specified by the $BLDCYCLE environment variable.  This file is then 
+  copied over to the directory:
+
+	$TOP/HISTORY/bldquery/<release_name>
+
+  If a file called "makelist" already exists in this directory then it is 
+  replaced.  Once all the release directories have been searched and all the 
+  makelist files copied, bldquerymerge invokes the bldquerydb command which 
+  creates all the database files required for executing the bldquery command.  
+  All the newly created bldquery database files found in the directory,
+
+	$TOP/HISTORY/bldquery
+
+  are then copied to the AFS directory:
+
+	/afs/austin/aix/BLDENV_DEFINE_AFSSUBDIR/HISTORY/bldquery
+
+  This is the default location where the bldquery command looks to find the
+  database files necessary for its execution.
+
+  When the bldquerymerge command completes, it posts a status out to the status
+  files with a type field of "bldquerymerge" and a status field indicating
+  success or failure.
+
+  Flags
+
+	-d - executes bldquerymerge in the delay mode; this causes 
+	     bldquerymerge to sleep until midnight before starting the process
+	     of building the bldquery database files; if this flag is not set
+	     then bldquerymerge begins building the files immediately
+
+  Environment Variables
+
+	TOP		Full pathname of the top of the build tree.  The user
+			is prompted for this if it is not set.
+
+	BLDCYCLE	Current build cycle (e.g. 9207).  The user is prompted
+			for this if it is not set.
+
+	KLOG_USERID	A valid klog user ID; this will be used by bldquerymerge
+			to klog before copying the bldquery database files to 
+			AFS.  The bldquerymerge command expects this to be set 
+			and does not prompt the user if it is not.  If it
+			is not set and there is no active klog token on
+			the machine on which bldquerymerge is running, then
+			the copy to AFS will fail.
+
+	KLOG_PASSWD	A valid klog password for the user ID specified by the
+			KLOG_USERID environment variable; this will be used by 
+			bldquerymerge to klog before copying the bldquery 
+			database files to AFS.  The bldquerymerge command 
+			expects this to be set and does not prompt the user if 
+			it is not.  If it is not set and there is no active 
+			klog token on the machine on which bldquerymerge is 
+			running, then the copy to AFS will fail.
+
+  Examples
+
+	1) bldquerymerge
+
+  Input Files
+
+	$TOP/PTF/$BLDCYCLE/xreflist
+	$TOP/PTF/$BLDCYCLE/<release_name>/makelist
+
+  Output Files
+
+	$TOP/HISTORY/bldquery/xreflist
+	$TOP/HISTORY/bldquery/<release_name>/makelist
+
+  Related Information
+
+        $BLDENV/usr/bin/bldhostsfile            The bldhostsfile command
+                                                used to get name of afs
+                                                base directory.
+	$BLDENV/usr/bin/bldquery		The bldquery command.
+	$BLDENV/usr/bin/bldquerydb		The bldquerydb command.
+        $BLDENV/usr/bin/hostsfile.dat           The data file used by
+                                                bldhostsfile command.
+

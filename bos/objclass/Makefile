@@ -1,0 +1,169 @@
+# @(#)11	1.77  src/bos/objclass/Makefile, Makefiles, bos41J, 9509A_all 2/16/95 09:03:30
+#
+# COMPONENT_NAME: (CFGMETHODS) Makefiles
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 83
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1988, 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+
+VPATH		= ${TARGET_MACHINE}
+
+POWER_SUBDIRS	= cdboot tapeboot
+
+SUBDIRS	= ${${TARGET_MACHINE}_SUBDIRS}
+
+ILIST		= lft.add  lft_dpm.add \
+		rcm.add \
+		tty.add \
+		kts.add \
+		kbd.add \
+		tablet.add \
+		mca_kma.add \
+		std_keyboard.add \
+		std_mouse.add \
+		std_tablet.add \
+		mouse.add \
+		gio.add \
+		skycolor.add \
+		sga.add \
+		sgabus.add \
+		skymono.add \
+		diskette.siofd.fd.add \
+		adapter.sio.ppa.add \
+		adapter.sio.fda.add \
+		adapter.sio.fda_iod.add \
+		adapter.sio.ppa_iod.add \
+		adapter.sio.fda_2.add \
+		lvm.add \
+		logvol.add \
+		ent.add \
+		tok.add \
+		apm.add \
+		mpqp.add \
+		mpaa.add \
+		mpa.add \
+		cat.add \
+		smit_class.cre \
+		sm_bosacct.add \
+		sm_bosmenu.add \
+		sm_aio.add \
+		sm_lft.add \
+		sm_lvm.add \
+		sm_3270.add \
+		sm_cdrom.add \
+		sm_rwopt.add \
+		sm_dev.add \
+		sm_dials.add \
+		sm_disk.add \
+		sm_fd.add \
+		sm_apm.add \
+		sm_mpqp.add \
+		sm_mpaa.add \
+		sm_mpa.add \
+		sm_cat.add \
+		sm_msla.add \
+		sm_printer.add \
+		sm_pty.add \
+		sm_scsi.add \
+		sm_sys.add \
+		sm_tape.add \
+		sm_tm.add \
+		sm_tty.add \
+		sm_inputdd.add \
+		chtz.add \
+		cmdarch.add \
+		cmdcntl.add \
+		cmdcomm.add \
+		cmddate.add \
+		cmdfs.add \
+		cmdiconv.add \
+		cmdmsg.add \
+		cmdoper.add \
+		cmdpios.add \
+		cmdps.add \
+		cmdque.add \
+		cmdsrc.add \
+		cmduname.add \
+		instupdt.add \
+		inst_menus.add \
+		swvpd.add \
+		usrgrp.add \
+		adapter.mca.serdasda.add \
+		adapter.serdasda.serdasdc.add disk.serdasdc.serdasdd.add \
+		disk.serdasdc.serdasdd2.add disk.serdasdc.serdasdd4.add \
+		disk.serdasdc.2000mb.add \
+		disk.mca.badisk.add \
+		cdrom.scsi.cdrom1.add \
+		cdrom.scsi.enhcdrom.add cdrom.scsi.oscd.add \
+		cdrom.scsi.enhcdrom3.add \
+		disk.scsi.355mb.add disk.scsi.670mb.add disk.scsi.320mb.add \
+		disk.scsi.400mb.add disk.scsi.540mb.add disk.scsi.730mb.add \
+		disk.scsi.857mb.add \
+		disk.scsi.160mb.add disk.scsi.200mb.add disk.scsi.1000mb.add \
+		disk.scsi.1000mbde.add disk.scsi.1200mb.add \
+		disk.scsi.1000mb16bit.add \
+		disk.scsi.1000mb16bitde.add \
+		disk.scsi.1370mb.add \
+		disk.scsi.2000mb.add disk.scsi.2000mbde.add \
+		disk.scsi.2000mb16bitde.add \
+		disk.scsi.1100mb.add \
+		disk.scsi.1100mb16bit.add \
+		disk.scsi.1100mb16bitde.add \
+		disk.scsi.2200mb.add \
+		disk.scsi.2200mb16bit.add \
+		disk.scsi.2200mb16bitde.add \
+		disk.scsi.4500mb16bit.add \
+		disk.scsi.4500mb16bitde.add \
+		disk.scsi.osdisk.add \
+		rwoptical.scsi.osomd.add \
+		cdrom.scsi.scsd.add \
+		disk.scsi.scsd.add \
+		rwoptical.scsi.scsd.add \
+		ILS.add \
+		hpJetDirect.add \
+		diag.scsidisk.add \
+		diag.disksa.add \
+		diag.8f78.add \
+		diag.df9f.add \
+		slips.cre \
+		userprofiles.cre \
+		wga.add mid.add \
+		base_dump.add \
+		base_errlg.add \
+		sm_alog.add \
+		adapter.mca.64p232.add \
+		adapter.mca.sio.add \
+		adapter.mca.sio_1.add adapter.mca.sio_2.add \
+		adapter.mca.sio_3.add \
+		adapter.mca.8p188.add adapter.mca.8p232.add \
+		adapter.mca.8p422.add \
+		adapter.mca.16p232.add adapter.mca.16p422.add \
+		adapter.sio.s1a.add adapter.sio.s2a.add \
+		adapter.sio.s3a.add \
+		msla.add \
+		psla.add \
+		sol.add \
+		3270.add \
+		gemini.add \
+		softlic.add
+
+
+IDIR		= /etc/stanzas/
+
+smit_class.cre_IDIR = /usr/samples/smit/
+
+NOUPDATE_LIST	= ${ILIST:@TMP@${${TMP}_IDIR:U${IDIR}}${TMP}@}
+
+.include <${RULES_MK}>

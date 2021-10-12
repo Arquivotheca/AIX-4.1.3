@@ -1,0 +1,131 @@
+# @(#)89        1.11.1.6  src/bos/usr/lib/pios/predef/ibm4216-31.630, cmdpios, bos411, 9428A410j 5/6/94 16:05:55
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:625:CB:S[B]DyEn:
+:626:CC:S[C]DyEn:
+:627:CD:S[D]DyEn:
+:628:CE:S[E]DyEn:
+:629:CF:S[F]DyEn:
+:630:CG:S[G]DyEn:
+:727:_E:Dn:!
+:621:_H:S[F350]I[1810503]Dy:
+:808:_I:Dn:
+:793:_L:S[D020]I[1810504]%IWY:+
+:795:_X:S[D030]I[1810507]EtL[/usr/bin/ls -1 /usr/lib/lpd/pio/trans1 | /usr/bin/sed '/^850$/d']V[%`WX]:
+:635:_b:S[D010]I[1810508]E#G[0..%?%G_l%{0}%=%t%e%G_l%G_t%-%{1}%-%d%;]:0
+:658:_d:S[C925]I[1810509]EnL[%IW2]F1:a
+:623:_g:S[C250]I[1810511]E#G[1..]:1
+:717:_h:S[D040]I[1810512]:
+:637:_i:S[D015]I[1810513]E#G[0..%G_w%{1}%-%d]:0
+:678:_l:S[D045]I[1810531]E#G[0..]:62
+:700:_p:S[B035]I[1810552]EnR[=10,12,17]:10
+:634:_t:S[D005]I[1810515]E#G[0..%?%G_l%{0}%=%t%e%G_l%G_b%-%{1}%-%d%;]:0
+:638:_u:S[E015]I[1810516]EnR[pioattr1.cat,1,768;lower tray,upper tray or no sheet feeder,envelope tray=1,2,3]:2
+:702:_v:S[D055]I[1810555]EnR[=6,8]:6
+:677:_w:S[D050]I[1810517]E#G[1..]:80
+:640:_x:S[D025]I[1810518]EnR[CR->CR LF->LF VT->VT,CR->CRLF,LF->CRLF VT->CRVT=0,1,2]:2
+:808:_z:Dn:
+:614:_Z:Dn%IWY:+
+:060:__SYS::
+:708:sH:S[150]I[1810525]:
+:709:sT:S[155]I[1810525]:
+:655:uH:S[140]I[1810527]EnR[pioattr1.cat,1,768;lower tray,upper tray or no sheet feeder,envelope tray=1,2,3]:2
+:656:uT:S[145]I[1810527]EnR[pioattr1.cat,1,768;lower tray,upper tray or no sheet feeder,envelope tray=1,2,3]:2
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/piof630 -XIBM-850 -l%G_l%{1}%+%d -t%G_t%{1}%+%d %IsH -u%IuH | %Ide/piofquote
+:324:st::%Ide/pioburst %F[H] %Idb/T.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/piof630 -XIBM-850 -l%G_l%{1}%+%d %?%o%G_l%r%{1}%+%{14}%>%t-t%o%G_l%r%{1}%+%{14}%-%d%; %IsT -u%IuT | %Ide/piofquote
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piof630 -t%G_t%{1}%+%d -l%GwL%{1}%+%d -w%IwW %f[bgiuxLXZ] | %Ide/piofquote %Uh
+:278:id::%Ide/pioformat -@%Idd/%Imm -!%Idf/piof630 -t%G_t%{1}%+%d -l%GwL%{1}%+%d -w%IwW %f[bgiuxLXZ] -X '' | %Ide/piofquote %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piof630 -#+ -x0 -l%IwL -w%IwW %f[jxJLZ] | %Ide/piofquote
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[ju] ; }
+:059:__PFL::
+:684:Ia:S[160a]I[1810528]Dn:
+:055:__FIL::
+:660:fc::
+:661:fd::
+:662:ff::
+:663:fg::
+:665:fn::
+:666:fp::/usr/bin/pr -l%IwL -w%IwW %F[h] %I@1
+:667:ft::
+:668:fv::
+:058:__MIS::
+:330:mA::Diablo 630 Emulation
+:290:mH::120
+:331:mL::[devices.cat,71,4;IBM 4216 Personal Page Printer, Model 031]
+:295:mN::4216
+:298:mS::_
+:299:mV::120
+:303:mf::%Idf/piof630
+:308:mp::%%!,\x04%%!
+:061:__TRN::
+:326:t0::%Id2/ascii
+:327:t1::
+:328:t2::
+:328:t3::
+:328:t4::
+:328:t5::
+:328:t6::
+:328:t7::
+:328:t8::
+:328:t9::
+:062:__WKV::
+:818:WX::%?%L_X%tif [[ -f /usr/lib/lpd/pio/trans1/%I_X ]]; then print "0\\c"; else print "1\\c"; fi%eprint "0\\c"%;
+:730:Wu::%G_u%d
+:337:w1::0
+:337:w2::0
+:339:wD::
+:340:wF::0
+:343:wH::%GmH%G_p%/%d
+:347:wL::%?%Cl%t%f!l%e%o%GwV%G_l%*%r%GwV%/%d%;
+:358:wV::%GmV%G_v%/%d
+:359:wW::%?%Cw%t%f!w%e%o%Gww%r%GwH%/%d%;
+:365:wf::af
+:367:wh::%{9}%Px%{28}%Py%?%gy%t%wy%gx%c%gx%{8}%+%Px%;%;\0
+:368:wi::cl
+:369:wl::%{1}%G_E%+%d
+:373:wp::!
+:382:wv::\0
+:383:ww::%GwH%G_w%*%d
+:384:wy::cx
+:051:__CAG::
+:125:c1::
+:142:cd::
+:143:ch::\33\11%Gw1%GwH%/%c
+:144:ci::statusdict begin %GWu%d setpapertray currentfile /diablo emulate 
+:146:cl::%Iac%Ial
+:147:cm::
+:152:cr::
+:155:cs::\33\37%GwH%c
+:052:__CTL::
+:110:ab::\10
+:111:ac::\15
+:113:af::\14
+:116:ai::\17
+:117:al::\12
+:118:an::\0
+:120:ao::\16
+:121:ar::\7
+:054:__ESC::
+:258:ew::\33%Gw1%c
+:259:ex::\33%Gw1%c%Gw2%c
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::master
+:477:zS::!
+:685:zV::+

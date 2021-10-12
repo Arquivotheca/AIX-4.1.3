@@ -1,0 +1,28 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can also specify "all characters except ..."
+using an expression of the form
+ [^ab]
+which means "any character except the letters 'a' or 'b'.
+This is just like filename patterns again.  Does
+  [^abc]
+match the letter 'a'? Answer "yes" or "no".
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+34.2b 5

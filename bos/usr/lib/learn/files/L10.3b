@@ -1,0 +1,25 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Often you will use "ls" with "rm"
+to first find the name of a file, and then remove it.
+This directory contains one file whose name begins with "g".
+Find out what it is and remove it.
+Then type "ready".
+#create george
+#user
+test ! -r george
+#log
+#next
+10.3c 2

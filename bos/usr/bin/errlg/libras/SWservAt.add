@@ -1,0 +1,127 @@
+#   @(#)65  1.5  src/bos/usr/bin/errlg/libras/SWservAt.add, cmderrlg, bos41J, 9512A_all 3/7/95 11:27:15	 
+
+#
+#   COMPONENT_NAME: CMDERRLG
+#
+#   FUNCTIONS: ras file for SMIT odm population
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+SWservAt:
+	attribute = "errlg_file"
+	deflt = "/var/adm/ras/errlog"
+	value = "/var/adm/ras/errlog"
+
+SWservAt:
+	attribute = "errlg_buf"
+	deflt = "8192"
+	value = "8192"
+
+SWservAt:
+	attribute = "errlg_size"
+	deflt = "1048576"
+	value = "1048576"
+
+SWservAt:
+	attribute = "tprimary"
+	deflt = "/dev/hd7"
+	value = "/dev/hd7"
+
+SWservAt:
+	attribute = "tsecondary"
+	deflt = "/dev/sysdumpnull"
+	value = "/dev/sysdumpnull"
+
+SWservAt:
+	attribute = "primary"
+	deflt = "/dev/hd7"
+	value = "/dev/hd7"
+	
+SWservAt:
+	attribute = "secondary"
+	deflt = "/dev/sysdumpnull"
+	value = "/dev/sysdumpnull"
+
+SWservAt:
+	attribute = "autocopydump"
+	deflt = "/var/adm/ras"
+	value = "/var/adm/ras"
+
+SWservAt:
+	attribute = "forcecopydump"
+	deflt = "TRUE"
+	value = "TRUE"
+
+SWservAt:
+	attribute = "copyfilesystem"
+	deflt = "/dev/hd9var,/var"
+	value = "/dev/hd9var,/var"
+
+SWservAt:
+	attribute = "alog_type"
+	deflt = "boot"
+	value = "boot"
+
+SWservAt:
+	attribute = "boot_logname"
+	deflt = "/var/adm/ras/bootlog"
+	value = "/var/adm/ras/bootlog"
+
+SWservAt:
+	attribute = "boot_logsize"
+	deflt = "8192"
+	value = "8192"
+
+SWservAt:
+	attribute = "boot_logverb"
+	deflt = "1"
+	value = "1"
+
+SWservAt:
+	attribute = "alog_type"
+	deflt = "bosinst"
+	value = "bosinst"
+
+SWservAt:
+	attribute = "bosinst_logname"
+	deflt = "/var/adm/ras/bosinstlog"
+	value = "/var/adm/ras/bosinstlog"
+
+SWservAt:
+	attribute = "bosinst_logsize"
+	deflt = "8192"
+	value = "8192"
+
+SWservAt:
+	attribute = "bosinst_logverb" 
+	deflt = "1"
+	value = "1"
+
+SWservAt:
+	attribute = "alog_type"
+	deflt = "nim"
+	value = "nim"
+
+SWservAt:
+	attribute = "nim_logname"
+	deflt = "/var/adm/ras/nimlog"
+	value = "/var/adm/ras/nimlog"
+
+SWservAt:
+	attribute = "nim_logsize"
+	deflt = "8192"
+	value = "8192"
+
+SWservAt:
+	attribute = "nim_logverb" 
+	deflt = "1"
+	value = "1"

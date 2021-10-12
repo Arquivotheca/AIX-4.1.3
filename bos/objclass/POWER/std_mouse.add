@@ -1,0 +1,73 @@
+# @(#)47	1.1  src/bos/objclass/POWER/std_mouse.add, inputdd, bos41J, 9509A_all 2/14/95 12:56:04
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Stanzas for the standard mouse predefined values
+#
+
+# 3 button mouse predefined values
+PdDv:
+ type = "mse_3b"
+ class = "mouse"
+ subclass = "std_m"
+ prefix = "mouse"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x925
+ setno = 127
+ msgno = 7
+ catalog = "devices.cat"
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgmouse_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "mouse/std_m/mse_3b"
+
+# 2 button mouse predefined values
+PdDv:
+ type = "mse_2b"
+ class = "mouse"
+ subclass = "std_m"
+ prefix = "mouse"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 1
+ led = 0x924
+ setno = 127
+ msgno = 8
+ catalog = "devices.cat"
+ DvDr = ""
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgmouse_std"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgktm_std"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "mouse/std_m/mse_2b"

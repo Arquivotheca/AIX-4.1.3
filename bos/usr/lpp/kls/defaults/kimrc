@@ -1,0 +1,30 @@
+# @(#)30        1.2  src/bos/usr/lpp/kls/defaults/kimrc, libkr, bos411, 9428A410j 3/23/93 20:30:23
+#
+# COMPONENT_NAME:       (libKR) AIX Input Method
+#
+# FUNCTIONS:		Korean Input Method Profile 
+#
+# ORIGINS:		27
+#
+# (C) COPYRIGHT International Business Machines Corp.  1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+initbase	: alphanum
+#initbase	: hangeul
+#initbase	: jamo
+initsize	: banja
+#initsize	: jeonja
+inithanja	: off
+#inithanja	: on
+initinsrep	: replace
+#initinsrep	: insert
+initlearning	: off
+#initlearning	: on
+initbeep	: on
+#initbeep	: off
+#initacm	: on
+initacm		: off

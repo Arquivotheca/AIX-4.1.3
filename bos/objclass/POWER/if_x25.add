@@ -1,0 +1,142 @@
+# @(#) 63  1.18  src/bos/objclass/POWER/if_x25.add, sockobj, bos411, 9428A410j 1/27/94 15:25:44
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the x25 network interface.
+
+PdDv:
+	type		= "xt"
+	class		= "if"
+	subclass	= "XT"
+	prefix		= "xt"
+	base		= 0
+	chgstatus	= 1
+	DvDr		= "if_xt"
+	led		= 0x581
+	setno		= 110
+	msgno		= 22
+	catalog		= "devices.cat"
+	Define		= "/usr/lib/methods/defif"
+	Configure	= "/usr/lib/methods/cfgif"
+	Change		= "/usr/lib/methods/chgif"
+	Unconfigure	= "/usr/lib/methods/ucfgif"
+	Undefine	= "/usr/lib/methods/udefif"
+	uniquetype	= "if/XT/xt"
+
+PdCn:
+	uniquetype	= "if/XT/xt"
+	connkey		= "TCPIP"
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "mtu"
+	deflt		= "576"
+	values		= "60-2048,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 2
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "remmtu"
+	deflt		= "576"
+	values		= "60-2048,1"
+	type		= "R"
+	generic		= "DU"
+	rep		= "nr"
+	nls_index	= 3
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "netaddr"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 4
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "state"
+	deflt		= "down"
+	values		= "up,down,detach"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 5
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "arp"
+	deflt		= "on"
+	values		= "on,off"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 7
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "hwloop"
+	deflt		= "off"
+	values		= "on,off"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 17
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "netmask"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 8
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "if_keyword"
+	deflt		= "x25"
+	values		= "x25"
+	type		= "R"
+	generic		= ""
+	rep		= "s"
+	nls_index	= 0
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "security"
+	deflt		= "none"
+	values		= "top_secret,secret,confidential,unclassified,none"
+	type		= "R"
+	generic		= "DU"
+	rep		= "sl"
+	nls_index	= 9
+
+PdAt:
+	uniquetype	= "if/XT/xt"
+	attribute	= "authority"
+	deflt		= ""
+	values		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 10

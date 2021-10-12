@@ -1,0 +1,26 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can combine the optional arguments to "ls"; for example
+you can get the "long" list sorted by time of last change
+by saying
+  ls -lt
+Try that, then type "ready".
+#copyin
+#user
+#uncopyin
+#match ls -lt
+#log
+#next
+0.1g 10

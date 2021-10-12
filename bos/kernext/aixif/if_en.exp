@@ -1,0 +1,20 @@
+*
+* @(#)96	1.5  src/bos/kernext/aixif/if_en.exp, sysxaixif, bos411, 9428A410j 4/26/94 10:43:03
+*   COMPONENT_NAME: SYSXAIXIF
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+config_en 
+en_ioctl 
+en_output 
+arpresolve
+arpinput

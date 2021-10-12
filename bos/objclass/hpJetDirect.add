@@ -1,0 +1,509 @@
+# @(#)32	1.7  src/bos/objclass/hpJetDirect.add, cmdpios, bos41J, 9512A_all 3/16/95 15:46:08
+#
+#   COMPONENT_NAME: CMDPIOS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# hpJetDirect.extended
+#EXT
+#*******************************************************************
+#   printer manufacturer selector
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_makhp_prt"
+	next_id = "ps_makhp_prt_predef"
+	option_id = "ps_printer_manufacturer_opt"
+	has_name_select = "n"
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+	type = "j"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	otherstr=$(/usr/bin/dspmsg piobe.cat -s 8 1 'Other (Select this if your printer type is not listed above)')
+	if [[ \"$otherstr\" = \"$1\" ]]  # see if they selected 'other'
+	then 
+		manuf='+++OTHER+++'
+	else
+		manuf=\"$1\"
+	fi
+	print \"$manuf\"
+	}; x"
+	cmd_to_classify_postfix = "_rawname"
+	raw_field_name = ""
+	cooked_field_name = "ps_manuf"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_printer_manufacturer_opt"
+        disc_field_name = ""
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = "" 
+        prefix = ""
+        cmd_to_list_mode = "a"
+        cmd_to_list = "/usr/lib/lpd/pio/etc/piolspt -m"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810171"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   Predefined printer selector
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_makhp_prt_predef"
+	next_id = ""
+	option_id = "ps_printer_predef_opt"
+	has_name_select = "n"
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "function x {
+	otherstr=$(/usr/bin/dspmsg piobe.cat -s 8 1 'Other (Select this if your printer type is not listed above)')
+	if [[ \"$otherstr\" = \"$1\" ]]  # see if they selected 'other'
+	then 
+		# branch back to this selector with ps_manuf=+++OTHER+++
+		print 'ps_mkpq_prt_predef:+++OTHER+++::::'
+		exit 0;   
+	fi
+	# they selected one of the printer types
+	description=$(print ${1#* })   # strip off leading spaces
+	predef=${1%% *}
+	dtype=$predef
+	device_found=$(/usr/sbin/lsdev -P -c printer -t $predef) 
+	predef_found=$(/usr/bin/ls -1 /usr/lib/lpd/pio/predef/$predef.* 2>/dev/null)
+	if [[ -z $device_found && -z $predef_found ]] 
+	then
+		package=$(/usr/bin/egrep -p \"^[ 	]*type[ 	]*=[ 	]*$predef\" /usr/lib/lpd/pio/etc/printers.inv | /usr/bin/awk '$1 == \"package\" { print $3 }')
+		print \"ps_mkpq_prt_notinstalled:::::$package\"
+		exit 0
+	fi
+	if [[ -z $predef_found ]] 
+	then
+		ptype='generic'  # No predef file found for this type
+	else
+		ptype=$predef
+	fi
+	case \"$2\" in 
+	hpJetDirect)  print \"ps_mkbootp_sys::$ptype:$description:$ptype:\"
+	;;
+	*)  print \"ps_error_ghostName:::::$(/usr/bin/dspmsg -s 1 piosmit.cat 90 'Unrecognized attachment type.\n')\"
+	;;
+	esac
+	}; x "
+	cmd_to_classify_postfix = "_rawname ps_attach"
+	raw_field_name = ""
+	cooked_field_name = "cookedname:ps_manuf:ps_dtype:ps_description:ps_ptype:ps_error_msg"
+	next_type = "n"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_printer_predef_opt"
+        disc_field_name = ""
+	name = "Printer Type"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 18 
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = "a"
+        cmd_to_list = "function x {
+		/usr/lib/lpd/pio/etc/piolspt -t -A \"$2\" \"$1\"
+	}; x"
+        cmd_to_list_postfix = "ps_manuf ps_attach"
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "1810173"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   BOOTP/TFTP Server selector
+#*******************************************************************
+sm_name_hdr:
+	id = "ps_mkbootp_sys"
+	next_id = "ps_build_dialog"  # dialog builder
+	option_id = "ps_mkbootp_op"
+	has_name_select = "y"
+	name = "BOOTP/TFTP Server"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 19
+	type = "j"
+	ghost = "y"
+        cmd_to_classify = "function x { case $1 in
+        1) ps_prt_comm=ps_mkhp_boot_opt
+        ;;
+        2) ps_prt_comm=ps_mkhp_noboot_opt
+	;;
+        esac
+	ps_exec_cmd='/usr/lib/lpd/pio/etc/piomkjetd mkpq_jetdirect'
+	ps_attach=hpJetDirect
+	print "$ps_attach:$ps_exec_cmd:$ps_prt_comm"
+        }; x"
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "ps_attach:ps_exec_cmd:ps_prt_comm"
+	next_type = "n"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_mkbootp_op"
+        disc_field_name = ""
+	name = "BOOTP/TFTP Server"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 19 
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = "/usr/bin/dspmsg -s 1 piosmit.cat 20 '1 Make this system a BOOTP/TFTP server\n'
+        /usr/bin/dspmsg -s 1 piosmit.cat 21 '2 Do NOT make this system a BOOTP/TFTP server\n'
+	"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1810166"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "9000"
+        id = "ps_mkhp_boot_opt"
+        disc_field_name = ""
+	name = "\nPrinter connection characteristics"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 63
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "9070"
+        id = "ps_mkhp_noboot_opt"
+        disc_field_name = ""
+	name = "\nPrinter connection characteristics"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 63
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+	help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "9080"
+	id = "ps_mkhp_noboot_opt"
+	disc_field_name = ""
+	name = "   HOSTNAME of the JetDirect Card"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 22
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = "-h "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1810167"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "9010"
+	id = "ps_mkhp_boot_opt"
+	disc_field_name = ""
+	name = "   HOSTNAME of the JetDirect Card"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 22 
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = "-h "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1810167"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "9020"
+	id = "ps_mkhp_boot_opt"
+	disc_field_name = ""
+	name = "   HARDWARE ADDRESS of the JetDirect Card"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 23
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = "-e "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1810168"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "9025"
+	id = "ps_mkhp_boot_opt"
+	disc_field_name = ""
+	name = "   NETWORK INTERFACE"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 120
+        op_type = "r"
+        entry_type = "n"
+        entry_size = 0
+        required = "+"
+        prefix = "-n "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = "Ethernet,Token Ring"
+	values_msg_file = "piosmit.cat"
+	values_msg_set = 1
+	values_msg_id = 121
+        aix_values = "ether,tr"
+        help_msg_id = "1810168"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "9030"
+	id = "ps_mkhp_boot_opt"
+	disc_field_name = ""
+	name = "   GATEWAY ADDRESS"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 24
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-g "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1810169"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "9040"
+	id = "ps_mkhp_boot_opt"
+	disc_field_name = ""
+	name = "   SUBNET MASK"
+	name_msg_file = "piosmit.cat"
+	name_msg_set = 1
+	name_msg_id = 25
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-m "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1810170"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#*******************************************************************
+#   Remove a queue
+#*******************************************************************
+sm_name_hdr:
+        id = "ps_rmpq_ghostname_jetdirect"
+        next_id = "ps_rmpq_CmdHdr_jetdirect"
+        option_id = "ps_rmpq_CmdHdr_ghostOptjetd"
+        has_name_select = "y"
+        type = "j"
+        ghost = "y"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = ""
+        next_type = "d"
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "ps_rmpq_CmdHdr_ghostOptjetd"
+        disc_field_name = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+
+sm_cmd_hdr:
+	id = "ps_rmpq_CmdHdr_jetdirect"
+	option_id = "ps_rmpq_jetdCmdHdrOpt"
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	has_name_select = "y"
+	cmd_to_exec = "/usr/lib/lpd/pio/etc/piomkjetd rmpq_jetdirect"
+	ask = "y"
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = "function x { print '#remove_queue'
+	print $1#!:$2
+	}; x"
+	cmd_to_discover_postfix = "queue_name queue_device"
+	name_size = 0
+	value_size = 0
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "ps_rmpq_jetdCmdHdrOpt"
+	disc_field_name = "remove_queue"
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = "y"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+
+

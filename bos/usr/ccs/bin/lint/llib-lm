@@ -1,0 +1,72 @@
+/* @(#)14	1.3  src/bos/usr/ccs/bin/lint/llib-lm, cmdprog, bos411, 9428A410j 6/15/90 22:52:22 */
+/*
+ * COMPONENT_NAME: (CMDPROG) Programming Utilities
+ *
+ * FUNCTIONS: 
+ *
+ * ORIGINS: 27; 10
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+/*NOTUSED*/
+/*NOTDEFINED*/
+
+#include <math.h>
+
+/* BESSEL(3M) */
+double	j0(double x) { return (x); }
+double	j1(double x) { return (x); }
+double	jn(int n, double x) { return (x); }
+double	y0(double x) { return (x); }
+double	y1(double x) { return (x); }
+double	yn(int n, double x) { return (x); }
+/* ERF(3M) */
+double	erf(double x) { return (x); }
+double	erfc(double x) { return (x); }
+/* EXP(3M) */
+double	exp(double x) { return (x); }
+double	log(double x) { return (x); }
+double	log10(double x) { return (x); }
+double	pow(double x, double y)  { return (x); }
+double	sqrt(double x) { return (x); }
+/* FLOOR(3M) */
+double	floor(double x) { return (x); }
+double	ceil(double x) { return (x); }
+double	fmod(double x, double y) { return (x); }
+double	fabs(double x) { return (x); }
+/* GAMMA(3M) */
+double	gamma(double x) { return (x); }
+/* HYPOT(3M) */
+double	hypot(double x, double y) { return (x); }
+/* MATHERR(3M) */
+int	matherr(struct exception *p) { return (0); }
+/* SINH(3M) */
+double	sinh(double x) { return (x); }
+double	cosh(double x) { return (x); }
+double	tanh(double x) { return (x); }
+/* TRIG(3M) */
+double	sin(double x) { return (x); }
+double	cos(double x) { return (x); }
+double	tan(double x) { return (x); }
+double	asin(double x) { return (x); }
+double	acos(double x) { return (x); }
+double	atan(double x) { return (x); }
+double	atan2(double x, double y) { return (x); }
+
+double	asinh(double x) { return (x); }
+double	acosh(double x) { return (x); }
+double	atanh(double x) { return (x); }
+double	cbrt(double x) { return (x); }
+double	nearest(double x) { return (x); }
+double	trunc(double x) { return (x); }
+int	ilogb(double x) { return (0); }
+int	isnan(double x) { return (0); }
+double	log1p(double x) { return (x); }
+double	nextafter(double x,double y) { return (x); }
+int	unordered(double x,double y) { return (0); }

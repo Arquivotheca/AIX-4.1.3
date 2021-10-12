@@ -1,0 +1,25 @@
+# @(#)73        1.3  src/bos/usr/lib/pios/file.attach, cmdpios, bos411, 9428A410j 3/17/94 20:28:49
+#
+#   COMPONENT_NAME: CMDPIOS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+	# FILE attachment
+	description 	= 	piobe.cat,4,21;File (in /dev directory)
+	add_queue 	= 	ps_makprt_prt
+	add_printer     =   	ps_makprt_prt
+	seq_num		=	6
+	submit_job	=	ps_qprt_fileName
+	change_queue	=	ps_chpq_attachName
+	change_filters	=	ps_pqfilters_ghostName
+	remove_queue	=	ps_rmpq_ghostName_other

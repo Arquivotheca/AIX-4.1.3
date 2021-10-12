@@ -1,0 +1,30 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+It is often possible to leave out braces,
+but when you do be sure that you get the
+answer you really wanted.
+For example, does
+  x sup a over b
+produce the same output as
+  x sup {a over b}
+Answer yes or no.
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+5.1h 10
+5.2g 5

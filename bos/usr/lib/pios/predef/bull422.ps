@@ -1,0 +1,34 @@
+# @(#)67        1.6  src/bos/usr/lib/pios/predef/bull422.ps, cmdpios, bos411, 9428A410j 5/25/94 19:46:41
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# BULL SOURCE FILE
+#
+:060:__SYS::
+:641:s0:S[115]I[1810521]DnEn%IWP:4
+:757:s1:S[105]I[1810521]DnEn%IWP:4
+:758:s2:S[110]I[1810521]DnEn%IWP:4
+:500:__HTP::
+:321:sh::%Ide/bullps.header | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsH
+:324:st::%Ide/bullps.trailer | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsT
+:058:__MIS::
+:330:mA::PostScript
+:331:mL::[devices.cat,71,90;Bull Compuprint PageMaster 422]
+:295:mN::422
+:475:__HIR::
+:686:zL::2
+:688:zM::Bull
+:476:zP::generic.ps
+:477:zS::!
+:685:zV::+

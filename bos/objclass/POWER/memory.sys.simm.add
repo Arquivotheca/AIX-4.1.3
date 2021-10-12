@@ -1,0 +1,64 @@
+*@(#)54  1.1  src/bos/objclass/POWER/memory.sys.simm.add, cfgmethods, bos411, 9428A410j 12/2/93 13:54:23
+* 
+*  COMPONENT_NAME: (CFGMETHODS) memory.sys.simm.add
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = simm
+	class = memory
+	subclass = sys
+	prefix = mem
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x812
+	setno = 1
+	msgno = 0
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = memory/sys/simm
+
+
+PdAt:
+	uniquetype = "memory/sys/simm"
+	attribute = "size"
+	deflt = "0"
+	values = "0-512,1"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nr"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "memory/sys/simm"
+	attribute = "desc"
+	deflt = "37"
+	values = "37,38,39,40,41,42,43,44"
+	width = ""
+	type = "T"
+	generic = ""
+	rep = "nl"
+	nls_index = 0

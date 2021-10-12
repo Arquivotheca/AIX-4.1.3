@@ -1,0 +1,71 @@
+* 
+* @(#)09  1.11  src/bos/usr/ccs/lib/libcfg/libcfg.exp, libcfg, bos41J, 9522A_b 5/31/95 11:36:27
+*  COMPONENT_NAME: (LIBCFG)  Generic library config support
+* 
+*  FUNCTIONS: libcfg.exp
+* 
+*  ORIGINS: 27
+* 
+*  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*  combined with the aggregated modules for this product)
+*                   SOURCE MATERIALS
+*  (C) COPYRIGHT International Business Machines Corp. 1989,1995
+*  All Rights Reserved
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* library export symbols
+conferrno
+genmajor
+genseq
+rm_major
+relmajor
+setup_cudvdr
+reset_cudvdr
+get_minor_list
+getminor
+genminor
+free_list
+ck_for_symlinks
+del_special_files
+reldevno
+get_kmid
+load_kext
+unload_kext
+loadext
+attrval
+getattr
+putattr
+PdDv_CLASS
+PdCn_CLASS
+PdAt_CLASS
+Config_Rules_CLASS
+CuDv_CLASS
+CuDep_CLASS
+CuAt_CLASS
+CuDvDr_CLASS
+CuVPD_CLASS
+meth_err_msg
+chkmajor
+lstmajor
+findmcode
+geninst
+relinst
+lsinst
+get_resid_packet
+get_resid_dev
+get_resid_mem
+get_resid_cpu
+get_resid_version
+get_resid_vpd
+iplcb_get
+get_irq_packets
+get_dma_packets
+get_io_packets
+get_mem_packets
+get_pci_descriptor
+get_bax_descriptor
+get_chipid_descriptor
+get_L2cache_size
+

@@ -1,0 +1,33 @@
+/* @(#)29  1.2  src/bos/objclass/userprofiles.cre, rcs, bos411, 9428A410j 6/6/93 15:45:31 */
+/*
+ *   COMPONENT_NAME: RCS
+ *
+ *   FUNCTIONS: none
+ *
+ *   ORIGINS: 27
+ *
+ *   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ *   combined with the aggregated modules for this product)
+ *                    SOURCE MATERIALS
+ *
+ *   (C) COPYRIGHT International Business Machines Corp. 1993
+ *   All Rights Reserved
+ *   US Government Users Restricted Rights - Use, duplication or
+ *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+userprofiles:
+
+class userprofiles {
+	char	UserName[9];
+	char	Custid[9];
+	char	Userid[9];
+	char	Password[33];
+	char	ConnType[7];
+	char	ConnDesc[65];
+        char    Server[128];
+	char	Interface[6];
+	char    Emulator[7];
+	char    Sessions[128];
+	int     RecordType;
+};

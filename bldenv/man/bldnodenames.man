@@ -1,0 +1,184 @@
+#
+# @(#)94	1.8  src/bldenv/man/bldnodenames.man, bldprocess, bos412, GOLDA411a 4/21/93 19:20:08
+#
+#  COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+#  FUNCTIONS: Manual page for bldnodenames
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1992, 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  bldnodenames Command
+  
+  
+  Purpose
+  
+  The bldnodenames command is the interface to retrieve data from the
+  $NODENAMES file.
+  
+
+  Syntax
+ 
+  bldnodenames <nodename> <log_errors> 
+
+  bldnodenames_checkfile <log_errors>
+
+  bldnodenames_search <request> <log_errors>
+
+
+  Description
+
+  The functions in bldnodenames retrieve data from $NODENAMES and
+  return them to the caller in environment variables.  This interface
+  allows the format of $NODENAMES to be transparent to the caller.
+
+  The function bldnodename is called to return the data associated
+  with the nodename supplied.  The function bldnodenames always calls
+  bldnodenames_checkfile.  The function bldnodenames returns 0 if no error
+  occurs, 1 if a error occurs, and 2 if multiple entries for one
+  nodename are found in $NODENAMES.  The environment variables returned
+  are NODENAMES_NODE and NODENAMES_PRIORITIES.
+
+  The function bldnodenames_checkfile is called to check and insure the
+  file $NODENAMES exists.  This function is provided for functions that
+  need to check for a valid $NODENAMES.  The function bldnodenames_checkfile
+  returns 0 if $NODENAMES exist and 1 if $NODENAMES does not exist.  No
+  environment variables are returned by this function.
+
+  The function bldnodenames_search sequentially returns each entry
+  in the $NODENAMES file.  The value of request being $SEARCH_FIRST
+  checks the existence of $NODENAMES via bldnodenames_checkfile, opens the
+  file and gets the first entry.  The value of request being $SEARCH_NEXT
+  gets the next entry from $NODENAMES.  The value of request being
+  $SEARCH_STOP closes $NODENAMES.  The function bldnodenames_search
+  returns 0 if no error occurs and 1 if a error occurs.  The environment
+  variables returned are NODENAMES_NODE, NODENAMES_NODENAME and
+  NODENAMES_PRIORITIES.
+
+  The function bldnodenames_search opens file descriptor 9, if file
+  descriptor 9 is open before calling bldnodenames_search it will be
+  closed after the call to bldnodenames_search.  DO NOT call
+  bldnodenames_search in a subshell or as $(bldnodenames_search ...)
+  because file descriptor 9 will not remain open across calls
+  under these conditions.
+
+
+  Flags
+
+  nodename      Nodename name that bldnodenames should search for.
+
+  log_errors    Value is either TRUE or FALSE.  A value of TRUE will
+                result in a error message being displayed through the
+                log function for any error encountered.  A value of
+                FALSE will not display the error messages.  The error
+                codes returned are independent of the setting of this
+                value.
+
+  request       $SEARCH_FIRST checks for $NODENAMES existence, opens
+                $NODENAMES, and get first entry.  $SEARCH_NEXT reads 
+                the next entry from $NODENAMES.  $SEARCH_STOP closes
+                $NODENAMES.
+
+
+  Environment Variables
+
+  NODENAMES    The pathname for 'nodenames.dat', If not set, defaults to
+	       "$BLDENV/usr/bin/nodenames.dat"
+
+  NODENAMES_NODE
+               Source name of release directory on build machines.
+
+  NODENAMES_NODENAME
+               Source name of release directory in AFS.
+
+  NODENAMES_PRIORITIES
+               Priorities tracks must be to be acceptable for this build.
+
+  SEARCH_FIRST General search constant.  Passed to functions that perform
+               searches and indicates that the search should be initialized
+               and the first element returned.
+
+  SEARCH_NEXT  General search constant.  Passed to functions that perform
+	       searches and indicates that the search should display the 
+               next element in the search.
+
+  SEARCH_STOP  General search constant.  Passed to functions that perform
+               searches and indicates that the search is complete and all
+               unneeded resources created for the search should be released.
+
+  SPACECHARACTER
+               SPACE character constant.
+
+  TABCHARACTER
+               TAB character constant.
+
+
+  Messages
+
+    Fatal Errors
+
+    "Searching for <nodename> and found <nodename_node> in <NODENAMES>"
+    This error should never occur.  Indicates a entry for <nodenames> was found
+    but when processing the data begin the <nodenames> value has changed.
+
+    Errors
+
+    "File <NODENAMES> does not exist"
+    The file environment variable NODENAMES is set to does not exist.
+    
+    "<nodename> not found in <NODENAMES>"
+    The entry for <nodename> is not the file <NODENAMES>.  Entry needs to be
+    added or another NODENAMES needs to be set to another file.
+
+    "Multiple <nodename>'s found in <NODENAMES>"
+    Multiple entries for <nodename> were found in <NODENAMES>.  Only one
+    entry for <nodename> is allowed.
+
+
+  Examples
+  
+  1. Call bldnodenames on nodename 320.  Log any errors encountered.
+
+     bldnodenames 320 "${TRUE}"
+
+  2. Call bldnodenames on nodename 310.  Do not log errors encountered.
+
+     bldnodenames 310 "${FALSE}"
+
+  3. Call bldnodenames_search for first entry.  Log errors encountered.
+
+     bldnodenames_search ${SEARCH_FIRST} "${TRUE}"
+
+  4. Call bldnodenames_search for second entry.  Log errors encountered.
+
+     bldnodenames_search ${SEARCH_NEXT} "${TRUE}"
+
+  5. Call bldnodenames_search for third entry.  Log errors encountered.
+
+     bldnodenames_search ${SEARCH_NEXT} "${TRUE}"
+
+  6. Call bldnodenames_search to close file.  Log errors encountered.
+
+     bldnodenames_search ${SEARCH_STOP} "${TRUE}"
+  
+
+  Input Files
+
+#include "nodenames.dat.man"
+
+
+  Related Information
+  
+  $BLDENV/usr/man/bldloginit      The man page for the logging commands.
+  $BLDENV/usr/man/bldnodenames    The man page for bldnodenames functions.
+  $BLDENV/usr/man/hostsfile.dat   The man page with the description of the
+                                  $HOSTSFILE file.
+  $BLDENV/usr/man/nodenames.dat   The man page with the description of the
+                                  $NODENAMES file.

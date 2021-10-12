@@ -1,0 +1,46 @@
+#!/unix
+* @(#)96      1.4  src/bos/kernext/exp/diagex.exp, sysxdiag, bos41B, 9504A 1/3/95 08:52:06
+*
+*
+* COMPONENT_NAME: (sysxdiag) Diagnostic Kernel Extension
+*
+* FUNCTIONS: Diagnostic Kernel Extension Interface Export Symbols
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993,1995
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+diag_open               syscall
+diag_intr               syscall
+diag_watch4intr         syscall
+diag_close              syscall
+diag_dma_master         syscall
+diag_dma_slave          syscall
+diag_dma_flush          syscall
+diag_dma_complete       syscall
+diag_dma_unmask         syscall
+diag_dma_mask           syscall
+diag_read_handle        syscall
+diag_io_write           syscall
+diag_io_read            syscall
+diag_io_wr_stream       syscall
+diag_io_rd_stream       syscall
+diag_mem_write          syscall
+diag_mem_read           syscall
+diag_mem_wr_stream      syscall
+diag_mem_rd_stream      syscall
+diag_pos_write          syscall
+diag_pos_read           syscall
+e_wakeup                syscall
+diag_special_io_write   syscall
+diag_special_io_read    syscall
+diag_map_page         	syscall
+diag_unmap_page         syscall
+diag_map_enable         syscall
+diag_map_disable      	syscall

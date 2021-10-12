@@ -1,0 +1,51 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Write a program to copy its input to its output,
+replacing each string of one or more blanks by
+a single blank.
+#once #create Ref
+   This    has   lines   with several     blanks    
+including some in  funny places.    
+#once #create Ref1
+          
+#once #create Answer
+ This has lines with several blanks 
+including some in funny places. 
+ 
+#user
+a.out <Ref >test
+a.out <Ref1 >>test
+#cmp test Answer
+#succeed
+One way:
+
+ #include <stdio.h>
+
+main()
+{
+	int c;
+
+	for (c = getchar(); c != EOF; ) {
+		putchar(c);
+		if (c == ' ')
+			while ((c = getchar()) == ' ')
+				;
+		else
+			c = getchar();
+	}
+}
+#log
+#next
+9.1a 10

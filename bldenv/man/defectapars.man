@@ -1,0 +1,32 @@
+# @(#)30	1.4  src/bldenv/man/defectapars.man, bldtools, bos412, GOLDA411a 6/4/93 17:53:23
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: defectapars file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    $TOP/PTF/$BLDCYCLE/defectapars:
+	Maps defect numbers to their corresponding APAR number, release
+        and CMVC family.  Created by bldretain (for production) or bldmid
+        (for development).
+
+	Format:
+	        <defect>|<apar>|<release>|<CMVC_Family>
+	        <defect>|<apar>|<release>|<CMVC_Family>
+                       .
+                       .
+
+        Where:
+          <CMVC_Family> is <familyname>@<hostname>@<portnumber>
+
+        The old file format:
+            <defect>|<apar>
+        can still be read by the tools.  The tools will assume the defects
+        came from the $DEFAULT_CMVCFAMILY family.

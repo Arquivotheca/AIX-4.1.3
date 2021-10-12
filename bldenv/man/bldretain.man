@@ -1,0 +1,205 @@
+# @(#)59	1.4  src/bldenv/man/bldretain.man, bldprocess, bos412, GOLDA411a 4/29/94 09:38:28
+#
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldretain man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991,1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+bldretain
+
+
+PURPOSE
+
+	The bldretain creates APARs and PTFIDs by interfacing with the RETAIN 
+system.
+
+
+SYNOPSIS
+
+	bldretain [-u]
+
+
+DESCRIPTION
+
+	The bldretain command uses the current BLDCYCLE (obtained from bldinit)
+to query for 'prebuild cmvccommit' success in the 'STATUS_FILE' for all 
+releases and gets a list of release names and the corresponding levelversions 
+(See the man pages of the status functions). It is a higher level interface to 
+RETAIN database tools, it calls these tools by passing the release names and 
+the levelversions to them. Even though these lower level tools create the APARs
+and the PTFids for all the defects of that levelversion of a release, The 
+bldretain command acts as a wraparound for these tools. If for any reason the 
+execution of the bldretain command is stopped at any point, It has the 
+capability to resume from the same point at a later time. The bldretain command
+uses the SELFIX logging and status functions to keep a record of its execution 
+history, so it is very important that these logs ( in the 'bldlogpath'/RETAIN 
+directory) and status entries (STATUS_FILE) are kept when the execution is 
+stopped. The best examples of what might cause the execution to stop are when 
+the RETAIN database system goes down or there is a power outage etc.
+
+	After an APAR is created for a defect in RETAIN, the APAR is written in
+to the reference field of the defect in CMVC. If the operator who is executing
+the command does not have the right authority to write into the reference 
+fields, the bldretain command would quit with a fatal error message. This can
+be overcome by setting the CMVC 'CMVC_BECOME' variable to the right user. If it 
+is not set, bldretain would prompt for it (see the CMVC user's guide for more
+information). The bldretain command confirms whether the operator has indeed
+set the CMVC 'CMVC_BECOME' variable to the right authority, but this confir-
+mation can be avoided by setting the environment variable 'AUTO' to 'Yes'.
+
+	There are certain initialization requirements that have to be met 
+before running the bldretain command.
+
+1) korn shell has to be installed (version 3.1.5 or higher).
+
+2) AIXwindows (or Motif) has to be up and running
+
+3) A file called '.netrc' has to created in the operator's home directory. The
+   format of this file would be,
+
+	machine retain login <RETAIN loginid> password <RETAIN passwd>
+
+	where <RETAIN loginid> and <RETAIN passwd> would be the RETAIN login 
+	and the password of the operator into the RETAIN database system
+	respectively. (For more information on RETAIN loginids and passwords
+	contact the RETAIN administrator)
+
+4) The following variables have to be setup in the '.profile' file in the 
+   operator's home directory.
+
+	export ENV=$HOME/.kshrc
+	RETAIN_SYSTEM=BDC
+	RETAIN_WAIT=20
+	RETAIN_PATH=$BLDENV/usr/bin
+	VM_PROMPT=Ready
+	export RETAIN_SYSTEM RETAIN_WAIT RETAIN_PATH VM_PROMPT
+	HTN_OPTIONS="-fzn Rom6.500"
+	HOST_LIST="ausvm2 ausvm1 ausvm6 ausvmq"
+	export HTN_OPTIONS HOST_LIST
+
+5) The following variables have to be setup in the '.kshrc' in the operator's
+   home directory.
+
+	HISTFILE=$HOME/.ksh_hist
+	HTNMAP=/tmp/retain
+	CENTER=165
+	RETNAME="<NAME> (<RETAIN login>)"
+	export HISTFILE HTNMAP CENTER RETNAME
+
+   where <NAME> and the <RETAIN login> are the operator's name and the RETAIN 
+   login id respectively.
+
+
+6) In order to use the Change Team Retain tools, the following must be set
+up.
+        a) On the build machine, create a /retain/bin directory
+        b) From the mariscal machine directory /retain/bin, copy the
+following files to the build machine's /retain/bin:
+
+		hlogin
+      		hlogoff
+		aparopen
+		aparclose
+		aparcreate
+		Retain.ksh
+		Common.ksh
+		htn
+		hget
+		hexpect
+		hsend
+		Site.def
+                Passget
+                Passput
+	
+	c) Add /retain/bin to the $PATH in the file '.profile' in the HOME
+directory.
+        d) Set the environment variable HTNMAP in the file '.profile' in the
+HOME directory
+        
+           export HTNMAP=$HOME/Retain/.mapretain
+
+	e) Source the file '.profile' in the HOME directory
+
+	   . .profile
+
+        f) Add the following to the .Xdefaults file in the HOME directory.
+        
+           htn*speckey: on
+           htn*bracket: on
+           htn*zoom: off
+ 
+	To make the bldretain completely noninteractive, the following 
+variables have to be set and exported either on the command line or in the file
+'.profile' in the HOME directory.
+
+		TOP
+		BLDCYCLE
+		STATUS_FILE
+		DISPLAY
+		CMVC_BECOME
+		AUTO
+
+	The bldretain command posts a status of success or failure for each 
+release and its levelversion in the status file, However no processing is done 
+if there are no status entries for 'prebuild cmvccommit' for a bldcycle in the
+status file.
+
+	The bldretain command uses the functions bldlog and bldlogset to log 
+the proceedings of every run. The log file is $TOP/LOG/$BLDCYCLE/bldretain.N
+where N starts at 1 and increments every time the bldretain command is run. 
+(see the showlog command for a description of viewing the log files).
+
+
+	The bldretain command creates(appends) the following files
+	
+	1. 'defectapars' in the 'bldglobalpath' ($TOP/PTF/$BLDCYCLE)
+	   This file contains defects and their corresponding APARs in build(s)
+	   for the release.
+
+	2. 'ptfids' in the 'bldglobalpath' ($TOP/PTF/$BLDCYCLE)
+	   This file contains APARs and their corresponding PTFids in build(s)
+	   for the release.
+
+	3. 'abstracts' in the 'bldhistorypath' ($TOP/HISTORY)
+	   This file contains the APAR, it's corresponding abstract and symptom
+	   note in build(s) for the release.
+
+
+FLAGS
+
+	-u 	Closes APARs under release XXX instead of the unannounced 
+		320 level (Unrestricted database)
+
+
+#include "defectapars.man"
+#include "ptfids.man"
+#include "abstracts.man"
+
+
+RELATED INFORMATION
+
+	The following commands
+		AparsNeeded
+		CreateApar
+		OpenApar
+		CloseApar
+		CheckAparStatus
+		CreatePtf
+		CheckStatus
+		bldsetstatus
+		QueryStatus
+		DeleteStatus
+		bldinit
+		bldlogpath
+		bldglobalpath
+		bldhistorypath
+		bldabstracts

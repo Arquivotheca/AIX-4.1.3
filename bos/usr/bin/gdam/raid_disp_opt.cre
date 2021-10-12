@@ -1,0 +1,36 @@
+class raid_disp_opt {
+	char id_seq_num[17];                         /* offset: 0xc ( 12) */
+	char id[65];                                 /* offset: 0x1d ( 29) */
+	vchar disc_field_name[65];                   /* offset: 0x60 ( 96) */
+	vchar name[1025];                            /* offset: 0x64 ( 100) */
+	vchar name_msg_file[1025];                   /* offset: 0x68 ( 104) */
+	long name_msg_set;                           /* offset: 0x6c ( 108) */
+	long name_msg_id;                            /* offset: 0x70 ( 112) */
+	char op_type[2];                             /* offset: 0x74 ( 116) */
+	char entry_type[2];                          /* offset: 0x76 ( 118) */
+	long entry_size;                             /* offset: 0x78 ( 120) */
+	char required[2];                            /* offset: 0x7c ( 124) */
+	vchar prefix[1025];                          /* offset: 0x80 ( 128) */
+	char cmd_to_list_mode[2];                    /* offset: 0x84 ( 132) */
+	vchar cmd_to_list[1025];                     /* offset: 0x88 ( 136) */
+	vchar cmd_to_list_postfix[1025];             /* offset: 0x8c ( 140) */
+	char multi_select[2];                        /* offset: 0x90 ( 144) */
+	long value_index;                            /* offset: 0x94 ( 148) */
+	vchar disp_values[1025];                     /* offset: 0x98 ( 152) */
+	vchar values_msg_file[1025];                 /* offset: 0x9c ( 156) */
+	long values_msg_set;                         /* offset: 0xa0 ( 160) */
+	long values_msg_id;                          /* offset: 0xa4 ( 164) */
+	vchar aix_values[1025];                      /* offset: 0xa8 ( 168) */
+	char help_msg_id[17];                        /* offset: 0xac ( 172) */
+	vchar help_msg_loc[1025];                    /* offset: 0xc0 ( 192) */
+	vchar help_msg_base[64];                     /* offset: 0xc4 ( 196) */
+	vchar help_msg_book[64];                     /* offset: 0xc8 ( 200) */
+	};
+/*
+	descriptors:    26
+	structure size:     0xcc (204) bytes
+	data offset:    0x6a0
+	population:     4111 objects (2510 active, 1601 deleted)
+*/
+
+

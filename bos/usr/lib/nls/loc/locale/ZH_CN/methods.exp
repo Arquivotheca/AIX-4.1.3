@@ -1,0 +1,28 @@
+* @(#)56	1.1  src/bos/usr/lib/nls/loc/locale/zh_CN/methods.exp, ils-zh_CN, bos41B, 9504A 12/20/94 10:25:51
+*
+*   COMPONENT_NAME: ils-zh_CN
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1994
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+__mblen_euccn
+__mbstopcs_euccn
+__mbstowcs_euccn
+__mbtopc_euccn
+__mbtowc_euccn
+__pcstombs_euccn
+__pctomb_euccn
+__wcstombs_euccn
+__wcswidth_euccn
+__wctomb_euccn
+__wcwidth_euccn

@@ -1,0 +1,21 @@
+#!/unix
+
+* @(#)55 1.3 src/bos/kernext/exp/ttydbg.exp, sysxtty, bos411, 9428A410j 6/10/94 10:00:43
+*
+* COMPONENT_NAME: (sysxtty)	ttydbg extension for tty debugging
+*
+* FUNCTIONS:
+*
+* ORIGINS: 83
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+
+* Pointer to the general tty table : crash tty on /dev/mem
+tty_list
+
+* Routines
+
+tty_read_mem
+tty_read_word
+tty_db_printf

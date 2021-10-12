@@ -1,0 +1,464 @@
+# @(#)81        1.2  src/bos/diag/tu/baud/tu_spec, tu_baud, bos411, 9439B411a 9/29/94 10:57:30
+/*
+ * COMPONENT_NAME: tu_baud
+ *
+ * FUNCTIONS: Declarations only
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1988, 1994
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+        Business Audio Adapter
+        Test Unit Component Interface Specification
+        Version 0.8  (under construction)
+
+
+
+
+
+
+
+
+
+        May 23, 1994
+        Revised July  5, 1994
+
+        Document owner: Don Fuchik
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        IBM CONFIDENTIAL
+
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+
+        TABLE OF CONTENTS
+
+
+        Document Control
+                Revisions and Ownership
+                Document Repository
+                Document Distribution
+
+        Introduction
+                Hardware Overview
+                FRU Test Coverage
+
+        Build and Integration Requirements
+                Test Unit Control Block
+                Calling Conventions
+                CMVC Information
+                Source Files
+
+        Execution Environment
+                Device Driver Load/Unload
+                Recommended TU Execution Order
+                AIX Signal Handling
+
+        Test Units Details
+                General Error Codes
+                Test Units (FRU isolation)
+                Test Units (debug)
+
+
+        FRU Isolation
+                FRU List
+                Service Request Numbers List
+
+
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        DOCUMENT CONTROL
+
+
+
+        Revisions and Ownership -
+
+        This document is owned by department F46S, Graphics and Multimedia
+        Developement.  The following is a table of revision information:
+
+
+        Date    Version         Description of Revision
+        ___________________________________________________________________
+
+        5/23/94   0.1           Original document.
+        6/17/94   0.7           Added TU5 and source files list.
+        7/05/94   0.8           Added SRN numbers.
+
+        ___________________________________________________________________
+
+
+
+
+        Document Repository -
+
+        The most recent level of this document can be found on the AFS file
+        system:  /afs/austin/depts/f46s/foxclub/tu_cis,  and on CMVC...
+
+
+
+        Document Distribution -
+
+        The following persons should be notified when the document is
+        modified.
+
+                Bashem Coorg                    F55S
+                Don Fuchik                      F46S
+                Maggie Chandler
+                John C. Miller
+                Steve Hatcher                   F46S
+
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        INTRODUCTION
+
+        Hardware Overview -
+
+        The card under test is a microchannel adapter, occupying one slot.
+        The primary components of the adapter are a Standard Microsystems
+        Corporation MCI94C18A microchannel interface chip, a Crystal Semi-
+        conductor Corporation CS4231 Audio Codec and audio input and output
+        amplifiers.  The adapter is a single FRU.
+
+
+        FRU Test Coverage -
+
+        The primary TU's described here are designed to isolate the adapter
+        to a 95% confidence level without operator interaction.  Additional
+        test units are useful for development and manufacting, for component
+        level testing.
+
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        BUILD AND INTEGRATION REQUIREMENT
+
+        Test Unit Control Block -
+        Calling Conventions -
+        CMVC Information -
+        Source Files -
+                'exectu' is built from the following source files:
+                        All under:  tu320/R2/cmd/diag/tu/baud.
+                        baud_exectu.c
+                        baud_exectu.h
+                        baudtu.c
+                        vpd_check.c
+                        baudutil.c
+                        Makefile
+
+                'dabaud' is built from the following source files:
+                        All under:  tu320/R2/cmd/diag/da/baud.
+                        dabaud.c
+                        dabaud.cat
+                        dabaud.msg
+                        dabaud.h
+                        dabaud_msg.h
+                        Makefile
+
+                        Ship files are under the following path:
+                                tu320/nls/ship/usr/lpp/diagnostics/da.
+
+
+                'bauddiagdd' and 'bauddiagpin', the device drivers, are
+                built from the following source files:
+                        (Under: /htx/src/tu320/R2/sysx/foxclub/dd)
+                        baud_config.c
+                        baud_open.c
+                        baud_close.c
+                        baud_read.c
+                        baud_write.c
+                        baud_intr_handler.c
+                        baud_ioctl.c
+                        baud_watchdog.c
+                        baud_mpx.c
+                        baud_misc.c
+                        baudd.h
+                        baudregs.h
+                        baud_exectu.h
+                        Makefile
+
+                'cfgdiagbaud', this file is built from the following files:
+                        (Under: /htx/src/tu320/R2/sysx/foxclub/cfg)
+                        cfgbaud.c
+                        bauddd.h
+
+                'ucfgdiagbaud', this file is built from the following files:
+                        (Under: /htx/src/tu320/R2/sysx/foxclub/cfg)
+                        ucfgbaud.c
+                        bauddd.h
+
+
+                The diagnostics diskette image is built from the following
+                source files:
+                        (Under: /htx/src/tu320/R2/sysx/foxclub/diskette)
+                        Makefile
+                        diagS.dep.S (list of files included)
+                        diagstartS.sh
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        EXECUTION ENVIRONMENT
+
+        Device Driver Load/Unload
+
+        The test units for the audio adapter do not use the device
+        driver used by applications, but have a driver which is
+        unique to diagnostics.  Thus, before the test units are run
+        the audio adapter must be first returned from the "available"
+        state to the "defined" state, and then placed into the diagnostics
+        state using special configuration files.  The following files
+        are unique to diagnostics are are required:
+
+                /etc/drivers/bauddiagdd
+                /etc/drivers/bauddiagpin
+                /etc/methods/cfgdiagbaud
+                /etc/methods/ucfgdiagbaud
+
+        The following sequence is recommended for placing the device
+        into the diagnostic state (device name /dev/baud1 is used here
+        as an example):
+
+                odm_run_method("ucfgdevice", "-l baud1", &msg, &err);
+                odm_run_method("cfgdiagbaud", "-l baud1", &msg, &err);
+
+
+        After diagnostics are complete, use this sequence to return the
+        device to the "available" state:
+
+                odm_run_method("ucfgdiagbaud", "-l baud1", &msg, &err);
+                odm_run_method("cfgbaud", "-l baud1", &msg, &err);
+
+
+        Refer to the "AIX Calls and Subroutine Reference: Base Operating
+        System, Volume 1" for further information on these calls.
+
+
+
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        GENERAL ERROR CODES
+
+        The following error codes are not specific to any TU -
+
+        0020    Invalid argument count.
+        0021    Logical device name invalid.
+        0x22    HTX_communications error.
+        0x23    Illegal Device Name.
+        0x24    Device open failure.
+        0x25    Rules file open failure.
+        0x26    Device close failure.
+
+
+        3100    Invalid TU selected.
+        3200
+         -3300  Error in htx rules file.
+
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        TEST UNITS (FRU isolation)
+
+        These test units do not require operation action or attachment
+        of external devices to the adapter.  These test units should be
+        run under HTX and for service and customer diagnostics.
+
+
+
+        TU 2    VPD register test -
+
+                Check the VPD registers for a valid header and CRC.
+
+                ERROR RETURN CODES -
+
+                2300    VPD data incorrect
+                2301    VPD CRC check incorrect
+
+
+
+        TU 3    MCI74C18A register and interrupt test -
+
+                Check the read and write capability of the chip's internal
+                registers, and the chips ability to generate a system
+                interrupt.
+
+                ERROR RETURN CODES -
+
+                2100    Invalid response from MCI7418A chip
+                2101    Bad POS register operation
+
+
+        TU 4    CS4231 (Codec) register test -
+
+                Checks the read and write capability of the Codec chip's
+                internal registers, and the associated read and write data
+                paths to the microchannel.
+
+                ERROR RETURN CODES -
+
+                2200    Failed register write/read test.
+
+
+
+        TU 10   Simultaneous Record and Playback Test -
+
+                Checks the line-in and line-out audio paths,
+                the Codec's internal A/D and D/A conversion circuitry
+                and the Microchannel DMA interface and control logic.
+                No operator intervention is required for this test.
+
+
+                ERROR RETURN CODES -
+
+                No unique codes are generated.
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        TEST UNITS (debug)
+
+        These test units are intended for debug of the adapter.  They
+        require operation intervention.
+
+
+
+
+        TU 5    Adatper Reset -
+
+                Resets adapter to idle state, mode 2.
+
+                ERROR RETURN CODES -
+
+                No unique codes are generated.
+
+
+        TU 6    Audio Digital Loopback Test -
+
+                Checks the line-in and line-out audio paths, as well as
+                the Codec's internal A/D and D/A conversion circuitry.
+                This requires operation intervention and external audio
+                devices, and is intended for manufacturing test.
+
+                ERROR RETURN CODES -
+
+                No unique codes are generated.
+
+
+        TU 7    Manual Register Control -
+
+                This TU is intended for development testing only.
+
+                ERROR RETURN CODES -
+
+                No unique codes are generated.
+
+
+        TU 8    Audio Record and Playback Test -
+
+                Checks the line-in and line-out audio paths,
+                the Codec's internal A/D and D/A conversion circuitry
+                and the Microchannel DMA interface and control logic.
+                This requires operation intervention and external audio
+                devices, and is intended for manufacturing test.
+
+                ERROR RETURN CODES -
+
+                No unique codes are generated.
+
+
+
+        TU 9    Simultaneous Record and Playback Test -
+
+                Checks the line-in and line-out audio paths,
+                the Codec's internal A/D and D/A conversion circuitry
+                and the Microchannel DMA interface and control logic.
+                This requires operation intervention and external audio
+                devices, and is intended for manufacturing test.
+
+                ERROR RETURN CODES -
+
+                No unique codes are generated.
+
+
+
+        Business Audio TU CIS                                  Version 0.8
+
+
+        FRU LIST
+
+        Description             Func Code       Part Number
+
+        Audio Adapter           715             88G2774
+        Software                Software
+
+
+
+
+        SERVICE REQUEST NUMBERS LIST
+
+        SRN     715-101         80% Adapter
+                                20% Software
+
+        SRN     715-102         100% Adapter
+
+        SRN     715-103         100% Adapter
+
+        SRN     715-104         100% Adapter
+
+        SRN     715-105         100% Adapter
+
+        SRN     715-106         100% Software
+
+

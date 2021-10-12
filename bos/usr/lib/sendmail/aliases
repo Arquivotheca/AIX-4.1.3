@@ -1,0 +1,32 @@
+# @(#)87	1.3  src/bos/usr/lib/sendmail/aliases, cmdsend, bos411, 9428A410j 6/15/90 23:21:43
+# 
+# COMPONENT_NAME: CMDSEND aliases
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  26  27 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+##
+#  Aliases in this file will NOT be expanded in the header from
+#  Mail, but WILL be visible over networks or from /bin/bellmail.
+#
+#	>>>>>>>>>>	The command "sendmail -bi" must be run after
+#	>> NOTE >>	this file is updated for any changes to
+#	>>>>>>>>>>	affect sendmail operation.
+##
+
+# Alias for mailer daemon
+MAILER-DAEMON:root
+
+# Following alias is required by the new mail protocol, RFC 822
+postmaster:root
+
+# Aliases to handle mail to msgs and news
+nobody: /dev/null

@@ -1,0 +1,30 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This time you have to get a list of the files whose names begin
+with "memo", but sorted in order of last change, most recent first,
+as produced by "ls -t".  Get the list in file "gorp",
+then type "ready".
+#create memo1
+first line
+#create memo3
+third line
+#create memo2
+second line
+#user
+ls -t memo* >X1
+#cmp X1 gorp
+#log
+#next
+2.1d 10

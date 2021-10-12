@@ -1,0 +1,102 @@
+######################################################################
+#  @(#)55        1.3  src/bldenv/man/update_RETAIN.man, pkgtools, bos412, GOLDA411a 6/24/93 13:42:36
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: PTF_filename
+#		server
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# update_RETAIN.man 
+#
+# Change log:
+#    06/04/92-sw-add -s option
+#    02/05/92-wt-created
+######################################################################
+  update_RETAIN Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+    Updates RETAIN and CMVC with ptf apar data obtained from
+    shipped_ptfs format file
+
+
+  Syntax
+
+    update_RETAIN [-s ship_directory] [-x shipped_ptf_filename] 
+                  [-n] [-h] [-?] PTF_filename(s)
+
+
+  Description
+
+    The update_RETAIN command updates the PTF information on RETAIN and
+    CMVC.
+        
+    This command is called by promote_ship and generally run in the
+    background. The error messages are mailed to the user who runs
+    this command.
+   
+
+  Flags
+
+    -s ship directory          Directory of ship server.
+                               The default is $SHIP_DIRNAME which is in
+                               32_pkg_environment file.
+
+    -x shipped_ptfs_filename   Path and file name of the shipped_ptfs
+                               file. The default is "shipped_ptfs" on the
+                               ship server directory.
+
+    -n                         Lists the ptf apar data that would be passed
+                               to SendPtf.
+
+    -h | -?                    Lists the help message. 
+
+    PTF_filename(s)            List of PTFs to be released to the field.
+                               For example:
+                                     U0000257.ptf  U0000032.ptf U000001.ptf
+                                               < or >
+                                     U0000257 U0000032 U000001
+
+
+  Messages
+
+    Fatal Errors
+
+    "update_RETAIN: ...... "
+    The error message that is caused by running the update_RETAIN command.
+
+
+  Examples
+
+    1. Updates the PTF U000001 from the ship server (ship_server) on RETAIN
+       and CMVC:
+
+       update_RETAIN -s ship_server U000001.ptf
+
+
+  Implementation Specifics
+
+    The update_RETAIN command calls 32_pkg_environment and SendPtf programs.
+    Make sure add those programs pathname to your PATH environment variable. 
+
+
+  Related Information
+
+    promote_ship
+    SendPtf

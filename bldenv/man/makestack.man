@@ -1,0 +1,141 @@
+######################################################################
+#  @(#)41        1.4  src/bldenv/man/makestack.man, pkgtools, bos412, GOLDA411a 10/4/93 13:43:49
+######################################################################
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: Command
+#		file
+#		filenames
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+  makestack Command
+  makestack41 Command (See Implementation Specifics Section)
+
+
+  Key Concept
+
+
+  Purpose
+
+     Creates the stacked tapes that contain install images
+     and update images.
+
+
+  Syntax
+
+     makestack [-l stack_list] [-c img_dir] [-d device] [-i image_type]
+               [-n dir_name] [-B] [-h] [-1 bosboot image] [-2 bosinst image]
+
+
+  Description
+   
+     The makestack command reads the lpp tar image names or PTF backup
+     image names from the stack_list file (specified by -l option;     
+     Default is stack.list on the current directory) and stacks the
+     images to the tapes.
+
+
+  Flags
+
+     -l stack_list	The path and filename of the stack list file.    
+    			The default is stack.list on the current	
+			directory.  The environment variable STAKLST
+			can also be used to specify this file.
+
+     -c img_dir		The directory that contains the installable
+           		images. The default is the current directory.
+			The environment variable CUR can also be used
+			to specify this file.
+
+     -d device		Name of the tape device. The default is rmt0.
+
+     -i image_type	Specifies image type by AIX release for TOC format.
+			Valid values are 3.1, 3.2 and 4.1 which indicate
+			type 1, 2 and 3 TOC formats, respectively.  Default
+			is type 1. (See note under  IMPLEMENTATION SPECIFICS.)
+
+     -n dir_name	No execute. This option will generate a TOC	
+			and write TOC to dir_name directory, but not    
+			write to the tapes.
+
+     -B			Generates a tape without the bosboot/bosinst
+			images.
+
+     -h			Lists help message.
+
+     -1			Bosboot image. Defaults to bosboot.tape.
+
+     -2			Bosinstall image. Defaults to bosinst.tape.
+
+
+  NOTE:  A command line argument will always override a previously
+  set environment variable.  i.e., -l overrides STAKLST.
+
+  Examples 	
+
+     1. Generates an installable tapes that all images are in /image	
+	directory:
+
+	makestack -c /image 
+
+     2. Generates an unbootable tapes that all images are in the  
+     	current directory:
+
+	makestack -B
+
+     3. Generates a 4.1 toc file only and puts it on /tmp directory:
+
+	makestack -i 4.1 -n /tmp
+
+	OR
+
+	makestack41 -n /tmp
+
+        See note under implementation specifics.
+        See implementation specifics section for details on makestack41.
+
+
+  
+  Input File
+
+     stack_list - List of lpp filenames or PTF filenames (one per line).
+		  ie.     bos.obj.13d
+                          bosadt.12
+                          updates/bos.U03.02.0000.0000.U401862.bff
+
+
+  Prerequisite Information
+
+     The makestack command calls stack_32, Maketoc_32 and gen_toc_entry
+     programs. Make sure you add those programs' pathname to your PATH
+     environment variable.
+
+  Implementation Specifics
+
+  In the AIX 4.1 build environment there is a link between makestack and
+  makestack41.  If makestack41 is invoked the -i <image_type> option is
+  not necessary.  makestack41 will always generate a 4.1 (type 3) TOC
+  (refer to example 3 above).  The stack tools are located in the
+  tools/power/usr/bin directory of the 4.1 build environment.
+
+  Note: Until Boulder supports image types for toc formats other than type 1,
+              all types will default to type 1.
+
+  Related Information
+
+     stack_32
+     Maketoc_32
+     gen_toc_entry
+

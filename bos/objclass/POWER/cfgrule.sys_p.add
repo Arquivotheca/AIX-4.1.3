@@ -1,0 +1,16 @@
+*@(#)59  1.1  src/bos/objclass/POWER/cfgrule.sys_p.add, cfgmethods, bos41B, 412_41B_sync 1/12/95 14:56:08
+* 
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+* 
+*  FUNCTIONS: adds Fan Control config method to the database
+* 
+*  ORIGINS: 83
+* 
+*  LEVEL 1,  5 Years Bull Confidential Information
+*
+* Fan Control for Pegasus deskside
+*
+Config_Rules:
+	phase = 2
+	seq = 80
+	rule = "/usr/lib/methods/cfgfan"

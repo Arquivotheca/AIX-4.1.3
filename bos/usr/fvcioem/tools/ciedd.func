@@ -1,0 +1,338 @@
+P$$ADDRENTRY *$ePtr$addrtbl.c
+P$$ADDRENTRY *$eIndex$addrtbl.c
+F$$ADDRTABLE *$new_ADDRTABLE$addrtbl.c
+F$$void$free_ADDRTABLE$addrtbl.c
+F$S$ADDRENTRY *$find$addrtbl.c
+F$S$ADDRENTRY *$alloc$addrtbl.c
+F$S$ADDRENTRY *$dealloc$addrtbl.c
+F$$int$enableGroup$addrtbl.c
+F$$int$disableGroup$addrtbl.c
+F$$int$disableAllGroups$addrtbl.c
+F$$ADDRTABLE *$new_ADDRTABLE$addrtbl.h
+F$$void$free_ADDRTABLE$addrtbl.h
+F$$int$enableGroup$addrtbl.h
+F$$int$disableGroup$addrtbl.h
+F$$int$disableAllGroups$addrtbl.h
+F$$CHN *$new_CHN$chn.c
+F$$void$free_CHN$chn.c
+F$$int$openChannel$chn.c
+F$$int$closeChannel$chn.c
+F$$int$getChannelStatus$chn.c
+F$$int$readData$chn.c
+F$$void$readStatus$chn.c
+F$$void$queueStatus$chn.c
+F$$int$writeData$chn.c
+F$$int$entMulticastAddr$chn.c
+F$$int$tokFuncAddr$chn.c
+F$$int$tokGroupAddr$chn.c
+F$$int$tokSetGroupAddr$chn.c
+F$$int$tokClearGroupAddr$chn.c
+F$$int$fddiGroupAddr$chn.c
+F$$int$fddiClearAllGroups$chn.c
+F$$int$fddiQueryGroupAddr$chn.c
+F$$int$entPromiscuousOn$chn.c
+F$$int$entPromiscuousOff$chn.c
+F$$int$startSession$chn.c
+F$$int$haltSession$chn.c
+F$$void$haltAllSessions$chn.c
+M$$$lockChannel$chn.h
+M$$$unlockChannel$chn.h
+F$$CHN *$new_CHN$chn.h
+F$$void$free_CHN$chn.h
+F$$int$openChannel$chn.h
+F$$int$closeChannel$chn.h
+F$$int$getChannelStatus$chn.h
+F$$int$readData$chn.h
+F$$void$readStatus$chn.h
+F$$void$queueStatus$chn.h
+F$$int$writeData$chn.h
+F$$int$entMulticastAddr$chn.h
+F$$int$tokFuncAddr$chn.h
+F$$int$tokGroupAddr$chn.h
+F$$int$tokSetGroupAddr$chn.h
+F$$int$tokClearGroupAddr$chn.h
+F$$int$fddiGroupAddr$chn.h
+F$$int$fddiClearAllGroups$chn.h
+F$$int$fddiQueryGroupAddr$chn.h
+F$$int$entPromiscuousOn$chn.h
+F$$int$entPromiscuousOff$chn.h
+F$$int$startSession$chn.h
+F$$int$haltSession$chn.h
+F$$void$haltAllSessions$chn.h
+F$$CHN_LIST *$new_CHN_LIST$chnlist.c
+F$$void$free_CHN_LIST$chnlist.c
+F$$int$expand_CHN_LIST$chnlist.c
+F$$CHN_LIST *$new_CHN_LIST$chnlist.h
+F$$void$free_CHN_LIST$chnlist.h
+F$$int$expand_CHN_LIST$chnlist.h
+F$$int$cieconfig$ciedd.c
+F$$int$ciempx$ciedd.c
+F$$int$cieopen$ciedd.c
+F$$int$cieclose$ciedd.c
+F$$int$cieread$ciedd.c
+F$$int$ciewrite$ciedd.c
+F$$int$cieselect$ciedd.c
+F$$int$cieioctl$ciedd.c
+P$$size_t$arraysize$ciedd.h
+P$$int$min$ciedd.h
+P$$int$max$ciedd.h
+F$$void$cierecv$cierecv.c
+F$$void$ciestat$ciestat.c
+F$$void$dbginit$cieutil.c
+F$$void$dbgterm$cieutil.c
+F$$void$dbgwrt$cieutil.c
+F$$const char *$getEnv$cieutil.c
+F$$void$dbgout$cieutil.c
+F$$int$sortIOCTLdefTable$cieutil.c
+F$$int$uioToMbuf$cieutil.c
+F$$int$mbufToUio$cieutil.c
+F$$IODT_ENTRY *$searchIODTable$cieutil.c
+F$S$int$hexInt$cieutil.c
+F$$char *$hexStr$cieutil.c
+F$$int$memDump$cieutil.c
+M$$$TOK_FRAME_HAS_ROUTING_INFO$cieutil.h
+M$$$TOK_ROUTING_INFO_LENGTH$cieutil.h
+F$$void$dbginit$cieutil.h
+F$$void$dbgterm$cieutil.h
+F$$void$dbgwrt$cieutil.h
+F$$const char *$getEnv$cieutil.h
+F$$void$dbgout$cieutil.h
+F$$int$sortIOCTLdefTable$cieutil.h
+F$$int$uioToMbuf$cieutil.h
+F$$int$mbufToUio$cieutil.h
+F$$IODT_ENTRY *$searchIODTable$cieutil.h
+F$$char *$hexStr$cieutil.h
+F$$int$memDump$cieutil.h
+F$S$int$devInitENT$dev.c
+F$S$int$devInitFDDI$dev.c
+F$$DEV *$new_DEV$dev.c
+F$$void$free_DEV$dev.c
+F$$int$attachChannelToDevice$dev.c
+F$$void$detachChannelFromDevice$dev.c
+F$$int$createChannel$dev.c
+F$$int$destroyChannel$dev.c
+F$$int$describeDevice$dev.c
+F$$int$queryStatistics$dev.c
+F$$int$tokQueryVPD$dev.c
+F$$int$tokQueryTokenRingInfo$dev.c
+F$$int$entQueryVPD$dev.c
+F$$DEV *$new_DEV$dev.h
+F$$void$free_DEV$dev.h
+F$$int$attachChannelToDevice$dev.h
+F$$void$detachChannelFromDevice$dev.h
+F$$int$createChannel$dev.h
+F$$int$destroyChannel$dev.h
+F$$int$describeDevice$dev.h
+F$$int$queryStatistics$dev.h
+F$$int$tokQueryVPD$dev.h
+F$$int$tokQueryTokenRingInfo$dev.h
+F$$int$entQueryVPD$dev.h
+F$$int$init_DEVMGR$devmgr.c
+F$$void$uninit_DEVMGR$devmgr.c
+F$$int$createDevice$devmgr.c
+F$$int$destroyDevice$devmgr.c
+M$$$ACQUIRE_DEVICE$devmgr.c
+F$$int$acquireDevice$devmgr.c
+F$$void$releaseDevice$devmgr.c
+F$$int$acquireChannel$devmgr.c
+F$$void$releaseChannel$devmgr.c
+F$$int$init_DEVMGR$devmgr.h
+F$$void$uninit_DEVMGR$devmgr.h
+F$$int$createDevice$devmgr.h
+F$$int$destroyDevice$devmgr.h
+F$$int$acquireDevice$devmgr.h
+F$$void$releaseDevice$devmgr.h
+F$$int$acquireChannel$devmgr.h
+F$$void$releaseChannel$devmgr.h
+M$$$setHWM$devstats.h
+F$$DEVTABLE *$new_DEVTABLE$devtable.c
+F$$void$free_DEVTABLE$devtable.c
+F$$int$mkDevHandle$devtable.c
+F$$DEVTABLE *$new_DEVTABLE$devtable.h
+F$$void$free_DEVTABLE$devtable.h
+F$$int$mkDevHandle$devtable.h
+P$$BOOLEAN$dhValid$devtable.h
+P$$DEV *$getDEV$devtable.h
+P$$int$setDEV$devtable.h
+P$$int$clrDEV$devtable.h
+P$$int$incrDevCount$devtable.h
+P$$int$decrDevCount$devtable.h
+P$$unsigned in$rotate$dmalloc.c
+M$$$hash$dmalloc.c
+F$$void$dmallocInit$dmalloc.c
+F$$void$dmallocTerm$dmalloc.c
+F$$void$dmallocReport$dmalloc.c
+F$$void$d_save$dmalloc.c
+F$$void$d_attach$dmalloc.c
+F$$void$d_release$dmalloc.c
+F$$void *$dmalloc$dmalloc.c
+F$$int$dmfree$dmalloc.c
+F$$struct mbuf *$d_get$dmalloc.c
+F$$struct mbuf *$d_gethdr$dmalloc.c
+F$$struct mbuf *$d_getclr$dmalloc.c
+F$$struct mbuf *$d_clgetm$dmalloc.c
+F$$struct mbuf *$d_free$dmalloc.c
+F$$void$d_freem$dmalloc.c
+F$$void$dmallocInit$dmalloc.h
+F$$void$dmallocTerm$dmalloc.h
+F$$void$dmallocReport$dmalloc.h
+F$$void$d_save$dmalloc.h
+F$$void$d_release$dmalloc.h
+F$$void *$dmalloc$dmalloc.h
+F$$int$dmfree$dmalloc.h
+F$$struct mbuf *$d_get$dmalloc.h
+F$$struct mbuf *$d_gethdr$dmalloc.h
+F$$struct mbuf *$d_getclr$dmalloc.h
+F$$struct mbuf *$d_clgetm$dmalloc.h
+F$$struct mbuf *$d_free$dmalloc.h
+F$$void$d_freem$dmalloc.h
+P$$void *$xmalloc$dmalloc.h
+P$$void$xmfree$dmalloc.h
+P$$void$m_get$dmalloc.h
+P$$void$m_gethdr$dmalloc.h
+P$$void$m_getclr$dmalloc.h
+P$$void$m_clgetm$dmalloc.h
+P$$void$m_free$dmalloc.h
+P$$void$m_freem$dmalloc.h
+F$$void$mk_DSAP_filter$filter.c
+F$$void$mk_ethertype_filter$filter.c
+F$$void$mk_FDDI_SMT_filter$filter.c
+F$$void$mk_TOK_MAC_filter$filter.c
+F$$void$mk_DSAP_filter$filter.h
+F$$void$mk_ethertype_filter$filter.h
+F$$void$mk_FDDI_SMT_filter$filter.h
+F$$void$mk_TOK_MAC_filter$filter.h
+M$$$min$mapaddr.c
+M$$$max$mapaddr.c
+F$S$int$tokFGtoCDLI$mapaddr.c
+F$S$ADDR_MAP *$findAddrMap$mapaddr.c
+F$$int$mapNetAddress$mapaddr.c
+F$$int$mapNetAddress$mapaddr.h
+F$$void$mbqInit$mbqueue.inl
+F$$mbuf_t *$mbqQueue$mbqueue.inl
+F$$mbuf_t *$mbqDeQueue$mbqueue.inl
+M$$$mbqEmpty$mbqueue.inl
+M$$$mbqSize$mbqueue.inl
+M$$$mbqHWM$mbqueue.inl
+P$$ndd_mib_addr_elem_t *$first_mib_addr$mibaddr.h
+P$$ndd_mib_addr_elem_t *$next_mib_addr$mibaddr.h
+P$$int$mib_addr_count$mibaddr.h
+F$$int$dbg_ns_alloc$nsdebug.c
+F$$void$dbg_ns_free$nsdebug.c
+F$$int$dbg_ns_add_filter$nsdebug.c
+F$$int$dbg_ns_del_filter$nsdebug.c
+F$$int$dbg_ns_add_status$nsdebug.c
+F$$int$dbg_ns_del_status$nsdebug.c
+F$$int$dbg_ndd_output$nsdebug.c
+F$$int$dbg_ndd_ctl$nsdebug.c
+M$$$NDD_OUTPUT$nsdebug.h
+M$$$NDD_CTL$nsdebug.h
+F$$int$dbg_ns_alloc$nsdebug.h
+F$$void$dbg_ns_free$nsdebug.h
+F$$int$dbg_ns_add_filter$nsdebug.h
+F$$int$dbg_ns_del_filter$nsdebug.h
+F$$int$dbg_ns_add_status$nsdebug.h
+F$$int$dbg_ns_del_status$nsdebug.h
+F$$int$dbg_ndd_output$nsdebug.h
+F$$int$dbg_ndd_ctl$nsdebug.h
+F$S$int$enable_FDDI_SMT$nsdmx.c
+F$S$int$disable_FDDI_SMT$nsdmx.c
+F$S$int$enable_TOK_MAC$nsdmx.c
+F$S$int$disable_TOK_MAC$nsdmx.c
+F$S$int$enable_ethertype$nsdmx.c
+F$S$int$disable_ethertype$nsdmx.c
+F$S$int$enable_DSAP$nsdmx.c
+F$S$int$disable_DSAP$nsdmx.c
+F$$int$enableStatus$nsdmx.c
+F$$int$disableStatus$nsdmx.c
+F$$int$enableSessionFilters$nsdmx.c
+F$$int$disableSessionFilters$nsdmx.c
+F$$int$enableStatus$nsdmx.h
+F$$int$disableStatus$nsdmx.h
+F$$int$enableSessionFilters$nsdmx.h
+F$$int$disableSessionFilters$nsdmx.h
+F$$QHANDLE$new_QUEUE$queue.c
+F$$void$free_QUEUE$queue.c
+F$$CURSOR$xNew$queue.c
+F$$CURSOR$xQueue$queue.c
+F$$CURSOR$xPush$queue.c
+F$$CURSOR$xInsert$queue.c
+F$$void *$xRemove$queue.c
+F$$QHANDLE$new_QUEUE$queue.h
+F$$void$free_QUEUE$queue.h
+P$$CURSOR$qInsert$queue.h
+P$$CURSOR$qQueue$queue.h
+P$$<obj-type *>$qPush$queue.h
+P$$<obj-type *>$qRemove$queue.h
+M$$$qDelete$queue.h
+P$$<obj-type *>$qPop$queue.h
+P$$<obj-type *>$qDrop$queue.h
+P$$<obj-type *>$qCurr$queue.h
+P$$<obj-type *>$qFirst$queue.h
+P$$<obj-type *>$qLast$queue.h
+P$$<obj-type *>$qNext$queue.h
+P$$<obj-type *>$qPrev$queue.h
+P$$BOOLEAN$qEmpty$queue.h
+P$$BOOLEAN$qSize$queue.h
+F$$CURSOR$xNew$queue.h
+F$$CURSOR$xQueue$queue.h
+F$$CURSOR$xPush$queue.h
+F$$CURSOR$xInsert$queue.h
+F$$void *$xRemove$queue.h
+F$$void$initSesBlock$ses.c
+F$$SES *$new_SES$ses.c
+F$$void$destroy_SES$ses.c
+F$$int$tokSetFuncAddr$ses.c
+F$$int$tokClearFuncAddr$ses.c
+F$$void$initSesBlock$ses.h
+F$$SES *$new_SES$ses.h
+F$$void$destroy_SES$ses.h
+F$$int$tokSetFuncAddr$ses.h
+F$$int$tokClearFuncAddr$ses.h
+F$$void$mapTokMonStats$statistics.c
+F$$void$mapFddiStats$statistics.c
+F$$void$mapEnt3ComStats$statistics.c
+F$$void$mapEntIentStats$statistics.c
+F$$void$mapTokMonStats$statistics.h
+F$$void$mapFddiStats$statistics.h
+F$$void$mapEnt3ComStats$statistics.h
+F$$void$mapEntIentStats$statistics.h
+F$S$int$mapFDDIHardFail$status.c
+F$S$int$mapFDDILimboEnter$status.c
+F$S$int$mapFDDINDDStatus$status.c
+F$S$int$mapTokHardFail$status.c
+F$S$int$mapTokLimboEnter$status.c
+F$S$int$mapTokNDDStatus$status.c
+F$$int$mapAsyncStatus$status.c
+F$$STATBLK *$new_STATBLK$status.c
+F$$void$free_STATBLK$status.c
+F$$STATBLK *$mkStartDoneStatus$status.c
+F$$STATBLK *$mkHaltDoneStatus$status.c
+F$$STATBLK *$mkNullBlkStatus$status.c
+F$$STATBLK *$mkLostStatusStatus$status.c
+F$$STATBLK *$mkTXDoneStatus$status.c
+F$$STATBLK *$mkCDLIStatus$status.c
+F$$int$mapAsyncStatus$status.h
+F$$STATBLK *$new_STATBLK$status.h
+F$$void$free_STATBLK$status.h
+F$$STATBLK *$mkStartDoneStatus$status.h
+F$$STATBLK *$mkHaltDoneStatus$status.h
+F$$STATBLK *$mkNullBlkStatus$status.h
+F$$STATBLK *$mkLostStatusStatus$status.h
+F$$STATBLK *$mkTXDoneStatus$status.h
+F$$STATBLK *$mkCDLIStatus$status.h
+F$$TRACE_TABLE *$new_TRACE_TABLE$trccap.c
+F$$void$free_TRACE_TABLE$trccap.c
+M$$$NETADDR1$trccap.h
+M$$$NETADDR2$trccap.h
+M$$$XMFAIL$trccap.h
+M$$$XFFAIL$trccap.h
+M$$$TRC_XMIT$trccap.h
+M$$$TRC_RECV$trccap.h
+M$$$TRC_OTHER$trccap.h
+M$$$TRC_DEBUG$trccap.h
+M$$$FUNC_NAME$trccap.h
+F$$TRACE_TABLE *$new_TRACE_TABLE$trccap.h
+F$$void$free_TRACE_TABLE$trccap.h
+F$$void$cieTrace$trccap.h
+F$$void$cieTrace$trccap.inl

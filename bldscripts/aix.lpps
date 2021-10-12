@@ -1,0 +1,196 @@
+#
+#   ORIGINS: 27,71
+#
+STAGE|RELEASE|SCRIPT|LABEL|MAKE_PASS|STAGE_DIRS
+#
+# create the fileset database
+#
+filesetDB|bai|ksh -x ../ode_tools/power/usr/bin/MFSadmin -s -b||||
+#
+# prepareTree
+#
+prepareTree|bai|ksh -x bldscripts/prepareTree|||
+CreateBC_initial|bai|ksh -x bldscripts/CreateBC|||
+#
+# setup
+#
+setup|bos41J|setup.sh|||| # do not build setup for 41J
+#
+# kernel
+#
+kernel|bos41J|aixlpp.sh|KERNEL and KERNEL extensions |build|bos/kernel "" bos/kernext "" bos/kernel _mp|
+kernel_include|bos41J|aixlpp.sh|KERNEL includes|include|bos/kernel "" bos/kernext ""|
+#
+# cmds
+#
+cmds_include|bos41J|aixlpp.sh|CMDS include|include|bos/sbin "" bos/usr ""|
+cmds_exp1|bos41J|aixlpp.sh|CMDS export pass 1|export|bos/usr/bin "" bos/usr/ccs/lib/libdes "" bos/usr/ccs/lib/proflib "" bos/usr/ccs/lib/libs "" bos/usr/ccs/lib/libc "" bos/usr/ccs/lib/libodm "" bos/usr/ccs/lib/libm "" bos/usr/ccs/lib/libim "" bos/usr/ccs/lib/libiconv "" bos/usr/ccs/lib/libPW "" bos/usr/ccs/lib/libi18n "" bos/usr/ccs/lib/libcfg "" bos/usr/ccs/lib/libori2 ""|
+cmds_exp1A|bos41J|aixlpp.sh|CMDS export pass 1|export|bos/usr/bin "" bos/usr/ccs/lib/proflib "" bos/usr/ccs/lib/libs "" bos/usr/ccs/lib/libc "" bos/usr/ccs/lib/libodm "" bos/usr/ccs/lib/libm "" bos/usr/ccs/lib/libim "" bos/usr/ccs/lib/libiconv "" bos/usr/ccs/lib/libPW "" bos/usr/ccs/lib/libi18n "" bos/usr/ccs/lib/libcfg "" bos/usr/ccs/lib/libori2 ""|
+cmds_exp2|bos41J|aixlpp.sh|CMDS export pass 2|export|bos ""|
+cmds_build|bos41J|aixlpp.sh|CMDS build pass|build|bos ""|
+cmds_build_diag|bos41J|aixlpp.sh|CMDS build pass|build|bos/diag ""|
+rspc|rspc41J|aixlpp.sh|RS PC build pass|build|rspc ""|
+rspc_include|rspc41J|aixlpp.sh|RS PC includes pass|include|rspc ""|
+rspc_g|rspc_g41J|aixlpp.sh|RS PC build pass|build|woodfield ""|
+#
+# gos
+#
+gos|gos410|aixlpp.sh|GOS build|build|gos ""|
+gos_msg|gos410|aixlpp.sh|GOS msg build|build|gos/msg ""|
+gosinstall|gos410|aixlpp.sh|GOS install|install|gos ""|
+gos_include|gos41J|aixlpp.sh|GOS include pass|include|gos "" |
+gos2d_exp|gos41J|aixlpp.sh|GOS 2D export pass|export|gos/include "" gos/rms "" gos/2d "" gos/rms "" gos/apps ""|
+gos2d_build|gos41J|aixlpp.sh|GOS 2D build pass|build|gos/include "" gos/rms "" gos/2d "" gos/apps ""|
+gos3d_exp|gos41J|aixlpp.sh|SOFTGL export pass|export|gos/3d/SOFT3D "" gos/3d/SOFTGL "" gos/3d/GAI "" gos/rbyvoo ""|
+SOFT3D|gos41J|aixlpp.sh|SOFT3D build pass|build|gos/3d/SOFT3D ""|
+SOFTGL|gos41J|aixlpp.sh|SOFTGL build pass|build|gos/3d/SOFTGL ""|
+GL|gos41J|aixlpp.sh|GOS 3D build pass|build|gos/3d/GL ""
+OPENGL|gos41J|aixlpp.sh|OPENGL build pass|build|gos/3d/OPENGL ""|
+PEX_exp1|gos41J|aixlpp.sh|PEX export pass 1|export|gos/3d/PEX/server/dipex "" gos/3d/PEX/server/ddpex/ibm/3dm1 "" gos/3d/PEX/server/ddpex/ibm/common|
+PEX_exp2|gos41J|aixlpp.sh|PEX export pass 2|export|gos/3d/PEX/server/ddpex/ibm/soft/level2 ""|
+PEX_exp3|gos41J|aixlpp.sh|PEX export pass 3|export|gos/3d/PEX/server/ddpex/ibm/soft/level2p "" gos/3d/PEX/server/ddpex/ibm/soft/level2e ""|
+PEX_exp4|gos41J|aixlpp.sh|PEX export pass 4|export|gos/3d/PEX/server/ddpex/ibm/soft/level2_f ""|
+PEX_exp5|gos41J|aixlpp.sh|PEX export pass 5|export|gos/3d/PEX/server/ddpex/ibm/soft/level2_fp ""|
+PEX_exp6|gos41J|aixlpp.sh|PEX export pass 6|export|gos/3d/PEX/server/ddpex/ibm/soft/level2_t ""|
+PEX_exp7|gos41J|aixlpp.sh|PEX export pass 7|export|gos/3d/PEX/server/ddpex/ibm/soft/level2_tp ""|
+PEX|gos41J|aixlpp.sh|PEX build pass|build|gos/3d/PEX ""|
+gos3d_build|gos41J|aixlpp.sh|GOS 3D build pass|build|gos/3d/GAI "" gos/3d/graPHIGS "" gos/msg "" gos/usr "" gos/rbyvoo ""|
+#
+# other lpps to build
+#
+xlC|xlC41J|aixlpp.sh|XLC (C++) build|build|xlC ""|
+nfs|nfs41J|aixlpp.sh|NFS build|build|nfs ""|
+tcpip|tcpip41J|aixlpp.sh|TCP/IP build|build|tcpip ""|
+dtuimx|dtuimx41J|aixlpp.sh|DT UIMX build pass|build|dtuimx ""|
+tw|tw41J|aixlpp.sh|TW build|build|tw ""|
+cmdtext|cmdtext41J|aixlpp.sh|CMDTEXT build|build|cmdtext ""|
+des|des41J|aixlpp.sh|DES build|build|des ""|
+xlf|xlf41J|aixlpp.sh|XLF build|build|xlf ""|
+INed|tenplus41J|aixlpp.sh|INED build|build|tenplus ""|
+msg|msg41J|aixlpp.sh|TRANSLATED MESSAGES build|build|msg ""|
+icraft|icraft41J|aixlpp.sh|ICRAFT build|build|icraft ""|
+dossvr|dossvr41J|aixlpp.sh|DOSSVR build|build|pci ""|
+dsmit|dsmit41J|aixlpp.sh|DSMIT build|build|dsmit ""|
+hcon|hcon41J|aixlpp.sh|HCON  build|build|hcon ""|
+info|info41J|aixlpp.sh|INFO build|build|info ""|
+infoxl|info41J|aixlpp.sh|INFOXL build|build|infoxl ""|
+perf|perf41J|aixlpp.sh|PERF build|build|perf ""|
+afs|afs41J|aixlpp.sh|AFS build|build|afs ""|
+x_st_mgr|xmgr41J|aixlpp.sh|X Station Mgr|build|x_st_mgr ""|
+neptune|nep41J|aixlpp.sh|NEPTUNE build|build|neptune ""|
+netware|netware41J|aixlpp.sh|NETWARE build|build|netware ""|
+cde_build|cde41J|aixlpp.sh|CDE build|build|cde ""|
+cde_build2|cde41J|aixlpp.sh|CDE build|build|cde/cde1/dtnosup "" cde/cde1/localized "" cde/cde1/fontaliases ""|
+cde_build3|cde41J|aixlpp.sh|CDE build|build|cde/doc/cde1/LearningProducts/desktop/help ""|
+cde_lib1|cde41J|aixlpp.sh|CDE libXpm.a pass|build|cde/xdt2cde/xpmlib ""|
+ssa|ssa41J|aixlpp.sh|SSA build|build|ssa ""|
+sx25|x25sw41J|aixlpp.sh|sx25 build|build|sx25 ""|
+wabi|wabi41J|aixlpp.sh|WABI build|build|wabit ""|
+web|web41J|aixlpp.sh|WEB build|build|web ""|
+netbios|pcprotocols41J|aixlpp.sh|NETBIOS build|build|netbios ""|
+#
+# Install Stages
+#
+cmdsinstall|bos41J|aixlpp.sh|CMDS INSTALL|install|bos ""|
+kernelinstall|bos41J|aixlpp.sh|KERNEL INSTALL|install|bos/kernel "" bos/kernext "" bos/kernel _mp|
+rspcinstall|rspc41J|aixlpp.sh|RS PC install pass|install|rspc ""|
+rspc_ginstall|rspc_g41J|aixlpp.sh|RS PC install pass|install|woodfield ""|
+gos2dinstall|gos41J|aixlpp.sh|GOS 2D install pass|install|gos/include "" gos/rms "" gos/2d "" gos/apps ""|
+gos3dinstall|gos41J|aixlpp.sh|GOS 3D install pass|install|gos/3d/GAI "" gos/3d/graPHIGS "" gos/msg "" gos/usr "" gos/rbyvoo ""|
+cdeinstall|cde41J|aixlpp.sh|CDE install|install|cde ""|
+dtuimxinstall|dtuimx41J|aixlpp.sh|DT UIMX install pass|install|dtuimx ""|
+PEXinstall|gos41J|aixlpp.sh|PEX install pass|install|gos/3d/PEX ""|
+GLinstall|gos41J|aixlpp.sh|GOS 3D install pass|install|gos/3d/GL ""
+OPENGLinstall|gos41J|aixlpp.sh|OPENGL install pass|install|gos/3d/OPENGL ""|
+SOFT3Dinstall|gos41J|aixlpp.sh|SOFT3D install pass|install|gos/3d/SOFT3D ""|
+SOFTGLinstall|gos41J|aixlpp.sh|SOFTGL install pass|install|gos/3d/SOFTGL ""|
+xlCinstall|xlC41J|aixlpp.sh|XLC (C++) install|install|xlC ""|
+nfsinstall|nfs41J|aixlpp.sh|NFS install|install|nfs ""|
+tcpipinstall|tcpip41J|aixlpp.sh|TCP/IP install|install|tcpip ""|
+twinstall|tw41J|aixlpp.sh|TW install|install|tw ""|
+cmdtextinstall|cmdtext41J|aixlpp.sh|CMDTEXT install|install|cmdtext ""|
+desinstall|des41J|aixlpp.sh|DES install|install|des ""|
+xlfinstall|xlf41J|aixlpp.sh|XLF install|install|xlf ""|
+INedinstall|tenplus41J|aixlpp.sh|INED install|install|tenplus ""|
+msginstall|msg41J|aixlpp.sh|TRANSLATED MESSAGES install|install|msg ""|
+icraftinstall|icraft41J|aixlpp.sh|ICRAFT install|install|icraft ""|
+dossvrinstall|dossvr41J|aixlpp.sh|DOSSVR install|install|pci ""|
+dsmitinstall|dsmit41J|aixlpp.sh|DSMIT install|install|dsmit ""|
+hconinstall|hcon41J|aixlpp.sh|HCON install|install|hcon ""|
+infoinstall|info41J|aixlpp.sh|INFO install|install|info ""|
+infoxlinstall|info41J|aixlpp.sh|INFOXL install|install|infoxl ""|
+perfinstall|perf41J|aixlpp.sh|PERF install|install|perf ""|
+afsinstall|afs41J|aixlpp.sh|AFS install|install|afs ""|
+x_st_mgrinstall|xmgr41J|aixlpp.sh|X Station Mgr|install|x_st_mgr ""|
+neptuneinstall|nep41J|aixlpp.sh|NEPTUNE install|install|neptune ""|
+netwareinstall|netware41J|aixlpp.sh|NETWARE install|install|netware ""|
+ssainstall|ssa41J|aixlpp.sh|SSA install|install|ssa ""|
+sx25install|x25sw41J|aixlpp.sh|sx25 install|install|sx25 ""|
+wabiinstall|wabiinstall41J|aixlpp.sh|WABI install|install|wabit ""|
+webinstall|webinstall41J|aixlpp.sh|WEB install|install|web ""|
+netbiosinstall|pcprotocols41J|aixlpp.sh|NETBIOS install|install|netbios ""|
+#
+# Pre-Image processing
+#
+UpdateVRMFs|bai|ksh -x bldscripts/UpdateVRMFs|||
+CreateBC_final|bai|ksh -x bldscripts/CreateBC|||
+walk_packages_bos|bai|ksh -x bldscripts/walk_packages|||bos|
+walk_packages_X11|bai|ksh -x bldscripts/walk_packages|||X11|
+walk_packages_devices|bai|ksh -x bldscripts/walk_packages|||devices|
+walk_packages_other|bai|ksh -x bldscripts/walk_packages|||des icraft dps OpenGL PEX_PHIGS dsmit uimx infoxl perfmgr perfagent UMS afs sx25 hcon netware ipx blkmux stacklist Wabi internet_server |
+walk_packages_printers|bai|ksh -x bldscripts/walk_packages|||printers|
+#
+# Install Images Processing
+#
+bos_images_all|pkg41J|aixlpp.sh|bos_IMAGES|build|packages/bos ""|
+clientImages|bai|ksh -x /.../bai.cell.austin.ibm.com/fs/u/build/bin/clientImages|||
+X11_images_all|pkg41J|aixlpp.sh|X11_images|build|packages/X11 ""|
+device_images_all|pkg41J|aixlpp.sh|device_IMAGES|build|packages/devices ""|
+other_images|pkg41J|aixlpp.sh|other_IMAGES|build|packages/des "" packages/icraft "" packages/dps "" packages/OpenGL "" packages/PEX_PHIGS "" packages/dsmit "" packages/uimx "" packages/infoxl "" packages/perfmgr "" packages/perfagent "" packages/UMS "" packages/afs "" packages/sx25 "" packages/hcon "" packages/netware "" packages/ipx "" packages/blkmux "" packages/stacklist "" packages/Wabi "" packages/internet_server "" packages/netbios ""|
+printer_images|pkg41J|aixlpp.sh|printer_IMAGES|build|packages/printers ""|
+#
+# Update-Image Processing
+#
+NormalizeXreqShip|bai|ksh -x bldscripts/NormalizeXreqShip|||
+NormalizeLmupdatelist|bai|ksh -x bldscripts/NormalizeLmupdatelist|||
+SetNotBuiltShipFiles|bai|ksh -x bldscripts/SetNotBuiltShipFiles|||
+SetUnexpectedShipFiles|bai|ksh -x bldscripts/SetUnexpectedShipFiles|||
+ResolveLmupdateXreqDiffs|bai|ksh bldscripts/ResolveLmupdateXreqDiffs|||
+CreatePtf_pkgFiles|bai|ksh -x bldscripts/CreatePtf_pkgFiles|||
+NoUnresolvableUnexpecteds|bai|ksh bldscripts/NoUnresolvableUnexpecteds|||
+FixupPtf_pkgFiles|bai|ksh -x bldscripts/FixupPtf_pkgFiles|||
+MakePTFs|bai|ksh -x bldscripts/MakePTFs|||
+#
+# Post-Image Processing
+#
+installimages|pkg41J|aixlpp.sh|INSTALL images|install|packages ""|
+MakeStackList|bai|ksh -x /.../bai.cell.austin.ibm.com/fs/u/build/bin/MakeStackList|||
+createTOCs|bai|ksh -x /.../bai.cell.austin.ibm.com/fs/u/build/bin/createTOCs|||
+stackLong|bai|ksh -x /.../bai.cell.austin.ibm.com/fs/u/build/bin/stackLong  <~/bin/cr|||
+stackShort|bai|ksh -x /.../bai.cell.austin.ibm.com/fs/u/build/bin/stackShort  <~/bin/cr|||
+nimInstall|bai|ksh -x /.../bai.cell.austin.ibm.com/fs/u/build/bin/nimInstall|||
+#
+# Cleanup FILESET.list
+#
+FILESET_cleanup|bai|ksh -x ../ode_tools/power/usr/bin/MFSadmin -c||||
+#
+#
+#   COMPONENT_NAME: ADE_BUILD
+#
+#
+# List of LPPs to build:
+#
+# setup|bos410|setup.sh| # do not build setup for 411
+cmds|bos410|aixlpp.sh|COMMANDS build|build|bos ""|
+
+#
+# List of LPPs to install:
+#
+install_orig|bos410|aixlpp.sh|INSTALL|install|bos "" bos/kernel "" bos/kernext "" bos/kernel _mp|
+
+#
+# List of images to build/install:
+#
+images|pkg410|aixlpp.sh|IMAGES|build|packages ""|
+images_devices|pkg410|aixlpp.sh|IMAGES-DEVICES|build|packages/devices ""|
+installimages|pkg410|aixlpp.sh|INSTALL images|install|packages ""|

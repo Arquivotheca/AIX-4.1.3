@@ -1,0 +1,33 @@
+# @(#)82	1.6  src/bldenv/man/abstractlist.man, bldprocess, bos412, GOLDA411a 6/2/93 10:27:59
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: abstractlist file format man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/PTF/$BLDCYCLE/abstractlist
+        List of defect numbers, the CMVC Family the defect is from and
+        the CMVC abstract.  Created by prebuild (for production) or
+        ptfsetup (for development).
+
+        Format:
+          <Defect>:<CMVC_Family><SPACE><SPACE><abstract>
+          <Defect>:<CMVC_Family><SPACE><SPACE><abstract>
+            .
+            .
+
+        Where:
+          <CMVC_Family> is <familyname>@<hostname>@<portnumber>
+
+        The old file format:
+          <Defect><SPACE><SPACE><abstract>
+        can still be read by the tools.  The tools will assume the defects
+        came from the $DEFAULT_CMVCFAMILY family.

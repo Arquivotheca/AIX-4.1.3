@@ -1,0 +1,56 @@
+#!/bin/bsh
+# @(#)33	1.6.1.2  src/bos/usr/bin/uucp/uudemon.poll, cmduucp, bos411, 9428A410j 9/30/93 15:53:38
+# 
+# COMPONENT_NAME: CMDUUCP uudemon.poll
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# This shell should be run out of crontab every hour,
+#  a little before  uudemon.hour since this one
+#  does not start the scheduler.
+
+PATH=/bin:/usr/bin:/etc:/usr/sbin/uucp
+SPOOL=/var/spool/uucp
+
+POLLFILE=/etc/uucp/Poll
+# POLLFILE is a list of "system <tab> hour1 hour2 hour3 ..." for polling
+# For example 
+#	raven	2  6  10
+# without the # at the beginning.  Lines starting with # are ignored.
+# NOTE a tab must follow the machine name
+
+umask 022
+set +e
+
+HOUR="`date '+%H'`"
+# HOUR="`date | sed -e 's/:.*//' -e 's/^.*\(..\)$/\1/'"
+HOUR=`expr $HOUR + 0`
+
+cat $POLLFILE  |
+sed -n -e "/^[^#].*[ 	]$HOUR[ 	]/s/	.*//p" -e "/^[^#].*[ 	]$HOUR\$/s/	.*//p" |
+while read site
+do
+	if test ! -d $SPOOL/$site
+	then
+		mkdir $SPOOL/$site
+		# since only root can execute chown, if you run this as
+		# someone other than uucp, you must do the chown yourself
+		#chown uucp $SPOOL/$site
+	fi
+
+	j=`expr $site : '\(.\{1,7\}\)'`
+	touch $SPOOL/$site/C.${j}n0000
+	# since only root can execute chown, if you run this as
+	# someone other than uucp, you must do the chown yourself
+	#chown uucp $SPOOL/$site/C.${j}n0000
+done

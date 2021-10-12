@@ -1,0 +1,509 @@
+# @(#)47        1.1  src/bos/usr/bin/netls/netls2.add, netls, bos411, 9428A410j 6/9/94 10:12:21
+#
+#   COMPONENT_NAME: netls2.add
+#
+#   FUNCTIONS: stanza file for netls SMIT odm population
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+sm_menu_opt:
+        id_seq_num = "080"
+        id = "system"
+        next_id = "netls_server"
+        text = "Manage AIX Floating User Licenses for this Server"
+        text_msg_file = "smit.cat"
+        text_msg_set = "54"
+        text_msg_id = "24"
+        next_type = "m"
+        help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_menu_opt:
+        id = "netls_server"
+        id_seq_num = "010"
+        next_id = "install_float"
+        text = "Register Floating User Licenses"
+        text_msg_file = "smit.cat"
+        text_msg_set = "54"
+        text_msg_id = "25"
+        next_type = "d"
+        help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_menu_opt:
+	id = "netls_server"
+	id_seq_num = "020"
+	next_id = "change_float"
+	text = "Change the Number of Installed Floating User Licenses"
+	text_msg_file = "smit.cat"
+	text_msg_set = "54"
+	text_msg_id = "26"
+	next_type = "d"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+# Register Floating User Licenses
+sm_cmd_hdr:
+	id = "install_float"
+	option_id = "install_float_opts"
+	has_name_select = ""
+	name = "Register Floating User Licenses"
+	name_msg_file = "smit.cat"
+	name_msg_set = "54"
+	name_msg_id = "25"
+	cmd_to_exec = "x(){
+# This program will install a compound license for creating floating user
+# licenses for an AIX system.  The user is then prompted for a machine target
+# and the number of floating user licenses to be installed on the system.
+# The information provided by the user is used to create the actual concurrent
+# access license that must be installed on an iFOR/LS license server to provide
+# the floating user capability.
+
+# Print a couple of blank lines for readability.
+print
+print
+
+# Save the current PATH.
+OLDPATH=$PATH
+# Add the iFOR/LS executables directory and the current directory to the PATH.
+export PATH=$PATH:/usr/lib/netls/bin:.
+
+#
+# Verify that the user is root before continuing.
+#
+IDNUM=`id -u`
+if [[ $IDNUM -ne 0 ]] then
+  print \"You must be root to run this program.  Login as \'root\' or use the \'su\' command\nbefore running this program.\"
+  print
+  exit -1
+fi
+
+
+#
+# Verify that the license server is running.
+#
+ps -e | grep netlsd > /dev/null
+if [[ $? -ne 0 ]] then
+  print \"The license server was not found to be running on this machine.  If the\nlicense server is already configured on this machine, then simply run the\nprogram \'/usr/lib/netls/bin/srv_start\' to start your daemons.  If the\nlicense server has not yet been configured on this machine, then go to the\ndirectory \'/usr/lib/netls/conf\' and run the program \'netls_config\'.  This\nwill generate the program \'netls_first_time\', which you must then run to\nstart your license server properly.\"
+  print
+  exit -1
+fi
+
+
+#
+# Install a compound license.
+#
+print \"Installing a compound license on this machine...\"
+
+HOSTNAME=`hostname`
+
+ls_stat -n $HOSTNAME -i -v \"AIX Base Operating System\" -p \"AIX User License\" -r \"4.1\" | grep \"compound\" > /dev/null
+
+if [[ $? -eq 0 ]]; then
+  print \"The compound license is already installed.\"
+  print
+else
+  print
+  ls_admin -a -v \"AIX Base Operating System\" 90b82be84513.02.81.23.86.fb.00.00.00 t37eq6q4hsdsu
+  print
+  ls_admin -a -p \"AIX Base Operating System\" \"AIX User License\" uxbk79dfd3anj93m79kgmbcghbmavbtnuyt5stv87b2aaaaa \"4.1\"
+  print
+  ls_stat -n $HOSTNAME -i -v \"AIX Base Operating System\" -p \"AIX User License\" -r \"4.1\" | grep \"compound\" > /dev/null
+
+  if [[ $? -eq 0 ]]; then
+    print \"The compound license was successfully installed.\"
+  else
+    print \"The compound license was not installed.  Correct the error and try again.\"
+    exit -1
+  fi
+  print
+fi
+
+
+#
+# Check for an existing user license.
+#
+print \"Checking for floating user licenses already installed on this machine...\"
+
+HOSTNAME=`hostname`
+
+ls_stat -n $HOSTNAME -i -v \"AIX Base Operating System\" -p \"AIX User License\" -r \"4.1\" | grep \"concurrent\" > /dev/null
+
+if [[ $? -eq 0 ]]; then
+  print \"Floating user licenses are already installed on this machine.  Use the SMIT\nscreen for \'Change the Number of Installed Floating User Licenses\' to update\nyour license count.\"
+  print
+  exit -1
+else
+  print \"No licenses currently installed.\"
+  print
+fi
+
+
+#
+# The number of licenses to create is passed in as parameter 1.
+# The targetid for the license comes from ls_targetid.
+#
+
+LICENSES=$1
+TARGETID=`ls_targetid | awk 'NR==3 {print $1}'`
+
+print \"Licenses = $LICENSES\"
+print \"Targetid = $TARGETID\"
+
+#
+# Creating the server license...
+#
+
+print
+print \"The licenses are being appended to the file \'/usr/lib/netls/conf/AIX.FLOAT\'.\"
+print >> /usr/lib/netls/conf/AIX.FLOAT
+print \"==============================================================================\" >> /usr/lib/netls/conf/AIX.FLOAT
+print \"==============================================================================\" >> /usr/lib/netls/conf/AIX.FLOAT
+print >> /usr/lib/netls/conf/AIX.FLOAT
+
+ls_dpass -v \"AIX Base Operating System\" -i 90b82be84513.02.81.23.86.fb.00.00.00 -k supplier -N \"AIX User License\" -p 5765393 -r 4.1 -w license -l concurrent -e 01/01/50 -t \"aix\" -u -n $LICENSES $TARGETID > /usr/lib/netls/conf/AIX.FLOAT.new  2>&1
+print
+
+cat /usr/lib/netls/conf/AIX.FLOAT.new >> /usr/lib/netls/conf/AIX.FLOAT
+
+# initialize the return code.
+RC=0
+
+grep \"?(ls_dpass)\" /usr/lib/netls/conf/AIX.FLOAT.new > /dev/null
+
+if [[ $? -ne 0 ]]; then
+  print \"Your licenses were successfully created.  Adding licenses to the server...\"
+  print
+  grep \"ls_admin\" /usr/lib/netls/conf/AIX.FLOAT.new > /usr/lib/netls/conf/AIX.FLOAT.cmds
+  grep -v \"AIX User License\" /usr/lib/netls/conf/AIX.FLOAT.cmds > /usr/lib/netls/conf/AIX.FLOAT.cmd1
+  grep \"AIX User License\" /usr/lib/netls/conf/AIX.FLOAT.cmds > /usr/lib/netls/conf/AIX.FLOAT.cmd2
+  chmod 755 /usr/lib/netls/conf/AIX.FLOAT.cmd*
+  /usr/lib/netls/conf/AIX.FLOAT.cmd1 > /usr/lib/netls/conf/AIX.FLOAT.chk1
+  /usr/lib/netls/conf/AIX.FLOAT.cmd2 > /usr/lib/netls/conf/AIX.FLOAT.chk2
+  grep \"?(ls_admin)\" /usr/lib/netls/conf/AIX.FLOAT.chk2 > /dev/null
+  if [[ $? -eq 0 ]]; then
+    print \"Your licenses were *not* successfully added.\"
+    print
+    print \"Check the file /usr/lib/netls/conf/AIX.FLOAT for details.\"
+    RC=-1
+  else
+    print \"Your licenses were successfully added.\"
+  fi
+  # Log everything to the AIX.FLOAT file
+  cat /usr/lib/netls/conf/AIX.FLOAT.cmd1 > /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.chk1 >> /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.cmd2 >> /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.chk2 >> /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.last_run >> /usr/lib/netls/conf/AIX.FLOAT
+else
+  print \"Your licenses were not created.  Check the /usr/lib/netls/conf/AIX.FLOAT file\nfor error messages.\"
+  print
+  RC=-1
+fi
+print
+
+# Remove temporary files
+rm -f /usr/lib/netls/conf/AIX.FLOAT.new
+rm -f /usr/lib/netls/conf/AIX.FLOAT.cmds
+rm -f /usr/lib/netls/conf/AIX.FLOAT.cmd1
+rm -f /usr/lib/netls/conf/AIX.FLOAT.cmd2
+rm -f /usr/lib/netls/conf/AIX.FLOAT.chk1
+rm -f /usr/lib/netls/conf/AIX.FLOAT.chk2
+rm -f /usr/lib/netls/conf/AIX.FLOAT.last_run
+
+export PATH=$OLDPATH
+exit $RC
+}
+x"
+	exec_mode = ""
+	name_size = "0"
+	value_size = "0"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id = "install_float_opts"
+	id_seq_num = "010"
+	name = "Number of Licenses to Install"
+	name_msg_file = "smit.cat"
+	name_msg_set = "54"
+	name_msg_id = "27"
+	entry_type = "#"
+	required = "+"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+# Change the Number of Floating User Licenses
+sm_cmd_hdr:
+	id = "change_float"
+	option_id = "change_float_opts"
+	has_name_select = ""
+	name = "Change the Number of Installed Floating User Licenses"
+	name_msg_file = "smit.cat"
+	name_msg_set = "54"
+	name_msg_id = "26"
+        cmd_to_exec = "x(){
+
+# This program will delete a floating user license from an AIX system and
+# replace it with another floating user license.
+
+#First get timestamp of license and new number
+while getopts t:n: Option \"$@\"; do
+        case $Option in 
+          t) TIMESTAMP=$OPTARG;; 
+          n) LICENSES=$OPTARG;; 
+        esac 
+done
+
+TIMESTAMP=`echo \"$TIMESTAMP\" | cut -f9 -d' '`
+
+# Print a couple of blank lines for readability.
+print
+print
+
+# Save the current PATH.
+OLDPATH=$PATH
+# Add the iFOR/LS executables directory and the current directory to the PATH.
+export PATH=$PATH:/usr/lib/netls/bin:.
+
+#
+# Verify that the user is root before continuing.
+#
+IDNUM=`id -u`
+if [[ $IDNUM -ne 0 ]] then
+  print \"You must be root to run this program.  Login as \'root\' or use the \'su\' command\nbefore running this program.\"
+  print
+  exit -1
+fi
+
+
+#
+# Verify that the license server is running.
+#
+ps -e | grep netlsd > /dev/null
+if [[ $? -ne 0 ]] then
+  print \"The license server was not found to be running on this machine.  If the\nlicense server is already configured on this machine, then simply run the\nprogram \'/usr/lib/netls/bin/srv_start\' to start your daemons.  If the\nlicense server has not yet been configured on this machine, then go to the\ndirectory \'/usr/lib/netls/conf\' and run the program \'netls_config\'.  This\nwill generate the program \'netls_first_time\', which you must then run to\nstart your license server properly.\"
+  print
+  exit -1
+fi
+
+
+#
+# Install a compound license.
+#
+print \"Installing a compound license on this machine...\"
+
+HOSTNAME=`hostname`
+
+ls_stat -n $HOSTNAME -i -v \"AIX Base Operating System\" -p \"AIX User License\" -r \"4.1\" | grep \"compound\" > /dev/null
+
+if [[ $? -eq 0 ]]; then
+  print \"The compound license is already installed.\"
+  print
+else
+  print
+  ls_admin -a -v \"AIX Base Operating System\" 90b82be84513.02.81.23.86.fb.00.00.00 t37eq6q4hsdsu
+  print
+  ls_admin -a -p \"AIX Base Operating System\" \"AIX User License\" uxbk79dfd3anj93m79kgmbcghbmavbtnuyt5stv87b2aaaaa \"4.1\"
+  print
+  ls_stat -n $HOSTNAME -i -v \"AIX Base Operating System\" -p \"AIX User License\" -r \"4.1\" | grep \"compound\" > /dev/null
+
+  if [[ $? -eq 0 ]]; then
+    print \"The compound license was successfully installed.\"
+  else
+    print \"The compound license was not installed.  Correct the error and try again.\"
+    exit -1
+  fi
+  print
+fi
+
+
+#
+# Delete an existing user license.  The timestamp for the user license to
+# delete must be passed in as parameter 2.
+#
+print \"Deleting the floating user licenses already installed for this machine...\"
+HOSTNAME=`hostname`
+print \"Timestamp = $TIMESTAMP\"
+print
+
+ls_admin -s -p \"AIX Base Operating System\" | grep \"$TIMESTAMP\" | grep \"Concurrent\" > /dev/null
+
+if [[ $? -ne 0 ]]; then
+  print \"No floating user license could be found with the specified timestamp.\"
+  print
+  exit -1
+fi
+
+print >> /usr/lib/netls/conf/AIX.FLOAT
+print \"==============================================================================\" >> /usr/lib/netls/conf/AIX.FLOAT
+print \"==============================================================================\" >> /usr/lib/netls/conf/AIX.FLOAT
+print >> /usr/lib/netls/conf/AIX.FLOAT
+
+ls_admin -n $HOSTNAME -d -p \"AIX Base Operating System\" \"AIX User License\" $TIMESTAMP > /usr/lib/netls/conf/AIX.FLOAT.del 2>&1
+
+grep \"?(ls_admin)\" /usr/lib/netls/conf/AIX.FLOAT.del > /dev/null
+
+if [[ $? -eq 0 ]]; then
+  print \"The floating user license already installed on this machine could not be\ndeleted.  See the file \'/usr/lib/netls/conf/AIX.FLOAT\' for details.\nCorrect the problem and try again.\"
+  print
+  cat /usr/lib/netls/conf/AIX.FLOAT.del >> /usr/lib/netls/conf/AIX.FLOAT
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.del
+  exit -1
+fi
+
+
+#
+# The number of licenses to create is passed in as parameter 1.
+# The targetid for the license comes from ls_targetid.
+#
+
+print \"Creating and adding the new floating user licenses...\"
+print
+
+TARGETID=`ls_targetid | awk 'NR==3 {print $1}'`
+
+print \"Licenses = $LICENSES\"
+print \"Targetid = $TARGETID\"
+
+#
+# Creating the server license...
+#
+
+print
+print \"The licenses are being appended to the file \'/usr/lib/netls/conf/AIX.FLOAT\'.\"
+
+ls_dpass -v \"AIX Base Operating System\" -i 90b82be84513.02.81.23.86.fb.00.00.00 -k supplier -N \"AIX User License\" -p 5765393 -r 4.1 -w license -l concurrent -e 01/01/50 -t \"aix\" -u -n $LICENSES $TARGETID > /usr/lib/netls/conf/AIX.FLOAT.new  2>&1
+print
+
+cat /usr/lib/netls/conf/AIX.FLOAT.new >> /usr/lib/netls/conf/AIX.FLOAT
+
+# initialize the return code 
+RC=0
+
+grep \"?(ls_dpass)\" /usr/lib/netls/conf/AIX.FLOAT.new > /dev/null
+
+if [[ $? -ne 0 ]]; then
+  print \"Your new licenses were successfully created.  Adding them to the server...\"
+  print
+  grep \"ls_admin\" /usr/lib/netls/conf/AIX.FLOAT.new > /usr/lib/netls/conf/AIX.FLOAT.cmds
+  grep -v \"AIX User License\" /usr/lib/netls/conf/AIX.FLOAT.cmds > /usr/lib/netls/conf/AIX.FLOAT.cmd1
+  grep \"AIX User License\" /usr/lib/netls/conf/AIX.FLOAT.cmds > /usr/lib/netls/conf/AIX.FLOAT.cmd2
+  chmod 755 /usr/lib/netls/conf/AIX.FLOAT.cmd*
+  /usr/lib/netls/conf/AIX.FLOAT.cmd1 > /usr/lib/netls/conf/AIX.FLOAT.chk1
+  /usr/lib/netls/conf/AIX.FLOAT.cmd2 > /usr/lib/netls/conf/AIX.FLOAT.chk2
+  grep \"?(ls_admin)\" /usr/lib/netls/conf/AIX.FLOAT.chk2 > /dev/null
+  if [[ $? -eq 0 ]]; then
+    print \"Your new licenses were *not* successfully added.\"
+    print
+    print \"Check the file /usr/lib/netls/conf/AIX.FLOAT for details.\"
+    RC=-1
+  else
+    print \"Your new licenses were successfully added.\"
+  fi
+  # Log everything to the AIX.FLOAT file
+  cat /usr/lib/netls/conf/AIX.FLOAT.cmd1 > /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.chk1 >> /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.cmd2 >> /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.chk2 >> /usr/lib/netls/conf/AIX.FLOAT.last_run
+  cat /usr/lib/netls/conf/AIX.FLOAT.last_run >> /usr/lib/netls/conf/AIX.FLOAT
+else
+  print \"Your licenses were not created.  Check the /usr/lib/netls/conf/AIX.FLOAT file\nfor error messages.\"
+  print
+  RC=-1
+fi
+print
+
+  # Remove temporary files
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.del
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.new
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.cmds
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.cmd1
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.cmd2
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.chk1
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.chk2
+  rm -f /usr/lib/netls/conf/AIX.FLOAT.last_run
+
+export PATH=$OLDPATH
+exit $RC
+}
+x"
+	ask = ""
+	exec_mode = ""
+	ghost = ""
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = "0"
+	value_size = "0"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id = "change_float_opts"
+	id_seq_num = "010"
+	name = "AIX User License to Change"
+	name_msg_file = "smit.cat"
+	name_msg_set = "54"
+	name_msg_id = "28"
+	op_type = "l"
+	entry_type = ""
+	entry_size = ""
+	required = "+"
+	prefix = "-t "
+	cmd_to_list_mode = ""
+        cmd_to_list                     = "x()
+{
+TIMESTAMP=`dspmsg smit.cat -s 51 2 \"timestamp\"`
+/usr/lib/netls/bin/ls_admin -n `hostname` -s -p \"AIX Base Operating System\" \"AIX User License\" | grep \"$TIMESTAMP\" | grep \"Concurrent\" | cut -c9-
+}
+x"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = ""
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = ""
+	values_msg_id = ""
+	aix_values = ""
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id = "change_float_opts"
+	id_seq_num = "020"
+	disc_field_name = ""
+	name = "New Number of Licenses"
+	name_msg_file = "smit.cat"
+	name_msg_set = "54"
+	name_msg_id = "29"
+	entry_type = "#"
+	required = "+"
+	prefix = "-n "
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+

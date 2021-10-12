@@ -1,0 +1,295 @@
+# @(#)65        1.2  src/bos/objclass/POWER/tape.scsi.3490e.add, cfgmethods, bos41J, 9513A_all 3/24/95 16:19:57
+*
+*  COMPONENT_NAME: (CFGMETHODS) SCSI TAPE PREDEFINED DATA STANZAS
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 27
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = 3490e
+	class = tape
+	subclass = scsi
+	prefix = rmt
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x899
+	setno = 54
+	msgno = 20
+	fru = 1
+	catalog = devices.cat
+	DvDr = tape
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsctape
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = tape/scsi/3490e
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = mode
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 5
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = block_size
+	deflt = 1024
+	values = "0-262144,1"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nr
+	nls_index = 6
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = extfm
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = ret
+	deflt = no
+	values = "no"
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = dev_type
+	deflt = 0x0a
+	values = 0x0a
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = model_name
+	deflt = "03490C1103490C11"
+	values = "03490C1103490C11"
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = model_name
+	deflt = "03490C2203490C22"
+	values = "03490C2203490C22"
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = "tape/scsi/3490e"
+	attribute = "read_ratio"
+	deflt = "0"
+	values = "0"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+        uniquetype = "tape/scsi/3490e"
+        attribute = "write_ratio"
+        deflt = "0"
+        values = "0"
+        width = ""
+        type = "R"
+        generic = ""
+        rep = "nl"
+        nls_index = 0
+
+PdAt:
+	uniquetype = "tape/scsi/3490e"
+	attribute = "min_read_error"
+	deflt = "0"
+	values = "0"
+	width = ""
+        type = "R"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "tape/scsi/3490e"
+	attribute = "min_write_error"
+	deflt = "0"
+	values = "0"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = maxlun
+	deflt = 1
+	values = 1
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = mode_data
+	deflt = 0x000010087f00000000008000020e00000000000000000000000000000a06000100000000100e00000000012cc600180000000100
+	values = "0x000010087f00000000008000020e00000000000000000000000000000a06000100000000100e00000000012cc600180000000100"
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = res_support
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = var_block_size
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = density_set_1
+	deflt = 0x7f
+	values = 0x7f
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 12
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = density_set_2
+	deflt = 0x7f
+	values = 0x7f
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 13
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = compress
+	deflt = yes
+	values = yes,no
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 15
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = autoload
+	deflt = yes
+	values = yes,no
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 22
+
+PdAt:
+        uniquetype = tape/scsi/3490e
+        attribute = vpd_map
+        deflt = "MF0808C,TM1010C,SN260CC,Z00008X,Z12004C,Z23202C,Z32402X"
+        values = ""
+        width = ""
+        type = V
+        generic = ""
+        rep = sl
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = pm_dev_itime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/3490e
+	attribute = pm_dev_stime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+        uniquetype = tape/scsi/3490e
+        attribute = pm_device_id
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x0018
+4000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b0
+00,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0

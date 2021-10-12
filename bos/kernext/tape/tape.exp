@@ -1,0 +1,17 @@
+#!/etc/drivers/tape
+* @(#)88	1.2  src/bos/kernext/tape/tape.exp, sysxtape, bos411, 9428A410j 6/15/90 18:42:33
+*
+* COMPONENT_NAME: (SYSXTAPE)  SCSI Magnetic Tape Device Driver
+*			      Top Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*

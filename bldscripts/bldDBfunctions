@@ -1,0 +1,673 @@
+#!/bin/ksh
+#
+# @(#)06        1.2  src/bldscripts/bldDBfunctions, ade_build, bos412, GOLDA411a 7/1/94 10:40:14
+#
+#   COMPONENT_NAME: 
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#------------------------------------------------------------------------------
+#
+# Description:
+#
+#    adds a BUILD row to the bai database
+#    
+#
+# Inputs:
+#
+#    None.
+#
+# Outputs:
+#
+#    None.
+#
+# History:
+#
+#	 02/21/94  RSL Modification...
+#        12/02/93  JDS Initial 1.0 version.
+#
+#------------------------------------------------------------------------------
+#
+# General DB functions
+#
+#------------------------------------------------------------------------------
+
+function createROW
+{
+ 	existROW 
+ 	if  [[ $? = 0 ]]
+ 	then
+ 		return 0 
+ 	fi
+
+ 	existLockROW
+ 	if [[ $? = 0  ]]
+ 	then
+ 		return 0 
+ 	fi
+
+	if [ ! -d $DataDir/$KEY ]
+	then
+		mkdir -p $DataDir/$KEY
+		chmod 777 $DataDir/$KEY
+	fi
+
+	print $DEFAULTS > $DataDir/$KEY/ROW
+	chmod 666 $DataDir/$KEY/ROW
+
+	return 0
+
+}
+
+function existROW
+{
+
+	if [ -f $DataDir/$KEY/ROW ]
+	then
+		return 0
+	else
+		return 1
+	fi
+
+}
+
+function existLockROW
+{
+
+	if [ -f $DataDir/$KEY/ROW.lock ]
+	then
+		return 0
+	else
+		return 1
+	fi
+
+}
+
+function lockROW
+{
+	sleep_value=5;
+	loop_counter=0;
+
+	while ((loop_counter <5))
+	do
+		if [[ ! -f $DataDir/$KEY/ROW.lock ]]
+		then
+			mv $DataDir/$KEY/ROW $DataDir/$KEY/ROW.lock
+			return 0	
+		fi
+		sleep $sleep_value
+		((loop_counter=loop_counter+1))
+	done
+
+	return 1
+}
+
+function unlockROW
+{
+	if [ ! -f $DataDir/$KEY/ROW.lock ]
+	then
+		print "ERROR; locked file does not exist"
+	fi
+
+	mv $DataDir/$KEY/ROW.lock $DataDir/$KEY/ROW
+
+	return 0
+
+}
+
+function updateROW
+{
+    position=$1                 # Which field position to update.
+    value=$2                    # Value to update in field postion.
+
+    #
+    # Figure out how many fields there really are.
+    #
+    print $FIELDS | wc -w | read max_fields
+
+    #
+    # Replace the field position with the new value.
+    #
+    print $(cat $ROW.lock) |
+    awk '
+    {
+        FS = "|"
+
+        #
+        # Go through all fields.
+        #
+        for (field = 1; field <= '"$max_fields"'; field++)
+        {
+            #
+            # Get the next field value.
+            #
+            next_value = $field
+
+            #
+            # Is this the field position to update?
+            #
+            if (field == '"$position"')
+            {
+                #
+                # Replace the field position with the requested value.
+                #
+                next_value = "'"$value"'"
+            }
+
+            #
+            # Print the next field followed by its field seperator.
+            #
+            printf("%s%s", next_value, FS);
+        }
+    }' |
+    read NEW_ROW
+
+    #
+    # replace existing row with new row
+    #
+    print $NEW_ROW > $ROW.lock
+
+    return 0
+
+}
+
+function readROW
+{
+
+	#
+	# See if Row Exists
+	# 
+	if [ ! -f $DataDir/$KEY/ROW* ]
+	then
+		print "ERROR:"$KEY"_DOES_NOT_EXIST"   
+		return
+	fi
+
+	#
+	# Make Sure $READ_STRING is a valid field
+	#
+	print $FIELDS | grep $READ_STRING >/dev/null
+	if [[ $? != 0 ]]
+        then
+                print 'ERROR:FIELD_'$READ_STRING'_NOT_DEFINED'
+		return
+        fi
+
+	#
+	# Read the value of $READ_STRING
+	#
+	VALUE="FIELD:$READ_STRING_NOT_DEFINED"
+ 	print $FIELDS | sed -e "s|\(^.*$READ_STRING\).*$|\1|" | wc -w | read POSITION
+	ls -F -1 -rt $DataDir/$KEY/ROW* | tail -1 | read file_name
+	cat $file_name | cut -d"|" -f$POSITION | read VALUE
+
+	if [[ -z $VALUE ]]
+	then 
+		VALUE="<null>"
+	fi
+
+	print $VALUE
+
+	return 0
+	
+}
+
+function updateTABLE
+{
+
+	#
+	# Create the level (if it does not exist)
+	#
+	createROW
+	
+	#
+	# Lock the level
+	#
+	lockROW
+	if [[ $? != 0 ]]
+	then
+		print "ROW_"$KEY"_IS_LOCKED"
+		return 1
+	fi
+
+	
+	#
+	# Set the value of the row
+	#
+	ROW=$DataDir/$KEY/ROW
+	
+	#
+	# Make Updates based on UPDATE_STRING
+	#
+	
+	while [[ $UPDATE_STRING > "" ]]
+	do
+		print $UPDATE_STRING | read update UPDATE_STRING
+		print $update | awk '{FS="=" ; print $1" "$2}' | read FIELD VALUE
+		print $FIELDS | sed -e "s|\(^.*$FIELD\).*$|\1|" | wc -w	| read POSITION
+		updateROW $POSITION $VALUE
+	done
+	
+	#
+	# Unlock the level
+	#
+	unlockROW
+	
+	return 0
+}
+
+#------------------------------------------------------------------------------
+
+function showStage
+{
+	table=${0#show}
+	arguments="-t $table $*"
+	showTABLE $arguments
+}
+#------------------------------------------------------------------------------
+
+function showStageReq
+{
+	table=${0#show}
+	arguments="-t $table $*"
+	showTABLE $arguments
+}
+#------------------------------------------------------------------------------
+
+function showBuildStage
+{
+	table=${0#show}
+	arguments="-t $table $*"
+	showTABLE $arguments
+}
+#------------------------------------------------------------------------------
+
+function showTABLE
+{
+
+#
+# data definition for Build Level
+#
+#
+# define variables
+#
+format_string=""
+KEY=""
+output_string=""
+
+
+# read - options from the command line
+while getopts :t:f:k:   arguments
+do
+  case $arguments in
+    f)  # define output string
+        format_string=$OPTARG
+        print $format_string | sed 's/\%/\|/g' | read format_string;;
+    k)  # define the search key and change | to / so it can be included
+        # in a pathname
+	KEY=$OPTARG 
+	print $KEY | sed 's/\%/\//g' | read KEY;;
+    t)  TABLE=$OPTARG;;
+
+    :)  # print message that there is a missing argument to an option 
+        print "You forgot to enter an argument to $OPTARG";;
+
+    \?) print "$OPTARG is not a valid switch.";;
+  esac
+done
+
+#determine the type of table that is to be processed 
+#basename $0  | read command
+#TABLE=${command#show}
+eval echo \$"$TABLE"Fields | read FIELDS
+eval echo \$"$TABLE"Defaults | read DEFAULTS
+eval echo \$"$TABLE"Dir | read TableDIR
+eval echo \$"$TABLE"Keys | read TableKEY
+eval echo \$"$TABLE"Row | read TableROW
+
+#
+#
+# if there is nothing in the directory specified
+# by the key then there is nothing to show and
+# we can return immediately
+#
+dirKEY="/"$KEY
+ls $TableDIR$dirKEY >/dev/null 2>&1
+if (( "$?" != 0 ))
+then
+    exit 0
+fi 
+
+#
+#
+#
+integer numberFields
+integer fieldCount
+integer count
+
+# strip the quotes from the beginning and the end of $TableROW
+TableROW=${TableROW#\"}
+TableROW=${TableROW%\"}
+
+# output the header line to define fields of the output.  If the format string has not been
+# specified then print the default header given by $TableROW, the fields in order as stored
+# in the database.  If it has been specified that output the format string as given.
+
+if [[ $format_string = "" ]]
+then
+    print $TableROW |  sed 's/ /\|/g'    
+else
+    print $format_string
+fi
+
+# start the search through the database starting at the top of the table.  If 
+# the user gave any keys to limit the search such as the release id, then the search
+# would start at that point.
+
+find $TableDIR$dirKEY -type f -name ROW* -print |  
+	    
+while read dirName
+do
+    { # process each file under the specified directory and build up the row contents string
+      # which will contain all the fields in the specified table
+    rowContent=""
+    numberFields=$(print $dirName | awk '{ FS="/" ; print NF }')
+    (( fieldCount = numberFields ))
+    while (( fieldCount >= 2  ))
+    do
+	# keep track of the position in the fields
+	print $dirName | awk '{ FS="/" ; print $"'$fieldCount'" }' | read columns 
+        if [[ $columns = ROW* ]]
+        then
+	    rowContents=$(cat $dirName)
+        else
+	    rowContents=$columns"|"$rowContents
+        fi
+    (( fieldCount = fieldCount - 1  ))
+    done
+
+    # rowContents now contains all elements in the database including the directory name 
+    # from the top of the tree.  We now need to strip everything up to and including the
+    # table name
+    rowContents=${rowContents#*$TABLE\|}
+   
+
+    # Time to check if formatting of output is specified 
+    # if not print the complete row
+    if [[ $format_string = "" ]]
+    then
+         print $rowContents
+         # | sed "s/ /\|/g"
+    else  
+        # print the fields in the order specified by the format_string
+        integer found  # this variable is 0 when the match has not been found and 1 when is has
+
+	# convert the format_string by replacing all | with blanks so that set can be performed to
+        # parse the string
+        print $format_string | sed "s/\|/ /g" | read format_string
+
+        
+        set $format_string
+
+	# Look at each field in the format_string and find its location in the rowContents so that
+        # the corresponding elements might be printed
+        for formats in $*
+        do
+           found=0
+	   count=1
+     	   # search through the field names in TableROW to see if you can match the fields
+	   # given by the format string 
+           for fields in $TableROW
+           do
+  	      if [[ $fields = $formats ]]	 
+              then
+ 		  # a match has been found so we add the corresponding field into the output string
+                  print $rowContents | awk '{ FS="|" ; print $'$count'}' | read output_field
+                  output_string=$output_string"|"$output_field
+                  found=1
+              fi
+           (( count = count + 1 ))
+           done
+           if ((found == 0))  
+           then 
+	       # if the format field was invalid so it could not be found in the TableROW
+	       # then we output <not defined> so the user can tell that a mistake was made.
+               output_string=$output_string"|<not defined>"
+           fi
+        done
+
+	# all fields in the format string and we are ready to output the results for that
+	# particular entry.  
+        output_string=${output_string#\|}
+        print $output_string
+        output_string=""
+    fi
+    }
+done
+
+}
+
+#------------------------------------------------------------------------------
+#
+# Application Specific Functions
+#
+#------------------------------------------------------------------------------
+#
+function maintainBuildStage
+{
+
+FIELDS=$BuildStageFields
+DEFAULTS=$BuildStageDefaults
+#
+# define variables
+#
+MODE="UPDATE"
+UPDATE_STRING="" 
+#
+#
+# 
+while getopts k:rf:v: arguments
+do
+	case $arguments in
+		k) KEY="BuildStage/"$OPTARG ;;
+
+		r) MODE="READ" ;;
+
+		f) READ_STRING=$OPTARG ;;
+
+		v) UPDATE_STRING=$UPDATE_STRING$OPTARG" ";;
+
+		?) print $USAGE ;;
+	esac
+done
+
+case $MODE in
+	UPDATE) updateTABLE ;;
+	READ)	readROW ;;
+esac
+
+return 0
+
+}
+
+#------------------------------------------------------------------------------
+
+function initDB
+{
+
+SAVEPATH=$PATH
+PATH=$SAVEPATH
+
+BUILDBASE=$(dirname $BASE)
+BLDCYCLE=$(basename $BASE)  
+
+#
+# BLD_LOG_DIR
+#
+if [[ -z "$BLD_LOG_DIR" ]] ; then
+        BLD_LOG_DIR="$BUILDBASE/$BLDCYCLE/src/logs"
+fi
+
+#
+# Log Directory Must exist
+#
+if [[ ! -d "$BLD_LOG_DIR" ]] ; then
+        print "Build $BLD_LOG_DIR does not exist"
+        exit 1
+fi
+
+#
+# Log Directory must be a Directory
+#
+if [[ ! -d "$BLD_LOG_DIR" ]] ; then
+        print "$BLD_LOG_DIR must be a directory"
+        exit 1
+fi
+
+integer DB_NEEDS_UPDATE
+DB_NEEDS_UPDATE=0
+BLDSCRIPT_DIR=$BUILDBASE/$BLDCYCLE/src/bldscripts
+
+#
+# define location of the database!
+#
+DataDir="$BLD_LOG_DIR/buildDB"
+
+#
+# Establish DataBase Definition
+#
+StageDir=$DataDir/Stage
+StageKeys="STAGE"
+StageFields="RELEASE SCRIPT LABEL MAKE_PASS STAGE_DIRS"
+StageRow=$StageKeys" "$StageFields
+#
+StageReqDir=$DataDir/StageReq
+StageReqKeys="STAGE STAGE_REQ"
+StageReqFields=""
+StageReqRow=$StageReqKeys" "$StageReqFields
+#
+BuildStageDir=$DataDir/BuildStage
+BuildStageKeys="BUILD STAGE"
+BuildStageFields="COMPLETE BUILD_MACHINE BLOCKING_DEFECT"
+BuildStageRow=$BuildStageKeys" "$BuildStageFields
+
+#
+# Populate the 'tables'
+#
+
+DB_UPDATE_TIME=$DataDir/DB_UPDATE
+
+#
+# don't try to initialize database 
+# while it is already being initialized
+#
+while [[ -f "$DataDir/"$BLDCYCLE".lock" ]]
+do
+    print "========================================================================================================="
+    print "Another dbld session is initializing database."
+    print "File: "$DataDir"/"$BLDCYCLE".lock protects the database from multiple update attempts."
+    print "=========================================================================================================="
+    sleep 60
+done
+
+#
+# See if Stage Table Needs to be updated
+#
+if [[ ! -f $DB_UPDATE_TIME ]]
+then
+	DB_NEEDS_UPDATE=1 
+fi
+
+if [[ -f $DB_UPDATE_TIME ]]
+then
+	find $BLDSCRIPT_DIR  -newer $DB_UPDATE_TIME  -name 'Stage*' -print > /tmp/tmp$$
+	if [[ -s /tmp/tmp$$ ]] 
+	then
+		DB_NEEDS_UPDATE=1
+	fi
+fi
+
+if [[ -f /tmp/tmp$$ ]]
+then
+	rm /tmp/tmp$$
+fi
+
+if (( DB_NEEDS_UPDATE != 0 ))
+then
+        print "initializing database..."
+
+#
+#       lock out other updates
+#
+	touch "$DataDir/"$BLDCYCLE".lock"
+        rm $DB_UPDATE_TIME
+
+	if [[ -d $StageDir ]]
+	then
+		rm -fr $StageDir/*
+	fi
+        grep -E '^[a-z]|^[A-Z]' "$BLDSCRIPT_DIR/Stage" | 
+        	grep -v "STAGE" |
+        	while read ROW 
+        	do
+        		print $ROW | awk '{FS="|" ; print $1}' | read STAGE
+        
+        		if [[ ! -d "$StageDir" ]]
+        		then
+        			mkdir -p "$StageDir"
+        		fi
+			if [[ ! -d $StageDir/$STAGE ]] 
+			then
+				mkdir -p $StageDir/$STAGE
+			fi
+                        # cut out the key from the row
+        		print $ROW | 
+        			cut -d \| -f 2,3,4,5,6,7  > $StageDir"/$STAGE/ROW"
+        	done
+        
+	if [[ -d $StageReqDir ]]
+	then
+		rm -fr $StageReqDir/*
+	fi
+        grep -E '^[a-z]|^[A-Z]' "$BLDSCRIPT_DIR/StageReq" | 
+        	grep -v "STAGE" |
+        	while read ROW 
+        	do
+        		print $ROW | awk '{FS="|" ; print $1,$2}' | read STAGE REQ
+        
+        		if [[ ! -d "$StageReqDir" ]]
+        		then
+        			mkdir -p "$StageReqDir"
+        		fi
+         
+			if [[ ! -d $StageReqDir/$STAGE/$REQ ]] 
+			then
+				mkdir -p $StageReqDir/$STAGE/$REQ
+			fi
+                        # cut out the key from the row
+        		print "" > $StageReqDir"/$STAGE/$REQ/ROW"
+        	done
+fi
+
+
+if [[ -f "$DataDir/"$BLDCYCLE".lock" ]]
+then 
+       rm "$DataDir/"$BLDCYCLE".lock"
+fi
+
+touch $DB_UPDATE_TIME
+
+return 0
+
+}

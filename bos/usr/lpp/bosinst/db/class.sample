@@ -1,0 +1,32 @@
+/* @(#)61 1.4 src/bos/usr/lpp/bosinst/db/class.sample, bosinst, bos411, 9428A410j 93/01/12 09:03:32  */
+/*
+ *
+ * COMPONENT_NAME: (BOSINST) Base Operating System Install
+ *
+ * FUNCTIONS: class description file
+ *
+ * ORIGINS: 27
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+/*
+	This is a sample class description file.
+
+	The only required entry is the bos.
+*/
+
+#define _IMAGEDIR /usr/lpp/bosinst/images
+#define _PLATFORM R2
+
+classname	value		_PLATFORM - Newest drop
+
+bos		filename	_IMAGEDIR/R2/bos.current
+
+lpp		filename	_IMAGEDIR/R2/tcpip
+-		filename	_IMAGEDIR/R2/xwindows
+-		filename	_IMAGEDIR/R2/nfs

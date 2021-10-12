@@ -1,0 +1,38 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+A useful operation is to replace a string of several blanks
+by exactly one blank.  Note that you can't just write
+
+s/ */ /
+
+because the " *" will match any number of blanks
+including zero.  Thus it will always match at the beginning
+of the line, even if there is no blank there.
+The normal sequence is
+
+s/  */ /
+which will only substitute for a string
+that has at least one blank in it.
+Try that command on the line in the file "line".
+Then rewrite the file "line" and type "ready".
+#create Ref
+here is a long space.
+#create line
+here      is a long space.
+#user
+#cmp line Ref
+#log
+#next
+35.2e 5

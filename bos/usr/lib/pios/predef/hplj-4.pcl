@@ -1,0 +1,63 @@
+# @(#)28        1.8  src/bos/usr/lib/pios/predef/hplj-4.pcl, cmdpios, bos411, 9428A410j 5/6/94 16:05:31
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:695:_Y:S[E030]I[1810560]DnEnR[pioattr1.cat,1,759;simplex (single-sided),duplex-- long-edge binding,duplex-- short edge binding=0,1,2]:0
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,785;no initialization,full initialization,send PCL language switch command only=0,1,2]:1
+:712:_q:S[B045]I[1810554]EnR[=300,600]:300
+:060:__SYS::
+:823:mZ:S[101]I[1810563]%IWY:!
+:833:s1:S[105]I[1810521]En%IWP:1
+:834:s2:S[110]I[1810521]En%IWP:1
+:837:s3:S[120]I[1810522]En%IWE:3
+:836:s5:S[117]I[1810522]En%IWE:3
+#:824:s6:S[113]I[1810521]En%IWP:1
+:835:s7:S[112]I[1810521]En%IWP:1
+:747:sD:S[103]I[1810566]%IWY:+
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@ %Idd/%Imm -!%Idf/piofpcl -J+ -L! %IsH -u%IuH
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpqstuvxzIJLOQXYZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpqstuvxzIJLOQXYZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpqsuvxzIJOQYZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[jquJYZ] ; }
+:058:__MIS::
+:330:mA::PCL
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,106;Hewlett-Packard LaserJet 4]
+:295:mN::hplj-4
+:416:mU::courier[10,4099;0;0(%ImB)]courier-bold[10,4099;3;0(%ImB)]courier-italic[10,4099;0;1(%ImB)]courier[12,4099;0;0(%ImB)]courier-bold[12,4099;3;0(%ImB)]courier-italic[12,4099;0;1(%ImB)]lineprinter[17,4096;0;0(%ImB)]courier[17,4099;0;0(%ImB)]
+:308:mp::%?%GsD%t%?%GmZ%t%%!,\x04%%!%e,%;,,,x T %;
+:062:__WKV::
+:689:W6::%?%GWu%{3}%<%GWu%{5}%>%|%t%IWP%e%IWE%;
+:760:W9::R[pioattr1.cat,1,839;standard 250-sheet cassette,multipurpose tray (paper),optional 500-sheet lower cassette,manual paper feed,multipurpose tray (envelope),optional envelope feeder,manual envelope feed=1,2,7,0,5,3,4]
+:461:wJ::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2400}%e%gq%{2}%=%t%{2400}%e%gq%{3}%=%t%{1999}%e%gq%{4}%=%t%{2338}%e%{2025}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:462:wK::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3000}%e%gq%{2}%=%t%{3900}%e%gq%{3}%=%t%{2735}%e%gq%{4}%=%t%{3207}%e%{2850}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:463:wM::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{3180}%e%gq%{2}%=%t%{4080}%e%gq%{3}%=%t%{2915}%e%gq%{4}%=%t%{3389}%e%{3030}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+:464:wR::%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t%{2250}%e%gq%{2}%=%t%{2250}%e%gq%{3}%=%t%{1849}%e%gq%{4}%=%t%{2180}%e%{1875}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+:458:wQ::%?%GWu%{0}%=%t%Gs0%e%GWu%{1}%=%t%Gs1%e%GWu%{2}%=%t%Gs2%e%GWu%{3}%=%t%Gs3%e%GWu%{4}%=%t%Gs4%e%GWu%{5}%=%t%Gs5%e%Gs7%;%d
+:051:__CAG::
+:144:ci::%I[pU]%?%G_j%{2}%=%t%IpL%e%I[pR,pL,eR,eP,c1,eT,eS,eO,ct,eF,eu,es,eC]%;
+:152:cr::%IeR%o%I[eF,eP,eO,eS,ct,eD]%IpU
+:054:__ESC::
+:608:pR::@PJL SET RESOLUTION = %G_q%d\12
+:482:es::\33&l%G_Q%Pq%?%GWu%{3}%<%GWu%{5}%>%|%t%?%gq%{1}%=%t2%e%gq%{2}%=%t3%e%gq%{4}%=%t26%e%gq%{5}%=%t1%e2%;%e%?%gq%{1}%=%t80%e%gq%{3}%=%t81%e%gq%{4}%=%t90%e%gq%{5}%=%t91%e80%;%;A
+:764:eu::\33&l%?%GWu%{0}%=%t2%e%GWu%{2}%=%t4%e%GWu%{3}%=%t6%e%GWu%{4}%=%t3%e%GWu%{5}%=%t4%e%GWu%{7}%=%t5%e1%;H
+:475:__HIR::
+:686:zL::2
+:688:zM::Hewlett-Packard
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

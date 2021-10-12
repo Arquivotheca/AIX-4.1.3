@@ -1,0 +1,35 @@
+#!/unix
+* @(#)92
+*
+* COMPONENT_NAME: SYSDB
+*
+*   FUNCTIONS: dbtty.exp - exports needed for tty debugger hook
+*
+*   ORIGINS: 27 83
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*  @IBM_COPYRIGHT@
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993
+* All Rights Reserved
+*
+* LEVEL 1, 5 Years Bull Confidential Information
+*
+*******************************************************************
+d_offset
+dbg_pinned
+debugger
+db_tty_dump_ptr
+tty_db_register_ptr
+tty_db_unregister_ptr
+tty_db_open_ptr
+tty_db_close_ptr
+get_from_memory
+debpg
+

@@ -1,0 +1,174 @@
+# @(#)53        1.4  src/bos/objclass/POWER/disk.scsi.2200mb16bit.add, cfgmethods, bos41J, 9513A_all 3/24/95 22:30:19
+* 
+*  COMPONENT_NAME: (CFGMETHODS) SCSI DISK PREDEFINED DATA STANZAS
+* 
+*  FUNCTIONS:
+*  
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1994, 1995
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+PdDv:
+	type = 2200mb16bit
+	class = disk
+	subclass = scsi
+	prefix = hdisk
+	devid = ""
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x704
+	setno = 2
+	msgno = 25
+	fru = 1
+	catalog = scdisk.cat
+	DvDr = scdisk
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgscdisk
+	Change = /etc/methods/chgdisk
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = disk/scsi/2200mb16bit
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = model_map
+	deflt = "100eDFHSS2W       ,0808IBMRISC /IBM     "
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = maxlun
+	deflt = 0
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = pv
+	deflt = "no"
+	values = "no,yes,clear"
+	width = ""
+	type = R
+	generic = "U"
+	rep = "sl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = pvid
+	deflt = "none"
+	values = ""
+	width = ""
+	type = R
+	generic = "D"
+	rep = s
+	nls_index = 2
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = mode_data
+	deflt = 0x000000080000000000000200010a24013000000001000000020e0000000000000000000000000000070a0501000000000000000008120000ffff0000ffffffff00040000000000000a06000100000000000ac0110000000000000000
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = mode_default
+	deflt = 0x00000000010900ffffffff00ff00ff020a0000ffffffffffffffff00030000ff
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = recovery_limit
+	deflt = 1
+	values = 1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = queue_depth
+	deflt = 3
+	values = 3
+	width = ""
+	type = R
+	generic = D
+	rep = nr
+	nls_index = 30
+
+PdAt:
+	uniquetype = disk/scsi/2200mb16bit
+	attribute = q_type
+	deflt = simple
+	values = simple
+	width = ""
+	type = R
+	generic = D
+	rep = sl
+	nls_index = 31
+
+PdAt:
+        uniquetype = disk/scsi/2200mb16bit
+        attribute = pm_dev_itime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/2200mb16bit
+        attribute = pm_dev_stime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/2200mb16bit
+        attribute = pm_devid
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x00184000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b000,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0

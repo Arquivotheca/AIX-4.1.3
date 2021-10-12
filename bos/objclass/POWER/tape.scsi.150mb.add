@@ -1,0 +1,267 @@
+# @(#)72        1.2  src/bos/objclass/POWER/tape.scsi.150mb.add, cfgmethods, bos41J, 9513A_all 3/24/95 16:19:34
+*
+*  COMPONENT_NAME: (CFGMETHODS) SCSI TAPE PREDEFINED DATA STANZAS
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 27
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = 150mb
+	class = tape
+	subclass = scsi
+	prefix = rmt
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x971
+	setno = 54
+	msgno = 1
+	fru = 1
+	catalog = devices.cat
+	DvDr = tape
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsctape
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = tape/scsi/150mb
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = mode
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 5
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = block_size
+	deflt = 512
+# Need values to be a range in order to use same SMIT stanzas as used
+# for the block_size attribute of the other tape drives.
+	values = "512,0"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 6
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = extfm
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = ret
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 7
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = model_map
+	deflt = "1010 TDC 360021F8568/ TDC 360021F8606/ TDC 360021F8621/ TDC 3600       ,0808TANDBERG"
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = maxlun
+	deflt = 0
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = dev_type
+	deflt = 3
+	values = 3
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = min_read_error
+	deflt = 10
+	values = 10
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = min_write_error
+	deflt = 8
+	values = 8
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = read_ratio
+	deflt = 0x1388
+	values = 0x1388
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = write_ratio
+	deflt = 0x01F4
+	values = 0x01F4
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = mode_data
+	deflt = 0x000010080000000000000200000202700000080000000064
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = res_support
+	deflt = yes
+	values = yes
+	width = ""
+	type = R
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = var_block_size
+	deflt = 512
+	values = 512
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = density_set_1
+	deflt = 16
+	values = "0,15,16"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 12
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = density_set_2
+	deflt = 15
+	values = "0,15,16"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = nl
+	nls_index = 13
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = vpd_map
+	deflt = "MF0808C,TM1010C,PN2607C,Z00008X,Z12004C,Z22402C"
+	values = ""
+	width = ""
+	type = V
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = pm_dev_itime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = tape/scsi/150mb
+	attribute = pm_dev_stime
+	deflt = 300
+	values = 0-7200,1
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+        uniquetype = tape/scsi/150mb
+        attribute = pm_device_id
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x0018
+4000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b0
+00,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0

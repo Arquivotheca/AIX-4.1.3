@@ -1,0 +1,20 @@
+#!/bin/bsh
+# @(#)32	1.5  src/bos/usr/bin/uucp/uudemon.hour, cmduucp, bos411, 9428A410j 9/30/93 15:53:29
+# 
+# COMPONENT_NAME: CMDUUCP uudemon.hour
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+cd /usr/sbin/uucp
+/usr/sbin/uucp/uusched &
+/usr/sbin/uucp/uuxqt &

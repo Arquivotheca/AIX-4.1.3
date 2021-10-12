@@ -1,0 +1,719 @@
+
+# @(#)26	1.41  src/bldenv/man/ENV_variables.man, bldtools, bos412, GOLDA411a 6/28/94 11:37:26
+#
+#  COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#  FUNCTIONS: ENV_variables man page.
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1992, 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  Environment Variables
+
+  This manual pages list alphabetically all environment variables
+  used by the build tools.
+
+  _BUILDER     Status type.
+
+               Used by bldsetstatus.
+
+  _DATE        Status type.
+
+               Used by bldsetstatus.
+
+  _HOSTNAME    Status type.
+
+               Used by bldsetstatus.
+
+  AFSBASE      Base of the AFS tree.  Value is /afs/austin/aix.
+
+               Used by bldhostsfile, bldkshconst and ptfsetup.
+
+  AIXHISTORY   Location of the HISTORY directory under the AIX selfix
+               tree.
+
+               Used by postselfix, bldverify, and related tools.
+
+  AIX_STATUS_FILE
+               Location of the AIX selfix status file, STATUS_FILE
+               used by default.
+
+               Used by makeptf.
+
+  AIXUPDATE    Location of the UPDATE directory under the AIX selfix
+               tree.
+
+               Used by postselfix, bldverify, and related tools.
+
+  AUTO         (bldretain) Do not check to see if CMVC_BECOME is set.
+               (prebuild) If set, LCOMMIT, LMERGE, and LSSMRG are set to
+                          'Y',  but if any of these three flag are explicitly
+                          set, they are not changed.
+
+               Used by bldretain and prebuild.
+
+  BLDCMVCFAMILY_FILE
+               Full pathname of file to use for the CMVC family data.
+               Default value is $BLDENV/usr/bin/bldCMVCfamily.dat.
+
+               Used by bldCMVCfamily.
+
+  BLDCYCLE     Current "cycle" of builds.  Typically in the form 'yyww'
+               where yy = year and ww = week.  BLDCYCLE must be set.
+
+               Used by ChangeMemos, ChangeSymptoms, CheckSymptom,
+               bldabstracts, bldfixptfpkg, bldfixptfpkgback, bldmid,
+               subptf, bldquerymerge, bldretain, bldsniffed, bldstatus,
+               prebuild, promoteptf, ptfsetup, showstatus, and v3bld.
+
+  BLDENV       Full pathname to the top of the build environment.  Typical
+               value is /bldenv/3.2/prod.
+
+               Used by bldCMVCfamily, blddeps, bldfixptfpkg, bldfixptfpkgback,
+               bldpkgptf, subptf, bldquerydb, bldquerymerge, bldretain,
+               bldsniffed, chkbld, cptools, cumptf, makeptf, prebuild,
+               ptfsetup, and v3bld.
+
+  BLDFINAL     If set to any non-null string, it indicates the build
+               being performed is the final one of the current build
+               cycle which causes v3bld to start bldgetlists in the
+               background upon completion of the build.  Default is null.
+
+               Used by v4bld.
+
+  BLDLOG_DATABASE
+               Override the standard name for the database file the
+               logging functions use.  Used primarily for functions
+               executed remotely that do logging.  Since the remote
+               process has no tty assigned, the logging functions will
+               not be able to create a unique file by using the tty
+               name.  The file specified should be unique (contain a
+               process id).  When the function doing the logging is
+               finished, it should call 'logset -r' to remove the
+               database file.
+
+               Used by bldlog, bldlogset, odmcloseall and v3bld.
+
+  BLDOPTLIBS   If set, references to libraries will be optimized.
+               Basically, a command's library dependencies will be replaced
+               with the dependencies on the object files actually linked with.
+
+               Used by subptf.
+
+  BLDOWNER     The CMVC userlogin that should be used when searching for
+               levels.  Only levels assigned to this userlogin will be
+               found.  Value will be prompted for if not defined.
+
+               Used by bldcleanlevels and prebuild.
+
+  BLDMSGCAT    If set, the message LPPs will be packaged; normally
+               all update files belonging to message LPPs are ignored
+               (i.e. not packaged).
+
+               Used by subptf.
+
+  BLDNOQMERGE  If set the bldquerymerge command will not be ran on selfix
+               phase transition to package phase; bldquerymerge prepares
+               the bldquery database
+
+               Used by bldstatus.
+
+  BLDPTFPREVIF If null, no previous (history) dependents are included
+               in PTF; if set, previous dependents are included in PTF.
+
+               Used by subptf.
+
+  BLDPTFRETAIN Value to use if the command line parameter <idtype> to
+               subptf is not specified.
+
+               Used by subptf.
+
+  BLDPTFSPLIT  If set, special files in $BLDENV/usr/bin/bldspecialfiles
+               will be forced into separate PTF packages.  This option
+               keeps large files (i.e. /unix) packaged separately for
+               supercedes.
+
+               Used by subptf.
+
+  BLDTMP       Temporary directory. The default is /tmp.
+
+               Used by CheckStatus, DeleteStatus, QueryStatus, SetStatus,
+               bldcleanlevels, blddeps, bldlock, bldlogset, subptf,
+               bldsetstatus, cptools, prebuild, report and showstatus
+
+  BLDTRACKINGDEFECT_BLDENV
+               This specifies the build environment (i.e. 320, 324, 325,
+               410, etc.).  This is needed for determining the 'level' and
+               'abstract' fields of the tracking defect.  The level field
+               will take the following form:
+               "$BLDCYCLE$BLDTRACKINGDEFECT_BLDENV"
+
+               Used by bldtrackingdefect.
+
+  BLDTRACKINGDEFECT_COMPONENT
+               The tracking defect will be opened in this CMVC component.
+
+               Used by bldtrackingdefect.
+
+  BLDTRACKINGDEFECT_FAMILY
+               The CMVC family the tracking defect will be opened in.
+               Format is:
+                  familyname[@hostname[@portnumber]]
+               where values in [] are optional.
+
+               Used by bldtrackingdefect.
+
+  BLDTRACKINGDEFECT_FILE
+               Full pathname of file to look for the tracking defect
+               default information in.
+
+               Used by bldtrackingdefect.
+
+  BLDTRACKINGDEFECT_NOPROMPT
+               Determines if user will be prompted for opening of the
+               tracking defect.  If BLDTRACKINGDEFECT_NOPROMPT has a
+               null value then the user will be prompted before the
+               tracking defect is opened in order to confirm that this
+               is the desired action.  If the variable has a non-null
+               value then the user will not be prompted and the tracking
+               defect will be opened.
+
+               Used by bldtrackingdefect.
+
+  BLDTRACKINGDEFECT_OWNER
+               The tracking defect will be opened by this CMVC user and
+               then assigned to this CMVC user.  This CMVC user must have
+               a host entry for the machine and AIX login.
+
+               Used by bldtrackingdefect.
+               
+  BLDTRACKINGDEFECT_SEVERITY
+               The severity to open the tracking defect at.
+
+               Used by bldtrackingdefect.
+
+  BLDTRACKINGDEFECT_TEST
+               When set to $TRUE a test tracking defect define in the
+               file $BLDTRACKINGDEFECT_FILE will be used instead of 
+               opening a new tracking defect.
+
+               Used by bldtrackingdefect.
+
+  BUILDER      The builder's name.  The default is null.
+
+               Used by bldsetstatus, bldsniffed, cptools, prebuild,
+               showstatus and v3bld.
+
+  BULLHISTORY  Location of the HISTORY directory under the Bull selfix
+               tree.
+
+               Used by postselfix, bldverify, and related tools.
+
+  BULL_STATUS_FILE
+               Location of the Bull selfix status file.
+
+               Used by makeptf.
+
+  BULLUPDATE   Location of the UPDATE directory under the Bull selfix
+               tree.
+
+               Used by postselfix, bldverify, and related tools.
+
+  CDBOOTIMAGE  Full path location of the boot image file.
+
+               Used by makecd.
+
+  CENTER       Set in $HOME/.kshrc
+
+               Used by bldretain.
+
+  COLUMNS      Number of columns on the screen.  Default is 80.
+
+               Used by bldpkgptf.
+
+  CMVC_BECOME  Specifies the CMVC user ID.
+
+               Used by bldretain, bldtrackingdefect, prebuild and report.
+
+  CMVC_ID      The value of CMVC_BECOME.
+
+               Used by bldretrain.
+
+  CMVC_FAMILY  CMVC family.
+
+               Used by report.
+
+  CMVC_RELEASE CMVC release name.
+
+               Used by blddeps, bldsniffed, ptfsetup, report, and v3bld.
+
+  DEBUG_BLDCLEANLEVELS
+               If $TRUE all 'Level -delete' and 'LevelMember -delete'
+               commands will be printed to the screen but the commands
+               will not be executed.
+               If $FALSE all  'Level -delete' and 'LevelMember -delete'
+               commands will be executed.
+
+               Used by bldcleanlevels.
+
+  DISPLAY
+
+               Used by bldretain.
+
+  ENV          User environment file.  Set in .profile.  Refer to 'ksh'
+               for a complete description.  Value should be $HOME/.kshrc.
+
+               Required to be set by bldretain.
+
+  EXBASE       The base directory for extraction.  If not set, the location
+               will be determined from the file $HOSTSFILE.  The user must
+               use an absolute path name when setting this variable.
+
+               Used by prebuild.
+
+  FALSE        Definition of False.
+
+               Used by bldcleanlevels.
+
+  HISTFILE     History pathname.  Default value is
+               $HOME/.ksh_hist`basename $TTY`.
+
+               Used by bldretain.
+
+  HOME         Home directory.
+
+               Use by bldretain and treecopy.
+
+  HOST         Name of machine.  Will be set from 'uname' if not defined.
+
+               Used by bldshowapar, bldptfinfo and bldpboatck.
+
+  HOST_LIST
+
+               Used by bldretain.
+
+  HOSTSFILE    The pathname for 'hostsfile.dat', If not set, defaults to
+               "$BLDENV/usr/bin/hostsfile.dat"
+
+               Used by bldhostsfile, bldhostsfile_check and 
+               bldhostsfile_search.
+
+  HOSTSFILE_AFSBASE
+               AFS tree of last release name passed to bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search, cptools and
+               prebuild.
+
+  HOSTSFILE_AFSDELTA
+               AFS delta source trees of last release name passed to
+               bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search and prebuild.
+
+  HOSTSFILE_AFSPROD
+               AFS full source tree of last release name passed to
+               bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search and prebuild.
+
+  HOSTSFILE_BASE
+               Production tree of last release name passed to
+               bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search, and prebuild.
+
+  HOSTSFILE_BLDNODE
+               CMVC name of release directory for the last release name
+               passed to bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search, odmcloseall,
+               prebuild, unodmcloseall, and v4bld.
+
+  HOSTSFILE_BUILD
+               Directory where a full build should start.
+
+               Used by bldhostsfile, and bldhostsfile_search.
+
+  HOSTSFILE_CMVCFAMILY
+               The CMVC Family the release resides in.  The default is
+               aix@ausaix02@2035.  Format is:
+                  familyname[@hostname[@portnumber]]
+               where values in [] are optional.
+
+               Used by bldhostsfile, bldhostsfile_search, postpackage and
+               prebuild.
+
+  HOSTSFILE_DATA1
+               Data field one.  Uses of this field are currently:
+               1) if HOSTSFILE_ENVIRONMENT is ade then this field contains
+                  the first arguments that will be passed to setup.sh,
+                  build.sh, install.sh and onecmd.sh in v3bld.
+
+               Used by bldhostsfile, bldhostsfile_search and v3bld
+
+  HOSTSFILE_DEFAULT_CMVCFAMILY
+               Default value for HOSTSFILE_CMVCFAMILY. The value is
+               aix@ausaix02@2035.
+               
+               Used by bldhostsfile, bldhostsfile_search and bldkshconst.
+
+  HOSTSFILE_DELTA
+               Production delta source tree of last release name passed
+               to bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search and prebuild.
+
+  HOSTSFILE_ENVIRONMENT
+               Type of environment the build occurs in.  Values are are
+               aix32 or ade.
+
+               Used by bldhostsfile, and bldhostsfile_search.
+
+  HOSTSFILE_HOST
+               Host the last release name passed to bldhostsfile is built
+               on.
+
+               Used by bldhostsfile, bldhostsfile_search, postbuild,
+               prebuild, odmcloseall and unodmcloseall.
+
+  HOSTSFILE_OBJECT
+               Directory where the objects files are located.
+
+               Used by bldhostsfile, and bldhostsfile_search.
+
+  HOSTSFILE_PROD
+               Full source tree of last release name passed to bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search, cptools,
+               odmcloseall and prebuild.
+
+  HOSTSFILE_REL
+               REL name of the last release name passed to bldhostsfile.
+
+               Used by bldhostsfile, bldhostsfile_search, odmcloseall,
+               prebuild, unodmcloseall and v4bld.
+
+  HOSTSFILE_RELEASE
+               Release name of entry.  Set only when calling
+               bldhostsfile_search.
+
+               Used by bldhostsfile_search.
+
+  HOSTSFILE_SHIP
+               Directory where the ship tree is located.
+
+               Used by bldhostsfile, and bldhostsfile_search.
+
+  HTN_OPTIONS
+
+               Used by bldretain.
+
+  HTNMAP       Default value is /tmp/retain.
+
+               Used by bldretain.
+
+  LCONT        If not set and a development level contains one or
+               more tracks in an illegal state (e.g. not must
+               fix), user is prompted for decision to continue
+               with the defective level (the bad tracks are excluded).
+               If set, the value is used and no prompt is given.
+               'y' will continue with the level, 'n' will skip the level.
+
+               Used by prebuild.
+
+  LCOMMIT      If not set, user is prompted before commit.  If set,
+               the value is used and no prompt is given. 'y' will
+               commit the production level; 'n' will not commit
+               the level.
+
+               Used by prebuild.
+
+  LDONLY       If set, only an CMVC level for a release is created.  The
+               extract, etc., is not done.
+
+               Used by prebuild.
+
+  LEVELCHECK_FLAGS
+               Argument(s) to be supplied when running the Level command
+               with the "-check" flag.  The values of LEVELCHECK_FLAGS are
+               "" and "-long".
+
+               Used by prebuild.
+
+  LEVELNAME    Name of the current level.  Default  computed from BLDCYCLE
+               and the last three digits of CMVC_RELEASE, which are of the
+               form 'vrl', where v = version, r = release, and l = level.  The
+               base LEVELNAME then is 'yywwvrl'.  A single letter, lower-case
+               alpha character is normally appended to the base to
+               differentiate between builds within the same build cycle (e.g.
+               9214320d).
+
+               Used by prebuild, ptfsetup and v4bld.
+
+
+  LEVELVERSION See LEVELNAME.
+
+               Used by CheckSymptom, prebuild and ptfsetup.
+
+  LINES        Number of lines on the screen.  Default is 24.
+
+               Used by bldpkgptf.
+
+  LMERGE       If not set, user is prompted before merge. If set
+               the value is used and no prompt is given. 'y' will
+               merge the delta tree with the level source tree; 'n'
+               will not merge the delta.
+
+               Used by prebuild.
+
+  LMFIX        If not set, tracks must be in the mustfix state
+               in order to be included in a production level.
+
+               Used by prebuild.
+
+  LNAMES       If set, automatically exclude all levels whose name does
+               not include LNAMES.
+
+               Used by prebuild.
+
+  LOCKFILE     Lock file; defaults to $BLDTMP/lockfile; normally this
+               value should not be changed (when/if set) since it could
+               invalidate normal locking.
+
+               Used by bldlock and subptf.
+
+  LOGBLDPTF    Overrides subptf log file; defaults to
+               $TOP/LOG/$BLDCYCLE/subptf.N where N is the first unused
+               integer.
+
+               Used by subptf.
+
+  LOGPREBUILD  Full pathname of the log file. Default is
+               $TOP/LOG/prebuild.<n> where <n> is the first unused integer
+
+               Used by prebuild.
+
+  LOGV3BLD     Full  pathname of  the log  file.  Default is
+               $TOP/LOG/$BLDCYCLE/LOG.v3bld.
+
+               Used by v3bld.
+
+  LSSMRG       If not set, user is prompted before the CMVC source server
+               merge. If set,the value is used and no prompt is given.
+               'y' will merge the delta tree with the CMVC source server.
+               'n' will not merge the delta.
+
+               Used by prebuild.
+
+  MAKEARGS     Arguments that should be supplied to make when it is called.
+
+               Used by v4bld.
+
+  NODENAMES    The pathname for 'nodenames.dat', If not set, defaults to
+               "$BLDENV/usr/bin/nodenames.dat"
+
+               Used by bldnodenames, bldnodenames_check, bldnodenames_search.
+
+  NODENAMES_NODE
+               Source name of release directory on build machines.
+
+               Used by bldhostsfile, bldnodenames, bldnodenames_search,
+               odmcloseall, prebuild, nodmcloseall, and v3bld.
+
+  NODENAMES_NODENAME
+               Source name of release directory in AFS.
+
+               Used by bldhostsfile, bldnodenames and bldnodenames_search.
+
+  NODENAMES_PRIORITIES
+               Priorities tracks must be to be acceptable for this build.
+
+               Used by bldnodenames, bldnodenames_search and prebuild.
+
+  PRODBLD      If set to "yes" or "bai", it indicates that the build
+               being performed is a production build.  Default is null.
+
+               Used by v3bld.
+
+  PROD_DIRNAME Directory of production server.
+
+               Used by gendiskette, genfsimage, gentape and promote_ship.
+
+  PRODENV      Environment that the production build is being done in.
+               The value can be set to SVC<release> for a service build
+               or set to BAI or unset for a bai production build.  For
+               example if you are building for 4.1.0 in service mode the
+               value should be set to SVC410.
+
+               Used by bldinitfunc to append to the value of PRODENV to
+               BLDTRACKINGDEFECT_FILE and BLDHOSTSFILE.
+
+  PRODUCTION_AREAS
+               Comma separated list of areas that may perform production
+               builds.  Each entry must be enclosed with single quotes.
+               No default value.  PRODUCTION_AREAS and PRODUCTION_FILE
+               cannot both be defined at the same time.
+
+               Example: PRODUCTION_AREAS="'AUS/D05','AUS/D05S'"
+
+               Note: You must enclose within double quotes so that shell
+                     does not remove the single quotes.
+
+               Used by prebuild.
+
+  PRODUCTION_FILE
+               File to get list of areas that may perform production builds.
+               Default value is $BLDENV/usr/bin/production_areas.dat  Format
+               is one line composed of each area entry enclosed with single
+               quotes separated by commas. PRODUCTION_AREAS and
+               PRODUCTION_FILE cannot both be defined at the same time.
+
+               Used by prebuild.
+
+  PTERM        If equal to \"aixterm\", windows are created to examine
+               log files; otherwise, pg is used.  Its is the user's
+               responsibility to be configured for X if this option is
+               used.
+
+               Used by prebuild
+
+  PTFPREFIX    If set, the prefix specified is the prefix used for any
+               dummy PTF identifiers which are generated.  Different prefixes
+               should be used for different build cycles to avoid confusion.
+
+               Used by subptf.
+
+  PTFSEED      Specifies the dummy PTFid to start with, the number is
+               incremented as ids are assigned (this option is only valid
+               when not using Retain).
+
+               Used by subptf.
+
+  RELS         Releases to process.
+
+               Used by prebuild.
+
+  RETAIN_OUTPUT
+               Directory to store output from RETAIN.
+
+               Used by bldretain.
+
+  RETAIN_PATH
+
+               Used by bldretain.
+
+  RETAIN_SYSTEM
+
+               Used by bldretain.
+
+  RETAIN_WAIT
+
+               Used by bldretain.
+
+  RETNAME      Name of person accessing RETAIN.  Set in $HOME/.kshrc
+
+               Used by bldretain.
+
+  SEARCH_FIRST General search constant.  Passed to functions that perform
+               searches and indicates that the search should be initialized
+               and the first element returned.
+
+               Used by bldhostsfile, bldhostsfile_search, bldnodenames_search
+               and bldkshconst.
+
+  SEARCH_NEXT  General search constant.  Passed to functions that perform
+               searches and indicates that the search should display the
+               next element in the search.
+
+               Used by bldhostsfile, bldhostsfile_search, bldnodenames_search
+               and bldkshconst.
+
+  SEARCH_STOP  General search constant.  Passed to functions that perform
+               searches and indicates that the search is complete and all
+               unneeded resources created for the search should be released.
+
+               Used by bldhostsfile, bldhostsfile_search, bldnodenames_search
+               and bldkshconst.
+
+  SHIP_DIRNAME Directory of ship server.
+
+               Used by gendiskette, genfsimage, gentape, promote_ship,
+               update_RETAIN, and xmit_ptf
+
+  SPACECHARACTER
+               SPACE character constant.
+
+               Used by bldnodenames, bldnodenames_search and bldkshconst.
+
+  STATUS_FILE  Status file; usually set to $TOP/HISTORY/STATUS_FILE;
+               defaults to /tmp/status.db if not set in environment.
+
+               Used by CheckStatus, CheckSymptom, DeleteStatus, QueryStatus,
+               SetStatus, bldabstracts, subptf, bldretain, bldsetstatus,
+               prebuild, showstatus and v3bld.
+
+  TABCHARACTER
+               TAB character constant.
+
+               Used by bldkshconst and prebuild.
+
+  TDPATH       Output filename.
+
+               Used by ptfmake.
+
+  TOP          Full pathname of the top of the tree from which the build
+               is initiated.
+
+               Used by ChangeMemos, ChangeSymptoms, CheckSymptom,
+               bldabstracts, bldcleanlevels, blddeps, bldfixptfpkg,
+               bldfixptfpkgback, bldmid, bldpkgptf, subptf, bldquery,
+               bldquerydb, bldquerymerge, bldretain, bldsniffed, bldstatus,
+               cptools, cumptf, prebuild, promoteptf, ptfsetup and v3bld.
+
+  TRUE         Definition of True.
+
+               Used by bldcleanlevels.
+
+  UPDATE       If set to any  non-null string,  it indicates
+               the build being performed is an update build.
+               Default is null.
+
+               Used by v4bld.
+
+  V4BLDNOPROMPT
+               If set  to "yes",  indicates the  build is to proceed
+               without user prompting.  This is generally used for
+               starting builds in "batch" mode.  It requires that
+               CMVC_RELEASE, BLDCYCLE, LEVELNAME, and PRODBLD variables
+               be set prior to executing v3bld.  Default is null.
+
+               Used by v4bld.
+
+  V4BLD_LINK
+               Set it to "-l" to run a production build with a
+               backing tree link.  Set it to "" otherwise.  If the
+               value is unset then v4bld will prompt you for whether
+               to run the build with a backing tree link.
+
+               Used by v4bld.
+
+
+  VERSION      If set, automatically exclude all levels whose release
+               name does not include VERSION.
+
+               Used by prebuild.
+
+  VM_PROMPT
+
+               Used by bldretain.
+
+  XMIT_TABLE   Path and file name of the transmission control file.
+
+               Used by xmit_ptf.

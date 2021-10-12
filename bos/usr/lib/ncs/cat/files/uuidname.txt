@@ -1,0 +1,132 @@
+
+
+
+UUIDNAME.TXT(5)    Headers, Tables, and Macros    UUIDNAME.TXT(5)
+
+
+
+NNNNAAAAMMMMEEEE
+     uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt - file associating names with UUIDs
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     Public file:
+     ////ssssyyyyssss////nnnnccccssss////uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt (SR9 Apollo workstations)
+     ////eeeettttcccc////nnnnccccssss////uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt (SR10 Apollo  workstations  and  other
+     UNIX systems)
+     nnnnccccssss$$$$eeeexxxxeeee::::uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt (VMS systems)
+     \\\\nnnnccccssss\\\\uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt (MS-DOS systems)
+
+     Private file:
+     ~~~~////uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt (Apollo workstations and other UNIX systems)
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     A uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt file  associates  textual  names  with  UUIDs
+     (Universal Unique Identifiers).  The llllbbbb____aaaaddddmmmmiiiinnnn administrative
+     tool can use these names to  identify  objects,  types,  and
+     interfaces;  it accepts names as input and displays names as
+     output whenever possible.
+
+     System-wide associations of names with UUIDs are defined  in
+     a  public  uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt  file  on the host where llllbbbb____aaaaddddmmmmiiiinnnn is
+     invoked.  On Apollo workstations  and  other  UNIX  systems,
+     user-specific  associations can also be defined in a private
+     uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt file in the home  directory  of  the  user  who
+     invokes  llllbbbb____aaaaddddmmmmiiiinnnn.   The  llllbbbb____aaaaddddmmmmiiiinnnn  tool  reads  these files
+     (first the public file, then the private file, if it exists)
+     when  it  starts  up,  and  it uses the names defined in the
+     files for the duration of the session.
+
+     Each UUID in a uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt file appears at the beginning of
+     a   line.   Names  associated  with  that  UUID  occupy  the
+     remainder of the line, separated by spaces or  tabs.   Names
+     that contain spaces or tabs must be delimited by double quo-
+     tation marks.  Blank lines and lines beginning  with  ####  are
+     ignored.   A  ####iiiinnnncccclllluuuuddddeeee construct supports inclusion of other
+     files in this format.
+
+     More than one name can be associated with a UUID if  several
+     names  appear  on one line of a uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt file, if a UUID
+     appears on several lines of one file, or if a  UUID  appears
+     in  several  files.   The first name encountered by llllbbbb____aaaaddddmmmmiiiinnnn
+     when it starts up is treated as the for the  UUID,  and  all
+     subsequent names are treated as Any primary names or aliases
+     can be entered as input to llllbbbb____aaaaddddmmmmiiiinnnn,  but  the  tool  always
+     uses primary names for output.
+
+     If an undefined name is entered as  input,  llllbbbb____aaaaddddmmmmiiiinnnn  treats
+     the input as a wildcard.
+
+
+
+
+
+NCS Administration        Last change:                          1
+
+
+
+
+
+
+UUIDNAME.TXT(5)    Headers, Tables, and Macros    UUIDNAME.TXT(5)
+
+
+
+     Note that this mechanism for associating  names  with  UUIDs
+     may  be  superseded  by  a  more general naming service in a
+     future software release.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEE
+     The  following  is  part  of  a  sample  uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt  file:
+     _3333_3333_3333_bbbb_9999_1111_cccc_5555_0000_0000_0000_0000_...._0000_dddd_...._0000_0000_...._0000_0000_...._8888_7777_...._8888_4444_...._0000_0000_...._0000_0000_...._0000_0000              _gggg_llll_bbbb_////_oooo_bbbb_jjjj_eeee_cccc_tttt
+     _3333_3333_3333_bbbb_9999_1111_dddd_eeee_0000_0000_0000_0000_...._0000_dddd_...._0000_0000_...._0000_0000_...._8888_7777_...._8888_4444_...._0000_0000_...._0000_0000_...._0000_0000                _gggg_llll_bbbb_////_tttt_yyyy_pppp_eeee
+     _3333_3333_3333_bbbb_2222_eeee_6666_9999_0000_0000_0000_0000_...._0000_dddd_...._0000_0000_...._0000_0000_...._8888_7777_...._8888_4444_...._0000_0000_...._0000_0000_...._0000_0000           _gggg_llll_bbbb_////_iiii_nnnn_tttt_eeee_rrrr_ffff_aaaa_cccc_eeee
+     _3333_4444_bbbb_4444_5555_2222_0000_8888_aaaa_0000_0000_0000_...._0000_dddd_...._0000_0000_...._0000_0000_...._8888_7777_...._8888_4444_...._0000_0000_...._0000_0000_...._0000_0000    _rrrr_gggg_yyyy_////_oooo_bbbb_jjjj_eeee_cccc_tttt
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          2
+
+
+

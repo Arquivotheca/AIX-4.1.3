@@ -1,0 +1,30 @@
+# @(#)70        1.1  src/bldenv/vfs/vfs.tmplt, ade_build, bos412, GOLDA411a 2/17/93 09:31:21
+#
+#   COMPONENT_NAME: BOSBUILD
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# this file describes the known virtual file system implementations.
+# format: (the name and vfs_number should match what is in <sys/vmount.h>)
+#
+# The standard helper directory is /etc/helpers
+#
+# name	vfs_number mount_helper filsys_helper
+#
+# Uncomment the following line to specify the local or remote default vfs.
+%defaultvfs	jfs	nfs
+#
+cdrfs	5	none			none
+jfs     3       none    		/sbin/helpers/v3fshelper
+nfs	2	__BUILD__/sbin/helpers/nfsmnthelp	none			remote

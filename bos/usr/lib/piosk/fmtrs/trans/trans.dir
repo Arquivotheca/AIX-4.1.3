@@ -1,0 +1,40 @@
+# @(#)38	1.1  src/bos/usr/lib/piosk/fmtrs/trans/trans.dir, cmdpiosk, bos411, 9428A410j 7/17/93 16:35:11
+#
+#   COMPONENT_NAME: CMDPIOSK
+#
+#   FUNCTIONS: trans.dir
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# This file is provided to define code set translation table for 
+# MBCS printer backends.
+#
+# <from code set> 	<to code set>		<translation file>
+#
+
+IBM-932			sjis83			IBM-932_sjis83
+IBM-932			sjis90			IBM-932_sjis90
+sjis83			IBM-932			sjis83_IBM-932
+sjis90			IBM-932			sjis90_IBM-932
+#
+IBM-eucJP		euc78			IBM-eucJP_euc78
+IBM-eucJP		euc83			IBM-eucJP_euc83
+euc78			IBM-eucJP		euc78_IBM-eucJP
+euc83			IBM-eucJP		euc83_IBM-eucJP
+#
+jis78			fold7			jis78_fold7
+jis83			fold7			jis83_fold7
+jis90			fold7			jis90_fold7
+fold7			jis78			fold7_jis78
+fold7			jis83			fold7_jis83
+fold7			jis90			fold7_jis90
+

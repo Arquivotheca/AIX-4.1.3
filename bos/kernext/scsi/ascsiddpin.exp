@@ -1,0 +1,67 @@
+#!/etc/drivers/ascsiddpin
+*
+* COMPONENT_NAME: SYSXSCSI
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+asc_abort
+asc_activate_cmd
+asc_async_status
+asc_cdt_func
+asc_cdt
+asc_cleanup
+asc_clear_pos
+asc_clear_queues
+asc_create_bufs
+asc_enable_bufs
+asc_disable_bufs
+asc_entity_id
+asc_epow
+asc_get_adp_info
+asc_get_adp_resources
+asc_get_ctl_blk
+asc_init_pipes
+asc_init_pos
+asc_ioctl
+asc_log_error
+asc_parse_reply
+asc_process_adp_elem
+asc_process_locate
+asc_reset_adapter
+asc_reset_bus
+asc_rir
+asc_stub
+asc_wdt_intr
+asc_alloc_tcws
+asc_dequeue
+asc_get_start_free
+asc_intr
+asc_output
+asc_process_elem
+asc_retry_get
+asc_retry_put
+asc_rtov
+asc_sendlist_dq
+asc_start
+asc_sleep
+asc_translate
+asc_update_eq
+asc_vtor
+asc_dump
+asc_dump_write
+asc_delay
+asc_cntlz
+qrev_writes
+qrev_writel
+adp_ctrl
+epow
+epow_mp_lock

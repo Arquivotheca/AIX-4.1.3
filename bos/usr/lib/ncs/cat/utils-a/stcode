@@ -1,0 +1,66 @@
+
+
+
+STCODE(1)                 User Commands                 STCODE(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     ssssttttccccooooddddeeee - translate a hexadecimal status code value to a tex-
+     tual message
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ssssttttccccooooddddeeee _h_e_x__s_t_a_t__c_o_d_e
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     ssssttttccccooooddddeeee prints the textual message associated with a  hexade-
+     cimal  status  code.   This command is useful when a program
+     produces a hexadecimal status code instead of a textual mes-
+     sage.
+
+     ssssttttccccooooddddeeee processes predefined status codes.  No  provision  is
+     currently made to add user-defined status codes to the error
+     text database.
+
+     _h_e_x__s_t_a_t__c_o_d_e
+               The hexadecimal status code to be translated.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     Translate the hexadecimal status code  1c010003:   _$$$$  ssssttttccccooooddddeeee
+     1111cccc000011110000000000003333  _uuuu_nnnn_kkkk_nnnn_oooo_wwww_nnnn  _iiii_nnnn_tttt_eeee_rrrr_ffff_aaaa_cccc_eeee  _((((_nnnn_eeee_tttt_wwww_oooo_rrrr_kkkk  _cccc_oooo_mmmm_pppp_uuuu_tttt_iiii_nnnn_gggg _ssss_yyyy_ssss_tttt_eeee_mmmm_////_RRRR_PPPP_CCCC
+     _rrrr_uuuu_nnnn_tttt_iiii_mmmm_eeee_))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          1
+
+
+

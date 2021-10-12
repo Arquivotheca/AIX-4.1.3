@@ -1,0 +1,79 @@
+# @(#)67        1.5  src/bos/usr/lib/pios/predef/master, cmdpios, bos411, 9428A410j 5/6/94 16:06:45
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:622:Ca:DyS[G500]I[1810532]EnR[pioattr1.cat,1,631;(diag1) - do not print job; display main pipeline and pre-processing filter,(diag2) - do not print job; display all pipelines and filters,(display) - print job; display all pipelines and filters,(ignore) - print job; ignore stderr produced by filters,(normal) - print job; exit if filters produce stderr=-a1,-a0\x27 \x27-A3,-a0\x27 \x27-A2,-a0\x27 \x27-A0,-a0\x27 \x27-A1]:%?%G_a%t-a%I_a%e-a%I_a\x27 \x27-A%I_A%;
+:013:_A:DnEnR[0,1,2,3]:1
+:791:_J:S[C950]I[1810533]%IWY:+
+:614:_Z:S[D035]I[1810534]%IWY:+
+:063:_a:DnEnR[0,1]:0
+:659:_f:S[C930]I[1810535]EtL[%IW3]F1V[%`W7]Dy:
+:616:_j:S[C940]I[1810536]%IWY:+
+:060:__SYS::
+:652:si:S[160]I[1810537]:
+:682:sp:S[165]I[1810538]V[%`W5]:
+:653:sw:S[185]I[1810539]E#G[0..%G_w%Pw%?%gw%{77}%<%t%gw%e%{77}%;%d]:%G_w%Pw%?%gw%{77}%<%t%gw%e%{77}%;%d
+:057:__IDS::
+:059:__PFL::
+:055:__FIL::
+:669:f1:I[1810540]:
+:670:f2:I[1810540]:
+:671:f3:I[1810540]:
+:672:f4:I[1810540]:
+:673:f5:I[1810540]:
+:664:fl::%ip
+:053:__DIR::
+:160:d1::%I@4/trans1
+:161:d2::%I@4/trans2
+:509:dD::%I@5/dev
+:414:dF::%I@5/flags
+:162:db::%I@4/burst
+:163:dd::%I@5/ddi
+:164:de::%I@4/etc
+:165:df::%I@4/fmtrs
+:166:dn::%I@4/fonts
+:167:dz::/tmp
+:058:__MIS::
+:332:mD::pioattr1.cat
+:287:mF::
+:301:mc::\0
+:302:md::
+:304:mi::s,s,,,n,,,a
+:305:mm::
+:306:mn::
+:307:mo::%Ide/pioout %v[ABCDFINOPRS]
+:308:mp::
+:309:mq::
+:311:mr::
+:313:mt::
+:316:mv::
+:319:mz::14688
+:062:__WKV::
+:694:WY::EnR[pioattr1.cat,1,619;yes,no=+,!]
+:657:W2::/usr/sbin/lsvirprt -q %Imq -d %Imv -a i. -f'%%7$c  %%6$s\\n'
+:632:W3::/usr/sbin/lsvirprt -q %Imq -d %Imv -n -a f. -f'%%7$c  %%6$s\\n'
+:681:W5::typeset sp=$(print "%Isp"|/usr/bin/tr -d '[BCN]');typeset -i len=${#sp};typeset var;while(( len > 0 ));do var="_$(print $sp|/usr/bin/cut -c$len)";if /usr/sbin/lsvirprt -q %Imq -d %Imv -a $var 2>/dev/null|/usr/bin/egrep "^$var" >/dev/null 2>&1;then \x3a;else print "1\\c";exit;fi;len=len-1;done;print "0\\c"
+:633:W7::%?%L_f%tif /usr/sbin/lsvirprt -q %Imq -d %Imv -a f%I_f 2>/dev/null | /usr/bin/egrep "^f%I_f" > /dev/null 2>&1; then print "0\\c"; else print "1\\c"; fi%eprint "0\\c"%;
+:051:__CAG::
+:052:__CTL::
+:420:__FNT::
+:421:__CNV::
+:054:__ESC::
+:475:__HIR::
+:687:zA::
+:474:zD::+
+:476:zP::
+:477:zS::!
+:685:zV::!

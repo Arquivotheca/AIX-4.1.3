@@ -1,0 +1,122 @@
+*/* @(#)66	1.1  src/bos/usr/ccs/bin/as/POWER/instrs.ops.rs2, cmdas, bos411, 9428A410j 5/10/93 14:55:29*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.rs2
+* *
+* *       V4.1  RIOS/2 implementation unique instructions. They are
+* *       not supported in RIOS/1, not supported in 601, not supported
+* *       in common PowerPC architecture. 
+* *
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1992
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+***********************************************************************
+*
+*** - *** Type indicator: Bit map for RIOS/2 unique instructions 
+*                         is 0x8004
+% 32772
+***********************************************************************
+*       DS-Form instructions
+***********************************************************************
+*
+*       Instruction Format: DS-FORM  (Disp .. signed, 4 divisible )
+*
+*       ---------------------------------------------------------
+*       |OPCODE|   OP1  |   RA  |         D               | XO  |
+*       ---------------------------------------------------------
+*       0     5 6     10 11   15 16                     29 30  31
+*
+*              OP1 = FRT | FRS  
+*
+*   Assembler Format:
+*
+*       mnemonic  OP1,D(RA|0)
+*
+*******************************************************
+**** /*** Floating Point Quad Load and Store *** / ****
+*******************************************************
+*38    lfq    frt,d(ra)      Load Floating Point Quad
+       lfq        r3       d3   56
+*39    lfqu   frt,d(ra)      Load FP Quad with Update
+       lfqu       r3       d3   57
+*317   lfqx   frt,ra,rb      Load Float Quad indexed
+       lfqx       rrr      x7   31-791
+*337   lfqux  frt,ra,rb      Load Float Quad with Update indexed
+       lfqux      rrr      x7   31-823
+*3C    stfq   frs,d(ra)      Store Floating Point Quad
+       stfq       r3       d3   60
+*3D    stfqu  frs,d(ra)      Store FP Quad with Update
+       stfqu      r3       d3   61
+*397   stfqx  frs,ra,rb      Store Float Quad indexed
+       stfqx      rrr      x7   31-919
+*367   stfqux frs,ra,rb      Store Float Quad with Update indexed
+       stfqux     rrr      x7   31-951
+***********************************************************************
+*       AD-Form instructions
+***********************************************************************
+*
+*       Instruction Format: AD-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  ///  | FRB   |  ///  |XO = 22 |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRB         ----- RC=0
+*       mnemonic. FRT,FRB         ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /*** Floating Point Square Root ***/ ****
+*********************************************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*016   fsqrt   frt,frb    Floating Square Root
+*016   fsqrt.  frt,frb    Floating Square Root (Rc=1)
+       fsqrt      rr       ad   63-022
+       fsqrt.     rr       ad   63-022-1
+*

@@ -1,0 +1,2493 @@
+# @(#)79	1.9  src/bos/usr/lib/nls/loc/locale/zh_TW/zh_TW.IBM-eucTW.src, cfgnls, bos411, 9436E411a 9/9/94 03:04:01
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# Initial localedef source file for Traditional Chinese
+
+# Based on POSIX.2 D10 syntax with X/Open extension.
+#
+# Design notes and asusmptions:
+#
+# ``Chinese character set'' is considered to consist of:
+#       128 characters in ASCII (both graphic and control),
+#     13051 characters in CNS 11643.1986
+#      6204 User Defined characters
+#       325 IBM Unique characters
+#
+#
+# Names for Chinese specific characters are assigned as
+# follows:
+#       ASCII characters have their standard names defined
+#       in the POSIX.2.
+#       CNS characters have names based on their code value written
+#       in hexadecimal.
+#
+# This definition implicitly assumes that underlying encoding
+# is EUC_TW.
+
+# Notes on LC_CTYPE:
+#
+#       Undefined code points are not included in any classes,
+#       because they are not printable characters nor control
+#       characters, though they *are* valid characters.
+
+LC_CTYPE
+
+# Upper and lower consist of:
+#       alphabets in ASCII,
+#       Latin alphabets in CNS11643.1986
+#       Greek alphabets in CNS11643.1986
+#       Cyrillic alphabets in IBM-sbdTW
+#       Katakana and Hiragana in IBM-sbdTW
+
+upper   <A>;<B>;<C>;<D>;<E>;<F>;<G>;<H>;<I>;<J>;<K>;<L>;<M>;\
+        <N>;<O>;<P>;<Q>;<R>;<S>;<T>;<U>;<V>;<W>;<X>;<Y>;<Z>;\
+        <cns10433>;...;<cns10458>;\
+        <cns10485>;...;<cns10494>;\
+        <cns10501>;...;<cns10514>;\
+        <csbd0332>;...;<csbd0364>
+
+lower   <a>;<b>;<c>;<d>;<e>;<f>;<g>;<h>;<i>;<j>;<k>;<l>;<m>;\
+        <n>;<o>;<p>;<q>;<r>;<s>;<t>;<u>;<v>;<w>;<x>;<y>;<z>;\
+        <cns10459>;...;<cns10484>;\
+        <cns10515>;...;<cns10538>;\
+        <csbd0365>;...;<csbd0394>;\
+        <csbd0401>;...;<csbd0403>
+
+#
+# Alpha Class
+# Default to upper and lower
+#
+
+#
+# Digit Class
+#
+# Digit and xdigit contains ASCII characters only, as required
+# in the standard.
+
+digit   <zero>;<one>;<two>;<three>;<four>;\
+        <five>;<six>;<seven>;<eight>;<nine>
+
+xdigit  <zero>;<one>;<two>;<three>;<four>;\
+        <five>;<six>;<seven>;<eight>;<nine>;\
+        <A>;<B>;<C>;<D>;<E>;<F>;\
+        <a>;<b>;<c>;<d>;<e>;<f>
+
+#
+# blank class
+#
+
+blank   <space>;<tab>
+
+#
+# space class
+#
+#       space characters in C locale
+#       Chinese Space from CNS11643
+
+
+# CNS 11643 contains a ``Chinese space'' character.
+# It is classified as a ``locale specific white-space
+# character.''
+
+space   <tab>;<newline>;<vertical-tab>;<form-feed>;\
+        <carriage-return>;<space>;\
+        <cns10101>
+
+# Cntrl deifned here is exactly the same as one defined in
+# POSIX.2 D10.  No locale specific characters are added.
+
+cntrl   <alert>;<backspace>;<tab>;<newline>;<vertical-tab>;\
+        <form-feed>;<carriage-return>;\
+        <NUL>;<SOH>;<STX>;<ETX>;<EOT>;<ENQ>;<ACK>;<SO>;\
+        <SI>;<DLE>;<DC1>;<DC2>;<DC3>;<DC4>;<NAK>;<SYN>;\
+        <ETB>;<CAN>;<EM>;<SUB>;<ESC>;<IS4>;<IS3>;<IS2>;\
+        <IS1>;<DEL>
+
+# Alpha class consists of all characters in upper and lower,
+# and:
+#                                       1. Phonetic Symbols(42)
+#                                       2. Radicals(186)
+#                                       3. Most Frequently Used (5401)
+#                                       4. Secondary Frequently Used (7650)
+
+#                                       5. User Defined Characters (6204)
+#                                       6. IBM Unique Chars (5)
+# Please make sure that the characters specified as upper or
+# lower are automatically included in alpha.
+
+#
+#
+# graph
+#
+#       upper, lower, alpha, digit, xdigit
+#       CNS11643 printable characters
+#       IBM Unique Symbols
+
+graph   <exclamation-mark>;<quotation-mark>;<number-sign>;\
+   <dollar-sign>;<percent-sign>;<ampersand>;<apostrophe>;\
+   <left-parenthesis>;<right-parenthesis>;<asterisk>;\
+   <plus-sign>;<comma>;<hyphen>;<period>;<slash>;\
+   <colon>;<semicolon>;<less-than-sign>;<equals-sign>;\
+   <greater-than-sign>;<question-mark>;<commercial-at>;\
+   <left-square-bracket>;<backslash>;<right-square-bracket>;\
+   <circumflex>;<underscore>;<grave-accent>;\
+   <left-brace>;<vertical-line>;<right-brace>;<tilde>;\
+   <A>;<B>;<C>;<D>;<E>;<F>;<G>;<H>;<I>;<J>;<K>;<L>;<M>;\
+   <N>;<O>;<P>;<Q>;<R>;<S>;<T>;<U>;<V>;<W>;<X>;<Y>;<Z>;\
+   <a>;<b>;<c>;<d>;<e>;<f>;<g>;<h>;<i>;<j>;<k>;<l>;<m>;\
+   <n>;<o>;<p>;<q>;<r>;<s>;<t>;<u>;<v>;<w>;<x>;<y>;<z>;\
+   <zero>;<one>;<two>;<three>;<four>;\
+   <five>;<six>;<seven>;<eight>;<nine>;\
+   <cns10102>;...;<cns10194>;<cns10201>;...;<cns10294>;\
+   <cns10301>;...;<cns10346>;<cns10401>;...;<cns10432>;\
+   <cns10433>;...;<cns10458>;\
+   <cns10459>;...;<cns10494>;\
+   <cns10501>;...;<cns10514>;\
+   <cns10515>;...;<cns10538>;\
+   <cns10539>;...;<cns10580>;\
+   <cns10601>;...;<cns10630>;\
+   <cns10701>;...;<cns10794>;\
+   <cns10801>;...;<cns10894>;<cns10901>;...;<cns10925>;\
+   <cns13401>;...;<cns13433>;<cns13601>;...;<cns13694>;\
+   <cns13701>;...;<cns13794>;\
+   <cns13801>;...;<cns13894>;\
+   <cns13901>;...;<cns13994>;\
+   <cns14001>;...;<cns14094>;\
+   <cns14101>;...;<cns14194>;\
+   <cns14201>;...;<cns14294>;\
+   <cns14301>;...;<cns14394>;\
+   <cns14401>;...;<cns14494>;\
+   <cns14501>;...;<cns14594>;\
+   <cns14601>;...;<cns14694>;\
+   <cns14701>;...;<cns14794>;\
+   <cns14801>;...;<cns14894>;\
+   <cns14901>;...;<cns14994>;\
+   <cns15001>;...;<cns15094>;\
+   <cns15101>;...;<cns15194>;\
+   <cns15201>;...;<cns15294>;\
+   <cns15301>;...;<cns15394>;\
+   <cns15401>;...;<cns15494>;\
+   <cns15501>;...;<cns15594>;\
+   <cns15601>;...;<cns15694>;\
+   <cns15701>;...;<cns15794>;\
+   <cns15801>;...;<cns15894>;\
+   <cns15901>;...;<cns15994>;\
+   <cns16001>;...;<cns16094>;\
+   <cns16101>;...;<cns16194>;\
+   <cns16201>;...;<cns16294>;\
+   <cns16301>;...;<cns16394>;\
+   <cns16401>;...;<cns16494>;\
+   <cns16501>;...;<cns16594>;\
+   <cns16601>;...;<cns16694>;\
+   <cns16701>;...;<cns16794>;\
+   <cns16801>;...;<cns16894>;\
+   <cns16901>;...;<cns16994>;\
+   <cns17001>;...;<cns17094>;\
+   <cns17101>;...;<cns17194>;\
+   <cns17201>;...;<cns17294>;\
+   <cns17301>;...;<cns17394>;\
+   <cns17401>;...;<cns17494>;\
+   <cns17501>;...;<cns17594>;\
+   <cns17601>;...;<cns17694>;\
+   <cns17701>;...;<cns17794>;\
+   <cns17801>;...;<cns17894>;\
+   <cns17901>;...;<cns17994>;\
+   <cns18001>;...;<cns18094>;\
+   <cns18101>;...;<cns18194>;\
+   <cns18201>;...;<cns18294>;\
+   <cns18301>;...;<cns18394>;\
+   <cns18401>;...;<cns18494>;\
+   <cns18501>;...;<cns18594>;\
+   <cns18601>;...;<cns18694>;\
+   <cns18701>;...;<cns18794>;\
+   <cns18801>;...;<cns18894>;\
+   <cns18901>;...;<cns18994>;\
+   <cns19001>;...;<cns19094>;\
+   <cns19101>;...;<cns19194>;\
+   <cns19201>;...;<cns19294>;\
+   <cns19301>;...;<cns19343>;\
+   <cns20101>;...;<cns20194>;\
+   <cns20201>;...;<cns20294>;\
+   <cns20301>;...;<cns20394>;\
+   <cns20401>;...;<cns20494>;\
+   <cns20501>;...;<cns20594>;\
+   <cns20601>;...;<cns20694>;\
+   <cns20701>;...;<cns20794>;\
+   <cns20801>;...;<cns20894>;\
+   <cns20901>;...;<cns20994>;\
+   <cns21001>;...;<cns21094>;\
+   <cns21101>;...;<cns21194>;\
+   <cns21201>;...;<cns21294>;\
+   <cns21301>;...;<cns21394>;\
+   <cns21401>;...;<cns21494>;\
+   <cns21501>;...;<cns21594>;\
+   <cns21601>;...;<cns21694>;\
+   <cns21701>;...;<cns21794>;\
+   <cns21801>;...;<cns21894>;\
+   <cns21901>;...;<cns21994>;\
+   <cns22001>;...;<cns22094>;\
+   <cns22101>;...;<cns22194>;\
+   <cns22201>;...;<cns22294>;\
+   <cns22301>;...;<cns22394>;\
+   <cns22401>;...;<cns22494>;\
+   <cns22501>;...;<cns22594>;\
+   <cns22601>;...;<cns22694>;\
+   <cns22701>;...;<cns22794>;\
+   <cns22801>;...;<cns22894>;\
+   <cns22901>;...;<cns22994>;\
+   <cns23001>;...;<cns23094>;\
+   <cns23101>;...;<cns23194>;\
+   <cns23201>;...;<cns23294>;\
+   <cns23301>;...;<cns23394>;\
+   <cns23401>;...;<cns23494>;\
+   <cns23501>;...;<cns23594>;\
+   <cns23601>;...;<cns23694>;\
+   <cns23701>;...;<cns23794>;\
+   <cns23801>;...;<cns23894>;\
+   <cns23901>;...;<cns23994>;\
+   <cns24001>;...;<cns24094>;\
+   <cns24101>;...;<cns24194>;\
+   <cns24201>;...;<cns24294>;\
+   <cns24301>;...;<cns24394>;\
+   <cns24401>;...;<cns24494>;\
+   <cns24501>;...;<cns24594>;\
+   <cns24601>;...;<cns24694>;\
+   <cns24701>;...;<cns24794>;\
+   <cns24801>;...;<cns24894>;\
+   <cns24901>;...;<cns24994>;\
+   <cns25001>;...;<cns25094>;\
+   <cns25101>;...;<cns25194>;\
+   <cns25201>;...;<cns25294>;\
+   <cns25301>;...;<cns25394>;\
+   <cns25401>;...;<cns25494>;\
+   <cns25501>;...;<cns25594>;\
+   <cns25601>;...;<cns25694>;\
+   <cns25701>;...;<cns25794>;\
+   <cns25801>;...;<cns25894>;\
+   <cns25901>;...;<cns25994>;\
+   <cns26001>;...;<cns26094>;\
+   <cns26101>;...;<cns26194>;\
+   <cns26201>;...;<cns26294>;\
+   <cns26301>;...;<cns26394>;\
+   <cns26401>;...;<cns26494>;\
+   <cns26501>;...;<cns26594>;\
+   <cns26601>;...;<cns26694>;\
+   <cns26701>;...;<cns26794>;\
+   <cns26801>;...;<cns26894>;\
+   <cns26901>;...;<cns26994>;\
+   <cns27001>;...;<cns27094>;\
+   <cns27101>;...;<cns27194>;\
+   <cns27201>;...;<cns27294>;\
+   <cns27301>;...;<cns27394>;\
+   <cns27401>;...;<cns27494>;\
+   <cns27501>;...;<cns27594>;\
+   <cns27601>;...;<cns27694>;\
+   <cns27701>;...;<cns27794>;\
+   <cns27801>;...;<cns27894>;\
+   <cns27901>;...;<cns27994>;\
+   <cns28001>;...;<cns28094>;\
+   <cns28101>;...;<cns28194>;\
+   <cns28201>;...;<cns28236>;\
+   <cns30101>;...;<cns30194>;\
+   <cns30201>;...;<cns30294>;\
+   <cns30301>;...;<cns30394>;\
+   <cns30401>;...;<cns30494>;\
+   <cns30501>;...;<cns30594>;\
+   <cns30601>;...;<cns30694>;\
+   <cns30701>;...;<cns30794>;\
+   <cns30801>;...;<cns30894>;\
+   <cns30901>;...;<cns30994>;\
+   <cns31001>;...;<cns31094>;\
+   <cns31101>;...;<cns31194>;\
+   <cns31201>;...;<cns31294>;\
+   <cns31301>;...;<cns31394>;\
+   <cns31401>;...;<cns31494>;\
+   <cns31501>;...;<cns31594>;\
+   <cns31601>;...;<cns31694>;\
+   <cns31701>;...;<cns31794>;\
+   <cns31801>;...;<cns31894>;\
+   <cns31901>;...;<cns31994>;\
+   <cns32001>;...;<cns32094>;\
+   <cns32101>;...;<cns32194>;\
+   <cns32201>;...;<cns32294>;\
+   <cns32301>;...;<cns32394>;\
+   <cns32401>;...;<cns32494>;\
+   <cns32501>;...;<cns32594>;\
+   <cns32601>;...;<cns32694>;\
+   <cns32701>;...;<cns32794>;\
+   <cns32801>;...;<cns32894>;\
+   <cns32901>;...;<cns32994>;\
+   <cns33001>;...;<cns33094>;\
+   <cns33101>;...;<cns33194>;\
+   <cns33201>;...;<cns33294>;\
+   <cns33301>;...;<cns33394>;\
+   <cns33401>;...;<cns33494>;\
+   <cns33501>;...;<cns33594>;\
+   <cns33601>;...;<cns33694>;\
+   <cns33701>;...;<cns33794>;\
+   <cns33801>;...;<cns33894>;\
+   <cns33901>;...;<cns33994>;\
+   <cns34001>;...;<cns34094>;\
+   <cns34101>;...;<cns34194>;\
+   <cns34201>;...;<cns34294>;\
+   <cns34301>;...;<cns34394>;\
+   <cns34401>;...;<cns34494>;\
+   <cns34501>;...;<cns34594>;\
+   <cns34601>;...;<cns34694>;\
+   <cns34701>;...;<cns34794>;\
+   <cns34801>;...;<cns34894>;\
+   <cns34901>;...;<cns34994>;\
+   <cns35001>;...;<cns35094>;\
+   <cns35101>;...;<cns35194>;\
+   <cns35201>;...;<cns35294>;\
+   <cns35301>;...;<cns35394>;\
+   <cns35401>;...;<cns35494>;\
+   <cns35501>;...;<cns35594>;\
+   <cns35601>;...;<cns35694>;\
+   <cns35701>;...;<cns35794>;\
+   <cns35801>;...;<cns35894>;\
+   <cns35901>;...;<cns35994>;\
+   <cns36001>;...;<cns36094>;\
+   <cns36101>;...;<cns36194>;\
+   <cns36201>;...;<cns36294>;\
+   <cns36301>;...;<cns36394>;\
+   <cns36401>;...;<cns36494>;\
+   <cns36501>;...;<cns36594>;\
+   <cns36601>;...;<cns36638>;\
+   <cns40101>;...;<cns40194>;\
+   <cns40201>;...;<cns40294>;\
+   <cns40301>;...;<cns40394>;\
+   <cns40401>;...;<cns40494>;\
+   <cns40501>;...;<cns40594>;\
+   <cns40601>;...;<cns40694>;\
+   <cns40701>;...;<cns40794>;\
+   <cns40801>;...;<cns40894>;\
+   <cns40901>;...;<cns40994>;\
+   <cns41001>;...;<cns41094>;\
+   <cns41101>;...;<cns41194>;\
+   <cns41201>;...;<cns41294>;\
+   <cns41301>;...;<cns41394>;\
+   <cns41401>;...;<cns41494>;\
+   <cns41501>;...;<cns41594>;\
+   <cns41601>;...;<cns41694>;\
+   <cns41701>;...;<cns41794>;\
+   <cns41801>;...;<cns41894>;\
+   <cns41901>;...;<cns41994>;\
+   <cns42001>;...;<cns42094>;\
+   <cns42101>;...;<cns42194>;\
+   <cns42201>;...;<cns42294>;\
+   <cns42301>;...;<cns42394>;\
+   <cns42401>;...;<cns42494>;\
+   <cns42501>;...;<cns42594>;\
+   <cns42601>;...;<cns42694>;\
+   <cns42701>;...;<cns42794>;\
+   <cns42801>;...;<cns42894>;\
+   <cns42901>;...;<cns42994>;\
+   <cns43001>;...;<cns43094>;\
+   <cns43101>;...;<cns43194>;\
+   <cns43201>;...;<cns43294>;\
+   <cns43301>;...;<cns43394>;\
+   <cns43401>;...;<cns43494>;\
+   <cns43501>;...;<cns43594>;\
+   <cns43601>;...;<cns43694>;\
+   <cns43701>;...;<cns43794>;\
+   <cns43801>;...;<cns43894>;\
+   <cns43901>;...;<cns43994>;\
+   <cns44001>;...;<cns44094>;\
+   <cns44101>;...;<cns44194>;\
+   <cns44201>;...;<cns44294>;\
+   <cns44301>;...;<cns44394>;\
+   <cns44401>;...;<cns44494>;\
+   <cns44501>;...;<cns44594>;\
+   <cns44601>;...;<cns44694>;\
+   <cns44701>;...;<cns44794>;\
+   <cns44801>;...;<cns44894>;\
+   <cns44901>;...;<cns44994>;\
+   <cns45001>;...;<cns45094>;\
+   <cns45101>;...;<cns45194>;\
+   <cns45201>;...;<cns45294>;\
+   <cns45301>;...;<cns45394>;\
+   <cns45401>;...;<cns45494>;\
+   <cns45501>;...;<cns45594>;\
+   <cns45601>;...;<cns45694>;\
+   <cns45701>;...;<cns45794>;\
+   <cns45801>;...;<cns45894>;\
+   <cns45901>;...;<cns45994>;\
+   <cns46001>;...;<cns46094>;\
+   <cns46101>;...;<cns46194>;\
+   <cns46201>;...;<cns46294>;\
+   <cns46301>;...;<cns46394>;\
+   <cns46401>;...;<cns46494>;\
+   <cns46501>;...;<cns46594>;\
+   <cns46601>;...;<cns46694>;\
+   <cns46701>;...;<cns46794>;\
+   <cns46801>;...;<cns46894>;\
+   <cns46901>;...;<cns46994>;\
+   <cns47001>;...;<cns47094>;\
+   <cns47101>;...;<cns47194>;\
+   <cns47201>;...;<cns47294>;\
+   <cns47301>;...;<cns47394>;\
+   <cns47401>;...;<cns47494>;\
+   <cns47501>;...;<cns47594>;\
+   <cns47601>;...;<cns47694>;\
+   <cns47701>;...;<cns47794>;\
+   <cns47801>;...;<cns47860>;\
+   <cudc0101>;...;<cudc0194>;\
+   <cudc0201>;...;<cudc0294>;\
+   <cudc0301>;...;<cudc0394>;\
+   <cudc0401>;...;<cudc0494>;\
+   <cudc0501>;...;<cudc0594>;\
+   <cudc0601>;...;<cudc0694>;\
+   <cudc0701>;...;<cudc0794>;\
+   <cudc0801>;...;<cudc0894>;\
+   <cudc0901>;...;<cudc0994>;\
+   <cudc1001>;...;<cudc1094>;\
+   <cudc1101>;...;<cudc1194>;\
+   <cudc1201>;...;<cudc1294>;\
+   <cudc1301>;...;<cudc1394>;\
+   <cudc1401>;...;<cudc1494>;\
+   <cudc1501>;...;<cudc1594>;\
+   <cudc1601>;...;<cudc1694>;\
+   <cudc1701>;...;<cudc1794>;\
+   <cudc1801>;...;<cudc1894>;\
+   <cudc1901>;...;<cudc1994>;\
+   <cudc2001>;...;<cudc2094>;\
+   <cudc2101>;...;<cudc2194>;\
+   <cudc2201>;...;<cudc2294>;\
+   <cudc2301>;...;<cudc2394>;\
+   <cudc2401>;...;<cudc2494>;\
+   <cudc2501>;...;<cudc2594>;\
+   <cudc2601>;...;<cudc2694>;\
+   <cudc2701>;...;<cudc2794>;\
+   <cudc2801>;...;<cudc2894>;\
+   <cudc2901>;...;<cudc2994>;\
+   <cudc3001>;...;<cudc3094>;\
+   <cudc3101>;...;<cudc3194>;\
+   <cudc3201>;...;<cudc3294>;\
+   <cudc3301>;...;<cudc3394>;\
+   <cudc3401>;...;<cudc3494>;\
+   <cudc3501>;...;<cudc3594>;\
+   <cudc3601>;...;<cudc3694>;\
+   <cudc3701>;...;<cudc3794>;\
+   <cudc3801>;...;<cudc3894>;\
+   <cudc3901>;...;<cudc3994>;\
+   <cudc4001>;...;<cudc4094>;\
+   <cudc4101>;...;<cudc4194>;\
+   <cudc4201>;...;<cudc4294>;\
+   <cudc4301>;...;<cudc4394>;\
+   <cudc4401>;...;<cudc4494>;\
+   <cudc4501>;...;<cudc4594>;\
+   <cudc4601>;...;<cudc4694>;\
+   <cudc4701>;...;<cudc4794>;\
+   <cudc4801>;...;<cudc4894>;\
+   <cudc4901>;...;<cudc4994>;\
+   <cudc5001>;...;<cudc5094>;\
+   <cudc5101>;...;<cudc5194>;\
+   <cudc5201>;...;<cudc5294>;\
+   <cudc5301>;...;<cudc5394>;\
+   <cudc5401>;...;<cudc5494>;\
+   <cudc5501>;...;<cudc5594>;\
+   <cudc5601>;...;<cudc5694>;\
+   <cudc5701>;...;<cudc5794>;\
+   <cudc5801>;...;<cudc5894>;\
+   <cudc5901>;...;<cudc5994>;\
+   <cudc6001>;...;<cudc6094>;\
+   <cudc6101>;...;<cudc6194>;\
+   <cudc6201>;...;<cudc6294>;\
+   <cudc6301>;...;<cudc6394>;\
+   <cudc6401>;...;<cudc6494>;\
+   <cudc6501>;...;<cudc6594>;\
+   <cudc6601>;...;<cudc6694>;\
+   <csbd0101>;...;<csbd0150>;\
+   <csbd0332>;...;<csbd0364>;\
+   <csbd0365>;...;<csbd0394>;\
+   <csbd0401>;...;<csbd0403>;\
+   <csbd0404>;...;<csbd0438>;\
+   <csbd0439>;...;<csbd0443>
+#
+#
+# Print
+#
+#       upper, lower, alpha, digit, xdigit
+#       CNS11643 printable characters
+#       IBM Unique Symbols
+
+print   <space>;\
+        <exclamation-mark>;<quotation-mark>;<number-sign>;\
+        <dollar-sign>;<percent-sign>;<ampersand>;<apostrophe>;\
+        <left-parenthesis>;<right-parenthesis>;<asterisk>;\
+        <plus-sign>;<comma>;<hyphen>;<period>;<slash>;\
+        <colon>;<semicolon>;<less-than-sign>;<equals-sign>;\
+        <greater-than-sign>;<question-mark>;<commercial-at>;\
+        <left-square-bracket>;<backslash>;<right-square-bracket>;\
+        <circumflex>;<underscore>;<grave-accent>;\
+        <left-brace>;<vertical-line>;<right-brace>;<tilde>;\
+        <A>;<B>;<C>;<D>;<E>;<F>;<G>;<H>;<I>;<J>;<K>;<L>;<M>;\
+        <N>;<O>;<P>;<Q>;<R>;<S>;<T>;<U>;<V>;<W>;<X>;<Y>;<Z>;\
+        <a>;<b>;<c>;<d>;<e>;<f>;<g>;<h>;<i>;<j>;<k>;<l>;<m>;\
+        <n>;<o>;<p>;<q>;<r>;<s>;<t>;<u>;<v>;<w>;<x>;<y>;<z>;\
+        <zero>;<one>;<two>;<three>;<four>;\
+        <five>;<six>;<seven>;<eight>;<nine>;\
+        <cns10101>;\
+        <cns10102>;...;<cns10194>;<cns10201>;...;<cns10294>;\
+        <cns10301>;...;<cns10346>;<cns10401>;...;<cns10432>;\
+        <cns10433>;...;<cns10458>;\
+        <cns10459>;...;<cns10494>;\
+        <cns10501>;...;<cns10514>;\
+        <cns10515>;...;<cns10538>;\
+        <cns10539>;...;<cns10580>;\
+        <cns10601>;...;<cns10630>;\
+        <cns10701>;...;<cns10794>;\
+        <cns10801>;...;<cns10894>;<cns10901>;...;<cns10925>;\
+        <cns13401>;...;<cns13433>;<cns13601>;...;<cns13694>;\
+        <cns13701>;...;<cns13794>;\
+        <cns13801>;...;<cns13894>;\
+        <cns13901>;...;<cns13994>;\
+        <cns14001>;...;<cns14094>;\
+        <cns14101>;...;<cns14194>;\
+        <cns14201>;...;<cns14294>;\
+        <cns14301>;...;<cns14394>;\
+        <cns14401>;...;<cns14494>;\
+        <cns14501>;...;<cns14594>;\
+        <cns14601>;...;<cns14694>;\
+        <cns14701>;...;<cns14794>;\
+        <cns14801>;...;<cns14894>;\
+        <cns14901>;...;<cns14994>;\
+        <cns15001>;...;<cns15094>;\
+        <cns15101>;...;<cns15194>;\
+        <cns15201>;...;<cns15294>;\
+        <cns15301>;...;<cns15394>;\
+        <cns15401>;...;<cns15494>;\
+        <cns15501>;...;<cns15594>;\
+        <cns15601>;...;<cns15694>;\
+        <cns15701>;...;<cns15794>;\
+        <cns15801>;...;<cns15894>;\
+        <cns15901>;...;<cns15994>;\
+        <cns16001>;...;<cns16094>;\
+        <cns16101>;...;<cns16194>;\
+        <cns16201>;...;<cns16294>;\
+        <cns16301>;...;<cns16394>;\
+        <cns16401>;...;<cns16494>;\
+        <cns16501>;...;<cns16594>;\
+        <cns16601>;...;<cns16694>;\
+        <cns16701>;...;<cns16794>;\
+        <cns16801>;...;<cns16894>;\
+        <cns16901>;...;<cns16994>;\
+        <cns17001>;...;<cns17094>;\
+        <cns17101>;...;<cns17194>;\
+        <cns17201>;...;<cns17294>;\
+        <cns17301>;...;<cns17394>;\
+        <cns17401>;...;<cns17494>;\
+        <cns17501>;...;<cns17594>;\
+        <cns17601>;...;<cns17694>;\
+        <cns17701>;...;<cns17794>;\
+        <cns17801>;...;<cns17894>;\
+        <cns17901>;...;<cns17994>;\
+        <cns18001>;...;<cns18094>;\
+        <cns18101>;...;<cns18194>;\
+        <cns18201>;...;<cns18294>;\
+        <cns18301>;...;<cns18394>;\
+        <cns18401>;...;<cns18494>;\
+        <cns18501>;...;<cns18594>;\
+        <cns18601>;...;<cns18694>;\
+        <cns18701>;...;<cns18794>;\
+        <cns18801>;...;<cns18894>;\
+        <cns18901>;...;<cns18994>;\
+        <cns19001>;...;<cns19094>;\
+        <cns19101>;...;<cns19194>;\
+        <cns19201>;...;<cns19294>;\
+        <cns19301>;...;<cns19343>;\
+        <cns20101>;...;<cns20194>;\
+        <cns20201>;...;<cns20294>;\
+        <cns20301>;...;<cns20394>;\
+        <cns20401>;...;<cns20494>;\
+        <cns20501>;...;<cns20594>;\
+        <cns20601>;...;<cns20694>;\
+        <cns20701>;...;<cns20794>;\
+        <cns20801>;...;<cns20894>;\
+        <cns20901>;...;<cns20994>;\
+        <cns21001>;...;<cns21094>;\
+        <cns21101>;...;<cns21194>;\
+        <cns21201>;...;<cns21294>;\
+        <cns21301>;...;<cns21394>;\
+        <cns21401>;...;<cns21494>;\
+        <cns21501>;...;<cns21594>;\
+        <cns21601>;...;<cns21694>;\
+        <cns21701>;...;<cns21794>;\
+        <cns21801>;...;<cns21894>;\
+        <cns21901>;...;<cns21994>;\
+        <cns22001>;...;<cns22094>;\
+        <cns22101>;...;<cns22194>;\
+        <cns22201>;...;<cns22294>;\
+        <cns22301>;...;<cns22394>;\
+        <cns22401>;...;<cns22494>;\
+        <cns22501>;...;<cns22594>;\
+        <cns22601>;...;<cns22694>;\
+        <cns22701>;...;<cns22794>;\
+        <cns22801>;...;<cns22894>;\
+        <cns22901>;...;<cns22994>;\
+        <cns23001>;...;<cns23094>;\
+        <cns23101>;...;<cns23194>;\
+        <cns23201>;...;<cns23294>;\
+        <cns23301>;...;<cns23394>;\
+        <cns23401>;...;<cns23494>;\
+        <cns23501>;...;<cns23594>;\
+        <cns23601>;...;<cns23694>;\
+        <cns23701>;...;<cns23794>;\
+        <cns23801>;...;<cns23894>;\
+        <cns23901>;...;<cns23994>;\
+        <cns24001>;...;<cns24094>;\
+        <cns24101>;...;<cns24194>;\
+        <cns24201>;...;<cns24294>;\
+        <cns24301>;...;<cns24394>;\
+        <cns24401>;...;<cns24494>;\
+        <cns24501>;...;<cns24594>;\
+        <cns24601>;...;<cns24694>;\
+        <cns24701>;...;<cns24794>;\
+        <cns24801>;...;<cns24894>;\
+        <cns24901>;...;<cns24994>;\
+        <cns25001>;...;<cns25094>;\
+        <cns25101>;...;<cns25194>;\
+        <cns25201>;...;<cns25294>;\
+        <cns25301>;...;<cns25394>;\
+        <cns25401>;...;<cns25494>;\
+        <cns25501>;...;<cns25594>;\
+        <cns25601>;...;<cns25694>;\
+        <cns25701>;...;<cns25794>;\
+        <cns25801>;...;<cns25894>;\
+        <cns25901>;...;<cns25994>;\
+        <cns26001>;...;<cns26094>;\
+        <cns26101>;...;<cns26194>;\
+        <cns26201>;...;<cns26294>;\
+        <cns26301>;...;<cns26394>;\
+        <cns26401>;...;<cns26494>;\
+        <cns26501>;...;<cns26594>;\
+        <cns26601>;...;<cns26694>;\
+        <cns26701>;...;<cns26794>;\
+        <cns26801>;...;<cns26894>;\
+        <cns26901>;...;<cns26994>;\
+        <cns27001>;...;<cns27094>;\
+        <cns27101>;...;<cns27194>;\
+        <cns27201>;...;<cns27294>;\
+        <cns27301>;...;<cns27394>;\
+        <cns27401>;...;<cns27494>;\
+        <cns27501>;...;<cns27594>;\
+        <cns27601>;...;<cns27694>;\
+        <cns27701>;...;<cns27794>;\
+        <cns27801>;...;<cns27894>;\
+        <cns27901>;...;<cns27994>;\
+        <cns28001>;...;<cns28094>;\
+        <cns28101>;...;<cns28194>;\
+        <cns28201>;...;<cns28236>;\
+        <cns30101>;...;<cns30194>;\
+        <cns30201>;...;<cns30294>;\
+        <cns30301>;...;<cns30394>;\
+        <cns30401>;...;<cns30494>;\
+        <cns30501>;...;<cns30594>;\
+        <cns30601>;...;<cns30694>;\
+        <cns30701>;...;<cns30794>;\
+        <cns30801>;...;<cns30894>;\
+        <cns30901>;...;<cns30994>;\
+        <cns31001>;...;<cns31094>;\
+        <cns31101>;...;<cns31194>;\
+        <cns31201>;...;<cns31294>;\
+        <cns31301>;...;<cns31394>;\
+        <cns31401>;...;<cns31494>;\
+        <cns31501>;...;<cns31594>;\
+        <cns31601>;...;<cns31694>;\
+        <cns31701>;...;<cns31794>;\
+        <cns31801>;...;<cns31894>;\
+        <cns31901>;...;<cns31994>;\
+        <cns32001>;...;<cns32094>;\
+        <cns32101>;...;<cns32194>;\
+        <cns32201>;...;<cns32294>;\
+        <cns32301>;...;<cns32394>;\
+        <cns32401>;...;<cns32494>;\
+        <cns32501>;...;<cns32594>;\
+        <cns32601>;...;<cns32694>;\
+        <cns32701>;...;<cns32794>;\
+        <cns32801>;...;<cns32894>;\
+        <cns32901>;...;<cns32994>;\
+        <cns33001>;...;<cns33094>;\
+        <cns33101>;...;<cns33194>;\
+        <cns33201>;...;<cns33294>;\
+        <cns33301>;...;<cns33394>;\
+        <cns33401>;...;<cns33494>;\
+        <cns33501>;...;<cns33594>;\
+        <cns33601>;...;<cns33694>;\
+        <cns33701>;...;<cns33794>;\
+        <cns33801>;...;<cns33894>;\
+        <cns33901>;...;<cns33994>;\
+        <cns34001>;...;<cns34094>;\
+        <cns34101>;...;<cns34194>;\
+        <cns34201>;...;<cns34294>;\
+        <cns34301>;...;<cns34394>;\
+        <cns34401>;...;<cns34494>;\
+        <cns34501>;...;<cns34594>;\
+        <cns34601>;...;<cns34694>;\
+        <cns34701>;...;<cns34794>;\
+        <cns34801>;...;<cns34894>;\
+        <cns34901>;...;<cns34994>;\
+        <cns35001>;...;<cns35094>;\
+        <cns35101>;...;<cns35194>;\
+        <cns35201>;...;<cns35294>;\
+        <cns35301>;...;<cns35394>;\
+        <cns35401>;...;<cns35494>;\
+        <cns35501>;...;<cns35594>;\
+        <cns35601>;...;<cns35694>;\
+        <cns35701>;...;<cns35794>;\
+        <cns35801>;...;<cns35894>;\
+        <cns35901>;...;<cns35994>;\
+        <cns36001>;...;<cns36094>;\
+        <cns36101>;...;<cns36194>;\
+        <cns36201>;...;<cns36294>;\
+        <cns36301>;...;<cns36394>;\
+        <cns36401>;...;<cns36494>;\
+        <cns36501>;...;<cns36594>;\
+        <cns36601>;...;<cns36638>;\
+        <cns40101>;...;<cns40194>;\
+        <cns40201>;...;<cns40294>;\
+        <cns40301>;...;<cns40394>;\
+        <cns40401>;...;<cns40494>;\
+        <cns40501>;...;<cns40594>;\
+        <cns40601>;...;<cns40694>;\
+        <cns40701>;...;<cns40794>;\
+        <cns40801>;...;<cns40894>;\
+        <cns40901>;...;<cns40994>;\
+        <cns41001>;...;<cns41094>;\
+        <cns41101>;...;<cns41194>;\
+        <cns41201>;...;<cns41294>;\
+        <cns41301>;...;<cns41394>;\
+        <cns41401>;...;<cns41494>;\
+        <cns41501>;...;<cns41594>;\
+        <cns41601>;...;<cns41694>;\
+        <cns41701>;...;<cns41794>;\
+        <cns41801>;...;<cns41894>;\
+        <cns41901>;...;<cns41994>;\
+        <cns42001>;...;<cns42094>;\
+        <cns42101>;...;<cns42194>;\
+        <cns42201>;...;<cns42294>;\
+        <cns42301>;...;<cns42394>;\
+        <cns42401>;...;<cns42494>;\
+        <cns42501>;...;<cns42594>;\
+        <cns42601>;...;<cns42694>;\
+        <cns42701>;...;<cns42794>;\
+        <cns42801>;...;<cns42894>;\
+        <cns42901>;...;<cns42994>;\
+        <cns43001>;...;<cns43094>;\
+        <cns43101>;...;<cns43194>;\
+        <cns43201>;...;<cns43294>;\
+        <cns43301>;...;<cns43394>;\
+        <cns43401>;...;<cns43494>;\
+        <cns43501>;...;<cns43594>;\
+        <cns43601>;...;<cns43694>;\
+        <cns43701>;...;<cns43794>;\
+        <cns43801>;...;<cns43894>;\
+        <cns43901>;...;<cns43994>;\
+        <cns44001>;...;<cns44094>;\
+        <cns44101>;...;<cns44194>;\
+        <cns44201>;...;<cns44294>;\
+        <cns44301>;...;<cns44394>;\
+        <cns44401>;...;<cns44494>;\
+        <cns44501>;...;<cns44594>;\
+        <cns44601>;...;<cns44694>;\
+        <cns44701>;...;<cns44794>;\
+        <cns44801>;...;<cns44894>;\
+        <cns44901>;...;<cns44994>;\
+        <cns45001>;...;<cns45094>;\
+        <cns45101>;...;<cns45194>;\
+        <cns45201>;...;<cns45294>;\
+        <cns45301>;...;<cns45394>;\
+        <cns45401>;...;<cns45494>;\
+        <cns45501>;...;<cns45594>;\
+        <cns45601>;...;<cns45694>;\
+        <cns45701>;...;<cns45794>;\
+        <cns45801>;...;<cns45894>;\
+        <cns45901>;...;<cns45994>;\
+        <cns46001>;...;<cns46094>;\
+        <cns46101>;...;<cns46194>;\
+        <cns46201>;...;<cns46294>;\
+        <cns46301>;...;<cns46394>;\
+        <cns46401>;...;<cns46494>;\
+        <cns46501>;...;<cns46594>;\
+        <cns46601>;...;<cns46694>;\
+        <cns46701>;...;<cns46794>;\
+        <cns46801>;...;<cns46894>;\
+        <cns46901>;...;<cns46994>;\
+        <cns47001>;...;<cns47094>;\
+        <cns47101>;...;<cns47194>;\
+        <cns47201>;...;<cns47294>;\
+        <cns47301>;...;<cns47394>;\
+        <cns47401>;...;<cns47494>;\
+        <cns47501>;...;<cns47594>;\
+        <cns47601>;...;<cns47694>;\
+        <cns47701>;...;<cns47794>;\
+        <cns47801>;...;<cns47860>;\
+        <cudc0101>;...;<cudc0194>;\
+        <cudc0201>;...;<cudc0294>;\
+        <cudc0301>;...;<cudc0394>;\
+        <cudc0401>;...;<cudc0494>;\
+        <cudc0501>;...;<cudc0594>;\
+        <cudc0601>;...;<cudc0694>;\
+        <cudc0701>;...;<cudc0794>;\
+        <cudc0801>;...;<cudc0894>;\
+        <cudc0901>;...;<cudc0994>;\
+        <cudc1001>;...;<cudc1094>;\
+        <cudc1101>;...;<cudc1194>;\
+        <cudc1201>;...;<cudc1294>;\
+        <cudc1301>;...;<cudc1394>;\
+        <cudc1401>;...;<cudc1494>;\
+        <cudc1501>;...;<cudc1594>;\
+        <cudc1601>;...;<cudc1694>;\
+        <cudc1701>;...;<cudc1794>;\
+        <cudc1801>;...;<cudc1894>;\
+        <cudc1901>;...;<cudc1994>;\
+        <cudc2001>;...;<cudc2094>;\
+        <cudc2101>;...;<cudc2194>;\
+        <cudc2201>;...;<cudc2294>;\
+        <cudc2301>;...;<cudc2394>;\
+        <cudc2401>;...;<cudc2494>;\
+        <cudc2501>;...;<cudc2594>;\
+        <cudc2601>;...;<cudc2694>;\
+        <cudc2701>;...;<cudc2794>;\
+        <cudc2801>;...;<cudc2894>;\
+        <cudc2901>;...;<cudc2994>;\
+        <cudc3001>;...;<cudc3094>;\
+        <cudc3101>;...;<cudc3194>;\
+        <cudc3201>;...;<cudc3294>;\
+        <cudc3301>;...;<cudc3394>;\
+        <cudc3401>;...;<cudc3494>;\
+        <cudc3501>;...;<cudc3594>;\
+        <cudc3601>;...;<cudc3694>;\
+        <cudc3701>;...;<cudc3794>;\
+        <cudc3801>;...;<cudc3894>;\
+        <cudc3901>;...;<cudc3994>;\
+        <cudc4001>;...;<cudc4094>;\
+        <cudc4101>;...;<cudc4194>;\
+        <cudc4201>;...;<cudc4294>;\
+        <cudc4301>;...;<cudc4394>;\
+        <cudc4401>;...;<cudc4494>;\
+        <cudc4501>;...;<cudc4594>;\
+        <cudc4601>;...;<cudc4694>;\
+        <cudc4701>;...;<cudc4794>;\
+        <cudc4801>;...;<cudc4894>;\
+        <cudc4901>;...;<cudc4994>;\
+        <cudc5001>;...;<cudc5094>;\
+        <cudc5101>;...;<cudc5194>;\
+        <cudc5201>;...;<cudc5294>;\
+        <cudc5301>;...;<cudc5394>;\
+        <cudc5401>;...;<cudc5494>;\
+        <cudc5501>;...;<cudc5594>;\
+        <cudc5601>;...;<cudc5694>;\
+        <cudc5701>;...;<cudc5794>;\
+        <cudc5801>;...;<cudc5894>;\
+        <cudc5901>;...;<cudc5994>;\
+        <cudc6001>;...;<cudc6094>;\
+        <cudc6101>;...;<cudc6194>;\
+        <cudc6201>;...;<cudc6294>;\
+        <cudc6301>;...;<cudc6394>;\
+        <cudc6401>;...;<cudc6494>;\
+        <cudc6501>;...;<cudc6594>;\
+        <cudc6601>;...;<cudc6694>;\
+        <csbd0101>;...;<csbd0150>;\
+        <csbd0332>;...;<csbd0364>;\
+        <csbd0365>;...;<csbd0394>;\
+        <csbd0401>;...;<csbd0403>;\
+        <csbd0404>;...;<csbd0438>;\
+        <csbd0439>;...;<csbd0443>
+#
+# Punct contains all other printable characters, i.e.:
+#       symbols in ASCII,
+#       ``special characters'' in CNS11643.1986
+#       ``border characters'' in CNS11643.1986
+#       ``special characters'' in IBM Unique Symbols
+
+punct   <exclamation-mark>;<quotation-mark>;<number-sign>;\
+        <dollar-sign>;<percent-sign>;<ampersand>;<apostrophe>;\
+        <left-parenthesis>;<right-parenthesis>;<asterisk>;\
+        <plus-sign>;<comma>;<hyphen>;<period>;<slash>;\
+        <colon>;<semicolon>;<less-than-sign>;<equals-sign>;\
+        <greater-than-sign>;<question-mark>;<commercial-at>;\
+        <left-square-bracket>;<backslash>;<right-square-bracket>;\
+        <circumflex>;<underscore>;<grave-accent>;\
+        <left-brace>;<vertical-line>;<right-brace>;<tilde>;\
+        <cns10102>;...;<cns10194>;<cns10201>;...;<cns10294>;\
+        <cns10301>;...;<cns10394>;<cns10401>;...;<cns10432>;\
+        <csbd0101>;...;<csbd0150>;<csbd0404>;...;<csbd0438>
+
+# Alnum, graph and print are not defined here.  They will
+# be supplied by localedef command.
+
+# blank is same as C locale.
+
+blank   <space>;<tab>
+
+# Toupper and tolower handle characters in JIS X0208 as well.
+
+toupper (<a>,<A>);(<b>,<B>);(<c>,<C>);(<d>,<D>);(<e>,<E>);\
+        (<f>,<F>);(<g>,<G>);(<h>,<H>);(<i>,<I>);(<j>,<J>);\
+        (<k>,<K>);(<l>,<L>);(<m>,<M>);(<n>,<N>);(<o>,<O>);\
+        (<p>,<P>);(<q>,<Q>);(<r>,<R>);(<s>,<S>);(<t>,<T>);\
+        (<u>,<U>);(<v>,<V>);(<w>,<W>);(<x>,<X>);(<y>,<Y>);\
+        (<z>,<Z>);\
+        (<cns10459>,<cns10433>);(<cns10460>,<cns10434>);(<cns10461>,<cns10435>);\
+        (<cns10462>,<cns10436>);(<cns10463>,<cns10437>);(<cns10464>,<cns10438>);\
+        (<cns10465>,<cns10439>);(<cns10466>,<cns10440>);(<cns10467>,<cns10441>);\
+        (<cns10468>,<cns10442>);(<cns10469>,<cns10443>);(<cns10470>,<cns10444>);\
+        (<cns10471>,<cns10445>);(<cns10472>,<cns10446>);(<cns10473>,<cns10447>);\
+        (<cns10474>,<cns10448>);(<cns10475>,<cns10449>);(<cns10476>,<cns10450>);\
+        (<cns10477>,<cns10451>);(<cns10478>,<cns10452>);(<cns10479>,<cns10453>);\
+        (<cns10480>,<cns10454>);(<cns10481>,<cns10455>);(<cns10482>,<cns10456>);\
+        (<cns10483>,<cns10457>);(<cns10484>,<cns10458>);\
+        (<cns10515>,<cns10485>);(<cns10516>,<cns10486>);(<cns10517>,<cns10487>);\
+        (<cns10518>,<cns10488>);(<cns10519>,<cns10489>);(<cns10520>,<cns10490>);\
+        (<cns10521>,<cns10491>);(<cns10522>,<cns10492>);(<cns10523>,<cns10493>);\
+        (<cns10524>,<cns10494>);(<cns10525>,<cns10501>);(<cns10526>,<cns10502>);\
+        (<cns10527>,<cns10503>);(<cns10528>,<cns10504>);(<cns10529>,<cns10505>);\
+        (<cns10530>,<cns10506>);(<cns10531>,<cns10507>);(<cns10532>,<cns10508>);\
+        (<cns10533>,<cns10509>);(<cns10534>,<cns10510>);(<cns10535>,<cns10511>);\
+        (<cns10536>,<cns10512>);(<cns10537>,<cns10513>);(<cns10538>,<cns10514>);\
+        (<csbd0365>,<csbd0332>);(<csbd0366>,<csbd0333>);\
+        (<csbd0367>,<csbd0334>);(<csbd0368>,<csbd0335>);\
+        (<csbd0369>,<csbd0336>);(<csbd0370>,<csbd0337>);\
+        (<csbd0371>,<csbd0338>);(<csbd0372>,<csbd0339>);\
+        (<csbd0373>,<csbd0340>);(<csbd0374>,<csbd0341>);\
+        (<csbd0375>,<csbd0342>);(<csbd0376>,<csbd0343>);\
+        (<csbd0377>,<csbd0344>);(<csbd0378>,<csbd0345>);\
+        (<csbd0379>,<csbd0346>);(<csbd0380>,<csbd0347>);\
+        (<csbd0381>,<csbd0348>);(<csbd0382>,<csbd0349>);\
+        (<csbd0383>,<csbd0350>);(<csbd0384>,<csbd0351>);\
+        (<csbd0385>,<csbd0352>);(<csbd0386>,<csbd0353>);\
+        (<csbd0387>,<csbd0354>);(<csbd0388>,<csbd0355>);\
+        (<csbd0389>,<csbd0356>);(<csbd0390>,<csbd0357>);\
+        (<csbd0391>,<csbd0358>);(<csbd0392>,<csbd0359>);\
+        (<csbd0393>,<csbd0360>);(<csbd0394>,<csbd0361>);\
+        (<csbd0401>,<csbd0362>);(<csbd0402>,<csbd0363>);\
+        (<csbd0403>,<csbd0364>)
+
+tolower (<A>,<a>);(<B>,<b>);(<C>,<c>);(<D>,<d>);(<E>,<e>);\
+        (<F>,<f>);(<G>,<g>);(<H>,<h>);(<I>,<i>);(<J>,<j>);\
+        (<K>,<k>);(<L>,<l>);(<M>,<m>);(<N>,<n>);(<O>,<o>);\
+        (<P>,<p>);(<Q>,<q>);(<R>,<r>);(<S>,<s>);(<T>,<t>);\
+        (<U>,<u>);(<V>,<v>);(<W>,<w>);(<X>,<x>);(<Y>,<y>);\
+        (<Z>,<z>);\
+        (<cns10433>,<cns10459>);(<cns10434>,<cns10460>);(<cns10435>,<cns10461>);\
+        (<cns10436>,<cns10462>);(<cns10437>,<cns10463>);(<cns10438>,<cns10464>);\
+        (<cns10439>,<cns10465>);(<cns10440>,<cns10466>);(<cns10441>,<cns10467>);\
+        (<cns10442>,<cns10468>);(<cns10443>,<cns10469>);(<cns10444>,<cns10470>);\
+        (<cns10445>,<cns10471>);(<cns10446>,<cns10472>);(<cns10447>,<cns10473>);\
+        (<cns10448>,<cns10474>);(<cns10449>,<cns10475>);(<cns10450>,<cns10476>);\
+        (<cns10451>,<cns10477>);(<cns10452>,<cns10478>);(<cns10453>,<cns10479>);\
+        (<cns10454>,<cns10480>);(<cns10455>,<cns10481>);(<cns10456>,<cns10482>);\
+        (<cns10457>,<cns10483>);(<cns10458>,<cns10484>);\
+        (<cns10485>,<cns10515>);(<cns10486>,<cns10516>);(<cns10487>,<cns10517>);\
+        (<cns10488>,<cns10518>);(<cns10489>,<cns10519>);(<cns10490>,<cns10520>);\
+        (<cns10491>,<cns10521>);(<cns10492>,<cns10522>);(<cns10493>,<cns10523>);\
+        (<cns10494>,<cns10524>);(<cns10501>,<cns10525>);(<cns10502>,<cns10526>);\
+        (<cns10503>,<cns10527>);(<cns10504>,<cns10528>);(<cns10505>,<cns10529>);\
+        (<cns10506>,<cns10530>);(<cns10507>,<cns10531>);(<cns10508>,<cns10532>);\
+        (<cns10509>,<cns10533>);(<cns10510>,<cns10534>);(<cns10511>,<cns10535>);\
+        (<cns10512>,<cns10536>);(<cns10513>,<cns10537>);(<cns10514>,<cns10538>);\
+        (<csbd0332>,<csbd0365>);(<csbd0333>,<csbd0366>);\
+        (<csbd0334>,<csbd0367>);(<csbd0335>,<csbd0368>);\
+        (<csbd0336>,<csbd0369>);(<csbd0337>,<csbd0370>);\
+        (<csbd0338>,<csbd0371>);(<csbd0339>,<csbd0372>);\
+        (<csbd0340>,<csbd0373>);(<csbd0341>,<csbd0374>);\
+        (<csbd0342>,<csbd0375>);(<csbd0343>,<csbd0376>);\
+        (<csbd0344>,<csbd0377>);(<csbd0345>,<csbd0378>);\
+        (<csbd0346>,<csbd0379>);(<csbd0347>,<csbd0380>);\
+        (<csbd0348>,<csbd0381>);(<csbd0349>,<csbd0382>);\
+        (<csbd0350>,<csbd0383>);(<csbd0351>,<csbd0384>);\
+        (<csbd0352>,<csbd0385>);(<csbd0353>,<csbd0386>);\
+        (<csbd0354>,<csbd0387>);(<csbd0355>,<csbd0388>);\
+        (<csbd0356>,<csbd0389>);(<csbd0357>,<csbd0390>);\
+        (<csbd0358>,<csbd0391>);(<csbd0359>,<csbd0392>);\
+        (<csbd0360>,<csbd0393>);(<csbd0361>,<csbd0394>);\
+        (<csbd0362>,<csbd0401>);(<csbd0363>,<csbd0402>);\
+        (<csbd0364>,<csbd0403>)
+END LC_CTYPE
+
+# Notes on LC_COLLATE:
+#       The following definition provide the straight forward
+#       collation for all characters in Chinese locale.
+#       The ordering is based on byte-by-byte comparison of
+#       their codes.
+
+LC_COLLATE
+
+order_start
+<NUL>
+<SOH>
+<STX>
+<ETX>
+<EOT>
+<ENQ>
+<ACK>
+<alert>
+<backspace>
+<tab>
+<newline>
+<vertical-tab>
+<form-feed>
+<carriage-return>
+<SO>
+<SI>
+<DLE>
+<DC1>
+<DC2>
+<DC3>
+<DC4>
+<NAK>
+<SYN>
+<ETB>
+<CAN>
+<EM>
+<SUB>
+<ESC>
+<IS4>
+<IS3>
+<IS2>
+<IS1>
+<space>
+<exclamation-mark>
+<quotation-mark>
+<number-sign>
+<dollar-sign>
+<percent-sign>
+<ampersand>
+<apostrophe>
+<left-parenthesis>
+<right-parenthesis>
+<asterisk>
+<plus-sign>
+<comma>
+<hyphen>
+<period>
+<slash>
+<zero>
+<one>
+<two>
+<three>
+<four>
+<five>
+<six>
+<seven>
+<eight>
+<nine>
+<colon>
+<semicolon>
+<less-than-sign>
+<equals-sign>
+<greater-than-sign>
+<question-mark>
+<commercial-at>
+<A>
+<B>
+<C>
+<D>
+<E>
+<F>
+<G>
+<H>
+<I>
+<J>
+<K>
+<L>
+<M>
+<N>
+<O>
+<P>
+<Q>
+<R>
+<S>
+<T>
+<U>
+<V>
+<W>
+<X>
+<Y>
+<Z>
+<left-square-bracket>
+<backslash>
+<right-square-bracket>
+<circumflex>
+<underscore>
+<grave-accent>
+<a>
+<b>
+<c>
+<d>
+<e>
+<f>
+<g>
+<h>
+<i>
+<j>
+<k>
+<l>
+<m>
+<n>
+<o>
+<p>
+<q>
+<r>
+<s>
+<t>
+<u>
+<v>
+<w>
+<x>
+<y>
+<z>
+<left-brace>
+<vertical-line>
+<right-brace>
+<tilde>
+<DEL>
+#CS1 Plane 1, 684 Symbols A1A1-C2C1
+
+<cns10101>
+...
+<cns10194>
+<cns10201>
+...
+<cns10294>
+<cns10301>
+...
+<cns10394>
+<cns10401>
+...
+<cns10494>
+<cns10501>
+...
+<cns10594>
+<cns10601>
+...
+<cns10694>
+<cns10701>
+...
+<cns10794>
+<cns10801>
+...
+<cns10894>
+<cns10901>
+...
+<cns10994>
+<cns11001>
+...
+<cns11094>
+<cns11101>
+...
+<cns11194>
+<cns11201>
+...
+<cns11294>
+<cns11301>
+...
+<cns11394>
+<cns11401>
+...
+<cns11494>
+<cns11501>
+...
+<cns11594>
+<cns11601>
+...
+<cns11694>
+<cns11701>
+...
+<cns11794>
+<cns11801>
+...
+<cns11894>
+<cns11901>
+...
+<cns11994>
+<cns12001>
+...
+<cns12094>
+<cns12101>
+...
+<cns12194>
+<cns12201>
+...
+<cns12294>
+<cns12301>
+...
+<cns12394>
+<cns12401>
+...
+<cns12494>
+<cns12501>
+...
+<cns12594>
+<cns12601>
+...
+<cns12694>
+<cns12701>
+...
+<cns12794>
+<cns12801>
+...
+<cns12894>
+<cns12901>
+...
+<cns12994>
+<cns13001>
+...
+<cns13094>
+<cns13101>
+...
+<cns13194>
+<cns13201>
+...
+<cns13294>
+<cns13301>
+...
+<cns13394>
+<cns13401>
+...
+<cns13433>
+# CS1 Plane 1 , 5401 Characters, C4A1-FDCB
+<cns13601>
+...
+<cns13694>
+<cns13701>
+...
+<cns13794>
+<cns13801>
+...
+<cns13894>
+<cns13901>
+...
+<cns13994>
+<cns14001>
+...
+<cns14094>
+<cns14101>
+...
+<cns14194>
+<cns14201>
+...
+<cns14294>
+<cns14301>
+...
+<cns14394>
+<cns14401>
+...
+<cns14494>
+<cns14501>
+...
+<cns14594>
+<cns14601>
+...
+<cns14694>
+<cns14701>
+...
+<cns14794>
+<cns14801>
+...
+<cns14894>
+<cns14901>
+...
+<cns14994>
+<cns15001>
+...
+<cns15094>
+<cns15101>
+...
+<cns15194>
+<cns15201>
+...
+<cns15294>
+<cns15301>
+...
+<cns15394>
+<cns15401>
+...
+<cns15494>
+<cns15501>
+...
+<cns15594>
+<cns15601>
+...
+<cns15694>
+<cns15701>
+...
+<cns15794>
+<cns15801>
+...
+<cns15894>
+<cns15901>
+...
+<cns15994>
+<cns16001>
+...
+<cns16094>
+<cns16101>
+...
+<cns16194>
+<cns16201>
+...
+<cns16294>
+<cns16301>
+...
+<cns16394>
+<cns16401>
+...
+<cns16494>
+<cns16501>
+...
+<cns16594>
+<cns16601>
+...
+<cns16694>
+<cns16701>
+...
+<cns16794>
+<cns16801>
+...
+<cns16894>
+<cns16901>
+...
+<cns16994>
+<cns17001>
+...
+<cns17094>
+<cns17101>
+...
+<cns17194>
+<cns17201>
+...
+<cns17294>
+<cns17301>
+...
+<cns17394>
+<cns17401>
+...
+<cns17494>
+<cns17501>
+...
+<cns17594>
+<cns17601>
+...
+<cns17694>
+<cns17701>
+...
+<cns17794>
+<cns17801>
+...
+<cns17894>
+<cns17901>
+...
+<cns17994>
+<cns18001>
+...
+<cns18094>
+<cns18101>
+...
+<cns18194>
+<cns18201>
+...
+<cns18294>
+<cns18301>
+...
+<cns18394>
+<cns18401>
+...
+<cns18494>
+<cns18501>
+...
+<cns18594>
+<cns18601>
+...
+<cns18694>
+<cns18701>
+...
+<cns18794>
+<cns18801>
+...
+<cns18894>
+<cns18901>
+...
+<cns18994>
+<cns19001>
+...
+<cns19094>
+<cns19101>
+...
+<cns19194>
+<cns19201>
+...
+<cns19294>
+<cns19301>
+...
+<cns19343>
+#<FDFE>
+#<FEA1>
+#...
+#<FEFE>
+#
+#CS2 Plane 2, Secondary Frequently Used Characters, 7650 Characters
+# Code Range 8EA2A1A1-8EA2F2C4
+<cns20101>
+...
+<cns20194>
+<cns20201>
+...
+<cns20294>
+<cns20301>
+...
+<cns20394>
+<cns20401>
+...
+<cns20494>
+<cns20501>
+...
+<cns20594>
+<cns20601>
+...
+<cns20694>
+<cns20701>
+...
+<cns20794>
+<cns20801>
+...
+<cns20894>
+<cns20901>
+...
+<cns20994>
+<cns21001>
+...
+<cns21094>
+<cns21101>
+...
+<cns21194>
+<cns21201>
+...
+<cns21294>
+<cns21301>
+...
+<cns21394>
+<cns21401>
+...
+<cns21494>
+<cns21501>
+...
+<cns21594>
+<cns21601>
+...
+<cns21694>
+<cns21701>
+...
+<cns21794>
+<cns21801>
+...
+<cns21894>
+<cns21901>
+...
+<cns21994>
+<cns22001>
+...
+<cns22094>
+<cns22101>
+...
+<cns22194>
+<cns22201>
+...
+<cns22294>
+<cns22301>
+...
+<cns22394>
+<cns22401>
+...
+<cns22494>
+<cns22501>
+...
+<cns22594>
+<cns22601>
+...
+<cns22694>
+<cns22701>
+...
+<cns22794>
+<cns22801>
+...
+<cns22894>
+<cns22901>
+...
+<cns22994>
+<cns23001>
+...
+<cns23094>
+<cns23101>
+...
+<cns23194>
+<cns23201>
+...
+<cns23294>
+<cns23301>
+...
+<cns23394>
+<cns23401>
+...
+<cns23494>
+<cns23501>
+...
+<cns23594>
+<cns23601>
+...
+<cns23694>
+<cns23701>
+...
+<cns23794>
+<cns23801>
+...
+<cns23894>
+<cns23901>
+...
+<cns23994>
+<cns24001>
+...
+<cns24094>
+<cns24101>
+...
+<cns24194>
+<cns24201>
+...
+<cns24294>
+<cns24301>
+...
+<cns24394>
+<cns24401>
+...
+<cns24494>
+<cns24501>
+...
+<cns24594>
+<cns24601>
+...
+<cns24694>
+<cns24701>
+...
+<cns24794>
+<cns24801>
+...
+<cns24894>
+<cns24901>
+...
+<cns24994>
+<cns25001>
+...
+<cns25094>
+<cns25101>
+...
+<cns25194>
+<cns25201>
+...
+<cns25294>
+<cns25301>
+...
+<cns25394>
+<cns25401>
+...
+<cns25494>
+<cns25501>
+...
+<cns25594>
+<cns25601>
+...
+<cns25694>
+<cns25701>
+...
+<cns25794>
+<cns25801>
+...
+<cns25894>
+<cns25901>
+...
+<cns25994>
+<cns26001>
+...
+<cns26094>
+<cns26101>
+...
+<cns26194>
+<cns26201>
+...
+<cns26294>
+<cns26301>
+...
+<cns26394>
+<cns26401>
+...
+<cns26494>
+<cns26501>
+...
+<cns26594>
+<cns26601>
+...
+<cns26694>
+<cns26701>
+...
+<cns26794>
+<cns26801>
+...
+<cns26894>
+<cns26901>
+...
+<cns26994>
+<cns27001>
+...
+<cns27094>
+<cns27101>
+...
+<cns27194>
+<cns27201>
+...
+<cns27294>
+<cns27301>
+...
+<cns27394>
+<cns27401>
+...
+<cns27494>
+<cns27501>
+...
+<cns27594>
+<cns27601>
+...
+<cns27694>
+<cns27701>
+...
+<cns27794>
+<cns27801>
+...
+<cns27894>
+<cns27901>
+...
+<cns27994>
+<cns28001>
+...
+<cns28094>
+<cns28101>
+...
+<cns28194>
+<cns28201>
+...
+<cns28236>
+#CS2 Plane 3, Executive Yuen DP Center 6/1988 , 6148 Characters
+# Code Range 8EA3A1A1-8EA3E2C6
+<cns30101>
+...
+<cns30194>
+<cns30201>
+...
+<cns30294>
+<cns30301>
+...
+<cns30394>
+<cns30401>
+...
+<cns30494>
+<cns30501>
+...
+<cns30594>
+<cns30601>
+...
+<cns30694>
+<cns30701>
+...
+<cns30794>
+<cns30801>
+...
+<cns30894>
+<cns30901>
+...
+<cns30994>
+<cns31001>
+...
+<cns31094>
+<cns31101>
+...
+<cns31194>
+<cns31201>
+...
+<cns31294>
+<cns31301>
+...
+<cns31394>
+<cns31401>
+...
+<cns31494>
+<cns31501>
+...
+<cns31594>
+<cns31601>
+...
+<cns31694>
+<cns31701>
+...
+<cns31794>
+<cns31801>
+...
+<cns31894>
+<cns31901>
+...
+<cns31994>
+<cns32001>
+...
+<cns32094>
+<cns32101>
+...
+<cns32194>
+<cns32201>
+...
+<cns32294>
+<cns32301>
+...
+<cns32394>
+<cns32401>
+...
+<cns32494>
+<cns32501>
+...
+<cns32594>
+<cns32601>
+...
+<cns32694>
+<cns32701>
+...
+<cns32794>
+<cns32801>
+...
+<cns32894>
+<cns32901>
+...
+<cns32994>
+<cns33001>
+...
+<cns33094>
+<cns33101>
+...
+<cns33194>
+<cns33201>
+...
+<cns33294>
+<cns33301>
+...
+<cns33394>
+<cns33401>
+...
+<cns33494>
+<cns33501>
+...
+<cns33594>
+<cns33601>
+...
+<cns33694>
+<cns33701>
+...
+<cns33794>
+<cns33801>
+...
+<cns33894>
+<cns33901>
+...
+<cns33994>
+<cns34001>
+...
+<cns34094>
+<cns34101>
+...
+<cns34194>
+<cns34201>
+...
+<cns34294>
+<cns34301>
+...
+<cns34394>
+<cns34401>
+...
+<cns34494>
+<cns34501>
+...
+<cns34594>
+<cns34601>
+...
+<cns34694>
+<cns34701>
+...
+<cns34794>
+<cns34801>
+...
+<cns34894>
+<cns34901>
+...
+<cns34994>
+<cns35001>
+...
+<cns35094>
+<cns35101>
+...
+<cns35194>
+<cns35201>
+...
+<cns35294>
+<cns35301>
+...
+<cns35394>
+<cns35401>
+...
+<cns35494>
+<cns35501>
+...
+<cns35594>
+<cns35601>
+...
+<cns35694>
+<cns35701>
+...
+<cns35794>
+<cns35801>
+...
+<cns35894>
+<cns35901>
+...
+<cns35994>
+<cns36001>
+...
+<cns36094>
+<cns36101>
+...
+<cns36194>
+<cns36201>
+...
+<cns36294>
+<cns36301>
+...
+<cns36394>
+<cns36401>
+...
+<cns36494>
+<cns36501>
+...
+<cns36594>
+<cns36601>
+...
+<cns36638>
+#CS2 Plane 4, RIS, ISO10646, 171 from original plane 14, 7278 Characters
+# Code Range 8EA4A1A1-8EA4EEDC
+<cns40101>
+...
+<cns40194>
+<cns40201>
+...
+<cns40294>
+<cns40301>
+...
+<cns40394>
+<cns40401>
+...
+<cns40494>
+<cns40501>
+...
+<cns40594>
+<cns40601>
+...
+<cns40694>
+<cns40701>
+...
+<cns40794>
+<cns40801>
+...
+<cns40894>
+<cns40901>
+...
+<cns40994>
+<cns41001>
+...
+<cns41094>
+<cns41101>
+...
+<cns41194>
+<cns41201>
+...
+<cns41294>
+<cns41301>
+...
+<cns41394>
+<cns41401>
+...
+<cns41494>
+<cns41501>
+...
+<cns41594>
+<cns41601>
+...
+<cns41694>
+<cns41701>
+...
+<cns41794>
+<cns41801>
+...
+<cns41894>
+<cns41901>
+...
+<cns41994>
+<cns42001>
+...
+<cns42094>
+<cns42101>
+...
+<cns42194>
+<cns42201>
+...
+<cns42294>
+<cns42301>
+...
+<cns42394>
+<cns42401>
+...
+<cns42494>
+<cns42501>
+...
+<cns42594>
+<cns42601>
+...
+<cns42694>
+<cns42701>
+...
+<cns42794>
+<cns42801>
+...
+<cns42894>
+<cns42901>
+...
+<cns42994>
+<cns43001>
+...
+<cns43094>
+<cns43101>
+...
+<cns43194>
+<cns43201>
+...
+<cns43294>
+<cns43301>
+...
+<cns43394>
+<cns43401>
+...
+<cns43494>
+<cns43501>
+...
+<cns43594>
+<cns43601>
+...
+<cns43694>
+<cns43701>
+...
+<cns43794>
+<cns43801>
+...
+<cns43894>
+<cns43901>
+...
+<cns43994>
+<cns44001>
+...
+<cns44094>
+<cns44101>
+...
+<cns44194>
+<cns44201>
+...
+<cns44294>
+<cns44301>
+...
+<cns44394>
+<cns44401>
+...
+<cns44494>
+<cns44501>
+...
+<cns44594>
+<cns44601>
+...
+<cns44694>
+<cns44701>
+...
+<cns44794>
+<cns44801>
+...
+<cns44894>
+<cns44901>
+...
+<cns44994>
+<cns45001>
+...
+<cns45094>
+<cns45101>
+...
+<cns45194>
+<cns45201>
+...
+<cns45294>
+<cns45301>
+...
+<cns45394>
+<cns45401>
+...
+<cns45494>
+<cns45501>
+...
+<cns45594>
+<cns45601>
+...
+<cns45694>
+<cns45701>
+...
+<cns45794>
+<cns45801>
+...
+<cns45894>
+<cns45901>
+...
+<cns45994>
+<cns46001>
+...
+<cns46094>
+<cns46101>
+...
+<cns46194>
+<cns46201>
+...
+<cns46294>
+<cns46301>
+...
+<cns46394>
+<cns46401>
+...
+<cns46494>
+<cns46501>
+...
+<cns46594>
+<cns46601>
+...
+<cns46694>
+<cns46701>
+...
+<cns46794>
+<cns46801>
+...
+<cns46894>
+<cns46901>
+...
+<cns46994>
+<cns47001>
+...
+<cns47094>
+<cns47101>
+...
+<cns47194>
+<cns47201>
+...
+<cns47294>
+<cns47301>
+...
+<cns47394>
+<cns47401>
+...
+<cns47494>
+<cns47501>
+...
+<cns47594>
+<cns47601>
+...
+<cns47694>
+<cns47701>
+...
+<cns47794>
+<cns47801>
+...
+<cns47860>
+#CS2 Plane 12- User defined Area,6204 Characters
+#Code Range 8EACA1A1-8EACE2FE
+<cudc0101>
+...
+<cudc0194>
+<cudc0201>
+...
+<cudc0294>
+<cudc0301>
+...
+<cudc0394>
+<cudc0401>
+...
+<cudc0494>
+<cudc0501>
+...
+<cudc0594>
+<cudc0601>
+...
+<cudc0694>
+<cudc0701>
+...
+<cudc0794>
+<cudc0801>
+...
+<cudc0894>
+<cudc0901>
+...
+<cudc0994>
+<cudc1001>
+...
+<cudc1094>
+<cudc1101>
+...
+<cudc1194>
+<cudc1201>
+...
+<cudc1294>
+<cudc1301>
+...
+<cudc1394>
+<cudc1401>
+...
+<cudc1494>
+<cudc1501>
+...
+<cudc1594>
+<cudc1601>
+...
+<cudc1694>
+<cudc1701>
+...
+<cudc1794>
+<cudc1801>
+...
+<cudc1894>
+<cudc1901>
+...
+<cudc1994>
+<cudc2001>
+...
+<cudc2094>
+<cudc2101>
+...
+<cudc2194>
+<cudc2201>
+...
+<cudc2294>
+<cudc2301>
+...
+<cudc2394>
+<cudc2401>
+...
+<cudc2494>
+<cudc2501>
+...
+<cudc2594>
+<cudc2601>
+...
+<cudc2694>
+<cudc2701>
+...
+<cudc2794>
+<cudc2801>
+...
+<cudc2894>
+<cudc2901>
+...
+<cudc2994>
+<cudc3001>
+...
+<cudc3094>
+<cudc3101>
+...
+<cudc3194>
+<cudc3201>
+...
+<cudc3294>
+<cudc3301>
+...
+<cudc3394>
+<cudc3401>
+...
+<cudc3494>
+<cudc3501>
+...
+<cudc3594>
+<cudc3601>
+...
+<cudc3694>
+<cudc3701>
+...
+<cudc3794>
+<cudc3801>
+...
+<cudc3894>
+<cudc3901>
+...
+<cudc3994>
+<cudc4001>
+...
+<cudc4094>
+<cudc4101>
+...
+<cudc4194>
+<cudc4201>
+...
+<cudc4294>
+<cudc4301>
+...
+<cudc4394>
+<cudc4401>
+...
+<cudc4494>
+<cudc4501>
+...
+<cudc4594>
+<cudc4601>
+...
+<cudc4694>
+<cudc4701>
+...
+<cudc4794>
+<cudc4801>
+...
+<cudc4894>
+<cudc4901>
+...
+<cudc4994>
+<cudc5001>
+...
+<cudc5094>
+<cudc5101>
+...
+<cudc5194>
+<cudc5201>
+...
+<cudc5294>
+<cudc5301>
+...
+<cudc5394>
+<cudc5401>
+...
+<cudc5494>
+<cudc5501>
+...
+<cudc5594>
+<cudc5601>
+...
+<cudc5694>
+<cudc5701>
+...
+<cudc5794>
+<cudc5801>
+...
+<cudc5894>
+<cudc5901>
+...
+<cudc5994>
+<cudc6001>
+...
+<cudc6094>
+<cudc6101>
+...
+<cudc6194>
+<cudc6201>
+...
+<cudc6294>
+<cudc6301>
+...
+<cudc6394>
+<cudc6401>
+...
+<cudc6494>
+<cudc6501>
+...
+<cudc6594>
+<cudc6601>
+...
+<cudc6694>
+#CS2 Plane 13--IBM Unique Symbols, 325 Characters
+#Code Range 8EADA1A1-8EADA4CB, 8EADA4C7-8EADA4CB are Chinese characters
+#
+<csbd0101>
+...
+<csbd0194>
+<csbd0201>
+...
+<csbd0294>
+<csbd0301>
+...
+<csbd0394>
+<csbd0401>
+...
+<csbd0443>
+order_end
+
+END LC_COLLATE
+
+# Notes on LC_MESSAGES
+#
+# The name of this category is LC_MESSAGES here, as in
+# POSIX.2 D10.
+#
+
+LC_MESSAGES
+
+yesexpr "<circumflex><left-square-bracket><y><Y><cns14950><right-square-bracket>"
+noexpr  "<circumflex><left-square-bracket><n><N><cns14133><right-square-bracket>"
+yesstr  "y:Y:Yes"
+nostr   "n:N:No"
+
+END LC_MESSAGES
+
+# Notes for LC_MONETARY:
+#
+
+LC_MONETARY
+
+int_curr_symbol         "<N><T><D><space>"
+currency_symbol         "<N><T><dollar-sign>"
+mon_decimal_point       <period>
+mon_thousands_sep       "<comma>"
+mon_grouping            3
+positive_sign           ""
+negative_sign           "<hyphen>"
+int_frac_digits         2
+frac_digits             2
+p_cs_precedes           1
+p_sep_by_space          0
+n_cs_precedes           1
+n_sep_by_space          0
+p_sign_posn             1
+n_sign_posn             4
+
+END LC_MONETARY
+
+# Notes for LC_NUMERIC
+# The Chinese numeric representation is the same with that of US
+
+LC_NUMERIC
+
+decimal_point           <period>
+thousands_sep           "<comma>"
+grouping                3
+
+END LC_NUMERIC
+
+# Notes for LC_TIME
+# Same for both mon and abmon , day and abday.
+
+LC_TIME
+
+# Sunday Monday, and so on  in Chinese Ideogram
+abday  "<cns13742>";"<cns13601>";\
+"<cns13608>";"<cns13621>";\
+"<cns13830>";"<cns13676>";\
+"<cns13690>"
+
+# Same as abday
+day  "<cns14951><cns16370><cns13742>";"<cns14951><cns16370><cns13601>";\
+ "<cns14951><cns16370><cns13608>";"<cns14951><cns16370><cns13621>";\
+ "<cns14951><cns16370><cns13830>";"<cns14951><cns16370><cns13676>";\
+ "<cns14951><cns16370><cns13690>"
+
+# First Month , Second month...in Chinese Digits
+#abmon  "<one><cns13744>";"<two><cns13744>";"<three><cns13744>";\
+#"<four><cns13744>";"<five><cns13744>";"<six><cns13744>";\
+#"<seven><cns13744>";"<eight><cns13744>";"<nine><cns13744>";\
+#"<one><zero><cns13744>";"<one><one><cns13744>";\
+#"<one><two><cns13744>"
+
+abmon  "<space><one><cns13744>";\
+ "<space><two><cns13744>";\
+ "<space><three><cns13744>";\
+ "<space><four><cns13744>";\
+ "<space><five><cns13744>";\
+ "<space><six><cns13744>";\
+ "<space><seven><cns13744>";\
+ "<space><eight><cns13744>";\
+ "<space><nine><cns13744>";\
+ "<one><zero><cns13744>";\
+ "<one><one><cns13744>";\
+ "<one><two><cns13744>"
+
+# same as abmon
+mon  "<one><cns13744>";"<two><cns13744>";"<three><cns13744>";\
+ "<four><cns13744>";"<five><cns13744>";"<six><cns13744>";\
+ "<seven><cns13744>";"<eight><cns13744>";"<nine><cns13744>";\
+ "<one><zero><cns13744>";"<one><one><cns13744>";\
+ "<one><two><cns13744>"
+
+
+# Era year definition: THIS IS AN X/OPEN EXTENSION
+# This definition handles these 1 era only, i.e., Republic of China
+# Years befor ROC are printed
+# as A.D. or B.C.
+
+era "<plus-sign><colon>\
+<two><colon>\
+<one><nine><one><three><slash><zero><one><slash><zero><one><colon>\
+<plus-sign><asterisk><colon>\
+<cns13667><cns16562><cns13865><cns15747><colon>\
+<percent-sign><N><percent-sign><o><cns14001>;\
+<plus-sign><colon>\
+<one><colon>\
+<one><nine><one><two><slash><zero><one><slash><zero><one><colon>\
+<one><nine><one><two><slash><one><two><slash><three><one><colon>\
+<cns13667><cns16562><cns13865><cns15747><colon>\
+<percent-sign><N><cns13607><cns14001>;\
+<plus-sign><colon>\
+<one><colon>\
+<one><slash>><one><slash><one><colon>\
+<one><nine><one><one><slash><one><two><slash><three><one><colon>\
+<cns14073><cns13687><colon>\
+<percent-sign><N><percent-sign><o><cns14001>;\
+<hyphen><colon>\
+<one><colon>\
+<hyphen><one><slash><one><two><slash><three><one><colon>\
+<hyphen><asterisk><colon>\
+<cns14073><cns13687><cns14809><colon>\
+<percent-sign><N><percent-sign><o><cns14001>"
+
+# expected output:
+#       ROC 80 YEAR 5 MONTH 6 DATE  Monday 8 HOUR 30 MINUTE 0 SECOND
+# in Chinese Ideograms
+# d_t_fmt "91/11/12m<cns1C5CC>%d<cns1C5CA>%a%H<cns1D5EB>%M<cns1C5A1>%S<cns1D2F0>"
+d_t_fmt "<percent-sign><E><Y><percent-sign><m><cns13744><percent-sign><d><cns13742>\
+  <percent-sign><A>\
+  <percent-sign><H><cns15375><percent-sign><M><cns13701><percent-sign><S><cns15080>"
+
+# 08/20/91
+d_fmt "<percent-sign><m><slash><percent-sign><d><slash><percent-sign><y>"
+
+# 9:30:00
+#t_fmt   "%H<colon>%M<colon>%S"
+t_fmt "<percent-sign><H><colon><percent-sign><M><colon><percent-sign><S>"
+
+# AM and PM in Chinese Ideograms
+am_pm "<cns13624><cns13709>";"<cns13622><cns13709>"
+
+t_fmt_ampm	"%I:%M:%S %p"
+
+nlldate "%b %d %Y"
+
+END LC_TIME

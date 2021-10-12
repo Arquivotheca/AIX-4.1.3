@@ -1,0 +1,92 @@
+* @(#)28	1.7  src/bos/objclass/POWER/devno.add, cfgmethods, bos411, 9428A410j 11/5/91 10:07:26
+*********************************************************************
+*		DATA FOR CUSTOMIZED DEVICE
+*		   DRIVER OBJECT CLASS
+*
+* COMPONENT_NAME : (CFGMETH) devno.add
+*
+* ORIGINS : 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989
+* Unpublished Work
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* RESTRICTED RIGHTS LEGEND
+* US Government Users Restricted Rights -  Use, Duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+
+
+
+************
+*** NOTE:  value3 must be ";" in these stanzas.  The bosboot command is
+***	   dependent on this.
+************
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "sysram"
+	value2 = "0"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "systty"
+	value2 = "1"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "sysmem"
+	value2 = "2"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "sysmach"
+	value2 = "3"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "syscons"
+	value2 = "4"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "systrace"
+	value2 = "5"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "syserror"
+	value2 = "6"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "sysdump"
+	value2 = "7"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "sysaudit"
+	value2 = "8"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "sysrsvd"
+	value2 = "9"
+	value3 = ";"
+
+CuDvDr:
+	resource = "ddins"
+	value1 = "rootvg"
+	value2 = "10"
+	value3 = ";"

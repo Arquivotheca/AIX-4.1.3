@@ -1,0 +1,112 @@
+* @(#)21 1.2 src/bos/objclass/POWER/adapter.sio.fda_2.add, cfgmethods, bos411, 9432B411a 8/9/94 16:10:24
+*
+*  COMPONENT_NAME: (CFGMETHODS)
+*
+*  FUNCTIONS: Floppy diskette adapter predefined data
+*
+*  ORIGINS: 27
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+***********************************************************************
+
+*
+* SIO floppy adapter for diskless
+*
+PdDv:
+	type = fda_2
+	class = adapter
+	subclass = sio
+	prefix = fda
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus =0
+	bus_ext = 0
+	fru = 2
+	led = 0x828
+	setno = 40
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = "fd"
+	Define = /usr/lib/methods/define
+	Configure = /usr/lib/methods/cfgfda
+	Change = ""
+	Unconfigure = /usr/lib/methods/ucfgdevice
+	Undefine = /usr/lib/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/sio/fda_2
+
+PdCn:
+	uniquetype = adapter/sio/fda_2
+	connkey = siofd
+	connwhere = 0
+
+PdCn:
+	uniquetype = adapter/sio/fda_2
+	connkey = siofd
+	connwhere = 1
+
+PdAt:
+	uniquetype = adapter/sio/fda_2
+	attribute = adapter_type
+	deflt = 1
+	values = 1
+	width = ""
+	type = R
+	generic = ""
+	rep = nl
+	nls_index = 0
+	
+PdAt:
+	uniquetype = adapter/sio/fda_2
+	attribute = bus_intr_lvl
+	deflt = 6
+	values = 6,7
+	width = ""
+	type = N
+	generic = D
+	rep = nl
+	nls_index = 3
+
+PdAt:
+	uniquetype = adapter/sio/fda_2
+	attribute = dma_lvl
+	deflt = 0 
+	values = 0
+	width = ""
+	type = A
+	generic = D
+	rep = nl
+	nls_index = 5
+
+PdAt:
+	uniquetype = adapter/sio/fda_2
+	attribute = intr_priority
+	deflt = 4 
+	values = 4
+	width = ""
+	type = P
+	generic = D
+	rep = nl
+	nls_index = 4
+
+PdAt:
+	uniquetype = adapter/sio/fda_2
+	attribute = bus_io_addr
+	deflt = 0x60
+	values = 0x60
+	width = 0x10
+	type = O
+	generic = D
+	rep = nl
+	nls_index = 2

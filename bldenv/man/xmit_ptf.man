@@ -1,0 +1,161 @@
+######################################################################
+#  @(#)81        1.6  src/bldenv/man/xmit_ptf.man, pkgtools, bos412, GOLDA411a 4/20/94 11:18:17
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: xmit_ptf
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# xmit_ptf.man
+######################################################################
+  xmit_ptf Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+    Releases ptf(s) to the field by transmitting the
+    CCSS file(s) to the appropriate rcp destinations.
+
+
+  Syntax
+
+    xmit_ptf [-s ship_directory] [-x xmit_control_filename] [-n] 
+             [-h] [-?] PTF_filename(s)
+
+
+  Description
+
+    The xmit_ptf command transmits the PTF ccss format files to the
+    destination by using the rcp command. Then, it check sums the
+    target destination file and compares it with the check sum of the
+    ship server file. Finally, it moves the target destination file
+    to the target ccss directory.  
+
+    This command is called by the promote_ship command and generally runs
+    in the background.  The error messages are mailed to the user who ran
+    this command.  The completion status for each ptf is mailed to the
+    notification list found in the $XMIT_TABLE file.
+
+
+  Flags
+
+    -s ship_directory          Directory of ship server.
+                               The default is the $SHIP_DIRNAME which is in
+                               32_pkg_environment file.
+
+    -x xmit_control_filename   Path and file name of the transmission control
+                               file. The default is the $XMIT_TABLE which is  
+                               in 32_pkg_environment file.
+
+    -n                         Display the transmission information for each
+                               PTF that would have been sent without actually
+                               sending the ptf.
+
+    -h | -?                    Lists help messages.  
+
+    PTF_filename(s)            List of PTFs to be released to the field.
+                               For example:
+                                  U0000257.ptf  U0000032.ptf U000001.ptf
+                                             < or >
+                                  U0000257 U0000032 U000001
+
+
+  Messages
+
+    Fatal Errors:
+
+    (1) "xmit_ptf: ERROR: file 32_pkg_environment not found in PATH"
+        Add 32_pkg_environment to your path.
+
+    (2) "xmit_ptf: at least one PTF file is required"
+        Run xmit_ptf with at least one ptf filename on the command line.
+
+    (3) "xmit_ptf: input ptf U4***** must be a readable file in $SHIP_DIRNAME"
+        Set the correct permissions on the ptf.
+
+    (4) "xmit_ptf: Error creating work dir"
+        Set the permissions for the directory where the work directory
+        is located.
+
+    (5) "xmit_ptf: ship directory $SHIP_DIRNAME from 32_pkg_environment 
+         is invalid"
+        Check if $SHIP_DIRNAME is set to where your ptfs are.
+
+    (6) "xmit_ptf: ship directory $SHIP_DIRNAME from 32_pkg_environment 
+        must be readable"
+        Set the permissions for the ship directory to allow reading.
+
+    (7) "xmit_ptf: Ship index file in $SHIP_DIRNAME must be readable"
+        Set the permissions for the ship index file to allow reading.
+
+    (8) "xmit_ptf: The xmit control table $XMIT_TABLE must be a readable file"
+        Set the permissions for the xmit control table file to allow reading.
+
+    (9) "xmit_ptf: The file logfile $LOG_FILE must be a writable file"
+        Set the permissions for the logfile to allow writing.
+
+    (10) "xmit_ptf: No distribution_notification record was found in 
+          $XMIT_TABLE"
+         Check if the $XMIT_TABLE in your path exists.
+
+    (11) "xmit_ptf: Could not get the amount of free space in $TARGETPTFDIR"
+         The rsh command failed. Retry xmit_ptf.
+
+    Transmission Errors:
+
+    These errors are not fatal.  xmit_ptf will continue to process the
+    rest of the ptfs given on the command line. A note is sent to the 
+    distribution notification list concerning the failure. 
+
+    (1) "xmit_ptf: Could not find the ptf number $PTF entry in the shipped 
+         server shipped_ptfs file. $PTF not transmitted to host"
+    (2) "xmit_ptf: There is not enough free space in $TARGETPTFDIR to copy 
+         the ptf into"
+    (3) "xmit_ptf: removal of original $PTF from $TARGETPTFDIR failed"
+    (4) "xmit_ptf: rcp of $PTF to $TARGETPTFDIR failed"
+    (5) "xmit_ptf: PTF $PTF. Check sum of Boulder $target_sum does not
+         match the check sum of austin ship server $ship_sum. removing
+         .ptf file from Boulder directory"
+    (6) "xmit_ptf: Could not remove $PTF from the $TARGETPTFDIR directory"
+    (7) "xmit_ptf: Moving of ptf $PTF from $TARGETPTFDIR to $TARGETCCSSDIR
+         failed" 
+    (8) "xmit_ptf: chmod of $TARGETCCSSDIR/$PTF.RS6.ccss failed"
+
+
+  Examples
+
+    1. Transmit file U000001.ptf from the ship server (ship_server) to 
+       the destination machine for distribution:
+
+       xmit_ptf -s ship_server U000001.ptf
+
+    2. Transmit file U000001.ptf from the ship server (ship_server) to 
+       the destination machine for distribution and the control information
+       file is xmit_control_file:
+
+       xmit_ptf -s ship_server -x xmit_control_file U000001.ptf
+
+
+  Prerequisite Information
+
+    The xmit_ptf command requires 32_pkg_environment file. Make sure
+    you add this file pathname to your PATH environment variable.
+
+
+  Related Information
+
+    promote_ship

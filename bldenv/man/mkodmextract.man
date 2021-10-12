@@ -1,0 +1,117 @@
+# @(#)98 1.2 src/bldenv/man/mkodmextract.man, pkgtools, bos412, GOLDA411a 6/8/94 15:18:24
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: mkodmextract command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  mkodmextract Command
+  
+  
+  Purpose
+
+  The mkodmextract command reads each stanza from the input stanza file and 
+  writes an odmdelete command, with appropriate parameters, to standard output.
+  
+
+  Syntax 
+
+  mkodmextract -d objclassdb -f <stanza file>
+  
+
+  Description
+  
+  The mkodmextract command is invoked by the mkodmupdt command in the 4.1 
+  build environment when the previous stanza file is not specified.  For each 
+  stanza in the input stanza file, it reads the object class database file,
+  extracts the keys associated with the object class, and writes an odmdelete 
+  command with appropriate parameters to standard output. The command also 
+  verifies the object class, keys, and fields in the stanza file. 
+        
+
+  Flags
+  
+  
+    -d objclassdb       Database file containing valid object classes, 
+                        keys and fields. 
+    
+    -f stanza file      Stanza file being processed (i.e. <.add>).
+
+  
+  Fatal Errors
+  
+    If a fatal error is detected, processing is terminated and mkodmextract 
+    exits with a non-zero return code.  Possible errors include:
+
+     - An object class should not be modified during an install.
+       This situation is indicated in the object class database file
+       by listing a 99 in the object class key data.
+
+     - The object class table (objclassdb) or the input stanza file (.add file)
+       could not be opened for read access.
+
+     - The object class could not be identified in a stanza.
+  
+     - A object class name from the stanza file could not be found in the 
+       object class database file.
+
+     - An invalid key or field appears in a stanza for an object class.
+
+
+  Input Files
+
+  object class definition (.add) file
+
+	This file contains one or more object class definitions in stanza 
+	format.  The format of a stanza is:
+
+		object_class _name:
+			<key> = <value>
+			...
+			<attribute> = <value>
+			...
+
+  object class database file
+
+	This is the internal database file mkodmextract uses to verify the object
+	classes from the stanza files and generate the appropriate odm commands 
+	for the output odm scripts.  This database file contains one entry for 
+	each object class where the entries are described as follows:
+
+	<object class>:<List of keys>:<List of fields including keys>
+
+	The list of keys is separated by %.  The list of fields is 
+	comma-separated.  For example:
+
+	GAI:Adapter_Id%Module_Key%Module_Path:Adapter_Id,Module_Key,Module_Path
+
+	To indicate that an object class is not updatable, use the following
+	syntax in the object class database file:
+
+	<object class>:99
+         
+         For Example:
+         CuAt:99
+
+
+  Output
+ 
+  mkodmextract outputs a series of odmdelete commands with appropriate 
+  parameters to the standard output. One odmdelete command is generated 
+  for each stanza in the stanza file that contains the keys and their values.
+  
+
+  Related Information
+ 
+  4.1 BLDENV mkodmupdt command
+  4.1 BLDENV odmupdate command
+  
+

@@ -1,0 +1,27 @@
+# @(#)32	1.3  src/bldenv/man/lmmakelist.man, bldtools, bos412, GOLDA411a 6/1/92 16:15:11
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: lmmakelist file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    $TOP/PTF/$BLDCYCLE/<release-name>/lmmakelist.N:
+        Cumulative list of target-dependency lines for every dependency 
+        checked by the make Command each time v3bld was executed to
+        build <release-name>.  Token one is the target, token two the
+        dependency, and token three an optional value which indicates if
+        the make Command considered the dependency new.  Created 
+        when v3bld is executed under update mode.
+
+	Format:
+		<target> <dependency> [NEW]
+        	<target> <dependency> [NEW]
+                            .
+                            .

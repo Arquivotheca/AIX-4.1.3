@@ -1,0 +1,79 @@
+# @(#)43        1.2  src/bos/usr/lib/pios/predef/lex4076-2c.col, cmdpios, bos41J, 9517B_all 4/26/95 18:45:20
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1993, 1995
+# All Rights Reserved
+#
+:056:__FLG::
+:674:Cs::-s%I_s\x27 \x27-p%I_p
+:793:_L:Dn:+
+:003:_Y:Dn:
+:635:_b:Dn::0
+:658:_d:S[C925]I[1810509]EnL[%IW2]F1:p
+:623:_g:Dn:1
+:637:_i:Dn:0
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,785;no initialization,full initialization,send PCL language switch command only=0,1,2]:1
+:678:_l:Dn:%IwY
+:700:_p:Dn:10
+:701:_s:Dn:courier
+:634:_t:Dn:0
+:702:_v:Dn:%Isv
+:677:_w:Dn:%IwX
+:060:__SYS::
+:642:s1:S[105]I[1810521]En%IWP:1
+:643:s2:Dn:1
+:644:s3:Dn:3
+:650:SA:Dn:/usr/bin/lsquedev -c -q%Imq -d%Imv | /usr/bin/awk -F\72 'NR == 2 {printf("%%s",$8)}'
+:651:SF:Dn:/usr/bin/lsquedev -c -q%Imq -d%Imv | /usr/bin/awk -F\72 'NR == 2 {printf("%%s",$4)}'
+:648:sa:S[170]I[1810558]EnR[pioattr1.cat,1,619;yes,no=TRUE,FALSE]:%`SA
+:649:sf:S[175]I[1810559]:%`SF
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLOQXZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLOQXZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJOQZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:058:__MIS::
+#
+# set the paper sizes used in set initial conditions updated with
+# value of _Q specified on the command line
+:452:m0::%?%GWu%{0}%=%t%G_Q%e%Gs0%;%c
+:452:m1::%?%GWu%{1}%=%t%G_Q%e%Gs1%;%c
+:452:m2::%?%GWu%{2}%=%t%G_Q%e%Gs2%;%c
+:452:m3::%?%GWu%{3}%=%t%G_Q%e%Gs3%;%c
+:452:m4::%?%GWu%{4}%=%t%G_Q%e%Gs4%;%c
+:330:mA::Color raster - PCL Emulation
+:565:mB::hplj.roman8,hplj.ibmus,hplj.ecma
+:331:mL::[devices.cat,71,202;Lexmark ExecJet IIc]
+:295:mN::4076c
+# mU defines the list of fonts available. -- There are no fonts in color mode. 
+#  Format:  FontName[pitch,typeface;stroke weight;style(trans2 code page tables)
+:416:mU::courier[10,3;0;0(%ImB)]
+:516:mY::1
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,732;manual paper,automatic sheet feeder,manual envelope=0,1,4]
+:762:WP::R[letter,legal,B5,A4,exec=1,2,3,4,5]
+:763:WE::R[7 3/4,9,10,DL,C5,B5,other=1,2,3,4,5,6,7]
+:051:__CAG::
+:144:ci::%Iez%?%G_j%{1}%=%t%I[eP,c1,eT,eO,ct,eF,eu,es,eC]%;
+:152:cr::%IeR%o%I[eF,eP,eO,ct,eD]%Iex
+:054:__ESC::
+:764:eu::\33&l%?%GWu%{0}%=%t3%e%GWu%{4}%=%t3%e1%;H
+:514:ex::\33[K\007\0\1\272\2\0\0\0\200
+:263:ez::\33[K\007\0\1\272\2\0\0\0\200
+:475:__HIR::
+:686:zL::2
+:688:zM::Lexmark
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

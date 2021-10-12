@@ -1,0 +1,89 @@
+#!/bin/ksh
+# @(#)44        1.1  src/bldscripts/prepareTree, ade_build, bos41J, 9509A_all 2/14/95 08:23:51
+#
+#   COMPONENT_NAME: ADE_BUILD
+#
+#   ORIGINS: 27,71
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991, 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# work in the $src directory
+#
+if [[ -z $src ]]
+then
+	print "Variable src is undefined"
+	exit 1
+fi
+if [[ ! -d $images ]]
+then
+	print "$src is not a directory"
+	exit 1
+fi
+
+#
+# touch all the src/packages/*/*.il files EXCEPT
+# in src/packages/X11/loc and src/packages/msg/*
+#
+#for dir in $src/packages/*/*
+#do
+#	find $dir -name \*.il -print | grep -v -E "X11/loc|/msg" | xargs touch
+#	if [[ $? != 0 ]]
+#		then
+#			print "Could not touch .il files"
+#			exit 1
+#	fi
+#done
+
+#
+# touch src/bos/kernel/ios/conf.c
+# to have uname report the build cycle
+#
+if [[ ! -f $src/bos/kernel/ios/conf.c ]]
+then
+	print "Could not touch $src/bos/kernel/ios/conf.c"
+	exit 1
+fi
+touch $src/bos/kernel/ios/conf.c
+if [[ $? != 0 ]]
+then
+	print "Could not touch $src/bos/kernel/ios/conf.c"
+	exit 1
+fi
+
+#
+# make sure the src/logs directory is linked to $log
+#
+ln -s -f $log $src/log
+if [[ $? != 0 ]]
+then
+	print "Could not ln $src/logs to logs"
+	exit 1
+fi
+
+
+#
+# remove obj/packages/bos/bosinst and obj/packages/bos/bosboot
+#
+for dir in bosboot bosinst diagboot
+do
+	if [[ -d $obj/packages/bos/$dir ]]
+	then
+		rm -fr $obj/packages/bos/$dir
+		if [[ $? != 0 ]]
+		then
+			print "Could not remove directory $dir"
+			exit 1
+		fi
+	
+	fi
+done
+

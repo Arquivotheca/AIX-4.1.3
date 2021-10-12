@@ -1,0 +1,553 @@
+# @(#)41        1.18  src/bos/objclass/chtz.add, cmdtz, bos411, 9431A411a 8/4/94 15:12:51
+
+################################################################################
+#
+# COMPONENT_NAME:  CMDTZ
+#
+# FUNCTIONS:  None.
+#
+# ORIGINS:  27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+################################################################################
+
+################################################################################
+#									       #
+#	COMMANDS: chtz                  				       #
+#									       #
+################################################################################
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Startup                                                       #
+#                    System Environments                                       #
+#                        Change Time Zone                                      #
+#             or                                                               #
+#                System Environements                                          #
+#                    Change Time Zone                                          #
+#                                                                              #
+# FAST KEY:  chtz                                                              #
+#            date                                                              #
+#									       #
+# UNIX COMMAND(S):  chtz                                                       #
+#                   date                                                       #
+#                                                                              #
+# DESIGN:  1. selector -- daylight savings (yes, no)   			       #
+#          2. selector -- timezone (1 of list of 24)			       #
+#			  (one selector for yes, one for no; could be merged,  #
+#			  but cmd_to_list simpler is separated)                #
+#	   3. dialogue -- show selections + date entries                       #
+#			  runs chtz & date (with new TZ setting)               #
+#                                                                              #
+################################################################################
+
+sm_name_hdr:
+    id                       = "chtz"
+    next_id                  = "chtz_selector_"
+    option_id                = "chtz_cmd_opt_a"
+    has_name_select          = ""
+    name                     = "Change / Show Date, Time, and Time Zone"
+    name_msg_file            = "smit.cat"
+    name_msg_set             = 30
+    name_msg_id              = 1
+    type                     = "r"
+    ghost                    = "y"
+    cmd_to_classify          = "\
+class_proc ()
+{
+if [ $1 = 1 ]
+then
+    echo $(dspmsg smit.cat -s 30 18 'yes')
+else
+    echo $(dspmsg smit.cat -s 30 19 'no')
+fi
+}
+class_proc "
+    cmd_to_classify_postfix  = "daylight_1_2"
+    raw_field_name           = "daylight_1_2"
+    cooked_field_name        = "daylight_y_n"
+    next_type                = "n"
+    help_msg_id              = ""
+    help_msg_loc             = ""
+
+sm_cmd_opt:
+    id                       = "chtz_cmd_opt_a"
+    id_seq_num               = "0"
+    disc_field_name          = ""
+    name                     = "Use DAYLIGHT SAVINGS TIME?"
+    name_msg_file            = "smit.cat"
+    name_msg_set             = 30
+    name_msg_id              = 2
+    op_type                  = "l"
+    entry_type               = ""
+    entry_size               = 0
+    required                 = ""
+    prefix                   = ""
+    cmd_to_list_mode         = "1"
+    cmd_to_list              = "\
+echo \"$(dspmsg smit.cat -s 30 4 '# Does this time zone go on\\\\n# DAYLIGHT SAVINGS TIME?\\\\n# ')\"\n\
+echo $(dspmsg smit.cat -s 30 5 '1 yes')\n\
+echo $(dspmsg smit.cat -s 30 6 '2 no')"
+    cmd_to_list_postfix      = ""
+    multi_select             = "n"
+    value_index              = 0
+    disp_values              = ""
+    values_msg_file          = ""
+    values_msg_set           = 0
+    values_msg_id            = 0
+    aix_values               = ""
+    help_msg_id              = "05481"
+    help_msg_loc             = ""
+
+sm_name_hdr:
+    id                       = "chtz_selector_1" * (1 = yes)
+    next_id                  = "chtz_dial"
+    option_id                = "chtz_cmd_opt_yes"
+    has_name_select          = "y"
+    name                     = ""
+    name_msg_file            = ""
+    name_msg_set             = 0
+    name_msg_id              = 0
+    type                     = "j"
+    ghost                    = "y"
+    cmd_to_classify          = "\
+class_proc ()
+{
+OLD_TZ=`echo $TZ | sed '1s/:/#!:/g'`
+echo \"$OLD_TZ:$1\" | sed '1s/(\\([^)]*\\).*/\\1/'
+}
+class_proc "
+    cmd_to_classify_postfix  = "_rawname"
+    raw_field_name           = ""
+    cooked_field_name        = "old_TZ:time_zone"
+    next_type                = "d"
+    help_msg_id              = ""
+    help_msg_loc             = ""
+
+sm_name_hdr:
+    id                       = "chtz_selector_2" * (2 = no)
+    next_id                  = "chtz_dial"
+    option_id                = "chtz_cmd_opt_no"
+    has_name_select          = "y"
+    name                     = ""
+    name_msg_file            = ""
+    name_msg_set             = 0
+    name_msg_id              = 0
+    type                     = "j"
+    ghost                    = "y"
+    cmd_to_classify          = "\
+class_proc ()
+{
+OLD_TZ=`echo $TZ | sed '1s/:/#!:/g'`
+echo \"$OLD_TZ:$1\" | sed '1s/(\\([^)]*\\).*/\\1/'
+}
+class_proc "
+    cmd_to_classify_postfix  = "_rawname"
+    raw_field_name           = ""
+    cooked_field_name        = "old_TZ:time_zone"
+    next_type                = "d"
+    help_msg_id              = ""
+    help_msg_loc             = ""
+
+sm_cmd_opt:
+    id                        = "chtz_cmd_opt_yes"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "CUT (Coordinated Universal Time) Time Zone"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 30
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+echo \"$(dspmsg smit.cat -s 30 7 '\
+(CUT0GDT)           Coordinated Universal Time   (CUT)\\n\
+(GMT0BST)           United Kingdom               (CUT)\\n\
+(AZOREST1AZOREDT)   Azores; Cape Verde        (CUT -1)\\n\
+(FALKST2FALKDT)     Falkland Islands          (CUT -2)\\n\
+(GRNLNDST3GRNLNDDT) Greenland; East Brazil    (CUT -3)\\n\
+(AST4ADT)           Central Brazil            (CUT -4)\\n\
+(EST5EDT)           Eastern U.S.; Colombia    (CUT -5)\\n\
+(CST6CDT)           Central U.S.; Honduras    (CUT -6)\\n\
+(MST7MDT)           Mountain U.S.             (CUT -7)\\n\
+(PST8PDT)           Pacific U.S.; Yukon       (CUT -8)\\n\
+(AST9ADT)           Alaska                    (CUT -9)\\n\
+(HST10HDT)          Hawaii; Aleutian          (CUT-10)\\n\
+(BST11BDT)          Bering Straits            (CUT-11)\\n\
+(NZST-12NZDT)       New Zealand               (CUT+12)\\n\
+(MET-11METDT)       Solomon Islands           (CUT+11)\\n\
+(EET-10EETDT)       Eastern Australia         (CUT+10)\\n\
+(JST-9JDT)          Japan                     (CUT +9)\\n\
+(KORST-9KORDT)      Korea                     (CUT +9)\\n\
+(WAUST-8WAUDT)      Western Australia         (CUT +8)\\n\
+(TAIST-8TAIDT)      Taiwan                    (CUT +8)\\n\
+(THAIST-7THAIDT)    Thailand                  (CUT +7)\\n\
+(TASHST-6TASHDT)    Tashkent; Central Asia    (CUT +6)\\n\
+(PAKST-5PAKDT)      Pakistan                  (CUT +5)\\n\
+(WST-4WDT)          Gorki; Central Asia; Oman (CUT +4)\\n\
+(MEST-3MEDT)        Turkey                    (CUT +3)\\n\
+(SAUST-3SAUDT)      Saudi Arabia              (CUT +3)\\n\
+(WET-2WET)          Finland                   (CUT +2)\\n\
+(USAST-2USADT)      South Africa              (CUT +2)\\n\
+(NFT-1DFT)          Norway; France            (CUT +1)')\""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "05482"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chtz_cmd_opt_no"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "CUT (Coordinated Universal Time) Time Zone"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 30
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+echo \"$(dspmsg smit.cat -s 30 8 '\
+(CUT0)      Coordinated Universal Time   (CUT)\\n\
+(GMT0)      United Kingdom               (CUT)\\n\
+(AZOREST1)  Azores; Cape Verde        (CUT -1)\\n\
+(FALKST2)   Falkland Islands          (CUT -2)\\n\
+(GRNLNDST3) Greenland; East Brazil    (CUT -3)\\n\
+(AST4)      Central Brazil            (CUT -4)\\n\
+(EST5)      Eastern U.S.; Colombia    (CUT -5)\\n\
+(CST6)      Central U.S.; Honduras    (CUT -6)\\n\
+(MST7)      Mountain U.S.             (CUT -7)\\n\
+(PST8)      Pacific U.S.; Yukon       (CUT -8)\\n\
+(AST9)      Alaska                    (CUT -9)\\n\
+(HST10)     Hawaii; Aleutian          (CUT-10)\\n\
+(BST11)     Bering Straits            (CUT-11)\\n\
+(NZST-12)   New Zealand               (CUT+12)\\n\
+(MET-11M)   Solomon Islands           (CUT+11)\\n\
+(EET-10E)   Eastern Australia         (CUT+10)\\n\
+(JST-9)     Japan                     (CUT +9)\\n\
+(KORST-9)   Korea                     (CUT +9)\\n\
+(WAUST-8)   Western Australia         (CUT +8)\\n\
+(TAIST-8)   Taiwan                    (CUT +8)\\n\
+(THAIST-7)  Thailand                  (CUT +7)\\n\
+(TASHST-6)  Tashkent; Central Asia    (CUT +6)\\n\
+(PAKST-5)   Pakistan                  (CUT +5)\\n\
+(WST-4)     Gorki; Central Asia; Oman (CUT +4)\\n\
+(MEST-3)    Turkey                    (CUT +3)\\n\
+(SAUST-3)   Saudi Arabia              (CUT +3)\\n\
+(WET-2)     Finland                   (CUT +2)\\n\
+(USAST-2)   South Africa              (CUT +2)\\n\
+(NFT-1)     Norway; France            (CUT +1)')\""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "05482"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+	id                      = "chtz_dial"
+	option_id               = "chtz_opts,chtz_opts_2"
+	has_name_select         = "y"
+	name                    = "Change / Show Date, Time, & Time Zone"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 30
+	name_msg_id             = 1
+	cmd_to_exec             = \
+"date_proc () 		# MM dd hh mm ss yy    TZ
+# dialogue param order	#  3  4  5  6  7  2    1
+{
+chtz \"$1\"
+exit_chtz=\"$?\"
+TZ=\"$1\"
+
+DATE_STR=`/bin/printf \"%02d%02d%02d%02d.%02d%02d\" $(($3)) $(($4)) $(($5)) $(($6)) $(($7)) $(($2))`
+date \"$DATE_STR\"
+exit_date=\"$?\"
+if [ $exit_chtz = 0 -a $exit_date = 0 ]
+then
+echo ' '
+echo $(dspmsg smit.cat -s 30 9 'Any changes made to the time zone will take effect\\\\n\
+at your next login session.')
+else
+ exit 1
+fi
+}
+date_proc "
+	ask                     = ""
+	exec_mode               = "P"
+	ghost                   = ""
+	cmd_to_discover         = \
+"disc_proc() 
+{
+TZ=\"$1\"
+echo '#cur_month:cur_day:cur_hour:cur_min:cur_sec:cur_year'\n\
+date +%m:%d:%H:%M:%S:%y
+}
+disc_proc"
+	cmd_to_discover_postfix = "time_zone"
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = ""
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "10"
+	disc_field_name     = "cur_year"
+	name                = "YEAR (00-99)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 10
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055102"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "20"
+	disc_field_name     = "cur_month"
+	name                = "MONTH (01-12)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 11
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055132"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "30"
+	disc_field_name     = "cur_day"
+	name                = "DAY (01-31)\n" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 12
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055133"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "40"
+	disc_field_name     = "cur_hour"
+	name                = "HOUR (00-23)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 13
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055134"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "50"
+	disc_field_name     = "cur_min"
+	name                = "MINUTES (00-59)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 14
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055135"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "60"
+	disc_field_name     = "cur_sec"
+	name                = "SECONDS (00-59)" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 15
+	op_type             = ""
+	entry_type          = "#"
+	entry_size          = 2
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "055136"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts_2"
+	id_seq_num          = "02"
+	disc_field_name     = "old_TZ"
+	name                = "Old time zone"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 20
+	op_type             = ""
+	entry_type          = ""
+	entry_size          = 0
+	required            = ""
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "2850007"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "04"
+	disc_field_name     = "time_zone"
+	name                = "Time zone"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 16
+	op_type             = ""
+	entry_type          = "r"
+	entry_size          = 98
+	required            = "y"
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "2850008"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "chtz_opts"
+	id_seq_num          = "08"
+	disc_field_name     = "daylight_y_n"
+	name                = "Does this time zone go on daylight savings time?\n" 
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 30
+	name_msg_id         = 17
+	op_type             = ""
+	entry_type          = ""
+	entry_size          = 0
+	required            = ""
+	prefix              = ""
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "05481"
+	help_msg_loc        = ""
+

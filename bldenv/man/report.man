@@ -1,0 +1,105 @@
+#
+# @(#)11        1.3  src/bldenv/man/report.man, bldtools, bos412, GOLDA411a 8/6/93 13:41:48
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#  FUNCTIONS: report man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  report Command
+  
+  
+  Purpose
+  
+  Interface to the CMVC Report command.  Each option selects a specific
+  report type.
+  
+
+  Syntax
+  
+  report [ all | def <levelname> | other | pib | selfix | selfix_defects | unf ]
+
+
+  Description
+  
+  The report command is a interface to the CMVC Report and contains options
+  to run specific CMVC Reports.  The default report when no options are
+  specified contains level name, release name, level type, date level was
+  last updated and the state of the level for the current CMVC login's
+  (CMVC_BECOME) area that have not been committed or have a type of other. 
+
+
+  Flags
+
+  all            Report all levels assigned to the current CMVC login's
+                 (CMVC_BECOME) area.  The report contains: level name,
+                 release name, level type, date level was last updated
+                 and the state of the level.
+
+  def <levelname>
+                 Report number of defects in production levels assigned to
+                 the current CMVC login's (CMVC_BECOME) area.  The
+                 <levelname> argument determines which levels will be
+                 included in the report, the check is a wild card in the
+                 form <levelname>%.
+
+  other          Report all levels assigned to the current CMVC login's
+                 (CMVC_BECOME) area that have not been committed and are
+                 of type other.  The report contains: level name, release
+                 name, level type, date level was last updated and the
+                 state of the level.
+
+  pib            Report all levels assigned to the pib CMVC login that
+                 are not type other and have not been committed.  The
+                 report contains: level name, release name, level type,
+                 date level assigned to pib and state of the level.
+
+  selfix         Report all levels assigned to the selfix CMVC login that
+                 are not type other and have not been committed.  The
+                 report contains: level name, release name, level type,
+                 date level assigned to selfix, defects in level, and
+                 number of defects in level that are apars.
+
+  selfix_defects Report all defects assigned to the components bldtools,
+                 bldprocess, bosbuild, pkgtools, package or retain that
+                 are not closed or canceled.  The report contains: defect
+                 number, track, component name, state defect, CMVC owner
+                 login, severity, age and abstract.
+
+  unf            Report all levels assigned to the current CMVC login's
+                 (CMVC_BECOME) area that are not type other and the state
+                 is clean or not defined.  The report contains: level name,
+                 release name, level type, date level was last updated and
+                 the state of the level.
+ 
+
+  Environment Variables
+
+  BLDTMP       Temporary directory. The default is /tmp.
+
+  CMVC_BECOME  Specifies the CMVC user ID.
+
+  CMVC_FAMILY  CMVC family.
+
+  CMVC_RELEASE CMVC release name.
+
+
+  Examples
+ 
+  1.  Report on all levels assigned to the selfix CMVC login.
+
+      report selfix
+
+
+  Related Information
+  
+  Report                          The CMVC Report command.

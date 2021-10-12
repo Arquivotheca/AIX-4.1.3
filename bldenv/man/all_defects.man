@@ -1,0 +1,30 @@
+#
+# @(#)62	1.2  src/bldenv/man/all_defects.man, bldtools, bos412, GOLDA411a 5/17/93 14:33:31
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: all_defects file format man page.
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/PTF/$BLDCYCLE/all_defects
+        List of all CMVC defects from build cycle $BLDCYCLE.  The file
+        contains the CMVC defect followed by the CMVC release and CMVC
+        family the defect came from.  Created by prebuild (for
+        production) or ptfsetup (for development).  Entries within the 
+        file are grouped by release name; defects are in ascending
+        order within each release name grouping.
+
+	Format:
+          <defect><space><release><space><family>
+          <defect><space><release><space><family>
+             .
+             .

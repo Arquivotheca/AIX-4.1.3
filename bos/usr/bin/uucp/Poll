@@ -1,0 +1,25 @@
+# @(#)75	1.3  src/bos/usr/bin/uucp/Poll, cmduucp, bos411, 9428A410j 6/15/90 23:57:35
+# 
+# COMPONENT_NAME: UUCP Poll
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# This file (Poll) contains a list of
+#  "system <tab> hour1 hour2 hour3 ..." lines for polling remote systems.
+# See examples below
+#
+# Lines starting with # are ignored.
+# NOTE a tab must follow the machine name
+
+#raven	2  6  10
+#quail	0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23

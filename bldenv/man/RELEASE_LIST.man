@@ -1,0 +1,25 @@
+# @(#)26	1.3  src/bldenv/man/RELEASE_LIST.man, bldtools, bos412, GOLDA411a 5/24/93 09:01:30
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: PRODUCT_LIST file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    $BLDENV/usr/bin/RELEASE_LIST:
+        List of release names.  The order of the list represents the
+        build order dependencies.  Any release updating files in the
+        build environment must appear before all the releases that
+        use those files.
+
+	Format:
+	        <release-name>
+        	<release-name>
+                       .
+                       .

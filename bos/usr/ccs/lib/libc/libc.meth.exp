@@ -1,0 +1,24 @@
+#!libc.a(meth.o)
+* @(#)23	1.2.1.1  src/bos/usr/ccs/lib/libc/libc.meth.exp, libc, bos411, 9428A410j 5/25/92 13:27:34
+*
+* COMPONENT_NAME: LIBC
+*
+* FUNCTION:
+*
+* ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1985,1992
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* Kludge for now, until -bexpall works.
+* This contains common, RT and R2 exports.
+*
+
+__method_table
+__method_tbl

@@ -1,0 +1,39 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#once #create message
+.ND
+.tr %$
+.EQ
+delim $$
+.EN
+.LP
+Sometimes there will be a need for a subscript or superscript
+that has nothing to the left of it, as in references like
+  $"" sup 1$Smith, J. `A great paper...'
+
+Experiment and decide if you can get this effect
+by writing simply
+  %sup 1%Smith, J.....
+
+Type yes if this works, no if it does not.
+.pl 1
+#
+#once neqn message | nroff -T$term %s/tinyms -
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+11.1f 10

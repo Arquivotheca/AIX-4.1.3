@@ -1,0 +1,24 @@
+# @(#)58 1.1 src/bos/usr/lib/pios/predef/bull825.gl2, cmdpios, bos411, 9428A410j 4/28/94 08:04:14
+#
+# COMPONENT_NAME: Printer Backend for Bull Compuprint PageMaster 825
+#                         in HP-PGL/2 Mode
+#
+# FUNCTIONS:
+#
+# ORIGINS: 83
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+:056:__FLG::
+:048:_Y::0
+:060:__SYS::
+:447:s1::4
+:058:__MIS::
+:330:mA::Plotter emulation
+:331:mL::Bull Compuprint PageMaster 825
+:295:mN::825
+:054:__ESC::
+:513:eS::\33&l%G_Y%dS
+:475:__HIR::
+:476:zP::hp-pgl2
+:477:zS::!

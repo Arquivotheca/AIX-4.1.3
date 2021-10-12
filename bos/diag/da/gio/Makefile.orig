@@ -1,0 +1,35 @@
+# @(#)57	1.5  src/bos/diag/da/gio/Makefile, dagio, bos411, 9428A410j 1/7/94 10:47:48
+#
+#   COMPONENT_NAME: DAGIO
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+
+VPATH		= ${MAKETOP}/bos/kernext/exp
+PROGRAMS	= dgioa
+
+MSGHDRS		= dgioa_msg.h
+CATFILES 	= dgioa.cat
+HFILES		= ${MSGHDRS}
+
+INCFLAGS	= -I${MAKETOP}/bos/diag/tu/gio
+
+LIBS		= -lasl -ldiag -lodm -lcfg -lc -lgiotu
+
+ILIST		= ${PROGRAMS} dgioa.cat
+IDIR		= /usr/lpp/diagnostics/da/
+dgioa.cat_IDIR	= /usr/lpp/diagnostics/catalog/default/
+
+dgioa_IMPORTS	= -bI:diagex.exp
+
+.include <${RULES_MK}>

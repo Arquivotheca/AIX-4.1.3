@@ -1,0 +1,29 @@
+# @(#)44	1.2  src/bldenv/man/ptf_index.man, bldtools, bos412, GOLDA411a 1/27/93 18:08:08
+#
+#   COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#   FUNCTIONS: Man page for ptf index file
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    /afs/austin/aix/ptf.images/320/prod/index:    
+        Index of the contents of all ptf images.
+
+	Format:
+		<LPP>:PTFID>:requisite type>:requisite LPP>:requisite data>
+		<LPP>:PTFID>:requisite type>:requisite LPP>:requisite data>
+	Example:
+		bos:U402023:ifreq:bosadt:U402053
+		bos:U402023:ifreq:bsl:U402025
+		bos:U402023:prereq:bos:v=03 r=02 m=0000
+
+		                                .
+		                                .
+	

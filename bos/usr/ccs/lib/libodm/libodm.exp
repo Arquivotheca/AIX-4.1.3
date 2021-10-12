@@ -1,0 +1,54 @@
+* @(#)03        1.6  src/bos/usr/ccs/lib/libodm/libodm.exp, libodm, bos411, 9428A410j 2/26/93 10:58:17
+*
+*  COMPONENT_NAME: LIBODM - Library export file
+*
+*  FUNCTIONS: Makefile
+*
+*  ORIGIN: 27
+*
+*  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*  combined with the aggregated modules for this product)
+*                   SOURCE MATERIALS
+*  (C) COPYRIGHT International Business Machines Corp. 1989
+*  All Rights Reserved
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+odm_add_obj
+odm_change_obj
+odm_close_class
+odm_create_class
+odm_free_list
+odm_get_by_id
+odm_get_obj
+odm_get_first
+odm_get_next
+odm_get_list
+odm_initialize
+odm_mount_class
+odm_open_class
+odm_rm_by_id
+odm_rm_class
+odm_rm_obj
+odm_run_method
+odm_set_path
+odm_set_perms
+odm_terminate
+odmerrno
+odm_err_msg
+get_odm_msg
+odm_lock
+odm_unlock
+legal_size
+get_offsets
+get_ascii_phrase
+get_value_from_string
+convert_to_binary
+stanza_line_number
+raw_addr_class
+print_odm_trace
+convert_to_hex_ascii
+odmtrace
+odm_searchpath
+odm_read_only

@@ -1,0 +1,69 @@
+# @(#)48	1.3  src/bldenv/man/ptfmake.man, bldtools, bos412, GOLDA411a 5/12/92 13:29:19
+# COMPONENT_NAME: (BUILDTOOLS) BAI Build Tools 
+#
+# FUNCTIONS: ptfmake man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+ptfmake 
+
+
+Purpose
+
+The ptfmake command is a modified version of 3.1.5 /bin/make program. It does
+all the functions that the /bin/make program does plus lists the full path  
+names of target and dependencies. 
+
+Syntax
+
+  ptfmake [-b]
+
+  Description
+
+The ptfmake command does everything the make command does plus lists full path 
+names of the target file and dependencies. If the -b flag is NOT used, this 
+command would function as /bin/make. If the dependencies are changed, for 
+example if foo.c is newer than foo.o, the lmmakelist output from the ptfmake
+command would contain:
+                       /a/b/c/d/foo     /a/b/c/d/foo.o NEW
+                       /a/b/c/d/foo.o   /a/b/c/d/foo.c NEW 
+
+If the dependent files are not changed, then NEW is not appended at the end
+of the target-dependency line. For example, if foo.c is not newer than foo.o,
+the output from the ptfmake command would contain:
+
+                       /a/b/c/d/foo     /a/b/c/d/foo.o 
+                       /a/b/c/d/foo.o   /a/b/c/d/foo.c  
+                       
+If the shell environment variable, TDPATH, is set to a file name, the target-
+dependency lines are written to that file. Otherwise they are written to 
+standard output.
+ 
+All the options and the flags that can be used with the /bin/make command can 
+also be used with the ptfmake command. The -b flag is used when target- 
+dependency information is required. 
+
+
+Environment variables 
+
+TDPATH: Specifies the output file for -b option (defaults to standard output).
+All other variables for the /bin/make command remain unchanged.
+
+Flags
+
+-b   Write out the full path names of target and dependency files to the 
+     filename set in the shell variable TDPATH, otherwise write to standard 
+     output.
+
+     All other flags of the /bin/make program can be used with this command.
+
+Related commands 
+
+        /bin/make 

@@ -1,0 +1,29 @@
+#
+# dependents of usga.o:
+usga.o: ${MAKETOP}../export/power/usr/include/stdio.h
+usga.o: ${MAKETOP}../export/power/usr/include/standards.h
+usga.o: ${MAKETOP}../export/power/usr/include/va_list.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/types.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/m_types.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/limits.h
+usga.o: ${MAKETOP}../export/power/usr/include/float.h
+usga.o: ${MAKETOP}../export/power/usr/include/signal.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/signal.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/context.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/m_param.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/mstsave.h
+usga.o: ${MAKETOP}../export/power/usr/include/fcntl.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/flock.h
+usga.o: ${MAKETOP}../export/power/usr/include/unistd.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/access.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/lockf.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/stat.h
+usga.o: ${MAKETOP}../export/power/usr/include/sys/mode.h
+usga.o: ${MAKETOP}../export/power/usr/include/diag/diago.h
+usga.o: ${MAKETOP}../export/power/usr/include/asl.h
+usga.o: ${MAKETOP}../export/power/usr/include/stdarg.h
+usga.o: ${MAKETOP}../export/power/usr/include/diag/da_rc.h
+usga.o: ${MAKETOP}../export/power/usr/include/diag/diag_exit.h
+usga.o: ${MAKETOP}bos/diag/tu/sgasl/sgamisc.h
+usga.o: ${MAKETOP}bos/diag/tu/sgasl/exectu.h
+usga.o: ${MAKETOP}../export/power/usr/include/diag/atu.h

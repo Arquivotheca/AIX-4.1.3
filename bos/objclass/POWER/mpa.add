@@ -1,0 +1,98 @@
+* @(#)21        1.1  R2/objclass/mpa.add, mpaodm, mpa325, 9317325 5/3/93 17:11:51
+*
+*   COMPONENT_NAME: (MPAODM) MP/A ODM FILES
+*
+*   FUNCTIONS: 
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+ 
+** Predefined Device object
+ 
+*PdDv:
+* PdDv.class = device class (e.g. adapter)
+* PdDv.subclass = connection type (e.g. mca meaning MicroChannelArch.)
+* PdDv.type = (e.g. pca (Parallel Channel Adapter)
+* PdDv.prefix = customized device names prefix (e.g. /dev/cat0)
+* PdDv.devid = the card id obtained from pos(0) and pos(1)
+* PdDv.base = whether device is a base device
+* PdDv.has_vpd =  device has/hasn't got Vital Product Data
+* PdDv.detectable = whether the device can be detected automatically
+* PdDv.chgstatus = set to NEW when defining a device of this type
+* PdDv.bus_ext = whether this device is a bus extension
+* PdDv.fru = whether this device IS a FRU (field replacable unit)
+* PdDv.led = the LED value to be displayed when being configured at boot time
+* PdDv.catalog = the NLS message catalog containing adapter text descriptions
+* PdDv.setno = the NLS message set number containing text descriptions
+* PdDv.msgno = the NLS message number of the text description of the adapter
+* PdDv.DvDr = device driver (e.g. "catdd") to be loaded when the adapter is configured
+* PdDv.Define = the pathname of the define method
+* PdDv.Configure = the pathame of the configure method
+* PdDv.Change = the pathname of the change method
+* PdDv.Unconfigure = the pathname of the unconfigure method
+* PdDv.Undefine = the pathname of the undefine method
+* PdDv.Start = the pathname of the start method
+* PdDv.Stop = the pathname of the stop method
+* PdDv.uniquetype = adapter's class, subclass, and type
+ 
+PdDv:
+	type = "mpa"
+	class = "driver"
+	subclass = "mpaa"
+	prefix = "mpa"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x996
+	catalog = "mpa.cat"
+	setno = 1
+	msgno = 7
+	DvDr = "mpadd"
+	Define = /usr/lib/methods/define
+	Configure = /usr/lib/methods/cfgmpa
+	Change = /usr/lib/methods/chggen
+	Unconfigure = /usr/lib/methods/ucfgdevice
+	Undefine = /usr/lib/methods/undefine
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = driver/mpaa/mpa
+
+** Predefined Attributes
+ 
+*PdAt:
+* PdAt.uniquetype = adapter's class, subclass, and type
+* PdAt.attribute =  attribute name
+* PdAt.deflt = default value for attribute
+* PdAt.values =  possible values the attribute can be set to
+* PdAt.width = range of addresses to be assigned
+* PdAt.type =  type or attribute (e.g. bus I/O address)
+* PdAt.generic = displayable and user changeable characteristics
+* PdAt.rep =  type of representation (e.g. numeric range)
+* PdAt.nls_index = the NLS catalog message number
+
+
+PdAt:
+        uniquetype = "driver/mpaa/mpa"
+        attribute = "rdto"
+        values= "6-128,1"
+        type= R
+        deflt= 92
+        generic= DU
+        nls_index= 10 
+        width= ""
+        rep= nr

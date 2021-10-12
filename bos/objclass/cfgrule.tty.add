@@ -1,0 +1,33 @@
+* "@(#)15       1.1  src/bos/objclass/cfgrule.tty.add, cfgmethods, bos411, 9428A410j 12/29/93 10:06:16";
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS: cfgrule.tty.add - Add file for tty device
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+Config_Rules:
+	phase = 2
+	seq = 25
+	rule = "/etc/methods/starttty"
+
+Config_Rules:
+	phase = 3
+	seq = 25
+	rule = "/etc/methods/starttty"
+
+
+
+
+
+
+
+

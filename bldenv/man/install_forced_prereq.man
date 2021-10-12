@@ -1,0 +1,26 @@
+# @(#)58        1.2  src/bldenv/man/install_forced_prereq.man, pkgtools, bos412, GOLDA411a 1/4/94 14:08:27
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: install_forced_prereq file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/HISTORY/install_forced_prereq:
+        This file contains the subsystem for the installp program.
+        The <ptf> field is the latest cumulative PTF for the subsystem.
+        Comments begin with a "#".
+
+	Format:
+                <subsystem><space><ptf>
+                <subsystem><space><ptf>
+                            .
+                            .

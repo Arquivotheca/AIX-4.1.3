@@ -1,0 +1,461 @@
+* @(#)29        1.5  src/bos/objclass/mag.add, magdd, bos41J, 9516A_all 4/18/95 13:30:03
+# COMPONENT_NAME: (magdd) MAG Device Driver ODM info
+#
+# FUNCTIONS: mag.add
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1995
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# Stanzas for populating the GXT300 Device Driver predefined values
+# See R2/cfg/methods/devices.msg for nls messages
+
+
+
+PdDv:
+	type = "4002"
+	class = "adapter"
+	subclass = "buc"
+	prefix = "mag"
+	devid = "4002"
+	base = 0
+	has_vpd = 1
+ 	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x718 
+	setno =  1
+	msgno =  0
+	catalog = "graphdev.cat"
+	DvDr = "magdd_loadpin"
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfg_graphics"
+	Change = "/etc/methods/chggen"
+	Unconfigure = "/etc/methods/ucfgdevice"
+	Undefine = "/etc/methods/undefine"
+        Start = ""
+        Stop = ""
+	uniquetype = "adapter/buc/4002"
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "_subtype"
+	deflt = "101"
+	values = "101, 102"
+	width = ""
+	type = "T"
+	generic = ""
+	rep = "nl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "dsp_name"
+	deflt = "GXT500"
+	values = "GXT500,GXT500D"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "s"
+	nls_index = 15
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "dsp_desc"
+	deflt = "Graphics Adapter"
+	values = "Graphics Adapter"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color1"
+	deflt = "0x00000000"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color2"
+	deflt = "0x00FF0000"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color3"
+	deflt = "0x0000FF00"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color4"
+	deflt = "0x00FFFF00"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color5"
+	deflt = "0x000000FF"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color6"
+	deflt = "0x00FF00FF"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color7"
+	deflt = "0x0000FFFF"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color8"
+	deflt = "0x00B0B0B0"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color9"
+	deflt = "0x00808080"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color10"
+	deflt = "0x00ff8080"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color11"
+	deflt = "0x0080ff80"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color12"
+	deflt = "0x00c08020"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color13"
+	deflt = "0x008080ff"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color14"
+	deflt = "0x00FF80FF"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color15"
+	deflt = "0x0080FFFF"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+	
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "ksr_color16"
+	deflt = "0x00FFFFFF"
+	values = "0x0-0xFFFFFF,0x1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 93
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "scrn_width_mm"
+	deflt = "356"
+	values = "1-10000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 1
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "scrn_height_mm"
+	deflt = "284"
+	values = "1-10000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 2
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "scrn_width_pel"
+	deflt = "1280"
+	values = "1-10000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 3
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "scrn_height_pel"
+	deflt = "1024"
+	values = "1-10000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 4
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "display_id"
+	deflt = "0x043a0000"
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nl"
+	nls_index = 5
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "belongs_to"
+	deflt = "graphics"
+	values = "0"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "s"
+	nls_index = 6
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "intr_level"
+	deflt = "0xa"
+	values = "0xa"
+	width = ""
+	type = "I"
+	generic = "D"
+	rep = "n"
+	nls_index = 7
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "intr_priority"
+	deflt = "0x4"
+	values = "0x4"
+	width = ""
+	type = "P"
+	generic = "D"
+	rep = "n"
+	nls_index = 8
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+        attribute = "cfg_method_load"
+	deflt = "/etc/methods/cfg_mag"
+	values = "/etc/methods/cfg_mag"
+        width = ""
+        type = "R"
+        generic = "D"
+        rep = "s"
+	nls_index = 9
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "magdd_intr"
+	deflt = "magdd_loadpin"
+	values = "magdd_loadpin"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "s"
+	nls_index = 10
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+        attribute = "ccm_dd"
+        deflt = "ccmdd"
+        values = "ccmdd"
+        width = ""
+        type = "R"
+        generic = "D"
+        rep = "s"
+	nls_index = 11
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+        attribute = "ccmdd_intr"
+        deflt = "ccmdd_pin"
+        values = "ccmdd_pin"
+        width = ""
+        type = "R"
+        generic = "D"
+        rep = "s"
+	nls_index = 12
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+        attribute = "cdd_kmod_entry"
+        deflt ="mag_cdd_4002"
+        values = "mag_cdd_4002"
+        width = ""
+        type = "R"
+        generic = "D"
+        rep = "s"
+	nls_index = 13
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+        attribute = "cdd_kmod_inter"
+        deflt = ""
+        values = ""
+        width = ""
+        type = "R"
+        generic = "D"
+        rep = "sl"
+	nls_index = 14
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "bus_id"
+	deflt = "0x87f00000"
+	values = "0x87f00000"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "n"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "fb_swap"
+	deflt = "0"
+	values = "0,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "n"
+	nls_index = 94
+
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "server_numb"
+	deflt = "0x0"
+	values = "0x0"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "n"
+	nls_index = 90
+
+PdAt:
+	uniquetype = "adapter/buc/4002"
+	attribute = "custom_font"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "n"
+	nls_index = 91
+
+PdCn:
+        uniquetype = "adapter/buc/4002"
+	connkey	= "display"
+	connwhere = ""
+

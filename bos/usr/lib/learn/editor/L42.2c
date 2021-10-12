@@ -1,0 +1,44 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Remember the procedures with '*' for changing one or more
+of something into one something.  Pick up the file
+"sloppy" and on every line, wherever there are several
+blanks in a row change them to one blank.  This can be done
+with one command; it is a very common task. Then rewrite the file
+and type "ready".
+#create Ref
+It seems that medieval art
+ Alone retains its zest
+To charm and please its devotees
+ We've done our level best
+We're not quite sure that all we do
+ Has the Early English ring
+But as far as we can tell
+ It's something like this sort of thing.
+#create sloppy
+It seems   that medieval   art
+ Alone retains   its zest
+To   charm and please its   devotees
+   We've done our    level best
+We're not quite  sure that all we do
+ Has the Early English ring
+But as far as we    can   tell
+ It's something like   this sort of thing.
+#user
+#cmp sloppy Ref
+#log
+#next
+43.1a 10
+43.2a 5

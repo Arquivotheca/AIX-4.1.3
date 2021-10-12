@@ -1,0 +1,8 @@
+#!/bin/ksh
+# This procedure will automatically bring up the 2 location brokers and the
+# ifor/ls server
+startsrc -s llbd
+sleep 5
+startsrc -s glbd
+sleep 5
+startsrc -s netlsd -a "-no lcwvptms"

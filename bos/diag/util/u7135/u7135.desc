@@ -1,0 +1,325 @@
+$ @(#)51        1.6  src/bos/diag/util/u7135/u7135.desc, dsau7135, bos41J, 9519A_all 5/4/95 17:08:18
+$
+$   COMPONENT_NAME: DSAU7135 (7135 Service Aids)
+$
+$   FUNCTIONS:
+$
+$   ORIGINS: 27
+$
+$
+$   (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+$   All Rights Reserved
+$   Licensed Materials - Property of IBM
+$   US Government Users Restricted Rights - Use, duplication or
+$   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+$
+$
+$
+
+$
+$ Data descriptions for the 7135 Service Aids.
+$ Refer to the SA CIS for this component.
+$
+
+$set SEQUENCE_DESC
+
+   1 Main_SA_Sequence
+   2 Get_LUN_Info
+   3 Get_LUN_Status_2B
+   4 Busy_LUN
+   5 Certify_LUN
+   6 Certify_PDisk
+   7 Format_PDisk
+   8 uCode_Init
+   9 Cntrl_uCode
+  10 Cntrl_No_uCode
+  11 PDisk_uCode
+  12 Certify_LUN_Init
+  13 PDisk_Init
+  14 Update_EEPROM
+  15 Replace_Controller
+  16 DL_All_PDisks
+
+$set ASL_SCREEN_DESC
+
+ 050 Screen D55050: SA Selection.
+ 051 Screen D55051: Controller selection Menu.
+ 052 Screen D55052: Accessing array information, please stand by.
+ 053 Screen D55053: Configuring LUN, please stand by.
+ 054 Screen D55054: Passive cntrl message.
+ 056 Screen D55056: Detecting spare drives, please stand by.
+ 062 Screen D55062: Degraded pdisk, run Format SA.
+ 063 Screen D55063: Format in progress.
+ 064 Screen D55064: Unexpected error.
+ 065 Screen D55065: Device busy, free the resource.
+ 066 Screen D55066: No pdisks found.
+ 067 Screen D55067: No LUNs found.
+ 068 Screen D55068: No controllers found in the system.
+ 069 Screen D55069: Device problem found, run Diags.
+ 071 Screen D55071: Format Physical Disk device selection menu.
+ 072 Screen D55072: Format warning message.
+ 074 Screen D55074: Format in progress, please stand by.
+ 075 Screen D55075: Format completed.
+ 076 Screen D55076: Exit format (N/y).
+ 101 Screen D55101: Certify Physical Disk device selection menu.
+ 102 Screen D55102: Certify LUN device selection menu.
+ 103 Screen D55103: PDisk Certify percent complete, please stand by.
+ 104 Screen D55104: LUN Certify percent complete, please stand by.
+ 105 Screen D55105: Certify complete.
+ 106 Screen D55106: Certify block size != 512.
+ 107 Screen D55107: Certify PFA failure, replace disk.
+ 108 Screen D55108: Certify disk failure, replace disk.
+ 150 Screen D55150: Download from diskette or hard disk.
+ 151 Screen D55151: Reading microcode files, please stand by.
+ 152 Screen D55152: Latest or previous level.
+ 154 Screen D55154: Download in progress, please stand by.
+ 155 Screen D55155: Physical Disk uCode device selection menu.
+ 161 Screen D55161: No ucode files found.
+ 162 Screen D55162: Current level not found.
+ 163 Screen D55163: Insert ucode diskette.
+ 164 Screen D55164: At current level.
+ 165 Screen D55165: Must halt all I/O (single drive), continue (N/y)
+ 166 Screen D55166: Download to All/one physical disk(s).
+ 167 Screen D55167: Must halt all I/O (all drives), continue (N/y)
+ 174 Screen D55174: Error reading ucode file from diskette.
+ 175 Screen D55175: Controller Microcode Download Completed successfully.
+ 176 Screen D55176: PDisk Microcode Download Completed successfully.
+ 180 Screen D55180: EEPROM file requirements, continue (N/y)
+ 181 Screen D55181: Insert EEPROM diskette.
+ 182 Screen D55182: Update EEPROM in progress.
+ 183 Screen D55183: Update EEPROM completed successfully.
+ 184 Screen D55184: Update EEPROM file open failed.
+ 190 Screen D55190: Replace controller, change to held-in-reset (N/y).
+ 191 Screen D55191: Replace controller, remove dac, press Enter.
+ 192 Screen D55192: Replace controller, paired dac held-in-reset.
+ 193 Screen D55193: Replace controller, insert new dac, press Enter.
+ 194 Screen D55194: Replace controller, completed, run diags.
+ 195 Screen D55195: Replace controller, single controller subsystem.
+
+$set SCATU_TUCB_DESC
+
+   1 Execute an SCATU: TEST UNIT READY
+   2 Execute an SCATU: REQUEST SENSE
+   3 Execute an SCATU: MODE SENSE (current)
+   4 Execute an SCATU: MODE SENSE (changable)
+   5 Execute an SCATU: MODE SENSE Logical Array page 2B
+   6 Execute an SCATU: TEST UNIT READY
+   7 Execute an SCATU: RESERVE UNIT
+   8 Execute an SCATU: READ CAPACITY
+   9 Issue DKIOCMD_RS ioctl(): TEST UNIT READY
+  10 Issue DKIOCMD_RS ioctl(): INQUIRY
+  11 Issue DKIOCMD_RS ioctl(): RELEASE UNIT
+  12 Issue DKIOCMD_RS ioctl(): START UNIT
+  13 5055 LUN diag mode data
+  14 Issue DKIOCMD_RS ioctl(): WRITE BUFFER
+  15 5155
+  16 Issue DKIOCMD_RS ioctl(): MODE SENSE (2C)
+  17 Issue DKIOCMD_RS ioctl(): INQUIRY
+  18 Issue DKIOCMD_RS ioctl(): START UNIT (START)
+  19 Issue DKIOCMD_RS ioctl(): MODE SENSE 10 (current)
+  20 Issue DKIOCMD_RS ioctl(): INQUIRY
+  21 Issue DKIOCMD_RS ioctl(): START UNIT (STOP)
+  22 Issue DKIOCMD_RS ioctl(): MODE SENSE 10 (changable)
+  23 Issue DKIOCMD_RS ioctl(): INQUIRY
+  24 5053
+  25 Issue DKIOCMD_RS ioctl(): INQUIRY
+  26 Issue DKIOCMD_RS ioctl(): MODE SENSE (Array Physical page 2A)
+  27 Issue DKIOCMD_RS ioctl(): Logical Array page 2B
+  28 Issue DKIOCMD_RS ioctl(): START UNIT (START)
+  29 5C28
+  30 Issue DKIOCMD_RS ioctl(): TEST UNIT READY
+  31 Issue DKIOCMD_RS ioctl(): MODE SELECT 10 (Diag pdisk)
+  32 Issue DKIOCMD_RS ioctl(): RESERVE UNIT
+  33 Issue DKIOCMD_RS ioctl(): RESERVE UNIT
+  34 Issue DKIOCMD_RS ioctl(): MODE SENSE (Subsystem Mode page 2D)
+  35 5D28
+  36 Issue DKIOCMD_RS ioctl(): TEST UNIT READY
+  37 Issue DKIOCMD_RS ioctl(): FORMAT UNIT
+  38 Issue DKIOCMD_RS ioctl(): READ BUFFER (EEPROM)
+  39 Issue DKIOCMD_RS ioctl(): WRITE BUFFER (EEPROM)
+
+$set MISC_TASK_DESC
+
+  50 Configure dac device and parent.
+ 151 Configure hdisk device.
+1000 Open dac device in Normal node.
+1101 Open hdisk in Normal mode.
+1251 Open hdisk device in SC_DIAGNOSTICS mode.
+1050 Open dac device in Normal mode.
+1300 Open dar device in SC_DIAGNOSTICS mode.
+4000 Call RT_GET_ROUTER_STATE ioctl(): Get dac state.
+4101 Call RT_SET_ROUTER_STATE ioctl(): Set dac to held-in-reset.
+8001 Get hdisk information.
+8002 Determine physical disk download type (all/single).
+8028 Perform the Certify routine.
+8050 Call the task sequence for the SA selected.
+8995 End of Busy_LUN Task Sequence.
+8996 End of Replace_Controller Task Sequence, exit SA.
+8997 End of PDisk_uCode Task Sequence, restart sequence.
+8998 End of Task Sequence, return retry (repeat).
+8999 End of Task Sequence.
+
+$set CONDITION_DESC
+
+   1 Task returned good status.
+   2 Task returned bad status.
+   3 Task returned other than good status.
+   4 User selected a valid item.
+   5 User selected item #1.
+   6 User selected item #2.
+   7 User selected item #3.
+   8 User selected item #4.
+   9 User pressed ENTER or ASL_OK.
+  10 User pressed CANCEL or EXIT.
+  11 Good status, download to all pdisks, and more disks.
+  12 Good status and Controller is in the active state.
+  13 Good status and Controller not in the active state.
+  14 Good status, download to all pdisks, and last disk.
+  15 User selected download to all pdisks.
+  17 Good status and LUN counter < number of LUNS.
+  18 Command line controller download.
+  19 Good status and spare disk counter < number of spare disks.
+  20 User selected Cancel PDisk Download.
+  21 Task returned EINVAL.
+  23 User selected Certify LUN.
+  24 User selected Certify Physical Disk.
+  25 User selected Format Physical Disk.
+  26 User selected Controller Microcode Download.
+  27 User selected Physical Disk Microcode Download.
+  28 User selected Update EEPROM.
+  29 User selected Replace Controller.
+  30 CHECK CONDITION and byte 14 of sense data (FRUC) != 0.
+  31 Check condition and only 18 bytes of sense data.
+  33 GOOD status and Controller counter < number of controllers.
+  34 Good status, current LBA < last LBA.
+  35 No spare physical devices found in the array.
+  36 Certify LUN selected and no LUNs found in the array.
+  38 Current LBA >= last LBA.
+  39 Good status and physical disk is not a spare.
+  40 Current LBA < Last LBA.
+  41 Good status and user selected download to all disks.
+  42 Single controller subsystem.
+  43 Good status and ucode block counter < num blocks.
+  44 Good status, cntrl ucode and block counter = num blocks.
+  45 Retry count not exceeded for this task.
+  46 Device config failed.
+  49 Task returned EBUSY/EACCESS/EAGAIN.
+  51 Task returned SCATU_TIMEOUT.
+  52 Task returned SCATU_RESERVATION_CONFLICT.
+  53 Task returned SCATU_CHECK_CONDITION.
+  54 Task returned SCATU_COMMAND_ERROR/SCATU_BUSY.
+  55 Task returned SCATU_IO_BUS_ERROR.
+  56 Task returned SCATU_ADAPTER_FAILURE.
+  57 Mode Sense block size != 512.
+  58 Previous task sequence not complete.
+  60 For any and all conditions.
+  61 Check condition and FRUC != 0.
+  62 State of dac is held-in-reset.
+  63 Good status and user selected pdisk download.
+  64 Good status and user selected pdisk format/certify.
+  65 State of paired dac is held-in-reset.
+
+$set REACTION_DESC
+
+   1 Continue to the next task (clear retry flag, if any).
+   2 Retry current task.
+   3 Restart SA.
+   4 Set device reserved flag.
+   5 Restart task sequence.
+   6 Set DL_ALL_PDISKS flag.
+   7 Initialize item_selected.
+   8 Increment item_selected.
+   9 Clear the download to all pdisks flag.
+  13 Call the Certify LUN routine.
+  14 Call the Certify PDisk routine.
+  15 Change router state to RESET_ACTIVE.
+  16 Set LUN value for hdisk device.
+  17 Mark pdisk as failed (download).
+  18 Mark pdisk as passed (download).
+  20 Get dar name from CuAt for this dac.
+  21 Add LUN to status and increment LUN count.
+  23 Add DEAD LUN to status and increment LUN count.
+  24 Mark hdisk as Open Error on array status screen.
+  25 Increment LUN counter.
+  26 Call cfgdar to update ODM information.
+  27 Call cfgdac to update ODM information.
+  28 Get the CH/ID of the next pdisk.
+  29 Determine spare disk type from Inquiry data.
+  30 Set dac_selected to the dac device selected.
+  31 Configure the LUN device.
+  34 Set LUN value for dac device.
+  35 Get CuDv info for dac selected.
+  36 Set reserved device (LUN or pdisk) flag.
+  37 Set sa_selected variable to item selected.
+  38 Get name/location of the device selected.
+  39 Get name of device selected and its parent.
+  40 Get the last LBA and block size of the device selected.
+  41 Increment current LBA by 32k.
+  42 Save the current MODE SELECT data.
+  43 Save the changable MODE SELECT data.
+  44 Set download from diskette flag.
+  45 Build controller ucode file name.
+  46 Build physical disk ucode file name.
+  47 Get microcode file to download.
+  48 Set previous level flag.
+  49 Sleep 15 seconds.
+  50 Update format percent complete.
+  51 Set ucode block size to zero (last Write Buffer).
+  52 Open the ucode file for downloading.
+  53 Get ucode file info (size, blocks, etc).
+  54 Get a block of ucode data.
+  55 Set the latest/previous flag.
+  56 Add ".02.00" to download name.
+  57 Set SPT flag for physical disk commands.
+  58 Clear SPT flag for physical disk commands.
+  67 Delete retry flag (if any) for this task.
+  68 Go ahead one task in the task sequence.
+  69 Go back one task in the task sequence.
+  70 Exit with good status.
+  71 Exit with bad status.
+  73 Exit with device busy status.
+  74 Exit with software error.
+  75 Exit with unexpected error.
+  76 Exit with invalid ODM data error.
+  80 Save current EEPROM data (64 bytes).
+  81 Get latest level EEPROM file (64 bytes).
+  84 Get CuDv info for all hdisks.
+  85 Add all pdisks to selection menu list.
+  86 Add spare/hot spare pdisks to selection menu list.
+  97 Exit SA with open failed status, run Diagnostics.
+  98 Exit SA with config failed status, run Diagnostics.
+ 100 Exit SA with bad status, run Diagnostics.
+ 103 Close the device.
+ 104 Delete this task sequence.
+3047 Screen D55047: Run the Microcode Download SA.
+3054 Screen D55054: Run Diagnostics to make this dac active.
+3055 Screen D55055: Controller not responding, run Diagnostics.
+3062 Screen D55062: Degraded pdisk, run Format SA.
+3063 Screen D55063: Format in progress, unusable until complete.
+3067 Screen D55067: No LUN's found, exit with good status.
+3076 Screen D55076: Stop format? (N/y)?
+3192 Screen D55192: Paired dac held-in-reset, runs diags.
+3195 Screen D55195: Single controller subsystem.
+9002 Execute task sequence: Get_LUN_Info (2)
+9003 Execute task sequence: Get_LUN_Status_2B (3)
+9004 Execute task sequence: Busy_LUN (4)
+9005 Execute task sequence: Certify_LUN (5)
+9006 Execute task sequence: Certify_PDisk (6)
+9007 Execute task sequence: Format_PDisk (7)
+9008 Execute task sequence: uCode_Init (8)
+9009 Execute task sequence: Cntrl_uCode (9)
+9010 Execute task sequence: Cntrl_No_uCode (10)
+9011 Execute task sequence: PDisk_uCode (11)
+9012 Execute task sequence: Certify_LUN_Init (12)
+9013 Execute task sequence: PDisk_Init (13)
+9014 Execute task sequence: Update_EEPROM (14)
+9015 Execute task sequence: Replace_Controller (15)
+9016 Execute task sequence: DL_All_PDisks (16)
+9201 Set max retry count to 1 and retry this task.
+9202 Set max retry count to 2 and retry this task.
+9203 Set max retry count to 3 and retry this task.
+9204 Set max retry count to 4 and retry this task.
+9205 Set max retry count to 5 and retry this task.
+9206 Set max retry count to 6 and retry this task.
+9207 Set max retry count to 7 and retry this task.
+

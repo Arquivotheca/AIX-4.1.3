@@ -1,0 +1,2670 @@
+#  @(#)39  1.41.2.49  src/bos/objclass/instupdt.add, cmdinstl, bos41J, 9521B_all 5/25/95 16:20:12
+#
+#   COMPONENT_NAME: CMDINSTL
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#------------------------------------------------------------------------------
+# easy_install_bundle = Install Bundle Contents
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id = "easy_install_bundle"
+	next_id = "easy_install_bundle.get_bundle"
+	option_id = "get_device"
+	has_name_select = ""
+	name = "Install Bundle Contents"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 633
+	type = "c"
+	ghost = "n"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "0504009"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "easy_install_bundle.get_bundle"
+	next_id = "easy_install_bundles.cmd_header"
+	option_id = "easy_install_bundle.select_bundle"
+	has_name_select = "y"
+	name = "BUNDLE to install"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 635
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "_bundlename"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "0504003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "easy_install_bundle.select_bundle"
+	disc_field_name = ""
+	name = "BUNDLE to install"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 635
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "+"
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = "/usr/lib/instl/sm_inst list_bundles "
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0504003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "easy_install_bundles.cmd_header"
+	option_id = "easy_install_bundles.cmd_option,device"
+	has_name_select = "y"
+	name = "Install Bundle Contents"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 633
+	cmd_to_exec = "/usr/lib/instl/sm_inst installp_cmd -T iems -G -L -q -a -c -X -g -S all_licensed"
+	ask = "y"
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "0504002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "easy_install_bundles.cmd_option"
+	disc_field_name = "_bundlename"
+	name = "BUNDLE to install"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 635
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "+"
+	prefix = "-b "
+	cmd_to_list_mode = ""
+	cmd_to_list = "/usr/lib/instl/sm_inst list_bundles "
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0504003"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#------------------------------------------------------------------------------
+# easy_install_view = View Bundle Contents
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id = "easy_install_view"
+	next_id = "easy_install_view.bun_select"
+	option_id = "get_device"
+	has_name_select = ""
+	name = "View Bundle Contents"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 632
+	type = "c"
+	ghost = "n"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "0504008"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "easy_install_view.bun_select"
+	next_id = "easy_install_view.cmd_header"
+	option_id = "easy_install_view.get_bundle"
+	has_name_select = "y"
+	name = "VIEW bundle"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 636
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "bundle"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "0503076"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "easy_install_view.get_bundle"
+	disc_field_name = ""
+	name = "VIEW bundle"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 636
+	op_type = "l"
+	entry_type = "n"
+	entry_size = 0
+	required = "+"
+	prefix = "-b "
+	cmd_to_list_mode = ""
+	cmd_to_list = "/usr/lib/instl/sm_inst list_bundles"
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0503076"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "easy_install_view.cmd_header"
+	option_id = "easy_install_view.cmd_option,device"
+	has_name_select = "y"
+	name = "View Bundle Contents"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 632
+	cmd_to_exec = "/usr/lib/instl/sm_inst installp_format -i -N -O"
+	ask = "n"
+	exec_mode = ""
+	ghost = "y"
+	cmd_to_discover = ""
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "0504008"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "020"
+	id = "easy_install_view.cmd_option"
+	disc_field_name = "bundle"
+	name = "VIEW bundle"
+	name_msg_file = "smit.cat"
+	name_msg_set = 1
+	name_msg_id = 636
+	op_type = ""
+	entry_type = "n"
+	entry_size = 0
+	required = "+"
+	prefix = "-b "
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0503076"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+#------------------------------------------------------------------------------
+# Install Software Products at Latest Level                     install_latest1
+#   Install New Software Products at Latest Level                install_latest
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id			= "install_latest"
+	next_id			= "install_latest.cmd_header"
+	option_id		= "get_device"
+	name			= "Install New Software Products at Latest Level"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 630
+	type			= "c"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "1800605"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "install_latest.cmd_header"
+	option_id		= "install_latest.cmd_option,inst_options,prereq,device,commo"
+	has_name_select		= "y"
+	name			= "Install New Software Products at Latest Level"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 630
+	cmd_to_exec		= "/usr/lib/instl/sm_inst installp_cmd -T iems -L -q -a"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800605"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_latest.cmd_option"
+	id_seq_num		= "020"
+	disc_field_name		= ""
+	name			= "SOFTWARE to install"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 620
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-o "
+	cmd_to_list_mode	= "f"
+	cmd_to_list		= "/usr/lib/instl/sm_inst installp_format -iems -l -O -d "
+	cmd_to_list_postfix	= "_rawname"
+	multi_select		= ","
+	value_index		= 0
+	disp_values		= "all_licensed"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503002"
+	help_msg_loc		= ""
+
+#------------------------------------------------------------------------------
+# Install Software Products at Latest Level                     install_latest1
+#   Update Currently Installed Software to Latest Level      	     update_all
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id			= "update_all"
+	next_id			= "update_all.cmd_header"
+	option_id		= "get_device"
+	name			= "Update Currently Installed Software to Latest Level"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 654
+	type			= "c"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "0504013"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "update_all.cmd_header"
+	option_id		= "update_all.cmd_option,device,commo"
+	has_name_select		= "y"
+	name			= "Update Currently Installed Software to Latest Level"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 654
+	cmd_to_exec		= "/usr/lib/instl/sm_inst installp_cmd -T iems -q -a -g -S _update_all"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "0504013"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "update_all.cmd_option"
+	id_seq_num		= "020"
+	disc_field_name		= ""
+	name			= "SOFTWARE to update"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 639
+	op_type			= ""
+	entry_type		= "n"
+	entry_size		= 0
+	required		= ""
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= "_update_all"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "1800600"
+	help_msg_loc		= ""
+
+
+sm_cmd_opt:
+	id			= "update_all.cmd_option"
+	id_seq_num		= "030"
+	disc_field_name		= ""
+	name			= "PREVIEW only? (update operation will NOT occur)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 651
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-p"
+	help_msg_id		= "1800601"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "update_all.cmd_option"
+	id_seq_num		= "040"
+	disc_field_name		= ""
+	name			= "COMMIT software updates?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 6
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-c,"
+	help_msg_id		= "0503003"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "update_all.cmd_option"
+	id_seq_num		= "050"
+	disc_field_name		= ""
+	name			= "SAVE replaced files?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 621
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= "-N,"
+	help_msg_id		= "0503030"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "update_all.cmd_option"
+	id_seq_num		= "055"
+    disc_field_name		= ""
+    name			= "ALTERNATE save directory"
+    name_msg_file		= "smit.cat"
+    name_msg_set		= 1
+    name_msg_id			= 61
+    op_type			= ""
+    entry_type			= "t"
+    entry_size			= 0
+    required			= "n"
+    prefix			= "-t"
+    cmd_to_list_mode		= ""
+    cmd_to_list			= ""
+    cmd_to_list_postfix		= ""
+    multi_select		= "n"
+    value_index			= 0
+    disp_values			= ""
+    values_msg_file		= ""
+    values_msg_set		= 0
+    values_msg_id		= 0
+    aix_values			= ""
+    help_msg_id			= "2840028"
+    help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "update_all.cmd_option"
+	id_seq_num		= "070"
+	disc_field_name		= ""
+	name			= "EXTEND file systems if space needed?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 623
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-X,"
+	help_msg_id		= "0503005"
+	help_msg_loc		= ""
+
+
+sm_cmd_opt:
+        id                      = "update_all.cmd_option"
+        id_seq_num              = "090"
+        disc_field_name         = ""
+        name                    = "VERIFY update and check file sizes?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 650
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 29
+        aix_values              = ",-v"
+        help_msg_id             = "0503004"
+        help_msg_loc            = ""
+
+#------------------------------------------------------------------------------
+# Install / Update Selectable Software (Custom Install)      install_selectable
+#   Install Fileset Updates by FixID		                install_fileset
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id			= "install_fileset"
+	next_id			= "install_fileset.cmd_header"
+	option_id		= "get_device"
+	name			= "Install Fileset Updates by Fix"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 618
+	type			= "c"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "1800608"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+        id                      = "install_fileset.cmd_header"
+        option_id               = "install_fileset.cmd_option,device,commit,commo"
+        has_name_select         = "y"
+        name                    = "Install Fileset Updates by Fix"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 618
+        cmd_to_exec             = "/usr/lib/instl/sm_inst instfix_cmd  "
+        ask                     = "y"
+        exec_mode               = ""
+        ghost                   = "n"
+        cmd_to_discover         = ""
+        cmd_to_discover_postfix = ""
+        name_size               = 0
+        value_size              = 0
+        help_msg_id             = "1800608"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "install_fileset.cmd_option"
+        id_seq_num              = "020"
+        disc_field_name         = ""
+        name                    = "FIXES to install"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 652
+        op_type                 = "l"
+        entry_type              = "t"
+        entry_size              = 0
+        required                = "+"
+        prefix                  = "-f "
+        cmd_to_list_mode        = "F"
+        cmd_to_list             = "/usr/lib/instl/sm_inst instfix_list "
+        cmd_to_list_postfix     = "_rawname"
+        multi_select            = "y"
+        value_index             = 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "1800602"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "install_fileset.cmd_option"
+	id_seq_num		= "030"
+	disc_field_name		= ""
+	name			= "PREVIEW only? (update operation will NOT occur)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 651
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-p"
+	help_msg_id		= "1800601"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_fileset.cmd_option"
+	id_seq_num		= "050"
+	disc_field_name		= ""
+	name			= "SAVE replaced files?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 621
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= ",-N"
+	help_msg_id		= "0503030"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_fileset.cmd_option"
+	id_seq_num		= "055"
+        disc_field_name		= ""
+        name			= "ALTERNATE save directory"
+        name_msg_file		= "smit.cat"
+        name_msg_set		= 1
+        name_msg_id		= 61
+        op_type			= ""
+        entry_type		= "t"
+        entry_size		= 0
+        required		= "n"
+        prefix			= "-t"
+        cmd_to_list_mode	= ""
+        cmd_to_list		= ""
+        cmd_to_list_postfix	= ""
+        multi_select		= "n"
+        value_index		= 0
+        disp_values		= ""
+        values_msg_file		= ""
+        values_msg_set		= 0
+        values_msg_id		= 0
+        aix_values		= ""
+        help_msg_id		= "2840028"
+        help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_fileset.cmd_option"
+	id_seq_num		= "070"
+	disc_field_name		= ""
+	name			= "EXTEND file systems if space needed?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 623
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-X,"
+	help_msg_id		= "0503005"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "install_fileset.cmd_option"
+        id_seq_num              = "090"
+        disc_field_name         = ""
+        name                    = "VERIFY update and check file sizes?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 650
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 29
+        aix_values              = ",-v"
+        help_msg_id             = "0503004"
+        help_msg_loc            = ""
+
+
+#------------------------------------------------------------------------------
+# Install / Update Selectable Software (Custom Install)      install_selectable
+#    Install Bundles of Software                	 custom_install_bundles
+#------------------------------------------------------------------------------
+
+sm_name_hdr:
+        id                      = "custom_install_bundles"
+        next_id                 = "custom_install_bundles.name_header2"
+        option_id               = "get_device"
+        name                    = "Install Bundles of Software"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 634
+        type                    = "j"
+        ghost                   = "n"
+        cmd_to_classify         = ""
+        cmd_to_classify_postfix = ""
+        raw_field_name          = ""
+        cooked_field_name       = ""
+        next_type               = "n"
+        help_msg_id             = "0504002"
+        help_msg_loc            = ""
+
+sm_name_hdr:
+        id                      = "custom_install_bundles.name_header2"
+        next_id                 = "custom_install_bundles.cmd_header"
+        option_id               = "get_bundle"
+        has_name_select         = "y"
+        name                    = "Install Bundles of Software"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 634
+        type                    = "j"
+        ghost                   = "y"
+        cmd_to_classify         = ""
+        cmd_to_classify_postfix = ""
+        raw_field_name          = "_bundlename"
+        cooked_field_name       = ""
+        next_type               = "d"
+        help_msg_id             = "0504002"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "get_bundle"
+	id_seq_num		= "0"
+	disc_field_name		= "_bundlename"
+	name			= "BUNDLE to install from"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 641
+	op_type			= "l"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-b "
+	cmd_to_list_mode	= "1"
+   cmd_to_list		= "/usr/lib/instl/sm_inst list_bundles"
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0504010"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+        id                      = "custom_install_bundles.cmd_header"
+        option_id               = "custom_install_bundles.cmd_option,device,bundle,prereq,commo"
+        has_name_select         = "y"
+        name                    = "Install Bundles of Software"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 634
+	cmd_to_exec		= "/usr/lib/instl/sm_inst installp_cmd -T iems -L -q -a "
+        ask                     = "y"
+        exec_mode               = ""
+        ghost                   = "n"
+        cmd_to_discover         = ""
+        cmd_to_discover_postfix = ""
+        name_size               = 0
+        value_size              = 0
+        help_msg_id             = "0504002"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "bundle"
+	id_seq_num		= "015"
+	disc_field_name		= "_bundlename"
+	name			= "BUNDLE to install from"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 641
+	op_type			= ""
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-b "
+	cmd_to_list_mode	= ""
+   cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0504010"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "020"
+        disc_field_name         = ""
+        name                    = "Bundle CONTENTS to install"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 642
+        op_type                 = "l"
+        entry_type              = "t"
+        entry_size              = 0
+        required                = "+"
+        prefix                  = "-o "
+        cmd_to_list_mode        = "f"
+        cmd_to_list             = "/usr/lib/instl/sm_inst installp_format -iems -l -O -d "
+        cmd_to_list_postfix     = "_rawname -b _bundlename"
+        multi_select            = ","
+        value_index             = 0
+        disp_values             = "all_licensed"
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "0504011"
+        help_msg_loc            = ""
+	
+sm_cmd_opt:
+	id			= "custom_install_bundles.cmd_option"
+	id_seq_num		= "030"
+	disc_field_name		= ""
+	name			= "PREVIEW only? (install operation will NOT occur)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 648
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-p"
+	help_msg_id		= "0504004"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "040"
+        disc_field_name         = ""
+        name                    = "APPLY updates to bundle?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 643
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+        aix_values              = ",-I"
+        help_msg_id             = "0503077"
+        help_msg_loc            = ""
+
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "050"
+        disc_field_name         = ""
+        name                    = "COMMIT software updates?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 6
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "yes,no"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 51
+        aix_values              = "-c,"
+        help_msg_id             = "0503003"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "060"
+        disc_field_name         = ""
+        name                    = "SAVE replaced files?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 621
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "yes,no"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 51
+        aix_values              = ",-N"
+        help_msg_id             = "0503030"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "065"
+        disc_field_name         = ""
+        name                    = "ALTERNATE save directory"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 61
+        op_type                 = ""
+        entry_type              = "t"
+        entry_size              = 0
+        required                = "n"
+        prefix                  = "-t"
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = ""
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "2840028"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "080"
+        disc_field_name         = ""
+        name                    = "EXTEND file systems if space needed?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 623
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "yes,no"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 51
+        aix_values              = "-X,"
+        help_msg_id             = "0503005"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "085"
+        disc_field_name         = ""
+        name                    = "VERIFY install and check file sizes?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 622
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 29
+        aix_values              = ",-v"
+        help_msg_id             = "0503004"
+        help_msg_loc            = ""
+
+
+sm_cmd_opt:
+        id                      = "custom_install_bundles.cmd_option"
+        id_seq_num              = "120"
+        disc_field_name         = ""
+        name                    = "Include corresponding LANGUAGE filesets?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 637
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+        aix_values              = "-G,"
+        help_msg_id             = "0504014"
+        help_msg_loc            = ""
+
+
+#------------------------------------------------------------------------------
+# Install / Update Selectable Software (Custom Install)      install_selectable
+#   Install/Update From All Available Software"          install_selectable_all
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id			= "install_selectable_all"
+	next_id			= "install_selectable_all.cmd_header"
+	option_id		= "get_device"
+	name			= "Install/Update From All Available Software"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 619
+	type			= "c"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "1800617"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "install_selectable_all.cmd_header"
+	option_id		= "install_selectable_all.cmd_option,prereq,device,commit,commo"
+	has_name_select		= "y"
+	name			= "Install/Update From All Available Software"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 619
+	cmd_to_exec		= "/usr/lib/instl/sm_inst installp_cmd -T iems -Q -q -a"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800617"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_selectable_all.cmd_option"
+	id_seq_num		= "020"
+	disc_field_name		= ""
+	name			= "SOFTWARE to install"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 620
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-o "
+	cmd_to_list_mode	= "f"
+	cmd_to_list		= "/usr/lib/instl/sm_inst installp_format -iems -O -d "
+	cmd_to_list_postfix	= "_rawname"
+	multi_select		= ","
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503002"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_selectable_all.cmd_option"
+	id_seq_num		= "030"
+	disc_field_name		= ""
+	name			= "PREVIEW only? (install operation will NOT occur)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 648
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-p"
+	help_msg_id		= "0504004"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_selectable_all.cmd_option"
+	id_seq_num		= "050"
+	disc_field_name		= ""
+	name			= "SAVE replaced files?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 621
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= ",-N"
+	help_msg_id		= "0503030"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id			= "install_selectable_all.cmd_option"
+	id_seq_num		= "055"
+        disc_field_name		= ""
+        name			= "ALTERNATE save directory"
+        name_msg_file		= "smit.cat"
+        name_msg_set		= 1
+        name_msg_id		= 61
+        op_type			= ""
+        entry_type		= "t"
+        entry_size		= 0
+        required		= "n"
+        prefix			= "-t"
+        cmd_to_list_mode	= ""
+        cmd_to_list		= ""
+        cmd_to_list_postfix	= ""
+        multi_select		= "n"
+        value_index		= 0
+        disp_values		= ""
+        values_msg_file		= ""
+        values_msg_set		= 0
+        values_msg_id		= 0
+        aix_values		= ""
+        help_msg_id		= "2840028"
+        help_msg_loc		= ""
+
+
+sm_cmd_opt:
+	id			= "install_selectable_all.cmd_option"
+	id_seq_num		= "070"
+	disc_field_name		= ""
+	name			= "EXTEND file systems if space needed?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 623
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-X,"
+	help_msg_id		= "0503005"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "install_selectable_all.cmd_option"
+        id_seq_num              = "080"
+        disc_field_name         = ""
+        name                    = "OVERWRITE same or newer versions?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 625
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 29
+        aix_values              = ",-F"
+        help_msg_id             = "1800616"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "install_selectable_all.cmd_option"
+        id_seq_num              = "090"
+        disc_field_name         = ""
+        name                    = "VERIFY install and check file sizes?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 622
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 29
+        aix_values              = ",-v"
+        help_msg_id             = "0503004"
+        help_msg_loc            = ""
+
+#------------------------------------------------------------------------------
+# Install / Update Software					 install_update
+#   Copy Software to Hard Disk for Future Installation		      bffcreate
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id			= "bffcreate"
+	next_id			= "bffcreate.cmd_header"
+	option_id		= "get_device.bffcreate"
+	name			= "Copy Software to Hard Disk for Future Installation"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 486
+	type			= "c"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "1800510"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "get_device.bffcreate"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "INPUT device / directory for software"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 626
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-d "
+	cmd_to_list_mode	= "1"
+        cmd_to_list		= "/usr/lib/instl/sm_inst list_devices bffcreate"
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503001"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "bffcreate.cmd_header"
+	option_id		= "bffcreate.cmd_option,device"
+	has_name_select		= "y"
+	name			= "Copy Software to Hard Disk for Future Installation"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 486
+	cmd_to_exec		= "/usr/lib/instl/sm_inst bffcreate_cmd"
+	ask			= "n"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800510"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "bffcreate.cmd_option"
+	id_seq_num		= "02"
+	disc_field_name		= ""
+	name			= "SOFTWARE package to copy"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 644
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "/usr/lib/instl/sm_inst bffcreate_format"
+	cmd_to_list_postfix	= "_rawname"
+	multi_select		= "y"
+	value_index		= 0
+	disp_values		= "all"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503011"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "bffcreate.cmd_option"
+	id_seq_num		= "03"
+	disc_field_name		= ""
+	name			= "DIRECTORY for storing software package"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 627
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-t"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "/usr/sys/inst.images"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503012"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "bffcreate.cmd_option"
+	id_seq_num		= "04"
+	disc_field_name		= ""
+	name			= "DIRECTORY for temporary storage during copying"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 628
+	op_type			= ""
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "n"
+	prefix			= "-w"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "/tmp"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503013"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "bffcreate.cmd_option"
+	id_seq_num		= "05"
+	disc_field_name		= ""
+	name			= "EXTEND file systems if space needed?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 623
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-X,"
+	help_msg_id		= "0503048"
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Install / Update Software					 install_update
+#  "Clean Up After an Interrupted Installation" 		install_cleanup  
+#------------------------------------------------------------------------------
+sm_cmd_hdr:
+	id			= "install_cleanup"
+	option_id		= ""
+	has_name_select		= "n"
+	name			= "Clean Up After an Interrupted Installation"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 7
+	cmd_to_exec		= "installp 2>&1 -C"
+	ask			= "n"
+	exec_mode		= ""
+	ghost			= "y"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800511"
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Install / Update Software					 install_update
+#   List All Software on Installation Media			   install_list
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id			= "install_list"
+	next_id			= "install_list.cmd_header"
+	option_id		= "get_device"
+	name			= "List All Software on Installation Media"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 494
+	type			= "c"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "1800505"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "install_list.cmd_header"
+	option_id		= "install_list.cmd_option"
+	has_name_select		= "y"
+	name			= "List All Software on Installation Media"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 494
+	cmd_to_exec		= "/usr/lib/instl/sm_inst installp_format -O -iems"
+	ask			= "n"
+	exec_mode		= ""
+	ghost			= "y"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800505"	
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_list.cmd_option"
+	id_seq_num		= "010"
+	disc_field_name		= "_rawname"
+	name			= ""
+	name_msg_file		= ""
+	name_msg_set		= 0
+	name_msg_id		= 0
+	op_type			= ""
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= "-d "
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= ""
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Install / Update Software					 install_update
+#   List All Problems Fixed by Software on Installati>>>  install_list_problems
+#------------------------------------------------------------------------------
+sm_name_hdr:
+	id			= "install_list_problems"
+	next_id			= "install_list_problems.cmd_header"
+	option_id		= "get_device"
+	name			= "List All Problems Fixed by Software on Installation Media"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 493
+	type			= "c"
+	ghost			= "n"
+	cmd_to_classify		= ""
+        cmd_to_classify_postfix	= ""
+	raw_field_name		= ""
+	cooked_field_name	= ""
+	help_msg_id		= "1800506"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "install_list_problems.cmd_header"
+	option_id		= "install_list_problems.cmd_option,device"
+	has_name_select		= "y"
+	name			= "List All Problems Fixed by Software on Installation Media"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 493
+	cmd_to_exec		= "/usr/lib/instl/sm_inst instfix_list "
+	ask			= "n"
+	exec_mode		= ""
+	ghost			= "y"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800506"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_list_problems.cmd_option"
+	id_seq_num		= "010"
+	disc_field_name		= "_rawname"
+	name			= ""
+	name_msg_file		= ""
+	name_msg_set		= 0
+	name_msg_id		= 0
+	op_type			= ""
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= ""
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Install / Update Software					 install_update
+#   List User Instructions for Update Media           install_list_instructions 
+#------------------------------------------------------------------------------
+
+sm_name_hdr:
+        id                      = "install_list_instructions"
+        next_id                 = "install_instructions.cmd_header"
+        option_id               = "get_device"
+        name                    = "List User Instructions for Update Media"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 490
+        type                    = "c"
+        ghost                   = "n"
+        cmd_to_classify         = ""
+        cmd_to_classify_postfix = ""
+        raw_field_name          = ""
+        cooked_field_name       = ""
+        help_msg_id             = "2840026"
+        help_msg_loc            = ""
+
+sm_cmd_hdr:
+        id                      = "install_instructions.cmd_header"
+        option_id               = "install_instructions.cmd_option,device"
+        has_name_select         = "y"
+        name                    = "List User Instructions for Update Media"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 490
+        cmd_to_exec             = "inuumsg 158; /usr/lib/instl/sm_inst installp_cmd -T iems -q -i"
+        ask                     = "n"
+        exec_mode               = ""
+        ghost                   = "n"
+        cmd_to_discover         = ""
+        cmd_to_discover_postfix = ""
+        name_size               = 0
+        value_size              = 0
+        help_msg_id             = "2840026"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "install_instructions.cmd_option"
+        id_seq_num              = "020"
+        disc_field_name         = ""
+        name                    = "SOFTWARE name"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 603
+        op_type                 = "l"
+        entry_type              = "t"
+        entry_size              = 0
+        required                = "+"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = "/usr/lib/instl/sm_inst installp_format -iems -n -O -d "
+        cmd_to_list_postfix     = "_rawname"
+        multi_select            = ","
+        value_index             = 0
+        disp_values             = "all"
+        values_msg_file         = ""
+        values_msg_set          = 0
+        values_msg_id           = 0
+        aix_values              = ""
+        help_msg_id             = "0503078"
+        help_msg_loc            = ""
+
+
+#------------------------------------------------------------------------------
+# List Installed Software                                                lslpp
+#   List All Applied but Not Committed Software Updates    install_list_applied
+#------------------------------------------------------------------------------
+sm_cmd_hdr:
+	id			= "install_list_applied"
+	option_id		= ""
+	has_name_select		= ""
+	name			= "List All Applied but Not Committed Software Updates"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 40
+	cmd_to_exec		= "installp -s 1>/tmp/_$$.out 2>/tmp/_$$.err ; cat /tmp/_$$.err /tmp/_$$.out ; rm -rf /tmp/_$$.out /tmp/_$$.err"
+	ask			= "n"
+	exec_mode		= ""
+	ghost			= "y"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix = ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800507"
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Maintain Installed Software                                 maintain_software
+#   Commit Applied Software Updates (Remove Saved Files)         install_commit
+#------------------------------------------------------------------------------
+sm_cmd_hdr:
+	id			= "install_commit"
+	option_id		= "install_commit,maintain_common"
+	has_name_select		= "n"
+	name			= "Commit Applied Software Updates (Remove Saved Files)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 41
+	cmd_to_exec		= "installp 2>&1 -c"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix = ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800508"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_commit"
+	id_seq_num		= "01"
+	disc_field_name		= ""
+	name			= "SOFTWARE name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 603
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "installp -Ous -Js 1>/tmp/_$$.out 2>/tmp/_$$.err ; cat /tmp/_$$.err /tmp/_$$.out ; rm -rf /tmp/_$$.out /tmp/_$$.err"
+	cmd_to_list_postfix	= ""
+	multi_select		= "y"
+	value_index		= 0
+	disp_values		= "all"
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503034"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "install_commit"
+        id_seq_num              = "02"
+        disc_field_name         = ""
+        name                    = "PREVIEW only? (commit operation will NOT occur)"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 645
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+        aix_values              = ",-p"
+        help_msg_id             = "1800603"
+        help_msg_loc            = ""
+
+
+sm_cmd_opt:
+	id			= "install_commit"
+	id_seq_num		= "03"
+	disc_field_name		= ""
+	name			= "COMMIT requisites?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 5
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-g,"
+	help_msg_id		= "0503009"
+	help_msg_loc		= ""
+
+#------------------------------------------------------------------------------
+# Maintain Installed Software                                 maintain_software
+#   Reject Applied Software Updates (Use Previous Version)	 install_reject
+#------------------------------------------------------------------------------
+sm_cmd_hdr:
+	id			= "install_reject"
+	option_id		= "install_reject,maintain_common"
+	has_name_select		= "n"
+	name			= "Reject Applied Software Updates (Use Previous Version)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 52
+	cmd_to_exec		= "installp 2>&1 -rB"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix = ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800509"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_reject"
+	id_seq_num		= "01"
+	disc_field_name		= ""
+	name			= "SOFTWARE name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 603
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	cmd_to_list		= "installp -Ous -JBs 1>/tmp/_$$.out 2>/tmp/_$$.err ; cat /tmp/_$$.err /tmp/_$$.out ; rm -rf /tmp/_$$.out /tmp/_$$.err"
+	cmd_to_list_postfix	= ""
+	multi_select		= "y"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503035"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "install_reject"
+        id_seq_num              = "02"
+        disc_field_name         = ""
+        name                    = "PREVIEW only? (reject operation will NOT occur)"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 646
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+        aix_values              = ",-p"
+        help_msg_id             = "1800607"
+        help_msg_loc            = ""
+
+
+sm_cmd_opt:
+	id			= "install_reject"
+	id_seq_num		= "03"
+	disc_field_name		= ""
+	name			= "REJECT dependent software?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 26
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0			
+ 	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-g"
+	help_msg_id		= "0503036"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_reject"
+	id_seq_num		= "04"
+	disc_field_name		= ""
+	name			= "EXTEND file systems if space needed?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 623
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-X,"
+	help_msg_id		= "0503048"
+	help_msg_loc		= ""
+
+
+
+#------------------------------------------------------------------------------
+# Maintain Installed Software                                 maintain_software
+#   Remove Software Products        			         install_remove
+#------------------------------------------------------------------------------
+sm_cmd_hdr:
+	id			= "install_remove"
+	option_id		= "install_remove,maintain_common"
+	has_name_select		= "n"
+	name			= "Remove Software Products"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 53
+	cmd_to_exec		= "installp 2>&1 -u"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix = ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800599"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "install_remove"
+	id_seq_num		= "01"
+	disc_field_name		= ""
+	name			= "SOFTWARE name"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 603
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "--"
+	cmd_to_list_mode	= ""
+	#cmd_to_list		= "installp -Ous -JIs"
+	cmd_to_list		= "lslpp -qlc | awk -F: '{ print $2 }' | awk '{ print $1 }' | sort -u"
+	cmd_to_list_postfix	= ""
+	multi_select		= "y"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503047"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "install_remove"
+        id_seq_num              = "02"
+        disc_field_name         = ""
+        name                    = "PREVIEW only? (remove operation will NOT occur)"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 647
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+        aix_values              = "-p,"
+        help_msg_id             = "0504007"
+        help_msg_loc            = ""
+
+
+sm_cmd_opt:
+	id			= "install_remove"
+	id_seq_num		= "03"
+	disc_field_name		= ""
+	name			= "REMOVE dependent software?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 54
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-g"
+	help_msg_id		= "0503046"
+	help_msg_loc		= ""
+
+#------------------------------------------------------------------------------
+# Shared name selector
+#------------------------------------------------------------------------------
+sm_cmd_opt:
+	id			= "get_device"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= "INPUT device / directory for software"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 626
+	op_type			= "l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-d "
+	cmd_to_list_mode	= "1"
+        cmd_to_list		= "/usr/lib/instl/sm_inst list_devices"
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503001"
+	help_msg_loc		= ""
+
+
+#------------------------------------------------------------------------------
+# Shared dialog options
+#------------------------------------------------------------------------------
+sm_cmd_opt:
+	id			= "device"
+	id_seq_num		= "010"
+	disc_field_name		= "_rawname"
+	name			= "INPUT device / directory for software"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 626
+	op_type			= ""
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-d "
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "0503001"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "prereq"
+	id_seq_num		= "062"
+	disc_field_name		= ""
+	name			= "AUTOMATICALLY install requisite software?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 3
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-g,"
+	help_msg_id		= "0503029"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "commit"
+	id_seq_num		= "045"
+	disc_field_name		= ""
+	name			= "COMMIT software updates?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 6
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-c"
+	help_msg_id		= "0503003"
+	help_msg_loc		= ""
+
+
+sm_cmd_opt:
+	id			= "commo"
+	id_seq_num		= "160"
+	disc_field_name		= ""
+	name			= "DETAILED output?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 649
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-V2"
+	help_msg_id		= "0504005"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "maintain_common"
+        id_seq_num              = "10"
+        disc_field_name         = ""
+        name                    = "DETAILED output?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 649
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+        aix_values              = ",-V2"
+        help_msg_id             = "0504005"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+	id			= "inst_options"
+	id_seq_num		= "030"
+	disc_field_name		= ""
+	name			= "PREVIEW only? (install operation will NOT occur)"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 648
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= ",-p"
+	help_msg_id		= "0504004"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "inst_options"
+	id_seq_num		= "040"
+	disc_field_name		= ""
+	name			= "COMMIT software updates?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 6
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-c,"
+	help_msg_id		= "0503003"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "inst_options"
+	id_seq_num		= "050"
+	disc_field_name		= ""
+	name			= "SAVE replaced files?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 621
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "no,yes"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 29
+	aix_values		= "-N,"
+	help_msg_id		= "0503030"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id			= "inst_options"
+        id_seq_num		= "060"
+        disc_field_name		= ""
+        name			= "ALTERNATE save directory"
+        name_msg_file		= "smit.cat"
+        name_msg_set		= 1
+        name_msg_id		= 61
+        op_type			= ""
+        entry_type		= "t"
+        entry_size		= 0
+        required		= "n"
+        prefix			= "-t"
+        cmd_to_list_mode	= ""
+        cmd_to_list		= ""
+        cmd_to_list_postfix	= ""
+        multi_select		= "n"
+        value_index		= 0
+        disp_values		= ""
+        values_msg_file		= ""
+        values_msg_set		= 0
+        values_msg_id		= 0
+        aix_values		= ""
+        help_msg_id		= "2840028"
+        help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "inst_options"
+	id_seq_num		= "070"
+	disc_field_name		= ""
+	name			= "EXTEND file systems if space needed?"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 1
+	name_msg_id		= 623
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "y"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+	aix_values		= "-X,"
+	help_msg_id		= "0503005"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+        id                      = "inst_options"
+        id_seq_num              = "080"
+        disc_field_name         = ""
+        name                    = "OVERWRITE same or newer versions?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 625
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 29
+        aix_values              = ",-F"
+        help_msg_id             = "1800616"
+        help_msg_loc            = ""
+
+sm_cmd_opt:
+        id                      = "inst_options"
+        id_seq_num              = "090"
+        disc_field_name         = ""
+        name                    = "VERIFY install and check file sizes?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 622
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "no,yes"
+        values_msg_file         = "smit.cat"
+        values_msg_set          = 1
+        values_msg_id           = 29
+        aix_values              = ",-v"
+        help_msg_id             = "0503004"
+        help_msg_loc            = ""
+
+
+sm_cmd_opt:
+        id                      = "inst_options"
+        id_seq_num              = "110"
+        disc_field_name         = ""
+        name                    = "Include corresponding LANGUAGE filesets?"
+        name_msg_file           = "smit.cat"
+        name_msg_set            = 1
+        name_msg_id             = 637
+        op_type                 = "r"
+        entry_type              = "n"
+        entry_size              = 0
+        required                = "y"
+        prefix                  = ""
+        cmd_to_list_mode        = ""
+        cmd_to_list             = ""
+        cmd_to_list_postfix     = ""
+        multi_select            = "n"
+        value_index             = 0
+        disp_values             = "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 1
+	values_msg_id		= 51
+        aix_values              = "-G,"
+        help_msg_id             = "0504014"
+        help_msg_loc            = ""
+
+#------------------------------------------------------------------------------
+# Problem Determination				problem
+#	Verify Software Requisites and Installations
+#------------------------------------------------------------------------------
+
+sm_cmd_hdr:
+        id = "lppchk"
+        option_id = "lppchk"
+        has_name_select = "n"
+        name = "Verify Software Requisites and Installations"
+        name_msg_file = "smit.cat"
+        name_msg_set = 1
+        name_msg_id = 507
+        cmd_to_exec = "lppchk -v"
+        ask = "n"
+        exec_mode = ""
+        ghost = "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "1800521"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "01"
+        id = "lppchk"
+        disc_field_name = ""
+        name = "SOFTWARE name"
+        name_msg_file = "smit.cat"
+        name_msg_set = 1
+        name_msg_id = 603
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "--"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "lslpp -Jl"
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0503027"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+#-----------------------------------------------------------------------------
+# manual device installation 
+#-----------------------------------------------------------------------------
+
+sm_name_hdr:
+        id                       ="devinst"
+        next_id                  ="devinst.hdr"
+        option_id                ="get_device"
+        name                     ="Install Additional Device Software"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =735
+        type                     ="c"
+        ghost                    ="n"
+        cmd_to_classify 	 = ""
+        cmd_to_classify_postfix = ""
+        raw_field_name           ="_rawname"
+        cooked_field_name        =""
+        help_msg_id              ="1800098"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+	id                       ="devinst.hdr"
+        option_id                ="devinstopt,inst_options,prereq,device,commo"
+	has_name_select          ="y"
+	name                     ="Install Additional Device Software"
+	name_msg_file            ="smit.cat"
+	name_msg_set             =25
+	name_msg_id              =735
+	cmd_to_exec              = "/usr/lib/instl/sm_inst installp_cmd -T iems -L -q -a"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id              ="1800098"
+	help_msg_loc             =""
+
+sm_cmd_opt:
+        id                       ="devinstopt"
+        id_seq_num               ="020"
+        disc_field_name          =""
+        name                     ="SOFTWARE to install"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =1
+        name_msg_id              =620
+        op_type                  ="l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-o "
+	cmd_to_list_mode	= "f"
+	cmd_to_list		= "listprod()\n\
+{\n\
+ISCD=`/usr/lib/assist/check_cd $1` \n\
+if [ x$ISCD = x0 ] \n\
+then
+ installp -JqLd $1 2>&1 | egrep devices | grep -v msg > /tmp/device.smit2 \n\
+else
+ INSTDIR=`/usr/lib/assist/mount_cd $1` \n\
+ installp -JqLd $INSTDIR 2>&1 | egrep devices | grep -v msg > /tmp/device.smit2 \n\
+ /usr/lib/assist/unmount_cd $1\n\
+fi
+/usr/lib/instl/sm_inst installp_format -i -n -O -P /tmp/device.smit2 \n\
+RC=$?
+/usr/bin/rm -f /tmp/device.smit2 \n\
+exit $RC \n\
+}
+listprod"
+	cmd_to_list_postfix	= "_rawname"
+	multi_select		= ","
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+        help_msg_id              ="1800110"
+        help_msg_loc             =""
+
+#-----------------------------------------------------------------------------
+# manual printer installation 
+#-----------------------------------------------------------------------------
+
+sm_name_hdr:
+        id                       ="printerinst"
+        next_id                  ="printerinst.hdr"
+        option_id                ="get_device"
+        name                     ="Install Additional Printer/Plotter Software"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =734
+        type                     ="c"
+        ghost                    ="n"
+        cmd_to_classify 	 =""
+        cmd_to_classify_postfix = ""
+        raw_field_name           ="_rawname"
+        cooked_field_name        =""
+        help_msg_id              ="1800099"
+        help_msg_loc             =""
+
+sm_cmd_hdr:
+	id                       ="printerinst.hdr"
+	option_id                ="printerinstopt,inst_options,prereq,device,commo"
+	has_name_select          ="y"
+	name                     ="Install Additional Printer/Plotter Software"
+	name_msg_file            ="smit.cat"
+	name_msg_set             =25
+	name_msg_id              =734
+	cmd_to_exec              = "/usr/lib/instl/sm_inst installp_cmd -T iems -L -q -a"
+	ask			= "y"
+	exec_mode		= ""
+	ghost			= "n"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id              ="1800099"
+	help_msg_loc             =""
+
+# first line on screens is common with the devinstdev option
+
+sm_cmd_opt:
+	id                       ="printerinstopt"
+	id_seq_num               ="020"
+	disc_field_name          =""
+	name                     ="SOFTWARE to install"
+	name_msg_file            ="smit.cat"
+	name_msg_set             =1
+	name_msg_id              =620
+        op_type                  ="l"
+	entry_type		= "t"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-o "
+	cmd_to_list_mode	= "f"
+	cmd_to_list		= "listprod()\n\
+{\n\
+ISCD=`/usr/lib/assist/check_cd $1` \n\
+if [ x$ISCD = x0 ] \n\
+then
+ installp -JqLd $1 2>&1 | egrep printers | grep -v msg > /tmp/device.smit2 \n\
+else
+ INSTDIR=`/usr/lib/assist/mount_cd $1` \n\
+ installp -JqLd $INSTDIR 2>&1 | egrep printers | grep -v msg > /tmp/device.smit2 \n\
+ /usr/lib/assist/unmount_cd $1\n\
+fi
+/usr/lib/instl/sm_inst installp_format -i -n -O -P /tmp/device.smit2 \n\
+RC=$?
+/usr/bin/rm -f /tmp/device.smit2 \n\
+exit $RC \n\
+}
+listprod"
+	cmd_to_list_postfix	= "_rawname"
+	multi_select		= ","
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+        help_msg_id              ="1800110"
+        help_msg_loc             =""

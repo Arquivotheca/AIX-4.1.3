@@ -1,0 +1,138 @@
+# @(#)80        1.3  src/bos/objclass/POWER/diag.deff.add, sysxdmpa, bos41J, 9510A_all 3/3/95 13:47:46
+#
+#   COMPONENT_NAME: (MPAODM) MP/A ODM FILES
+#
+#   FUNCTIONS: MPA Diagnostic Predefined Stanzas
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# DType    - name uniquely identifying a device type
+# DSClass  - name uniquely identifying a device subclass
+# Ports    - number of ports on the card if a multi-port card
+# Pset     - set id of message set in catalog file dcda.msg (vendor.msg)
+#            (see Menu bit 16 below if not using dcda.msg file)
+# PreTest  - set if device is to be tested before system comes up.
+#          - value equals 1 if not a display device
+#          - value equals 2 if a display device
+# AttDType - names a device that has a device driver that supports DType.
+# Conc     - 0 not supported in concurrent mode
+#          - 1 supports Diagnostic Tests in concurrent mode
+#          - 2 supports ELA
+# SupTests - Bit positions 32 16 8 4 2 1
+#                           |  | | | | |__Shared Tests
+#                           |  | | | |____Subtests Tests
+#                           |  | | |______Full Tests
+#                           |  | |________Missing Options 1
+#                           |  |__________Missing Options 2
+#                           |_____________HFT Devices (used for X)
+#                                         device will not be in test list if
+#                                         running under X-windows
+#
+# Menu     - Bit positions 16 8 4 2 1
+#                           | | | | |_____Diagnostic Test List Menu
+#                           | | | |_______Not allowed to be deleted from DTL Menu
+#                           | | |_________Diagnostic Selection Menu
+#                           | |___________Conditional Diagnostic Selection Menu
+#                           |_____________Devices SRN numbers are located in the
+#                                         Diagnostic Application catalog file.
+#                                         Pset indicates the set number
+# DNext    - 2 Test Sibling next
+#          - 1 Test Parent next
+# DaName   - name of Diagnostic Application associated with device
+#            When DaName is prefixed with a "*", the diagnostic controller will
+#            get the value of the attribute name that follows the "*", then
+#            uses the attribute value obtained to get the real DaName from the
+#            PDiagAtt object class. This method is used to allow support of
+#            devices having the same DType, but requiring different DA.
+# Diskette - 0 => Not on any diskette
+#            X => Diskette number
+#            S => Supplemental Diskette
+# EnclDaName - name of Diagnostic Application associated with enclosure for
+#              device
+# SysxFlg  - Bit positions  8 4 2 1
+#                           | | | |__System Exerciser NOT supported
+#                           | | |____DA must run separately from similar DAs
+#                           | |______DA requires media
+#                           |________DA is considered a long test
+#
+#
+PDiagDev:
+        DType = "mpaa"
+        DSClass = "mca"
+        Ports = 0
+        PSet = 1
+        PreTest = 0
+        AttDType = ""
+        AttSClass = ""
+        Conc = 1
+        SupTests = 4
+        Menu = 21
+        DNext = 1
+        DaName = "dampa"
+        Diskette = "6B"
+        EnclDaName = ""
+        SysxFlg = 0
+
+# Predefined Device object
+ 
+#PdDv:
+# PdDv.class = device class (e.g. adapter)
+# PdDv.subclass = connection type (e.g. mca meaning MicroChannelArch.)
+# PdDv.type = (e.g. pca (Parallel Channel Adapter)
+# PdDv.prefix = customized device names prefix (e.g. /dev/cat0)
+# PdDv.devid = the card id obtained from pos(0) and pos(1)
+# PdDv.base = whether device is a base device
+# PdDv.has_vpd =  device has/hasn't got Vital Product Data
+# PdDv.detectable = whether the device can be detected automatically
+# PdDv.chgstatus = set to NEW when defining a device of this type
+# PdDv.bus_ext = whether this device is a bus extension
+# PdDv.fru = whether this device IS a FRU (field replacable unit)
+# PdDv.led = the LED value to be displayed when being configured at boot time
+# PdDv.catalog = the NLS message catalog containing adapter text descriptions
+# PdDv.setno = the NLS message set number containing text descriptions
+# PdDv.msgno = the NLS message number of the text description of the adapter
+# PdDv.DvDr = device driver (e.g. "catdd") to be loaded when the adapter is configured
+# PdDv.Define = the pathname of the define method
+# PdDv.Configure = the pathame of the configure method
+# PdDv.Change = the pathname of the change method
+# PdDv.Unconfigure = the pathname of the unconfigure method
+# PdDv.Undefine = the pathname of the undefine method
+# PdDv.Start = the pathname of the start method
+# PdDv.Stop = the pathname of the stop method
+# PdDv.uniquetype = adapter's class, subclass, and type
+
+PdDv:
+	type = "dmpa"
+	class = "driver"
+	subclass = "mpaa"
+	prefix = "dmpa"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x996
+	catalog = "dmpa.cat"
+	setno = 1
+	msgno = 7
+	DvDr = "dmpadd"
+	Define = /etc/methods/define
+	Configure = /usr/lib/methods/cfgdmpa
+	Change = ""
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = driver/mpaa/dmpa

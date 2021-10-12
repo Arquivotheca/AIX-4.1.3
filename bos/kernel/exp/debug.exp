@@ -1,0 +1,64 @@
+#!/unix
+* @(#)26        1.12  src/bos/kernel/exp/debug.exp, sysdb, bos411, 9428A410j 5/12/94 17:44:57
+*
+* COMPONENT_NAME: (SYSDB)
+*	debug.exp - exports needed for crash and low level debugger
+*
+* ORIGINS: 27 83
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1989,1993
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* 
+*  @IBM_COPYRIGHT@
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993
+* All Rights Reserved
+*
+* LEVEL 1, 12 Years Bull Confidential Information
+*
+*******************************************************************
+* Symbols exported for debug purposes
+execexit
+enter_dbg
+library_anchor
+printbuf
+kexit
+dbp_mh_freelater
+
+*	crash needs the following
+*
+file
+utsname
+hbuf
+buf_hdr
+hinode
+mbufs
+mbclusters
+dbp_streams_runq
+
+*
+* both crash and lldb (will) need
+*
+* curproc 
+panicstr
+g_kxsrval
+kernel_anchor
+dbp_fmodsw
+dbp_dmodsw
+dbp_sth_open_streams
+
+
+* structure pointers related to trchdr
+trchdr_ptr
+fake_trchdr
+
+*
+* for xmalloc test cases
+*
+verify_empty_heap

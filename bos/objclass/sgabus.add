@@ -1,0 +1,70 @@
+# @(#)98	1.1  src/bos/objclass/sgabus.add, dispccm, bos411, 9428A410j 5/13/94 15:03:46
+#
+#   COMPONENT_NAME: SGADD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#=================================================================                                                                   
+#====================================================================
+#		PREDEFINED DATA
+#		FOR SGA BUS
+#
+#	Notes:	Uses message setno same as sga adapter
+#		Uses LED same as sga adapter
+#
+#====================================================================
+
+PdDv:
+	type = "sgabus"
+	class = "bus"
+	subclass = "sys"
+	prefix = "sgabus"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	chgstatus = 1
+	bus_ext = 0
+	fru = 0
+	led = 0x880
+	setno = 143
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = "/etc/methods/cfg_sgabus"
+	Change = ""
+	Unconfigure = "/etc/methods/ucfgdevice"
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = "bus/sys/sgabus"
+
+PdAt:
+	uniquetype = "bus/sys/sgabus"
+	attribute = "bus_id"
+	deflt  = "0x84000000"
+	values = "0x84000000"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "n"
+	nls_index = 2
+
+
+PdCn:
+	uniquetype = "bus/sys/sgabus"
+	connkey = sys
+	connwhere = "40"
+

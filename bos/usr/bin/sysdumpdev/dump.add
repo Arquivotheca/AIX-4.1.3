@@ -1,0 +1,519 @@
+# @(#)02  1.8  src/bos/usr/bin/sysdumpdev/dump.add, cmddump, bos411, 9428A410j 4/11/94 11:57:12
+#
+#   COMPONENT_NAME: CMDDUMP
+#
+#   FUNCTIONS: stanza file for additional dump SMIT odm population 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_menu_opt:
+        id_seq_num = "070"
+        id = "dump"
+        next_id = "dump_startp"
+        text = "Start a Dump to the Primary Dump Device"
+        text_msg_file = "smit.cat"
+        text_msg_set = 25
+        text_msg_id = 423
+        next_type = "d"
+        alias = "n"
+        help_msg_id = "0453003"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_menu_opt:
+        id_seq_num = "080"
+        id = "dump"
+        next_id = "dump_starts"
+        text = "Start a Dump to the Secondary Dump Device"
+        text_msg_file = "smit.cat"
+        text_msg_set = 25
+        text_msg_id = 424
+        next_type = "d"
+        alias = "n"
+        help_msg_id = "0453004"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_menu_opt:
+        id_seq_num = "090"
+        id = "dump"
+        next_id = "dump_copy_file"
+        text = "Copy a System Dump from a Dump Device to a File"
+        text_msg_file = "smit.cat"
+        text_msg_set = 25
+        text_msg_id = 180
+        next_type = "n"
+        alias = ""
+        help_msg_id = "1800189"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_menu_opt:
+        id_seq_num = "095"
+        id = "dump"
+        next_id = "dump_copy_dskt"
+        text = "Copy a System Dump from a Dump Device to Diskette"
+        text_msg_file = "smit.cat"
+        text_msg_set = 25
+        text_msg_id = 425
+        next_type = "n"
+        alias = ""
+        help_msg_id = "1800592"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "dump_copy_file"
+        disc_field_name = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1800189"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "010"
+        id = "dump_copy_file_not_2"
+        disc_field_name = "_devicename"
+        name = "Copy dump image from:"
+        name_msg_file = "smit.cat"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 11
+        op_type = ""
+        entry_type = "f"
+        entry_size = 0
+        required = "+"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0453012"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+
+sm_cmd_opt:
+        id_seq_num = "020"
+        id = "dump_copy_file_not_2"
+        disc_field_name = "_targfile"
+        name = "Copy dump image to:"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 12
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = "/var/adm/ras/dump_file_copy"
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0453013"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "030"
+        id = "dump_copy_file_not_2"
+        disc_field_name = ""
+        name = "Input and output file BLOCKSIZE for copy"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 21
+        op_type = ""
+        entry_type = "#"
+        entry_size = 0
+        required = "+"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = "4096"
+        help_msg_id = "0453027"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "035"
+        id = "dump_copy_file_not_2"
+        disc_field_name = "_size"
+        name = "SIZE in bytes to be copied"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 13
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0453014"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "040"
+        id = "dump_copy_file_not_2"
+        disc_field_name = "_timestamp"
+        name = "DATE of last dump"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 14
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0453015"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "dump_copy_dskt"
+        disc_field_name = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "1800592"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "020"
+        id = "dump_copy_dskt_not_2"
+        disc_field_name = ""
+        name = "Copy dump image to:"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 12
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = "/dev/rfd0"
+        help_msg_id = "0453013"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_copy_file_exit_2"
+        option_id = ""
+        has_name_select = "y"
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "echo $(dspmsg smit.cat -s 10 22 'No previous dump recorded.')\n\
+exit 0"
+        ask = ""
+        exec_mode = "p"
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453029"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_copy_file_not_2"
+        option_id = "dump_copy_file_not_2"
+        has_name_select = ""
+        name = "Copy a System Dump from a Dump Device to a File"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 12
+        cmd_to_exec = "x() {\n\
+
+LVNAME=`echo $1 | cut -c6-`
+LVTYPE=`/usr/sbin/lslv $LVNAME | grep \"TYPE:\" | awk '{print $2}'`
+if [ \"$LVTYPE\" = \"paging\" ]
+then
+	dspmsg cmddump.cat -s 1 557 \"The dump on %s is no longer valid.  To see if\n\
+the dump was copied to a file on boot, run the following command:\n\
+        sysdumpdev -L\n\" $1
+	exit 1
+else
+ 
+	COUNT=`expr $4 / $3`\n\
+	OVFL=`expr $4 % $3`\n\
+	if [ $OVFL != 0 ]\n\
+  	then COUNT=`expr $COUNT + 1`\n\
+	fi\n\
+	dd if=$1 of=$2 bs=$3 count=$COUNT\n\
+fi
+}\n\
+x"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "n"
+        cmd_to_discover = "/usr/lib/ras/dump_smutil sysdumpdev -L"
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453011"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_copy_dskt_exit_2"
+        option_id = ""
+        has_name_select = "y"
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "echo $(dspmsg smit.cat -s 10 22 'No previous dump recorded.')\n\
+exit 0"
+        ask = ""
+        exec_mode = "p"
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453029"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_copy_dskt_not_2"
+        option_id = "dump_copy_dskt_not_2"
+        has_name_select = "y"
+        name = "Copy a System Dump from a Dump Device to Diskette"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 23
+        cmd_to_exec = "/usr/lib/ras/cpydmpdskt "
+        ask = ""
+        exec_mode = ""
+        ghost = ""
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453028"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_startp"
+        option_id = ""
+        has_name_select = ""
+        name = "Start a Dump to the Primary Dump Device"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 7
+        cmd_to_exec = "sysdumpstart -p"
+        ask = "y"
+        exec_mode = "p"
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453020"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "dump_starts"
+        option_id = ""
+        has_name_select = ""
+        name = "Start a Dump to the Secondary Dump Device"
+        name_msg_file = "smit.cat"
+        name_msg_set = 10
+        name_msg_id = 8
+        cmd_to_exec = "sysdumpstart -s"
+        ask = "y"
+        exec_mode = ""
+        ghost = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0453021"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_name_hdr:
+        id = "dump_copy_file"
+        next_id = "dump_copy_file_"
+        option_id = "dump_copy_file"
+        has_name_select = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        type = "c"
+        ghost = "y"
+        cmd_to_classify = "sysdumpdev -L >/dev/null 2>&1\n\
+exit_status=$?\n\
+if [ $exit_status = '2' ]\n\
+then\n\
+    echo 'exit_2'\n\
+    exit 0\n\
+fi\n\
+if [ $exit_status = '1' ]\n\	
+then\n\
+    echo 'sysdumpdev: permission denied'\n\
+    exit $exit_status\n\
+else\n\
+    echo 'not_2'\n\	
+    exit $exit_status\n\	
+fi #"
+        cmd_to_classify_postfix = ""
+        raw_field_name = ""
+        cooked_field_name = ""
+        next_type = "d"
+        help_msg_id = "1800189"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_name_hdr:
+        id = "dump_copy_dskt"
+        next_id = "dump_copy_dskt_"
+        option_id = "dump_copy_dskt"
+        has_name_select = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        type = "c"
+        ghost = "y"
+        cmd_to_classify = "sysdumpdev -L >/dev/null 2>&1\n\
+exit_status=$?\n\
+if [ $exit_status = '2' ]\n\
+then\n\
+    echo 'exit_2'\n\
+    exit 0\n\
+fi\n\
+if [ $exit_status = '1' ]\n\	
+then\n\
+    echo 'sysdumpdev: permission denied'\n\
+    exit $exit_status\n\
+else\n\
+    echo 'not_2'\n\	
+    exit $exit_status\n\		
+fi #"
+        cmd_to_classify_postfix = ""
+        raw_field_name = ""
+        cooked_field_name = ""
+        next_type = "d"
+        help_msg_id = "1800592"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""

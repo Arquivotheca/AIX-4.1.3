@@ -1,0 +1,18 @@
+
+PDiagDev:
+        DType = "baud"
+        DSClass = "mca"
+        Ports = 0
+        PSet = 1
+        PreTest = 0
+        AttDType = ""
+        AttSClass = ""
+        Conc = 1
+        SupTests = "0x6"
+        Menu = 21
+        DNext = 1
+        DaName = "dabaud"
+        Diskette = "5"
+        EnclDaName = ""
+        SysxFlg = 0
+

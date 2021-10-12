@@ -1,0 +1,38 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Sometimes you want to request one of a limited
+range of characters.  This is possible with an
+expression like
+  [a-d]
+which matches a, b, c, or d.  Thus, to take
+some combinations
+  ab[c-f]
+matches
+  abc, abd, abe, abf
+Try typing "ls a[0-9]"
+and see how many files it matches.  Type that
+number in the form "answer N".
+#create a0
+#create a1
+#create a5
+#create ax
+#copyin
+#user
+#uncopyin
+#match 3
+#log
+#next
+9.1a 10
+9.2a 4

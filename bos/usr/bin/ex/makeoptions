@@ -1,0 +1,85 @@
+# /* @(#)35  1.6  src/bos/usr/bin/ex/makeoptions, cmdedit, bos411, 9428A410j 6/11/94 14:16:13 */
+#
+# COMPONENT_NAME: (CMDEDIT) makeoptions
+#
+# FUNCTION: none
+#
+# ORIGINS: 3, 10, 13, 26, 27, 71
+#
+# This module contains IBM CONFIDENTIAL code. -- (IBM
+# Confidential Restricted when combined with the aggregated
+# modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# 
+# Copyright (c) 1981 Regents of the University of California 
+# 
+# makeoptions  1.6  com/cmd/edit/vi,3.1,9013 3/7/90 06:07:19
+#
+# (c) Copyright 1990, 1991, 1992 OPEN SOFTWARE FOUNDATION, INC.
+# ALL RIGHTS RESERVED
+#
+# OSF/1 1.1
+#
+# HISTORY
+# Log:	makeoptions 
+# Revision 2.5  90/10/07  16:31:43  devrcs
+#
+# Copyright (c) 1980 Regents of the University of California.
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	makeoptions	6.4 (Berkeley) 5/31/85
+#
+
+#
+# remake options -- this isn't necessary unless you add/delete options
+#
+# only command-line #defines (-D) will be processed by this script.
+#
+trap '${ODE_TOOLS}/usr/bin/rm -f ex_data.tmp.c' 0 2
+
+ex_data=${1-ex_data.c}
+shift
+
+	${ODE_TOOLS}/usr/bin/sed -e '/^#include/d' < $ex_data > ex_data.tmp.c
+	${ODE_TOOLS}/usr/bin/cc -F ${ODE_TOOLS}/etc/xlC.cfg -E $* ex_data.tmp.c | ${ODE_TOOLS}/usr/bin/sed -e '
+/option options/{
+N
+h
+}
+1,/option options/d
+/^#/d
+/^[ 	]*$/d
+/^[ 	]*0/d
+/}/{
+g
+s/[^@]*\n//
+}
+s/[ 	]*"\([^"]*\)".*$/\1/
+y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/' | \
+	${ODE_TOOLS}/usr/bin/cat -n | ${ODE_TOOLS}/usr/bin/sed -e '
+1a\
+/* ex_vars.h  makeoptions Revision: 2.5 Date: 90/10/07 16:31:43 */\
+
+s/[ 	]*\([0-9][0-9]*\)[ 	]*\(.*\)/#define	\2	\1/
+1{
+h
+d
+}
+$!{
+H
+d
+}
+${
+s/\(	[^	]*	\)\(.*\)$/\10\
+#define	NOPTS	\2/
+P
+s/[^@]*\n//
+H
+x
+}' > ex_vars.h

@@ -1,0 +1,46 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+(Section 1.9 -- read 1.6-1.8 too.)
+Write a program that removes trailing blanks
+and tabs from each line of input, and deletes
+entirely blank lines.  To make your job easier,
+you can use the function getline; its source
+is in getline.c.
+Type ready when you are done.
+#once #create Ref
+  This  file  contains
+some trailing     		
+blanks 
+and tabs
+
+
+	
+ 	 
+and some empty lines.
+#once #create Ref1
+  This  file  contains
+some trailing
+blanks
+and tabs
+and some empty lines.
+#once cp %s/getline.c .
+#user
+a.out <Ref >test
+#cmp test Ref1
+#succeed
+No answer yet - sorry.
+#log
+#next
+10 10

@@ -1,0 +1,276 @@
+# @(#)35        1.3  src/bos/diag/da/d7135/d7135.desc, da7135, bos41J, 9515A_all 3/26/95 22:59:41
+#
+#   COMPONENT_NAME: DA7135 
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#
+
+#
+# Data descriptions for the 7135 Diagnostic Application.
+# Refer to the DA CIS for this component.
+#
+
+$set SEQUENCE_DESC
+
+   1 Main_DA_Sequence
+   2 Get_LUN_Status
+   3 Cntrl_State
+   4 Spare_Disk_Seq
+   5 Subsys_MS_2D
+   6 Dead_LUN_Seq
+   7 ELA_Seq
+   8 Set_Router_Seq
+   9 Restore_Router_Seq
+  10 Check_For_uCode
+
+$set ASL_SCREEN_DESC
+
+ 000 Screen D55000: Accessing array status information.
+ 001 Screen D55001: Accessing logical status information.
+ 002 Screen D55002: Accessing physical disk status information.
+ 003 Screen D55003: Display the array status screen.
+ 004 Screen D55004: Accessing subsystem status information.
+ 005 Screen D55005: Test other controller (Y/N)?
+ 006 Screen D55006: Return controller state (Y/N)?
+
+$set SCATU_TUCB_DESC
+
+   1 Execute an SCATU: TEST UNIT READY
+   2 Execute an SCATU: REQUEST SENSE
+   3 Execute an SCATU: MODE SENSE (current)
+   4 Execute an SCATU: MODE SENSE (changable)
+   5 Execute an SCATU: MODE SENSE Logical Array page 2B
+   6 Execute an SCATU: TEST UNIT READY
+   7 Execute an SCATU: RESERVE UNIT
+   8 Execute an SCATU: READ CAPACITY
+   9 Call DKIOCMD_PTRS ioctl(): TEST UNIT READY
+  10 Call DKIOCMD_PTRS ioctl(): INQUIRY
+  11 Call DKIOCMD_RS ioctl(): RELEASE UNIT
+  12 Call DKIOCMD_RS ioctl(): START UNIT
+  13 5055
+  14 Call DKIOCMD_RS ioctl(): WRITE BUFFER
+  15 5155
+  16 Call DKIOCMD_RS ioctl(): MODE SENSE (2C)
+  17 Call DKIOCMD_RS ioctl(): INQUIRY
+  18 Call DKIOCMD_RS ioctl(): START UNIT (START)
+  19 Call DKIOCMD_RS ioctl(): MODE SENSE 10 (current)
+  20 Call DKIOCMD_RS ioctl(): INQUIRY
+  21 Call DKIOCMD_RS ioctl(): START UNIT (STOP)
+  22 Call DKIOCMD_RS ioctl(): MODE SENSE 10 (changable)
+  23 Call DKIOCMD_RS ioctl(): INQUIRY
+  24 5053
+  25 Call DKIOCMD_RS ioctl(): INQUIRY
+  26 Call DKIOCMD_RS ioctl(): MODE SENSE (Array Physical page 2A)
+  27 Call DKIOCMD_RS ioctl(): Logical Array page 2B
+  28 Call DKIOCMD_RS ioctl(): MODE SENSE (Controller page 2C)
+  29 5C28
+  30 Call DKIOCMD_RS ioctl(): TEST UNIT READY
+  31 Call DKIOCMD_RS ioctl(): MODE SELECT 10 (Diag)
+  32 Call DKIOCMD_RS ioctl(): RESERVE UNIT
+  33 Call DKIOCMD_RS ioctl(): RESERVE UNIT
+  34 Call DKIOCMD_RS ioctl(): MODE SENSE (Subsystem page 2D)
+  35 5D28
+  36 Call DKIOCMD_RS ioctl(): TEST UNIT READY
+  37 Call DKIOCMD_RS ioctl(): FORMAT UNIT
+  38 Call DKIOCMD_PTRS ioctl(): TEST UNIT READY
+  39 Call DKIOCMD_PTRS ioctl(): SEND DIAGNOSTIC
+
+$set MISC_TASK_DESC
+
+   1 Configure dac device and parent.
+ 200 Configure the dar device.
+1200 Open LUN in SC_DIAGNOSTICS mode.
+1300 Open dar in SC_DIAGNOSTICS mode.
+1000 Open dac in NORMAL mode.
+1100 Open LUN in NORMAL mode.
+3002 Screen D55002: Array Status.
+4000 Call RT_GET_ROUTER_STATE ioctl(): Save router state.
+4100 Call RT_SET_ROUTER_STATE ioctl(): Set router state.
+4101 Call RT_SET_ROUTER_STATE ioctl(): Restore router state.
+7000 Perform ELA.
+8000 Get the status of the hdisks.
+8001 Identify and diagnose each physical disk in the array.
+8002 Check for a controller state change.
+8003 Initialization task.
+8998 End of Task Sequence, Repeat Sequence.
+8999 End of Task Sequence.
+
+$set CONDITION_DESC
+
+   1 Task returned good status.
+   2 Task returned bad status.
+   3 Task returned other than good status.
+   4 User selected a valid item.
+   5 User selected item #1.
+   6 User selected item #2.
+   7 User selected item #3.
+   8 User selected item #4.
+   9 User pressed ENTER or ASL_OK.
+  10 User pressed CANCEL or EXIT.
+  11 No devices found.
+  12 Good status and Controller is in the active state.
+  13 Good status and Controller not in the active state.
+  14 Good status and Advanced mode.
+  15 Good status, Passive Controller, advanced test mode.
+  16 Good status, Passive Controller, customer test mode.
+  17 Good status and LUN counter < number of LUNS.
+  18 Not interactive test mode, and all pdisks diagnosed.
+  19 More pdisks to diagnose.
+  20 All pdisks diagnosed.
+  21 Task returned EINVAL.
+  22 Test mode = Exit Loopmode.
+  23 Task returned EICON.
+  24 Task returned EDRV.
+  25 Task returned EIO.
+  27 The subsystem has two controllers.
+  28 The controller state has been changed.
+  29 The controller is held-in-reset.
+  30 CHECK CONDITION and sense data FRU Code != 0.
+  31 CHECK CONDITION and 18 bytes of sense data (no ucode).
+  32 Bad status and spare disk counter < number of spare disks.
+  33 GOOD status and Controller counter < number of controllers.
+  34 Good status, current LBA < last LBA.
+  35 No spare physical devices found in the array.
+  36 Certify LUN selected and no LUNs found in the array.
+  37 Good status and user selected Certify LUN SA.
+  38 Good status and current LBA >= last LBA.
+  39 Previous microcode level selected.
+  40 Good status and current LBA < Last LBA.
+  41 Good status and 000000 (SK/ASC/ASCQ)
+  42 Good status and 020404 (SK/ASC/ASCQ)
+  43 Good status and ucode block counter < num blocks.
+  44 Good status, cntrl ucode and block counter = num blocks.
+  45 Retry count not exceeded for this task.
+  46 Device config failed.
+  47 Parent config failed.
+  48 Grandparent config failed.
+  49 Task returned EBUSY/EACCESS/EAGAIN.
+  50 Task returned EINVAL.
+  51 Task returned SCATU_TIMEOUT.
+  52 Task returned SCATU_RESERVATION_CONFLICT.
+  53 Task returned SCATU_CHECK_CONDITION.
+  54 Task returned SCATU_COMMAND_ERROR/SCATU_BUSY.
+  55 Task returned SCATU_IO_BUS_ERROR.
+  56 Task returned SCATU_ADAPTER_FAILURE.
+  57 Mode Sense block size != 512.
+  58 Previous task sequence not complete.
+  59 ELA only test mode.
+  60 For any and all conditions.
+  61 Check condition and FRUC != 0.
+
+$set REACTION_DESC
+
+   1 Continue to the next task (clear retry flag, if any).
+   2 Retry current task.
+   3 Restart DA.
+   4 Set device reserved flag.
+   5 Restart task sequence.
+   6 DA Screen D55004: Passive controller selected.
+   7 Screen D55065: Exit the RAID mgr to run Diags.
+   8 Display the format in progress message.
+   9 Degraded pdisk, run Format SA.
+  10 Format in progress, unusable until complete.
+  11 Screen D55045: LUN Status Unknown
+  12 Screen D55047: Run the Microcode Download SA.
+  13 Screen D55048: Exit the RAID mgr to run Diags.
+  14 Screen D55049: Unexpected Error.
+  15 Set dev_lun to the dac LUN value.
+  16 Set dev_lun to the hdisk LUN value.
+  17 Get array type (110 or 115) from CuVPD.
+  18 Add dac device(s) to array status.
+  19 Build the array status screen.
+  20 Get dar name from CuAt for this dac.
+  21 Add LUN to status, close, unconfigure and increment LUN count.
+  22 Get the name of the next LUN.
+  23 Add DEAD LUN to status, close, unconfigure and increment LUN count.
+  24 Mark hdisk as Open Error on array status screen.
+  25 Increment LUN counter.
+  26 Configure the dar device.
+  27 Call cfgdac to update ODM information.
+  28 Get the next valid pdisk CH/ID.
+  29 Get the product ID from the Inquiry data.
+  30 Restart Sequence from first task.
+  31 Configure the LUN device.
+  32 Get the LUN devices for this dac from CuDv.
+  33 Check subsystem mode sense for FRU's.
+  34 Copy the Mode Sense 2A data to a buffer.
+  35 Get status of pdisks, add spares/hot spares to the array status.
+  36 Set reserved device (LUN or pdisk) flag.
+  37 Initialize variables.
+  38 Get the device CuDv information from ODM.
+  39 Get the SCSI/LUN ID of the dac.
+  40 Set dac FFC to PdDv LED.
+  41 Check for hdisk device type for ELA.
+  42 Save the current MODE SELECT data.
+  43 Save the changable MODE SELECT data.
+  44 Save current router state.
+  45 Change router state to make this dac active.
+  46 Restore router state to previous state.
+  47 Get the microcode level from the Inquiry data.
+  55 Skip the next two tasks in the task sequence.
+  56 Skip the next three tasks in the task sequence.
+  57 Set SPT flag for physical disk commands.
+  58 Clear SPT flag for physical disk commands.
+  67 Delete retry flag (if any) for this task.
+  68 Skip the next task in the task sequence.
+  69 Go back one task in the task sequence.
+  70 Exit with good status.
+  71 Exit with bad status.
+  72 Exit with test parent status.
+  73 Exit with device busy status.
+  74 Exit with software error.
+  75 Exit with unexpected error.
+  76 Exit with invalid ODM data error.
+  90 Callout SRN D55-310 (unknown pdisk).
+  91 Screen D55042: Corrupted pdisk, run format SA.
+  93 Callout SRN D55-301.
+  97 Callout open failed SRN.
+ 100 Callout SRN according to task number.
+ 101 Callout SRN according to MODE SENSE page 2D.
+ 102 Callout SRN according to sense data byte 14 (FRUC).
+ 103 Close the device.
+ 104 Delete this task sequence.
+ 105 End of task sequence, exit with good status.
+ 106 Send a BDR to the device.
+ 107 Close the device.
+ 108 Get pdisk capacity from CuAt.
+ 109 Get unknown pdisk product ID CuAt.
+ 110 Get pdisk FFC from PDiagAtt.
+2302 Callout SRN D55-302.
+2308 Callout Device config SRN.
+2309 Callout Parent config SRN.
+2310 Callout SRN D55-310.
+2311 Callout SRN D55-311.
+2312 Callout SRN D55-312.
+2404 Callout SRN D55-404.
+4043 Screen D55043: Dac config failed, test other dac.
+4047 Screen D55047: Run the Microcode Download SA.
+9001 Execute task sequence: Main_SA_Seq
+9002 Execute task sequence: Get_LUN_Status
+9003 Execute task sequence:
+9004 Execute task sequence: Spare_Disk_Seq
+9005 Execute task sequence: Subsystem_MS_2D
+9006 Execute task sequence: Dead_LUN
+9007 Execute task sequence: ELA_Seq
+9008 Execute task sequence: Set_Router_Seq
+9009 Execute task sequence: Restore_Router_Seq
+9010 Execute task sequence: Check_For_uCode
+9201 Set max retry count to 1 and retry this task.
+9202 Set max retry count to 2 and retry this task.
+9203 Set max retry count to 3 and retry this task.
+9204 Set max retry count to 4 and retry this task.
+9205 Set max retry count to 5 and retry this task.
+9206 Set max retry count to 6 and retry this task.
+9207 Set max retry count to 7 and retry this task.
+

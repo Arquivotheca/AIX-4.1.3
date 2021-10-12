@@ -1,0 +1,264 @@
+
+
+
+DRM_ADMIN(1)              User Commands              DRM_ADMIN(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     ddddrrrrmmmm____aaaaddddmmmmiiiinnnn - Data Replication Manager Administrative Tool
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ////eeeettttcccc////nnnnccccssss////ddddrrrrmmmm____aaaaddddmmmmiiiinnnn [ ----vvvveeeerrrrssssiiiioooonnnn ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The ddddrrrrmmmm____aaaaddddmmmmiiiinnnn tool administers servers  based  on  the  Data
+     Replication  Manager (DRM) such as ggggllllbbbbdddd, the replicated ver-
+     sion of the Global Location Broker (GLB).
+
+     With ddddrrrrmmmm____aaaaddddmmmmiiiinnnn, you can inspect  or  modify  replica  lists,
+     merge  databases  to  force convergence among replicas, stop
+     servers, and delete replicas.
+
+     The role of ddddrrrrmmmm____aaaaddddmmmmiiiinnnn is to administer  the  replication  of
+     databases,  not  to  change  the  data  they  contain.   For
+     instance, you can use ddddrrrrmmmm____aaaaddddmmmmiiiinnnn to merge two replicas of the
+     GLB  database,  but you must use llllbbbb____aaaaddddmmmmiiiinnnn to add a new entry
+     to the database.   Also,  although  ddddrrrrmmmm____aaaaddddmmmmiiiinnnn  can  stop  or
+     delete  a  GLB replica, you must invoke ggggllllbbbbdddd directly if you
+     want to start or create a replica.
+
+     Once invoked, ddddrrrrmmmm____aaaaddddmmmmiiiinnnn enters an interactive mode, in which
+     it accepts the commands described below.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----vvvveeeerrrrssssiiiioooonnnn
+          Display the version of NCK that this ddddrrrrmmmm____aaaaddddmmmmiiiinnnn  belongs
+          to, but do not start the tool.
+
+CCCCOOOOMMMMMMMMAAAANNNNDDDDSSSS
+     Most  ddddrrrrmmmm____aaaaddddmmmmiiiinnnn  commands  operate  on  a   default   object
+     (_d_e_f_a_u_l_t__o_b_j)  at  a default host (_d_e_f_a_u_l_t__h_o_s_t).  Together,
+     _d_e_f_a_u_l_t__o_b_j and  _d_e_f_a_u_l_t__h_o_s_t  specify  a  default  replica.
+     Defaults  are  established by the sssseeeetttt command and are remem-
+     bered until changed by another sssseeeetttt.
+
+     Currently, the only known object is ggggllllbbbb.
+
+     Some ddddrrrrmmmm____aaaaddddmmmmiiiinnnn commands operate on a  host  other  than  the
+     default.  We identify this host as _o_t_h_e_r__h_o_s_t.
+
+     The host name you supply as a _d_e_f_a_u_l_t__h_o_s_t or an  _o_t_h_e_r__h_o_s_t
+     takes  the form _f_a_m_i_l_y::::_h_o_s_t, where the host can be specified
+     either by its name or by its network address.  For  example,
+     ddddddddssss::::////////jjjjeeeeeeeevvvveeeessss,  ddddddddssss::::####111100001111aaaa....55557777ffff99995555, iiiipppp::::bbbbeeeerrrrttttiiiieeee, and iiiipppp::::####111199992222....5555....5555....5555
+     are acceptable host names.
+
+     aaaaddddddddrrrreeeepppp _o_t_h_e_r__h_o_s_t
+          Add _o_t_h_e_r__h_o_s_t to the  replica  list  at  _d_e_f_a_u_l_t__h_o_s_t.
+          The  replica  at _d_e_f_a_u_l_t__h_o_s_t will propagate _o_t_h_e_r__h_o_s_t
+
+
+
+NCS Administration        Last change:                          1
+
+
+
+
+
+
+DRM_ADMIN(1)              User Commands              DRM_ADMIN(1)
+
+
+
+          to all other replica lists for _d_e_f_a_u_l_t__o_b_j.
+
+     cccchhhhrrrreeeepppp ----ffffrrrroooommmm _o_t_h_e_r__h_o_s_t ----ttttoooo _n_e_w__o_t_h_e_r__h_o_s_t
+          Change  the  network  address  for  _o_t_h_e_r__h_o_s_t  in  the
+          replica  list  at  _d_e_f_a_u_l_t__h_o_s_t to _n_e_w__o_t_h_e_r__h_o_s_t.  The
+          replica at _d_e_f_a_u_l_t__h_o_s_t will propagate this  change  to
+          all  other  replica  lists  for _d_e_f_a_u_l_t__o_b_j.  The cccchhhhrrrreeeepppp
+          command will fail if a replica of _d_e_f_a_u_l_t__o_b_j  is  run-
+          ning  at  _o_t_h_e_r__h_o_s_t  or  if  _o_t_h_e_r__h_o_s_t  is not on the
+          replica list at _d_e_f_a_u_l_t__h_o_s_t.
+
+     ddddeeeellllrrrreeeepppp _o_t_h_e_r__h_o_s_t
+          Delete the replica of _d_e_f_a_u_l_t__o_b_j at  _o_t_h_e_r__h_o_s_t.   The
+          ddddeeeellllrrrreeeepppp command tells the replica at _o_t_h_e_r__h_o_s_t
+
+          1.To propagate all of the entries  in  its  propagation
+            queue
+
+          2.To propagate a delete request to all other  replicas,
+            causing  _o_t_h_e_r__h_o_s_t  to  be  deleted  from  all other
+            replica lists for _d_e_f_a_u_l_t__o_b_j
+
+          3.To delete its copy of _d_e_f_a_u_l_t__o_b_j
+
+          4.To stop running
+
+     The ddddeeeellllrrrreeeepppp command returns you immediately to the  ddddrrrrmmmm____aaaaddddmmmmiiiinnnn
+     prompt,  but  the  actual deletion of the replica can take a
+     long time in configurations that are not stable and  intact.
+     You can check whether the daemon for the deleted replica has
+     stopped by listing the processes running on its host.
+
+     iiiinnnnffffoooo Get  status   information   about   the   replica   for
+          _d_e_f_a_u_l_t__o_b_j at _d_e_f_a_u_l_t__h_o_s_t.
+
+     llllrrrreeeepppp [ ----dddd ] [ ----cccclllloooocccckkkkssss ] [ ----nnnnaaaa ]
+          List replicas for _d_e_f_a_u_l_t__o_b_j as stored in the  replica
+          list at _d_e_f_a_u_l_t__h_o_s_t.
+
+          The ----dddd option lists deleted as well as existing  repli-
+          cas.
+
+          The ----cccclllloooocccckkkkssss option shows the current time on each  host
+          and indicates clock skew among the replicas.
+
+          The ----nnnnaaaa option lists the network address of each host.
+
+     mmmmeeeerrrrggggeeee { ----ffffrrrroooommmm | ----ttttoooo } _o_t_h_e_r__h_o_s_t
+          The mmmmeeeerrrrggggeeee command copies  entries  in  the  _d_e_f_a_u_l_t__o_b_j
+          database  and replica list from one replica to another.
+          It copies an entry if no corresponding entry exists  in
+          the  destination database or if the corresponding entry
+
+
+
+NCS Administration        Last change:                          2
+
+
+
+
+
+
+DRM_ADMIN(1)              User Commands              DRM_ADMIN(1)
+
+
+
+          in the destination database bears an earlier timestamp.
+
+          A merge does not cause entries to be  propagated.   The
+          database  and  replica  list at the origination are not
+          changed.
+
+          The ----ffffrrrroooommmm option copies entries  from  the  _d_e_f_a_u_l_t__o_b_j
+          database   and   replica  list  at  _o_t_h_e_r__h_o_s_t  to  the
+          _d_e_f_a_u_l_t__o_b_j database and replica list at _d_e_f_a_u_l_t__h_o_s_t.
+
+          The ----ttttoooo option copies entries  from  the  database  and
+          replica  list  at  _d_e_f_a_u_l_t__h_o_s_t  to  the  database  and
+          replica list at _o_t_h_e_r__h_o_s_t.
+
+          A mmmmeeeerrrrggggeeee ----ffffrrrroooommmm followed by a mmmmeeeerrrrggggeeee ----ttttoooo causes the repli-
+          cas at the two hosts to converge.
+
+     mmmmeeeerrrrggggeeee____aaaallllllll
+          The mmmmeeeerrrrggggeeee____aaaallllllll command uses _d_e_f_a_u_l_t__h_o_s_t as the hub  for
+          a  global  merge  of all replicas for _d_e_f_a_u_l_t__o_b_j.  For
+          each host  on  the  replica  list  at  _d_e_f_a_u_l_t__h_o_s_t,  a
+          mmmmeeeerrrrggggeeee____aaaallllllll first does a mmmmeeeerrrrggggeeee ----ffffrrrroooommmm, then does a mmmmeeeerrrrggggeeee ----
+          ttttoooo.  All replicas of  _d_e_f_a_u_l_t__o_b_j  are  thereby  forced
+          into  a consistent state.  The mmmmeeeerrrrggggeeee____aaaallllllll operation does
+          not cause any entries to be propagated.
+
+          You should do a mmmmeeeerrrrggggeeee____aaaallllllll
+
+          +o  When a replica is purged
+
+          +o  When a replica is reset
+
+          +o  When a replica has been incommunicado for two  weeks
+            or more
+
+          +o  When a replica (for example, when  its  database  is
+            destroyed by a disk failure)
+
+     mmmmoooonnnniiiittttoooorrrr [ ----rrrr _n ]
+          This command causes ddddrrrrmmmm____aaaaddddmmmmiiiinnnn to read the clock of each
+          replica  of  _d_e_f_a_u_l_t__o_b_j  every _n minutes and to report
+          any clock skews or non-answering replicas.  If  you  do
+          not specify ----rrrr, the period is 15 minutes.
+
+     ppppuuuurrrrggggeeeerrrreeeepppp _o_t_h_e_r__h_o_s_t
+          The ppppuuuurrrrggggeeeerrrreeeepppp command purges _o_t_h_e_r__h_o_s_t from the replica
+          list at _d_e_f_a_u_l_t__h_o_s_t.  The replica at _d_e_f_a_u_l_t__h_o_s_t then
+          propagates a delete request  to  the  replicas  at  the
+          hosts   remaining   on   its   list,  thereby  removing
+          _o_t_h_e_r__h_o_s_t   from   all   other   replica   lists   for
+          _d_e_f_a_u_l_t__o_b_j.    The  delete  request  is  not  sent  to
+          _o_t_h_e_r__h_o_s_t.
+
+
+
+NCS Administration        Last change:                          3
+
+
+
+
+
+
+DRM_ADMIN(1)              User Commands              DRM_ADMIN(1)
+
+
+
+          A ppppuuuurrrrggggeeeerrrreeeepppp can cause data to be lost and should only be
+          used  when a replica has We recommend strongly that you
+          do a mmmmeeeerrrrggggeeee____aaaallllllll operation after the ppppuuuurrrrggggeeeerrrreeeepppp to  prevent
+          the remaining replicas of the _d_e_f_a_u_l_t__o_b_j database from
+          becoming inconsistent.  If the purged replica is  still
+          running, it should be rrrreeeesssseeeetttt.
+
+          We recommend that you use cccchhhhrrrreeeepppp (rather than aaaaddddddddrrrreeeepppp and
+          ppppuuuurrrrggggeeeerrrreeeepppp) to change entries on the replica list.
+
+     qqqquuuuiiiitttt Quit the ddddrrrrmmmm____aaaaddddmmmmiiiinnnn session.
+
+     rrrreeeesssseeeetttt _o_t_h_e_r__h_o_s_t
+          Reset the replica of _d_e_f_a_u_l_t__o_b_j at _o_t_h_e_r__h_o_s_t.
+
+          The rrrreeeesssseeeetttt command tells the replica  at  _o_t_h_e_r__h_o_s_t  to
+          delete its copy of _d_e_f_a_u_l_t__o_b_j and to stop running.  It
+          does not cause _o_t_h_e_r__h_o_s_t to be deleted from any  other
+          replica  lists.  This command can cause data to be lost
+          unless a successful mmmmeeeerrrrggggeeee____aaaallllllll is done first.
+
+     sssseeeetttt [ ----oooo _o_b_j__n_a_m_e ] ----hhhh _h_o_s_t__n_a_m_e
+          Set the default object and host.  All  subsequent  com-
+          mands  will  operate  on _o_b_j__n_a_m_e.  Subsequent commands
+          that do not specify a host will be sent  to  _h_o_s_t__n_a_m_e.
+          If  you  do  not specify the ----oooo option, ddddrrrrmmmm____aaaaddddmmmmiiiinnnn keeps
+          the current _d_e_f_a_u_l_t__o_b_j.
+
+          If you use sssseeeetttt with the ----oooo option, ddddrrrrmmmm____aaaaddddmmmmiiiinnnn checks the
+          clocks  at  all  hosts  with  replicas of the specified
+          object.
+
+     ssssttttoooopppp Stop the server for  _d_e_f_a_u_l_t__o_b_j  that  is  running  at
+          _d_e_f_a_u_l_t__h_o_s_t.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEE
+     The following example starts  ddddrrrrmmmm____aaaaddddmmmmiiiinnnn,  sets  the  default
+     object  to  ggggllllbbbb,  and  sets  the  default host to ////////mmmmaaaarrrrssss:  _$$$$
+     ////eeeettttcccc////nnnnccccssss////ddddrrrrmmmm____aaaaddddmmmmiiiinnnn _dddd_rrrr_mmmm______aaaa_dddd_mmmm_iiii_nnnn_:::: sssseeeetttt ----oooo ggggllllbbbb ----hhhh ddddddddssss::::////////mmmmaaaarrrrssss
+             _DDDD_eeee_ffff_aaaa_uuuu_llll_tttt  _oooo_bbbb_jjjj_eeee_cccc_tttt_::::  _gggg_llll_bbbb   _dddd_eeee_ffff_aaaa_uuuu_llll_tttt   _hhhh_oooo_ssss_tttt_::::   _dddd_dddd_ssss_::::_////_////_mmmm_aaaa_rrrr_ssss
+     _ssss_tttt_aaaa_tttt_eeee_:::: _iiii_nnnn _ssss_eeee_rrrr_vvvv_iiii_cccc_eeee
+             _CCCC_hhhh_eeee_cccc_kkkk_iiii_nnnn_gggg _cccc_llll_oooo_cccc_kkkk_ssss _oooo_ffff _gggg_llll_bbbb _rrrr_eeee_pppp_llll_iiii_cccc_aaaa_ssss
+             _dddd_dddd_ssss_::::_////_////_mmmm_aaaa_rrrr_ssss              _1111_9999_8888_7777_////_0000_4444_////_0000_9999_...._1111_7777_::::_0000_9999
+             _dddd_dddd_ssss_::::_////_////_pppp_llll_uuuu_tttt_oooo             _1111_9999_8888_7777_////_0000_4444_////_0000_9999_...._1111_7777_::::_0000_9999
+             _dddd_dddd_ssss_::::_////_////_mmmm_eeee_rrrr_cccc_uuuu_rrrr_yyyy           _1111_9999_8888_7777_////_0000_4444_////_0000_9999_...._1111_7777_::::_0000_7777
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+NCS Administration        Last change:                          4
+
+
+

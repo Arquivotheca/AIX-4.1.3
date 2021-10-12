@@ -1,0 +1,178 @@
+# @(#)79        1.4  src/bos/objclass/POWER/disk.scsi.scsd.add, cfgmethods, bos41J, 9513A_all 3/24/95 22:36:47
+*
+*  COMPONENT_NAME: (CFGMETHODS) SCSI DISK PREDEFINED DATA STANZAS
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 27
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1994, 1995
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = scsd
+	class = disk
+	subclass = scsi
+	prefix = hdisk
+	devid = ""
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0
+	setno = 2
+	msgno = 0
+	fru = 1
+	catalog = scdisk.cat
+	DvDr = scdisk
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgscdisk
+	Change = /etc/methods/chgdisk
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = disk/scsi/scsd
+	
+	
+PdAt:
+	uniquetype = disk/scsi/scsd
+	attribute = message_no
+	deflt = 8
+	values = "8, 51, 52, 53, 54"
+	width = ""
+	type = T
+	generic = ""
+	rep = nl
+	nls_index = 0
+	
+	
+PdAt:
+	uniquetype = disk/scsi/scsd
+	attribute = led
+	deflt = 0x721
+	values = "0x0-0xfff, 0x1"
+	width = ""
+	type = Z
+	generic = ""
+	rep = nr
+	nls_index = 0
+	
+	
+PdAt:
+	uniquetype = disk/scsi/scsd
+	attribute = pv
+	deflt = "no"
+	values = "no,yes,clear"
+	width = ""
+	type = R
+	generic = "U"
+	rep = "sl"
+	nls_index = 0
+	
+	
+PdAt:
+	uniquetype = disk/scsi/scsd
+	attribute = pvid
+	deflt = "none"
+	values = ""
+	width = ""
+	type = R
+	generic = "D"
+	rep = s
+	nls_index = 2
+	
+	
+PdAt:
+        uniquetype = disk/scsi/scsd
+        attribute = model_name
+        deflt = "SCSD_DISK       "
+        values = ""
+        width = ""
+        type = R
+        generic = ""
+        rep = s
+        nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/scsd
+        attribute = diag_scsd
+        deflt = "none"
+        values = ""
+        width = ""
+        type = R
+        generic = ""
+        rep = s
+        nls_index = 0
+
+PdAt:
+	uniquetype = disk/scsi/scsd
+	attribute = queue_depth
+	deflt = 3
+	values = 3
+	width = ""
+	type = R
+	generic = D
+	rep = nr
+	nls_index = 30
+
+PdAt:
+        uniquetype = disk/scsi/scsd
+        attribute = "size_in_mb"
+        deflt = "0"
+        values = "0-2000000000,1"
+        width = ""
+        type = R
+        generic = "D"
+        rep = nr
+        nls_index = 60
+
+PdAt:
+	uniquetype = disk/scsi/scsd
+	attribute = vpd_map
+	deflt = "MF0808C,TM1010C,FN720cC,RL2004X,SN2408C,EC7e0aC,PN880cC,Z00008X,Z12c0cC,Z26204C,Z36605C,Z46c04C,Z57002C,Z6940aC"
+	values = ""
+	width = ""
+	type = V
+	generic = ""
+	rep = sl
+	nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/scsd
+        attribute = pm_dev_itime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/scsd
+        attribute = pm_dev_stime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = disk/scsi/scsd
+        attribute = pm_devid
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x00184000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b000,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0

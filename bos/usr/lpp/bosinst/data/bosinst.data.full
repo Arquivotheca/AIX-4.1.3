@@ -1,0 +1,107 @@
+# @(#) 83 1.1 src/bos/usr/lpp/bosinst/data/bosinst.data.full, bosinst, bos411, 9428A410j 5/11/94 09:22:46
+#
+#   COMPONENT_NAME: BOSINST
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NOTE:  After this first comment section ends, COMMENTS WILL NOT BE ALLOWED.
+#
+# NOTE: Stanzas follow these rules:
+#       1. Stanza names must be at the beginning of the line and end in a colon.
+#       2. Comments may be after the colon, but THAT'S THE ONLY PLACE!!!! other
+#          than here in the header.  Even then, don't expect those comments
+#          to be put back where they were after BOS install gets done processing
+#          this file.  We reserve the right to mangle and ignore all comments
+#          which are not placed in this header.
+#       3. Stanza fields are on lines following stanza names,  Stanza fields
+#          must NOT begin at the beginning of the line, but must have tabs or
+#          blanks in front of them.
+#       4. There can be no blank lines between field lines of the same stanza.
+#       5. A blank line MUST separate each stanza.  In other words, after the
+#          last field line of the stanza, a blank line must follow before the
+#          line containing the stanza name of the next stanza.
+#
+# NOTE: In this comment section, the values listed in the fields are the
+#       possible ones separated by a comma.  You must pick only one if you are
+#       creating stanzas after the comment section.  Field options listed in
+#       angle brackets (<...>) are descriptions of the field and not actually
+#       the values which would go in the field.
+#
+# # control_flow defines the flow of control during BOS install.
+# control_flow:
+#     INSTALL_TYPE = full, client, personal
+#     CONSOLE = < Device which will be your console.  Passed to chcons. >
+#     INSTALL_METHOD = overwrite, preserve, migrate
+#     PROMPT = yes,no
+#     EXISTING_SYSTEM_OVERWRITE = yes,no
+#     INSTALL_X_IF_ADAPTER = yes,no
+#     RUN_STARTUP = yes,no
+#     RM_INST_ROOTS = yes,no
+#     ERROR_EXIT = < Command to run when error occurs.  Must be in boot image. >
+#     CUSTOMIZATION_FILE = < Command to run after BOS install finishes. >
+#     TCB = yes, no  <turns on/off trusted computing base>
+#     BUNDLES = < Bundle file to install after auto install.  >
+# 
+# There can be multiple target_disk_data stanzas.  They define which disk(s)
+# will contain the root volume group.  Only one field (LOCATION, SIZE_MB,
+# HDISKNAME) must be non-null for BOS install to choose a disk.  The order of
+# precedence is LOCATION, then SIZE_MB, then HDISKNAME.  If LOCATION is set,
+# BOS install will ignore SIZE_MB and HDISKNAME.  If LOCATION is not set and
+# SIZE_MB is, BOS install will select disks based on SIZE_MB and ignore
+# HDISKNAME.  If LOCATION and SIZE_MB are both empty, BOS install will choose
+# the disk specified in HDISKNAME.  If all three are empty, BOS install will
+# choose for you.
+# WARNING:  Don't leave the target_disk_data stanza(s) empty if PROMPT = no
+#           unless you don't care which disk BOS install overwrites, because
+#           the algorithm for determining the default disk on which to install
+#           is not always predictable.
+# The SIZE_MB field can contain either a size or the word 'largest'.  If a size
+# is listed, BOS install will do a best-fit on the disks.  If the word 'largest'
+# is in that field, BOS install will pick the largest disk.  If there are more
+# than one target_disk_data stanza, BOS install will pick the two 'largest'
+# disks, etc.
+#
+# target_disk_data:
+#     LOCATION = 
+#     SIZE_MB = 
+#     HDISKNAME = 
+# 
+# locale:
+#     BOSINST_LANG = <language to use during installation>
+#     CULTURAL_CONVENTION = <primary cc to use after reboot>
+#     MESSAGES = <primary message catalogs to use after reboot>
+#     KEYBOARD = <keyboard map to use after reboot>
+
+control_flow:
+    INSTALL_TYPE = full
+    CONSOLE = 
+    INSTALL_METHOD = 
+    PROMPT = yes
+    EXISTING_SYSTEM_OVERWRITE = no
+    INSTALL_X_IF_ADAPTER = yes
+    RUN_STARTUP = yes
+    RM_INST_ROOTS = no
+    ERROR_EXIT = 
+    CUSTOMIZATION_FILE =
+    TCB = no
+    BUNDLES = 
+
+target_disk_data:
+    LOCATION = 
+    SIZE_MB = 
+    HDISKNAME = 
+
+locale:
+    BOSINST_LANG = 
+    CULTURAL_CONVENTION = 
+    MESSAGES = 
+    KEYBOARD = 

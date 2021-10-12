@@ -1,0 +1,36 @@
+# @(#)11        1.1  src/bos/objclass/POWER/diag.00100300.add, cmddiag, bos41J, 9514A_all 4/3/95 16:22:00
+#
+#   COMPONENT_NAME: CMDDIAG
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+
+# ------ PCI SCSI Controller  (NCR 825)
+PDiagDev:
+	DType = "ncr825"
+	DSClass = "pci"
+	Ports = 0
+	PSet = 1
+	PreTest = 0
+	AttDType = ""
+	AttSClass = ""
+	Conc = 1
+	SupTests = 0x44
+	Menu = 21
+	DNext = 1
+	DaName = "dpciscsi"
+	Diskette = "5"
+	EnclDaName = ""
+	SysxFlg = 0
+	DClass = "adapter"
+

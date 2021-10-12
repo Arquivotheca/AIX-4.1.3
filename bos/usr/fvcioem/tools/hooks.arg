@@ -1,0 +1,74 @@
+&arg                            Pointer to argument structure
+&cio3ComStats                   Pointer to COMIO 3COM Status Block
+&cioFddiStats                   Pointer to COMIO FDDI Status Block
+&cioTokStats                    Pointer to COMIO TokenRing Status Block
+&ddsTemp                        Pointer to Device Dependent Structure
+&dev->dds.ds.ent.vpd            Pointer to VPD
+&dev->dds.ds.tok.vpd            Pointer to VPD
+&filter                         Pointer to filter
+&q                              Pointer to queue
+&qp                             Pointer to query parameter structure
+&ringInfo                       Pointer to Token Ring Info structure
+&stat                           Pointer to status output buffer
+&temp                           Pointer to device info structure
+*(ulong *)(&dh)                 Device Handle
+*revents                        Returned Events
+0                               Not Used
+NETADDR1(addr)                  First 4 bytes of the adapter address
+NETADDR1(e->addr)               First 4 bytes of the adapter address
+NETADDR2(addr)                  Last 2 bytes of adapter address || 0x0000
+NETADDR2(e->addr)               Last 2 bytes of adapter address || 0x0000
+addrBits                        Functional Address
+arg                             Argument Pointer
+arg.netid                       Netid
+arg.opcode                      Function Code
+argp                            Argument Pointer
+cdliLen                         Length of CDLI-format address
+cdliStat->option[0]             CDLI Status Block option[0]
+cdliStat->option[1]             CDLI Status Block option[1]
+chan                            Channel Number
+channame                        Pointer to Channel Name String
+chanp                           Pointer to Channel Number
+chn                             Pointer to CHN object
+cioLen                          Length of COMIO-format address
+cmd                             Command Code
+dds->devType                    Emulator Device Type Code
+dev                             Pointer to DEV object
+dev->dds.devType                Emulator Device Type Code
+dev->dds.recQueueSize           Receive Queue Size
+devType                         Emulator Device TYpe Code
+devflag                         Device Open Flags
+devno                           Device Number (major/minor)
+events                          Event Bit Flags
+ext                             Extension Block
+fdef                            Filter Definition
+filter                          Filter
+func                            Pointer to C Function Name
+groupAddr                       Group Address
+i                               Number of major numbers already defined
+info                            Pointer to Device Info Structure
+len                             Length parameter
+line                            Line Number in source file
+m                               mbuf pointer
+ndd                             Pointer to ndd
+nddname                         Pointer to logical device name
+nddp                            Pointer to ndd
+nddpp                           Pointer to pointer to ndd
+netid                           Netid
+netidLength                     Length of netid
+q.p_info                        Pointer to devinfo return buffer
+qp.bufptr                       Pointer to status return buffer
+rc                              Return Code
+s                               Pointer to lost status block
+ses                             Pointer to SES object
+ses->type                       Session Type Code
+sizeof(DDS)                     Length of DDS
+stat                            Pointer to status block
+statfilter                      Pointer to status filter
+statuser                        Pointer to statuser block
+uarg                            Pointer to cio_sess_blk_t
+uiop                            Pointer to uio
+uiop->uio_resid                 uio residual length
+user                            Pointer to user structure
+vpd                             Pointer to VPD
+xrc                             Return Code

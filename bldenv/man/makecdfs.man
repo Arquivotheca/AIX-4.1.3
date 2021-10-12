@@ -1,0 +1,171 @@
+######################################################################
+# @(#)06        1.7  src/bldenv/man/makecdfs.man, pkgtools, bos412, GOLDA411a 9/8/94 17:04:00
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# NAME: makecdfs.man  (pkgtools)
+#
+######################################################################
+
+makecdfs Command
+
+Purpose
+
+Creates a 4.1 filesystem that can be used as input to the Young
+Minds software.  This is the first step in the process of creating
+a 4.1 CDROM.  
+
+
+Syntax
+
+makecdfs  [ -d destination_dir ] [ -s source_dir ] [ -i imagesList ] 
+	  [ -l devicefileList ] [ -n ] [ -t installType ]
+	    
+
+Description
+
+makecdfs creates a filesystem from the files found relative to the
+location specified as the source directory.  If no source location is 
+specified, makecdfs defaults to a pre-defined AFS location
+(/afs/austin/aix/project/aix411/build/latest).  If no destination is 
+specified, the filesystem is created in the current working directory.
+
+makecdfs does the following:
+
+1) Copy images from <source_dir>/inst.images to 
+   <destination_dir>/usr/sys/inst.images
+
+   if [ imagesList specified ]
+	copy only images listed 
+   else
+	copy ALL images 
+
+2) Optionally, create a table of contents for the images in 
+   <destination_dir>/usr/sys/inst.images
+
+   if [ -n flag NOT specified ]
+	create TOC in <destination_dir>/usr/sys/inst.images
+
+3) Optionally, create the extended filesystem shown in the diagram below
+
+   if [ bos is one of the images in <destination_dir>/usr/sys/inst.images ]
+
+	restore bos in <destination_dir>/bos.rte and create symbolic links.
+
+	copy device support files listed in devicefileList from 
+		<source_dir>/ship/power to <destination_dir>/devices.
+
+	copy bos install files from <source_dir>/ship/power/usr/lpp/bosinst 
+		to <destination_dir>/bos.rte/usr/lpp/bosint.
+
+	copy bos install message catalogs from 
+		each directory in <source_dir>/ship/power/usr/lib/nls/msg 
+		that contains the file 'BosMenus.cat' to 
+		<destination_dir>/bos.rte/usr/lib/nls/msg.
+
+	if [ -t flag specified ]
+		copy corresponding bosinst.data install template from 
+		<source_dir>/src/bos/usr/lpp/bosinst/data to
+		<destination_dir>/usr/lpp/bosinst
+	(The default install template is used when this flag is not
+	specified. This file was included in the above step to 
+	<copy bos install files>.)
+	
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+The output filesystem is created as shown below:
+
+			    	      <destination_dir>	
+ 					     |
+	    =======================================================
+	    |	 		 |			          |		 
+	  devices	      bos.rte	       		-  -  -  usr        
+	    |	 		 |		      /           |	 	 
+	   usr	       	        usr     <- -  -  -  -     ===============      
+	    |			 |			  |     |       |
+        =======               ============	       - lpp   lib     sys
+	|     |               |          |           /        / |	|
+       lib   lpp/fonts       lib        lpp    <-  -         /  |  inst.images
+        |    ^(symlink from   | ^        |                  /   |
+        |      usr/lpp)       |  \    bosinst              /    |   
+        |                     |   \                       /     |    
+   ==================         |    -  -  -  -  -  -  -  -       |
+   |       |        |         |                                 |
+ drivers methods microcode    |                                 |
+   ^        ^    ^            |                                 |
+    \      /    /    ===================================	|
+  (symlinks from     |       |       |        |        |	|
+    usr/lib/*)	    nls  drivers methods microcode objrepos <-  | -  -  -  - -/
+ 		     |       ^      ^     ^     		|	     /
+		    msg      |      |     |     ==========================  /
+		     |       |      |     |     |       |       |        | /
+		     *       \- - - (- - -(-drivers methods microcode objrepos  
+		     |		    |	  |          /	     /
+		BosMenus.cat	    \- - -(- - - - -/       /
+					  |                /
+					  \- - - - - - - -/
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Flags
+
+	 -d directory  	Specifies the full path location where the
+			filesystem will be created.  
+
+	 -s directory 	Specifies the full path location where the source 
+			files reside.  The source files must be found in 
+			specific subdirectories of the location specified.  
+			The default path is: 
+			/afs/austin/aix/project/aix411/build/latest  
+
+	 -i filename	Specifies a file containing a list of the images to
+			include in the output filesystem.
+
+	 -l filename    Specifies a file containing a list of the device 
+			support files to include in the output filesystem.
+			The default devicefileList is:
+			$SRC_DIR/inst.images/cdboot.fsfiles
+
+	 -n  		Specifies that a table of contents should not be
+			created for the install images.  The toc is
+	     		created by default if this flag is not specified.
+
+	 -t installType Specifies the bos install type.  Valid values are
+			'full', 'client', 'personal' or 'eserver'.  
+	
+
+Error Checking
+
+Errors that occur while restoring bos, creating symbolic links for bos, and
+copying install images are logged to '/tmp/makecdfs.err.$$'
+
+The source directory must exist and be readable.
+The <source_dir>/inst.images directory must exist and be readable.
+The destination directory must exist and be writable.
+The filesystem created in the destination directory cannot exceed 600MB.
+The destination directory must have enough space to create the filesystem.
+
+
+Environment Variables
+
+none
+
+Reference Material
+
+The AIX version 3.2 and version 4.1 inutoc command.  (makecdfs uses a
+customized version 3.2 inutoc command if it is run from a 3.2 machine.)

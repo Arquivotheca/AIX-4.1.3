@@ -1,0 +1,372 @@
+# @(#)20	1.6  src/bos/usr/lib/nls/charmap/IBM-850, cfgnls, bos411, 9428A410j 3/10/94 17:10:43
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#       charmap for IBM-850 codeset
+#
+#
+
+<code_set_name>			"IBM-850"
+<mb_cur_max>                    1
+<mb_cur_min>                    1
+
+CHARMAP
+
+
+#	Control Characters and ASCII
+
+<NUL>				\x00
+<SOH>				\x01
+<STX>				\x02
+<ETX>				\x03
+<EOT>				\x04
+<ENQ>				\x05
+<ACK>				\x06
+<BEL>				\x07
+<alert>				\x07
+<backspace>			\x08
+<tab>				\x09
+<newline>			\x0a
+<vertical-tab>			\x0b
+<form-feed>			\x0c
+<carriage-return>		\x0d
+<SO>				\x0e
+<SI>				\x0f
+<DLE>				\x10
+<DC1>				\x11
+<DC2>				\x12
+<DC3>				\x13
+<DC4>				\x14
+<NAK>				\x15
+<SYN>				\x16
+<ETB>				\x17
+<CAN>				\x18
+<EM>				\x19
+<SUB>				\x1a
+<ESC>				\x1b
+<IS4>				\x1c
+<IS3>				\x1d
+<IS2>				\x1e
+<IS1>				\x1f
+<SP>				\x20
+<space>				\x20
+<exclamation-mark>		\x21
+<quotation-mark>		\x22
+<number-sign>			\x23
+<dollar-sign>			\x24
+<percent-sign>			\x25
+<ampersand>			\x26
+<apostrophe>			\x27
+<left-parenthesis>		\x28
+<right-parenthesis>		\x29
+<asterisk>			\x2a
+<plus-sign>			\x2b
+<comma>				\x2c
+<hyphen-minus>			\x2d
+<hyphen>                        \x2d
+<period>			\x2e
+<full-stop>			\x2e
+<slash>				\x2f
+<solidus>			\x2f
+<zero>				\x30
+<one>				\x31
+<two>				\x32
+<three>				\x33
+<four>				\x34
+<five>				\x35
+<six>				\x36
+<seven>				\x37
+<eight>				\x38
+<nine>				\x39
+<colon>				\x3a
+<semicolon>			\x3b
+<less-than-sign>		\x3c
+<equals-sign>			\x3d
+<greater-than-sign>		\x3e
+<question-mark>			\x3f
+<commercial-at>			\x40
+<A>				\x41
+<B>				\x42
+<C>				\x43
+<D>				\x44
+<E>				\x45
+<F>				\x46
+<G>				\x47
+<H>				\x48
+<I>				\x49
+<J>				\x4a
+<K>				\x4b
+<L>				\x4c
+<M>				\x4d
+<N>				\x4e
+<O>				\x4f
+<P>				\x50
+<Q>				\x51
+<R>				\x52
+<S>				\x53
+<T>				\x54
+<U>				\x55
+<V>				\x56
+<W>				\x57
+<X>				\x58
+<Y>				\x59
+<Z>				\x5a
+<left-square-bracket>		\x5b
+<backslash>			\x5c
+<reverse-solidus>		\x5c
+<right-square-bracket>		\x5d
+<circumflex>			\x5e
+<circumflex-accent>		\x5e
+<underscore>			\x5f
+<low-line>			\x5f
+<grave-accent>			\x60
+<a>				\x61
+<b>				\x62
+<c>				\x63
+<d>				\x64
+<e>				\x65
+<f>				\x66
+<g>				\x67
+<h>				\x68
+<i>				\x69
+<j>				\x6a
+<k>				\x6b
+<l>				\x6c
+<m>				\x6d
+<n>				\x6e
+<o>				\x6f
+<p>				\x70
+<q>				\x71
+<r>				\x72
+<s>				\x73
+<t>				\x74
+<u>				\x75
+<v>				\x76
+<w>				\x77
+<x>				\x78
+<y>				\x79
+<z>				\x7a
+<left-brace>			\x7b
+<left-curly-bracket>		\x7b
+<vertical-line>			\x7c
+<right-brace>			\x7d
+<right-curly-bracket>		\x7d
+<tilde>				\x7e
+<DEL>				\x7f
+
+#
+# the following controls are meaningful in the ISO8859-1 code set only,
+# so these symbols are defined as the codepoint for <DEL> for IBM-850
+#
+<PAD>                           \x7f
+<HOP>                           \x7f
+<BPH>                           \x7f
+<NBH>                           \x7f
+<IND>                           \x7f
+<NEL>                           \x7f
+<SSA>                           \x7f
+<ESA>                           \x7f
+<HTS>                           \x7f
+<HTJ>                           \x7f
+<VTS>                           \x7f
+<PLD>                           \x7f
+<PLU>                           \x7f
+<RI>                            \x7f
+<SS2>                           \x7f
+<SS3>                           \x7f
+<DCS>                           \x7f
+<PU1>                           \x7f
+<PU2>                           \x7f
+<STS>                           \x7f
+<CCH>                           \x7f
+<MW>                            \x7f
+<SPS>                           \x7f
+<EPA>                           \x7f
+<SOS>                           \x7f
+<SGCI>                          \x7f
+<SCI>                           \x7f
+<CSI>                           \x7f
+<ST>                            \x7f
+<OSC>                           \x7f
+<PM>                            \x7f
+<APC>                           \x7f
+
+#
+# Latin-1 extended characters
+#
+
+<C-cedilla>                     \x80
+<u-diaresis>                    \x81
+<e-acute>                       \x82
+<a-circumflex>                  \x83
+<a-diaresis>                    \x84
+<a-grave>                       \x85
+<a-ring>                        \x86
+<c-cedilla>                     \x87
+<e-circumflex>                  \x88
+<e-diaresis>                    \x89
+<e-grave>                       \x8a
+<i-diaresis>                    \x8b
+<i-circumflex>                  \x8c
+<i-grave>                       \x8d
+<A-diaresis>                    \x8e
+<A-ring>                        \x8f
+<E-acute>                       \x90
+<ae>                            \x91
+<AE>                            \x92
+<o-circumflex>                  \x93
+<o-diaresis>                    \x94
+<o-grave>                       \x95
+<u-circumflex>                  \x96
+<u-grave>                       \x97
+<y-diaresis>                    \x98
+<O-diaresis>                    \x99
+<U-diaresis>                    \x9a
+<o-slash>                       \x9b
+<sterling>                      \x9c
+<O-slash>                       \x9d
+<multiply>                      \x9e
+<florin>                        \x9f
+<a-acute>                       \xa0
+<i-acute>                       \xa1
+<o-acute>                       \xa2
+<u-acute>                       \xa3
+<n-tilde>                       \xa4
+<N-tilde>                       \xa5
+<feminine>                      \xa6
+<masculine>                     \xa7
+<question-down>                 \xa8
+<registered>                    \xa9
+<not>                           \xaa
+<one-half>                      \xab
+<one-quarter>                   \xac
+<exclamation-down>              \xad
+<guillemot-left>                \xae
+<guillemot-right>               \xaf
+<boxfill-dark>                  \xb0
+<boxfill-medium>                \xb1
+<boxfill-light>                 \xb2
+<box-vertical>                  \xb3
+<box-int-right>                 \xb4
+<A-acute>                       \xb5
+<A-circumflex>                  \xb6
+<A-grave>                       \xb7
+<copyright>                     \xb8
+<doublebox-int-right>           \xb9
+<doublebox-vertical>            \xba
+<doublebox-top-right>           \xbb
+<doublebox-bottom-right>        \xbc
+<cent>                          \xbd
+<yen>                           \xbe
+<box-top-right>                 \xbf
+<box-bottom-left>               \xc0
+<box-int-bottom>                \xc1
+<box-int-top>                   \xc2
+<box-int-left>                  \xc3
+<box-horizontal>                \xc4
+<box-intersection>              \xc5
+<a-tilde>                       \xc6
+<A-tilde>                       \xc7
+<doublebox-bottom-left>         \xc8
+<doublebox-top-left>            \xc9
+<doublebox-int-bottom>          \xca
+<doublebox-int-top>             \xcb
+<doublebox-int-left>            \xcc
+<doublebox-horizontal>          \xcd
+<doublebox-intersection>        \xce
+<currency>                      \xcf
+<eth>                           \xd0
+<Eth>                           \xd1
+<E-circumflex>                  \xd2
+<E-diaresis>                    \xd3
+<E-grave>                       \xd4
+<i-dotless>                     \xd5
+<I-acute>                       \xd6
+<I-circumflex>                  \xd7
+<I-diaresis>                    \xd8
+<box-bottom-right>              \xd9
+<box-top-left>                  \xda
+<boxfill>                       \xdb
+<boxfill-bottom>                \xdc
+<broken-bar>                    \xdd
+<I-grave>                       \xde
+<boxfill-top>                   \xdf
+<O-acute>                       \xe0
+<s-sharp>                       \xe1
+<O-circumflex>                  \xe2
+<O-grave>                       \xe3
+<o-tilde>                       \xe4
+<O-tilde>                       \xe5
+<mu>                            \xe6
+<thorn>                         \xe7
+<Thorn>                         \xe8
+<U-acute>                       \xe9
+<U-circumflex>                  \xea
+<U-grave>                       \xeb
+<y-acute>                       \xec
+<Y-acute>                       \xed
+<macron>                        \xee
+<acute>                         \xef
+<dash>                          \xf0
+<plus-minus>                    \xf1
+<double-underscore>             \xf2
+<three-quarters>                \xf3
+<paragraph>                     \xf4
+<section>                       \xf5
+<divide>                        \xf6
+<division>                      \xf6
+<cedilla>                       \xf7
+<degree>                        \xf8
+<diaresis>                      \xf9
+<dot>                           \xfa
+<one-superior>                  \xfb
+<three-superior>                \xfc
+<two-superior>                  \xfd
+<boxfill-middle>                \xfe
+<last-print-graph>              \xfe
+<nobreakspace>                  \xff
+
+END CHARMAP
+
+CHARSETID
+
+<NUL>...<DEL>				0
+<C-cedilla>...<guillemot-right> 	1
+<boxfill-dark>...<box-int-right>	2
+<A-acute>...<copyright>			1
+<doublebox-int-right>...\
+<doublebox-bottom-right>		2
+<cent>					1
+<yen>					1
+<box-top-right>...<box-intersection>    2
+<a-tilde>				1
+<A-tilde>				1
+<doublebox-bottom-left>...\
+<doublebox-intersection>		2
+<currency>...<I-diaresis>		1
+<box-bottom-right>...<boxfill-bottom>	2
+<broken-bar>...<I-grave>		1
+<boxfill-top>				2
+<O-acute>...<O-tilde>			1
+<mu>					2
+<Thorn>...<Y-acute>			1
+<macron>				2
+<acute>					1
+<plus-minus>...<section>		2
+<divide>...<two-superior>		1
+<boxfill-middle>			2
+<nobreakspace>				1
+
+END CHARSETID

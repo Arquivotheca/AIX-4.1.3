@@ -1,0 +1,42 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Bars are not the only characters you can put 
+around an equation.
+If you say
+  left (  thing  right )
+you will get large parentheses around "thing".
+You can also use [ and ] for large square brackets
+and { and } for large braces.
+
+The main problem is that on your terminal there is
+no good way for neqn to draw large braces
+or brackets or parens.  So neqn replaces all of these
+with bars.
+Use the right character anyway, though - things do
+work properly on the typesetter.  And who knows, some day
+neqn may get improved as well.
+
+With the current version of neqn, does the input
+  left { a over b right }
+produce the same output as
+  left [ a over b right ]
+Answer yes or no.
+#copyin
+#user
+#uncopyin
+#match yes
+#log
+#next
+12.1c 10

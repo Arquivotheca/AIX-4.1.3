@@ -1,0 +1,73 @@
+#!/bin/ksh
+# @(#)36	1.1  src/bldscripts/CreateBC, ade_build, bos41J, 9509A_all 2/16/95 12:16:47
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+
+alias  dataman=`whence dataman`
+alias  CMVCman="`whence bldenv` `whence CMVCman`"
+alias  DBenv="`whence bldenv` `whence DBenv` "
+cmd=${0##*/}
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+export     TOP=$treetop/selfix
+typeset    RC=0
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+
+# make sure the build cycle is not there
+echo DBenv bcedit -o delete -t buildcycle -b $BLDCYCLE
+DBenv bcedit -o delete -t buildcycle -b $BLDCYCLE || :
+
+# recreate it
+echo DBenv bcedit -o add -t buildcycle -b $BLDCYCLE
+DBenv bcedit -o add -t buildcycle -b $BLDCYCLE
+
+# Get the releases in this buildcycle
+RELEASEQUERY=$(dataman -q CMVC[RELEASEQUERY])
+CMVCman Report -view levelview -raw -w "name='$BLDCYCLE' and $RELEASEQUERY" |
+awk -F\| '{print $2}' |
+dataman -s leveldata[$BLDCYCLE][releases]
+
+# add each level in the buildcycle to the db object.
+Report -view levelmemberview -w "levelname='$BLDCYCLE' and $RELEASEQUERY" -raw | awk -F\| '{print $2, $3}' |
+while read rel track
+do
+#   echo DBenv bcedit -o add -t level -b $BLDCYCLE -s $BLDCYCLE -r $rel
+   echo DBenv bcedit -o add -t transaction -b $BLDCYCLE -s $track -r $rel
+   if DBenv bcedit -o add -t transaction -b $BLDCYCLE -s $track -r $rel
+   then :
+   else
+      echo "Failed to add tx's from release $rel to the buildcycle $BLDCYCLE."
+      RC=1
+   fi
+done
+[ $RC = 0 ]
+
+DBenv verify -b $BLDCYCLE
+
+dataman -s leveldata[$BLDCYCLE][treepath]=$treetop
+dataman -s leveldata[$BLDCYCLE][type]=production
+bldquery41 -l $BLDCYCLE | awk 'NF > 1 {print $0}' | dataman -s leveldata[$BLDCYCLE][targets]
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

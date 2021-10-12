@@ -1,0 +1,66 @@
+# @(#)04	1.3  src/bos/usr/bin/uucp/Sysfiles, cmduucp, bos411, 9428A410j 1/17/94 14:09:15
+# 
+# COMPONENT_NAME: CMDUUCP Sysfiles
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#
+#ident	"@(#)uucp:Sysfiles	1.2"
+#
+#	Sysfiles provides a means of specifying different Systems,
+#	Devices and Dialers files for the uucico and cu services.  This is
+#	useful for certain networks where, for example, requests for
+#	interactive login service might be accepted on a different basis
+#	than requests for uucico service (hence different Systems files),
+#	or where there are different chat scripts to request each service 
+#	(hence different Dialers files).
+#
+#	Another use of Sysfiles is to split large Systems files into
+#	smaller, more manageable files (e.g., local and global Systems 
+#	files).
+#
+#	FORMAT:
+#
+#	service=<service name>	systems=<systems file list> \
+#				devices=<devices file list> \
+#				dialers=<dialers file list>
+#
+#	Where service name is "uucico" or "cu".  Each file list is a list 
+#	of colon-separated file names.  File names are relative to 
+#	/etc/uucp unless a full path name is given.  Files are searched
+#	in the order that they appear in the file list.
+#
+#	The defaults are the usual uucp files: /etc/uucp/Systems,
+#	/etc/uucp/Devices and /etc/uucp/Dialers.
+#
+#	EXAMPLE 1:  
+#	This example uses different systems and dialers files to separate
+#	the uucico- and cu-specific info, with information that they
+#	use in common still in the "usual" Systems and Dialers files.
+#
+#	service=uucico	systems=Systems.cico:Systems \
+#			dialers=Dialers.cico:Dialers
+#	service=cu	systems=Systems.cu:Systems \
+#			dialers=Dialers.cu:Dialers
+#
+#	EXAMPLE 2:  
+#	This example uses the default Devices and Dialers files for uucico
+#	and cu, but has split the Systems file into local, company-wide,
+#	and global files.
+#
+#	service=uucico	systems=Systems.local:Systems.company:Systems
+#	service=cu	systems=Systems.local:Systems.company:Systems
+#
+# The only valid service types at this time are "cu" and "uucico."  Uucico-
+# related commands (uucp, uux, etc.) use the "uucico" service entries.  All
+# other commands (cu, ct, slattach, etc.) utilize the "cu" service entries.

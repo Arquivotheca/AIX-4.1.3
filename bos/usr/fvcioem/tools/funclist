@@ -1,0 +1,362 @@
+#!/usr/bin/rexx
+
+  parse arg comp .
+
+  st. = ''
+  sx. = 0
+  ns  = 0
+
+  cset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
+  cd    = directory()
+
+  if comp = 'cie' then
+    do
+      base  = '/devel/cioem/src/bos/kernext/cie/'
+      flist = cd'/ciedd.files'
+      outf  = cd'/ciedd.func'
+      outp  = cd'/ciedd.prot'
+    end
+  else if comp = 'cfg' then
+    do
+      base  = '/devel/cioem/src/bos/usr/lib/methods/cfgcie/'
+      flist = cd'/cfg.files'
+      outf  = cd'/cfg.func'
+      outp  = cd'/cfg.prot'
+    end
+  else
+    do
+      say 'Component' comp 'unrecognized'
+      exit
+    end
+
+  if (directory(base) = '') then
+    do
+      say "Can't change to base directory" base
+      exit
+    end
+
+    do while lines(flist)
+      l = linein(flist)
+      parse var l fid .
+      call process fid
+    end
+
+  call lineout flist
+
+  'rm' outf
+  'rm' outp
+
+    do i = 1 to ns
+
+      call lineout outf,st.i._type             ||'$'||,
+                        funcAttr(st.i._ret)    ||'$'||,
+                        st.i._name             ||'$'||,
+                        st.i._fid
+
+      plist = st.i._parm
+
+        do while plist <> ''
+          parse var plist p '|' plist
+          parse var p pname ':' pattr ':' ptype ':' pcom
+          call lineout outp,st.i._name'.'st.i.fid ||'$'||,
+                            pname                 ||'$'||,
+                            pattr                 ||'$'||,
+                            ptype                 ||'$'||,
+                            pcom
+        end
+
+    end
+
+  call lineout outp
+  call lineout outf
+
+  exit
+
+funcAttr:
+procedure
+  parse arg ret
+
+  if (word(ret,1) = 'static') then
+      return 'S$'space(subword(ret,2))
+  else
+      return '$'ret
+
+parmAttr:
+procedure
+  parse arg parm
+
+  c = ''
+  r = ''
+  v = ''
+
+    do while parm <> ''
+        select
+          when word(parm,1) = 'const'    then
+            do
+              c = 'C'
+              parm = subword(parm,2)
+            end
+          when word(parm,1) = 'volatile' then
+            do
+              v = 'V'
+              parm = subword(parm,2)
+            end
+          when word(parm,1) = 'register' then
+            do
+              r = 'R'
+              parm = subword(parm,2)
+            end
+          otherwise
+              return r||c||v'$'parm
+        end
+    end
+
+  return r||c||v'$?'
+
+process:
+procedure expose cset ns st. sx.
+
+  parse arg fid
+
+  say 'Processing' fid
+
+  call loadFile fid
+
+  n     = 1
+  stmt. = ''
+
+    do i = 1 to file.0
+
+      if right(file.i,1) = '\' then
+          stmt.n = stmt.n||substr(file.i,1,length(file.i)-1)
+      else
+        do
+          stmt.n = stmt.n||file.i
+          n      = n + 1
+        end
+    end
+
+    do i = 1 to n
+
+      if xFunc(stmt.i) then
+        do
+            do j = i by -1 to 1 while stmt.j\=''
+            end
+
+          if (i-j > 5 | i-j < 2) then
+              say 'Error 1:' fid i j func
+          else
+            do
+                do k = i+1 to i+12 while (stmt.k \='   )' & stmt.k \='   );')
+                end
+
+              if (k > i+12) then
+                  say 'Error 2:' fid i j k func
+              else
+                do
+
+                  ret = ''
+                    do a = j+1 to i-1
+                      tmp = space(stmt.a)
+                      if tmp <> 'inline' then ret = ret||space(stmt.a)' '
+                    end
+                  ret = space(ret)
+
+                  parm = ''
+                    do a = i+1 to k-2
+                      parm = parm||reformatArg(stmt.a)'|'
+                    end
+                  parm = parm||reformatArg(stmt.a)
+
+                  call record 'F',func'.'fid,parm,ret
+                end
+            end
+        end
+      else if xMacro(stmt.i) then
+        do
+          parse var macro func '(' parm ')' .
+          parm = translate(parm,'|',',')
+          call record 'M',func'.'fid,parm,''
+        end
+    end
+
+  return
+
+
+loadFile:
+procedure expose file.
+
+  parse arg fid .
+
+    do i = 1 by 1 while lines(fid)
+      file.i = linein(fid)
+    end
+
+  file.0 = i-1
+
+  return
+
+record:
+procedure expose ns st. sx.
+
+  parse arg type,id,parm,ret
+
+  parse var id name '.' fid
+
+  x = sx.id
+
+  if x = 0 then
+    do
+      ns = ns + 1
+      sx.id = ns
+
+      st.ns._type = type
+      st.ns._name = name
+      st.ns._fid  = fid
+      st.ns._parm = parm
+      st.ns._ret  = ret
+    end
+  else
+    do
+
+      if type = 'M' then
+        do
+          if st.x._type = 'M' then
+              say 'Duplicate macro' name fid st.x._fid
+          else
+              st.x._type = 'P'
+        end
+      else /* type = 'F' */
+        do
+          if st.x._type = 'M' then
+            do
+              st.x._ret  = ret
+              st.x._parm = parm
+              st.x._type = 'P'
+            end
+          else
+              say 'Duplicate function' name fid st.x._fid
+        end
+    end
+
+  return
+
+matchArg:
+procedure
+  parse arg p1,p2
+
+    do i = 1 by 1 while p1<>''
+      parse var p1 temp '|' p1
+      parse var temp p1.i '/' .
+    end
+  n1 = i-1
+
+    do i = 1 by 1 while p2<>''
+      parse var p2 temp '|' p2
+      parse var temp p2.i '/' .
+    end
+  n2 = i-1
+
+  if n1<>n2 then return 0
+
+    do i = 1 to n1
+      if space(p1.i) <> space(p2.i) then return 0
+    end
+
+  return 1
+
+
+xFunc:
+procedure expose cset func
+  parse arg a 4 b
+  if a \= '   ' then return 0
+  x = verify(b,cset)
+  if x < 2 then return 0
+  if substr(b,x) \= '(' then return 0
+  b = substr(b,1,x-1)
+  if b = 'while' | b = 'if' | b = 'for' then return 0
+  func = b
+  return 1
+
+xMacro:
+procedure expose cset macro
+  s = strip(arg(1),'B')
+  if left(s,8) \= '#define ' then return 0
+  s = strip(substr(s,9),'L')
+  x = verify(s,cset)
+  if x < 2 then return 0
+  if substr(s,x,1) \= '(' then return 0
+  macro=space(s)
+  return 1
+
+reformatArg:
+procedure
+
+  parse arg decl
+
+  com = ''
+
+  i = pos('/*',decl)
+  if (i > 0) then
+    do
+      j = pos('*/',decl,i)
+      if j = 0 then j = length(decl)+1
+      com  = space(substr(decl,i+2,j-i-2))' '
+      decl = space(delstr(decl,i,j+1))
+    end
+
+  i = pos('//',decl)
+  if (i > 0) then
+    do
+      com  = space(substr(decl,i+2))' '
+      decl = space(delstr(decl,i))
+    end
+
+  if right(decl,1) = ',' then decl=delstr(decl,length(decl))
+  decl = space(decl)
+
+  ac = ''
+  av = ''
+  ar = ''
+  ai = ''
+  ao = ''
+
+  done = 0
+
+    do while decl <> '' & \done
+        select
+          when word(decl,1) = 'const'    then
+            do
+              ac = 'C'
+              decl = subword(decl,2)
+            end
+          when word(decl,1) = 'volatile' then
+            do
+              av = 'V'
+              decl = subword(decl,2)
+            end
+          when word(decl,1) = 'register' then
+            do
+              ar = 'R'
+              decl = subword(decl,2)
+            end
+          otherwise
+              done = 1
+        end
+    end
+
+  if (com \= '') then
+    do
+      parse var com io '-' rest
+      io = translate(io)
+      if verify(io,'IO ') = 0 then
+        do
+          if pos('I',io) > 0 then ai = 'I'
+          if pos('O',io) > 0 then ao = '0'
+          com = space(rest)
+        end
+    end
+
+  w = words(decl)
+
+  return word(decl,w)':'||ar||ac||av||ai||ao||':'subword(decl,1,w-1)':'com

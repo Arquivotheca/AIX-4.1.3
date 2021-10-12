@@ -1,0 +1,310 @@
+# @(#)25        1.8  src/bos/usr/lib/pios/predef/generic.pcl, cmdpios, bos411, 9428A410j 5/25/94 19:46:59
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#============================= Flag Attributes ==============================
+:056:__FLG::
+:625:CB:S[B]DyEn:
+:626:CC:S[C]DyEn:
+:627:CD:S[D]DyEn:
+:628:CE:S[E]DyEn:
+:629:CF:S[F]DyEn:
+:630:CG:S[G]DyEn:
+:674:Cs:S[B005]I[1810500]EnC[_s,_p]R[%`W0]:-s%I_s\x27 \x27-p%I_p
+:727:_E:Dn:
+:621:_H:S[F350]I[1810503]Dy:
+:023:_I:Dn:
+:793:_L:S[D020]I[1810504]%IWY:+
+:697:_O:DnEnR[1,3]:3
+:683:_Q:S[E020]I[1810505]En%IW6:%IwQ
+:795:_X:S[D030]I[1810507]EtL[/usr/bin/ls -1 /usr/lib/lpd/pio/trans1 | /usr/bin/sed '/^850$/d']V[%`WX]:
+:695:_Y:S[E030]I[1810560]EnR[pioattr1.cat,1,759;simplex (single-sided),duplex-- long-edge binding,duplex-- short-edge binding=0,1,2]:0
+:614:_Z:Dn%IWY:+
+:635:_b:S[D010]I[1810508]E#G[0..%?%G_l%{0}%=%t%e%G_l%G_t%-%{1}%-%d%;]:0
+:658:_d:S[C925]I[1810509]EnL[%IW2]F1:a
+:623:_g:S[C250]I[1810511]E#G[1..]:1
+:717:_h:S[D040]I[1810512]:
+:637:_i:S[D015]I[1810513]E#G[0..%G_w%{1}%-%d]:0
+:678:_l:S[D045]I[1810514]E#F1L[print "%{6}%Pv%IW4\\t@ 6 %`W8\\n%{8}%Pv%IW4\\t@ 8 %`W8"]V[%?%G_l%{1}%<%t1%e0%;]:%IwY
+:700:_p:DnE#V[%`W1]:10
+:701:_s:DnEnV[%`W1]:courier
+:634:_t:S[D005]I[1810515]E#G[0..%?%G_l%{0}%=%t%e%G_l%G_b%-%{1}%-%d%;]:0
+:638:_u:S[E015]I[1810516]En%IW9:1
+:702:_v:DnEnR[6,8]:%Isv
+:677:_w:S[D050]I[1810517]E#G[1..]:%IwX
+:640:_x:S[D025]I[1810518]EnR[CR->CR LF->LF VT->VT,CR->CRLF,LF->CRLF VT->CRVT=0,1,2]:2
+:618:_z:S[E005]I[1810520]EnR[pioattr1.cat,1,620;portrait,landscape=!,+]:!
+#
+#================= System Administrator Attributes ===============================
+:060:__SYS::
+#
+# s0 - s4 define the default paper sizes for the paper sources. 
+:641:s0:S[115]I[1810521]En%IWP:1
+:757:s1:S[105]I[1810521]En%IWP:1
+:758:s2:S[110]I[1810521]En%IWP:1
+:644:s3:S[120]I[1810522]En%IWE:3
+:645:s4:S[125]I[1810522]En%IWE:3
+#
+:654:sv:S[180]I[1810526]EnR[=6,8]:6
+:708:sH:S[150]I[1810525]Et:
+:709:sT:S[155]I[1810525]Et:
+:655:uH:S[140]I[1810527]En%IW9:1
+:656:uT:S[145]I[1810527]En%IW9:1
+#
+#====================== Header / Trailer Page Pipelines ==========================
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@ %Idd/%Imm -!%Idf/piofpcl -J! -L! %IsH -u%IuH
+:324:st::%Ide/pioburst %F[H] %Idb/T.ascii | %Ide/pioformat -@ %Idd/%Imm -!%Idf/piofpcl -t-14 %IsT -u%IuT
+#
+#====================== Main Processing Pipelines ================================
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLOQXYZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLOQXYZ] %Uh
+:465:in::{ if [[ ! -x /usr/bin/hplj ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 804 "Error\072 The /usr/bin/hplj command was not found."; exit 1; fi; /usr/bin/hplj; } | %Iip 
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJOQYZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+#
+#========================== Prohibited Flags =====================================
+:059:__PFL::
+:684:Ia:S[160a]I[1810528]Dn:
+#
+#========================== Prefix Filters =======================================
+:055:__FIL::
+:660:fc::
+:661:fd::
+:662:ff::{ [[ -x /usr/ucb/fpr ]] || { %Ide/piomsg -c pioattr1.cat -s 1 -n 815 'Error\072 The /usr/ucb/fpr command was not found.\\n';exit 1;};/usr/ucb/fpr;}
+:663:fg::
+:665:fn::{ if [[ ! -x /usr/bin/hplj ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 804 "Error\072 The /usr/bin/hplj command was not found."; exit 1; fi; /usr/bin/hplj; }%ip
+:666:fp::/usr/bin/pr -l%IwL -w%IwW %F[h] %I@1
+:667:ft::
+:668:fv::
+#
+#============================ Miscellaneous ======================================
+:058:__MIS::
+:330:mA::PCL Emulation
+:565:mB::hplj.roman8
+:290:mH::720
+:331:mL::[pioattr1.cat,1,807;PCL Printer]
+:298:mS::_
+#
+# mU defines the list of fonts available. 
+#  Format:  FontName[pitch,typeface;stroke weight;style(trans2 code page tables)
+:416:mU::courier[10,3;0;0(%ImB)]courier-bold[10,3;3;0(%ImB)]lineprinter[17,0;0;0(%ImB)]
+#
+:299:mV::720
+:303:mf::%Idf/piofpcl
+:308:mp::,,,,x T 
+#
+#========================== Stage 2 Translate Tables =============================
+:061:__TRN::
+:326:t0::
+:327:t1::
+:328:t2::
+:328:t3::
+:328:t4::
+:328:t5::
+:328:t6::
+:328:t7::
+:328:t8::
+:328:t9::
+#
+#============================ Work Attributes ====================================
+:062:__WKV::
+:818:WX::%?%L_X%tif [[ -f /usr/lib/lpd/pio/trans1/%I_X ]]; then print "0\\c"; else print "1\\c"; fi%eprint "0\\c"%;
+#
+# Generate a list of typestyles/pitches based on mU
+:675:W0::print '%ImU\\c'|/usr/bin/tr ']' '\\012'|/usr/bin/sed "s/\\[\\([^,]*\\),/ \\1 /"|/usr/bin/sort -u +0 -1 +1 -2 -n|/usr/bin/sed "s/ \\([^ ]*\\) /\\[\\1,/"|/usr/bin/tr '\\012' ']'|%IWA
+:675:WA::/usr/bin/awk -v sep="  " -v flags="sp" 'BEGIN{RS="]";}{if(m=match($0,"^[^\\\\[]*\\\\[[0-9]*"))s[cnt++]=substr($0,m,RLENGTH);}END{for(i=0;i<cnt;i++){no=split(s[i],F,"\\\\[");for(j=1;j<=no;j++){printf("%%s",F[j]);if(j+1<=no)printf("%%s",sep);}if(i+1<cnt)printf(",");}printf("=");for(i=0;i<cnt;i++){no=split(s[i],F,"\\\\[");for(j=1;j<=no;j++){printf("-%%s%%s",substr(flags,j,1),F[j]);if(j+1<=no)printf("%%s","\\047 \\047"); }if(i+1<cnt)printf(",");}}'
+#
+# Validates if the _s / _p combination have a match in mU using %# reg. expr. operator
+:676:W1::if [[ -n '%#mU"%I_s\\[%I_p@$"' ]];then print "0\\c";else print "1\\c";fi
+#
+# Determine lines per page based on pels per page (used in _l list)
+:679:W4::%?%G_z%t%GwR%e%GwK%;%gv%*%{300}%/%d
+:680:W8::/usr/bin/dspmsg pioattr1.cat 690 "lines per inch"
+#
+# Generate a ring list for paper size or envelope size
+:689:W6::%Zq%?%GWu%{3}%=%t%{1}%Pq%e%?%GWu%{4}%=%t%{1}%Pq%;%;%?%gq%t%IWE%e%IWP%;
+#
+# Generate a ring list for paper source
+:760:W9::R[pioattr1.cat,1,761;manual paper feed,upper tray,lower tray,envelope feeder,manual envelope feed=0,1,2,3,4]
+#
+# Generate a ring list for paper types and envelopes available
+:762:WP::R[letter,legal,A4,exec=1,2,4,5]
+:763:WE::R[7 3/4,10,DL,C5,other=1,3,4,5,7]
+#
+# Wu defines the paper source based on _u (and _O if on the command line).   
+:730:Wu::%?%CO%t%?%G_O%{1}%=%t%?%Cu%t%?%G_u%{2}%>%t%{4}%e%{0}%;%e%{0}%;%e%?%G_O%{2}%=%t%{5}%e%G_u%;%;%e%G_u%;%d
+#
+# Horizontal Increment Per Character (in Hres units)
+:343:wH::%GmH%G_p%/%d
+#
+# Vertical Increment (wV) and Vertical Decrement (wD) in Vres units
+:358:wV::%GmV%G_v%/%d
+:339:wD::
+#
+# Page Width (in Hres units)
+:383:ww::%GwH%G_w%*%d
+#
+# Page Width (pels) For Portrait Orientation
+:461:wJ::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{2400}%e%gq%{2}%=%t%{2400}%e%gq%{3}%=%t%{1999}%e%gq%{4}%=%t%{2338}%e%{2025}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+#
+# Page Length (pels) For Portrait Orientation
+:462:wK::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{3000}%e%gq%{2}%=%t%{3900}%e%gq%{3}%=%t%{2735}%e%gq%{4}%=%t%{3207}%e%{2850}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+#
+# Page Width (pels) For Landscape Orientation
+:463:wM::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{3180}%e%gq%{2}%=%t%{4080}%e%gq%{3}%=%t%{2915}%e%gq%{4}%=%t%{3389}%e%{3030}%;%e%?%gq%{1}%=%t%{1012}%e%gq%{2}%=%t%{1012}%e%gq%{3}%=%t%{1087}%e%gq%{4}%=%t%{1157}%e%gq%{5}%=%t%{1771}%e%{1928}%;%;%d
+#
+# Page Length (pels) For Landscape Orientation
+:464:wR::%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t%{2250}%e%gq%{2}%=%t%{2250}%e%gq%{3}%=%t%{1849}%e%gq%{4}%=%t%{2180}%e%{1875}%;%e%?%gq%{1}%=%t%{2130}%e%gq%{2}%=%t%{2562}%e%gq%{3}%=%t%{2730}%e%gq%{4}%=%t%{2480}%e%gq%{5}%=%t%{2586}%e%{2852}%;%;%d
+#
+# For pipelines -- page length/width in chars, using length from '_l' and '_w'.  
+:347:wL::%?%Cl%t%f!l%e%I_l%;
+:359:wW::%?%Cw%t%f!w%e%I_w%;
+#
+# wQ determines the paper size for the source defined by Wu.  Values of Wu 
+# supported are '0' (manual), '1' (tray 1,upper), '2' (tray 2,lower),'3' (auto envelope),
+# '4' (manual envelope)
+:458:wQ::%?%GWu%{0}%=%t%Gs0%e%GWu%{1}%=%t%Gs1%e%GWu%{2}%=%t%Gs2%e%GWu%{3}%=%t%Gs3%e%Gs4%;%d
+#
+# Calculated page width (wX) in characters and length (wY) in lines for 
+# the current orientation and paper size.  The resulting values are used
+# by _w and _l for their default values.
+:454:wX::%Gwj%?%G_p%{17}%=%t%{167}%e%G_p%{10}%*%;%*%{3000}%/%d
+:455:wY::%Gwk%G_v%*%{300}%/%d
+#
+# Page width in current orientation and paper size (pels)
+:517:wj::%?%G_z%{1}%&%t%GwM%e%GwJ%;%d
+#
+# Page length in current orientation and paper size (pels)
+:518:wk::%?%G_z%{1}%&%t%GwR%e%GwK%;%d
+#
+# Effective Line Density (lines per inch x 100)
+:519:wn::%G_l%{30000}%*%Gwk%/%d
+#
+# Pass-Through Instead of Formatting (i.e., data stream is not modified)
+:373:wp::!
+#
+# PCL font selection
+#   wt defines the PCL typeface
+#   wu defines the PCL style (e.g. upright, italic)
+#   wv defines the stroke weight
+#   wz defines the pitch
+# These attributes are set by the piofpcl formatter based on the font
+# selected by the user (see mU).  wt, wu, and wv  are referenced
+# by 'eT' which sends the escape sequences to select the font.
+:566:wt::3
+:567:wu::0
+:568:wv::0
+:418:wz::%G_p%d
+#
+# Number of Lines to Space Down For Each Line Feed
+:369:wl::%{1}%G_E%+%d
+#
+:337:w1::0
+:340:wF::0
+:341:wG::
+:348:wN::
+:352:wP::
+:354:wT::
+:365:wf::af
+:367:wh::%{9}%Px%{28}%Py%?%gy%t%wy%gx%c%gx%{8}%+%Px%;%;\0
+:368:wi::cl
+:384:wy::cx
+#================================ Commands =======================================
+:051:__CAG::
+#
+# Escape sequences used to select code pages 
+:127:c1::\33(8U
+:130:c2::\33(10U
+:131:c3::\33(0N
+:143:ch::\33&a%Gw1%dH
+#
+# String of characters to initialize the printer.  By the time 'ci' is evaluated
+# '_j' has a value of '1' (complete init.) or '2' (send language switch command only)
+:144:ci::%?%G_j%{1}%=%t%I[eR,eP,c1,eT,eS,eO,ct,eF,eu,es,eC]%;
+:146:cl::%Iac%Ial
+:147:cm::%IeR%I[eF,eP,eO,ct]
+#
+# String of characters to restore the printer
+:152:cr::%IeR%o%I[eF,eP,eO,eS,ct,eD]
+:156:ct::\33&k%?%Gwp%t%G_x%d%e0%;G
+:052:__CTL::
+:110:ab::\10
+:111:ac::\15
+:113:af::\14\15
+:116:ai::\17
+:117:al::\12
+:118:an::\0
+:120:ao::\16
+:121:ar::\7
+#
+#========================= Escape Sequence Definitions ===========================
+:054:__ESC::
+#
+# Select font if specified with font id
+:187:eF::%?%G_I%t\33(s%?%G_I%{3}%>%t1%e0%;p%G_I%dT\17%;
+#
+# Set the vertical line spacing in 1/48 increments based on page length
+:774:eC::\33&l%{480000}%Gwn%/%Pq%gq%{100}%/%d.%gq%{100}%m%2dC
+#
+# Set the vertical line spacing (6 or 8 lpi)
+:775:eD::\33&l%?%G_v%{8}%=%t8%e6%;D
+#
+# Set the page orientation
+:202:eO::\33&l%G_z%dO
+#
+# Set the pitch
+:204:eP::%?%S_s%"lineprinter"%=%t\33(s16.67H\33(s8.5V%e\33(s%G_p%dH%;
+#
+# PCL reset
+:208:eR::\33E
+#
+# Set duplex mode
+:513:eS::\33&l%G_Y%dS
+#
+# Escape sequences to set the typeface, stroke weight, and style
+:569:eT::\33(s%Gwu%dS\33(s%Gwv%dB\33(s%Gwt%dT
+#
+:213:eW::\33%GwP%c
+:216:eX::\33%GwP%c%GwG%c%IwN%GwT%?%GwT%{96}%>%t%?%GwT%{123}%<%t%{223}%&%;%;%c
+:219:eY::\33%GwP%c%GwG%c%IwN%GwT%{223}%&%c%x
+#
+# Select the symbol set
+:221:eZ::\33%GwP%c%IwN%GwT%{223}%&%c
+#
+# Transparent print data
+:225:eb::\33&p1X
+#
+# Generate the paper source escape sequence.
+#   If Wu = 0, then manual feed
+#   If Wu = 1, then feed from tray (upper)
+#   If Wu = 2. then feed from tray (lower)
+#   If Wu = 3, then feed from envelope feeder
+#   If Wu = 4, then manual envelope feed
+#   else, feed from tray
+:764:eu::\33&l%?%GWu%{0}%=%t2%e%GWu%{2}%=%t4%e%GWu%{3}%=%t6%e%GWu%{4}%=%t3%e1%;H
+#
+# Generate the page size escape sequence based on _Q.
+:482:es::\33&l%G_Q%Pq%?%GWu%{3}%<%t%?%gq%{1}%=%t2%e%gq%{2}%=%t3%e%gq%{4}%=%t26%e%gq%{5}%=%t1%e2%;%e%?%gq%{1}%=%t80%e%gq%{3}%=%t81%e%gq%{4}%=%t90%e%gq%{5}%=%t91%e80%;%;A
+#
+# Printer Job Language (PJL) commands
+:609:pU::\33%%-12345X
+:610:pL::@PJL ENTER LANGUAGE = PCL\012
+:475:__HIR::
+:686:zL::2
+:688:zM::generic
+:476:zP::master
+:477:zS::!
+:685:zV::+

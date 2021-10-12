@@ -1,0 +1,441 @@
+* @(#)51	1.12  src/bos/objclass/POWER/sm_sys.add, cfgmethods, bos411, 9428A410j 4/1/94 16:14:33
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Sys Node Device (sys0) Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       Change/Show Characteristics of Operating System
+#
+#       Help text Id's for the sys0 device specific helps are in the
+#       range:          TBD
+#       This INCLUDES menu helps.
+#
+
+
+#
+# Change/Show Characteristics of Operating System
+# This allows the system device's (sys0) characteristics to be shown and, if
+# desired, changed.  The chdev command is executed from this dialogue.
+# The initial name selector is a ghost selector that determines whether
+# or not the model supports memory scrubbing.  The lsattr command is
+# used to determine if the sys0 device has a memory scrubbing attribute.
+# Different command headers are used for the two cases; one having a
+# command option for the memory scrubbing attribute and one without.  All
+# other command options are the same for both.
+#
+
+
+sm_name_hdr:
+	id		= "chgsys"
+	next_id		= "chgsys_"
+	option_id	= "chgsys_hdr.opt"
+	has_name_select = "n"
+	name		= ""
+	name_msg_file	= 0
+	name_msg_id	= 0
+	type		= "c"
+	ghost		= "y"
+	cmd_to_classify = "machinetype () \n\
+{ \n\
+lsattr -D -l sys0 -a memscrub >/dev/null 2>/dev/null\n\
+if [ $? -eq 0 ]\n\
+then\n\
+	echo "MS"\n\
+else\n\
+	echo "noMS"
+fi\n\
+} \n\
+machinetype "
+	cmd_to_classify_postfix   = ""
+	raw_field_name	= "_rawname"
+	cooked_field_name = "_cookedname"
+	next_type       = "d"
+	help_msg_id     = ""
+	help_msg_loc    = ""
+
+sm_cmd_opt:
+    id                        = "chgsys_hdr.opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id	              = ""
+    help_msg_loc              = ""
+
+# This is the command header for machines which support Memory Scrubbing.
+
+sm_cmd_hdr:
+    id                        = "chgsys_MS"
+    option_id                 = "chgsys_opt,chgsys_MS_opt"
+    has_name_select           = "y"
+    name                      = "Change / Show Characteristics of Operating System"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 650
+    cmd_to_exec               = "chdev -l sys0"
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -E -O -l sys0"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id	              = "042050"
+    help_msg_loc              = ""
+
+
+# This is the command header for machines which DO NOT support Memory Scrubbing.
+
+sm_cmd_hdr:
+    id                        = "chgsys_noMS"
+    option_id                 = "chgsys_opt"
+    has_name_select           = "y"
+    name                      = "Change / Show Characteristics of Operating System"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 650
+    cmd_to_exec               = "chdev -l sys0"
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -E -O -l sys0"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id	              = "042050"
+    help_msg_loc              = ""
+
+# Displays memscrub attribute.
+sm_cmd_opt:
+    id                        = "chgsys_MS_opt"
+    id_seq_num                = "080"
+    disc_field_name           = "memscrub"
+    name                      = "Enable memory SCRUBBING"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 29
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a memscrub="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "true,false"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 13
+    aix_values                = "true,false"
+    help_msg_id	              = "042064"
+    help_msg_loc              = ""
+
+
+# Dialog header command options.
+
+# Displays maxuproc attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "maxuproc"
+    name                      = "Maximum number of PROCESSES allowed per user"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 20
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a maxuproc="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -l sys0 -a maxuproc -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id	              = "042051"
+    help_msg_loc              = ""
+
+# Displays maxbuf attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "020"
+    disc_field_name           = "maxbuf"
+    name                      = "Maximum number of pages in block I/O BUFFER CACHE"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 18
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a maxbuf="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -l sys0 -a maxbuf -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id	              = "042052"
+    help_msg_loc              = ""
+
+# Displays maxmbuf attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "030"
+    disc_field_name           = "maxmbuf"
+    name                      = "Maximum Kbytes of real memory allowed for MBUFS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 19
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a maxmbuf="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -l sys0 -a maxmbuf -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id	              = "042053"
+    help_msg_loc              = ""
+
+# Displays autorestart attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "040"
+    disc_field_name           = "autorestart"
+    name                      = "Automatically REBOOT system after a crash"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 21
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a autorestart="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "true,false"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 13
+    aix_values                = "true,false"
+    help_msg_id	              = "042054"
+    help_msg_loc              = ""
+
+# Displays iostat attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "050"
+    disc_field_name           = "iostat"
+    name                      = "Continuously maintain DISK I/O history"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 22
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a iostat="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "true,false"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 13
+    aix_values                = "true,false"
+    help_msg_id	              = "042055"
+    help_msg_loc              = ""
+
+# Displays maxpout attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "060"
+    disc_field_name           = "maxpout"
+    name                      = "HIGH water mark for pending write I/Os per file"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 27
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a maxpout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -l sys0 -a maxpout -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id	              = "042062"
+    help_msg_loc              = ""
+
+# Displays minpout attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "070"
+    disc_field_name           = "minpout"
+    name                      = "LOW water mark for pending write I/Os per file"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 28
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a minpout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -l sys0 -a minpout -R"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id	              = "042063"
+    help_msg_loc              = ""
+
+
+# Displays realmem attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "090"
+    disc_field_name           = "realmem"
+    name                      = "Amount of usable physical memory in Kbytes"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 23
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "042056"
+    help_msg_loc              = ""
+
+
+# Displays keylock attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "120"
+    disc_field_name           = "keylock"
+    name                      = "State of system keylock at boot time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 17
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "042059"
+    help_msg_loc              = ""
+
+# Displays core dump attribute.
+sm_cmd_opt:
+    id                        = "chgsys_opt"
+    id_seq_num                = "150"
+    disc_field_name           = "fullcore"
+    name                      = "Enable full CORE dump"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 1
+    name_msg_id               = 45
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a fullcore="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "true,false"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 13
+    aix_values                = "true,false"
+    help_msg_id	              = "0420920"
+    help_msg_loc              = ""
+

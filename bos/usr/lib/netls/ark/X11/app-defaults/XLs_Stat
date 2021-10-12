@@ -1,0 +1,24 @@
+! #ident "@(#)XLs_Stat:3.3  File Date:93/03/25 Last Delta:91/12/17 13:10:59"
+! /usr/X11/lib/app-defaults/XLs_Stat
+
+XLs_Stat*geometry:                              =-0+0
+                                                
+*FontList:                              *-courier-medium-r-normal--12-*
+*XmText.alignment:			ALIGNMENT_CENTER
+*XmText.marginHeight:			2
+*field.alignment:			ALIGNMENT_BEGINNING
+*field.marginHeight:			6
+
+*foreground:                            Black
+*background:                            Lightblue
+*XmText.foreground:                     Black
+*XmText.background:                     White
+*prompt_dialog.foreground:              Black
+*prompt_dialog.background:              Lightblue
+*XmSelectionBox.foreground:             Black
+*XmSelectionBox.background:             White
+
+*selectColor:				Black
+*topShadowColor:			Black
+*highlightPixmap:			50_foreground
+

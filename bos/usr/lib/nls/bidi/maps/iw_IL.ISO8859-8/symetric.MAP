@@ -1,0 +1,35 @@
+# @(#)65	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.ISO8859-8/symetric.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:46:51
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# EHTsymetric.map
+# _______________
+#
+# This is the maping of the "symetric" swaping characters in EHterm
+# internal representation of ISO 8859/8, CP 916.
+# 
+#
+#
+040          041        #    \050 -> \051  ( -> )
+041          040        #    \051 -> \050  ) -> (
+060          062        #    \074 -> \076  < -> >
+062          060        #    \076 -> \074  > -> <
+091          093        #    \133 -> \135  [ -> ]
+093          091        #    \135 -> \133  ] -> [
+123          125        #    \173 -> \175  { -> }
+125          123        #    \175 -> \173  } -> {
+171          187        #    \253 -> \273  << -> >>
+187          171        #    \273 -> \253  >> -> <<
+

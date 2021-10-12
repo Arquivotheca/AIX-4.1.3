@@ -1,0 +1,194 @@
+/*
+static char sccsid[] = "@(#)72  1.7  src/bos/usr/lib/asw/mpqp/iface.def, ucodmpqp, bos411, 9428A410j 8/23/93 13:19:41";
+*/
+/*
+ * COMPONENT_NAME: (UCODMPQ) Multiprotocol Quad Port Adapter Software
+ *
+ * FUNCTIONS:
+ * 	Defines for command and response interface with driver
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+#define	RQE_TX_ACK	0x0
+#define	RQE_TX_NAK	0x8
+#define	RQE_RX_ACK	0x1
+#define	RQE_RX_NAK	0x9
+#define	RQE_RX_DMA	0x1
+#define	RQE_RX_NODMA	0x9
+#define	RQE_CMD_ACK	0x2
+#define	RQE_CMD_NAK	0xA
+#define	RQE_STAT_SOL	0x3
+#define	RQE_STAT_UNSOL	0xB
+#define	RQE_CPS_ACK	0x4
+#define	RQE_CPS_NAK	0xC
+
+#define	RQE_ADAP_ERR	0x6
+#define	RQE_ADAP_EDR	0xE
+#define	RQE_DIAG_ERR	0x7
+#define	RQE_DIAG_EDR	0xF
+
+#define	RAES_STACK	0x00B0	/* ASW Stack Overflow */
+#define	RAES_QUEUE	0x00C0	/* ASW Queue Error */
+#define	RAESQ_TXF_O	0x0001	/* Tx Free List Overflow */
+#define	RAESQ_RXF_O	0x0002	/* Rx Free List Overflow */
+#define	RAESQ_PCQ_O	0x0003	/* P Command Q Overflow */
+#define	RAESQ_PRQ_O	0x0004	/* P Response Q Overflow */
+#define	RAESQ_ARQ_O	0x000F	/* Adapter Resp Q Overflow */
+
+/*
+   Command types
+*/
+
+#define TX_OR_RXBUFIND	(unsigned char)0x1	/* 0x1? command types */
+#define	TX_SHORT	(unsigned char)0x10	/* Tx Short */
+#define	TX_LONG		(unsigned char)0x11	/* Tx Long */
+#define	TX_GATHER	(unsigned char)0x12	/* Tx Gather */
+#define	RX_BUF_IND	(unsigned char)0x13	/* Rx Buffer Indicate */
+
+#define NON_TX_CMD	(unsigned char)0x2	/* 0x2? command types */
+#define	SET_PARMS	(unsigned char)0x21	/* set parameters */
+#define	START_PORT	(unsigned char)0x22	/* start port */
+#define	STOP_PORT	(unsigned char)0x23	/* stop port */
+#define	TERM_PORT	(unsigned char)0x24	/* terminate port */
+#define	FLUSH_PORT	(unsigned char)0x25	/* flush port */
+#define	QUERY_STAT	(unsigned char)0x2A	/* query statistics */
+#define	START_AR	(unsigned char)0x2B	/* Start Autoresponse */
+#define	STOP_AR		(unsigned char)0x2C	/* Stop Autoresponse */
+#define HALT_RECV	(unsigned char)0x30	/* Halt frame reception */
+#define START_RECV	(unsigned char)0x31	/* Start frame reception */
+
+/************************************************************************/
+/* Buffer Status Values : 0x1???					*/
+/************************************************************************/
+#define BUF_STAT_OVFLW  (unsigned short)0x1001	/* Rx buffer overflow	*/
+#define BUF_STAT_CPS_OK	(unsigned short)0x1002  /* X.21 Call Prog Sig	*/
+#define BUF_STAT_CPS_E	(unsigned short)0x1003  /* X.21 Call Prog Sig - err */
+#define BUF_STAT_X_DPI  (unsigned short)0x1004  /* X.21 DCE Provided Info */
+#define BUF_STAT_MDM_D	(unsigned short)0x1005	/* Modem Data		*/
+#define BUF_STAT_AR_D	(unsigned short)0x1006	/* Auto Response Data	*/
+
+/* Defines for transmit errors, types STAT_UNSOL or TX_NAK.  Note that
+   "sequence" is preserved, so the RQE status value (byte) is used. */
+
+/************************************************************************/
+/* Transmit Errors 							*/
+/************************************************************************/
+
+#define TX_BUF_ERR	(unsigned char)0x87	/* Transmit too big */
+#define	CTS_UNDERRUN	(unsigned char)0x88	/* Transmit Error */
+#define	TX_UNDERRUN	(unsigned char)0x89	/* DMA Error */
+#define	ASY_LOST_RTS	(unsigned char)0x42	/* RTS lost due to rx */
+
+/************************************************************************/
+/*									*/
+/* RECEIVE ERRORS 							*/
+/*									*/
+/************************************************************************/
+/************************************************************************/
+/* Protocol Independent Errors : 0x8???					*/
+/************************************************************************/
+
+#define BUF_STAT_NOERR  (unsigned short)0x0000	/* No error on Rx buffer */
+#define	RX_OVERRUN	(unsigned short)0x8001	/* DMA Error */
+#define RX_PARITY_ERR	(unsigned short)0x8002	/* BiSync (ASCII) and Async */
+#define	FRAME_CRC	(unsigned short)0x8003	/* Receive Error */
+#define	LOST_SYNC	(unsigned short)0x8004	/* Receive Error */
+
+/************************************************************************/
+/* SDLC Errors : 0x9???							*/
+/************************************************************************/
+
+#define	SDLC_ABORT	 (unsigned short)0x9001	/* SDLC, Abort Detected */
+#define	SDLC_SHORT_FRAME (unsigned short)0x9002	/* SDLC, Fields missing */
+#define	SDLC_RESIDUAL	 (unsigned short)0x9003	/* SDLC, RESID Lgt != 0 */
+
+/************************************************************************/
+/* BSC Errors : 0xA???				  BSC Messages : 0x2??? */
+/************************************************************************/
+
+#define BSC_INV_FRAME	(unsigned short)0xA001	/* BSC, Protocol violation */
+#define BSC_PAD_ERR	(unsigned short)0xA002	/* BSC, Closing PAD error  */
+
+						/* Below, rtype = RX_NO_DMA */
+#define MSG_ETB		(unsigned short)0x2001	/* --- ETB : 0 1 */
+#define MSG_ETX		(unsigned short)0x2002	/* --- ETX : 0 2 */
+#define MSG_ACK0	(unsigned short)0x2008	/* --- AK0 : 0 8 */
+#define MSG_ACK1	(unsigned short)0x2009	/* --- AK1 : 0 9 */
+#define MSG_WACK	(unsigned short)0x200A	/* --- WAK : 0 A */
+#define MSG_NAK		(unsigned short)0x200B	/* --- NAK : 0 B */
+#define MSG_ENQ 	(unsigned short)0x200C	/* --- ENQ : 0 C */
+#define MSG_EOT 	(unsigned short)0x200D	/* --- EOT : 0 D */
+#define MSG_RVI 	(unsigned short)0x200E	/* --- RVI : 0 E */
+#define MSG_DISC	(unsigned short)0x200F	/* --- DSC : 0 F */
+#define	MSG_MAX_NO_DMA	MSG_DISC		/* Below, rtype = RX_DMA */
+#define MSG_STX_ITB	(unsigned short)0x2020	/* STX ITB : 2 0 */
+#define MSG_STX_ETB	(unsigned short)0x2021	/* STX ETB : 2 1 */
+#define MSG_STX_ETX	(unsigned short)0x2022	/* STX ETX : 2 2 */
+#define MSG_STX_ENQ	(unsigned short)0x202C	/* STX ENQ : 2 C */
+#define MSG_SOH_ITB	(unsigned short)0x2030	/* SOH ITB : 3 0 */
+#define MSG_SOH_ETB	(unsigned short)0x2031	/* SOH ETB : 3 1 */
+#define MSG_SOH_ETX	(unsigned short)0x2032	/* SOH ETX : 3 2 */
+#define MSG_SOH_ENQ	(unsigned short)0x203C	/* SOH ENQ : 3 C */
+#define MSG_DATA_ACK0	(unsigned short)0x2088	/* dat AK0 : 8 8 */
+#define MSG_DATA_ACK1	(unsigned short)0x2089	/* dat AK1 : 8 9 */
+#define MSG_DATA_NAK	(unsigned short)0x208B	/* dat ETB : 8 B */
+#define MSG_DATA_ENQ	(unsigned short)0x208C	/* dat ENQ : 8 C */
+
+/************************************************************************/
+/* X21 Errors : 0xB???				  X21 Messages : 0x3??? */
+/************************************************************************/
+
+#define	INVALID_CPS	(unsigned short)0xB001	/* Receive Error */
+
+/************************************************************************/
+/* ASY Errors : 0xC???							*/
+/************************************************************************/
+
+#define	ASY_FRAMING_ERR	(unsigned short)0xC001	 /* ASC, Start/Stop bit */
+
+/************************************************************************/
+/* Adapter-wide Errors : 0xD???						*/
+/************************************************************************/
+
+#define	ASW_OVERWRITE	(unsigned short)0xD001	 /* ASW overwitten	*/
+#define	BAD_RX_DMA_Q_AD	(unsigned short)0xD002	 /* bad address on DMA Q*/
+#define	LOST_COMMAND	(unsigned short)0xD003	 /* lost PCQ command	*/
+
+/************************************************************************/
+/* Unsolicited Port Status RQE Status Values				*/
+/************************************************************************/
+
+#define	X21_INDICATE	(unsigned short)0x00D1
+#define	X21_ZERO	(unsigned short)0x00D2
+#define	X21_ALT		(unsigned short)0x00D3
+#define	X21_ONE		(unsigned short)0x00D4
+#define	X21_BEL		(unsigned short)0x00D5
+#define	X21_PLUS	(unsigned short)0x00D6
+
+/************************************************************************/
+/* Possible TASKREG values:						*/
+
+#define	TREG_ARQ	(unsigned char)0x00	/* ARQ is now non-empty */
+#define	TREG_TXFREE	(unsigned char)0x01	/* TxFree List is non-empty */
+#define	TREG_DMA0ACK	(unsigned char)0x80	/* BM DMA, p0, complete */
+#define	TREG_DMA1ACK	(unsigned char)0x81	/* BM DMA, p1, complete */
+#define	TREG_DMA2ACK	(unsigned char)0x82	/* BM DMA, p2, complete */
+#define	TREG_DMA3ACK	(unsigned char)0x83	/* BM DMA, p3, complete */
+#define	TREG_WDT	(unsigned char)0xFE	/* Watchdog Timer Expired */
+#define	TREG_NOI	(unsigned char)0xFF	/* No interrupt pending */
+
+/************************************************************************/
+/* Possible ACMDREG values:						*/
+
+#define	ACMD_ACQ	(unsigned short)0x0000	/* ACQ is now non-empty */
+#define	ACMD_TXFREE	(unsigned short)0x0001	/* TxFree is empty */

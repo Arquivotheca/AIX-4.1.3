@@ -1,0 +1,89 @@
+/* @(#)01       1.8.1.5  src/bos/usr/ccs/bin/lint/POWER/llib-lc, cmdprog, bos411, 9428A410j 6/21/91 14:54:29 */
+/*
+ * COMPONENT_NAME: (CMDPROG) Programming Utilities
+ *
+ * FUNCTIONS:
+ *
+ * ORIGINS: 27; 10
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1985, 1991
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+#ifndef LINT
+#define LINT
+#endif
+#ifndef lint
+#define lint
+#endif
+
+/*NOTUSED*/
+/*NOTDEFINED*/
+/*LINTLIBRARY*/
+/*LINTSTDLIB*/
+
+#include <unistd.h>
+#include <stdio.h>
+
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/sem.h>
+#include <pwd.h>
+#include <string.h>
+#include <wcstr.h>
+#include <ctype.h>
+#include <fcntl.h>
+#ifdef NLS
+#include <NLctype.h>
+#include <NLxio.h>
+#endif
+
+#include <setjmp.h>
+#include <assert.h>
+#include <memory.h>
+#include <stdarg.h>
+
+#include <sys/protosw.h>
+#include <sys/socketvar.h>
+#include <signal.h>
+#define _KERNEL
+#include <sys/flock.h>
+#undef _KERNEL
+#include <sys/stat.h>
+#include <time.h>
+#include <limits.h>
+#include <float.h>
+#include <locale.h>
+#include <sys/fullstat.h>
+#include <sys/times.h>
+#include <sys/utsname.h>
+#include <ustat.h>
+#include <grp.h>
+#include <search.h>
+#include <malloc.h>
+#include <mon.h>
+#include <a.out.h>
+#include <varargs.h>
+#include <sys/flock.h>
+#include <sys/vfs.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <nl_types.h>
+#include <sys/domain.h>
+#include <netinet/in.h>
+#include <errno.h>
+#include <dirent.h>
+#include <ndbm.h>
+#include <sys/uio.h>
+#include <sys/socket.h>
+#include <sys/mbuf.h>
+#undef n_name
+#include <netdb.h>
+
+#include <sys/resource.h>
+#include <sys/time.h>
+#include <sgtty.h>

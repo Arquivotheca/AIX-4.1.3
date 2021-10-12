@@ -1,0 +1,45 @@
+# @(#)37        1.2  src/bos/usr/lib/pios/predef/lex4079+.ps, cmdpios, bos41J, 9517B_all 4/26/95 18:45:25
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 70
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# (C) COPYRIGHT Lexmark International, Inc. 1993, 1995
+# All Rights Reserved
+#
+#
+:056:__FLG::
+#
+#   Print Quality is controlled by _q
+#     1=Quality, 2=Bold Black, 3=High Speed, 4=High Quality, 5=Transparency,
+:712:_q:S[B045]I[1810554]EnR[pioattr1.cat,1,741;quality,bold black,high speed,high quality,transparency=1,2,3,4,5]:1
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j] -q3 %IsH
+:324:st::%Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[j] -q3 %IsT
+:057:__IDS::
+:273:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jqHJZ] %UH
+:058:__MIS::
+:330:mA::PostScript
+:331:mL::[devices.cat,71,205;Lexmark Color Jetprinter Plus]
+:295:mN::4079p
+:301:mc::\0
+:319:mz::14688
+:051:__CAG::
+:144:ci::%?%G_j%{1}%=%t statusdict begin %Iar end %;
+:052:__CTL::
+:612:ar::%G_q%d setprintmethod
+:475:__HIR::
+:686:zL::2
+:688:zM::Lexmark 
+:476:zP::generic.ps
+:477:zS::!
+:685:zV::+

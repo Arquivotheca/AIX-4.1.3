@@ -1,0 +1,174 @@
+*/* @(#)35	1.1  src/bos/usr/ccs/bin/as/POWER/instrs.ops.ppc_opt2, cmdas, bos411, 9428A410j 3/10/94 10:45:47*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.ppc_opt2
+*
+* *       PowerPC optional instruction set 2.
+* *       They are implemented in  603 and 604 processor. 
+* *       They are not implemented in 601.
+* *                                                                   
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1994
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+*
+************************************************************************
+*** - *** Type indicator:  Bit map for 604 unique instructions is
+*                           0x8040, for 603 is 0x8020.
+*                          since these instructions are for both
+*                          603 and 604, the bit map will be 0x8060
+% 32864
+************************************************************************
+*       X-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XZ-format
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / | / / / | / / / |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic                      ----- RC=0
+*       mnemonic.                     ----- RC=1
+*
+***********************************************************************
+***********************************
+**** /*** Storage Control ***/ ****
+***********************************
+*Opcde 1F
+*
+*236   tlbsync                TLB Synchronize
+       tlbsync   n       x0   31-566
+*
+***********************************************************************
+*       Instruction Format: X-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | RS | FRT | FRS | BF
+*              OP2 = RA | FRA
+*              OP3 = RB | FRB | NB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2,OP3         ----- RC=0
+*       mnemonic. OP1,OP2,OP3         ----- RC=1
+*
+***********************************************************************
+*
+************************************
+**** /*** Floating Point Load and Store ***/ ****
+**********************************
+*Opcde = 1F
+*3D7   stfiwx  frs,ra,rb   Store Floating-Point as Interger
+*                          Word Indexed
+       stfiwx      rrr      x7   31-983
+*
+***********************************************************************
+*       A-Form instructions
+***********************************************************************
+*
+*       Instruction Format: AD-format
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  ///  | FRB   |  ///  |XO = 22 |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRB         ----- RC=0
+*       mnemonic. FRT,FRB         ----- RC=1
+*
+***********************************************************************
+*********************************************************
+**** /*** Floating Point Graphics ***/ ****
+*********************************************************
+*Opcde 3B
+*018   fres     frt,frb    Floating Reciprocal estimate Single
+*018   fres     frt,frb    Floating Reciprocal estimate Single (Rc=1)
+       fres      rr        ad   59-024
+       fres.     rr        ad   59-024-1
+*
+*Opcode 3F
+*01A   frsqrte  frt,frb   Floating Reciprocal Square Root
+*01A   frsqrte. frt,frb   Floating Reciprocal Square Root (Rc=1)
+       frsqrte   rr       ad    63-026
+       frsqrte.  rr       ad    63-026-1
+***********************************************************************
+*       AE-Form instructions
+***********************************************************************
+*
+*       Instruction Format: AE-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  FRT  |  FRA  |  FRB  |  FRC  |   XO   |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21   25 26    30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  FRT,FRA,FRB,FRC     ----- RC=0
+*       mnemonic. FRT,FRA,FRB,FRC     ----- RC=1
+*
+***********************************************************************
+********************************
+**** /*** Floating Point Graphics ***/ ****
+********************************
+*Opcode 3F
+*       mnem  |input     |out |op code value
+*017   fsel                     frt=(fra*frc)+frb
+*017   fsel    frt,fra,frb,frc   Floating Select
+*017   fsel.   frt,fra,frb,frc   Floating Select (Rc=1)
+       fsel        rrrr     ae    63-023
+       fsel.       rrrr     ae    63-023-1
+*
+***********************************************************************

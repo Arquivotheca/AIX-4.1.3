@@ -1,0 +1,62 @@
+# @(#)12	1.4  src/bldenv/rastools/dirs2ids.src, cmderrlg, bos412, GOLDA411a 9/6/94 12:19:49
+# COMPONENT_NAME: PKG (Packaging)
+#
+# FUNCTIONS:  File mapping directory to software VPD
+#
+# ORIGINS: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+# This file is simply a file containing path names, Retain component IDs
+# and versions for each pathname.  Since our build environment is set up
+# along LPP lines, the database has very few entries in it.
+# The Retain information is found in the compids.table file in the
+# packaging tree (src/bldenv/pkgtools).
+# 
+# The retidsbld script looks through the database until the path of the
+# file it's building matches a path in the database.
+# The match is done using the number of characters in the database 
+# pathname.  For example, if the file being built is 
+# /bos/usr/bin/errlg/errpt/errpt, and an entry for /bos was
+# found in the database, this would be a match.  If the RAS code had
+# a different Retain component, then an entry could be put into
+# the database preceeding /bos, like, /bos/usr/bin/errlg.
+#
+# To maintain this file, look at the directories under <build-tree>/src
+# (e.g.), bos, gos, xlc ...
+# Look through the compids.table file to see what the Retain Component
+# IDs and Versions should be.  Be especially careful if the directory
+# appears to contain more than one Retain Component.
+#
+# There should be a line beginning with "*" (in the directory spot)
+# which represents the default.
+
+# dir		CompID		Version
+bos		576539300	410
+des		569691900	410
+dsmit		569690200	210
+dtuimx		576540000	410
+gos/2d/DPS	569690400	410
+gos/2d/XTOP	569690700	410
+gos/3d		569690700	410
+gos		576539300	410
+hcon		576539800	410
+icraft		569689300	210
+infoxl		569689800	410
+netware		569702100	410
+nfs		576539300	410
+pci		576539300	410
+perf/perfmgr	569690000	210
+perf		569689900	210
+sx25		569692600	410
+tcpip		576539300	410
+tenplus		576539300	410
+x_st_mgr	576539300	410
+*		576539300	410

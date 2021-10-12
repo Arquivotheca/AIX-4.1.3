@@ -1,0 +1,30 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can also specify "all characters except ..."
+using an expression of the form
+  [^ab]
+which means "anything except an 'a' or 'b' character".
+Will
+   s/ab[^cde]/xyz23/p
+change
+   xbcabfgh
+Type "yes" or "no".
+#copyin
+#user
+#uncopyin
+#match yes
+#log
+#next
+34.1b 10

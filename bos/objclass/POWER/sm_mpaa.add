@@ -1,0 +1,130 @@
+* @(#)85      1.4  src/bos/objclass/POWER/sm_mpaa.add, mpaodm, bos41B, 9504A 12/13/94 14:20:13
+*
+*   COMPONENT_NAME: (MPAODM) MP/A ODM FILES
+*
+*   FUNCTIONS: 
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+
+
+
+***********************************************************************
+
+sm_menu_opt:
+        id_seq_num = "071"
+        id = "commodev"
+        next_id = "mpa"
+        text = "Single Port Multiprotocol Adapter/A"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 1
+        next_type = "m"
+        alias = ""
+        help_msg_id = 00001
+
+sm_menu_opt:
+        id_seq_num = "010"
+        id = "mpa"
+        next_id = "mpaadap"
+        text = "Adapter"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 2
+        next_type = "m"
+        alias = ""
+        help_msg_id = 00001
+
+sm_menu_opt:
+        id_seq_num = "020"
+        id = "mpa"
+        next_id = "mpaserv"
+        text = "Services"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 3
+        next_type = "m"
+        alias = ""
+        help_msg_id = 00001
+
+sm_menu_opt:
+        id_seq_num = "030"
+        id = "mpa"
+        next_id = "multiapps"
+        text = "User Applications"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 4
+        next_type = "m"
+        alias = ""
+        help_msg_id = 00001
+
+sm_menu_opt:
+        id_seq_num = "010"
+        id = "mpaadap"
+        next_id = "lsmpa"
+        text = "List all Single Port Multiprotocol Adapters"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 5
+        next_type = "d"
+        alias = ""
+        help_msg_id = 1800193
+
+sm_menu_opt:
+        id_seq_num = "020"
+        id = "mpaadap"
+        next_id = "mngmpadd"
+        text = "Manage Device Drivers for Single Port Multiprotocol Adapter/A"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 6
+        next_type = "m"
+        alias = ""
+        help_msg_id = 00001  
+
+sm_menu_opt:
+        id_seq_num = "030"
+        id = "mpaadap"
+        next_id = "errpt"
+        text = "Generate an Error Report"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 7
+        next_type = "n"
+        alias = ""
+        help_msg_id = 00001
+
+sm_menu_opt:
+        id_seq_num = "040"
+        id = "mpaadap"
+        next_id = "sslast"
+        text = "Trace a Single Port Multiprotocol Adapter/A"
+        text_msg_file = "mpa.cat"
+        text_msg_set = 2
+        text_msg_id = 8
+        next_type = "m"
+        alias = ""
+        help_msg_id = 00001
+
+sm_cmd_hdr:
+        id = "lsmpa"
+        option_id = ""
+        has_name_select = "n"
+        name = "List all Single Port Multiprotocol Adapters"
+        name_msg_file = "mpa.cat"
+        name_msg_set = 2
+        name_msg_id = 5
+        ghost = "y"
+        cmd_to_exec = "lsparent -C -k mpaa"

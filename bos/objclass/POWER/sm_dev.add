@@ -1,0 +1,571 @@
+# @(#)47        1.11  src/bos/objclass/POWER/sm_dev.add, cfgmethods, bos411, 9432B411a 8/11/94 09:41:15
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Configure All Devices, List All Devices
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       Install/Configure Devices Added After IPL
+#       List All Supported Devices
+#       Show Characteristics of a Supported Device
+#       List All Defined Devices
+#       Show Characteristics of a Defined Device
+#
+
+#
+# Install/Configure Devices Added After IPL
+# This uses a dialogue to invoke the configuration manager.
+# The cfgmgr command is executed from this dialogue. If software is to be
+# installed, the -i option of cfgmgr is used.
+#
+# Command header
+sm_cmd_hdr:
+        id                       ="cfgmgr"
+        option_id                ="cfgmgr_dialog"
+        has_name_select          ="n"
+        name                     ="Install/Configure Devices Added After IPL"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =25
+        name_msg_id              =20
+        cmd_to_exec 		 = "run_cfgmgr()\n\
+{\n\
+if [[ \"x$1\" = x\"\" || \"x$1\" = \'none\' ]] \n\
+then \n\
+        cfgmgr  \n\
+        exit $? \n\
+fi
+ISCD=`/usr/lib/assist/check_cd $1`  \n\
+if [ x$ISCD = x0 ] \n\
+then \n\
+        cfgmgr -i $1 \n\
+        exit $? \n\
+fi \n\
+INSTDIR=`/usr/lib/assist/mount_cd $1` \n\
+if [ $? = 0 ] \n\
+then \n\
+        cfgmgr -i$INSTDIR \n\
+        /usr/lib/assist/unmount_cd $1 \n\
+        exit $?\n\
+fi \n\
+exit $?\n\
+} \n\
+run_cfgmgr"
+        ask                      =""
+        exec_mode                ="p"
+        ghost                    ="n"
+        cmd_to_discover          ="x()\n\
+{\n\
+echo \"\#none_value\" \n\
+echo \"none\" \n\
+} \n\
+x"
+        cmd_to_discover_postfix  =""
+        name_size                =0
+        value_size               =0
+        help_msg_id              ="0420010"
+        help_msg_loc             =""
+
+# information note
+#
+sm_cmd_opt:
+        id                       ="cfgmgr_dialog"
+        id_seq_num               ="010"
+        disc_field_name          =""
+        name                     ="NOTE: A selection of \"none\" configures\n\
+devices added after IPL without the\n\
+installation of software\n\
+"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =27
+        name_msg_id              =22
+        op_type                  =""
+        entry_type               ="n"
+        entry_size               =0
+        required                 =""
+        prefix                   =""
+        cmd_to_list_mode         =""
+        cmd_to_list              =""
+        cmd_to_list_postfix      =""
+        multi_select             =""
+        value_index              =0
+        disp_values              =""
+        values_msg_file          =""
+        values_msg_set           =""
+        values_msg_id            =""
+        aix_values               =""
+        help_msg_id              =""
+        help_msg_loc             =""
+
+# device input entry field
+#
+sm_cmd_opt:
+        id                       ="cfgmgr_dialog"
+        id_seq_num               ="020"
+        disc_field_name          ="none_value"
+        name                     ="INPUT device / directory for software"
+        name_msg_file            ="smit.cat"
+        name_msg_set             =1
+        name_msg_id              =626
+        op_type                  ="l"
+        entry_type               ="t"
+        entry_size               =0
+        required                 =""
+        prefix                   =""
+        cmd_to_list_mode         ="1"
+        cmd_to_list 		 ="\n\
+list_dev()\n\
+{\n\
+echo \"none\" \n\
+/usr/lib/instl/sm_inst list_devices\n\
+}\n\
+list_dev"
+        cmd_to_list_postfix      =""
+        multi_select             ="n"
+        value_index              =0
+        disp_values              ="none"
+        values_msg_file          =""
+        values_msg_set           =0
+        values_msg_id            =0
+        aix_values               ="none"
+        help_msg_id              ="0420011"
+        help_msg_loc             =""
+
+#
+# List All Supported Devices
+# This uses a ghost dialogue to list all the supported devices in the
+# predefined database.  The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lssdev"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Supported Devices"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 30
+    cmd_to_exec               = "lsdev -P | sort -d -f"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+
+#
+# List All Defined Devices
+# This uses a ghost dialogue to list all the current devices in the
+# customized database.  The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsddev"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined Devices"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 31
+    cmd_to_exec               = "lsdev -C | sort -d -f"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+
+#
+# Show Characteristics of a Supported Device
+# This allows a device's characteristics, i.e. attributes, to be
+# displayed.  Name selectors are used to get the device class, subclass,
+# and type.  The dialogue then shows all of the attributes.
+
+# Select the predefined device class.
+sm_name_hdr:
+    id                        = "lsattrs"
+    next_id                   = "lsattrs_1"
+    option_id                 = "lsattrs_opt"
+    has_name_select           = "n"
+    name                      = "Show Characteristics of a Supported Device"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 477
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "class"
+    cooked_field_name         = ""
+    next_type                 = "n"
+    help_msg_id               = "1800570"
+    help_msg_loc              = ""
+
+# Name selector command option for listing supported classes.
+sm_cmd_opt:
+    id                        = "lsattrs_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Device Class"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 18
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -P -r class"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04207"
+    help_msg_loc              = ""
+
+# Select the predefined device subclass.
+sm_name_hdr:
+    id                        = "lsattrs_1"
+    next_id                   = "lsattrs_2"
+    option_id                 = "lsattrs_1_opt"
+    has_name_select           = "n"
+    name                      = "Show Characteristics of a Supported Device"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 477
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "subclass"
+    cooked_field_name         = ""
+    next_type                 = "n"
+    help_msg_id               = "1800570"
+    help_msg_loc              = ""
+
+# Name selector command option for listing supported subclasses within class.
+sm_cmd_opt:
+    id                        = "lsattrs_1_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Device Interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 17
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -P -r subclass "
+    cmd_to_list_postfix       = "-c class"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04208"
+    help_msg_loc              = ""
+
+
+# Select the predefined device type.
+sm_name_hdr:
+    id                        = "lsattrs_2"
+    next_id                   = "lsattrs_hdr"
+    option_id                 = "lsattrs_2_opt"
+    has_name_select           = "n"
+    name                      = "Show Characteristics of a Supported Device"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 477
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "type"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800570"
+    help_msg_loc              = ""
+
+# Name selector command option for listing supported types.
+sm_cmd_opt:
+    id                        = "lsattrs_2_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Device Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 19
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "\
+xx()\n\
+{\n\
+lsdev -P -F 'type description' -c $1 -s $2 | sort -d -f\n\
+}\n\
+xx"
+    cmd_to_list_postfix       = "class subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04209"
+    help_msg_loc              = ""
+
+# The dialogue header.
+sm_cmd_hdr:
+    id                        = "lsattrs_hdr"
+    option_id                 = "lsattrs_hdr_opt"
+    has_name_select           = "y"
+    name                      = "Show Characteristics of a Supported Device"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 477
+    cmd_to_exec               = "\
+xx()\n\
+{\n\
+lsdev -P -c $1 -t $2 -s $3 -F'description'\n\
+echo '\n\'\n\
+lsattr -D -c $1 -t $2 -s $3 -F'description deflt'\n\
+}\n\
+xx"
+    ask                       = ""
+    exec_mode                 = "p"
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800570"
+    help_msg_loc              = ""
+
+
+# Dialog header command options.
+
+#Class 
+sm_cmd_opt:
+    id                        = "lsattrs_hdr_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "class"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+#Type
+sm_cmd_opt:
+    id                        = "lsattrs_hdr_opt"
+    id_seq_num                = "020"
+    disc_field_name           = "type"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+#Subclass
+sm_cmd_opt:
+    id                        = "lsattrs_hdr_opt"
+    id_seq_num                = "030"
+    disc_field_name           = "subclass"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+
+#
+# Show Characteristics of a Defined Device
+# This allows a device's characteristics, i.e. attributes, to be
+# displayed.  First, there is a name selector used to put up a
+# list of the defined devices for the user to select from.
+# The dialogue then shows all of the attributes.
+
+# Select the device by logical name.
+sm_name_hdr:
+    id                        = "lsattrd"
+    next_id                   = "lsattrd_hdr"
+    option_id                 = "lsattrd_opt"
+    has_name_select           = "n"
+    name                      = "Show Characteristics of a Defined Device"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 478
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "lname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800571"
+    help_msg_loc              = ""
+
+# Name selector command option for listing defined devices.
+sm_cmd_opt:
+    id                        = "lsattrd_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Defined Devices"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 20
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C | sort -d -f"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+# The dialogue header.
+sm_cmd_hdr:
+    id                        = "lsattrd_hdr"
+    option_id                 = "lsattrd_hdr_opt"
+    has_name_select           = "y"
+    name                      = "Show Characteristics of a Defined Device"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 478
+    cmd_to_exec               = "\
+xx()\n\
+{\n\
+lsdev -C -l $1 -F 'name\n\description\n\status\n\location'\n\
+echo '\n\'\n\
+lsattr -E -l $1 -F'description value'\n\
+}\n\
+xx"
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800571"
+    help_msg_loc              = ""
+
+
+# Dialog header command options.
+
+#Device logical name.
+sm_cmd_opt:
+    id                        = "lsattrd_hdr_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "lname"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""

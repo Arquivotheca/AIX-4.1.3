@@ -1,0 +1,29 @@
+#!/usr/lib/drivers/rcm_loadpin
+* @(#)36	1.5  src/bos/kernext/rcm/rcm_loadpin.exp, rcm, bos41J, 9512A_all 3/20/95 10:48:25
+*
+*   COMPONENT_NAME: RCM
+*
+* FUNCTIONS: export pinned symbols to unpinned half of code
+*
+*   ORIGINS: 27
+*
+* IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+* combined with the aggregated modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+aixgsc
+rcm_state_change
+rcmdds
+comAnc
+rcm_pm_data_init
+update_pm_data
+cleanup_pm_data
+pm_event
+pmdata
+rcmioctl

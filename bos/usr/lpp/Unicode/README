@@ -1,0 +1,420 @@
+# @(#)16	1.5  src/bos/usr/lpp/Unicode/README, cfgnls, bos411, 9428A410j 6/9/94 10:16:33
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#   Unicode is a trademark of Unicode, Inc.
+#
+
+           Developers Toolkit for Unicode - Sample UNIVERSAL locale
+           --------------------------------------------------------
+
+In AIX 4.1, the Unicode Toolkit sample package provides a UNIVERSAL locale
+which can support characters from all other AIX locales. The UNIVERSAL locale
+provides users with the capability to mix multiple scripts (e.g. Chinese,
+Cyrillic, Greek, etc.) in a single window or text file. All internationalized
+AIX commands, libraries and applications should be able to provide
+multiscripting capabilities using the UNIVERSAL locale.
+
+
+Contents of this File
+---------------------
+
+I.   Overview 
+
+II.  Installation
+
+III. Using the UNIVERSAL Locale
+
+IV.  Description of Files in Package
+
+V.   Known problems
+
+
+I. Overview
+-----------
+
+AIX provides a rich set of locales, so that most users can interact with
+the system and manipulate data in their own language. These locales can all
+coexist on the same system and a user can open windows in different
+locales on the same screen at the same time.
+
+The UNIVERSAL locale provides the additional capability of mixing
+characters from all locales in the same window or text file. This is
+accomplished by adopting the 16-bit Unicode Standard Worldwide Character
+Encoding as the locale process code. In this encoding, each of the world's
+written characters is assigned a unique binary representation, so that the
+characters can be combined freely in Unicode text.
+
+The International Organization for Standardization (ISO) has adopted
+Unicode as the encoding for the 2-octet form of the ISO 10646 Universal
+Multiple-Octet Coded Character Set (UCS-2). AIX has adopted the ISO
+standard name and uses the standard label "UCS-2" to describe this
+encoding.
+
+Although UCS-2 is an ideal internal process code for the UNIVERSAL locale,
+it is not a suitable encoding for plain text on traditional byte-oriented
+operating systems, such as AIX. Therefore, the external file code for the
+UNIVERSAL locale is X/Open's File System Safe UCS Transformation Format
+(FSS-UTF). This encoding is expected to be registered in ISO 10646 as
+"UTF-8", and this is the label used for this encoding on AIX.
+
+Unicode, UCS-2 and UTF-8 are all described in more detail in the "Code Set
+Overview" article of the AIX documentation.
+
+Since the UNIVERSAL locale is a normal AIX locale, all internationalized
+AIX applications, commands and libraries are usable in its environment. For
+example, a user can open an aixterm in the UNIVERSAL locale, create a file
+of multiscript data using the vi editor, and operate on the file using any
+AIX text processing utilities.
+
+
+II. Installation
+----------------
+
+A. Prerequisites for effective use of UNIVERSAL locale
+
+  1. As with other multibyte AIX locales, presentation and input of non-ASCII 
+     characters is possible only in an X environment.
+  
+  2. Presentation and input of characters also depends on the package of
+     Unicode converters for AIX code sets (bos.iconv.ucs.com). If a needed 
+     converter is not present, then those characters will not be displayed.
+  
+  3. The UNIVERSAL input method depends on the installation of ISO or EUC
+     locales for desired languages. This is because the UNIVERSAL input
+     method is an input method manager, which allows users to switch among
+     any of the available input methods.
+  
+  4. Presentation of characters depends on installation of the following
+     packages which contain the corresponding fonts:
+  
+     X11.fnt.iso1        - for Latin 1 characters
+     X11.fnt.iso2        - for Latin 2 characters
+     X11.fnt.iso3        - for Latin 3 characters
+     X11.fnt.iso4        - for Latin 4 characters
+     X11.fnt.iso5        - for Cyrillic characters
+     X11.fnt.ibm1046     - for Arabic characters
+     X11.fnt.iso7        - for Greek characters
+     X11.fnt.iso8        - for Hebrew characters
+     X11.fnt.iso9        - for Latin 5 (Turkish) characters
+     bos.loc.com.JP      - for Japanese characters
+     bos.loc.iso.ko_KR   - for Korean characters
+     bos.loc.iso.zh_TW   - for Traditional Chinese characters
+     X11.compat.fnt.pc   - for IBM-850 characters
+  
+  5. Printing of UTF-8 data on the 4019 printer requires the ibm4019 printer
+     support package (printers.ibm4019.rte), and the full set of font
+     packages listed above.
+
+
+B. Executing the 'uni_install' shell script
+
+Because the Unicode Toolkit is provided as a sample package, it is not
+fully installed on the system by the normal installation process. This
+permits users and system administrators to understand which system files
+are affected by the installation and to customize the installation
+according to their needs.
+
+The installation can be completed by executing the 'uni_install' shell
+script. This script creates all the necessary directories, files and links
+to support execution in the UNIVERSAL locale environment.
+
+
+C. Customizing the UNIVERSAL locale for your preferred language.
+
+The UNIVERSAL locale is built to support all characters from all
+AIX-supported languages. However, it has the neutral cultural behavior of
+the C locale. This behavior can be localized by modifying the UNIVERSAL
+locale source file and building a new locale using localedef. For example:
+
+  1. mkdir $HOME/loc
+  
+  2. cd $HOME/loc
+  
+  3. cp /usr/lpp/Unicode/loc/UNIVERSAL.src Custom.src
+  
+  4. edit Custom.src to localize it. This can be done by replacing portions
+     of the file with the corresponding portions from other AIX locale source
+     files.
+  
+  5. cd /usr/lpp/Unicode/methods 
+  
+     The UNIVERSAL.m file assumes that the uni.o is the current directory
+     when the locale is compiled.
+  
+  6. localedef -c -L '-lc -blibpath:/usr/lpp/Unicode/methods:/usr/lib:/lib' \
+         -i $HOME/loc/Custom.src \
+         -f UTF-8 \ 
+         -m /usr/lpp/Unicode/loc/UNIVERSAL.m $HOME/loc/UNIVERSAL
+  
+  7. export LOCPATH=$HOME/loc:$LOCPATH
+  
+     This sets LOCPATH to use the customized UNIVERSAL locale preferentially.
+
+
+D. Converting message catalog files to UTF-8.
+
+There are no message files shipped for the UNIVERSAL locale. However, the
+shipped message files for any language can be converted to UTF-8 by using
+the appropriate iconv converter. This will allow system messages to be
+displayed in the desired language while executing in the UNIVERSAL locale.
+For example, the following shell script can be used to convert all of the
+Traditional Chinese message files from IBM-eucTW to UTF-8 and install them
+in the /usr/lib/nls/msg/UNIVERSAL directory:
+
+mkdir /usr/lib/nls/msg/UNIVERSAL
+for i in /usr/lib/nls/msg/zh_TW/*.cat
+do
+        CATNAME=$(basename $i)
+        LANG=zh_TW dspcat -g $i > /tmp/.cat1
+        iconv -f IBM-eucTW -t UTF-8 < /tmp/.cat1 > /tmp/.cat2
+        LANG=UNIVERSAL gencat /usr/lib/nls/msg/UNIVERSAL/${CATNAME} /tmp/.cat2
+done
+
+
+D. Setting up UTF-8 printer support.
+
+The supplied ibm4019.uni file is installed in the /usr/lib/lpd/pio/predef
+directory by the uni_install script. This file enables the creation of a
+UTF-8 data stream virtual printer queue for the 4019 printer. This printer
+queue is capable of printing the full set of UNIVERSAL locale characters by
+downloading the X font files listed in the ibm4019.uni file. It is
+dependent on the existence of these font files in the system.
+
+
+III. Using the UNIVERSAL Locale
+-------------------------------
+
+A. Setting the locale
+
+A user can begin executing in the UNIVERSAL locale environment by simply
+setting the LANG environment variable. With this setting, all
+internationalized programs will execute in the UNIVERSAL locale
+environment. Note that presentation and input of characters is not possible
+within an aixterm, unless the aixterm itself is executing in the UNIVERSAL
+locale. The following sequence invokes an aixterm in the UNIVERSAL locale:
+
+LANG=UNIVERSAL
+aixterm +mn &
+
+The +mn option is used to ensure that the aixterm will be sensitive to
+keyboard remapping events. This can be important when using the UNIVERSAL
+input method.
+
+Correct presentation of all UNIVERSAL locale characters requires the use of
+a font set similar to that in the /usr/lib/X11/UNIVERSAL/app-defaults
+resource files. If the font is overridden by a command line option or a
+more specific entry in another resource file, it may not be possible to
+view the entire set of characters.
+
+The /usr/lpp/Unicode/samples/utf8.txt UTF-8 data file contains most of the
+characters supported by the UNIVERSAL locale. Users should be able to view
+and manipulate this file within the aixterm using the vi editor, or any
+other internationalized AIX utility.
+
+
+B. Using the UNIVERSAL input method
+
+The UNIVERSAL input method supports two general modes of character input:
+
+  1. Switching between installed AIX locale input methods.
+
+  2. Selection of characters from character lists.
+
+The UNIVERSAL input method is configured by the UNIVERSAL.imcfg file. This
+file defines the set of available AIX locale input methods and the lists of
+characters for list-based input. It also defines the key combinations used
+to invoke the input method selection menus. Its format is described in a
+comment at the top of the file.  The UNIVERSAL.imcfg file is found by using
+the LOCPATH environment variable. A user can build a customized version of
+this file and reset LOCPATH to use it preferentially.
+
+The default key combinations recognized by the UNIVERSAL input method are:
+
+<Cntrl> <Alt> <i>     -- Invokes the input method selection menu
+<Cntrl> <Alt> <l>     -- Invokes the menu of character lists
+<Cntrl> <Alt> <c>     -- Invokes the current list of characters
+
+A selection menu can be closed by pressing the <Enter> key.
+
+1. Input method switching
+
+After an input method is selected from the input method selection menu, it
+can be used in the same way as in its associated locale. The label at the
+left edge of the input method status bar describes the locale for the
+currently selected input method. For example, if the Japanese input method
+is selected from the selection menu, the ja_JP label is displayed in the
+status area. Any status information specific to the current input method is
+displayed immediately to the right of this label.
+
+Most input methods require a locale-specific keyboard mapping to support
+certain input sequences. In the X environment, the keyboard can be remapped
+by invoking the xmodmap command with the keyboard files under the
+/usr/lpp/X11/defaults/xmodmap directory. For example the following command
+remaps the keyboard so as to support the Japanese input method:
+
+   xmodmap /usr/lpp/X11/defaults/xmodmap/ja_JP/keyboard
+
+Note that the keyboard mappings assume an associated physical keyboard. For
+example, the ja_JP mapping assumes a 106-key keyboard. This mapping must be
+modified to use other keys in place of the missing keys, to support the
+Japanese input method on a smaller keyboard, such as the 101-key US
+keyboard. By default, aixterm is not sensitive to keyboard remapping
+events, and the +mn option must be used to override this behavior.
+
+2. List-based character input
+
+By default, the <Cntrl> <Alt> <l> key combination invokes the menu of
+character lists. After a list is selected from this menu, characters can be
+input by simply selecting them from the list with the mouse. The characters
+will initially be inserted in the input method pre-edit area. The characters
+can be "committed" by pressing the <Enter> key.
+
+When a character list is selected from the character list menu, it becomes
+the current character list. It can then be invoked by simply entering the
+default <Cntrl> <Alt> <c> key combination.
+
+
+C. Using the xmueditor sample editor
+
+The OSF Motif1.2 xmeditor sample has been modified to better support the
+UNIVERSAL locale. The source is provided in the X11.samples.apps.motifdemos
+package, and is installed as /usr/samples/Motif1.2/xmsamplers/xmueditor.c.
+
+It can be compiled as follows:
+
+   cc xmueditor.c -lXt -lXm -liconv -o xmueditor
+
+As with any other internationalized X application, when the xmueditor
+program is executed in the UNIVERSAL locale, the UNIVERSAL input method can
+be used to edit data in any AIX-supported script.
+
+The "File" menu of the xmueditor program also provides "Encoding", "Import"
+and "Export" options. These options can be used to import and export files
+in any encoding. The files are automatically converted into and out of the
+locale encoding by using the appropriate iconv converter. The file encoding
+for the import and export operations is defined using the "Encoding"
+option. Imported files are inserted at the current cursor position. Since
+the UNIVERSAL locale encoding (UTF-8) is a superset of all other locale
+encodings, when the xmueditor program is executed in this locale, it can
+import data files from any other AIX locales.
+
+The /usr/lpp/Unicode/samples/utf8.txt UTF-8 data file contains most of the
+characters supported by the UNIVERSAL locale.
+
+For example, a user can combine Japanese data encoded using IBM-eucJP and
+French data encoded using ISO8859-1 in the same file, as follows:
+
+  1. Invoke xmueditor in the UNIVERSAL locale:
+
+     export LANG=UNIVERSAL
+     xmueditor &
+
+  2. Use the "File/Encoding" menu selection to set the encoding to IBM-eucJP.
+
+  3. Use the "File/Import" menu selection to read the file of Japanese data,
+     convert it to UTF-8, and insert it at the current cursor position.
+
+  4. Position the cursor at the correct insertion point for the French text.
+
+  5. Use the "File/Encoding" menu selection to set the encoding to ISO8859-1.
+
+  6. Use the "File/Import" menu selection to read the file of French data,
+     convert it to UTF-8, and insert it at the current cursor position.
+
+  7. Use the "File/Encoding" menu selection to set the encoding to UTF-8.
+
+  8. Use the "File/Export" menu selection to write the multilingual file
+     using the UTF-8 encoding.
+
+The user could also edit the file using the UNIVERSAL input method to add
+characters from any other AIX-supported script.
+
+
+D. Font selection
+
+The UNIVERSAL locale requires the following font encodings to display of
+the characters defined in the charmap:
+
+  iso8859-1
+  iso8859-2
+  iso8859-3
+  iso8859-4
+  iso8859-5
+  ibm-1046
+  iso8859-7
+  iso8859-8
+  iso8859-9
+  jisx0201.1976-0
+  jisx0208.1983-0
+  ibm-udcjp
+  cns11643.1986-1
+  cns11643.1986-2
+  ibm-sbdtw
+  ibm-udctw
+  ksc5601.1987-0
+
+The fontList and fontSet resource values need to be specified carefully, so
+as to match the desired fonts for each of the above encodings. In the case
+of column-oriented applications such as aixterm, there is the additional
+restriction that the column width must be the same for all the fonts. The
+resource files in the /usr/lpp/Unicode/X11/app-defaults directories contain
+some suggested fontList and fontSet definitions for certain X clients.
+
+
+IV. Description of Files in Package
+-----------------------------------
+
+The following files are found under /usr/lpp/Unicode:
+
+README - This file
+uni_install - Shell script for completing the Unicode Toolkit installation.
+uni_deinstall - Shell script for undoing the uni_install changes.
+[X11] 
+  [app-defaults] - X resource files for certain clients, which include font
+		   lists and font sets for the UNIVERSAL locale.
+  [nls] - X locale database files for the UNIVERSAL locale.
+[charmap] 
+  UNIVERSAL.cm - UNIVERSAL locale UTF-8 charmap file.
+[loc]
+  UNIVERSAL.imcfg - UNIVERSAL input method configuration file.
+  UNIVERSAL.m - UNIVERSAL locale method file.
+  UNIVERSAL.src - UNIVERSAL locale source file.
+  UNIVERSAL.im - UNIVERSAL input method.
+  UNIVERSAL - UNIVERSAL locale.
+[lpd]
+  [pio]
+    [predef]
+      ibm4019.uni - 4019 printer definition colon file for UTF-8 data stream.
+[methods]
+  uni.o - UNIVERSAL locale methods library.
+[samples]
+  utf8.txt - Sample file of UTF-8 data.
+[tty] - Files to supporting TTY handling of UTF-8 data.
+  UTF-8
+  uc_utf
+  lc_utf
+
+
+V. Known Problems
+-----------------
+
+  1. Single-column 3-byte characters are not displayed correctly in aixterm. 
+     This is because of assumptions about the maximum number of bytes per
+     column in aixterm. The only characters affected by this problem are
+     single-width Katakana characters and Arabic presentation forms.
+
+  2. Because the fonts are not all the same height in aixterm, partial
+     characters may sometimes be left on the screen when text is deleted. 
+     This is corrected when the screen is refreshed.

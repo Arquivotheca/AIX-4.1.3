@@ -1,0 +1,115 @@
+*@(#)84  1.2  src/bos/objclass/POWER/planar.sys.sysplanar_p.add, cfgmethods, bos411, 9428A410j 4/13/94 12:41:18
+* 
+*  COMPONENT_NAME: (CFGMETHODS) planar.sys.sysplanar.add
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27, 83
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+* system planar device
+PdDv:
+	type = sysplanar_p
+	class = planar
+	subclass = sys
+	prefix = sysplanar
+	devid = ""
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 1
+	bus_ext = 0
+	led = 0x811
+	setno = 1
+	msgno = 51
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/usr/lib/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = planar/sys/sysplanar_p
+
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = 0
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = 1
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = A
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = B
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = C
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = D
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = E
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = F
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = G
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = H
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = P
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = Q
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = R
+
+PdCn:
+	uniquetype = planar/sys/sysplanar_p
+	connkey = sys
+	connwhere = S
+

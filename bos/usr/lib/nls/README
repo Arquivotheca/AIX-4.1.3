@@ -1,0 +1,217 @@
+#!/bin/ksh
+# @(#)40	1.2  src/bos/usr/lib/nls/README, cfgnlskm, bos411, 9428A410j 12/14/93 00:07:07
+#
+# COMPONENT_NAME :	CFGNLSKM - AIX Input Method Keymap File
+#
+# FUNCTIONS :		README file
+#
+# ORIGINS :		27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# SYNOPSYS
+#
+#	/usr/lib/nls/README 32LocaleName
+#
+# Locale naming has been changed.  The AIX InputMethod keymaps have
+# changed the format and their names.  The way to find those imkeymaps
+# have also been changed.
+# Some application programs which had hard-references to the old names
+# may still need to reference them by the same name.
+# The following sample shell script is to create names with which the
+# applications could reference those objects by the old names.
+#
+# The following shows the summary of the old and the new names.
+# The old names are symbolic links to the new objects.
+#
+# < files shipped >
+#	f /usr/lib/nls/loc/%L32@aix31.imkeymap
+#	f /usr/lib/nls/loc/%L32@aix31@alt.imkeymap
+# < names to be created by this sh script >
+#	l /usr/lib/nls/im/%L31.%C31
+#		---> /usr/lib/nls/im/%L32@aix31
+#	l /usr/lib/nls/im/%L31
+#		---> /usr/lib/nls/im/%L32@aix31
+#	l /usr/lib/nls/loc/%L31.%C31.imkeymap
+#		---> /usr/lib/nls/loc/%L32@aix31.imkeymap
+#	l /usr/lib/nls/loc/%L31.imkeymap
+#		---> /usr/lib/nls/loc/%L32@aix31.imkeymap (%L31 != %L32)
+#	l /usr/lib/nls/loc/%L31.%C31
+#		---> /usr/lib/nls/loc/%L32.%C32
+#	l /usr/lib/nls/loc/%L31
+#		---> /usr/lib/nls/loc/%L32.%C32 (%L31 != %L32)
+#
+# where,	%L31, %L32 : locale name in AIX3.1 and AIX3.2, respectively.
+#		%C31, %C32 : codeset name in AIX3.1 and AIX3.2, respectively.
+#
+
+LOCDIR=/usr/lib/nls/loc
+IMDIR=/usr/lib/nls/im
+
+locale=$1;
+
+IM=sbcs;
+C31=pc850;
+C32=IBM-850;
+CONFLICT="";
+
+case "$locale" in
+Da_DK)
+	echo "Danish in Denmark";
+	L31=Da_DK; L32=Da_DK;
+	CONFLICT=yes;
+	;;
+Du_BE|Nl_BE)
+	echo "Dutch in Belgium";
+	L31=Du_BE; L32=Nl_BE;
+	;;
+Du_NL|Nl_NL)
+	echo "Dutch in Netherlands";
+	L31=Du_NL; L32=Nl_NL;
+	;;
+En_UK|EN_GB)
+	echo "English in United Kingdom";
+	L31=En_UK; L32=EN_GB;
+	;;
+En_JP)
+	echo "English in Japan";
+	L31=En_JP; L32=En_JP;
+	CONFLICT=yes;
+	;;
+En_US)
+	echo "English in United States";
+	L31=En_US; L32=En_US;
+	CONFLICT=yes;
+	;;
+Fi_SU|Fi_FI)
+	echo "Finnish in Finland";
+	L31=Fi_SU; L32=Fi_FI;
+	;;
+Fr_BE)
+	echo "French in Belgium";
+	L31=Fr_BE; L32=Fr_BE;
+	CONFLICT=yes;
+	;;
+Fr_CF|Fr_CA)
+	echo "French in Canada";
+	L31=Fr_CF; L32=Fr_CA;
+	;;
+Fr_FR)
+	echo "French in France";
+	L31=Fr_FR; L32=Fr_FR;
+	CONFLICT=yes;
+	;;
+Fr_SW|Fr_CH)
+	echo "French in Switzerland";
+	L31=Fr_SW; L32=Fr_CH;
+	;;
+Gr_GR|De_DE)
+	echo "German in Gemany";
+	L31=Gr_GR; L32=De_DE;
+	;;
+Gr_SW|De_CH)
+	echo "German in Switzerland";
+	L31=Gr_SW; L32=De_CH;
+	;;
+Is_IS)
+	echo "Icelandic in Iceland";
+	L31=Is_IS; L32=Is_IS;
+	CONFLICT=yes;
+	;;
+It_IT)
+	echo "Italian in Italy";
+	L31=It_IT; L32=It_IT;
+	CONFLICT=yes;
+	;;
+Jp_JP|Ja_JP)
+	echo "Japanese in Japan";
+	L31=Jp_JP; L32=Ja_JP;
+	C31=pc932; C32=IBM-932;
+	IM=JP;
+	;;
+No_NO)
+	echo "Norwegian in Norway";
+	L31=No_NO; L32=No_NO;
+	CONFLICT=yes;
+	;;
+Po_PO|Pt_PT)
+	echo "Portugese in Portugal";
+	L31=Po_PO; L32=Pt_PT;
+	;;
+Sp_SP|Es_ES)
+	echo "Spanish in Spain";
+	L31=Sp_SP; L32=Es_ES;
+	;;
+Sv_SV|Sv_SE)
+	echo "Swedish in Sweden";
+	L31=Sv_SV; L32=Sv_SE;
+	;;
+"")
+	echo "usage : $(basename $0) locale_name"
+	exit 1;
+	;;
+*)
+	echo "no such locale \"$locale\".";
+	echo "usage : $(basename $0) locale_name"
+	exit 1;
+	;;
+esac
+
+#
+#	Create a 3.1 long form named inputmethod directory (soft link).
+#
+if [[ ! -a $IMDIR/$L31.$C31 && -a $IMDIR/$L32@aix31 ]]; then
+	ln -s $IMDIR/$L32@aix31 $IMDIR/$L31.$C31;
+fi
+
+#
+#	Create a 3.1 short form named inputmethod directory (soft link).
+#
+if [[ ! -a $IMDIR/$L31 && -a $IMDIR/$L32@aix31 ]]; then
+	ln -s $IMDIR/$L32@aix31 $IMDIR/$L31;
+fi
+
+#
+#	Create a 3.1 "inputmethod" name.
+#
+if [[ -a $IMDIR/$L31.$C31 && ! -a $IMDIR/$L31.$C31/inputmethod ]]; then
+	if [[ -a $LOCDIR/$IM.im ]]; then
+		ln -s $LOCDIR/$IM.im $IMDIR/$L31.$C31/inputmethod;
+	fi
+fi
+
+#
+#	Create a 3.1 long form named imkeymap file.
+#
+if [[ ! -a $LOCDIR/$L31.$C31.imkeymap && -a $LOCDIR/$L32@aix31.imkeymap ]]; then
+	ln -s $LOCDIR/$L32@aix31.imkeymap $LOCDIR/$L31.$C31.imkeymap;
+fi
+
+#
+#	Create a 3.1 short form named imkeymap file.
+#
+if [[ -z $CONFLICT && ! -a $LOCDIR/$L31.imkeymap && -a $LOCDIR/$L32@aix31.imkeymap ]]; then
+	ln -s $LOCDIR/$L32@aix31.imkeymap $LOCDIR/$L31.imkeymap;
+fi
+
+#
+#	Create a 3.1 long form named locale DB
+#
+if [[ ! -a $LOCDIR/$L31.$C31 && -a $LOCDIR/$L32.$C32 ]]; then
+	ln -s $LOCDIR/$L32.$C32 $LOCDIR/$L31.$C31;
+fi
+
+#
+#	Create a 3.1 short form named locale DB
+#
+if [[ -z $CONFLICT && ! -a $LOCDIR/$L31 && -a $LOCDIR/$L32.$C32 ]]; then
+	ln -s $LOCDIR/$L32.$C32 $LOCDIR/$L31;
+fi
+
+exit 0;

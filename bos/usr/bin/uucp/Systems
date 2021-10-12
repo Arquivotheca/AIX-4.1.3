@@ -1,0 +1,26 @@
+# @(#)76	1.5  src/bos/usr/bin/uucp/Systems, cmduucp, bos411, 9428A410j 3/1/94 08:23:30
+# 
+# COMPONENT_NAME: UUCP Systems
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# Modem connection.
+# Execute /usr/lib/uucp/uucpadm for on-line uucp configuration help.
+# systemx Any ACU 1200 chicago2600776 in:--in: nuucp word: panzer
+#
+# Direct serial connection at 9600 baud.
+# systemx Any systemx 9600 - "" \r in:--in: nuucp word: panzer
+#
+# TCP network connection using Berkeley t protocol.
+# systemx Any TCP,t - - in:--in: nuucp word: panzer
+#

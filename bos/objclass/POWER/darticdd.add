@@ -1,0 +1,90 @@
+* @(#)10        1.2  src/bos/objclass/POWER/darticdd.add, dd_artic, bos411, 9428A410j 4/1/94 11:22:35
+* COMPONENT_NAME: dd_artic
+*
+* FUNCTIONS: N/A
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = "articdiag"
+	class = "driver"
+	subclass = "articmpx"
+	prefix = "diagric"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 1641
+	setno = 43
+	msgno = 0
+	catalog = "devices.cat"
+	DvDr = "darticdd"
+	Define = "/usr/lib/methods/define"
+	Configure = "/usr/lib/methods/cfgdgric"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = "driver/articmpx/articdiag"
+
+PdAt:
+	uniquetype = "driver/articmpx/articdiag"
+	attribute = "shared_win_size"
+	deflt = "0x8000"
+	values = "0x2000,0x4000,0x8000,0x10000"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "n"
+	nls_index = 8
+
+PdDv:
+	type = "articdiag"
+	class = "driver"
+	subclass = "portmaster"
+	prefix = "diagric"
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 1640
+	setno = 29
+	msgno = 0
+	catalog = "devices.cat"
+	DvDr = "darticdd"
+	Define = "/usr/lib/methods/define"
+	Configure = "/usr/lib/methods/cfgdgric"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = "driver/portmaster/articdiag"
+
+PdAt:
+	uniquetype = "driver/portmaster/articdiag"
+	attribute = "shared_win_size"
+	deflt = "0x8000"
+	values = "0x2000,0x4000,0x8000,0x10000"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "n"
+	nls_index = 8

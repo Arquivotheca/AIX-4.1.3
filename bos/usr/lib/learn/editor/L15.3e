@@ -1,0 +1,29 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Remember that after typing the '.' which ends an append
+you can type ordinary commands at the editor.  Go into
+the editor; append the line
+
+washington, d.c.
+
+and then print it with the 'p' command.  Then write it
+on a file named "city" and leave the editor and type "ready".
+#create Ref
+washington, d.c.
+#user
+#cmp city Ref
+#log
+#next
+15.3f 5

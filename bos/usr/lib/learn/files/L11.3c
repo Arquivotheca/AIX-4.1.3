@@ -1,0 +1,35 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This is a little trickier.  The directions
+for this step are in a file whose
+name begins with "p".  Print that file;
+it will tell you what to do.  Then type "ready".
+#create delaware
+narrowsburg
+port jervis
+delaware water gap
+easton
+trenton
+philadelphia
+#create pub
+Make a copy of the file "delaware" which is
+named "hudson".
+#user
+#cmp delaware hudson
+#log
+#next
+12.1a 10
+12.2a 5
+12.3a 2

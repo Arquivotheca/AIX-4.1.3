@@ -1,0 +1,39 @@
+# @(#)83	1.1  src/bldenv/man/memo_info.man, bldprocess, bos412, GOLDA411a 4/15/92 14:26:49
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: memo_info file format man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+	$TOP/HISTORY/memo_info
+		List of APAR numbers with user memo string associated with the
+		APAR. Created by bldretain (for production) or bldmid ( for
+		development).
+
+	Format:
+		<APAR>
+		  BLANKLINE
+		<SPACE>[ <user memo> ]
+		<SPACE>[ <user memo> ]
+			.
+			.
+			.
+		[<@>]
+		<APAR>
+		  BLANKLINE
+		<SPACE>[ <user memo> ]
+		<SPACE>[ <user memo> ]
+			.
+			.
+			.
+			.
+		[<@>]
+

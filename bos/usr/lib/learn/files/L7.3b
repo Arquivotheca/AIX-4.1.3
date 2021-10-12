@@ -1,0 +1,30 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can use the [] characters anywhere you want
+in a file name.  For example,
+ ls a[bc]d
+would match abd or acd, right?
+What is the command that finds out how
+many files are named "ax" or "bx"?
+Type that command, then "ready".
+#create ax
+#create bx
+#copyin
+#user
+#uncopyin
+#match ls [ab]x
+#log
+#next
+7.3c 2

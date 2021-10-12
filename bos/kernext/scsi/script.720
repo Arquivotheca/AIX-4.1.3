@@ -1,0 +1,806 @@
+; @(#)84        1.4  src/bos/kernext/scsi/script.720, sysxscsi, bos411, 9432A411a 7/30/94 16:48:13
+;
+; COMPONENT_NAME: (SYSXSCSI) IBM SCSI Adapter SCRIPT(tm) File
+;
+; FUNCTIONS: NONE
+;
+; ORIGINS: 27
+;
+; (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+; All Rights Reserved
+; Licensed Materials - Property of IBM
+;
+; US Government Users Restricted Rights - Use, duplication or
+; disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+;
+
+; SCRIPT
+; This SCRIPT contains the one main script used for most of all the
+; SCSI commands that will be sent to the target.  It is written in a manner
+; to handle possible, erroneous bus phases and messages received during the
+; execution of the script
+; Additionally, it will contain the IO_WAIT script needed to wait for
+; reselections from the target.
+
+EXTERNAL cmd_msg_in_addr
+EXTERNAL status_addr
+EXTERNAL identify_msg_addr
+EXTERNAL sync_msg_out_addr
+EXTERNAL sync_msg_out_addr2
+EXTERNAL data_addr
+EXTERNAL extended_msg_addr
+EXTERNAL lun_msg_addr
+EXTERNAL reject_msg_addr
+EXTERNAL tag_msg_addr
+EXTERNAL abort_bdr_msg_out_addr
+EXTERNAL abort_bdr_msg_in_addr
+EXTERNAL scsi_0_lun, scsi_1_lun, scsi_2_lun, scsi_3_lun, scsi_4_lun, scsi_5_lun
+EXTERNAL scsi_6_lun, scsi_7_lun
+
+ENTRY cmd_msg_in_buf, cmd_buf, status_buf
+ENTRY identify_msg_buf
+ENTRY reject_msg_buf, regular_phase_hdlr
+ENTRY sync_msg_out_buf, extended_msg_buf, sync_msg_out_buf2
+ENTRY abort_bdr_msg_out_buf, abort_bdr_msg_in_buf
+ENTRY iowait_entry_point, reselect_router, lun_msg_buf, tag_msg_buf
+ENTRY iowait_patch_point, scsi_id_0, scsi_id_1, scsi_id_2, scsi_id_3
+ENTRY scsi_id_4, scsi_id_5, scsi_id_6, scsi_id_7
+ENTRY init_dsa, init_index, sig_jump, queue_tag
+
+ENTRY scripts_entry_point, message_loop, status_complete, send_data
+ENTRY after_data_move_check, receive_data, msg_hdlr , ext_msg_handler
+ENTRY disconnect_point, reject_target_sync, status_complete_data
+ENTRY disconnect_point_1, msg_hdlr_1, unknown_msg_hdlr, msg_done, msg_done_1
+ENTRY failed_selection_hdlr, script_reconnect_point
+ENTRY renegotiate_sync, sync_msg_in_rejected
+
+ENTRY abort_sequence, bdr_sequence, start_abort_msg_out_phase
+ENTRY abdr2_sequence, start_abdr2_msg_out_phase
+ENTRY start_bdr_msg_out_phase, start_abort_bdr_msg_in_phase
+ENTRY failed_abort_bdr_selection_hdlr
+
+ENTRY failed_sync_selection_hdlr, sync_negotiation
+ENTRY start_sync_msg_out, start_sync_msg_in_phase
+ENTRY sync_phase_hdlr, reject_cleanup
+ENTRY complete_ext_msg, cleanup_phase, goto_cleanup
+ENTRY ext_msg_patch, send_command
+
+Table tableindirect     \
+      data_info  = 8{0} \       ;8 bytes: 1 align, 3 count, 4 addr
+      cmd_info   = 8{0}         ;8 bytes: 1 align, 3 count, 4 addr
+
+ABSOLUTE phase_error            = 0x00001
+ABSOLUTE io_done_after_data     = 0x00005
+ABSOLUTE io_done                = 0x00006
+ABSOLUTE io_wait                = 0x00007
+ABSOLUTE unknown_msg            = 0x00009
+ABSOLUTE ext_msg                = 0x0000A
+ABSOLUTE check_next_io          = 0x0000B
+ABSOLUTE check_next_io_data     = 0x0000C
+ABSOLUTE cmd_select_atn_failed  = 0x00012
+ABSOLUTE err_not_ext_msg        = 0x00013
+ABSOLUTE sync_neg_done          = 0x00014
+ABSOLUTE sync_msg_reject        = 0x00016
+;ABSOLUTE abort_msg_error       = 0x00017
+ABSOLUTE neg_select_failed      = 0x00018
+ABSOLUTE abort_select_failed    = 0x00019
+ABSOLUTE abort_io_complete      = 0x0001A
+ABSOLUTE unknown_reselect_id    = 0x0001D
+ABSOLUTE uninitialized_reselect = 0X0001E
+;ABSOLUTE bdr_msg_error         = 0X0001F
+;ABSOLUTE bdr_select_failed     = 0x0001B
+;ABSOLUTE bdr_io_complete       = 0x0001C
+;ABSOLUTE modify_data_ptr       = 0x00021
+;ABSOLUTE target_sync_sent      = 0x00022
+ABSOLUTE suspended              = 0X00023
+
+ABSOLUTE        NEXUS_data_base_adr3    = 0x88
+ABSOLUTE        NEXUS_data_base_adr2    = 0x88
+ABSOLUTE        NEXUS_data_base_adr1    = 0x88
+ABSOLUTE        NEXUS_data_base_adr0    = 0x88
+
+RELATIVE target_id = 0x01
+RELATIVE cmd_bytes_out_count = 0x00
+RELATIVE data_byte_count = 00
+RELATIVE ext_msg_size = 0x00
+RELATIVE scntl1_patch = 0x7F
+RELATIVE scntl3_patch = 0x13
+RELATIVE sxfer_patch = 0x08
+RELATIVE tag_patch = 0x99
+RELATIVE abdr_tag_patch = 0xAA
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+iowait_entry_point:
+        wait reselect rel(sig_jump)  ;if SIGP set, jump sig_jump
+
+reselect_router:
+        ;SSID = [ Valxx Scsi_id ]
+        ;examine bits 7 (VAL) and 3-0 (the reselecting device's SCSI id)
+        move SSID & 0x8F to SFBR
+        move SFBR & 0x0F to SCRATCHB0
+iowait_patch_point:
+        ; SCRATCHB0 = [ 0000 Scsi_id ]
+        jump scsi_id_0, if 0x80
+        jump scsi_id_1, if 0x81
+        jump scsi_id_2, if 0x82
+        jump scsi_id_3, if 0x83
+        jump scsi_id_4, if 0x84
+        jump scsi_id_5, if 0x85
+        jump scsi_id_6, if 0x86
+        jump scsi_id_7, if 0x87
+        ;interrupt if not VAL or bits 3-0 indicate our SCSI id
+        int unknown_reselect_id
+
+scsi_id_0:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_0_lun, if 0x80
+        jump scsi_0_lun, if 0x81
+        jump scsi_0_lun, if 0x82
+        jump scsi_0_lun, if 0x83
+        jump scsi_0_lun, if 0x84
+        jump scsi_0_lun, if 0x85
+        jump scsi_0_lun, if 0x86
+        jump scsi_0_lun, if 0x87
+        int uninitialized_reselect
+
+scsi_id_1:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_1_lun, if 0x80
+        jump scsi_1_lun, if 0x81
+        jump scsi_1_lun, if 0x82
+        jump scsi_1_lun, if 0x83
+        jump scsi_1_lun, if 0x84
+        jump scsi_1_lun, if 0x85
+        jump scsi_1_lun, if 0x86
+        jump scsi_1_lun, if 0x87
+        int uninitialized_reselect
+scsi_id_2:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_2_lun, if 0x80
+        jump scsi_2_lun, if 0x81
+        jump scsi_2_lun, if 0x82
+        jump scsi_2_lun, if 0x83
+        jump scsi_2_lun, if 0x84
+        jump scsi_2_lun, if 0x85
+        jump scsi_2_lun, if 0x86
+        jump scsi_2_lun, if 0x87
+        int uninitialized_reselect
+scsi_id_3:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_3_lun, if 0x80
+        jump scsi_3_lun, if 0x81
+        jump scsi_3_lun, if 0x82
+        jump scsi_3_lun, if 0x83
+        jump scsi_3_lun, if 0x84
+        jump scsi_3_lun, if 0x85
+        jump scsi_3_lun, if 0x86
+        jump scsi_3_lun, if 0x87
+        int uninitialized_reselect
+scsi_id_4:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_4_lun, if 0x80
+        jump scsi_4_lun, if 0x81
+        jump scsi_4_lun, if 0x82
+        jump scsi_4_lun, if 0x83
+        jump scsi_4_lun, if 0x84
+        jump scsi_4_lun, if 0x85
+        jump scsi_4_lun, if 0x86
+        jump scsi_4_lun, if 0x87
+        int uninitialized_reselect
+scsi_id_5:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_5_lun, if 0x80
+        jump scsi_5_lun, if 0x81
+        jump scsi_5_lun, if 0x82
+        jump scsi_5_lun, if 0x83
+        jump scsi_5_lun, if 0x84
+        jump scsi_5_lun, if 0x85
+        jump scsi_5_lun, if 0x86
+        jump scsi_5_lun, if 0x87
+        int uninitialized_reselect
+scsi_id_6:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_6_lun, if 0x80
+        jump scsi_6_lun, if 0x81
+        jump scsi_6_lun, if 0x82
+        jump scsi_6_lun, if 0x83
+        jump scsi_6_lun, if 0x84
+        jump scsi_6_lun, if 0x85
+        jump scsi_6_lun, if 0x86
+        jump scsi_6_lun, if 0x87
+        int uninitialized_reselect
+scsi_id_7:
+        move 1, lun_msg_addr, when MSG_IN
+        jump scsi_7_lun, if 0x80
+        jump scsi_7_lun, if 0x81
+        jump scsi_7_lun, if 0x82
+        jump scsi_7_lun, if 0x83
+        jump scsi_7_lun, if 0x84
+        jump scsi_7_lun, if 0x85
+        jump scsi_7_lun, if 0x86
+        jump scsi_7_lun, if 0x87
+        int uninitialized_reselect
+; if we have reached this point, that means a device that we know nothing about
+; has reselected us, so we have jumped here.  it could mean we forgot to
+; write in the patch address to a device we do recognize, and we jumped here
+; as part of the "safety net".  Or, that the device has done an illegal
+; reselection after an ABORT or BDR has been issued to it.
+
+
+sig_jump:
+        ;clear SIGP and interrupt host
+        MOVE CTEST2 TO SFBR
+        int suspended
+
+init_index:
+        ; store scsi id and lun in SCRATCHA0
+        ; SFBR = [ xxxx xLun_id ]
+        MOVE SFBR & 0x07 TO SCRATCHA0
+        ; SCRATCHA0 = [ 00000 Lun_id ]
+        MOVE SCRATCHB0 TO SFBR
+        ; SFBR = [ 0000 Scsi_id ]
+        ; computes nexus=[0 ScsiId LunId] :
+        JUMP REL(bit3), IF 0x00 AND MASK 0xF7
+        MOVE SCRATCHA0 | 0x40 TO SCRATCHA0
+bit3:   JUMP REL(bit2), IF 0x00 AND MASK 0xFB
+        MOVE SCRATCHA0 | 0x20 TO SCRATCHA0
+bit2:   JUMP REL(bit1), IF 0x00 AND MASK 0xFD
+        MOVE SCRATCHA0 | 0x10 TO SCRATCHA0
+bit1:   JUMP REL(bitend), IF 0x00 AND MASK 0xFE
+        MOVE SCRATCHA0 | 0x08 TO SCRATCHA0
+bitend: ; SCRATCHA0 = [ 0Scsi_id Lun_id ]
+        RETURN
+
+init_dsa:
+        ; DSA initialized to NEXUS_data address
+        ;Nexus_data_size = 16 bytes, then DSA = base-adr + (8*nexus)
+        ;equivalent to nexus left 4 times + base_adr
+        ;assume nexus (tag) is in SCRATCHA0
+        ;we patch NEXUS_data_base_adr during script_init, to be the
+        ;dma address of our table-indirect table
+        ;Since we initialize DSA to zero first, we don't need to worry
+        ;about carry being set on the shifts from DSA1
+        MOVE 0 TO DSA0
+        MOVE 0 TO DSA1
+        MOVE 0 TO DSA2
+        MOVE 0 TO DSA3
+        MOVE SCRATCHA0 TO SFBR
+        CLEAR CARRY
+        MOVE SFBR SHL 0 TO DSA0
+        MOVE DSA1 SHL 0 TO DSA1    ; for carry, if any
+        MOVE DSA0 SHL 0 TO DSA0
+        MOVE DSA1 SHL 0 TO DSA1    ; for carry, if any
+        MOVE DSA0 SHL 0 TO DSA0
+        MOVE DSA1 SHL 0 TO DSA1    ; for carry, if any
+        MOVE DSA0 SHL 0 TO DSA0
+        MOVE DSA1 SHL 0 TO DSA1    ; for carry, if any
+        MOVE DSA0 + NEXUS_data_base_adr0 TO DSA0
+        MOVE DSA1 + NEXUS_data_base_adr1 TO DSA1 WITH CARRY
+        MOVE DSA2 + NEXUS_data_base_adr2 TO DSA2 WITH CARRY
+        MOVE DSA3 + NEXUS_data_base_adr3 TO DSA3 WITH CARRY
+        ; DSA = base address NEXUS_data
+        RETURN
+
+;handle being in message after receiving the identify message after a
+;reselect
+reconnect_msg_in:
+        move 1, cmd_msg_in_addr, when MSG_IN
+        jump queue_tag, if 0x20
+        MOVE SFBR to SCRATCHB0
+	;save sfbr before calling init_dsa
+        call rel(init_dsa)
+	MOVE SCRATCHB0 to SFBR
+	;restore sfbr
+        jump not_tag_msg
+queue_tag:
+        ; SFBR = Queue tag operator (0x20)
+        ; Save the nexus given there
+        CLEAR ACK
+        MOVE 1, tag_msg_addr, when MSG_IN
+        MOVE SFBR to SCRATCHA0
+        call rel(init_dsa)
+        jump msg_done
+
+script_reconnect_point:
+        call rel(init_index)
+        move SCNTL1 & scntl1_patch to SCNTL1
+        move scntl3_patch to SCNTL3
+        move sxfer_patch to SXFER
+        clear ACK
+
+;Handle the possible actions following a reconnection.  We have already read
+;the initial MSG_IN in the IO_WAIT script (this is how we figured out which
+;target was trying to reselect us).  If we aren't in MSG_IN any longer,
+;set DSA.
+        jump reconnect_msg_in, when MSG_IN
+        call rel(init_dsa)
+        jump receive_data, when DATA_IN
+        jump send_data, if DATA_OUT
+        jump status_complete, if STATUS
+        int phase_error
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+scripts_entry_point:
+        select ATN target_id, failed_selection_hdlr
+; arbitrate and select the target with the SCSI id written into the current
+; zero position.  If during the selection, another target (including the
+;target we were trying to select) reselects the chip, then we jump to the script
+;at the address failed_selection_hdlr.  This script does a simple interrupt so
+;that the process interrupt handler will see that this script never got started
+;and needs to be restarted at a later time.  The interrupt handler will then
+;start the SIOP at the script address of job_wait_reselection (also known
+;as the IO_WAIT script) to start the handling of the reselection by the target.
+
+; put the qtag we will be using into SCRATCHA0
+        move tag_patch to SCRATCHA0
+; clear sigp if it was set, we are going to interrupt the host anyway
+        move CTEST2 | 0X00 to CTEST2
+        int phase_error, when not MSG_OUT
+
+message_loop:
+        move 1, identify_msg_addr, when MSG_OUT
+cleanup_phase:
+        call rel(init_dsa)
+        move SCNTL1 & scntl1_patch to SCNTL1
+        move scntl3_patch to SCNTL3
+        move sxfer_patch to SXFER
+        jump message_loop, when MSG_OUT
+;loop indefinitely in this message output loop until the device receives the
+;messages and then changes to the next phase.  The next phase is dictated by the
+;contents of the messages.  So, the following lines check for all possible
+;phases that could occur for all possible types of messages that were just sent.
+        jump status_complete, if STATUS
+        jump msg_hdlr, if MSG_IN
+send_command:
+        int phase_error, if not CMD
+;we check for three possible cases.  The default case we drop into is the CMD
+;phase.  So we output the CMD and then check for all the possible phases that
+;could occur as a result of that command.
+
+        move from cmd_info, when CMD
+regular_phase_hdlr:
+        jump msg_hdlr, when MSG_IN
+        jump status_complete, if STATUS
+        jump receive_data, if DATA_IN
+        jump send_data, if DATA_OUT
+        int phase_error
+
+regular_phase_hdlr_1:
+        jump msg_hdlr_1, when MSG_IN
+        jump status_complete_data, if STATUS
+        jump receive_data, if DATA_IN
+        jump send_data, if DATA_OUT
+        int phase_error
+;after the DATA_OUT check, there can be no more possible phases that we could
+;expect from any command other than those we've just checked.  Thus, we must be
+;in trouble.
+
+status_complete:
+        move 1, status_addr, when STATUS
+;now that we get the status byte in, we don't need to see what type of SCSI
+;status we've got because that is up to the device driver to decide what to do
+;with the status.  We are concerned with just correctly getting the status from
+;the device.  We now go through the phases possible after receiving the status.
+;This is the cleanup required before we disconnect from the target.
+
+        int phase_error, when not MSG_IN
+        move 1, cmd_msg_in_addr, when MSG_IN
+        ;clear the SDU bit
+        move SCNTL2 & 0x7F to SCNTL2
+        clear ACK
+        wait disconnect
+        int io_done
+
+status_complete_data:
+        move 1, status_addr, when STATUS
+;now that we get the status byte in, we don't need to see what type of SCSI
+;status we've got because that is up to the device driver to decide what to do
+;with the status.  We are concerned with just correctly getting the status from
+;the device.  We now go through the phases possible after receiving the status.
+;This is the cleanup required before we disconnect from the target.
+
+        int phase_error, when not MSG_IN
+        move 1, cmd_msg_in_addr, when MSG_IN
+        ;clear the SDU bit
+        move SCNTL2 & 0x7F to SCNTL2
+        clear ACK
+        wait disconnect
+        int io_done_after_data
+
+send_data:
+        move from data_info, when DATA_OUT
+
+after_data_move_check:
+        jump status_complete_data, when STATUS
+        jump msg_hdlr_1, if MSG_IN
+        int phase_error
+;after the DATA_OUT, two cases can occur.  First, we have transferred all the
+;bytes that the device expects and wants from us.  In this case, we might get
+;back an immediate STATUS back from the device.  However, the device may want to
+;send in the STATUS byte later on.  In that case, the target would be sending a
+;MSG_IN to us to start the sequence leading up to disconnection.  This also
+;covers the second case in which we have not transferred all the data necessary,
+;but we give up the bus because the target device likes to disconnect between
+;major transfers of data.  Thus, we would also need the MSG_IN phase to start
+;the disconnect sequence mentioned above.  This same logic applies to the
+;DATA_IN script that follows.
+
+receive_data:
+        move from data_info, when DATA_IN
+        jump after_data_move_check
+
+
+;the following are the specific message handlers that handle getting messages
+;before a command phase, after a command phase, or after a data phase.  Because
+;these messages are not illegal, but have distinct implications depending on
+;where they occur, three separate scripts must be created just to hold the
+;specific interrupt flag so that the system interrupt handler can know exactly
+;at what poing the messages started arriving.  Where the messages come in will
+;affect the execution path of the interrupt handler.  For the case of receiving
+;a MSG_IN of 0x02, we interrupt to go to the processor to update the data
+;pointer.  In SCSI protocol, we should expect a disconnect message of 0x04
+;after receiving the 0x02.  So in the interrupt handler (after the interrupt to
+;handle the 0x02), we must restart the chip at the script address
+;after_data_move_check.
+msg_hdlr:
+        move 1, cmd_msg_in_addr, when MSG_IN
+        jump queue_tag, if 0x20
+not_tag_msg:
+        jump ext_msg_handler, if 01
+        jump disconnect_point, if 04
+        jump reject_cleanup, if 07
+        jump msg_done, if 03
+        jump unknown_msg_hdlr, if not 0x02
+msg_done:
+        clear ACK
+        jump regular_phase_hdlr
+
+msg_hdlr_1:
+        move 1, cmd_msg_in_addr, when MSG_IN
+        jump ext_msg_handler, if 01
+        jump disconnect_point_1, if 04
+        jump reject_cleanup, if 07
+        jump msg_done_1, if 03
+        jump unknown_msg_hdlr, if not 0x02
+msg_done_1:
+        clear ACK
+        jump regular_phase_hdlr_1
+
+unknown_msg_hdlr:
+        int unknown_msg
+
+;the extended message is shown by the msg being a 0x01.  The first byte is the
+;message length, and the second byte is the opcode that the processor will look
+;at to see what the device was trying to say.
+
+ext_msg_handler:
+        clear ACK
+        move 2, extended_msg_addr, when MSG_IN
+        int ext_msg
+
+complete_ext_msg:
+        clear ACK
+        move ext_msg_size, extended_msg_addr, when MSG_IN
+ext_msg_patch:
+        nop ext_msg_patch
+        clear ACK
+;we check for five possible cases.  The default case we drop into is the CMD
+;phase.  So we output the CMD and then check for all the possible phases that
+;could occur as a result of that command.
+        jump msg_hdlr, when MSG_IN
+        jump status_complete, if STATUS
+        jump receive_data, if DATA_IN
+        jump send_data, if DATA_OUT
+        jump send_command
+;this nop will be patched either to do another interrupt to handle a message
+;to change the data pointer, or it will be a jump to cleanup_phase to continue
+;on with the SCSI protocol.  We continue with the SCSI protocol when we get
+;an extended identify message or a sync message.
+
+reject_target_sync:
+        set ATN
+        move SCNTL1 & scntl1_patch to SCNTL1
+        move scntl3_patch to SCNTL3
+        move sxfer_patch to SXFER
+        clear ACK
+        move 1, reject_msg_addr, when MSG_OUT
+        clear ATN
+;we check for five possible cases.  The default case we drop into is the CMD
+;phase.  So we output the CMD and then check for all the possible phases that
+;could occur as a result of that command.
+        jump msg_hdlr, when MSG_IN
+        jump status_complete, if STATUS
+        jump receive_data, if DATA_IN
+        jump send_data, if DATA_OUT
+        jump send_command
+
+reject_cleanup:
+        clear ATN
+        int sync_msg_reject
+goto_cleanup:
+        clear ACK
+        jump cleanup_phase
+
+renegotiate_sync:
+        set ATN
+        move SCNTL1 & scntl1_patch to SCNTL1
+        move scntl3_patch to SCNTL3
+        move sxfer_patch to SXFER
+        clear ACK
+        move 5, sync_msg_out_addr2, when MSG_OUT
+        clear ATN
+;we check for five possible cases.  The default case we drop into is the CMD
+;phase.  So we output the CMD and then check for all the possible phases that
+;could occur as a result of that command.
+        jump msg_hdlr, when MSG_IN
+        jump status_complete, if STATUS
+        jump receive_data, if DATA_IN
+        jump send_data, if DATA_OUT
+        jump send_command
+
+disconnect_point:
+        ;clear the SDU bit
+        move SCNTL2 & 0x7F to SCNTL2
+        clear ACK
+        wait disconnect
+        int check_next_io
+
+disconnect_point_1:
+        ;clear the SDU bit
+        move SCNTL2 & 0x7F to SCNTL2
+        clear ACK
+        wait disconnect
+        int check_next_io_data
+
+failed_selection_hdlr:
+        ;manually clear Start bit to compensate for chip problem
+        move SCNTL0 & 0xDF to SCNTL0
+
+        ;patch the tag so the host knows what command lost negotiation
+        move tag_patch to SCRATCHA0
+
+; clear sigp if it was set, we are going to interrupt the host anyway
+        move CTEST2 | 0X00 to CTEST2
+
+        int cmd_select_atn_failed
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; SYNC.SS
+;       This SCRIPT contains the negotiation sequence for synchronous data
+;       data transfer.  If it receives a message reject at the appropriate portion
+;       of the code, then we send a message to the host that the target device
+;       is a asynchronous device
+;
+; The following portions of code is for the SYNC negotiations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+sync_negotiation:
+        select ATN target_id, failed_sync_selection_hdlr
+; arbitrate and select the target with the SCSI id written into the current
+; zero position.  If during the selection, another target (including the
+;target we were trying to select) reselects the chip, then we jump to the script
+;at the address failed_sync_selection_hdlr.  This script does a simple
+;interrupt so that the process interrupt handler will see that this script
+;never got started and needs to be restarted at a later time.  The interrupt
+;handler will then start the SIOP at the script address of job_wait_reselection
+;(also known as the IO_WAIT script) to start the handling of the reselection by
+;the target.
+
+; put the qtag we will be using into SCRATCHA0
+        move tag_patch to SCRATCHA0
+
+; clear sigp if it was set, we are going to interrupt the host anyway
+        move CTEST2 | 0X00 to CTEST2
+
+        jump start_sync_msg_out, when MSG_OUT
+        clear ATN
+        int phase_error
+
+start_sync_msg_out:
+        move 6, sync_msg_out_addr, when MSG_OUT
+        jump start_sync_msg_in_phase, when MSG_IN
+;after moving out all the message bytes stating our protocol (the sync protocol)
+;we check for a possible MSG_IN that could be a message reject, 0x07.
+;If we have anything other than message in, we are in trouble.  We will try to
+;ignore the device's protocol violation by interrupting the host and assume
+;ASYNC transfers, as if the target had sent an O7.
+        clear ATN
+        int sync_msg_reject
+        jump cleanup_phase
+
+start_sync_msg_in_phase:
+        move 1, extended_msg_addr, when MSG_IN
+        jump sync_msg_in_rejected, if 0x07
+;0x07 is a message reject.  The target device does not want to do sync data
+;transfers.  Jump to an intermediate point to ACK the byte, then continue.
+
+        int err_not_ext_msg, if not 01
+;0x01 indicates that we will be getting an extended message.  We expect to get
+;one back in response to our extended message asking for asynchronous data
+;transfer.  Interrupt the processor to log, it will then restart the script and
+;set ATN before ACKing the byte.  If it is an extended message, ACK the byte
+;and move in the rest of the message.
+
+        clear ACK
+        move 4, extended_msg_addr, when MSG_IN
+        clear ACK
+        int sync_neg_done
+;interrupt to the process level so that we can set the SIOP to run in sync mode
+;now that we have established successful sync negotiations with the target.
+;After the SIOP has been set to handle sync transfers (if it was successful),
+;then we continue to execute the script that contains the intended I/O.  This is
+;done at the interrupt handler running another script.
+
+sync_msg_in_rejected:
+        clear ACK
+        jump sync_phase_hdlr, if 07
+
+sync_phase_hdlr:
+        jump reject_cleanup, if 07
+        jump start_sync_msg_out, when MSG_OUT
+        jump start_sync_msg_in_phase, if MSG_IN
+        int phase_error
+
+failed_sync_selection_hdlr:
+        ;manually clear Start bit to compensate for chip problem
+        move SCNTL0 & 0xDF to SCNTL0
+
+        ;patch the tag so the host knows what command lost negotiation
+        move tag_patch to SCRATCHA0
+
+; clear sigp if it was set, we are going to interrupt the host anyway
+        move CTEST2 | 0X00 to CTEST2
+
+        int neg_select_failed
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; ABORT SCRIPT
+; This sends out the abort message to the target device.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+bdr_sequence:
+        select ATN target_id, failed_abort_bdr_selection_hdlr
+
+; put the qtag we will be using into SCRATCHA0
+        move abdr_tag_patch to SCRATCHA0
+
+; clear sigp if it was set, we are going to interrupt the host anyway
+        move CTEST2 | 0X00 to CTEST2
+
+; arbitrate and select the target with the SCSI id written into the current
+; zero position.  If during the selection, another target (including the
+;target we were trying to select) reselects the chip, then we jump to the script
+;at the address failed_abort_bdr_selection_hdlr.  This script does a simple
+;interrupt so that the process interrupt handler will see that this script
+;never got started and needs to be restarted at a later time.  The interrupt
+;handler will then start the SIOP at the script address of job_wait_reselection
+;(also known as the IO_WAIT script) to start the handling of the reselection by
+;the target.
+
+        jump start_bdr_msg_out_phase, when MSG_OUT
+        clear ATN
+        int phase_error
+
+abort_sequence:
+        select ATN target_id, failed_abort_bdr_selection_hdlr
+
+; put the qtag we will be using into SCRATCHA0
+        move abdr_tag_patch to SCRATCHA0
+
+; clear sigp if it was set, we are going to interrupt the host anyway
+        move CTEST2 | 0X00 to CTEST2
+
+; arbitrate and select the target with the SCSI id written into the current
+; zero position.  If during the selection, another target (including the
+;target we were trying to select) reselects the chip, then we jump to the script
+;at the address failed_abort_bdr_selection_hdlr.  This script does a simple
+;interrupt so that the process interrupt handler will see that this script
+;never got started and needs to be restarted at a later time.  The interrupt
+;handler will then start the SIOP at the script address of job_wait_reselection
+;(also known as the IO_WAIT script) to start the handling of the reselection by
+;the target.
+
+        jump start_abort_msg_out_phase, when MSG_OUT
+        clear ATN
+        int phase_error
+
+start_abort_msg_out_phase:
+        move 2, abort_bdr_msg_out_addr, when MSG_OUT
+        jump wait_for_bus_free
+
+abdr2_sequence:
+        set ATN
+        clear ACK
+        jump start_abdr2_msg_out_phase, when MSG_OUT
+        call rel(get_to_msg_out)
+        jump start_abdr2_msg_out_phase, when MSG_OUT
+        clear ATN
+        int phase_error
+
+start_abdr2_msg_out_phase:
+        move 1, abort_bdr_msg_out_addr, when MSG_OUT
+wait_for_bus_free:
+        clear ATN
+        ;clear the SDU bit
+        move SCNTL2 & 0x7F to SCNTL2
+        wait disconnect
+        int abort_io_complete
+
+start_bdr_msg_out_phase:
+        move 1, abort_bdr_msg_out_addr, when MSG_OUT
+        jump wait_for_bus_free
+
+;the get_to_msg_out routine allows the target to complete
+;the current phase before switching to MSG_OUT.  Any byte(s)
+;moved are garbage bytes.
+get_to_msg_out:
+        jump rel(abdr2_msg_in), if MSG_IN
+        jump rel(abdr2_status), if STATUS
+        jump rel(abdr2_data_in), if DATA_IN
+        jump rel(abdr2_data_out), if DATA_OUT
+        move 1, abort_bdr_msg_in_addr, when COMMAND
+        return
+abdr2_msg_in:
+        move 1, abort_bdr_msg_in_addr, when MSG_IN
+        clear ACK
+        return
+abdr2_status:
+        move 1, abort_bdr_msg_in_addr, when STATUS
+        clear ACK
+        return
+abdr2_data_in:
+        move 1, abort_bdr_msg_in_addr, when DATA_IN
+        clear ACK
+        jump rel(abdr2_data_in), when DATA_IN
+        return
+abdr2_data_out:
+        move 1, abort_bdr_msg_in_addr, when DATA_OUT
+        jump rel(abdr2_data_out), when DATA_OUT
+        return
+
+failed_abort_bdr_selection_hdlr:
+        ;manually clear Start bit to compensate for chip problem
+        move SCNTL0 & 0xDF to SCNTL0
+
+; put the tag we will be using into SCRATCHA0
+        move abdr_tag_patch to SCRATCHA0
+
+; clear sigp if it was set, we are going to interrupt the host anyway
+        move CTEST2 | 0X00 to CTEST2
+        int abort_select_failed
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+cmd_msg_in_buf:
+        nop cmd_msg_in_buf
+cmd_buf:
+        nop cmd_buf
+        nop cmd_buf
+status_buf:
+        nop status_buf
+identify_msg_buf:
+        nop identify_msg_buf
+sync_msg_out_buf:
+        nop sync_msg_out_buf
+sync_msg_out_buf2:
+        nop sync_msg_out_buf2
+extended_msg_buf:
+        nop extended_msg_buf
+abort_bdr_msg_out_buf:
+        nop abort_bdr_msg_out_buf
+abort_bdr_msg_in_buf:
+        nop abort_bdr_msg_in_buf
+lun_msg_buf:
+        nop lun_msg_buf
+reject_msg_buf:
+        nop reject_msg_buf
+tag_msg_buf:
+        nop tag_msg_buf

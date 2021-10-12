@@ -1,0 +1,99 @@
+* @(#)03	1.1  src/bos/objclass/POWER/disk.serdasdc.2000mb.add, cfgmethods, bos411, 9428A410j 6/17/93 12:44:02
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS : Serial DASD  predefines
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1990,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = 2000mb
+	class = disk
+	subclass = serdasdc
+	prefix = hdisk
+	devid = 0
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x870
+	setno = 140
+	msgno = 36
+	fru = 1
+	catalog = devices.cat
+	DvDr = sd
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgserdasdd
+	Change = /etc/methods/chgdisk
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = disk/serdasdc/2000mb
+
+
+
+PdAt:
+	uniquetype = disk/serdasdc/2000mb
+	attribute = model_name
+	deflt = "H1H"
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/serdasdc/2000mb
+	attribute = pv
+	deflt = "no"
+	values = "no,yes,clear"
+	width = ""
+	type = R
+	generic = "U"
+	rep = "sl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/serdasdc/2000mb
+	attribute = pvid
+	deflt = "none"
+	values = ""
+	width = ""
+	type = R
+	generic = "D"
+	rep = s
+	nls_index = 15
+
+
+PdAt:
+	uniquetype = disk/serdasdc/2000mb
+	attribute = mode_data
+	deflt = 0x000000080000000000000200010124070105080100000180
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = disk/serdasdc/2000mb
+	attribute = queue_depth
+	deflt = 3
+	values = 3
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0

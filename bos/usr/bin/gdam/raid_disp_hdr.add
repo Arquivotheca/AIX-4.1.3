@@ -1,0 +1,443 @@
+# @(#)13  1.4 src/bos/usr/bin/gdam/raid_disp_hdr.add, sysxgdam, bos41J, 9518A_all  5/2/95  14:51:07
+#
+#   COMPONENT_NAME: ALLTHORN_SW
+#
+#   FUNCTIONS: IBM-7135 Disk Array Subsystem GUI Interface
+#
+#   ORIGINS: 27,66
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+
+#   These are the odm stanzas necessary to configure and manage the
+#   IBM 7135 RAIDiant Disk Array subsystem.
+
+raid_disp_hdr:
+        id = "array_type"
+        option_id = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = ""
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "subsys_config"
+        option_id = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_subsys_config "
+        cmd_to_exec_postfix = "-l subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = "-l subsysname"
+        help_msg_id = "32,3"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "subsys_status"
+        option_id = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_subsys_status "
+        cmd_to_exec_postfix = ""
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_config"
+        option_id = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_drive_config "
+        cmd_to_exec_postfix = "-l subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,4"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_status"
+        option_id = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_drive_status "
+        cmd_to_exec_postfix = ""
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+
+raid_disp_hdr:
+        id = "device_config"
+        option_id = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        multi_select = ""
+        cmd_to_exec = "7135_device_config "
+        cmd_to_exec_postfix = "-l subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,5"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "device_status"
+        option_id = ""
+        name = ""
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_device_status "
+        cmd_to_exec_postfix = ""
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = ""
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "subsys_menu"
+        option_id = "7135_health_chk_freq"
+        name = "Health Check Frequency"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        multi_select = ""
+        cmd_to_exec = "7135_set_subsys_info "
+        cmd_to_exec_postfix = "-health_check "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,67"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "subsys_menu"
+        option_id = "7135_load_balance"
+        name = "Load Balancing"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        multi_select = "y"
+        cmd_to_exec = "7135_set_subsys_info "
+        cmd_to_exec_postfix = "-load_balance "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,69"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "subsys_menu"
+        option_id = "7135_polled_aen"
+        name = "Auto Error Notification"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_set_subsys_info "
+        cmd_to_exec_postfix = "-aen "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,68"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_menu"
+        option_id = "7135_drive_create"
+        name = "Create a RAID Array"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_set_lun_info"
+        cmd_to_exec_postfix = " -mklun "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,99"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_menu"
+        option_id = "7135_drive_oper"
+        name = "Mark a Drive Operational"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_change_drive "
+        cmd_to_exec_postfix = "0x80 subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,85"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_menu"
+        option_id = "7135_drive_spare"
+        name = "Mark a Drive Spare"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_change_drive "
+        cmd_to_exec_postfix = "0x82 subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,86"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_menu"
+        option_id = "7135_drive_replaced"
+        name = "Replace a Drive"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_change_drive "
+        cmd_to_exec_postfix = "0x84 subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,88"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_menu"
+        option_id = "7135_drive_format"
+        name = "Format a Drive"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_change_drive "
+        cmd_to_exec_postfix = "0x94 subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,89"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_menu"
+        option_id = "7135_drive_fail"
+        name = "Fail a Drive"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_change_drive "
+        cmd_to_exec_postfix = "0x83 subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,90"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "drive_menu"
+        option_id = "7135_drive_delete"
+        name = "Delete a Drive"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_change_drive "
+        cmd_to_exec_postfix = "0x81 subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,91"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "device_menu"
+        option_id = "7135_device_create"
+        name = "Create a RAID Sub-Array"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_set_lun_info"
+        cmd_to_exec_postfix = " -mksublun subsysname groupnum devname "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,100"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "device_menu"
+        option_id = "7135_device_change"
+        name = "Change/Show a RAID Array"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_set_lun_info"
+        cmd_to_exec_postfix = " -chglun "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,14"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "device_menu"
+        option_id = "7135_check_parity"
+        name = "Check RAID Array Parity"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_set_lun_info "
+        cmd_to_exec_postfix = "-chkpar "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,45"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "device_menu"
+        option_id = "7135_device_owner"
+        name = "Change RAID Array Ownership"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_set_lun_info "
+        cmd_to_exec_postfix = "-changeowner subsysname"
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,63"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+
+raid_disp_hdr:
+        id = "device_menu"
+        option_id = "7135_device_delete"
+        name = "Delete a RAID Array"
+        name_msg_file = ""
+        name_msg_set = 0
+        name_msg_id = 0
+        cmd_to_exec = "7135_set_lun_info "
+        cmd_to_exec_postfix = "-delete "
+        exec_mode = ""
+        multi_select = "y"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        help_msg_id = "32,44"
+        help_msg_loc = "gdam.cat"
+        help_msg_base = ""
+        help_msg_book = ""
+        PdDvLn = "driver/node/dar"
+

@@ -1,0 +1,124 @@
+######################################################################
+#  @(#)68        1.2  src/bldenv/man/dependency_list.man, pkgtools, bos412, GOLDA411a 6/24/93 13:34:57
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: PTF_filename
+#		PTFs
+#		failure
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# NAME: dependency_list.man  (pkgtools)
+#
+# Change log:
+#    10/22/91-wt-added header
+######################################################################
+  dependency_list Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+    Prints a list of missing requisite PTFs that the original PTFs depend on.
+
+  Syntax
+
+    dependency_list  -b build_directory  [-p prod_directory]
+                     [-s ship_directory] [-o out_filename ]
+                     [-c] [-v] [-h] [-?] PTF_filename(s)
+
+
+  Description
+
+    Prints missing 'upstream' PTFs (PTFs which directly or
+    indirectly rely on the specified PTFs to standard out (sysout).
+    If all PTFs have been specified in the original list
+    on the command line, no PTFs will be printed.  Only
+    PTFs with the same lpp name as the specified PTFs are listed.
+    Using the '-c' option returns an error code if there
+    are missing requisites.
+
+
+  Flags
+
+    -b build_directory   Path to the 'build' server.
+
+    -p prod_directory    Path to the 'production' server.
+
+    -s ship_directory    Path to the 'ship' server.
+
+    -o outfilename   Path and file name for the list of
+                       missing requisite PTFs.
+
+    -c   Check mode     Returns an error code if requisite PTFs were
+                          found that are not in the orignal list.
+
+    -v   Verbose mode   Messages are given during execution.
+
+    -h | -?   Help      Print help message and exit regardless
+                          of other options specified.
+
+    PTF_filename(s)   A list of PTFs to be checked.
+                      The file names can include or exclude ".ptf":
+                      For example:
+                                U0000257.ptf  U0000032.ptf U000001.ptf
+                                           < or >
+                                U0000257 U0000032 U000001
+
+  Exits
+
+    With -c option:
+      If there are missing requisites:  Error:  non-zero return code.
+      No missing requisites:  Successful:  return code of zero.
+
+    Without -c option:
+      If there is a program error: Non-zero return code.
+      No program error: Return code of zero.
+
+
+  Files
+
+    None
+
+
+  Examples
+
+    1. 'dependency_list  -b build -p prod  -s ship  ix00003.ptf ix00234.ptf'
+
+       List the upstream requisite PTFs associated with ix00003 and ix00234.
+
+    2. 'dependency_list  -b /afs/build -v ix00003.ptf ix00234.ptf'
+
+       List the upstream requisite PTFs associated with ix00003
+       and ix00234 in verbose mode.
+
+    3. 'dependency_list  -b build -p prod -c ix00003.ptf ix00234.ptf ix00236'
+
+       Check that there are no other upstream requisite PTFs
+       that are dependent on the given PTFs.  Any others would
+       be printed to stdout.  The return code would indicate
+       success or failure (whether any extra PTFs were found).
+
+
+  Implementation Specifics
+
+    Using PTFs specified on the command line allows execution
+    of this command from Motif or EMACS.
+
+
+  Related Information
+
+    kill_mif

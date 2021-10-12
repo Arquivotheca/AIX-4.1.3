@@ -1,0 +1,1130 @@
+# @(#)37        1.16  src/bos/objclass/POWER/sm_cdrom.add, cfgmethods, bos41J, 9510A_all 2/20/95 22:01:30
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: CD-ROM Drive Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined CD ROM Drives
+#       List All Supported CD ROM Drives
+#       Add a CD ROM Drive
+#       Change/Show Characteristics of a CD ROM Drive
+#       Remove a CD ROM Drive
+#       Configure a Defined CD ROM Drive
+#
+#       Help text Id's for CD ROM specific helps are in the range:
+#               0420500 to 0420549
+#       This does not include menu helps.
+#
+
+#
+# List All Defined CD ROM Drives
+# This uses a ghost dialogue to list all the defined CD ROM drives.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsdcdr"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined CD ROM Drives"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 103
+    cmd_to_exec               = "lsdev -C -c cdrom"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800111"
+    help_msg_loc              = ""
+
+#
+# List All Supported CD ROM Drives
+# This uses a ghost dialogue to list all the Predefined CD ROM drives.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsscdr"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Supported CD ROM Drives"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 104
+    cmd_to_exec               = "lsdev -P -c cdrom -F \"type subclass description\""
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800112"
+    help_msg_loc              = ""
+
+#
+# Add a CD ROM Drive
+# This allows a CD ROM drive to be added by defining and configuring it.
+# There are two name selectors followed by the dialogue.  The first
+# name selector is used to put up a list of Predefined CD ROM drives for the
+# user to select from.  The second name selector puts up a list of
+# defined adapters which can have the selected type of CD ROM drive
+# attached to it.  The dialogue then puts up a list of all the user
+# configurable attributes.
+
+# Select type of CD ROM
+sm_name_hdr:
+    id                        = "makcdr"
+    next_id                   = "makcdr_"
+    option_id                 = "cdrom_predef_opt"
+    has_name_select           = "n"
+    name                      = "Add a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 105
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+class () # str1 str2 str3\n\
+{\n\
+echo $1 | sed 's/^\\([^ ]*\\)[ ]*\\([^ ]*\\)[ ]*/\\2:\\1:\\2:/' \
+     |sed s/"scsi:oscd"/"oscd_scsi:oscd"/g \n\
+}\n\
+class "
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "_cookedname:type:subclass:desc"
+    next_type                 = "n"
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+# Name selector command option for type of CD ROM
+sm_cmd_opt:
+    id                        = "cdrom_predef_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "CD ROM Drive Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 426
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "lsdev -P -c cdrom -F \"type subclass description\""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04201"
+    help_msg_loc              = ""
+
+# Select parent adapter
+# There is a name selector at this level for each unique Predefined CDROM
+# subclass.  The Id's for these name selectors are built as follows:
+#       "makcdr_xxx_yyy"
+# where xxx is the subclass and yyy will only exist for the type = oscd.
+
+# SCSI CDROM drive
+sm_name_hdr:
+    id                        = "makcdr_scsi"
+    next_id                   = "makcdr_scsi_hdr"
+    option_id                 = "makcdr_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 105
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+
+# Other SCSI CDROM drive
+sm_name_hdr:
+    id                        = "makcdr_oscd_scsi"
+    next_id                   = "makcdr_oscd_scsi_hdr"
+    option_id                 = "makcdr_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 105
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "makcdr_parent_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter "
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There can be a unique header for each
+# predefined CD ROM drive instance, or several drive instances may share
+# a common header.
+
+# SCSI CDROM drive's dialogue header.
+sm_cmd_hdr:
+    id                        = "makcdr_scsi_hdr"
+    option_id                 = "cdrom_add,cdrom_common"
+    has_name_select           = "y"
+    name                      = "Add a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 105
+    cmd_to_exec               = "mkdev -c cdrom"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c cdrom"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+# Other SCSI CDROM drive's dialogue header.
+sm_cmd_hdr:
+    id                        = "makcdr_oscd_scsi_hdr"
+    option_id                 = "cdrom_add,cdrom_common,cdrom_oscd_common"
+    has_name_select           = "y"
+    name                      = "Add a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 105
+    cmd_to_exec               = "mkdev -c cdrom"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c cdrom"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800113"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a CD ROM Drive
+# This allows a CD ROM drive's characteristics to be shown and, if desired,
+# changed.  First, there is a name selector used to put up a list of the
+# defined CD ROM drives for the user to select from.  The dialogue then
+# shows all of the characteristics.
+
+# Select CD ROM by logical name
+sm_name_hdr:
+    id                        = "chgcdr"
+    next_id                   = "chgcdr_"
+    option_id                 = "cdrom_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 106
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\" \
+  | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\2:&/'\\
+  |sed s/"ide:oicdrom"/"oicdrom_ide:oicdrom"/g \\
+  |sed s/"scsi:oscd"/"oscd_scsi:oscd"/g \n\
+} \n\
+xx "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:parent:port:loc:state:desc"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# The dialogue headers follow.  There is one for each unique Predefined
+# CD ROM drive instance.  Their Id's are built as follows:
+#       "chgcdr_xxx_yyy"
+# where xxx is the subclass and yyy exists only for the oscd type.
+
+# SCSI CDROM
+sm_cmd_hdr:
+    id                        = "chgcdr_scsi"
+    option_id                 = "cdrom_chg,cdrom_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 106
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# Other SCSI CDROM
+sm_cmd_hdr:
+    id                        = "chgcdr_oscd_scsi"
+    option_id                 = "cdrom_chg,cdrom_common,cdrom_oscd_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 106
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+
+#
+# Remove a CD ROM Drive
+# This allows a CD ROM drive to be removed, including its definition in the
+# database, from the system.  A name selector is used to put up a list
+# of the "defined" and "configured" CD ROM drives for the user to select
+# from.  The dialogue then uses the rmdev command to remove the selected
+# device.
+
+# Select CD ROM by logical name
+sm_name_hdr:
+    id                        = "rmvcdr"
+    next_id                   = "rmvcdr_hdr"
+    option_id                 = "cdrom_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 107
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvcdr_hdr"
+    option_id                 = "rmvcdr_opt"
+    has_name_select           = "y"
+    name                      = "Remove a CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 107
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvcdr_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 425
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420500"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvcdr_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = " "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "0420512"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined CD ROM Drive
+# This allows a CD ROM drive that is defined but not configured to be
+# configured.  A name selector is used to put up a list of the "defined"
+# CD ROM drives for the user to select from.  The dialogue then uses the
+# mkdev command to configure the selected device.
+
+# Select CD ROM by logical name
+sm_name_hdr:
+    id                        = "cfgcdr"
+    next_id                   = "cfgcdr_hdr"
+    option_id                 = "cdrom_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 108
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800117"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgcdr_hdr"
+    option_id                 = "cfgcdr_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 108
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800117"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgcdr_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 425
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420500"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing CD ROMs by logical name.
+# Used by: move, change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "cdrom_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 425
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c cdrom"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add.
+# Used by: add function.
+
+# Displays CD ROM device type.
+sm_cmd_opt:
+    id                        = "cdrom_add"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "CD ROM Drive type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 427
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420501"
+    help_msg_loc              = ""
+
+# Displays CD ROM device subclass.
+sm_cmd_opt:
+    id                        = "cdrom_add"
+    id_seq_num                = "002"
+    disc_field_name           = "subclass"
+    name                      = "CD ROM Drive interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 428
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420502"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "cdrom_add"
+    id_seq_num                = "003"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420504"
+    help_msg_loc              = ""
+
+# Displays CD ROM device's parent adapter.
+sm_cmd_opt:
+    id                        = "cdrom_add"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420503"
+    help_msg_loc              = ""
+
+# Displays connection address of CD ROM device.
+sm_cmd_opt:
+    id                        = "cdrom_add"
+    id_seq_num                = "005"
+    disc_field_name           = ""
+    name                      = "CONNECTION address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 5
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -k subclass"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420510"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change.
+# Used by: show/change function.
+
+# Displays the CD ROM logical name.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "CD ROM Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 425
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420500"
+    help_msg_loc              = ""
+
+# Displays CD ROM device type.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "type"
+    name                      = "CD ROM Drive type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 427
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420501"
+    help_msg_loc              = ""
+
+# Displays CD ROM device subclass.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "subclass"
+    name                      = "CD ROM Drive interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 428
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420502"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420504"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420505"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420506"
+    help_msg_loc              = ""
+
+# Displays CD ROM device's parent adapter.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "007"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420503"
+    help_msg_loc              = ""
+
+# Displays connection address of CD ROM device.
+sm_cmd_opt:
+    id                        = "cdrom_chg"
+    id_seq_num                = "008"
+    disc_field_name           = "port"
+    name                      = "Connection address"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 6
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420510"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Used by: add and show/change functions.
+
+# Display the reserve device attribute.
+sm_cmd_opt:
+    id                        = "cdrom_common"
+    id_seq_num                = "010"
+    disc_field_name           = "reserve_lock"
+    name                      = "RESERVE device on open"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 2
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a reserve_lock="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420511"
+    help_msg_loc              = ""
+
+# Display the prevent eject attribute.
+sm_cmd_opt:
+    id                        = "cdrom_common"
+    id_seq_num                = "020"
+    disc_field_name           = "prevent_eject"
+    name                      = "PREVENT ejection of media when open"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 3 
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a prevent_eject="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420513"
+    help_msg_loc              = ""
+
+# Set read time out attribute for oscd.
+sm_cmd_opt:
+    id                        = "cdrom_oscd_common"
+    id_seq_num                = "030"
+    disc_field_name           = "rw_timeout"
+    name                      = "READ time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 38 
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a rw_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c cdrom -a rw_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420520"
+    help_msg_loc              = ""
+
+# Set start unit time out attribute for oscd.
+sm_cmd_opt:
+    id                        = "cdrom_oscd_common"
+    id_seq_num                = "040"
+    disc_field_name           = "start_timeout"
+    name                      = "START UNIT time out value"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 35
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a start_timeout="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c cdrom -a start_timeout -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420573"
+    help_msg_loc              = ""
+
+# Set play audio attribute for oscd.
+sm_cmd_opt:
+    id                        = "cdrom_oscd_common"
+    id_seq_num                = "050"
+    disc_field_name           = "audio_supported"
+    name                      = "Play AUDIO supported"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 40
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a audio_supported="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27 
+    values_msg_id             = 12 
+    aix_values                = "yes,no"
+    help_msg_id               = "0420521"
+    help_msg_loc              = ""
+
+# Set mode 2 form 1 density code attribute for oscd.
+sm_cmd_opt:
+    id                        = "cdrom_oscd_common"
+    id_seq_num                = "060"
+    disc_field_name           = "m2f1_code"
+    name                      = "MODE 2 FORM 1 Density Code"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 41
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a m2f1_code="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c cdrom -a m2f1_code -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420523"
+    help_msg_loc              = ""
+
+# Set mode 2 form 2 density code attribute for oscd.
+sm_cmd_opt:
+    id                        = "cdrom_oscd_common"
+    id_seq_num                = "070"
+    disc_field_name           = "m2f2_code"
+    name                      = "MODE 2 FORM 2 Density Code"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 42
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a m2f2_code="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c cdrom -a m2f2_code -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420524"
+    help_msg_loc              = ""
+
+# Set CD-DA density code attribute for oscd.
+sm_cmd_opt:
+    id                        = "cdrom_oscd_common"
+    id_seq_num                = "080"
+    disc_field_name           = "cdda_code"
+    name                      = "CD-DA Density Code"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 51
+    name_msg_id               = 43
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a cdda_code="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c cdrom -a cdda_code -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420525"
+    help_msg_loc              = ""
+

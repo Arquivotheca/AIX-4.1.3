@@ -1,0 +1,109 @@
+#
+# @(#)37        1.1  src/bldenv/man/bldCMVCfamily.man, bldtools, bos412, GOLDA411a 9/29/93 17:16:02
+#
+#  COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#  FUNCTIONS: Manual page for bldCMVCfamily.
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  bldCMVCfamily Command
+  
+  
+  Purpose
+  
+  The bldCMVCfamily command is used to convert CMVC family names 
+  in to the form 'familyname@hostname@portnumber'.  The multi-family
+  support requires that a single format be used for the CMVC family
+  name.
+
+  All references to a CMVC family that are not guaranteed to be in
+  the form 'familyname@hostname@portnumber' should be passed into
+  bldCMVCfamily for conversion.
+
+
+  Syntax
+ 
+  bldCMVCfamily <family>
+
+
+  Description
+
+  The bldCMVCfamily command is passed a family name in the form:
+  'familyname', 'familyname@hostname' or 'familyname@hostname@portnumber'
+  and will return on STDOUT the full family name in the form
+  'familyname@hostname@portnumber' from $BLDCMVCFAMILY_FILE.
+
+  The bldCMVCfamily command ignores the values of 'hostname' and
+  'portnumber' when they are passed with the family name.  The 'familyname'
+  is used to access a entry in $BLDCMVCFAMILY_FILE and the file entry is
+  returned.
+
+  The bldCMVCfamily command returns 0 if the family name is found with the
+  full family name written to STDOUT; 1 is returned if the family name is not
+  found, NULL is written to STDOUT, and a error message is written to STDERR.
+
+
+  Flags
+
+  family   The CMVC family name.  Format is 'familyname',
+           'familyname@hostname' or 'familyname@hostname@portnumber'.
+
+
+  Environment Variables
+
+  BLDCMVCFAMILY_FILE
+               Full pathname of file to use for the CMVC family data.
+               Default value is $BLDENV/usr/bin/bldCMVCfamily.dat.
+
+  BLDENV       Full pathname to the top of the build environment.  Typical
+               value is /bldenv/3.2/prod.
+
+
+  Messages
+
+    Errors
+
+    "A entry for <FAMILYNAME> must exist in <BLDCMVCFAMILY_FILE>"
+    There is no entry for FAMILYNAME in the bldCMVCfamily database.
+
+
+  Examples
+
+  Assuming $BLDCMVCFAMILY_FILE contains the entry aix@ausaix02@2035.
+  
+  1. Using just family name.  CMVC_FAMILY will be aix@ausaix02@2035.
+
+     CMVC_FAMILY=$(bldCMVCfamily aix)
+
+  2. Using familyname and hostname.  CMVC_FAMILY will be aix@ausaix02@2035.
+
+     CMVC_FAMILY=$(bldCMVCfamily aix@ausaix02)
+
+  3. Using familyname, hostname and portnumber.  CMVC_FAMILY will be
+     aix@ausaix02@2035.
+
+     CMVC_FAMILY=$(bldCMVCfamily aix@ausaix02@2035)
+
+  4. Using familyname, not matching hostname and not matching portnumber.
+     CMVC_FAMILY will be aix@ausaix02@2035.
+
+     CMVC_FAMILY=$(bldCMVCfamily aix@ausaix05@2045)
+
+  5. Invalid familyname.  CMVC_FMAILY will be NULL.
+
+     CMVC_FAMILY=$(bldCMVCfamily xia@ausaix02@2035)
+     A entry for xia must exist in /bldenv/3.2.5/prod/usr/bin/bldCMVCfamily.dat
+
+
+  Input Files
+
+#include "bldCMVCfamily.dat.man"

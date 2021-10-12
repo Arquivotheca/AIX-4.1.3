@@ -1,0 +1,85 @@
+# @(#)21	1.3  src/bos/objclass/tablet.add, inputdd, bos41J, 9509A_all 2/14/95 13:11:02
+#
+#   COMPONENT_NAME: INPUTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# Stanzas for the RSC/PowerPC tablet predefined values
+#
+
+PdDv:
+ type = "tablet_2"
+ class = "adapter"
+ subclass = "sio"
+ prefix = "siota"
+ devid = ""
+ base = 0
+ has_vpd = 0
+ detectable = 1
+ chgstatus = 0
+ bus_ext = 0
+ fru = 2
+ led = 0x824
+ setno = 126
+ msgno = 2
+ catalog = "devices.cat"
+ DvDr = "tabletdd"
+ Define = "/usr/lib/methods/define"
+ Configure = "/usr/lib/methods/cfgktsm"
+ Change = "/usr/lib/methods/chggen"
+ Unconfigure = "/usr/lib/methods/ucfgdevice"
+ Undefine = "/usr/lib/methods/undefine"
+ Start = ""
+ Stop = ""
+ uniquetype = "adapter/sio/tablet_2"
+
+PdAt:
+ uniquetype = "adapter/sio/tablet_2"
+ attribute = "bus_io_addr"
+ deflt = "0x70"
+ values = "0x70"
+ width = "0x8"
+ type = "O"
+ generic=""
+ rep = "n"
+ nls_index = 0
+
+PdAt:
+ uniquetype = "adapter/sio/tablet_2"
+ attribute = "bus_intr_lvl"
+ deflt = "1"
+ values = "1"
+ width = ""
+ type = "I"
+ generic=""
+ rep = "n"
+ nls_index = 0
+
+
+PdAt:
+ uniquetype = "adapter/sio/tablet_2"
+ attribute = "intr_priority"
+ deflt = "4"
+ values = "4"
+ width = ""
+ type = "P"
+ generic=""
+ rep = "n"
+ nls_index = 0
+
+# Predefined Connections
+PdCn:
+ uniquetype = "adapter/sio/tablet_2"
+ connkey = "std_t"
+ connwhere = "tablet"

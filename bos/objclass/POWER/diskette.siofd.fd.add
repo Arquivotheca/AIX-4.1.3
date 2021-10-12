@@ -1,0 +1,92 @@
+* @(#)25 1.3 src/bos/objclass/POWER/diskette.siofd.fd.add, cfgmethods, bos41J, 9513A_all 3/28/95 13:21:38
+*
+*  COMPONENT_NAME: (CFGMETHODS)
+*
+*  FUNCTIONS: Floppy diskette drive predefined data
+*
+*  ORIGINS: 27 & 83
+*
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+*
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+***********************************************************************
+
+*	stanza file for floppy disk drive
+*
+PdDv:
+	type = fd
+	class = diskette
+	subclass = siofd
+	prefix = fd
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x935
+	setno = 60
+	msgno = 1
+	catalog = "devices.cat"
+	DvDr = ""
+	Define = /usr/lib/methods/define
+	Configure = /usr/lib/methods/cfgfdd
+	Change = /usr/lib/methods/chggen
+	Unconfigure = /usr/lib/methods/ucfgfdd
+	Undefine = /usr/lib/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = diskette/siofd/fd
+
+PdAt:
+	uniquetype = diskette/siofd/fd
+	attribute = fdtype
+	deflt = "3.5inch"
+	values = "3.5inch,3.5inch4Mb,5.25inch"
+	width = ""
+	type = R
+	generic = DU
+	rep = sl
+	nls_index = 2
+
+PdAt:
+	uniquetype = diskette/siofd/fd
+	attribute = pm_devid
+	deflt = 0x00120000
+	values = "0x00120000, 0x001a0000, 0x001a1000, 0x001a2000, 0x001a3000,
+	          0x001a4000, 0x001a5000, 0x001a6000, 0x001a7000, 0x001a8000,
+	          0x001a9000, 0x001aa000, 0x001ab000, 0x001ac000, 0x001ad000,
+	          0x001ae000, 0x001af000"
+	type = R
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = diskette/siofd/fd
+        attribute = pm_dev_itime
+        deflt = "300"
+        values = "0-7200,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+	uniquetype = diskette/siofd/fd
+        attribute = pm_dev_stime
+        deflt = "120"
+        values = "0-7200,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+

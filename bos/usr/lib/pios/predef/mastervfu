@@ -1,0 +1,60 @@
+# @(#)77        1.3  src/bos/usr/lib/pios/predef/mastervfu, cmdpios, bos411, 9437C411a 9/16/94 08:08:52
+#
+# COMPONENT_NAME: Printer Backend for PR-88 VFU Handling
+#
+# FUNCTIONS:
+#
+# ORIGINS: 83
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+:056:__FLG::
+:013:_A::1
+:027:_J::+
+:050:_Z::+
+:063:_a::0
+:070:_f::
+:076:_j::1
+:060:__SYS::
+:322:si::
+:323:sp::
+:325:sw::78
+:057:__IDS::
+:059:__PFL::
+:055:__FIL::
+:053:__DIR::
+:160:d1::%I@4/trans1
+:161:d2::%I@4/trans2
+:509:dD::%I@5/dev
+:414:dF::%I@5/flags
+:162:db::%I@4/burst
+:163:dd::%I@5/ddi
+:164:de::%I@4/etc
+:165:df::%I@4/fmtrs
+:166:dn::/usr/lib/lpd/pio/bull_vfu
+:167:dz::/tmp
+:058:__MIS::
+:332:mD::pioattr1.cat
+:287:mF::
+:301:mc::\0
+:302:md::
+:304:mi::s
+:305:mm::
+:306:mn::
+:307:mo::%Ide/pioout %v[ABCDFINOPRS]
+:308:mp::
+:309:mq::
+:311:mr::
+:313:mt::
+:316:mv::
+:319:mz::14688
+:062:__WKV::
+:051:__CAG::
+:052:__CTL::
+:420:__FNT::
+:421:__CNV::
+:054:__ESC::
+:475:__HIR::
+:476:zP::
+:477:zS::!
+:474:zD::+

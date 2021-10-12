@@ -1,0 +1,32 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+As we mentioned, you can add several lines at once.  Here is
+a set of lines; go into the editor, append them, write them
+on a file named "fruit", and then leave the editor and
+type "ready".
+#create Ref
+apple
+peach
+pear
+plum
+nectarine
+orange
+#print Ref
+#user
+#cmp Ref fruit
+#log
+#next
+16.1a 10
+15.3e 5

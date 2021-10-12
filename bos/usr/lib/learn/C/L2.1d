@@ -1,0 +1,28 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+What value is printed by this printf statement?
+
+	printf("%%3.1f", 3.141592654);
+
+Type "answer XXX", where XXX is the value.
+#copyin
+#user
+#uncopyin
+#match %3.1f
+#fail
+Look again - it's %%
+#log
+#next
+2.1e 10

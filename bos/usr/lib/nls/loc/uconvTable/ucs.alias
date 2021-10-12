@@ -1,0 +1,27 @@
+# @(#)11	1.1  src/bos/usr/lib/nls/loc/uconvTable/ucs.alias, cmdiconv, bos411, 9428A410j 8/26/93 06:07:17
+#
+#   COMPONENT_NAME:	CMDICONV
+#
+#   FUNCTIONS:		Alias names of UCS.
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   This file contains the alias names of UCS (Universal Code Set),
+#   for specification of UCS name as a argument of iconv (code set
+#   converter) when performing conversion from/to UCS.
+#   The format of this file is:
+#	UCS name		# Comments
+#   Items are separated by any number of spaces and/or tabs. A '#'
+#   indicates the beginning of a comment, characters up to the end
+#   of the line are ignored. Blank lines are allowed.
+#
+
+UCS-2		# for default name

@@ -1,0 +1,93 @@
+a
+# @(#)96        1.1  src/bos/usr/ccs/lib/libcurses/compat/termcap.ed, libcurses, bos411, 9428A410j 9/2/93 13:59:49
+#
+# COMPONENT_NAME: (LIBCURSES) Curses Library
+#
+# FUNCTIONS:    termcap.ed
+#
+# ORIGINS: 3, 10, 27
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1985, 1988
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+The following ed script will edit the caps file and produce the termcap.c
+file which corresponds to the caps defined.  The edit commands assume
+that the caps file is in the following general form.
+
+name,    "code" "cd" comment
+
+the comma after name and the quotes around the codes are expected as
+shown here.  The 'white space' between fields may be spaces or tabs.
+The width of name, code and comment are variable and comment may include
+spaces. cd must be exactly 2 characters wide (within the quotes).
+
+Many of the edit commands below use the following general specification
+to separate the line into the segments identified above.
+
+/.*,.*".*".*".."[  ]*.*/
+		     AA
+		A   A||__  The comment specifier
+	    A  A|___|_____ White space after cd [space tab]*
+	  AA|__|__________ cd specification
+      A  A||______________ white space between code and cd
+    AA|__|________________ code specification
+ A A||____________________ white space after name
+ |_|______________________ name with comma delimiter
+
+These segments will frequently be grouped using \( and \) to pick those
+parts needed for a given operation.
+.
+1,$d
+E caps.e
+g/^#/d
+/--- begin bool/+,/--- end bool/-w bool
+/--- begin num/+,/--- end num/-w num
+/--- begin str/+,/--- end str/-w str
+a
+for each segment of the file produce a copy using cd and name in
+the form
+	 case two('a','b'): rv = name ; break ;
+
+.
+1,$d
+E bool
+1,$s/"/'/
+1,$s/"/'/
+1,$s/\(.*\),.*"\(.\)\(.\)".*/	case two('\2','\3'): rv = \1; break;
+w
+E num
+1,$s/"/'/
+1,$s/"/'/
+1,$s/\(.*\),.*"\(.\)\(.\)".*/	case two('\2','\3'): rv = \1; break;
+w
+E str
+1,$s/"/'/
+1,$s/"/'/
+1,$s/\(.*\),.*"\(.\)\(.\)".*/	case two('\2','\3'): rv = \1; break;
+w
+a
+
+insert the segments created above into the template for termcap.c
+at the point indicated by the text BOOL, NUM and STR
+
+.
+1,$d
+E termcap.form.e
+/BOOL/d
+-r bool
+/NUM/d
+-r num
+/STR/d
+-r str
+w termcap.c
+!${ODE_TOOLS}/usr/bin/rm bool num str
+q
+

@@ -1,0 +1,38 @@
+# @(#)44        1.15  src/bos/usr/lib/pios/predef/qms100.ps, cmdpios, bos411, 9428A410j 5/25/94 19:46:53
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:616:_j:S[C940]I[1810536]%IWY:!
+:060:__SYS::
+:445:sQ::date +"%%j %%H %%M %%S" >> %IdF/%Imn
+:443:sd::180
+:057:__IDS::
+:274:ia::{ test "$PIOTITLE" !=  %I@1 && BFLAG=" -b $PIOTITLE ";%Isq %p if [[ ! -x /usr/bin/enscript ]]; then %Ide/piomsg -c pioattr1.cat -s 1 -n 801 "Error\072 The /usr/bin/enscript command was not found."; exit 1; fi; /usr/bin/enscript %?%CX%t%f[X]%e -X%I_X%; -p- -q%?%G_2%t -2%;%?%G_z%t -r%;%?%G_3%t -G%;%?%G_1%t%e -B%;%?%G_L%t%e -c%;%?%Ch%t%fbh%e%?%L_h%t -b'%I_h'%e $BFLAG %;%; -L%G_l%d -f%?%Cs%t%f!s%e%I_s%;%G_p%d %?%G_1%t-F%Iw7%G_p%d%;%?%G_4%t -g%;%?%G_5%t -o%;%?%L_f%t%e %I@1%;;} | %Iis
+:273:is::%Isq %p %Iss
+:444:sq::%Ide/pioqms100 -s %?%S_d%"g"%=%tg%es%; -i %G@3%d -f %IdF/%Imn -d %Isd %v[CDFINR] &&
+:473:ss::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJZ] %z; %IsQ
+:058:__MIS::
+:330:mA::PostScript
+:331:mL::[devices.cat,71,58;QMS ColorScript 100, Model 20]
+:295:mN::qms100
+:307:mo::%Ide/pioout %v[ABCDFINOPRS] -K "state may be changed" -L "PrinterError" -E LPST_NOSLCT
+:051:__CAG::
+:144:ci::\4
+:475:__HIR::
+:686:zL::2
+:688:zM::QMS
+:476:zP::generic.ps
+:477:zS::!
+:685:zV::+

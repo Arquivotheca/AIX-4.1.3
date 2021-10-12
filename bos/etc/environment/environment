@@ -1,0 +1,40 @@
+# @(#)18	1.21  src/bos/etc/environment/environment, cmdsh, bos411, 9428A410j 5/13/94 15:09:03
+#
+# COMPONENT_NAME: (CMDSH) Shell related commands 
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+################################################################
+# System wide environment file.  This file should only contain
+#     1.  comment lines which have a # in the first column,
+#     2.  blank lines, and
+#     3.  Lines in the form name=value.
+#
+# WARNING: This file is only for establishing environment variables.
+#          Execution of commands from this file or any lines other
+#          than specified above may cause failure of the initialization 
+#	   process.
+#
+# Searching the current directory last is usually a BIG time saver.
+# If /usr/ucb is at the beginning of the PATH the BSD version of commands will
+# be found. 
+#
+PATH=/usr/bin:/etc:/usr/sbin:/usr/ucb:/usr/bin/X11:/sbin
+TZ=CST6CDT
+LANG=C
+LOCPATH=/usr/lib/nls/loc
+NLSPATH=/usr/lib/nls/msg/%L/%N:/usr/lib/nls/msg/%L/%N.cat
+LC__FASTMSG=true
+
+# ODM routines use ODMDIR to determine which objects to operate on
+# the default is /etc/objrepos - this is where the device objects
+# reside, which are required for hardware configuration
+
+ODMDIR=/etc/objrepos

@@ -1,0 +1,31 @@
+* @(#)24	1.5  src/bos/usr/ccs/lib/libc_r/libc_t.imp.non_r, libcthrd, bos41J, 9516A_all 4/12/95 14:24:31
+*
+*   COMPONENT_NAME: LIBCTHRD
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1993,1995
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*   The following are symbols imported from libc_t.a and don't have an
+*   _r symbol in libc_r.a
+
+daylight
+tzname
+timezone
+isuserrmtnam
+set_getpwent_remote
+opterr
+optind
+optopt
+optarg
+_getpwnam_shadow
+_mondata

@@ -1,0 +1,123 @@
+# @(#)87	1.2  src/bos/objclass/POWER/sm_diag.add, cmddiag, bos411, 9428A410j 3/9/94 15:15:16
+#
+#  COMPONENT_NAME: (CMDDIAG) Diagnostics Interface (SMIT)
+#
+#  FUNCTIONS: Diagnostics Smit Interfaces
+#
+#  ORIGINS: 27
+#
+#  sm_diag.add --- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       Hardware Diagnostics
+#       Current Shell Diagnostics
+#	Maintenance Shell Diagnostics
+#
+
+sm_menu_opt:
+        id                  = "problem"
+        id_seq_num          = "050"
+        next_id             = "diag"
+        text                = "Hardware Diagnostics"
+        text_msg_file       = "diagcd.cat"
+        text_msg_set        = 3
+        text_msg_id         = 1
+        next_type           = "m"
+        alias               = ""
+        help_msg_id         = "180044"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "diag"
+        id_seq_num          = "010"
+        next_id             = "diagcur"
+        text                = \
+"Current Shell Diagnostics\n\
+\n\
+    This selection invokes the \"diag\" command in the current shell.\n\
+    No users or applications will be affected.  If the device you want\n\
+    to test is not listed, or if you want to do further analysis, then\n\
+    select the Maintenance Shell Diagnostics.\n  "
+        text_msg_file       = "diagcd.cat"
+        text_msg_set        = 3
+        text_msg_id         = 2
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800482"
+        help_msg_loc        = ""
+
+
+sm_menu_opt:
+        id                  = "diag"
+        id_seq_num          = "020"
+        next_id             = "diagshut"
+        text                = \
+"Maintenance Shell Diagnostics\n\
+\n\
+    This selection invokes the \"cd /;shutdown -m\" command, which brings the\n\
+    system down to the Maintenance Shell.  During a shutdown, all users are\n\
+    notified of the impending shutdown, and are given 60 seconds to log off.\n\
+\n\
+    Perform the following steps to use the Maintenance Shell Diagnostics.\n
+\
+        *  Login as \"root\" at the default console (/dev/console).\n\
+        *  Enter the \"diag\" command.\n\
+        *  Enter \"Ctrl d\" to return to the default user shell."
+        text_msg_file       = "diagcd.cat"
+        text_msg_set        = 3
+        text_msg_id         = 3
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800483"
+        help_msg_loc        = ""
+
+
+# dialogues for (fast paths) diagcur and diagshut
+
+sm_cmd_hdr:
+	id		    = "diagcur"
+	option_id	    = ""
+	has_name_select     = ""
+	name		    = ""
+	name_msg_file	    = ""
+	name_msg_set	    = 0
+	name_msg_id	    = 0
+	cmd_to_exec	    = "diag"
+	ask		    = ""
+	exec_mode	    = "i"
+	ghost		    = "y"
+	cmd_to_discover     = ""
+	cmd_to_discover_postfix = ""
+	name_size	    = 0
+	value_size	    = 0
+	help_msg_id	    = "04511"	
+	help_msg_loc	    = ""
+
+sm_cmd_hdr:
+	id		    = "diagshut"
+	option_id	    = ""
+	has_name_select     = ""
+	name		    = ""
+	name_msg_file	    = ""
+	name_msg_set	    = 0
+	name_msg_id	    = 0
+	cmd_to_exec	    = "cd /; shutdown -m"
+	ask		    = "y"
+	exec_mode	    = "e"
+	ghost		    = "y"
+	cmd_to_discover     = ""
+	cmd_to_discover_postfix = ""
+	name_size	    = 0
+	value_size	    = 0
+	help_msg_id	    = "04512"
+	help_msg_loc	    = ""

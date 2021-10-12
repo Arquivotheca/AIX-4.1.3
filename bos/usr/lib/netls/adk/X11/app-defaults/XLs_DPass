@@ -1,0 +1,27 @@
+! #ident "@(#)XLs_DPass:1.1  File Date:93/03/25 Last Delta:92/12/24 16:24:42"
+! /usr/X11/lib/app-defaults/XLs_DPass
+
+XLs_DPass*geometry:                              =-0+0
+
+*FontList:                              *-courier-medium-r-normal--12-*
+*info.FontList:                         *-courier-medium-o-normal--14-*
+*info.alignment:			ALIGNMENT_CENTER
+*info.marginHeight:			4
+*XmText.alignment:			ALIGNMENT_CENTER
+*XmText.marginHeight:			2
+*field.alignment:			ALIGNMENT_BEGINNING
+*field.marginHeight:			6
+
+*foreground:                            Black
+*background:                            Lightblue
+*XmText.foreground:                     Black
+*XmText.background:                     White
+*prompt_dialog.foreground:              Black
+*prompt_dialog.background:              Lightblue
+*XmSelectionBox.foreground:             Black
+*XmSelectionBox.background:             White
+
+*selectColor:				Black
+*topShadowColor:			Black
+*highlightPixmap:                       50_foreground
+

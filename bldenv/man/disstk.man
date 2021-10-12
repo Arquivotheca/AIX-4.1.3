@@ -1,0 +1,120 @@
+######################################################################
+#  @(#)69        1.2  src/bldenv/man/disstk.man, pkgtools, bos412, GOLDA411a 6/24/93 13:35:40
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: Contents
+#		Format_Of_code
+#		device
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# NAME: disstk.man  (pkgtools)
+#
+# Change log:
+#    10/22/91-wt-added header
+######################################################################
+  disstk Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+     Creates v3.2 stacked format diskettes
+     from backup or tar format installp files.
+
+
+  Syntax
+
+     disstk -l stack_list -c source_directory [-d device]
+               [-n toc_directory] [-h|-?]
+
+
+  Description
+
+     Creates a set of stacked format diskettes.  Each diskette set contains
+     a Table of Contents (TOC) and the product image files (in
+     backup or tar format).  The shell 'distoc' actually creates the
+     TOC.
+
+
+  Flags
+
+     -l stack_list         file which contains the filenames of
+                           backup or tar format files to be written
+                           to diskette.
+                           (one entry per line).
+
+     -c source_directory   Installable image directory.
+
+     -d device             Diskette device (path name is optional).
+                           Default if fd0.
+                           Example: [-d fd0] or [-d /dev/fd0]
+
+     -n toc_directory      Do not execute diskette generation.  Instead just
+                           generate a TOC in the specified directory.
+
+     -h | -?               Lists Help message and exits
+
+  Exit
+
+     If there is a program error: Non-zero return code.
+     No program error: Return code of zero.
+
+
+  File
+
+    None
+
+
+  Examples
+
+     1. Create stacked output on diskettes in device rfd0:
+
+        disstk -l stack_list -c /test/image -d rfd0
+
+     2. Create a TOC of the current set of files:
+
+        disstk -l stack_list -c /test/image -n ./
+
+
+  Implementation Specifics
+
+     Diskette Format
+        1. Each diskette must have a header file beginning in block 1. The
+           format of the header is :
+              bytes 0-3 binary integer with value of 3609823512= x'D7298918'
+              bytes 4-15 date and time
+              bytes 16-19 binary integer volume number
+              bytes 20-511 binary zeros
+        2. The TOC file will begin in block 2. The TOC file has a TOC header
+           in the form of Volume Date Format_Of_code (for 3.2 Format_Of_Code=2).
+           The TOC also has an entry for each product image which specifies
+           the file position in the diskette. The file position data is
+           formatted volume:beginning block:size of file.
+        3. Following the TOC each of the product image files are written to
+           successive diskette blocks.
+     Known limitations
+        All files to be written to diskettes are first written to one huge file.
+        Depending on the amount of /tmp space that is allocated, the program may
+        run out of space.  It should be noted that this algorithm was used to
+        speed up the diskette production process.  Writing files to a diskette
+        using a block size of 512 took approximately 12-15 minutes.  The current
+        version using a block size of 18432 takes approximately 1-2 minutes.
+
+
+  Related Information
+
+     stack_32

@@ -1,0 +1,82 @@
+* @(#)37	1.7  src/bos/objclass/POWER/ops.add, sysxsol, bos411, 9428A410j 10/11/93 10:21:39
+* COMPONENT_NAME: SYSXSOL
+*
+* FUNCTIONS: N/A
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+********** PdDv ***************************************************************
+
+PdDv:
+	uniquetype = "node/node/ops"
+	class = node
+	subclass = node
+	type = ops
+	DvDr = "soldd"
+	Define = "/usr/lib/methods/define -n"
+	Configure = "/usr/lib/methods/cfgops"
+	Change = "/usr/lib/methods/chggen"
+	prefix = ops
+	devid = ""
+	led = 0x861
+	base = 0
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	Start = ""
+	Stop = ""
+	fru = 0
+	setno = 4
+	msgno = 1
+	catalog = "devices.cat"
+	Unconfigure = "/usr/lib/methods/ucfgdevice"
+	Undefine = "/usr/lib/methods/undefine"
+
+PdCn:
+	uniquetype = "node/node/ops"
+	connkey = ops
+	connwhere = ""
+
+********** PdAt ***************************************************************
+
+PdAt:
+	uniquetype = "node/node/ops"
+	attribute = processor_id
+	values = 1-254,1
+	type = R
+	generic = DU
+	nls_index = 5
+	width = ""
+	deflt = -1
+	rep = nr
+
+PdAt:
+	uniquetype = "node/node/ops"
+	attribute = sta_que_size
+	values = 3-20,1
+	type = R
+	deflt = 10
+	width = ""
+	generic = DU
+	nls_index = 7
+	rep = nr
+
+PdAt:
+	uniquetype = "node/node/ops"
+	attribute = rec_que_size
+	values = 20-150,1
+	type = R
+	deflt = 30
+	width = ""
+	generic = DU
+	nls_index = 6
+	rep = nr

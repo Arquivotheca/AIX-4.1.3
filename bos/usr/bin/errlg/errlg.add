@@ -1,0 +1,1135 @@
+#  @(#)03        1.12  src/bos/usr/bin/errlg/errlg.add, cmderrlg, bos41J, 9512A_all 3/3/95 10:57:20 
+#
+#   COMPONENT_NAME: CMDERRLG
+#
+#   FUNCTIONS: datafile for SMIT odm population 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_name_hdr:
+	id = "errpt_sel_2"
+	next_id = "errpt.dial_2_1"
+	option_id = "errpt_ghost2"
+	has_name_select = "y"
+	name = "Generate an Error Report"
+	name_msg_file = "smit.cat"
+	name_msg_set = 8
+	name_msg_id = 1
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "0315001"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "errpt_sel_1"
+	next_id = "errpt.dial_1_"
+	option_id = "errpt_ghost1"
+	has_name_select = "y"
+	name = "Generate an Error Report"
+	name_msg_file = "smit.cat"
+	name_msg_set = 8
+	name_msg_id = 1
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "0315001"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+        id = "errpt"
+        next_id = "errpt_sel_"
+        option_id = "errpt_sel.1st"
+        has_name_select = ""
+        name = ""
+        name_msg_file = "smit.cat"
+        name_msg_set = 0
+        name_msg_id = 0
+        type = "r"
+        ghost = "y"
+        cmd_to_classify = ""
+        cmd_to_classify_postfix = ""
+        raw_field_name = "output_device"
+        cooked_field_name = ""
+        next_type = "n"
+        help_msg_id = "0315001"
+        help_msg_loc = ""
+        help_msg_base = ""
+
+sm_menu_opt:
+        id                  = "error"
+        id_seq_num          = "010"
+        next_id             = "errpt"
+        text                = "Generate an Error Report"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 88
+        next_type           = "n"
+        alias               = ""
+        help_msg_id         = "1800203"
+        help_msg_loc        = ""
+
+sm_menu_opt:
+        id                  = "error"
+        id_seq_num          = "030"
+        next_id             = "errclear"
+        text                = "Clean the Error Log"
+        text_msg_file       = "smit.cat"
+        text_msg_set        = 25
+        text_msg_id         = 174
+        next_type           = "d"
+        alias               = ""
+        help_msg_id         = "1800403"
+        help_msg_loc        = ""
+
+sm_cmd_opt:
+        id_seq_num = "2000"
+        id = "errpt_filename"
+        disc_field_name = ""
+        name = "FILENAME to send report to (default is stdout)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 14
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = " > "
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315012"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "errpt.dial_1_1"
+        option_id = "errpt,errpt_filename,errpt_1"
+        has_name_select = "y"
+        name = "Generate an Error Report"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 1
+        cmd_to_exec = "errpt"
+        ask = ""
+        exec_mode = "n"
+        ghost = ""
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0315001"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "errpt.dial_1_2"
+        option_id = "errpt,errpt_filename,errpt_2"
+        has_name_select = "y"
+        name = "Generate an Error Report"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 1
+        cmd_to_exec = "echo $(dspmsg smit.cat -s 8 17 'This command will run unt
+il interrupted.')\n\
+echo $(dspmsg smit.cat -s 8 18 'Press Enter to continue.')\n\
+read xxxxx\n\
+errpt"
+        ask = ""
+        exec_mode = "e"
+        ghost = ""
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0315001"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "errpt.dial_2_1"
+	option_id = "errpt,errpt_printer,errpt_1"
+	has_name_select = "y"
+	name = "Generate an Error Report"
+	name_msg_file = "smit.cat"
+	name_msg_set = 8
+	name_msg_id = 1
+	cmd_to_exec = "errpt"
+	ask = ""
+	exec_mode = "n"
+	ghost = ""
+	cmd_to_discover = "# Get default lpq entry, skip past bsh entry if it is first. \n\
+COUNT=`expr 0`\n\
+ DFLT=\"\" \n\
+LANG=C enq -q | \n\
+while read A1 STUFF \n\
+        do \n\
+        COUNT=`expr $COUNT + 1` \n\
+        if [ $COUNT -ge 3 -a $A1 != bsh ] \n\
+        then \n\
+                DFLT=$A1 \n\
+        fi \n\
+done \n\
+print '#errpt_printer'\n\
+print $DFLT"
+	cmd_to_discover_postfix = ""
+	name_size = 0
+	value_size = 0
+	help_msg_id = "0315001"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+        id = "errclear"
+        option_id = "errclear"
+        has_name_select = ""
+        name = "Clean the Error Log"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 3
+        cmd_to_exec = "errclear"
+        ask = "n"
+        exec_mode = "p"
+        ghost = "n"
+        cmd_to_discover = ""
+        cmd_to_discover_postfix = ""
+        name_size = 0
+        value_size = 0
+        help_msg_id = "0315023"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "0"
+        id = "errpt_sel.1st"
+        disc_field_name = ""
+        name = "FILENAME for error report"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 24
+        op_type = "l"
+        entry_type = ""
+        entry_size = 0
+        required = ""
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = "echo $(dspmsg smit.cat -s 8 25 '1 filename (defaults to stdout)')\n\
+echo $(dspmsg smit.cat -s 8 26 '2 printer')"
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315033"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "errpt_ghost1"
+	disc_field_name = ""
+	name = "CONCURRENT error reporting?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 8
+	name_msg_id = 4
+	op_type = "l"
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = "1"
+	cmd_to_list = "echo $(dspmsg smit.cat -s 8 19 '1 no')\n\
+echo $(dspmsg smit.cat -s 8 20 '2 yes')"
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0315002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+
+sm_cmd_opt:
+	id_seq_num = "0"
+	id = "errpt_ghost2"
+	disc_field_name = ""
+	name = "CONCURRENT error reporting?"
+	name_msg_file = "smit.cat"
+	name_msg_set = 0
+	name_msg_id = 0
+	op_type = ""
+	entry_type = ""
+	entry_size = 0
+	required = ""
+	prefix = ""
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "0315002"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "010"
+        id = "errpt_1"
+        disc_field_name = "concurrent"
+        name = "CONCURRENT error reporting?"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 4
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = "n"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = "no"
+        values_msg_file = ""
+        values_msg_set = 8
+        values_msg_id = 21
+        aix_values = ""
+        help_msg_id = "0315002"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "010"
+        id = "errpt_2"
+        disc_field_name = "concurrent"
+        name = "CONCURRENT Error Reporting?"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 4
+        op_type = ""
+        entry_type = ""
+        entry_size = 0
+        required = "y"
+        prefix = ""
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = "yes"
+        values_msg_file = "smit.cat"
+        values_msg_set = 8
+        values_msg_id = 22
+        aix_values = "-c"
+        help_msg_id = "0315002"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "1010"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "LOGFILE"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 29
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-i"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 1
+        disp_values = "/var/adm/ras/errlog"
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315037"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "1011"
+        id = "errpt"
+        disc_field_name = "template"
+        name = "TEMPLATE file"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 30
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-y"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 1
+        disp_values = "/var/adm/ras/errtmplt"
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315038"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "1012"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "MESSAGE file"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 31
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-z"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 1
+        disp_values = "/var/adm/ras/codepoint.cat"
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315039"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "043"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "Error LABELS     (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 32
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-J"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "errpt -t | cut -c10-80 | sort"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315034"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "075"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "SEQUENCE numbers (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 33
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-l"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315035"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "025"
+        id = "errpt"
+        disc_field_name = "sum_det"
+        name = "SUMMARY or DETAILED error report"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 5
+        op_type = "r"
+        entry_type = "n"
+        entry_size = 0
+        required = "n"
+        prefix = ""
+        cmd_to_list_mode = "1"
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = "summary,detailed"
+        values_msg_file = "smit.cat"
+        values_msg_set = 8
+        values_msg_id = 23
+        aix_values = " ,-a"
+        help_msg_id = "0315003"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "030"
+        id = "errpt"
+        disc_field_name = "class"
+        name = "Error CLASSES    (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 6
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-d"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "x()
+{
+echo \"H\"
+echo \"S\"
+echo \"O\"
+echo \"U\"
+}
+x"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315004"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "040"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "Error TYPES      (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 7
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-T"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "x()
+{
+echo \"PERM\"
+echo \"TEMP\"
+echo \"PERF\"
+echo \"UNKN\"
+echo \"INFO\"
+}
+x"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315005"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "045"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "Resource CLASSES (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 8
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-S"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = "" 
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315006"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "050"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "Resource TYPES   (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 9
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-R"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315007"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "060"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "Resource NAMES   (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 10
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = ""
+        prefix = "-N"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315008"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "044"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "Error ID's       (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 11
+        op_type = "l"
+        entry_type = "x"
+        entry_size = 0
+        required = "n"
+        prefix = "-j"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "errpt -t | cut -c1-9,32-"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315009"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "080"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "STARTING time interval"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 12
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-s"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315010"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "090"
+        id = "errpt"
+        disc_field_name = "type"
+        name = "ENDING time interval"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 13
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-e"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+	help_msg_id = "0315036"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "1001"
+        id = "errpt_printer"
+        disc_field_name = "errpt_printer"
+        name = "PRINTER name for report"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 15
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "+"
+        prefix = " | /usr/lib/ras/errlg_smutil catpr Z"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "lsallq"
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315013"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "030"
+        id = "errclear"
+        disc_field_name = "class"
+        name = "Error CLASSES    (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 6
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-d"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "x()
+{
+echo \"H\"
+echo \"S\"
+echo \"O\"
+echo \"U\"
+}
+x"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315025"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "035"
+        id = "errclear"
+        disc_field_name = "type"
+        name = "Error TYPES      (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 7
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-T"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "x()
+{
+echo \"PERM\"
+echo \"TEMP\"
+echo \"PERF\"
+echo \"UNKN\"
+echo \"INFO\"
+}
+x"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315026"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "040"
+        id = "errclear"
+        disc_field_name = "type"
+        name = "Resource CLASSES (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 8
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-S"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "errpt -S"
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315027"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "050"
+        id = "errclear"
+        disc_field_name = "type"
+        name = "Resource TYPES   (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 9
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-R"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "errpt -R"
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315028"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "060"
+        id = "errclear"
+        disc_field_name = "type"
+        name = "Resource NAMES   (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 10
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-N"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "errpt -N"
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315029"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "039"
+        id = "errclear"
+        disc_field_name = "type"
+        name = "Error ID's       (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 11
+        op_type = "l"
+        entry_type = "x"
+        entry_size = 0
+        required = "n"
+        prefix = "-j"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "errpt -t | cut -c1-9,32-"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0315030"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "080"
+        id = "errclear"
+        disc_field_name = "logfile"
+        name = "LOGFILE"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 29
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-i"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 1
+        disp_values = "/var/adm/ras/errlog"
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0316004"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "090"
+        id = "errclear"
+        disc_field_name = "template"
+        name = "TEMPLATE file"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 30
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-y"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 1
+        disp_values = "/var/adm/ras/errtmplt"
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0316005"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "075"
+        id = "errclear"
+        disc_field_name = "type"
+        name = "SEQUENCE numbers (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 33
+        op_type = ""
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-l"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = ""
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        aix_values = ""
+        help_msg_id = "0316003"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "038"
+        id = "errclear"
+        disc_field_name = "type"
+        name = "Error LABELS     (default is all)"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 32
+        op_type = "l"
+        entry_type = "t"
+        entry_size = 0
+        required = "n"
+        prefix = "-J"
+        cmd_to_list_mode = "1"
+        cmd_to_list = "errpt -t | cut -c10-80 | sort"
+        cmd_to_list_postfix = ""
+        multi_select = "y"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = ""
+        help_msg_id = "0316002"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+
+sm_cmd_opt:
+        id_seq_num = "020"
+        id = "errclear"
+        disc_field_name = "num_of_days"
+        name = "Remove entries older than this NUMBER OF DAYS"
+        name_msg_file = "smit.cat"
+        name_msg_set = 8
+        name_msg_id = 16
+        op_type = ""
+        entry_type = "#"
+        entry_size = 0
+        required = "y"
+        prefix = "--"
+        cmd_to_list_mode = ""
+        cmd_to_list = ""
+        cmd_to_list_postfix = ""
+        multi_select = "n"
+        value_index = 0
+        disp_values = ""
+        values_msg_file = ""
+        values_msg_set = 0
+        values_msg_id = 0
+        aix_values = "30"
+        help_msg_id = "0315024"
+        help_msg_loc = ""
+        help_msg_base = ""
+        help_msg_book = ""
+

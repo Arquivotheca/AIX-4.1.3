@@ -1,0 +1,25 @@
+#!libpthreads.a(shr.o)
+* @(#)81        1.4  src/bos/usr/ccs/lib/libc_r/libpthreads.imp, libc, bos41B, 9505A 1/23/95 10:36:33
+*
+*   COMPONENT_NAME: libcthrd
+*
+*   FUNCTIONS:
+*
+*   ORIGINS: 27
+*
+*   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+*   combined with the aggregated modules for this product)
+*                    SOURCE MATERIALS
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1994, 1995
+*   All Rights Reserved
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+nsleep
+pause
+raise
+sigaction
+sigpending
+sigsuspend

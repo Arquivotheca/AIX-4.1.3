@@ -1,0 +1,335 @@
+* stanzas common to 8 and 128 port digi ISA adpaters
+
+sm_cmd_hdr:
+	id = "maktty_hdr_cxiadd"
+	option_id = "tty_add,tty_common,tty_cxiadd"
+	has_name_select = "y"
+	name = "Add a TTY"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 83
+	cmd_to_exec = "mkdev -c tty "
+	ask = ""
+	exec_mode = ""
+	ghost = "n"
+        cmd_to_discover = "attribs () \n\
+{ \n\
+l1=$( lsattr -c tty -s $1 -t $2 -D -O ) \n\
+l11=$( echo \"$l1\" | head -1 ) \n\
+l12=$( echo \"$l1\" | tail -1 ) \n\
+l2=$( lsattr -l $3 -D -O | sed -e 's/\\\\/\\\\\\\\\\\\\\\\/g' ) \n\
+l21=$( echo \"$l2\" | head -1 | sed -e 's/.//' ) \n\
+l22=$( echo \"$l2\" | tail -1 ) \n\
+echo \"$l11:$l21\" \n\
+echo \"$l12:$l22\" \n\
+} \n\
+attribs "
+        cmd_to_discover_postfix = "subclass type parent"
+	name_size = 0
+	value_size = 0
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_hdr:
+	id = "chgtty_hdr_cxiadd"
+	option_id = "tty_chg,tty_common,tty_cxiadd"
+	has_name_select = "y"
+	name = "Change/Show Characteristics of a TTY"
+	name_msg_file = "smit.cat"
+	name_msg_set = 25
+	name_msg_id = 85
+	cmd_to_exec = "chdev "
+	ask = ""
+	exec_mode = ""
+	ghost = "n"
+	cmd_to_discover = "lsattr "
+	cmd_to_discover_postfix = "-l logicname -E -O"
+	name_size = 0
+	value_size = 0
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "180"
+	id = "tty_cxiadd"
+	disc_field_name = "onstr"
+	name = "Transparent Print ON String"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 44
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a onstr="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1850004"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "182"
+	id = "tty_cxiadd"
+	disc_field_name = "offstr"
+	name = "Transparent Print OFF String"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 45
+	op_type = ""
+	entry_type = "t"
+	entry_size = 0
+	required = "n"
+	prefix = "-a offstr="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1850005"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "184"
+	id = "tty_cxiadd"
+	disc_field_name = "maxcps"
+	name = "Transparent Print Maximum Characters per Second"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 46
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 4
+	required = "n"
+	prefix = "-a maxcps="
+	cmd_to_list_mode = "r"
+        cmd_to_list  = "lsattr -a maxcps -R"
+        cmd_to_list_postfix = "-l parent"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1850006"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "186"
+	id = "tty_cxiadd"
+	disc_field_name = "maxchar"
+	name = "Transparent Print Maximum Character Packet Size"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 47
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 4
+	required = ""
+	prefix = "-a maxchar="
+	cmd_to_list_mode = "r"
+        cmd_to_list  = "lsattr -a maxchar -R"
+        cmd_to_list_postfix = "-l parent"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1850007"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "188"
+	id = "tty_cxiadd"
+	disc_field_name = "bufsize"
+	name = "Transparent Print Buffer Size"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 48
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 0
+	required = "n"
+	prefix = "-a bufsize="
+	cmd_to_list_mode = "r"
+        cmd_to_list  = "lsattr -a bufsize -R"
+        cmd_to_list_postfix = "-l parent"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1850008"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "190"
+	id = "tty_cxiadd"
+	disc_field_name = "forcedcd"
+	name = "Ignore Carrier Detect"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 49
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = "-a forcedcd="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "enable,disable"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = "enable,disable"
+	help_msg_id = "1850009"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "192"
+	id = "tty_cxiadd"
+	disc_field_name = "altpin"
+	name = "Use Alternate RJ-45 Pinouts"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 51
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = "-a altpin="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "enable,disable"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = "enable,disable"
+	help_msg_id = "1850011"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "194"
+	id = "tty_cxiadd"
+	disc_field_name = "edelay"
+	name = "Receive Event Delay Time"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 89
+	op_type = "l"
+	entry_type = "#"
+	entry_size = 3
+	required = "n"
+	prefix = "-a edelay="
+	cmd_to_list_mode = "r"
+        cmd_to_list  = "lsattr -a edelay -R"
+        cmd_to_list_postfix = "-l parent"
+	multi_select = ""
+	value_index = 0
+	disp_values = ""
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = ""
+	help_msg_id = "1850012"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "196"
+	id = "tty_cxiadd"
+	disc_field_name = "2200flow"
+	name = "2200 Flow Control"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 49
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = "-a 2200flow="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "enable,disable"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = "enable,disable"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_cmd_opt:
+	id_seq_num = "198"
+	id = "tty_cxiadd"
+	disc_field_name = "2200print"
+	name = "2200 Print Control"
+	name_msg_file = "devices.cat"
+	name_msg_set = 65
+	name_msg_id = 49
+	op_type = "r"
+	entry_type = "n"
+	entry_size = 0
+	required = ""
+	prefix = "-a 2200print="
+	cmd_to_list_mode = ""
+	cmd_to_list = ""
+	cmd_to_list_postfix = ""
+	multi_select = "n"
+	value_index = 0
+	disp_values = "enable,disable"
+	values_msg_file = ""
+	values_msg_set = 0
+	values_msg_id = 0
+	aix_values = "enable,disable"
+	help_msg_id = ""
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+

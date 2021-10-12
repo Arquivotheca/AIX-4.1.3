@@ -1,0 +1,33 @@
+# @(#)12	1.1  src/bos/usr/lpp/Unicode/X11/app-defaults/XMdemos, cfgnls, bos410, 9406A410a 2/7/94 09:50:55
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+*.fontList: \
+-ibm-roman-medium-r-*-c-120-iso8859-*;\
+-ibm-roman-medium-r-*-c-120-ibm-1046;\
+-ibm_aix-mincho-medium-r-*-m-130-*;\
+-ibm_aix-mincho-medium-r-*-m-260-*;\
+-ibm_aix-sung-medium-r-*-m-260-*;\
+-ibm_aix-myungjo-medium-r-*-m-260-*:
+
+!*.fontList: \
+!-ibm-roman-medium-r-*-c-90-iso8859-*;\
+!-ibm-roman-medium-r-*-c-90-ibm-1046;\
+!-ibm_aix-gothic-medium-r-*-m-90-*;\
+!-ibm_aix-gothic-medium-r-*-m-180-*;\
+!-ibm_aix-sung-medium-r-*-m-180-*:
+
+Aixim.auxPolicy: RowColumn
+!Aixim.auxPolicy: ListBox
+!Aixim.auxPolicy: ScrollList

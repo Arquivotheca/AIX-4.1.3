@@ -1,0 +1,234 @@
+#!/bin/ksh
+ 
+# This program will configure a machine to run as a standalone license server.
+# When configuration is complete, the license server will only grant licenses
+# to applications that are started on the same machine.  Running this program
+# is equivalent to running the netls_config script and the netls_first_time
+# script with a "new alternate cell" configuration.
+ 
+#
+# remove_proc <proc_name> will make sure process is not running
+#
+remove_proc()
+{
+	pid=`/usr/bin/ps -e | /usr/bin/grep $1 | /usr/bin/awk '{ print $1 }'`
+	if [ "${pid}" = "" ]
+	then
+		return 0
+ 	fi
+ 
+ 	kill ${pid}
+	sleep 1
+ 
+ 	pid=`/usr/bin/ps -e | /usr/bin/grep $1 | /usr/bin/awk '{ print $1 }'`
+ 	if [ "${pid}" = "" ]
+ 	then
+ 		return 0
+ 	fi
+ 
+ 	kill -9 ${pid}
+}
+ 
+# set up variables because this is an Internationalized script
+MSGCAT=netls.cat			# message catalog number
+MSGSET=2				# message set number
+MSG1=1					# 1st message
+MSG2=2					# 2nd message
+MSG3=3
+MSG4=4
+MSG5=5
+MSG6=6
+MSG7=7
+MSG8=8
+MSG9=9
+MSG10=10
+MSG11=11
+MSG12=12
+MSG13=13
+MSG14=14
+MSG15=15
+MSG16=16
+MSG17=17
+MSG18=18
+MSG19=19
+MSG20=20
+MSG21=21
+ 
+PATH=$PATH:/usr/lib/netls/ark/ils
+export PATH
+ 
+# Print a couple of blank lines for readability.
+print
+print
+ 
+# Verify that the user is root before continuing.
+IDNUM=`id -u`
+if [[ $IDNUM -ne 0 ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG1 -m "You must be root to run this program.  Login as \"root\" or use the \"su\" command
+before running this program."
+  print
+  exit -1
+fi
+ 
+# Verify that the server software is installed.  It may be installed with
+# any of three packages.  First check for the AIX 4.1 iFOR/LS server fileset.
+# Then check for the AIX 3.2 NetLS Administrator Runtime Kit.  Finally,
+# check for the AIX 3.2 NetLS Application Developer Kit.
+ODMDIR=/usr/lib/objrepos odmget -q"lpp_name=bos.ifor_ls.server and state<6 \
+  and state>2 and state!=4" product | grep ifor_ls > /dev/null
+if [[ $? -ne 0 ]] then
+  ODMDIR=/usr/lib/objrepos odmget -q"lpp_name=iFORLS.ARK and state<6 \
+    and state>2 and state!=4" product | grep iFORLS > /dev/null
+  if [[ $? -ne 0 ]] then
+    ODMDIR=/usr/lib/objrepos odmget -q"lpp_name=NetLS.Ark and state<6 \
+      and state>2 and state!=4" product | grep NetLS > /dev/null
+    if [[ $? -ne 0 ]] then
+      ODMDIR=/usr/lib/objrepos odmget -q"lpp_name=NetLS.Ark_Adk and state<6 \
+        and state>2 and state!=4" product | grep NetLS > /dev/null
+      if [[ $? -ne 0 ]] then
+        i18necho -s $MSGSET -f $MSGCAT -n $MSG2 -m "The iFOR/LS license server is not installed.  Please refer to your installation 
+documentation for instructions on how to install your license server."
+        print
+        exit -1
+      fi
+    fi
+  fi
+fi
+ 
+ 
+i18necho -s $MSGSET -f $MSGCAT -n $MSG3 -m "Your machine will now be configured to be a standalone iFOR/LS license server."
+print
+print
+ 
+# Stop the netlsd daemon if it is running.  Sleep for 3 seconds in case the
+# glbd has to propogate the unregistration to other glbd's.
+ps -e | grep netlsd > /dev/null
+if [[ $? -eq 0 ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG4 -m "Stopping the netsld daemon..."
+  stopsrc -cs netlsd
+  sleep 3
+  remove_proc netlsd
+  sleep 1
+  print
+fi
+ 
+# Stop the glbd daemon if it is running.
+ps -e | grep glbd > /dev/null
+if [[ $? -eq 0 ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG5 -m "Stopping the glbd daemon..."
+  stopsrc -cs glbd
+  remove_proc glbd
+  print
+fi
+ 
+# Stop the llbd daemon if it is running.
+ps -e | grep llbd > /dev/null
+if [[ $? -eq 0 ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG6 -m "Stopping the llbd daemon..."
+  stopsrc -cs llbd
+  remove_proc llbd
+  print
+  print
+fi
+ 
+# Remove any files created from previous configurations.
+i18necho -s $MSGSET -f $MSGCAT -n $MSG7 -m "Removing the current configuration..."
+if [[ -a /etc/ncs/glb.e ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG8 -m "  removing /etc/ncs/glb.e"
+  rm -f /etc/ncs/glb.e
+fi
+if [[ -a /etc/ncs/glb.p ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG9 -m "  removing /etc/ncs/glb.p"
+  rm -f /etc/ncs/glb.p
+fi
+if [[ -a /etc/ncs/glb_log ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG10 -m "  removing /etc/ncs/glb_log"
+  rm -f /etc/ncs/glb_log
+fi
+if [[ -a /etc/ncs/glb_obj.txt ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG11 -m "  removing /etc/ncs/glb_obj.txt"
+  rm -f /etc/ncs/glb_obj.txt
+fi
+if [[ -a /etc/ncs/glb_site.txt ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG12 -m "  removing /etc/ncs/glb_site.txt"
+  rm -f /etc/ncs/glb_site.txt
+fi
+if [[ -a /tmp/llbdbase.dat ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG13 -m "  removing /tmp/llbdbase.dat"
+  rm -f /tmp/llbdbase.dat
+fi
+print
+print
+
+i18necho -s $MSGSET -f $MSGCAT -n $MSG14 -m "Beginning the new standalone configuration..."  
+print
+
+# Create the new cell identifier.
+/etc/ncs/uuid_gen > /etc/ncs/glb_obj.txt
+ 
+# Start the local location broker daemon.
+i18necho -s $MSGSET -f $MSGCAT -n $MSG15 -m "Starting the llbd daemon..."
+startsrc -s llbd
+print
+ 
+# Start the global location broker daemon.
+i18necho -s $MSGSET -f $MSGCAT -n $MSG16 -m "Starting the glbd daemon..."
+startsrc -s glbd -a "-create -first -family ip"
+print
+ 
+# Verify that the glbd has started cleanly before starting netlsd.
+/usr/lib/ncs/bin/lb_find -q >/dev/null 2>&1
+if [[ $? -eq 0 ]] then
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG17 -m "Starting the netlsd daemon..."
+  startsrc -s netlsd
+else
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG18 -m "The GLB server is not responding;"
+  i18necho -s $MSGSET -f $MSGCAT -n $MSG19 -m  "NetLS server cannot be started."
+  exit -1
+fi
+print
+ 
+ 
+i18necho -s $MSGSET -f $MSGCAT -n $MSG20 -m "Updating the /etc/inittab file to automatically start your server whenever
+the system is re-booted..."
+print
+ 
+# Automatically start ncs on reboot.
+rmitab rcncs > /dev/null 2>&1
+mkitab rcncs:2:wait:"sh /etc/rc.ncs > /dev/console 2>&1 # Start NCS"
+ 
+# Edit the /etc/rc.ncs file to uncomment the line to start the llbd and glbd.
+if [[ -a /etc/rc.ncs ]] then
+ed -s /etc/rc.ncs <<! > /dev/null
+/startsrc -s llbd
+c
+startsrc -s llbd
+.
+/startsrc -s glbd
+c
+startsrc -s glbd
+.
+w
+q
+!
+fi
+
+# Automatically start netlsd on reboot.
+rmitab netlsd > /dev/null 2>&1
+mkitab netlsd:2:wait:"sh /etc/rc.netls >/dev/console 2>&1 # start netls"
+
+print
+
+print "=============================================================================="
+print
+i18necho -s $MSGSET -f $MSGCAT -n $MSG21 -m "Configuration has completed.  Only applications that are started on this
+machine will be granted licenses by the license server on this machine.
+ 
+To perform a more advanced configuration on this machine, run the program
+\"/usr/lib/netls/conf/netls_config\"."
+print
+exit 0
+ 
+
+
+

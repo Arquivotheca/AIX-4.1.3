@@ -1,0 +1,110 @@
+#
+# @(#)94 1.1 src/bldenv/man/adeprodid.man, pkgtools, bos412, GOLDA411a 5/20/94 14:57:04
+#
+#  COMPONENT_NAME: (pkgtools) Aix Build/Packaging/Distribution Tools
+#
+#  FUNCTIONS: adeprodid command man page
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  adeprodid Command
+  
+  
+  Purpose
+
+  The adeprodid command generates the productid file for an install or 
+  update package.
+
+  The productid file contains a product name followed by a four-digit
+  type field and a five-digit model field.  The type and model values are
+  separated by a dash "-".  Both values make up the unique product id.
+
+  This file is archived into the liblpp.a file for an install or update
+  package.  The installp command reads the productid file if it
+  exists and stores the value in the Vital Products Database (VPD)
+  for the lpp.
+
+
+  Syntax
+
+  adeprodid -l <product_name> -t <compids.table> [ -d <output_directory> ]
+
+
+  Flags
+
+*  -l <product_name>	Specifies the name of the software product or lpp.
+
+*  -t <compids.table>	Specifies the path name of the compids.table file.
+			This file is a data file containing the product
+			information for each lpp and each option.
+			
+   -d <output_dir>	Specifies the path name of the directory where
+			the productid file should be generated.
+
+   NOTE:  Flags indicated with an * are required.
+
+
+  Fatal Errors
+  
+    Fatal errors contain the word "USAGE" or "FATAL ERROR" followed by an 
+    error message printed to stderr.  adeprodid exits with a non-zero 
+    return code if an error is detected.
+
+
+  Input Files
+
+  compids.table
+
+	The compids.table file is required.  This file includes
+	vendor_id(s) and component/option information.  The compids.table
+	file is exported to the $ODE_TOOLS/usr/lib directory in the 4.1
+	build environment.  The format of this file is:
+
+	prologue - contains standard prologue and comments.
+	** lines - contains information concerning maintenance of
+		this file.
+	%%_ lines - contains vendor identification and numeric_id.
+	component/option lines - contains the information required for
+		packaging and distribution of each component/option.
+
+		The format of these lines are:
+
+	package name:component id:feature code:component release level:
+		system release level:change team id(s):CMVC release:vendor_id:
+		iFOR/LS_product_id:iFOR/LS_product_version:
+
+	Example:
+
+	    bos.adt:575603001:5005:410:410:TX2527:XXX:IBM:1234567:12345678901:
+
+
+  Output Files
+ 
+  productid - The productid file is written to the current directory and
+	contains the software product name followed by a numeric id.
+	For the above compids.table entry, the product id file would
+	contain:
+
+	bos.adt 5756-03001
+
+
+  Examples
+
+  1.  To generate the productid file for bos.adt, execute the following
+      command:
+
+	adeprodid -l bos.adt -t ode_tools/power/usr/lib/compids.table
+
+  2.  To generate the productid file for bos.adt.data in the data subdirectory
+      execute the following command:
+
+	adeprodid -l bos.adt.data -t ode_tools/power/usr/lib/compids.table \
+		  -d data

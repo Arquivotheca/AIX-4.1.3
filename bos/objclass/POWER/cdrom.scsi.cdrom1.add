@@ -1,0 +1,142 @@
+# @(#)36        1.4  src/bos/objclass/POWER/cdrom.scsi.cdrom1.add, cfgmethods, bos41J, 9513A_all 3/24/95 22:17:07
+* 
+*  COMPONENT_NAME: (CFGMETHODS) SCSI CD-ROM PREDEFINED DATA STANZAS
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1995
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = cdrom1
+	class = cdrom
+	subclass = scsi
+	prefix = cd
+	devid = ""
+	base = 0
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x974
+	setno = 1
+	msgno = 1
+	fru = 1
+	catalog = scdisk.cat
+	DvDr = scdisk
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsccd
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = cdrom/scsi/cdrom1
+
+PdAt:
+	uniquetype = cdrom/scsi/cdrom1
+	attribute = model_name
+	deflt = "CD-ROM DRIVE:XM "
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = cdrom/scsi/cdrom1
+	attribute = maxlun
+	deflt = 0
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+
+PdAt:
+	uniquetype = cdrom/scsi/cdrom1
+	attribute = mode_data
+	deflt = 0x000080080000000000000200020109
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = cdrom/scsi/cdrom1
+	attribute = reserve_lock
+	deflt = no
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 2
+
+PdAt:
+	uniquetype = cdrom/scsi/cdrom1
+	attribute = prevent_eject
+	deflt = no
+	values = no,yes 
+	width = ""
+	type = R
+	generic = UD
+	rep = sl 
+	nls_index = 3
+
+PdAt:
+	uniquetype = cdrom/scsi/cdrom1
+        attribute = vpd_map
+        deflt = "MF0808C,TM1010C,RL2004C,Z00008X"
+        values = ""
+        width = ""
+        type = V
+        generic = ""
+        rep = sl
+        nls_index = 0
+
+PdAt:
+        uniquetype = cdrom/scsi/cdrom1
+        attribute = pm_dev_itime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = cdrom/scsi/cdrom1
+        attribute = pm_dev_stime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = cdrom/scsi/cdrom1
+        attribute = pm_devid
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x00184000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b000,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+

@@ -1,0 +1,54 @@
+# @(#)08        1.11.1.3  src/bos/usr/lib/pios/predef/ti2115.pcl, cmdpios, bos411, 9428A410j 9/10/93 17:34:00
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:003:_Y:Dn:
+:791:_J:S[C950]I[1810533]%IWY:!
+:683:_Q:S[E020]I[1810505]En%IWP:%IwQ
+:060:__SYS::
+:446:s0:Dn:
+:449:s3:Dn:
+:450:s4:Dn:
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLQXZ] %Uh
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLQXZ] %Uh
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJQZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%;
+:058:__MIS::
+:330:mA::PCL Emulation
+:565:mB::hplj.roman8
+:331:mL::[devices.cat,71,8;Texas Instruments OmniLaser 2115 Page Printer]
+:295:mN::ti2115
+#
+# Font list
+:416:mU::courier[10,3;0;0(%ImB)]
+#
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,743;upper tray,lower tray=1,2]
+:762:WP::R[letter,legal,A4=1,2,4]
+#
+# Define the paper source based on _u
+:730:Wu::%G_u%d
+#
+:051:__CAG::
+#
+# Initialization (ci) and Restore (cr) strings
+:144:ci::%?%G_j%{1}%=%t%I[eR,eP,c1,eT,eO,ct,eF,eu,es,eC]%;
+:152:cr::
+:475:__HIR::
+:686:zL::2
+:688:zM::Texas Instruments
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

@@ -1,0 +1,10 @@
+ADDRESS MAP FOR mid_cdd_pin
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+    00000000 000290  2 PR SD S1    <>                        ../../../../../../../src/bos/kernext/disp/ped/cdd/cdd_interrupt.c(cdd_interrupt.o)
+    00000000           PR LD S2    .cdd_interrupt
+    00000290 000040  2 PR SD S3    <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    00000290           PR LD S4    ._ptrgl
+    00000290           PR LD S5    .$PTRGL
+* E 00000000 00000C  2 DS SD S6    cdd_interrupt             ../../../../../../../src/bos/kernext/disp/ped/cdd/cdd_interrupt.c(cdd_interrupt.o)
+    0000000C 000000  2 T0 SD S7    <TOC>

@@ -1,0 +1,36 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can use all kinds of addresses with "=" so
+that you can find the number of the last line with
+   $=
+for example.  There is a file 'monteverdi' in this
+directory: find out the number of the next to last line.
+Then exit from the editor with wq and type "answer N"
+where N is the number of the next to last line.
+#create monteverdi
+  madrigals
+  magnificat a 6 voci
+  mass a 4 voci
+  motets
+  l'orfeo
+  psalms
+#copyin
+#user
+#uncopyin
+#match 5
+#log
+#next
+15.1a 10
+15.2a 5

@@ -1,0 +1,561 @@
+#
+#  @(#)16  1.28  src/bos/usr/lib/assist/add_files/sm_migrate.add, cmdassist, bos411, 9428A410j 6/30/94 15:12:05
+#
+#   COMPONENT_NAME:  cmdassist
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_menu_opt:
+    id_seq_num                = "000"
+    id                        = "__ROOT__"
+    next_id                   = "assist"
+    text                      = "Installation Assistant"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 1
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850100"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "060"
+    id                        = "assist"
+    next_id                   = "startup_env"
+    text                      = "Manage Language Environment"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 34
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850106"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "100"
+    id                        = "assist"
+    next_id                   = "assist_install"
+    text                      = "Install Software Applications"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 23
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850110"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "110"
+    id                        = "assist"
+    next_id                   = "assist_backup"
+    text                      = "Back Up the System"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 31
+    next_type                 = "n"
+    alias                     = ""
+    help_msg_id               = "2850111"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "120"
+    id                        = "assist"
+    next_id                   = "install_exit"
+    text                      = "Tasks Completed - Exit to AIX Login"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 30
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850112"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_install"
+    next_id                   = "assist_license"
+    text                      = "Add License Passwords for Applications"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 24
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850130"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_install"
+    next_id                   = "easy_install"
+    text                      = "Install a Bundle of Software (Easy Install)"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 29
+    next_type                 = "m"
+    alias                     = "y"
+    help_msg_id               = "0504002"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "030"
+    id                        = "assist_install"
+    next_id                   = "install_selectable"
+    text                      = "Install Selectable Software (Custom Install)"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 59
+    next_type                 = "m"
+    alias                     = "y"
+    help_msg_id               = "2850115"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id			      = "assist_install_gui_parent"	
+    next_id                   = "assist_install_gui"
+    text                      = "Install Software Applications"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52 
+    text_msg_id               = 23 
+    next_type                 = "m"
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_install_gui"
+    next_id                   = "assist_license"
+    text                      = "Add License Passwords for Applications"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 24
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850130"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_install_gui"
+    next_id                   = "run_xinstallm"
+    text                      = "Install a Bundle of Software (Easy Install)"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 29
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "0504002"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+		
+sm_cmd_hdr:
+	id		= "run_xinstallm"
+	cmd_to_exec	= "/usr/bin/X11/xinstallm -ez &"
+	exec_mode	= "E"
+	ghost		= "y"
+
+sm_menu_opt:
+    id_seq_num                = "030"
+    id                        = "assist_install_gui"
+    next_id                   = "run_xinstallm_adv"
+    text                      = "Install Selectable Software (Custom Install)"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 59
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850115"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+	id              = "run_xinstallm_adv"
+	cmd_to_exec     = "/usr/bin/X11/xinstallm &"
+	exec_mode       = "E"
+	ghost           = "y"
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_license"
+    next_id                   = "assist_license_setup"
+    text                      = "Set Up for Adding Concurrent-Use and Use-Once Licenses"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 25
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850131"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_license"
+    next_id                   = "manage_nodelocked"
+    text                      = "Manage NodeLocked Licenses"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 35
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "9000004"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "030"
+    id                        = "assist_license"
+    next_id                   = "manage_prod_licenses"
+    text                      = "Manage Concurrent-Use and Use-Once Licenses"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 36
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "9000009"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "040"
+    id                        = "assist_license"
+    next_id                   = "manage_vendors"
+    text                      = "Manage Vendors"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 37
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "9000010"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "050"
+    id                        = "assist_license"
+    next_id                   = "show_target_id"
+    text                      = "Show Target ID"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 51
+    text_msg_id               = 41
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "9000023"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "assist_license_setup"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "Set Up for Adding Concurrent-Use and Use-Once Licenses"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 25
+    cmd_to_exec               = "\
+license_passwd ()
+{
+  # Set variables for message numbers.  These must match the values
+  # in the include file cmdassist_msg.h which is generated from the
+  # cmdassist.msg file.
+  #
+  MF_CMDASSIST=cmdassist.cat  # Message file
+  ASSIST_ERR_SET=1            # Message set number
+  ASSIST_INSTL_NETLS_I=4      # Installing netls (information)
+  ASSIST_INSTL_NETLS_E=5      # Install error, netls package
+  ASSIST_INSTL_FAIL_I=9       # Install failure, possible causes
+  ASSIST_CONFIG_NETLS_I=21    # Configuring netls (information)
+  ASSIST_CONFIG_NETLS_E=22    # Error trying to config netls
+  ASSIST_START_NETLS_I=23     # Starting netls (information)
+  ASSIST_START_NETLS_E=24     # Unable to start netls
+
+  # If /etc/ncs/glb.e file exists (indicates user has previously
+  # configured iFOR/LS), set flag so configuration will not be redone.
+  #
+  if [[ -f /etc/ncs/glb.e ]]
+  then
+    config=0
+  else
+    config=1
+  fi
+
+  # Install iFOR/LS server if it is not already installed.
+  #
+  lslpp -l bos.ifor_ls.server 2>/dev/null 1>/dev/null
+  if [[ $? != 0 ]]
+  then
+    # Display installing message and install the iFOR/LS package.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_NETLS_I \
+'install_assist:  Please wait.  The bos.ifor_ls.server \n\
+package will be installed.\n\n'
+    /usr/lib/assist/install_pkg bos.ifor_ls.server
+    if [[ $? != 0 ]]
+    then
+      # Display specific install error message for iFOR/LS.
+      dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_NETLS_E \
+'0851-001 install_assist:  Concurrent-use and use-once licenses\n\
+cannot be added to the system until the bos.ifor_ls.server package\n\
+is installed.  An attempt to install this package failed.\n\n'
+      # Display information about possible causes for install error.
+      dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_FAIL_I \
+'The installation failure may have been caused \n\
+by one of the following: \n\
+  - The input device/directory is not correct. \n\
+    The device may be changed through the Set \n\
+    Installation Device menu. \n\
+  - The input device does not contain a valid \n\
+    installation medium. \n\
+  - There is a valid installation medium, but \n\
+    it does not contain the necessary packages. \n\
+If you are able to correct this problem, you \n\
+may wish to try this function again.\n'
+      exit 1 
+    fi
+  fi
+
+  # Configure the iFOR/LS server if needed.
+  #
+  if (( config == 1 ))
+  then
+    # Configure this system to serve license passwords to itself.
+      dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_CONFIG_NETLS_I \
+'\n\ninstall_assist:  No prior configuration of NCS was found for\n\
+this system.  Attempting to configure NCS for use of this system\n\
+as an iFOR/LS license server.\n'
+    /usr/lib/netls/conf/auto_config
+    if [[ $? != 0 ]]
+    then
+      # Display error indicating we could not configure iFOR/LS.
+      dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_CONFIG_NETLS_E \
+'0851-014 install_assist:  An error occurred while attempting\n\
+to configure this system as a standalone iFOR/LS license server.\n\
+Consult the iFOR/LS product documentation for more specific\n\
+information about any errors displayed by the configuration\n\
+procedure.\n'
+      exit 1
+    fi
+  else
+    # Start the license server with prior NCS configuration.
+      dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_START_NETLS_I \
+'\n\ninstall_assist:  An existing configuration of NCS was detected\n\
+for this system.  Attempting to start the iFOR/LS license server\n\
+with the current configuration.\n\n'
+    /usr/lib/netls/bin/srv_start
+    ps -ef >/tmp/.assist.$$
+    grep netlsd /tmp/.assist.$$ 2>/dev/null 1>/dev/null
+    rc=$?
+    rm /tmp/.assist.$$ 2>/dev/null 1>/dev/null
+    if [[ $rc != 0 ]]
+    then
+      # Display error that we could not start the license server.
+      dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_START_NETLS_E \
+'\n0851-015 install_assist:  Unable to start the iFOR/LS license\n\
+server.  Consult the iFOR/LS product documentation for more\n\
+specific information.\n'
+      exit 1
+    fi
+  fi
+
+exit 0
+}
+license_passwd " 	
+    ask                       = "n"
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850131"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_name_hdr:
+    id                        = "assist_backup"
+    next_id                   = "assist_backup"
+    option_id                 = "dummy_opt"
+    has_name_select	      = ""
+    name                      = "Back Up the System"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 31
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify	      = "\
+x()
+{
+    # Check to see if the backup command is installed.
+    lslpp -l bos.sysmgt.sysbr 2>/dev/null 1>/dev/null
+    if [[ $? != 0 ]]
+    then
+	echo 2
+    else
+	echo 1
+    fi
+}
+x"
+    next_type 		      = "n"
+
+sm_name_hdr:
+    id                        = "assist_backup1"
+    next_id                   = "mksysb"
+    option_id                 = "dummy_opt"
+    has_name_select	      = ""
+    ghost		      = "y"
+
+sm_cmd_opt:
+    id			      = "dummy_opt"
+    id_seq_num		      = 0
+
+sm_name_hdr:
+    id                        = "assist_backup2"
+    next_id                   = "mksysb"
+    option_id                 = "cmd_backup"
+    has_name_select	      = ""
+    name                      = "Back Up the System"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 31
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = "\
+install_sysbr ()
+{
+  # Set variables for message numbers.  These must match the values
+  # in the include file cmdassist_msg.h which is generated from the
+  # cmdassist.msg file.
+  #
+  MF_CMDASSIST=cmdassist.cat  # Message file
+  ASSIST_ERR_SET=1            # Message set number
+  ASSIST_INSTL_SYSBR_E=6      # Install error, sysbr package
+  ASSIST_INSTL_FAIL_I=9       # Install failure, possible causes
+
+  # Install the system backup package.
+  /usr/lib/assist/install_pkg bos.sysmgt.sysbr
+  if [[ $? != 0 ]]
+  then
+    # Display specific error message for backup.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_SYSBR_E \
+'0851-002 install_assist:  The system cannot \n\
+be backed up until the bos.sysmgt.sysbr \n\
+package is installed.  An attempt to install \n\
+this package failed.\n\n'
+    # Display information about possible causes for install error.
+    dspmsg -s $ASSIST_ERR_SET $MF_CMDASSIST $ASSIST_INSTL_FAIL_I \
+'The installation failure may have been caused \n\
+by one of the following: \n\
+  - The input device/directory is not correct. \n\
+    The device may be changed through the Set \n\
+    Installation Device menu. \n\
+  - The input device does not contain a valid \n\
+    installation medium. \n\
+  - There is a valid installation medium, but \n\
+    it does not contain the necessary packages. \n\
+If you are able to correct this problem, you \n\
+may wish to try this function again.\n'
+    exit 1
+  else
+    exit 0
+  fi
+}
+install_sysbr "
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = ""
+    next_type 		      = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_backup"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Back Up the System"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 31
+    op_type                   = "l"
+    cmd_to_list               = "x()\
+{
+if [ $SMIT = "a" ] \n\
+then \n\
+dspmsg -s 52 smit.cat 46 \
+'Press Enter to automatically install the backup command.\n\
+Press F3 to cancel.\n\
+'\n\
+else \n\
+dspmsg -s 52 smit.cat 54 'Click on this item to automatically install the backup command.\n' \n\
+fi\n\
+} \n\
+x"
+    entry_type                = "t"
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "install_exit"
+    option_id                 = ""
+    has_name_select           = ""
+    name                      = "Tasks Completed - Exit to AIX Login"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 30
+    cmd_to_exec               = "/usr/lib/assist/exit_assistant"
+    ask                       = ""
+    exec_mode                 = "E"
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+

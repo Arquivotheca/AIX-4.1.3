@@ -1,0 +1,93 @@
+#!/bin/bsh
+# COMPONENT_NAME: UUCP uuto
+# 
+# FUNCTIONS: do 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# "@(#)40       1.9  src/bos/usr/bin/uucp/uuto, cmduucp, bos41J, 9507A 2/6/95 11:42:28"
+#
+#	uucp:uuto	1.5
+a=""
+f=""
+d=""
+sub=""
+export UUP
+mysys=`uuname -l`
+CMD=`basename $0`
+mesg="Usage: $CMD [-m -p] files remote!user"
+if test  $# -lt 1
+	then
+		echo $mesg>&2
+		exit 1
+fi
+trap "exit 1" 1 2 3 13 15
+copy=0
+#	get options
+while true
+do
+	case $1 in
+	 -m)	a="$a $1" sub="$sub -m" ;;
+	 -p)	copy=1 sub="$sub -p" ;;
+	 --)	shift; break;;    # everything following "--" is an operand
+	 -*)	echo $mesg>&2 ; exit 1;;
+	 *)	break ;;
+	esac
+	shift
+done
+#	get file names
+while test $#  -gt 1
+do
+	if test -d "$1" -a {"$1" = "." -o "$1" = ".."}
+		then shift; continue
+	elif test -r "$1" -a -f "$1"
+		then f="$f $1"
+	elif test -r "$1" -a -d "$1"
+		then d="$d $1"
+	elif test "$UUP" = ""
+		then echo "$1: file/directory not found" >&2; exit 1
+	fi
+	shift
+done
+#	the recipient arg: remote!user
+remote=`expr $1 : '\(.*\)!'`
+user=`expr $1 : '.*!\(.*\)' \| $1`
+if test 1 -eq "$copy"
+	then a="$a -C"
+fi
+	a="$a -d -n$user"
+error=1
+if test -n "$d" -a -n "$user"
+then
+	for i in $d
+	do
+		( cd $i; UUP="$UUP/$i"
+		for j in `ls -a`
+		do
+			if test "$j" = "." -o "$j" = ".."; then continue;
+			else
+			FILES="$FILES $j"
+			fi
+		done
+		if test "$FILES"; then
+		uuto $sub $FILES $1;fi)
+	error=0
+	done
+fi
+if test -n "$f" -a -n "$user"
+then
+	uucp $a $f $remote!~/receive/$user/$mysys$UUP/
+	error=0
+fi
+if test $error = 1
+then 
+	echo $mesg >&2
+	exit 2
+fi

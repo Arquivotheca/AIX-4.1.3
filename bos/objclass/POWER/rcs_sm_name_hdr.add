@@ -1,0 +1,957 @@
+# @(#)97  1.6  src/bos/objclass/POWER/rcs_sm_name_hdr.add, rcs, bos41J, 9509A_all 2/21/95 16:36:29
+# 
+#   COMPONENT_NAME: RCS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_name_hdr:
+	id = "RCS_chgslip"
+	next_id = "RCS_chgslipc"
+	option_id = "RCS__chgslip"
+	has_name_select = ""
+	name = "Available SLIP Connections"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 7
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_chusrprof_sel"
+	next_id = "RCS_ch_what_serv"
+	option_id = "RCS_chusr_name_sel"
+	has_name_select = ""
+	name = "Select a User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 57
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "rcss_name"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000021"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_ch_what_serv"
+	next_id = "RCS_chusrprof_tmp"
+	option_id = "RCS_rcs_serv_sel"
+	has_name_select = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "serv_name_tmp"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_chusrprof_tmp"
+	next_id = "RCS_chusrprof_"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = ""
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+	echo IBMLink \n\
+} \n\
+x "
+	cmd_to_classify_postfix = "serv_name_tmp"
+	raw_field_name = ""
+	cooked_field_name = "serv_name"
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_chusrprof_IBMLink"
+	next_id = "RCS_link_prof_"
+	option_id = "RCS_conn_sel_lnk"
+	has_name_select = ""
+	name = "Select a Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 54
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "conn_type"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_link_prof_SNA"
+	next_id = "RCS_chlnk_prof_sna_HCON"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_link_prof_SLIP"
+	next_id = "RCS_chlnk_prof_slip_"
+	option_id = "RCS_emul_link_slip"
+	has_name_select = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "Emulator"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_link_prof_TCP/IP"
+	next_id = "RCS_chlnk_prof_tcp_"
+	option_id = "RCS_sel_emul_tcp"
+	has_name_select = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "Emulator"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_connectslip"
+	next_id = "RCS_showslips"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Connect a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 15
+	type = ""
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `whoami` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "user_name"
+	next_type = "n"
+	help_msg_id = "6000045"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_showslips"
+	next_id = "RCS_makeconnection"
+	option_id = "RCS__showslips"
+	has_name_select = ""
+	name = "Connect a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 15
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "connselected"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000045"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_usr_disconnslip"
+	next_id = "RCS_user_disconnslip"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 69
+	type = ""
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `whoami` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "user_name"
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_user_disconnslip"
+	next_id = "RCS_disconnslip"
+	option_id = "RCS_what_slip_to_rm"
+	has_name_select = ""
+	name = "Disconnect a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 34
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "connection_name"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_ibmlogon"
+	next_id = "RCS_ibmprof_sel"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Select User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 53
+	type = ""
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `whoami` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "ibmprof_user_name"
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_ibmprof_sel"
+	next_id = "RCS_ibmprof_logon"
+	option_id = "RCS_getibmserv"
+	has_name_select = ""
+	name = "Select User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 53
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "_rawname"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_ibmprof_logonSLIP"
+	next_id = "RCS_ibmprof_logon_slip_"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Select User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 53
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `lsusrprof -l -n $1 -t4 | cut -d ':' -f4` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = "ibmprof_user_name"
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_ibmprof_logonTCP/IP"
+	next_id = "RCS_ibmprof_logon_tcp_"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Select User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 53
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `lsusrprof -l -n $1 -t3 | cut -d ':' -f4` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = "ibmprof_user_name"
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_ibmprof_logonSNA"
+	next_id = "RCS_ibmprof_logon_sna"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Select User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 53
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `lsusrprof -l -n $1 -t5 | cut -d ':' -f4` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = "ibmprof_user_name"
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_sup6login_name_sel"
+	next_id = "RCS_sup6login_sel"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	type = ""
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `whoami` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "support_name"
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_sup6login_sel"
+	next_id = "RCS_sup6login_"
+	option_id = "RCS__sup6login_sel"
+	has_name_select = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_mkusrprof_IBMLink"
+	next_id = "RCS_mkusrprof_ibm_"
+	option_id = "RCS_link_conn_type"
+	has_name_select = ""
+	name = "Add an IBMLink User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 5
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "link_conn_type"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_mkusrprof_ibm_SLIP"
+	next_id = "RCS_mkusrprof_ibm_slip_"
+	option_id = "RCS_link_emul_ibm_SLIP"
+	has_name_select = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "link_emul_type"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_mkusrprof_ibm_TCP/IP"
+	next_id = "RCS_mkusrprof_ibm_tcp_"
+	option_id = "RCS_link_emul_TCP/IP"
+	has_name_select = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "link_emul_type"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_mkusrprof_ibm_SNA"
+	next_id = "RCS_mkprof_HCON"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Emulator Selection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 27
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "sna_emul"
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_rcs_add_profile"
+	next_id = "RCS_rcs_select_serv"
+	option_id = "RCS_rcs_select_name"
+	has_name_select = ""
+	name = "Add a User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 4
+	type = ""
+	ghost = "n"
+	cmd_to_classify = "ck_user() \n\
+{
+USER=`id -u` \n\
+if [ $USER -ne 0 ] \n\
+then \n\
+	dspmsg ksh.cat 1 'Permission denied.' \n\
+	exit 1 \n\
+fi \n\
+}
+ck_user"
+	cmd_to_classify_postfix = "rcss_name"
+	raw_field_name = "rcss_name"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_rcs_select_serv"
+	next_id = "RCS_mkusrprof_"
+	option_id = "RCS_rcs_service"
+	has_name_select = ""
+	name = "Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 46
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+	echo IBMLink \n\
+} \n\
+x "
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "rcs_serv_name"
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_usrfunc_getname"
+	next_id = "RCS_usrfuncquery"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	type = ""
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+echo `whoami` \n\
+} \n\
+x "
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = "rcss_name"
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_usrfuncquery"
+	next_id = "RCS_usrfunc"
+	option_id = "RCS__usrfuncquery"
+	has_name_select = ""
+	name = "Select a Remote Service"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 56
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+	echo IBMLink \n\
+} \n\
+x "
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_get_slip"
+	next_id = "RCS_reconfig_slip"
+	option_id = "RCS__get_slip"
+	has_name_select = ""
+	name = "Reconfigure a SLIP Link"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 43
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "slip_name"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_rmslip"
+	next_id = "RCS_removeslip"
+	option_id = "RCS_whichslip"
+	has_name_select = ""
+	name = "Remove a SLIP Connection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 47
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "slip2remove"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_rmusrprof_sel"
+	next_id = "RCS_rm_what_serv"
+	option_id = "RCS_rm_name_sel"
+	has_name_select = ""
+	name = "Select a User Name"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 57
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "rmprof_nam"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000022"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_rm_what_serv"
+	next_id = "RCS_process_profile"
+	option_id = "RCS_rm_serv_sel"
+	has_name_select = ""
+	name = "Remove a User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 49
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "rcs_serv_name"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000040"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_process_profile"
+	next_id = "RCS_rmusrprof_"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Remove a User Profile"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 49
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x() \n\
+{ \n\
+SERVICE=$2 \n\
+for I in `lsusrprof -l -n $1 | cut -d':' -f7` \n\
+do \n\
+	case $I in \n\
+		3) USERSERV=`dspmsg rcs.cat 75 'IBMLink (TCP/IP Connection)\n'` ;; \n\
+		4) USERSERV=`dspmsg rcs.cat 76 'IBMLink (SLIP Connection)\n'` ;; \n\
+		5) USERSERV=`dspmsg rcs.cat 77 'IBMLink (SNA Connection)\n'` ;; \n\
+	esac \n\
+	if [ \"$USERSERV\" = \"$SERVICE\" ] \n\
+	then \n\
+		echo $I \n\
+	fi \n\
+done \n\
+} \n\
+x "
+	cmd_to_classify_postfix = "rmprof_nam rcs_serv_name"
+	raw_field_name = "rm_serv_name"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000040"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_stopslipserver"
+	next_id = "RCS_stopslip_"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Active SLIP Connections"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 1
+	type = "c"
+	ghost = "y"
+	cmd_to_classify = "x()\n\
+{\n\
+/usr/bin/slipcomm -p$$ -q > /dev/null 2>&1\n\
+if [ $? -eq 0 ]\n\
+then\n\
+	echo bad\n\
+else\n\
+	echo good\n\
+fi\n\
+}\n\
+x"
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_stopslip_good"
+	next_id = "RCS_ok_to_stopslip"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "No Active SLIP Connections"
+	name_msg_file = ""
+	name_msg_set = 0
+	name_msg_id = 0
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_stopslip_bad"
+	next_id = "RCS_echo_active_before"
+	option_id = "RCS_ghost_cmd_opt"
+	has_name_select = ""
+	name = "Active SLIP Connections"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 1
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_echo_active_before"
+	next_id = "RCS_ok_to_stopslip_ask_"
+	option_id = "RCS_echo_active_slips"
+	has_name_select = ""
+	name = "Active SLIP Connections"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 1
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_sub_sys_disconn_slip"
+	next_id = "RCS__sub_sys_disconn_slip"
+	option_id = "RCS_select_slip"
+	has_name_select = ""
+	name = "Disconnect a SLIP Connection"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 1
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "slip_to_remove"
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_usrfuncIBMLink"
+	next_id = "RCS_link_emul_"
+	option_id = "RCS__linkcontype"
+	has_name_select = ""
+	name = "Select a Connection Type"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 54
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = "linkconn"
+	cooked_field_name = ""
+	next_type = "n"
+	help_msg_id = "6000000"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_link_emul_TCP/IP"
+	next_id = "RCS_linkucfg_tcp_"
+	option_id = "RCS_link_emul_sel"
+	has_name_select = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_link_emul_SLIP"
+	next_id = "RCS_linkucfg_slip_"
+	option_id = "RCS_link_emul_sel"
+	has_name_select = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	type = "r"
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""
+
+sm_name_hdr:
+	id = "RCS_link_emul_SNA"
+	next_id = "RCS_linkucfg_sna"
+	option_id = "RCS__link_emul_SNA"
+	has_name_select = ""
+	name = "Select an Emulator"
+	name_msg_file = "rcs.cat"
+	name_msg_set = 1
+	name_msg_id = 58
+	type = ""
+	ghost = "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name = ""
+	cooked_field_name = ""
+	next_type = "d"
+	help_msg_id = "6000018"
+	help_msg_loc = ""
+	help_msg_base = ""
+	help_msg_book = ""

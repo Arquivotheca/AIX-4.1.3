@@ -1,0 +1,77 @@
+# @(#) 64  1.11  src/bos/objclass/netinet.add, sockobj, bos411, 9428A410j 5/28/91 15:06:52
+#
+# COMPONENT_NAME: (SOCKET)  Configuration Stanza File
+#
+# ORIGIN: 27
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1989
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#                                                                   
+
+#	configuration data for the internet network protocol extension.
+
+PdDv:
+	type		= "inet"
+	class		= "tcpip"
+	subclass	= "TCPIP"
+	prefix		= "inet"
+	base		= 0
+	chgstatus	= 0
+	DvDr		= "netinet"
+	led		= 0x581
+	setno		= 110
+	msgno		= 23
+	catalog		= "devices.cat"
+	Define		= "/usr/lib/methods/definet"
+	Configure	= "/usr/lib/methods/cfginet"
+	Change		= "/usr/lib/methods/chginet"
+	Unconfigure	= "/usr/lib/methods/ucfginet"
+	Undefine	= "/usr/lib/methods/udefinet"
+	Start		= "/usr/lib/methods/sttinet"
+	Stop		= "/usr/lib/methods/stpinet"
+	uniquetype	= "tcpip/TCPIP/inet"
+
+PdAt:
+	uniquetype	= "tcpip/TCPIP/inet"
+	attribute	= "hostname"
+	deflt		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 24
+
+PdAt:
+	uniquetype	= "tcpip/TCPIP/inet"
+	attribute	= "gateway"
+	deflt		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 25
+
+PdAt:
+	uniquetype	= "tcpip/TCPIP/inet"
+	attribute	= "route"
+	deflt		= ""
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 26
+
+PdAt:
+	uniquetype	= "tcpip/TCPIP/inet"
+	attribute	= "bootup_option"
+	deflt		= "no"
+	type		= "R"
+	generic		= "DU"
+	rep		= "s"
+	nls_index	= 27
+

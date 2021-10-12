@@ -1,0 +1,30 @@
+#
+# @(#)96        1.7  src/bldenv/bldtools/bldCMVCfamily.dat, bldtools, bos412, GOLDA411a 2/8/94 15:18:41
+#
+#   COMPONENT_NAME: BLDTOOLS
+#
+#   FUNCTIONS: bldCMVCfamily.dat
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# For the format of this file issue: bldman bldCMVCfamily.dat
+#
+
+aix@ausaix02@2035
+aixdce@ausaix04@2065
+admin@ausaix04@2045
+aixosf@ausaix04@2055
+oltp@ausaix00@2535
+mm@ausaix00@2530
+test1@ausaix01@2023
+test2@ausaix01@2024
+test01@ausaix05@2550

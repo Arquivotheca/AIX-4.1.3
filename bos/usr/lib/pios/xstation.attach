@@ -1,0 +1,26 @@
+# @(#)88        1.2  src/bos/usr/lib/pios/xstation.attach, cmdpios, bos411, 9428A410j 7/28/93 17:10:18
+#
+#   COMPONENT_NAME: CMDPIOS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+	# Xstation attachment
+   	description 	= 	piobe.cat,4,19;Printer Attached to Xstation
+	seq_num   	=	3
+	add_queue	=	ps_makprt_prt
+	add_printer     =   	ps_makprt_prt
+	submit_job	=	ps_qprt_fileName
+	change_queue	=	ps_chpq_attachName
+	change_filters	=	ps_pqfilters_ghostName
+	printer_conn	=	ps_chprinter_xstaName
+	remove_queue	=	ps_rmpq_ghostName_other

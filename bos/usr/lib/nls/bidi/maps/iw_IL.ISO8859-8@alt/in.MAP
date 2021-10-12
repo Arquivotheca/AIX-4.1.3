@@ -1,0 +1,180 @@
+# @(#)67	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.ISO8859-8@alt/in.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:47:03
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# HTABLES
+# -------
+#
+# Contents:
+# External to internal (input) conversion tables for hebrew emulators.
+# Since at current version, font code points are code page  856,
+# this values are used for internal representation
+# If ISO code page values are required for external data, a conversion
+# is required.
+#
+# First  number is the external (ISO 8859-8)    decimal character value.
+# Second number is the internal (code page 856) decimal character value.
+#
+# Only characters with external values different from the internal,
+# must be entered.
+#
+#
+#
+# ISO 8859-8 to PC 856 code page conversion table
+# -----------------------------------------------
+#
+#
+#
+# Characters commented with [*] are not defined in ISO 8859-8.
+# they are all mapped to code 254 [solid rectangle] in code page 856.
+#
+#
+#ISO          P850           ISO
+#value        value          name
+#
+128             0   #        ISO values 128 - 159
+129             1   #        are extra controls.
+130             2   #
+131             3   #        We map them to ASCII codes
+132             4   #        0 - 32 to be compatible
+133             5   #        with VT2xx terminal
+134             6   #        codings.
+135             7   #
+136             8   #
+137             9   #
+138            10   #
+139            11   #
+140            12   #
+141            13   #
+142            14   #
+143            15   #
+144            16   #
+145            17   #
+146            18   #
+147            19   #
+148            20   #
+149            21   #
+150            22   #
+151            23   #
+152            24   #
+153            25   #
+154            26   #
+155            27   #
+156            28   #
+157            29   #
+158            30   #
+159            31   #       -------- end of extra controls
+		    #                graphic ISO stuff start here
+160            32   #        space
+161           173   #        inverted exclamation sign
+162           189   #        cent sign
+163           156   #        english pound sign
+164           207   #        currency symbol
+165           190   #        yen sign
+166           221   #        broken vertical bar
+167           245   #        section symbol
+168           249   #        umlaut accent
+169           184   #        copyright symbol
+170           166   #        feminine sign
+171           174   #        left angle quotes
+172           170   #        logical not
+173           196   #        center box bar
+174           169   #        registered trademark
+175           238   #        overbar
+176           248   #        degree symbol
+177           241   #        plus minus sign
+178           253   #        superscript 2
+179           252   #        superscript 3
+180           239   #        acute accent
+181           230   #        mu small, micro symbol
+182           244   #        paragraph symbol
+183           250   #        middle dot
+184           247   #        cedilla accent
+185           251   #        superscript 1
+186           167   #        masculine sign
+187           175   #        right angle quotes
+188           172   #        one quater
+189           171   #        one half
+190           243   #        three forths
+191           168   #        inverted question mark
+		    #        --------- This is not proper ISO
+		    #                  We have ISO box chars or'ed
+		    #                  with 8859-8 ISO page
+192           186   #        double vertical bar
+193           205   #        double center box bar
+194           201   #        double upper left corner box
+195           187   #        double upper right corner box
+196           200   #        double lower left corner box
+197           188   #        double lower right corner box
+198           204   #        double left side middle
+199           185   #        double right side middle
+200           203   #        double top side middle
+201           202   #        double bottom side middle
+202           206   #        double intersection
+203           223   #        bright character cell upper half
+204           220   #        bright character cell lower half
+205           219   #        bright character cell
+206           254   #        solid rectangle
+207           254   #        [*]
+208           179   #        vertical bar
+209           196   #        center box bar
+210           218   #        upper left corner box
+211           191   #        upper right corner box
+212           192   #        lower left corner box
+213           217   #        lower right corner box
+214           195   #        left side middle
+215           180   #        right side middle
+216           194   #        top side middle
+217           193   #        bottom side middle
+218           197   #        intersection
+219           176   #        quarter hashed
+220           177   #        half hashed
+221           178   #        full hashed
+222           237   #        [*]
+223           225   #        double underscore (this one is from ISO)
+		    #        --------- Hebrew comes here
+224           128   #        aleph
+225           129   #        beth
+226           130   #        gimel
+227           131   #        daled
+228           132   #        he
+229           133   #        vav
+230           134   #        zain
+231           135   #        chet
+232           136   #        tet
+233           137   #        jod
+234           138   #        caf sofit
+235           139   #        caf
+236           140   #        lamed
+237           141   #        mem sofit
+238           142   #        mem
+239           143   #        nun sofit
+240           144   #        nun
+241           145   #        samach
+242           146   #        ain
+243           147   #        peh sofit
+244           148   #        peh
+245           149   #        tzadik sofit
+246           150   #        tzadik
+247           151   #        kuf
+248           152   #        reish
+249           153   #        shin
+250           154   #        taf
+251           254   #        [*]
+252           254   #        [*]
+253           254   #        [*]
+254           254   #        [*]
+255           254   #        [*]
+

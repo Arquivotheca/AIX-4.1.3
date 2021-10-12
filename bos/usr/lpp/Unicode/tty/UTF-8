@@ -1,0 +1,25 @@
+# @(#)48        1.1  src/bos/usr/lpp/Unicode/tty/UTF-8, cfgnls, bos411, 9428A410j 4/18/94 13:37:20
+#
+# COMPONENT_NAME: CFGNLS
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27, 83
+#
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+# combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+Name : UTF-8
+Type : M
+Multibyte handling : EUC
+ioctl EUC_WSET : 3:1,3:2,3:0
+lower converter : /usr/lib/drivers/lc_utf
+upper converter : /usr/lib/drivers/uc_utf

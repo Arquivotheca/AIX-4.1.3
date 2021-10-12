@@ -1,0 +1,23 @@
+#
+# @(#)17  1.6  src/bldenv/bldtools/bldtrackingdefect.dat, bldtools, bos412, GOLDA411a 3/24/94 12:49:12
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldtrackingdefect data file.
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+
+#
+# For the format of this file issue: bldman bldtrackingdefect.dat
+#
+
+production|admin@ausaix04@2045|bai|baibuild|3|410|noprompt|
+test|test01@ausaix05@2550|tracker|bldtrackingdefect|3|325|noprompt|

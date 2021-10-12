@@ -1,0 +1,696 @@
+# @(#)82        1.43  src/Makeconf, ade_build, bos41J, 9523A_all 5/30/95 15:12:10
+#
+#   COMPONENT_NAME: ADE_BUILD
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27,71
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1995
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# @OSF_FREE_COPYRIGHT@
+# 
+# Copyright (c) 1990, 1991, 1992
+# Open Software Foundation, Inc.
+# 
+# Permission is hereby granted to use, copy, modify and freely distribute
+# the software in this file and its documentation for any purpose without
+# fee, provided that the above copyright notice appears in all copies and
+# that both the copyright notice and this permission notice appear in
+# supporting documentation.  Further, provided that the name of Open
+# Software Foundation, Inc. ("OSF") not be used in advertising or
+# publicity pertaining to distribution of the software without prior
+# written permission from OSF.  OSF makes no representations about the
+# suitability of this software for any purpose.  It is provided "as is"
+# without express or implied warranty.
+#
+
+#
+# This special makefile marks the top of the source tree.  Several
+# builtin make variables are defined based upon the location of this
+# file and the subdirectory within this tree where make was invoked.
+#
+
+.if !defined(_OSF_MAKECONF_)
+_OSF_MAKECONF_=
+
+context?=power_aix
+
+.if !empty(context:Mpower_aix)
+MACHINE=power
+TARGET_MACHINE=POWER
+target_machine=power
+CPUTYPE=${TARGET_MACHINE}
+cputype=${target_machine}
+PROJECT_NAME=AIX
+project_name=aix
+ARCHIVE_FORMAT=AIXARCH
+OBJECT_FORMAT=XCOFF
+.endif
+
+.if !empty(context:Mpower_aix_dce)
+MACHINE=power
+TARGET_MACHINE=POWER
+target_machine=power
+CPUTYPE=${TARGET_MACHINE}
+cputype=${target_machine}
+PROJECT_NAME=DCE
+project_name=dce
+ARCHIVE_FORMAT=AIXARCH
+OBJECT_FORMAT=XCOFF
+.endif
+
+
+#------------------------------------------------------------------------------
+#
+# The following code sets the 41MACHINE variable based on the results
+# of the command 'lslpp -i | grep bos.rte'.  If nothing is returned,
+# this indicates the build is occurring on a machine with 3.2.5 installed.
+# Otherwise, the machine is considered to have a 4.1 operating system.
+#
+# This variable is used to determine whether locales should be taken
+# from the build environment (325) or should be built (41).
+#
+#------------------------------------------------------------------------------
+
+.if !defined(MACHLEVEL)
+MACHLEVEL!=/usr/bin/lslpp -i | /usr/bin/grep bos.rte || /bin/echo ""
+.if !empty(MACHLEVEL)
+41MACHINE:=yes
+.endif
+.endif
+
+.if defined(41MACHINE)
+LOCPATH:=${ODE_TOOLS}/usr/lib/nls/41loc
+BLDENV_LOCPATH:=/usr/lib/nls/41loc
+LOCALES_BUILD_DIR:=41
+.else
+LOCPATH:=${ODE_TOOLS}/usr/lib/nls/325loc
+BLDENV_LOCPATH:=/usr/lib/nls/325loc
+LOCALES_BUILD_DIR:=325
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${PROJECT_NAME} != "DCE")
+.MAKEFLAGS: -r
+.else
+# DCE needs library members to remain after library is created.
+.MAKEFLAGS: -r -DD16S
+.endif
+
+.if defined(OBJECTDIR)
+MAKEOBJDIR=${OBJECTDIR}
+.endif
+
+.if defined(SOURCEDIR)
+MAKESRCDIRPATH=${SOURCEDIR}
+.endif
+
+#------------------------------------------------------------------------------
+
+RULES_MK?=osf.${project_name}.rules.mk
+
+#------------------------------------------------------------------------------
+#<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+#------------------------------------------------------------------------------
+#
+# Determine which LPP is building.  Using:
+#                                         #
+#    MAKEDIR=/gos/desktop/lib/synlib      # MAKEDIR=/bos/usr/bin/adb
+#                                         #
+# 1) Replace /desktop with -_-desktop     # 1) Replace /desktop with -_-desktop
+# CURRENT_PATH=/gos-_-desktop/lib/synlib  # CURRENT_PATH=/bos/usr/bin/adb
+#                                         #
+# 2) Replace beginning / with -_-         # 2) Replace beginning with / with -_-
+# CURRENT_PATH=-_-gos-_-desktop/lib/synlib# CURRENT_PATH=-_-bos/usr/bin/adb
+#                                         #
+# 3) Replace / with space                 # 3) Replace / with space
+# CURRENT_PATH=-_-gos-_-desktop lib synlib# CURRENT_PATH=-_-bos usr bin adb
+#                                         #
+# 4) Replace -_- with /                   # 4) Replace -_- with /
+# CURRENT_PATH=/gos/desktop lib synlib    # CURRENT_PATH=/bos usr bin adb
+#                                         #
+# 5) Match /* word                        # 5) Match /* word
+# CURRENT_PATH=/gos/desktop               # CURRENT_PATH=/bos
+#                                         #
+# 6) Get last compoment of word           # 6) Get last component of word
+#    LPP=desktop                          #    LPP=bos
+#                                         #
+.if (${PROJECT_NAME} != "DCE")
+SEP=-_-
+CURRENT_PATH:=${MAKEDIR:S|/desktop|${SEP}desktop|g:S|/nepddx|${SEP}nepddx|g}
+CURRENT_PATH:=${CURRENT_PATH:S|^/|${SEP}|g}
+CURRENT_PATH:=${CURRENT_PATH:S|/| |g}
+CURRENT_PATH:=${CURRENT_PATH:S|${SEP}|/|g}
+LPP:=${CURRENT_PATH:M/*:T}
+.else
+LPP=dce
+.endif
+
+BUILD_VERSION=41J
+LPP_RELEASE:=${LPP}${BUILD_VERSION}
+
+#
+# Determine if we are building in kernel or kernext
+#
+IN_KERNEL:=${MAKEDIR:M/${LPP}/kernel*}
+IN_KERNEXT:=${MAKEDIR:M/*/kernext*}
+
+
+#------------------------------------------------------------------------------
+#<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+#------------------------------------------------------------------------------
+
+EXPORTBASE=${BASE}/export/${target_machine}
+
+INCDIRS=-I${EXPORTBASE}/usr/include
+LIBDIRS=-L${EXPORTBASE}/usr/lib -L${EXPORTBASE}/usr/ccs/lib
+ZLIBDIRS=-Z${EXPORTBASE}
+
+_AIX3CURLIBFLAG=-L${EXPORTBASE}/usr/lib
+_AIX3CURSESLIBFLAG=-L${EXPORTBASE}/usr/aix3/lib
+
+#
+# C_PP_INCDIRS serves the same function for C++ compilation statements
+# as INCDIRS does for C compilations.  The -I${EXPORTBASE} has to be
+# included to prevent some sources from breaking.  This is not an
+# endorsement of ... <usr/include/blah.h> in source however.
+#
+C_PP_INCDIRS=-I${EXPORTBASE}/usr/include/xlC -I${EXPORTBASE}/usr/include/xlC/X11 -I${EXPORTBASE} ${INCDIRS}
+C_PP_LIBPATH=${ODE_TOOLS:U${BLDENV_TOOLS}}/usr/lpp/xlC/lib
+C_PP_LIBDIRS=${C_PP_LIBPATH:S|:| |g:S|^|-L|g}
+C_PP_ZLIBDIRS=-Z${C_PP_LIBPATH}
+C_PP_TARGET_LIBS=-lC -lm -lc
+
+.if !empty(.TARGETS:Minstall_*)
+NO_SHARED_LIBRARIES=yes
+.else
+.undef NO_SHARED_LIBRARIES
+.endif
+
+DEPENDENCIES=yes
+DEF_TOSTAGE=${BASE}/ship/${target_machine}
+
+#------------------------------------------------------------------------------
+#<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "bldenv")
+LPP_RELEASE=bos${BUILD_VERSION}
+
+EXPORTBASE:=${EXPORTBASE}/bldenv
+
+INCDIRS=-I${EXPORTBASE}/usr/include
+LIBDIRS=-L${EXPORTBASE}/usr/lib -L${EXPORTBASE}/usr/ccs/lib
+ZLIBDIRS=
+
+C_PP_INCDIRS=-I${EXPORTBASE}/usr/include/xlC -I${EXPORTBASE}/usr/include/xlC/X11 -I${EXPORTBASE}
+C_PP_ZLIBDIRS=
+C_PP_TARGET_LIBS=-lCns -lm -lc
+
+NO_SHARED_LIBRARIES=yes
+NO_SETENV=NO_SETENV
+
+XLC_CFG?=bldenv.xlC.cfg
+C_PP_CFG?=bldenv.xlC.cfg
+XLF_CFG?=bldenv.xlf.cfg
+
+#
+# Want to set PTF_UPDATE=no in the bldenv regardless of what
+# PTF_UPDATE is set to in the environment.
+#
+PTF_UPDATE=no
+
+TOSTAGE?=${BASE}/ode_tools/${target_machine}
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "bos")
+
+.if !empty(.TARGETS:Minstall_*)
+.undef DEPENDENCIES
+.else
+DEPENDENCIES=yes
+.endif
+
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "hcon")
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "web")
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "gos")
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "woodfield")
+LPP_RELEASE=rspc_g${BUILD_VERSION}
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "nepddx")
+LPP_RELEASE=nep${BUILD_VERSION}
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "neptune")
+LPP_RELEASE=nep${BUILD_VERSION}
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "netware")
+CPU       = ibmr2
+OS        = AIX
+ARCH      = rs6k_v32
+SYSVERS   = SVR4
+CONF      = /etc/conf
+OPT       = /usr/lpp/netware
+ETCOPT    = /etc/netware
+VAROPT    = /var/netware
+SYSVOL    = /opt/netware
+HU_UID    = 777
+HU_GID    = 888
+.endif
+
+#------------------------------------------------------------------------------
+.if (${LPP} == "cde")
+LPP_RELEASE=gos${BUILD_VERSION}
+INCDIRS=-I${EXPORTBASE}/cde/usr/include -I${EXPORTBASE}/cde/usr/include/dt -I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11 -I${EXPORTBASE}/usr/include/dt -I${EXPORTBASE}/usr/include/dt/X11
+C_PP_INCDIRS:=${C_PP_INCDIRS} -I${EXPORTBASE}/cde/usr/include -I${EXPORTBASE}/usr/include/dt -I${EXPORTBASE}/usr/include
+LIBDIRS=-L${EXPORTBASE}/cde/usr/lib -L${EXPORTBASE}/usr/lib -L${EXPORTBASE}/usr/ccs/lib
+# DEF_TOSTAGE=${BASE}/ship/${target_machine}/cde
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "desktop")
+LPP_RELEASE=gos${BUILD_VERSION}
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11 -I${EXPORTBASE}/usr/include/dt -I${EXPORTBASE}/usr/include/dt/X11
+C_PP_INCDIRS:=${C_PP_INCDIRS} -I${EXPORTBASE}/usr/include/dt -I${EXPORTBASE}/usr/include
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "dex")
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11 -I${EXPORTBASE}/usr/include/dt
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "dce")
+   TARGET_OS ?= AIX4
+   target_os ?= aix4
+   TARGET_CPU ?= POWER
+   target_cpu ?= power
+
+   DCE_SET_LIBPATH?=-blibpath:/usr/lib:/lib
+
+   KLIBDIRS="-L${EXPORTBASE}/kernel/lib"
+
+   # Library paths to be used by tools produced in dce setup phase which
+   # are targeted to run on the build machine.
+   HOSTLIBDIRS="-L${ODE_TOOLS}/lib -L/usr/lib -L/usr/ccs/lib"
+
+   # Shared libraries switch
+   # Rules need to be here because src/Makefile uses USE_SHARED_LIBRARIES
+   # before including ${RULES_MK}
+   NO_SHARED_LIBRARIES=1
+.if defined(NO_SHARED_LIBRARIES) || defined(USE_STATIC_LIBRARIES)
+   USE_SHARED_LIBRARIES=0
+.else
+   USE_SHARED_LIBRARIES=1
+.endif
+
+   # If pass is SETUP then target machine is the build machine.
+.if defined(MAKEFILE_PASS) && (${MAKEFILE_PASS} == "SETUP")
+   EXPORTBASE:=${EXPORTBASE}/bldenv
+   INCDIRS=-I${EXPORTBASE}/usr/include
+   LIBDIRS=-L${EXPORTBASE}/usr/lib -L${EXPORTBASE}/usr/ccs/lib
+   XLC_CFG?=bldenv.xlC.cfg
+   # Don't allow any build tool to be bound threaded.
+   XLC_R=${XLC}
+   CC_R=${CC}
+.else
+   XLC_CFG?=dce.xlC.cfg
+.endif
+   CCTYPE?=ansi
+   ANSI_CC=${XLC_R}
+   TRADITIONAL_CC=${ANSI_CC}
+
+   #
+   # DES encryption code switch
+   USE_DES=1
+
+   #
+   # NCS 1.5 compatibility switch
+   #
+   NO_COMPAT_NCS15=1
+
+   # Setting for building without DFS.
+.if defined (NO_DFS)
+   NO_KRPC=1
+.endif
+
+   DCESHARED_PATH=/opt/dce
+   DCELOCAL_PATH=/opt/dcelocal
+   DCEPATHS ?= -DDCESHARED_PATH=\"/opt/dce\" -DDCELOCAL_PATH=\"/opt/dcelocal\"
+
+   # Define the directories to use during the install_all pass for AIX.
+   DCE_i_?=/usr/lpp/dce/src
+   DCE_i_BIN?=/usr/lpp/dce/bin
+   DCE_i_DCECP?=/usr/lpp/dce/dcecp
+   DCE_i_ETC_B?=/usr/lpp/dce/bin
+   DCE_i_ETC_E?=/etc/dce
+   DCE_i_ETC_ZONEINFO?=/etc/zoneinfo
+   DCE_i_EXT?=/usr/lib/drivers
+   DCE_i_EXT_SBIN?=/usr/sbin
+   DCE_i_MSGS_US?=/usr/lib/nls/msg/en_US
+   DCE_i_SBIN?=/sbin
+   DCE_i_SHARE_INC?=/usr/include
+   DCE_i_SMIT_BASE?=/usr/lpp/dce/smit
+   DCE_i_SMIT_CDS?=/usr/lpp/dce/smit
+   DCE_i_SMIT_DFSNFS?=/usr/lpp/dce/smit
+   DCE_i_SMIT_EDFS?=/usr/lpp/dce/smit
+   DCE_i_SMIT_SEC?=/usr/lpp/dce/smit
+   DCE_i_TCL?=/usr/lpp/dce/tcl
+   DCE_i_USR?=/usr/lpp/dce
+   DCE_i_USR_CCS_LIB?=/usr/lib
+   DCE_i_USR_INC?=/usr/include
+   DCE_i_USR_LIB?=/usr/lib
+   DCE_i_USR_LIB_C?=/usr/lpp/dce/cdmf
+   DCE_i_USR_LIB_D?=/usr/lpp/dce/priv
+   DCE_i_USR_OV?=/usr/OV
+   DCE_i_VAR?=/var/dce
+   DCE_i_ZONES?=/usr/lpp/dce/examples/zones
+
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (defined(IN_KERNEL) && (${IN_KERNEL} != "")) || (defined(IN_KERNEXT) && (${IN_KERNEXT} != ""))
+EXPORTBASE:=${EXPORTBASE}${MP}
+
+INCDIRS=-I${EXPORTBASE}/kernel/include
+LIBDIRS=-L${EXPORTBASE}/kernel/lib
+
+#
+# The value contained in the variable default_build is used when compiling
+# the file src/bos/kernel/ios/conf.c.
+#
+.if defined(MP)
+.if (${MP} == "_mp_real")
+default_build=${BASE:T}-MP_REAL
+.else
+.if (${MP} == "_mp")
+default_build=${BASE:T}-MP
+.else
+.if (${MP} == "_603_DEC")
+default_build=${BASE:T}-603_DEC
+.else
+default_build=${BASE:T}-UP
+.endif
+.endif
+.endif
+.endif
+
+.if !empty(.TARGETS:Minstall_*)
+.undef DEPENDENCIES
+.else
+DEPENDENCIES=yes
+.endif
+
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "packages")
+LPP_RELEASE=pkg${BUILD_VERSION}
+
+INCDIRS=-I${EXPORTBASE}/usr/include
+LIBDIRS=-L${EXPORTBASE}/usr/ccs/lib
+
+LPPVERSION=4
+LPPRELEASE=1
+LPPMAINT=3
+LPPFIXLEVEL=0
+
+NO_SHARED_LIBRARIES=yes
+
+TOSTAGE?=${BASE}/inst.images
+
+.if defined(BUILD_IDD)
+
+AFSDIR:=/afs/austin/common/usr/lpp/info/En_US.draft
+LINKLOC_PATH=${BASE}/ship/power/usr/lpp/info/lib/en_US
+LINKLOC=${LINKLOC_PATH}/aix41
+SMITHELP_PATH=${BASE}/ship/power/usr/lpp/smith
+SMITHELP=${SMITHELP_PATH}/en_US
+FALSE=${ODE_TOOLS}/bin/false
+
+AFSRUNNING!=[ -d ${AFSDIR} ] || { /bin/echo "cannot bld IDD databases w/o AFS running on machine, unset BUILD_IDD or setup AFS"; ${FALSE}; }
+#
+# Make sure that the IDD database source paths exist, so that the databases
+# can be linked in, if they do not create them.
+#
+CREATE_LINKLOC_PATH!=[ -d ${LINKLOC_PATH} ] || /bin/mkdir -p ${LINKLOC_PATH}
+CREATE_SMITHELP_PATH!=[ -d ${SMITHELP_PATH} ] || /bin/mkdir -p ${SMITHELP_PATH}
+#
+# link in the databases
+#
+LINKLOC_LINK!=[ -L ${LINKLOC} ] || /bin/ln -s ${AFSDIR} ${LINKLOC}
+SMITHELP_LINK!=[ -L ${SMITHELP} ] || /bin/ln -s ${AFSDIR} ${SMITHELP}
+
+.endif
+
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "pci")
+LPP_RELEASE=dossvr${BUILD_VERSION}
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "tenplus")
+INCDIRS=-I${EXPORTBASE}/usr/include -I${EXPORTBASE}/usr/include/X11
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "sx25")
+LPP_RELEASE=x25sw${BUILD_VERSION}
+.endif
+
+#------------------------------------------------------------------------------
+
+.if (${LPP} == "x_st_mgr")
+LPP_RELEASE=xmgr${BUILD_VERSION}
+.endif
+
+#------------------------------------------------------------------------------
+
+PTF_UPDATE?=no
+TOSTAGE?=${DEF_TOSTAGE}
+
+#------------------------------------------------------------------------------
+#<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+#------------------------------------------------------------------------------
+#
+# The following sections must be the last sections in the file.  Do NOT move
+# these sections!!!!
+#
+#------------------------------------------------------------------------------
+#<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+#------------------------------------------------------------------------------
+#
+# Create the TDPATH variable.  TDPATH is used to store information for PTF
+# updates.
+#
+.if defined(PTF_UPDATE) && (${PTF_UPDATE} != "no") && (${PTF_UPDATE} != "NO")
+
+#
+# Assign TDDIR to the path where the selfix information for the lpp release
+# will be stored.  This is usually under selfix/PTF/<base>/<lpp release>.
+# <base> is the basename of the directory where the build resides.
+# <lpp release> is the release assoicated with the lpp being built
+# (i.e. bos410 for bos).
+#
+TD_BLDCYCLE?=${BASE:T}
+TDDIR=${BASE}/selfix/PTF/${TD_BLDCYCLE}/${LPP_RELEASE}
+
+#
+# Determine the process id that make is running under.  This is used to
+# determine the version number to assign for TDPATH.  Since make is executed
+# each time a directory is walked, it is important that the version number
+# be assigned only once.
+#
+THIS_PROC!=/bin/echo $$$$
+
+#
+# Make sure that the TDDIR exists, if it does not create it.
+#
+CREATE_TDDIR!=[ -d ${TDDIR} ] || /bin/mkdir -p ${TDDIR}
+
+#
+# Establish the version number if it does not already exist.  The initial
+# version number will always be 1.
+#
+FIRST_VER!=[ -f ${TDDIR}/.nextnum ] || /bin/echo "1" >${TDDIR}/.nextnum
+
+#
+# Store the process id for the first make executed.  This regulates when to
+# increment the version number for TDPATH.
+#
+PROC_ID!=[ -f ${TDDIR}/proc_id ] || /bin/echo ${THIS_PROC} >${TDDIR}/proc_id
+
+#
+# Retrieve the current version number that is to be used in assigning TDPATH.
+#
+CURR_VER!=/bin/cat ${TDDIR}/.nextnum
+TDPATH:=${TDDIR}/lmmakelist.${CURR_VER}
+TDPATH_ALL:=${TDDIR}/makeDependency.dat.${THIS_PROC}
+
+#
+# When make has finished, increment the version number only if this is the
+# first make that was executed.
+#
+.END .INTERRUPT:
+	@if [ -f ${TDDIR}/proc_id ]; \
+	then \
+		start_proc_id=`/bin/cat ${TDDIR}/proc_id`; \
+	\
+		if [ "${THIS_PROC}" = "$$start_proc_id" ]; \
+		then \
+			/bin/expr ${CURR_VER} + 1 >${TDDIR}/.nextnum; \
+			/bin/rm -f ${TDDIR}/proc_id; \
+		fi; \
+	fi
+.endif
+
+#------------------------------------------------------------------------------
+#<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+#------------------------------------------------------------------------------
+
+.if defined(SOURCEDIR) && (${SOURCEDIR} != "")
+BACKED_BASE=${SOURCEDIR:S|:| |g:S|/src$||g}
+
+#
+# Determine all the locations to search for include files.
+#
+BACKING_INCDIRS!=\
+for next_base in ${BACKED_BASE};\
+do \
+    /bin/echo ${INCDIRS} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+done
+
+#
+# Determine all the locations to search for libraries.
+#
+BACKING_LIBDIRS!=\
+for next_base in ${BACKED_BASE};\
+do \
+    /bin/echo ${LIBDIRS} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+done
+
+#
+# Determine all the locations to search for libraries.
+#
+BACKING_AIX3CURLIBFLAG!=\
+for next_base in ${BACKED_BASE};\
+do \
+    /bin/echo ${_AIX3CURLIBFLAG} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+done
+
+#
+# Determine all the locations to search for libraries.
+#
+BACKING_AIX3CURSESLIBFLAG!=\
+for next_base in ${BACKED_BASE};\
+do \
+    /bin/echo ${_AIX3CURSESLIBFLAG} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+done
+
+#
+# Determine all the locations to search for C++ include files.
+#
+BACKING_C_PP_INCDIRS!=\
+for next_base in ${BACKED_BASE};\
+do \
+    /bin/echo ${C_PP_INCDIRS} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+done
+
+#
+# Determine all the locations to set LIBPATH for C++.
+#
+TEMP_C_PP_LIBPATH!=\
+for next_base in ${BACKED_BASE};\
+do \
+    /bin/echo ${C_PP_LIBPATH} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+done
+
+BACKING_C_PP_LIBPATH!=\
+/bin/echo ${C_PP_LIBPATH} ${TEMP_C_PP_LIBPATH} | /bin/sed -e "s| |:|g"
+
+#
+# Determine all the locations to search for C++ libraries.
+#
+BACKING_C_PP_LIBDIRS!=\
+for next_base in ${BACKED_BASE};\
+do \
+    /bin/echo ${C_PP_LIBDIRS} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+done
+
+INCDIRS:=${INCDIRS} ${BACKING_INCDIRS}
+LIBDIRS:=${LIBDIRS} ${BACKING_LIBDIRS}
+C_PP_INCDIRS:=${C_PP_INCDIRS} ${BACKING_C_PP_INCDIRS}
+C_PP_LIBPATH:=${BACKING_C_PP_LIBPATH}
+C_PP_LIBDIRS:=${C_PP_LIBDIRS} ${BACKING_C_PP_LIBDIRS}
+_AIX3CURLIBFLAG:=${_AIX3CURLIBFLAG} ${BACKING_AIX3CURLIBFLAG}
+_AIX3CURSESLIBFLAG:=${_AIX3CURSESLIBFLAG} ${BACKING_AIX3CURSESLIBFLAG}
+
+#
+# Determine all the locations to search for kernel libraries in DCE.
+#
+.if (${LPP} == "dce")
+   BACKING_KLIBDIRS!=\
+   for next_base in ${BACKED_BASE};\
+   do \
+      /bin/echo ${KLIBDIRS} | /bin/sed -e "s|${BASE}|$${next_base}|g";\
+   done
+   KLIBDIRS:=${KLIBDIRS} ${BACKING_KLIBDIRS}
+.endif
+
+.endif
+
+#------------------------------------------------------------------------------
+#<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+#------------------------------------------------------------------------------
+.endif

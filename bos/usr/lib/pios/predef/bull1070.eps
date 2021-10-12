@@ -1,0 +1,22 @@
+# @(#)45 1.2 src/bos/usr/lib/pios/predef/bull1070.eps, cmdpios, bos411, 9430C411a 7/11/94 09:02:10
+#
+# COMPONENT_NAME: Printer Backend for Bull Compuprint 1070
+#                         in Epson Mode
+#
+# FUNCTIONS:
+#
+# ORIGINS: 83
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+:056:__FLG::
+:100:_w::136
+:060:__SYS::
+:321:sh::%Ide/bull.head %IwW | %Ide/pioformat -@%Idd/%Imm -!%Idf/piof420x -q1 -J! -L! %IsH
+:324:st::%Ide/bull.trail | %Ide/pioformat -@%Idd/%Imm -!%Idf/piof420x -q1 -t%o%G_l%r%{14}%-%d -L! %IsT
+:330:mA::Epson emulation
+:331:mL::Bull Compuprint 1070
+:295:mN::1070
+:475:__HIR::
+:476:zP::1072
+:477:zS::+

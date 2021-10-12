@@ -1,0 +1,199 @@
+* @(#)13	1.11  src/bos/objclass/POWER/3270.add, cfgmethods, bos411, 9428A410j 6/15/90 18:01:08
+*********************************************************************
+*	Predefined stanza file for 3270 adapter version B    
+*
+* COMPONENT_NAME : 3270.stanza
+*
+* ORIGINS : 27 
+*
+* (C) COPYRIGHT International Business Machines Corp. 1989
+* Unpublished Work
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* RESTRICTED RIGHTS LEGEND
+* US Government Users Restricted Rights -  Use, Duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+***********************************************************************
+PdDv:
+	type = 3270 
+	class = adapter 
+	subclass = mca 
+	prefix = 3270c
+	devid = 0xffe1
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x854 
+	setno = 26
+	msgno = 1
+	catalog = "devices.cat" 
+	DvDr = c327dd
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfg3270
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = "" 
+	Stop = ""
+	uniquetype = adapter/mca/3270 
+
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = bus_mem_addr
+	deflt = 0xC2000
+	values = "0xC2000-0xffe000,0x2000"
+	width = 0x2000
+	type = M
+	generic = D 
+	rep = nr 
+	nls_index = 2 
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = bus_io_addr
+	deflt = 0x2d0
+	values = "0x2d0-0xed0,0x400"
+	width = 0xf 
+	type = O 
+	generic = D  
+	rep = nl 
+	nls_index = 3 
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = bus_intr_lvl
+	deflt = 9 
+	values = 9
+	width = "" 
+	type = I 
+	generic = D 
+	rep = nl 
+	nls_index = 4 
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = intr_priority
+	deflt = 3 
+	values = 3
+	width = "" 
+	type = P  
+	generic = D  
+	rep = nl 
+	nls_index = 5 
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer1_addr
+	deflt = 0x100 
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 6
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer2_addr
+	deflt = 0x100 
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 7
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer3_addr
+	deflt = 0x100 
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 8
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer4_addr
+	deflt = 0x100 
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 9
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer5_addr
+	deflt = 0x100
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 10
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer6_addr
+	deflt = 0x100 
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 11
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer7_addr
+	deflt = 0x100 
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 12
+ 
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = printer8_addr
+	deflt = 0x100
+	values = "0x0-0x100,0x01"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr
+	nls_index = 13
+
+
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = num_sessions
+	deflt = 5
+	values = "1-5,1"
+	width = "" 
+	type = R 
+	generic = DU 
+	rep = nr 
+	nls_index = 14
+
+PdAt:
+	uniquetype = adapter/mca/3270
+	attribute = buffer_size
+	deflt = 8192
+	values = "4096-32768,1"
+	width = "" 
+	type = R 
+	generic = DU  
+	rep = nr 
+	nls_index = 15
+

@@ -1,0 +1,534 @@
+# @(#)34        1.17.1.1  src/bos/objclass/POWER/sm_fd.add, cfgmethods, bos41B, 9504A 12/13/94 14:20:42
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Diskette Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined Diskette Drives
+#       Add a Diskette Drive
+#       Change/Show Characteristics of a Diskette Drive
+#       Remove a Diskette Drive
+#       Configure a Defined Diskette Drive
+#
+#       Help text Id's for diskette specific helps are in the range:
+#               0420600 to 0420699
+#       This does not include menu helps.
+#
+
+#
+# List All Defined Diskette Drives
+# This uses a ghost dialogue to list all the defined diskette drives.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsddskt"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined Diskette Drives"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 111
+    cmd_to_exec               = "lsdev -C -c diskette"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800122"
+    help_msg_loc              = ""
+
+#
+# Add a Diskette Drive
+# This allows a diskette drive to be added by defining and configuring it.
+# This dialogue only supports adding a floppy diskette to one of the
+# native I/O ports.
+
+sm_cmd_hdr:
+    id                        = "makdskt"
+    option_id                 = "dskt_add,dskt_common"
+    has_name_select           = "n"
+    name                      = "Add a Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 112
+    cmd_to_exec               = "mkdev -c diskette -s siofd -t fd -p fda0"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c diskette -s siofd -t fd -D -O"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800123"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a Diskette Drive
+# This allows a diskette drive's characteristics to be shown and, if
+# desired changed.  First, there is a name selector used to put up a list
+# of the defined diskette drives for the user to select from.  The dialogue
+# then shows all of the characteristics.
+
+# Select diskette drive by logical name
+sm_name_hdr:
+    id                        = "chgdskt"
+    next_id                   = "chgdskt_hdr"
+    option_id                 = "dskt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 113
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = "lsdev -C -F \"parent:connwhere:location:status\" -l "
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "parent:port:loc:state"
+    next_type                 = "d"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# The dialogue header.
+sm_cmd_hdr:
+    id                        = "chgdskt_hdr"
+    option_id                 = "dskt_chg,dskt_common"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 113
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+#
+# Remove a Diskette Drive
+# This allows a diskette drive to be removed, including its definition in
+# the database, from the system.  A name selector is used to put up a list
+# of the "defined" and "configured" diskette drives for the user to select
+# from.  The dialogue then uses the rmdev command to remove the selected
+# device.
+
+# Select diskette drive by logical name
+sm_name_hdr:
+    id                        = "rmvdskt"
+    next_id                   = "rmvdskt_hdr"
+    option_id                 = "dskt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 114
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvdskt_hdr"
+    option_id                 = "rmvdskt_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 114
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvdskt_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 450
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420600"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvdskt_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "0420612"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined Diskette Drive
+# This allows a diskette drive that is defined but not configured to be
+# configured.  A name selector is used to put up a list of the "defined"
+# diskette drives for the user to select from.  The dialogue then uses the
+# mkdev command to configure the selected device.
+
+# Select diskette drive by logical name
+sm_name_hdr:
+    id                        = "cfgdskt"
+    next_id                   = "cfgdskt_hdr"
+    option_id                 = "dskt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 115
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800127"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgdskt_hdr"
+    option_id                 = "cfgdskt_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 115
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800127"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgdskt_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 450
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420600"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing diskette drives by logical name.
+# Used by: change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "dskt_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 450
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c diskette"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add.
+# Used by: add function.
+
+# Displays port number diskette drive is connected to.
+sm_cmd_opt:
+    id                        = "dskt_add"
+    id_seq_num                = "002"
+    disc_field_name           = ""
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn -p fda0 -k siofd "
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420610"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to show/change.
+# Used by: show/change function.
+
+# Displays diskette drive name.
+sm_cmd_opt:
+    id                        = "dskt_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Diskette Drive"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 450
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420600"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "dskt_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420602"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "dskt_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420603"
+    help_msg_loc              = ""
+
+# Displays parent adapter.
+sm_cmd_opt:
+    id                        = "dskt_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420601"
+    help_msg_loc              = ""
+
+# Displays port number diskette drive is connected to.
+sm_cmd_opt:
+    id                        = "dskt_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "port"
+    name                      = "Port number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 4
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420610"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Used by: add and show/change functions.
+sm_cmd_opt:
+    id                        = "dskt_common"
+    id_seq_num                = "010"
+    disc_field_name           = "fdtype"
+    name                      = "Diskette DRIVE TYPE"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 60
+    name_msg_id               = 2
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a fdtype="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "3.5inch,5.25inch,3.5inch4Mb"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 451
+    aix_values                = "3.5inch,5.25inch,3.5inch4Mb"
+    help_msg_id               = "0420611"
+    help_msg_loc              = ""

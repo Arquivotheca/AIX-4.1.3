@@ -1,0 +1,1142 @@
+# @(#)10	1.6  src/bos/usr/lib/nim/objrepos/egdb.add, cmdnim, bos411, 9428A410j  4/6/94  09:46:57 */
+#
+#   COMPONENT_NAME: CMDNIM
+#
+#   FUNCTIONS: ./usr/lib/nim/objrepos/egdb.add
+#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+nim_object:
+	id = 666
+	name = "master"
+	class = 1
+	type = "23"
+	attrs = "666"
+
+nim_object:
+	id = 743361169
+	name = "net1"
+	class = 3
+	type = "42"
+	attrs = "743361169"
+
+nim_object:
+	id = 743361589
+	name = "net2"
+	class = 3
+	type = "43"
+	attrs = "743361589"
+
+nim_object:
+	id = 743362931
+	name = "net3"
+	class = 3
+	type = "43"
+	attrs = "743362931"
+
+nim_object:
+	id = 743363074
+	name = "net4"
+	class = 3
+	type = "44"
+	attrs = "743363074"
+
+nim_object:
+	id = 743363363
+	name = "spot1"
+	class = 2
+	type = "24"
+	attrs = "743363363"
+
+nim_object:
+	id = 743363624
+	name = "server2"
+	class = 1
+	type = "22"
+	attrs = "743363624"
+
+nim_object:
+	id = 743381502
+	name = "server3"
+	class = 1
+	type = "22"
+	attrs = "743381502"
+
+nim_object:
+	id = 743382315
+	name = "server4"
+	class = 1
+	type = "22"
+	attrs = "743382315"
+
+nim_object:
+	id = 743382401
+	name = "root1"
+	class = 2
+	type = "26"
+	attrs = "743382401"
+
+nim_object:
+	id = 743382425
+	name = "dump1"
+	class = 2
+	type = "28"
+	attrs = "743382425"
+
+nim_object:
+	id = 743382444
+	name = "paging1"
+	class = 2
+	type = "27"
+	attrs = "743382444"
+
+nim_object:
+	id = 743382461
+	name = "home1"
+	class = 2
+	type = "29"
+	attrs = "743382461"
+
+nim_object:
+	id = 743382529
+	name = "images2"
+	class = 2
+	type = "33"
+	attrs = "743382529"
+
+nim_object:
+	id = 743382570
+	name = "rte2"
+	class = 2
+	type = "38"
+	attrs = "743382570"
+
+nim_object:
+	id = 743382592
+	name = "mksysb2"
+	class = 2
+	type = "39"
+	attrs = "743382592"
+
+nim_object:
+	id = 743382656
+	name = "spot4"
+	class = 2
+	type = "24"
+	attrs = "743382656"
+
+nim_object:
+	id = 743382709
+	name = "nimbun3"
+	class = 2
+	type = "35"
+	attrs = "743382709"
+
+nim_object:
+	id = 743382736
+	name = "images3"
+	class = 2
+	type = "33"
+	attrs = "743382736"
+
+nim_object:
+	id = 743382842
+	name = "dkls1"
+	class = 1
+	type = "20"
+	attrs = "743382842"
+
+nim_object:
+	id = 743382883
+	name = "dkls2"
+	class = 1
+	type = "20"
+	attrs = "743382883"
+
+nim_object:
+	id = 743383058
+	name = "dkls3"
+	class = 1
+	type = "20"
+	attrs = "743383058"
+
+nim_object:
+	id = 743383107
+	name = "dkls4"
+	class = 1
+	type = "20"
+	attrs = "743383107"
+
+nim_object:
+	id = 743384239
+	name = "server1"
+	class = 1
+	type = "22"
+	attrs = "743384239"
+
+nim_object:
+	id = 743384510
+	name = "shome1"
+	class = 2
+	type = "30"
+	attrs = "743384510"
+
+nim_object:
+	id = 743384642
+	name = "std1"
+	class = 1
+	type = "22"
+	attrs = "743384642"
+
+nim_object:
+	id = 743384776
+	name = "std2"
+	class = 1
+	type = "22"
+	attrs = "743384776"
+
+nim_object:
+	id = 743384831
+	name = "std3"
+	class = 1
+	type = "22"
+	attrs = "743384831"
+
+nim_object:
+	id = 743384881
+	name = "std4"
+	class = 1
+	type = "22"
+	attrs = "743384881"
+
+nim_object:
+	id = 744933073
+	name = "dreamland"
+	class = 1
+	type = "22"
+	attrs = "744933073"
+
+nim_object:
+	id = 744933113
+	name = "nimbun2"
+	class = 2
+	type = "35"
+	attrs = "744933113"
+
+nim_object:
+	id = 744945878
+	name = "simages"
+	class = 2
+	type = "33"
+	attrs = "744945878"
+
+nim_object:
+	id = 744945890
+	name = "spot_bundle"
+	class = 2
+	type = "35"
+	attrs = "744945890"
+
+nim_attr:
+	id = 666
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 666
+	value = "this is the NIM master - only one may exist per NIM environment"
+	seqno = 0
+	pdattr = "57"
+
+nim_attr:
+	id = 666
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 666
+	value = "net1 dlong 10005aa8850e tok0"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 666
+	value = "16"
+	seqno = 1
+	pdattr = "113"
+
+nim_attr:
+	id = 743361169
+	value = "129.35.129.0"
+	seqno = 0
+	pdattr = "110"
+
+nim_attr:
+	id = 743361169
+	value = "255.255.255.0"
+	seqno = 0
+	pdattr = "111"
+
+nim_attr:
+	id = 743361169
+	value = "17"
+	seqno = 0
+	pdattr = "109"
+
+nim_attr:
+	id = 666
+	value = "net2 dreamland 123 eth0"
+	seqno = 2
+	pdattr = "94"
+
+nim_attr:
+	id = 743361589
+	value = "192.192.192.0"
+	seqno = 0
+	pdattr = "110"
+
+nim_attr:
+	id = 743363624
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743361589
+	value = "255.255.255.0"
+	seqno = 0
+	pdattr = "111"
+
+nim_attr:
+	id = 743361589
+	value = "17"
+	seqno = 0
+	pdattr = "109"
+
+nim_attr:
+	id = 743362931
+	value = "100.100.100.0"
+	seqno = 0
+	pdattr = "110"
+
+nim_attr:
+	id = 743362931
+	value = "255.255.240.0"
+	seqno = 0
+	pdattr = "111"
+
+nim_attr:
+	id = 743363074
+	value = "128.35.128.0"
+	seqno = 0
+	pdattr = "110"
+
+nim_attr:
+	id = 743361589
+	value = "net3 beany"
+	seqno = 1
+	pdattr = "112"
+
+nim_attr:
+	id = 743362931
+	value = "net2 weany"
+	seqno = 1
+	pdattr = "112"
+
+nim_attr:
+	id = 743362931
+	value = "17"
+	seqno = 0
+	pdattr = "109"
+
+nim_attr:
+	id = 743363074
+	value = "255.255.0.0"
+	seqno = 0
+	pdattr = "111"
+
+nim_attr:
+	id = 743363624
+	value = "net2 kernow 10005aa8850e eth1"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743361589
+	value = "net4 beany"
+	seqno = 2
+	pdattr = "112"
+
+nim_attr:
+	id = 743363074
+	value = "net2 superman"
+	seqno = 1
+	pdattr = "112"
+
+nim_attr:
+	id = 743363074
+	value = "17"
+	seqno = 0
+	pdattr = "109"
+
+nim_attr:
+	id = 743363363
+	value = "master"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743363363
+	value = "tok"
+	seqno = 0
+	pdattr = "102"
+
+nim_attr:
+	id = 743363363
+	value = "eth"
+	seqno = 0
+	pdattr = "102"
+
+nim_attr:
+	id = 743363363
+	value = "fddi"
+	seqno = 0
+	pdattr = "102"
+
+nim_attr:
+	id = 743363363
+	value = "4"
+	seqno = 0
+	pdattr = "53"
+
+nim_attr:
+	id = 743363363
+	value = "1"
+	seqno = 0
+	pdattr = "54"
+
+nim_attr:
+	id = 743382656
+	value = "tok"
+	seqno = 0
+	pdattr = "102"
+
+nim_attr:
+	id = 743382656
+	value = "eth"
+	seqno = 0
+	pdattr = "102"
+
+nim_attr:
+	id = 743382656
+	value = "fddi"
+	seqno = 0
+	pdattr = "102"
+
+nim_attr:
+	id = 743382656
+	value = "4"
+	seqno = 0
+	pdattr = "53"
+
+nim_attr:
+	id = 743382656
+	value = "1"
+	seqno = 0
+	pdattr = "54"
+
+nim_attr:
+	id = 743363363
+	value = "/export/exec/spot1"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 666
+	value = "spot1"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743363363
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743363624
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743381502
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743381502
+	value = "net3 devon 10005aa8850e tok"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743381502
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743382315
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743382315
+	value = "net4 giskard 10005aa8850e fddi1"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743382315
+	value = "rfd0"
+	seqno = 0
+	pdattr = "95"
+
+nim_attr:
+	id = 743382315
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743382842
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743382842
+	value = "net1 bach 10005aa8850e tok5"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743382842
+	value = "16"
+	seqno = 1
+	pdattr = "113"
+
+nim_attr:
+	id = 743382401
+	value = "/export/root"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382401
+	value = "master"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 666
+	value = "root1"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382401
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382425
+	value = "/export/dump"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382425
+	value = "master"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 666
+	value = "dump1"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382425
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382444
+	value = "/export/swap"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382444
+	value = "master"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 666
+	value = "paging1"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382444
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382461
+	value = "/export/home"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382461
+	value = "master"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 666
+	value = "home1"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382461
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382529
+	value = "/usr/sys/inst.images"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382529
+	value = "server2"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743363624
+	value = "images2"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382529
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382570
+	value = "/usr/sys/inst.images/bos.rte"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382570
+	value = "server2"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743363624
+	value = "rte2"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382570
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382592
+	value = "/usr/sys/inst.images/mksysb"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382592
+	value = "server2"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743363624
+	value = "mksysb2"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382592
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382656
+	value = "/usr"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382656
+	value = "server4"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743382315
+	value = "spot4"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382656
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382709
+	value = "/export/bundles/d91bundle"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382709
+	value = "server3"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743381502
+	value = "nimbun3"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382709
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382736
+	value = "/export/images"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743382736
+	value = "server3"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743381502
+	value = "images3"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743382736
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382842
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743382883
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743382883
+	value = "net2 benames 10005aa8850e eth10"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743382883
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743383058
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743383058
+	value = "net3 jocox 10005aa8850e abc1"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743383058
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743383107
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743383107
+	value = "net4 day2 10005aa8850e vvv"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743383107
+	value = "hdisk0"
+	seqno = 0
+	pdattr = "95"
+
+nim_attr:
+	id = 743383107
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743384239
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743384239
+	value = "net1 snafu 10005aa8850e xyz"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743384239
+	value = "16"
+	seqno = 1
+	pdattr = "113"
+
+nim_attr:
+	id = 743384239
+	value = "rfd0"
+	seqno = 0
+	pdattr = "95"
+
+nim_attr:
+	id = 743384239
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743384642
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743384642
+	value = "net1 logical 10005aa8850e tok5"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743384642
+	value = "16"
+	seqno = 1
+	pdattr = "113"
+
+nim_attr:
+	id = 743384510
+	value = "/export/home"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 743384510
+	value = "server1"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 743384239
+	value = "shome1"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 743384510
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743384642
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743384776
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743384776
+	value = "net2 shocker 10005aa8850e eth2"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743384776
+	value = "rmt"
+	seqno = 0
+	pdattr = "95"
+
+nim_attr:
+	id = 743384776
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743384831
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743384831
+	value = "net3 bicycle 10005aa8850e abc"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743384831
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743384881
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 743384881
+	value = "net4 stalingrad 10005aa8850e eth1"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 743384881
+	value = "rfd0"
+	seqno = 0
+	pdattr = "95"
+
+nim_attr:
+	id = 743384881
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 744933073
+	value = "5"
+	seqno = 0
+	pdattr = "85"
+
+nim_attr:
+	id = 744933073
+	value = "net2 dreamland 10005aa8850e 1"
+	seqno = 1
+	pdattr = "94"
+
+nim_attr:
+	id = 744933073
+	value = "6"
+	seqno = 0
+	pdattr = "86"
+
+nim_attr:
+	id = 743382709
+	value = "images3"
+	seqno = 0
+	pdattr = "33"
+
+nim_attr:
+	id = 743382736
+	value = "nimbun3"
+	seqno = 0
+	pdattr = "35"
+
+nim_attr:
+	id = 744933113
+	value = "server2"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 744933113
+	value = "/tmp/nimbun2"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 744933113
+	value = "images2"
+	seqno = 0
+	pdattr = "33"
+
+nim_attr:
+	id = 744933113
+	value = "0"
+	seqno = 0
+	pdattr = "103"
+
+nim_attr:
+	id = 744933113
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 743382529
+	value = "nimbun2"
+	seqno = 0
+	pdattr = "35"
+
+nim_attr:
+	id = 743363624
+	value = "nimbun2"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 744945878
+	value = "master"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 744945878
+	value = "/export/nim/simages"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 744945878
+	value = "0"
+	seqno = 0
+	pdattr = "103"
+
+nim_attr:
+	id = 744945878
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 666
+	value = "simages"
+	seqno = 0
+	pdattr = "96"
+
+nim_attr:
+	id = 744945890
+	value = "master"
+	seqno = 0
+	pdattr = "100"
+
+nim_attr:
+	id = 744945890
+	value = "/export/nim/spot_bundle"
+	seqno = 0
+	pdattr = "101"
+
+nim_attr:
+	id = 744945890
+	value = "simages"
+	seqno = 0
+	pdattr = "33"
+
+nim_attr:
+	id = 744945890
+	value = "0"
+	seqno = 0
+	pdattr = "103"
+
+nim_attr:
+	id = 744945890
+	value = "15"
+	seqno = 0
+	pdattr = "99"
+
+nim_attr:
+	id = 744945878
+	value = "spot_bundle"
+	seqno = 0
+	pdattr = "35"
+
+nim_attr:
+	id = 666
+	value = "spot_bundle"
+	seqno = 0
+	pdattr = "96"
+
+nim_object:
+	id = 12345
+	name = "bad027"
+	class = 1
+	type = "21"
+	attrs = "12345"

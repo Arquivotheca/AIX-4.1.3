@@ -1,0 +1,126 @@
+(ld): halt 4
+(ld): setopt strip 
+(ld): setopt member 
+(ld): savename rbydd
+(ld): filelist 38 6
+(ld): i rby_subrs.o
+(ld): i rby_vttact.o
+(ld): i rby_vttinit.o
+(ld): i rby_vdd.o
+(ld): i rby_dd.o
+(ld): i rby_freec.o
+(ld): i rbyadma.o
+(ld): i rbymem.o
+(ld): i rbymore.o
+(ld): i rbytextr.o
+(ld): i rbyunpin.o
+(ld): i rbytexture.o
+(ld): i rbyevent.o
+(ld): i fifo64.o
+(ld): i rbyddf.o
+(ld): i rbydump.o
+(ld): i rbyPfont.o
+(ld): i rbycfg.o
+(ld): i rbydcxt.o
+(ld): i rbydma.o
+(ld): i rbyfdback.o
+(ld): i rbyprebld.o
+(ld): i rbyseg.o
+(ld): i rbysysq.o
+(ld): i rbyvoo.o
+(ld): i rbydiag.o
+(ld): i hfmphigstext.o
+(ld): i hfmxtext.o
+(ld): i rbyhfmdisp.o
+(ld): i rbygamma.o
+(ld): i rbygp.o
+(ld): i rbyswitch.o
+(ld): i ktok.o
+(ld): i rbytools.o
+(ld): i rby_intr.o
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsys.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a
+(ld): i /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a
+FILELIST: Number of previously inserted files processed: 38
+(ld): imports ../../../../../../src/bos/kernel/exp/sysoverlay.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/sysoverlay.exp: 7
+(ld): imports ../../../../../../src/bos/kernel/exp/kernex.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/kernex.exp: 514
+(ld): imports ../../../../../../src/bos/kernel/exp/syscalls.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/syscalls.exp: 247
+(ld): imports ../../../../../../src/bos/kernel/exp/dead.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/dead.exp: 5
+(ld): imports ../../../../../../src/bos/kernel/exp/streams.exp 
+IMPORTS: Symbols imported from import file ../../../../../../src/bos/kernel/exp/streams.exp: 6
+(ld): entry rby_config
+ENTRY: Entry point set to rby_config
+(ld): resolve
+ld: 0711-228 WARNING: Duplicate symbols were found while resolving symbols.
+	The following duplicates were found:
+ Symbol                    Source-File(Object) OR Import-File{Shared-object}
+ ------------------------- -------------------------------------------------
+ .i_disable                ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ i_disable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ .i_enable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ i_enable                  ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+    ** Duplicate **        ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+RESOLVE: 483 of 1734 symbols were kept.
+RESOLVE: The return code is 4.
+(ld): addgl /aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o
+ADDGL: Glink code added for 72 symbols.
+(ld): er full
+ER: There are no unresolved symbols.
+(ld): mismatch
+MISMATCH: No type mismatches exist.
+(ld): comprld
+COMPRLD: Kept 1664 of 1664 relocation entries.
+(ld): origin 0x0 0x0
+(ld): save 1L .
+SAVE: Section sizes = 87824+5812+1556 (0x15710+0x16B4+0x614 hex)
+SAVE: Size of TOC: 720 (0x2D0 hex)
+SAVE: These object files and archive members were
+	used to create the output file:
+ rby_subrs.o
+ rby_vttact.o
+ rby_vttinit.o
+ rby_vdd.o
+ rby_dd.o
+ rby_freec.o
+ rbyadma.o
+ rbymem.o
+ rbymore.o
+ rbytextr.o
+ rbyunpin.o
+ rbytexture.o
+ rbyevent.o
+ fifo64.o
+ rbyddf.o
+ rbydump.o
+ rbyPfont.o
+ rbycfg.o
+ rbydcxt.o
+ rbydma.o
+ rbyfdback.o
+ rbyprebld.o
+ rbyseg.o
+ rbysysq.o
+ rbyvoo.o
+ hfmphigstext.o
+ hfmxtext.o
+ rbyhfmdisp.o
+ rbygamma.o
+ rbygp.o
+ rbyswitch.o
+ ktok.o
+ rby_intr.o
+ /aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a[ioccdelay.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o]
+ /aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strlen.o]
+(ld): gen map rbydd.map
+(ld): rc
+RC: Highest return code was 4.

@@ -1,0 +1,198 @@
+*/* @(#)65	1.1  src/bos/usr/ccs/bin/as/POWER/instrs.ops.rs1.no601, cmdas, bos411, 9428A410j 5/10/93 14:55:16*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.rs1.no601
+* *
+* *       V4.1 RIOS/1 implementation unique instructions.  They are
+* *       supported in RIOS/2, but not in 601
+* *                                                                   
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1992
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+*
+***********************************************************************
+*** - *** Type indicator: Bit map for POWER unique instructions but 
+*                         not supported in 601 is 0x8006
+% 32774
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*   D-From ( output format )  Instructions
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+***********************************************************************
+*       SC-Form instructions
+***********************************************************************
+*
+*       Instruction Format: SC-FORM  (System Call)
+*
+*       ------------------------------------------------------
+*      |OPCODE| / / / / | / / / /|         BD           |AR|LK|
+*       ------------------------------------------------------
+*       0    5 6      10 11    15 16                  29 30 31
+*
+*                                 ----------------------
+*       .........................|  FL1  |  LEV   | FL2 |.....
+*                                 ----------------------
+*                                 16   19 20    26 27 29
+*
+*   Asm Formats:
+*
+*       mnemonic  BD
+*       mnemonic  LEV,FL1,FL2
+*
+***********************************************************************
+**********************
+*********************************************
+**** /*** Supervisor Linkage & Trap ***/ ****
+*********************************************
+*       mnem  |input     |out |op code value
+*11    svc    lev,fl1,fl2    Supervisor Call                  (AR=0 LK=0)
+       svc        jhk      dy   17-000
+*11    svcl   lev,fl1,fl2    Supervisor Call and Link         (AR=0 LK=1)
+       svcl       jhk      dy   17-000-1
+*
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*   X-From ( output format )  Instructions
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+***********************************************************************
+*       X-Form instructions
+***********************************************************************
+*
+*       Instruction Format: X-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | RS | FRT | FRS | BF
+*              OP2 = RA | FRA
+*              OP3 = RB | FRB | NB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2,OP3         ----- RC=0
+*       mnemonic. OP1,OP2,OP3         ----- RC=1
+*
+***********************************************************************
+**************************
+*********************************************
+**** /*** Supervisor Linkage & Trap ***/ ****
+*********************************************
+*232   mfsri  rt,ra,rb       Move from segment Register Indirect
+       mfsri      rrr      x7   31-627
+*332   rac    rt,ra,rb       Real address compute
+*332   rac.   rt,ra,rb       Real address compute (Rc=1)
+       rac        rrr      x7   31-818
+       rac.       rrr      x7   31-818-1
+***********************************************************************
+*       XZL-Form instructions ( One of XL-Form )
+***********************************************************************
+*
+*       Instruction Format: XZL-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / | / / / | / / / |       EO       |LK |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*
+*   Asm Formats:
+*
+*       mnemonic                      ----- LK=0
+*       mnemonic.                     ----- LK=1
+*
+***********************************************************************
+*********************************************
+**** /*** Machine State Modification ***/ ****
+**********************************************
+*       mnem  |input     |out |op code value
+*052   rfsvc                 Return From SVC
+       rfsvc      n        x0   19-082
+*
+***********************************************************************
+*       XAB-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XAB-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / |  RA   |  RB   |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  RA,RB               ----- RC=0
+*       mnemonic. RA,RB               ----- RC=1
+***********************************************************************
+***********************************
+**** /*** Storage Control ***/ ****
+***********************************
+*Opcode 1F
+*       mnem  |input     |out |op code value
+*1F6   cli    ra,rb          Cache Line Invalidate
+       cli        rr       x3   31-502
+*0F6   clf    ra,rb          Cache Line Flush
+       clf        rr       x3   31-118
+*2F6   dclst  ra,rb          Data cache line store
+       dclst      rr       x3   31-630
+*       mnem  |input     |out |op code value
+*3F6   dclz   ra,rb          Data cache line set to zero
+       dclz       rr       x3   31-1014
+*
+*132   tlbi   ra,rb          TLB invalidate entry
+       tlbi       rr       x3   31-306
+*
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+**             Some special extended mnemonics                      ***
+**             No particular instruction format order               ***
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+*1D3   mtsdr0 rs             Move to SDR0 register (mtspr)
+       mtsdr0     r        x4   31-467-0-0-0-24
+*153   mfsdr0 rt             Move from SDR0 register (mfspr)
+       mfsdr0     r        x4   31-339-0-0-0-24
+*1D3   mttid  rs             Move to TID register (mtspr)
+       mttid      r        x4   31-467-0-0-0-17
+*153   mftid  rt             Move from TID register (mfspr)
+       mftid      r        x4   31-339-0-0-0-17

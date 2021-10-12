@@ -1,0 +1,47 @@
+#
+# @(#)78        1.4  src/bldenv/bldtools/rename/cptools.dat, bldtools, bos412, GOLDA411a 3/18/94 09:33:43
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: cptools.dat
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# For the format of this file issue: bldman cptools.dat
+#
+
+builder:bteam@bahama
+builder:ctlead@bahama
+builder:wolz@nacho.houston.ibm.com
+builder:build@nacho.houston.ibm.com
+builder:bteam@lazurus.austin.ibm.com
+builder:shu@austin.ibm.com
+builder:landy@austin.ibm.com
+
+directory:${HOSTSFILE_PROD}/bin ${HOSTSFILE_AFSBASE}/prod/bin
+directory:${HOSTSFILE_PROD}/etc ${HOSTSFILE_AFSBASE}/prod/etc
+directory:${HOSTSFILE_PROD}/lib ${HOSTSFILE_AFSBASE}/prod/lib
+directory:${HOSTSFILE_PROD}/usr ${HOSTSFILE_AFSBASE}/prod/usr
+
+file:${HOSTSFILE_PROD}/usr/bin/README_bldenv_afs ${HOSTSFILE_AFSBASE}/README
+
+message:attention build coordinator:
+message:
+message:Please be informed that the 4.1.0 build environment in
+message:${HOSTSFILE_AFSBASE}
+message:has been updated.
+message:
+message:Please refer to ${HOSTSFILE_AFSBASE}/README for a
+message:description of the build environment.
+message:
+message:PIB
+message:
+
+subject:4.1.0 Build Environment copied to AFS.

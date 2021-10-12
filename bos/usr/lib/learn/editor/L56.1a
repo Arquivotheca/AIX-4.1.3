@@ -1,0 +1,50 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Is there just as easy a way of
+printing the immediately preceding line?
+Not quite, but almost.  The line
+
+-
+
+will print the line just before the line you
+are on.  What's the equivalent command
+in terms of "." and "p"?  Type "answer COMMAND"
+when you figure it out.  Again, you can experiment
+first; the same file named "pres" is in this directory.
+#create pres
+George Washington
+John Adams
+Thomas Jefferson
+James Madison
+James Monroe
+John Quincy Adams
+Andrew Jackson
+Martin van Buren
+William Henry Harrison
+John Tyler
+James K. Polk
+Franklin Pierce
+Millard Fillmore
+James Buchanan
+Abraham Lincoln
+#copyin
+#user
+#uncopyin
+#match .-1p
+The "p" isn't needed.
+#match .-1
+#log
+#next
+57.1a 10

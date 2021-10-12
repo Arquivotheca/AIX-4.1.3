@@ -1,0 +1,18 @@
+#!/unix
+* @(#)35	1.1  src/bos/diag/tu/pcitok/slih/sky_intr.exp, tu_pcitok, bos41J, 9512A_all 3/21/95 17:04:11
+*
+*
+* COMPONENT_NAME: (tu_pcitok) Skyline LAN adapter test units
+*
+* FUNCTIONS: Interrupt Handler Export Symbols
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+sky_interrupt

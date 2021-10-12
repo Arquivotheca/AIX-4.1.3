@@ -1,0 +1,325 @@
+* @(#)41        1.6  src/bos/objclass/POWER/fddi.add, sysxfddi, bos411, 9428A410j 4/15/94 15:41:46
+*********************************************************************
+*
+*   COMPONENT_NAME: SYSXFDDI
+*
+*   FUNCTIONS: fddi.add : device object file for FDDI Adapter
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*********************************************************************
+
+***********************************************************************
+*       Predefine data for the FDDI Device Driver
+***********************************************************************
+
+PdDv:
+        type            = "fddi"
+        class           = "adapter"
+        subclass        = "mca"
+        prefix          = "fddi"
+        devid           = "0xf48e"
+        base            = "0"
+        has_vpd         = "1"
+        detectable      = "1"
+        chgstatus       = "0"
+        bus_ext         = "0"
+        fru             = "1"
+        led             = "0x0859"
+        setno           = "1"
+        msgno           = "0"
+        catalog         = "fddi.cat"
+        DvDr            = "fddidd"
+        Define          = "/usr/lib/methods/define"
+        Configure       = "/usr/lib/methods/cfgfddi"
+        Change          = "/usr/lib/methods/chgfddi"
+	Unconfigure     = "/usr/lib/methods/ucfgfddi"
+        Undefine        = "/usr/lib/methods/undefine"
+        Start           = ""
+        Stop            = ""
+        uniquetype      = "adapter/mca/fddi"
+
+PdCn:
+        uniquetype      = "adapter/mca/fddi"
+        connkey         = "fddi"
+        connwhere       = "0"
+
+* "bus_mem_addr" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "bus_mem_addr"
+        deflt           = "0x100000"
+        values          = "0x100000-0xF00000,0x200000"
+        width           = "0x4000"
+        type            = "M"
+        generic         = "D"
+        rep             = "nr"
+        nls_index       = "9"
+
+* "title" - Configurable attribute
+* Value set by config method and not set by user.
+* Allows a configurable descriptive text for the device.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "title"
+        deflt           = "1"
+        values          = "1,36,37,38,39"
+        width           = ""
+        type            = "T"
+        generic         = ""
+        rep             = "nl"
+        nls_index       = "35"
+
+* "bus_io_addr" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "bus_io_addr"
+        deflt           = "0x7140"
+        values          = "0x7140,0x7150,0x7540,0x7550,0x7940,0x7950,0x7d40,0x7d50"
+        width           = "16"
+        type            = "O"
+        generic         = "D"
+        rep             = "nl"
+        nls_index       = "8"
+
+* "bus_intr_lvl" - Hardware attribute
+* Value set by system and not modifiable by user.
+* The interrupt level for this device is shareable with other devices.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "bus_intr_lvl"
+        deflt           = "9"
+        values          = "9,10,14,15"
+        width           = ""
+        type            = "I"
+        generic         = "D"
+        rep             = "nl"
+        nls_index       = "2"
+
+* "intr_priority" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "intr_priority"
+        deflt           = "3"
+        values          = "3"
+        width           = ""
+        type            = "P"
+        generic         = "D"
+        rep             = "nl"
+        nls_index       = "4"
+
+* "dma_lvl" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "dma_lvl"
+        deflt           = "6"
+        values          = "0-14,1"
+        width           = ""
+        type            = "A"
+        generic         = "D"
+        rep             = "nr"
+        nls_index       = "10"
+
+* "tx_que_size" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "tx_que_size"
+        deflt           = "30"
+        values          = "3-250,1"
+        width           = ""
+        type            = "R"
+        generic         = "DU"
+        rep             = "nr"
+        nls_index       = "34"
+
+* "use_alt_addr" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "use_alt_addr"
+        deflt           = "no"
+        values          = "yes,no"
+        width           = ""
+        type            = "R"
+        generic         = "DU"
+        rep             = "sl"
+        nls_index       = "11"
+
+* "alt_addr" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "alt_addr"
+        deflt           = "0x400000000000"
+	values          = ""
+        width           = ""
+        type            = "R"
+        generic         = "DU"
+	rep             = "s"
+        nls_index       = "12"
+
+* "tvx" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "tvx"
+        deflt           = "2509200"
+        values          = "80-5202000,80"
+        width           = ""
+        type            = "R"
+        generic         = "DU"
+        rep             = "nr"
+        nls_index       = "26"
+
+* "t_req" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "t_req"
+        deflt           = "165000000"
+        values          = "160-165000000,80"
+        width           = ""
+        type            = "R"
+        generic         = "DU"
+        rep             = "nr"
+        nls_index       = "25"
+
+* "dma_base_addr" - Hardware attribute
+* Value set by system and not modifiable by user.
+* Displayable with "lsattr" command.
+* No help text.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "dma_base_addr"
+        deflt           = "0x100000"
+        values          = "0x100000-0xfffc0000,0x1000"
+        width           = "0x70000"
+        type            = "M"
+        generic         = "D"
+        rep             = "nr"
+        nls_index       = "3"
+
+* "pmf_passwd" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "pmf_passwd"
+        deflt           = "0x0"
+        values          = ""
+        width           = ""
+        type            = "R"
+        generic         = "DU"
+        rep             = "s"
+        nls_index       = "18"
+
+* "user_data" - Device attribute
+* Value modifiable by user through SMIT or command line.
+* Displayable with "lsattr" command.
+* Help text available.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "user_data"
+        deflt           = ""
+        values          = ""
+        width           = ""
+        type            = "R"
+        generic         = "DU"
+        rep             = "s"
+        nls_index       = "20"
+
+* "mcode" - Device attribute
+* Value not modifiable.
+* Displayable with "lsattr" command.
+* No help text.
+* This attribute is the base name of the microcode to be loaded into memory
+* and passed to the adapter.  The level of the microcode will be determined
+* by the configuration method and the VPD on the hardware.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "mcode"
+        deflt           = "8ef4m"
+        values          = ""
+        width           = ""
+        type            = "R"
+        generic         = "D"
+        rep             = "sl"
+        nls_index       = "0"
+
+* "addl_dvdr" - Configurable attribute
+* Value modifiable through command line only.
+* Not displayable with "lsattr" command.
+* No help text.
+* This attribute is the name of the method to be executed to configure or
+* unconfigure an additional driver in the kernel for this device.
+PdAt:
+        uniquetype      = "adapter/mca/fddi"
+        attribute       = "addl_dvdr"
+        deflt           = "/usr/lib/methods/cfgdmxfddi"
+        values          = ""
+        width           = ""
+        type            = "R"
+        generic         = "U"
+        rep             = "s"
+        nls_index       = "0"
+
+PdDv:
+        type            = "fddix"
+        class           = "adapter"
+        subclass        = "fddi"
+        prefix          = "fddix"
+        devid           = "0"
+        base            = "0"
+        has_vpd         = "1"
+        detectable      = "1"
+        chgstatus       = "0"
+        bus_ext         = "0"
+        fru             = "1"
+        led             = "0x0859"
+        setno           = "1"
+        msgno           = "17"
+        catalog         = "fddi.cat"
+        DvDr            = ""
+        Configure       = ""
+        Change          = ""
+        Unconfigure     = ""
+        Define          = "/usr/lib/methods/define"
+        Undefine        = "/usr/lib/methods/undefine"
+        Start           = ""
+        Stop            = ""
+        uniquetype      = "adapter/fddi/fddix"

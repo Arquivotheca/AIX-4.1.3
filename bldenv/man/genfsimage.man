@@ -1,0 +1,224 @@
+######################################################################
+#  @(#)74        1.11  genfsimage.man, pkgtools, bos324 6/24/93 13:39:13
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: build
+#		contents
+#		filenames
+#		target_directory
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# genfsimage.man 
+#
+######################################################################
+  genfsimage Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+     Creates a file system of the specified PTFs suitable
+     for network installs. 
+
+
+  Syntax
+
+     genfsimage -l stack_list -d target_directory [-e]
+                [-b build_directory] [-p prod_directory]
+                [-s ship_directory] [-M maint_level] 
+                [-V AIX_version] [-T ptfapardef_file]
+                [-t] [-o] [-x] [-c] [-m] [-B] [-N] [-h|-?]
+
+
+  Description
+
+     The genfsimage command reads each PTF filename from the stack_list file
+     (specified by -l option), and unpacks each CCSS format PTF file, which
+     is located on the ship, product or build (if -b option is specified)
+     servers, into the toc fragment and the backup format file. Then, it
+     creates a table of contents (toc) file and puts this toc file with all
+     backup format images on the target_directory (specified by -d option).
+
+     By default, genfsimage sets the ship server variable to the value
+     of the SHIP_DIRNAME environment variable; to override this value,
+     use the -s option.  If the -B option is specified, then genfsimage
+     will also set the product server variable, to the value of the
+     PROD_DIRNAME environment variable by default, or, to the value
+     specified by the -p option.
+
+     The genfsimage command allows duplicate PTF files to exist
+     on the build server and product or ship servers if the -t option
+     is specified. If the -t option is not used, then genfsimage
+     will give an error message for any duplicate PTFs found.   If
+     the -t option is used, then the -b and -B options are required.
+
+     By default, the genfsimage command will not check the filesystem
+     size before generating the images on the filesystem. However, if -c
+     option is specified, it will check all ccss file sizes and compare
+     to the target filesystem. If the target filesystem size is not 
+     enough, an error is reported.
+
+     If the build directory is specified, genfsimage calls gen_ptf_index
+     to create an index file for the build directory.  If the V flag
+     is specified with the value of 4, the -T flag is also required,
+     since the ptfapardef.master file is required to build the index
+     file for version 4 style ptfs.
+
+
+
+  Flags
+
+     -l stack_list        Stack list that contains PTF filenames without paths.
+
+     -d target_directory  Target directory where the image files will be
+                          written.  The files ultimately must be copied
+                          to /usr/sys/inst.images on the target machine.
+
+     -b build_directory   Build server directory.
+
+     -p prod_directory    Production server directory.
+
+     -s ship_directory    Ship server directory.
+
+     -M                   User's current maintenance level.  All requisite
+			  PTFs in the current maintenance level and in
+			  earlier maintenance levels are excluded.
+
+     -V                   The target AIX version for the output tape.
+                          Default is '3' for AIX version 3.  If 4 is specified,
+                          the 41_pkg_environment program will be executed,
+                          otherwise the 32_pkg_environment program will be
+                          executed.
+
+     -T                   The location of the ptfapardef.master file.  This
+                          file specifies the fileset and vrmf for each ptf.
+                          This flag must be specified when both the -b and -V4
+                          options are used.
+
+     -e                   Excludes all prerequisite PTFs.
+
+     -t                   Ignore duplicate PTF's between build server and
+                          prod or ship servers.
+
+     -o                   Generate only the toc image in the target directory.
+
+     -x			  Excludes superseded images.
+
+     -c      		  Check filesystem size before generating backup     
+                          images on filesystem.
+
+     -m                   Do not generate the memo_to_users file in the
+			  target directory.
+
+     -B			  Set both ship server directory and product server
+         		  directory. Default is setting ship server         
+                          directory only.
+
+     -N                   Exclude PTF fixes from the problem resolution file.
+			  This file is located in the product server directory.
+
+     -h | -?              Provides help message.
+
+
+  Environment Variables
+
+     $PROD_DIRNAME       Set by 32_pkg_environment or 41_pkg_environment program
+
+     $SHIP_DIRNAME       Set by 32_pkg_environment or 41_pkg_environment program
+
+
+  Messages
+ 
+     Informative
+
+     "genfsimage was SUCCESSFUL!"
+     The genfsimage command successfully creates the toc file and update
+     images and puts those files on the target directory.
+
+     Fatal Errors
+
+     "genfsimage: ERROR: ......"
+     The error message that is caused by running the genfsimage command.
+
+     "media_list: ......"
+     The error message that is caused by running the media_list program.
+
+     "gen_ptf_index: ......"
+     The error message that is caused by running the gen_ptf_index program.
+
+     "ccss_unpack: ......"
+     The error message that is caused by running the ccss_unpack program.
+
+
+  Examples
+
+     1. Create a file system in ./target from ship_server 
+        with requisites and check ./target file system size:
+
+        genfsimage -l stack_list -d ./target -c
+
+     2. Create a file system & toc in /test/image with all requisites
+        from the build_server(/test/build), prod_server, and ship_server 
+        included:
+
+        genfsimage -l stack_list -d /test/image -b /test/build -B
+
+     3. Create a file system in ./target from the prod_server
+        and ship_server without including requisites:
+
+        genfsimage -l stack_list -d ./target -e -B
+ 
+     4. Create a file system in ./target from the ship_server
+        without including supersededs:
+
+        genfsimage -l stack_list -d ./target -x 
+
+     5. Create a file system in ./target with the duplicate PTFs
+        from the build_server (/test/build), prod_server and ship_server 
+        and all requisites:
+ 
+        genfsimage -l stack_list -d ./target -t -b /test/build -B
+
+     6. Create only the toc image in /test/image with all requisites
+        from the build_server (/test/build), prod_server, and ship_server:
+       
+        genfsimage -l stack_list -d /test/image -b /test/build -o -B
+
+      
+  Input Files
+
+     stack_list - List of desired PTF #'s or filenames (one per line).
+                     ie.    U0000257.ptf          U0000257
+                            U0000032.ptf   <or>   U0000032
+                            U0000001.ptf          U0000001
+
+     ptfapardef.master file - contains information for each ptf.  The format is:
+         PTF|apar|defect|lpp_name|subsystem|release|family|abstract|vrmf
+
+
+  Prerequisite Information
+
+     The genfsimage command calls media_list, gen_ptf_index, ccss_unpack,
+     and either 32_pkg_environment or 41_pkg_environment programs.
+     Make sure you add the pathnames for these programs to your PATH
+     environment variable.
+
+
+  Related Information
+
+     gentape
+     gendiskette

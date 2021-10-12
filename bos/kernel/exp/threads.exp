@@ -1,0 +1,47 @@
+#!/unix
+* @(#)29	1.3  src/bos/kernel/exp/threads.exp, sysproc, bos41J, 9507A 2/8/95 14:34:46
+*
+* COMPONENT_NAME: (SYSEXP) Exported System calls
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27, 83
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1995
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*	WARNING:
+*
+*	This file contains imports for libpthreads only.  
+*
+*	The system calls listed below are not imported by libc.a.  The
+*	list of interfaces supported by libc.a must be carefully managed
+*	to simplify the update process.  Otherwise a mismatch may occur
+*	between the updated libc.a and the running kernel, resulting in
+*	death of each command run subsequently.  Consequently, we have 
+*	we have decided to decouple threads from libc.a. These are
+*	internal undocumented interfaces.  If you want to update libc.a,
+*	edit syscalls.exp.
+*
+
+_nsleep                 syscall
+_pause                 	syscall
+_sigaction             	syscall
+_sigpending             syscall
+_sigsuspend             syscall
+thread_kill             syscall
+thread_setstate         syscall
+thread_terminate_ack    syscall
+thread_tsleep           syscall
+thread_twakeup          syscall
+thread_unlock		syscall
+thread_waitlock		syscall
+
+*	The following are fast system calls do not use syscall.
+
+thread_userdata

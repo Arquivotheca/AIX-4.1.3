@@ -1,0 +1,37 @@
+#!/etc/drivers/tapepin
+* @(#)87	1.4  src/bos/kernext/tape/tapepin.exp, sysxtape, bos41J, 9513A_all 3/24/95 16:03:03
+*
+* COMPONENT_NAME: (SYSXTAPE)  SCSI Magnetic Tape Device Driver
+*			      Bottom Half Export List
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1988, 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+tape_df_list_ptr
+tape_device_config
+tape_device_lock_word
+strdump
+strstart
+strsleep
+striodone
+strbldcmd
+strreadwrite
+str_request_sense
+str_general
+str_load
+str_erase
+str_space
+str_write_filemarks
+strstore
+strsend
+strlog
+strwatchdog
+strpmhandler

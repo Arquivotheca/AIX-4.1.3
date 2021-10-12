@@ -1,0 +1,207 @@
+######################################################################
+#  @(#)71        1.9  gentape.man, pkgtools, bos324 6/24/93 13:39:39
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: build
+#		contents
+#		device
+#		filenames
+#		tapes
+#		toc
+#		variable
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# gentape.man
+#
+######################################################################
+  gentape Command
+
+
+  Key Concepts
+
+
+  Purpose
+
+     Creates a set of stacked update tapes (with or without
+     prereqs) from the PTF servers.
+
+
+  Syntax
+
+     gentape  -l stack_list  [-b build_directory]
+              [-p prod_directory] [-s ship_directory]
+              [-f device] [-w temp_dir] [-M maint_level] 
+              [-V aix_version] [-T ptfapardef_file] 
+	      [-e] [-m] [-t] [-x] [-N] [-B] [-1 -2] [-h|-?]
+
+
+  Description
+
+     The gentape command reads each PTF filename from the stack_list file
+     (specified by -l option), and unpacks each CCSS format PTF file, 
+     which is located on the ship, product or build (if -b option is
+     specified) servers, into the toc fragment and the backup format    
+     file. Then, it creates a table of contents (toc) file and writes	 
+     this toc file with all backup format images to the tape.
+     
+     By default, gentape sets the ship server variable to the value
+     of the SHIP_DIRNAME environment variable; to override this value,
+     use the -s option.  If the -B option is specified, then gentape
+     will also set the product server variable, to the value of the
+     PROD_DIRNAME environment variable by default, or, to the value
+     specified by the -p option.
+
+     The gentape command allows duplicate PTF files to exist
+     on the build server and product or ship servers if the -t option
+     is specified. If the -t option is not used, then gentape
+     will give an error message for any duplicate PTFs found.   If
+     the -t option is used, then the -b and -B options are required.
+
+     If the build directory is specified, gentape calls gen_ptf_index
+     to create an index file for the build directory.  If the V flag
+     is specified with the value of 4, the -T flag is also required,
+     since the ptfapardef.master file is needed to build the index
+     file for version 4 style ptfs.
+
+  Flags
+
+     -l stack_list       This file contains PTF filenames
+                         (without paths) or PTF#s, one entry per
+                         line.
+
+     -b build_directory  Build server directory.
+
+     -p prod_directory   Production server directory.
+
+     -s ship_directory   Ship server directory.
+
+     -f device           Output device (with or without path).  The default
+                         device is rmt0.
+
+     -w			 Directory where temporary work files are generated.
+			 The default work directory is /tmp.
+
+     -M                  User's current maintenance level.  All requisite
+			 PTFs in the current maintenance level and in earlier 
+			 maintenance levels are excluded.
+
+     -V                  The target AIX version for the output tape.
+                         Default is '3' for AIX version 3.  If 4 is specified,
+                         the 41_pkg_environment program will be executed, 
+                         otherwise the 32_pkg_environment program is
+                         executed.
+      
+     -T                  The location of the ptfapardef.master file.  This
+                         file specifies the fileset and vrmf for each ptf.
+                         This flag must be specified when both the -b and -V4
+                         options are used. 
+
+     -e                  Excludes all prerequisite PTFs.  Each PTF is written
+                         to the tape in the order specified.
+
+     -m                  Create matched media format toc
+                         (default is 3.2 format toc)
+
+     -t                  Ignore duplicate PTF's between build server and
+                         prod or ship servers.
+
+     -x  		 Exclude superseded images.
+
+     -N                  Exclude PTF fixes from the problem resolution file.
+			 This file is located in the product server directory.
+ 
+     -B			 Set both ship server directory and product
+  			 server directory. Default is setting ship
+			 server directory only.
+
+     -1                  Bosboot file name and path. This file is the first 
+                         file on the output tape.
+
+     -2                  Bos install file name and path. This file is the
+                         second file on the output tape.
+
+     -h | -?             Provides help message.
+
+
+  Environment Variables  
+
+     $PROD_DIRNAME       Set by 32_pkg_environment or 41_pkg_environment program
+
+     $SHIP_DIRNAME       Set by 32_pkg_environment or 41_pkg_environment program
+
+
+  Messages
+
+     Informative
+
+     "gentape was SUCCESSFUL!"
+     The gentape command successfully creates the toc file and update 
+     images and puts those files on the target directory.
+
+     Fatal Errors
+
+     "gentape: ERROR: ......"
+     The error message that is caused by running the gentape command.
+
+     "media_list: ......"
+     The error message that is caused by running the media_list program.
+
+     "gen_ptf_index: ......"
+     The error message that is caused by running the gen_ptf_index program.
+
+     "ccss_unpack: ......"
+     The error message that is caused by running the ccss_unpack program.
+
+
+  Examples
+
+     1. Create a stacked format 8mm tape with only the PTFs you specify:
+
+             gentape -l stack_list -f /dev/rmt1 -e
+
+     2. Create a stacked format 1/4 inch tape from the build server with 
+        all requisites included, but exclude supersededs:
+
+             gentape -l stack_list -b build -f /dev/rmt0 -x
+
+     3. Create a stacked format 8mm tape with duplicate PTFs on build server
+        and product or ship servers and all requisites included:
+
+	     gentape -l stack_list -b build -f /dev/rmt1 -t -B
+
+
+  Input Files
+
+     stacklist - List of desired PTF #'s or filenames (one per line).
+                     ie.    U0000257.ptf          U0000257
+                            U0000032.ptf   <or>   U0000032
+                            U0000001.ptf          U0000001
+
+     ptfapardef.master file - contains information for each ptf.  The format is:
+         PTF|apar|defect|lpp_name|subsystem|release|family|abstract|vrmf
+
+
+  Prerequisite Information
+
+     The gentape command calls media_list, gen_ptf_index, ccss_unpack, 
+     and either 32_pkg_environment or 41_pkg_environment programs. Make sure 
+     you add the pathnames for these programs to your PATH environment
+     variable. 
+
+
+  Related Information
+
+     genfsimage
+     gendiskette

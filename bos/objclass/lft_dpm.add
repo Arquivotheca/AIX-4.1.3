@@ -1,0 +1,53 @@
+# @(#)00	1.1  src/bos/objclass/lft_dpm.add, lftdd, bos411, 9438B411a 9/20/94 17:48:52
+#
+#   COMPONENT_NAME: LFTDD
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# Timeout values for LFT Dipslay Power Management.
+# Note all values are in minutes
+
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "pwr_mgr_t1"
+	deflt = "20"
+	values = "20"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 13
+
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "pwr_mgr_t2"
+	deflt = "30"
+	values = "30"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 14
+
+PdAt:
+	uniquetype = "lft/node/lft"
+	attribute = "pwr_mgr_t3"
+	deflt = "40"
+	values = "40"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "s"
+	nls_index = 15

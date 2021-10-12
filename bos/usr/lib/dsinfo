@@ -1,0 +1,291 @@
+#
+# @(#)64	1.3  src/bos/usr/lib/dsinfo, cmdtty, bos411, 9428A410j 3/21/93 14:11:09
+#
+# COMPONENT_NAME: (cmdtty) terminal control commands
+#
+# FILE_NAME: dsinfo - Terminal entrys for the dscreen program. The first set
+#                     are terminals that have multiple pages of memory so screen
+#                     contents can be preserved across dty switching. The second
+#                     set have no screen memory so dty switches destroy what is
+#                     on the screen at the time of the switch.
+#
+# ORIGINS: 80
+#
+# This software contains proprietary and confidential information of Digi
+# International Inc.  By accepting transfer of this copy, Recipient agrees
+# to retain this software in confidence, to prevent disclosure to others, and
+# to make no use of this software other than that for which it was delivered.
+# This is an unpublished copyright work Digi International Inc.  Execpt as
+# permitted by federal law, 17 USC 117, copying is strictly prohibited.
+#
+# Digi International Inc. CONFIDENTIAL - (Digi International Inc. Confidential
+# when combined with the aggregated modules for this product)
+#                  SOURCE MATERIALS
+# (C) COPYRIGHT Digi International Inc. 1988-1992
+# All Rights Reserved
+#
+# US Government Users Restircted Rights - Use, duplication or disclosure
+# restricted by GSA ADP Schedule Contract with Digi International Inc.
+#
+
+
+#
+# Tips on setting up dsinfo for a new terminal type:
+#
+#	You will need to select keys or key sequence on your terminal
+# keyboard to perform the following functions:
+#   - switch to a session (1 per possible session)
+#   - create a session
+#   - switch to previous session
+#   - end DigiScreen
+#   - list a help message
+# You can determine what sequences are sent by a function key by either
+# consulting the manual for the terminal, or by running "cat > /tmp/KEYS",
+# typing the keys you want to know about, then viewing the file KEYS
+# with "od" or "cat -v". 
+#
+#	This file is used to map the keys you picked to the functions they
+# should perform, and also to specify the number of sessions that may be
+# created on any given terminal type. The number of "dsks" entries in the
+# number of sessions available on a given terminal. On a terminal with hardware
+# pages, the maximum number of availble sessions will be the number of
+# hardware pages on the terminal, otherwise it is arbitrary.
+#
+#	Some terminals have multiple hardware pages so that switching
+# between screens is very fast. The "dsp" attribute is used to describe
+# how to switch the display to the appropriate screen. Other terninals 
+# which do not have this capability are set up here to do to a "clear screen"
+# when switching between sessions.
+#
+#	The following is an annotated version of the Wyse 60 dsinfo entry:
+# (the lines beginning with "#>" are copies of the actual entry)
+#
+#>wy60|wyse60|wyse model 60,
+# The first line begins on column 1 and gives the name(s) of the terminal
+#
+#>       dsks=^A`^M|Shift-F1|,
+#>       dsks=^Aa^M|Shift-F2|,
+#>       dsks=^Ab^M|Shift-F3|,
+# Each "dsks" line defines the key for switching to a particular screen session.
+# The Nth "dsks" entry switches you to the Nth session. The format is:
+#		dsks=key_seq|key_name|init_seq,
+# On a Wyse 60, "Shift-F1" will send the sequence "^A`^M", and will switch
+# dscreen to session 1. The init_seq string is optional and is sent when
+# switching to that screen. Note that the "dsp" sequence (defined below) will
+# always be sent AFTER the init_str for "dsks".
+# The preceding lines define 3 sessions for the Wyse 60.
+#
+#>       dskc=\Eq|Insert|,
+# The "dskc" entry defines how to create a new screen, the "Insert" key
+# in this case. The optional (unused in this case) init_str will be sent
+# whenever a new session is created, followed by the dsp code.
+#
+#>       dske=\ET|End|\Ew0\E+,
+# The "dske" sequence will end all DigiScreen sessions. The optional
+# init_str here can be used to force a switch back to the base hardware
+# page in the terminal.
+#
+#>       dskp=\200|Ctrl-F1|,
+# The "dskp" sequence will switch back to the previously active session.
+# Optional init_str is sent, followed by "dsp" string.
+# (\200 = 200 octal = 0x80)
+#
+#>       dskl=\201|Ctrl-F2|,
+# The "dskl" sequence prints help to the screen.
+#
+#>       dsp=\Ew0|\E+,dsp=\Ew1|\E+,dsp=\Ew2|\E+,
+# (more than one attribute may be on the same line)
+# The "dsp" sequence(s) tell how to switch the screen to a given session.
+# For a terminal with hardware pages, the Nth "dsp" sequence is used to switch
+# to the page for the "Nth" session. If no extra hardware pages are supported,
+# then there is typically only one "dsp" entrym and it is used for all switches.
+# The terminals described in this file use "clear screen" for "dsp" if there
+# are no hardware pages. The optional init_str is sent the 1st time a session
+# becomes active.
+#
+# "dst" (not used for Wyse 50) is the number of character times to allow
+# between characters in an escape sequence. This defaults to 1, but needs
+# to be larger for sequences requiring the user to type more than 1 key.
+#
+#
+#	An entry is provided for a terminal called "debug" which has
+# all optional strings enabled to see which strings are sent at which time.
+#
+#   Summary:
+# dsks=page0 keybrd sequence
+# dsks=page1 keybrd sequence
+# dskc=create and move to new dscreen window
+# dske=end DigiScreen
+# dskp=previous screen sequence
+# dskl=list help messages
+# dsp=move to page and set up screen
+# dst=delay time between chars in the escape sequence
+#
+
+# The escape codes for the IBM 3151 terminal can be obtained in the
+# IBM 3151 technical reference, orderable as part number GA18-2634.
+
+debug|debugging entry,
+        dsks=\E1|ESC-1|(sess1),
+        dsks=\E2|ESC-2|(sess2),
+        dsks=\E3|ESC-3|(sess3),
+        dskc=\Ec|ESC-c|(create),
+        dske=\Ee|ESC-e|(end),
+        dskp=\Ep|ESC-p|(prev),
+        dskl=\El|ESC-l|(list),
+        dsp=(dsp1)|(dinit1),
+        dsp=(dsp2)|(dinit2),
+        dsp=(dsp3)|(dinit3),
+        dst=30,
+
+wy60|wyse60|wyse model 60,
+        dsks=^A`^M|Shift-F1|,
+        dsks=^Aa^M|Shift-F2|,
+        dsks=^Ab^M|Shift-F3|,
+        dskc=\Eq|Insert|,
+        dske=\ET|End|\Ew0\E+,
+        dskp=\200|Ctrl-F1|,
+        dskl=\201|Ctrl-F2|,
+        dsp=\Ew0|\E+,dsp=\Ew1|\E+,dsp=\Ew2|\E+,
+
+wy60-wp|wyse60-wp|wyse model 60 used with a word processor,
+        dsks=^E^A@^M|Ctrl-E-F1|,
+        dsks=^E^AA^M|Ctrl-E-F2|,
+        dsks=^E^AB^M|Ctrl-E-F3|,
+        dskc=^Eo|Ctrl-E-o|,
+        dske=^Ee|Ctrl-E-e|\Ew0\E+,
+        dskq=^Eq|Ctrl-E-q|\Ew0\E+,
+        dskp=^Ep|Ctrl-E-p|,
+        dskl=^Eh|Ctrl-E-h|,
+        dsp=\Ew0|\E+,dsp=\Ew1|\E+,dsp=\Ew2|\E+,
+        dst=15,
+
+wy60d|DoubleView in Wyse60 mode,
+        dsks=^A`^M|Shift-F1|,
+        dsks=^Aa^M|Shift-F2|,
+        dsks=^Ab^M|Shift-F3|,
+        dsks=^Ac^M|Shift-F4|,
+        dsks=^Ad^M|Shift-F5|,
+        dsks=^Ae^M|Shift-F6|,
+        dsks=^Af^M|Shift-F7|,
+        dskc=\Eq|Insert|,
+        dske=\ET|End|\Ew0\E+,
+        dskp=\200|Ctrl-F1|,
+        dskl=\201|Ctrl-F2|,
+        dsp=\Ew0|\E+,
+        dsp=\Ew1|\E+,
+        dsp=\Ew2|\E+,
+        dsp=\Ew3|\E+,
+        dsp=\Ew4|\E+,
+        dsp=\Ew5|\E+,
+        dsp=\Ew6|\E+,
+
+wy60d-wp|DoubleView in Wyse60 mode used with a word processor,
+        dsks=^E^A@^M|Ctrl-E-F1|,
+        dsks=^E^AA^M|Ctrl-E-F2|,
+        dsks=^E^AB^M|Ctrl-E-F3|,
+        dsks=^E^AC^M|Ctrl-E-F4|,
+        dsks=^E^AD^M|Ctrl-E-F5|,
+        dsks=^E^AE^M|Ctrl-E-F6|,
+        dsks=^E^AF^M|Ctrl-E-F7|,
+        dskc=^Eo|Ctrl-E-o|,
+        dske=^Ee|Ctrl-E-e|\Ew0\E+,
+        dskq=^Eq|Ctrl-E-q|\Ew0\E+,
+        dskp=^Ep|Ctrl-E-p|,
+        dskl=^Eh|Ctrl-E-h|,
+        dsp=\Ew0|\E+,
+        dsp=\Ew1|\E+,
+        dsp=\Ew2|\E+,
+        dsp=\Ew3|\E+,
+        dsp=\Ew4|\E+,
+        dsp=\Ew5|\E+,
+        dsp=\Ew6|\E+,
+        dst=15,
+
+wy50|wyse50|wyse model 50,
+        dsks=^A`^M|Shift-F1|,
+        dsks=^Aa^M|Shift-F2|,
+        dske=^Ak^M|Shift-F12|\Ew0\E+,
+        dskc=^Al^M|Shift-F13|,
+        dskl=^Am^M|Shift-F14|,
+        dsp=\Ew0|\E+,dsp=\Ew1|\E+,
+
+wy50-wp|wyse50-wp|wyse model 50 used with a word processor,
+        dsks=^E^A@^M|Ctrl-E-F1|,
+        dsks=^E^AA^M|Ctrl-E-F2|,
+        dske=^Ee|Ctrl-E-e|\Ew0\E+,
+        dskq=^Eq|Ctrl-E-q|\Ew0\E+,
+        dskc=^Eo|Ctrl-E-o|,
+        dskl=^Eh|Ctrl-E-h|,
+        dsp=\Ew0|\E+,dsp=\Ew1|\E+,
+        dst=15,
+
+# Examples of terminals that have no screen memory to page through. Screen
+# is destroyed when changing from one dty to another.
+#
+suansi|SCO Unix ansi console w/1 physical screen,
+        dsks=\E[M|Shift-F1|,
+        dsks=\E[N|Shift-F2|,
+        dsks=\E[O|Shift-F3|,
+        dskc=\E[L|Insert|,
+        dske=\E[F|End|\E[H\E[J,
+        dskp=\E[k|Ctrl-F1|,
+        dskl=\E[l|Ctrl-F2|,
+        dsp=|\E[H\E[J,
+        dst=15,
+
+suansi-wp|SCO Unix ansi console w/1 physical screen using word processors,
+        dsks=^E\E[M|Ctrl-E-F1|,
+        dsks=^E\E[N|Ctrl-E-F2|,
+        dsks=^E\E[O|Ctrl-E-F3|,
+        dskc=^Eo|Ctrl-E-o|,
+        dske=^Ee|Ctrl-Ee|\E[H\E[J,
+        dskq=^Eq|Ctrl-Eq|\E[H\E[J,
+        dskp=^E\E[k|Ctrl-E-Ctrl-F1|,
+        dskl=^E\E[l|Ctrl-E-Ctrl-F2|,
+        dsp=|\E[H\E[J,
+        dst=15,
+
+PC7300|UNIX PC w/1 physical screen,
+        dsks=\EPa|Cntrl-1|,
+        dsks=\EPb|Cntrl-2|,
+        dsks=\EPc|Cntrl-3|,
+        dskc=\EOn|Creat|,
+        dske=\EOk|Exit|\E[1;1H\E[2J,
+        dskp=\ENg|Prev|,
+        dskl=\EOm|Help|,
+        dsp=|\E[1;1H\E[2J,
+        dst=10,
+
+mgr|UNIX PC w/1 physical screen,
+        dsks=\EPa|Cntrl-1|,
+        dsks=\EPb|Cntrl-2|,
+        dsks=\EPc|Cntrl-3|,
+        dskc=\EOn|Creat|,
+        dske=\EOk|Exit|\E1\,1M^L,
+        dskp=\ENg|Prev|,
+        dskl=\EOm|Help|,
+        dsp=|\E1\,1M^L,
+        dst=10,
+
+vt100|vt131 w/1 physical screen,
+	dsks=\EOQ|PF2|,
+	dsks=\EOR|PF3|,
+	dsks=\EOS|PF4|,
+	dskc=\EOP\EOQ|PF1PF2|,
+	dske=\EOP\EOS|PF1PF4|\E[1;1H\E[2J,
+	dskp=\EOP\EOR|PF1PF3|,
+	dskl=\EOP\EOP|PF1PF1|,
+	dsp=|\E[1;1H\E[2J,
+	dst=10,
+
+ibm3151|ibm3151 w/1 physical screen,
+        dsks=\E!a\r|Shift-F1,
+        dsks=\E!b\r|Shift-F2,
+        dsks=\E!c\r|Shift-F3,
+        dskc=\EN|Ctrl-Insert,
+        dske=\EL|Clear,
+        dskp=\E"A|Jump,
+        dskl=\EH|Home,
+        dsp=\EH\EJ,
+	dst=10,

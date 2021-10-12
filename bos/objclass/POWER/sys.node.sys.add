@@ -1,0 +1,253 @@
+*Z%56  1.5  src/bos/objclass/POWER/sys.node.sys.add, cfgmethods, bos411, 9428A410j 5/9/94 15:52:05
+* 
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+
+* sys device
+PdDv:
+	type = sys
+	class = sys
+	subclass = node
+	prefix = sys
+	devid = "rs6k"
+	base = 1
+	has_vpd = 0
+	detectable = 0
+	chgstatus = 1
+	bus_ext = 0
+	led = 0x811
+	setno = 1
+	msgno = 1
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/usr/lib/methods/define -n"
+	Configure = "/usr/lib/methods/cfgsys"
+	Change = "/usr/lib/methods/chggen"
+	Unconfigure = ""
+	Undefine = ""
+	Start = ""
+	Stop = ""
+	uniquetype = sys/node/sys
+
+
+PdCn:
+	uniquetype = sys/node/sys
+	connkey = sys
+	connwhere = 0
+
+PdCn:
+	uniquetype = sys/node/sys
+	connkey = sys
+	connwhere = 1
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "syscons"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "sysconsp"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "altcons"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "tmpcons"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "modelcode"
+	deflt = "0x0"
+	values = "0x0-0xffffffff,0x1"
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "nr"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "keylock"
+	deflt = ""
+	values = "service,normal,secure"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "sl"
+	nls_index = 17
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "maxbuf"
+	deflt = "20"
+	values = "20-1000,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 18
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "maxmbuf"
+	deflt = "2048"
+	values = "2048-524288,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 19
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "maxuproc"
+	deflt = "40"
+	values = "40-131072,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 20
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "autorestart"
+	deflt = "false"
+	values = "false,true"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 21
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "iostat"
+	deflt = "true"
+	values = "false,true"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 22
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "realmem"
+	deflt = "0x0"
+	values = "0x0-0xffffffff,0x1"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nr"
+	nls_index = 23
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "conslogin"
+	deflt = "enable"
+	values = "enable,disable"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "sl"
+	nls_index = 26
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "rostime"
+	deflt = ""
+	values = ""
+	width = ""
+	type = "R"
+	generic = ""
+	rep = "s"
+	nls_index = 0
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "maxpout"
+	deflt = "0"
+	values = "0-131072,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 27
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "minpout"
+	deflt = "0"
+	values = "0-131072,1"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "nr"
+	nls_index = 28
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "memscrub"
+	deflt = "false"
+	values = "false,true"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 29
+
+PdAt:
+	uniquetype = "sys/node/sys"
+	attribute = "fullcore"
+	deflt = "false"
+	values = "false,true"
+	width = ""
+	type = "R"
+	generic = "DU"
+	rep = "sl"
+	nls_index = 45
+

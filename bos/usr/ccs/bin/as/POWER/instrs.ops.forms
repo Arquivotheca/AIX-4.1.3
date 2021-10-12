@@ -1,0 +1,471 @@
+*/* @(#)99	1.1  src/bos/usr/ccs/bin/as/POWER/instrs.ops.forms, cmdas, bos411, 9428A410j 1/28/93 11:41:38*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.forms
+* *     
+* *             This is a summary of all the instruction forms. It
+* *             describes each letter meaning of all the input 
+* *             and output formats. 
+* *
+* * ORIGINS: 3, 27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1985, 1992
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*  Note for instruction input: (  9/8/92 )
+*
+*   According to the code logic of makeops.c, all the instruction input 
+*   file ( i.e. all instrs.ops.xxx files ) must follow the following
+*   rules:
+*    1) Each comment line begins with a '*' at column 1 and ends
+*       with '\n'.
+*    2) No space line is allowed.
+*    3) Each non-comment line ends with '\n'. The '\n' must immediately
+*       follow the data. No space is allowed bwtween the end of the
+*       data and  '\n'.
+***********************************************************************
+*                       input  out  out   instruction                 *
+*                       format fmt  fmt    format                     *
+*  -------------------------------                                    *
+* |-------------------------------|  |                                *
+* | D-Format Instructions         |  V                                *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | D-Form: base-disp ||      |   |    -----------------------        *
+* |   op1,disp(op2)   || rs   |ds | ds|op1 |op2 |displacement |       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | SI-Form: sign-imme||      |   |    -----------------------        *
+* |   op1,op2,immed   || rri  |di | di|op1 |op2 | immediate   |       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* | Extended inst     ||      |   |                                   *
+* |       :minus-immed||      |   |    -----------------------        *
+* |   op1,op2,immed   || rri  |dm | dm|op1 |op2 | -immediate  |       *
+* | (si rt,ra,i --    ||      |   |    -----------------------        *
+* |  = ai rt,ra,-i)   ||      |   |    6    11   16         31        *
+* |                   ||      |   |                                   *
+* | Extended inst     ||      |   |                                   *
+* |   op1 filled in   ||      |   |    -----------------------        *
+* |       op2,immed   || ri   |dz | dz| -- |op2 | immediate   |       *
+* | (tlgti ra,immed   ||      |   |    -----------------------        *
+* |  = ti 1,ra,immed) ||      |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | Extended inst     ||      |   |                                   *
+* |   op2 filled in   ||      |   |    -----------------------        *
+* |       op1,immed   || ri   |dt | dt| op1|--  | immediate   |       *
+* |                   || ru   |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | UI-Form: unsgn-imm||      |   |    -----------------------        *
+* |   op1,op2,immed   || rru  |du | du|op1 |op2 | unsign-immed|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* |-------------------||----------|                                   *
+* | UL-Form: unsgn-log||      |   |    -----------------------        *
+* |   op2,op1,immed   || rri  |dr | dl|op1 |op2 | unsign-logic|       *
+* |(op1,op2 reversed) ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16         31        *
+* |-------------------------------|                                   *
+* | DS-Form:          ||      |   |    --------------------------     *
+* |  4-divisible-disp ||      |   |    --------------------------     *
+* |   op1,disp(op2)   || r3   |d3 | d3 |op1|op2|disp.      | EO |     *
+* |                   ||      |   |    --------------------------     *
+* |                   ||      |   |    6   11  16           30 31     *
+* |-------------------------------|                                   *
+* | B-Form: branches  ||      |   |                                   *
+* |  Relative:        ||      |   |    -----------------------        *
+* |   op1,op2,disp    || ocd  |db | db|op1 |op2 | disp  |0 |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16      30 31        *
+* |  Absolute:        ||      |   |    -----------------------        *
+* |   op1,op2,disp    || ocp  |dp | dp|op1 |op2 | disp  |1 |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16      30 31        *
+* |  Extended mnemonics ..............                                *
+* |  Relative:        ||      |   |    -----------------------        *
+* |   op1,disp        || cd   |df | df| O  |op1 | disp  |0 |LK|       *
+* |       disp        || 0    |dg |    -----------------------        *
+* |                   ||      |dj |    6    11   16      30 31        *
+* |  Absolute:        ||      |   |    -----------------------        *
+* |   op1,disp        || cp   |dn | dn| O  |op1 | disp  |1 |LK|       *
+* |       disp        || 2    |dg |    -----------------------        *
+* |                   ||      |dj |    6    11   16      30 31        *
+* |  Relative:        ||      |   |    -----------------------        *
+* |   CRi,disp        || fd   |de | de| O  | CRi| disp  |0 |LK|       *
+* |       disp        || 0    |dg |    -----------------------        *
+* |                   ||      |dj |    6    11   16      30 31        *
+* |  Absolute:        ||      |   |    -----------------------        *
+* |   CRi,disp        || fp   |do | de| O  | CRi| disp  |0 |LK|       *
+* |       disp        || 2    |dg |    -----------------------        *
+* |                   ||      |dj |    6    11   16      30 31        *
+* |-------------------||----------|                                   *
+* | SC-Form: SVC      ||      |   |                                   *
+* |  AA=1:(Bit 30)    ||      |   |    -----------------------        *
+* |   bd              || v    |dc | dc| -- | -- | bd    | 1|LK|       *
+* |  (svca bd)        ||      |   |    -----------------------        *
+* |                   ||      |   |    6    11   16      30 31        *
+* |  AA=0:(Bit 30)    ||      |   |    -----------------------        *
+* |   lev,fl1,fl2     || jhk  |dy | dp|--|--|fl1|lev|fl2| 0|LK|       *
+* |         (reloc)   ||      |   |    -----------------------        *
+* |                   ||      |   |    6  11 16  20  27  30 31        *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | X-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | X-Form:           ||      |   |    -----------------------        *
+* |   op1,op2,op3     || rrr  |x7 | x7|op1|op2|op3|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XO-Form:          ||      |   |    -----------------------        *
+* |   op1,op2,op3     || rrr  |x7 | x7|op1|op2|op3|OV| EO  |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21 22    31        *
+* |-------------------||----------|                                   *
+* | XO2-Form:         ||      |   |    -----------------------        *
+* |   op1,op2         || rr   |x6 | x6|op1|op2|---|OV| EO  |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21 22    31        *
+* |-------------------||----------|                                   *
+* | XR-Form           ||      |   |    -----------------------        *
+* |   op2,op1,op3     || rrr  |xf | xf|op1|op2|op3|   EO   |Rc|       *
+* | (op2,op1 reversed)||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XR1-Form          ||      |   |    -----------------------        *
+* |   op1,op3,op2     || rrr  |xg | xg|op1|op2|op3|   EO   |Rc|       *
+* | (op2,op3 reversed)||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XR2-Form          ||      |   |    -----------------------        *
+* |   op2,op1         || rr   |xe | xe|op1|op2|---|   EO   |Rc|       *
+* | (op2,op1 reversed)|| 4r   |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XBC-Form ( one of XL-Form for Branch Cond. to LR and CTR)         *
+* |  To Link Reg.     ||      |   |    -----------------------        *
+* |   bo,bi           || oc   |x6 | x6|bo |bi |---|   EO   |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |  To Count Reg.    ||      |   |    -----------------------        *
+* |   bo,bi           || Oc   |x6 | x6|bo |bi |---|   EO   |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |  Extended mnemonics                                               *
+* |  To LR and CTR    ||      |   |    -----------------------        *
+* |   bi              ||  c   |x2 | x2|---|bi |---|   EO   |LK|       *
+* |   none            ||  1   |x2 |    ------------------------       *
+* |                   ||      |x0 |    6  11   16  21       31        *
+* |  To LR and CTR    ||      |   |    -----------------------        *
+* |   CRi             ||  f   |q2 | x2|---|CRi|---|   EO   |LK|       *
+* |   none            ||  1   |   |    ------------------------       *
+* |                   ||      |   |    6  11   16  21       31        *
+* |-------------------||----------|                                   *
+* | XBX-Form (one of XL-Form for CR logical inst. )                   *
+* |                           |   |    -----------------------        *
+* |   op1,op2,op3     || ccc  |x7 | x7|op1|op2|op3|   EO   |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XM1-Form: ( for external XFL-Form) -----------------------        *
+* |   fm,op2          || wr   |xm | xm|  mask |op2|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6    15 16  21       31        *
+* |-------------------||----------|                                   *
+* | XM2-Form: (for external XFX-Form)  -----------------------        *
+* |   fm,op1          || wr   |xc | xc|op1| mask  |   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11      21       31        *
+* |-------------------||----------|                                   *
+* | XZ-Form:          ||      |   |    -----------------------        *
+* |                   || n    |x0 | x0|---|---|---|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XZL-Form:         ||      |   |    -----------------------        *
+* |                   || n    |x0 | x0|---|---|---|   EO   |LK|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | X1-Form:          ||      |   |    -----------------------        *
+* |   op1             || r    |x4 | x4|op1|---|---|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XTA-Form:         ||      |   |    -----------------------        *
+* |   op1,op2         || rr   |x6 | x6|op1|op2|---|   EO   |Rc|       *
+* |                   || ff   |xp |    -----------------------        *
+* |                   || re   |   |    6   11  16  21       31        *
+* |                   || r4   |   |                                   *
+* |-------------------||----------|                                   *
+* | XTB-Form:         ||      |   |    -----------------------        *
+* |   op1,op3         || rr   |x5 | x5|op1|---|op3|   EO   |Rc|       *
+* |                   || fq   |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XAT-Form          ||      |   |    -----------------------        *
+* |   op2,op1         || rr   |xe | xe|op1|op2|---|   EO   |Rc|       *
+* | (op2,op1 reversed)|| 4r   |xv |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XAB-Form:         ||      |   |    -----------------------        *
+* |   op2,op3         || rr   |x3 | x3|---|op2|op3|   EO   |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* | XB-Form:          ||      |   |    -----------------------        *
+* |   op3             || r    |x1 | x1|---|---|op3|   EO   |Rc|       *
+* |                   ||      |   |    ------------------------       *
+* |                   ||      |   |    6   11  16  21       31        *
+* |-------------------||----------|                                   *
+* |-------------------------------|                                   *
+* | M-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | M-Form:           ||      |   |    ------------------------       *
+* |  op2,op1,op3,mb,me|| rrrtt|m  | m |op1|op2|op3| mb | me |Rc|      *
+* |                   ||      |   |    ------------------------       *
+* |                   ||      |   |    6   11  16  21   26   31       *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | A-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | A-Form:           ||      |   |    -----------------------        *
+* |   op1,op2,op4,op3 || rrrr |a  | a |op1|op2|op3|op4| EO |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21  26   31        *
+* |-------------------------------|                                   *
+* | AB-Form:          ||      |   |    -----------------------        *
+* |   op1,op2,op3     || rrr  |ab | ab|op1|op2|op3|---| EO |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21  26   31        *
+* |-------------------------------|                                   *
+* | AC-Form:          ||      |   |    -----------------------        *
+* |   op1,op2,op4     || rrr  |ac | ac|op1|op2|---|op4| EO |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21  26   31        *
+* |-------------------------------|                                   *
+* | AD-Form:          ||      |   |    -----------------------        *
+* |   op1,op3         || rr   |ad | ad|op1|---|op3|---| EO |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21  26   31        *
+* |-------------------------------|                                   *
+* | AE-Form:          ||      |   |    -----------------------        *
+* |   op1,op2,op3,op4 || rrrr |ae | ae|op1|op2|op3|op4| EO |Rc|       *
+* |                   ||      |   |    -----------------------        *
+* |                   ||      |   |    6   11  16  21  26   31        *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | I-Format Instructions         |                                   *
+* |-------------------------------|                                   *
+* |-------------------------------|                                   *
+* | I-Form:           ||      |   |    --------------------------     *
+* |   li              || a    |la | la|      li (absolute) |1 |Rc|    *
+* |   absolute        ||      |   |    --------------------------     *
+* |                   ||      |   |    6                    30  31    *
+* |   relative        ||      |   |    --------------------------     *
+* |   li              || l    |li | li|     li (relative)  |0 |Rc|    *
+* |                   ||      |   |    --------------------------     *
+* |                   ||      |   |    6                    30  31    *
+* |                   ||      |   |                                   *
+* |-------------------------------|                                   *
+*                                                                     *
+***********************************************************************
+* Input format descriptors                                            *
+*  where:
+*        a = 26-bit absolute address (relocatable)
+*        A = base displacement d(ra) which need invalid form 
+*            check (i.e. RA==0 ).
+*        b = 1-bit bit data, (0 or 1)
+*        B = base displacement d(ra) which need invalid form 
+*            check (i.e. RA==0 iand RT==RA).
+*        c = 5-bit condition code bit number (values between 0-31)
+*        C = base displacement d(ra) which need invalid form 
+*            check (i.e. RA>=RT ).
+*        d = 16-bit relative displacement value (relocatable)
+*        e = 5-bit segment register (value between 0-15)
+*        f = 3-bit CRi field in condition register ((0-7) (adjust*4))
+*        g = 5-Bit special purpose register field (0-31)
+*        h = 4-bit field (value between 0-15)
+*        i = 16-bit signed immediate data
+*        j = 7-bit field (value between 0-127)
+*        k = 3-bit field (value between 0-7)
+*        l = 26-bit relative address (relocatable)
+*        m = 5-bit immediate value (values between 1-32)
+*        n = no parameters (therefore no values period)
+*        o = 4-bit branch operation to perform (values 0-15 (adjust*2))
+*        O = Branch Conditional to CTR Reg.
+*        p = 16-bit absolute value (relocatable)
+*        q = 4-bit immediate value ( values of 0-15) to FPSCR (16-19)
+*        r = register (values of 0-31)
+*        s = base displacement form of operand( d(ra))
+*        t = 5-bit immediate value (values between 0-31)
+*        u = 16-bit unsigned immediate data
+*        v = 14-bit svc field
+*        w = 8-bit cr field mask (value 0-255)
+*        x = 6-bit special opcode for RYO
+*        y = 32-bit absolute anything used for first m form mask operand
+*        z = Optional 5-bit mask used for m form second operand
+*        0 = 16-bit relative disp value (rel) with implied 0 5-bit prec
+*        1 = missing optional absolute operand value 0
+*        2 = 16-bit absolute disp value (r/a) with implied 0 5-bit prec
+*        3 = 16-bit signed disp value that is divisible by 4
+*        4 = 2-bit unsigned data ( value 0-3 ), for SPR sequence number.
+*        5 = 10-bit unsigned data ( value 0-1023 ) for New SPRs in PowerPC
+*        6 = 5-bit immediate value (1-31), for number of bits to be 
+*            extracted, shifted or rotated.
+*        7 = 16-bit signed value, which  will be negated before 
+*             generating the object code.
+*
+*       y? = two input formats, listed onechartwochar in the following
+*            ex.:  y?XZZ.  Therefore, f1=ZZ f2=X.
+*            ex2:  rrty?ztt  Therefore, f1=rrttt f2=rrtz
+*       ?! = two input formats, listed onecharonechar in the following
+*            ex.:  ?!XZ.  Therefore, f1=X f2=Z. 
+*       ?& = two input formats, listed threechartwochar.
+*            ex:   ?&XZZ  Therefor, f1=XZZ f2=ZZ
+*            ex2:  f?&bri  Therefore, f1=fbri f2=fri
+*  
+* Output format                                                       
+*  where d = d-form instruction                                       
+*          2nd letter                                                 
+*            a =  for two input formats: 4 input operands or  */
+                           /* 3 input operands.
+*            b =  bc & bcl instructions
+*            c = POWER svca and svcla inst.                    
+*            d = only displacement used                               
+*            e = Extended mnemonics for bc and bcl with the following
+*                BO field encoding: 
+*                1) branch if cond. true  2) branch if cond. false
+*                3) decrement CTR, branch if CRT == 0
+*                4) decrement CTR, branch if CTR != 0 
+*                and with BI field incorporated.
+*            f =  Extended mnemonics for bc and bcl with BO 
+*                 field incorporated.
+*            g =  for extended mnemonics of the relative and 
+*                 absolute branch prediction with '+' suffix 
+*            h = for two input formats: 3 input operands or  
+*                2 input operands.
+*            i = immediate signed data (ra & rb)
+*            j = for extended mnemonics of the relative and  
+*                absolute branch prediction with '-' suffix  
+*            k =  for basic mnemonics of the relative and   
+*                 absolute branch prediction with '+' suffix  
+*            l = for basic mnemonics of the relative and   
+*                absolute branch prediction with '-' suffix  
+*            m = 16-bit signed value, which  will be negated before 
+*                 generating the object code
+*            n = Extended mnemonics for bca and bcla with BO 
+*                 field incorporated.
+*            o = Extended mnemonics for bca and bcla with the following
+*                BO field encoding:
+*                1) branch if cond. true  2) branch if cond. false
+*                3) decrement CTR, branch if CRT == 0
+*                4) decrement CTR, branch if CTR != 0
+*                and with BI field incorporated.
+*            p =  bca & bcla instructions
+*            r = ra and rs reversed.
+*            s = displacement (ra & rb)                               
+*            t = displacement with only rt used  (li, lil, liu, lis )
+*            u = immediate unsigned data ( (RT|BF), RA, UI ) 
+*            x = extended format (really ds format) (ra & rb)         
+*            y = POWER svc and svcl inst.
+*            z = immediate signed data with ra                        
+*            3 = 16-bit signed disp value that is divisible by 4      
+*        x = x-form instruction                                       
+*          2nd letter is a hex character indicating which regs        
+*            are active.  For example 5 indicates rt and rb are       
+*            active.                                                  
+*          or                                                         
+*          a = support ?& two-input-format.                
+*          b =  duplicates the ARG2 to ARG3 
+*          c =  used for mtcrf instr. condition register bit mask.
+*          d =  duplicates the ARG1 to ARG2 and ARG3 
+*          e = reverse ARG1 and ARG2, ARG3 is zero
+*          f = rs and ra reversed in ( three operands )     
+*          g = ra and rb reversed ( three operands )
+*          h = for two input formats: 3 input operands or 2 input 
+*              operands.
+*          i =  mtspr. arg2 and arg1 reversed. arg1 is 10-bit SPR 
+*              which contains low-order 5 bits followed by high-order 
+*              5 bits. The Assembler has to swap them  back to the 
+*              normal order before generating  object code.
+*          j = mfspr.  ARG2 is 10-bit SPR which contains low-order 
+*              5 bits followed by high-order 5 bits. The Assembler 
+*              has to swap them  back to the normal order before generating 
+*              the binary code.
+*          k = handling the basic mnemonics of the branch conditional 
+*              to LR or CTR with '+' suffix prediction 
+*          l = handling the basic mnemonics of the branch 
+*              conditional to LR or CTR with '-' suffix prediction
+*          m = support xfl form. mtfsf inst.
+*          n = mftb inst. having two input formats  
+*          o = invalid form check to mtsri inst.
+*          p = ra contains sequence number for Upper or Lower of SPR  
+*          q =  for "lswi" or "lsi" inst. 
+*          r = "mr" or "not" inst. same as or, nor inst
+*          s = invalid form check "RA !=0"       
+*               for inst.: "stbux", "sthux", "stwux" ("stux" for POWER),
+*                "lfsux", "lfdux", "stfsux", "stfdux"
+*          t = invalid form check "RA !=0" and RA!=RT"    
+*              inst. :"lbzux", "lhzux", "lhaux", "lux", 
+*                     "lwzux" ("lux" for POWER)
+*          u =  invalid form check "RA !=0 and RA!=0"  
+*               inst. :"lswx",  and "lsx" for POWER   
+*          v = rs and ra reversed and ra contains sequence number for 
+*              Upper or Lower of SPR  ( IBAT and DBAT ) 
+*          x = blanket form of instruction to allow any field to be   
+*              set for testing purposes                               
+*          v = rs and ra reversed and ra contains sequence number for 
+*              Upper or Lower of SPR                    
+*          w = handle mfdec inst.  if asm mode is pwr or pwrx, use 6 
+*              as the DEC Reg. encoding to generate obj code.
+*              if asm mode is default or any, use 6 as the DEC Reg. 
+*              encoding to generate obj code and report warning message.
+*              if asm mode is ppc or 601, use 22  as the DEC Reg. 
+*              encoding to generate obj code.
+*              if the asm mode is com, report error              
+*        m = m-form instruction   
+*          2nd letter                                                 
+*          no 2nd letter = rlimi rotate left immediate
+*          a = extended mnemonic extlwi
+*          b = extended mnemonic extrwi
+*          c =extended mnemonic rotlwi
+*          d = extended mnemonic rotrwi 
+*          e = extended mnemonic clrlwi  
+*          f =  extended mnemonic clrrwi 
+*          g =  extended mnemonic clrslwi
+*          h =  extended mnemonic rotlw 
+*          j =  extended mnemonic inslwi 
+*          k = extended mnemonic insrwi
+*          l = extended mnemonic slwi (sli for POWER )
+*          r = extended mnemonic srwi ( sri for POWER )
+*        a = a-form instruction  
+*          2nd letter                                                 
+*          no 2nd letter = 4 input operands, arg3 and arg4 are reversed. 
+*          b = 3 input operands, arg3 in slot 3
+*          c = 3 input operands, arg3 in slot 4
+*          d = 2 input operands, in slot 1 and slot 3
+*          e = 4 input operands.
+*        li = li form of address 
+*        la = absolute form of li address    
+*        q2 = Extended mnemonics for branch via LR and CTR, with 
+*             the following BO field encoding:
+*                1) branch if cond. true  2) branch if cond. false
+*                3) decrement CTR, branch if CRT == 0
+*                4) decrement CTR, branch if CTR != 0
+*                and with BI field incorporated. 
+*                                          
+***********************************************************************

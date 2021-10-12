@@ -1,0 +1,50 @@
+#
+# @(#)11  1.5  src/bldenv/man/bldtrackingdefect.dat.man, bldtools, bos412, GOLDA411a 3/24/94 12:42:13
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS:  bldtrackingdefect.dat man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  $BLDENV/usr/bin/bldtrackingdefect.dat
+
+    Accessing bldtrackingdefect.dat should only be done through functions
+    in bldtrackingdefect.
+ 
+    Format of this file is:
+ 
+      production|<family>|<owner>|<component>|<severity>|<bldenv>|<prompt>|
+      test|<family>|<owner>|<component>|<severity>|<bldenv>|<prompt>|
+ 
+    where there is only production line entry and one test entry per file.
+    The production line entry is required.  The test line entry is optional.
+
+    Each field is described below:
+
+      production or test - Determines the type of field entry.  The test
+                           entry is used when testing the interfaces that
+                           access the tracking defect.  The production entry
+                           is used in all other cases.
+      family (required) - Name of CMVC family the tracking defect should be
+                          opened in.  Format is
+                          familyname[@hostname[@portnumber]] where values in
+                          [] are optional.  The CMVC family name must also
+                          exist in the file $BLDENV/usr/bin/bldCMVCfamily.dat
+                          This field is validated by calling bldCMVCfamily.
+      owner (required) - Name of CMVC identifier that all tracking defects
+                         created will be assigned to.
+      component (required) - Name of CMVC component that all tracking defects
+                             will be created against.
+      severity (optional) - Severity the tracking defect should be opened as.
+      bldenv (required) - Name of the build environment that the tracking
+                          defects are being created for.
+      prompt (optional) -  If null bldstatus will prompt to create tracking
+                           defect.  If not null bldstatus will not prompt.

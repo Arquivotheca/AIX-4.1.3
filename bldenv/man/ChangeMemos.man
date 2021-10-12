@@ -1,0 +1,74 @@
+# @(#)81	1.3  src/bldenv/man/ChangeMemos.man, bldprocess, bos412, GOLDA411a 6/1/92 11:42:19
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: ChangeMemos man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+ChangeMemos
+
+
+PURPOSE
+
+	The ChangeMemos command updates the 'memo_info' and 'memos' files in
+the 'bldhistorypath' and 'bldglobalpath' directories.
+
+
+SYNTAX
+
+	ChangeMemos [file]
+
+
+DESCRIPTION
+
+	The ChangeMemos command reads the input file(standard input by default)
+to get a list of defects/features whose user memo strings need to be updated in
+the files 'memo_info' and 'memos'.
+	The user memo string and the APAR is obtained for each one of these 
+defects/features from CMVC. The ChangeMemos command then updates the above 
+mentioned files. However if the command cannot find these files, it creates 
+them. If the files are found but do not have anything relevant to that 
+particular defect/feature, the information is appended to the files. If the 
+files do contain information about that defect then the defect information is 
+replaced with the information that is got from CMVC.
+	The ChangeMemos command logs its execution status (along with any 
+errors encountered) to both the terminal and the log file. The log file will be
+in the directory pointed to by 'bldlogpath' with the name "ChangeMemos.all".
+
+
+
+FLAGS
+
+	file		Input file containing defects/features, each on a
+			separate line.
+
+EXAMPLES
+
+	1. To pass a file containing defects
+
+		ChangeMemos defectsfile
+
+	2. To pass defects from STDIN
+
+		echo "12345" | ChangeMemos
+
+
+#include "memo_info.man"
+#include "memos.man"
+
+
+RELATED INFORMATION
+
+		bldhistorypath
+		bldglobalpath
+		bldhistorypath
+		bldlogpath
+		CheckSymptom

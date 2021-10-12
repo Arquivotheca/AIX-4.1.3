@@ -1,0 +1,40 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+There is a file "song" in this directory. Find all lines
+which don't end in "." and put a comma at the end of
+these lines.  Then rewrite the file and type "ready".
+#create Ref
+It seems that Early English art,
+ Alone retains its zest.
+To charm and please its devotees,
+ We've done our level best.
+We're not quite sure that all we do,
+ Has the Early English ring,
+But as far as we can tell,
+ It's something like this sort of thing.
+#create song
+It seems that Early English art
+ Alone retains its zest.
+To charm and please its devotees
+ We've done our level best.
+We're not quite sure that all we do
+ Has the Early English ring
+But as far as we can tell
+ It's something like this sort of thing.
+#user
+#cmp song Ref
+#log
+#next
+73.1a 10

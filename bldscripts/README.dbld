@@ -1,0 +1,351 @@
+# @(#)37        1.2  src/bldscripts/README.dbld, ade_build, bos412, GOLDA411a 7/1/94 10:39:53
+#
+#   COMPONENT_NAME: bldprocess
+#
+#   ORIGINS: 27
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+                                 dbld README
+                                 ~~~~~~~~~~~
+ 
+1) INTRODUCTION
+                                
+dbld is a script which enables you to specify that you want to
+build a set of lpps on the machine on which it is run. The way this
+is done in is to logon to your machine of choice as follows:
+
+================================================================================
+
+AIX Version 3
+(C) Copyrights by IBM and by others 1982, 1993.
+login: build
+build's Password:
+*******************************************************************************
+*                                                                             *
+*                                                                             *
+*  Welcome to AIX Version 3.2!
+*                                                                             *
+*  Please see the README file in /usr/lpp/bos for information pertinent to    *
+*  this release of the AIX Operating System.
+*                                                                             *
+*                                                                             *
+*******************************************************************************
+
+           ##    #       #    #    ##    #          #    #    #  ######
+         #  #   #       #   #    #  #   #          #    ##   #  #
+       #    #  #       ####    #    #  #          #    # #  #  #####
+      ######  #       #  #    ######  #          #    #  # #  #
+     #    #  #       #   #   #    #  #          #    #   ##  #
+    #    #  ######  #    #  #    #  ######     #    #    #  ######
+
+
+Last unsuccessful login: Wed Mar  2 15:25:37 1994 on pts/3 from tycobb.austin.ib
+m.com
+Last login: Fri Mar  4 11:09:26 1994 on pts/2 from tycobb.austin.ibm.com
+executing /.../bai.cell.austin.ibm.com/fs/u/build/.profile
+[build@alkaline]:/.../bai.cell.austin.ibm.com/fs/u/build
+
+================================================================================
+
+At this point you must change directory to the 'src' level of your build.
+For example:
+
+cd /.../bai.cell.austin.ibm.com/fs/project/aix4/build/azure/9415X/src
+ 
+Then enter: 
+
+ksh bldscripts/dbld <input_file>
+
+where <input_file> is a file containing the list of lpps to run. On our client
+machines we have the files:
+
+$HOME/bin/lpps.<client>
+
+setup so that we have a stable environment established and tuned
+for the builds.
+
+For example, to start dbld from alkaline we would typically do the following:
+
+================================================================================
+
+GO 4.1 > pwd
+/.../bai.cell.austin.ibm.com/fs/project/aix4/build/azure/9415X/src
+[build@alkaline]:/.../bai.cell.austin.ibm.com/fs/u/build
+GO 4.1 > ksh bldscripts/dbld $HOME/bin/lpps.alkaline
+[Attempting to build: kernel_include]
+  LPP kernel_include is SUCCESSFULLY built!
+[Attempting to build: kernel]
+  LPP kernel is SUCCESSFULLY built!
+[Attempting to build: cmdtext]
+  LPP cmdtext is being built on another machine
+[Attempting to build: des]
+  LPP des is SUCCESSFULLY built!
+[Attempting to build: xlc]
+  LPP xlc is SUCCESSFULLY built!
+[Attempting to build: xlf]
+  LPP xlf is SUCCESSFULLY built!
+[Attempting to build: msg]
+PREREQ to msg :  cmds_exp
+
+
+
+Ready to build:  msg
+RELEASE:  msg410
+SCRIPT:   aixlpp.sh
+PASS:     build
+DIRECTORIES:  msg ""
+LABEL: TRANSLATED_MESSAGES_build
+
+
+================================================================================
+
+2) INPUT FILES
+
+The input file to dbld is very simple. The lpps.alkaline file is as follows:
+
+gos_include
+gos2d_build
+tw
+hcon
+INed
+icraft
+dex
+info
+twinstall
+hconinstall
+INedinstall
+icraftinstall
+dexinstall
+infoinstall
+
+dbld will try to build every lpp listed in the file in order. dbld will 
+wait until prerequisite lpp's are completed. For example, the gos_include
+lpp is dependent upon setup. The gos2d_build is dependent upon gos2d_exp.
+While the existing input files for dbld are supposed to complete a build,
+we all know that build breaks occur. If the input file shown above is used
+and the hcon lpp breaks, then dbld will eventually stall when the attempt is
+made to build hconinstall. This is because the hconinstall lpp is dependent
+upon hcon to complete successfully. What you see in that situation is:
+
+================================================================================
+
+GO 4.1 > ksh bldscripts/dbld lpps.jds
+[Attempting to build: hconinstall]
+PREREQ to hconinstall :  hcon
+
+Waiting on prereqs for: hconinstall .........
+
+================================================================================ 
+
+If you do not know how to fix the hcon build break you can interrupt the
+dbld session and create an alternate input file. You would probably want to
+use the following file (assuming nothing other than hcon broke): 
+
+INedinstall
+icraftinstall
+dexinstall
+infoinstall
+
+This input file can be named anything you wish. However, DO NOT REPLACE
+the bin/lpps.<client_name> files as those have been tuned to build the
+tree under the current cell configuration.
+
+How does dbld do all these great things? How does dbld know which lpps
+are prerequisites to other lpps? What we use currently to maintain this is
+a simple database. If everything goes smoothly it would not be necessary
+to know that the database even existed. However, we all know build breaks
+occur. One type of situation that occurs frequently is that the database
+'remembers' that an lpp has successfully built. If you bring in a change
+which requires that the lpp be rebuilt you can 'force' dbld to build an
+lpp in the input file. For example, if setup and kernel needed to be rebuilt
+the following input file could be used:
+
+setup Y
+kernel Y
+
+The 'Y' is the 'force flag'. This lets you tell dbld to make an attempt
+to build the lpp even if it has succesfully built.
+
+It is also important to realize that you can use the 'force flag' to force
+an lpp to build without waiting for its prerequisites to complete. This is
+useful when it is known that an lpp can be started when a prequisite is
+partially complete. Currently, gos2d_exp and gos3d_exp require that cmds_exp
+complete before they can start. However, it is known that gos is only  
+dependent on some of the bos libraries. So the builder can watch the cmds_exp
+log and force the gos exports to start building prior to the completion of
+the cmds_exp lpp.
+
+3) DATABASE MANIPULATION
+
+dbld reads and updates a database in order to operate. The database
+conists of three tables. These are:
+
+Stage      - this identifies the 'stages' or lpps to be built. This table
+             is really an expansion of the 'src/bldscripts/aix.lpps' file.
+StageReq   - this identifies the prerequisites to each stage
+BuildStage - this identifies the current state of the lpp's within
+             a given build cycle
+
+Builders within our DCE cell can use the script dDB (for dynamic DataBase) to
+issue calls to the database. For example, to identify if the 9409A kernel
+is complete you can enter the following:
+
+================================================================================
+
+GO 4.1 > ksh bldscripts/dDB showBuildStage -k '9409A/kernel*'
+BUILD|STAGE|COMPLETE|BUILD_MACHINE
+9409A|kernel|Y|alkaline.austin.ibm.com|
+9409A|kernel_include|Y|alkaline.austin.ibm.com|
+
+================================================================================
+
+The output shows that for BUILD=9409A and STAGE=kernel the value of the
+COMPLETE flag is Y. This indicates that for 9409A the kernel lpp is complete.
+
+The argument to dDB is 'showBuildStage -k 9409A/kernel*'. This is a request
+to the database. In English we would be asking:
+
+'Show the contents of the BuildStage table where the key value starts with
+9409A/kernel'.
+
+The database prints the column headings and the contents of the rows matching
+the input key. You can use the following syntax to limit the columns output
+from the command to just the columns you are interested in:    
+
+================================================================================
+
+GO 4.1 > ksh bldscripts/dDB showBuildStage -k 9409A/kernel -f "STAGE%COMPLETE"
+STAGE|COMPLETE
+kernel|Y
+
+================================================================================
+
+If you want to update the database to indicate that the kernel lpp did
+not complete then you can enter the following:
+
+================================================================================
+
+GO 4.1 > ksh ksh/dDB maintainBuildStage -k 9409A/kernel -v COMPLETE=N
+
+================================================================================ 
+The script /.../bai.cell.austin.ibm.com/fs/u/build/bin/resetBuildStage will
+reset the status of all the lpps for a build cycle to 'N'. This will cause
+an lpp to be rebuilt when p4vbld is run.
+
+4) DATABASE LOCATION
+
+The database used by dbld is dynamically generated from the files
+$MAKETOP/bldscripts/Stage and $MAKETOP/bldscripts/StageReq. When
+these files are updated the database are re-created the next time
+dbld is run. The database will be created by default under:
+
+$MAKETOP/src/logs/buildDB
+
+The default location can be changed by setting the environment
+variable BLD_LOG_DIR prior to using dbld.
+
+IT IS IMPORTANT THAT THE DATABASE BE MAINTAINED IN A CONSISTENT
+LOCATION FOR ANY GIVEN BUILD. SO FOR EACH BUILD DECIDE WHERE THE
+DATABASE WILL RESIDE AND STICK TO IT. BAI uses a setup script
+for each build to establish the BLD_LOG_DIR variable to a desired
+location. This is recommended. It is also recommended that 
+$MAKETOP/src/bldscripts be appended to your PATH variable.
+
+5) AVAILABLE TOOLS
+   
+Tools which have been developed for aiding with building in a distributed
+environment and use the database are as follows:
+
+dbld: This enables builds to be started on a chosen machine.
+
+        USAGE: ksh bldscripts/dbld <file_containing_list_of_LPPs>
+
+whatHasBuilt: This identifies the status of the lpps for a given build
+              cycle.
+
+        USAGE: ksh bldscripts/whatHasBuilt <build_cycle>
+
+unsetBuildStatus: Sets the completion state of lpps for a given build cycle
+                  to 'N' or not complete.
+
+        USAGE: ksh bldscripts/unsetBuildStatus <build_cycle>
+
+6) OPTIONS
+
+Available command line options are:
+
+   a) -b <break process>
+
+      This option causes the procedure <break process> to be invoked if a
+      break occurs during any of the stages listed in the input file. Typically
+      the procedure is used to call a digital pager. dbld will supply a text
+      message as input to the <break process>. 
+ 
+
+   b) -c <complete process>
+
+      This option causes the procedure <complete process> to be invoked if a
+      complete occurs during any of the stages listed in the input file. Typically
+      the procedure is used to call a digital pager. dbld will supply a text
+      message as input to the <complete process>. 
+ 
+
+================================= APPENDICES ==================================
+
+A) DATA DICTIONARY
+
+   The following lists the tables and columns for the database. The columnns
+   marked as <column_name> are key fields.
+
+   TABLE                COLUMN               Description 
+   ------------------   ------------------   ----------------------------------
+   Stage                <STAGE>              The lpp or 'stage' to be built.
+
+                        RELEASE              The CMVC release which contains
+                                             the code for the STAGE.
+                       
+                        SCRIPT               The src/bldscripts/* script used
+                                             to build the STAGE.
+
+                        LABEL                A label used to describe the
+                                             stage.
+
+                        MAKE_PASS            The build phase for the STAGE.
+                                             This will be include, libs, export,                                             build or install.
+
+                        STAGE_DIRS           The directories to walk during the
+                                             STAGE.
+
+    StageReq            <STAGE>              The lpp or 'stage' to be built.
+
+                        <STAGE_REQ>          A prereq required to complete 
+                                             before STAGE can be built.
+
+    BuildStage          <BUILD>              The build cycle.
+
+                        <STAGE>              The STAGE within the BUILD or 
+                                             build cycle.       
+
+                        COMPLETE             The completion status for the
+                                             STAGE. Valid values are <null>,
+                                             N for 'Not complete', B for 
+                                             'Broken' and Y for 'Complete'.
+
+                        BUILD_MACHINE        Identifies the build machine where
+                                             the last attempt to build the STAGE
+                                             has been made.
+
+
+                        BLOCKING_DEFECT      Identifies the defect opened against
+                                             any break which prevents the completion
+                                             of the stage.
+

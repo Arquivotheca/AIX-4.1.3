@@ -1,0 +1,99 @@
+/* @(#)42  1.1  src/bos/objclass/cfgodm.cre2, cmdcfg, bos411, 9428A410j 3/14/90 14:28:13 */
+/*
+ * COMPONENT_NAME: CMDCFG (Input file to odmcreate)
+ *
+ * FUNCTIONS: none
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregate modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. datestring
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+/* Common to Predefined/Customized Object Classes */
+
+#define		TYPESIZE	16		
+#define		CLASSIZE	16	
+#define		PREFIXSIZE	16
+#define		DEVIDSIZE	16
+#define		CATSIZE		16
+#define		DDNAMESIZE	16
+#define		UNIQUESIZE	48
+#define		NAMESIZE	16
+#define		VPDSIZE		512
+#define		KEYSIZE		16
+#define		LOCSIZE		16
+
+/* Predefined/Customized Attribute Object Class */
+
+#define		ATTRNAMESIZE	16
+#define		DEFAULTSIZE	256
+#define		ATTRVALSIZE	256
+#define		WIDTHSIZE	16
+#define		FLAGSIZE	8
+
+/* Predefined Device Driver Object Class */
+
+#define		PATHSIZE	256
+
+/* Configuration Rules Object Class */
+
+#define		RULESIZE	256
+
+/* Customized Device Driver Object Class */
+
+#define		RESOURCESIZE	12
+#define		VALUESIZE	20
+
+class PdDv {
+	char type[TYPESIZE];		key
+	char class[CLASSIZE];
+	char subclass[CLASSIZE];
+	char prefix[PREFIXSIZE];
+	char devid[DEVIDSIZE];
+	short base;
+	short has_vpd;
+	short detectable;
+	short chgstatus;
+	short bus_ext;
+	short fru;
+	short led;
+	short setno;
+	short msgno;
+	char catalog[CATSIZE];
+	char DvDr[DDNAMESIZE];
+	method Define;
+	method Configure;
+	method Change;
+	method Unconfigure;
+	method Undefine;
+	method Start;
+	method Stop;
+	short inventory_only;
+	char uniquetype[UNIQUESIZE];		key
+	};
+
+class PdCn {
+	char uniquetype[UNIQUESIZE];		key
+	char connkey[KEYSIZE];
+	char connwhere[LOCSIZE];
+	};
+
+class PdAt {
+	char uniquetype[UNIQUESIZE];			key
+	char attribute[ATTRNAMESIZE];
+	char deflt[DEFAULTSIZE];
+	char values[ATTRVALSIZE];
+	char width[WIDTHSIZE];
+	char type[FLAGSIZE];
+	char generic[FLAGSIZE];
+	char rep[FLAGSIZE];
+	short nls_index;
+	};
+

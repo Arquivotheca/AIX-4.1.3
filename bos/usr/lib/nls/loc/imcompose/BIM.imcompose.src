@@ -1,0 +1,436 @@
+/* @(#)34       1.1  src/bos/usr/lib/nls/loc/imcompose/BIM.imcompose.src, cmdims, bos411, 9428A410j 7/8/93 18:46:43 */
+/*
+ * COMPONENT_NAME : (cmdims) SBCS Input Method
+ *
+ * FUNCTIONS : imcompose definition file
+ *
+ * ORIGINS : 27
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1993
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+/*
+ *	Please refer to the following file for compose definition grammar.
+ *		/usr/lib/nls/loc/sbcs.imcompose.src
+ */
+
+/*
+ *	compose definitions for bidi input
+ */
+
+#define Latin		0
+#define Bidi		32
+#define ModState	Mod1Mask|Mod2Mask
+
+LAYER_SWITCH Latin = XK_Shift_L + ModState in Bidi ;
+LAYER_SWITCH Bidi = XK_Shift_R + ModState in Latin ;
+
+/*
+ *	Bidi ParseKey support
+ */
+
+"\033[001B" = XK_Return + ModState in BIM_PARSEKEYS ;
+"\033[002B" = XK_Shift_L + ModState in BIM_PARSEKEYS ;
+"\033[003B" = XK_Shift_R + ModState in BIM_PARSEKEYS ;
+"\033[004B" = XK_Num_Lock + ShiftMask in BIM_PARSEKEYS ;
+"\033[006B" = XK_KP_Divide + ShiftMask in BIM_PARSEKEYS ;
+"\033[007B" = XK_KP_Divide + ModState in BIM_PARSEKEYS ;
+
+"\033[014B" = XK_KP_Multiply + ModState in BIM_PARSEKEYS ;
+"\033[008B" = XK_KP_4 + ModState in BIM_PARSEKEYS ;
+"\033[009B" = XK_KP_1 + ModState in BIM_PARSEKEYS ;
+"\033[012B" = XK_KP_2 + ModState in BIM_PARSEKEYS ;
+"\033[013B" = XK_KP_3 + ModState in BIM_PARSEKEYS ;
+"\033[010B" = XK_KP_7 + ModState in BIM_PARSEKEYS ;
+"\033[011B" = XK_KP_8 + ModState in BIM_PARSEKEYS ;
+
+
+/*
+ *	compose definitions for sbcs input
+ */
+
+UNBOUND = COMPOSE_ERROR ;
+
+/*
+ *	compose definitions for NumPad keys
+ */
+
+/* 3 digits */
+
+'\x00' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_0+ModState in * ;
+'\x01' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_1+ModState in * ;
+'\x02' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_2+ModState in * ;
+'\x03' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_3+ModState in * ;
+'\x04' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_4+ModState in * ;
+'\x05' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_5+ModState in * ;
+'\x06' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_6+ModState in * ;
+'\x07' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_7+ModState in * ;
+'\x08' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_8+ModState in * ;
+'\x09' = XK_KP_0+ModState XK_KP_0+ModState XK_KP_9+ModState in * ;
+'\x0a' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_0+ModState in * ;
+'\x0b' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_1+ModState in * ;
+'\x0c' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_2+ModState in * ;
+'\x0d' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_3+ModState in * ;
+'\x0e' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_4+ModState in * ;
+'\x0f' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_5+ModState in * ;
+'\x10' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_6+ModState in * ;
+'\x11' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_7+ModState in * ;
+'\x12' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_8+ModState in * ;
+'\x13' = XK_KP_0+ModState XK_KP_1+ModState XK_KP_9+ModState in * ;
+'\x14' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_0+ModState in * ;
+'\x15' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_1+ModState in * ;
+'\x16' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_2+ModState in * ;
+'\x17' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_3+ModState in * ;
+'\x18' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_4+ModState in * ;
+'\x19' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_5+ModState in * ;
+'\x1a' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_6+ModState in * ;
+'\x1b' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_7+ModState in * ;
+'\x1c' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_8+ModState in * ;
+'\x1d' = XK_KP_0+ModState XK_KP_2+ModState XK_KP_9+ModState in * ;
+'\x1e' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_0+ModState in * ;
+'\x1f' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_1+ModState in * ;
+'\x20' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_2+ModState in * ;
+'\x21' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_3+ModState in * ;
+'\x22' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_4+ModState in * ;
+'\x23' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_5+ModState in * ;
+'\x24' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_6+ModState in * ;
+'\x25' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_7+ModState in * ;
+'\x26' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_8+ModState in * ;
+'\x27' = XK_KP_0+ModState XK_KP_3+ModState XK_KP_9+ModState in * ;
+'\x28' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_0+ModState in * ;
+'\x29' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_1+ModState in * ;
+'\x2a' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_2+ModState in * ;
+'\x2b' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_3+ModState in * ;
+'\x2c' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_4+ModState in * ;
+'\x2d' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_5+ModState in * ;
+'\x2e' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_6+ModState in * ;
+'\x2f' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_7+ModState in * ;
+'\x30' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_8+ModState in * ;
+'\x31' = XK_KP_0+ModState XK_KP_4+ModState XK_KP_9+ModState in * ;
+'\x32' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_0+ModState in * ;
+'\x33' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_1+ModState in * ;
+'\x34' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_2+ModState in * ;
+'\x35' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_3+ModState in * ;
+'\x36' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_4+ModState in * ;
+'\x37' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_5+ModState in * ;
+'\x38' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_6+ModState in * ;
+'\x39' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_7+ModState in * ;
+'\x3a' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_8+ModState in * ;
+'\x3b' = XK_KP_0+ModState XK_KP_5+ModState XK_KP_9+ModState in * ;
+'\x3c' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_0+ModState in * ;
+'\x3d' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_1+ModState in * ;
+'\x3e' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_2+ModState in * ;
+'\x3f' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_3+ModState in * ;
+'\x40' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_4+ModState in * ;
+'\x41' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_5+ModState in * ;
+'\x42' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_6+ModState in * ;
+'\x43' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_7+ModState in * ;
+'\x44' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_8+ModState in * ;
+'\x45' = XK_KP_0+ModState XK_KP_6+ModState XK_KP_9+ModState in * ;
+'\x46' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_0+ModState in * ;
+'\x47' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_1+ModState in * ;
+'\x48' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_2+ModState in * ;
+'\x49' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_3+ModState in * ;
+'\x4a' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_4+ModState in * ;
+'\x4b' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_5+ModState in * ;
+'\x4c' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_6+ModState in * ;
+'\x4d' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_7+ModState in * ;
+'\x4e' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_8+ModState in * ;
+'\x4f' = XK_KP_0+ModState XK_KP_7+ModState XK_KP_9+ModState in * ;
+'\x50' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_0+ModState in * ;
+'\x51' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_1+ModState in * ;
+'\x52' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_2+ModState in * ;
+'\x53' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_3+ModState in * ;
+'\x54' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_4+ModState in * ;
+'\x55' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_5+ModState in * ;
+'\x56' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_6+ModState in * ;
+'\x57' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_7+ModState in * ;
+'\x58' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_8+ModState in * ;
+'\x59' = XK_KP_0+ModState XK_KP_8+ModState XK_KP_9+ModState in * ;
+'\x5a' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_0+ModState in * ;
+'\x5b' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_1+ModState in * ;
+'\x5c' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_2+ModState in * ;
+'\x5d' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_3+ModState in * ;
+'\x5e' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_4+ModState in * ;
+'\x5f' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_5+ModState in * ;
+'\x60' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_6+ModState in * ;
+'\x61' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_7+ModState in * ;
+'\x62' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_8+ModState in * ;
+'\x63' = XK_KP_0+ModState XK_KP_9+ModState XK_KP_9+ModState in * ;
+'\x64' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_0+ModState in * ;
+'\x65' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_1+ModState in * ;
+'\x66' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_2+ModState in * ;
+'\x67' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_3+ModState in * ;
+'\x68' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_4+ModState in * ;
+'\x69' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_5+ModState in * ;
+'\x6a' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_6+ModState in * ;
+'\x6b' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_7+ModState in * ;
+'\x6c' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_8+ModState in * ;
+'\x6d' = XK_KP_1+ModState XK_KP_0+ModState XK_KP_9+ModState in * ;
+'\x6e' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_0+ModState in * ;
+'\x6f' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_1+ModState in * ;
+'\x70' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_2+ModState in * ;
+'\x71' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_3+ModState in * ;
+'\x72' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_4+ModState in * ;
+'\x73' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_5+ModState in * ;
+'\x74' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_6+ModState in * ;
+'\x75' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_7+ModState in * ;
+'\x76' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_8+ModState in * ;
+'\x77' = XK_KP_1+ModState XK_KP_1+ModState XK_KP_9+ModState in * ;
+'\x78' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_0+ModState in * ;
+'\x79' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_1+ModState in * ;
+'\x7a' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_2+ModState in * ;
+'\x7b' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_3+ModState in * ;
+'\x7c' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_4+ModState in * ;
+'\x7d' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_5+ModState in * ;
+'\x7e' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_6+ModState in * ;
+'\x7f' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_7+ModState in * ;
+'\x80' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_8+ModState in * ;
+'\x81' = XK_KP_1+ModState XK_KP_2+ModState XK_KP_9+ModState in * ;
+'\x82' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_0+ModState in * ;
+'\x83' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_1+ModState in * ;
+'\x84' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_2+ModState in * ;
+'\x85' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_3+ModState in * ;
+'\x86' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_4+ModState in * ;
+'\x87' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_5+ModState in * ;
+'\x88' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_6+ModState in * ;
+'\x89' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_7+ModState in * ;
+'\x8a' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_8+ModState in * ;
+'\x8b' = XK_KP_1+ModState XK_KP_3+ModState XK_KP_9+ModState in * ;
+'\x8c' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_0+ModState in * ;
+'\x8d' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_1+ModState in * ;
+'\x8e' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_2+ModState in * ;
+'\x8f' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_3+ModState in * ;
+'\x90' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_4+ModState in * ;
+'\x91' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_5+ModState in * ;
+'\x92' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_6+ModState in * ;
+'\x93' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_7+ModState in * ;
+'\x94' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_8+ModState in * ;
+'\x95' = XK_KP_1+ModState XK_KP_4+ModState XK_KP_9+ModState in * ;
+'\x96' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_0+ModState in * ;
+'\x97' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_1+ModState in * ;
+'\x98' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_2+ModState in * ;
+'\x99' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_3+ModState in * ;
+'\x9a' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_4+ModState in * ;
+'\x9b' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_5+ModState in * ;
+'\x9c' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_6+ModState in * ;
+'\x9d' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_7+ModState in * ;
+'\x9e' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_8+ModState in * ;
+'\x9f' = XK_KP_1+ModState XK_KP_5+ModState XK_KP_9+ModState in * ;
+'\xa0' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_0+ModState in * ;
+'\xa1' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_1+ModState in * ;
+'\xa2' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_2+ModState in * ;
+'\xa3' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_3+ModState in * ;
+'\xa4' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_4+ModState in * ;
+'\xa5' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_5+ModState in * ;
+'\xa6' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_6+ModState in * ;
+'\xa7' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_7+ModState in * ;
+'\xa8' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_8+ModState in * ;
+'\xa9' = XK_KP_1+ModState XK_KP_6+ModState XK_KP_9+ModState in * ;
+'\xaa' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_0+ModState in * ;
+'\xab' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_1+ModState in * ;
+'\xac' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_2+ModState in * ;
+'\xad' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_3+ModState in * ;
+'\xae' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_4+ModState in * ;
+'\xaf' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_5+ModState in * ;
+'\xb0' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_6+ModState in * ;
+'\xb1' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_7+ModState in * ;
+'\xb2' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_8+ModState in * ;
+'\xb3' = XK_KP_1+ModState XK_KP_7+ModState XK_KP_9+ModState in * ;
+'\xb4' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_0+ModState in * ;
+'\xb5' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_1+ModState in * ;
+'\xb6' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_2+ModState in * ;
+'\xb7' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_3+ModState in * ;
+'\xb8' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_4+ModState in * ;
+'\xb9' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_5+ModState in * ;
+'\xba' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_6+ModState in * ;
+'\xbb' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_7+ModState in * ;
+'\xbc' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_8+ModState in * ;
+'\xbd' = XK_KP_1+ModState XK_KP_8+ModState XK_KP_9+ModState in * ;
+'\xbe' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_0+ModState in * ;
+'\xbf' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_1+ModState in * ;
+'\xc0' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_2+ModState in * ;
+'\xc1' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_3+ModState in * ;
+'\xc2' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_4+ModState in * ;
+'\xc3' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_5+ModState in * ;
+'\xc4' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_6+ModState in * ;
+'\xc5' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_7+ModState in * ;
+'\xc6' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_8+ModState in * ;
+'\xc7' = XK_KP_1+ModState XK_KP_9+ModState XK_KP_9+ModState in * ;
+'\xc8' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_0+ModState in * ;
+'\xc9' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_1+ModState in * ;
+'\xca' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_2+ModState in * ;
+'\xcb' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_3+ModState in * ;
+'\xcc' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_4+ModState in * ;
+'\xcd' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_5+ModState in * ;
+'\xce' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_6+ModState in * ;
+'\xcf' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_7+ModState in * ;
+'\xd0' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_8+ModState in * ;
+'\xd1' = XK_KP_2+ModState XK_KP_0+ModState XK_KP_9+ModState in * ;
+'\xd2' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_0+ModState in * ;
+'\xd3' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_1+ModState in * ;
+'\xd4' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_2+ModState in * ;
+'\xd5' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_3+ModState in * ;
+'\xd6' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_4+ModState in * ;
+'\xd7' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_5+ModState in * ;
+'\xd8' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_6+ModState in * ;
+'\xd9' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_7+ModState in * ;
+'\xda' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_8+ModState in * ;
+'\xdb' = XK_KP_2+ModState XK_KP_1+ModState XK_KP_9+ModState in * ;
+'\xdc' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_0+ModState in * ;
+'\xdd' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_1+ModState in * ;
+'\xde' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_2+ModState in * ;
+'\xdf' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_3+ModState in * ;
+'\xe0' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_4+ModState in * ;
+'\xe1' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_5+ModState in * ;
+'\xe2' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_6+ModState in * ;
+'\xe3' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_7+ModState in * ;
+'\xe4' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_8+ModState in * ;
+'\xe5' = XK_KP_2+ModState XK_KP_2+ModState XK_KP_9+ModState in * ;
+'\xe6' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_0+ModState in * ;
+'\xe7' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_1+ModState in * ;
+'\xe8' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_2+ModState in * ;
+'\xe9' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_3+ModState in * ;
+'\xea' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_4+ModState in * ;
+'\xeb' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_5+ModState in * ;
+'\xec' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_6+ModState in * ;
+'\xed' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_7+ModState in * ;
+'\xee' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_8+ModState in * ;
+'\xef' = XK_KP_2+ModState XK_KP_3+ModState XK_KP_9+ModState in * ;
+'\xf0' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_0+ModState in * ;
+'\xf1' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_1+ModState in * ;
+'\xf2' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_2+ModState in * ;
+'\xf3' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_3+ModState in * ;
+'\xf4' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_4+ModState in * ;
+'\xf5' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_5+ModState in * ;
+'\xf6' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_6+ModState in * ;
+'\xf7' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_7+ModState in * ;
+'\xf8' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_8+ModState in * ;
+'\xf9' = XK_KP_2+ModState XK_KP_4+ModState XK_KP_9+ModState in * ;
+'\xfa' = XK_KP_2+ModState XK_KP_5+ModState XK_KP_0+ModState in * ;
+'\xfb' = XK_KP_2+ModState XK_KP_5+ModState XK_KP_1+ModState in * ;
+'\xfc' = XK_KP_2+ModState XK_KP_5+ModState XK_KP_2+ModState in * ;
+'\xfd' = XK_KP_2+ModState XK_KP_5+ModState XK_KP_3+ModState in * ;
+'\xfe' = XK_KP_2+ModState XK_KP_5+ModState XK_KP_4+ModState in * ;
+'\xff' = XK_KP_2+ModState XK_KP_5+ModState XK_KP_5+ModState in * ;
+
+/* 2 digits */
+
+"\x00*" = XK_KP_0+ModState XK_KP_0+ModState *+* in * ;
+"\x01*" = XK_KP_0+ModState XK_KP_1+ModState *+* in * ;
+"\x02*" = XK_KP_0+ModState XK_KP_2+ModState *+* in * ;
+"\x03*" = XK_KP_0+ModState XK_KP_3+ModState *+* in * ;
+"\x04*" = XK_KP_0+ModState XK_KP_4+ModState *+* in * ;
+"\x05*" = XK_KP_0+ModState XK_KP_5+ModState *+* in * ;
+"\x06*" = XK_KP_0+ModState XK_KP_6+ModState *+* in * ;
+"\x07*" = XK_KP_0+ModState XK_KP_7+ModState *+* in * ;
+"\x08*" = XK_KP_0+ModState XK_KP_8+ModState *+* in * ;
+"\x09*" = XK_KP_0+ModState XK_KP_9+ModState *+* in * ;
+"\x0a*" = XK_KP_1+ModState XK_KP_0+ModState *+* in * ;
+"\x0b*" = XK_KP_1+ModState XK_KP_1+ModState *+* in * ;
+"\x0c*" = XK_KP_1+ModState XK_KP_2+ModState *+* in * ;
+"\x0d*" = XK_KP_1+ModState XK_KP_3+ModState *+* in * ;
+"\x0e*" = XK_KP_1+ModState XK_KP_4+ModState *+* in * ;
+"\x0f*" = XK_KP_1+ModState XK_KP_5+ModState *+* in * ;
+"\x10*" = XK_KP_1+ModState XK_KP_6+ModState *+* in * ;
+"\x11*" = XK_KP_1+ModState XK_KP_7+ModState *+* in * ;
+"\x12*" = XK_KP_1+ModState XK_KP_8+ModState *+* in * ;
+"\x13*" = XK_KP_1+ModState XK_KP_9+ModState *+* in * ;
+"\x14*" = XK_KP_2+ModState XK_KP_0+ModState *+* in * ;
+"\x15*" = XK_KP_2+ModState XK_KP_1+ModState *+* in * ;
+"\x16*" = XK_KP_2+ModState XK_KP_2+ModState *+* in * ;
+"\x17*" = XK_KP_2+ModState XK_KP_3+ModState *+* in * ;
+"\x18*" = XK_KP_2+ModState XK_KP_4+ModState *+* in * ;
+"\x19*" = XK_KP_2+ModState XK_KP_5+ModState *+* in * ;
+"\x1a*" = XK_KP_2+ModState XK_KP_6+ModState *+* in * ;
+"\x1b*" = XK_KP_2+ModState XK_KP_7+ModState *+* in * ;
+"\x1c*" = XK_KP_2+ModState XK_KP_8+ModState *+* in * ;
+"\x1d*" = XK_KP_2+ModState XK_KP_9+ModState *+* in * ;
+"\x1e*" = XK_KP_3+ModState XK_KP_0+ModState *+* in * ;
+"\x1f*" = XK_KP_3+ModState XK_KP_1+ModState *+* in * ;
+"\x20*" = XK_KP_3+ModState XK_KP_2+ModState *+* in * ;
+"\x21*" = XK_KP_3+ModState XK_KP_3+ModState *+* in * ;
+"\x22*" = XK_KP_3+ModState XK_KP_4+ModState *+* in * ;
+"\x23*" = XK_KP_3+ModState XK_KP_5+ModState *+* in * ;
+"\x24*" = XK_KP_3+ModState XK_KP_6+ModState *+* in * ;
+"\x25*" = XK_KP_3+ModState XK_KP_7+ModState *+* in * ;
+"\x26*" = XK_KP_3+ModState XK_KP_8+ModState *+* in * ;
+"\x27*" = XK_KP_3+ModState XK_KP_9+ModState *+* in * ;
+"\x28*" = XK_KP_4+ModState XK_KP_0+ModState *+* in * ;
+"\x29*" = XK_KP_4+ModState XK_KP_1+ModState *+* in * ;
+"\x2a*" = XK_KP_4+ModState XK_KP_2+ModState *+* in * ;
+"\x2b*" = XK_KP_4+ModState XK_KP_3+ModState *+* in * ;
+"\x2c*" = XK_KP_4+ModState XK_KP_4+ModState *+* in * ;
+"\x2d*" = XK_KP_4+ModState XK_KP_5+ModState *+* in * ;
+"\x2e*" = XK_KP_4+ModState XK_KP_6+ModState *+* in * ;
+"\x2f*" = XK_KP_4+ModState XK_KP_7+ModState *+* in * ;
+"\x30*" = XK_KP_4+ModState XK_KP_8+ModState *+* in * ;
+"\x31*" = XK_KP_4+ModState XK_KP_9+ModState *+* in * ;
+"\x32*" = XK_KP_5+ModState XK_KP_0+ModState *+* in * ;
+"\x33*" = XK_KP_5+ModState XK_KP_1+ModState *+* in * ;
+"\x34*" = XK_KP_5+ModState XK_KP_2+ModState *+* in * ;
+"\x35*" = XK_KP_5+ModState XK_KP_3+ModState *+* in * ;
+"\x36*" = XK_KP_5+ModState XK_KP_4+ModState *+* in * ;
+"\x37*" = XK_KP_5+ModState XK_KP_5+ModState *+* in * ;
+"\x38*" = XK_KP_5+ModState XK_KP_6+ModState *+* in * ;
+"\x39*" = XK_KP_5+ModState XK_KP_7+ModState *+* in * ;
+"\x3a*" = XK_KP_5+ModState XK_KP_8+ModState *+* in * ;
+"\x3b*" = XK_KP_5+ModState XK_KP_9+ModState *+* in * ;
+"\x3c*" = XK_KP_6+ModState XK_KP_0+ModState *+* in * ;
+"\x3d*" = XK_KP_6+ModState XK_KP_1+ModState *+* in * ;
+"\x3e*" = XK_KP_6+ModState XK_KP_2+ModState *+* in * ;
+"\x3f*" = XK_KP_6+ModState XK_KP_3+ModState *+* in * ;
+"\x40*" = XK_KP_6+ModState XK_KP_4+ModState *+* in * ;
+"\x41*" = XK_KP_6+ModState XK_KP_5+ModState *+* in * ;
+"\x42*" = XK_KP_6+ModState XK_KP_6+ModState *+* in * ;
+"\x43*" = XK_KP_6+ModState XK_KP_7+ModState *+* in * ;
+"\x44*" = XK_KP_6+ModState XK_KP_8+ModState *+* in * ;
+"\x45*" = XK_KP_6+ModState XK_KP_9+ModState *+* in * ;
+"\x46*" = XK_KP_7+ModState XK_KP_0+ModState *+* in * ;
+"\x47*" = XK_KP_7+ModState XK_KP_1+ModState *+* in * ;
+"\x48*" = XK_KP_7+ModState XK_KP_2+ModState *+* in * ;
+"\x49*" = XK_KP_7+ModState XK_KP_3+ModState *+* in * ;
+"\x4a*" = XK_KP_7+ModState XK_KP_4+ModState *+* in * ;
+"\x4b*" = XK_KP_7+ModState XK_KP_5+ModState *+* in * ;
+"\x4c*" = XK_KP_7+ModState XK_KP_6+ModState *+* in * ;
+"\x4d*" = XK_KP_7+ModState XK_KP_7+ModState *+* in * ;
+"\x4e*" = XK_KP_7+ModState XK_KP_8+ModState *+* in * ;
+"\x4f*" = XK_KP_7+ModState XK_KP_9+ModState *+* in * ;
+"\x50*" = XK_KP_8+ModState XK_KP_0+ModState *+* in * ;
+"\x51*" = XK_KP_8+ModState XK_KP_1+ModState *+* in * ;
+"\x52*" = XK_KP_8+ModState XK_KP_2+ModState *+* in * ;
+"\x53*" = XK_KP_8+ModState XK_KP_3+ModState *+* in * ;
+"\x54*" = XK_KP_8+ModState XK_KP_4+ModState *+* in * ;
+"\x55*" = XK_KP_8+ModState XK_KP_5+ModState *+* in * ;
+"\x56*" = XK_KP_8+ModState XK_KP_6+ModState *+* in * ;
+"\x57*" = XK_KP_8+ModState XK_KP_7+ModState *+* in * ;
+"\x58*" = XK_KP_8+ModState XK_KP_8+ModState *+* in * ;
+"\x59*" = XK_KP_8+ModState XK_KP_9+ModState *+* in * ;
+"\x5a*" = XK_KP_9+ModState XK_KP_0+ModState *+* in * ;
+"\x5b*" = XK_KP_9+ModState XK_KP_1+ModState *+* in * ;
+"\x5c*" = XK_KP_9+ModState XK_KP_2+ModState *+* in * ;
+"\x5d*" = XK_KP_9+ModState XK_KP_3+ModState *+* in * ;
+"\x5e*" = XK_KP_9+ModState XK_KP_4+ModState *+* in * ;
+"\x5f*" = XK_KP_9+ModState XK_KP_5+ModState *+* in * ;
+"\x60*" = XK_KP_9+ModState XK_KP_6+ModState *+* in * ;
+"\x61*" = XK_KP_9+ModState XK_KP_7+ModState *+* in * ;
+"\x62*" = XK_KP_9+ModState XK_KP_8+ModState *+* in * ;
+"\x63*" = XK_KP_9+ModState XK_KP_9+ModState *+* in * ;
+
+/* 1 digit */
+
+"\x00*" = XK_KP_0+ModState *+* in * ;
+"\x01*" = XK_KP_1+ModState *+* in * ;
+"\x02*" = XK_KP_2+ModState *+* in * ;
+"\x03*" = XK_KP_3+ModState *+* in * ;
+"\x04*" = XK_KP_4+ModState *+* in * ;
+"\x05*" = XK_KP_5+ModState *+* in * ;
+"\x06*" = XK_KP_6+ModState *+* in * ;
+"\x07*" = XK_KP_7+ModState *+* in * ;
+"\x08*" = XK_KP_8+ModState *+* in * ;
+"\x09*" = XK_KP_9+ModState *+* in * ;

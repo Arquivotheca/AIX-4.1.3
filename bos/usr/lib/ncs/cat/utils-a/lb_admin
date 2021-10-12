@@ -1,0 +1,330 @@
+
+
+
+LB_ADMIN(1)               User Commands               LB_ADMIN(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     llllbbbb____aaaaddddmmmmiiiinnnn - Location Broker Administrative Tool
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ////eeeettttcccc////nnnnccccssss////llllbbbb____aaaaddddmmmmiiiinnnn [ ----nnnnqqqq ] [ ----vvvveeeerrrrssssiiiioooonnnn ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The llllbbbb____aaaaddddmmmmiiiinnnn tool administers the registrations of NCS-based
+     servers  in  Global  Location Broker (GLB) or Local Location
+     Broker (LLB) databases.  A server registers Universal Unique
+     Identifiers  (UUIDs)  specifying  an  object, a type, and an
+     interface, along with a socket address specifying its  loca-
+     tion.   A  client  can  locate  servers  by  issuing  lookup
+     requests to GLBs and LLBs.  Using the llllbbbb____aaaaddddmmmmiiiinnnn tool, you can
+     look  up  information,  add new entries, and delete existing
+     entries in a specified database.
+
+     The llllbbbb____aaaaddddmmmmiiiinnnn tool is useful for inspecting the  contents  of
+     Location   Broker  databases  and  for  correcting  database
+     errors.  For example,  if  a  server  terminates  abnormally
+     without  unregistering itself, you can use llllbbbb____aaaaddddmmmmiiiinnnn to manu-
+     ally remove its entry from the GLB database.
+
+     In accepting  input  or  displaying  output,  llllbbbb____aaaaddddmmmmiiiinnnn  uses
+     either  character  strings  or  descriptive textual names to
+     identify objects, types, and interfaces.  A character string
+     directly  represents  the  data  in  a  UUID  in  the format
+     _x_x_x_x_x_x_x_x_x_x_x_x...._x_x...._x_x...._x_x...._x_x...._x_x...._x_x...._x_x...._x_x, where each _x is a hex-
+     adecimal  digit.   Descriptive  textual names are associated
+     with UUIDs in the uuuuuuuuiiiiddddnnnnaaaammmmeeee....ttttxxxxtttt file.
+
+     With llllbbbb____aaaaddddmmmmiiiinnnn, you examine or modify only one database at  a
+     time,  which  we  refer  to  as  the  The uuuusssseeee____bbbbrrrrooookkkkeeeerrrr command
+     selects the type of Location Broker database,  GLB  or  LLB.
+     The  sssseeeetttt____bbbbrrrrooookkkkeeeerrrr  command  selects  the host whose GLB or LLB
+     database is to be accessed.  Of course, if  you  modify  one
+     replica  of  a  replicated  GLB database, your modifications
+     will be propagated to the other replicas of that database.
+
+     On Apollo systems, llllbbbb____aaaaddddmmmmiiiinnnn presents both a  Domain/Dialogue
+     window-oriented   user  interface  and  a  terminal-oriented
+     interface.   On  other  systems,  it   presents   only   the
+     terminal-oriented   interface.    Here   we   describe   the
+     terminal-oriented interface to llllbbbb____aaaaddddmmmmiiiinnnn.  For information on
+     the Domain/Dialogue interface, use the HELP key or the right
+     mouse button, or see _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----nnnnqqqq        Do not query for verification of wildcard  expan-
+               sions in uuuunnnnrrrreeeeggggiiiisssstttteeeerrrr operations.
+
+     ----vvvveeeerrrrssssiiiioooonnnn   Display the version of  NCK  that  this  llllbbbb____aaaaddddmmmmiiiinnnn
+
+
+
+NCS Administration        Last change:                          1
+
+
+
+
+
+
+LB_ADMIN(1)               User Commands               LB_ADMIN(1)
+
+
+
+               belongs to, but do not start the tool.
+
+CCCCOOOOMMMMMMMMAAAANNNNDDDDSSSS
+     In llllooooooookkkkuuuupppp, rrrreeeeggggiiiisssstttteeeerrrr, and uuuunnnnrrrreeeeggggiiiisssstttteeeerrrr  commands,  the  _o_b_j_e_c_t,
+     _t_y_p_e,  and  _i_n_t_e_r_f_a_c_e  arguments  can  be  either  character
+     strings representing UUIDs or textual names corresponding to
+     UUIDs, as described earlier.
+
+     aaaa[dddddddd]     Synonym for rrrreeeeggggiiiisssstttteeeerrrr.
+
+     cccc[lllleeeeaaaannnn]   Find and delete obsolete entries  in  the  current
+               database.
+
+               When you issue this command, llllbbbb____aaaaddddmmmmiiiinnnn attempts  to
+               contact  each  server  registered in the database.
+               If the server responds, the entry for  its  regis-
+               tration  is  left  intact in the database.  If the
+               server does not respond, llllbbbb____aaaaddddmmmmiiiinnnn tries to look up
+               its  registration  in the LLB database at the host
+               where the server is located, tells you the  result
+               of  this  lookup,  and  asks  whether  you want to
+               delete the entry.  If a server responds,  but  its
+               UUIDs  do  not  match  the  entry in the database,
+               llllbbbb____aaaaddddmmmmiiiinnnn tells you this result  and  asks  whether
+               you want to delete the entry.
+
+               There are two situations in  which  it  is  likely
+               that a database entry should be deleted:
+
+               +o  The server does not respond, llllbbbb____aaaaddddmmmmiiiinnnn  succeeds
+                 in  contacting  the  LLB  at  the host where the
+                 server  is  located,  and  the  server  is   not
+                 registered  with  that LLB.  The server is prob-
+                 ably no longer running.
+
+               +o  A server responds, but its UUIDs do  not  match
+                 the  entry  in  the  database.   The server that
+                 responded is not the  one  that  registered  the
+                 entry.
+
+               Entries that meet either of these  conditions  are
+               probably  safe to delete and are considered eligi-
+               ble for (described in  the  next  paragraph).   In
+               other  situations,  it  is  best not to delete the
+               entry unless you  can  verify  directly  that  the
+               server is not running (for example, by listing the
+               processes running on its host).
+
+               When llllbbbb____aaaaddddmmmmiiiinnnn asks whether you want to  delete  an
+               entry,  you  have  four  ways to respond.  A yyyy[eeeessss]
+               response  deletes  the  entry.   A  nnnn[oooo]  response
+               leaves  the entry intact in the database.  After a
+
+
+
+NCS Administration        Last change:                          2
+
+
+
+
+
+
+LB_ADMIN(1)               User Commands               LB_ADMIN(1)
+
+
+
+               yyyyeeeessss or a nnnnoooo, llllbbbb____aaaaddddmmmmiiiinnnn proceeds to check  the  next
+               entry  in  the  current database.  A gggg[oooo] response
+               invokes automatic deletion, in which all  eligible
+               entries are deleted and all ineligible entries are
+               left intact, without your being queried, until all
+               entries have been checked.  A qqqq[uuuuiiiitttt] response ter-
+               minates the cccclllleeeeaaaannnn operation.
+
+     dddd[eeeelllleeeetttteeee]  Synonym for uuuunnnnrrrreeeeggggiiiisssstttteeeerrrr.
+
+     hhhh[eeeellllpppp] [_c_o_m_m_a_n_d] or ???? [_c_o_m_m_a_n_d]
+               Display a description of the specified _c_o_m_m_a_n_d or,
+               if  none  is  specified,  list all of the llllbbbb____aaaaddddmmmmiiiinnnn
+               commands.
+
+     llll[ooooooookkkkuuuupppp] _o_b_j_e_c_t _t_y_p_e _i_n_t_e_r_f_a_c_e
+               Look up and  display  all  entries  with  matching
+               _o_b_j_e_c_t,  _t_y_p_e, and _i_n_t_e_r_f_a_c_e fields in the current
+               database.  You can use asterisks as wildcards  for
+               any  of  the  arguments.  If all the arguments are
+               wildcards, llllooooooookkkkuuuupppp displays the entire database.
+
+     qqqq[uuuuiiiitttt]    Exit the llllbbbb____aaaaddddmmmmiiiinnnn session.
+
+     rrrr[eeeeggggiiiisssstttteeeerrrr] _o_b_j_e_c_t _t_y_p_e _i_n_t_e_r_f_a_c_e _l_o_c_a_t_i_o_n _a_n_n_o_t_a_t_i_o_n [_f_l_a_g]
+               Add the specified entry to the  current  database.
+               You  can use an asterisk to represent the nil UUID
+               in the _o_b_j_e_c_t, _t_y_p_e, and _i_n_t_e_r_f_a_c_e fields.
+
+               The  _l_o_c_a_t_i_o_n  is   a   string   in   the   format
+               _f_a_m_i_l_y::::_h_o_s_t[[[[_p_o_r_t]]]], where _f_a_m_i_l_y is an address fam-
+               ily, _h_o_s_t is a host  name,  and  _p_o_r_t  is  a  port
+               number.   Possible  values  for _f_a_m_i_l_y include ddddddddssss
+               and iiiipppp.  You can use a leading #### to indicate  that
+               a  host name is in the standard numeric form.  For
+               example, ddddddddssss::::////////ssssaaaallllzzzzbbbbuuuurrrrgggg[[[[555511115555]]]], ddddddddssss::::####555577775555dddd....555544442222eeee[[[[444455552222]]]],
+               iiiipppp::::vvvviiiieeeennnnnnnnaaaa[[[[1111777755556666]]]],  and  iiiipppp::::####111199992222....5555....5555....5555[[[[1111777799991111]]]] are all
+               acceptable _l_o_c_a_t_i_o_n specifiers.
+
+               The _a_n_n_o_t_a_t_i_o_n is a string of up to 64  characters
+               annotating  the entry.  Use double quotation marks
+               to delimit a string that contains a space or  con-
+               tains  no characters.  To embed a double quotation
+               mark in the string, precede it with a backslash.
+
+               The _f_l_a_g is either llllooooccccaaaallll (the default) or  gggglllloooobbbbaaaallll,
+               indicating  whether the entry should be marked for
+               local registration only  or  for  registration  in
+               both  the  LLB  and  GLB databases.  The _f_l_a_g is a
+               field that is stored with the entry; it  does  not
+               affect   where   the  entry  is  registered.   The
+               sssseeeetttt____bbbbrrrrooookkkkeeeerrrr  and  uuuusssseeee____bbbbrrrrooookkkkeeeerrrr  commands  select  the
+
+
+
+NCS Administration        Last change:                          3
+
+
+
+
+
+
+LB_ADMIN(1)               User Commands               LB_ADMIN(1)
+
+
+
+               particular LLB or GLB database for registration.
+
+     ssss[eeeetttt____bbbbrrrrooookkkkeeeerrrr] [_b_r_o_k_e_r__s_w_i_t_c_h] _h_o_s_t
+               Set the host for the current LLB or GLB.   If  you
+               specify  gggglllloooobbbbaaaallll  as  the _b_r_o_k_e_r__s_w_i_t_c_h, sssseeeetttt____bbbbrrrrooookkkkeeeerrrr
+               sets the  current  GLB;  otherwise,  it  sets  the
+               current  LLB.   The _h_o_s_t is a string in the format
+               _f_a_m_i_l_y::::_h_o_s_t, where _f_a_m_i_l_y is an address family and
+               _h_o_s_t  is  a host name.  Possible values for _f_a_m_i_l_y
+               include ddddddddssss and iiiipppp.  You can use a  leading  ####  to
+               indicate  that  a  host  name  is  in the standard
+               numeric   form.     For    example,    ddddddddssss::::////////lllliiiinnnnzzzz,
+               ddddddddssss::::####444499999999dddd....555599990000ffff,  iiiipppp::::pppprrrraaaagggguuuueeee,  and iiiipppp::::####111199992222....5555....5555....5555 are
+               all acceptable _h_o_s_t specifiers.
+
+               Issue uuuusssseeee____bbbbrrrrooookkkkeeeerrrr, not this command,  to  determine
+               whether  subsequent operations will access the LLB
+               or the GLB.
+
+     sssseeeetttt____tttt[iiiimmmmeeeeoooouuuutttt] [sssshhhhoooorrrrtttt | lllloooonnnngggg]
+               Set the timeout period used by llllbbbb____aaaaddddmmmmiiiinnnn for all of
+               its  operations.   With  an  argument  of sssshhhhoooorrrrtttt or
+               lllloooonnnngggg, sssseeeetttt____ttttiiiimmmmeeeeoooouuuutttt sets  the  timeout  accordingly.
+               With  no argument, it displays the current timeout
+               value.
+
+     uuuu[nnnnrrrreeeeggggiiiisssstttteeeerrrr] _o_b_j_e_c_t _t_y_p_e _i_n_t_e_r_f_a_c_e _l_o_c_a_t_i_o_n
+               Delete the specified entry from the current  data-
+               base.
+
+               The  _l_o_c_a_t_i_o_n  is   a   string   in   the   format
+               _f_a_m_i_l_y::::_h_o_s_t[[[[_p_o_r_t]]]], where _f_a_m_i_l_y is an address fam-
+               ily, _h_o_s_t is a host  name,  and  _p_o_r_t  is  a  port
+               number.   Possible  values  for _f_a_m_i_l_y include ddddddddssss
+               and iiiipppp.  You can use a leading #### to indicate  that
+               a  host name is in the standard numeric form.  For
+               example, ddddddddssss::::////////ssssaaaallllzzzzbbbbuuuurrrrgggg[[[[555511115555]]]], ddddddddssss::::####555577775555dddd....555544442222eeee[[[[444455552222]]]],
+               iiiipppp::::vvvviiiieeeennnnnnnnaaaa[[[[1111777755556666]]]],  and  iiiipppp::::####111199992222....5555....5555....5555[[[[1111777799991111]]]] are all
+               acceptable _l_o_c_a_t_i_o_n specifiers.
+
+               You can use an  asterisk  as  a  wildcard  in  the
+               _o_b_j_e_c_t,  _t_y_p_e,  and  _i_n_t_e_r_f_a_c_e fields to match any
+               value for the field.  Unless you  have  suppressed
+               queries  by invoking llllbbbb____aaaaddddmmmmiiiinnnn with the ----nnnnqqqq option,
+               uuuunnnnrrrreeeeggggiiiisssstttteeeerrrr asks you whether to delete each  match-
+               ing entry.  A yyyy[eeeessss] response deletes the entry.  A
+               nnnn[oooo] response leaves the entry in the database.  A
+               gggg[oooo]   response  deletes  all  remaining  database
+               entries that match, without your being queried.  A
+               qqqq[uuuuiiiitttt]  response  terminates the uuuunnnnrrrreeeeggggiiiisssstttteeeerrrr opera-
+               tion, without deleting any more entries.
+
+
+
+
+NCS Administration        Last change:                          4
+
+
+
+
+
+
+LB_ADMIN(1)               User Commands               LB_ADMIN(1)
+
+
+
+     uuuussss[eeee____bbbbrrrrooookkkkeeeerrrr] [_b_r_o_k_e_r__s_w_i_t_c_h]
+               Select the type of database that subsequent opera-
+               tions  will access, GLB or LLB.  The _b_r_o_k_e_r__s_w_i_t_c_h
+               is either gggglllloooobbbbaaaallll or llllooooccccaaaallll.  If you do not supply a
+               _b_r_o_k_e_r__s_w_i_t_c_h,   uuuusssseeee____bbbbrrrrooookkkkeeeerrrr   tells   whether  the
+               current database is global or local.
+
+               Use sssseeeetttt____bbbbrrrrooookkkkeeeerrrr to select the host whose GLB or LLB
+               is to be accessed.
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          5
+
+
+

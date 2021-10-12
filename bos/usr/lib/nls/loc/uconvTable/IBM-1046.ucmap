@@ -1,0 +1,398 @@
+# @(#)62	1.3  src/bos/usr/lib/nls/loc/uconvTable/IBM-1046.ucmap, cmdiconv, bos411, 9428A410j 5/9/94 14:46:58
+#
+#   COMPONENT_NAME:	CMDICONV
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   ISO 10646-1: UCS-2
+#
+#   Table Format:
+#	Columns separated by spaces:
+#	Col1: (pos.  1- 7) ISO 10646 code as <Uxxxx>
+#	Col2: (pos. 16-30) IBM-1046 code as \xhh
+#	Col3: (pos. 32-39) IBM GCGID
+#	Col4: (pos. 42-49) Mapping indicator to specify:
+#		1. Arabic Shared hapes:
+#			NOMINAL, ISOLATED, INITIAL, MEDIAL, FINAL
+#		2. Synonym GCGID used when direct mapping for
+#		   the main GCGID is not available.
+#	Col5: (pos. 56-> ) ISO 10646 character name
+#
+#   Sorting:	The entries are in IBM CCSID 01046 code point order
+#
+#   Statistics:	IBM CCSID  01046:  253 (of 254) code points mapped to
+#		ISO 10646, UCS-2:  337 code points
+#
+<code_set_name>         "IBM-1046"
+<char_name_mask>        "AXXXX"
+<mb_cur_max>            1
+<mb_cur_min>            1
+<uconv_class>		"SBCS"
+#
+#
+#
+CHARMAP
+#
+#ISO 10646     Codepoint        GCGID    SYN/SHAPE     ISO 10646 Name
+#---------     ---------        -------- ---------     ------------------------
+<U0000>        \x00            #                       ===
+<U0001>        \x01            #                       ===
+<U0002>        \x02            #                       ===
+<U0003>        \x03            #                       ===
+<U0004>        \x04            #                       ===
+<U0005>        \x05            #                       ===
+<U0006>        \x06            #                       ===
+<U0007>        \x07            #                       ===
+<U0008>        \x08            #                       ===
+<U0009>        \x09            #                       ===
+<U000A>        \x0A            #                       ===
+<U000B>        \x0B            #                       ===
+<U000C>        \x0C            #                       ===
+<U000D>        \x0D            #                       ===
+<U000E>        \x0E            #                       ===
+<U000F>        \x0F            #                       ===
+<U0010>        \x10            #                       ===
+<U0011>        \x11            #                       ===
+<U0012>        \x12            #                       ===
+<U0013>        \x13            #                       ===
+<U0014>        \x14            #                       ===
+<U0015>        \x15            #                       ===
+<U0016>        \x16            #                       ===
+<U0017>        \x17            #                       ===
+<U0018>        \x18            #                       ===
+<U0019>        \x19            #                       ===
+<U001C>        \x1A            #                       ===
+<U001B>        \x1B            #                       ===
+<U007F>        \x1C            #                       ===
+<U001D>        \x1D            #                       ===
+<U001E>        \x1E            #                       ===
+<U001F>        \x1F            #                       ===
+<U0020>        \x20            # SP010000              SPACE
+<U0021>        \x21            # SP020000              EXCLAMATION MARK
+<U0022>        \x22            # SP040000              QUOTATION MARK
+<U0023>        \x23            # SM010000              NUMBER SIGN
+<U0024>        \x24            # SC030000              DOLLAR SIGN
+<U066A>        \x25            # SM020007              ARABIC PERCENT SIGN
+<U0026>        \x26            # SM030000              AMPERSAND
+<U0027>        \x27            # SP050000              APOSTROPHE
+<U0028>        \x28            # SP060000              LEFT PARENTHESIS
+<U0029>        \x29            # SP070000              RIGHT PARENTHESIS
+<U066D>        \x2A            # SM040007              ARABIC FIVE POINTED STAR
+<U002B>        \x2B            # SA010000              PLUS SIGN
+<U002C>        \x2C            # SP080000              COMMA
+<U002D>        \x2D            # SP100000              HYPHEN-MINUS
+<U002E>        \x2E            # SP110000              FULL STOP
+<U002F>        \x2F            # SP120000              SOLIDUS
+<U0030>        \x30            # ND100000              DIGIT ZERO
+<U0031>        \x31            # ND010000              DIGIT ONE
+<U0032>        \x32            # ND020000              DIGIT TWO
+<U0033>        \x33            # ND030000              DIGIT THREE
+<U0034>        \x34            # ND040000              DIGIT FOUR
+<U0035>        \x35            # ND050000              DIGIT FIVE
+<U0036>        \x36            # ND060000              DIGIT SIX
+<U0037>        \x37            # ND070000              DIGIT SEVEN
+<U0038>        \x38            # ND080000              DIGIT EIGHT
+<U0039>        \x39            # ND090000              DIGIT NINE
+<U003A>        \x3A            # SP130000              COLON
+<U003B>        \x3B            # SP140000              SEMICOLON
+<U003C>        \x3C            # SA030000              LESS-THAN SIGN
+<U003D>        \x3D            # SA040000              EQUALS SIGN
+<U003E>        \x3E            # SA050000              GREATER-THAN SIGN
+<U003F>        \x3F            # SP150000              QUESTION MARK
+<U0040>        \x40            # SM050000              COMMERCIAL AT
+<U0041>        \x41            # LA020000              LATIN CAPITAL LETTER A
+<U0042>        \x42            # LB020000              LATIN CAPITAL LETTER B
+<U0043>        \x43            # LC020000              LATIN CAPITAL LETTER C
+<U0044>        \x44            # LD020000              LATIN CAPITAL LETTER D
+<U0045>        \x45            # LE020000              LATIN CAPITAL LETTER E
+<U0046>        \x46            # LF020000              LATIN CAPITAL LETTER F
+<U0047>        \x47            # LG020000              LATIN CAPITAL LETTER G
+<U0048>        \x48            # LH020000              LATIN CAPITAL LETTER H
+<U0049>        \x49            # LI020000              LATIN CAPITAL LETTER I
+<U004A>        \x4A            # LJ020000              LATIN CAPITAL LETTER J
+<U004B>        \x4B            # LK020000              LATIN CAPITAL LETTER K
+<U004C>        \x4C            # LL020000              LATIN CAPITAL LETTER L
+<U004D>        \x4D            # LM020000              LATIN CAPITAL LETTER M
+<U004E>        \x4E            # LN020000              LATIN CAPITAL LETTER N
+<U004F>        \x4F            # LO020000              LATIN CAPITAL LETTER O
+<U0050>        \x50            # LP020000              LATIN CAPITAL LETTER P
+<U0051>        \x51            # LQ020000              LATIN CAPITAL LETTER Q
+<U0052>        \x52            # LR020000              LATIN CAPITAL LETTER R
+<U0053>        \x53            # LS020000              LATIN CAPITAL LETTER S
+<U0054>        \x54            # LT020000              LATIN CAPITAL LETTER T
+<U0055>        \x55            # LU020000              LATIN CAPITAL LETTER U
+<U0056>        \x56            # LV020000              LATIN CAPITAL LETTER V
+<U0057>        \x57            # LW020000              LATIN CAPITAL LETTER W
+<U0058>        \x58            # LX020000              LATIN CAPITAL LETTER X
+<U0059>        \x59            # LY020000              LATIN CAPITAL LETTER Y
+<U005A>        \x5A            # LZ020000              LATIN CAPITAL LETTER Z
+<U005B>        \x5B            # SM060000              LEFT SQUARE BRACKET
+<U005C>        \x5C            # SM070000              REVERSE SOLIDUS
+<U005D>        \x5D            # SM080000              RIGHT SQUARE BRACKET
+<U005E>        \x5E            # SD150000              CIRCUMFLEX ACCENT
+<U005F>        \x5F            # SP090000              LOW LINE
+<U0060>        \x60            # SD130000              GRAVE ACCENT
+<U0061>        \x61            # LA010000              LATIN SMALL LETTER A
+<U0062>        \x62            # LB010000              LATIN SMALL LETTER B
+<U0063>        \x63            # LC010000              LATIN SMALL LETTER C
+<U0064>        \x64            # LD010000              LATIN SMALL LETTER D
+<U0065>        \x65            # LE010000              LATIN SMALL LETTER E
+<U0066>        \x66            # LF010000              LATIN SMALL LETTER F
+<U0067>        \x67            # LG010000              LATIN SMALL LETTER G
+<U0068>        \x68            # LH010000              LATIN SMALL LETTER H
+<U0069>        \x69            # LI010000              LATIN SMALL LETTER I
+<U006A>        \x6A            # LJ010000              LATIN SMALL LETTER J
+<U006B>        \x6B            # LK010000              LATIN SMALL LETTER K
+<U006C>        \x6C            # LL010000              LATIN SMALL LETTER L
+<U006D>        \x6D            # LM010000              LATIN SMALL LETTER M
+<U006E>        \x6E            # LN010000              LATIN SMALL LETTER N
+<U006F>        \x6F            # LO010000              LATIN SMALL LETTER O
+<U0070>        \x70            # LP010000              LATIN SMALL LETTER P
+<U0071>        \x71            # LQ010000              LATIN SMALL LETTER Q
+<U0072>        \x72            # LR010000              LATIN SMALL LETTER R
+<U0073>        \x73            # LS010000              LATIN SMALL LETTER S
+<U0074>        \x74            # LT010000              LATIN SMALL LETTER T
+<U0075>        \x75            # LU010000              LATIN SMALL LETTER U
+<U0076>        \x76            # LV010000              LATIN SMALL LETTER V
+<U0077>        \x77            # LW010000              LATIN SMALL LETTER W
+<U0078>        \x78            # LX010000              LATIN SMALL LETTER X
+<U0079>        \x79            # LY010000              LATIN SMALL LETTER Y
+<U007A>        \x7A            # LZ010000              LATIN SMALL LETTER Z
+<U007B>        \x7B            # SM110000              LEFT CURLY BRACKET
+<U007C>        \x7C            # SM130000              VERTICAL LINE
+<U007D>        \x7D            # SM140000              RIGHT CURLY BRACKET
+<U007E>        \x7E            # SD190000              TILDE
+<U001A>        \x7F            #                       ===
+<UFE88>        \x80            # AA310402     FINAL    ARABIC LETTER ALEF WITH HAMZA BELOW FINAL FORM
+<U00D7>        \x81            # SA070000              MULTIPLICATION SIGN
+<U00F7>        \x82            # SA060000              DIVISION SIGN
+<UFEB1>        \x83            # AS010006     FINAL    ARABIC LETTER SEEN FINAL FORM
+<UFEB5>        \x84            # AS230006     FINAL    ARABIC LETTER SHEEN FINAL FORM
+<UFEB9>        \x85            # AS450006     FINAL    ARABIC LETTER SAD FINAL FORM
+<UFEBD>        \x86            # AD450006     FINAL    ARABIC LETTER DAD FINAL FORM
+<UFE71>        \x87            # AA070004     MEDIAL   ARABIC TATWEEL WITH FATHATAN ABOVE
+<U25A0>        \x89            # SM470000              BLACK SQUARE
+<U2502>        \x8A            # SF110000              BOX DRAWINGS LIGHT VERTICAL
+<U2500>        \x8B            # SF100000              BOX DRAWINGS LIGHT HORIZONTAL
+<U2510>        \x8C            # SF030000              BOX DRAWINGS LIGHT DOWN AND LEFT
+<U250C>        \x8D            # SF010000              BOX DRAWINGS LIGHT DOWN AND RIGHT
+<U2514>        \x8E            # SF020000              BOX DRAWINGS LIGHT UP AND RIGHT
+<U2518>        \x8F            # SF040000              BOX DRAWINGS LIGHT UP AND LEFT
+<UFE79>        \x90            # AU050004     MEDIAL   ARABIC DAMMA MEDIAL FORM
+<UFE7B>        \x91            # AI050004     MEDIAL   ARABIC KASRA MEDIAL FORM
+<UFE7D>        \x92            # AX100004     MEDIAL   ARABIC SHADDA MEDIAL FORM
+<UFE7F>        \x93            # AE050004     MEDIAL   ARABIC SUKUN MEDIAL FORM
+<UFE77>        \x94            # AA050004     MEDIAL   ARABIC FATHA MEDIAL FORM
+<UFE8A>        \x95            # AY310002     FINAL    ARABIC LETTER YEH WITH HAMZA ABOVE FINAL FORM
+<UFEF0>        \x96            # AA020002     FINAL    ARABIC LETTER ALEF MAKSURA FINAL FORM
+<UFEF4>        \x97            # AY010003     MEDIAL   ARABIC LETTER YEH MEDIAL FORM
+<UFEF3>        \x97            # AY010003     INITIAL  ARABIC LETTER YEH INITIAL FORM
+<UFEF2>        \x98            # AY010002     FINAL    ARABIC LETTER YEH FINAL FORM
+<UFECE>        \x99            # AG310002     FINAL    ARABIC LETTER GHAIN FINAL FORM
+<UFECF>        \x9A            # AG310003     INITIAL  ARABIC LETTER GHAIN INITIAL FORM
+<UFED0>        \x9B            # AG310004     MEDIAL   ARABIC LETTER GHAIN MEDIAL FORM
+<UFEF6>        \x9C            # AL220003              ARABIC LIGATURE LAM WITH ALEF WITH MADDA ABOVE FINAL FORM
+<UFEF8>        \x9D            # AL320003              ARABIC LIGATURE LAM WITH ALEF WITH HAMZA ABOVE FINAL FORM
+<UFEFA>        \x9E            # AL320402              ARABIC LIGATURE LAM WITH ALEF WITH HAMZA BELOW FINAL FORM
+<UFEFC>        \x9F            # AL020003              ARABIC LIGATURE LAM WITH ALEF FINAL FORM
+<U00A0>        \xA0            # SP300000              NO-BREAK SPACE
+<U0622>        \xA1            # AA210006    *NOMINAL  ARABIC LETTER ALEF WITH MADDA ABOVE
+<U0623>        \xA2            # AA310006    *NOMINAL  ARABIC LETTER ALEF WITH HAMZA ABOVE
+<U0625>        \xA3            # AA310406    *NOMINAL  ARABIC LETTER ALEF WITH HAMZA BELOW
+<U00A4>        \xA4            # SC010000              CURRENCY SIGN
+<U0627>        \xA5            # AA010006    *NOMINAL  ARABIC LETTER ALEF
+<UFE8C>        \xA6            # AY310000     MEDIAL   ARABIC LETTER YEH WITH HAMZA ABOVE MEDIAL FORM
+<UFE8B>        \xA6            # AY310000     INITIAL  ARABIC LETTER YEH WITH HAMZA ABOVE INITIAL FORM
+<UFE92>        \xA7            # AB010003     MEDIAL   ARABIC LETTER BEH MEDIAL FORM
+<UFE91>        \xA7            # AB010003     INITIAL  ARABIC LETTER BEH INITIAL FORM
+<UFE98>        \xA8            # AT010003     MEDIAL   ARABIC LETTER TEH MEDIAL FORM
+<UFE97>        \xA8            # AT010003     INITIAL  ARABIC LETTER TEH INITIAL FORM
+<UFE9C>        \xA9            # AT470003     MEDIAL   ARABIC LETTER THEH MEDIAL FORM
+<UFE9B>        \xA9            # AT470003     INITIAL  ARABIC LETTER THEH INITIAL FORM
+<UFEA0>        \xAA            # AG230003     MEDIAL   ARABIC LETTER JEEM MEDIAL FORM
+<UFE9F>        \xAA            # AG230003     INITIAL  ARABIC LETTER JEEM INITIAL FORM
+<UFEA4>        \xAB            # AH450003     MEDIAL   ARABIC LETTER HAH MEDIAL FORM
+<UFEA3>        \xAB            # AH450003     INITIAL  ARABIC LETTER HAH INITIAL FORM
+<U060C>        \xAC            # SP080007              ARABIC COMMA
+<U00AD>        \xAD            # SP320000              SOFT HYPHEN
+<UFEA8>        \xAE            # AH470003     MEDIAL   ARABIC LETTER KHAH MEDIAL FORM
+<UFEA7>        \xAE            # AH470003     INITIAL  ARABIC LETTER KHAH INITIAL FORM
+<UFEB4>        \xAF            # AS010003     MEDIAL   ARABIC LETTER SEEN MEDIAL FORM
+<UFEB3>        \xAF            # AS010003     INITIAL  ARABIC LETTER SEEN INITIAL FORM
+<U0660>        \xB0            # ND100001              ARABIC-INDIC DIGIT ZERO
+<U0661>        \xB1            # ND010001              ARABIC-INDIC DIGIT ONE
+<U0662>        \xB2            # ND020001              ARABIC-INDIC DIGIT TWO
+<U0663>        \xB3            # ND030001              ARABIC-INDIC DIGIT THREE
+<U0664>        \xB4            # ND040001              ARABIC-INDIC DIGIT FOUR
+<U0665>        \xB5            # ND050001              ARABIC-INDIC DIGIT FIVE
+<U0666>        \xB6            # ND060001              ARABIC-INDIC DIGIT SIX
+<U0667>        \xB7            # ND070001              ARABIC-INDIC DIGIT SEVEN
+<U0668>        \xB8            # ND080001              ARABIC-INDIC DIGIT EIGHT
+<U0669>        \xB9            # ND090001              ARABIC-INDIC DIGIT NINE
+<UFEB8>        \xBA            # AS230003     MEDIAL   ARABIC LETTER SHEEN MEDIAL FORM
+<UFEB7>        \xBA            # AS230003     INITIAL  ARABIC LETTER SHEEN INITIAL FORM
+<U061B>        \xBB            # SP140007              ARABIC SEMICOLON
+<UFEBC>        \xBC            # AS450003     MEDIAL   ARABIC LETTER SAD MEDIAL FORM
+<UFEBB>        \xBC            # AS450003     INITIAL  ARABIC LETTER SAD INITIAL FORM
+<UFEC0>        \xBD            # AD450003     MEDIAL   ARABIC LETTER DAD MEDIAL FORM
+<UFEBF>        \xBD            # AD450003     INITIAL  ARABIC LETTER DAD INITIAL FORM
+<UFECA>        \xBE            # AC470002     FINAL    ARABIC LETTER AIN FINAL FORM
+<U061F>        \xBF            # SP150007              ARABIC QUESTION MARK
+<UFECB>        \xC0            # AC470003     INITIAL  ARABIC LETTER AIN INITIAL FORM
+<UFE80>        \xC1            # AX300000     ISOLATED ARABIC LETTER HAMZA ISOLATED FORM
+<U0621>        \xC1            # AX300000    *NOMINAL  ARABIC LETTER HAMZA
+<UFE81>        \xC2            # AA210000     ISOLATED ARABIC LETTER ALEF WITH MADDA ABOVE ISOLATED FORM
+<U0622>        \xC2            # AA210000    *NOMINAL  ARABIC LETTER ALEF WITH MADDA ABOVE
+<UFE83>        \xC3            # AA310000     ISOLATED ARABIC LETTER ALEF WITH HAMZA ABOVE ISOLATED FORM
+<U0623>        \xC3            # AA310000    *NOMINAL  ARABIC LETTER ALEF WITH HAMZA ABOVE
+<UFE85>        \xC4            # AW310000     ISOLATED ARABIC LETTER WAW WITH HAMZA ABOVE ISOLATED FORM
+<UFE86>        \xC4            # AW310000     FINAL    ARABIC LETTER WAW WITH HAMZA ABOVE FINAL FORM
+<U0624>        \xC4            # AW310000    *NOMINAL  ARABIC LETTER WAW WITH HAMZA ABOVE
+<UFE87>        \xC5            # AA310400     ISOLATED ARABIC LETTER ALEF WITH HAMZA BELOW ISOLATED FORM
+<U0625>        \xC5            # AA310400    *NOMINAL  ARABIC LETTER ALEF WITH HAMZA BELOW
+<UFE89>        \xC6            # AY310006     ISOLATED ARABIC LETTER YEH WITH HAMZA ABOVE ISOLATED FORM
+<U0626>        \xC6            # AY310006    *NOMINAL  ARABIC LETTER YEH WITH HAMZA ABOVE
+<UFE8D>        \xC7            # AA010000     ISOLATED ARABIC LETTER ALEF ISOLATED FORM
+<U0627>        \xC7            # AA010000    *NOMINAL  ARABIC LETTER ALEF
+<UFE8F>        \xC8            # AB010000     ISOLATED ARABIC LETTER BEH ISOLATED FORM
+<UFE90>        \xC8            # AB010000     FINAL    ARABIC LETTER BEH FINAL FORM
+<U0628>        \xC8            # AB010000    *NOMINAL  ARABIC LETTER BEH
+<UFE93>        \xC9            # AT020000     ISOLATED ARABIC LETTER TEH MARBUTA ISOLATED FORM
+<UFE94>        \xC9            # AT020000     FINAL    ARABIC LETTER TEH MARBUTA FINAL FORM
+<U0629>        \xC9            # AT020000    *NOMINAL  ARABIC LETTER TEH MARBUTA
+<UFE95>        \xCA            # AT010000     ISOLATED ARABIC LETTER TEH ISOLATED FORM
+<UFE96>        \xCA            # AT010000     FINAL    ARABIC LETTER TEH FINAL FORM
+<U062A>        \xCA            # AT010000    *NOMINAL  ARABIC LETTER TEH
+<UFE99>        \xCB            # AT470000     ISOLATED ARABIC LETTER THEH ISOLATED FORM
+<UFE9A>        \xCB            # AT470000     FINAL    ARABIC LETTER THEH FINAL FORM
+<U062B>        \xCB            # AT470000    *NOMINAL  ARABIC LETTER THEH
+<UFE9D>        \xCC            # AG230000     ISOLATED ARABIC LETTER JEEM ISOLATED FORM
+<UFE9E>        \xCC            # AG230000     FINAL    ARABIC LETTER JEEM FINAL FORM
+<U062C>        \xCC            # AG230000    *NOMINAL  ARABIC LETTER JEEM
+<UFEA1>        \xCD            # AH450000     ISOLATED ARABIC LETTER HAH ISOLATED FORM
+<UFEA2>        \xCD            # AH450000     FINAL    ARABIC LETTER HAH FINAL FORM
+<U062D>        \xCD            # AH450000    *NOMINAL  ARABIC LETTER HAH
+<UFEA5>        \xCE            # AH470000     ISOLATED ARABIC LETTER KHAH ISOLATED FORM
+<UFEA6>        \xCE            # AH470000     FINAL    ARABIC LETTER KHAH FINAL FORM
+<U062E>        \xCE            # AH470000    *NOMINAL  ARABIC LETTER KHAH
+<UFEA9>        \xCF            # AD010000     ISOLATED ARABIC LETTER DAL ISOLATED FORM
+<UFEAA>        \xCF            # AD010000     FINAL    ARABIC LETTER DAL FINAL FORM
+<U062F>        \xCF            # AD010000    *NOMINAL  ARABIC LETTER DAL
+<UFEAB>        \xD0            # AD470000     ISOLATED ARABIC LETTER THAL ISOLATED FORM
+<UFEAC>        \xD0            # AD470000     FINAL    ARABIC LETTER THAL FINAL FORM
+<U0630>        \xD0            # AD470000    *NOMINAL  ARABIC LETTER THAL
+<UFEAD>        \xD1            # AR010000     ISOLATED ARABIC LETTER REH ISOLATED FORM
+<UFEAE>        \xD1            # AR010000     FINAL    ARABIC LETTER REH FINAL FORM
+<U0631>        \xD1            # AR010000    *NOMINAL  ARABIC LETTER REH
+<UFEAF>        \xD2            # AZ010000     ISOLATED ARABIC LETTER ZAIN ISOLATED FORM
+<UFEB0>        \xD2            # AZ010000     FINAL    ARABIC LETTER ZAIN FINAL FORM
+<U0632>        \xD2            # AZ010000    *NOMINAL  ARABIC LETTER ZAIN
+<UFEB1>        \xD3            # AS010006     ISOLATED ARABIC LETTER SEEN ISOLATED FORM
+<UFEB2>        \xD3            # AS010006     FINAL    ARABIC LETTER SEEN FINAL FORM
+<U0633>        \xD3            # AS010006    *NOMINAL  ARABIC LETTER SEEN
+<UFEB5>        \xD4            # AS230006     ISOLATED ARABIC LETTER SHEEN ISOLATED FORM
+<UFEB6>        \xD4            # AS230006     FINAL    ARABIC LETTER SHEEN FINAL FORM
+<U0634>        \xD4            # AS230006    *NOMINAL  ARABIC LETTER SHEEN
+<UFEB9>        \xD5            # AS450006     ISOLATED ARABIC LETTER SAD ISOLATED FORM
+<UFEBA>        \xD5            # AS450006     FINAL    ARABIC LETTER SAD FINAL FORM
+<U0635>        \xD5            # AS450006    *NOMINAL  ARABIC LETTER SAD
+<UFEBD>        \xD6            # AD450006     ISOLATED ARABIC LETTER DAD ISOLATED FORM
+<UFEBE>        \xD6            # AD450006     FINAL    ARABIC LETTER DAD FINAL FORM
+<U0636>        \xD6            # AD450006    *NOMINAL  ARABIC LETTER DAD
+<UFEC1>        \xD7            # AT450000     ISOLATED ARABIC LETTER TAH ISOLATED FORM
+<UFEC2>        \xD7            # AT450000     FINAL    ARABIC LETTER TAH FINAL FORM
+<UFEC3>        \xD7            # AT450000     INITIAL  ARABIC LETTER TAH INITIAL FORM
+<UFEC4>        \xD7            # AT450000     MEDIAL   ARABIC LETTER TAH MEDIAL FORM
+<U0637>        \xD7            # AT450000    *NOMINAL  ARABIC LETTER TAH
+<UFEC5>        \xD8            # AZ450000     ISOLATED ARABIC LETTER ZAH ISOLATED FORM
+<UFEC6>        \xD8            # AZ450000     FINAL    ARABIC LETTER ZAH FINAL FORM
+<UFEC7>        \xD8            # AZ450000     INITIAL  ARABIC LETTER ZAH INITIAL FORM
+<UFEC8>        \xD8            # AZ450000     MEDIAL   ARABIC LETTER ZAH MEDIAL FORM
+<U0638>        \xD8            # AZ450000    *NOMINAL  ARABIC LETTER ZAH
+<UFEC9>        \xD9            # AC470000     ISOLATED ARABIC LETTER AIN ISOLATED FORM
+<U0639>        \xD9            # AC470000    *NOMINAL  ARABIC LETTER AIN
+<UFECD>        \xDA            # AG310000     ISOLATED ARABIC LETTER GHAIN ISOLATED FORM
+<U063A>        \xDA            # AG310000    *NOMINAL  ARABIC LETTER GHAIN
+<UFECC>        \xDB            # AC470004     MEDIAL   ARABIC LETTER AIN MEDIAL FORM
+<UFE82>        \xDC            # AA210002     FINAL    ARABIC LETTER ALEF WITH MADDA ABOVE FINAL FORM
+<UFE84>        \xDD            # AA310002     FINAL    ARABIC LETTER ALEF WITH HAMZA ABOVE FINAL FORM
+<UFE8E>        \xDE            # AA010002     FINAL    ARABIC LETTER ALEF FINAL FORM
+<UFED4>        \xDF            # AF010003     MEDIAL   ARABIC LETTER FEH MEDIAL FORM
+<UFED3>        \xDF            # AF010003     INITIAL  ARABIC LETTER FEH INITIAL FORM
+<U0640>        \xE0            # SM860000              ARABIC TATWEEL
+<UFED1>        \xE1            # AF010000     ISOLATED ARABIC LETTER FEH ISOLATED FORM
+<UFED2>        \xE1            # AF010000     FINAL    ARABIC LETTER FEH FINAL FORM
+<U0641>        \xE1            # AF010000    *NOMINAL  ARABIC LETTER FEH
+<UFED5>        \xE2            # AQ010000     ISOLATED ARABIC LETTER QAF ISOLATED FORM
+<UFED6>        \xE2            # AQ010000     FINAL    ARABIC LETTER QAF FINAL FORM
+<U0642>        \xE2            # AQ010000    *NOMINAL  ARABIC LETTER QAF
+<UFED9>        \xE3            # AK010000     ISOLATED ARABIC LETTER KAF ISOLATED FORM
+<UFEDA>        \xE3            # AK010000     FINAL    ARABIC LETTER KAF FINAL FORM
+<U0643>        \xE3            # AK010000    *NOMINAL  ARABIC LETTER KAF
+<UFEDD>        \xE4            # AL010000     ISOLATED ARABIC LETTER LAM ISOLATED FORM
+<UFEDE>        \xE4            # AL010000     FINAL    ARABIC LETTER LAM FINAL FORM
+<U0644>        \xE4            # AL010000    *NOMINAL  ARABIC LETTER LAM
+<UFEE1>        \xE5            # AM010000     ISOLATED ARABIC LETTER MEEM ISOLATED FORM
+<UFEE2>        \xE5            # AM010000     FINAL    ARABIC LETTER MEEM FINAL FORM
+<U0645>        \xE5            # AM010000    *NOMINAL  ARABIC LETTER MEEM
+<UFEE5>        \xE6            # AN010000     ISOLATED ARABIC LETTER NOON ISOLATED FORM
+<UFEE6>        \xE6            # AN010000     FINAL    ARABIC LETTER NOON FINAL FORM
+<U0646>        \xE6            # AN010000    *NOMINAL  ARABIC LETTER NOON
+<UFEEB>        \xE7            # AH010003     INITIAL  ARABIC LETTER HEH INITIAL FORM
+<U0647>        \xE7            # AH010003    *NOMINAL  ARABIC LETTER HEH
+<UFEED>        \xE8            # AW010000     ISOLATED ARABIC LETTER WAW ISOLATED FORM
+<UFEEE>        \xE8            # AW010000     FINAL    ARABIC LETTER WAW FINAL FORM
+<U0648>        \xE8            # AW010000    *NOMINAL  ARABIC LETTER WAW
+<UFEEF>        \xE9            # AA020000     ISOLATED ARABIC LETTER ALEF MAKSURA ISOLATED FORM
+<U0649>        \xE9            # AA020000    *NOMINAL  ARABIC LETTER ALEF MAKSURA
+<UFEF1>        \xEA            # AY010000     ISOLATED ARABIC LETTER YEH ISOLATED FORM
+<U064A>        \xEA            # AY010000    *NOMINAL  ARABIC LETTER YEH
+<UFE70>        \xEB            # AA070000     ISOLATED ARABIC FATHATAN ISOLATED FORM
+<U064B>        \xEB            # AA070000    *NOMINAL  ARABIC FATHATAN
+<UFE72>        \xEC            # AU070000     ISOLATED ARABIC DAMMATAN ISOLATED FORM
+<U064C>        \xEC            # AU070000    *NOMINAL  ARABIC DAMMATAN
+<UFE74>        \xED            # AI070000     ISOLATED ARABIC KASRATAN ISOLATED FORM
+<U064D>        \xED            # AI070000    *NOMINAL  ARABIC KASRATAN
+<UFE76>        \xEE            # AA050000     ISOLATED ARABIC FATHA ISOLATED FORM
+<U064E>        \xEE            # AA050000    *NOMINAL  ARABIC FATHA
+<UFE78>        \xEF            # AU050000     ISOLATED ARABIC DAMMA ISOLATED FORM
+<U064F>        \xEF            # AU050000    *NOMINAL  ARABIC DAMMA
+<UFE7A>        \xF0            # AI050000     ISOLATED ARABIC KASRA ISOLATED FORM
+<U0650>        \xF0            # AI050000    *NOMINAL  ARABIC KASRA
+<UFE7C>        \xF1            # AX100000     ISOLATED ARABIC SHADDA ISOLATED FORM
+<U0651>        \xF1            # AX100000    *NOMINAL  ARABIC SHADDA
+<UFE7E>        \xF2            # AE050000     ISOLATED ARABIC SUKUN ISOLATED FORM
+<U0652>        \xF2            # AE050000    *NOMINAL  ARABIC SUKUN
+<UFED8>        \xF3            # AQ010003     MEDIAL   ARABIC LETTER QAF MEDIAL FORM
+<UFED7>        \xF3            # AQ010003     INITIAL  ARABIC LETTER QAF INITIAL FORM
+<UFEDC>        \xF4            # AK010003     MEDIAL   ARABIC LETTER KAF MEDIAL FORM
+<UFEDB>        \xF4            # AK010003     INITIAL  ARABIC LETTER KAF INITIAL FORM
+<UFEE0>        \xF5            # AL010003     MEDIAL   ARABIC LETTER LAM MEDIAL FORM
+<UFEDF>        \xF5            # AL010003     INITIAL  ARABIC LETTER LAM INITIAL FORM
+<UF8FC>        \xF6            # SM870000     KASSEH (ARABIC TAIL)
+<UFEF5>        \xF7            # AL220000              ARABIC LIGATURE LAM WITH ALEF WITH MADDA ABOVE ISOLATED FORM
+<UFEF7>        \xF8            # AL320000              ARABIC LIGATURE LAM WITH ALEF WITH HAMZA ABOVE ISOLATED FORM
+<UFEF9>        \xF9            # AL320400              ARABIC LIGATURE LAM WITH ALEF WITH HAMZA BELOW ISOLATED FORM
+<UFEFB>        \xFA            # AL020000              ARABIC LIGATURE LAM WITH ALEF ISOLATED FORM
+<UFEE4>        \xFB            # AM010003     MEDIAL   ARABIC LETTER MEEM MEDIAL FORM
+<UFEE3>        \xFB            # AM010003     INITIAL  ARABIC LETTER MEEM INITIAL FORM
+<UFEE8>        \xFC            # AN010003     MEDIAL   ARABIC LETTER NOON MEDIAL FORM
+<UFEE7>        \xFC            # AN010003     INITIAL  ARABIC LETTER NOON INITIAL FORM
+<UFEEC>        \xFD            # AH010004     MEDIAL   ARABIC LETTER HEH MEDIAL FORM
+<UFEE9>        \xFE            # AH010000     ISOLATED ARABIC LETTER HEH ISOLATED FORM
+<UFEEA>        \xFE            # AH010000     FINAL    ARABIC LETTER HEH FINAL FORM
+#--------------------------------------------------------------------------
+#           IBM CCSID  01046:  253 (of 254) code points mapped to
+#           ISO 10646, UCS-2:  337 code points
+#
+END CHARMAP

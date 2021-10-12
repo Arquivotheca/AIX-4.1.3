@@ -1,0 +1,25 @@
+# @(#)56        1.1  src/bldenv/man/forced_root.man, pkgtools, bos412, GOLDA411a 12/1/93 17:29:30
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: forced_root file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/HISTORY/forced_root:
+        Subsystems that are required to have a root part in order to
+        properly deliver fixes.  Comments begin with a "#".
+
+	Format:
+                <subsystem>
+                <subsystem>
+                     .
+                     .

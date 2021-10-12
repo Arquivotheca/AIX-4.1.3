@@ -1,0 +1,186 @@
+# @(#)82        1.9  src/bos/objclass/POWER/sm_sol.add, cfgcommo, bos41B, 9504A 12/13/94 14:20:25
+#
+#  COMPONENT_NAME: (CFGMETHODS) Devices User Interface (SMIT)
+#
+#  FUNCTIONS: Serial Optical Link Interfaces
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1991,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_cmd_hdr:
+	id			= "listotp"
+	option_id		= ""
+	has_name_select		= "n"
+	name			= "List All Serial Optical Channel Converter Adapters"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 27
+	name_msg_id		= 678
+	cmd_to_exec		= "lsdev -C -c adapter -s slc -t otp"
+	ask			= ""
+	exec_mode		= ""
+	ghost			= "y"
+	cmd_to_discover		= ""
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800193"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "opsconfig"
+	option_id		= "cfgops"
+	has_name_select		= "n"
+	name			= "Complete Initial Configuration for the Serial Optical Link"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 27
+	name_msg_id		= 676
+	cmd_to_exec		= "\
+xx()\n\
+{\n\
+chdev -l ops0 $1;if [ $? -eq 0 ];then mkdev -l ops0;fi\n\
+}\n\
+xx"
+	ask			= ""
+	exec_mode		= "p"
+	ghost			= "n"
+	cmd_to_discover		= "lsattr -l ops0 -E -O | sed 's/-1//g'"
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "04201601"
+	help_msg_loc		= ""
+
+sm_cmd_opt:
+	id			= "cfgops"
+	id_seq_num		= "010"
+	disc_field_name		= "processor_id"
+	name			= "Processor ID number for this machine"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 4
+	name_msg_id		= 5
+	op_type			= "l"
+	entry_type		= "#"
+	entry_size		= 0
+	required		= "+"
+	prefix			= "-aprocessor_id="
+	cmd_to_list_mode	= "r"
+	cmd_to_list		= "lsattr -l ops0 -a processor_id -R"
+	cmd_to_list_postfix	= ""
+	multi_select		= "n"
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "04201602"
+	help_msg_loc		= ""
+
+sm_cmd_hdr:
+	id			= "opschange"
+	option_id		= "cfgops,chgops"
+	has_name_select		= "n"
+	name			= "Change / Show Characteristics of the Serial Optical Link"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 27
+	name_msg_id		= 677
+	cmd_to_exec		= "chdev -l ops0"
+	ask			= ""
+	exec_mode		= "p"
+	ghost			= "n"
+	cmd_to_discover		= "lsattr -l ops0 -E -O | sed 's/-1//g'"
+	cmd_to_discover_postfix	= ""
+	name_size		= 0
+	value_size		= 0
+	help_msg_id		= "1800197"
+	help_msg_loc		= ""
+
+# Displays receive queue size attribute.
+sm_cmd_opt:
+	id			= "chgops"
+	id_seq_num		= "020"
+	disc_field_name		= "rec_que_size"
+	name			= "RECEIVE queue size"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 4
+	name_msg_id		= 6
+	op_type			= "l"
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a rec_que_size="
+	cmd_to_list_mode	= "r"
+	cmd_to_list		= "lsattr -l ops0 -a rec_que_size -R"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "04201603"
+	help_msg_loc		= ""
+
+# Displays status block queue size attribute.
+sm_cmd_opt:
+	id			= "chgops"
+	id_seq_num		= "030"
+	disc_field_name		= "sta_que_size"
+	name			= "STATUS BLOCK queue size"
+	name_msg_file		= "devices.cat"
+	name_msg_set		= 4
+	name_msg_id		= 7
+	op_type			= "l"
+	entry_type		= "#"
+	entry_size		= 0
+	required		= ""
+	prefix			= "-a sta_que_size="
+	cmd_to_list_mode	= "r"
+	cmd_to_list		= "lsattr -l ops0 -a sta_que_size -R"
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 0
+	disp_values		= ""
+	values_msg_file		= ""
+	values_msg_set		= 0
+	values_msg_id		= 0
+	aix_values		= ""
+	help_msg_id		= "04201604"
+	help_msg_loc		= ""
+
+# Display database only question.
+sm_cmd_opt:
+	id			= "chgops"
+	id_seq_num		= "040"
+	disc_field_name		= ""
+	name			= "Apply change to DATABASE only"
+	name_msg_file		= "smit.cat"
+	name_msg_set		= 27
+	name_msg_id		= 11
+	op_type			= "r"
+	entry_type		= "n"
+	entry_size		= 0
+	required		= "n"
+	prefix			= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+	cmd_to_list_postfix	= ""
+	multi_select		= ""
+	value_index		= 1
+	disp_values		= "yes,no"
+	values_msg_file		= "smit.cat"
+	values_msg_set		= 27
+	values_msg_id		= 12
+	aix_values		= "-P"
+	help_msg_id		= "04201605"
+	help_msg_loc		= ""

@@ -1,0 +1,298 @@
+# @(#)95        1.3  src/bldscripts/README, ade_build, bos412, GOLDA411a 2/15/94 11:18:49
+#
+#   COMPONENT_NAME: bldprocess
+#
+#   ORIGINS: 27
+#
+#   This module contains IBM CONFIDENTIAL code. -- (IBM
+#   Confidential Restricted when combined with the aggregated
+#   modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+This file describes the use of and syntax for the following files residing
+in the src/bldscripts directory:
+
+    setup.sh
+    makelpp.sh
+    all.sh
+    aixlpp.sh
+    aix.lpps
+
+
+SETUP.SH
+~~~~~~~~
+    setup.sh is used when building the build environment tools.
+    To use setup.sh:
+
+        sh -x bldscripts/setup.sh [-l] \
+              [<release type>_TOOLS [<release type>_TOOLS ...]]
+
+        Example: sh -x bldscripts/setup.sh
+                 sh -x bldscripts/setup.sh -l
+                 sh -x bldscripts/setup.sh BOS_TOOLS GOS_TOOLS
+
+    The -l (lowercase L) paramater is optional and indicates that the
+    backing tree is accessible through the link contained in the directory
+    above src.  The link is analogous to the link used in sandboxes.  Any
+    number of links can exist like in a sandbox.  Caution should be exercised
+    when using more then one link as the command line, when building, may
+    exceed the maximum length and possibly core dump.
+
+    <release type>_TOOLS is optional and currently can be specified as
+    one or more of the following:
+
+         BOS_TOOLS
+         CMDTEXT_TOOLS
+         INED_TOOLS
+         GOS_TOOLS
+
+    This parameter controls which tools are to be built for a given
+    release type (i.e. bos).  When <release type>_TOOLS is specified,
+    only the build environment tools belonging to the release type,
+    will be built.  Refer to src/bldenv/Makefile for the tools that
+    are built under each type of <release type>_TOOLS.
+
+
+MAKELPP.SH
+~~~~~~~~~~
+    makelpp.sh is the central building script which is called to
+    build an LPP.  To use this script:
+
+        sh -x bldscripts/makelpp.sh [-l] <LPP name>
+
+        Example: sh -x bldscripts/makelpp.sh gosinstall
+                 sh -x bldscripts/makelpp.sh -l gosinstall
+                 sh -x bldscripts/makelpp.sh setup BOS_TOOLS
+
+    The -l (lowercase L) paramater is optional and indicates that the
+    backing tree is accessible through the link contained in the directory
+    above src.  The link is analogous to the link used in sandboxes.  Any
+    number of links can exist like in a sandbox.  Caution should be exercised
+    when using more then one link as the command line, when building, may
+    exceed the maximum length and possibly core dump.
+
+    <LPP name> is the name of the LPP to build (i.e. gos or gosinstall).
+    Any LPP can be built using makelpp.sh including setup.  Output from
+    makelpp.sh is not redirected, so if you need output to be redirected:
+
+        sh -x bldscripts/makelpp.sh <LPP name> ><filename> 2>&1
+
+        Example: sh -x bldscripts/makelpp.sh setup >logs/gos.log 2>&1
+                 sh -x bldscripts/makelpp.sh -l setup >logs/gos.log 2>&1
+
+    For a complete list of available <LPP name>'s look at the file
+    bldscripts/aix.lpps.  The first column in this file indicates
+    <LPP name>.
+
+
+ALL.SH
+~~~~~~
+    all.sh will build each LPP, in order, as listed in bldscripts/aix.lpps.
+    To use all.sh:
+
+        sh -x bldscripts/all.sh [-t] [-l]
+
+        Example: sh -x bldscripts/all.sh -t
+                 sh -x bldscripts/all.sh -t -l
+
+    The -t parameter is optional and controls whether the output from each
+    LPP built is automatically tailed to the screen.  If -t is specified
+    automatic tailing will occur.  Please note that if control-C is pressed
+    during the running of all.sh, not only will the tail stop but all.sh
+    will also exit.
+
+    The -l (lowercase L) paramater is optional and indicates that the
+    backing tree is accessible through the link contained in the directory
+    above src.  The link is analogous to the link used in sandboxes.  Any
+    number of links can exist like in a sandbox.  Caution should be exercised
+    when using more then one link as the command line, when building, may
+    exceed the maximum length and possibly core dump.
+
+    This script stores log file information under src/logs with the
+    naming convention <LPP name>.log.<#>.  <LPP name> is the name of the
+    LPP that is building (i.e. gosinstall).  <#> is the next higher version
+    number of the log file (starting with 1) which all.sh keeps track of
+    and increments each time that all.sh is run after a break occurs.
+
+    The script is smart enough to check for the existence of directories
+    before attempting to build a LPP.  For instance if src/gos does not
+    exist all.sh will skip building gos and gosinstall.  all.sh uses the
+    file bldscripts/aix.lpps to determine the order of LPP building and
+    what directories to walk for each LPP.  When the -l (lowercase L)
+    parameter is specified, the script traverses the link chain to check
+    for the existence of directories after searching the current src
+    directory.
+
+    Each time all.sh successfully completes an LPP it creates the file
+    <LPP>_done.  This file is used by all.sh on subsequent runs to
+    determine which LPPs need to be built as listed in bldscripts/aix.lpps.
+    So if the file gos_done existed, all.sh would skip building gos.
+
+
+AIXLPP.SH
+~~~~~~~~~
+    There are cases when a single directory or list of directories need to
+    be built but it would be inconveniet to use makelpp.sh or all.sh.  For
+    building individual directories use aixlpp.sh.  In fact, makelpp.sh
+    calls aixlpp.sh to perform the building of an LPP.  To use this script:
+
+        sh -x bldscripts/aixlpp.sh [-l] "<some label>" \
+              <export, build or install> <directory> \
+              [<"" or _mp> [<directory> [<"" or _mp>]] ...]
+
+        Example: sh -x bldscripts/aixlpp.sh "Use 1" build gos
+                 sh -x bldscripts/aixlpp.sh "Use 2" install gos
+                 sh -x bldscripts/aixlpp.sh "Use 3" build bos/kernel _mp
+                 sh -x bldscripts/aixlpp.sh "Use 4" build gos "" tw
+                 sh -x bldscripts/aixlpp.sh -l "Use 5" build gos "" tw
+
+    The -l (lowercase L) paramater is optional and indicates that the
+    backing tree is accessible through the link contained in the directory
+    above src.  The link is analogous to the link used in sandboxes.  Any
+    number of links can exist like in a sandbox.  Caution should be exercised
+    when using more then one link as the command line, when building, may
+    exceed the maximum length and possibly core dump.
+
+    "<some label>" is any string label giving some indication of what is
+    building.  This can be any quoted human readable string.
+    <export, build or install> is either export, build, or install which
+    indicates which type of pass to perform on the LPP.
+
+    <directory> is the name of LPP directory to start building from.
+    This can be any existing directory.  <"" or _mp> is an optional
+    parameter and is either "" or _mp.  This parameter is intended to
+    identify if the LPP being built is for MP.  In the case when the LPP
+    being built is not for MP use "".
+
+    aixlpp.sh can handle any number of directories at one time, the only
+    limit on the number of directories to pass to aixlpp.sh is controlled
+    by the line length limit for the shell.
+
+    To demonstrate the usefullness of this script:
+
+        - Examples of building an individual LPP directory:
+
+        sh -x bldscripts/aixlpp.sh "Example1" build bos/diag/da
+        sh -x bldscripts/aixlpp.sh "Example2" build bos/kernel _mp
+        sh -x bldscripts/aixlpp.sh -l "Example3" build bos/kernel _mp
+
+        - Examples of building multiple LPP directories:
+
+        sh -x bldscripts/aixlpp.sh "Example4" build gos/rms "" bos/kernel _mp
+        sh -x bldscripts/aixlpp.sh "Example5" build bos/kernel "" gos/desktop
+        sh -x bldscripts/aixlpp.sh -l "Example5" build bos
+
+    Although <"" or _mp> is optional when specifying single directories to
+    build, it becomes required when more than one directory is built.
+    <"" or _mp> becomes a place holder between multiple directory
+    specification and again if what is being built is not for MP use "".
+
+
+AIX.LPPS
+~~~~~~~~
+    This file contains the ordered list of LPPs to build/install.
+    aix.lpps is used by both makelpp.sh and all.sh.  Each entry is
+    described by the following fields:
+
+        <LPP name>|<LPP release>|<LPP script>|<label string>|\
+            <make pass>|<list of LPPs>|
+
+    <LPP name>     - The symbolic name for the LPP(s) to build/install.
+    <LPP release>  - Release of lpp.
+    <LPP script>   - Script to execute to build/install LPP(s).
+    <label string> - The string indicating what is being done.
+    <make pass>    - The pass used to build/install LPP.
+    <list of LPPs> - The space separated list of LPP directories.  Each LPP
+                     directory is followed by "" or _mp.
+
+    The continuation character (\), used in the format explanation above, is
+    a place holder character showing that the format overflows one line.  Do
+    NOT use the continuation character when creating a new LPP line in
+    aix.lpps.
+
+    <LPP name> and <LPP script> are required.  All other fields are optional.
+    As example:
+
+        setup|bos410|setup.sh|
+        cmds|bos410|aixlpp.sh|COMMANDS build|build|bos ""|
+
+
+SCRIPT CALLING FLOW
+~~~~~~~~~~~~~~~~~~~
+    The flow of how the scripts, contained in src/bldscripts, are called
+    is illustrated by the following diagrams:
+
+
+                                   |
+                                   |
+                                  \./
+                         +----> all.sh -------------+
+                         |         |                |
+              aix.lpps --+         |                |
+            (input file) |        \./               |
+                         +---> makelpp.sh           |
+                                   |                |
+                            +------+------+         |
+                            |             |         |
+                           \./           \./        |
+                        setup.sh      aixlpp.sh     |
+                          |   |         |   |       |
+                          |   +----+----+   +-------+
+                          |        |                |
+                          |       \./               |
+                          |    common.sh            |
+                          |                        \./
+                          +-----------------> common_funcs.sh
+
+              Diagram 1. Flow when all.sh is executed.
+
+
+                                   |
+                                   |
+                                  \./
+              aix.lpps ------> makelpp.sh
+            (input file)           |
+                            +------+------+
+                            |             |
+                           \./           \./
+                        setup.sh      aixlpp.sh
+                          |   |         |   |
+                          |   +----+----+   +-------+
+                          |        |                |
+                          |       \./               |
+                          |    common.sh            |
+                          |                        \./
+                          +-----------------> common_funcs.sh
+
+              Diagram 2. Flow when makelpp.sh is executed.
+
+
+                                 |
+                                 |
+                                \./
+                             setup.sh
+                               |   |
+                         +-----+   +-----+ 
+                         |               |
+                        \./             \./
+                     common.sh   common_funcs.sh 
+
+              Diagram 3. Flow when setup.sh is executed.
+
+
+                                 |
+                                 |
+                                \./
+                             aixlpp.sh
+                               |   |
+                         +-----+   +-----+ 
+                         |               |
+                        \./             \./
+                     common.sh   common_funcs.sh 
+
+              Diagram 4. Flow when aixlpp.sh is executed.

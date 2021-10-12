@@ -1,0 +1,304 @@
+# @(#)18	1.1  src/bos/usr/lib/nls/loc/uconvTable/IBM-837.ucmap, ils-zh_CN, bos41J, 9509A_all 2/19/95 23:31:23
+#
+#   COMPONENT_NAME:	CMDICONV
+#
+#   FUNCTIONS:
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#   ISO 10646-1: UCS-2
+#
+#   Table Format:
+#	Columns separated by spaces:
+#	Col1: (pos.  1- 7) ISO 10646 code as <Uxxxx>
+#	Col2: (pos. 16-30) code as \xhh
+#	Col3: (pos. 32-39) IBM GCGID
+#	Col4: (pos. 42-49) Mapping indicator to specify:
+#		1. Arabic Shared hapes:
+#			NOMINAL, ISOLATED, INITIAL, MEDIAL, FINAL
+#		2. Synonym GCGID used when direct mapping for
+#		   the main GCGID is not available.
+#	Col5: (pos. 56-> ) ISO 10646 character name
+#
+#
+#
+<code_set_name>               "IBM-837"
+<char_name_mask>              "AXXXX"
+<mb_cur_max>                  1
+<mb_cur_min>                  1
+<uconv_class>                 "SBCS"
+#
+#
+CHARMAP
+#
+#
+#
+#ISO 10646      IBM-837
+#_________      _________
+<U0000>           \x00      #
+<U0001>           \x01      #
+<U0002>           \x02      #
+<U0003>           \x03      #
+<U0004>           \x37      #
+<U0005>           \x2d      #
+<U0006>           \x2e      #
+<U0007>           \x2f      #
+<U0008>           \x16      #
+<U0009>           \x05      #
+<U000a>           \x25      #
+<U000b>           \x0b      #
+<U000c>           \x0c      #
+<U000d>           \x0d      #
+<U000e>           \x0e      #
+<U000f>           \x0f      #
+<U0010>           \x10      #
+<U0011>           \x11      #
+<U0012>           \x12      #
+<U0013>           \x13      #
+<U0014>           \x3c      #
+<U0015>           \x3d      #
+<U0016>           \x32      #
+<U0017>           \x26      #
+<U0018>           \x18      #
+<U0019>           \x19      #
+<U001a>           \x3f      #
+<U001b>           \x27      #
+<U001c>           \x22      #
+<U001d>           \x1d      #
+<U001e>           \x35      #
+<U001f>           \x1f      #
+<U0020>           \x40      #
+<U0021>           \x5a      #
+<U0022>           \x7f      #
+<U0023>           \x7b      #
+<U0024>           \xe0      #
+<U0025>           \x6c      #
+<U0026>           \x50      #
+<U0027>           \x7d      #
+<U0028>           \x4d      #
+<U0029>           \x5d      #
+<U002a>           \x5c      #
+<U002b>           \x4e      #
+<U002c>           \x6b      #
+<U002d>           \x60      #
+<U002e>           \x4b      #
+<U002f>           \x61      #
+<U0030>           \xf0      #
+<U0031>           \xf1      #
+<U0032>           \xf2      #
+<U0033>           \xf3      #
+<U0034>           \xf4      #
+<U0035>           \xf5      #
+<U0036>           \xf6      #
+<U0037>           \xf7      #
+<U0038>           \xf8      #
+<U0039>           \xf9      #
+<U003a>           \x7a      #
+<U003b>           \x5e      #
+<U003c>           \x4c      #
+<U003d>           \x7e      #
+<U003e>           \x6e      #
+<U003f>           \x6f      #
+<U0040>           \x7c      #
+<U0041>           \xc1      #
+<U0042>           \xc2      #
+<U0043>           \xc3      #
+<U0044>           \xc4      #
+<U0045>           \xc5      #
+<U0046>           \xc6      #
+<U0047>           \xc7      #
+<U0048>           \xc8      #
+<U0049>           \xc9      #
+<U004a>           \xd1      #
+<U004b>           \xd2      #
+<U004c>           \xd3      #
+<U004d>           \xd4      #
+<U004e>           \xd5      #
+<U004f>           \xd6      #
+<U0050>           \xd7      #
+<U0051>           \xd8      #
+<U0052>           \xd9      #
+<U0053>           \xe2      #
+<U0054>           \xe3      #
+<U0055>           \xe4      #
+<U0056>           \xe5      #
+<U0057>           \xe6      #
+<U0058>           \xe7      #
+<U0059>           \xe8      #
+<U005a>           \xe9      #
+<U005b>           \xba      #
+<U005c>           \xb2      #
+<U005d>           \xbb      #
+<U005e>           \xb0      #
+<U005f>           \x6d      #
+<U0060>           \x79      #
+<U0061>           \x81      #
+<U0062>           \x82      #
+<U0063>           \x83      #
+<U0064>           \x84      #
+<U0065>           \x85      #
+<U0066>           \x86      #
+<U0067>           \x87      #
+<U0068>           \x88      #
+<U0069>           \x89      #
+<U006a>           \x91      #
+<U006b>           \x92      #
+<U006c>           \x93      #
+<U006d>           \x94      #
+<U006e>           \x95      #
+<U006f>           \x96      #
+<U0070>           \x97      #
+<U0071>           \x98      #
+<U0072>           \x99      #
+<U0073>           \xa2      #
+<U0074>           \xa3      #
+<U0075>           \xa4      #
+<U0076>           \xa5      #
+<U0077>           \xa6      #
+<U0078>           \xa7      #
+<U0079>           \xa8      #
+<U007a>           \xa9      #
+<U007b>           \xc0      #
+<U007c>           \x4f      #
+<U007d>           \xd0      #
+<U007e>           \xa0      #
+<U007f>           \x07      #
+<U0080>           \x43      #
+<U0081>           \x20      #
+<U0082>           \x21      #
+<U0083>           \x1c      #
+<U0084>           \x23      #
+<U0085>           \xeb      #
+<U0086>           \x24      #
+<U0087>           \x9b      #
+<U0088>           \x71      #
+<U0089>           \x28      #
+<U008a>           \x38      #
+<U008b>           \x49      #
+<U008c>           \x90      #
+<U008d>           \xba      #
+<U008e>           \xec      #
+<U008f>           \xdf      #
+<U0090>           \x45      #
+<U0091>           \x29      #
+<U0092>           \x2a      #
+<U0093>           \x9d      #
+<U0094>           \x72      #
+<U0095>           \x2b      #
+<U0096>           \x8a      #
+<U0097>           \x9a      #
+<U0098>           \x67      #
+<U0099>           \x56      #
+<U009a>           \x64      #
+<U009b>           \x4a      #
+<U009c>           \x53      #
+<U009d>           \x68      #
+<U009e>           \x59      #
+<U009f>           \x46      #
+<U00a0>           \xea      #
+<U00a1>           \xda      #
+<U00a2>           \x2c      #
+<U00a3>           \x4a      #
+<U00a4>           \x8b      #
+<U00a5>           \x5b      #
+<U00a6>           \x41      #
+<U00a7>           \xfe      #
+<U00a8>           \x58      #
+<U00a9>           \x51      #
+<U00aa>           \x52      #
+<U00ab>           \x48      #
+<U00ac>           \x5f      #
+<U00ad>           \xdb      #
+<U00ae>           \x8e      #
+<U00af>           \xa1      #
+<U00b0>           \x73      #
+<U00b1>           \x74      #
+<U00b2>           \x75      #
+<U00b3>           \xfa      #
+<U00b4>           \x15      #
+<U00b5>           \xb0      #
+<U00b6>           \xb1      #
+<U00b7>           \xb3      #
+<U00b8>           \xb4      #
+<U00b9>           \xb5      #
+<U00ba>           \x6a      #
+<U00bb>           \xb7      #
+<U00bc>           \xb8      #
+<U00bd>           \xb9      #
+<U00be>           \xcc      #
+<U00bf>           \xbc      #
+<U00c0>           \xab      #
+<U00c1>           \x3e      #
+<U00c2>           \x3b      #
+<U00c3>           \x0a      #
+<U00c4>           \xbf      #
+<U00c5>           \x8f      #
+<U00c6>           \x3a      #
+<U00c7>           \x14      #
+<U00c8>           \xa0      #
+<U00c9>           \x17      #
+<U00ca>           \xcb      #
+<U00cb>           \xca      #
+<U00cc>           \x1a      #
+<U00cd>           \x1b      #
+<U00ce>           \x9c      #
+<U00cf>           \x04      #
+<U00d0>           \x34      #
+<U00d1>           \xef      #
+<U00d2>           \x1e      #
+<U00d3>           \x06      #
+<U00d4>           \x08      #
+<U00d5>           \x09      #
+<U00d6>           \x77      #
+<U00d7>           \x70      #
+<U00d8>           \xbe      #
+<U00d9>           \xbb      #
+<U00da>           \xac      #
+<U00db>           \x54      #
+<U00dc>           \x63      #
+<U00dd>           \x65      #
+<U00de>           \x66      #
+<U00df>           \x62      #
+<U00e0>           \x30      #
+<U00e1>           \x42      #
+<U00e2>           \x47      #
+<U00e3>           \x57      #
+<U00e4>           \xee      #
+<U00e5>           \x33      #
+<U00e6>           \xb6      #
+<U00e7>           \xe1      #
+<U00e8>           \xcd      #
+<U00e9>           \xed      #
+<U00ea>           \x36      #
+<U00eb>           \x44      #
+<U00ec>           \xce      #
+<U00ed>           \xcf      #
+<U00ee>           \x31      #
+<U00ef>           \xaa      #
+<U00f0>           \xfc      #
+<U00f1>           \x9e      #
+<U00f2>           \xae      #
+<U00f3>           \x8c      #
+<U00f4>           \xdd      #
+<U00f5>           \xdc      #
+<U00f6>           \x39      #
+<U00f7>           \xfb      #
+<U00f8>           \x80      #
+<U00f9>           \xaf      #
+<U00fa>           \xfd      #
+<U00fb>           \x78      #
+<U00fc>           \x76      #
+<U00fd>           \xb2      #
+<U00fe>           \x9f      #
+<U00ff>           \xff      #
+#
+END CHARMAP
+#________________________________________________________________________

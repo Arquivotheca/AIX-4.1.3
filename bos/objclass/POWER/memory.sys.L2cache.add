@@ -1,0 +1,57 @@
+*@(#)79  1.1  src/bos/objclass/POWER/memory.sys.L2cache.add, cfgmethods, bos411, 9428A410j 6/6/94 13:09:16
+* 
+*  COMPONENT_NAME: (CFGMETHODS) memory.sys.L2cache.add
+* 
+*  FUNCTIONS:
+* 
+*  ORIGINS: 27, 83
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+* system planar device
+PdDv:
+	type = L2cache
+	class = memory
+	subclass = sys
+	prefix = L2cache
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x708
+	setno = 1
+	msgno = 53
+	fru = 1
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/usr/lib/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/usr/lib/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = memory/sys/L2cache
+
+
+
+PdAt:
+	uniquetype = memory/sys/L2cache
+	attribute = "size"
+	deflt = "0"
+	values = "0x0-0xffffffff,0x1"
+	width = ""
+	type = "R"
+	generic = "D"
+	rep = "nr"
+	nls_index = 50
+

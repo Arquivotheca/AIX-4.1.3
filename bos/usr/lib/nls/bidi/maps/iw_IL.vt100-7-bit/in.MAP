@@ -1,0 +1,171 @@
+# @(#)88	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.vt100-7-bit/in.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:48:35
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# HTABLES
+# -------
+#
+# This file contains the requested external to internal (input) conversion
+# tables for hterm. Since at current version, font code points are
+# code page  856, this values are used for internal representation.
+# If 7 bit ASCII values are used for external data representation,
+# a conversion # is required.
+#
+# First  number is the external (ASCII)         decimal character value.
+# Second number is the internal (code page 856) decimal character value.
+#
+# Only characters with external values different from the internal,
+# must be entered.
+#
+#
+#
+# 7 bit ASCII to PC 856 code page conversion table
+# ------------------------------------------------
+#
+#
+#ASCII        P850           ISO
+#value        value          name
+#
+96            224   #        aleph
+97            225   #        beth
+98            226   #        gimel
+99            227   #        daled
+100           228   #        he
+101           229   #        vav
+102           230   #        zain
+103           231   #        chet
+104           232   #        tet
+105           233   #        jod
+106           234   #        caf sofit
+107           235   #        caf
+108           236   #        lamed
+109           237   #        mem sofit
+110           238   #        mem
+111           239   #        nun sofit
+112           240   #        nun
+113           241   #        samach
+114           242   #        ain
+115           243   #        peh sofit
+116           244   #        peh
+117           245   #        tzadik sofit
+118           246   #        tzadik
+119           247   #        kuf
+120           248   #        reish
+121           249   #        shin
+122           250   #        taf
+		    #
+		    #        values 128 - 256 are mapped to 0 - 127
+128             0   #
+129             1   #
+130             2   #
+131             3   #
+132             4   #
+133             5   #
+134             6   #
+135             7   #
+136             8   #
+137             9   #
+138            10   #
+139            11   #
+140            12   #
+141            13   #
+142            14   #
+143            15   #
+144            16   #
+145            17   #
+146            18   #
+147            19   #
+148            20   #
+149            21   #
+150            22   #
+151            23   #
+152            24   #
+153            25   #
+154            26   #
+155            27   #
+156            28   #
+157            29   #
+158            30   #
+159            31   #
+160            32   #
+161            33   #
+162            34   #
+163            35   #
+164            36   #
+165            37   #
+166            38   #
+167            39   #
+168            40   #
+169            41   #
+170            42   #
+171            43   #
+172            44   #
+173            45   #
+174            46   #
+175            47   #
+176            48   #
+177            49   #
+178            50   #
+179            51   #
+180            52   #
+181            53   #
+182            54   #
+183            55   #
+184            56   #
+185            57   #
+186            58   #
+187            59   #
+188            60   #
+189            61   #
+190            62   #
+191            63   #
+192            64   #
+193            65   #
+194            66   #
+195            67   #
+196            68   #
+197            69   #
+198            70   #
+199            71   #
+200            72   #
+201            73   #
+202            74   #
+203            75   #
+204            76   #
+205            77   #
+206            78   #
+207            79   #
+208            80   #
+209            81   #
+210            82   #
+211            83   #
+212            84   #
+213            85   #
+214            86   #
+215            87   #
+216            88   #
+217            89   #
+218            90   #
+219            91   #
+220            92   #
+221            93   #
+222            94   #
+223            95   #
+251           123   #
+252           124   #
+253           125   #
+254           126   #
+255           127   #
+

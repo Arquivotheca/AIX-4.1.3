@@ -1,0 +1,59 @@
+*@(#)14  1.3  src/bos/objclass/POWER/processor.sys.proc1.add, cfgmethods, bos41B, 412_41B_sync 12/21/94 12:11:43
+*
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 83
+*
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+
+* processor device
+PdDv:
+	type = proc1
+	class = processor
+	subclass = sys
+	prefix = proc
+	devid = ""
+	base = 0
+	has_vpd = 0
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 2
+	led = 0x811
+	setno = 1
+	msgno = 47
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = processor/sys/proc1
+
+PdAt:
+    	uniquetype = "processor/sys/proc1"
+    	attribute = "state"
+    	deflt = "enable"
+    	values = "enable,disable,faulty"
+    	width = ""
+    	type = "R"
+    	generic = "D"
+    	rep = "sl"
+    	nls_index = 48
+
+PdAt:
+        uniquetype = "processor/sys/proc1"
+        attribute = "type"
+        deflt = "POWER"
+        values = ""
+        width = ""
+        type = "R"
+        generic = "D"
+        rep = "sl"
+        nls_index = 49

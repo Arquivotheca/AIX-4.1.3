@@ -1,0 +1,381 @@
+#
+# @(#)16        1.12  src/bos/usr/lib/assist/add_files/sm_preinstall.add, cmdassist, bos41J, 9517B_all 4/27/95 11:20:23
+#
+#   COMPONENT_NAME:  cmdassist
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+sm_menu_opt:
+    id_seq_num                = "050"
+    id                        = "assist"
+    next_id                   = "assist_rootvg"
+    text                      = "Manage System Storage and Paging Space (rootvg)"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 7
+    next_type                 = "m"
+    alias                     = ""
+    help_msg_id               = "2850105"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "010"
+    id                        = "assist_rootvg"
+    next_id                   = "assist_disks"
+    text                      = "Add/Show Disks for System Storage (rootvg)"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 8
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850120"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_menu_opt:
+    id_seq_num                = "020"
+    id                        = "assist_rootvg"
+    next_id                   = "assist_page"
+    text                      = "Add/Show Paging Space"
+    text_msg_file             = "smit.cat"
+    text_msg_set              = 52
+    text_msg_id               = 9
+    next_type                 = "d"
+    alias                     = ""
+    help_msg_id               = "2850121"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "assist_disks"
+    option_id                 = "cmd_add_storage"
+    has_name_select           = "n"
+    name                      = "Add/Show Disks for System Storage (rootvg)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 8
+    cmd_to_exec               = "extendvg rootvg"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = ""
+    cmd_to_discover           = "\
+vgid=`getlvodm -v rootvg`
+pp_size=`lqueryvg -g $vgid -s | awk '{printf \"%d\",(2^\\$1)/1048576}'`
+free_space=`expr $(lqueryvg -g $vgid -F) \\* $pp_size`
+space_alloc=`expr $(lsvg rootvg | sed -n \"s/.*USED PPs:[ ]*\\\([0-9]*\\\).*/\\\1/p\") \\* $pp_size`
+disk_rootvg=`getlvodm -w $vgid | awk '{printf\"%s,\",\\$2}'`
+disk_rootvg=`echo $disk_rootvg | sed 's/,$//'`
+echo \"#free_space:space_alloc:disk_rootvg\"
+echo \"$free_space:$space_alloc:$disk_rootvg\"
+"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "2850120"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_storage"
+    id_seq_num                = "010"
+    disc_field_name           = "free_space"
+    name                      = "SPACE available in rootvg (MB)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 10
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850122"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_storage"
+    id_seq_num                = "020"
+    disc_field_name           = "space_alloc"
+    name                      = "Space ALLOCATED in rootvg (MB)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 11
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850123"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_storage"
+    id_seq_num                = "030"
+    disc_field_name           = "disk_rootvg"
+    name                      = "DISKS in rootvg"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 12
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850124"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_storage"
+    id_seq_num                = "040"
+    disc_field_name           = ""
+    name                      = "Disks to be ADDED"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 13
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lspv | grep None | cut -f1 -d' '"
+    cmd_to_list_postfix       = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850125"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_hdr:
+    id                        = "assist_page"
+    option_id                 = "cmd_add_page"
+    has_name_select           = "n"
+    name                      = "Add/Show Paging Space"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 9
+    cmd_to_exec               = "/usr/lib/assist/set_pgspace"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = ""
+    cmd_to_discover           = "\
+vgid=`getlvodm -v rootvg`
+mem_size=`expr $(bootinfo -r) / 1024`
+disk_rootvg=`getlvodm -w $vgid | awk '{printf\"%s,\",\\$2}'`
+disk_rootvg=`echo $disk_rootvg | sed 's/,$//'`
+space_avail=`expr $(lqueryvg -g $vgid -F) \\* $(lqueryvg -g $vgid -s | awk '{printf \"%d\",(2^\\$1)/1048576}')`
+recom_page=`/usr/lib/assist/calc_pgspace recommended_ps`
+curr_page=`lsps -s |
+  awk ' NR>1 { print substr($1,1,length($1)-2) }'`
+new_page=`/usr/lib/assist/calc_pgspace default_ps`
+# print results
+echo \"#mem_size:disk_rootvg:space_avail:recom_page:curr_page:new_page\"
+echo \"$mem_size:$disk_rootvg:$space_avail:$recom_page:$curr_page:$new_page\"
+"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 1
+    help_msg_id               = "2850121"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_page"
+    id_seq_num                = "010"
+    disc_field_name           = "mem_size"
+    name                      = "MEMORY size (MB)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 14
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850126"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_page"
+    id_seq_num                = "020"
+    disc_field_name           = "disk_rootvg"
+    name                      = "DISKS in rootvg"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 12
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list_postfix       = ""
+    multi_select              = "y"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850124"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_page"
+    id_seq_num                = "030"
+    disc_field_name           = "space_avail"
+    name                      = "SPACE available in rootvg (MB)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 10
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "On System"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850122"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_page"
+    id_seq_num                = "040"
+    disc_field_name           = "recom_page"
+    name                      = "RECOMMENDED paging space (MB)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 15
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850127"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_page"
+    id_seq_num                = "050"
+    disc_field_name           = "curr_page"
+    name                      = "CURRENT paging space (MB)\n"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 16
+    op_type                   = "n"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "n"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850128"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+
+sm_cmd_opt:
+    id                        = "cmd_add_page"
+    id_seq_num                = "060"
+    disc_field_name           = "new_page"
+    name                      = "NEW paging space (MB)"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 52
+    name_msg_id               = 17
+    op_type                   = "n"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "2850129"
+    help_msg_loc              = ""
+    help_msg_base             = ""
+    help_msg_book             = ""
+

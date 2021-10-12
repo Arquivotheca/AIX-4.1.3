@@ -1,0 +1,864 @@
+# @(#)31	1.4  src/bos/usr/lib/nls/loc/locale/iw_IL.ISO8859-8.src, cfgnls, bos411, 9428A410j 4/1/94 09:11:08
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# Locale Source for iw_IL ( ISO8859-8 ) locale                       #
+######################################################################
+
+
+#############
+LC_CTYPE
+#############
+
+upper   <A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>
+
+lower   <a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>
+
+alpha   <alef>;\
+	<bet>;\
+	<gimmel>;\
+	<dallet>;\
+	<heh>;\
+	<vav>;\
+	<zain>;\
+	<chet>;\
+	<tet>;\
+	<yod>;\
+	<kaf-final>;\
+	<kaf>;\
+	<lammed>;\
+	<mem-final>;\
+	<mem>;\
+	<nun-final>;\
+	<nun>;\
+	<samech>;\
+	<ain>;\
+	<pe-final>;\
+	<pe>;\
+	<zadi-final>;\
+	<zadi>;\
+	<kof>;\
+	<resh>;\
+	<shin>;\
+	<taf>
+
+space  	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+       	<form-feed>;\
+	<carriage-return>;\
+	<space>
+
+cntrl   <NUL>;\
+	<SOH>;\
+	<STX>;\
+	<ETX>;\
+	<EOT>;\
+	<ENQ>;\
+	<ACK>;\
+	<BEL>;\
+	<alert>;\
+	<backspace>;\
+	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+	<form-feed>;\
+	<carriage-return>;\
+	<SO>;\
+	<SI>;\
+	<DLE>;\
+	<DC1>;\
+	<DC2>;\
+	<DC3>;\
+	<DC4>;\
+	<NAK>;\
+	<SYN>;\
+	<ETB>;\
+	<CAN>;\
+	<EM>;\
+	<SUB>;\
+	<ESC>;\
+	<IS4>;\
+	<IS3>;\
+	<IS2>;\
+	<IS1>;\
+	<DEL>;\
+	<BPH>;\
+	<NBH>;\
+	<IND>;\
+	<NEL>;\
+	<SSA>;\
+	<ESA>;\
+	<HTS>;\
+	<HTJ>;\
+	<VTS>;\
+	<PLD>;\
+	<PLU>;\
+	<RI>;\
+	<SS2>;\
+	<SS3>;\
+	<DCS>;\
+	<PU1>;\
+	<PU2>;\
+	<STS>;\
+	<CCH>;\
+	<MW>;\
+	<SPS>;\
+	<EPA>;\
+	<SOS>;\
+	<SCI>;\
+	<CSI>;\
+	<ST>;\
+	<OSC>;\
+	<PM>;\
+	<APC>
+
+punct   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>
+
+graph   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<cent>;\
+	<sterling>;\
+	<currency>;\
+	<yen>;\
+	<broken-bar>;\
+	<section>;\
+	<diaresis>;\
+	<copyright>;\
+	<multiply>;\
+	<guillemot-left>;\
+	<not>;\
+	<shy>;\
+	<registered>;\
+	<hebrew-macron>;\
+	<degree>;\
+	<plus-minus>;\
+	<two-superior>;\
+	<three-superior>;\
+	<acute>;\
+	<mu>;\
+	<paragraph>;\
+	<dot>;\
+	<cedilla>;\
+	<one-superior>;\
+	<divide>;\
+	<division>;\
+	<guillemot-right>;\
+	<one-quarter>;\
+	<one-half>;\
+	<three-quarters>;\
+	<double-underscore>;\
+	<alef>;\
+	<bet>;\
+	<gimmel>;\
+	<dallet>;\
+	<heh>;\
+	<vav>;\
+	<zain>;\
+	<chet>;\
+	<tet>;\
+	<yod>;\
+	<kaf-final>;\
+	<kaf>;\
+	<lammed>;\
+	<mem-final>;\
+	<mem>;\
+	<nun-final>;\
+	<nun>;\
+	<samech>;\
+	<ain>;\
+	<pe-final>;\
+	<pe>;\
+	<zadi-final>;\
+	<zadi>;\
+	<kof>;\
+	<resh>;\
+	<shin>;\
+	<taf>
+
+print   <space>;\
+	<exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<cent>;\
+	<sterling>;\
+	<currency>;\
+	<yen>;\
+	<broken-bar>;\
+	<section>;\
+	<diaresis>;\
+	<copyright>;\
+	<multiply>;\
+	<guillemot-left>;\
+	<not>;\
+	<shy>;\
+	<registered>;\
+	<hebrew-macron>;\
+	<degree>;\
+	<plus-minus>;\
+	<two-superior>;\
+	<three-superior>;\
+	<acute>;\
+	<mu>;\
+	<paragraph>;\
+	<dot>;\
+	<cedilla>;\
+	<one-superior>;\
+	<divide>;\
+	<division>;\
+	<guillemot-right>;\
+	<one-quarter>;\
+	<one-half>;\
+	<three-quarters>;\
+	<double-underscore>;\
+	<alef>;\
+	<bet>;\
+	<gimmel>;\
+	<dallet>;\
+	<heh>;\
+	<vav>;\
+	<zain>;\
+	<chet>;\
+	<tet>;\
+	<yod>;\
+	<kaf-final>;\
+	<kaf>;\
+	<lammed>;\
+	<mem-final>;\
+	<mem>;\
+	<nun-final>;\
+	<nun>;\
+	<samech>;\
+	<ain>;\
+	<pe-final>;\
+	<pe>;\
+	<zadi-final>;\
+	<zadi>;\
+	<kof>;\
+	<resh>;\
+	<shin>;\
+	<taf>
+
+digit   <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>
+
+xdigit  <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>
+
+blank  	<space>;\
+	<tab>
+
+toupper (<a>,<A>);(<b>,<B>);(<c>,<C>);(<d>,<D>);(<e>,<E>);\
+        (<f>,<F>);(<g>,<G>);(<h>,<H>);(<i>,<I>);(<j>,<J>);\
+        (<k>,<K>);(<l>,<L>);(<m>,<M>);(<n>,<N>);(<o>,<O>);\
+        (<p>,<P>);(<q>,<Q>);(<r>,<R>);(<s>,<S>);(<t>,<T>);\
+        (<u>,<U>);(<v>,<V>);(<w>,<W>);(<x>,<X>);(<y>,<Y>);\
+        (<z>,<Z>)
+
+END LC_CTYPE
+
+
+#############
+LC_COLLATE
+#############
+
+order_start	forward;forward
+
+<NUL>
+<SOH>
+<STX>
+<ETX>
+<EOT>
+<ENQ>
+<ACK>
+<alert>
+<backspace>
+<tab>
+<newline>
+<vertical-tab>
+<form-feed>
+<carriage-return>
+<SO>
+<SI>
+<DLE>
+<DC1>
+<DC2>
+<DC3>
+<DC4>
+<NAK>
+<SYN>
+<ETB>
+<CAN>
+<EM>
+<SUB>
+<ESC>
+<IS4>
+<IS3>
+<IS2>
+<IS1>
+<space>
+<underscore>
+<double-underscore>
+<hebrew-macron>
+<shy>
+<hyphen-minus>
+<comma>
+<semicolon>
+<colon>
+<exclamation-mark>
+<question-mark>
+<slash>
+<period>
+<acute>
+<grave-accent>
+<circumflex-accent>
+<diaresis>
+<tilde>
+<cedilla>
+<apostrophe>
+<quotation-mark>
+<guillemot-left>
+<guillemot-right>
+<left-parenthesis>
+<right-parenthesis>
+<left-square-bracket>
+<right-square-bracket>
+<left-brace>
+<right-brace>
+<dot>
+<section>
+<paragraph>
+<copyright>
+<registered>
+<commercial-at>
+<currency>
+<cent>
+<dollar-sign>
+<sterling>
+<yen>
+<asterisk>
+<backslash>
+<ampersand>
+<number-sign>
+<percent-sign>
+<plus-sign>
+<plus-minus>
+<divide>
+<multiply>
+<less-than-sign>
+<equals-sign>
+<greater-than-sign>
+<not>
+<vertical-line>
+<broken-bar>
+<degree>
+<mu>
+<nobreakspace>
+<zero>
+<one-quarter>
+<one-half>
+<three-quarters>
+<one>
+<one-superior>
+<two>
+<two-superior>
+<three>
+<three-superior>
+<four>
+<five>
+<six>
+<seven>
+<eight>
+<nine>
+<a> <a>;<a>
+<b> <b>;<b>
+<c> <c>;<c>
+<d> <d>;<d>
+<e> <e>;<e>
+<f> <f>;<f>
+<g> <g>;<g>
+<h> <h>;<h>
+<i> <i>;<i>
+<j> <j>;<j>
+<k> <k>;<k>
+<l> <l>;<l>
+<m> <m>;<m>
+<n> <n>;<n>
+<o> <o>;<o>
+<p> <p>;<p>
+<q> <q>;<q>
+<r> <r>;<r>
+<s> <s>;<s>
+<t> <t>;<t>
+<u> <u>;<u>
+<v> <v>;<v>
+<w> <w>;<w>
+<x> <x>;<x>
+<y> <y>;<y>
+<z> <z>;<z>
+<A> <a>;<A>
+<B> <b>;<B>
+<C> <c>;<C>
+<D> <d>;<D>
+<E> <e>;<E>
+<F> <f>;<F>
+<G> <g>;<G>
+<H> <h>;<H>
+<I> <i>;<I>
+<J> <j>;<J>
+<K> <k>;<K>
+<L> <l>;<L>
+<M> <m>;<M>
+<N> <n>;<N>
+<O> <o>;<O>
+<P> <p>;<P>
+<Q> <q>;<Q>
+<R> <r>;<R>
+<S> <s>;<S>
+<T> <t>;<T>
+<U> <u>;<U>
+<V> <v>;<V>
+<W> <w>;<W>
+<X> <x>;<X>
+<Y> <y>;<Y>
+<Z> <z>;<Z>
+<alef>
+<bet>
+<gimmel>
+<dallet>
+<heh>
+<vav>
+<zain>
+<chet>
+<tet>
+<yod>
+<kaf-final>
+<kaf>
+<lammed>
+<mem-final>
+<mem>
+<nun-final>
+<nun>
+<samech>
+<ain>
+<pe-final>
+<pe>
+<zadi-final>
+<zadi>
+<kof>
+<resh>
+<shin>
+<taf>
+<DEL>
+<PAD>
+<HOP>
+<BPH>
+<NBH>
+<IND>
+<NEL>
+<SSA>
+<ESA>
+<HTS>
+<HTJ>
+<VTS>
+<PLD>
+<PLU>
+<RI>
+<SS2>
+<SS3>
+<DCS>
+<PU1>
+<PU2>
+<STS>
+<CCH>
+<MW>
+<SPS>
+<EPA>
+<SOS>
+<SCI>
+<CSI>
+<ST>
+<OSC>
+<PM>
+<APC>
+
+
+UNDEFINED               IGNORE;IGNORE
+
+order_end
+
+END LC_COLLATE
+
+
+#############
+LC_MONETARY
+#############
+
+int_curr_symbol   "<N><I><S><space>"
+currency_symbol   "<chet><shin>"
+mon_decimal_point <period>
+mon_thousands_sep "<comma>"
+mon_grouping      3
+positive_sign     ""
+negative_sign     "<hyphen>"
+int_frac_digits   2
+frac_digits       2
+p_cs_precedes     1
+p_sep_by_space    1
+n_cs_precedes     1
+n_sep_by_space    1
+p_sign_posn       2
+n_sign_posn       2
+debit_sign        "<D><B>"
+credit_sign       "<C><R>"
+left_parenthesis  "<left-parenthesis>"
+right_parenthesis "<right-parenthesis>"
+
+END LC_MONETARY
+
+
+#############
+LC_NUMERIC
+#############
+
+decimal_point     <period>
+thousands_sep     "<comma>"
+grouping          3
+
+END LC_NUMERIC
+
+
+#############
+LC_TIME
+#############
+abday   "<apostrophe><alef>";\
+	"<apostrophe><bet>";\
+	"<apostrophe><gimmel>";\
+	"<apostrophe><dallet>";\
+	"<apostrophe><heh>";\
+	"<apostrophe><vav>";\
+	"<apostrophe><shin>"
+
+day     "<nun-final><vav><shin><alef><resh>";\
+	"<yod><nun><shin>";\
+	"<yod><shin><yod><lammed><shin>";\
+	"<yod><ain><yod><bet><resh>";\
+	"<yod><shin><yod><mem><chet>";\
+	"<yod><shin><shin>";\
+	"<taf><bet><shin>"
+
+abmon   "<vav><nun><yod>";\
+	"<resh><bet><pe>";\
+	"<zadi-final><resh><mem>";\
+	"<resh><pe><alef>";\
+	"<yod><alef><mem>";\
+	"<nun><vav><yod>";\
+	"<lammed><vav><yod>";\
+	"<gimmel><vav><alef>";\
+	"<tet><pe><samech>";\
+	"<kof><vav><alef>";\
+	"<bet><vav><nun>";\
+	"<mem><zadi><dallet>"
+
+mon     "<resh><alef><vav><nun><yod>";\
+	"<resh><alef><vav><resh><bet><pe>";\
+	"<zadi-final><resh><mem>";\
+	"<lammed><yod><resh><pe><alef>";\
+	"<yod><alef><mem>";\
+	"<yod><nun><vav><yod>";\
+	"<yod><lammed><vav><yod>";\
+	"<tet><samech><vav><gimmel><vav><alef>";\
+	"<resh><bet><mem><tet><pe><samech>";\
+	"<resh><bet><vav><tet><kof><vav><alef>";\
+	"<resh><bet><mem><bet><vav><nun>";\
+	"<resh><bet><mem><zadi><dallet>"
+
+d_t_fmt "%Z %H:%M:%S %Y %b %e %a"
+
+d_fmt   "%d/%m/%y"
+
+t_fmt   "%H:%M:%S"
+
+am_pm   "<A><M>";"<P><M>"
+
+t_fmt_ampm	"%I:%M:%S %p"
+
+nlldate	"%Y %b %e"
+
+END LC_TIME
+
+
+#############
+LC_MESSAGES
+#############
+
+yesexpr "[yY][[:alpha:]]*|[[:alpha:]]*<kaf>"
+noexpr  "[nN][[:alpha:]]*|[[:alpha:]]*<lammed>"
+yesstr  "y:Y:YES:<kaf>:<nun-final><kaf>"
+nostr   "n:N:NO:<lammed>:<alef><lammed>"
+
+END LC_MESSAGES

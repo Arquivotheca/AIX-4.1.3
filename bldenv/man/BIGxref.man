@@ -1,0 +1,26 @@
+# @(#)25	1.2  src/bldenv/man/BIGxref.man, bldtools, bos412, GOLDA411a 5/14/92 10:20:11
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: XREF files man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    $TOP/PTF/$BLDCYCLE/XREF/*:
+	Each file lists ship files along with the LPP option each file belongs
+        to.  The file options have the format 
+		<lpp-name>.<option-substring1>.<option-substring2>...
+        These files are created by v3bld with make rules (Make.footer).  One
+	file is created in the XREF directory for each packaging directory. 
+
+	Format:
+	        <ship file path> <file option>
+       		<ship file path> <file option>
+                     .
+                     .

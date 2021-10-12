@@ -1,0 +1,132 @@
+
+
+
+LLBD(1)                   User Commands                   LLBD(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     llllllllbbbbdddd - Local Location Broker Daemon
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ////eeeettttcccc////nnnnccccssss////llllllllbbbbdddd [ ----vvvveeeerrrrssssiiiioooonnnn ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The Local Location Broker daemon (llllllllbbbbdddd) is part of the  Net-
+     work  Computing System (NCS).  It manages the Local Location
+     Broker (LLB) database, which stores information  about  NCS-
+     based server programs running on the local host.
+
+     A host must run llllllllbbbbdddd if it is to support the Location Broker
+     forwarding  function or to allow remote access (for example,
+     by the llllbbbb____aaaaddddmmmmiiiinnnn tool) to the LLB database.  In general,  any
+     host  that  runs  NCS-based  servers should run an llllllllbbbbdddd, and
+     llllllllbbbbdddd should be running before any such servers are  started.
+     Additionally,   any   network  or  internet  supporting  NCS
+     activity should have at least  one  host  running  a  Global
+     Location Broker daemon (ggggllllbbbbdddd).
+
+     (On MS-DOS systems, which can run  only  one  process  at  a
+     time,  llllllllbbbbdddd functionality is automatically incorporated into
+     every NCS-based server.)
+
+     The following subsections briefly describe llllllllbbbbdddd  startup  on
+     various   systems.   See  _M_a_n_a_g_i_n_g  _N_C_S  _S_o_f_t_w_a_r_e  for  more
+     detailed information.
+
+  RRRRuuuunnnnnnnniiiinnnngggg llllllllbbbbdddd oooonnnn SSSSRRRR11110000 AAAAppppoooolllllllloooo SSSSyyyysssstttteeeemmmmssss
+     If the LLB is to support remote access from hosts in the  IP
+     address  family,  a TCP daemon (ttttccccppppdddd) must be running on the
+     local node when llllllllbbbbdddd is started.
+
+     To start llllllllbbbbdddd on a node that is already running, become root
+     and  type  the  following  at a shell prompt:  _$$$$ ////eeeettttcccc////sssseeeerrrrvvvveeeerrrr
+     ////eeeettttcccc////nnnnccccssss////llllllllbbbbdddd To have llllllllbbbbdddd start every time  a  node  boots,
+     use ttttoooouuuucccchhhh or ccccrrrrffff to create the file ////eeeettttcccc////ddddaaaaeeeemmmmoooonnnnssss////llllllllbbbbdddd.
+
+  RRRRuuuunnnnnnnniiiinnnngggg llllllllbbbbdddd oooonnnn SSSSRRRR9999 AAAAppppoooolllllllloooo SSSSyyyysssstttteeeemmmmssss
+     If the LLB is to support remote access from hosts in the  IP
+     address family, a TCP server (ttttccccpppp____sssseeeerrrrvvvveeeerrrr) must be running on
+     the local node when llllllllbbbbdddd is started.
+
+     To start llllllllbbbbdddd on a node that is already running, become root
+     and  type  the  following at a Display Manager prompt:  _CCCC_oooo_mmmm_----
+     _mmmm_aaaa_nnnn_dddd_:::: ccccppppssss ////ssssyyyyssss////nnnnccccssss////llllllllbbbbdddd To have llllllllbbbbdddd start every time a node
+     boots,    add   the   following   line   to   the   file   ````
+     nnnnooooddddeeee____ddddaaaattttaaaa////ssssttttaaaarrrrttttuuuupppp...._s_u_f_f_i_x, where _s_u_f_f_i_x indicates the display
+     type:  _cccc_pppp_ssss _////_ssss_yyyy_ssss_////_nnnn_cccc_ssss_////_llll_llll_bbbb_dddd
+
+
+
+
+
+NCS Administration        Last change:                          1
+
+
+
+
+
+
+LLBD(1)                   User Commands                   LLBD(1)
+
+
+
+  RRRRuuuunnnnnnnniiiinnnngggg llllllllbbbbdddd oooonnnn SSSSuuuunnnnOOOOSSSS aaaannnndddd UUUULLLLTTTTRRRRIIIIXXXX SSSSyyyysssstttteeeemmmmssss
+     On SunOS and ULTRIX systems, llllllllbbbbdddd is typically started by  a
+     line  in  ////eeeettttcccc////rrrrcccc  such  as the following:  _////_eeee_tttt_cccc_////_nnnn_cccc_ssss_////_llll_llll_bbbb_dddd To
+     start llllllllbbbbdddd by hand on one of  these  systems,  you  must  be
+     root.
+
+  RRRRuuuunnnnnnnniiiinnnngggg llllllllbbbbdddd oooonnnn VVVVMMMMSSSS SSSSyyyysssstttteeeemmmmssss
+     On VMS systems, llllllllbbbbdddd is typically started by a line  in  the
+     ssssyyyyssssttttaaaarrrrttttuuuupppp....ccccoooommmm startup file.  To start llllllllbbbbdddd by hand on one of
+     these  systems,  you  need  special  privileges  which   are
+     described in _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----lllliiiisssstttteeeennnn _f_a_m_i_l_y__l_i_s_t
+          This option restricts the address families on which  an
+          LLB listens.  Use it only if you are creating a special
+          configuration where access to an LLB is restricted to a
+          subset of hosts in the network or internet.
+
+          The _f_a_m_i_l_y__l_i_s_t is a list of the  address  families  on
+          which  the  LLB  will  listen.   Names in this list are
+          separated by spaces.  Possible family names include ddddddddssss
+          and iiiipppp.
+
+          If llllllllbbbbdddd is started without the ----lllliiiisssstttteeeennnn option, the  LLB
+          will  listen on all address families that are supported
+          both by NCS and by the local host.  On Apollo  systems,
+          this  set  of families always includes ddddddddssss and may also
+          include iiiipppp.  On most other systems, iiiipppp is currently the
+          only family.
+
+     ----vvvveeeerrrrssssiiiioooonnnn
+          Display the version of NCK that this llllllllbbbbdddd  belongs  to,
+          but do not start the daemon.
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          2
+
+
+

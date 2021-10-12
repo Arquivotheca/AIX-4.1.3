@@ -1,0 +1,36 @@
+* @(#)17	1.2  src/bos/usr/bin/virscan/darclean.lst, cmdsvir, bos411, 9428A410j 4/3/91 19:11:55
+*
+* COMPONENT_NAME: CMDSVIR
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1990
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* Infection signature.
+*
+9D73482E3B1E0807753A85DB7436E8AB029DE883007234
+This file may be infected with the Dark Avenger virus.
+(COM and EXE files. Pause if found. Scan memory.)
+*
+* Dark Avenger damage signature; once in every sixteen executions of
+* an infected file (counter kept in sector 0), the virus will overwrite
+* a more-or-less random sector on the disk with a block beginning
+* with the string "Eddie lives...somewhere in time!", and containing
+* some of the virus' own code, including that given here.
+*  Since this string will also identify infected files, it is
+* recommended that to avoid confusion one should first thoroughly
+* remove all infected files (using the usual VIRSCAN Dark Avenger
+* signature), before using this signature to find damaged files.
+* This signature should also be used with the -a option, since
+* it may well be in non-executable files.   As in:
+*
+*     VIRSCAN C: D: -SDARCLEAN.LST -A -P
+*
+8CC383C3102E039CFF062E899C53002E8B9CFD062E
+This file may have been damaged (or infected) by the Dark Avenger virus.
+EXE and COM files and everything else, really.

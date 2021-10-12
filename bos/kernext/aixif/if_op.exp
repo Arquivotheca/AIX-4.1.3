@@ -1,0 +1,28 @@
+* 
+* @(#)35	1.2  src/bos/kernext/aixif/if_op.exp, sysxaixif, bos411, 9428A410j 9/15/93 15:44:05
+* @(#)35	1.1  src/bos/kernext/aixif/if_op.exp, sysxaixif, bos410 4/19/91 11:01:10
+* COMPONENT_NAME: (SYSXAIXF) Network device driver interface 
+*
+* ORIGINS: 27 
+*
+* This module contains IBM CONFIDENTIAL code. -- (IBM
+* Confidential Restricted when combined with the aggregated
+* modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1989, 1991 
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+*
+* symbols exported from if_op loadable code.
+*
+
+if_op_count
+op_recv
+op_output
+op_send
+op_netintr
+op_statintr

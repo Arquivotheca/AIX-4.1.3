@@ -1,0 +1,40 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+The two files you were editing are still around here.
+Use "diff" to see what the differences between them are
+and check that the correction was made properly.  Then
+type "ready".
+#create markets
+shop-rite
+acme
+kings
+a&p
+finast
+qathmark
+#create nmark
+shop-rite
+acme
+kings
+a&p
+finast
+pathmark
+#copyin
+#user
+#uncopyin
+#match diff markets nmark
+#match diff nmark markets
+#log
+#next
+31.1a 10

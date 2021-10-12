@@ -1,0 +1,276 @@
+#
+# @(#)12	1.6  src/bldenv/man/bldtrackingdefect.man, bldtools, bos412, GOLDA411a 3/24/94 12:41:26
+#
+#  COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+#  FUNCTIONS: Manual page for bldtrackingdefect.
+#
+#  ORIGINS: 27
+#
+#  (C) COPYRIGHT International Business Machines Corp. 1993
+#  All Rights Reserved
+#  Licensed Materials - Property of IBM
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+  bldtrackingdefect Command
+  
+  
+  Purpose
+  
+  The bldtrackingdefect commands provide the interfaces for creating,
+  commenting and closing the tracking defects opened with every build
+  cycle.
+  
+
+  Syntax
+ 
+  bldtrackingdefect CANCEL <build_cycle> <log_errors>
+
+  bldtrackingdefect CHECK <build_cycle> <log_errors>
+
+  bldtrackingdefect CLOSE <build_cycle> <log_errors>
+
+  bldtrackingdefect VERIFY <build_cycle> <log_errors>
+
+  bldtrackingdefect OPEN <build_cycle> <log_errors>
+
+  bldtrackingdefect NOTE <build_cycle> <log_errors> [ -f <file> | <remark> ]
+
+  bldtrackingdefect_checkfile <log_errors>
+
+  bldtrackingdefect_values <build_cycle> <log_errors> 
+
+  bldtrackingdefect_cmvc_cmd <build_cycle> <log_errors> <action> <remarks>
+
+
+  Description
+
+  The function bldtrackingdefect with the options CANCEL, CHECK, CLOSE,
+  VERIFY, OPEN and NOTE provide all functions required to access the
+  tracking defect.  The functions bldtrackingdefect_checkfile and
+  bldtrackingdefect_values are called by bldtrackingdefect to obtain
+  data used to access the tracking defect.  The function
+  bldtrackingdefect_cmvc_cmd provides a common interface to cmvc for
+  commands other than open and note.
+ 
+  The OPEN option is used to open and move into the working state a tracking
+  defect for the build cycle. If the build cycle has never been opened a
+  tracking defect will be opened; if the build cycle already had a tracking
+  defect created and the defect is in the cancel state the tracking defect
+  will be reopened.  The defect number returned from the open will be stored
+  in the status file.  A return value of 0 indicates no errors occurred and a
+  nonzero value indicates an error occurred.
+
+  The CHECK option is used to check and see if the build cycle has a
+  tracking defect.  A return value of 0 indicates the build cycle does
+  have a tracking defect.  A nonzero return value indicates no tracking
+  defect is exists for the build cycle.  The state the tracking defect
+  is actually in is not checked (i.e. the tracking defect could be in
+  the closed state and this function will return 0).
+
+  The NOTE option is used to add remarks to the tracking defect for the
+  build cycle.  The remarks can be passed as a string or contained in a
+  file.  The notes added are done using the CMVC user defined in
+  $CMVC_BECOME; if $CMVC_BECOME is not defined then the CMVC user
+  $BLDTRACKINGDEFECT_OWNER is used.  A return value of 0 indicates no
+  errors occurred and a nonzero value indicates a error occurred.
+
+  The CANCEL option is used to move the tracking defect to the cancel
+  state.  This option  should be used  if the tracking defect may have
+  to be reopened.  A return value of 0 indicates no errors occurred and
+  a nonzero value indicates a error occurred.
+
+  The CLOSE option is used to move the tracking defect to the close state.
+  Once the tracking defect is closed it cannot be reopened.  A return
+  value of 0 indicates no errors occurred and a nonzero value indicates
+  a error occurred.
+
+  The VERIFY option is used to move the tracking defect to the verify state.
+  Once the tracking defect is in verify it cannot be reopened.  A return
+  value of 0 indicates no errors occurred and a nonzero value indicates
+  a error occurred.
+
+  The function bldtrackingdefect_values is called to get data need to
+  access the tracking defect for the current build cycle.  The function
+  bldtrackingdefect always calls bldtrackingdefect_checkfile.  A return
+  value of 0 indicates no errors occurred and a nonzero value indicates
+  an error occurred.  The environment variables returned are
+  $BLDTRACKINGDEFECT_OWNER, $BLDTRACKINGDEFECT_COMPONENT,
+  $BLDTRACKINGDEFECT_BLDENV, $BLDTRACKINGDEFECT_FAMILY,
+  $BLDTRACKINGDEFECT_NOPROMPT, $BLDTRACKINGDEFECT_ABSTRACT,
+  $BLDTRACKINGDEFECT_STATE and $BLDTRACKINGDEFECT_SEVERITY.
+
+  The function bldtrackingdefect_checkfile is called to check and insure
+  the file $BLDTRACKINGDEFECT_FILE exists.  This function is provided for
+  functions that need to check for a valid $BLDTRACKINGDEFECT_FILE.  A
+  return value of 0 indicates the file $BLDTRACKINGDEFECT_FILE  was found
+  and a nonzero value indicates a error occurred.
+
+  The function bldtrackingdefect_cmvc_cmd provides a common interface to
+  cmvc for commands other than the open or note commands.  It keeps the
+  state information up to date and handles bad return codes from cmvc.
+  It returns 0 if the command was successful, non-zero otherwise.
+
+  The status file $STATUS_FILE contains records which map a build cycle 
+  to a tracking defect.  If the status file becomes corrupt the tracking
+  defects for some build cycles may be lost.  If this has happened you
+  can issue the following CMVC command to figure out what the defect is.
+  You'll need to fill in "version", "buildcomp", and BLDCYCLE with
+  appropriate values.  For a 325 build, version=325, buildcomp=ctbuild32.
+  For a 410 build, version=410, buildcomp=baibuild.
+
+  Report -view DefectView -where "compName = '$buildcomp' and abstract \
+    = 'Tracking defect for $buildcomp build cycle $BLDCYCLE.'" -fam admin
+
+  The tool will use this command to attempt to recover if it can't get the
+  defect out of the status file.  If the defect is found using cmvc, then
+  the tool will attempt to fix up the status file.
+
+  Flags
+
+  build_cycle   The build cycle to use when storing or retriving
+                defect number from the status file.
+
+  log_errors    Value is either TRUE or FALSE.  A value of TRUE will
+                result in a error message being displayed through the
+                log function for any error encountered.  A value of
+                FALSE will not display the error messages.  The error
+                codes returned are independent of the setting of this
+                value.
+
+  -f file       File to take remarks to add to the defect from.
+
+  remark        String of remarks to add to the defect.
+
+
+  Environment Variables
+
+  BLDTRACKINGDEFECT_BLDENV
+               This specifies the build environment (i.e. 320, 324, 325,
+               410, etc.).  This is needed for determining the 'level' and
+               'abstract' fields of the tracking defect.  The level field
+               will take the following form:
+               "$BLDCYCLE$BLDTRACKINGDEFECT_BLDENV"
+
+  BLDTRACKINGDEFECT_COMPONENT
+               The tracking defect will be opened in this CMVC component.
+
+  BLDTRACKINGDEFECT_FAMILY
+               The CMVC family the tracking defect will be opened in.
+               Format is:
+                  familyname[@hostname[@portnumber]]
+               where values in [] are optional.
+
+  BLDTRACKINGDEFECT_FILE
+               Full pathname of file to look for the tracking defect
+               default information in.
+
+  BLDTRACKINGDEFECT_NOPROMPT
+               Determines if user will be prompted for opening of the
+               tracking defect.  If BLDTRACKINGDEFECT_NOPROMPT has a
+               null value then the user will be prompted before the
+               tracking defect is opened in order to confirm that this
+               is the desired action.  If the variable has a non-null
+               value then the user will not be prompted and the tracking
+               defect will be opened.
+
+  BLDTRACKINGDEFECT_OWNER
+               The tracking defect will be opened by this CMVC user and
+               then assigned to this CMVC user.  This CMVC user must have
+               a host entry for the machine and AIX login.
+               
+  BLDTRACKINGDEFECT_SEVERITY
+               The severity to open the tracking defect at.
+
+  BLDTRACKINGDEFECT_TEST
+               When set to $TRUE the test line in the file
+               $BLDTRACKINGDEFECT_FILE will be used instead of 
+               opening a new tracking defect.
+
+  BLDTRACKINGDEFECT_STATE
+               Keeps track of the state of the defect between invocations.
+
+  BLDTRACKINGDEFECT_ABSTRACT
+               The abstract of the tracking defect.  It is used by 
+               bldtrackingdefect_open when opening the tracking defect,
+               and by bldtrackingdefect_values on a cmvc query if the
+               defect number couldn't be found in the status file.
+
+  CMVC_BECOME  Specifies the CMVC user ID.
+
+  STATUS_FILE  Status file; usually set to $TOP/HISTORY/STATUS_FILE;
+               defaults to /tmp/status.db if not set in environment.
+
+
+  Messages
+
+    Errors
+
+    "File <BLDTRACKINGDEFECT_FILE> does not exist"
+    The file environment variable BLDTRACKINGDEFECT_FILE is set to does
+    not exist.
+    
+    "No entry found in <BLDTRACKINGDEFECT_FILE>"
+    The file BLDTRACKINGDEFECT does not contain a entry for the tracking
+    defect environment variables.
+    
+    "<ENVIRONMENT_VARIABLE> has no value"
+    The environment variable specified by ENVIRONMENT_VARIABLE has no
+    value.  The environment variable must have a value so that the 
+    tracking defect can be created.
+
+
+  Examples
+  
+  1. Open the admin tracking defect for build cycle $BLDCYCLE.
+
+     bldtrackingdefect OPEN ${BLDCYCLE} "${TRUE}"
+
+  2. Add a note to the tracking defect for build cycle $BLDCYCLE that
+     says "comment about defect".
+
+     bldtrackingdefect NOTE ${BLDCYCLE} "${TRUE}" "comment about defect"
+
+  3. Add a note to the tracking defect for build cycle $BLDCYCLE that
+     is the contents of the file remark_file.
+
+     bldtrackingdefect NOTE ${BLDCYCLE} "${TRUE}" -f remark_file
+
+  4. Cancel the tracking defect for build cycle $BLDCYCLE.
+
+     bldtrackingdefect CANCEL ${BLDCYCLE} "${TRUE}"
+
+  5. Reopen the admin tracking defect for build cycle $BLDCYCLE.
+
+     bldtrackingdefect OPEN ${BLDCYCLE} "${TRUE}"
+
+  6. Close the admin tracking defect for build cycle $BLDCYCLE.  The
+     tracking defect can never be opened again.
+
+     bldtrackingdefect CLOSE ${BLDCYCLE} "${TRUE}"
+  
+
+  Input Files
+
+#include "bldtrackingdefect.dat.man"
+
+
+  Related Information
+  
+  $BLDENV/usr/man/bldloginit      The man page for the logging commands.
+  $BLDENV/usr/man/bldnodenames    The man page for bldnodenames functions.
+  $BLDENV/usr/man/bldtrackingdefect
+                                  The man page for bldtrackingdefect functions.
+  $BLDENV/usr/man/bldtrackingdefect.dat
+                                  The man page with the description of the
+                                  $BLDTRACKINGDEFECT_FILE file.
+  $BLDENV/usr/man/hostsfile.dat   The man page with the description of the
+                                  $HOSTSFILE file.
+  $BLDENV/usr/man/nodenames.dat   The man page with the description of the
+                                  $NODENAMES file.
+  $STATUS_FILE			  The status file.  A record within this 
+				  file maps build cycles to the tracking
+				  defects

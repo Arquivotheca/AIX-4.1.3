@@ -1,0 +1,52 @@
+*@(#)15  1.4  src/bos/objclass/POWER/cpucard.sys.cpucard1.add, cfgmethods, bos41J, 9507A 2/6/95 06:52:57
+*
+*  COMPONENT_NAME: (CFGMETHODS) SYSTEM DEVICES STANZA FILE
+*
+*  FUNCTIONS:
+*
+*  ORIGINS: 83
+*
+*  LEVEL 1,  5 Years Bull Confidential Information
+
+* CPU daughter board device
+PdDv:
+	type = cpucard1
+	class = cpucard
+	subclass = sys
+	prefix = cpucard
+	devid = ""
+	base = 0 
+	has_vpd = 1 
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x811
+	setno = 1
+	msgno = 46
+	catalog = devices.cat
+	DvDr = ""
+	Define = "/etc/methods/define"
+	Configure = ""
+	Change = ""
+	Unconfigure = ""
+	Undefine = "/etc/methods/undefine"
+	Start = ""
+	Stop = ""
+	uniquetype = cpucard/sys/cpucard1
+
+PdCn:
+   	uniquetype = cpucard/sys/cpucard1
+   	connkey = sys
+   	connwhere = 0
+
+PdCn:
+	uniquetype = cpucard/sys/cpucard1
+	connkey = sys
+	connwhere = 1
+
+PdCn:
+        uniquetype = cpucard/sys/cpucard1
+        connkey = sys
+        connwhere = L
+

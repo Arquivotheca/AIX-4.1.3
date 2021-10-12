@@ -1,0 +1,61 @@
+#!/bin/sh
+
+#ident "@(#)ls_find_svr_sh:1.2  File Date:93/03/25 Last Delta:92/12/24 11:15:15"
+
+# **************************************************************************
+# Confidential and Proprietary.  Copyright 1992 by Gradient Technologies, Inc.
+# Hudson, Massachusetts.  Unpublished -- All Rights Reserved Under Copyright
+# Laws Of The United States.
+
+# Gradient Technologies, Inc. [Gradient] reserves all rights, title and
+# interest with respect to copying, modification or the distribution of such
+# software programs and associated documentation, except those rights
+# specifically granted by Gradient in Network License System Agreement between
+# Gradient and Licensee.  Without such an agreement, such software programs
+# may not be used, copied, modified or distributed in source or object code
+# form.  Further, the copyright notice must appear on the media, the
+# supporting documentation and packaging as set forth in said agreement. Said
+# agreement does not grant any rights to use Gradient's name or trademarks in
+# advertising or publicity, with respect to the distribution of the software
+# programs without the expressed and specific prior written permission of
+# Gradient.  Trademark agreements may be obtained in a separate Trademark
+# License Agreement.
+# **************************************************************************
+
+
+# exactly one argument, the name of a machine supposed to be running
+# a netlsd. Assumes that the ls_tv program is in /usr/lib/netls/bin
+
+# return code 0 if server is found, 255 if not
+
+LS_TV=/usr/lib/netls/bin/ls_tv
+
+if [ $# -ne 1 ]
+then
+	prog=`basename $0`
+	echo "
+Usage:  $prog <server_name>
+
+Uses the netls ls_tv program and verifies if <server_name> is running
+a netlsd or not. Exit status is 0 if <server_name> is running netlsd
+otherwise exit status is 255.
+
+This program assumes that the path to ls_tv is $LS_TV
+"
+
+	exit 255
+fi
+
+
+svr_list=`$LS_TV | grep '   ' |  awk '{print $1}'`
+for svr in $svr_list
+do
+	if [ $svr = $1 ]
+	then
+		# found it
+		exit 0
+	fi
+done
+
+# not found
+exit 255

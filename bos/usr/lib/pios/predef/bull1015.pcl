@@ -1,0 +1,22 @@
+# @(#)40 1.1 src/bos/usr/lib/pios/predef/bull1015.pcl, cmdpios, bos411, 9428A410j 4/28/94 07:56:09
+#
+# COMPONENT_NAME: Printer Backend for Bull Compuprint PageMaster 1015
+#                         in HP-PCL5 mode
+#
+# FUNCTIONS:
+#
+# ORIGINS: 83
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+:056:__FLG::
+:060:__SYS::
+:447:s1::4
+:058:__MIS::
+:330:mA::HPLJ III & IIID emulation
+:331:mL::Bull Compuprint PageMaster 1015
+:295:mN::1015
+:054:__ESC::
+:475:__HIR::
+:476:zP::hp-pcl5
+:477:zS::!

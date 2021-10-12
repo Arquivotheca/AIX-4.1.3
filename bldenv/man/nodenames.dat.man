@@ -1,0 +1,50 @@
+#
+# @(#)92  1.4  src/bldenv/man/nodenames.dat.man, bldprocess, bos412, GOLDA411a 12/7/92 09:36:08
+#
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS:  nodenames.dat man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1992
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  $BLDENV/usr/bin/nodenames.dat
+
+    Accessing nodenames.dat should only be done through functions in
+    bldnodenames.
+ 
+    Format of this file is:
+ 
+      <bldnode><space><node>[<space><priority> ...]
+ 
+    where there is only entry per line.  Each field is described below:
+ 
+      bldnode (required) - CMVC name of release directory.
+      node (required) - Source name of release directory.
+      priority (optional) - Priority that track must have to be included in
+                            build.  There can be more than one priority for
+                            each release.
+ 
+    IMPORTANT : The order of the entries is important in this file.
+                This file is searched sequentially in bldhostsfile by
+                calling bldnodenames_search.  The nodenames returned
+                are used to calculate the value for HOSTSFILE_REL, this
+                involves taking the release name and stripping off the
+                nodename.  Ordering within the file requires the most
+                restrictive names appear first or the the following
+                condition will occur.  Assume a entry for bldnode 10
+                appears before the entry for bldnode 310.  For a release
+                name of bos310, bldhostsfile will encounter 10 first,
+                and set HOSTSFILE_REL to bos3 instead of the desired
+                bos.  The ordering of the entries need not be numeric,
+                only that four character bldnode names must all appear
+                before three character bldnode names.  All three character
+                bldnode names must appear before all two character
+                bldnodenames.  All two character bldnode names must appear
+                before all one character bldnodenames.

@@ -1,0 +1,134 @@
+	sccsid        @(#)56  1.3  src/bos/usr/lib/asw/mpqp/README, ucodmpqp, bos411, 9428A410j 1/19/94 13:03:51
+	--------------------------------------------------------------------
+/*
+ * COMPONENT_NAME: (UCODMPQ) Multiprotocol Quad Port Adapter Software
+ *
+ * DESCRIPTION:
+ *	README file	: MPQP Adapter Software :Building 80186 executable image
+ *			
+ * This file describes the ASW build process.  It is not a code file
+ *
+ * ORIGINS: 27
+ *
+ * IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+ * combined with the aggregated modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */                                                                   
+		       MPQP Adapter Software Build Procedure 
+	--------------------------------------------------------------------
+
+	The MPQP Adapter Software is an 80186 executable image that is 
+	downloaded to the MPQP adapter at run time; this image resides 
+	under the /etc/asw directory in the file "mpqpasw".  This document
+	describes how to build this image from the adapter software source
+	files.
+
+	You will need the following (in addition to the adapter software
+	source files) to create mpqpasw:
+
+		1)  IBM RS6000 running AIX 3.1.5 or above.
+		2)  IBM AIX/RS6000 Personal Computer AT Simulator Version 
+		    01.01.0005 or greater.
+		3)  IBM C/2 Compiler version 1.00 or greater
+		4)  IBM Personal Computer Macro Assembler/2 version 
+		    1.00 or greater.
+		5)  IBM MAKE/2 version 1.00 or greater.
+
+	Install the Personal Computer AT Simulator (pcsim) on your RS6000 
+	according to the directions provided with the simulator.  The
+	minidisk for the simulator will need about 20000 blocks to 
+	hold the adapter software source and build tools. Install the
+	C/2 compiler and Macro Assembler according to the directions 
+	provided with each.  The following DOS directory structure is 
+	recommended:
+
+		C:\MASM		Macro assembler directory.
+		C:\C2		C/2 compiler directory.
+		C:\C2\BIN	C/2 commands, including MAKE/2
+		C:\C2\INCLUDE	C/2 include files
+		C:\C2\LIB	C/2 libraries
+		C:\C2\SRC	C/2 example source
+		C:\C2\TMP	C/2 temporary directory
+		C:\SRC		MPQP adapter software source
+
+	The PATH environment variable should be set up such that the 
+	commands in C2\BIN override those of \DOS; also several build
+	variables need to be defined.  The following definitions for
+	AUTOEXEC.BAT are recommended:
+
+		PATH C:\C2\BIN;C:\MASM;C:\DOS
+		SET INCLUDE=C:\C2\INCLUDE
+		SET LIB=C:\C2\LIB
+		SET TMP=C:\C2\TMP
+
+	Files can be transferred to and from pcsim using the "dosread" 
+	and "doswrite" commands (see "AIX Commands Reference" on pages 
+	318 and 320).  Copy the MPQP Adapter Software source files 
+	(including Make.dos and Linkfile) to the C:\SRC directory.  Start
+	pcsim and go to the SRC directory; enter "MAKE MAKE.DOS" to begin
+	the build.
+
+	When the build has finished successfully (20 to 30 minutes), the
+	file "MPQPASW" will exist in the SRC directory.  This is the 
+	executable image of the adapter software, but it is unuseable
+	unless all data structures are aligned at exact pre-defined
+	addresses by the linker.  To achieve this end, the base address
+	of the adapter software must be offset to reflect any changes
+	to the code size, then the adapter software must be rebuilt to
+	cause this offset to align the image to the proper address
+	boundaries.  The shell script "adjbase" does this by examining the
+	map file from the previous link, calculating the needed offset
+	and editing the adapter source to cause the next link to have
+	proper alignment.  The fully executable mpqpasw is then created
+	by the following steps:
+
+		1)  Copy the MPQP adapter software source (including
+		    Make.dos and Linkfile) to the SRC directory using
+		    doswrite.
+
+			Ex: for i in *.c *.s *.h *.def *.inc *.typ *.ext \
+                                *.pro Make.dos Linkfile
+                            do
+                                 doswrite -a -Ddospartition $i /src/$i
+                            done
+
+			        Where dospartition is the filename of the 
+                                PCSIM DOS partition
+
+		2)  Build (first pass) the adapter software by entering
+		    pcsim, changing to the SRC directory, then entering
+		    "MAKE MAKE.DOS" to start the build.
+
+		3)  When the first pass build completes successfully,
+		    exit pcsim and run the "adjbase" shell script.  Do
+		    not run it again without doing another build, or the
+		    base address will be wrong.  If adjbase indicates 
+		    that the base address needs no adjustment, skip step 4.
+
+		4)  Re-enter pcsim and rebuild (second pass) the adapter
+		    software by changing to the SRC directory and entering
+		    "MAKE MAKE.DOS" -- the second pass should take only
+		    a few minutes to complete.
+
+		5)  Exit pcsim and retrieve the mpqpasw and mpqpasw.map
+		    files from pcsim using dosread. 
+
+			Ex: dosread -Ddospartition /src/mpqpasw mpqpasw
+
+			        Where dospartition is the filename of the 
+                                PCSIM DOS partition
+
+	If the "EXE2BIN" phase of the build fails because of "unsufficient
+	memory", simply exit pcsim, run the adjbase script, re-enter pcsim,
+	then re-build.  If this fails to fix the problem, the code size of
+	the adapter software is too big to fit into one segment (> 64K); the
+	source will have to be modified to reduce the code size.
+
+
+	----------------------------------------------------------------------
+

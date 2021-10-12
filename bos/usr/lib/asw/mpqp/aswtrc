@@ -1,0 +1,471 @@
+#! /bin/ksh
+# sccsid        @(#)86  1.6  src/bos/usr/lib/asw/mpqp/aswtrc, ucodmpqp, bos411, 9434B411a 6/16/94 10:01:56
+#-----------------------------------------------------------------------
+#
+#	        Trace Decode for MPQP Adapter Software
+#
+#  This shell script requires that the MPQP Quad Port Device Driver
+#  Tool (mpqpddt) be present and executable from the same $PATH.
+#  The trace area in adapter memory is read and dumped to a file
+#  using mpqpddt; this dump made into a linear sequence of trace
+#  points and then parsed into meaningful trace data.
+#
+#  INVOCATION:
+#
+#	aswtrc < -p port_number  | -d aswdump_filename > [-X]
+#  
+#	Port_number specifies the port to be opened for reading
+#	adapter memory.  Any port can be used as long it is not
+#	in use by another application.  Ports 0, 1, 2, and 3 will
+#	yield a trace for the first adapter, ports 4, 5, 6, and 7 
+#	for the second adapter, and so on.  Output trace data is
+#	written to /tmp/aswtrace, and the last ten traces are
+#	printed to the display.
+#
+
+usage()
+{
+    $trace
+    print "Usage: $prog < -p port_number | -d aswdump_filename > [-X]
+    Formats the trace part of the adapter software 
+    -p	port number, uses mpqpddt to get the data
+    -d	unformated mpqpasw dumpfile, collected with dbmpqp_trc
+    -X	debug tracing" >&2
+    exit 1
+}
+
+main()
+{
+$trace
+flag=
+DUMPFILE=""
+PORT=""
+
+if [ $# -ne 0 ]
+then
+    for arg
+    do
+	case "$arg" in 
+	-p|-d) flag=$arg ;;
+	-p*) PORT=${arg#??} ;;
+	-d*) DUMPFILE=${arg#??} ;;
+	-X) trace="set -x"; $trace ;;
+	-|[!-]*) case $flag in
+	    -p) PORT=$arg ;;
+	    -d) DUMPFILE=$arg ;;
+	    esac
+	    ;;
+	-*) usage ;;
+	esac
+    done
+fi
+
+# Either $PORT has to have a value or $DUMPFILE, not both.
+    if [ "$PORT" != "" -a "$DUMPFILE" != "" ]
+    then
+        usage
+    fi
+    if [ "$PORT" = "" -a "$DUMPFILE" = "" ]
+    then
+        usage
+    fi
+  
+if [ "$PORT" != "" ]
+then
+
+    TRCDIR=/tmp
+
+#
+#  Get dump of adapter trace memory by sending commands to 
+#  mpqpddt -- remove the prompts from the beginning of the file.
+#
+    echo "o" > /tmp/ddtcmd
+    echo "$PORT" >> /tmp/ddtcmd
+    echo "" >>  /tmp/ddtcmd
+    echo "" >> /tmp/ddtcmd
+    echo "" >> /tmp/ddtcmd
+    echo "b" >> /tmp/ddtcmd
+    echo "r" >> /tmp/ddtcmd
+    echo "1850" >> /tmp/ddtcmd
+    echo "1f800" >> /tmp/ddtcmd
+    echo "f" >> /tmp/ddtcmd
+    echo "f" >> /tmp/ddtcmd
+    echo "f" >> /tmp/ddtcmd
+    echo "f" >> /tmp/ddtcmd
+    echo "f" >> /tmp/ddtcmd
+    echo "q" >> /tmp/ddtcmd
+    cat /tmp/ddtcmd | mpqpddt > /tmp/temptrc
+    vi /tmp/temptrc  >>/dev/null <<!
+:1,37d
+ZZ
+!
+    rm /tmp/ddtcmd
+else
+    formatasw < $DUMPFILE > $DUMPFILE.fmt
+    LINES=`wc -l $DUMPFILE.fmt | cut -c3-7`
+    csplit -f /tmp/temptrc $DUMPFILE.fmt %1f800% /1ff00/+1 %"$LINES"%+1 2> /dev/null
+    mv /tmp/temptrc00 /tmp/temptrc
+fi
+
+# Strip trace points from memory trace by removing them from 
+# columns 6, 7, 8, and 9 and serializing them one per line.
+#
+
+    cat /tmp/temptrc | awk ' { print $6 
+		 	   print $7 
+		 	   print $8 
+		 	   print $9 }' | 
+	 awk ' $0 ~ /[A-Za-z0-9\-]/ { print $0 }' > /tmp/trcwork
+#
+# Put the trace points in order -- all trace points after the "---"
+# happened first; all trace points before the "---" happened last.
+# Separate the first and last series of trace points, then 
+# concatenate them in reverse to get them in correct order.
+#
+cp /tmp/trcwork /tmp/trcwrk1
+cp /tmp/trcwork /tmp/trcwrk2
+vi /tmp/trcwrk1 >> /dev/null <<!
+:1,/---/d
+ZZ
+!
+vi /tmp/trcwrk2 >> /dev/null <<!
+:/---/,\$d
+ZZ
+!
+cat /tmp/trcwrk1 /tmp/trcwrk2 > /tmp/trcwork
+rm /tmp/trcwrk1
+rm /tmp/trcwrk2
+echo " " >> /tmp/trcwork
+echo "          -- END OF TRACE --" >> /tmp/trcwork
+#
+# Decode each trace point; translate to function, file name, and 
+# brief explanation of what is happening at that point in the code.
+#
+vi /tmp/trcwork >> /dev/null <<!
+:1,\$s/eaa/eaa add_rqe         (errsts.c)        Add RQE Entry /g
+:1,\$s/eaz/eaz add_rqe         (errsts.c)        Add RQE Exit /g
+:1,\$s/eaP/eaP add_rqe         (errsts.c)        Add RQE Full PR queue! /g
+:1,\$s/eap/eap add_rqe         (errsts.c)        Add RQE Write empty PR queue /g
+:1,\$s/eaA/eaA add_rqe         (errsts.c)        Add RQE Full AR queue! /g
+:1,\$s/eaN/eaN add_rqe         (errsts.c)        Add RQE non-empty PR queue /g
+:1,\$s/eai/eai add_rqe         (errsts.c)        Add RQE Interrupt host /g
+:1,\$s/esE/esE scc_delta       (errsts.c)        SCC Delta Entry/g
+:1,\$s/esX/esX scc_delta       (errsts.c)        SCC Delta Exit/g
+:1,\$s/esa/esa scc_delta       (errsts.c)        SCC Delta Timer pop/g
+:1,\$s/esb/esb scc_delta       (errsts.c)        SCC Delta TX FS Timer/g
+:1,\$s/esc/esc scc_delta       (errsts.c)        SCC Delta Another Timer /g
+:1,\$s/eCa/eCa cio_delta       (errsts.c)        Handle CIO changes entry/g
+:1,\$s/eCr/eCr cio_delta       (errsts.c)        Ring Indicate/g
+:1,\$s/eCd/eCd cio_delta       (errsts.c)        DSR Signal Change/g
+:1,\$s/efa/efa f_errsts        (errsts.c)        ERS Entry /g
+:1,\$s/efz/efz f_errsts        (errsts.c)        ERS Exit /g
+:1,\$s/efA/efA f_errsts        (errsts.c)        ERS Empty eblk (exit) /g
+:1,\$s/efE/efE f_errsts        (errsts.c)        ERS Unknown protocol! /g
+:1,\$s/pfa/pfa f_prqwork       (errsts.c)        PRQ Entry /g
+:1,\$s/pfz/pfz f_prqwork       (errsts.c)        PRQ Exit /g
+:1,\$s/pfA/pfA f_prqwork       (errsts.c)        PRQ Empty port resp queue /g
+:1,\$s/pfr/pfr f_prqwork       (errsts.c)        PRQ Receive DMA /g
+:1,\$s/pfs/pfs f_prqwork       (errsts.c)        PRQ Sleeping port /g
+:1,\$s/pfF/pfF f_prqwork       (errsts.c)        PRQ AR queue full! /g
+:1,\$s/pfw/pfw f_prqwork       (errsts.c)        PQR Write to AR queue /g
+:1,\$s/ees/ees sleep           (errsts.c)        Sleep Entry /g
+:1,\$s/eew/eew sleep           (errsts.c)        Sleep Wake Sched'd,Dont Sleep/g
+:1,\$s/eea/eea sleep_enable    (errsts.c)        Sleep Enable Entry /g
+:1,\$s/eeE/eeE sleep_enable    (errsts.c)        MAJOR ERROR! /g
+:1,\$s/eDa/eDa sleep_disable   (errsts.c)        Sleep Disable Entry /g
+:1,\$s/eca/eca free_cmdblk     (errsts.c)        Free Command Block Entry /g
+:1,\$s/sra/sra rx_post_sdlc    (sdlcoffl.c)      SDLC RX Entry /g
+:1,\$s/srz/srz rx_post_sdlc    (sdlcoffl.c)      SDLC RX Exit /g
+:1,\$s/srO/srO rx_post_sdlc    (sdlcoffl.c)      SDLC RX buffer overflow /g
+:1,\$s/srp/srp rx_post_sdlc    (sdlcoffl.c)      SDLC RX poll frame\/autoresp/g
+:1,\$s/srr/srr rx_post_sdlc    (sdlcoffl.c)      SDLC RX reroute for RX DMA/g
+:1,\$s/srC/srC rx_post_sdlc    (sdlcoffl.c)      SDLC RX Frame CRC error!/g
+:1,\$s/srR/srR rx_post_sdlc    (sdlcoffl.c)      SDLC RX Frame Residual error!/g
+:1,\$s/srA/srA rx_post_sdlc    (sdlcoffl.c)      SDLC RX Abort!/g
+:1,\$s/srS/srS rx_post_sdlc    (sdlcoffl.c)      SDLC RX Short Frame!/g
+:1,\$s/srt/srt rx_post_sdlc    (sdlcoffl.c)      SDLC RX stop receive timer/g
+:1,\$s/sru/sru rx_post_sdlc    (sdlcoffl.c)      SDLC RX restart receive timer/g
+:1,\$s/sTa/sTa tx_pre_sdlc     (sdlcoffl.c)      SDLC TX Entry /g
+:1,\$s/sTb/sTb tx_pre_sdlc     (sdlcoffl.c)      SDLC TX V25bis dial string/g
+:1,\$s/sTp/sTp tx_pre_sdlc     (sdlcoffl.c)      SDLC TX Poll bit /g
+:1,\$s/sTz/sTz tx_pre_sdlc     (sdlcoffl.c)      SDLC TX Exit /g
+:1,\$s/sSa/sSa bop_decode      (sdlcoffl.c)      SDLC BOP Entry /g
+:1,\$s/sSz/sSz bop_decode      (sdlcoffl.c)      SDLC BOP Exit /g
+:1,\$s/sSA/sSA bop_decode      (sdlcoffl.c)      SDLC Line ABORT! /g
+:1,\$s/sSO/sSO bop_decode      (sdlcoffl.c)      SDLC Receiver Overrun! /g
+:1,\$s/sSS/sSS bop_decode      (sdlcoffl.c)      SDLC Short Frame! /g
+:1,\$s/sST/sST bop_decode      (sdlcoffl.c)      SDLC Transmit Underrun! /g
+:1,\$s/sSC/sSC bop_decode      (sdlcoffl.c)      SDLC CTS Underrun! /g
+:1,\$s/sSP/sSP bop_decode      (sdlcoffl.c)      SDLC PLL lost sync! /g
+:1,\$s/sSr/sSr bop_decode      (sdlcoffl.c)      SDLC RX\/TX Status /g
+:1,\$s/sSe/sSe bop_decode      (sdlcoffl.c)      SDLC ECT Status /g
+:1,\$s/sSc/sSc bop_decode      (sdlcoffl.c)      SDLC CIO Status /g
+:1,\$s/Tta/Tta txCommon        (transmit.c)      TX Entry /g
+:1,\$s/Ttb/Ttb txCommon        (transmit.c)      TX No buffer to transmit /g
+:1,\$s/TtL/TtL txCommon        (transmit.c)      TX Zero length from preproc!/g
+:1,\$s/TtB/TtB txCommon        (transmit.c)      TX Buffer length exceeded!/g
+:1,\$s/TtN/TtN txCommon        (transmit.c)      TX starting DMA on another!/g
+:1,\$s/Ttz/Ttz txCommon        (transmit.c)      TX Exit-just did SetPdma/g
+:1,\$s/Txa/Txa xmit_frame      (transmit.c)      TX Frame Entry /g
+:1,\$s/Txz/Txz xmit_frame      (transmit.c)      TX Frame Exit /g
+:1,\$s/Txn/Txn xmit_frame      (transmit.c)      TX Frame Next xmit not Ready /g
+:1,\$s/Txo/Txo xmit_frame      (transmit.c)      TX Frame Next xmit not Rdy HD/g
+:1,\$s/Txb/Txb xmit_frame      (transmit.c)      TX Frame Del Q'd Xmits, Empty/g
+:1,\$s/Txc/Txc xmit_frame      (transmit.c)      TX Frame Del Q'd Xmits,Locked/g
+:1,\$s/Txd/Txd xmit_frame      (transmit.c)      TX Frame Del Q'd Xmits/g
+:1,\$s/Txe/Txe xmit_frame      (transmit.c)     TX Frame Del Qd Xmits,Not Xmit/g
+:1,\$s/Tsa/Tsa start_frame     (transmit.c)      Start TX Entry /g
+:1,\$s/TsA/TsA start_frame     (transmit.c)      Start TX Async DMA enable /g
+:1,\$s/Tsh/Tsh start_frame     (transmit.c)      Start TX half-dup disable RX/g
+:1,\$s/Tsb/Tsb start_frame     (transmit.c)      Start TX RX in progress /g
+:1,\$s/Tsc/Tsc start_frame     (transmit.c)      Start TX RX disable /g
+:1,\$s/Tse/Tse start_frame     (transmit.c)      Start TX Externally clocked /g
+:1,\$s/Tsi/Tsi start_frame     (transmit.c)      Start TX Internally clocked /g
+:1,\$s/Tsz/Tsz start_frame     (transmit.c)      Start TX Exit /g
+:1,\$s/Tfa/Tfa f_txwork        (transmit.c)      TX Work Entry /g
+:1,\$s/Tfz/Tfz f_txwork        (transmit.c)      TX Work Exit /g
+:1,\$s/TaE/TaE tx_ack          (transmit.c)      TX Ack Entry /g
+:1,\$s/Tap/Tap tx_ack          (transmit.c)      TX Ack Timer Popped, NAK! /g
+:1,\$s/Tas/Tas tx_ack          (transmit.c)      TX Set Rx Timer /g
+:1,\$s/Tar/Tar tx_ack          (transmit.c)      TX Ack Reset Timers /g
+:1,\$s/Taf/Taf tx_ack          (transmit.c)      TX Ack Free Cmd Blk /g
+:1,\$s/bta/bta tx_pre_bsc      (bscoffl.c)       Bisync TX Entry /g
+:1,\$s/btz/btz tx_pre_bsc      (bscoffl.c)       Bisync TX Exit /g
+:1,\$s/btE/btE tx_pre_bsc      (bscoffl.c)       Bisync TX buffer too large! /g
+:1,\$s/btb/btb tx_pre_bsc      (bscoffl.c)       Bisync TX odd parity /g
+:1,\$s/btc/btc tx_pre_bsc      (bscoffl.c)       Bisync TX odd parity dial /g
+:1,\$s/btd/btd tx_pre_bsc      (bscoffl.c)       Bisync TX even parity dial /g
+:1,\$s/bsa/bsa bsc_tsm         (bscoffl.c)       Bisync TX State Mach Entry /g
+:1,\$s/bsz/bsz bsc_tsm         (bscoffl.c)       Bisync TX State Mach Exit /g
+:1,\$s/bxa/bxa bsc_xmit_frame  (bscoffl.c)       Bisync TX Frame Entry /g
+:1,\$s/bxz/bxz bsc_xmit_frame  (bscoffl.c)       Bisync TX Frame Exit /g
+:1,\$s/bxn/bxn bsc_xmit_frame  (bscoffl.c)       Bisync TX Frame start/g
+:1,\$s/bra/bra rx_post_bsc     (bscoffl.c)       Bisync RX Entry/g
+:1,\$s/brC/brC rx_post_bsc     (bscoffl.c)       Bisync RX Err: Bad CRC!/g
+:1,\$s/bRC/bRC rx_post_bsc     (bscoffl.c)       Bsc RX Err:asc_fr_op Bad CRC!/g
+:1,\$s/brP/brP rx_post_bsc     (bscoffl.c)       Bisync RX Err: Bad Parity!/g
+:1,\$s/bRP/bRP rx_post_bsc     (bscoffl.c)    Bsc RX Err:asc_fr_op Bad Parity!/g
+:1,\$s/brO/brO rx_post_bsc     (bscoffl.c)       Bisync RX Err: Overflow!/g
+:1,\$s/brE/brE rx_post_bsc     (bscoffl.c)       Bisync RX Err: Pad error!/g
+:1,\$s/brB/brB rx_post_bsc     (bscoffl.c)       Bisync RX Err: Bad Frame:/g
+:1,\$s/brA/brA rx_post_bsc     (bscoffl.c)       Bisync RX non-matching addr/g
+:1,\$s/brI/brI rx_post_bsc     (bscoffl.c)       Bisync RX no ctrl chars!/g
+:1,\$s/brJ/brJ rx_post_bsc     (bscoffl.c)       Bisync RX SOH improper end!/g
+:1,\$s/brK/brK rx_post_bsc     (bscoffl.c)       Bisync RX DLE-STX no end!/g
+:1,\$s/brL/brL rx_post_bsc     (bscoffl.c)       Bisync RX STX improper end!/g
+:1,\$s/brM/brM rx_post_bsc     (bscoffl.c)       Bisync RX improper end char!/g
+:1,\$s/brN/brN rx_post_bsc     (bscoffl.c)       Bisync RX bad DLE sequence!/g
+:1,\$s/brQ/brQ rx_post_bsc     (bscoffl.c)       Bisync RX ctl char not last!/g
+:1,\$s/201/201 rx_post_bsc     (bscoffl.c)       Bisync RX ETB/g
+:1,\$s/202/202 rx_post_bsc     (bscoffl.c)       Bisync RX ETX/g
+:1,\$s/208/208 rx_post_bsc     (bscoffl.c)       Bisync RX ACK0/g
+:1,\$s/209/209 rx_post_bsc     (bscoffl.c)       Bisync RX ACK1/g
+:1,\$s/20A/20A rx_post_bsc     (bscoffl.c)       Bisync RX WAK/g
+:1,\$s/20B/20B rx_post_bsc     (bscoffl.c)       Bisync RX NAK/g
+:1,\$s/20C/20C rx_post_bsc     (bscoffl.c)       Bisync RX ENQ/g
+:1,\$s/20D/20D rx_post_bsc     (bscoffl.c)       Bisync RX EOT/g
+:1,\$s/20E/20E rx_post_bsc     (bscoffl.c)       Bisync RX RVI/g
+:1,\$s/20F/20F rx_post_bsc     (bscoffl.c)       Bisync RX DSC/g
+:1,\$s/220/220 rx_post_bsc     (bscoffl.c)       Bisync RX STX ITB/g
+:1,\$s/221/221 rx_post_bsc     (bscoffl.c)       Bisync RX STX ETB/g
+:1,\$s/222/222 rx_post_bsc     (bscoffl.c)       Bisync RX STX ETX/g
+:1,\$s/22C/22C rx_post_bsc     (bscoffl.c)       Bisync RX STX ENQ/g
+:1,\$s/230/230 rx_post_bsc     (bscoffl.c)       Bisync RX SOH ITB/g
+:1,\$s/231/231 rx_post_bsc     (bscoffl.c)       Bisync RX SOH ETB/g
+:1,\$s/232/232 rx_post_bsc     (bscoffl.c)       Bisync RX SOH ETX/g
+:1,\$s/23C/23C rx_post_bsc     (bscoffl.c)       Bisync RX SOH ENQ/g
+:1,\$s/288/288 rx_post_bsc     (bscoffl.c)       Bisync RX dat ACK0/g
+:1,\$s/289/289 rx_post_bsc     (bscoffl.c)       Bisync RX dat ACK1/g
+:1,\$s/28B/28B rx_post_bsc     (bscoffl.c)       Bisync RX dat ETB/g
+:1,\$s/28C/28C rx_post_bsc     (bscoffl.c)       Bisync RX dat ENQ/g
+:1,\$s/bRa/bRa bsc_rsm         (bscoffl.c)       Bisync RX State Machine Entry/g
+:1,\$s/bRz/bRz bsc_rsm         (bscoffl.c)       Bisync RX State Machine Exit/g
+:1,\$s/bmn/bmn make_rqe        (bscoffl.c)       Bisync RX NO-DMA RQE/g
+:1,\$s/bmd/bmd make_rqe        (bscoffl.c)       Bisync RX DMA RQE/g
+:1,\$s/bca/bca cop_decode      (bscoffl.c)       COP decode Entry/g
+:1,\$s/bct/bct cop_decode      (bscoffl.c)       COP RX-TX Status/g
+:1,\$s/bcO/bcO cop_decode      (bscoffl.c)       COP Receiver Overrun! /g
+:1,\$s/bcP/bcP cop_decode      (bscoffl.c)       COP Receiver Pad Error! /g
+:1,\$s/bcU/bcU cop_decode      (bscoffl.c)       COP Transmit DMA Underrun! /g
+:1,\$s/bcC/bcC cop_decode      (bscoffl.c)       COP Transmit CTS Underrun! /g
+:1,\$s/bcD/bcD cop_decode      (bscoffl.c)       COP PLL out of sync! /g
+:1,\$s/bcE/bcE cop_decode      (bscoffl.c)       COP ECT Status /g
+:1,\$s/bcS/bcS cop_decode      (bscoffl.c)       COP CIO Status /g
+:1,\$s/bcz/bcz cop_decode      (bscoffl.c)       COP decode Exit/g
+:1,\$s/rEa/rEa enable_rx       (receive.c)       RX Enable Entry/g
+:1,\$s/reE/reE enable_rx       (receive.c)       RX Enable Free List Empty!/g
+:1,\$s/rez/rez enable_rx       (receive.c)       RX Enable Exit/g
+:1,\$s/rda/rda disable_rx      (receive.c)       RX Disable Entry/g
+:1,\$s/rdz/rdz disable_rx      (receive.c)       RX Disable Exit/g
+:1,\$s/rdc/rdc disable_rx      (receive.c)       RX Disable No Current Buffer/g
+:1,\$s/rdD/rdD disable_rx      (receive.c)      RX Disable no DMA on channel!/g
+:1,\$s/rdE/rdE disable_rx      (receive.c)      RX Disable could not get buf!/g
+:1,\$s/rfa/rfa f_rxwork        (receive.c)       RX Work Entry/g
+:1,\$s/rfn/rfn f_rxwork        (receive.c)       RX Work nothing to do/g
+:1,\$s/rfE/rfE f_rxwork        (receive.c)       RX Work Underrun DMA! /g
+:1,\$s/rfd/rfd f_rxwork        (receive.c)       RX Work Init DMA /g
+:1,\$s/rfz/rfz f_rxwork        (receive.c)       RX Work Exit/g
+:1,\$s/Ssa/Ssa startp          (startp.c)        Startp Entry/g
+:1,\$s/Ssb/Ssb startp          (startp.c)        Startp State data_transfer/g
+:1,\$s/Ssz/Ssz startp          (startp.c)        Startp Exit/g
+:1,\$s/Saa/Saa smrtans         (startp.c)        Smartans Entry/g
+:1,\$s/Sad/Sad smrtans         (startp.c)        Smartans DSR On/g
+:1,\$s/Saw/Saw smrtans         (startp.c)        Smartans Wait For DSR/g
+:1,\$s/SaN/SaN smrtans         (startp.c)        Smartans Receive Error!/g
+:1,\$s/Sas/Sas smrtans         (startp.c)        Smartans Stop Port/g
+:1,\$s/Smw/Smw smrtmod         (startp.c)        Smartmod Wait for Connect/g
+:1,\$s/Smt/Smt smrtmod         (startp.c)        Smartmod Timer Expired/g
+:1,\$s/Smd/Smd smrtmod         (startp.c)        Smartmod DSR Changed/g
+:1,\$s/Smx/Smx smrtmod         (startp.c)        Smartmod Xmit Delay Complete/g
+:1,\$s/Smc/Smc smrtmod         (startp.c)        Smartmod Call Data/g
+:1,\$s/Sms/Sms smrtmod         (startp.c)        Smartmod Stop Port/g
+:1,\$s/Sca/Sca autocal         (startp.c)        Autocal Entry/g
+:1,\$s/Scb/Scb autocal         (startp.c)        Autocal CTS active RI not/g
+:1,\$s/Scc/Scc autocal         (startp.c)        Autocal interrupt CTS timer/g
+:1,\$s/Scd/Scd autocal         (startp.c)        Autocal wait CTS RI active/g
+:1,\$s/Sce/Sce autocal         (startp.c)        Autocal CTS signal change/g
+:1,\$s/Scf/Scf autocal         (startp.c)        Autocal CTS timer expired/g
+:1,\$s/Scg/Scg autocal         (startp.c)        Autocal send dial cmd down/g
+:1,\$s/Scm/Scm autocal         (startp.c)        Autocal interrupt DSR timer/g
+:1,\$s/Scn/Scn autocal         (startp.c)        Autocal wait DSR RI active/g
+:1,\$s/Sco/Sco autocal         (startp.c)        Autocal DSR signal change/g
+:1,\$s/Scp/Scp autocal         (startp.c)        Autocal DSR timer expired/g
+:1,\$s/Scq/Scq autocal         (startp.c)        Autocal RQE_CMD_ACK/g
+:1,\$s/Scr/Scr autocal         (startp.c)        Autocal transmit tmr expired/g
+:1,\$s/Sua/Sua autoans         (startp.c)        Autoans Entry/g
+:1,\$s/Sud/Sud autoans         (startp.c)        Autoans DSR already active/g
+:1,\$s/Sug/Sug autoans         (startp.c)        Autoans sleep for DSR/g
+:1,\$s/Suh/Suh autoans         (startp.c)        Autoans connection successful/g
+:1,\$s/Sui/Sui autoans         (startp.c)        Autoans Stop Port/g
+:1,\$s/Suj/Suj autoans         (startp.c)        Autoans transmit tmr expired/g
+:1,\$s/Ppa/Ppa f_pcqwork       (portwork.c)      PCQ Work Entry/g
+:1,\$s/PpB/PpB f_pcqwork       (portwork.c)      PCQ Work No Work/g
+:1,\$s/PpC/PpC f_pcqwork       (portwork.c)      PCQ Work Que Locked/g
+:1,\$s/Ppd/Ppd f_pcqwork       (portwork.c)      PCQ Work Que Transmit/g
+:1,\$s/Ppe/Ppe f_pcqwork       (portwork.c)      PCQ Work Que Non-Xmit/g
+:1,\$s/Ppf/Ppf f_pcqwork       (portwork.c)      PCQ Work Que Abort work/g
+:1,\$s/Ppg/Ppg f_pcqwork       (portwork.c)      PCQ Work Que Diag/g
+:1,\$s/PpH/PpH f_pcqwork       (portwork.c)      PCQ Work rcv_buf_ind on PCQ!/g
+:1,\$s/PpE/PpE f_pcqwork       (portwork.c)      PCQ Work Que unsupported!/g
+:1,\$s/Ppz/Ppz f_pcqwork       (portwork.c)      PCQ Work Exit/g
+:1,\$s/aPa/aPa rx_post_asy     (asyoffl.c)       Async Post Entry/g
+:1,\$s/aPO/aPO rx_post_asy     (asyoffl.c)       Async Post Buffer Overflow!/g
+:1,\$s/aPP/aPP rx_post_asy     (asyoffl.c)       Async Post Parity Error!/g
+:1,\$s/aPx/aPx rx_post_asy     (asyoffl.c)       Async Post RX_NODMA/g
+:1,\$s/aPy/aPy rx_post_asy     (asyoffl.c)       Async Post RX_DMA/g
+:1,\$s/aPz/aPz rx_post_asy     (asyoffl.c)       Async Post Exit/g
+:1,\$s/Msa/Msa set_parm        (setparm.c)       Set Parm Entry/g
+:1,\$s/Msz/Msz set_parm        (setparm.c)       Set Parm Exit/g
+:1,\$s/MsE/MsE set_parm        (setparm.c)       Set Parm RQE Error!/g
+:1,\$s/Mca/Mca chg_parm        (setparm.c)       Change Parm Entry/g
+:1,\$s/Mcz/Mcz chg_parm        (setparm.c)       Change Parm Exit/g
+:1,\$s/Sib/Sib set_int_clk     (setproto.c)      Set Internal Clock Entry/g
+:1,\$s/Asa/Asa start_ar        (autoresp.c)      Start Auto Response Entry/g
+:1,\$s/Asz/Asz start_ar        (autoresp.c)      Start Auto Response Exit/g
+:1,\$s/Apa/Apa start_ar        (autoresp.c)      Stop Auto Response Entry/g
+:1,\$s/Apz/Apz start_ar        (autoresp.c)      Stop Auto Response Exit/g
+:1,\$s/Iih/Iih host_command    (intzero.c)       Host Cmd Int Halt Receive/g
+:1,\$s/Iis/Iis host_command    (intzero.c)       Host Cmd Int Start Receive/g
+:1,\$s/Iiv/Iiv host_command    (intzero.c)       Host Cmd Int Vector/g
+:1,\$s/Iir/Iir host_command    (intzero.c)       Host Cmd Int RX Buf Ind/g
+:1,\$s/Iit/Iit host_command    (intzero.c)       Host Cmd Int Xmit/g
+:1,\$s/Iip/Iip host_command    (intzero.c)       Host Cmd Int to Port CQ/g
+:1,\$s/Iif/Iif host_command    (intzero.c)       Host Cmd Int Flush Port/g
+:1,\$s/Dta/Dta xmit_dma_work   (intzero.c)       DMA Xmit Wrk Entry/g
+:1,\$s/Dtz/Dtz xmit_dma_work   (intzero.c)       DMA Xmit Wrk Exit/g
+:1,\$s/Dtt/Dtt xmit_dma_work   (intzero.c)       DMA Xmit Wrk Starting DMA/g
+:1,\$s/DtB/DtB xmit_dma_work   (intzero.c)       DMA Xmit Wrk DMA still Busy!/g
+:1,\$s/Dra/Dra recv_dma_work   (intzero.c)       DMA Recv Wrk Entry/g
+:1,\$s/DrB/DrB recv_dma_work   (intzero.c)       DMA Recv Wrk DMA still Busy!/g
+:1,\$s/Drz/Drz recv_dma_work   (intzero.c)       DMA Recv Wrk Exit/g
+:1,\$s/Drr/Drr recv_dma_work   (intzero.c)       DMA Recv Wrk Start DMA/g
+:1,\$s/DrD/DrD recv_dma_work   (intzero.c)       DMA Recv Wrk DMA still Busy!/g
+:1,\$s/Drf/Drf recv_dma_work   (intzero.c)       DMA Recv Wrk Starting DMA/g
+:1,\$s/Dba/Dba dma_complete    (intzero.c)       BM DMA Int Entry/g
+:1,\$s/Dbz/Dbz dma_complete    (intzero.c)       BM DMA Int Exit/g
+:1,\$s/DbF/DbF dma_complete    (intzero.c)       BM DMA RX: ARQ FULL!/g
+:1,\$s/Dbr/Dbr dma_complete    (intzero.c)       BM DMA RX: Terminate/g
+:1,\$s/Dbt/Dbt dma_complete    (intzero.c)       BM DMA TX: Terminate/g
+:1,\$s/SSa/SSa stop_p          (stop.c)          Stop Port: Entry/g
+:1,\$s/SSz/SSz stop_p          (stop.c)          Stop Port: Exit/g
+:1,\$s/SSx/SSx stop_p          (stop.c)          Stop Port: X21/g
+:1,\$s/SSy/SSy stop_p          (stop.c)          Stop Port: non-X21/g
+:1,\$s/SSu/SSu stop_p          (stop.c)          Stop Port: clearing rx_curr/g
+:1,\$s/SSv/SSv stop_p          (stop.c)          Stop Port: clearing rx_next/g
+:1,\$s/SSt/SSt stop_p          (stop.c)          Stop Port: clearing txbuf0/g
+:1,\$s/SSw/SSw stop_p          (stop.c)          Stop Port: clearing txbuf1/g
+:1,\$s/tsr/tsr start_duscc_tim (timeutil.c)      Start the DUSCC timer/g
+:1,\$s/trr/trr stop_duscc_time (timeutil.c)      Stop the DUSCC timer/g
+:1,\$s/Pia/Pia init_pcb        (pcbinit.c)       Port Ctrl Blk Init Entry/g
+:1,\$s/XlE/XlE X21leased       (x21lsd.c)        X21 Leased Entry/g
+:1,\$s/Xls/Xls X21leased       (x21lsd.c)        X21 Leased State:Signal_Rdy/g
+:1,\$s/Xlr/Xlr X21leased       (x21lsd.c)     X21Lsd State:Rdy or Sgnl_Rdy_Ctl/g
+:1,\$s/Xli/Xli X21leased       (x21lsd.c)        X21 Leased Indicate Alrdy On/g
+:1,\$s/Xlc/Xlc clr_x21_lsd     (x21lsd.c)        X21 Lsd Clear X21 Leased Call/g
+:1,\$s/Xlx/Xlx xmt_24_bits     (x21lsd.c)        X21 Leased Transmit 24 Bits/g
+:1,\$s/Xlt/Xlt xmt_24_start    (x21lsd.c)        X21 Lsd Xmit 24 Bits Backgrnd/g
+:1,\$s/Xse/Xse x21switched     (x21start.c)      X21 Switched Entry/g
+:1,\$s/Xst/Xst x21switched     (x21start.c)      X21 Switched Dial Data/g
+:1,\$s/Xce/Xce call_establishm (x21start.c)      X21 Call Establishment/g
+:1,\$s/Xcr/Xcr call_establishm (x21start.c)      X21 Call Estab,State:Ready/g
+:1,\$s/Xcp/Xcp call_establishm (x21start.c)      X21 Call Estab + on R Circuit/g
+:1,\$s/XcD/XcD call_establishm (x21start.c)      X21 Call Estab Direct Call/g
+:1,\$s/Xcb/Xcb call_establishm (x21start.c)      X21 Call Est BEL on R Circuit/g
+:1,\$s/Xcz/Xcz call_establishm (x21start.c)      X21 Call Estab 0 on R Circuit/g
+:1,\$s/Xct/Xct call_establishm (x21start.c)      X21 Call Estab XT1 Timer/g
+:1,\$s/Xc2/Xc2 call_establishm (x21start.c)      X21 Call Estab 24 Bit Timer/g
+:1,\$s/Xcc/Xcc call_establishm (x21start.c)      X21 Call Est,Done Signal Rdy/g
+:1,\$s/Xcs/Xcs call_establishm (x21start.c)      X21 Call Estab, Stop Port/g
+:1,\$s/Xcd/Xcd call_establishm (x21start.c)      X21 Call Est,State:DTE Waitin/g
+:1,\$s/Xci/Xci call_establishm (x21start.c)      X21 CallEst,Indcat,Strt Compl/g
+:1,\$s/Xcg/Xcg call_establishm (x21start.c)      X21 Call Est,XT2|XT4|Gr0 Timr/g
+:1,\$s/Xc1/Xc1 call_establishm (x21start.c)      X21 Call Est,CPS Timer/g
+:1,\$s/Xcy/Xcy call_establishm (x21start.c)      X21 Call Estab 0 on R Circuit/g
+:1,\$s/XcC/XcC call_establishm (x21start.c)      X21 Call Est Intrmedt RQE Typ/g
+:1,\$s/XcS/XcS call_establishm (x21start.c)      X21 DTE Wait State,Stop Port/g
+:1,\$s/Xte/Xte call_term       (x21start.c)      X21 Call Term,Send Clr Confrm/g
+:1,\$s/Xtw/Xtw call_term       (x21start.c)    X21,Wt DCE_CLR_CONF|CLR_DCE_RDY/g
+:1,\$s/Xtt/Xtt call_term       (x21start.c)    X21 CallTerm DCE didn't respond/g
+:1,\$s/Xtz/Xtz call_term       (x21start.c)      X21 Call Term 0 on R Circuit/g
+:1,\$s/Xto/Xto call_term       (x21start.c)      X21 Call Term 1 on R Circuit/g
+:1,\$s/Xtr/Xtr call_term       (x21start.c)      X21 Call Term Retry In Prog/g
+:1,\$s/Xts/Xts call_term       (x21start.c)      X21 Call Term Stop Port/g
+:1,\$s/Xtc/Xtc call_term       (x21start.c)      X21 CallTerm Intrmedt RQE Typ/g
+:1,\$s/Xtx/Xtx call_term       (x21start.c)      X21 Call Term Exit/g
+:1,\$s/XdE/XdE dte_clear_confi (x21start.c)      X21 DTE Clear Confirm Entry/g
+:1,\$s/XDE/XDE dte_clear_reque (x21start.c)      X21 DTE Clear Request Entry/g
+:1,\$s/XrE/XrE x21_rcv_data    (x21start.c)      X21 Receive Data Entry/g
+:1,\$s/Xrd/Xrd x21_rcv_data    (x21start.c)      X21 Rcv Data Numeric 1st Char/g
+:1,\$s/Xrc/Xrc x21_rcv_data    (x21start.c)      X21 Receive Data CPS Data/g
+:1,\$s/Xrm/Xrm x21_rcv_data    (x21start.c)      X21 Receive Data >1 CPS Data/g
+:1,\$s/Xrv/Xrv x21_rcv_data    (x21start.c)      X21 Receive Data Get Grp Num/g
+:1,\$s/Xr0/Xr0 x21_rcv_data    (x21start.c)      X21 Receive Data Grp Num is 0/g
+:1,\$s/Xrr/Xrr x21_rcv_data    (x21start.c)      X21 RcvDatGrp Num not 0,Retry/g
+:1,\$s/Xrm/Xrm x21_rcv_data    (x21start.c)      X21 Receiv Data Retry In Prog/g
+:1,\$s/Xr8/Xr8 x21_rcv_data    (x21start.c)      X21 Receive Data Grp Num is 8/g
+:1,\$s/XrR/XrR x21_rcv_data    (x21start.c)    X21 Rcv Data Call Prog Sig-Err!/g
+:1,\$s/Xre/Xre x21_post_x21    (x21offl.c)       X21 Offlevel Entry/g
+:1,\$s/Xrp/Xrp x21_post_x21    (x21offl.c)       X21 Offlevel + In Frame/g
+:1,\$s/Xrb/Xrb x21_post_x21    (x21offl.c)       X21 Offlevel BEL In Frame/g
+:1,\$s/Xrx/Xrx x21_post_x21    (x21offl.c)       X21 Offlevel Exit/g
+:1,\$s/Xpr/Xpr x21_pre_x21     (x21offl.c)       X21 Pre Transmit Entry/g
+:1,\$s/Xde/Xde x21_decode      (x21offl.c)       X21 Decode Entry/g
+:1,\$s/Xdi/Xdi x21_decode      (x21offl.c)       X21 Decode Indicate High/g
+:1,\$s/Xdz/Xdz x21_decode      (x21offl.c)       X21 Decode Zero Pattern/g
+:1,\$s/Xda/Xda x21_decode      (x21offl.c)       X21 Decode Alt 0 and 1 Pattrn/g
+:1,\$s/Xdo/Xdo x21_decode      (x21offl.c)       X21 Decode One Pattern/g
+:1,\$s/Xdx/Xdx x21_decode      (x21offl.c)       X21 Decode Exit/g
+ZZ
+!
+#  Now create a trace file:
+#
+echo `date` > /tmp/timestamp
+cat /tmp/timestamp /tmp/trcwork > /tmp/aswtrace
+rm /tmp/trcwork
+rm /tmp/temptrc*
+rm /tmp/timestamp
+tail /tmp/aswtrace
+
+}
+
+main "$@"

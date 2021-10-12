@@ -1,0 +1,20 @@
+# @(#)21	1.2  src/bos/usr/bin/uucp/uucron/uucp, cmduucp, bos411, 9428A410j 10/8/90 09:34:47
+# 
+# COMPONENT_NAME: UUCP uucp
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  27  3 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989, 1990
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# 20,50 * * * * /bin/bsh -c "/usr/lib/uucp/uudemon.poll > /dev/null"
+# 25,55 * * * * /bin/bsh -c "/usr/lib/uucp/uudemon.hour > /dev/null"
+# 45 23 * * * /bin/bsh -c "/usr/lib/uucp/uudemon.cleanu > /dev/null"
+# 48 8,12,16 * * * /bin/bsh -c "/usr/lib/uucp/uudemon.admin > /dev/null"

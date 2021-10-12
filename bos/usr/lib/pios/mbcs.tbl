@@ -1,0 +1,33 @@
+# @(#)59	1.4  src/bos/usr/lib/pios/mbcs.tbl, cmdpios, bos411, 9437C411a 9/15/94 09:57:09
+#
+#   COMPONENT_NAME: CMDPIOS
+#
+#   FUNCTIONS: mbcs.tbl
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+En_US Ja_JP     kji lips2+ lips3 kps
+en_US ja_JP     kji lips2+ lips3 kps
+En_US ko_KR     kor
+en_US ko_KR     kor
+En_US zh_TW     cht
+en_US zh_TW     cht
+Ja_JP En_US     asc gl pcl ps 630 855
+ja_JP en_US     asc gl pcl ps 630 855
+Ja_JP ko_KR     kor
+ja_JP ko_KR     kor
+Ja_JP zh_TW     cht
+ja_JP zh_TW     cht
+ko_KR en_US     asc gl pcl ps 630 855
+ko_KR ja_JP     kji lips2+ lips3 kps
+ko_KR zh_TW     cht
+zh_TW en_US     asc gl pcl ps 630 855
+zh_TW ja_JP     kji lips2+ lips3 kps
+zh_TW ko_KR     kor

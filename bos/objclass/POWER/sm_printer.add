@@ -1,0 +1,2332 @@
+# @(#)31        1.12.1.12  src/bos/objclass/POWER/sm_printer.add, cfgmethods, bos41J, 9519A_all 5/3/95 12:41:18
+#
+#   COMPONENT_NAME: CFGMETHODS  Devices User Interface (SMIT)
+#
+#   FUNCTIONS: Printer Interfaces
+#
+#   ORIGINS: 27, 83
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1989,1994
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# LEVEL 1, 5 Years Bull Confidential Information
+
+#
+# The following SMIT functions are supported by the dialogues in this
+# file:
+#       List All Defined Printers/Plotters
+#       List All Supported Printers/Plotters
+#       Add a Printer/Plotter
+#       Move a Printer/Plotter to Another Port
+#       Change/Show Characteristics of a Printer/Plotter
+#       Remove a Printer/Plotter
+#       Configure a Defined Printer/Plotter
+#
+#       Help text Id's for Printer/plotter specific helps are in the range:
+#               0420100 to 0420199
+#       This does not include menu helps.
+#
+
+# NOTES
+#
+# ( by P.Cugny@frec.bull.fr)
+#
+# 1. the following new attributes of printer devices are taken into account:
+#       tbc16, tbc64, modules, open_disp, flow_disp
+#
+# 2. removal of following attributes:
+#	xon, dtr
+#
+# 3. help Id's
+#
+#       New help Id's are in the range:
+#               1821000 to 1821005
+#
+
+#
+# List All Defined Printers/Plotters
+# This uses a ghost dialogue to list all the defined Printer/Plotter
+# devices.  The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lsdprt"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Defined Printers/Plotters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 184
+    cmd_to_exec               = "lsdev -C -c printer | sort -u"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800193"
+    help_msg_loc              = ""
+
+#
+# List All Supported Printers/Plotters
+# This uses a ghost dialogue to list all the Predefined printers/plotters.
+# The lsdev command is executed from this dialogue.
+#
+sm_cmd_hdr:
+    id                        = "lssprt"
+    option_id                 = ""
+    has_name_select           = "n"
+    name                      = "List All Supported Printers/Plotters"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 185
+    cmd_to_exec               = "lsdev -P -c printer -F \"type subclass description\" | sort -u"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800194"
+    help_msg_loc              = ""
+
+# Add a Printer/Plotter
+#
+# This allows a Printer/Plotter device to be added by defining and
+# configuring it.
+#
+# There are three name selectors followed by the dialogue.  The first
+# is a set of predefined printers and plotters types (with subclass
+# ignored).  This list will be 4224, 4234, etc.  The second is a list
+# of subclasses which are defined for the selected printer.  This will
+# be a list like rs232, rs422, parallel, etc.  The third selector puts
+# up a list of defined adapters which can have the selected type of
+# printer or plotter device attached to it.  Next there are dialogue
+# headers for each printer subclass for putting up the list of user
+# configurable attributes.
+
+# Select type of printer/plotter
+sm_name_hdr:
+    id                        = "makprt"
+    next_id                   = "makprt_subclass"
+    option_id                 = "prt_predef_opt"
+    has_name_select           = "n"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+	class () # str1 str2\n\
+	{\n\
+		echo $1 | sed -e 's/  */:/'\n\
+	}\n\
+	class "
+    cmd_to_classify_postfix   = "_rawname"
+    raw_field_name            = ""
+    cooked_field_name         = "type:desc"
+    next_type                 = "n"
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# Name selector command option for type of printer/plotter
+sm_cmd_opt:
+    id                        = "prt_predef_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Printer/Plotter Type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 51
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+	lsdev -P -c printer -F \"type description\" | \
+	sort -u +0 -1"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04205"
+    help_msg_loc              = ""
+
+sm_name_hdr:
+    id                        = "makprt_subclass"
+    next_id                   = "makprt_parent"
+    option_id                 = "prt_predef_class_opt"
+    has_name_select           = "n"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = "echo"
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = "subclass"
+    next_type                 = "n"
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# Name selector command option for type of printer/plotter
+sm_cmd_opt:
+    id                        = "prt_predef_class_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Printer/Plotter Interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 57
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = "\
+	prt_type ()\n\
+	{\n\
+		lsdev -P -c printer -t \"$1\" -r subclass\n\
+	}\n\
+	prt_type "
+    cmd_to_list_postfix       = "type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04206"
+    help_msg_loc              = ""
+
+# Select parent adapter
+# This name selector displays possible parent device's as determined
+# by printer/plotter subclass.
+sm_name_hdr:
+    id                        = "makprt_parent"
+    next_id                   = "makprt_hdr_"
+    option_id                 = "makprt_parent_opt"
+    has_name_select           = "y"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "\
+class () # str1 \n\
+{\n\
+echo $1 \n\
+}\n\
+class "
+    cmd_to_classify_postfix   = "subclass"
+    raw_field_name            = "parent"
+    cooked_field_name         = "_cookedname"
+    next_type                 = "n"
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "makprt_parent_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-k subclass"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# the next set of stanzas are organized according to the
+# subclass of the printer. There is a "branch" for rs232,
+# rs422, and parallel printers.
+
+# stanzas for rs232 printers
+# this stanza builds the next_id to the correct add options
+# based on the driver controlling the parent adapter
+sm_name_hdr:
+	id		= "makprt_hdr_rs232"
+	next_id		= "makprt_rs232_"
+	option_id	= "makprt_hdr_rs232.opt"
+	has_name_select = "y"
+	name		= ""
+	name_msg_file	= 0
+	name_msg_id	= 0
+	type		= "c"
+	ghost		= "y"
+	cmd_to_classify = "drvr () \n\
+{ \n\
+type=$(odmget -q \"name = $1\" CuDv | grep PdDvLn) \n\
+parent_unique_type=$(echo $type | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+driver_name=$(odmget -q \"uniquetype = $parent_unique_type\" PdDv | grep DvDr | \n\
+sed -e 's/.*\"\\(.*\\)\".*/\\1/' -e 's#^isa/##' -e 's/_rspc$//') \n\
+print $driver_name \n\
+} \n\
+drvr "
+	cmd_to_classify_postfix   = "parent"
+	raw_field_name	= "driver"
+	cooked_field_name = "_cookedname"
+	next_type       = "d"
+	help_msg_id     = ""
+	help_msg_loc    = ""
+
+sm_cmd_opt:
+    id                        = "makprt_hdr_rs232.opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = ""
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+
+# stanzas for rs422 printers
+# this stanza serves only to route smit to the next stanza in sm_cmd_hdr
+sm_name_hdr:
+	id		= "makprt_hdr_rs422"
+	next_id		= "makprt_rs422"
+	option_id	= "makprt_hdr_rs422.opt"
+	has_name_select = "y"
+	name		= "Add a Printer/Plotter"
+	name_msg_file	= "smit.cat"
+	name_msg_set	= ""
+	name_msg_id	= ""
+	type		= ""
+	ghost		= "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name	= ""
+	cooked_field_name = ""
+	next_type       = "d"
+	help_msg_id     = ""
+	help_msg_loc    = ""
+
+sm_cmd_opt:
+    id                        = "makprt_hdr_rs422.opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = ""
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+
+# stanzas for parallel printers
+# this stanza serves only to route smit to the next stanza in sm_cmd_hdr
+sm_name_hdr:
+	id		= "makprt_hdr_parallel"
+	next_id		= "makprt_parallel"
+	option_id	= "makprt_hdr_parallel.opt"
+	has_name_select = "n"
+	name		= "Add a Printer/Plotter"
+	name_msg_file	= ""
+	name_msg_id	= ""
+	type		= ""
+	ghost		= "y"
+	cmd_to_classify = ""
+	cmd_to_classify_postfix = ""
+	raw_field_name	= ""
+	cooked_field_name = ""
+	next_type       = "d"
+	help_msg_id     = ""
+	help_msg_loc    = ""
+
+sm_cmd_opt:
+    id                        = "makprt_hdr_parallel.opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = ""
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+
+# The dialogue headers follow.
+# Their id's are built as follows:
+#       "makprt_xxx_yyy"
+# where xxx is the subclass i.e. rs232, rs422 or parallel
+# where yyy is the driver type i.e. rsdd, liondd, cxmadd.
+
+# dialog for rs232 serial printer on an 8-, or 16-port adapter
+# or on one of the standard i/o serial ports
+sm_cmd_hdr:
+    id                        = "makprt_rs232_rsdd"
+    option_id                 = "prt_add,prt_common,prt_serial,prt_serial_rsdd"
+    has_name_select           = "y"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    cmd_to_exec               = "mkdev -c printer "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c printer"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# dialog for rs232 serial printer on a 64-port adapter
+sm_cmd_hdr:
+    id                        = "makprt_rs232_liondd"
+    option_id                 = "prt_add,prt_common,prt_serial,prt_serial_liondd"
+    has_name_select           = "y"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    cmd_to_exec               = "mkdev -c printer "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c printer"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# dialog for rs232 serial printer on a 128-port adapter
+sm_cmd_hdr:
+    id                        = "makprt_rs232_cxmadd"
+    option_id                 = "prt_add,prt_common,prt_serial,prt_serial_cxmadd"
+    has_name_select           = "y"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    cmd_to_exec               = "mkdev -c printer "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c printer"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "makprt_rs232_cxiadd"
+    option_id                 = "prt_add,prt_common,prt_serial,prt_serial_cxmadd"
+    has_name_select           = "y"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    cmd_to_exec               = "mkdev -c printer "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c printer"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+# dialog for all rs422 serial printers
+sm_cmd_hdr:
+    id                        = "makprt_rs422"
+    option_id                 = "prt_add,prt_common,prt_serial"
+    has_name_select           = "y"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    cmd_to_exec               = "mkdev -c printer "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c printer"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+
+# dialog for all parallel printers
+sm_cmd_hdr:
+    id                        = "makprt_parallel"
+    option_id                 = "prt_add,prt_common,prt_parallel"
+    has_name_select           = "y"
+    name                      = "Add a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 186
+    cmd_to_exec               = "mkdev -c printer "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr -c printer"
+    cmd_to_discover_postfix   = "-s subclass -t type -D -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800195"
+    help_msg_loc              = ""
+
+
+#
+# Move a Printer/Plotter to Another Port
+# This allows a printer/plotter device to be moved to another port or
+# another adapter.  There are two name selectors followed by the dialogue.
+# The first name selector is used to put up a list of defined
+# printers/plotters for the user to select from.  The second name selector
+# puts up a list of defined adapters which can have the selected
+# printer/plotter device attached.  The dialogue then allows for a new
+# port to be selected.
+
+# Select Printer/Plotter by logical name
+sm_name_hdr:
+    id                        = "movprt"
+    next_id                   = "movprt_parent"
+    option_id                 = "prt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Move a Printer/Plotter to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 187
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "n"
+    help_msg_id               = "1800160"
+    help_msg_loc              = ""
+
+# Select parent adapter
+sm_name_hdr:
+    id                        = "movprt_parent"
+    next_id                   = "movprt_hdr"
+    option_id                 = "prt_mv_parent"
+    has_name_select           = "y"
+    name                      = "Move a Printer/Plotter to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 187
+    type                      = "j"
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "parent"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800160"
+    help_msg_loc              = ""
+
+# Name selector command option for parent adapter
+sm_cmd_opt:
+    id                        = "prt_mv_parent"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Parent Adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsparent -C "
+    cmd_to_list_postfix       = "-l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04203"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "movprt_hdr"
+    option_id                 = "prt_mv"
+    has_name_select           = "y"
+    name                      = "Move a Printer/Plotter to Another Port"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 187
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800160"
+    help_msg_loc              = ""
+
+#
+# Change/Show Characteristics of a Printer/Plotter
+# This allows a printer/plotter device's characteristics to be shown and,
+# if desired, changed.  First, there is a name selector used to put up a
+# list of the defined printer/plotter devices for the user to select from.
+# The dialogue then shows all of the characteristics.
+
+# Select Printer/Plotter by logical name
+sm_name_hdr:
+    id                        = "chgprt"
+    next_id                   = "chgprt_hdr_"
+    option_id                 = "prt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Change/Show Characteristics of a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 188
+    type                      = "c"
+    ghost                     = "y"
+    cmd_to_classify           = "
+xx () \n\
+{ \n\
+lsdev -C -l $1 -F \"type:subclass:parent:connwhere:location:status:description\" \
+  | sed 's/^\\([^:]*\\):\\([^:]*\\):/\\2:&/' \n\
+} \n\
+xx "
+# Obtain type, subclass, parent, port from logicname; concat _ separated type
+# and subclass to next_id. (SMIT will concat up to first : to next_id by dflt)
+    cmd_to_classify_postfix   = " logicname "
+    raw_field_name            = "logicname"
+    cooked_field_name         = "_cookedname:type:subclass:parent:port:loc:state:desc"
+    next_type                 = "n"
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# the next set of stanzas are organized according to the
+# subclass of the printer. There is a "branch" for rs232,
+# rs422, and parallel printers.
+
+# Selector stanzas for each printer subclass follow.
+# Their Id's are built as follows:
+#       "chgprt_hdr_xxx"
+# where xxx is the subclass.
+
+# rs232 serial printers
+# The purpose of this stanza is to route us to the correct set of
+# smit dialogs for changing the printer. This is done based on the
+# device driver controlling the adapter that the printer is attached to.
+sm_name_hdr:
+	id                        = "chgprt_hdr_rs232"
+	next_id                   = "chgprt_rs232_"
+	option_id                 = "chgprt_hdr_rs232.opt"
+	has_name_select           = "y"
+	name                      = "Change/Show Characteristics of a Printer/Plotter"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = ""
+	name_msg_id               = ""
+	type                      = "c"
+	ghost                     = "y"
+	cmd_to_classify           = "drvr () \n\
+{ \n\
+type=$(odmget -q \"name = $1\" CuDv | grep PdDvLn) \n\
+parent_unique_type=$(echo $type | sed 's/.*\"\\(.*\\)\".*/\\1/') \n\
+driver_name=$(odmget -q \"uniquetype = $parent_unique_type\" PdDv | grep DvDr | \n\
+sed -e 's/.*\"\\(.*\\)\".*/\\1/' -e 's#^isa/##' -e 's/_rspc$//') \n\
+print $driver_name \n\
+} \n\
+drvr "
+	cmd_to_classify_postfix   = "parent"
+	raw_field_name            = "driver"
+	cooked_field_name         = ""
+	next_type                 = "d"
+	help_msg_id               = ""
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id			= "chgprt_hdr_rs232.opt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= ""
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= "0"
+	required		= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+
+# rs422 serial printers
+# The new sm_name_hdr stanza has no function for rs422 printers.
+# It simply sets us up to use the chgprt_rs422 object in sm_cmd_hdr.
+sm_name_hdr:
+	id			= "chgprt_hdr_rs422"
+	next_id                   = "chgprt_rs422"
+	option_id                 = "chgprt_hdr_rs422.opt"
+	has_name_select           = "n"
+	name                      = "Change/Show Characteristics of a Printer/Plotter"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = ""
+	name_msg_id               = ""
+	type                      = ""
+	ghost                     = "y"
+	cmd_to_classify           = ""
+	cmd_to_classify_postfix   = ""
+	raw_field_name            = ""
+	cooked_field_name         = ""
+	next_type                 = "d"
+	help_msg_id               = ""
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id			= "chgprt_hdr_rs422.opt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= ""
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= "0"
+	required		= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+
+# The new sm_name_hdr stanza has no function for parallel printers.
+# It simply sets us up to use the chgprt_parallel object in sm_cmd_hdr.
+sm_name_hdr:
+	id			= "chgprt_hdr_parallel"
+	next_id                   = "chgprt_parallel"
+	option_id                 = "chgprt_hdr_parallel.opt"
+	has_name_select           = "n"
+	name                      = "Change/Show Characteristics of a Printer/Plotter"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = ""
+	name_msg_id               = ""
+	type                      = ""
+	ghost                     = "y"
+	cmd_to_classify           = ""
+	cmd_to_classify_postfix   = ""
+	raw_field_name            = ""
+	cooked_field_name         = ""
+	next_type                 = "d"
+	help_msg_id               = ""
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id			= "chgprt_hdr_parallel.opt"
+	id_seq_num		= "0"
+	disc_field_name		= ""
+	name			= ""
+	op_type			= ""
+	entry_type		= ""
+	entry_size		= "0"
+	required		= ""
+	cmd_to_list_mode	= ""
+	cmd_to_list		= ""
+
+# The dialogue headers follow.
+# Their id's are built as follows:
+#       "chgprt_xxx_yyy"
+# where xxx is the subclass i.e. rs232, rs422 or parallel
+# where yyy is the driver type i.e. rsdd, liondd, cxmadd.
+
+# dialog for rs232 serial printer on an 8-, or 16-port adapter
+# or on one of the standard i/o serial ports
+sm_cmd_hdr:
+    id                        = "chgprt_rs232_rsdd"
+    option_id                 = "prt_chg,prt_common,prt_serial,prt_serial_rsdd"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 188
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# dialog for rs232 serial printer attached to 64-port adapter
+sm_cmd_hdr:
+    id                        = "chgprt_rs232_liondd"
+    option_id                 = "prt_chg,prt_common,prt_serial,prt_serial_liondd"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 188
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# dialog rs232 serial printer attached to 128-port adapter
+sm_cmd_hdr:
+    id                        = "chgprt_rs232_cxmadd"
+    option_id                 = "prt_chg,prt_common,prt_serial,prt_serial_cxmadd"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 188
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+sm_cmd_hdr:
+    id                        = "chgprt_rs232_cxiadd"
+    option_id                 = "prt_chg,prt_common,prt_serial,prt_serial_cxmadd"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 188
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# This is the same as the chgprt_hdr_rs422 object from the
+# previous version of the smit panels for printers.
+sm_cmd_hdr:
+    id                        = "chgprt_rs422"
+    option_id                 = "prt_chg,prt_common,prt_serial"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 188
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+# This is the same as the chgprt_hdr_parallel object from the
+# previous version of the printer smit panels.
+sm_cmd_hdr:
+    id                        = "chgprt_parallel"
+    option_id                 = "prt_chg,prt_common,prt_parallel"
+    has_name_select           = "y"
+    name                      = "Change/Show Characteristics of a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 188
+    cmd_to_exec               = "chdev "
+    ask                       = ""
+    exec_mode                 = "P"
+    ghost                     = "n"
+    cmd_to_discover           = "lsattr "
+    cmd_to_discover_postfix   = "-l logicname -E -O"
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+#
+# Remove a Printer/Plotter
+# This allows a printer/plotter device to be removed, including its
+# definition in the database, from the system.  A name selector is used to
+# put up a list of the "defined" and "configured" printer/plotter devices
+# for the user to select from.  The dialogue then uses the rmdev command to
+# remove the selected device.
+
+# Select Printer/Plotter by logical name
+sm_name_hdr:
+    id                        = "rmvprt"
+    next_id                   = "rmvprt_hdr"
+    option_id                 = "prt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Remove a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 189
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "rmvprt_hdr"
+    option_id                 = "rmvprt_opt"
+    has_name_select           = "y"
+    name                      = "Remove a Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 189
+    cmd_to_exec               = "rmdev "
+    ask                       = "y"
+    exec_mode                 = ""
+    ghost                     = "n"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800198"
+    help_msg_loc              = ""
+
+# Command options
+sm_cmd_opt:
+    id                        = "rmvprt_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 50
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420100"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "rmvprt_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "KEEP definition in database"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 10
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = ",-d "
+    help_msg_id               = "0420131"
+    help_msg_loc              = ""
+
+#
+# Configure a Defined Printer/Plotter
+# This allows a printer/plotter device that is defined but not configured to
+# be configured.  A name selector is used to put up a list of the "defined"
+# printer/plotter devices for the user to select from.  The dialogue then
+# uses the mkdev command to configure the selected device.
+
+# Select Printer/Plotter by logical name
+sm_name_hdr:
+    id                        = "cfgprt"
+    next_id                   = "cfgprt_hdr"
+    option_id                 = "prt_ln_opt"
+    has_name_select           = "n"
+    name                      = "Configure a Defined Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 190
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = "logicname"
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = "1800200"
+    help_msg_loc              = ""
+
+# Dialogue header
+sm_cmd_hdr:
+    id                        = "cfgprt_hdr"
+    option_id                 = "cfgprt_opt"
+    has_name_select           = "y"
+    name                      = "Configure a Defined Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 190
+    cmd_to_exec               = "mkdev "
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800200"
+    help_msg_loc              = ""
+
+# Command option
+sm_cmd_opt:
+    id                        = "cfgprt_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "logicname"
+    name                      = "Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 50
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420100"
+    help_msg_loc              = ""
+
+
+#
+# Name selector command option for listing Printers/Plotters by logical
+# name.
+# Used by: move, change/show, remove, and configure functions.
+sm_cmd_opt:
+    id                        = "prt_ln_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 50
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsdev -C -c printer"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "04202"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to add.
+# Common to all driver types controlling the parent adapter.
+# Used by: add function.
+
+# Displays printer/plotter device type.
+sm_cmd_opt:
+    id                        = "prt_add"
+    id_seq_num                = "001"
+    disc_field_name           = "type"
+    name                      = "Printer/Plotter type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 52
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420101"
+    help_msg_loc              = ""
+
+# Displays printer/plotter device subclass.
+sm_cmd_opt:
+    id                        = "prt_add"
+    id_seq_num                = "002"
+    disc_field_name           = "subclass"
+    name                      = "Printer/Plotter interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 53
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420102"
+    help_msg_loc              = ""
+
+# Displays busy_delay value.
+sm_cmd_opt:
+    id                        = "prt_parallel"
+    id_seq_num                = "065"
+    disc_field_name           = "busy_delay"
+    name                      = "Delay between characters (microseconds)"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 71
+    name_msg_id               = 33
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a busy_delay="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c printer -a busy_delay -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420135"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "prt_add"
+    id_seq_num                = "003"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420104"
+    help_msg_loc              = ""
+
+# Displays printer/plotter device's parent adapter.
+sm_cmd_opt:
+    id                        = "prt_add"
+    id_seq_num                = "004"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420103"
+    help_msg_loc              = ""
+
+# Displays port number printer/plotter device is connected to.
+sm_cmd_opt:
+    id                        = "prt_add"
+    id_seq_num                = "005"
+    disc_field_name           = ""
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn"
+    cmd_to_list_postfix       = "-p parent -k subclass"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420110"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Serial printer attributes common to add
+# and show/change.
+# Used by: add and show/change functions.
+
+# Displays baud rate.
+sm_cmd_opt:
+    id                        = "prt_serial"
+    id_seq_num                = "020"
+    disc_field_name           = "speed"
+    name                      = "BAUD rate"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 15
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a speed="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c printer -a speed -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420111"
+    help_msg_loc              = ""
+
+# Displays parity.
+sm_cmd_opt:
+    id                        = "prt_serial"
+    id_seq_num                = "025"
+    disc_field_name           = "parity"
+    name                      = "PARITY"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 16
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a parity="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c printer -a parity -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420112"
+    help_msg_loc              = ""
+
+# Displays bits per character.
+sm_cmd_opt:
+    id                        = "prt_serial"
+    id_seq_num                = "030"
+    disc_field_name           = "bpc"
+    name                      = "BITS per character"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 30
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a bpc="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c printer -a bpc -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420113"
+    help_msg_loc              = ""
+
+# Displays number of stop bits.
+sm_cmd_opt:
+    id                        = "prt_serial"
+    id_seq_num                = "035"
+    disc_field_name           = "stops"
+    name                      = "Number of STOP BITS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 31
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a stops="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c printer -a stops -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420114"
+    help_msg_loc              = ""
+
+# Displays flow_disp attribute.
+sm_cmd_opt:
+    id                        = "prt_serial"
+    id_seq_num                = "040"
+    disc_field_name           = "flow_disp"
+    name                      = "FLOW CONTROL to be used"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 38
+   op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a flow_disp="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c printer -a flow_disp -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1821004"
+    help_msg_loc              = ""
+
+# Displays open_disp attribute.
+sm_cmd_opt:
+    id                        = "prt_serial"
+    id_seq_num                = "050"
+    disc_field_name           = "open_disp"
+    name                      = "OPEN DISCIPLINE to be used"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 39
+   op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a open_disp="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c printer -a open_disp -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1821005"
+    help_msg_loc              = ""
+
+# Displays modules attribute.
+sm_cmd_opt:
+    id                        = "prt_serial"
+    id_seq_num                = "070"
+    disc_field_name           = "modules"
+    name                      = "STREAMS modules to be pushed at OPEN time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 37
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a modules="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = "lsattr -c printer -a modules -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ","
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1821003"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Specific to  8- or 16-port and standard i/o serial ports adapters.
+# Used by: add and show/change functions.
+
+# Displays tbc16 attribute .
+sm_cmd_opt:
+    id                        = "prt_serial_rsdd"
+    id_seq_num                = "060"
+    disc_field_name           = "tbc16"
+    name                      = "TRANSMIT buffer count"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 36
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a tbc16="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c printer -a tbc16 -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1821000"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Specific to  64-port adapters.
+# Used by: add and show/change functions.
+
+# Displays tbc64 attribute.
+sm_cmd_opt:
+    id                        = "prt_serial_liondd"
+    id_seq_num                = "060"
+    disc_field_name           = "tbc64"
+    name                      = "TRANSMIT buffer count"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 36
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a tbc64="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c printer -a tbc64 -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "1821001"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Specific to  128-port adapters.
+# Used by: add and show/change functions.
+
+# sets altpin attribute serial printers on a 128-port adapter
+sm_cmd_opt:
+    id                        = "prt_serial_cxmadd"
+    id_seq_num                = "010"
+    disc_field_name           = "altpin"
+    name                      = "Use Alternate RJ-45 Pinouts"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 65
+    name_msg_id               = 51
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a altpin="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "enable,disable"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "enable,disable"
+    help_msg_id               = "1850011"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Parallel printer attributes common to add
+# and show/change.
+# Used by: add and show/change functions.
+
+# Displays type of parallel interface.
+sm_cmd_opt:
+    id                        = "prt_parallel"
+    id_seq_num                = "010"
+    disc_field_name           = "interface"
+    name                      = "Type of PARALLEL INTERFACE"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 71
+    name_msg_id               = 31
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a interface="
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsattr -c printer -a interface -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420130"
+    help_msg_loc              = ""
+
+#
+# Dialog header command options.  Common to add and show/change.
+# Used by: add and show/change functions.
+
+# Displays printer time out period.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "140"
+    disc_field_name           = "ptop"
+    name                      = "Printer TIME OUT period"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 17
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a ptop="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c printer -a ptop -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420115"
+    help_msg_loc              = ""
+
+# Displays autoconfig.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "160"
+    disc_field_name           = "autoconfig"
+    name                      = "STATUS of device at BOOT time"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 33
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-a autoconfig="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "available,defined"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27  
+    values_msg_id             = 21 
+    aix_values                = "available,defined"
+    help_msg_id               = "0420132"
+    help_msg_loc              = ""
+
+# Displays instructional statement.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "200"
+    disc_field_name           = ""
+    name                      = "\n\
+Ignore the following attributes when using\n\
+the Print Queue:\n"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 54
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420116"
+    help_msg_loc              = ""
+
+# Displays number of lines per page.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "210"
+    disc_field_name           = "line"
+    name                      = "Number of LINES per page"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 18
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a line="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c printer -a line -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420117"
+    help_msg_loc              = ""
+
+# Displays number of columns per page.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "220"
+    disc_field_name           = "col"
+    name                      = "Number of COLUMNS per page"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 19
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a col="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c printer -a col -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420118"
+    help_msg_loc              = ""
+
+# Displays number of columns to indent.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "230"
+    disc_field_name           = "ind"
+    name                      = "Number of COLUMNS to indent"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 20
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a ind="
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "lsattr -c printer -a ind -R"
+    cmd_to_list_postfix       = "-s subclass -t type"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420119"
+    help_msg_loc              = ""
+
+# Displays "send all characters to printer unmodified" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "240"
+    disc_field_name           = "plot"
+    name                      = "Send all characters to printer UNMODIFIED"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 27
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a plot="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420120"
+    help_msg_loc              = ""
+
+# Displays "send backspaces" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "250"
+    disc_field_name           = "backspace"
+    name                      = "Send BACKSPACES"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 21
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a backspace="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420121"
+    help_msg_loc              = ""
+
+# Displays "wrap characters beyond the specified width" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "260"
+    disc_field_name           = "wrap"
+    name                      = "WRAP CHARACTERS beyond the specified width"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 29
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a wrap="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420128"
+    help_msg_loc              = ""
+
+# Displays "send form feeds" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "270"
+    disc_field_name           = "form"
+    name                      = "Send FORM FEEDS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 25
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a form="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420122"
+    help_msg_loc              = ""
+
+# Displays "send carriage returns" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "280"
+    disc_field_name           = "cr"
+    name                      = "Send CARRIAGE RETURNS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 23
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a cr="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420123"
+    help_msg_loc              = ""
+
+# Displays "send line feeds" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "290"
+    disc_field_name           = "lf"
+    name                      = "Send LINE FEEDS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 26
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a lf="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420124"
+    help_msg_loc              = ""
+
+# Displays "add carriage returns to line feeds" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "300"
+    disc_field_name           = "addcr"
+    name                      = "Add CARRIAGE RETURNS to LINE FEEDS"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 32
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a addcr="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420125"
+    help_msg_loc              = ""
+
+# Displays "convert lower case to upper case" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "310"
+    disc_field_name           = "case"
+    name                      = "Convert lowercase to uppercase"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 22
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a case="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420126"
+    help_msg_loc              = ""
+
+# Displays "expand tabs on eight postition boundaries" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "320"
+    disc_field_name           = "tabs"
+    name                      = "Expand TABS on eight position boundaries"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 28
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a tabs="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420127"
+    help_msg_loc              = ""
+
+# Displays "enable error reporting" attribute.
+sm_cmd_opt:
+    id                        = "prt_common"
+    id_seq_num                = "330"
+    disc_field_name           = "mode"
+    name                      = "Return on ERROR"
+    name_msg_file             = "devices.cat"
+    name_msg_set              = 72
+    name_msg_id               = 24
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a mode="
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = "yes,no"
+    values_msg_file           = "smit.cat"
+    values_msg_set            = 27
+    values_msg_id             = 12
+    aix_values                = "yes,no"
+    help_msg_id               = "0420129"
+    help_msg_loc              = ""
+#
+# Dialog header command options.  Specific to show/change.
+# Common to all adapters.
+# Used by: show/change function.
+
+# Displays the printer/plotter logical name.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 50
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420100"
+    help_msg_loc              = ""
+
+# Displays printer/plotter device type.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "002"
+    disc_field_name           = "type"
+    name                      = "Printer/Plotter type"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 52
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-t "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420101"
+    help_msg_loc              = ""
+
+# Displays printer/plotter device subclass.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "003"
+    disc_field_name           = "subclass"
+    name                      = "Printer/Plotter interface"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 53
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-s "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420102"
+    help_msg_loc              = ""
+
+# Displays device's description.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "004"
+    disc_field_name           = "desc"
+    name                      = "Description"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 7
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420104"
+    help_msg_loc              = ""
+
+# Displays device's state.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "005"
+    disc_field_name           = "state"
+    name                      = "Status"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 8
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420105"
+    help_msg_loc              = ""
+
+# Displays device's location.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "006"
+    disc_field_name           = "loc"
+    name                      = "Location"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 9
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420106"
+    help_msg_loc              = ""
+
+# Displays parent adapter.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "007"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420103"
+    help_msg_loc              = ""
+
+# Displays port number printer/plotter device is connected to.
+sm_cmd_opt:
+    id                        = "prt_chg"
+    id_seq_num                = "008"
+    disc_field_name           = "port"
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn"
+    cmd_to_list_postfix       = "-p parent -l logicname"
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420110"
+    help_msg_loc              = ""
+
+
+#
+# Dialog header command options.  Specific to move.
+# Used by: move function.
+
+# Displays the printer/plotter logical name.
+sm_cmd_opt:
+    id                        = "prt_mv"
+    id_seq_num                = "001"
+    disc_field_name           = "logicname"
+    name                      = "Printer/Plotter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 50
+    op_type                   = ""
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420100"
+    help_msg_loc              = ""
+
+# Displays the parent adapter.
+sm_cmd_opt:
+    id                        = "prt_mv"
+    id_seq_num                = "002"
+    disc_field_name           = "parent"
+    name                      = "Parent adapter"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 2
+    op_type                   = ""
+    entry_type                = ""
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-p "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420103"
+    help_msg_loc              = ""
+
+# Displays the port number.
+sm_cmd_opt:
+    id                        = "prt_mv"
+    id_seq_num                = "003"
+    disc_field_name           = ""
+    name                      = "PORT number"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 27
+    name_msg_id               = 3
+    op_type                   = "l"
+    entry_type                = "t"
+    entry_size                = 0
+    required                  = "+"
+    prefix                    = "-w "
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "lsconn "
+    cmd_to_list_postfix       = "-p parent -l logicname"
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0420110"
+    help_msg_loc              = ""
+
+

@@ -1,0 +1,75 @@
+/* */
+
+  parse arg input output
+
+  if input = '' | output = '' then
+    do
+      say 'Syntax: genmap <input> <output>'
+      exit
+    end
+
+  map  = 'genmap.map'
+  map. = ''
+
+    do while lines(map)
+      parse value linein(map) with lh '=' rh
+      lh = space(lh)
+      rh = space(rh)
+      map.lh = rh
+    end
+
+  call lineout map
+
+  w  = 0
+  n  = 0
+
+  vtype.       = 0
+  vtype.ULONG  = 1
+  vtype.USHORT = 1
+  vtype.UCHAR  = 1
+
+    do while lines(input)
+      parse value linein(input) with type name src .
+      type = translate(type)
+      if \vtype.type then iterate
+      n = n + 1
+      oname.n = remap(name,'3')
+      iname.n = remap(src,'4')
+      say n iname.n oname.n
+      w = max(w,length(oname.n))
+    end
+
+  call lineout input
+
+    do i = 1 to n-1
+      l = '   'left(oname.i,w)' = 'iname.i';'
+      say l
+      call lineout output,l
+    end
+
+  call lineout output
+
+  exit
+
+remap:
+procedure expose map.
+
+  parse arg iname,rel .
+
+  oname = ''
+  if left(iname,1) = '*' | left(iname,1) = '?' then iname=substr(iname,2)
+
+  l = 1
+  p = pos('.',iname)
+    do while p \= 0
+      seg  = substr(iname,l,p-l)
+      stem = rel'.'substr(iname,1,p-1)
+      if map.stem = '' then
+        oname = oname||seg'.'
+      else
+        oname = oname||map.stem'.'
+      l = p+1
+      p = pos('.',iname,l)
+    end
+  oname = oname||substr(iname,l)
+  return oname

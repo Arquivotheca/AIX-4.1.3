@@ -1,0 +1,60 @@
+/* @(#)93	1.5  src/bos/usr/lib/nim/objrepos/cmdnim.db.cre, cmdnim, bos411, 9428A410j  6/13/94  15:29:12 */
+/*
+ *   COMPONENT_NAME: CMDNIM
+ *
+ *   FUNCTIONS: ./usr/lib/nim/objrepos/cmdnim.db.cre
+ *
+ *   ORIGINS: 27
+ *
+ *
+ *   (C) COPYRIGHT International Business Machines Corp. 1993
+ *   All Rights Reserved
+ *   Licensed Materials - Property of IBM
+ *   US Government Users Restricted Rights - Use, duplication or
+ *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+/*******************************************************************************
+*
+*                             cmdnim_db.cre
+*
+* this file is used to create the NIM object classes; it gets passed to the
+*		odmcreate command
+*******************************************************************************/
+
+#include "cmdnim_defines.h"
+
+/*-------------------------- nim_pdattr             --------------------------*/
+
+class nim_pdattr {
+	short class;
+	vchar subclass[MAX_VALUE];
+	vchar type[MAX_VALUE];
+	short attr;
+	vchar name[MAX_NAME_BYTES];
+	long mask;
+	vchar value[MAX_VALUE];
+	short h_num;
+	short verbose_num;
+};
+
+/*-------------------------- nim_attr               --------------------------*/
+
+class nim_attr {
+	long id;
+	vchar value[MAX_VALUE];                   
+	int seqno;
+	link  nim_pdattr nim_pdattr attr pdattr;
+};
+
+/*-------------------------- nim_object             --------------------------*/
+
+class nim_object {
+	long id;
+	vchar name[MAX_NAME_BYTES];
+	short class;
+	link  nim_pdattr nim_pdattr attr type;
+	link  nim_attr nim_attr id attrs;
+};
+
+ 

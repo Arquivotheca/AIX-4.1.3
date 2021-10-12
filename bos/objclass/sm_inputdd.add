@@ -1,0 +1,305 @@
+* @(#)12	1.5  src/bos/objclass/sm_inputdd.add, cmdinputdd, bos411, 9437A411a 9/12/94 22:53:28
+#
+#  COMPONENT_NAME: (CMDINPUTDD) Input Device Driver Commands
+#
+#  FUNCTIONS: none
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# dialog to change keyboard hardware functions
+sm_cmd_hdr:
+    id                        = "chgkbd"
+    option_id                 = "chgkbd_opt"
+    has_name_select           = ""
+    name                      = "Change / Show Characteristics of the Keyboard"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 25
+    name_msg_id               = 731
+    cmd_to_exec               = "chhwkbd"
+    ask                       = "n"
+    exec_mode                 = "p"
+    ghost                     = "n"
+    cmd_to_discover           = \
+"x=`lsdev -C -S 1 -c keyboard | sed \"s/ .*//\"` \n\
+if [ \"$x\" !=  \"\" ]; then lsattr -l $x -E -O \n\
+else echo \"#\" \n\
+fi"
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = "1800197"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chgkbd_opt"
+    id_seq_num                = "010"
+    disc_field_name           = "typamatic_rate"
+    name                      = "Keyboard repeat rate"
+    name_msg_file             = "chhwkbd.cat"
+    name_msg_set              = 1
+    name_msg_id               = 1
+    op_type                   = "l"
+    entry_type                = "#"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-r"
+    cmd_to_list_mode          = "r"
+    cmd_to_list               = "echo 2..30"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "20"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "038033"       
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chgkbd_opt"
+    id_seq_num                = "020"
+    disc_field_name           = "typamatic_delay"
+    name                      = "Keyboard repeat delay"
+    name_msg_file             = "chhwkbd.cat"
+    name_msg_set              = 1
+    name_msg_id               = 2
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-d"
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 1
+    disp_values               = "250,500,750,1000"
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = "250,500,750,1000"
+    help_msg_id               = "038032"
+    help_msg_loc              = ""
+
+
+sm_cmd_opt:
+    id                        = "chgkbd_opt"
+    id_seq_num                = "030"
+    disc_field_name           = "volume"
+    name                      = "Alarm volume"
+    name_msg_file             = "chhwkbd.cat"
+    name_msg_set              = 1
+    name_msg_id               = 3
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-a"
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 2
+    disp_values               = "off,low,medium,high"
+    values_msg_file           = "chhwkbd.cat"
+    values_msg_set            = 1
+    values_msg_id             = 4
+    aix_values                = "0,1,2,3"
+    help_msg_id               = "038077"  
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chgkbd_opt"
+    id_seq_num                = "040"
+    disc_field_name           = "click"
+    name                      = "Clicker volume"
+    name_msg_file             = "chhwkbd.cat"
+    name_msg_set              = 1
+    name_msg_id               = 5
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-c"
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 2
+    disp_values               = "off,low,medium,high"
+    values_msg_file           = "chhwkbd.cat"
+    values_msg_set            = 1
+    values_msg_id             = 4
+    aix_values                = "0,1,2,3"
+    help_msg_id               = "038078"
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "chgkbd_opt"
+    id_seq_num                = "050"
+    disc_field_name           = "special_type"
+    name                      = "Extended keyboard identifier"
+    name_msg_file             = "chhwkbd.cat"
+    name_msg_set              = 1
+    name_msg_id               = 6
+    op_type                   = "r"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = ""
+    prefix                    = "-t"
+    cmd_to_list_mode          = "a"
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = "none,nonum"
+    values_msg_file           = "chhwkbd.cat"
+    values_msg_set            = 1
+    values_msg_id             = 7
+    aix_values                = "0,1"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+
+# dialog to add Spaceball
+
+## Select target tty connection
+sm_name_hdr:
+    id                        = "mksball"
+    next_id                   = "mksball_cmd"
+    option_id                 = "mksball_sel_opt"
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    type                      = ""
+    ghost                     = "y"
+    cmd_to_classify           = "
+xx() {\n\
+ if [ \"$1\" = \"\" ] \n
+   then \n\
+     echo \" \" \n\
+   else \n\
+     echo \"$1\" | sed 's/tty//' \n\
+ fi \n\
+} \n\
+xx "
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = "tty_num"
+    next_type                 = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "mksball_sel_opt"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Available tty Devices"
+    name_msg_file             = "chhwkbd.cat"
+    name_msg_set              = 1
+    name_msg_id               = 8
+    op_type                   = "l"
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "
+ii=`lsdev -C -S 1 -c tty` \n\
+if [ \"$ii\" = \"\" ] \n\
+  then \n\
+    echo \"  \" \n\
+  else \n\
+    echo \"$ii\" \n\
+fi" 
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "0381007"
+    help_msg_loc              = ""
+
+## add Spaceball
+sm_cmd_hdr:
+    id                        = "mksball_cmd"
+    option_id                 = "mksball_cmd_opt"
+    has_name_select           = "y"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    cmd_to_exec               = "/usr/lpp/X11/bin/sbinstall -a 1"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "mksball_cmd_opt"
+    id_seq_num                = "001"
+    disc_field_name           = "tty_num"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    op_type                   = ""
+    entry_type                = "r"
+    entry_size                = 0
+    required                  = "y"
+    prefix                    = "-l "
+    cmd_to_list_mode          = ""
+    cmd_to_list               = ""
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+
+# dialog to remove Spaceball
+sm_cmd_hdr:
+    id                        = "rmsball"
+    option_id                 = ""
+    has_name_select           = ""
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    cmd_to_exec               = "/usr/lpp/X11/bin/sbinstall -a 0"
+    ask                       = ""
+    exec_mode                 = ""
+    ghost                     = "y"
+    cmd_to_discover           = ""
+    cmd_to_discover_postfix   = ""
+    name_size                 = 0
+    value_size                = 0
+    help_msg_id               = ""
+    help_msg_loc              = ""
+

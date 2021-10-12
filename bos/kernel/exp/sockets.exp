@@ -1,0 +1,72 @@
+#!/unix
+* @(#)18	1.5.2.5  src/bos/kernel/exp/sockets.exp, sockexp, bos411, 9428A410j 3/3/94 07:35:09
+*
+*   COMPONENT_NAME: SOCKEXP
+*
+*   FUNCTIONS: none
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1988,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+*
+********************************************
+* Exported socket services
+********************************************
+soabort
+soaccept
+sobind
+soclose
+soconnect
+socreate
+sodisconnect
+sofree
+solisten
+soqremque
+soreceive
+soreserve
+sosend
+soshutdown
+socantrcvmore
+socantsendmore
+sohasoutofband
+soisconnected
+soisconnecting
+soisdisconnected
+soisdisconnecting
+sowakeup
+sbappend
+sbappendaddr
+sbdrop
+sbdroprecord
+sbflush
+sbwait
+sbwakeup
+kgethostname
+kgetdomainname
+sbappendrecord
+sbinsertoob
+sonewconn1
+sbreserve
+sonewsock
+sosbwait
+sosleep
+sogetopt
+sosetopt
+sounlock
+sosblock
+sbunlock
+sbpoll
+sodequeue
+sogetaddr
+sockaddr_new
+sb_max
+protosw_enable
+protosw_disable
+ip_protox

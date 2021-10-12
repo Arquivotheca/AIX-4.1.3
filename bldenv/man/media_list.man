@@ -1,0 +1,154 @@
+######################################################################
+#  @(#)76        1.4  src/bldenv/man/media_list.man, pkgtools, bos412, GOLDA411a 6/11/93 08:51:15
+######################################################################
+#
+# COMPONENT_NAME: (PKGTOOLS) Packaging Tools
+#
+# FUNCTIONS: media_list man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# NAME: media_list.man
+#
+# PURPOSE: man page for media_list command
+#
+# EXECUTION ENVIRONMENT: Build process environment
+#
+#
+# Change log:
+#    12/12/91-wt-updated related information section
+#    10/22/91-wt-added header
+#    01/24/92-kml-added the exclude_supersedes option
+#    05/21/93-glw-added preventative supersedes and peresl option
+######################################################################
+  media_list Command
+
+
+  Key Concepts
+
+
+
+  Purpose
+
+    Creates an ordered list of PTFs for stacked tape
+    and stacked diskette distribution media.
+
+
+  Syntax
+
+    media_list  -l PTF_filename [-b build_directory]
+                [-p prod_directory] [-s ship_directory] [-o outfilename]
+                [-h] [-?] [-v] [-e] [-x] [-t] [-n] [-r pereslfilename]
+
+
+  Description
+
+    For each PTF file specified, media_list provides all prereqs, coreqs,
+    supersedes, and ifreqs in the correct order for stacked tape generation.
+
+
+  Flags
+
+    -b build_directory   Path to the 'build' server.
+
+    -p prod_directory    Path to the 'production' server.
+
+    -s ship_directory    Path to the 'ship' server.
+
+    -l PTF_file          Path and filename containing a list of
+                         PTF files (one per line) to package.
+                         The filenames can include or exclude ".ptf":
+                         For example: the file "PTF_list" could contain:
+                             u123456          u123456.ptf
+                             u333333  < or >  u333333.ptf
+                             u444444          u444444.ptf
+
+    -o output_file       Path and filename for ordered list of requisites.
+                         Each PTF specified in the output file has a
+                         absolute path. The order indicates that all
+                         requisite PTFs needed by the current PTF
+                         have already been installed.  This allows an
+                         installation without ever needing to rewind
+                         the device.
+                         For example: output file /tmp/order.list:
+                              ship_directory/u444444.ptf
+                              ship_directory/u222222.ptf
+                              ship_directory/u111111.ptf
+                         Standard output is used if -o is not
+                         specified.
+
+    -r peresl_file       Path and filename of problem resolution file.
+                         Format of pe_resl file:
+                         Bad PTF#  PE APAR#  Fixing PTF#  Release
+                         --------  --------  -----------  -------
+                         U405796   IX31102   U414337      R320
+                         U407033   IX31177   U412816      R320
+
+                         If media_list selects a PTF which appears in the
+                         Bad PTF# column with an apar (not a defect number),
+                         the Fixing PTF#, if any,  will be selected too.
+
+    -n                   no preventative supersedes.  By default, if a
+                         selected PTF is superseded by another, that other
+                         is selected too.  This flag overrides that.
+
+    -t                   duplicate PTFs allowed on different servers.
+
+    -e                   Exclude any additional requisites and return
+                         original PTFs in the correct installation order.
+
+    -x                   Exclude supersedes of the original PTFs and return
+                         only ifreqs, coreqs, prereqs and original PTFs in
+                         the correct order.
+
+    -v                   verbose messages
+
+    -h | -?              Print usage message and exit.
+
+
+  Exit
+
+    Successful:  return code of zero.
+
+    Error: non-zero return code.
+      If there is an error, no output file will be generated.
+
+
+  File
+
+    None
+
+
+  Examples
+
+    1. 'media_list  -l ./input_list  -o ./output_list'
+
+       Generate the ordered list of original and associated requisite PTFs
+       needed for a stacked tape.
+
+    2. 'media_list  -l ./input_list  -o ./output_list -e'
+
+       Generate the ordered list of original PTFs needed for a stacked tape.
+
+    3. 'media_list  -l ./input_list  -o ./output_list -x'
+
+       Generate the ordered list of original and associated ifreq, coreq and
+       prereq PTFs needed for a stacked tape.
+
+  Implementation Specifics
+
+    None
+
+
+  Related Information
+
+    gentape
+    gendiskette
+    genfsimage

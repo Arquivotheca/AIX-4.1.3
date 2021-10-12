@@ -1,0 +1,129 @@
+# @(#)07        1.2  src/bos/objclass/POWER/diag.scarray.add, cmddiag, bos41J, 9511A_all 3/13/95 08:53:17
+#
+#   COMPONENT_NAME: CMDDIAG
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993,1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+
+#
+# ------ PDiagDev ODM stanzas (start of d7135.add)
+#
+
+# ------ 7135 Disk Array Controller (dac) device type
+PDiagDev:
+	DType = "dac7135"
+	DSClass = "scsi"
+	Ports = 0
+	PSet = 1
+	PreTest = 0
+	AttDType = ""
+	AttSClass = ""
+	Conc = 1
+	SupTests = 12
+	Menu = 21
+	DNext = 2
+	DaName = "d7135"
+	Diskette = "5"
+	EnclDaName = "dmorps"
+	SysxFlg = 1
+	DClass = "array"
+
+# ------ 7135 Disk Array LUN (hdisk) device type
+PDiagDev:
+	DType = "dar"
+	DSClass = "node"
+	Ports = 0
+	PSet = 1
+	PreTest = 0
+	AttDType = ""
+	AttSClass = ""
+	Conc = 1
+	SupTests = 4
+	Menu = 17
+	DNext = 2
+	DaName = "d7135"
+	Diskette = "5"
+	EnclDaName = "dmorps"
+	SysxFlg = 1
+	DClass = "driver"
+
+#
+# ------ DSMOptions ODM stanza (u7135 SA)
+#
+
+DSMOptions:
+	msgkey = "USM"
+	catalogue = "u7135.cat"
+	order = 0
+	setid = 1
+	msgid = 70
+	action = "u7135"
+	Diskette = "5"
+
+#
+# ------ PDiagAtt ODM stanzas
+#
+
+# ------ MODE DATA
+
+PDiagAtt:
+	DType = "dac7135"
+	DSClass = "scsi"
+	attribute = "MODE_DATA"
+	value = "0x000000080000000000000200010aF4000000000001000000020e28280000000000000000000000000a06000100000000000a80300000000000000000"
+	rep = "s"
+
+PDiagAtt:
+	DType = "array"
+	DSClass = "scsi"
+	attribute = "MODE_DATA"
+	value = "0x000000080000000000000200010afc010000000001000000020e66000000000000000000000000000a06000100000000"
+	rep = "s"
+
+# ------ PDisk FFC's
+
+PDiagAtt:		# 1.3GB Allicat
+	DType = "7135_pdisk"
+	DSClass = "scsi"
+	attribute = "0664M1S"
+	value = 0x84C
+	rep = "n"
+
+PDiagAtt:		# 2.0GB Allicat
+	DType = "7135_pdisk"
+	DSClass = "scsi"
+	attribute = "0664M1H"
+	value = 0x99C
+	rep = "n"
+
+PDiagAtt:		# 1.1GB Starfire
+	DType = "7135_pdisk"
+	DSClass = "scsi"
+	attribute = "DFHSS1W"
+	value = 0x7C2
+	rep = "n"
+
+PDiagAtt:		# 2.2GB Starfire
+	DType = "7135_pdisk"
+	DSClass = "scsi"
+	attribute = "DFHSS2W"
+	value = 0x7C4
+	rep = "n"
+
+PDiagAtt:		# 4.4GB Starfire
+	DType = "7135_pdisk"
+	DSClass = "scsi"
+	attribute = "DFHSS4W"
+	value = 0x7C6
+	rep = "n"
+

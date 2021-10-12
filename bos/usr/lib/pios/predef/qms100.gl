@@ -1,0 +1,51 @@
+# @(#)45        1.9  src/bos/usr/lib/pios/predef/qms100.gl, cmdpios, bos411, 9428A410j 5/6/94 16:06:04
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:791:_J:S[C950]I[1810533]%IWY:+
+:616:_j:S[C940]I[1810536]%IWY:+
+:060:__SYS::
+:744:sd:S[190]I[1810564]E#:180
+:500:__HTP::
+:324:sG::%Ide/pioburst %F[H] %Idb/T.gl | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt
+:445:sQ::date +"%%j %%H %%M %%S" >> %IdF/%Imn
+:324:sS::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@$ddi -!%Idf/piofpt; }
+:321:sg::%Ide/pioburst %F[H] %Idb/H.gl | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt
+:321:sh::%?%L@O%t%e%Isq %;%?%S_d%"s"%=%t%Iss%e%Isg%;%?%L@O%t%e%z; %IsQ%; %IsH
+:444:sq::%Ide/pioqms100 -s %?%S_d%"p"%=%tg%e%I_d%; -i %G@3%d -f %IdF/%Imn -d %Isd %v[CDFINR] &&
+:321:ss::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@$ddi -!%Idf/piofpt; }
+:324:st::%Isq %?%S_d%"s"%=%t%IsS%e%IsG%;%z; %IsQ %IsT
+:057:__IDS::
+:276:ig::%Isq %p %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJZ] %z; %IsQ
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[jJZ] %z; %IsQ ; }
+:058:__MIS::
+:330:mA::GL Emulation
+:331:mL::[devices.cat,71,58;QMS ColorScript 100, Model 20]
+:295:mN::qms100
+:301:mc::\4
+:307:mo::%Ide/pioout %v[ABCDFINOPRS] -K "state may be changed" -L "PrinterError" -E LPST_NOSLCT
+:308:mp::%%!,\x04%%!
+:319:mz::1
+:051:__CAG::
+:144:ci::\12sp1;\12in;\12
+:152:cr::\12sp1;\12in;\12\4
+:052:__CTL::
+:113:af::AF;\12
+:475:__HIR::
+:686:zL::2
+:688:zM::QMS
+:476:zP::generic.gl
+:477:zS::!
+:685:zV::+

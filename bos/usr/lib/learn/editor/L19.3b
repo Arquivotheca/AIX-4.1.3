@@ -1,0 +1,45 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You can use any other kind of address you want
+with 'd'; for example,
+  .d
+will delete the current line.  Remember the
+name of the last line?  Pick up file
+"flower" and delete the last line and
+rewrite the file.  Then type "ready".
+#create Ref
+aster
+chrysanthemum
+daffodil
+marigold
+petunia
+rose
+tulip
+zinnia
+#create flower
+aster
+chrysanthemum
+daffodil
+marigold
+petunia
+rose
+tulip
+zinnia
+hummingbird
+#user
+#cmp flower Ref
+#log
+#next
+19.2c 10

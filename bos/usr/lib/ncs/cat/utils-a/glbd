@@ -1,0 +1,264 @@
+
+
+
+GLBD(1)                   User Commands                   GLBD(1)
+
+
+
+NNNNAAAAMMMMEEEE
+     ggggllllbbbbdddd - Global Location Broker Daemon
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ////eeeettttcccc////nnnnccccssss////ggggllllbbbbdddd [ ----ccccrrrreeeeaaaatttteeee { ----ffffiiiirrrrsssstttt [ ----ffffaaaammmmiiiillllyyyy _f_a_m_i_l_y__n_a_m_e ] | ----
+     ffffrrrroooommmm _h_o_s_t__n_a_m_e } ]
+       [ ----cccchhhhaaaannnnggggeeee____ffffaaaammmmiiiillllyyyy _f_a_m_i_l_y__n_a_m_e ] [ ----lllliiiisssstttteeeennnn _f_a_m_i_l_y__l_i_s_t ] [ ----
+     vvvveeeerrrrssssiiiioooonnnn ]
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The Global Location Broker (GLB), part of the  Network  Com-
+     puting  System  (NCS),  helps clients to locate servers on a
+     network or internet.  The GLB database stores the  locations
+     (that  is,  the  network  addresses  and port numbers) where
+     server processes are running.  A daemon maintains this data-
+     base and provides access to it.
+
+     There are two versions of the GLB daemon:  ggggllllbbbbdddd and  nnnnrrrrggggllllbbbbdddd.
+     We  provide the replicatable version, ggggllllbbbbdddd, only for Apollo,
+     SunOS, and ULTRIX systems.  For other  systems,  we  provide
+     the non-replicatable version, nnnnrrrrggggllllbbbbdddd.
+
+     Here, we describe only ggggllllbbbbdddd.
+
+     You can replicate the GLB database to increase  its  availa-
+     bility.   Copies of the database can exist on several hosts,
+     with a ggggllllbbbbdddd running on each of those hosts to  maintain  the
+     consistency  of  the database replicas.  (In an internet, at
+     least one ggggllllbbbbdddd must run in each network.)  Each  replica  of
+     the  GLB  keeps  a  list of all the other GLB replicas.  The
+     ddddrrrrmmmm____aaaaddddmmmmiiiinnnn tool administers the replication of the GLB  data-
+     base and of the replica list.
+
+     Currently, ggggllllbbbbdddd supports both the DARPA IP  and  Domain  DDS
+     network  protocols.   A  GLB replica can allow access to its
+     database from both IP and DDS clients.  However,  when  com-
+     municating  with  each  other to maintain replication of the
+     GLB database, GLB replicas should use only one protocol fam-
+     ily.   You  choose  which  family  the GLBs will use.  In an
+     internet, all routing nodes must support this family.
+
+     If a set of GLB replicas includes any SunOS or  ULTRIX  sys-
+     tems, all replicas must use IP protocols to communicate with
+     each other.  A replica running on an Apollo system can  com-
+     municate with other replicas via IP protocols but still pro-
+     vide lookup and update services to its clients via  both  IP
+     and DDS protocols.
+
+     The following subsections briefly describe ggggllllbbbbdddd  startup  on
+     various   systems.   See  _M_a_n_a_g_i_n_g  _N_C_S  _S_o_f_t_w_a_r_e  for  more
+     detailed information.
+
+
+
+
+NCS Administration        Last change:                          1
+
+
+
+
+
+
+GLBD(1)                   User Commands                   GLBD(1)
+
+
+
+  RRRRuuuunnnnnnnniiiinnnngggg ggggllllbbbbdddd oooonnnn SSSSRRRR11110000 AAAAppppoooolllllllloooo SSSSyyyysssstttteeeemmmmssss
+     If the GLB is to communicate via IP protocols,  either  with
+     clients or with other GLB replicas, a TCP daemon (ttttccccppppdddd) must
+     be running on the local host when ggggllllbbbbdddd  is  started.   Also,
+     regardless  of  which  protocol  ggggllllbbbbdddd uses, a Local Location
+     Broker daemon (llllllllbbbbdddd) must be running on the local host  when
+     ggggllllbbbbdddd is started.
+
+     The TCP and Location Broker daemons  should  be  started  in
+     this  order:   ttttccccppppdddd,  llllllllbbbbdddd,  ggggllllbbbbdddd.   The  daemons will start
+     automatically in the correct order at boot time if the files
+     ////eeeettttcccc////ddddaaaaeeeemmmmoooonnnnssss////ttttccccppppdddd,  ////eeeettttcccc////ddddaaaaeeeemmmmoooonnnnssss////llllllllbbbbdddd, and ////eeeettttcccc////ddddaaaaeeeemmmmoooonnnnssss////ggggllllbbbbdddd
+     exist.  Use ttttoooouuuucccchhhh or ccccrrrrffff to create these files.
+
+  RRRRuuuunnnnnnnniiiinnnngggg ggggllllbbbbdddd oooonnnn SSSSRRRR9999 AAAAppppoooolllllllloooo SSSSyyyysssstttteeeemmmmssss
+     If the GLB is to communicate via IP protocols,  either  with
+     clients   or   with   other   GLB  replicas,  a  TCP  server
+     (ttttccccpppp____sssseeeerrrrvvvveeeerrrr) must be running on the local host when ggggllllbbbbdddd  is
+     started.   Also,  regardless  of which protocol ggggllllbbbbdddd uses, a
+     Local Location Broker daemon (llllllllbbbbdddd) must be running  on  the
+     local host when ggggllllbbbbdddd is started.
+
+     The TCP server and the Location  Broker  daemons  should  be
+     started  in this order:  ttttccccpppp____sssseeeerrrrvvvveeeerrrr, llllllllbbbbdddd, ggggllllbbbbdddd.  Typically,
+     processes are started by the file ````nnnnooooddddeeee____ddddaaaattttaaaa////ssssttttaaaarrrrttttuuuupppp...._s_u_f_f_i_x,
+     where _s_u_f_f_i_x indicates the display type.
+
+  RRRRuuuunnnnnnnniiiinnnngggg ggggllllbbbbdddd oooonnnn SSSSuuuunnnnOOOOSSSS aaaannnndddd UUUULLLLTTTTRRRRIIIIXXXX SSSSyyyysssstttteeeemmmmssss
+     On SunOS and ULTRIX systems, the GLB communicates  only  via
+     IP protocols.  A Local Location Broker daemon (llllllllbbbbdddd) must be
+     running on the local host when ggggllllbbbbdddd is started.
+
+     Typically, the llllllllbbbbdddd and ggggllllbbbbdddd processes are started in  back-
+     ground  at boot time from ////eeeettttcccc////rrrrcccc.  If you start the daemons
+     by hand, you must be root.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----ccccrrrreeeeaaaatttteeee    Create a replica of the GLB.  This option creates
+               a  GLB  database  in addition to starting a broker
+               process.  It must be used with either ----ffffiiiirrrrsssstttt or  ----
+               ffffrrrroooommmm.
+
+     ----ffffiiiirrrrsssstttt     This option can be used only  with  the  ---- ccccrrrreeeeaaaatttteeee
+               option.  Use  it to create the first replica (that
+               is, the very first instance) of the  GLB  on  your
+               network or internet.
+
+     ----ffffaaaammmmiiiillllyyyy _f_a_m_i_l_y__n_a_m_e
+               This option can be used only in  conjunction  with
+               the  ----ffffiiiirrrrsssstttt option.  It specifies the address fam-
+               ily that the first GLB replica will use  to  iden-
+               tify itself on the replica list.  Any subsequently
+
+
+
+NCS Administration        Last change:                          2
+
+
+
+
+
+
+GLBD(1)                   User Commands                   GLBD(1)
+
+
+
+               created replicas must use this family to  communi-
+               cate  with  this  replica.  Currently, _f_a_m_i_l_y__n_a_m_e
+               can be either ddddddddssss or iiiipppp.  If this  option  is  not
+               used,  the  replica  will  be  identified  on  the
+               replica list by its DDS address.
+
+     ----ffffrrrroooommmm _h_o_s_t__n_a_m_e
+               This option can be used  only  with  the  ---- ccccrrrreeeeaaaatttteeee
+               option.  Use  it  to create additional replicas of
+               the GLB.  A replica  of  the  GLB  must  exist  at
+               _h_o_s_t__n_a_m_e.   The database and replica list for the
+               new  replica  are  initialized   from   those   at
+               _h_o_s_t__n_a_m_e.  The replica at _h_o_s_t__n_a_m_e adds an entry
+               for the new replica to its replica list  and  pro-
+               pagates the entry to the other GLB replicas.
+
+               A _h_o_s_t__n_a_m_e takes the form _f_a_m_i_l_y::::_h_o_s_t, where  the
+               host can be specified either by its name or by its
+               network  address.   For   example,   ddddddddssss::::////////jjjjeeeeeeeevvvveeeessss,
+               ddddddddssss::::####999955559999aaaa....999944440000ffff,  iiiipppp::::bbbbeeeerrrrttttiiiieeee,  and iiiipppp::::####111199992222....5555....5555....5555 are
+               acceptable host names.
+
+               The new replica will use the same  address  family
+               as  _h_o_s_t__n_a_m_e in identifying itself on the replica
+               list.  For example, if _h_o_s_t__n_a_m_e is an IP address,
+               the  new  replica will be listed by its IP address
+               on the replica list.
+
+     ----cccchhhhaaaannnnggggeeee____ffffaaaammmmiiiillllyyyy _f_a_m_i_l_y__n_a_m_e
+               Use this option only if  network  reconfigurations
+               require  that  you  change  the  address family of
+               every GLB replica; see the discussion in the  sec-
+               tion.  Currently, _f_a_m_i_l_y__n_a_m_e can be either ddddddddssss or
+               iiiipppp.
+
+               For a procedure to change all of your GLB replicas
+               from  one  address family to another, see _M_a_n_a_g_i_n_g
+               _N_C_S _S_o_f_t_w_a_r_e.
+
+     ----lllliiiisssstttteeeennnn _f_a_m_i_l_y__l_i_s_t
+               This option  restricts  the  address  families  on
+               which  a  GLB  listens.   Use  it  only if you are
+               creating a special configuration where access to a
+               GLB is restricted to a subset of hosts in the net-
+               work or internet.
+
+               The _f_a_m_i_l_y__l_i_s_t is a list of the address  families
+               on  which the GLB will listen.  Names in this list
+               are separated by spaces.   Possible  family  names
+               include ddddddddssss and iiiipppp.
+
+               The GLB will always listen for requests  from  the
+
+
+
+NCS Administration        Last change:                          3
+
+
+
+
+
+
+GLBD(1)                   User Commands                   GLBD(1)
+
+
+
+               family  by which it is listed on the replica list,
+               even  if  that  family   is   not   specified   in
+               _f_a_m_i_l_y__l_i_s_t.
+
+               If ggggllllbbbbdddd is started without the ----lllliiiisssstttteeeennnn option, the
+               GLB  will  listen on all address families that are
+               supported both by NCS and by the local  host.   On
+               Apollo   systems,  this  set  of  families  always
+               includes ddddddddssss and may also  include  iiiipppp.   On  most
+               other systems, iiiipppp is currently the only family.
+
+     ----vvvveeeerrrrssssiiiioooonnnn   Display the version of NCK that this ggggllllbbbbdddd belongs
+               to, but do not start the daemon.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     1.  Create and start for the first time the first replica of
+     the   GLB  on  this  network  or  internet:   _$$$$  ////eeeettttcccc////sssseeeerrrrvvvveeeerrrr
+     ////eeeettttcccc////nnnnccccssss////ggggllllbbbbdddd ----ccccrrrreeeeaaaatttteeee ----ffffiiiirrrrsssstttt ----ffffaaaammmmiiiillllyyyy ddddddddssss &&&&
+
+     2.  Start for the first time a  subsequent  replica  of  the
+     GLB,  initializing  its  database  from  host  ////////jjjjeeeeeeeevvvveeeessss:   _$$$$
+     ////eeeettttcccc////sssseeeerrrrvvvveeeerrrr ////eeeettttcccc////nnnnccccssss////ggggllllbbbbdddd ----ccccrrrreeeeaaaatttteeee ----ffffrrrroooommmm ddddddddssss::::////////jjjjeeeeeeeevvvveeeessss &&&&
+
+     3.  Restart an existing replica of the GLB:   _$$$$  ////eeeettttcccc////sssseeeerrrrvvvveeeerrrr
+     ////eeeettttcccc////nnnnccccssss////ggggllllbbbbdddd &&&&
+
+     4.  Restart an existing replica of the GLB  on  remote  host
+     ////////bbbbeeeerrrrttttiiiieeee:      _$$$$    ccccrrrrpppp    ----   oooonnnn    ////////bbbbeeeerrrrttttiiiieeee    ////eeeettttcccc////sssseeeerrrrvvvveeeerrrr
+     ////////bbbbeeeerrrrttttiiiieeee////eeeettttcccc////nnnnccccssss////ggggllllbbbbdddd &&&&
+
+FFFFIIIILLLLEEEESSSS
+     On Apollo systems, ggggllllbbbbdddd writes diagnostic output to the file
+     ```` nnnnooooddddeeee____ddddaaaattttaaaa////ssssyyyysssstttteeeemmmm____llllooooggggssss////ggggllllbbbb____lllloooogggg.  On other UNIX systems, the
+     log file is ////eeeettttcccc////nnnnccccssss////ggggllllbbbb____lllloooogggg.
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _N_C_S _S_o_f_t_w_a_r_e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NCS Administration        Last change:                          4
+
+
+

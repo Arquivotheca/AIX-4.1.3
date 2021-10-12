@@ -1,0 +1,46 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This directory contains a file "abot" which
+has an extra line (one line was typed twice).
+Remove the extra line and rewrite the
+file; then type "ready".  This file is
+fairly short.
+#create Ref
+seven qualities characterize the clod and seven the
+wise man: the wise man does not speak before him 
+that is greater than he in wisdom; he does not
+break into his fellow's speech; he is not in a rush to
+reply; he asks what is relevant and replies to the
+point; he speaks of first things first and of last
+things last; of what he has not heard he says "I
+have not heard"; and he acknowledges what is true.
+  and the opposites apply to the clod.
+#create abot
+seven qualities characterize the clod and seven the
+wise man: the wise man does not speak before him 
+that is greater than he in wisdom; he does not
+break into his fellow's speech; he is not in a rush to
+break into his fellow's speech; he is not in a rush to
+reply; he asks what is relevant and replies to the
+point; he speaks of first things first and of last
+things last; of what he has not heard he says "I
+have not heard"; and he acknowledges what is true.
+  and the opposites apply to the clod.
+#user
+#cmp abot Ref
+#log
+#next
+30.1a 10
+30.2a 5

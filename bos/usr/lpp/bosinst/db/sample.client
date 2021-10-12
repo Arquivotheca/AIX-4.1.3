@@ -1,0 +1,106 @@
+/* @(#)62 1.4 src/bos/usr/lpp/bosinst/db/sample.client, bosinst, bos411, 9428A410j 93/01/12 09:03:50       */
+/*
+ *
+ * COMPONENT_NAME: (BOSINST) Base Operating System Install
+ *
+ * FUNCTIONS: sample client description file
+ *
+ * ORIGINS: 27
+ *
+ * (C) COPYRIGHT International Business Machines Corp. 1989
+ * All Rights Reserved
+ * Licensed Materials - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+/*
+	This is a sample client description file.
+
+	The client file name should be
+	
+			~netinst/db/<clientIPaddress>
+
+where <clientIPaddress> is NOT in the format
+
+			aaa.bbb.cc.d
+
+for example, but
+
+			aaabbbcccddd
+	
+where each 3-digit portion of the address is zero filled.  So if I have a
+machine with the IP address as 
+			111.222.33.4	,
+the client description file would have the name
+			111222033004	.
+Using this naming technique, all client description files will be twelve
+characters long.  Using dot notation, some filenames would be fifteen characters
+long which exceeds the 5A maximum file name length of fourteen characters.
+
+	These files use the C preprocessor, therefore,
+the file may include C style comments, #includes, #defines, etc.
+After passing through the preprocess, blank lines are deleted.
+
+	Records are composed of three fields, the recordname,
+recordtype, and recordvalue.  The name and type must be a single
+word each; the value may be of any number of words, but may not
+span lines.
+
+	Each recordname may appear at most once per description
+file, but may have multiple records.  In this case, the other records
+must immediately follow the first record, and must use the recordname
+of -.  See the example of the lpp's below.
+
+	The only required record is the bos.
+
+	Recordtypes may be one of:
+
+	filename: - the following value is a filename, and when
+		extracted from the database, we wish to have the
+		file type (ie, file, dir, char, block, pipe)
+		appended to the value.  For example, when the
+		value of the record
+
+			bos filename /usr/lpp/bosinst/images
+		
+		is extracted from the database, it will be
+
+			/usr/lpp/bosinst/images/bos.current file
+		
+		indicating that /usr/lpp/bosinst/images/bos.current is a 
+		plain file.
+
+	value: - the following value is to be passed through
+		the extraction without being modified.
+	
+	script: - the following value is the name of a script
+		in ~netinst/scripts.  The script is to be run
+		and its output to be used as the value of this
+		record.
+
+	
+	NOTE:  That although the file format allows the administrator to
+use any recordname, at network install time, the client will only be
+interested in certain records.  The other records will still be available
+on the client after the install is complete, and may assist customization
+scripts.
+
+*/
+
+#define _IMAGEDIR /usr/lpp/bosinst/images
+
+/* RECORD FORMAT:
+
+recordname	recordtype	recordvalue
+--------------	--------------	---------------------------- */
+bos		filename	_IMAGEDIR/bos.current
+
+lpp		filename	_IMAGEDIR/lpp.tcpip
+-		filename	_IMAGEDIR/lpp.xwind
+
+hostname	value		clientname
+
+curdate		script		curdate
+
+defaults	value		TZ=cst5dst EDITOR=/usr/bin/vi export TZ EDITOR

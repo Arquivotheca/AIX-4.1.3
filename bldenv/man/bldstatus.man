@@ -1,0 +1,170 @@
+# @(#)88        1.6  src/bldenv/man/bldstatus.man, bldtools, bos412, GOLDA411a 3/24/94 13:09:46
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: bldstatus man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+  bldstatus Command
+
+
+  Purpose
+  
+    The bldstatus command controls the build process by opening build cycles
+    and moderating transitions though the various build cycle phases.   
+
+  Syntax
+
+    bldstatus [-f] [ -o <bldcycle> | -e <bldcycle> | -b <bldcycle> | 
+                     -s <bldcycle> | -p <bldcycle> | -d <bldcycle> |
+                     -h <bldcycle> | -t <bldcycle> | -c <bldcycle> |
+                     -r <bldcycle> | -u <bldcycle> ]
+
+    A menu is provided if no command options are specified.
+
+  Description
+
+    The bldstatus Command controls the build process by controlling the
+    build cycle phases.  Each build step/command requires the build cycle to 
+    be in an appropriate phase before it can be performed.  Following is the
+    normal sequence of build cycle phases:
+
+      open -> prebuild -> build -> selfix -> package -> distribution -> closed
+
+    Some of the phase transitions occur automatically as a related step is
+    performed, other phase transition are done only under user control.
+    A user must, at a minimum, manually perform the following steps 
+    during the life of a build cycle.
+
+                   A. Open the build cycle (see option -o)
+                   B. Enter the selfix phase (see option -s)
+                   C. Enter distribution phase (see option -d)
+                   D. Close the build cycle (see option -c)
+
+    The following table lists the primary command normally associated with 
+    each phase, plus any action/command automatically executed when entering 
+    a phase.
+
+        PHASE          COMMAND       AUTOMATIC ACTION
+        -----          -------       ----------------
+        open                         open tracking defect & move it to working
+        prebuild       prebuild
+        build          v3bld
+        selfix         subptf        postbuild executed on phase entry
+        package        makeptf
+        distribution                 postpackage executed on phase entry
+                                     moves tracking defect to verify
+        closed                       closes tracking defect
+
+    The following table lists the valid starting phases for each build process 
+    command along with any effects the command has on the phase.  See the
+    Flags Section for additional related information.
+
+        COMMAND       STARTING PHASE             PHASE EFFECT
+        -------       --------------             ------------
+        prebuild      open, prebuild, or build   sets phase to prebuild
+        v3bld         prebuild or build          sets phase to build
+        subptf        selfix 
+        makeptf       package 
+
+    Build cycle phases can be reversed by the user (using this command)
+    if there are no conflicts with other build cycles.  For example, the
+    phase can be moved from "selfix" back to "build" as long as no other 
+    build cycle is in the build, selfix, package or hold phase.  But, in
+    most cases, phases cannot be skipped; bldstatus usually restricts
+    transitions to one of the two phases adjacent (before or after) to the 
+    current phase.
+
+  Flags
+       
+    -f 			Sets the force flag.  All phase transitions will be
+                        done without restrictions.  Associated phase transition
+                        actions (see below) will NOT be performed.  USE
+                        THE FORCE FLAG WITH EXTREME CAUTION WHEN RUNNING IN
+                        A PRODUCTION ENVIRONMENT.
+    -o <bldcycle>	Opens a new build cycle.  Must be done before any
+                        build process commands can execute.  Opens the cmvc
+                        tracking defect.
+    -e <bldcycle>	Enters the prebuild phase.  This transition normally
+                        occurs automatically the first time prebuild is run.
+    -b <bldcycle>	Enters the build phase.  This transition normally
+                        occurs automatically the first time v3bld is run.
+    -s <bldcycle>	Enters the selfix phase.  This transition must be
+                        manually performed AFTER ALL builds (using v3bld) for 
+                        ALL products are complete. The postbuild action/command
+                        is automatically done at the beginning of this 
+                        transition.  If postbuild fails, the phase is 
+                        automatically moved to the hold phase; the user must 
+                        resolve the problem and use bldstatus to move out of 
+                        the hold phase back into the build phase - bldstatus 
+                        can then be rerun to enter the selfix phase.  
+    -p <bldcycle>	Enters the package phase.  This transition must be
+                        manually performed after subptf has successfully 
+		        completed processing the selfix fix data.
+    -d <bldcycle>	Enters the distribution phase.  This transition must
+                        be manually performed after the packaging of all PTFs
+                        (use makeptf or genptf for all LPPs) has successfully 
+                        completed.  The postpackage action/command is 
+                        automatically done at the beginning of this transition.
+                        If this command is successful the admin defect will
+                        be moved to the verify state.
+    -h <bldcycle>	Enters the hold phase.  No build command can be done
+                        when the build cycle is in the hold phase.
+    -t <bldcycle>	Enters the test phase.  Deactivates all phase 
+                        verification by the build process commands.  Normally 
+                        used by development to bypass unneeded restrictions or 
+                        by production for test runs when phases can be ignored.
+    -c <bldcycle> and	Closes the build cycle.  This transition can be
+                        manually done after the packaged PTF data has been 
+                        distributed/published.  If a tracking defect was
+                        opened for the build cycle it will be closed.
+    -r <bldcycle>	Removes the build cycle data from the selective fix
+                        data area.  Can be used to regain space of build cycles
+                        that are closed.
+    -u <bldcycle>	Undefines the build cycle status (removes it from
+                        the status file).  Can be used to delete build cycles
+                        which have never been active (i.e. still in open 
+                        phase) or to delete the status of build cycles which 
+                        have been removed (-r option).
+
+  Input
+
+    Command Line Arguments:  
+	The bldstatus command may be executed with command line arguments or
+        from a menu (when no command option is specified on the command
+        line).
+
+    Environment Variables:
+        TOP - specifies the top of the build source tree; if not set, the user
+              will be prompted
+	BLDNOQMERGE - if set the bldquerymerge command will not be ran on
+	      selfix phase transition to package phase; bldquerymerge prepares
+ 	      the bldquery database
+
+    Prompts:
+	The build cycle will be prompted for when in menu mode; the phase
+	transition will take place for the specified build cycle.
+
+    Status File:
+        The current status file is read by bldstatus to determine the build
+        cycle phase.  This is normally transparent to the user.
+
+  Output
+
+    Logging:
+        All messages and phase transitions are logged in bldstatus.all under 
+        the related build cycle log directory (i.e. $TOP/LOG/$BLDCYCLE/).  
+        All phase transitions are also logged to $TOP/LOG/bldstatus.global,
+        which accumulates transition data for all build cycles.
+
+    Status File:
+        The current status file is updated by the bldstatus command if
+        a phase transition occurs.
+

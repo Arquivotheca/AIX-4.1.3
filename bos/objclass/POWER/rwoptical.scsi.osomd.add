@@ -1,0 +1,291 @@
+# @(#)49        1.4  src/bos/objclass/POWER/rwoptical.scsi.osomd.add, cfgmethods, bos41J, 9513A_all 3/24/95 22:12:41
+* 
+*  COMPONENT_NAME: (CFGMETHODS) SCSI READ/WRITE OPTICAL PREDEFINED DATA STANZAS
+* 
+*  FUNCTIONS: 
+* 
+*  ORIGINS: 27
+* 
+*  (C) COPYRIGHT International Business Machines Corp. 1992, 1995
+*  All Rights Reserved
+*  Licensed Materials - Property of IBM
+* 
+*  US Government Users Restricted Rights - Use, duplication or
+*  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = osomd
+	class = rwoptical
+	subclass = scsi
+	prefix = omd
+	devid = ""
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	fru = 1
+	led = 0x720
+	setno = 1
+	msgno = 20
+	catalog = scdisk.cat
+	DvDr = scdisk
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgsccd
+	Change = /etc/methods/chgdisk
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	inventory_only = 0
+	uniquetype = rwoptical/scsi/osomd
+
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = model_name
+	deflt = "DEFAULT_RWOPT   "
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = mode_data
+	deflt = 0x000000080000000000000200010124020a00000000000000000000070a05000000000000000000080c0000ffff0000ffffffff00010a06000100000000
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = mode_default
+	deflt = 0x00000000010700ffff000000ff0202ffff070a00ffff0000000000ffff0808000000000000ffff
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 0
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = recovery_limit
+	deflt = 4
+	values = 4
+	width = ""
+	type = R
+	generic = ""
+	rep = nr
+	nls_index = 0
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = safe_relocate
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = extended_rw
+	deflt = 0
+	values = 0
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = reset_delay
+	deflt = 2
+	values = 2
+	width = ""
+	type = R
+	generic = ""
+	rep = n
+	nls_index = 0
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = pv
+	deflt = "no"
+	values = "no,yes,clear"
+	width = ""
+	type = R
+	generic = "U"
+	rep = "sl"
+	nls_index = 0
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = pvid
+	deflt = "none"
+	values = ""
+	width = ""
+	type = R
+	generic = ""
+	rep = s
+	nls_index = 4
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = reserve_lock
+	deflt = yes
+	values = "yes,no"
+	width = ""
+	type = R
+	generic = "DU"
+	rep = sl
+	nls_index = 2
+
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = prevent_eject
+	deflt = no
+	values = no,yes 
+	width = ""
+	type = R
+	generic = UD
+	rep = sl 
+	nls_index = 3
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = queue_depth
+	deflt = 1
+	values = 1-256,1
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 30
+
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = q_type
+	deflt = none
+	values = none,ordered,simple
+	width = ""
+	type = R
+	generic = UD
+	rep = sl
+	nls_index = 31
+
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = q_err
+	deflt = yes
+	values = no,yes
+	width = ""
+	type = R
+	generic = UD
+	rep = sl
+	nls_index = 32
+
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = clr_q
+	deflt = no
+	values = no,yes
+	width = ""
+	type = R
+	generic = UD
+	rep = sl
+	nls_index = 33
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = rw_timeout
+	deflt = 120
+	values = 30-1000,1
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 34
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = start_timeout
+	deflt = 60
+	values = 30-1000,1
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 35
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = reassign_to
+	deflt = 120
+	values = 30-1000,1
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 36
+
+PdAt:
+	uniquetype = rwoptical/scsi/osomd
+	attribute = fmt_timeout
+	deflt = 3600
+	values = 30-7200,1
+	width = ""
+	type = R
+	generic = UD
+	rep = nr
+	nls_index = 37
+
+PdAt:
+        uniquetype = rwoptical/scsi/osomd
+        attribute = pm_dev_itime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = rwoptical/scsi/osomd
+        attribute = pm_dev_stime
+        deflt = "28800"
+        values = "0-28800,1"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+
+PdAt:
+        uniquetype = rwoptical/scsi/osomd
+        attribute = pm_devid
+        deflt = "0x00100000"
+        values = "0x00100000, 0x00180000,0x00181000,0x00182000,0x00183000,0x00184000,0x00185000, 0x00186000,0x00187000,0x00188000,0x00189000,0x0018a000,0x0018b000,0x0018c000,0x0018d000,0x0018e000,0x0018f000"
+        width = ""
+        type = R
+        generic = ""
+        rep = nr
+        nls_index = 0
+

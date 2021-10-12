@@ -1,0 +1,60 @@
+# @(#)91        1.1  src/bos/objclass/POWER/diag.isasrvaid.add, cmddiag, bos41J, 9512A_all 3/14/95 14:12:48
+#
+#
+# COMPONENT_NAME: (CMDDIAG) ISA Service Aids Object Class Data
+#
+# FUNCTIONS: None
+#
+# ORIGINS: 27, 83
+#
+# (C) COPYRIGHT International Business Machines Corp. 1995
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# DSMOptions->Diskette meaning: X00Y
+# Y	# - diskette or tape block number the service aid
+#	    is located on.
+#	S - Service Aid is located on a Supplemental Diskette.
+# X     1 - Indicates that all diskettes should be read in and processed
+#           before starting the Service Aid. 
+#	2 - Indicates that this Service Aid has additional information in 
+# 	    the PDiagAtt database concerning operating conditions. 
+#
+
+# The following are all ISA Service Aid selections.
+
+#       ISA Configuration Service Aid
+# This SA is supported only on CDROM standalone diagnostic media. 
+DSMOptions:
+ msgkey = "USM"
+ catalogue = "udisacfg.cat"
+ order = 0
+ setid = 1
+ msgid = 1
+ action = "udisacfg"
+ Diskette = "2008"
+
+# PDiagAtt->value meaning:
+# Conditions for allowing Service Aid on menu selection
+# Bits definition of attribute value are defined as :
+#     - Bit positions  8 4 2 1
+#	   	       | | | |
+#		       | | | |_______Can only be run in Service Mode
+#		       | | |_________Can only be run from hardfile
+#		       | |___________Can only be run on MP machine
+#		       |_____________Can only be run if ISA bus is present
+
+# Only display if in service mode from CDROM and if ISA bus present
+PDiagAtt:
+	DType = "USM"
+	DSClass = ""
+	attribute = "sa_selection"
+	value = "9"
+	rep = "n"
+	DClass = ""
+	DApp = "udisacfg"
+

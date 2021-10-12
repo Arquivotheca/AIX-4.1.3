@@ -1,0 +1,26 @@
+# @(#)55        1.2  src/bldenv/man/cumsList.man, pkgtools, bos412, GOLDA411a 1/4/94 14:01:02
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: cumsList file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $TOP/UPDATE/<option>/<subsystem>/cumsList:
+        List of previously created cumulative PTF's.  File updated by
+        ptfpkg each time a cumulative PTF is generated for the
+        subsystem.
+
+	Format:
+                <ptf>
+                <ptf>
+                  .
+                  .

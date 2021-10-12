@@ -1,0 +1,98 @@
+# @(#)36	1.3  src/bldenv/man/DeleteStatus.man, bldprocess, bos412, GOLDA411a 6/1/92 12:00:48
+#
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: DeleteStatus man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+DeleteStatus
+
+
+PURPOSE
+
+	Queries the status database file and deletes one or more records with 
+fields that match the fields specified on the command line.
+
+
+SYNOPSIS
+
+	 DeleteStatus [-a <avalue>] [-b <bvalue>] [-c <cvalue>] [-d <dvalue>]
+                      [-e <evalue>] [-f <fvalue>] [-g <gvalue>] [-h <hvalue>]
+                      [-i <ivalue>] [-j <jvalue>] [-F] filename
+
+
+DESCRIPTION
+
+	The DeleteStatus command queries the status database file and deletes 
+the first record with fields that match those specified on the command line. 
+However if the -F (force) option is chosen, DeleteStatus makes a backup copy of
+the existing status database file by appending '.old' to its name and then 
+deletes all the matching records. If the filename is not specified then it 
+checks for the value of the environment variable "STATUS_FILE" and if not set, 
+uses the default file "$BLDTMP/status.db". The DeleteStatus command uses 
+the 'bldlock' command to lock the status database while it is reading and 
+writing to the file, it unlocks it after it is done.
+	The DeleteStatus command returns zero on success and one on errors.All
+errors go to STDERR.
+
+
+FLAGS
+
+
+	-a <avalue>      The first field with the string <avalue>
+
+        -b <bvalue>      The second field with the string <bvalue>  
+
+        -c <cvalue>      The third field with the string <cvalue>  
+
+        -d <dvalue>      The fourth field with the string <dvalue>  
+
+        -e <evalue>      The fifth field with the string <evalue>  
+
+        -f <fvalue>      The sixth field with the string <fvalue>  
+
+        -g <gvalue>      The seventh field with the string <gvalue>  
+
+        -h <hvalue>      The eight field with the string <hvalue>
+	
+	-i <ivalue>      The ninth field with the string <ivalue>  
+
+        -j <jvalue>      The tenth field with the string <jvalue>  
+
+        -F               Deletes all the matching records 
+
+        filename         The database file where status information is stored
+
+
+EXAMPLES
+
+	1. To delete the status entry for prebuild cmvccommit failure
+
+		DeleteStatus -a prebuild -i cmvccommit -j failure
+
+	2. To delete all the entries with the same parameters above
+
+		DeleteStatus -a prebuild -i cmvccommit -j failure -F
+
+
+RELATED INFORMATION
+
+        The following commands
+                SetStatus
+                CheckStatus
+                QueryStatus
+                bldsetstatus
+                bldlock
+
+	The following file
+		$BLDTMP/status.db

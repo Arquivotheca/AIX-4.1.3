@@ -1,0 +1,49 @@
+# @(#)41	1.1  src/bos/usr/bin/setmaps/ibm3164-german.in, cmdtty, bos411, 9428A410j 2/18/91 18:21:48
+
+# COMPONENT_NAME: CMDTTY terminal control commands
+#
+# FUNCTIONS: setmaps .in file for ibm3164 with Germen keyboard and catridge
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1988, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+
+#
+# Any unexpected input characters are kept as is.  They are remapped
+# to "-" on output if they are sent back out.
+#
+\x40:\xf5
+\x5b:\x8e
+\x5c:\x99
+\x5d:\x9a
+\x7b:\x84
+\x7c:\x94
+\x7d:\x81
+\x7e:\xe1
+\xa7:\x40
+\xb0:\xf8
+\xb2:\xfd
+\xb3:\xfc
+\xb4:\xef
+\xb5:\xe6
+\xc0:\xb7
+\xc2:\xb6
+\xc4:\x5b
+\xc9:\x90
+\xd0:\xfa
+\xd4:\xe2
+\xd6:\x5c
+\xdc:\x5d
+\xdf:\x7e
+\xe0:\x85
+\xe2:\x83
+\xe4:\x7b
+\xe9:\x82
+\xf4:\x93
+\xf6:\x7c
+\xfc:\x7d

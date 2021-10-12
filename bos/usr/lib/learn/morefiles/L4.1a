@@ -1,0 +1,38 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+You have already had some practice in using ">" to capture
+the output of a program.  In much the same way, it
+is possible to arrange for a program to take its input not
+from the terminal but from a file.
+Most UNIX programs are written so that they will read either
+the terminal or from a list of filenames.
+To have a program read from a file instead of the terminal,
+use the "<", like this:
+  pr <file
+As a simple experiment, determine if
+  pr <file
+is absolutely identical to
+  pr file
+Answer yes or no.
+#create junk
+you can use this file to play with.
+#copyin
+#user
+#uncopyin
+#match no
+#log
+#next
+4.1b 10
+4.2a 5

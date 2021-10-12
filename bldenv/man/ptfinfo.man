@@ -1,0 +1,27 @@
+# @(#)38	1.2  src/bldenv/man/ptfinfo.man, bldtools, bos412, GOLDA411a 6/9/93 16:03:48
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: ptfinfo file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+    $TOP/HISTORY/ptfinfo.$BLDCYCLE:
+	List of PTF packaging information for reference by developers.
+
+	Format:
+	  <ptfid><tab><release><tab><apar><tab><defect>:<CMVC_Family> \
+             <tab><build-cycle><tab><LPP>
+	  <ptfid><tab><release><tab><apar><tab><defect>:<CMVC_Family> \
+             <tab><build-cycle><tab><LPP>
+	     .
+	     .
+
+        Where:
+          <CMVC_Family> is <familyname>@<hostname>@<portnumber>

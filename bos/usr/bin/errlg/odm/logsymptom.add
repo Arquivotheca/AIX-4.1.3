@@ -1,0 +1,45 @@
+# @(#)91	1.2  src/bos/usr/bin/errlg/odm/logsymptom.add, cmderrlg, bos41J, 9512A_all 3/7/95 11:25:53
+
+#
+# COMPONENT_NAME: (CMDERRLG)  ODM errnotify object 
+#
+# FUNCTIONS: logsymptom.add
+#
+# ORIGIN: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1994
+# Unpublished Work
+# All Rights Reserved
+# Licensed Material - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# log symptom string from a dump
+
+errnotify:
+	en_name = "sysdump_symp"
+	en_persistenceflg = 1
+	en_label = "DUMP_STATS"
+	en_method = "/usr/lib/ras/logsymptom $1"
+
+SWservAt:
+	attribute = "alog_type"
+	deflt = "dumpsymp"
+	value = "dumpsymp"
+
+SWservAt:
+	attribute = "dumpsymp_logname"
+	deflt = "/var/adm/ras/dumpsymplog"
+	value = "/var/adm/ras/dumpsymplog"
+
+SWservAt:
+	attribute = "dumpsymp_logsize"
+	deflt = "8192"
+	value = "8192"
+
+SWservAt:
+	attribute = "dumpsymp_logverb"
+	deflt = "1"
+	value = "1"

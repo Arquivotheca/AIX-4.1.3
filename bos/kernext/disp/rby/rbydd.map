@@ -1,0 +1,716 @@
+ADDRESS MAP FOR rbydd
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+ I                        ER S1    kernel_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S2    pinned_heap               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S3    as_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S4    as_det                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S5    as_getsrval               ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S6    clrjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S7    copyin                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S8    copyout                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S9    crfree                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S10   crref                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S11   curtime                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S12   d_clear                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S13   d_complete                ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S14   d_init                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S15   d_master                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S16   delay                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S17   devswadd                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S18   devswdel                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S19   devswqry                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S20   e_sleep                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S21   e_wakeup                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S22   errsave                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S23   et_wait                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S24   et_post                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S25   fp_open                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S26   fp_close                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S27   fp_fstat                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S28   getadsp                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S29   getptid                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S30   i_clear                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S31   i_init                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S32   i_unmask                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S33   lockl                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S34   longjmpx                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S35   nodev                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S36   pidsig                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S37   pin                       ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S38   pinu                      ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S39   printf                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S40   setjmpx                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S41   sprintf                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S42   suword                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S43   time                      ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S44   uiomove                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S45   unlockl                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S46   unpin                     ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S47   unpinu                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S48   vnop_getattr              ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S49   vnop_open                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S50   vnop_rdwr                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S51   vnop_rele                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S52   v                         ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S53   vm_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S54   vm_det                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S55   w_clear                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S56   w_init                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S57   w_start                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S58   w_stop                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S59   xmalloc                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S60   xmattach                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S61   xmdetach                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S62   xmemout                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S63   xmfree                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S64   pincode                   ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S65   lookupvp                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S66   unpincode                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S67   d_cflush                  ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S68   d_protect                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S69   io_att                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S70   io_det                    ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S71   vm_cflush                 ../../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S72   errno                     ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S73   getpid                    ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S74   kill                      ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S75   shmget                    ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S76   shmat                     ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S77   shmdt                     ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S78   thread_self               ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S79   _system_configuration     ../../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I  00003100           XO ER S80   __mulh                    ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003100           XO ER S81   .__mulh                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003280           XO ER S82   __divus                   ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003280           XO ER S83   .__divus                  ../../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00009000           XO ER S84   i_disable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009000           XO ER S85   .i_disable                ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009300           XO ER S86   i_enable                  ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009300           XO ER S87   .i_enable                 ../../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I                        ER S88   proc                      ../../../../../../src/bos/kernel/exp/dead.exp{/unix}
+    00000000 004070  2 PR SD S89   <>                        ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    00000000           PR LD S90   .init_rby
+    00000028           PR LD S91   .free_ucode
+    00000220           PR LD S92   .load_uc
+    000004EC           PR LD S93   .read_ucode
+    000006F0           PR LD S94   .kill_kernel_processes
+    00000818           PR LD S95   .close_diag_win
+    00000914           PR LD S96   .open_diag_win
+    00000A60           PR LD S97   .hw_dma_comp
+    00000B60           PR LD S98   .hw_dma_test2
+    00000D70           PR LD S99   .load_dcode
+    00000FBC           PR LD S100  .hw_dma_test
+    00001168           PR LD S101  .dma_test
+    00001448           PR LD S102  .write_pos
+    000014F4           PR LD S103  .read_pos
+    00001670           PR LD S104  .rby_reset
+    00001C3C           PR LD S105  .load_ucode
+    00001F54           PR LD S106  .get_ucode
+    000021B4           PR LD S107  .get_vpd
+    00002788           PR LD S108  .releasepd
+    000028CC           PR LD S109  .crc_ck
+    00002A50           PR LD S110  .rby_null_proc
+    00002A78           PR LD S111  .rby_dev_term
+    00002AA0           PR LD S112  .rby_dev_init
+    00002B10           PR LD S113  .rby_ioctl
+    00003000           PR LD S114  .rby_close
+    000030E4           PR LD S115  .rby_open
+    00003434           PR LD S116  .rby_config
+    000037A0           PR LD S117  .rby_define
+    00004070 000024  2 GL SD S118  <.xmfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004070           GL LD S119  .xmfree
+    00004094 000024  2 GL SD S120  <.setjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004094           GL LD S121  .setjmpx
+    000040B8 000024  2 GL SD S122  <.clrjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000040B8           GL LD S123  .clrjmpx
+    000040DC 000024  2 GL SD S124  <.longjmpx>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000040DC           GL LD S125  .longjmpx
+    00004100 000024  2 GL SD S126  <.io_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004100           GL LD S127  .io_att
+    00004124 0004B8  2 PR SD S128  <>                        ../../../../../../src/bos/kernext/disp/rby/ksr/rby_subrs.c(rby_subrs.o)
+    00004124           PR LD S129  .rby_log_reset_error
+    0000439C           PR LD S130  .rbyerr
+    00004460           PR LD S131  .rbylog
+    000044E0           PR LD S132  .rby_delay
+    000045DC 000024  2 GL SD S133  <.xmalloc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000045DC           GL LD S134  .xmalloc
+    00004600 000024  2 GL SD S135  <.sprintf>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004600           GL LD S136  .sprintf
+    00004624 000118  2 PR SD S137  .strlen                   strlen.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strlen.o])
+    0000473C 000024  2 GL SD S138  <.errsave>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000473C           GL LD S139  .errsave
+    00004760 000128  2 PR SD S140  <>                        ../../../../../../src/bos/kernel/lib/libsysp/POWER/ioccdelay.c(/aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a[ioccdelay.o])
+    00004760           PR LD S141  .io_delay
+    00004858           PR LD S142  .iocc_delay
+    00004888 000024  2 GL SD S143  <.curtime>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004888           GL LD S144  .curtime
+    000048AC 000024  2 GL SD S145  <.delay>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000048AC           GL LD S146  .delay
+    000048D0 000024  2 GL SD S147  <.io_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000048D0           GL LD S148  .io_det
+    000048F4 000024  2 GL SD S149  <.d_master>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000048F4           GL LD S150  .d_master
+    00004918 000024  2 GL SD S151  <.w_start>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004918           GL LD S152  .w_start
+    0000493C 000024  2 GL SD S153  <.e_sleep>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000493C           GL LD S154  .e_sleep
+    00004960 000024  2 GL SD S155  <.w_stop>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004960           GL LD S156  .w_stop
+    00004984 000024  2 GL SD S157  <.d_complete>             glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004984           GL LD S158  .d_complete
+    000049A8 000024  2 GL SD S159  <.crref>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000049A8           GL LD S160  .crref
+    000049CC 000024  2 GL SD S161  <.lookupvp>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000049CC           GL LD S162  .lookupvp
+    000049F0 000024  2 GL SD S163  <.vnop_open>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000049F0           GL LD S164  .vnop_open
+    00004A14 000024  2 GL SD S165  <.vnop_getattr>           glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A14           GL LD S166  .vnop_getattr
+    00004A38 000024  2 GL SD S167  <.pin>                    glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A38           GL LD S168  .pin
+    00004A5C 000024  2 GL SD S169  <.vnop_rdwr>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A5C           GL LD S170  .vnop_rdwr
+    00004A80 000024  2 GL SD S171  <.crfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004A80           GL LD S172  .crfree
+    00004AA4 000024  2 GL SD S173  <.vnop_rele>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004AA4           GL LD S174  .vnop_rele
+    00004AC8 000024  2 GL SD S175  <.kill>                   glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004AC8           GL LD S176  .kill
+    00004AEC 000024  2 GL SD S177  <.getptid>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004AEC           GL LD S178  .getptid
+    00004B10 000024  2 GL SD S179  <.et_post>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004B10           GL LD S180  .et_post
+    00004B34 000024  2 GL SD S181  <.xmdetach>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004B34           GL LD S182  .xmdetach
+    00004B58 000024  2 GL SD S183  <.unpinu>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004B58           GL LD S184  .unpinu
+    00004B7C 000024  2 GL SD S185  <.xmattach>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004B7C           GL LD S186  .xmattach
+    00004BA0 000024  2 GL SD S187  <.pinu>                   glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004BA0           GL LD S188  .pinu
+    00004BC4 000024  2 GL SD S189  <.copyout>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004BC4           GL LD S190  .copyout
+    00004BE8 000024  2 GL SD S191  <.copyin>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004BE8           GL LD S192  .copyin
+    00004C0C 000024  2 GL SD S193  <.devswqry>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004C0C           GL LD S194  .devswqry
+    00004C30 000024  2 GL SD S195  <.devswdel>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004C30           GL LD S196  .devswdel
+    00004C54 000024  2 GL SD S197  <.d_protect>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004C54           GL LD S198  .d_protect
+    00004C78 000090  2 PR SD S199  .bzero                    bzero.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o])
+    00004D08 000024  2 GL SD S200  <.getadsp>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004D08           GL LD S201  .getadsp
+    00004D2C 000024  2 GL SD S202  <.as_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004D2C           GL LD S203  .as_att
+    00004D50 000024  2 GL SD S204  <.as_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00004D50           GL LD S205  .as_det
+    00004D74 0000C4  2 PR SD S206  .bcopy                    moveeq.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o])
+    00004D74           PR LD S207  .ovbcopy
+    00004D80           PR LD S208  ._moveeq
+    00004D80           PR LD S209  .memcpy
+    00004D80           PR LD S210  .memmove
+    00004E38 0012A0  2 PR SD S211  <>                        ../../../../../../src/bos/kernext/disp/rby/intr/rby_intr.c(rby_intr.o)
+    00004E38           PR LD S212  .rby_sendClean
+    00004EDC           PR LD S213  .rby_sendInit
+    00004F80           PR LD S214  .process_pick
+    00005058           PR LD S215  .rby_wait_timeout
+    00005110           PR LD S216  .rby_prique_timeout
+    000051B0           PR LD S217  .rby_60sec_timeout
+    00005244           PR LD S218  .rby_set_usrbuf
+    000053A0           PR LD S219  .del_q_ack
+    00005428           PR LD S220  .process_event
+    0000556C           PR LD S221  .get_process_struct
+    000055D4           PR LD S222  .rby_intr
+    000060D8 0024C8  2 PR SD S223  <>                        ../../../../../../src/bos/kernext/disp/rby/font/hfmxtext.c(hfmxtext.o)
+    000060D8           PR LD S224  .hfmXclean
+    00006180           PR LD S225  .hfmXinit
+    000061BC           PR LD S226  .hfm_releaseFont
+    00006440           PR LD S227  .Get_Font_Shm_Addr
+    000064F8           PR LD S228  .hfm_XDispatch
+    000068F8           PR LD S229  .hfm_deleteFont
+    0000698C           PR LD S230  .createXFontHeader
+    0000719C           PR LD S231  .buildGlyph
+    00007BE4           PR LD S232  .buildMetric
+    000080A8           PR LD S233  .unlockBlocks
+    0000820C           PR LD S234  .getXCharData
+    000085A0 002740  2 PR SD S235  <>                        ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    000085A0           PR LD S236  .getport
+    000086D8           PR LD S237  .ps_scr
+    00008968           PR LD S238  .memcpyx
+    00008A70           PR LD S239  .chkcurs
+    00008BD4           PR LD S240  .bldglyphbuf
+    00008D60           PR LD S241  .cexpd_blt
+    000090AC           PR LD S242  .upd_ps
+    000092D4           PR LD S243  .update_ps
+    0000953C           PR LD S244  .wr_pcfa
+    00009830           PR LD S245  .draw_txt
+    000098DC           PR LD S246  .new_cursor
+    00009B10           PR LD S247  .upd_cursor
+    00009C50           PR LD S248  .itof
+    00009CD4           PR LD S249  .rby_vttterm
+    00009DEC           PR LD S250  .rby_vttdefc
+    00009EFC           PR LD S251  .rby_vttcpl
+    0000A0E8           PR LD S252  .rby_vttcfl
+    0000A294           PR LD S253  .rby_vttstct
+    0000A384           PR LD S254  .rby_vtttext
+    0000A4E0           PR LD S255  .rby_vttmovc
+    0000A5B0           PR LD S256  .rby_vttsetm
+    0000A62C           PR LD S257  .rby_vttscr
+    0000A890           PR LD S258  .rby_vttrds
+    0000A9AC           PR LD S259  .rby_vttdact
+    0000A9E8           PR LD S260  .rby_vttclr
+    0000ACE0 000024  2 GL SD S261  <.lockl>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000ACE0           GL LD S262  .lockl
+    0000AD04 00007C  2 PR SD S263  .fifo64                   noname(fifo64.o)
+    0000AD80 000024  2 GL SD S264  <.unlockl>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AD80           GL LD S265  .unlockl
+    0000ADA4 000024  2 GL SD S266  <.unpin>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000ADA4           GL LD S267  .unpin
+    0000ADC8 000378  2 PR SD S268  <>                        ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vttact.c(rby_vttact.o)
+    0000ADC8           PR LD S269  .rby_vttact
+    0000B140 000368  2 PR SD S270  <>                        ../../../../../../src/bos/kernext/disp/rby/dma/rbyadma.c(rbyadma.o)
+    0000B140           PR LD S271  .rby_pin_data_blocks
+    0000B4A8 000780  2 PR SD S272  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbydma.c(rbydma.o)
+    0000B4A8           PR LD S273  .rby_end_dma
+    0000B668           PR LD S274  .rby_start_dma
+    0000B8B0           PR LD S275  .rby_free_dma_node
+    0000BA70           PR LD S276  .rby_get_dma_node
+    0000BC28 000024  2 GL SD S277  <.getpid>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000BC28           GL LD S278  .getpid
+    0000BC4C 000024  2 GL SD S279  <.thread_self>            glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000BC4C           GL LD S280  .thread_self
+    0000BC70 000024  2 GL SD S281  <.suword>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000BC70           GL LD S282  .suword
+    0000BC94 000024  2 GL SD S283  <.d_cflush>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000BC94           GL LD S284  .d_cflush
+    0000BCB8 001BC8  2 PR SD S285  <>                        ../../../../../../src/bos/kernext/disp/rby/font/hfmphigstext.c(hfmphigstext.o)
+    0000BCB8           PR LD S286  .hfmgPclean
+    0000BD6C           PR LD S287  .hfmgPinit
+    0000BDA8           PR LD S288  .hfm_phigsDispatch
+    0000C16C           PR LD S289  .hfm_getFontPointer
+    0000C228           PR LD S290  .createphigsFontHeader
+    0000C870           PR LD S291  .buildphigsGlyph
+    0000D04C           PR LD S292  .buildphigsMetric
+    0000D4D4           PR LD S293  .getphigsCharData
+    0000D880 0000D8  2 PR SD S294  <>                        ../../../../../../src/bos/kernext/disp/rby/font/ktok.c(ktok.o)
+    0000D880           PR LD S295  .ktok
+    0000D958 000024  2 GL SD S296  <.fp_open>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D958           GL LD S297  .fp_open
+    0000D97C 000024  2 GL SD S298  <.fp_fstat>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D97C           GL LD S299  .fp_fstat
+    0000D9A0 000024  2 GL SD S300  <.fp_close>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D9A0           GL LD S301  .fp_close
+    0000D9C4 000024  2 GL SD S302  <.shmget>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D9C4           GL LD S303  .shmget
+    0000D9E8 000024  2 GL SD S304  <.shmat>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D9E8           GL LD S305  .shmat
+    0000DA0C 000040  2 PR SD S306  <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    0000DA0C           PR LD S307  ._ptrgl
+    0000DA0C           PR LD S308  .$PTRGL
+    0000DA4C 000024  2 GL SD S309  <.printf>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000DA4C           GL LD S310  .printf
+    0000DA70 000024  2 GL SD S311  <.e_wakeup>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000DA70           GL LD S312  .e_wakeup
+    0000DA94 000024  2 GL SD S313  <.xmemout>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000DA94           GL LD S314  .xmemout
+    0000DAB8 000098  2 PR SD S315  <>                        ../../../../../../src/bos/kernext/disp/rby/dma/rby_freec.c(rby_freec.o)
+    0000DAB8           PR LD S316  .rby_freec
+    0000DB50 000840  2 PR SD S317  <>                        ../../../../../../src/bos/kernext/disp/rby/dma/rbymem.c(rbymem.o)
+    0000DB50           PR LD S318  .rby_release_adapt_mem
+    0000DCF0           PR LD S319  .rby_unpin_adapt_mem
+    0000DE10           PR LD S320  .rby_pin_adapt_mem
+    0000DF98           PR LD S321  .rby_alloc_adapt_mem
+    0000E144           PR LD S322  .rby_do_pin
+    0000E390 000778  2 PR SD S323  <>                        ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    0000E390           PR LD S324  .rby_del_tex
+    0000E448           PR LD S325  .rby_more_tex_mem
+    0000E6C8           PR LD S326  .rby_unpin_tex_mem
+    0000E7E8           PR LD S327  .rby_pin_tex_mem
+    0000E9EC           PR LD S328  .rby_unregtex
+    0000EA68           PR LD S329  .rby_regtex
+    0000EB08 000AA0  2 PR SD S330  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbytexture.c(rbytexture.o)
+    0000EB08           PR LD S331  .rby_free_comm_data
+    0000EB70           PR LD S332  .rby_unallocate_tex_proc
+    0000ECFC           PR LD S333  .rby_unregister_texture
+    0000EE0C           PR LD S334  .rby_register_texture
+    0000F36C           PR LD S335  .free_tex_node
+    0000F4C4           PR LD S336  .rby_remove_proc_from_texture
+    0000F5A8 000024  2 GL SD S337  <.shmdt>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000F5A8           GL LD S338  .shmdt
+    0000F5CC 000A70  2 PR SD S339  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbyfdback.c(rbyfdback.o)
+    0000F5CC           PR LD S340  .rby_get_feedback_data
+    0000F938           PR LD S341  .rby_copy_feedback_data
+    0000FD18           PR LD S342  .rby_register_feedback_buffer
+    0001003C 000748  2 PR SD S343  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbyvoo.c(rbyvoo.o)
+    0001003C           PR LD S344  .rby_voo_genlock_lost_ack
+    00010138           PR LD S345  .rby_vid_query
+    000101BC           PR LD S346  .rby_vid_exit
+    00010340           PR LD S347  .rby_vst_enter
+    00010514           PR LD S348  .voo_acquire
+    0001067C           PR LD S349  .rby_voo_enter
+    00010784 000024  2 GL SD S350  <.pidsig>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00010784           GL LD S351  .pidsig
+    000107A8 000024  2 GL SD S352  <.unpincode>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000107A8           GL LD S353  .unpincode
+    000107CC 000024  2 GL SD S354  <.i_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000107CC           GL LD S355  .i_clear
+    000107F0 000024  2 GL SD S356  <.i_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000107F0           GL LD S357  .i_init
+    00010814 000024  2 GL SD S358  <.pincode>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00010814           GL LD S359  .pincode
+    00010838 000024  2 GL SD S360  <.i_unmask>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00010838           GL LD S361  .i_unmask
+    0001085C 000024  2 GL SD S362  <.uiomove>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0001085C           GL LD S363  .uiomove
+    00010880 000024  2 GL SD S364  <.w_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00010880           GL LD S365  .w_clear
+    000108A4 000024  2 GL SD S366  <.d_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000108A4           GL LD S367  .d_clear
+    000108C8 000298  2 PR SD S368  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbyddf.c(rbyddf.o)
+    000108C8           PR LD S369  .rby_ddf_ext
+    00010928           PR LD S370  .rby_ddf
+    00010B60 000168  2 PR SD S371  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbygamma.c(rbygamma.o)
+    00010B60           PR LD S372  .rby_load_gamma_table
+    00010CC8 000DD8  2 PR SD S373  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbyseg.c(rbyseg.o)
+    00010CC8           PR LD S374  .rby_destroy_shar_part_id
+    00010DCC           PR LD S375  .rby_free_proc_from_part
+    0001101C           PR LD S376  .rby_create_shar_part_id
+    000116F8           PR LD S377  .rby_destroy_segment_id
+    00011888           PR LD S378  .rby_create_segment_id
+    00011AA0 0009F8  2 PR SD S379  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbysysq.c(rbysysq.o)
+    00011AA0           PR LD S380  .rby_delete_sysq
+    00011E3C           PR LD S381  .rby_unregister_system_queue
+    00011FE0           PR LD S382  .rby_register_system_queue
+    00012498 000024  2 GL SD S383  <.et_wait>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00012498           GL LD S384  .et_wait
+    000124BC 000024  2 GL SD S385  <.as_getsrval>            glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000124BC           GL LD S386  .as_getsrval
+    000124E0 000024  2 GL SD S387  <.vm_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000124E0           GL LD S388  .vm_att
+    00012504 000024  2 GL SD S389  <.vm_cflush>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00012504           GL LD S390  .vm_cflush
+    00012528 000024  2 GL SD S391  <.vm_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00012528           GL LD S392  .vm_det
+    0001254C 000E18  2 PR SD S393  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbyPfont.c(rbyPfont.o)
+    0001254C           PR LD S394  .rby_del_font_list
+    0001262C           PR LD S395  .rby_unallocate_proc
+    00012734           PR LD S396  .rby_unregister_phigs_font
+    000128CC           PR LD S397  .rby_register_phigs_font
+    0001308C           PR LD S398  .free_node
+    00013208           PR LD S399  .rby_remove_proc_from_font
+    00013364 0001C8  2 PR SD S400  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbyprebld.c(rbyprebld.o)
+    00013364           PR LD S401  .rby_prebuild_font_data
+    0001352C 0000E0  2 PR SD S402  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbycfg.c(rbycfg.o)
+    0001352C           PR LD S403  .rby_set_texture_configuration
+    0001360C 000110  2 PR SD S404  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbydcxt.c(rbydcxt.o)
+    0001360C           PR LD S405  .rby_delete_context
+    0001371C 0002C8  2 PR SD S406  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbydump.c(rbydump.o)
+    0001371C           PR LD S407  .rby_dump
+    000139E4 000EE8  2 PR SD S408  <>                        ../../../../../../src/bos/kernext/disp/rby/rcm/rbygp.c(rbygp.o)
+    000139E4           PR LD S409  .rby_state_change
+    00013DE8           PR LD S410  .rby_unmake_gp
+    000142CC           PR LD S411  .rby_rcm_init
+    000146AC           PR LD S412  .rby_make_gp
+    000147F0           PR LD S413  .rby_rcm_exit
+    000148CC 000130  2 PR SD S414  <>                        ../../../../../../src/bos/kernext/disp/rby/font/rbyhfmdisp.c(rbyhfmdisp.o)
+    000148CC           PR LD S415  .hfmdispatch
+    000149FC 000090  2 PR SD S416  <>                        ../../../../../../src/bos/kernext/disp/rby/dma/rbymore.c(rbymore.o)
+    000149FC           PR LD S417  .rby_more_data_blocks
+    00014A8C 000128  2 PR SD S418  <>                        ../../../../../../src/bos/kernext/disp/rby/dma/rbyunpin.c(rbyunpin.o)
+    00014A8C           PR LD S419  .rby_unpin_data_blocks
+    00014BB4 000024  2 GL SD S420  <.w_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00014BB4           GL LD S421  .w_init
+    00014BD8 0004C0  2 PR SD S422  <>                        ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vttinit.c(rby_vttinit.o)
+    00014BD8           PR LD S423  .rby_vttinit
+    00015098 000118  2 PR SD S424  <>                        ../../../../../../src/bos/kernext/disp/rby/rcm/rbyswitch.c(rbyswitch.o)
+    00015098           PR LD S425  .rby_start_switch
+    000150C8           PR LD S426  .rby_check_dev
+    000151B0 000378  2 PR SD S427  <>                        ../../../../../../src/bos/kernext/disp/rby/event/rbyevent.c(rbyevent.o)
+    000151B0           PR LD S428  .rby_sync_mask
+    00015528 000024  2 GL SD S429  <.d_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00015528           GL LD S430  .d_init
+    0001554C 000024  2 GL SD S431  <.devswadd>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0001554C           GL LD S432  .devswadd
+    00015570 000080  3 RO SD S433  <>                        ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    000155F0 000020  3 RO SD S434  <>                        ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00015610 000080  3 RO SD S435  <>                        ../../../../../../src/bos/kernext/disp/rby/intr/rby_intr.c(rby_intr.o)
+    00015690 000080  3 RO SD S436  <>                        ../../../../../../src/bos/kernext/disp/rby/ddf/rbyddf.c(rbyddf.o)
+    00000000 0000B0  3 RW SD S437  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    000000B0 000155  3 RW SD S438  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_subrs.c(rby_subrs.o)
+    00000208 000066  3 RW SD S439  <_$STATIC>                ../../../../../../src/bos/kernel/lib/libsysp/POWER/ioccdelay.c(/aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a[ioccdelay.o])
+    00000270 000265  3 RW SD S440  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/intr/rby_intr.c(rby_intr.o)
+    000004D8 000092  3 RW SD S441  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00000570 000066  3 RW SD S442  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vttact.c(rby_vttact.o)
+    000005D8 00005E  3 RW SD S443  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbydma.c(rbydma.o)
+    00000638 00005F  3 RW SD S444  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/dma/rbyadma.c(rbyadma.o)
+    00000698 000066  3 RW SD S445  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/font/hfmxtext.c(hfmxtext.o)
+    00000700 00008C  3 RW SD S446  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/font/hfmphigstext.c(hfmphigstext.o)
+    00000790 00005D  3 RW SD S447  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/font/ktok.c(ktok.o)
+    000007F0 000061  3 RW SD S448  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/dma/rby_freec.c(rby_freec.o)
+    00000858 00005E  3 RW SD S449  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/dma/rbymem.c(rbymem.o)
+    000008B8 000072  3 RW SD S450  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbytexture.c(rbytexture.o)
+    00000930 000078  3 RW SD S451  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    000009A8 000060  3 RW SD S452  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbyfdback.c(rbyfdback.o)
+    00000A08 00005E  3 RW SD S453  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbyvoo.c(rbyvoo.o)
+    00000A68 000060  3 RW SD S454  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbygamma.c(rbygamma.o)
+    00000AC8 00005E  3 RW SD S455  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbyseg.c(rbyseg.o)
+    00000B28 0000EC  3 RW SD S456  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbysysq.c(rbysysq.o)
+    00000C18 00006C  3 RW SD S457  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbyPfont.c(rbyPfont.o)
+    00000C88 000061  3 RW SD S458  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbyprebld.c(rbyprebld.o)
+    00000CF0 00005E  3 RW SD S459  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbycfg.c(rbycfg.o)
+    00000D50 00005F  3 RW SD S460  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbydcxt.c(rbydcxt.o)
+    00000DB0 00005F  3 RW SD S461  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbydump.c(rbydump.o)
+    00000E10 000053  3 RW SD S462  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ddf/rbyddf.c(rbyddf.o)
+    00000E68 000063  3 RW SD S463  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/font/rbyhfmdisp.c(rbyhfmdisp.o)
+    00000ED0 00005F  3 RW SD S464  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/dma/rbymore.c(rbymore.o)
+    00000F30 000060  3 RW SD S465  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/dma/rbyunpin.c(rbyunpin.o)
+    00000F90 00005D  3 RW SD S466  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/rcm/rbygp.c(rbygp.o)
+    00000FF0 000067  3 RW SD S467  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vttinit.c(rby_vttinit.o)
+    00001058 0000A4  3 RW SD S468  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/rcm/rbyswitch.c(rbyswitch.o)
+    00001100 000066  3 RW SD S469  <_$STATIC>                ../../../../../../src/bos/kernext/disp/rby/event/rbyevent.c(rbyevent.o)
+*   00001168 00000C  2 DS SD S470  rby_config                ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    00001174 00000C  2 DS SD S471  rby_intr                  ../../../../../../src/bos/kernext/disp/rby/intr/rby_intr.c(rby_intr.o)
+    00001180 00000C  2 DS SD S472  hfmXclean                 ../../../../../../src/bos/kernext/disp/rby/font/hfmxtext.c(hfmxtext.o)
+    0000118C 00000C  2 DS SD S473  hfmgPclean                ../../../../../../src/bos/kernext/disp/rby/font/hfmphigstext.c(hfmphigstext.o)
+    00001198 00000C  2 DS SD S474  hfmXinit                  ../../../../../../src/bos/kernext/disp/rby/font/hfmxtext.c(hfmxtext.o)
+    000011A4 00000C  2 DS SD S475  hfmgPinit                 ../../../../../../src/bos/kernext/disp/rby/font/hfmphigstext.c(hfmphigstext.o)
+    000011B0 00000C  2 DS SD S476  rby_freec                 ../../../../../../src/bos/kernext/disp/rby/dma/rby_freec.c(rby_freec.o)
+    000011BC 00000C  2 DS SD S477  rby_alloc_adapt_mem       ../../../../../../src/bos/kernext/disp/rby/dma/rbymem.c(rbymem.o)
+    000011C8 00000C  2 DS SD S478  rby_pin_adapt_mem         ../../../../../../src/bos/kernext/disp/rby/dma/rbymem.c(rbymem.o)
+    000011D4 00000C  2 DS SD S479  rby_unpin_adapt_mem       ../../../../../../src/bos/kernext/disp/rby/dma/rbymem.c(rbymem.o)
+    000011E0 00000C  2 DS SD S480  rby_release_adapt_mem     ../../../../../../src/bos/kernext/disp/rby/dma/rbymem.c(rbymem.o)
+    000011EC 00000C  2 DS SD S481  rby_del_tex               ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    000011F8 00000C  2 DS SD S482  rby_unregtex              ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    00001204 00000C  2 DS SD S483  rby_regtex                ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    00001210 00000C  2 DS SD S484  rby_more_tex_mem          ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    0000121C 00000C  2 DS SD S485  rby_unpin_tex_mem         ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    00001228 00000C  2 DS SD S486  rby_pin_tex_mem           ../../../../../../src/bos/kernext/disp/rby/dma/rbytextr.c(rbytextr.o)
+    00001234 00000C  2 DS SD S487  rby_copy_feedback_data    ../../../../../../src/bos/kernext/disp/rby/ddf/rbyfdback.c(rbyfdback.o)
+    00001240 00000C  2 DS SD S488  rby_voo_genlock_lost_ack  ../../../../../../src/bos/kernext/disp/rby/ddf/rbyvoo.c(rbyvoo.o)
+    0000124C 00000C  2 DS SD S489  rby_vttcfl                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001258 00000C  2 DS SD S490  rby_vttact                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vttact.c(rby_vttact.o)
+    00001264 00000C  2 DS SD S491  rby_vttclr                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001270 00000C  2 DS SD S492  rby_vttdact               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    0000127C 00000C  2 DS SD S493  rby_vttcpl                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001288 00000C  2 DS SD S494  rby_vttscr                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001294 00000C  2 DS SD S495  rby_ddf                   ../../../../../../src/bos/kernext/disp/rby/ddf/rbyddf.c(rbyddf.o)
+    000012A0 00000C  2 DS SD S496  rby_vttdefc               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    000012AC 00000C  2 DS SD S497  rby_vttterm               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    000012B8 00000C  2 DS SD S498  rby_state_change          ../../../../../../src/bos/kernext/disp/rby/rcm/rbygp.c(rbygp.o)
+    000012C4 00000C  2 DS SD S499  hfmdispatch               ../../../../../../src/bos/kernext/disp/rby/font/rbyhfmdisp.c(rbyhfmdisp.o)
+    000012D0 00000C  2 DS SD S500  rby_more_data_blocks      ../../../../../../src/bos/kernext/disp/rby/dma/rbymore.c(rbymore.o)
+    000012DC 00000C  2 DS SD S501  rby_unpin_data_blocks     ../../../../../../src/bos/kernext/disp/rby/dma/rbyunpin.c(rbyunpin.o)
+    000012E8 00000C  2 DS SD S502  rby_wait_timeout          ../../../../../../src/bos/kernext/disp/rby/intr/rby_intr.c(rby_intr.o)
+    000012F4 00000C  2 DS SD S503  rby_vttinit               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vttinit.c(rby_vttinit.o)
+    00001300 00000C  2 DS SD S504  rby_vttmovc               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    0000130C 00000C  2 DS SD S505  rby_vttrds                ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001318 00000C  2 DS SD S506  rby_vtttext               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001324 00000C  2 DS SD S507  rby_vttsetm               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001330 00000C  2 DS SD S508  rby_vttstct               ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    0000133C 00000C  2 DS SD S509  rby_make_gp               ../../../../../../src/bos/kernext/disp/rby/rcm/rbygp.c(rbygp.o)
+    00001348 00000C  2 DS SD S510  rby_unmake_gp             ../../../../../../src/bos/kernext/disp/rby/rcm/rbygp.c(rbygp.o)
+    00001354 00000C  2 DS SD S511  rby_check_dev             ../../../../../../src/bos/kernext/disp/rby/rcm/rbyswitch.c(rbyswitch.o)
+    00001360 00000C  2 DS SD S512  rby_null_proc             ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    0000136C 00000C  2 DS SD S513  rby_start_switch          ../../../../../../src/bos/kernext/disp/rby/rcm/rbyswitch.c(rbyswitch.o)
+    00001378 00000C  2 DS SD S514  rby_sync_mask             ../../../../../../src/bos/kernext/disp/rby/event/rbyevent.c(rbyevent.o)
+    00001384 00000C  2 DS SD S515  rby_dev_init              ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    00001390 00000C  2 DS SD S516  rby_ddf_ext               ../../../../../../src/bos/kernext/disp/rby/ddf/rbyddf.c(rbyddf.o)
+    0000139C 00000C  2 DS SD S517  rby_dev_term              ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    000013A8 00000C  2 DS SD S518  rby_60sec_timeout         ../../../../../../src/bos/kernext/disp/rby/intr/rby_intr.c(rby_intr.o)
+    000013B4 00000C  2 DS SD S519  rby_prique_timeout        ../../../../../../src/bos/kernext/disp/rby/intr/rby_intr.c(rby_intr.o)
+    000013C0 00000C  2 DS SD S520  rby_close                 ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    000013CC 00000C  2 DS SD S521  rby_open                  ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    000013D8 00000C  2 DS SD S522  rby_ioctl                 ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    000013E4 000000  2 T0 SD S523  <TOC>
+    000013E4 000004  2 TC SD S524  <kernel_heap>
+    000013E8 000004  2 TC SD S525  <xmfree>
+    000013EC 000004  2 TC SD S526  <setjmpx>
+    000013F0 000004  2 TC SD S527  <clrjmpx>
+    000013F4 000004  2 TC SD S528  <longjmpx>
+    000013F8 000004  2 TC SD S529  <_system_configuration>
+    000013FC 000004  2 TC SD S530  <io_att>
+    00001400 000004  2 TC SD S531  <_$STATIC>
+    00001404 000004  2 TC SD S532  <pinned_heap>
+    00001408 000004  2 TC SD S533  <xmalloc>
+    0000140C 000004  2 TC SD S534  <_$STATIC>
+    00001410 000004  2 TC SD S535  <sprintf>
+    00001414 000004  2 TC SD S536  <ER>
+    00001418 000004  2 TC SD S537  <errsave>
+    0000141C 000004  2 TC SD S538  <curtime>
+    00001420 000004  2 TC SD S539  <_$STATIC>
+    00001424 000004  2 TC SD S540  <delay>
+    00001428 000004  2 TC SD S541  <io_det>
+    0000142C 000004  2 TC SD S542  <d_master>
+    00001430 000004  2 TC SD S543  <w_start>
+    00001434 000004  2 TC SD S544  <e_sleep>
+    00001438 000004  2 TC SD S545  <w_stop>
+    0000143C 000004  2 TC SD S546  <d_complete>
+    00001440 000004  2 TC SD S547  <crref>
+    00001444 000004  2 TC SD S548  <lookupvp>
+    00001448 000004  2 TC SD S549  <vnop_open>
+    0000144C 000004  2 TC SD S550  <vnop_getattr>
+    00001450 000004  2 TC SD S551  <pin>
+    00001454 000004  2 TC SD S552  <vnop_rdwr>
+    00001458 000004  2 TC SD S553  <crfree>
+    0000145C 000004  2 TC SD S554  <vnop_rele>
+    00001460 000004  2 TC SD S555  <kill>
+    00001464 000004  2 TC SD S556  <getptid>
+    00001468 000004  2 TC SD S557  <et_post>
+    0000146C 000004  2 TC SD S558  <_$STATIC_BSS>
+    00001470 000004  2 TC SD S559  <xmdetach>
+    00001474 000004  2 TC SD S560  <unpinu>
+    00001478 000004  2 TC SD S561  <xmattach>
+    0000147C 000004  2 TC SD S562  <pinu>
+    00001480 000004  2 TC SD S563  <errno>
+    00001484 000004  2 TC SD S564  <copyout>
+    00001488 000004  2 TC SD S565  <copyin>
+    0000148C 000004  2 TC SD S566  <devswqry>
+    00001490 000004  2 TC SD S567  <devswdel>
+    00001494 000004  2 TC SD S568  <d_protect>
+    00001498 000004  2 TC SD S569  <>
+    0000149C 000004  2 TC SD S570  <>
+    000014A0 000004  2 TC SD S571  <getadsp>
+    000014A4 000004  2 TC SD S572  <as_att>
+    000014A8 000004  2 TC SD S573  <as_det>
+    000014AC 000004  2 TC SD S574  <rby_intr>
+    000014B0 000004  2 TC SD S575  <_$STATIC>
+    000014B4 000004  2 TC SD S576  <_$STATIC_BSS>
+    000014B8 000004  2 TC SD S577  <_$STATIC_BSS>
+    000014BC 000004  2 TC SD S578  <_$STATIC>
+    000014C0 000004  2 TC SD S579  <lockl>
+    000014C4 000004  2 TC SD S580  <unlockl>
+    000014C8 000004  2 TC SD S581  <>
+    000014CC 000004  2 TC SD S582  <>
+    000014D0 000004  2 TC SD S583  <unpin>
+    000014D4 000004  2 TC SD S584  <_$STATIC_BSS>
+    000014D8 000004  2 TC SD S585  <_$STATIC>
+    000014DC 000004  2 TC SD S586  <getpid>
+    000014E0 000004  2 TC SD S587  <thread_self>
+    000014E4 000004  2 TC SD S588  <suword>
+    000014E8 000004  2 TC SD S589  <_$STATIC>
+    000014EC 000004  2 TC SD S590  <d_cflush>
+    000014F0 000004  2 TC SD S591  <_$STATIC>
+    000014F4 000004  2 TC SD S592  <_$STATIC>
+    000014F8 000004  2 TC SD S593  <_$STATIC_BSS>
+    000014FC 000004  2 TC SD S594  <_$STATIC>
+    00001500 000004  2 TC SD S595  <fp_open>
+    00001504 000004  2 TC SD S596  <fp_fstat>
+    00001508 000004  2 TC SD S597  <fp_close>
+    0000150C 000004  2 TC SD S598  <_$STATIC>
+    00001510 000004  2 TC SD S599  <shmget>
+    00001514 000004  2 TC SD S600  <shmat>
+    00001518 000004  2 TC SD S601  <printf>
+    0000151C 000004  2 TC SD S602  <e_wakeup>
+    00001520 000004  2 TC SD S603  <xmemout>
+    00001524 000004  2 TC SD S604  <time>
+    00001528 000004  2 TC SD S605  <rby_freec>
+    0000152C 000004  2 TC SD S606  <_$STATIC>
+    00001530 000004  2 TC SD S607  <>
+    00001534 000004  2 TC SD S608  <>
+    00001538 000004  2 TC SD S609  <rby_alloc_adapt_mem>
+    0000153C 000004  2 TC SD S610  <_$STATIC>
+    00001540 000004  2 TC SD S611  <rby_pin_adapt_mem>
+    00001544 000004  2 TC SD S612  <rby_unpin_adapt_mem>
+    00001548 000004  2 TC SD S613  <rby_release_adapt_mem>
+    0000154C 000004  2 TC SD S614  <rby_del_tex>
+    00001550 000004  2 TC SD S615  <_$STATIC>
+    00001554 000004  2 TC SD S616  <_$STATIC_BSS>
+    00001558 000004  2 TC SD S617  <rby_unregtex>
+    0000155C 000004  2 TC SD S618  <rby_regtex>
+    00001560 000004  2 TC SD S619  <_$STATIC>
+    00001564 000004  2 TC SD S620  <shmdt>
+    00001568 000004  2 TC SD S621  <rby_more_tex_mem>
+    0000156C 000004  2 TC SD S622  <rby_unpin_tex_mem>
+    00001570 000004  2 TC SD S623  <rby_pin_tex_mem>
+    00001574 000004  2 TC SD S624  <rby_copy_feedback_data>
+    00001578 000004  2 TC SD S625  <_$STATIC>
+    0000157C 000004  2 TC SD S626  <rby_voo_genlock_lost_ack>
+    00001580 000004  2 TC SD S627  <pidsig>
+    00001584 000004  2 TC SD S628  <v>
+    00001588 000004  2 TC SD S629  <proc>
+    0000158C 000004  2 TC SD S630  <_$STATIC>
+    00001590 000004  2 TC SD S631  <unpincode>
+    00001594 000004  2 TC SD S632  <i_clear>
+    00001598 000004  2 TC SD S633  <i_init>
+    0000159C 000004  2 TC SD S634  <pincode>
+    000015A0 000004  2 TC SD S635  <i_unmask>
+    000015A4 000004  2 TC SD S636  <uiomove>
+    000015A8 000004  2 TC SD S637  <w_clear>
+    000015AC 000004  2 TC SD S638  <d_clear>
+    000015B0 000004  2 TC SD S639  <rby_vttcfl>
+    000015B4 000004  2 TC SD S640  <rby_vttact>
+    000015B8 000004  2 TC SD S641  <rby_vttclr>
+    000015BC 000004  2 TC SD S642  <rby_vttdact>
+    000015C0 000004  2 TC SD S643  <rby_vttcpl>
+    000015C4 000004  2 TC SD S644  <rby_vttscr>
+    000015C8 000004  2 TC SD S645  <rby_ddf>
+    000015CC 000004  2 TC SD S646  <_$STATIC>
+    000015D0 000004  2 TC SD S647  <>
+    000015D4 000004  2 TC SD S648  <>
+    000015D8 000004  2 TC SD S649  <_$STATIC>
+    000015DC 000004  2 TC SD S650  <_$STATIC>
+    000015E0 000004  2 TC SD S651  <et_wait>
+    000015E4 000004  2 TC SD S652  <as_getsrval>
+    000015E8 000004  2 TC SD S653  <vm_att>
+    000015EC 000004  2 TC SD S654  <vm_cflush>
+    000015F0 000004  2 TC SD S655  <vm_det>
+    000015F4 000004  2 TC SD S656  <_$STATIC>
+    000015F8 000004  2 TC SD S657  <_$STATIC_BSS>
+    000015FC 000004  2 TC SD S658  <_$STATIC>
+    00001600 000004  2 TC SD S659  <_$STATIC>
+    00001604 000004  2 TC SD S660  <_$STATIC>
+    00001608 000004  2 TC SD S661  <_$STATIC>
+    0000160C 000004  2 TC SD S662  <_$STATIC>
+    00001610 000004  2 TC SD S663  <rby_vttdefc>
+    00001614 000004  2 TC SD S664  <rby_vttterm>
+    00001618 000004  2 TC SD S665  <rby_state_change>
+    0000161C 000004  2 TC SD S666  <hfmdispatch>
+    00001620 000004  2 TC SD S667  <_$STATIC>
+    00001624 000004  2 TC SD S668  <rby_more_data_blocks>
+    00001628 000004  2 TC SD S669  <_$STATIC>
+    0000162C 000004  2 TC SD S670  <rby_unpin_data_blocks>
+    00001630 000004  2 TC SD S671  <_$STATIC>
+    00001634 000004  2 TC SD S672  <_$STATIC_BSS>
+    00001638 000004  2 TC SD S673  <rby_wait_timeout>
+    0000163C 000004  2 TC SD S674  <w_init>
+    00001640 000004  2 TC SD S675  <_$STATIC>
+    00001644 000004  2 TC SD S676  <rby_vttinit>
+    00001648 000004  2 TC SD S677  <_$STATIC>
+    0000164C 000004  2 TC SD S678  <rby_vttmovc>
+    00001650 000004  2 TC SD S679  <rby_vttrds>
+    00001654 000004  2 TC SD S680  <rby_vtttext>
+    00001658 000004  2 TC SD S681  <rby_vttsetm>
+    0000165C 000004  2 TC SD S682  <rby_vttstct>
+    00001660 000004  2 TC SD S683  <rby_make_gp>
+    00001664 000004  2 TC SD S684  <rby_unmake_gp>
+    00001668 000004  2 TC SD S685  <rby_check_dev>
+    0000166C 000004  2 TC SD S686  <_$STATIC>
+    00001670 000004  2 TC SD S687  <rby_null_proc>
+    00001674 000004  2 TC SD S688  <nodev>
+    00001678 000004  2 TC SD S689  <rby_start_switch>
+    0000167C 000004  2 TC SD S690  <rby_sync_mask>
+    00001680 000004  2 TC SD S691  <_$STATIC>
+    00001684 000004  2 TC SD S692  <rby_dev_init>
+    00001688 000004  2 TC SD S693  <rby_ddf_ext>
+    0000168C 000004  2 TC SD S694  <rby_dev_term>
+    00001690 000004  2 TC SD S695  <d_init>
+    00001694 000004  2 TC SD S696  <rby_60sec_timeout>
+    00001698 000004  2 TC SD S697  <rby_prique_timeout>
+    0000169C 000004  2 TC SD S698  <rby_close>
+    000016A0 000004  2 TC SD S699  <rby_config>
+    000016A4 000004  2 TC SD S700  <rby_open>
+    000016A8 000004  2 TC SD S701  <rby_ioctl>
+    000016AC 000004  2 TC SD S702  <devswadd>
+    000016B0 000004  2 TC SD S703  <kernel_kill>
+    000016B8 000114  3 RW CM S704  ER                        ../../../../../../src/bos/kernext/disp/rby/ksr/rby_subrs.c(rby_subrs.o)
+    000017D0 000040  3 RW CM S705  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)
+    00001810 000194  3 RW CM S706  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/font/hfmxtext.c(hfmxtext.o)
+    000019A8 0000CC  3 RW CM S707  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vdd.c(rby_vdd.o)
+    00001A78 00004C  3 RW CM S708  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/ksr/rby_vttact.c(rby_vttact.o)
+    00001AC8 00019C  3 RW CM S709  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/font/hfmphigstext.c(hfmphigstext.o)
+    00001C68 000008  3 RW CM S710  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/ddf/rbytexture.c(rbytexture.o)
+    00001C70 000008  3 RW CM S711  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/ddf/rbyPfont.c(rbyPfont.o)
+    00001C78 00004C  3 RW CM S712  <_$STATIC_BSS>            ../../../../../../src/bos/kernext/disp/rby/rcm/rbygp.c(rbygp.o)
+    00001CC4 000004  2 RW CM S713  kernel_kill               ../../../../../../src/bos/kernext/disp/rby/config/rby_dd.c(rby_dd.o)

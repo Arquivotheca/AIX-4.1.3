@@ -1,0 +1,2245 @@
+# @(#)44	1.31  src/bos/objclass/ILS.add, cfgnls, bos41J, 9512A_all 3/20/95 10:45:11
+#
+#  COMPONENT_NAME: (CFGNLS)
+#
+#  FUNCTIONS: International Language Support Configuration File
+#
+#  ORIGINS: 27
+#
+#  IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#  combined with the aggregated modules for this product)
+#                   SOURCE MATERIALS
+#  (C) COPYRIGHT International Business Machines Corp. 1993,1994
+#  All Rights Reserved
+#
+#  US Government Users Restricted Rights - Use, duplication or
+#  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# 
+# CC:
+# 	locale				Locale key for Cultural Convention
+# 	text_string			String Describing "locale"
+# 	text_string_id			Message catalog reference number
+# 	codeset				Key: FONT: "codeset" field.
+# 	messages			Key: MESSAGES: "locale" field.
+# 	keyboards			Key: KEYBOARD: "keyboard_map" fields.
+# 	package				Package(s) needed for this locale
+# 	variables			Variables to set for this locale
+# 	bosinst_menu			Is this on the bos install menu?
+# 	menu				Which keyboard is expected by locale?
+# 	messageLink			Link to pull in message info.
+# 	keyboardLink			Link to pull in  default keyboard info.
+#
+# MESSAGES:
+# 	locale				Key: CC: "locale" field.
+# 	text_string			String Describing "locale"
+# 	text_string_id			Message catalog reference number
+# 	codeset				Key: FONT: "codeset" field.
+# 	package				Package(s) needed for these messages
+# 	variables			Variables to set for these messages
+# 	bosinst_translated		Is bosinst.msg translated to this lang.
+# 	bosinst_menu			Is this on the bos install menu?
+#
+# KEYBOARD:
+# 	locale				Key: CC: "locale" field.
+# 	keyboard_map			Locale key for keyboard
+# 	text_string			String Describing "locale"
+# 	text_string_id			Message catalog reference number
+# 	codeset				Key: FONT: "codeset" field.
+# 	package				Package(s) needed for this keyboard
+# 	variables			Variables to set for this keyboard
+# 	keyboard_cmd			Command to set keyboard
+# 	key_text			Text to describe keyboard
+# 	key_text_id			Message catalog reference number
+# 	bosinst_menu			Is this on the bos install menu?
+#
+# FONT:
+# 	codeset				Codeset for font
+# 	font_cmd			Command to set font
+
+CC:
+	locale = "C"
+	text_string = "C (POSIX)"
+	text_string_id = 100
+	codeset = "ISO8859-1"
+	messages = "C"
+	keyboards = "C"
+	package = ""
+	variables = "LANG=C"
+	bosinst_menu = "y"
+	menu = "101 102 106"
+	messageLink = "C"
+	keyboardLink = "C"
+
+CC:
+	locale = "ar_AA"
+	text_string = "Arabic(ISO)"
+	text_string_id = 124
+	codeset = "ISO8859-6"
+	messages = "en_US"
+	keyboards = "ar_AA"
+	package = "bos.loc.iso.ar_AA"
+	variables = "LANG=ar_AA"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "ar_AA"
+
+CC:
+	locale = "Ar_AA"
+	text_string = "Arabic(PC)"
+	text_string_id = 138
+	codeset = "IBM-1046"
+	messages = "en_US"
+	keyboards = "Ar_AA"
+	package = "bos.loc.pc_compat.Ar_AA"
+	variables = "LANG=Ar_AA"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "Ar_AA"
+
+CC:
+	locale = "bg_BG"
+	text_string = "Bulgarian"
+	text_string_id = 125
+	codeset = "ISO8859-5"
+	messages = "en_US"
+	keyboards = "bg_BG bg_BG@alt"
+	package = "bos.loc.iso.bg_BG"
+	variables = "LANG=bg_BG"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "bg_BG"
+
+CC:
+	locale = "ca_ES"
+	text_string = "Catalan"
+	text_string_id = 144
+	codeset = "ISO8859-1"
+	messages = "es_ES"
+	keyboards = "es_ES"
+	package = "bos.loc.iso.ca_ES"
+	variables = "LANG=ca_ES"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "es_ES"
+	keyboardLink = "es_ES"
+
+CC:
+	locale = "Ca_ES"
+	text_string = "Catalan"
+	text_string_id = 144
+	codeset = "IBM-850"
+	messages = "Es_ES"
+	keyboards = "Es_ES"
+	package = "bos.loc.pc_compat.Ca_ES"
+	variables = "LANG=Ca_ES"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Es_ES"
+	keyboardLink = "Es_ES"
+
+CC:
+	locale = "zh_TW"
+	text_string = "Chinese (Traditional)"
+	text_string_id = 101
+	codeset = "IBM-eucTW"
+	messages = "zh_TW"
+	keyboards = "zh_TW"
+	package = "bos.loc.iso.zh_TW"
+	variables = "LANG=zh_TW"
+	bosinst_menu = "y"
+	menu = "106"
+	messageLink = "zh_TW"
+	keyboardLink = "zh_TW"
+
+CC:
+	locale = "zh_CN"
+	text_string = "Chinese (Simplified EUC)"
+	text_string_id = 142
+	codeset = "IBM-eucCN"
+	messages = "en_US"
+	keyboards = "zh_CN"
+	package = "bos.loc.iso.zh_CN"
+	variables = "LANG=zh_CN"
+	bosinst_menu = "y"
+	menu = "101"
+	messageLink = "en_US"
+	keyboardLink = "zh_CN"
+
+CC:
+	locale = "ZH_CN"
+	text_string = "Chinese (Simplified UTF)"
+	text_string_id = 143
+	codeset = "UTF-8"
+	messages = "en_US"
+	keyboards = "ZH_CN"
+	package = "bos.loc.utf.ZH_CN"
+	variables = "LANG=ZH_CN"
+	bosinst_menu = "y"
+	menu = "101"
+	messageLink = "en_US"
+	keyboardLink = "ZH_CN"
+
+CC:
+	locale = "hr_HR"
+	text_string = "Croatian"
+	text_string_id = 126
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "hr_HR"
+	package = "bos.loc.iso.hr_HR"
+	variables = "LANG=hr_HR"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "hr_HR"
+
+CC:
+	locale = "cs_CZ"
+	text_string = "Czech"
+	text_string_id = 127
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "cs_CZ"
+	package = "bos.loc.iso.cs_CZ"
+	variables = "LANG=cs_CZ"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "cs_CZ"
+
+CC:
+	locale = "da_DK"
+	text_string = "Danish"
+	text_string_id = 102
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "da_DK"
+	package = "bos.loc.iso.da_DK"
+	variables = "LANG=da_DK"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "da_DK"
+
+CC:
+	locale = "Da_DK"
+	text_string = "Danish"
+	text_string_id = 102
+	codeset = "IBM-850"
+	messages = "en_US"
+	keyboards = "Da_DK"
+	package = "bos.loc.pc_compat.Da_DK"
+	variables = "LANG=Da_DK"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "Da_DK"
+
+CC:
+	locale = "nl_BE"
+	text_string = "Dutch (Belgium)"
+	text_string_id = 103
+	codeset = "ISO8859-1"
+	messages = "nl_BE"
+	keyboards = "nl_BE"
+	package = "bos.loc.iso.nl_BE"
+	variables = "LANG=nl_BE"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "nl_BE"
+	keyboardLink = "nl_BE"
+
+CC:
+	locale = "Nl_BE"
+	text_string = "Dutch (Belgium)"
+	text_string_id = 103
+	codeset = "IBM-850"
+	messages = "Nl_BE"
+	keyboards = "Nl_BE"
+	package = "bos.loc.pc_compat.Nl_BE"
+	variables = "LANG=Nl_BE"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Nl_BE"
+	keyboardLink = "Nl_BE"
+
+CC:
+	locale = "nl_NL"
+	text_string = "Dutch"
+	text_string_id = 104
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "nl_NL"
+	package = "bos.loc.iso.nl_NL"
+	variables = "LANG=nl_NL"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "nl_NL"
+
+CC:
+	locale = "Nl_NL"
+	text_string = "Dutch"
+	text_string_id = 104
+	codeset = "IBM-850"
+	messages = "en_US"
+	keyboards = "Nl_NL"
+	package = "bos.loc.pc_compat.Nl_NL"
+	variables = "LANG=Nl_NL"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "Nl_NL"
+
+CC:
+	locale = "en_GB"
+	text_string = "English (Great Britain)"
+	text_string_id = 105
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "en_GB en_GB@alt"
+	package = "bos.loc.iso.en_GB"
+	variables = "LANG=en_GB"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "en_GB"
+
+CC:
+	locale = "En_GB"
+	text_string = "English (Great Britain)"
+	text_string_id = 105
+	codeset = "IBM-850"
+	messages = "En_US"
+	keyboards = "En_GB En_GB@alt"
+	package = "bos.loc.pc_compat.En_GB"
+	variables = "LANG=En_GB"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "En_US"
+	keyboardLink = "En_GB"
+
+CC:
+	locale = "en_US"
+	text_string = "English (United States)"
+	text_string_id = 106
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "en_US"
+	package = "bos.loc.iso.en_US"
+	variables = "LANG=en_US"
+	bosinst_menu = "y"
+	menu = "101"
+	messageLink = "en_US"
+	keyboardLink = "en_US"
+
+CC:
+	locale = "En_US"
+	text_string = "English (United States)"
+	text_string_id = 106
+	codeset = "IBM-850"
+	messages = "En_US"
+	keyboards = "En_US"
+	package = "bos.loc.pc_compat.En_US"
+	variables = "LANG=En_US"
+	bosinst_menu = "n"
+	menu = "101"
+	messageLink = "En_US"
+	keyboardLink = "En_US"
+
+CC:
+	locale = "fi_FI"
+	text_string = "Finnish"
+	text_string_id = 107
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "fi_FI fi_FI@alt"
+	package = "bos.loc.iso.fi_FI"
+	variables = "LANG=fi_FI"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "fi_FI"
+
+CC:
+	locale = "Fi_FI"
+	text_string = "Finnish"
+	text_string_id = 107
+	codeset = "IBM-850"
+	messages = "en_US"
+	keyboards = "Fi_FI Fi_FI@alt"
+	package = "bos.loc.pc_compat.Fi_FI"
+	variables = "LANG=Fi_FI"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "Fi_FI"
+
+CC:
+	locale = "fr_BE"
+	text_string = "French (Belgium)"
+	text_string_id = 108
+	codeset = "ISO8859-1"
+	messages = "fr_FR"
+	keyboards = "fr_BE"
+	package = "bos.loc.iso.fr_BE"
+	variables = "LANG=fr_BE"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "fr_FR"
+	keyboardLink = "fr_BE"
+
+CC:
+	locale = "Fr_BE"
+	text_string = "French (Belgium)"
+	text_string_id = 108
+	codeset = "IBM-850"
+	messages = "Fr_FR"
+	keyboards = "Fr_BE"
+	package = "bos.loc.pc_compat.Fr_BE"
+	variables = "LANG=Fr_BE"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Fr_FR"
+	keyboardLink = "Fr_BE"
+
+CC:
+	locale = "fr_CA"
+	text_string = "French (Canada)"
+	text_string_id = 109
+	codeset = "ISO8859-1"
+	messages = "fr_FR"
+	keyboards = "fr_CA"
+	package = "bos.loc.iso.fr_CA"
+	variables = "LANG=fr_CA"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "fr_FR"
+	keyboardLink = "fr_CA"
+
+CC:
+	locale = "Fr_CA"
+	text_string = "French (Canada)"
+	text_string_id = 109
+	codeset = "IBM-850"
+	messages = "Fr_FR"
+	keyboards = "Fr_CA"
+	package = "bos.loc.pc_compat.Fr_CA"
+	variables = "LANG=Fr_CA"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Fr_FR"
+	keyboardLink = "Fr_CA"
+
+CC:
+	locale = "fr_CH"
+	text_string = "French (Switzerland)"
+	text_string_id = 110
+	codeset = "ISO8859-1"
+	messages = "fr_FR"
+	keyboards = "fr_CH"
+	package = "bos.loc.iso.fr_CH"
+	variables = "LANG=fr_CH"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "fr_FR"
+	keyboardLink = "fr_CH"
+
+CC:
+	locale = "Fr_CH"
+	text_string = "French (Switzerland)"
+	text_string_id = 110
+	codeset = "IBM-850"
+	messages = "Fr_FR"
+	keyboards = "Fr_CH"
+	package = "bos.loc.pc_compat.Fr_CH"
+	variables = "LANG=Fr_CH"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Fr_FR"
+	keyboardLink = "Fr_CH"
+
+CC:
+	locale = "fr_FR"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "ISO8859-1"
+	messages = "fr_FR"
+	keyboards = "fr_FR fr_FR@alt"
+	package = "bos.loc.iso.fr_FR"
+	variables = "LANG=fr_FR"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "fr_FR"
+	keyboardLink = "fr_FR"
+
+CC:
+	locale = "Fr_FR"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "IBM-850"
+	messages = "Fr_FR"
+	keyboards = "Fr_FR Fr_FR@alt"
+	package = "bos.loc.pc_compat.Fr_FR"
+	variables = "LANG=Fr_FR"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Fr_FR"
+	keyboardLink = "Fr_FR"
+
+CC:
+	locale = "de_CH"
+	text_string = "German (Switzerland)"
+	text_string_id = 112
+	codeset = "ISO8859-1"
+	messages = "de_DE"
+	keyboards = "de_CH"
+	package = "bos.loc.iso.de_CH"
+	variables = "LANG=de_CH"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "de_DE"
+	keyboardLink = "de_CH"
+
+CC:
+	locale = "De_CH"
+	text_string = "German (Switzerland)"
+	text_string_id = 112
+	codeset = "IBM-850"
+	messages = "De_DE"
+	keyboards = "De_CH"
+	package = "bos.loc.pc_compat.De_CH"
+	variables = "LANG=De_CH"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "De_DE"
+	keyboardLink = "De_CH"
+
+CC:
+	locale = "de_DE"
+	text_string = "German"
+	text_string_id = 113
+	codeset = "ISO8859-1"
+	messages = "de_DE"
+	keyboards = "de_DE"
+	package = "bos.loc.iso.de_DE"
+	variables = "LANG=de_DE"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "de_DE"
+	keyboardLink = "de_DE"
+
+CC:
+	locale = "De_DE"
+	text_string = "German"
+	text_string_id = 113
+	codeset = "IBM-850"
+	messages = "De_DE"
+	keyboards = "De_DE"
+	package = "bos.loc.pc_compat.De_DE"
+	variables = "LANG=De_DE"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "De_DE"
+	keyboardLink = "De_DE"
+
+CC:
+	locale = "el_GR"
+	text_string = "Greek"
+	text_string_id = 114
+	codeset = "ISO8859-7"
+	messages = "en_US"
+	keyboards = "el_GR"
+	package = "bos.loc.iso.el_GR"
+	variables = "LANG=el_GR"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "el_GR"
+
+CC:
+	locale = "iw_IL"
+	text_string = "Hebrew(ISO)"
+	text_string_id = 128
+	codeset = "ISO8859-8"
+	messages = "en_US"
+	keyboards = "iw_IL iw_IL@alt"
+	package = "bos.loc.iso.iw_IL"
+	variables = "LANG=iw_IL"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "iw_IL"
+
+CC:
+	locale = "Iw_IL"
+	text_string = "Hebrew(PC)"
+	text_string_id = 139
+	codeset = "IBM-856"
+	messages = "en_US"
+	keyboards = "Iw_IL Iw_IL@alt"
+	package = "bos.loc.pc_compat.Iw_IL"
+	variables = "LANG=Iw_IL"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "Iw_IL"
+
+CC:
+	locale = "hu_HU"
+	text_string = "Hungarian"
+	text_string_id = 129
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "hu_HU"
+	package = "bos.loc.iso.hu_HU"
+	variables = "LANG=hu_HU"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "hu_HU"
+
+CC:
+	locale = "is_IS"
+	text_string = "Icelandic"
+	text_string_id = 115
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "is_IS"
+	package = "bos.loc.iso.is_IS"
+	variables = "LANG=is_IS"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "is_IS"
+
+CC:
+	locale = "Is_IS"
+	text_string = "Icelandic"
+	text_string_id = 115
+	codeset = "IBM-850"
+	messages = "en_US"
+	keyboards = "Is_IS"
+	package = "bos.loc.pc_compat.Is_IS"
+	variables = "LANG=Is_IS"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "Is_IS"
+
+CC:
+	locale = "it_IT"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "ISO8859-1"
+	messages = "it_IT"
+	keyboards = "it_IT it_it@alt"
+	package = "bos.loc.iso.it_IT"
+	variables = "LANG=it_IT"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "it_IT"
+	keyboardLink = "it_IT"
+
+CC:
+	locale = "It_IT"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "IBM-850"
+	messages = "It_IT"
+	keyboards = "It_IT It_it@alt"
+	package = "bos.loc.pc_compat.It_IT"
+	variables = "LANG=It_IT"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "It_IT"
+	keyboardLink = "It_IT"
+
+CC:
+	locale = "ja_JP"
+	text_string = "Japanese(EUC)"
+	text_string_id = 117
+	codeset = "IBM-eucJP"
+	messages = "ja_JP"
+	keyboards = "ja_JP ja_JP@alt"
+	package = "bos.loc.iso.ja_JP"
+	variables = "LANG=ja_JP"
+	bosinst_menu = "y"
+	menu = "106"
+	messageLink = "ja_JP"
+	keyboardLink = "ja_JP"
+
+CC:
+	locale = "Ja_JP"
+	text_string = "Japanese(PC)"
+	text_string_id = 140
+	codeset = "IBM-932"
+	messages = "Ja_JP"
+	keyboards = "Ja_JP Ja_JP@alt"
+	package = "bos.loc.pc.Ja_JP"
+	variables = "LANG=Ja_JP"
+	bosinst_menu = "y"
+	menu = "106"
+	messageLink = "Ja_JP"
+	keyboardLink = "Ja_JP"
+
+CC:
+	locale = "ko_KR"
+	text_string = "Korean"
+	text_string_id = 118
+	codeset = "IBM-eucKR"
+	messages = "ko_KR"
+	keyboards = "ko_KR"
+	package = "bos.loc.iso.ko_KR"
+	variables = "LANG=ko_KR"
+	bosinst_menu = "y"
+	menu = "106"
+	messageLink = "ko_KR"
+	keyboardLink = "ko_KR"
+
+CC:
+	locale = "mk_MK"
+	text_string = "Macedonian"
+	text_string_id = 130
+	codeset = "ISO8859-5"
+	messages = "en_US"
+	keyboards = "mk_MK"
+	package = "bos.loc.iso.mk_MK"
+	variables = "LANG=mk_MK"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "mk_MK"
+
+CC:
+	locale = "no_NO"
+	text_string = "Norwegian"
+	text_string_id = 119
+	codeset = "ISO8859-1"
+	messages = "no_NO"
+	keyboards = "no_NO"
+	package = "bos.loc.iso.no_NO"
+	variables = "LANG=no_NO"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "no_NO"
+	keyboardLink = "no_NO"
+
+CC:
+	locale = "No_NO"
+	text_string = "Norwegian"
+	text_string_id = 119
+	codeset = "IBM-850"
+	messages = "No_NO"
+	keyboards = "No_NO"
+	package = "bos.loc.pc_compat.No_NO"
+	variables = "LANG=No_NO"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "No_NO"
+	keyboardLink = "No_NO"
+
+CC:
+	locale = "pl_PL"
+	text_string = "Polish"
+	text_string_id = 131
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "pl_PL"
+	package = "bos.loc.iso.pl_PL"
+	variables = "LANG=pl_PL"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "pl_PL"
+
+CC:
+	locale = "pt_BR"
+	text_string = "Portuguese (Brazil)"
+	text_string_id = 141
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "pt_BR"
+	package = "bos.loc.iso.pt_BR"
+	variables = "LANG=pt_BR"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "pt_BR"
+
+CC:
+	locale = "pt_PT"
+	text_string = "Portuguese"
+	text_string_id = 120
+	codeset = "ISO8859-1"
+	messages = "en_US"
+	keyboards = "pt_PT"
+	package = "bos.loc.iso.pt_PT"
+	variables = "LANG=pt_PT"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "pt_PT"
+
+CC:
+	locale = "Pt_PT"
+	text_string = "Portuguese"
+	text_string_id = 120
+	codeset = "IBM-850"
+	messages = "en_US"
+	keyboards = "Pt_PT"
+	package = "bos.loc.pc_compat.Pt_PT"
+	variables = "LANG=Pt_PT"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "Pt_PT"
+
+CC:
+	locale = "ro_RO"
+	text_string = "Romanian"
+	text_string_id = 132
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "ro_RO"
+	package = "bos.loc.iso.ro_RO"
+	variables = "LANG=ro_RO"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "ro_RO"
+
+CC:
+	locale = "ru_RU"
+	text_string = "Russian"
+	text_string_id = 133
+	codeset = "ISO8859-5"
+	messages = "en_US"
+	keyboards = "ru_RU ru_RU@alt"
+	package = "bos.loc.iso.ru_RU"
+	variables = "LANG=ru_RU"
+	bosinst_menu = "y"
+	menu = "101"
+	messageLink = "en_US"
+	keyboardLink = "ru_RU"
+
+CC:
+	locale = "sr_SP"
+	text_string = "Serbian Cyrillic"
+	text_string_id = 134
+	codeset = "ISO8859-5"
+	messages = "en_US"
+	keyboards = "sr_SP"
+	package = "bos.loc.iso.sr_SP"
+	variables = "LANG=sr_SP"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "sr_SP"
+
+CC:
+	locale = "sh_SP"
+	text_string = "Serbian Latin"
+	text_string_id = 135
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "sh_SP"
+	package = "bos.loc.iso.sh_SP"
+	variables = "LANG=sh_SP"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "sh_SP"
+
+CC:
+	locale = "sk_SK"
+	text_string = "Slovak"
+	text_string_id = 136
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "sk_SK"
+	package = "bos.loc.iso.sk_SK"
+	variables = "LANG=sk_SK"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "sk_SK"
+
+CC:
+	locale = "sl_SI"
+	text_string = "Slovene"
+	text_string_id = 137
+	codeset = "ISO8859-2"
+	messages = "en_US"
+	keyboards = "sl_SI"
+	package = "bos.loc.iso.sl_SI"
+	variables = "LANG=sl_SI"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "sl_SI"
+
+CC:
+	locale = "es_ES"
+	text_string = "Spanish"
+	text_string_id = 121
+	codeset = "ISO8859-1"
+	messages = "es_ES"
+	keyboards = "es_ES"
+	package = "bos.loc.iso.es_ES"
+	variables = "LANG=es_ES"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "es_ES"
+	keyboardLink = "es_ES"
+
+CC:
+	locale = "Es_ES"
+	text_string = "Spanish"
+	text_string_id = 121
+	codeset = "IBM-850"
+	messages = "Es_ES"
+	keyboards = "Es_ES"
+	package = "bos.loc.pc_compat.Es_ES"
+	variables = "LANG=Es_ES"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Es_ES"
+	keyboardLink = "Es_ES"
+
+CC:
+	locale = "sv_SE"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "ISO8859-1"
+	messages = "sv_SE"
+	keyboards = "sv_SE sv_SE@alt"
+	package = "bos.loc.iso.sv_SE"
+	variables = "LANG=sv_SE"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "sv_SE"
+	keyboardLink = "sv_SE"
+
+CC:
+	locale = "Sv_SE"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "IBM-850"
+	messages = "Sv_SE"
+	keyboards = "Sv_SE Sv_SE@alt"
+	package = "bos.loc.pc_compat.Sv_SE"
+	variables = "LANG=Sv_SE"
+	bosinst_menu = "n"
+	menu = "102"
+	messageLink = "Sv_SE"
+	keyboardLink = "Sv_SE"
+
+CC:
+	locale = "tr_TR"
+	text_string = "Turkish"
+	text_string_id = 123
+	codeset = "ISO8859-9"
+	messages = "en_US"
+	keyboards = "tr_TR tr_TR@alt"
+	package = "bos.loc.iso.tr_TR"
+	variables = "LANG=tr_TR"
+	bosinst_menu = "y"
+	menu = "102"
+	messageLink = "en_US"
+	keyboardLink = "tr_TR"
+
+MESSAGES:
+	locale = "C"
+	text_string = "C (POSIX)"
+	text_string_id = 100
+	codeset = "ISO8859-1"
+	package = ""
+	variables = ""
+	bosinst_translated = "n"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "en_US"
+	text_string = "English (United States)"
+	text_string_id = 106
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.en_US bos.msg.en_US.rte bos.msg.en_US.net.tcp.client"
+	variables = "LC_MESSAGES=en_US"
+	bosinst_translated = "y"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "En_US"
+	text_string = "English (United States)"
+	text_string_id = 106
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.En_US bos.msg.En_US.rte bos.msg.En_US.net.tcp.client"
+	variables = "LC_MESSAGES=En_US"
+	bosinst_translated = "n"
+
+MESSAGES:
+	locale = "zh_TW"
+	text_string = "Chinese (Traditional)"
+	text_string_id = 101
+	codeset = "IBM-eucTW"
+	package = "bos.loc.iso.zh_TW bos.msg.zh_TW.rte bos.msg.zh_TW.net.tcp.client"
+	variables = "LC_MESSAGES=C@lft"
+	bosinst_translated = "n"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "nl_BE"
+	text_string = "Dutch (Belgium)"
+	text_string_id = 103
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.nl_BE bos.msg.nl_BE.rte bos.msg.nl_BE.net.tcp.client"
+	variables = "LC_MESSAGES=nl_BE"
+	bosinst_translated = "y"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "Nl_BE"
+	text_string = "Dutch (Belgium)"
+	text_string_id = 103
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Nl_BE bos.msg.Nl_BE.rte bos.msg.Nl_BE.net.tcp.client"
+	variables = "LC_MESSAGES=Nl_BE"
+	bosinst_translated = "n"
+
+MESSAGES:
+	locale = "fr_FR"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fr_FR bos.msg.fr_FR.rte bos.msg.fr_FR.net.tcp.client"
+	variables = "LC_MESSAGES=fr_FR"
+	bosinst_translated = "y"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "Fr_FR"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fr_FR bos.msg.Fr_FR.rte bos.msg.Fr_FR.net.tcp.client"
+	variables = "LC_MESSAGES=Fr_FR"
+	bosinst_translated = "n"
+
+MESSAGES:
+	locale = "de_DE"
+	text_string = "German"
+	text_string_id = 113
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.de_DE bos.msg.de_DE.rte bos.msg.de_DE.net.tcp.client"
+	variables = "LC_MESSAGES=de_DE"
+	bosinst_translated = "y"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "De_DE"
+	text_string = "German"
+	text_string_id = 113
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.De_DE bos.msg.De_DE.rte bos.msg.De_DE.net.tcp.client"
+	variables = "LC_MESSAGES=De_DE"
+	bosinst_translated = "n"
+
+MESSAGES:
+	locale = "it_IT"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.it_IT bos.msg.it_IT.rte bos.msg.it_IT.net.tcp.client"
+	variables = "LC_MESSAGES=it_IT"
+	bosinst_translated = "y"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "It_IT"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.It_IT bos.msg.It_IT.rte bos.msg.It_IT.net.tcp.client"
+	variables = "LC_MESSAGES=It_IT"
+	bosinst_translated = "n"
+
+MESSAGES:
+	locale = "ja_JP"
+	text_string = "Japanese(EUC)"
+	text_string_id = 117
+	codeset = "IBM-eucJP"
+	package = "bos.loc.iso.ja_JP bos.msg.ja_JP.rte bos.msg.ja_JP.net.tcp.client"
+	variables = "LC_MESSAGES=C@lft"
+	bosinst_translated = "n"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "Ja_JP"
+	text_string = "Japanese(PC)"
+	text_string_id = 140
+	codeset = "IBM-932"
+	package = "bos.loc.pc.Ja_JP bos.msg.Ja_JP.rte bos.msg.Ja_JP.net.tcp.client"
+	variables = "LC_MESSAGES=C@lft"
+	bosinst_translated = "n"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "ko_KR"
+	text_string = "Korean"
+	text_string_id = 118
+	codeset = "IBM-eucKR"
+	package = "bos.loc.iso.ko_KR bos.msg.ko_KR.rte bos.msg.ko_KR.net.tcp.client"
+	variables = "LC_MESSAGES=C@lft"
+	bosinst_translated = "n"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "no_NO"
+	text_string = "Norwegian"
+	text_string_id = 119
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.no_NO bos.msg.no_NO.rte bos.msg.no_NO.net.tcp.client"
+	variables = "LC_MESSAGES=no_NO"
+	bosinst_translated = "n"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "No_NO"
+	text_string = "Norwegian"
+	text_string_id = 119
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.No_NO bos.msg.No_NO.rte bos.msg.No_NO.net.tcp.client"
+	variables = "LC_MESSAGES=No_NO"
+	bosinst_translated = "n"
+
+MESSAGES:
+	locale = "es_ES"
+	text_string = "Spanish"
+	text_string_id = 121
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.es_ES bos.msg.es_ES.rte bos.msg.es_ES.net.tcp.client"
+	variables = "LC_MESSAGES=es_ES"
+	bosinst_translated = "y"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "Es_ES"
+	text_string = "Spanish"
+	text_string_id = 121
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Es_ES bos.msg.Es_ES.rte bos.msg.Es_ES.net.tcp.client"
+	variables = "LC_MESSAGES=Es_ES"
+	bosinst_translated = "n"
+
+MESSAGES:
+	locale = "sv_SE"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.sv_SE bos.msg.sv_SE.rte bos.msg.sv_SE.net.tcp.client"
+	variables = "LC_MESSAGES=sv_SE"
+	bosinst_translated = "y"
+	bosinst_menu = "y"
+
+MESSAGES:
+	locale = "Sv_SE"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Sv_SE bos.msg.Sv_SE.rte bos.msg.Sv_SE.net.tcp.client"
+	variables = "LC_MESSAGES=Sv_SE"
+	bosinst_translated = "n"
+
+KEYBOARD:
+	locale = "C"
+	keyboard_map = "C"
+	text_string = "C (POSIX)"
+	text_string_id = 100
+	codeset = "ISO8859-1"
+	package = ""
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/C.lftkeymap"
+	key_text = "C (POSIX) keyboard."
+	key_text_id = 200
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "ar_AA"
+	keyboard_map = "ar_AA"
+	text_string = "Arabic(ISO)"
+	text_string_id = 124
+	codeset = "ISO8859-6"
+	package = "bos.loc.iso.ar_AA"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/ar_AA.lftkeymap"
+	key_text = "Arabic(ISO) keyboard."
+	key_text_id = 231
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Ar_AA"
+	keyboard_map = "Ar_AA"
+	text_string = "Arabic(PC)"
+	text_string_id = 138
+	codeset = "IBM-1046"
+	package = "bos.loc.pc_compat.Ar_AA"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Ar_AA.lftkeymap"
+	key_text = "Arabic(PC) keyboard."
+	key_text_id = 245
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "bg_BG"
+	keyboard_map = "bg_BG"
+	text_string = "Bulgarian"
+	text_string_id = 125
+	codeset = "ISO8859-5"
+	package = "bos.loc.iso.bg_BG"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/bg_BG.lftkeymap"
+	key_text = "Bulgarian Default: The keyboard has 102 keys."
+	key_text_id = 232
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "bg_BG"
+	keyboard_map = "bg_BG@alt"
+	text_string = "Bulgarian"
+	text_string_id = 125
+	codeset = "ISO8859-5"
+	package = "bos.loc.iso.bg_BG"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/bg_BG@alt.lftkeymap"
+	key_text = "Bulgarian Alternate: The keyboard has 101 keys."
+	key_text_id = 248
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "zh_TW"
+	keyboard_map = "zh_TW"
+	text_string = "Chinese (Traditional)"
+	text_string_id = 101
+	codeset = "IBM-eucTW"
+	package = "bos.loc.iso.zh_TW"
+	variables = ""
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/zh_TW.lftkeymap ; chhwkbd -m TW"
+	key_text = "Chinese (Traditional) keyboard."
+	key_text_id = 201
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "zh_CN"
+	keyboard_map = "zh_CN"
+	text_string = "Chinese (Simplified EUC)"
+	text_string_id = 142
+	codeset = "IBM-eucCN"
+	package = "bos.loc.iso.zh_CN"
+	variables = ""
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/zh_CN.lftkeymap"
+	key_text = "Chinese (Simplified EUC) keyboard."
+	key_text_id = 257
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "ZH_CN"
+	keyboard_map = "ZH_CN"
+	text_string = "Chinese (Simplified UTF)"
+	text_string_id = 143
+	codeset = "UTF-8"
+	package = "bos.loc.utf.ZH_CN"
+	variables = ""
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/ZH_CN.lftkeymap"
+	key_text = "Chinese (Simplified UTF) keyboard."
+	key_text_id = 258
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "hr_HR"
+	keyboard_map = "hr_HR"
+	text_string = "Croatian"
+	text_string_id = 126
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.hr_HR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/hr_HR.lftkeymap"
+	key_text = "Croatian keyboard."
+	key_text_id = 233
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "cs_CZ"
+	keyboard_map = "cs_CZ"
+	text_string = "Czech"
+	text_string_id = 127
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.cs_CZ"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/cs_CZ.lftkeymap"
+	key_text = "Czech keyboard."
+	key_text_id = 234
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "da_DK"
+	keyboard_map = "da_DK"
+	text_string = "Danish"
+	text_string_id = 102
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.da_DK"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/da_DK.lftkeymap"
+	key_text = "Danish keyboard."
+	key_text_id = 202
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Da_DK"
+	keyboard_map = "Da_DK"
+	text_string = "Danish"
+	text_string_id = 102
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Da_DK"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Da_DK.lftkeymap"
+	key_text = "Danish keyboard."
+	key_text_id = 202
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "nl_BE"
+	keyboard_map = "nl_BE"
+	text_string = "Dutch (Belgium)"
+	text_string_id = 103
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.nl_BE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/nl_BE.lftkeymap"
+	key_text = "Dutch (Belgium) keyboard."
+	key_text_id = 203
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Nl_BE"
+	keyboard_map = "Nl_BE"
+	text_string = "Dutch (Belgium)"
+	text_string_id = 103
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Nl_BE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Nl_BE.lftkeymap"
+	key_text = "Dutch (Belgium) keyboard."
+	key_text_id = 203
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "nl_NL"
+	keyboard_map = "nl_NL"
+	text_string = "Dutch"
+	text_string_id = 104
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.nl_NL"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/nl_NL.lftkeymap"
+	key_text = "Dutch keyboard: The top row of letters starts with 'Q W'."
+	key_text_id = 204
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Nl_NL"
+	keyboard_map = "Nl_NL"
+	text_string = "Dutch"
+	text_string_id = 104
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Nl_NL"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Nl_NL.lftkeymap"
+	key_text = "Dutch keyboard: The top row of letters starts with 'Q W'."
+	key_text_id = 204
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "en_GB"
+	keyboard_map = "en_GB"
+	text_string = "English (Great Britain)"
+	text_string_id = 105
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.en_GB"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/en_GB.lftkeymap"
+	key_text = "English (UK) Default: The '8' key has an '*' on it."
+	key_text_id = 205
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "En_GB"
+	keyboard_map = "En_GB"
+	text_string = "English (Great Britain)"
+	text_string_id = 105
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.En_GB"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/En_GB.lftkeymap"
+	key_text = "English (UK) Default: The '8' key has an '*' on it."
+	key_text_id = 205
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "en_GB"
+	keyboard_map = "en_GB@alt"
+	text_string = "English (Great Britain)"
+	text_string_id = 105
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.en_GB"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/en_GB@alt.lftkeymap"
+	key_text = "English (UK) Alternate: The '8' key has a '(' on it."
+	key_text_id = 225
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "En_GB"
+	keyboard_map = "En_GB@alt"
+	text_string = "English (Great Britain)"
+	text_string_id = 105
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.En_GB"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/En_GB@alt.lftkeymap"
+	key_text = "English (UK) Alternate: The '8' key has a '(' on it."
+	key_text_id = 225
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "en_US"
+	keyboard_map = "en_US"
+	text_string = "English (United States)"
+	text_string_id = 106
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.en_US"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/en_US.lftkeymap"
+	key_text = "English (United States) keyboard."
+	key_text_id = 206
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "En_US"
+	keyboard_map = "En_US"
+	text_string = "English (United States)"
+	text_string_id = 106
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.En_US"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/En_US.lftkeymap"
+	key_text = "English (United States) keyboard."
+	key_text_id = 206
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "fi_FI"
+	keyboard_map = "fi_FI"
+	text_string = "Finnish"
+	text_string_id = 107
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fi_FI"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/fi_FI.lftkeymap"
+	key_text = "Finnish Default: The front side of the '7' key has a '{' on it."
+	key_text_id = 207
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Fi_FI"
+	keyboard_map = "Fi_FI"
+	text_string = "Finnish"
+	text_string_id = 107
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fi_FI"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Fi_FI.lftkeymap"
+	key_text = "Finnish Default: The front side of the '7' key has a '{' on it."
+	key_text_id = 207
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "fi_FI"
+	keyboard_map = "fi_FI@alt"
+	text_string = "Finnish"
+	text_string_id = 107
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fi_FI"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/fi_FI@alt.lftkeymap"
+	key_text = "Finnish Alternate: The front side of the '7' key has nothing on it."
+	key_text_id = 226
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Fi_FI"
+	keyboard_map = "Fi_FI@alt"
+	text_string = "Finnish"
+	text_string_id = 107
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fi_FI"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Fi_FI@alt.lftkeymap"
+	key_text = "Finnish Alternate: The front side of the '7' key has nothing on it."
+	key_text_id = 226
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "fr_BE"
+	keyboard_map = "fr_BE"
+	text_string = "French (Belgium)"
+	text_string_id = 108
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fr_BE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/fr_BE.lftkeymap"
+	key_text = "French (Belgium) keyboard."
+	key_text_id = 208
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Fr_BE"
+	keyboard_map = "Fr_BE"
+	text_string = "French (Belgium)"
+	text_string_id = 108
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fr_BE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Fr_BE.lftkeymap"
+	key_text = "French (Belgium) keyboard."
+	key_text_id = 208
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "fr_CA"
+	keyboard_map = "fr_CA"
+	text_string = "French (Canada)"
+	text_string_id = 109
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fr_CA"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/fr_CA.lftkeymap"
+	key_text = "French (Canada) keyboard."
+	key_text_id = 209
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Fr_CA"
+	keyboard_map = "Fr_CA"
+	text_string = "French (Canada)"
+	text_string_id = 109
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fr_CA"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Fr_CA.lftkeymap"
+	key_text = "French (Canada) keyboard."
+	key_text_id = 209
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "fr_CH"
+	keyboard_map = "fr_CH"
+	text_string = "French (Switzerland)"
+	text_string_id = 110
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fr_CH"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/fr_CH.lftkeymap"
+	key_text = "French (Switzerland) keyboard."
+	key_text_id = 210
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Fr_CH"
+	keyboard_map = "Fr_CH"
+	text_string = "French (Switzerland)"
+	text_string_id = 110
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fr_CH"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Fr_CH.lftkeymap"
+	key_text = "French (Switzerland) keyboard."
+	key_text_id = 210
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "fr_FR"
+	keyboard_map = "fr_FR"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fr_FR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/fr_FR.lftkeymap"
+	key_text = "French Default: The '8' key has an '!' on it."
+	key_text_id = 211
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Fr_FR"
+	keyboard_map = "Fr_FR"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fr_FR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Fr_FR.lftkeymap"
+	key_text = "French Default: The '8' key has an '!' on it."
+	key_text_id = 211
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "fr_FR"
+	keyboard_map = "fr_FR@alt"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.fr_FR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/fr_FR@alt.lftkeymap"
+	key_text = "French Alternate: The '8' key as an '_' on it."
+	key_text_id = 227
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Fr_FR"
+	keyboard_map = "Fr_FR@alt"
+	text_string = "French"
+	text_string_id = 111
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Fr_FR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Fr_FR@alt.lftkeymap"
+	key_text = "French Alternate: The '8' key as an '_' on it."
+	key_text_id = 227
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "de_CH"
+	keyboard_map = "de_CH"
+	text_string = "German (Switzerland)"
+	text_string_id = 112
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.de_CH"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/de_CH.lftkeymap"
+	key_text = "German (Switzerland) keyboard."
+	key_text_id = 212
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "De_CH"
+	keyboard_map = "De_CH"
+	text_string = "German (Switzerland)"
+	text_string_id = 112
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.De_CH"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/De_CH.lftkeymap"
+	key_text = "German (Switzerland) keyboard."
+	key_text_id = 212
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "de_DE"
+	keyboard_map = "de_DE"
+	text_string = "German"
+	text_string_id = 113
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.de_DE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/de_DE.lftkeymap"
+	key_text = "German keyboard."
+	key_text_id = 213
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "De_DE"
+	keyboard_map = "De_DE"
+	text_string = "German"
+	text_string_id = 113
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.De_DE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/De_DE.lftkeymap"
+	key_text = "German keyboard."
+	key_text_id = 213
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "el_GR"
+	keyboard_map = "el_GR"
+	text_string = "Greek"
+	text_string_id = 114
+	codeset = "ISO8859-7"
+	package = "bos.loc.iso.el_GR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/el_GR.lftkeymap"
+	key_text = "Greek keyboard."
+	key_text_id = 214
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "iw_IL"
+	keyboard_map = "iw_IL"
+	text_string = "Hebrew(ISO)"
+	text_string_id = 128
+	codeset = "ISO8859-8"
+	package = "bos.loc.iso.iw_IL"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/iw_IL.lftkeymap"
+	key_text = "Hebrew(ISO) Default: The keyboard has 102 keys."
+	key_text_id = 235
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "iw_IL"
+	keyboard_map = "iw_IL@alt"
+	text_string = "Hebrew(ISO)"
+	text_string_id = 128
+	codeset = "ISO8859-8"
+	package = "bos.loc.iso.iw_IL"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/iw_IL@alt.lftkeymap"
+	key_text = "Hebrew(ISO) Alternate: The keyboard has 101 keys."
+	key_text_id = 250
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Iw_IL"
+	keyboard_map = "Iw_IL"
+	text_string = "Hebrew(PC)"
+	text_string_id = 139
+	codeset = "IBM-856"
+	package = "bos.loc.pc_compat.Iw_IL"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Iw_IL.lftkeymap"
+	key_text = "Hebrew(PC) Default: The keyboard has 102 keys."
+	key_text_id = 246
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Iw_IL"
+	keyboard_map = "Iw_IL@alt"
+	text_string = "Hebrew(PC)"
+	text_string_id = 139
+	codeset = "IBM-856"
+	package = "bos.loc.pc_compat.Iw_IL"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Iw_IL@alt.lftkeymap"
+	key_text = "Hebrew(PC) Alternate: The keyboard has 101 keys."
+	key_text_id = 251
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "hu_HU"
+	keyboard_map = "hu_HU"
+	text_string = "Hungarian"
+	text_string_id = 129
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.hu_HU"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/hu_HU.lftkeymap"
+	key_text = "Hungarian keyboard."
+	key_text_id = 236
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "is_IS"
+	keyboard_map = "is_IS"
+	text_string = "Icelandic"
+	text_string_id = 115
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.is_IS"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/is_IS.lftkeymap"
+	key_text = "Icelandic keyboard."
+	key_text_id = 215
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Is_IS"
+	keyboard_map = "Is_IS"
+	text_string = "Icelandic"
+	text_string_id = 115
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Is_IS"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Is_IS.lftkeymap"
+	key_text = "Icelandic keyboard."
+	key_text_id = 215
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "it_IT"
+	keyboard_map = "it_IT"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.it_IT"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/it_IT.lftkeymap"
+	key_text = "Italian Default: The front side of the 'Q' key has an '@' on it."
+	key_text_id = 216
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "It_IT"
+	keyboard_map = "It_IT"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.It_IT"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/It_IT.lftkeymap"
+	key_text = "Italian Default: The front side of the 'Q' key has an '@' on it."
+	key_text_id = 216
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "it_IT"
+	keyboard_map = "it_IT@alt"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.it_IT"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/it_IT@alt.lftkeymap"
+	key_text = "Italian Alternate: The front side of the 'Q' key has nothing on it."
+	key_text_id = 228
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "It_IT"
+	keyboard_map = "It_IT@alt"
+	text_string = "Italian"
+	text_string_id = 116
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.It_IT"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/It_IT@alt.lftkeymap"
+	key_text = "Italian Alternate: The front side of the 'Q' key has nothing on it."
+	key_text_id = 228
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "ja_JP"
+	keyboard_map = "ja_JP"
+	text_string = "Japanese(EUC)"
+	text_string_id = 117
+	codeset = "IBM-eucJP"
+	package = "bos.loc.iso.ja_JP"
+	variables = ""
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/ja_JP.lftkeymap ; chhwkbd -m JP"
+	key_text = "Japanese(EUC) Default: The 'Caps Lock' is on the bottom row of keys."
+	key_text_id = 255
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "ja_JP"
+	keyboard_map = "ja_JP@alt"
+	text_string = "Japanese(EUC)"
+	text_string_id = 117
+	codeset = "IBM-eucJP"
+	package = "bos.loc.iso.ja_JP"
+	variables = ""
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/ja_JP@alt.lftkeymap ; chhwkbd -m JP"
+	key_text = "Japanese(EUC) Alternate: The 'Caps Lock' is above the left shift key."
+	key_text_id = 256
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Ja_JP"
+	keyboard_map = "Ja_JP"
+	text_string = "Japanese(PC)"
+	text_string_id = 140
+	codeset = "IBM-932"
+	package = "bos.loc.pc.Ja_JP"
+	variables = ""
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/Ja_JP.lftkeymap ; chhwkbd -m JP"
+	key_text = "Japanese(PC) Default: The 'Caps Lock' is on the bottom row of keys."
+	key_text_id = 253
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Ja_JP"
+	keyboard_map = "Ja_JP@alt"
+	text_string = "Japanese(PC)"
+	text_string_id = 140
+	codeset = "IBM-932"
+	package = "bos.loc.pc.Ja_JP"
+	variables = ""
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/Ja_JP@alt.lftkeymap ; chhwkbd -m JP"
+	key_text = "Japanese(PC) Alternate: The 'Caps Lock' is above the left shift key."
+	key_text_id = 254
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "ko_KR"
+	keyboard_map = "ko_KR"
+	text_string = "Korean"
+	text_string_id = 118
+	codeset = "IBM-eucKR"
+	package = "bos.loc.iso.ko_KR"
+	variables = "AIX_LOCKKEY=38 AIX_LOCKMASK=08 AIX_LOCKBITS=00"
+	keyboard_cmd = "eval /usr/bin/chkbd /usr/lib/nls/loc/ko_KR.lftkeymap ; chhwkbd -m KR"
+	key_text = "Korean keyboard."
+	key_text_id = 218
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "mk_MK"
+	keyboard_map = "mk_MK"
+	text_string = "Macedonian"
+	text_string_id = 130
+	codeset = "ISO8859-5"
+	package = "bos.loc.iso.mk_MK"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/mk_MK.lftkeymap"
+	key_text = "Macedonian keyboard."
+	key_text_id = 237
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "no_NO"
+	keyboard_map = "no_NO"
+	text_string = "Norwegian"
+	text_string_id = 119
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.no_NO"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/no_NO.lftkeymap"
+	key_text = "Norwegian keyboard."
+	key_text_id = 219
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "No_NO"
+	keyboard_map = "No_NO"
+	text_string = "Norwegian"
+	text_string_id = 119
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.No_NO"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/No_NO.lftkeymap"
+	key_text = "Norwegian keyboard."
+	key_text_id = 219
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "pl_PL"
+	keyboard_map = "pl_PL"
+	text_string = "Polish"
+	text_string_id = 131
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.pl_PL"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/pl_PL.lftkeymap"
+	key_text = "Polish keyboard."
+	key_text_id = 238
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "pt_BR"
+	keyboard_map = "pt_BR"
+	text_string = "Portuguese (Brazil)"
+	text_string_id = 141
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.pt_BR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/pt_BR.lftkeymap"
+	key_text = "Portuguese (Brazil) keyboard."
+	key_text_id = 252
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "pt_PT"
+	keyboard_map = "pt_PT"
+	text_string = "Portuguese"
+	text_string_id = 120
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.pt_PT"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/pt_PT.lftkeymap"
+	key_text = "Portuguese keyboard."
+	key_text_id = 220
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Pt_PT"
+	keyboard_map = "Pt_PT"
+	text_string = "Portuguese"
+	text_string_id = 120
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Pt_PT"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Pt_PT.lftkeymap"
+	key_text = "Portuguese keyboard."
+	key_text_id = 220
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "ro_RO"
+	keyboard_map = "ro_RO"
+	text_string = "Romanian"
+	text_string_id = 132
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.ro_RO"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/ro_RO.lftkeymap"
+	key_text = "Romanian keyboard."
+	key_text_id = 239
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "ru_RU"
+	keyboard_map = "ru_RU"
+	text_string = "Russian"
+	text_string_id = 133
+	codeset = "ISO8859-5"
+	package = "bos.loc.iso.ru_RU"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/ru_RU.lftkeymap"
+	key_text = "Russian Default: The keyboard has 101 keys."
+	key_text_id = 240
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "ru_RU"
+	keyboard_map = "ru_RU@alt"
+	text_string = "Russian"
+	text_string_id = 133
+	codeset = "ISO8859-5"
+	package = "bos.loc.iso.ru_RU"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/ru_RU@alt.lftkeymap"
+	key_text = "Russian Alternate: The keyboard has 102 keys."
+	key_text_id = 249
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "sr_SP"
+	keyboard_map = "sr_SP"
+	text_string = "Serbian Cyrillic"
+	text_string_id = 134
+	codeset = "ISO8859-5"
+	package = "bos.loc.iso.sr_SP"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/sr_SP.lftkeymap"
+	key_text = "Serbian Cyrillic keyboard."
+	key_text_id = 241
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "sh_SP"
+	keyboard_map = "sh_SP"
+	text_string = "Serbian Latin"
+	text_string_id = 135
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.sh_SP"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/sh_SP.lftkeymap"
+	key_text = "Serbian Latin keyboard."
+	key_text_id = 242
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "sk_SK"
+	keyboard_map = "sk_SK"
+	text_string = "Slovak"
+	text_string_id = 136
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.sk_SK"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/sk_SK.lftkeymap"
+	key_text = "Slovak keyboard."
+	key_text_id = 243
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "sl_SI"
+	keyboard_map = "sl_SI"
+	text_string = "Slovene"
+	text_string_id = 137
+	codeset = "ISO8859-2"
+	package = "bos.loc.iso.sl_SI"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/sl_SI.lftkeymap"
+	key_text = "Slovene keyboard."
+	key_text_id = 244
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "es_ES"
+	keyboard_map = "es_ES"
+	text_string = "Spanish"
+	text_string_id = 121
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.es_ES"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/es_ES.lftkeymap"
+	key_text = "Spanish keyboard."
+	key_text_id = 221
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Es_ES"
+	keyboard_map = "Es_ES"
+	text_string = "Spanish"
+	text_string_id = 121
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Es_ES"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Es_ES.lftkeymap"
+	key_text = "Spanish keyboard."
+	key_text_id = 221
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "sv_SE"
+	keyboard_map = "sv_SE"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.sv_SE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/sv_SE.lftkeymap"
+	key_text = "Swedish Default: The front side of the '7' key has a '{' on it."
+	key_text_id = 222
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Sv_SE"
+	keyboard_map = "Sv_SE"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Sv_SE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Sv_SE.lftkeymap"
+	key_text = "Swedish Default: The front side of the '7' key has a '{' on it."
+	key_text_id = 222
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "sv_SE"
+	keyboard_map = "sv_SE@alt"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "ISO8859-1"
+	package = "bos.loc.iso.sv_SE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/sv_SE@alt.lftkeymap"
+	key_text = "Swedish Alternate: The front side of the '7' key has nothing on it."
+	key_text_id = 230
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "Sv_SE"
+	keyboard_map = "Sv_SE@alt"
+	text_string = "Swedish"
+	text_string_id = 122
+	codeset = "IBM-850"
+	package = "bos.loc.pc_compat.Sv_SE"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/Sv_SE@alt.lftkeymap"
+	key_text = "Swedish Alternate: The front side of the '7' key has nothing on it."
+	key_text_id = 230
+	bosinst_menu = "n"
+
+KEYBOARD:
+	locale = "tr_TR"
+	keyboard_map = "tr_TR"
+	text_string = "Turkish"
+	text_string_id = 123
+	codeset = "ISO8859-9"
+	package = "bos.loc.iso.tr_TR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/tr_TR.lftkeymap"
+	key_text = "Turkish Default: The top row of letters starts with 'Q W'."
+	key_text_id = 223
+	bosinst_menu = "y"
+
+KEYBOARD:
+	locale = "tr_TR"
+	keyboard_map = "tr_TR@alt"
+	text_string = "Turkish"
+	text_string_id = 123
+	codeset = "ISO8859-9"
+	package = "bos.loc.iso.tr_TR"
+	variables = ""
+	keyboard_cmd = "/usr/bin/chkbd /usr/lib/nls/loc/tr_TR@alt.lftkeymap"
+	key_text = "Turkish Alternate: The top row of letters starts with 'F G'."
+	key_text_id = 224
+	bosinst_menu = "y"
+
+FONT:
+	codeset = "IBM-850"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.ibm850.snf -a font2_path=/usr/lpp/fonts/Erg11.ibm850.snf"
+
+FONT:
+	codeset = "IBM-856"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Rom22.ibm856.snf -a font2_path=/usr/lpp/fonts/Rom10.ibm856.snf"
+
+FONT:
+	codeset = "IBM-1046"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Rom22.ibm1046.snf -a font2_path=/usr/lpp/fonts/Rom10.ibm1046.snf"
+
+FONT:
+	codeset = "ISO8859-1"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso1.snf -a font2_path=/usr/lpp/fonts/Erg11.iso1.snf"
+
+FONT:
+	codeset = "ISO8859-2"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Rom22.iso2.snf -a font2_path=/usr/lpp/fonts/Rom10.iso2.snf"
+
+FONT:
+	codeset = "ISO8859-5"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Rom22.iso5.snf -a font2_path=/usr/lpp/fonts/Rom10.iso5.snf"
+
+FONT:
+	codeset = "ISO8859-6"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Rom22.ibm1046.snf -a font2_path=/usr/lpp/fonts/Rom10.ibm1046.snf"
+
+FONT:
+	codeset = "ISO8859-7"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso7.snf -a font2_path=/usr/lpp/fonts/Erg11.iso7.snf"
+
+FONT:
+	codeset = "ISO8859-8"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Rom22.iso8.snf -a font2_path=/usr/lpp/fonts/Rom10.iso8.snf"
+
+FONT:
+	codeset = "ISO8859-9"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso9.snf -a font2_path=/usr/lpp/fonts/Erg11.iso9.snf"
+
+FONT:
+	codeset = "IBM-eucKR"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso1.snf -a font2_path=/usr/lpp/fonts/Erg11.iso1.snf"
+
+FONT:
+	codeset = "IBM-eucJP"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso1.snf -a font2_path=/usr/lpp/fonts/Erg11.iso1.snf"
+
+FONT:
+	codeset = "IBM-eucTW"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso1.snf -a font2_path=/usr/lpp/fonts/Erg11.iso1.snf"
+FONT:
+	codeset = "IBM-eucCN"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso1.snf -a font2_path=/usr/lpp/fonts/Erg11.iso1.snf"
+FONT:
+	codeset = "UTF-8"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso1.snf -a font2_path=/usr/lpp/fonts/Erg11.iso1.snf"
+
+FONT:
+	codeset = "IBM-932"
+	font_cmd = "chdev -P -l lft0 -a font1_path=/usr/lpp/fonts/Erg22.iso1.snf -a font2_path=/usr/lpp/fonts/Erg11.iso1.snf"

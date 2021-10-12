@@ -1,0 +1,20 @@
+# @(#)90        1.6  src/bldenv/pkgtools/rename/forced_prereq, pkgtools, bos412, GOLDA411a 5/25/93 09:05:34
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1992,1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#=============================================================================
+# PTF U414603 was a necessary prereq for any supersede PTF.  The PTF
+# contained an installp fix to handle supersedes.  Any future enhanced
+# installp supersede PTF should be placed in here (e.g. U411711, U413425).
+
+*prereq bos.obj p=U418610

@@ -1,0 +1,177 @@
+# @(#)69	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.ISO8859-8@alt/out.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:47:11
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS:#		
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+# HTABLES
+# -------
+#
+# This file contains the requested internal to external conversion tables
+# for ehterm. Since at current version, font code points are code page
+# 856, this values are used for internal representation.
+# If ISO code page values are required for external data representation
+# a conversion is required.
+#
+# First  number is the internal (code page 856) decimal character value.
+# Second number is the external (ISO 8859-8)    decimal character value.
+#
+# Only characters with external values different from the internal,
+# must be entered.
+#
+#
+#
+#
+#  PC 856 to ISO 8859-8 code page conversion table                        */
+#  -----------------------------------------------                        */
+#                                                                         */
+# Charcters commented with [*] are PC code page characters not existing
+# in ISO. they are all mapped into ISO character 206 (bullet).
+#
+# Note that box graphics is mapped to the region 192 - 223. This is not
+# according to 8859-8 but o.k. with ISO graphic control standard.
+# Since in 8859-9 this range is unused, it seems o.k.
+#
+#P850         ISO             P850
+#value        value           name
+#
+128           224   #         aleph
+129           225   #         beth
+130           226   #         gimel
+131           227   #         daled
+132           228   #         he
+133           229   #         vav
+134           230   #         zain
+135           231   #         chet
+136           232   #         tet
+137           233   #         jod
+138           234   #         chaf sofit
+139           235   #         chaf
+140           236   #         lamed
+141           237   #         mem sofit
+142           238   #         mem
+143           239   #         nun sofit
+144           240   #         nun
+145           241   #         samach
+146           242   #         ain
+147           243   #         peh sofit
+148           244   #         peh
+149           245   #         tzadik sofit
+150           246   #         tzadik
+151           247   #         kuf
+152           248   #         resh
+153           249   #         shin
+154           250   #         taf
+155           206   #         o slash small          [*]
+156           163   #         english pund sign
+157           206   #         o slash capital        [*]
+158           206   #         multiplication sign    [*]
+159           206   #         florin sign            [*]
+160           206   #         a acute small          [*]
+161           206   #         i acute small          [*]
+162           206   #         o acute small          [*]
+163           206   #         u acute small          [*]
+164           206   #         n tilde small          [*]
+165           206   #         n tilde capital        [*]
+166           170   #         feminine sign
+167           186   #         masculine sign
+168           191   #         inverted question mark
+169           174   #         registered trademark
+170           172   #         logical not
+171           189   #         one half
+172           188   #         one quarter
+173           161   #         inverted exclamation sign
+174           171   #         left angle quotes
+175           187   #         right angle quotes
+176           219   #         quarter hashed
+177           220   #         half hashed
+178           221   #         full hashed
+179           208   #         vertical bar
+180           215   #         right side middle
+181           206   #         a acute capital        [*]
+182           206   #         a circumflex capital   [*]
+183           206   #         a grave capital        [*]
+184           169   #         copyright symbol
+185           199   #         double right side middle
+186           192   #         double vertical bar
+187           195   #         double upper right corner
+188           197   #         double lower right corner
+189           162   #         cent sign
+190           165   #         yen sign
+191           211   #         upper right corner
+192           212   #         lower left corner
+193           217   #         bottom middle
+194           216   #         top middle
+195           214   #         left side middle
+196           209   #         center box bar
+197           218   #         intersection
+198           206   #         a tilde small             [*]
+199           206   #         A tilde capital           [*]
+200           196   #         double left lower
+201           194   #         double left upper
+202           201   #         double bottom middle
+203           200   #         double top middle
+204           198   #         double left side middle
+205           193   #         double center box bar
+206           202   #         double intersection
+207           164   #         international currency symbol
+208           206   #         eth icelandic small       [*]
+209           206   #         eth icelandic capital     [*]
+210           206   #         e circumflex capital      [*]
+211           206   #         e umlaut capital          [*]
+212           206   #         e grave capital           [*]
+213           206   #         small i dotless           [*]
+214           206   #         i acute capital           [*]
+215           206   #         i circumflex capital      [*]
+216           206   #         i umlaut capital          [*]
+217           213   #         lower right corner
+218           210   #         upper left corner
+219           205   #         bright character cell
+220           204   #         bright low half of cell
+221           166   #         broken vertical bar
+222           206   #         i grave capital           [*]
+223           203   #         bright upper half cell
+224           206   #         o acute capital           [*]
+225           206   #         s sharp small             [*]
+226           206   #         o circumflex capital      [*]
+227           206   #         o grave capital           [*]
+228           206   #         o tilde samall            [*]
+229           206   #         o tilde capital           [*]
+230           181   #         mu small, micro symbol
+231           206   #         thorm icelandic small     [*]
+232           206   #         thorn icelandic capital   [*]
+233           206   #         u acute capital           [*]
+234           206   #         u circumflex capital      [*]
+235           206   #         u grave capital           [*]
+236           206   #         y acute small             [*]
+237           206   #         y acute capital           [*]
+238           175   #         overbar
+239           180   #         acute accent
+240           173   #         syllable hyphen
+241           177   #         plus minus
+242           223   #         double underscore ???
+243           190   #         three forths
+244           182   #         paragraph symbol
+245           167   #         section symbol
+246           206   #         division sign            [*]
+247           184   #         cedilla accent
+248           176   #         degree symbol
+249           168   #         umlaut accent
+250           183   #         middle dot
+251           185   #         superscript 1
+252           179   #         superscript 3
+253           178   #         superscript 2
+254           206   #         vertical solid rectangle
+255           206   #         required space           [*]
+
+

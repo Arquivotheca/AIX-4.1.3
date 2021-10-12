@@ -1,0 +1,41 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Using the "^" character, you can easily put things
+at the beginnings of lines.  For example
+  s/^/***/
+puts "***" at the beginning of the line.  Now edit
+the file "text" and put the symbol '=' at the beginning
+of lines 3 through 5. Then rewrite the file and type "ready".
+#create Ref
+beef
+pork
+=chicken
+=duck
+=turkey
+lamb
+fish
+#create text
+beef
+pork
+chicken
+duck
+turkey
+lamb
+fish
+#user
+#cmp text Ref
+#log
+#next
+40.1a 10

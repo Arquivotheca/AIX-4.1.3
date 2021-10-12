@@ -1,0 +1,144 @@
+* @(#)44	1.2  src/bos/objclass/POWER/adapter.serdasda.serdasdc.add, cfgmethods, bos411, 9428A410j 6/17/93 12:07:04
+*
+*   COMPONENT_NAME: CFGMETHODS
+*
+*   FUNCTIONS : Serial DASD controller predefines
+*
+*   ORIGINS: 27
+*
+*
+*   (C) COPYRIGHT International Business Machines Corp. 1990,1993
+*   All Rights Reserved
+*   Licensed Materials - Property of IBM
+*   US Government Users Restricted Rights - Use, duplication or
+*   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+
+PdDv:
+	type = serdasdc
+	class = adapter
+	subclass = serdasda
+	prefix = serdasdc
+	devid = 0
+	base = 1
+	has_vpd = 1
+	detectable = 1
+	chgstatus = 0
+	bus_ext = 0
+	led = 0x870
+	setno = 140
+	msgno = 0
+	fru = 1
+	catalog = devices.cat
+	DvDr = sd
+	Define = /etc/methods/define
+	Configure = /etc/methods/cfgserdasdc
+	Change = /etc/methods/chggen
+	Unconfigure = /etc/methods/ucfgdevice
+	Undefine = /etc/methods/undefine
+	Start = ""
+	Stop = ""
+	uniquetype = adapter/serdasda/serdasdc
+
+PdCn:
+        connwhere = 0
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 1
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 2
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 3
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 4
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 5
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 6
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 7
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 8
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 9
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 10
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 11
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 12
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 13
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 14
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdCn:
+        connwhere = 15
+        uniquetype = adapter/serdasda/serdasdc
+        connkey = serdasdc
+
+PdAt:
+        uniquetype = adapter/serdasda/serdasdc
+        attribute = ucode
+        values = ""
+        type = R
+        generic = D
+        nls_index = 3
+        width = ""
+        deflt = ""
+        rep = s
+
+PdAt:
+        uniquetype = adapter/serdasda/serdasdc
+        attribute = desc
+        deflt = "2"
+        values = "2,50,51,52,53" 
+        width = ""
+        type = T
+        generic = ""
+        rep = nl
+        nls_index = 0
+

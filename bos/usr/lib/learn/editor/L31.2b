@@ -1,0 +1,38 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+This directory contains a file "animal" which has
+a mistyped line.  Print the file, find the line,
+fix the error using the 's' command, and then
+rewrite the corrected file and type "ready".
+#create Ref
+cat
+dog
+raccoon
+groundhog
+mouse
+mole
+#create animal
+cat
+dog
+rakkoon
+groundhog
+mouse
+mole
+#user
+#cmp animal Ref
+#log
+#next
+32.1a 10
+31.2c 5

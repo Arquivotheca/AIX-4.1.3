@@ -1,0 +1,1487 @@
+# @(#)22        1.2  src/bos/usr/lib/nls/loc/sim/implementation.memo, cmdims, bos411, 9435C411a 9/1/94 10:02:12
+#
+# COMPONENT_NAME: cmdims
+#
+# FUNCTIONS: SBCS Input method (Dynamic Composing IM (DIM))
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+###############################################
+#                                             #
+# Dynamic Composing Input Method (DIM)        #
+# Implementation Memo                         #
+#                                             #
+# Version 1.0                                 #
+#                                             #
+# June 7, 1993                                #
+#                                             #
+# Tomohiro Miyahira (JL02258 @ YMTVM1)        #
+#                                             #
+#                           IBM Confidential  #
+###############################################
+
+This document is a memo to describe the DIM implementation.
+
+
+1. Overview
+
+The compose definition consists of two types of information. One is the
+layer switch definition and another is the compose sequence definition.
+The layer switch definition is for switching layers in the DIM which has
+input layers, such as Greek layer in Greek IM.  The layer switch definition
+can be omitted for those IMs which have no layer, such as English, French.
+The compose sequence definition is for composing keysym/string from a
+sequence of key input. Dead key composing and Alt+NumPad key handling is
+defined in this information.
+
+These two definitions are stored in separate structures and those
+structures have no relationship with each other.  The detail of the
+structures are described in the following sections.
+
+
+2. LayerSwitch structure
+
+The following is the LayerSwitch structure.  An array of this LayerSwitch
+structure stores layer switch information.
+
+typedef struct _LayerSwitch {
+        unsigned int            keysym;
+        unsigned int            state;
+        unsigned int            layer;
+        unsigned int            result_layer;
+} LayerSwitch;
+
+One LayerSwitch structure corresponds one layer_switch_definition as
+following.
+
+                  result_layer
+                       |
+                       V
+	LAYER_SWITCH layer '=' key_state_pair IN layer ;
+                                     A             A
+                                     |             |
+                                keysym,state     layer
+
+3. ComposeTable structure
+
+The following is the ComposeTable structure.  Compose sequence definitions
+are stored in a chain of the structures.
+
+typedef struct _ComposeTable {
+        unsigned int            keysym;
+        unsigned int            state;
+        unsigned int            layer;
+        unsigned int            result_keysym;
+        unsigned char           *result_string;
+        struct _ComposeTable    *brother;
+        struct _ComposeTable    *child;
+} ComposeTable;
+
+One ComposeTable corresponds one key input and only the ComposeTable which
+corresponds to the last key input has the result_keysym or result_string.
+
+The following example shows how compose sequence definitions are
+represented with the chain of the ComposeTable structures.
+
+   "ABC" = XK_a+ShiftMask  XK_b+ShiftMask  XK_c+ShiftMask in Layer2 ;
+   XK_XXX = XK_a+ShiftMask  XK_b            XK_c+ShiftMask in Layer2 ;
+
+   +--------- head -----------+
+   | keysym:        XK_None   |
+   | state:         0         |
+   | layer:         0         |
+   | result_keysym: 0         |
+   | result_string: NULL      |
+   | brother:       NULL      |
+   | child:          +-----------+
+   +--------------------------+  |
+                                 | 
+               +-----------------+ 
+               |
+               |  +-----------+     +-----------+       +-----------+
+               +->| XK_a      |  +->| XK_b      |    +->| XK_c      |
+                  | ShiftMask |  |  | ShiftMask |    |  | ShiftMask |
+                  | Layer2    |  |  | Layer2    |    |  | Layer2    |
+                  | XK_None   |  |  | XK_None   |    |  | XK_None   |
+                  | NULL      |  |  | NULL      |    |  |  +----------->"ABC"
+                  | NULL      |  |  |  +-----------+ |  | NULL      |
+                  |  +-----------+  |  +-----------|-+  | NULL      |
+                  +-----------+     +-----------+  |    +-----------+
+                                                   | 
+                                 +-----------------+ 
+                                 |
+                                 |  +-----------+       +-----------+
+                                 +->| XK_b      |    +->| XK_c      |
+                                    | 0         |    |  | ShiftMask |
+                                    | Layer2    |    |  | Layer2    |
+                                    | XK_None   |    |  | XK_XXX    |
+                                    | NULL      |    |  | NULL      |
+                                    | NULL      |    |  | NULL      |
+                                    |  +-------------+  | NULL      |
+                                    +-----------+       +-----------+
+
+The head of the ComposeTable structure chain is a dummy and has no data
+except for the child ComposeTable pointer.
+The child pointer is a pointer to a ComposeTable, which corresponds to
+the next key in a input sequence.  The brother pointer is a pointer to a
+ComposeTable, which corresponds to the next candidate of input sequence.
+XK_None is a constant value which means no data. It is not a standard keysym.
+
+The strings are not the usual string.  The first byte of the array stores
+the length of the string (not including the first byte).
+
+
+4. DIMfep and DIMobject structure 
+
+The following is the DIMfep structure to store static data (which is not
+changed during key input). The compose definition information is stored here
+and is shared by some DIMobjects.
+
+typedef struct _DIMFep {
+        IMFepCommon     common;         /* IMFEP common			*/
+        unsigned int    version;        /* DIM version			*/
+        IMKeymap        *immap;         /* imkeymap			*/
+        unsigned char   *compose;       /* pointer to the area to store	*/
+                                        /* all the read image of the    */
+                                        /* compose file			*/
+        ComposeTable    *compose_table; /* pointer to the head of the	*/
+                                        /* ComposeTable chain		*/
+        unsigned int    compose_error;  /* the result keysym for	*/
+                                        /* compose error		*/
+        unsigned char   *compose_error_str; /* the result string for	*/
+                                            /* compose error		*/
+        LayerSwitch     *layer_switch;  /* pointer to the top of the	*/
+                                        /* array of the layer switch	*/
+                                        /* definitions */
+        unsigned int    layer_switch_num; /* the number of layer switch */
+                                          /* definitions */
+} DIMFepRec, *DIMFep;
+
+The following is the DIMobj structure to store dynamic data (which is
+changed during key input).  While input keys matches a compose sequence,
+the keys/state pairs and pointers to corresponding ComposeTable structures
+are stored here.
+
+#define MAX_NUM         16
+
+typedef struct _DIMObject {
+        IMObjectCommon  common;         /* IM Common info		*/
+        IMBuffer        output;         /* output buffer		*/
+        ComposeTable    *compose;       /* pointer to a ComposeTable	*/
+                                        /* structure which corresponds	*/
+                                        /* to the current input sequence*/
+        unsigned int    layer;          /* current input layer		*/
+        unsigned int    keysym[MAX_NUM];/* keysyms in the input sequence*/
+        unsigned int    state[MAX_NUM]; /* states in the input sequence	*/
+        ComposeTable    *item[MAX_NUM]; /* pointers to each ComposeTable*/
+                                        /* structure which corresponds	*/
+                                        /* to the current input sequence*/
+        int             item_num;       /* the number of items in the	*/
+                                        /* keysym[]			*/
+                                        /* (same as state[] and item[])	*/
+} DIMObjectRec, *DIMObject;
+
+
+5. Compiled compose definition
+The compose definition is used by the DIM after compiled with the keycomp
+command (with '-c' flag).  The format of the compiled compose definition
+is as follows.
+
+ +--------------------------------------------------------------------------+
+ | DIM version number.                                       (unsigned int) |
+ +--------------------------------------------------------------------------+
+ | The number of the ComposeTable structure. (*1)            (unsigned int) |
+ +--------------------------------------------------------------------------+
+ | The size of the string area. (*2)                         (unsigned int) |
+ +--------------------------------------------------------------------------+
+ | The number of the LayerSwitch structures. (*3)            (unsigned int) |
+ +--------------------------------------------------------------------------+
+ | The default keysym for compose error.                     (unsigned int) |
+ +--------------------------------------------------------------------------+
+ | The length of the defeult string for compose error. (*4)  (unsigned int) |
+ +--------------------------------------------------------------------------+
+ | The array of the ComposeTable structure.                                 |
+ |        The size of this area is  sizeof(ComposeTable) * (*1).            |
+ +--------------------------------------------------------------------------+
+ | The string area (the array of the unsigned character).                   |
+ | This area is used for strings pointed as result_string in ComposeTable.  |
+ |        The size of this area is specified above (*2).                    |
+ +--------------------------------------------------------------------------+
+ | The array of the LayerSwitch structure.                                  |
+ |        The size of this area is  sizeof(ComposeTable) * (*3).            |
+ +--------------------------------------------------------------------------+
+ | The default string for compose error.                                    |
+ |        The size of this area is specified above (*4).                    |
+ +--------------------------------------------------------------------------+
+
+Though the following members in the ComposeTable structures are pointers
+to a string or another ComposeTable structure, in the compiled compose
+definition, these are represented as indexes of the element in in the
+corresponding array.  NULL is represented with '-1'.
+    unsigned char           *result_string;
+    struct _ComposeTable    *brother;
+    struct _ComposeTable    *child;
+These are converted into pointers after read by the DIM.
+
+
+6. Bidi support
+
+The Bidi IM has the input layer BIM_PARSEKEYS in addition to the
+BIMLatinLayer and BIMNlsLayer.  This BIM_PARSEKEYS layer is very special
+because it can be combined with the other layer.  That is, the Bidi IM has
+the four layers:
+	1. simple BIMLatinLayer
+	2. simple BIMNlsLayer
+	3. BIMLatinLayer + BIM_PARSEKEYS
+	4. BIMNlsLayer + BIM_PARSEKEYS
+It is implemented as a special layer in the DIM.  "BIM_PARSEKEYS" is the
+layer name used in the compose definition file and the corresponding layer
+number in the program is 0x10000000 (defined in the imbim.h file).
+
+This BIM_PARSEKEYS layer is handled separately from the other layers.
+Switches between BIMLatinLayer and BIMNlsLayer do not affect it and vice
+versa.  The DIMFilter(), DIMLookup(), and DIMProcess() subroutines need to
+check the layer at the beginning of processing and if the layer is
+BIM_PARSEKEYS, the handling of layer switch and composing must be done for
+only the BIM_PARSEKEYS layer. On the other hand, not using the bit of the
+BIM_PARSEKEYS, layer switch and composing is done for the other layers.
+In addition to that, when the input layer is BIM_PARSEKEYS, the input
+keysym is not mapped with the _IMMapKeysym() subroutine in the libIM before
+composing.
+
+The following 4 commands are added to the DIMIoctl() subroutine for Bidi
+support.
+	BIM_ChangeLayer
+	BIM_ChangeParseKeys
+	BIM_QueryLayer
+	BIM_QueryParseKeys
+
+All constant values and structures for Bidi support are defined in the
+imbim.h file.
+
+
+7. Subroutines 
+
+The specification of the subroutines in the DIM files.
+
+##############################################################################
+#       subroutines in sim/dim.c  (cmdims)                                   #
+##############################################################################
+
+Subroutine Name
+	PutItems
+
+Purpose
+	Puts the compose sequence to the output buffer.
+
+Syntax
+static void     PutItems(
+		DIMObject	obj
+	)
+
+Description
+	If the compose result is UNBOUND, all items in the key sequence
+	is output to the output buffer with this subroutine. 
+
+Parameter
+	obj	The pointer to the DIM object.
+
+Return Values
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	beep
+
+Purpose
+	Calls beep callback subroutine.
+
+Syntax
+static void     beep(
+		DIMObject obj
+	)
+
+Description
+	If the beep callback subroutine is defined, then the beep
+	subroutine calls it.
+
+Parameter
+	obj	The pointer to the DIM object.
+
+Return Values
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	PutKeysym
+
+Purpose
+	Puts a keysym to the output buffer.
+
+Syntax
+static int      PutKeysym(
+		DIMObject       obj,
+		unsigned int    keysym,
+	        unsigned int    state
+	)
+
+Description
+	The PutKeysym subroutine puts a keysym to the output buffer.
+	The keysym/state pair is put after mapping with imkeymap (by using
+	the _IMSimpleMapping() subroutine in libIM).
+	Though, XK_UNBOUND, XK_BEEP, and XK_IGNORE are not real keysym
+        (they are pseudo keysym defined in DIM), they are also handled
+	appropriately.
+
+Parameter
+	obj	The pointer to the DIM object.
+	keysym	Keysym.
+	state	Input state.
+
+Return Values
+	0	Normal output.
+	1	The keysym was XK_UNBOUND, XK_BEEP, or XK_IGNORE.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	PutResult
+
+Purpose
+	Puts a string to the output buffer.
+
+Syntax
+static void     PutResult(
+	        DIMObject       obj,
+	        unsigned char   *str
+	)
+
+Description
+	The PutResult subroutine puts a string to the output buffer.
+	When the string has '*' in it, a corresponding keysym in the input
+	key sequence is output after mapping with imkeymap.  If there is no
+	corresponding keysym in the key sequence for '*', the '*' itself is
+	output.
+	If the output buffer is small, it is reallocated.
+
+Parameter
+	obj	The pointer to the DIM object.
+	str	Result string.  The first byte of the string is the length
+		of the string (not including the first byte).  Real '*' and
+		'\' is escaped with '\'.
+
+Return Values
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	Search
+
+Purpose
+	Searches brother compose tables
+
+Syntax
+static ComposeTable     *Search(
+	        ComposeTable    *ctp,
+	        unsigned int    keysym,
+	        unsigned int    state,
+	        unsigned int    layer
+	)
+
+Description
+	The Search subroutine searches brother ComposeTable structures. They
+	are chained to the brother member in the structure. If it is NULL,
+	there is no brother to search.
+	The XK_ALL value in the keysym, state, or layer member in the
+	ComposeTable structures matches any keysym, state, or layer
+	respectively.  If OR_STATE_FLAG in the state member in the 
+	ComposeTable structure is ON, that is treated as OR of the state.
+
+Parameter
+	ctp	The pointer to the ComposeTable structure. This and
+		brothers are searched.
+	keysym	Keysym.
+	state	Input state.
+	layer	Input layer.
+
+Return Values
+	NULL		Search fails.
+	not NULL	A pointer to the ComposeTable structure which
+			matches the key, state, and layer.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	SearchAll
+
+Purpose
+	Searches brother and child compose tables.
+
+Syntax
+static ComposeTable     *SearchAll(
+	        DIMObject       obj,
+	        ComposeTable    *head,
+	        unsigned int    keysym,
+	        unsigned int    state,
+	        unsigned int    layer
+	)
+
+Description
+	The SearchAll subroutine searches brother and child ComposeTable
+	structures.  The pointer passed as the first parameter points the
+	ComposeTable structure which matches the last key input.  If This
+	search is for the first key in the sequence, the head of the
+	whole chain of the ComposeTable must be passed.
+	First the children chained to the child member in the structure is
+	searched.  If it fails, the previous key input, which is stored in
+	the keysym[] and state[] in the DIM object, is searched again to
+	find another compose sequence (1-step back track). When another
+	compose sequence is found, the children of the ComposeTable
+	structure is checked with the keysym, state, and layer.
+	When the passed pointer points to the head of the whole chain, only
+	the children are searched, because the head is dummy and has
+	no brother.
+
+Parameter
+	obj	The pointer to the DIM object.  It is used to get the
+		keysym and state of the previous input for back track.
+	head	The pointer to the ComposeTable structure which matches the
+		last key input. This children are searched.
+	keysym	Keysym.
+	state	Input state.
+	layer	Input layer.
+
+Return Values
+	NULL		Search fails.
+	not NULL	A pointer to the ComposeTable structure which
+			matches the key, state, and layer.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	Compose
+
+Purpose
+	Searches compose tables and outputs results
+
+Syntax
+static int      Compose(
+	        DIMObject       obj,
+	        unsigned int    keysym,
+	        unsigned int    state,
+	        unsigned int    layer
+	)
+
+Description
+	The Compose subroutine searches ComposeTable structures. And it
+	outputs a result string/character to the output buffer if the
+	searched ComposeTable structure has a result string/keysym.
+	At first, all the input keysym (except for the BIM_PARSEKEYS layer)
+	is mapped with the _IMMapKeysym() subroutine in the libIM.
+	When the SearchAll() subroutine fails in searching with the mapped
+	keysym/state and it is in the middle of the compose sequence, the
+	error handling with the compose_error_str or compose_error is done.
+	If it is not in the middle of the compose sequence, just
+	IMInputNotUsed is returned.
+	When the SearchAll() subroutine successes, the keysym, state, and
+	the pointer to the corresponding ComposeTable structure are stored
+	in the array in the DIM object.  When it is the end of a compose
+	sequence, the result string/character is output to the output buffer.
+	If it is still in the middle of the compose sequence, no output is[		made.
+
+Parameter
+	obj	The pointer to the DIM object.  It is used to store the
+		keysym and state of the current input and to get the pointer
+		to the DIMfep structure which has the static compose
+		definition data.
+	keysym	Keysym.
+	state	Input state.
+	layer	Input layer.
+
+Return Values
+	IMInputUsed	The input key/state was used in the DIM.
+	IMInputNotUsed	The input key/state was not used in the DIM.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	CheckLayerSwitch
+
+Purpose
+	Checks layer switch.
+
+Syntax
+static int      CheckLayerSwitch(
+	        DIMObject       obj,
+		unsigned int    keysym,
+		unsigned int    state,
+		unsigned int    layer
+	)
+
+Description
+	The CheckLayerSwitch subroutine checks whether input is a key/state
+	to switch input layers.  If the layer switch is needed, the input
+	layer information in the DIM object is changed.
+	It checks all the layer_swithch structures pointed by the
+	layer_switch member in the SIMfep structure.
+	The XK_ALL value in the keysym, state, or layer member in the
+	ComposeTable structures matches any keysym, state, or layer
+	respectively.  If OR_STATE_FLAG in the state member in the 
+	ComposeTable structure is ON, that is treated as OR of the state.
+
+Parameter
+	obj	The pointer to the DIM object.  It is used to store the
+		keysym and state of the current input and to get the pointer
+		to the DIMfep structure which has the static compose
+		definition data.
+	keysym	Keysym.
+	state	Input state.
+	layer	Input layer.
+
+Return Values
+	IMInputUsed	The input key/state was used in the DIM. The input
+			layer was changed.
+	IMInputNotUsed	The input key/state was not used in the DIM.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	GetLayer
+
+Purpose
+	Gets the value of the N-th layer.
+
+Syntax
+static int      GetLayer(
+	        DIMObject       obj,
+	        unsigned int    n
+	)
+
+Description
+	The GetLayer subroutine returns the value of the specified layer.
+	Because the layers are sorted in the layer_switch[] in the DIMfep
+	structure in ascendant order, the value of the layer can be gotten
+	from it.
+
+Parameter
+	obj	The pointer to the DIM object.  It is used to get the
+		pointer to the LayerSwitch structures.
+	n	Specifies the n-th layer.  1 means the first (base) layer.
+
+Return Values
+	interger	The value of the specified layer. If there is no
+			corresponding layer, 0 is returned.
+
+
+------------------------------------------------------------------------------
+The following are IMCORE Interface Subroutines.
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMCreat
+
+Purpose
+	Creates one instance of the DIM object.
+
+Syntax
+static DIMObject        DIMCreate(
+	        DIMFep          dimfep,
+	        IMCallback      *cb,
+	        caddr_t         udata
+	)
+
+Description
+	The DIMCreate subroutine creates one instance of the DIM object.
+	Several DIM object instances can be created under one DIMfep.
+
+Parameter
+	dimfep	The pointer to the DIMfep.
+	cb	The pointer to the IMCallback structure. The application
+		must set the pointers to the callback subroutines.
+	udata	The optional pointer to a data which is passed to the
+		callback subroutines.
+
+Return Values
+	NULL		Creation fails.
+	not NULL	A pointer to a DIM object structure.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMDestroy
+
+Purpose
+	Destroys the DIM object.
+
+Syntax
+static void     DIMDestroy(
+		DIMObject obj
+	)
+
+Description
+	The DIMDestroy subroutine destroys one instance of the DIM object.
+
+Parameter
+	obj	The pointer to the DIM object.
+
+Return Values
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMFilter
+
+Purpose
+	Determines if a keysym/state is used by the DIM for composing.
+
+Syntax
+static int      DIMFilter(
+	        DIMObject       obj,
+	        unsigned int    keysym,
+	        unsigned int    state,
+	        caddr_t         *str,
+	        unsigned int    *len
+	)
+
+Description
+	The DIMFilter subroutine is used to process a keysym/state and to
+	compose a result according to the compose definition.
+	At first, layer switch is checked.  After that, composing is
+	processed.
+
+Parameter
+	obj	The pointer to the DIM object.
+	keysym	Input keysym.
+	state	Input state.
+	str	Holds the returned string if one exists. NULL means that no
+		composed string is ready.
+	len	Gives the length of returned string, if the str parameter
+		is not NULL.
+
+Return Values
+	IMInputUsed	The input key/state was used in the DIM.
+	IMInputNotUsed	The input key/state was not used in the DIM.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMLookup
+
+Purpose
+	Maps keysym/state to a sting.
+
+Syntax
+static int      DIMLookup(
+	        DIMObject       obj,
+	        unsigned int    keysym,
+	        unsigned int    state,
+	        caddr_t         *str,
+	        unsigned int    *len
+	)
+
+Description
+	The DIMLookupString subroutine is used to map a keysym/state pair
+	to a localized string.  It uses an imkeymap file and internal layer
+	information to map.  It does not do composing.
+
+Parameter
+	obj	The pointer to the DIM object.
+	keysym	Input keysym.
+	state	Input state.
+	str	Holds the returned string if one exists. NULL means that no
+		composed string is ready.
+	len	Gives the length of returned string, if the str parameter
+		is not NULL.
+
+Return Values
+	IMReturnNoString	No string is returned.
+	IMReturnString		A string is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMProcess
+
+Purpose
+	Processes a keysym/state.
+
+Syntax
+static int      DIMProcess(
+	        DIMObject       obj,
+	        unsigned int    keysym,
+	        unsigned int    state,
+	        caddr_t         *str,
+	        unsigned int    *len
+	)
+
+Description
+	The DIMProcess subroutine is used to process a keysym/state and to
+	compose a result according to the compose definition.
+	At first, layer switch is checked.  After that, composing is
+	processed.
+	If a keysym/state is not used for layer-switching/composing, the
+	DIMLookupString subroutine is used to map a keysym/state pair
+	to a localized string.  It uses an imkeymap file and internal layer
+	information to map.
+
+Parameter
+	obj	The pointer to the DIM object.
+	keysym	Input keysym.
+	state	Input state.
+	str	Holds the returned string if one exists. NULL means that no
+		composed string is ready.
+	len	Gives the length of returned string, if the str parameter
+		is not NULL.
+
+Return Values
+	IMTextAndAuxiliaryOff	No text string in the text area and the
+				auxiliary are is not shown.
+				DIMProcess() always returns this value.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMProcessAuxiliary
+
+Purpose
+	Does nothing.
+
+Syntax
+static int      DIMProcessAuxiliary(
+	        DIMObject obj,
+	        caddr_t auxid,
+	        unsigned int button,
+	        unsigned int panel_row,
+	        unsigned int panel_col,
+	        unsigned int item_row,
+	        unsigned int item_col
+	)
+
+Description
+	Do nothing. The auxiliary is not supported in the DIM.
+
+Parameter
+	obj		The pointer to the DIM object.
+	auxid		Identifies the auxiliary area.
+	button		Specifies the type of input.
+	panel_row	Indicates the row of the panel on which the
+			selection event occurred.
+	panel_col	Indicates the column of the panel on which the
+			selection event occurred.
+	item_row	Indicates the row of the selected item.
+	item_col	Indicates the column of the selected item.
+
+Return Values
+	IMNoError	DIMProcessAuxiliary() always return this value.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMIoctl
+
+Purpose
+	Performs a variety of control or query operations on the DIM.
+
+Syntax
+static int      DIMIoctl(
+		DIMObject obj,
+	        int cmd,
+	        caddr_t arg
+	)
+
+Description
+	Performs a variety of control or query operations on the DIM.
+	The following Bidi command can be also handled.
+		BIM_ChangeLayer
+		BIM_ChangeParseKeys
+		BIM_QueryLayer
+		BIM_QueryParseKeys
+
+Parameter
+	obj	The pointer to the DIM object.
+	cmd	Specifies the operation.
+	arg	The use of this parameter depends on the particular
+		operation performed.
+
+Return Values
+	IMNoError	No error encountered.
+	IMError		An error encountered.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMClose
+
+Purpose
+	Closes the DIM.
+
+Syntax
+static void     DIMClose(
+		DIMFep dimfep
+	)
+
+Description
+	The DIMClose subroutine closes the DIM and free the internal data
+	area.
+
+Parameter
+	dimfep	The pointer to the DIMfep.
+
+Return Values
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	DIMInitialize
+
+Purpose
+	Initializes the DIM.
+
+Syntax
+DIMFep  DIMInitialize(
+		IMLanguage language
+	)
+
+Description
+	The DIMInitialize subroutine allocate DIM internal data area and
+	initializes it. Moreover it reads imcopose file by using the
+	OpenCompose subroutine and sets the data to the following members
+	in the DIMfep structure.
+		compose
+        	compose_table
+        	compose_error
+        	compose_error_str
+        	layer_switch
+        	layer_switch_num
+
+Parameter
+	language	Specifyes the language name.
+
+Return Values
+	NULL		Initalization fails.
+	not NULL	A pointer to the DIMfep structure.
+
+
+##############################################################################
+#       subroutines in sim/OpenCompose.c  (cmdims)                           #
+##############################################################################
+
+Subroutine Name
+	ReadCompose
+
+Purpose
+	Reads compiled compose definition,
+
+Syntax
+static int      ReadCompose(
+	        char            *file,
+	        DIMFep          dimfep
+	)
+
+Description
+	The ReadCompose subroutine reads the compiled compose definition
+	and sets the compose definition data to the following members
+        in the DIMfep structure.
+                compose
+                compose_table
+                compose_error
+                compose_error_str
+                layer_switch
+	Because all the addresses in the compose definitions in the file
+	id represented with indexes, they are all converted into the
+	addresses.
+
+Parameter
+	file	The compose definition file name.
+	dimfep	The pointer to the DIMfep.
+
+Return Values
+	0	No error encountered.
+	-1	An error encountered.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	OpenCompose
+
+Purpose
+	Searches and reads the compiled compose definition.
+
+Syntax
+int     OpenCompose(
+	        IMLanguage      lang,
+	        DIMFep          dimfep
+	)
+
+Description
+	The OpenCompose subroutine searches and reads the compiled
+	compose definition file. The following files are searched in
+	this order.
+		$HOME/lang/.imcompose
+		$LOCPATH/lang/.imcompose
+		usr/lib/nls/loc/sbcs.imcompose
+
+Parameter
+	lang	Specifyes the language name.
+	dimfep	The pointer to the DIMfep.
+
+Return Values
+	0	No error encountered.
+	-1	An error encountered.
+
+
+##############################################################################
+#       subroutines in imkc/CompileCompose.c  (cmdimkc)                      #
+##############################################################################
+
+Subroutine Name
+	cpp
+
+Purpose
+	execute CPP (C Pre-Processor) before parsing.
+
+Syntax
+int     cpp(
+        	char *file
+	)
+
+Description
+	The cpp subroutine executes the CPP (C Pre-Processor) and passes
+	the result to the parser through a pipe.
+
+Parameter
+	file	Specifyes the input file.
+
+Return Values
+	0	No error encountered.
+	-1	An error encountered.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	OutputCompose
+
+Purpose
+	Outputs the compiled compose definition to stdout.
+
+Syntax
+static int      OutputCompose()
+
+Description
+	The OutputCompose subroutine outputs the compiled compose
+	definition to the standard out.  For the format of the compiled
+	definitions, see the section "5. Compiled compose definition"
+
+Parameter
+	none
+	(all the data of the compose definition is passed as global data.)
+
+Return Values
+	0	No error encountered.
+	-1	Write error.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	CompileCompose
+
+Purpose
+	Compiles and outputs the compose definition to stdout.
+
+Syntax
+int     CompileCompose()
+
+Description
+	The CompileCompose subroutine reads the text file of the compose
+	definition, compiles and outputs the result to the standard output.
+	The layers are sorted in the layer_switch[] in ascendant order.
+
+Parameter
+	none
+	(all the data of the compose definition is passed as global data.)
+
+Return Values
+	0	No error encountered.
+	-1	An error encountered.
+
+
+##############################################################################
+#       subroutines in imkc/ComposeTable.c  (cmdimkc)                        #
+##############################################################################
+
+Subroutine Name
+	GetCT
+
+Purpose
+	Gets a new ComposeTable structure.
+
+Syntax
+static  ComposeTable    *GetCT()
+
+Description
+	The GetCT subroutine returns a pointer to a new ComposeTable
+	structure.  The new ComposeTable structure comes from the global
+	array of the ComposeTable structure.  If the number of the elements
+	is not enough, the array is expanded.
+
+Parameter
+	none
+
+Return Values
+	A pointer to a new ComposeTable structure is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	GetString
+
+Purpose
+	Gets new string area.
+
+Syntax
+static  unsigned int    GetString(
+		int size
+	)
+
+Description
+	The GetString subroutine returns the index of the string area,
+	which is not used.  The new string area comes from the global
+	string area.  If the size of the string area is not enough, the
+	area is expanded.
+
+Parameter
+	size	Specifies the required size.
+
+Return Values
+	The index of the string area.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	NewCT
+
+Purpose
+	Creates and Initializes a new ComposeTable structure
+
+Syntax
+ComposeTable    *NewCT()
+
+Description
+	The NewCT subroutine returns a pointer to a new ComposeTable
+	structure after initializing.
+
+Parameter
+	none
+
+Return Values
+	A pointer to a new ComposeTable structure is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	SearchCT
+
+Purpose
+	Search the brother ComposeTable structures.
+
+Syntax
+unsigned int    SearchCT(
+	        unsigned int    ct,
+	        unsigned int    keysym,
+	        unsigned int    state,
+	        unsigned int    layer
+	)
+
+Description
+	The SearchCT subroutine returns a pointer to a ComposeTable
+	structure which has the given keysym/state/layer from the brothers
+	of the specified ComposeTable structure.  If no ComposeTable is
+	found, a new ComposeTable is chained and the pointer to it is
+	returned.
+
+Parameter
+	ct	The index of the ComposeTable array, which is the global
+		valiable CT[], for the first ComposeTable structure to be
+		checked.  All the brothers of this ComposeTable is checked.
+	keysym  Specifies the keysym.
+	state	Specifies the state.
+	layer	Specifies the layer.
+
+Return Values
+	The index to the ComposeTable structure (in TC[]) is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	InitCTtree
+
+Purpose
+	Initializes the dummy ComposeTable tree head.
+
+Syntax
+void    InitCTtree(
+	        ComposeTable    **head
+	)
+
+Description
+	The head of the ComposeTable structure tree is a dummy and has no
+	data except for the child ComposeTable pointer.  The InitCTtree
+	subroutine initializes the dummy ComposeTable tree head.
+
+Parameter
+	head	Returns the pointer to the dummy ComposeTable tree head.
+
+Return
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	AddSequence
+
+Purpose
+	Adds a compose sequence definition to ComposeTable tree.
+
+Syntax
+void    AddSequence(
+	        unsigned int    result_keysym,
+        	unsigned char   *result_string,
+        	unsigned int    keysym[],
+        	unsigned int    state[],
+        	int             keysym_num,
+        	unsigned int    layer
+	)
+
+Description
+	The AddSequence subroutine adds a compose sequence definition to
+	ComposeTable tree.  Either of the result_keysym or result_string
+	has a valid value.
+	Though the following members in the ComposeTable structures are
+	pointers to a string or another ComposeTable structure, in the
+	compiled compose definition, these are represented as indexes of
+	the element in in the corresponding array.  NULL is represented
+	with '-1'.
+		unsigned char           *result_string;
+		struct _ComposeTable    *brother;
+		struct _ComposeTable    *child;
+
+Parameter
+	result_keysym	The result keysym of the compose sequence. If the
+			result is not the keysym, the value must be XK_NONE.
+        		The XK_NONE is a pseudo keysym defined in DIM.
+	result_string	The result string of the compose sequence. If the
+			result is not the string, the value must be NULL.
+			The result string is not the usual string.  The
+			first byte of the array stores the length of the
+			string (not including the first byte).
+	keysym[]	Specifies the sequence of the keysym.
+	state[]		Specifies the sequence of the state.
+	layer		Specifies the layer in which the compose sequence
+			is valid.
+
+Return Values
+	none
+
+
+##############################################################################
+#       subroutines (for lex) in imkc/Item.l  (cmdimkc)                      #
+##############################################################################
+
+The following ParseTable structure is used while parsing the compose
+definition.
+
+typedef struct _ParseTable {
+        unsigned int    token;		/* the token			*/
+        unsigned int    val;		/* keysym or number value	*/
+        unsigned char   str[64];	/* parsed string		*/
+} ParseTable;
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	token
+
+Purpose
+	Stores the string and returns the token.
+
+Syntax
+token(
+	int x
+)
+
+Description
+	The token subroutine stores the parsed string into the yylval
+	structure and returns the token.
+
+Parameter
+	x	token.
+
+Return Values
+	The token is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	value
+
+Purpose
+	Stores the string and value and returns the token.
+
+Syntax
+value(
+	int	x,
+	int	y
+)
+
+Description
+	The value subroutine stores the parsed string and the value into
+	the yylval structure and returns the token.
+
+Parameter
+	x	token.
+	y	value.
+
+Return Values
+	The token is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	keysym
+
+Purpose
+	Stores the keysym string and value and returns the token.
+
+Syntax
+keysym(
+	int	x
+)
+
+Description
+	The keysym subroutine stores the parsed keysym string and the value
+	of the keysym into the yylval structure and returns the token.
+
+Parameter
+	x	token.
+
+Return Values
+	The token is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	string
+
+Purpose
+	Stores the string and value and returns the token.
+
+Syntax
+string(
+	int	x
+)
+
+Description
+	The string subroutine stores the parsed string into the yylval
+	structure and returns the token.  The \(backslash) is used as an
+	escape character.
+	The string is not the usual string.  The first byte of the array
+	stores the length of the string (not including the first byte).
+
+Parameter
+	x	token.
+
+Return Values
+	The token is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	number
+
+Purpose
+	Stores the number string and value and returns the token.
+
+Syntax
+number(
+	int	x
+)
+
+Description
+	The number subroutine stores the parsed number string and the
+	value of the string into the yylval structure and returns the token.
+	The number string is recognized as a decimal number.
+
+Parameter
+	x	token.
+
+Return Values
+	The token is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	hex
+
+Purpose
+	Stores the hexadecimal number string and value and returns the token.
+
+Syntax
+hex(
+	int	x
+)
+
+Description
+	The hex subroutine stores the parsed hexadecimal number string
+	and the value of the string into the yylval structure and returns
+	the token.
+	The number string is recognized as a hexadecimal decimal number.
+
+Parameter
+	x	token.
+
+Return Values
+	The token is returned.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	line_number
+
+Purpose
+	Gets the line number and file name from a line inserted by the CPP.
+
+Syntax
+line_number()
+
+Description
+	The line_number subroutine gets the line number and file name from
+	a line inserted by the CPP (C Pre-Processor).
+	The line has the following format.
+		#  line_number  file_name
+
+Parameter
+	none
+
+Return Values
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	yyerrors
+
+Purpose
+	Outputs the error line with the line number and the file name.
+
+Syntax
+yyerrors(
+	char	*s
+)
+
+Description
+	The yyerrors subroutine outputs the error line with the line
+	number and the file name.
+
+Parameter
+	s	one whole line string where error occurs
+
+Return Values
+	none
+
+
+##############################################################################
+#       subroutines in imkc/Layer.c  (cmdimkc)                               #
+##############################################################################
+
+Subroutine Name
+	AddLayerSwitch
+
+Purpose
+	Adds data to the array of the LayerSwitch structure.
+
+Syntax
+void    AddLayerSwitch(
+	        unsigned int result_layer,
+	        unsigned int keysym,
+	        unsigned int state,
+	        unsigned int layer
+	)
+
+Description
+	The AddLayerSwitch subroutine adds data to the layer_switch, global
+	data of the LayerSwitch structure.  If the size of the array is not
+	enough, it is expanded.
+
+Parameter
+	result_layer	Specifies the result of the layer switch.
+	keysym		Specifies the keysym.
+	state		Specifies the state.
+	layer		Specifies the layer.
+
+Return Values
+	none
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	CompareLayerSwitch
+
+Purpose
+	Compares layers in the LayerSwitch structure.
+
+Syntax
+static int      CompareLayerSwitch(
+                LayerSwitch     *l1,
+                LayerSwitch     *l2
+	)
+
+Description
+	The CompareLayerSwitch subroutine compares layers in the
+	LayerSwitch structures.
+
+Parameter
+	l1	The pointer to the LayerSwitch structure.
+	l2	The pointer to the LayerSwitch structure.
+
+Return Values
+	The CompareLayerSwitc subroutine then returns a value that is:
+		- Less than 0 (zero) if the value of l1 is less than l2.
+		- Equal to 0 if the value of l1 is equal to l2.
+		- Greater than 0 if the value of l1 is greater than l2.
+
+------------------------------------------------------------------------------
+
+Subroutine Name
+	SortLayerSwitch
+
+Purpose
+	Sorts the array of the LayerSwith structure.
+
+Syntax
+static int      CompareLayerSwitch(
+                LayerSwitch     *l1,
+                LayerSwitch     *l2
+	)
+
+Description
+	The SortLayerSwitch subroutine sorts the array of the LayerSwith
+	structure in ascendant order of the layers.
+
+Parameter
+	none
+
+Return Values
+	none

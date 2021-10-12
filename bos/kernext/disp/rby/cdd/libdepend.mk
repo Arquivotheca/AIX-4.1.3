@@ -1,0 +1,1 @@
+rby_cdd: ${MAKETOP}../../export/power/kernel/lib/libcsys.a(ptrgl.o)

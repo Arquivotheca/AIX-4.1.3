@@ -1,0 +1,96 @@
+#!/bin/ksh
+# @(#)40	1.2  FixupPtf_pkgFiles, ade_build, bos41J 2/21/95 11:45:32
+#
+#   COMPONENT_NAME: bldtools
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1995
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# syntax: $0
+#   The $BLDCYCLE variable must be set in the environment.
+
+alias  dataman=`whence dataman`
+cmd=${0##*/}
+trap 'dataman -s leveldata[$BLDCYCLE][status][$cmd]=FAILED; exit 1' ERR
+
+if [ "$BLDCYCLE" = "" ]
+then
+    echo "The BLDCYCLE variable must be set and exported!"
+    exit 1
+fi
+
+typeset -r treetop=$(dataman -q leveldata[$BLDCYCLE][treepath] || \
+                     dataman -q directory[fulltop])
+export     TOP=$treetop/selfix
+typeset    RC=0
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=RUNNING
+
+#
+# Remove notbuiltship files from the ptf_pkg files.
+# It is possible that we could remove all files for a particular apar
+# fix so the ptfapardef.master file might end up being incorrect.  This
+# is probably not so bad for bai, but it is wrong for ctbuild.
+#
+dataman -q leveldata[$BLDCYCLE][notbuiltshipfiles] |
+while read shipfile fileset
+do
+    # We need to make sure that we get the correct fileset for
+    # any liblpp.a shipfiles.  If we can't figure it out, then
+    # be conservative and leave it in.
+    if [[ "$shipfile" = *liblpp.a* ]]
+    then continue
+    fi
+
+    # If we find the ptf_pkg file then modify it, else try the next one.
+    if pkgfile=$(grep -sl "|$shipfile|" $TOP/*/ptf_pkg.$BLDCYCLE)
+    then
+	mv $pkgfile $pkgfile.rmshipf
+	grep -v "|$shipfile|" $pkgfile.rmshipf >$pkgfile
+    fi
+done
+
+#
+# Mail out a warning if we had any liblpp.a notbuiltshipfiles.
+( echo "Xreq thought the following liblpp.a files should have been built,"
+  echo "but they did not show up in the lmupdatelist.  This is a problem"
+  echo "that needs to be investigated."
+  echo "BLDCYCLE = $BLDCYCLE"
+  dataman -q leveldata[$BLDCYCLE][notbuiltshipfiles] | grep liblpp.a ) |
+mail -s "$BLDCYCLE failed to build some liblpp.a files" 41team@landru
+
+#
+# Add any resolved unexpected ship files.
+dataman -q leveldata[$BLDCYCLE][resolvedunexpectedships] |
+while read line
+do
+    fs=$(\print $line | awk -F\| '{print $4}')
+
+    # get the directory of the ptf_pkg file
+    updir=${fs%%.*}
+    \print $line >>$TOP/UPDATE/$updir/ptf_pkg.$BLDCYCLE
+done
+
+#
+# Add on the vrmf's to the fileset
+dataman -q leveldata[$BLDCYCLE][fs_vrmf] >/tmp/$cmd.$$
+for f in $TOP/UPDATE/*/ptf_pkg.$BLDCYCLE
+do
+    mv $f $f.presetvrmfs
+    awk -v fs_vrmf=/tmp/$cmd.$$ '
+        FILENAME == fs_vrmf { vrmf[$1] = $2; continue }
+        FILENAME != fs_vrmf { split($0,A,"|");
+             printf("%s|%s|%s|%s:%s|%s|%s|%s|\n", A[1], A[2], A[3], A[4],
+	            vrmf[A[4]], A[5], A[6], A[7])}
+	' /tmp/$cmd.$$ $f.presetvrmfs >$f
+done
+
+dataman -s leveldata[$BLDCYCLE][status][$cmd]=COMPLETE

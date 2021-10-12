@@ -1,0 +1,1309 @@
+# @(#)28	1.19  src/bos/usr/lib/nls/loc/locale/en_GB.ISO8859-1.src, cfgnls, bos411, 9428A410j 5/17/94 10:10:43
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# Locale source - English Great Britain                              #
+######################################################################
+
+
+#############
+LC_CTYPE
+#############
+upper   <A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<A-acute>;\
+	<A-grave>;\
+	<A-circumflex>;\
+	<A-diaresis>;\
+	<A-tilde>;\
+	<A-ring>;\
+	<AE>;\
+	<C-cedilla>;\
+	<Eth>;\
+	<E-acute>;\
+	<E-grave>;\
+	<E-circumflex>;\
+	<E-diaresis>;\
+	<I-acute>;\
+	<I-grave>;\
+	<I-circumflex>;\
+	<I-diaresis>;\
+	<N-tilde>;\
+	<O-acute>;\
+	<O-grave>;\
+	<O-circumflex>;\
+	<O-diaresis>;\
+	<O-tilde>;\
+	<O-slash>;\
+	<Thorn>;\
+	<U-acute>;\
+	<U-grave>;\
+	<U-circumflex>;\
+	<U-diaresis>;\
+	<Y-acute>
+
+lower   <a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<a-acute>;\
+	<a-grave>;\
+	<a-circumflex>;\
+	<a-diaresis>;\
+	<a-tilde>;\
+	<a-ring>;\
+	<ae>;\
+	<c-cedilla>;\
+	<eth>;\
+	<e-acute>;\
+	<e-grave>;\
+	<e-circumflex>;\
+	<e-diaresis>;\
+	<i-acute>;\
+	<i-grave>;\
+	<i-circumflex>;\
+	<i-diaresis>;\
+	<n-tilde>;\
+	<o-acute>;\
+	<o-grave>;\
+	<o-circumflex>;\
+	<o-diaresis>;\
+	<o-tilde>;\
+	<o-slash>;\
+	<s-sharp>;\
+	<thorn>;\
+	<u-acute>;\
+	<u-grave>;\
+	<u-circumflex>;\
+	<u-diaresis>;\
+	<y-acute>;\
+	<y-diaresis>
+
+space   <tab>;\
+	<newline>;\
+	<vertical-tab>;\
+	<form-feed>;\
+	<carriage-return>;\
+	<space>
+
+cntrl   <NUL>;\
+	<SOH>;\
+	<STX>;\
+	<ETX>;\
+	<EOT>;\
+	<ENQ>;\
+	<ACK>;\
+	<BEL>;\
+	<alert>;\
+	<backspace>;\
+	<tab>;\
+	<newline>;\
+	<vertical-tab>;\
+	<form-feed>;\
+	<carriage-return>;\
+	<SO>;\
+	<SI>;\
+	<DLE>;\
+	<DC1>;\
+	<DC2>;\
+	<DC3>;\
+	<DC4>;\
+	<NAK>;\
+	<SYN>;\
+	<ETB>;\
+	<CAN>;\
+	<EM>;\
+	<SUB>;\
+	<ESC>;\
+	<IS4>;\
+	<IS3>;\
+	<IS2>;\
+	<IS1>;\
+	<DEL>;\
+#
+# Controls <PAD> through <APC> are defined in ISO8859-1,
+# but not in IBM-850.  If using an IBM-850 charmap, or
+# some other code set where these controls do not exist, either
+#
+#    1) delete <PAD> through <APC> from this source, and take
+#       the ;\ off of the previous source statment ( yielding <DEL> )
+# or
+#    2) define <PAD> through <APC> in your charmap to have the same
+#       codepoint as <DEL>.
+#
+	<PAD>;\
+	<HOP>;\
+	<BPH>;\
+	<NBH>;\
+	<IND>;\
+	<NEL>;\
+	<SSA>;\
+	<ESA>;\
+	<HTS>;\
+	<HTJ>;\
+	<VTS>;\
+	<PLD>;\
+	<PLU>;\
+	<RI>;\
+	<SS2>;\
+	<SS3>;\
+	<DCS>;\
+	<PU1>;\
+	<PU2>;\
+	<STS>;\
+	<CCH>;\
+	<MW>;\
+	<SPS>;\
+	<EPA>;\
+	<SOS>;\
+	<SGCI>;\
+	<SCI>;\
+	<CSI>;\
+	<ST>;\
+	<OSC>;\
+	<PM>;\
+	<APC>
+
+graph   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<exclamation-down>;\
+	<cent>;\
+	<sterling>;\
+	<currency>;\
+	<yen>;\
+	<broken-bar>;\
+	<section>;\
+	<diaresis>;\
+	<copyright>;\
+	<feminine>;\
+	<guillemot-left>;\
+	<not>;\
+	<dash>;\
+	<registered>;\
+	<macron>;\
+	<degree>;\
+	<plus-minus>;\
+	<two-superior>;\
+	<three-superior>;\
+	<acute>;\
+	<mu>;\
+	<paragraph>;\
+	<dot>;\
+	<cedilla>;\
+	<one-superior>;\
+	<masculine>;\
+	<guillemot-right>;\
+	<one-quarter>;\
+	<one-half>;\
+	<three-quarters>;\
+	<question-down>;\
+	<A-grave>;\
+	<A-acute>;\
+	<A-circumflex>;\
+	<A-tilde>;\
+	<A-diaresis>;\
+	<A-ring>;\
+	<AE>;\
+	<C-cedilla>;\
+	<E-grave>;\
+	<E-acute>;\
+	<E-circumflex>;\
+	<E-diaresis>;\
+	<I-grave>;\
+	<I-acute>;\
+	<I-circumflex>;\
+	<I-diaresis>;\
+	<Eth>;\
+	<N-tilde>;\
+	<O-grave>;\
+	<O-acute>;\
+	<O-circumflex>;\
+	<O-tilde>;\
+	<O-diaresis>;\
+	<multiply>;\
+	<O-slash>;\
+	<U-grave>;\
+	<U-acute>;\
+	<U-circumflex>;\
+	<U-diaresis>;\
+	<Y-acute>;\
+	<Thorn>;\
+	<s-sharp>;\
+	<a-grave>;\
+	<a-acute>;\
+	<a-circumflex>;\
+	<a-tilde>;\
+	<a-diaresis>;\
+	<a-ring>;\
+	<ae>;\
+	<c-cedilla>;\
+	<e-grave>;\
+	<e-acute>;\
+	<e-circumflex>;\
+	<e-diaresis>;\
+	<i-grave>;\
+	<i-acute>;\
+	<i-circumflex>;\
+	<i-diaresis>;\
+	<eth>;\
+	<n-tilde>;\
+	<o-grave>;\
+	<o-acute>;\
+	<o-circumflex>;\
+	<o-tilde>;\
+	<o-diaresis>;\
+	<divide>;\
+	<division>;\
+	<o-slash>;\
+	<u-grave>;\
+	<u-acute>;\
+	<u-circumflex>;\
+	<u-diaresis>;\
+	<y-acute>;\
+	<thorn>;\
+
+#
+# Code points <doublebox-int-right> through <boxfill-middle>
+# are code points for IBM-850 code set only.
+# If using non IBM-850 charmaps with this locale source, either
+#
+#    1) delete <doublebox-int-right> through <boxfill-middle>
+#       from this source,
+# or
+#    2) define <doublebox-int-right> through <boxfill-middle>
+#       in your charmap as a code point which is graphic and print
+#       in Latin-1, such as <y-diaresis>
+#
+	<doublebox-int-right>;\
+	<doublebox-vertical>;\
+	<doublebox-top-right>;\
+	<doublebox-bottom-right>;\
+	<box-top-right>;\
+	<box-bottom-left>;\
+	<box-int-bottom>;\
+	<box-int-top>;\
+	<box-int-left>;\
+	<box-horizontal>;\
+	<box-intersection>;\
+	<doublebox-bottom-left>;\
+	<doublebox-top-left>;\
+	<doublebox-int-bottom>;\
+	<doublebox-int-top>;\
+	<doublebox-int-left>;\
+	<doublebox-horizontal>;\
+	<doublebox-intersection>;\
+	<box-bottom-right>;\
+	<box-top-left>;\
+	<boxfill>;\
+	<boxfill-bottom>;\
+	<boxfill-top>;\
+	<boxfill-middle>;\
+
+	<y-diaresis>
+
+print   <space>;\
+	<exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<solidus>;\
+	<zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<G>;\
+	<H>;\
+	<I>;\
+	<J>;\
+	<K>;\
+	<L>;\
+	<M>;\
+	<N>;\
+	<O>;\
+	<P>;\
+	<Q>;\
+	<R>;\
+	<S>;\
+	<T>;\
+	<U>;\
+	<V>;\
+	<W>;\
+	<X>;\
+	<Y>;\
+	<Z>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>;\
+	<g>;\
+	<h>;\
+	<i>;\
+	<j>;\
+	<k>;\
+	<l>;\
+	<m>;\
+	<n>;\
+	<o>;\
+	<p>;\
+	<q>;\
+	<r>;\
+	<s>;\
+	<t>;\
+	<u>;\
+	<v>;\
+	<w>;\
+	<x>;\
+	<y>;\
+	<z>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>;\
+	<nobreakspace>;\
+	<exclamation-down>;\
+	<cent>;\
+	<sterling>;\
+	<currency>;\
+	<yen>;\
+	<broken-bar>;\
+	<section>;\
+	<diaresis>;\
+	<copyright>;\
+	<feminine>;\
+	<guillemot-left>;\
+	<not>;\
+	<dash>;\
+	<registered>;\
+	<macron>;\
+	<degree>;\
+	<plus-minus>;\
+	<two-superior>;\
+	<three-superior>;\
+	<acute>;\
+	<mu>;\
+	<paragraph>;\
+	<dot>;\
+	<cedilla>;\
+	<one-superior>;\
+	<masculine>;\
+	<guillemot-right>;\
+	<one-quarter>;\
+	<one-half>;\
+	<three-quarters>;\
+	<question-down>;\
+	<A-grave>;\
+	<A-acute>;\
+	<A-circumflex>;\
+	<A-tilde>;\
+	<A-diaresis>;\
+	<A-ring>;\
+	<AE>;\
+	<C-cedilla>;\
+	<E-grave>;\
+	<E-acute>;\
+	<E-circumflex>;\
+	<E-diaresis>;\
+	<I-grave>;\
+	<I-acute>;\
+	<I-circumflex>;\
+	<I-diaresis>;\
+	<Eth>;\
+	<N-tilde>;\
+	<O-grave>;\
+	<O-acute>;\
+	<O-circumflex>;\
+	<O-tilde>;\
+	<O-diaresis>;\
+	<multiply>;\
+	<O-slash>;\
+	<U-grave>;\
+	<U-acute>;\
+	<U-circumflex>;\
+	<U-diaresis>;\
+	<Y-acute>;\
+	<Thorn>;\
+	<s-sharp>;\
+	<a-grave>;\
+	<a-acute>;\
+	<a-circumflex>;\
+	<a-tilde>;\
+	<a-diaresis>;\
+	<a-ring>;\
+	<ae>;\
+	<c-cedilla>;\
+	<e-grave>;\
+	<e-acute>;\
+	<e-circumflex>;\
+	<e-diaresis>;\
+	<i-grave>;\
+	<i-acute>;\
+	<i-circumflex>;\
+	<i-diaresis>;\
+	<eth>;\
+	<n-tilde>;\
+	<o-grave>;\
+	<o-acute>;\
+	<o-circumflex>;\
+	<o-tilde>;\
+	<o-diaresis>;\
+	<divide>;\
+	<division>;\
+	<o-slash>;\
+	<u-grave>;\
+	<u-acute>;\
+	<u-circumflex>;\
+	<u-diaresis>;\
+	<y-acute>;\
+	<thorn>;\
+
+#
+# Code points <doublebox-int-right> through <boxfill-middle>
+# are code points for IBM-850 code set only.
+# Non IBM-850 charmaps should define these as y-diaresis . . .
+#
+	<doublebox-int-right>;\
+	<doublebox-vertical>;\
+	<doublebox-top-right>;\
+	<doublebox-bottom-right>;\
+	<box-top-right>;\
+	<box-bottom-left>;\
+	<box-int-bottom>;\
+	<box-int-top>;\
+	<box-int-left>;\
+	<box-horizontal>;\
+	<box-intersection>;\
+	<doublebox-bottom-left>;\
+	<doublebox-top-left>;\
+	<doublebox-int-bottom>;\
+	<doublebox-int-top>;\
+	<doublebox-int-left>;\
+	<doublebox-horizontal>;\
+	<doublebox-intersection>;\
+	<box-bottom-right>;\
+	<box-top-left>;\
+	<boxfill>;\
+	<boxfill-bottom>;\
+	<boxfill-top>;\
+	<boxfill-middle>;\
+
+	<y-diaresis>
+
+punct   <exclamation-mark>;\
+	<quotation-mark>;\
+	<number-sign>;\
+	<dollar-sign>;\
+	<percent-sign>;\
+	<ampersand>;\
+	<apostrophe>;\
+	<left-parenthesis>;\
+	<right-parenthesis>;\
+	<asterisk>;\
+	<plus-sign>;\
+	<comma>;\
+	<hyphen>;\
+	<hyphen-minus>;\
+	<period>;\
+	<full-stop>;\
+	<slash>;\
+	<colon>;\
+	<semicolon>;\
+	<less-than-sign>;\
+	<equals-sign>;\
+	<greater-than-sign>;\
+	<question-mark>;\
+	<commercial-at>;\
+	<left-square-bracket>;\
+	<backslash>;\
+	<reverse-solidus>;\
+	<right-square-bracket>;\
+	<circumflex>;\
+	<circumflex-accent>;\
+	<underscore>;\
+	<low-line>;\
+	<grave-accent>;\
+	<left-brace>;\
+	<left-curly-bracket>;\
+	<vertical-line>;\
+	<right-brace>;\
+	<right-curly-bracket>;\
+	<tilde>
+
+digit   <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>
+
+xdigit  <zero>;\
+	<one>;\
+	<two>;\
+	<three>;\
+	<four>;\
+	<five>;\
+	<six>;\
+	<seven>;\
+	<eight>;\
+	<nine>;\
+	<A>;\
+	<B>;\
+	<C>;\
+	<D>;\
+	<E>;\
+	<F>;\
+	<a>;\
+	<b>;\
+	<c>;\
+	<d>;\
+	<e>;\
+	<f>
+
+blank   <space>;\
+	<tab>
+
+
+#
+# The <s-sharp> and <y-diaresis> are not included in the toupper nor
+# tolower tables because they do not have upper/lower counterparts.
+#
+toupper (<a>,<A>);(<b>,<B>);(<c>,<C>);(<d>,<D>);(<e>,<E>);\
+	(<f>,<F>);(<g>,<G>);(<h>,<H>);(<i>,<I>);(<j>,<J>);\
+	(<k>,<K>);(<l>,<L>);(<m>,<M>);(<n>,<N>);(<o>,<O>);\
+	(<p>,<P>);(<q>,<Q>);(<r>,<R>);(<s>,<S>);(<t>,<T>);\
+	(<u>,<U>);(<v>,<V>);(<w>,<W>);(<x>,<X>);(<y>,<Y>);\
+	(<z>,<Z>);\
+	(<a-acute>,<A-acute>);\
+	(<a-grave>,<A-grave>);\
+	(<a-circumflex>,<A-circumflex>);\
+	(<a-diaresis>,<A-diaresis>);\
+	(<a-tilde>,<A-tilde>);\
+	(<a-ring>,<A-ring>);\
+	(<ae>,<AE>);\
+	(<c-cedilla>,<C-cedilla>);\
+	(<eth>,<Eth>);\
+	(<e-acute>,<E-acute>);\
+	(<e-grave>,<E-grave>);\
+	(<e-circumflex>,<E-circumflex>);\
+	(<e-diaresis>,<E-diaresis>);\
+	(<i-acute>,<I-acute>);\
+	(<i-grave>,<I-grave>);\
+	(<i-circumflex>,<I-circumflex>);\
+	(<i-diaresis>,<I-diaresis>);\
+	(<n-tilde>,<N-tilde>);\
+	(<o-acute>,<O-acute>);\
+	(<o-grave>,<O-grave>);\
+	(<o-circumflex>,<O-circumflex>);\
+	(<o-diaresis>,<O-diaresis>);\
+	(<o-tilde>,<O-tilde>);\
+	(<o-slash>,<O-slash>);\
+	(<thorn>,<Thorn>);\
+	(<u-acute>,<U-acute>);\
+	(<u-grave>,<U-grave>);\
+	(<u-circumflex>,<U-circumflex>);\
+	(<u-diaresis>,<U-diaresis>);\
+	(<y-acute>,<Y-acute>)
+
+tolower (<A>,<a>);(<B>,<b>);(<C>,<c>);(<D>,<d>);(<E>,<e>);\
+	(<F>,<f>);(<G>,<g>);(<H>,<h>);(<I>,<i>);(<J>,<j>);\
+	(<K>,<k>);(<L>,<l>);(<M>,<m>);(<N>,<n>);(<O>,<o>);\
+	(<P>,<p>);(<Q>,<q>);(<R>,<r>);(<S>,<s>);(<T>,<t>);\
+	(<U>,<u>);(<V>,<v>);(<W>,<w>);(<X>,<x>);(<Y>,<y>);\
+	(<Z>,<z>);\
+	(<A-acute>,<a-acute>);\
+	(<A-grave>,<a-grave>);\
+	(<A-circumflex>,<a-circumflex>);\
+	(<A-diaresis>,<a-diaresis>);\
+	(<A-tilde>,<a-tilde>);\
+	(<A-ring>,<a-ring>);\
+	(<AE>,<ae>);\
+	(<C-cedilla>,<c-cedilla>);\
+	(<Eth>,<eth>);\
+	(<E-acute>,<e-acute>);\
+	(<E-grave>,<e-grave>);\
+	(<E-circumflex>,<e-circumflex>);\
+	(<E-diaresis>,<e-diaresis>);\
+	(<I-acute>,<i-acute>);\
+	(<I-grave>,<i-grave>);\
+	(<I-circumflex>,<i-circumflex>);\
+	(<I-diaresis>,<i-diaresis>);\
+	(<N-tilde>,<n-tilde>);\
+	(<O-acute>,<o-acute>);\
+	(<O-grave>,<o-grave>);\
+	(<O-circumflex>,<o-circumflex>);\
+	(<O-diaresis>,<o-diaresis>);\
+	(<O-tilde>,<o-tilde>);\
+	(<O-slash>,<o-slash>);\
+	(<Thorn>,<thorn>);\
+	(<U-acute>,<u-acute>);\
+	(<U-grave>,<u-grave>);\
+	(<U-circumflex>,<u-circumflex>);\
+	(<U-diaresis>,<u-diaresis>);\
+	(<Y-acute>,<y-acute>)
+
+END LC_CTYPE
+
+#############
+LC_COLLATE
+#############
+
+#################
+# Case weight collation symbols
+#################
+
+collating-symbol <lower-case>
+collating-symbol <index>
+collating-symbol <exponent>
+collating-symbol <upper-case>
+collating-symbol <subscript-capital>
+collating-symbol <superscript-capital>
+
+#################
+# Diacritical collation weight symbols
+#################
+
+collating-symbol <non-accented>
+collating-symbol <peculiar>
+collating-symbol <ligature>
+collating-symbol <accent-acute>
+collating-symbol <accent-grave>
+collating-symbol <accent-circumflex>
+collating-symbol <accent-ring>
+collating-symbol <accent-diaresis>
+collating-symbol <accent-tilde>
+collating-symbol <oblique>
+collating-symbol <accent-cedilla>
+collating-symbol <eszet>
+
+####################################
+# Collation definition begins here #
+####################################
+
+order_start forward;backward;forward;forward,position
+
+###############################
+# Case collation weights      #
+###############################
+
+<lower-case>
+<index>
+<exponent>
+<upper-case>
+<subscript-capital>
+<superscript-capital>
+
+###############################
+# Diacritical collation weights
+###############################
+<non-accented>
+<peculiar>
+<ligature>
+<accent-acute>
+<accent-grave>
+<accent-circumflex>
+<accent-ring>
+<accent-diaresis>
+<accent-tilde>
+<oblique>
+<accent-cedilla>
+
+########################################
+# Special characters begin here        #
+########################################
+
+<NUL>			IGNORE;IGNORE;IGNORE;<NUL>
+<SOH>			IGNORE;IGNORE;IGNORE;<SOH>
+<STX>			IGNORE;IGNORE;IGNORE;<STX>
+<ETX>			IGNORE;IGNORE;IGNORE;<ETX>
+<EOT>			IGNORE;IGNORE;IGNORE;<EOT>
+<ENQ>			IGNORE;IGNORE;IGNORE;<ENQ>
+<ACK>			IGNORE;IGNORE;IGNORE;<ACK>
+<BEL>			IGNORE;IGNORE;IGNORE;<BEL>
+<backspace>		IGNORE;IGNORE;IGNORE;<backspace>
+<tab>			IGNORE;IGNORE;IGNORE;<tab>
+<newline>		IGNORE;IGNORE;IGNORE;<newline>
+<vertical-tab>		IGNORE;IGNORE;IGNORE;<vertical-tab>
+<form-feed>		IGNORE;IGNORE;IGNORE;<form-feed>
+<carriage-return>	IGNORE;IGNORE;IGNORE;<carriage-return>
+<SO>			IGNORE;IGNORE;IGNORE;<SO>
+<SI>			IGNORE;IGNORE;IGNORE;<SI>
+<DLE>			IGNORE;IGNORE;IGNORE;<DLE>
+<DC1>			IGNORE;IGNORE;IGNORE;<DC1>
+<DC2>			IGNORE;IGNORE;IGNORE;<DC2>
+<DC3>			IGNORE;IGNORE;IGNORE;<DC3>
+<DC4>			IGNORE;IGNORE;IGNORE;<DC4>
+<NAK>			IGNORE;IGNORE;IGNORE;<NAK>
+<SYN>			IGNORE;IGNORE;IGNORE;<SYN>
+<ETB>			IGNORE;IGNORE;IGNORE;<ETB>
+<CAN>			IGNORE;IGNORE;IGNORE;<CAN>
+<EM>			IGNORE;IGNORE;IGNORE;<EM>
+<SUB>			IGNORE;IGNORE;IGNORE;<SUB>
+<ESC>			IGNORE;IGNORE;IGNORE;<ESC>
+<IS4>			IGNORE;IGNORE;IGNORE;<IS4>
+<IS3>			IGNORE;IGNORE;IGNORE;<IS3>
+<IS2>			IGNORE;IGNORE;IGNORE;<IS2>
+<IS1>			IGNORE;IGNORE;IGNORE;<IS1>
+<DEL>			IGNORE;IGNORE;IGNORE;<DEL>
+<PAD>			IGNORE;IGNORE;IGNORE;<PAD>
+<HOP>			IGNORE;IGNORE;IGNORE;<HOP>
+<BPH>			IGNORE;IGNORE;IGNORE;<BPH>
+<NBH>			IGNORE;IGNORE;IGNORE;<NBH>
+<IND>			IGNORE;IGNORE;IGNORE;<IND>
+<NEL>			IGNORE;IGNORE;IGNORE;<NEL>
+<SSA>			IGNORE;IGNORE;IGNORE;<SSA>
+<ESA>			IGNORE;IGNORE;IGNORE;<ESA>
+<HTS>			IGNORE;IGNORE;IGNORE;<HTS>
+<HTJ>			IGNORE;IGNORE;IGNORE;<HTJ>
+<VTS>			IGNORE;IGNORE;IGNORE;<VTS>
+<PLD>			IGNORE;IGNORE;IGNORE;<PLD>
+<PLU>			IGNORE;IGNORE;IGNORE;<PLU>
+<RI>			IGNORE;IGNORE;IGNORE;<RI>
+<SS2>			IGNORE;IGNORE;IGNORE;<SS2>
+<SS3>			IGNORE;IGNORE;IGNORE;<SS3>
+<DCS>			IGNORE;IGNORE;IGNORE;<DCS>
+<PU1>			IGNORE;IGNORE;IGNORE;<PU1>
+<PU2>			IGNORE;IGNORE;IGNORE;<PU2>
+<STS>			IGNORE;IGNORE;IGNORE;<STS>
+<CCH>			IGNORE;IGNORE;IGNORE;<CCH>
+<MW>			IGNORE;IGNORE;IGNORE;<MW>
+<SPS>			IGNORE;IGNORE;IGNORE;<SPS>
+<EPA>			IGNORE;IGNORE;IGNORE;<EPA>
+<SOS>			IGNORE;IGNORE;IGNORE;<SOS>
+<SGCI>			IGNORE;IGNORE;IGNORE;<SGCI>
+<SCI>			IGNORE;IGNORE;IGNORE;<SCI>
+<CSI>			IGNORE;IGNORE;IGNORE;<CSI>
+<ST>			IGNORE;IGNORE;IGNORE;<ST>
+<OSC>			IGNORE;IGNORE;IGNORE;<OSC>
+<PM>			IGNORE;IGNORE;IGNORE;<PM>
+<APC>			IGNORE;IGNORE;IGNORE;<APC>
+<space>                IGNORE;IGNORE;IGNORE;<space>
+<low-line>             IGNORE;IGNORE;IGNORE;<low-line>
+<macron>               IGNORE;IGNORE;IGNORE;<macron>
+<dash>                 IGNORE;IGNORE;IGNORE;<dash>
+<hyphen>               IGNORE;IGNORE;IGNORE;<hyphen>
+<comma>                IGNORE;IGNORE;IGNORE;<comma>
+<semicolon>            IGNORE;IGNORE;IGNORE;<semicolon>
+<colon>                IGNORE;IGNORE;IGNORE;<colon>
+<exclamation-mark>     IGNORE;IGNORE;IGNORE;<exclamation-mark>
+<exclamation-down>     IGNORE;IGNORE;IGNORE;<exclamation-down>
+<question-mark>        IGNORE;IGNORE;IGNORE;<question-mark>
+<question-down>        IGNORE;IGNORE;IGNORE;<question-down>
+<solidus>              IGNORE;IGNORE;IGNORE;<solidus>
+<full-stop>            IGNORE;IGNORE;IGNORE;<full-stop>
+<acute>                IGNORE;IGNORE;IGNORE;<acute>
+<grave-accent>         IGNORE;IGNORE;IGNORE;<grave-accent>
+<guillemot-left>       IGNORE;IGNORE;IGNORE;<guillemot-left>
+<guillemot-right>      IGNORE;IGNORE;IGNORE;<guillemot-right>
+<left-parenthesis>     IGNORE;IGNORE;IGNORE;<left-parenthesis>
+<right-parenthesis>    IGNORE;IGNORE;IGNORE;<right-parenthesis>
+<left-square-bracket>  IGNORE;IGNORE;IGNORE;<left-square-bracket>
+<right-square-bracket> IGNORE;IGNORE;IGNORE;<right-square-bracket>
+<left-brace>           IGNORE;IGNORE;IGNORE;<left-brace>
+<right-brace>          IGNORE;IGNORE;IGNORE;<right-brace>
+<section>              IGNORE;IGNORE;IGNORE;<section>
+<paragraph>            IGNORE;IGNORE;IGNORE;<paragraph>
+<copyright>            IGNORE;IGNORE;IGNORE;<copyright>
+<registered>           IGNORE;IGNORE;IGNORE;<registered>
+<commercial-at>        IGNORE;IGNORE;IGNORE;<commercial-at>
+<currency>             IGNORE;IGNORE;IGNORE;<currency>
+<cent>                 IGNORE;IGNORE;IGNORE;<cent>
+<dollar-sign>          IGNORE;IGNORE;IGNORE;<dollar-sign>
+<sterling>             IGNORE;IGNORE;IGNORE;<sterling>
+<yen>                  IGNORE;IGNORE;IGNORE;<yen>
+<asterisk>             IGNORE;IGNORE;IGNORE;<asterisk>
+<reverse-solidus>      IGNORE;IGNORE;IGNORE;<reverse-solidus>
+<ampersand>            IGNORE;IGNORE;IGNORE;<ampersand>
+<number-sign>          IGNORE;IGNORE;IGNORE;<number-sign>
+<percent-sign>         IGNORE;IGNORE;IGNORE;<percent-sign>
+<plus-sign>            IGNORE;IGNORE;IGNORE;<plus-sign>
+<plus-minus>           IGNORE;IGNORE;IGNORE;<plus-minus>
+<division>             IGNORE;IGNORE;IGNORE;<division>
+<multiply>             IGNORE;IGNORE;IGNORE;<multiply>
+<less-than-sign>       IGNORE;IGNORE;IGNORE;<less-than-sign>
+<equals-sign>          IGNORE;IGNORE;IGNORE;<equals-sign>
+<greater-than-sign>    IGNORE;IGNORE;IGNORE;<greater-than-sign>
+<not>                  IGNORE;IGNORE;IGNORE;<not>
+<circumflex-accent>    IGNORE;IGNORE;IGNORE;<circumflex-accent>
+<diaresis>             IGNORE;IGNORE;IGNORE;<diaresis>
+<tilde>                IGNORE;IGNORE;IGNORE;<tilde>
+<dot>                  IGNORE;IGNORE;IGNORE;<dot>
+<cedilla>              IGNORE;IGNORE;IGNORE;<cedilla>
+<apostrophe>           IGNORE;IGNORE;IGNORE;<apostrophe>
+<quotation-mark>       IGNORE;IGNORE;IGNORE;<quotation-mark>
+<vertical-line>        IGNORE;IGNORE;IGNORE;<vertical-line>
+<broken-bar>           IGNORE;IGNORE;IGNORE;<broken-bar>
+<degree>               IGNORE;IGNORE;IGNORE;<degree>
+<mu>                   IGNORE;IGNORE;IGNORE;<mu>
+
+<nobreakspace>         <space>;<non-accented>;<lower-case>;IGNORE
+
+############################
+# Alphanumerics start here #
+############################
+
+<zero>                 <zero>;<non-accented>;<lower-case>;IGNORE
+<one>                  <one>;<non-accented>;<lower-case>;IGNORE
+<two>                  <two>;<non-accented>;<lower-case>;IGNORE
+<three>                <three>;<non-accented>;<lower-case>;IGNORE
+<four>                 <four>;<non-accented>;<lower-case>;IGNORE
+<five>                 <five>;<non-accented>;<lower-case>;IGNORE
+<six>                  <six>;<non-accented>;<lower-case>;IGNORE
+<seven>                <seven>;<non-accented>;<lower-case>;IGNORE
+<eight>                <eight>;<non-accented>;<lower-case>;IGNORE
+<nine>                 <nine>;<non-accented>;<lower-case>;IGNORE
+
+<one-quarter>          <zero>;<accent-circumflex>;<lower-case>;IGNORE
+<one-half>             <zero>;<accent-diaresis>;<lower-case>;IGNORE
+<three-quarters>       <zero>;<oblique>;<lower-case>;IGNORE
+<one-superior>         <one>;<non-accented>;<exponent>;IGNORE
+<two-superior>         <two>;<non-accented>;<exponent>;IGNORE
+<three-superior>       <three>;<non-accented>;<exponent>;IGNORE
+
+<a>                    <a>;<non-accented>;<lower-case>;IGNORE
+<a-acute>              <a>;<accent-acute>;<lower-case>;IGNORE
+<a-grave>              <a>;<accent-grave>;<lower-case>;IGNORE
+<a-circumflex>         <a>;<accent-circumflex>;<lower-case>;IGNORE
+<a-tilde>              <a>;<accent-tilde>;<lower-case>;IGNORE
+<a-diaresis>           <a>;<accent-diaresis>;<lower-case>;IGNORE
+<a-ring>               <a>;<accent-ring>;<lower-case>;IGNORE
+<ae>                   <ae>;<ligature>;<lower-case>;IGNORE
+<b>                    <b>;<non-accented>;<lower-case>;IGNORE
+<c>                    <c>;<non-accented>;<lower-case>;IGNORE
+<c-cedilla>            <c>;<accent-cedilla>;<lower-case>;IGNORE
+<d>                    <d>;<non-accented>;<lower-case>;IGNORE
+<eth>                  <d>;<peculiar>;<lower-case>;IGNORE
+<e>                    <e>;<non-accented>;<lower-case>;IGNORE
+<e-acute>              <e>;<accent-acute>;<lower-case>;IGNORE
+<e-grave>              <e>;<accent-grave>;<lower-case>;IGNORE
+<e-circumflex>         <e>;<accent-circumflex>;<lower-case>;IGNORE
+<e-diaresis>           <e>;<accent-diaresis>;<lower-case>;IGNORE
+<f>                    <f>;<non-accented>;<lower-case>;IGNORE
+<g>                    <g>;<non-accented>;<lower-case>;IGNORE
+<h>                    <h>;<non-accented>;<lower-case>;IGNORE
+<i>                    <i>;<non-accented>;<lower-case>;IGNORE
+<i-acute>              <i>;<accent-acute>;<lower-case>;IGNORE
+<i-grave>              <i>;<accent-grave>;<lower-case>;IGNORE
+<i-circumflex>         <i>;<accent-circumflex>;<lower-case>;IGNORE
+<i-diaresis>           <i>;<accent-diaresis>;<lower-case>;IGNORE
+<j>                    <j>;<non-accented>;<lower-case>;IGNORE
+<k>                    <k>;<non-accented>;<lower-case>;IGNORE
+<l>                    <l>;<non-accented>;<lower-case>;IGNORE
+<m>                    <m>;<non-accented>;<lower-case>;IGNORE
+<n>                    <n>;<non-accented>;<lower-case>;IGNORE
+<n-tilde>              <n>;<accent-tilde>;<lower-case>;IGNORE
+<o>                    <o>;<non-accented>;<lower-case>;IGNORE
+<o-acute>              <o>;<accent-acute>;<lower-case>;IGNORE
+<o-grave>              <o>;<accent-grave>;<lower-case>;IGNORE
+<o-circumflex>         <o>;<accent-circumflex>;<lower-case>;IGNORE
+<o-tilde>              <o>;<accent-tilde>;<lower-case>;IGNORE
+<o-diaresis>           <o>;<accent-diaresis>;<lower-case>;IGNORE
+<o-slash>              <o>;<oblique>;<lower-case>;IGNORE
+<p>                    <p>;<non-accented>;<lower-case>;IGNORE
+<q>                    <q>;<non-accented>;<lower-case>;IGNORE
+<r>                    <r>;<non-accented>;<lower-case>;IGNORE
+<s>                    <s>;<non-accented>;<lower-case>;IGNORE
+<eszet>
+<t>                    <t>;<non-accented>;<lower-case>;IGNORE
+<thorn>                <thorn>;<peculiar>;<lower-case>;IGNORE
+<u>                    <u>;<non-accented>;<lower-case>;IGNORE
+<u-acute>              <u>;<accent-acute>;<lower-case>;IGNORE
+<u-grave>              <u>;<accent-grave>;<lower-case>;IGNORE
+<u-circumflex>         <u>;<accent-circumflex>;<lower-case>;IGNORE
+<u-diaresis>           <u>;<accent-diaresis>;<lower-case>;IGNORE
+<v>                    <v>;<non-accented>;<lower-case>;IGNORE
+<w>                    <w>;<non-accented>;<lower-case>;IGNORE
+<x>                    <x>;<non-accented>;<lower-case>;IGNORE
+<y>                    <y>;<non-accented>;<lower-case>;IGNORE
+<y-acute>              <y>;<accent-acute>;<lower-case>;IGNORE
+<z>                    <z>;<non-accented>;<lower-case>;IGNORE
+
+<A>                    <a>;<non-accented>;<upper-case>;IGNORE
+<A-acute>              <a>;<accent-acute>;<upper-case>;IGNORE
+<A-grave>              <a>;<accent-grave>;<upper-case>;IGNORE
+<A-circumflex>         <a>;<accent-circumflex>;<upper-case>;IGNORE
+<A-tilde>              <a>;<accent-tilde>;<upper-case>;IGNORE
+<A-diaresis>           <a>;<accent-diaresis>;<upper-case>;IGNORE
+<A-ring>               <a>;<accent-ring>;<upper-case>;IGNORE
+<AE>                   <ae>;<ligature>;<upper-case>;IGNORE
+<B>                    <b>;<non-accented>;<upper-case>;IGNORE
+<C>                    <c>;<non-accented>;<upper-case>;IGNORE
+<C-cedilla>            <c>;<accent-cedilla>;<upper-case>;IGNORE
+<D>                    <d>;<non-accented>;<upper-case>;IGNORE
+<Eth>                  <d>;<peculiar>;<upper-case>;IGNORE
+<E>                    <e>;<non-accented>;<upper-case>;IGNORE
+<E-acute>              <e>;<accent-acute>;<upper-case>;IGNORE
+<E-grave>              <e>;<accent-grave>;<upper-case>;IGNORE
+<E-circumflex>         <e>;<accent-circumflex>;<upper-case>;IGNORE
+<E-diaresis>           <e>;<accent-diaresis>;<upper-case>;IGNORE
+<F>                    <f>;<non-accented>;<upper-case>;IGNORE
+<G>                    <g>;<non-accented>;<upper-case>;IGNORE
+<H>                    <h>;<non-accented>;<upper-case>;IGNORE
+<I>                    <i>;<non-accented>;<upper-case>;IGNORE
+<I-acute>              <i>;<accent-acute>;<upper-case>;IGNORE
+<I-grave>              <i>;<accent-grave>;<upper-case>;IGNORE
+<I-circumflex>         <i>;<accent-circumflex>;<upper-case>;IGNORE
+<I-diaresis>           <i>;<accent-diaresis>;<upper-case>;IGNORE
+<J>                    <j>;<non-accented>;<upper-case>;IGNORE
+<K>                    <k>;<non-accented>;<upper-case>;IGNORE
+<L>                    <l>;<non-accented>;<upper-case>;IGNORE
+<M>                    <m>;<non-accented>;<upper-case>;IGNORE
+<N>                    <n>;<non-accented>;<upper-case>;IGNORE
+<N-tilde>              <n>;<accent-tilde>;<upper-case>;IGNORE
+<O>                    <o>;<non-accented>;<upper-case>;IGNORE
+<O-acute>              <o>;<accent-acute>;<upper-case>;IGNORE
+<O-grave>              <o>;<accent-grave>;<upper-case>;IGNORE
+<O-circumflex>         <o>;<accent-circumflex>;<upper-case>;IGNORE
+<O-tilde>              <o>;<accent-tilde>;<upper-case>;IGNORE
+<O-diaresis>           <o>;<accent-diaresis>;<upper-case>;IGNORE
+<O-slash>              <o>;<oblique>;<upper-case>;IGNORE
+<P>                    <p>;<non-accented>;<upper-case>;IGNORE
+<Q>                    <q>;<non-accented>;<upper-case>;IGNORE
+<R>                    <r>;<non-accented>;<upper-case>;IGNORE
+<S>                    <s>;<non-accented>;<upper-case>;IGNORE
+<T>                    <t>;<non-accented>;<upper-case>;IGNORE
+<Thorn>                <thorn>;<peculiar>;<upper-case>;IGNORE
+<U>                    <u>;<non-accented>;<upper-case>;IGNORE
+<U-acute>              <u>;<accent-acute>;<upper-case>;IGNORE
+<U-grave>              <u>;<accent-grave>;<upper-case>;IGNORE
+<U-circumflex>         <u>;<accent-circumflex>;<upper-case>;IGNORE
+<U-diaresis>           <u>;<accent-diaresis>;<upper-case>;IGNORE
+<V>                    <v>;<non-accented>;<upper-case>;IGNORE
+<W>                    <w>;<non-accented>;<upper-case>;IGNORE
+<X>                    <x>;<non-accented>;<upper-case>;IGNORE
+<Y>                    <y>;<non-accented>;<upper-case>;IGNORE
+<Y-acute>              <y>;<accent-acute>;<upper-case>;IGNORE
+<Z>                    <z>;<non-accented>;<upper-case>;IGNORE
+
+####################################
+# Characters with no opposite case #
+####################################
+
+<feminine>             <a>;<peculiar>;<exponent>;IGNORE
+<masculine>            <o>;<peculiar>;<exponent>;IGNORE
+<s-sharp>              <eszet>;<ligature>;<lower-case>;IGNORE
+<y-diaresis>           <y>;<accent-diaresis>;<lower-case>;IGNORE
+
+###################################
+# Ignore all undefined characters #
+###################################
+
+UNDEFINED              IGNORE;IGNORE;IGNORE;IGNORE
+ 
+order_end
+
+END LC_COLLATE
+
+#############
+LC_MONETARY
+#############
+
+int_curr_symbol   "<G><B><P><space>"
+currency_symbol   "<sterling>"
+mon_decimal_point <period>
+mon_thousands_sep "<comma>"
+mon_grouping      3
+positive_sign     ""
+negative_sign     "<hyphen>"
+int_frac_digits   2
+frac_digits       2
+p_cs_precedes     1
+p_sep_by_space    0
+n_cs_precedes     1
+n_sep_by_space    0
+p_sign_posn       1
+n_sign_posn       1
+debit_sign        "<D><B>"
+credit_sign       "<C><R>"
+left_parenthesis  "<left-parenthesis>"
+right_parenthesis "<right-parenthesis>"
+
+END LC_MONETARY
+
+
+#############
+LC_NUMERIC
+#############
+
+decimal_point     <period>
+thousands_sep     "<comma>"
+grouping          3
+
+END LC_NUMERIC
+
+
+#############
+LC_TIME
+#############
+abday   "<S><u><n>";\
+	"<M><o><n>";\
+	"<T><u><e>";\
+	"<W><e><d>";\
+	"<T><h><u>";\
+	"<F><r><i>";\
+	"<S><a><t>"
+
+day     "<S><u><n><d><a><y>";\
+	"<M><o><n><d><a><y>";\
+	"<T><u><e><s><d><a><y>";\
+	"<W><e><d><n><e><s><d><a><y>";\
+	"<T><h><u><r><s><d><a><y>";\
+	"<F><r><i><d><a><y>";\
+	"<S><a><t><u><r><d><a><y>"
+
+abmon   "<J><a><n>";\
+	"<F><e><b>";\
+	"<M><a><r>";\
+	"<A><p><r>";\
+	"<M><a><y>";\
+	"<J><u><n>";\
+	"<J><u><l>";\
+	"<A><u><g>";\
+	"<S><e><p>";\
+	"<O><c><t>";\
+	"<N><o><v>";\
+	"<D><e><c>"
+
+mon     "<J><a><n><u><a><r><y>";\
+	"<F><e><b><r><u><a><r><y>";\
+	"<M><a><r><c><h>";\
+	"<A><p><r><i><l>";\
+	"<M><a><y>";\
+	"<J><u><n><e>";\
+	"<J><u><l><y>";\
+	"<A><u><g><u><s><t>";\
+	"<S><e><p><t><e><m><b><e><r>";\
+	"<O><c><t><o><b><e><r>";\
+	"<N><o><v><e><m><b><e><r>";\
+	"<D><e><c><e><m><b><e><r>"
+
+d_t_fmt "%a %e %b %H:%M:%S %Y"
+
+d_fmt   "%d/%m/%y"
+
+t_fmt   "%H:%M:%S"
+
+am_pm   "";""
+
+t_fmt_ampm	"%H:%M:%S"
+
+nlldate "%d %b %Y"
+
+END LC_TIME
+
+
+#############
+LC_MESSAGES
+#############
+
+yesexpr "^([yY]|[yY][eE][sS])"
+noexpr  "^([nN]|[nN][oO])"
+yesstr  "yes:y:Y"
+nostr   "no:n:N"
+
+END LC_MESSAGES

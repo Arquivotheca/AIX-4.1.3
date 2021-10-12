@@ -1,0 +1,29 @@
+# @(#)87	1.1.1.2  src/bldenv/man/MemSyntax.man, bldprocess, bos412, GOLDA411a 1/10/94 18:38:21
+# COMPONENT_NAME: (BLDPROCESS) BAI Build Process
+#
+# FUNCTIONS: Memo string syntax man page
+#
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991, 1992
+# All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+			BNF form of Memo NOTE SYNTAX
+			--------------------------------
+
+  *		Occurs 0 or more times
+  \n		Newline
+  \s		Whitespace (Tab, Space, Newline)
+  [a-zA-Z]	Matches any single character of set
+  .		Matches any charactor
+
+  MEMO NOTE		:= BEGIN START_MEMO MEMO_STRING STOP_MEMO.*
+  BEGIN			:= .*\n\s*|\s*
+  START_MEMO		:= [sS][tT][aA][rR][tT]_[mM][eE][mM][oO]
+  STOP_MEMO		:= [sS][tT][oO][pP]_[mM][eE][mM][oO]
+  MEMO_STRING		:= .*

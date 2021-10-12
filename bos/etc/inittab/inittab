@@ -1,0 +1,26 @@
+: @(#)49  1.28.2.7  src/bos/etc/inittab/inittab, cmdoper, bos411, 9430C411a 7/26/94 16:27:45
+:
+:  COMPONENT_NAME: CMDOPER
+:
+:  ORIGINS: 3, 27
+:
+:  (C) COPYRIGHT International Business Machines Corp. 1989, 1993
+:  All Rights Reserved
+:  Licensed Materials - Property of IBM
+:
+:  US Government Users Restricted Rights - Use, duplication or
+:  disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+:
+: Note - initdefault and sysinit should be the first and second entry.
+:
+init:2:initdefault:
+brc::sysinit:/sbin/rc.boot 3 >/dev/console 2>&1 # Phase 3 of system boot
+powerfail::powerfail:/etc/rc.powerfail 2>&1 | alog -tboot > /dev/console # Power Failure Detection
+rc:2:wait:/etc/rc 2>&1 | alog -tboot > /dev/console # Multi-User checks
+fbcheck:2:wait:/usr/sbin/fbcheck 2>&1 | alog -tboot > /dev/console # run /etc/firstboot
+srcmstr:2:respawn:/usr/sbin/srcmstr # System Resource Controller
+cron:2:respawn:/usr/sbin/cron
+cons:0123456789:respawn:/usr/sbin/getty /dev/console
+qdaemon:2:wait:/usr/bin/startsrc -sqdaemon
+writesrv:2:wait:/usr/bin/startsrc -swritesrv
+uprintfd:2:respawn:/usr/sbin/uprintfd

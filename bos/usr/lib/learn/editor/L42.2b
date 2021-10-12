@@ -1,0 +1,31 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Now pick up the file 'stuff', change all instances of "green"
+everywhere to "red", and then rewrite the file and type "ready".
+#create Ref
+red light, village red
+red book, red paper, red pencil
+red car, red sign, redhorn
+red with envy
+#create stuff
+green light, village green
+green book, green paper, green pencil
+green car, green sign, greenhorn
+green with envy
+#user
+#cmp stuff Ref
+#log
+#next
+42.2c 5

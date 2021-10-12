@@ -1,0 +1,200 @@
+#
+# @(#)65	1.16  src/bldenv/man/ptfsetup.man, bldtools, bos412, GOLDA411a 5/26/94 09:43:08
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS: ptfsetup man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#include "bldenv_defines.h"
+
+  ptfsetup Command
+
+
+  Purpose
+
+  Create files required by subptf and cumptf for Developer and
+  Area builds.
+
+
+  Syntax
+
+  ptfsetup [ -a ] [ -c BLDCYCLE ] [ -h HISTORYDIR ] [ -l "LPP ..." ] 
+           [ -r RELEASE ] [ -n ] [ -u UPDATEDIR ] [ [ -b | -f ] name(s) ... ]
+
+
+  Description
+
+  In the file names below a $ indicates the value is taken from
+  either the command line arguments or from the environment variables
+  of the same names.
+
+  The ptfsetup command is used to create files required by subptf
+  and cumptf for Developer and Area builds.  These files include:
+
+    $TOP/PTF/$BLDCYCLE/$CMVC_RELEASE/changeview
+
+    $TOP/PTF/$BLDCYCLE/$CMVC_RELEASE/defects
+
+  Unless the append flag (see -a option below) is specified, the files 
+  will be removed if they exist before ptfsetup begins adding data to them.
+
+  Also, a third file:
+
+    $TOP/PTF/$BLDCYCLE/abstractlist
+
+  is appended to by ptfsetup.  Data is always appended to this file regardless
+  of whether the -a command line argument was used.
+
+  The ptfsetup command also copies lpp information from $UPDATEDIR into
+  $TOP/UPDATE.  The abstracts, memo_info, pkgptf.name, and ptfoptions files
+  from $HISTORYDIR are copied into $TOP/HISTORY.
+
+
+  Flags
+
+  -a 		  Append flag.  Files are appended to rather than recreated.
+
+  -b name         CMVC level name(s).
+
+  -c BLDCYCLE     Build cycle.
+
+  -f name         File(s) containing list of defects, one defect per line.
+
+  -h HISTORYDIR   Directory from which to copy the history data files
+                  abstracts, memo_info, pkgptf.name, and ptfoptions.
+                  Default is /afs/austin/aix/BLDENV_DEFINE_AFSSUBDIR/HISTORY.
+
+  -l "LPP ..."    List of LPPs whose update information is to be copied.  All
+		  LPP update information is copied by default.  Quotes around
+		  the LPP list are required.
+
+  -n		  Do not copy any LPP update information to local $TOP/UPDATE 
+		  directory and do not copy any history data files to local
+                  $TOP/HISTORY.
+
+  -r RELEASE	  CMVC release to use.
+
+  -u UPDATEDIR	  Directory from which to copy LPP update information.
+                  Default is /afs/austin/aix/BLDENV_DEFINE_AFSSUBDIR/UPDATE.
+
+  If the -b, or -f flags are not present, but the name(s) argument appears
+  on the command line, the -b flag is assumed.
+
+  A fatal error occurs if more than one of the -b or -f flags are
+  supplied at the same time.
+
+
+  Environment Variables
+
+  AFSBASE      Base of the AFS tree.  Value is /afs/austin/aix.
+
+  BLDCYCLE      Current "cycle" of builds.  Typically in the form 'yyww'
+                where yy = year and ww = week.  BLDCYCLE must be 
+                set.  Resolution of BLDCYCLE: 1) use value supplied with -c,
+                2) use value of environment variable BLDCYCLE, or 3) prompt
+                for BLDCYCLE value.
+
+  BLDENV        Full pathname to the top of the build environment.
+                Typical value is /bldenv/3.2/prod.
+                NOTE:  This variable MUST be set prior to the execution of
+                       ptfsetup.  Setting  PATH to include $BLDENV/usr/bin
+                       is recommended. 
+
+  CMVC_RELEASE  CMVC release being built.  CMVC_RELEASE must be set.
+                Resolution of CMVC_RELEASE: 1) use value supplied with -r,
+                2) use value of environment variable CMVC_RELEASE, or 3)
+                prompt for CMVC_RELEASE value.
+
+  LEVELNAME     Name of the current level.  Default  computed from BLDCYCLE
+                and the last three digits of CMVC_RELEASE, which are of the 
+		form 'vrl', where v = version, r = release, and l = level.  The
+                base LEVELNAME then is 'yywwvrl'.  A single letter, lower-case
+                alpha character is normally appended to the base to
+                differentiate between builds within the same build cycle (e.g.
+	        9214320d).  If the -f flag is not supplied, the value for 
+	        LEVELNAME must be set.  Resolution of LEVELNAME: 1) use name(s) 
+	        supplied on command line, 2) use name(s) supplied with -b, 3) 
+	        use value of environment variable LEVELNAME, or 4) prompt for
+                LEVELNAME value.  (NOTE: if prompted, only one build name may
+                be entered).
+
+  TOP           Full pathname to the top of the source tree from which the 
+		build is initiated.  The user will be prompted for this value 
+		if it is not set at command invocation.
+
+
+  Files
+#include "abstractlist.man"
+#include "all_defects.man"
+#include "changeview.man"
+#include "defects.man"
+#include "memos.man"
+#include "ptfrequisites.man"
+#include "renamelist.man"
+#include "symptoms.man"
+
+    $TOP/LOG/$BLDCYCLE/ptfsetup.<n>
+        Log of invocations of ptfsetup for build cycle $BLDCYCLE.  File
+        index <n> is incremented by 1 each time ptfsetup is run.
+
+
+  Warnings
+
+  "Levelname <lvlname> for <release> has no associated defects." 
+  No defects were found in CMVC query, insure levelname(s) used are
+  correct for <release>.
+      
+  "Levelname <lvlname> does not exist for <release>."
+  CMVC query does not have a levelname <lvlname> for <release>, cause will
+  usually be a misspelling of <lvlname> or <release>.
+
+  "File <file> does not exist."
+  FILE supplied with -f does not exist.  Cause will usually be incorrect
+  path or spelling error.
+
+
+  Examples
+
+  1.  Use the value bos320 for <release> and 9140 for <bldcycle>.  Query
+      CMVC for all defects associated with the 9140320 level.
+
+      ptfsetup -r bos320 -c 9140 -b 9140320
+        or
+      ptfsetup -r bos320 -c 9140 9140320
+
+  2.  Use the values of $CMVC_RELEASE and $BLDCYCLE from the environment.
+      List of defects comes from the files /tmp/defect_list and
+      /tmp/defect_list2.
+
+      ptfsetup -f /tmp/defect_list /tmp/defect_list2
+
+  3.  Use the values of $CMVC_RELEASE, $BLDCYCLE, and $LEVELNAME from the
+      environment.
+
+      ptfsetup
+
+
+  Related Information
+
+     See commands: 
+        $BLDENV/usr/bin/CheckSymptom - The "CheckSymptom" command. Creates
+                                       memos and symptoms file.
+        $BLDENV/usr/bin/bldhostsfile - The bldhostsfile command used to get
+                                       directories associated with a release
+                                       and name of afs base directory.
+	$BLDENV/usr/bin/bldman - Display man pages for tools.
+	$BLDENV/usr/bin/subptf - Generate PTF package list of information.
+	$BLDENV/usr/bin/cumptf - Generate PTF package image of files. 
+        $BLDENV/usr/bin/hostsfile.dat - The data file used by bldhostsfile
+                                        command.
+
+

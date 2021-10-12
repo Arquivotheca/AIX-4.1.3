@@ -1,0 +1,109 @@
+######################################################################
+#  @(#)75        1.2  src/bldenv/man/kill_mif.man, pkgtools, bos412, GOLDA411a 6/24/93 13:40:10
+#
+#   COMPONENT_NAME: PKGTOOLS
+#
+#   FUNCTIONS: PTF_filename
+#
+#   ORIGINS: 27
+#
+#   IBM CONFIDENTIAL -- (IBM Confidential Restricted when
+#   combined with the aggregated modules for this product)
+#                    SOURCE MATERIALS
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1993
+#   All Rights Reserved
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+######################################################################
+# kill_mif.man 
+#
+# Change log:
+#    10/22/91-wt-added header
+######################################################################
+  kill_mif Command
+
+
+  Key Concepts
+
+
+
+  Purpose
+
+    Removes CCSS format PTFs from the production server.
+
+
+  Syntax
+
+    kill_mif [-b build_directory] [-p prod_directory] [-k killed_list]
+             [-n] [-h] [-?] PTF_filename(s)'
+
+
+  Description
+
+    kill_mif calls 'dependency_list' to verify that all requisite PTFs have
+    been specified.  If not, an error code is returned.  Otherwise, all of the
+    PTFs specified will be removed and the server index files updated.
+    PTFs may be removed from the build and production servers only.
+
+
+  Flags
+
+    -b build_directory   Path to the 'build' server.
+
+    -p prod_directory    Path to the 'production' server.
+
+    -k killed_list       Path and filename for the output list
+                         of killed PTFs.
+
+    -n                   No execute.  Just print missing requisite
+                         PTFs to standard out.
+
+    -h | -?              Print help message and exit.
+
+    PTF_filename(s)   A list of PTFs to be killed.
+                      The file names can include or exclude ".ptf":
+                      For example:
+                                U0000257.ptf  U0000032.ptf U000001.ptf
+                                           < or >
+                                U0000257 U0000032 U000001
+
+
+  Exit
+
+    Without -n option:
+      If there are missing requisites:  Error:  non-zero return code.
+      No missing requisites:  Successful:  return code of zero.
+
+    With -n option:
+      If there is a program error: Non-zero return code.
+      No program error: Return code of zero.
+
+
+  File
+
+
+  Examples
+
+    1. 'kill_mif  -n U00002'
+
+       This command would list all PTF's that are dependent on U00002.
+
+    2. 'kill_mif  U00002 U00003'
+
+       This command would remove U00002 and U00003 from the
+       production server if no other PTFs referenced them.
+
+
+  Implementation Specifics
+
+    Using PTFs specified on the command line allows execution of this command
+    from Motif or EMACS.
+
+
+  Related Information
+
+    dependency_list
+    promote_prod
+    promote_ship

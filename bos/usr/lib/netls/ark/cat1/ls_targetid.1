@@ -1,0 +1,132 @@
+
+
+
+ls_targetid(1M)       Maintenance Commands        ls_targetid(1M)
+
+
+
+NNNNAAAAMMMMEEEE
+     ls_targetid - Prints information about the local NetLS  tar-
+     get id.
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     llllssss____ttttaaaarrrrggggeeeettttiiiidddd
+
+     llllssss____ttttaaaarrrrggggeeeettttiiiidddd [----cccc]((((HP-UX only))))
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     _l_s__t_a_r_g_e_t_i_d is used to find the NetLS ID used by  NetLS  for
+     locking licenses to a particular machine.
+
+     To create NetLS licenses for an application, an  application
+     supplier whose application uses NetLS licenses will need the
+     NetLS ID of  the  machine  executing  the  netlsd,  or  when
+     nodelocked  NetLS  licenses are desired, the NetLS ID of the
+     machine where the application will be executing.   Different
+     devices  are  used  to  derive the NetLS ID depending on the
+     type of NetLS license that is desired and also the  type  of
+     machine which will be storing the license.
+
+     On an HP-UX machine licenses managed  by  the  netlsd  (con-
+     current and use once licenses), the NetLS ID is derived from
+     the link level address of the LAN card accessed by the  dev-
+     ice file /dev/ls_targetid on the machine that is running the
+     netlsd.  If /dev/ls_targetid  does not exist and the  super-
+     user  is  executing  _l_s__t_a_r_g_e_t_i_d,  _l_s__t_a_r_g_e_t_i_d  will  create
+     /dev/ls_targetid.  On a hp9000s300, /dev/ls_targetid will be
+     created  for  the built in LAN card installed at select code
+     21 or, if there is no LAN card installed at select code  21,
+     the  LAN  card installed in the lowest numbered select code.
+     On a hp9000s800, the device file will be for  the  lan0  LAN
+     card.  This is the same method used by the netlsd for deter-
+     mining the NetLS ID of the machine on which it is executing.
+
+     On HP-UX, for NetLS nodelocked licenses,  the  NetLS  ID  is
+     derived from:
+
+          +o   The LAN card accessed by /dev/ls_targetid, or
+
+          +o   The built in SPU ID number, or
+
+          +o   An HIL ID Module.
+
+OOOOPPPPTTTTIIIIOOOONNNNSSSS
+     ----cccc (((( HHHHPPPP----UUUUXXXX oooonnnnllllyyyy ))))
+                    Change the LAN card accessed  by  the  device
+                    file /dev/ls_targetid.  _l_s__t_a_r_g_e_t_i_d lists the
+                    link level address of the installed LAN cards
+                    and allows the super-user to select an alter-
+                    nate LAN card.  This is to allow changing the
+
+
+
+NetLS Version 2           Last change:                          1
+
+
+
+
+
+
+ls_targetid(1M)       Maintenance Commands        ls_targetid(1M)
+
+
+
+                    IO slot where a LAN card is installed without
+                    losing the use of NetLS  licenses  locked  to
+                    that LAN card.
+
+RRRREEEETTTTUUUURRRRNNNN VVVVAAAALLLLUUUUEEEE
+     _l_s__t_a_r_g_e_t_i_d always returns 0.
+
+DDDDIIIIAAAAGGGGNNNNOOOOSSSSTTTTIIIICCCCSSSS
+     Messages displayed during execution are self-explanatory.
+
+EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+     To find all the local NetLS IDs:
+
+     _l_s__t_a_r_g_e_t_i_d
+
+     On HP-UX to change the LAN card accessed by /dev/ls_targetid
+
+     _l_s__t_a_r_g_e_t_i_d -_c
+
+DDDDEEEEPPPPEEEENNNNDDDDEEEENNNNCCCCIIIIEEEESSSS
+     For HP-UX machines SPU ID numbers are  not  available  on  a
+     hp9000s300 before HP-UX 8.0.
+
+AAAAUUUUTTTTHHHHOOOORRRR
+     _l_s__t_a_r_g_e_t_i_d was developed by HP  and  further  enhanced  for
+     other platforms by Gradient.
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     _M_a_n_a_g_i_n_g _S_o_f_t_w_a_r_e _P_r_o_d_u_c_t_s _w_i_t_h _t_h_e _N_e_t_w_o_r_k _L_i_c_e_n_s_e _S_y_s_t_e_m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NetLS Version 2           Last change:                          2
+
+
+

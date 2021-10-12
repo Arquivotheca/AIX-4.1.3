@@ -1,0 +1,58 @@
+# @(#)83	1.1  src/bos/usr/lib/nls/bidi/maps/iw_IL.ibmaadu/in.MAP, cfgnls, bos411, 9428A410j 8/27/93 09:48:14
+#
+#   COMPONENT_NAME: CFGNLS
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#  in.MAP
+#   -------
+#
+#  This is the maping of characters while in Hebrew_Alpha mode.
+#  Only keys affected must be present in the file.
+#  The first column is the decimal ISO code values of the Hebrew characters.  
+#  The second column is decimal code of the the IBM aadu vt220 8 bit
+#  emulator's  Hebrew characters. 
+#  This maps ISO to internal addu vt220 8 bit codes.
+#
+#
+# key          converted
+#                 to
+#
+224             199     # aleph
+225             252     # bet
+226             233     # gimmel
+227             226	# daled
+228             228	# heh
+229             224	# vav
+230             229	# zain
+231             231	# het
+232             234	# tet
+233             235	# yod
+234             232	# final kaf
+235             239	# kaf
+236             238	# lamed
+237             236	# final mem
+238             196	# mem
+239             197	# final nun
+240             201	# nun
+241             230	# samech
+242             198	# ayin
+243             244	# final pay
+244             246	# pay
+245             242	# final tsadik
+246             251	# tsadik
+247             249	# kuf
+248             253	# resh
+249             214	# shin
+250             220     # tof
+#

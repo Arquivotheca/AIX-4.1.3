@@ -1,0 +1,35 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+Now there is a file named "equipment"
+and on the next to last line is a word
+that contains 'nn' where it should have 'mm'.
+Fix it and rewrite the file.  Then type "ready".
+#create Ref
+screwdriver
+wrench
+saw
+hammer
+pliers
+#create equipment
+screwdriver
+wrench
+saw
+hanner
+pliers
+#user
+#cmp equipment Ref
+#log
+#next
+30.2g 5

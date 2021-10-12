@@ -1,0 +1,652 @@
+# @(#)36 1.16 src/bos/objclass/cmdcntl.add, cmdcntl, bos411, 9428A410j 2/16/94 09:32:22
+
+################################################################################
+#                                                                              #
+# COMPONENT_NAME:  CMDCNTL                                                     #
+#                                                                              #
+# FUNCTIONS:  None.                                                            #
+#                                                                              #
+# ORIGINS:  27, 83                                                             #
+#                                                                              #
+# IBM CONFIDENTIAL -- (IBM Confidential Restricted when                        #
+# combined with the aggregated modules for this product)                       #
+#                  SOURCE MATERIALS                                            #
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1993               #
+# All Rights Reserved                                                          #
+#                                                                              #
+# US Government Users Restricted Rights - Use, duplication or                  #
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.            #
+#                                                                              #
+# LEVEL 1, 5 Years Bull Confidential Information
+#
+################################################################################
+
+# NOTES
+#
+# ( by P.Cugny@frec.bull.fr)
+#
+# 1. help Id's
+#
+#       Help text Id's already used for helps are in the range:
+#               050901 to 050911
+#
+#	New help Id's are in the range:
+#		050912 to 050917
+#
+# 2. the command to list the processors has to be verified when available
+#
+
+################################################################################
+#									       #
+#	COMMANDS:  kill, ps, nice, renice, bindprocessor                       #
+#									       #
+################################################################################
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Processes                                                 #
+#                        Remove a Process                                      #
+#                                                                              #
+# FAST KEY:  kill     	                                                       #
+#									       #
+# UNIX COMMAND(S):  kill                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   2 dialogue objects 			                               #
+#                                                                              #
+# HEADER:  Remove a Process   	                                               #
+#                                                                              #
+# OBJECTS:  1.  SIGNAL type (SIGTERM, SIGKILL)                                 #
+#           2.  PROCESS ID                     	                               #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                      = "kill"
+	option_id               = "killOpts"
+	has_name_select         = "n"
+	name                    = "Remove a Process"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 20
+	name_msg_id             = 15
+	cmd_to_exec             = "/usr/bin/kill"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = ""
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050901"
+	help_msg_loc            = ""
+
+sm_cmd_opt:
+	id                  = "killOpts"
+	id_seq_num          = "0"
+	disc_field_name     = ""
+	name                = "SIGNAL type"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 20
+	name_msg_id         = 20
+	op_type             = "r"
+	entry_type          = ""
+	entry_size          = 0
+	required            = "y"
+	prefix              = "-"
+	cmd_to_list_mode    = ""
+	cmd_to_list         = ""
+	cmd_to_list_postfix = ""
+	multi_select        = ""
+	value_index         = 0
+	disp_values         = "SIGTERM,SIGKILL"
+	values_msg_file     = "smit.cat"
+	values_msg_set      = 20
+	values_msg_id       = 25
+	aix_values          = ""
+	help_msg_id         = "050902"
+	help_msg_loc        = ""
+
+sm_cmd_opt:
+	id                  = "killOpts"
+	id_seq_num          = "005"
+	disc_field_name     = ""
+	name                = "PROCESS ID"
+	name_msg_file       = "smit.cat"
+	name_msg_set        = 20
+	name_msg_id         = 30
+	op_type             = "l"
+	entry_type          = "#"
+	entry_size          = 0
+	required            = "+"
+	prefix              = ""
+	cmd_to_list_mode    = "1"
+	cmd_to_list         = "ps -e"
+	cmd_to_list_postfix = ""
+	multi_select        = "n"
+	value_index         = 0
+	disp_values         = ""
+	values_msg_file     = ""
+	values_msg_set      = 0
+	values_msg_id       = 0
+	aix_values          = ""
+	help_msg_id         = "050903"
+	help_msg_loc        = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  Processes & Subsystems                                        #
+#                    Processes                                                 #
+#                        Show all Current Processes                            #
+#                                                                              #
+# FAST KEY:  ps                                                                #
+#									       #
+# UNIX COMMAND(S):  ps                                                         #
+#                                                                              #
+# DESIGN:  1 name selector + 1 option                                          #
+#          2 dialogue headers                                                  #
+#                                                                              #
+# SELECTOR: Show THREADS information ?                                    #
+#                                                                              #
+# HEADER:  Show all Current Processes                                          #
+#          Show all Current Processes and Threads                              #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+# There are one name selector followed by two dialogues. 
+# The name selector is used to ask the user
+# if he wants threads information to be displayed or not.
+
+# name selector header for displaying threads information or not
+sm_name_hdr:
+    id                        = "ps"
+    next_id                   = "ps_"
+    option_id                 = "ps_sel"
+    has_name_select           = "n"
+    name                      = ""
+    name_msg_file             = ""
+    name_msg_set              = 0
+    name_msg_id               = 0
+    type                      = "r"
+    ghost                     = "y"
+    cmd_to_classify           = ""
+    cmd_to_classify_postfix   = ""
+    raw_field_name            = ""
+    cooked_field_name         = ""
+    next_type                 = "d"
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+# name selector command option 
+sm_cmd_opt:
+    id                        = "ps_sel"
+    id_seq_num                = "0"
+    disc_field_name           = ""
+    name                      = "Show THREADS information ?"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 20
+    name_msg_id               = 145
+    op_type                   = "l"
+    entry_type                = ""
+    entry_size                = 0
+    required                  = ""
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "\
+echo $(dspmsg smit.cat -s 20 135 '1 no')\n\
+echo $(dspmsg smit.cat -s 20 140 '2 yes')"
+    cmd_to_list_postfix       = ""
+    multi_select              = "n"
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = ""
+    help_msg_loc              = ""
+
+# dialog for Show all Current Processes
+sm_cmd_hdr:
+	id                      = "ps_1"
+	option_id               = ""
+	has_name_select         = "n"
+	name                    = "Show all Current Processes"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 20
+	name_msg_id             = 35
+	cmd_to_exec             = "ps -ef"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = "y"
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050904"
+	help_msg_loc            = ""
+
+# dialog for Show all Current Processes and Threads
+sm_cmd_hdr:
+	id                      = "ps_2"
+	option_id               = ""
+	has_name_select         = "n"
+	name                    = "Show all Current Processes and Threads"
+	name_msg_file           = "smit.cat"
+	name_msg_set            = 20
+	name_msg_id             = 150
+	cmd_to_exec             = "ps -efmo THREAD"
+	ask                     = "n"
+	exec_mode               = ""
+	ghost                   = "y"
+	cmd_to_discover         = ""
+	cmd_to_discover_postfix = ""
+	name_size               = 0
+	value_size              = 0
+	help_msg_id             = "050912"
+	help_msg_loc            = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Performance                                               #
+#                        Resource Status                                       #
+#                            Show Process Status                               #
+#                                                                              #
+# FAST KEY:  ps_gv     	                                                       #
+#                                                                              #
+# UNIX COMMAND(S):  ps gv                                                      #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#                                                                              #
+# HEADER:  Show Process Status                                                 #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "ps_gv"
+	option_id                 = ""
+	has_name_select           = "n"
+	name                      = "Show Process Status"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 100
+	cmd_to_exec               = "/usr/bin/ps gv"
+	ask                       = "n"
+	exec_mode                 = ""
+	ghost                     = "y"
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "050905"
+	help_msg_loc              = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Performance                                               #
+#                        Resource Controls                                     #
+#                            Set Initial Priority of a Process		       #
+#                                                                              #
+# FAST KEY:  nice     	                                                       #
+#									       #
+# UNIX COMMAND(S):  nice                                                       #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   2 dialogue objects 			                               #
+#                                                                              #
+# HEADER:  Set Initial Priority of a Process                                   #
+#                                                                              #
+# OBJECTS:  1.  PRIORITY number						       #
+#           2.  COMMAND name                   	                               #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "nice"
+	option_id                 = "nice_o"
+	has_name_select           = "n"
+	name                      = "Set Initial Priority of a Process"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 105
+	cmd_to_exec               = "/usr/bin/nice"
+	ask                       = "n"
+	exec_mode                 = ""
+	ghost                     = ""
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "050906"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "nice_o"
+	id_seq_num                = "010"
+	disc_field_name           = ""
+	name                      = "PRIORITY number"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 110
+	op_type                   = "l"
+	entry_type                = "t"
+	entry_size                = 0
+	required                  = "n"
+	prefix                    = "-"
+	cmd_to_list_mode          = "r"
+	cmd_to_list               = "echo -20..20"
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = "10"
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "050907"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "nice_o"
+	id_seq_num                = "020"
+	disc_field_name           = ""
+	name                      = "COMMAND name"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 115
+	op_type                   = ""
+	entry_type                = "t"
+	entry_size                = 0
+	required                  = "+"
+	prefix                    = "--"
+	cmd_to_list_mode          = ""
+	cmd_to_list               = ""
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = ""
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "050908"
+	help_msg_loc              = ""
+
+################################################################################
+#                                                                              #
+#                          SMIT Dialogue Definition                            #
+#                                                                              #
+# MENU PATH(S):  System Environments                                           #
+#                    Performance                                               #
+#                        Resource Controls                                     #
+#                            Alter the Priority of a Running Process 	       #
+#                                                                              #
+# FAST KEY:  renice    	                                                       #
+#									       #
+# UNIX COMMAND(S):  renice                                                     #
+#                                                                              #
+# DESIGN:  1 dialogue header						       #
+#	   2 dialogue objects 			                               #
+#                                                                              #
+# HEADER:  Alter the Priority of a Running Process			       #
+#                                                                              #
+# OBJECTS:  1.  PRIORITY increment	 				       #
+#           2.  PROCESS ID                   	                               #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "renice"
+	option_id                 = "renice_o"
+	has_name_select           = "n"
+	name                      = "Alter the Priority of a Running Process"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 120
+	cmd_to_exec               = "/usr/sbin/renice"
+	ask                       = "n"
+	exec_mode                 = ""
+	ghost                     = ""
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "050909"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "renice_o"
+	id_seq_num                = "010"
+	disc_field_name           = ""
+	name                      = "PRIORITY increment"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 125
+	op_type                   = "l"
+	entry_type                = "t"
+	entry_size                = 0
+	required                  = "+"
+	prefix                    = "-n"
+	cmd_to_list_mode          = "r"
+	cmd_to_list               = "echo -20..20"
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = "0"
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "050910"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "renice_o"
+	id_seq_num                = "020"
+	disc_field_name           = ""
+	name                      = "PROCESS ID"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 130
+	op_type                   = "l"
+	entry_type                = "t"
+	entry_size                = 0
+	required                  = "+"
+	prefix                    = ""
+	cmd_to_list_mode          = "1"
+	cmd_to_list               = "ps -e"
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = ""
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "050911"
+	help_msg_loc              = ""
+
+
+################################################################################
+#									       #
+#	COMMANDS:  bindprocessor					       #
+#									       #
+################################################################################
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S):  System Environments
+#                  Processes & Subsystems
+#                     Processes
+#                        Bind a Process to a Processor
+#
+# FAST KEY:  bindproc
+#
+# UNIX COMMAND(S):  bindprocessor
+#
+# DESIGN:  1 dialogue header
+#	   2 dialogue objects 	
+#
+# HEADER:  Bind a Process to a Processor
+#
+# OBJECTS:  1.  PROCESS ID
+#           2.  PROCESSOR ID
+#
+#
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "bindproc"
+	option_id                 = "bindproc_opt"
+	has_name_select           = "n"
+	name                      = "Bind a Process to a Processor"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 160
+	cmd_to_exec               = "bindprocessor"
+	ask                       = "n"
+	exec_mode                 = ""
+	ghost                     = ""
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "050913"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "bindproc_opt"
+	id_seq_num                = "010"
+	disc_field_name           = ""
+	name                      = "PROCESS ID"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 165
+	op_type                   = "l"
+	entry_type                = "#"
+	entry_size                = 0
+	required                  = "+"
+	prefix                    = ""
+	cmd_to_list_mode          = "1"
+	cmd_to_list               = "ps -eo \"pid bnd tty time comm\""
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = ""
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "050914"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+    id                        = "bindproc_opt"
+    id_seq_num                = "020"
+    disc_field_name           = ""
+    name                      = "PROCESSOR ID"
+    name_msg_file             = "smit.cat"
+    name_msg_set              = 20
+    name_msg_id               = 170
+    op_type                   = "l"
+    entry_type                = "n"
+    entry_size                = 0
+    required                  = "n"
+    prefix                    = ""
+    cmd_to_list_mode          = "1"
+    cmd_to_list               = "bindprocessor -q |awk -F: '{ print $2 }'|sed -e 's/^  //'|tr \" \" '\n'"
+    cmd_to_list_postfix       = ""
+    multi_select              = ""
+    value_index               = 0
+    disp_values               = ""
+    values_msg_file           = ""
+    values_msg_set            = 0
+    values_msg_id             = 0
+    aix_values                = ""
+    help_msg_id               = "050915"
+    help_msg_loc              = ""
+
+
+################################################################################
+#
+#                          SMIT Dialogue Definition
+#
+# MENU PATH(S):  System Environments
+#                  Processes & Subsystems
+#                     Processes
+#                        Unbind a Process
+#
+# FAST KEY:  ubindproc
+#
+# UNIX COMMAND(S):  bindprocessor
+#
+# DESIGN:  1 dialogue header
+#	   1 dialogue object 	
+#
+# HEADER:  Unbind a Process
+#
+# OBJECTS:  1.  PROCESS ID
+#
+################################################################################
+
+sm_cmd_hdr:
+	id                        = "ubindproc"
+	option_id                 = "ubindproc_opt"
+	has_name_select           = "n"
+	name                      = "Unbind a Process"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 180
+	cmd_to_exec               = "bindprocessor"
+	ask                       = "n"
+	exec_mode                 = ""
+	ghost                     = ""
+	cmd_to_discover           = ""
+	cmd_to_discover_postfix   = ""
+	name_size                 = 0
+	value_size                = 0
+	help_msg_id               = "050916"
+	help_msg_loc              = ""
+
+sm_cmd_opt:
+	id                        = "ubindproc_opt"
+	id_seq_num                = "010"
+	disc_field_name           = ""
+	name                      = "PROCESS ID"
+	name_msg_file             = "smit.cat"
+	name_msg_set              = 20
+	name_msg_id               = 165
+	op_type                   = "l"
+	entry_type                = "#"
+	entry_size                = 0
+	required                  = "+"
+	prefix                    = "-u"
+	cmd_to_list_mode          = "1"
+	cmd_to_list               = "ps -eo \"pid bnd tty time comm\" | grep -v \"<defunct>\" | awk '{ if ($2 != \"-\") print $0 }'"
+	cmd_to_list_postfix       = ""
+	multi_select              = ""
+	value_index               = 0
+	disp_values               = ""
+	values_msg_file           = ""
+	values_msg_set            = 0
+	values_msg_id             = 0
+	aix_values                = ""
+	help_msg_id               = "050917"
+	help_msg_loc              = ""

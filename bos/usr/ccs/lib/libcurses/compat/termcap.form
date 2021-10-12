@@ -1,0 +1,119 @@
+static char sccsid[] = "@(#)27  1.8  src/bos/usr/ccs/lib/libcurses/compat/termcap.form, libcurses, bos411, 9428A410j 6/16/90 01:53:09";
+/*
+ * COMPONENT_NAME: (LIBCURSE) Curses Library
+ *
+ * FUNCTIONS:   tgetent, tgetflag, tgetnum, tgetstr
+ *
+ * ORIGINS: 3, 10, 27
+ *
+ * This module contains IBM CONFIDENTIAL code. -- (IBM
+ * Confidential Restricted when combined with the aggregated
+ * modules for this product)
+ *                  SOURCE MATERIALS
+ * (C) COPYRIGHT International Business Machines Corp. 1985, 1988
+ * All Rights Reserved
+ * Licensed Material - Property of IBM
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+#include "cursesext.h"
+
+
+char *UP;
+char *BC;
+char PC;
+short ospeed;
+
+/*
+ * NAME:        tgetent
+ *
+ * FUNCTION:
+ *
+ *      Simulation of termcap using terminfo.
+ */
+
+int
+tgetent(bp, name)
+char *bp, *name;
+{
+	int rv;
+
+	if (setupterm(name, 1, &rv) >= 0)
+		/* Leave things as they were (for compatibility) */
+		reset_shell_mode();
+	return rv;
+}
+
+/* Make a 2 letter code into an integer we can switch on easily.*/
+#define two(s1, s2) (s1 + 256*s2)
+#define twostr(str) two(*str, str[1])
+
+/*
+ * NAME:        tgetflag
+ */
+
+int
+tgetflag(id)
+char *id;
+{
+	register int rv;
+	register char *p;
+
+	switch (twostr(id)) {
+	BOOLS
+	case two('b','s'):
+		p = cursor_left;
+		rv = p && *p==8 && p[1] == 0;
+		break;
+	case two('p','t'):
+		p = tab;
+		rv = p && *p==9 && p[1] == 0;
+		break;
+	case two('n','c'):
+		p = carriage_return;
+		rv = ! (p && *p==13 && p[1] == 0);
+		break;
+	case two('n','s'):
+		p = scroll_forward;
+		rv = ! (p && *p==10 && p[1] == 0);
+		break;
+	default: rv = 0;
+	}
+	return rv;
+}
+
+/*
+ * NAME:        tgetnum
+ */
+
+int
+tgetnum(id)
+char *id;
+{
+	int rv;
+
+	switch (twostr(id)) {
+	NUMS
+	default: rv = -1;
+	}
+	return rv;
+}
+
+/*
+ * NAME:        tgetstr
+ */
+
+char *
+tgetstr(id, area)
+char *id, *area;
+{
+	char *rv;
+
+	switch (twostr(id)) {
+	STRS
+	default: rv = NULL;
+	}
+	return rv;
+}

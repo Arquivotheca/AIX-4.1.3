@@ -1,0 +1,118 @@
+*/* @(#)34	1.1  src/bos/usr/ccs/bin/as/POWER/instrs.ops.ppc_opt1, cmdas, bos411, 9428A410j 3/10/94 10:45:33*/
+*/*
+* * COMPONENT_NAME: (CMDAS) Assembler and Macroprocessor 
+* *
+* * FUNCTIONS:  instrs.ops.ppc_opt1
+*
+* *       PowerPC optional instruction set 1.
+* *       They are implemented in  601, 603 and 604 processor. 
+* *                                                                   
+* *       Refer to "instrs.ops.forms" for the summary of all the
+* *       form definitions and the input and output format descriptions.
+*
+* * ORIGINS:  27
+* *
+* * This module contains IBM CONFIDENTIAL code. -- (IBM
+* * Confidential Restricted when combined with the aggregated
+* * modules for this product)
+* *                  SOURCE MATERIALS
+* * (C) COPYRIGHT International Business Machines Corp. 1994
+* * All Rights Reserved
+* *
+* * US Government Users Restricted Rights - Use, duplication or
+* * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+* */
+***********************************************************************
+*    Instruction Definition format:
+*
+*    mn_PPC  if  of  opc-exopc-rc/lk-ov-frt-fra-ab-frb  mn_PW
+*
+*   where
+*      mn_PPC = op code mnenmonic for PowerPC architecture.
+*      if = input-format descriptor for each operand of instruction
+*      of = output-format descriptor for placing operands into the
+*           generated instruction
+*      op  = opcode in decimal (0-63) bits 0-5 of instruction
+*      ext = extended op code in decimal - bits 22-30 of inst
+*      rc/lk = Rc or LK bit (0/1) - bit 31 of instruction
+*              (Rc=record bit, LK=link bit)
+*      ov  = OV bit (0/1) - bit 21 of instruction
+*              (enable overflow)
+*      frt = fixed operand 1 field in decimal (0-31) - bits 6-10
+*      fra = fixed operand 2 field in decimal (0-31) - bits 11-15
+*      ab  = AA bit (0/1) - bit 30 of instruction ... overlays
+*              exopc field (ab=Absolute/relative)
+*      frb = fixed operand 3 field in decimal (0-31) - bits 16-20
+*      mn_PW  = POWER mnemonics that shares the same opcode with
+*                PowerPC.
+* ---------------------------------------------------------------------
+*| op  | frt | fra | frb |ov|            ext                    |rc/lk |
+* ---------------------------------------------------------------------
+* 0     6     11    16    21 22                            | ab | 31
+*                                                           ----
+*                                                           30
+*
+************************************************************************
+*** - *** Type indicator:  Bit map for 601 unique instructions is
+*                           0x8010
+*                          Bit map for 603 unique instructions is 
+*                           0x8020
+*                          Bit map for 604 unique instructions is 
+*                           0x8040
+*                          since these instructions are for 601, 
+*                          603 and 604, the bit map will be 0x8070
+% 32880
+************************************************************************
+*       X-Form instructions
+***********************************************************************
+*
+*       Instruction Format: XB-format
+*
+*       ---------------------------------------------------
+*      |OPCODE| / / / | / / /|  RB   |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*   Asm Formats:
+*
+*       mnemonic  RB               ----- RC=0
+*       mnemonic. RB               ----- RC=1
+*
+***********************************************************************
+***********************************
+**** /*** storage Control  ***/ ****
+***********************************
+*Opcde 1F
+*       mnem  |input     |out |op code value
+*132    tlbie  rb             TLB Invalidate Entry
+*                              Entry 
+        tlbie  r         x1   31-306
+***********************************************************************
+*
+***********************************************************************
+*       Instruction Format: X-FORM
+*
+*       ---------------------------------------------------
+*      |OPCODE|  OP1  |  OP2  |  OP3  |       EO       |Rc |
+*       ---------------------------------------------------
+*       0    5 6    10 11   15 16   20 21            30 31
+*
+*              OP1 = RT | RS | FRT | FRS | BF
+*              OP2 = RA | FRA
+*              OP3 = RB | FRB | NB
+*
+*   Asm Formats:
+*
+*       mnemonic  OP1,OP2,OP3         ----- RC=0
+*       mnemonic. OP1,OP2,OP3         ----- RC=1
+*
+***********************************************************************
+**** /*** External Access ***/ ****
+**********************************
+*Opcode = 1F
+*       mnem  |input     |out |op code value
+*136   eciwx   rt,ra,rb      External Control in Word Indexed
+       eciwx       rrr      x7   31-310
+*1B6   ecowx   rs,ra,rb      External Control Out Word Indexed
+       ecowx       rrr      x7   31-438
+***********************************************************************

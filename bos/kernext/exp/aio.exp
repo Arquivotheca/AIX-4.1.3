@@ -1,0 +1,20 @@
+#!/unix
+* @(#)92	1.2  src/bos/kernext/exp/aio.exp, sysxaio, bos411, 9428A410j 10/14/93 15:47:22
+*
+* COMPONENT_NAME: (SYSXAIO) Asynchronous I/O
+*
+* FUNCTIONS: 
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1991, 1993
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+kaio_rdwr SYSCALL
+listio SYSCALL
+acancel SYSCALL
+iosuspend SYSCALL

@@ -1,0 +1,91 @@
+#
+# @(#)49        1.4  src/bldenv/man/bldsetstatus.man, bldprocess, bos412, GOLDA411a 3/28/94 15:56:19
+#
+# COMPONENT_NAME: (BLDTOOLS) BAI Build Tools
+#
+# FUNCTIONS:  bldsetstatus man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1991
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+bldsetstatus
+
+PURPOSE
+
+	The bldsetstatus command is a layer above the 'SetStatus' command and 
+basically calls SetStatus by setting the 'BUILDER' and 'date' parameters in 
+addition to the command line arguments.
+
+
+SYNOPSIS
+
+
+	 bldsetstatus [-a <avalue>] [-b <bvalue>] [-c <cvalue>] [-d <dvalue>]
+                      [-e <evalue>] [-f <fvalue>] [-g <gvalue>] [-h <hvalue>]
+                      [-i <ivalue>] [-j <jvalue>] filename
+
+DESCRIPTION
+
+	The bldsetstatus command is a higher level function with respect to 
+the 'SetStatus' command.Its function is to pass all its command line arguments 
+to SetStatus, it also sets the -e flag if the environment variable 'BUILDER' is
+set and the -d flag to the current date. It doesn't do any command line 
+parsing, any return codes are those of SetStatus. 
+
+
+FLAGS
+
+
+	-a <avalue>      The first field with the string <avalue>
+
+        -b <bvalue>      The second field with the string <bvalue>  
+
+        -c <cvalue>      The third field with the string <cvalue>  
+
+        -d <dvalue>      The fourth field with the string <dvalue>  
+
+        -e <evalue>      The fifth field with the string <evalue>  
+
+        -f <fvalue>      The sixth field with the string <fvalue>  
+
+        -g <gvalue>      The seventh field with the string <gvalue>  
+
+        -h <hvalue>      The eight field with the string <hvalue>
+	
+	-i <ivalue>      The ninth field with the string <ivalue>  
+
+        -j <jvalue>      The tenth field with the string <jvalue>  
+
+        filename        The databasefile where the information has to be stored
+
+
+EXAMPLES
+
+	1. To set status for the CMVC merge task of prebuild command to 
+	   success for the bos320 release
+
+           bldsetstatus -aprebuild -b9152 -cbos320 -i"CMVC merge" -jsuccess
+
+        2. To set status with date using a status file on the command line
+
+           bldsetstatus -a subptf -d "$(date)" -j success $(pwd)/STATUS_FILE
+
+
+RELATED INFORMATION
+
+        The following commands
+		SetStatus
+                CheckStatus
+                QueryStatus
+                DeleteStatus
+                bldlock
+
+	The following file
+		$BLDTMP/status.db

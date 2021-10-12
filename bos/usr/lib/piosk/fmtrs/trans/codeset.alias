@@ -1,0 +1,32 @@
+# @(#)36	1.1  src/bos/usr/lib/piosk/fmtrs/trans/codeset.alias, cmdpiosk, bos411, 9428A410j 7/17/93 16:35:05
+#
+#   COMPONENT_NAME: CMDPIOSK
+#
+#   FUNCTIONS: 
+#
+#   ORIGINS: 27
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1993
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+#
+# This file is provided to define the alias of code set name for
+# MBCS printer backends.
+#
+# realname	alias ...	 
+#
+IBM-932		sjis78 	SJIS78 
+sjis83		sjis 	SJIS83
+sjis90		SJIS90
+
+jis78 		JIS78 JISX0208.1978-0 JISX0208.1978-GL
+jis83 		JIS83
+jis90 		JIS90 JISX0208.1983-0 JISX0208.1983-GL 	
+
+euc78		EUC78
+euc83		EUC83
+IBM-eucJP	euc90 EUC90

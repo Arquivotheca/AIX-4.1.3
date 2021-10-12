@@ -1,0 +1,436 @@
+ADDRESS MAP FOR hiadd
+*IE ADDRESS  LENGTH AL CL TY Sym#  NAME                      SOURCE-FILE(OBJECT) or IMPORT-FILE{SHARED-OBJECT}
+--- -------- ------ -- -- -- ----- ------------------------- -------------------------------------------------
+ I                        ER S1    pinned_heap               ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S2    as_att                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S3    as_det                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S4    clrjmpx                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S5    copyin                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S6    copyout                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S7    d_clear                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S8    d_complete                ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S9    d_init                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S10   d_master                  ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S11   d_unmask                  ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S12   devswadd                  ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S13   devswdel                  ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S14   e_sleep                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S15   e_sleep_thread            ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S16   e_wakeup                  ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S17   errsave                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S18   getadsp                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S19   i_clear                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S20   i_init                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S21   i_sched                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S22   longjmpx                  ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S23   nodev                     ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S24   pin                       ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S25   pinu                      ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S26   selnotify                 ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S27   setjmpx                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S28   sprintf                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S29   talloc                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S30   tfree                     ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S31   tstart                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S32   tstop                     ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S33   uiomove                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S34   unpin                     ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S35   unpinu                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S36   xmalloc                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S37   xmfree                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S38   panic                     ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S39   pincode                   ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S40   unpincode                 ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S41   io_att                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S42   io_det                    ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S43   simple_lock_init          ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S44   lock_alloc                ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I                        ER S45   lock_free                 ../../../../../src/bos/kernel/exp/kernex.exp{/unix}
+ I  00009004           XO ER S46   disable_lock              ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009004           XO ER S47   .disable_lock             ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009304           XO ER S48   unlock_enable             ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I  00009304           XO ER S49   .unlock_enable            ../../../../../src/bos/kernel/exp/sysoverlay.exp{}
+ I                        ER S50   Trconflag                 ../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S51   trchook                   ../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I                        ER S52   _system_configuration     ../../../../../src/bos/kernel/exp/syscalls.exp{/unix}
+ I  00003100           XO ER S53   __mulh                    ../../../../../src/bos/kernel/exp/syscalls.exp{}
+ I  00003100           XO ER S54   .__mulh                   ../../../../../src/bos/kernel/exp/syscalls.exp{}
+    00000000 0018D0  2 PR SD S55   <>                        ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    00000000           PR LD S56   .int_prog_code
+    0000015C           PR LD S57   .loaducode
+    00000204           PR LD S58   .msla_delete_dds
+    00000348           PR LD S59   .get_microcode
+    000003E4           PR LD S60   .init_dds
+    000006B0           PR LD S61   .mslaintr
+    00000A5C           PR LD S62   .mslaconfig
+    00000FF0           PR LD S63   .msla_add_dds
+    00001228           PR LD S64   .mslaInitDDSF
+    000012C0           PR LD S65   .ipl_adaptor
+    0000145C           PR LD S66   .loadpos
+    000015EC           PR LD S67   .start_msla
+    0000166C           PR LD S68   .mslaSaveTrace
+    000018D0 0018B0  2 PR SD S69   <>                        ../../../../../src/bos/kernext/msla/mslamisc.c(mslamisc.o)
+    000018D0           PR LD S70   .qmakenull
+    0000197C           PR LD S71   .ioq_for_session
+    00001A28           PR LD S72   .qget
+    00001A4C           PR LD S73   .qpurge
+    00001B74           PR LD S74   .qempty
+    00001BA8           PR LD S75   .qdelete
+    00001C8C           PR LD S76   .qinsert
+    00001F20           PR LD S77   .hia_ios
+    000020FC           PR LD S78   .hia_gets
+    000022E8           PR LD S79   .hia_getc
+    00002504           PR LD S80   .hia_putl
+    00002718           PR LD S81   .hia_putc
+    0000292C           PR LD S82   .pio_error
+    00002A6C           PR LD S83   .free_dma
+    00002ADC           PR LD S84   .init_dma
+    00002B78           PR LD S85   .rmtmr
+    00002C78           PR LD S86   .cncltmr
+    00002D94           PR LD S87   .settmr
+    00002F34           PR LD S88   .ck_net
+    00002F6C           PR LD S89   .hia_puts
+    00003180 000024  2 GL SD S90   <.xmalloc>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00003180           GL LD S91   .xmalloc
+    000031A4 000090  2 PR SD S92   .bzero                    bzero.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[bzero.o])
+    00003234 0007A0  2 PR SD S93   <>                        ../../../../../src/bos/kernext/msla/mslaclose.c(mslaclose.o)
+    00003234           PR LD S94   .msla_halt_link_addr
+    000033BC           PR LD S95   .mslaclose
+    0000361C           PR LD S96   .free_link_buffers
+    00003780           PR LD S97   .logerr
+    00003890           PR LD S98   .scan_free_links
+    000039D4 001C18  2 PR SD S99   <>                        ../../../../../src/bos/kernext/msla/mslaio.c(mslaio.o)
+    000039D4           PR LD S100  .handle_stat_data
+    00003AF4           PR LD S101  .handle_io_cmd
+    00003C34           PR LD S102  .wr_response
+    00003D20           PR LD S103  .send_stat
+    00003DE4           PR LD S104  .write_expected
+    00003FEC           PR LD S105  .write_initiate
+    000040E4           PR LD S106  .ck_link_status
+    0000415C           PR LD S107  .dis_link
+    00004230           PR LD S108  .enb_link
+    0000432C           PR LD S109  .send_iocmd
+    00004618           PR LD S110  .init_msla
+    000046E0           PR LD S111  .ok_to_send
+    00004720           PR LD S112  .msla_closer
+    000047BC           PR LD S113  .halt_dev
+    00004878           PR LD S114  .msla_io
+    00004BFC           PR LD S115  .process_iocmd
+    00004D74           PR LD S116  .up_romp_cmd
+    0000524C           PR LD S117  .msla_opener
+    000052DC           PR LD S118  .MSLA_not_up
+    00005398           PR LD S119  .send_msla_cmd
+    000055EC 003100  2 PR SD S120  <>                        ../../../../../src/bos/kernext/msla/mslaofflv.c(mslaofflv.o)
+    000055EC           PR LD S121  .mslaexc
+    0000578C           PR LD S122  .put_3270_cmd
+    00005808           PR LD S123  .read_complete
+    000058C0           PR LD S124  .write_complete
+    00005988           PR LD S125  .int_dis_link
+    00005A18           PR LD S126  .int_enb_link
+    00005B3C           PR LD S127  .dma_complete
+    00005C60           PR LD S128  .msla_offlevel
+    00006CAC           PR LD S129  .start_stop_timeout
+    00006D38           PR LD S130  .rst_err_counter
+    00006D90           PR LD S131  .sleep_exp_hdlr
+    00006E78           PR LD S132  .p20_exp_hdlr
+    00006F2C           PR LD S133  .wr_init_trans
+    00007054           PR LD S134  .wr_trans_compl
+    00007154           PR LD S135  .interrupt_head
+    00007260           PR LD S136  .int_adapt_error
+    00007414           PR LD S137  .int_init_msla
+    00007518           PR LD S138  .cmd_completion
+    00007650           PR LD S139  .cmd_seq_out
+    0000773C           PR LD S140  .int_stat_data
+    00007AD8           PR LD S141  .io_exp_hdlr
+    00007BBC           PR LD S142  .snd_stat_complete
+    00007C28           PR LD S143  .int_send_stat
+    00007E18           PR LD S144  .int_sel_reset
+    00007F28           PR LD S145  .int_er_all_unprot
+    00007FB4           PR LD S146  .int_wr_op_ind_row
+    000080D0           PR LD S147  .int_wr_response
+    00008204           PR LD S148  .int_read_resp
+    000085AC           PR LD S149  .complete_5085
+    000086EC 000024  2 GL SD S150  <.i_sched>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000086EC           GL LD S151  .i_sched
+    00008710 000024  2 GL SD S152  <.d_complete>             glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00008710           GL LD S153  .d_complete
+    00008734 000E10  2 PR SD S154  <>                        ../../../../../src/bos/kernext/msla/mslaintr.c(mslaintr.o)
+    00008734           PR LD S155  .intr_sol_send_stat
+    000087E8           PR LD S156  .intr_sol_halt
+    0000888C           PR LD S157  .clear_io
+    000088F4           PR LD S158  .intr_sol_write
+    000089E4           PR LD S159  .intr_sol_ipl
+    00008A68           PR LD S160  .intr_sol_start
+    00008B5C           PR LD S161  .intr_sol
+    00008C58           PR LD S162  .intr_unsol
+    00008D10           PR LD S163  .check_session
+    00008D88           PR LD S164  .msla_intr
+    00008F2C           PR LD S165  .update_link_fields
+    00009364           PR LD S166  .handle_data_avail
+    00009544 000024  2 GL SD S167  <.e_wakeup>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00009544           GL LD S168  .e_wakeup
+    00009568 000024  2 GL SD S169  <.selnotify>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    00009568           GL LD S170  .selnotify
+    0000958C 000040  2 PR SD S171  <._ptrgl>                 ptrgl.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[ptrgl.o])
+    0000958C           PR LD S172  ._ptrgl
+    0000958C           PR LD S173  .$PTRGL
+    000095CC 000024  2 GL SD S174  <.sprintf>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    000095CC           GL LD S175  .sprintf
+    000095F0 000C08  2 PR SD S176  <>                        ../../../../../src/bos/kernext/msla/mslaopen.c(mslaopen.o)
+    000095F0           PR LD S177  .start_session
+    00009784           PR LD S178  .set_up_session
+    0000991C           PR LD S179  .end_session
+    00009A10           PR LD S180  .begin_session
+    00009C2C           PR LD S181  .free_to_open
+    00009CC8           PR LD S182  .check_open_errors
+    00009D2C           PR LD S183  .wait_to_open
+    00009E38           PR LD S184  .mslaopen
+    0000A158           PR LD S185  .buffer_alloc
+    0000A1F8 000024  2 GL SD S186  <.e_sleep_thread>         glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A1F8           GL LD S187  .e_sleep_thread
+    0000A21C 000024  2 GL SD S188  <.xmfree>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A21C           GL LD S189  .xmfree
+    0000A240 000024  2 GL SD S190  <.d_master>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A240           GL LD S191  .d_master
+    0000A264 0001C0  2 PR SD S192  .strncpy                  strncpy.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[strncpy.o])
+    0000A424 0000C4  2 PR SD S193  .bcopy                    moveeq.s(/aix/V4/rsc/41J/export/power/kernel/lib/libcsys.a[moveeq.o])
+    0000A424           PR LD S194  .ovbcopy
+    0000A430           PR LD S195  ._moveeq
+    0000A430           PR LD S196  .memcpy
+    0000A430           PR LD S197  .memmove
+    0000A4E8 000024  2 GL SD S198  <.errsave>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A4E8           GL LD S199  .errsave
+    0000A50C 000024  2 GL SD S200  <.io_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A50C           GL LD S201  .io_att
+    0000A530 000024  2 GL SD S202  <.setjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A530           GL LD S203  .setjmpx
+    0000A554 000024  2 GL SD S204  <.longjmpx>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A554           GL LD S205  .longjmpx
+    0000A578 000070  2 PR SD S206  .BusCpy                   noname(/aix/V4/rsc/41J/export/power/kernel/lib/libsysp.a[pioutil.o])
+    0000A5E8 000024  2 GL SD S207  <.clrjmpx>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A5E8           GL LD S208  .clrjmpx
+    0000A60C 000024  2 GL SD S209  <.io_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A60C           GL LD S210  .io_det
+    0000A630 000024  2 GL SD S211  <.d_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A630           GL LD S212  .d_clear
+    0000A654 000024  2 GL SD S213  <.d_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A654           GL LD S214  .d_init
+    0000A678 000024  2 GL SD S215  <.d_unmask>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000A678           GL LD S216  .d_unmask
+    0000A69C 000648  2 PR SD S217  <>                        ../../../../../../src/bos/kernel/lib/libsys/timeout.c(/aix/V4/rsc/41J/export/power/kernel/lib/libsys.a[timeout.o])
+    0000A69C           PR LD S218  .timeoutcf
+    0000A930           PR LD S219  .untimeout
+    0000AA48           PR LD S220  .timeout
+    0000AC50           PR LD S221  <.timeout_end>
+    0000ACE4 000024  2 GL SD S222  <.talloc>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000ACE4           GL LD S223  .talloc
+    0000AD08 000024  2 GL SD S224  <.tstop>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AD08           GL LD S225  .tstop
+    0000AD2C 000024  2 GL SD S226  <.tfree>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AD2C           GL LD S227  .tfree
+    0000AD50 000024  2 GL SD S228  <.tstart>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AD50           GL LD S229  .tstart
+    0000AD74 000024  2 GL SD S230  <.unpin>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AD74           GL LD S231  .unpin
+    0000AD98 000024  2 GL SD S232  <.copyin>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AD98           GL LD S233  .copyin
+    0000ADBC 000024  2 GL SD S234  <.uiomove>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000ADBC           GL LD S235  .uiomove
+    0000ADE0 000024  2 GL SD S236  <.i_clear>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000ADE0           GL LD S237  .i_clear
+    0000AE04 000024  2 GL SD S238  <.devswdel>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE04           GL LD S239  .devswdel
+    0000AE28 000024  2 GL SD S240  <.unpincode>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE28           GL LD S241  .unpincode
+    0000AE4C 000024  2 GL SD S242  <.lock_free>              glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE4C           GL LD S243  .lock_free
+    0000AE70 000024  2 GL SD S244  <.pincode>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE70           GL LD S245  .pincode
+    0000AE94 000024  2 GL SD S246  <.lock_alloc>             glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AE94           GL LD S247  .lock_alloc
+    0000AEB8 000024  2 GL SD S248  <.simple_lock_init>       glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000AEB8           GL LD S249  .simple_lock_init
+    0000AEDC 0004D0  2 PR SD S250  <>                        ../../../../../src/bos/kernext/msla/mslaread.c(mslaread.o)
+    0000AEDC           PR LD S251  .copy_buffer
+    0000AF60           PR LD S252  .wait_for_data
+    0000B00C           PR LD S253  .mslaread
+    0000B1EC           PR LD S254  .copy_3270_cmd
+    0000B258           PR LD S255  .msla_read_routine
+    0000B3AC 000024  2 GL SD S256  <.e_sleep>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000B3AC           GL LD S257  .e_sleep
+    0000B3D0 002108  2 PR SD S258  <>                        ../../../../../src/bos/kernext/msla/mslaioctl.c(mslaioctl.o)
+    0000B3D0           PR LD S259  .write_io
+    0000BC98           PR LD S260  .read_io
+    0000C1F0           PR LD S261  .mslaioctl
+    0000CF74           PR LD S262  .wait_for_io
+    0000D060           PR LD S263  .wakeup_wait_for_io
+    0000D0D0           PR LD S264  .get_info
+    0000D108           PR LD S265  .reset_link
+    0000D23C           PR LD S266  .auto_ack
+    0000D2C8           PR LD S267  .send_status
+    0000D3FC           PR LD S268  .msla_inquire_link
+    0000D4D8 000024  2 GL SD S269  <.pinu>                   glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D4D8           GL LD S270  .pinu
+    0000D4FC 000024  2 GL SD S271  <.unpinu>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D4FC           GL LD S272  .unpinu
+    0000D520 000024  2 GL SD S273  <.copyout>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D520           GL LD S274  .copyout
+    0000D544 000024  2 GL SD S275  <.getadsp>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D544           GL LD S276  .getadsp
+    0000D568 000024  2 GL SD S277  <.as_att>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D568           GL LD S278  .as_att
+    0000D58C 000024  2 GL SD S279  <.as_det>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000D58C           GL LD S280  .as_det
+    0000D5B0 0003C0  2 PR SD S281  <>                        ../../../../../src/bos/kernext/msla/mslawrite.c(mslawrite.o)
+    0000D5B0           PR LD S282  .mslawrite
+    0000D834           PR LD S283  .write_transfer
+    0000D970 0001D8  2 PR SD S284  <>                        ../../../../../src/bos/kernext/msla/mslaselect.c(mslaselect.o)
+    0000D970           PR LD S285  .mslaselect
+    0000DB48 000590  2 PR SD S286  <>                        ../../../../../src/bos/kernext/msla/mslampx.c(mslampx.o)
+    0000DB48           PR LD S287  .get_session
+    0000DC74           PR LD S288  .mhatoi
+    0000DCDC           PR LD S289  .mslampx
+    0000E0D8 000024  2 GL SD S290  <.devswadd>               glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000E0D8           GL LD S291  .devswadd
+    0000E0FC 000024  2 GL SD S292  <.pin>                    glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000E0FC           GL LD S293  .pin
+    0000E120 000024  2 GL SD S294  <.panic>                  glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000E120           GL LD S295  .panic
+    0000E144 000024  2 GL SD S296  <.i_init>                 glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000E144           GL LD S297  .i_init
+    0000E168 000024  2 GL SD S298  <.trchook>                glink.s(/aix/V4/rsc/41J/ode_tools/power/usr/lib/glink.o)
+    0000E168           GL LD S299  .trchook
+    0000E190 0001D4  3 RO SD S300  <>                        ../../../../../src/bos/kernext/msla/mslaofflv.c(mslaofflv.o)
+    0000E368 000020  3 RO SD S301  <>                        ../../../../../src/bos/kernext/msla/mslaintr.c(mslaintr.o)
+    0000E388 00008C  3 RO SD S302  <>                        ../../../../../src/bos/kernext/msla/mslaio.c(mslaio.o)
+    0000E418 000040  3 RO SD S303  <>                        ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    0000E458 0000BC  3 RO SD S304  <>                        ../../../../../src/bos/kernext/msla/mslaioctl.c(mslaioctl.o)
+    00000000 000094  3 RW SD S305  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslamisc.c(mslamisc.o)
+    00000098 0000DE  3 RW SD S306  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaio.c(mslaio.o)
+    00000178 000141  3 RW SD S307  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaofflv.c(mslaofflv.o)
+    000002C0 0000E4  3 RW SD S308  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaintr.c(mslaintr.o)
+    000003A8 000098  3 RW SD S309  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaopen.c(mslaopen.o)
+    00000440 000004  2 RW SD S310  sleep_waiting_to_open     ../../../../../src/bos/kernext/msla/mslaopen.c(mslaopen.o)
+    00000448 0000C1  3 RW SD S311  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaclose.c(mslaclose.o)
+    0000050C 000004  2 RW SD S312  callout_lock              ../../../../../../src/bos/kernel/lib/libsys/timeout.c(/aix/V4/rsc/41J/export/power/kernel/lib/libsys.a[timeout.o])
+    00000510 000008  3 RW SD S313  callo                     ../../../../../../src/bos/kernel/lib/libsys/timeout.c(/aix/V4/rsc/41J/export/power/kernel/lib/libsys.a[timeout.o])
+    00000518 00005D  3 RW SD S314  <_$STATIC>                ../../../../../../src/bos/kernel/lib/libsys/timeout.c(/aix/V4/rsc/41J/export/power/kernel/lib/libsys.a[timeout.o])
+    00000578 000126  3 RW SD S315  <_$STATIC>                ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    000006A0 00006C  3 RW SD S316  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaread.c(mslaread.o)
+    00000710 0000F5  3 RW SD S317  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaioctl.c(mslaioctl.o)
+    00000808 000079  3 RW SD S318  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslawrite.c(mslawrite.o)
+    00000888 000076  3 RW SD S319  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslaselect.c(mslaselect.o)
+    00000900 00007B  3 RW SD S320  <_$STATIC>                ../../../../../src/bos/kernext/msla/mslampx.c(mslampx.o)
+    0000097C 000004  2 RW SD S321  mslanexthole              ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+*   00000980 00000C  2 DS SD S322  mslaconfig                ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    0000098C 00000C  2 DS SD S323  msla_intr                 ../../../../../src/bos/kernext/msla/mslaintr.c(mslaintr.o)
+    00000998 00000C  2 DS SD S324  mslaexc                   ../../../../../src/bos/kernext/msla/mslaofflv.c(mslaofflv.o)
+    000009A4 00000C  2 DS SD S325  <timeout_end>             ../../../../../../src/bos/kernel/lib/libsys/timeout.c(/aix/V4/rsc/41J/export/power/kernel/lib/libsys.a[timeout.o])
+    000009B0 00000C  2 DS SD S326  mslaopen                  ../../../../../src/bos/kernext/msla/mslaopen.c(mslaopen.o)
+    000009BC 00000C  2 DS SD S327  mslaclose                 ../../../../../src/bos/kernext/msla/mslaclose.c(mslaclose.o)
+    000009C8 00000C  2 DS SD S328  mslaread                  ../../../../../src/bos/kernext/msla/mslaread.c(mslaread.o)
+    000009D4 00000C  2 DS SD S329  mslawrite                 ../../../../../src/bos/kernext/msla/mslawrite.c(mslawrite.o)
+    000009E0 00000C  2 DS SD S330  mslaselect                ../../../../../src/bos/kernext/msla/mslaselect.c(mslaselect.o)
+    000009EC 00000C  2 DS SD S331  mslampx                   ../../../../../src/bos/kernext/msla/mslampx.c(mslampx.o)
+    000009F8 00000C  2 DS SD S332  mslaioctl                 ../../../../../src/bos/kernext/msla/mslaioctl.c(mslaioctl.o)
+    00000A04 00000C  2 DS SD S333  msla_offlevel             ../../../../../src/bos/kernext/msla/mslaofflv.c(mslaofflv.o)
+    00000A10 00000C  2 DS SD S334  mslaintr                  ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    00000A1C 000000  2 T0 SD S335  <TOC>
+    00000A1C 000004  2 TC SD S336  <pinned_heap>
+    00000A20 000004  2 TC SD S337  <xmalloc>
+    00000A24 000004  2 TC SD S338  <device_control>
+    00000A28 000004  2 TC SD S339  <msladd_lock>
+    00000A2C 000004  2 TC SD S340  <_$STATIC>
+    00000A30 000004  2 TC SD S341  <_$STATIC>
+    00000A34 000004  2 TC SD S342  <_$STATIC>
+    00000A38 000004  2 TC SD S343  <i_sched>
+    00000A3C 000004  2 TC SD S344  <d_complete>
+    00000A40 000004  2 TC SD S345  <>
+    00000A44 000004  2 TC SD S346  <>
+    00000A48 000004  2 TC SD S347  <_$STATIC>
+    00000A4C 000004  2 TC SD S348  <e_wakeup>
+    00000A50 000004  2 TC SD S349  <>
+    00000A54 000004  2 TC SD S350  <>
+    00000A58 000004  2 TC SD S351  <selnotify>
+    00000A5C 000004  2 TC SD S352  <sprintf>
+    00000A60 000004  2 TC SD S353  <>
+    00000A64 000004  2 TC SD S354  <>
+    00000A68 000004  2 TC SD S355  <_$STATIC>
+    00000A6C 000004  2 TC SD S356  <e_sleep_thread>
+    00000A70 000004  2 TC SD S357  <msla_intr>
+    00000A74 000004  2 TC SD S358  <waiting_to_open>
+    00000A78 000004  2 TC SD S359  <sleep_waiting_to_open>
+    00000A7C 000004  2 TC SD S360  <xmfree>
+    00000A80 000004  2 TC SD S361  <d_master>
+    00000A84 000004  2 TC SD S362  <_$STATIC>
+    00000A88 000004  2 TC SD S363  <_system_configuration>
+    00000A8C 000004  2 TC SD S364  <errsave>
+    00000A90 000004  2 TC SD S365  <io_att>
+    00000A94 000004  2 TC SD S366  <setjmpx>
+    00000A98 000004  2 TC SD S367  <longjmpx>
+    00000A9C 000004  2 TC SD S368  <clrjmpx>
+    00000AA0 000004  2 TC SD S369  <io_det>
+    00000AA4 000004  2 TC SD S370  <d_clear>
+    00000AA8 000004  2 TC SD S371  <d_init>
+    00000AAC 000004  2 TC SD S372  <d_unmask>
+    00000AB0 000004  2 TC SD S373  <mslaexc>
+    00000AB4 000004  2 TC SD S374  <callout_lock>
+    00000AB8 000004  2 TC SD S375  <callo>
+    00000ABC 000004  2 TC SD S376  <talloc>
+    00000AC0 000004  2 TC SD S377  <tstop>
+    00000AC4 000004  2 TC SD S378  <tfree>
+    00000AC8 000004  2 TC SD S379  <timeout_end>
+    00000ACC 000004  2 TC SD S380  <tstart>
+    00000AD0 000004  2 TC SD S381  <_$STATIC>
+    00000AD4 000004  2 TC SD S382  <_$STATIC>
+    00000AD8 000004  2 TC SD S383  <unpin>
+    00000ADC 000004  2 TC SD S384  <_$STATIC_BSS>
+    00000AE0 000004  2 TC SD S385  <copyin>
+    00000AE4 000004  2 TC SD S386  <>
+    00000AE8 000004  2 TC SD S387  <>
+    00000AEC 000004  2 TC SD S388  <uiomove>
+    00000AF0 000004  2 TC SD S389  <i_clear>
+    00000AF4 000004  2 TC SD S390  <devswdel>
+    00000AF8 000004  2 TC SD S391  <mslaconfig>
+    00000AFC 000004  2 TC SD S392  <unpincode>
+    00000B00 000004  2 TC SD S393  <lock_free>
+    00000B04 000004  2 TC SD S394  <pincode>
+    00000B08 000004  2 TC SD S395  <lock_alloc>
+    00000B0C 000004  2 TC SD S396  <simple_lock_init>
+    00000B10 000004  2 TC SD S397  <nodev>
+    00000B14 000004  2 TC SD S398  <mslaopen>
+    00000B18 000004  2 TC SD S399  <mslaclose>
+    00000B1C 000004  2 TC SD S400  <mslaread>
+    00000B20 000004  2 TC SD S401  <e_sleep>
+    00000B24 000004  2 TC SD S402  <_$STATIC>
+    00000B28 000004  2 TC SD S403  <pinu>
+    00000B2C 000004  2 TC SD S404  <unpinu>
+    00000B30 000004  2 TC SD S405  <>
+    00000B34 000004  2 TC SD S406  <>
+    00000B38 000004  2 TC SD S407  <_$STATIC>
+    00000B3C 000004  2 TC SD S408  <copyout>
+    00000B40 000004  2 TC SD S409  <getadsp>
+    00000B44 000004  2 TC SD S410  <as_att>
+    00000B48 000004  2 TC SD S411  <as_det>
+    00000B4C 000004  2 TC SD S412  <mslawrite>
+    00000B50 000004  2 TC SD S413  <_$STATIC>
+    00000B54 000004  2 TC SD S414  <mslaselect>
+    00000B58 000004  2 TC SD S415  <_$STATIC>
+    00000B5C 000004  2 TC SD S416  <mslampx>
+    00000B60 000004  2 TC SD S417  <_$STATIC>
+    00000B64 000004  2 TC SD S418  <mslaioctl>
+    00000B68 000004  2 TC SD S419  <devswadd>
+    00000B6C 000004  2 TC SD S420  <pin>
+    00000B70 000004  2 TC SD S421  <panic>
+    00000B74 000004  2 TC SD S422  <msla_offlevel>
+    00000B78 000004  2 TC SD S423  <mslaintr>
+    00000B7C 000004  2 TC SD S424  <i_init>
+    00000B80 000004  2 TC SD S425  <Trconflag>
+    00000B84 000004  2 TC SD S426  <mslanexthole>
+    00000B88 000004  2 TC SD S427  <mslaTraceTable>
+    00000B8C 000004  2 TC SD S428  <trchook>
+    00000B90 000050  3 RW CM S429  device_control            ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    00000BE0 000004  2 RW CM S430  msladd_lock               ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    00000BE4 000004  2 RW CM S431  waiting_to_open           ../../../../../src/bos/kernext/msla/mslaopen.c(mslaopen.o)
+    00000BE8 01000C  3 RW CM S432  <_$STATIC_BSS>            ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)
+    00010BF8 00FD00  3 RW CM S433  mslaTraceTable            ../../../../../src/bos/kernext/msla/msladd.c(msladd.o)

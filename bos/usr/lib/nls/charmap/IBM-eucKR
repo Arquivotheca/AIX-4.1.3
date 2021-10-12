@@ -1,0 +1,376 @@
+# @(#)72	1.2  src/bos/usr/lib/nls/charmap/IBM-eucKR, cfgnls, bos411, 9428A410j 3/10/94 17:12:01
+#
+#   COMPONENT_NAME: cfgnls
+#
+#   FUNCTIONS: none
+#
+#   ORIGINS: 27
+#
+#
+#   (C) COPYRIGHT International Business Machines Corp. 1991,1994
+#   All Rights Reserved
+#   Licensed Materials - Property of IBM
+#   US Government Users Restricted Rights - Use, duplication or
+#   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+#       charmap for IBM-eucKR codeset
+#
+
+<code_set_name>              	"IBM-eucKR"
+<mb_cur_max>            	2
+<mb_cur_min>			1
+#<escape_char>			\
+
+#
+#	CHARMAP
+#
+
+CHARMAP
+
+
+#	Control Characters and ASCII
+
+<NUL>				\x00
+<SOH>				\x01
+<STX>				\x02
+<ETX>				\x03
+<EOT>				\x04
+<ENQ>				\x05
+<ACK>				\x06
+<alert>				\x07
+<backspace>			\x08
+<tab>				\x09
+<newline>			\x0a
+<vertical-tab>			\x0b
+<form-feed>			\x0c
+<carriage-return>		\x0d
+<SO>				\x0e
+<SI>				\x0f
+<DLE>				\x10
+<DC1>				\x11
+<DC2>				\x12
+<DC3>				\x13
+<DC4>				\x14
+<NAK>				\x15
+<SYN>				\x16
+<ETB>				\x17
+<CAN>				\x18
+<EM>				\x19
+<SUB>				\x1a
+<ESC>				\x1b
+<IS4>				\x1c
+<IS3>				\x1d
+<IS2>				\x1e
+<IS1>				\x1f
+<space>				\x20
+<exclamation-mark>		\x21
+<quotation-mark>		\x22
+<number-sign>			\x23
+<dollar-sign>			\x24
+<percent-sign>			\x25
+<ampersand>			\x26
+<apostrophe>			\x27
+<left-parenthesis>		\x28
+<right-parenthesis>		\x29
+<asterisk>			\x2a
+<plus-sign>			\x2b
+<comma>				\x2c
+<hyphen>			\x2d
+<hyphen-minus>			\x2d
+<period>			\x2e
+<slash>				\x2f
+<zero>				\x30
+<one>				\x31
+<two>				\x32
+<three>				\x33
+<four>				\x34
+<five>				\x35
+<six>				\x36
+<seven>				\x37
+<eight>				\x38
+<nine>				\x39
+<colon>				\x3a
+<semicolon>			\x3b
+<less-than-sign>		\x3c
+<equals-sign>			\x3d
+<greater-than-sign>		\x3e
+<question-mark>			\x3f
+<commercial-at>			\x40
+<A>				\x41
+<B>				\x42
+<C>				\x43
+<D>				\x44
+<E>				\x45
+<F>				\x46
+<G>				\x47
+<H>				\x48
+<I>				\x49
+<J>				\x4a
+<K>				\x4b
+<L>				\x4c
+<M>				\x4d
+<N>				\x4e
+<O>				\x4f
+<P>				\x50
+<Q>				\x51
+<R>				\x52
+<S>				\x53
+<T>				\x54
+<U>				\x55
+<V>				\x56
+<W>				\x57
+<X>				\x58
+<Y>				\x59
+<Z>				\x5a
+<left-square-bracket>		\x5b
+<backslash>			\x5c
+#
+# XK_Korean_Won is 2-byte char.
+# Here, won has the same code-point as <backslash>
+#
+#<won>                   	\x5c
+<right-square-bracket>		\x5d
+<circumflex>			\x5e
+<underscore>			\x5f
+<grave-accent>			\x60
+<a>				\x61
+<b>				\x62
+<c>				\x63
+<d>				\x64
+<e>				\x65
+<f>				\x66
+<g>				\x67
+<h>				\x68
+<i>				\x69
+<j>				\x6a
+<k>				\x6b
+<l>				\x6c
+<m>				\x6d
+<n>				\x6e
+<o>				\x6f
+<p>				\x70
+<q>				\x71
+<r>				\x72
+<s>				\x73
+<t>				\x74
+<u>				\x75
+<v>				\x76
+<w>				\x77
+<x>				\x78
+<y>				\x79
+<z>				\x7a
+<left-brace>			\x7b
+<left-curly-bracket>		\x7b
+<vertical-line>			\x7c
+<right-brace>			\x7d
+<right-curly-bracket>		\x7d
+<tilde>				\x7e
+<DEL>				\x7f
+
+#   KSC5601-1987 base names
+# no char in 9401-9494
+
+<k0101>...<k0194>		\xa1\xa1
+<k0201>...<k0294>		\xa2\xa1
+<k0301>...<k0394>		\xa3\xa1
+<k0401>...<k0494>		\xa4\xa1
+<k0501>...<k0594>		\xa5\xa1
+<k0601>...<k0694>		\xa6\xa1
+<k0701>...<k0794>		\xa7\xa1
+<k0801>...<k0894>		\xa8\xa1
+<k0901>...<k0994>		\xa9\xa1
+<k1001>...<k1094>		\xaa\xa1
+<k1101>...<k1194>		\xab\xa1
+<k1201>...<k1294>		\xac\xa1
+<k1301>...<k1394>		\xad\xa1
+<k1401>...<k1494>		\xae\xa1
+<k1501>...<k1594>		\xaf\xa1
+<k1601>...<k1694>		\xb0\xa1
+<k1701>...<k1794>		\xb1\xa1
+<k1801>...<k1894>		\xb2\xa1
+<k1901>...<k1994>		\xb3\xa1
+<k2001>...<k2094>		\xb4\xa1
+<k2101>...<k2194>		\xb5\xa1
+<k2201>...<k2294>		\xb6\xa1
+<k2301>...<k2394>		\xb7\xa1
+<k2401>...<k2494>		\xb8\xa1
+<k2501>...<k2594>		\xb9\xa1
+<k2601>...<k2694>		\xba\xa1
+<k2701>...<k2794>		\xbb\xa1
+<k2801>...<k2894>		\xbc\xa1
+<k2901>...<k2994>		\xbd\xa1
+<k3001>...<k3094>		\xbe\xa1
+<k3101>...<k3194>		\xbf\xa1
+<k3201>...<k3294>		\xc0\xa1
+<k3301>...<k3394>		\xc1\xa1
+<k3401>...<k3494>		\xc2\xa1
+<k3501>...<k3594>		\xc3\xa1
+<k3601>...<k3694>		\xc4\xa1
+<k3701>...<k3794>		\xc5\xa1
+<k3801>...<k3894>		\xc6\xa1
+<k3901>...<k3994>		\xc7\xa1
+<k4001>...<k4094>		\xc8\xa1
+<k4101>...<k4194>		\xc9\xa1
+<k4201>...<k4294>		\xca\xa1
+<k4301>...<k4394>		\xcb\xa1
+<k4401>...<k4494>		\xcc\xa1
+<k4501>...<k4594>		\xcd\xa1
+<k4601>...<k4694>		\xce\xa1
+<k4701>...<k4794>		\xcf\xa1
+<k4801>...<k4894>		\xd0\xa1
+<k4901>...<k4994>		\xd1\xa1
+<k5001>...<k5094>		\xd2\xa1
+<k5101>...<k5194>		\xd3\xa1
+<k5201>...<k5294>		\xd4\xa1
+<k5301>...<k5394>		\xd5\xa1
+<k5401>...<k5494>		\xd6\xa1
+<k5501>...<k5594>		\xd7\xa1
+<k5601>...<k5694>		\xd8\xa1
+<k5701>...<k5794>		\xd9\xa1
+<k5801>...<k5894>		\xda\xa1
+<k5901>...<k5994>		\xdb\xa1
+<k6001>...<k6094>		\xdc\xa1
+<k6101>...<k6194>		\xdd\xa1
+<k6201>...<k6294>		\xde\xa1
+<k6301>...<k6394>		\xdf\xa1
+<k6401>...<k6494>		\xe0\xa1
+<k6501>...<k6594>		\xe1\xa1
+<k6601>...<k6694>		\xe2\xa1
+<k6701>...<k6794>		\xe3\xa1
+<k6801>...<k6894>		\xe4\xa1
+<k6901>...<k6994>		\xe5\xa1
+<k7001>...<k7094>		\xe6\xa1
+<k7101>...<k7194>		\xe7\xa1
+<k7201>...<k7294>		\xe8\xa1
+<k7301>...<k7394>		\xe9\xa1
+<k7401>...<k7494>		\xea\xa1
+<k7501>...<k7594>		\xeb\xa1
+<k7601>...<k7694>		\xec\xa1
+<k7701>...<k7794>               \xed\xa1
+<k7801>...<k7894>		\xee\xa1
+<k7901>...<k7994>               \xef\xa1
+<k8001>...<k8094>               \xf0\xa1
+<k8101>...<k8194>               \xf1\xa1
+<k8201>...<k8294>               \xf2\xa1
+<k8301>...<k8394>               \xf3\xa1
+<k8401>...<k8494>               \xf4\xa1
+<k8501>...<k8594>               \xf5\xa1
+<k8601>...<k8694>               \xf6\xa1
+<k8701>...<k8794>               \xf7\xa1
+<k8801>...<k8894>               \xf8\xa1
+<k8901>...<k8994>               \xf9\xa1
+<k9001>...<k9094>               \xfa\xa1
+<k9101>...<k9194>               \xfb\xa1
+<k9201>...<k9294>               \xfc\xa1
+<k9301>...<k9394>               \xfd\xa1
+<k9401>...<k9494>               \xfe\xa1
+
+#	Part of User Definable Characters
+#;(to be defined if necessary)
+
+END CHARMAP
+
+#
+#	CHARSETID
+#
+
+CHARSETID
+
+<space>...<tilde>                       0
+<k0101>...<k0194>		 	1
+<k0201>...<k0294>			1	
+<k0301>...<k0394>			1
+<k0401>...<k0494>			1	
+<k0501>...<k0594>			1	
+<k0601>...<k0694>			1
+<k0701>...<k0794>			1	
+<k0801>...<k0894>			1	
+<k0901>...<k0994>			1	
+<k1001>...<k1094>			1	
+<k1101>...<k1194>			1	
+<k1201>...<k1294>			1	
+<k1301>...<k1394>			1	
+<k1401>...<k1494>			1
+<k1501>...<k1594>			1
+<k1601>...<k1694>			1
+<k1701>...<k1794>			1
+<k1801>...<k1894>			1
+<k1901>...<k1994>			1
+<k2001>...<k2094>			1
+<k2101>...<k2194>			1
+<k2201>...<k2294>			1
+<k2301>...<k2394>			1
+<k2401>...<k2494>			1
+<k2501>...<k2594>			1
+<k2601>...<k2694>			1
+<k2701>...<k2794>			1
+<k2801>...<k2894>			1
+<k2901>...<k2994>			1
+<k3001>...<k3094>			1
+<k3101>...<k3194>			1
+<k3201>...<k3294>			1
+<k3301>...<k3394>			1
+<k3401>...<k3494>			1
+<k3501>...<k3594>			1
+<k3601>...<k3694>			1
+<k3701>...<k3794>			1
+<k3801>...<k3894>			1
+<k3901>...<k3994>			1
+<k4001>...<k4094>			1
+<k4101>...<k4194>			1
+<k4201>...<k4294>			1
+<k4301>...<k4394>			1
+<k4401>...<k4494>			1
+<k4501>...<k4594>			1
+<k4601>...<k4694>			1
+<k4701>...<k4794>			1
+<k4801>...<k4894>			1
+<k4901>...<k4994>			1
+<k5001>...<k5094>			1
+<k5101>...<k5194>			1
+<k5201>...<k5294>			1
+<k5301>...<k5394>			1
+<k5401>...<k5494>			1
+<k5501>...<k5594>			1
+<k5601>...<k5694>			1
+<k5701>...<k5794>			1
+<k5801>...<k5894>			1
+<k5901>...<k5994>			1
+<k6001>...<k6094>			1
+<k6101>...<k6194>			1
+<k6201>...<k6294>			1
+<k6301>...<k6394>			1
+<k6401>...<k6494>			1
+<k6501>...<k6594>			1
+<k6601>...<k6694>			1
+<k6701>...<k6794>			1
+<k6801>...<k6894>			1
+<k6901>...<k6994>			1
+<k7001>...<k7094>			1
+<k7101>...<k7194>			1
+<k7201>...<k7294>			1
+<k7301>...<k7394>			1
+<k7401>...<k7494>			1
+<k7501>...<k7594>			1
+<k7601>...<k7694>			1
+<k7701>...<k7794>                       1
+<k7801>...<k7894>                       1
+<k7901>...<k7994>                       1
+<k8001>...<k8094>                       1
+<k8101>...<k8194>                       1
+<k8201>...<k8294>                       1
+<k8301>...<k8394>                       1
+<k8401>...<k8494>                       1
+<k8501>...<k8594>                       1
+<k8601>...<k8694>                       1
+<k8701>...<k8794>                       1
+<k8801>...<k8894>                       1
+<k8901>...<k8994>                       1
+<k9001>...<k9094>                       1
+<k9101>...<k9194>                       1
+<k9201>...<k9294>                       1
+<k9301>...<k9394>                       1
+<k9401>...<k9494>                       1
+
+END CHARSETID

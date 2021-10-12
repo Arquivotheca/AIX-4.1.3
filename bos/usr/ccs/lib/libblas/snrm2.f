@@ -1,0 +1,183 @@
+* @(#)42	1.2  src/bos/usr/ccs/lib/libblas/snrm2.f, libblas, bos411, 9428A410j 6/15/90 17:52:42
+*
+* COMPONENT_NAME: LIBBLAS Basic Linear Algebra Subroutine Library
+*
+* FUNCTIONS: SNRM2
+*
+* ORIGINS: 51, 27
+*
+* This module contains IBM CONFIDENTIAL code. -- (IBM
+* Confidential Restricted when combined with the aggregated
+* modules for this product)
+*                  SOURCE MATERIALS
+* (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+* All Rights Reserved
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+*
+************************************************************************
+*
+      REAL             FUNCTION SNRM2( N, SX, INCX )
+*
+*     euclidean norm of the n-vector stored in sx() with storage
+*     increment incx .
+*     if    n .le. 0 return with result = 0.
+*     if n .ge. 1 then incx must be .ge. 1
+*
+*           c.l.lawson, 1978 jan 08
+*
+*     four phase method     using two built-in constants that are
+*     hopefully applicable to all machines.
+*         cutlo = maximum of  sqrt(u/eps)  over all known machines.
+*         cuthi = minimum of  sqrt(v)      over all known machines.
+*     where
+*         eps = smallest no. such that eps + 1. .gt. 1.
+*         u   = smallest positive no.   (underflow limit)
+*         v   = largest  no.            (overflow  limit)
+*
+*     brief outline of algorithm..
+*
+*     phase 1    scans zero components.
+*     move to phase 2 when a component is nonzero and .le. cutlo
+*     move to phase 3 when a component is .gt. cutlo
+*     move to phase 4 when a component is .ge. cuthi/m
+*     where m = n for x() real and m = 2*n for complex.
+*
+*     values for cutlo and cuthi..
+*     from the environmental parameters listed in the imsl converter
+*     document the limiting values are as follows..
+*     cutlo, s.p.   u/eps = 2**(-102) for  honeywell.  close seconds are
+*                   univac and dec at 2**(-103)
+*                   thus cutlo = 2**(-51) = 4.44089e-16
+*     cuthi, s.p.   v = 2**127 for univac, honeywell, and dec.
+*                   thus cuthi = 2**(63.5) = 1.30438e19
+*     cutlo, d.p.   u/eps = 2**(-67) for honeywell and dec.
+*                   thus cutlo = 2**(-33.5) = 8.23181d-11
+*     cuthi, d.p.   same as s.p.  cuthi = 1.30438d19
+*     data cutlo, cuthi / 8.232d-11,  1.304d19 /
+*     data cutlo, cuthi / 4.441e-16,  1.304e19 /
+*
+*     .. Scalar Arguments ..
+      INTEGER                          INCX, N
+*     ..
+*     .. Array Arguments ..
+      REAL                             SX( 1 )
+*     ..
+*     .. Local Scalars ..
+      INTEGER                          I, IX, J, NEXT, NN
+      REAL                             CUTHI, CUTLO, HITEST, ONE, SUM,
+     $                                 XMAX, ZERO
+*     ..
+*     .. Intrinsic Functions ..
+      INTRINSIC                        ABS, FLOAT, SQRT
+*     ..
+*     .. Data statements ..
+      DATA                             ZERO, ONE / 0.0E0, 1.0E0 /
+      DATA                             CUTLO, CUTHI / 4.441E-16,
+     $                                 1.304E19 /
+*     ..
+*     .. Executable Statements ..
+*
+*** modified to use xerbla error handling if
+*   incx == 0.
+*
+      if (incx .lt. 1) then
+         call xerbla('SNRM2 ', 3)
+         snrm2 = 0
+         go to 140
+         end if
+*
+      IF( N.GT.0 )
+     $   GO TO 10
+      SNRM2 = ZERO
+      GO TO 140
+*
+   10 ASSIGN 30 TO NEXT
+      SUM = ZERO
+*
+*        begin main loop
+*
+      IX = 1
+      IF( INCX.LT.0 )
+     $   IX = 1 - ( N-1 )*INCX
+      I = IX
+      NN = IX + ( N-1 )*INCX
+   20 GO TO NEXT( 30, 40, 70, 80 )
+   30 IF( ABS( SX( I ) ).GT.CUTLO )
+     $   GO TO 110
+      ASSIGN 40 TO NEXT
+      XMAX = ZERO
+*
+*        phase 1.  sum is zero
+*
+   40 IF( SX( I ).EQ.ZERO )
+     $   GO TO 130
+      IF( ABS( SX( I ) ).GT.CUTLO )
+     $   GO TO 110
+*
+*        prepare for phase 2.
+*
+      ASSIGN 70 TO NEXT
+      GO TO 60
+*
+*        prepare for phase 4.
+*
+   50 I = J
+      ASSIGN 80 TO NEXT
+      SUM = ( SUM / SX( I ) ) / SX( I )
+   60 XMAX = ABS( SX( I ) )
+      GO TO 90
+*
+*        phase 2.  sum is small.
+*                  scale to avoid destructive underflow.
+*
+   70 IF( ABS( SX( I ) ).GT.CUTLO )
+     $   GO TO 100
+*
+*        common code for phases 2 and 4.
+*        in phase 4 sum is large.  scale to avoid overflow.
+*
+   80 IF( ABS( SX( I ) ).LE.XMAX )
+     $   GO TO 90
+      SUM = ONE + SUM*( XMAX / SX( I ) )**2
+      XMAX = ABS( SX( I ) )
+      GO TO 130
+*
+   90 SUM = SUM + ( SX( I ) / XMAX )**2
+      GO TO 130
+*
+*        prepare for phase 3.
+*
+  100 SUM = ( SUM*XMAX )*XMAX
+*
+*        for real or d.p. set hitest = cuthi/n
+*        for complex      set hitest = cuthi/(2*n)
+*
+  110 HITEST = CUTHI / FLOAT( N )
+*
+*        phase 3.  sum is mid-range.  no scaling.
+*
+      DO 120 J = I, NN, INCX
+         IF( ABS( SX( J ) ).GE.HITEST )
+     $      GO TO 50
+         SUM = SUM + SX( J )**2
+  120 CONTINUE
+      SNRM2 = SQRT( SUM )
+      GO TO 140
+*
+  130 CONTINUE
+      IF( I.NE.NN ) THEN
+         I = I + INCX
+         GO TO 20
+      ENDIF
+*
+*        end of main loop.
+*
+*        compute square root and adjust for scaling.
+*
+      SNRM2 = XMAX*SQRT( SUM )
+  140 CONTINUE
+      RETURN
+      END

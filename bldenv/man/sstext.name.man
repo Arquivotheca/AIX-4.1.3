@@ -1,0 +1,35 @@
+# @(#)63        1.3  src/bldenv/man/sstext.name.man, pkgtools, bos412, GOLDA411a 12/3/93 14:36:30
+#
+# COMPONENT_NAME: (PKGTOOLS)
+#
+# FUNCTIONS: sstext.name file man page
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+
+    $BLDENV/usr/bin/sstext.name
+        Contains subsystem name with comment that should be used when
+        the PTF image is created.  Lines beginning with the key word
+        ADDITIONAL_COMMENT allow comments to span multiple lines.
+        Lines beginning with a "#" are ignored.  The comment field
+        overrides the comment field taken from the lpp_name file
+        for the PTF.
+
+	Format:
+                <subsystem><spaces_or_tabs><comment>
+                [ ADDITIONAL_COMMENT<spaces_or_tabs><comment> ]
+                          .
+                          .
+                                   .
+                                   .
+                <subsystem><spaces_or_tabs><comment>
+                [ ADDITIONAL_COMMENT<spaces_or_tabs><comment> ]
+                          .
+                          .

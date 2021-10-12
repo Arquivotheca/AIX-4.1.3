@@ -1,0 +1,65 @@
+# @(#)91        1.13.1.7  src/bos/usr/lib/pios/predef/ibm4216-31.pcl, cmdpios, bos411, 9428A410j 5/6/94 16:06:01
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1989, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:683:_Q:Dn:%IwQ
+:003:_Y:Dn:
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,785;no initialization,full initialization,send PCL language switch command only=0,1,2]:1
+:638:_u:S[E015]I[1810516]En%IW9:2
+:060:__SYS::
+#
+:446:s0:Dn:
+:767:s3:S[120]I[1810522]En%IWE:3
+:450:s4:Dn:
+:655:uH:S[140]I[1810527]En%IW9:2
+:656:uT:S[145]I[1810527]En%IW9:2
+#
+# Header / Trailer page pipelines (need piofquote to quote binary data)
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -XIBM-850 %IsH -u%IuH | %Ide/piofquote
+:324:st::%Ide/pioburst %F[H] %Idb/T.ascii | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -XIBM-850 -t-14 %IsT -u%IuT | %Ide/piofquote
+#
+# Main processing pipelines (need piofquote to quote binary data)
+:057:__IDS::
+:274:ia::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW %f[bgijpstuvxzIJLXZ] %Uh | %Ide/piofquote
+:275:ic::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -l%IwL -w%IwW -X '' %f[bgijpstuvxzIJLXZ] %Uh | %Ide/piofquote
+:277:ip::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpcl -#+ -x0 -l%IwL -w%IwW %f[jpsuvxzIJLZ]%?%S_d%"n"%=%t -Z!%e%S_f%"n"%=%t -Z!%; | %Ide/piofquote
+:273:is::{ ddi=$(/usr/bin/find %Idd/%Imt.ps.%Imn.* -print 2>/dev/null | /usr/bin/sed "2,$ d"); [[ -z $ddi ]] && { %Ide/piomsg -c pioattr1.cat -s 1 -n 821 -a PostScript -a PostScript "Error\72 Cannot print %%1$s file because no %%2$s print queue exists for this printer.\\n"; exit 1; }; %Ide/pioformat -@$ddi -!%Idf/piofpt %f[ju] ; }
+:058:__MIS::
+:330:mA::PCL Emulation
+:565:mB::4216.roman8
+:331:mL::[devices.cat,71,4;IBM 4216 Personal Page Printer, Model 031]
+:295:mN::4216
+:308:mp::%%!,\x04%%!,,,x T 
+# 
+:062:__WKV::
+#
+:760:W9::R[pioattr1.cat,1,768;lower tray,upper tray or no sheet feeder,envelope tray=1,2,3]
+:762:WP::R[letter,legal,B5,A4=1,2,3,4]
+:763:WE::R[9,10,DL=2,3,4]
+:730:Wu::%G_u%d
+# Generate the correct 'name' parameter used in for the PostScript setpapertray
+# operator which sets the paper size before we switch into PCL mode
+:770:Ws::%?%GWu%{3}%<%t%?%G_Q%{1}%=%tletter%e%G_Q%{2}%=%tlegal%e%G_Q%{3}%=%tb5%ea4%;%e%?%G_Q%{2}%=%t3.875x8.875envelope%e%G_Q%{3}%=%t4.125x9.5envelope%e110x220envelope%;%;
+#
+:051:__CAG::
+:144:ci::statusdict begin %GWu%d setpapertray currentfile /hpcl emulate %?%G_j%{1}%=%t%I[eR,eP,c1,eT,eO,ct,eF,eC]%;
+:152:cr::
+:475:__HIR::
+:686:zL::2
+:688:zM::IBM
+:476:zP::generic.pcl
+:477:zS::!
+:685:zV::+

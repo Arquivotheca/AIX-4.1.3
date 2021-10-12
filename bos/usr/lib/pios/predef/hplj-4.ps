@@ -1,0 +1,48 @@
+# @(#)29        1.4  src/bos/usr/lib/pios/predef/hplj-4.ps, cmdpios, bos411, 9428A410j 5/25/94 19:47:10
+#
+# COMPONENT_NAME: (cmdpios) Printer Backend
+#
+# FUNCTIONS:
+#
+# ORIGINS: 27
+#
+# (C) COPYRIGHT International Business Machines Corp. 1993, 1994
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+:056:__FLG::
+:616:_j:S[C940]I[1810536]EnR[pioattr1.cat,1,812;no initialization,full initialization,send PostScript language switch command only=0,1,2]:1
+:712:_q:S[B045]I[1810554]EnR[=300,600]:300
+:638:_u:S[E015]I[1810516]En%IW9:1
+:060:__SYS::
+:833:s1:S[105]I[1810521]En%IWP:1
+:834:s2:S[110]I[1810521]En%IWP:1
+:835:s7:S[112]I[1810521]En%IWP:1
+:655:uH:S[140]I[1810527]En%IW9:1
+:656:uT:S[145]I[1810527]En%IW9:1
+:500:__HTP::
+:321:sh::%Ide/pioburst %F[H] %Idb/H.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsH -u%GuH%d
+:324:st::%Ide/pioburst %F[H] %Idb/T.ps | %Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jJ] %IsT -u%GuT%d
+:057:__IDS::
+:273:is::%Ide/pioformat -@%Idd/%Imm -!%Idf/piofpt %f[jquJZ]
+:058:__MIS::
+:330:mA::PostScript
+:331:mL::[devices.cat,71,106;Hewlett-Packard LaserJet 4]
+:295:mN::hplj-4
+:062:__WKV::
+:760:W9::R[pioattr1.cat,1,838;standard 250-sheet cassette,multipurpose tray (paper),optional 500-sheet lower cassette,optional envelope feeder=1,2,7,3]
+:458:wQ::%?%G_u%{1}%=%t%Gs1%e%G_u%{2}%=%t%Gs2%e%G_u%{7}%=%t%Gs7%e%Gs3%;%d
+:051:__CAG::
+:144:ci::%I[pU]%?%G_j%{2}%=%t%IpL%e%I[pR,pL] statusdict begin %?%G_u%{2}%=%t3%e%G_u%{3}%=%t2%e%G_u%{7}%=%t1%e0%; setpapertray end%;
+:152:cr::\4%IpU
+:054:__ESC::
+:608:pR::@PJL SET RESOLUTION = %G_q%d\12
+:475:__HIR::
+:686:zL::2
+:688:zM::Hewlett-Packard
+:476:zP::generic.ps
+:477:zS::!
+:685:zV::+

@@ -1,0 +1,35 @@
+# @(#)48	1.6  src/bos/usr/bin/tip/phones-file, cmdtip, bos411, 9428A410j 7/6/90 16:18:47
+# 
+# COMPONENT_NAME: UUCP phones-file
+# 
+# FUNCTIONS: 
+#
+# ORIGINS: 10  26  27 
+#
+# (C) COPYRIGHT International Business Machines Corp. 1985, 1989
+# All Rights Reserved
+# Licensed Materials - Property of IBM
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+#
+# This is a sample /etc/phones file.  Before being used in real life,
+# the system administrator will have to edit this file and add some real
+# system names and phone numbers.
+#
+bert		004156427750-<
+ernie		004156427652
+lbl		004154864979-<
+ames		009699129
+case		002163683923
+casevax		002163683240
+cwrunix		002163683240
+cwruecmp	002163683906
+ecmp		002163683906
+navy		423012273700
+gi		006028997900
+gi750		008015823032
+texas           512-999-8200
+sri             800-624-2468
+texas-20        800-642-7378

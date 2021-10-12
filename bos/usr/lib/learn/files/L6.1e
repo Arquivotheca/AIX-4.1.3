@@ -1,0 +1,32 @@
+#
+#  COMPONENT_NAME: (CMDMAN) commands that allow users to read online 
+#  		   documentation
+# 
+#  FUNCTIONS: 
+# 
+#  ORIGINS: 27
+# 
+#  Copyright (c) 1980 Regents of the University of California.
+#  All rights reserved.  The Berkeley software License Agreement
+#  specifies the terms and conditions for redistribution.
+# 
+
+#print
+There is exactly one file name which matches both
+   ab*
+and
+    a?d
+in the current directory.  What is it?
+Type "answer NAME" where NAME is its name.
+#create abc
+#create abd
+#create add
+#copyin
+#user
+#uncopyin
+#match abd
+#log
+#next
+7.1a 10
+7.2a 5
+7.3a 2

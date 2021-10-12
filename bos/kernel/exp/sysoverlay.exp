@@ -1,0 +1,29 @@
+#!
+* @(#)11	1.2  src/bos/kernel/exp/sysoverlay.exp, sysml, bos410, 9415B410a 11/16/92 06:54:01
+*
+* COMPONENT_NAME: (SYSEXP)
+*
+* FUNCTIONS:
+*
+* ORIGINS: 27
+*
+* (C) COPYRIGHT International Business Machines Corp. 1992, 1994
+* All Rights Reserved
+* Licensed Materials - Property of IBM
+*
+* US Government Users Restricted Rights - Use, duplication or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+*
+* System overlay address available to base extensions
+*
+* NOTE:
+*	Do not update this file without also changing overlay.h and overlay.m4
+*
+
+i_disable		0x9000
+disable_lock		0x9004
+i_enable		0x9300
+unlock_enable		0x9304
+simple_lock		0x9500
+simple_unlock		0x9900
+fetch_and_add		0x9b00
